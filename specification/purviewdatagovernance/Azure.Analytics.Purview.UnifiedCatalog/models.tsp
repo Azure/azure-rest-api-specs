@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace PurviewUnifiedCatalog;
 
@@ -85,9 +87,16 @@ model CatalogModelContactsValueInner {
 model CatalogModelManagedAttribute {
   @doc("The name of the managed attribute.")
   name?: string;
+
+  @doc("The value of the attribute.")
+  value?: string;
+
+  @doc("Whether this attribute is required.")
+  isRequired?: boolean;
 }
 
 @doc("Represents a critical data element in the catalog with metadata and relationships.")
+@resource("criticalDataElements")
 model CriticalDataElement {
   @doc("The current status of the critical data element.")
   status?: CatalogModelStatus;
@@ -96,7 +105,9 @@ model CriticalDataElement {
   dataType?: CatalogModelCriticalDataElementDataTypeEnum;
 
   @doc("The unique identifier of the critical data element.")
-  id?: uuid;
+  @key("criticalDataElementId")
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
   @doc("The name of the critical data element.")
   name?: string;
@@ -340,7 +351,20 @@ model RelationshipWrapper {
   relationshipType?: string;
 
   @doc("Unique identifier of the related entity.")
-  entityId?: uuid;
+  entityId: uuid;
+}
+
+@resource("relationships")
+@parentResource(CriticalDataElement)
+@doc("Wrapper for relationship information between entities.")
+model CdeRelationshipWrapper {
+  @doc("Type of the relationship.")
+  relationshipType?: string;
+
+  @doc("Unique identifier of the related entity.")
+  @key
+  @visibility(Lifecycle.Read)
+  entityId: uuid;
 }
 
 @doc("Source information for data assets.")
@@ -1338,4 +1362,46 @@ model CatalogModelKeyResultResponse {
   @doc("The link to the next page of results.")
   @nextLink
   nextLink?: string;
+}
+
+alias CriticalDataElementBody = {
+  @doc("The input documents to analyze.")
+  body: CriticalDataElement;
+};
+
+alias UpdateCriticalDataElementParameters = {
+  @doc("The unique identifier of the critical data element.")
+  criticalDataElementId: uuid;
+};
+
+alias DataElementPropertiesBody = {
+  @doc("The input properties for creating the relationship.")
+  body: DataElementProperties;
+};
+
+alias CriticalDataElementQueryRequestBody = {
+  @doc("The request body containing query criteria.")
+  body: CriticalDataElementQueryRequest;
+};
+
+alias Duplicatecheck = {
+  @doc("The number of duplicate checks to perform.")
+  duplicatecheck?: int32;
+};
+
+@doc("The number of duplicate checks to perform.")
+model DeleteCriticalDataElementResponse {
+  @doc("Delete response.")
+  @statusCode
+  status: 204;
+}
+
+@doc("The number of duplicate checks to perform.")
+model CreateCriticalDataElementResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  body: CriticalDataElement;
 }
