@@ -344,7 +344,7 @@ interface PrivateEndpointConnections {
 interface PrivateLinkResources {
   /** list private link resources on the given resource */
   list is ArmResourceListByParent<PrivateLinkResource>;
-  get is ArmResourceRead<PrivateLinkResource>;
+  //get is ArmResourceRead<PrivateLinkResource>;
 }
 
 // resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
