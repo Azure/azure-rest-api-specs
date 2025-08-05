@@ -228,6 +228,17 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(ExportedModelOptions, "ExportedModelDetails", "python");
 @@clientName(AnalyzeConversationAuthoringUtteranceEvaluationResult, "UtteranceEvaluationResult", "python");
 
+@@clientName(AnalyzeConversationAuthoringConfusionMatrixCell, "ConfusionMatrixCell", "python");
+@@clientName(AnalyzeConversationAuthoringConfusionMatrixRow, "ConfusionMatrixRow", "python");
+@@clientName(AnalyzeConversationAuthoringDataGenerationConnectionInfo, "DataGenerationConnectionInfo", "python");
+@@clientName(AnalyzeConversationAuthoringDataGenerationConnectionKind, "DataGenerationConnectionKind", "python");
+@@clientName(AnalyzeConversationAuthoringDataGenerationSettings, "DataGenerationSettings", "python");
+@@clientName(AnalyzeConversationAuthoringEntityEvaluationSummary, "EntityEvaluationSummary", "python");
+@@clientName(AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult, "UtteranceEntitiesEvaluationResult", "python");
+@@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult, "UtteranceEntityEvaluationResult", "python");
+@@clientName(AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult, "UtteranceIntentsEvaluationResult", "python");
+
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model ConversationAuthoringProjectClientOptions {
   projectName: string;
