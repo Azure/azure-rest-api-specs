@@ -1,0 +1,54 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Site.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Web;
+/**
+ * Slot Config names azure resource.
+ */
+@singleton("slotConfigNames")
+@parentResource(Site)
+model SlotConfigNamesResource
+  is Azure.ResourceManager.ProxyResource<SlotConfigNames> {
+  ...ResourceNameParameter<
+    Resource = SlotConfigNamesResource,
+    KeyName = "config",
+    SegmentName = "config",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface SlotConfigNamesResources {
+  /**
+   * Description for Gets the names of app settings and connection strings that stick to the slot (not swapped).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSlotConfigurationNames")
+  listSlotConfigurationNames is ArmResourceRead<SlotConfigNamesResource>;
+
+  /**
+   * Description for Updates the names of application settings and connection string that remain with the slot during swap operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("WebApps_UpdateSlotConfigurationNames")
+  updateSlotConfigurationNames is ArmResourceCreateOrReplaceSync<
+    SlotConfigNamesResource,
+    Response = ArmResourceUpdatedResponse<SlotConfigNamesResource>
+  >;
+}
+
+@@doc(SlotConfigNamesResource.name, "");
+@@doc(SlotConfigNamesResource.properties, "Core resource properties");
+@@doc(SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
+  "Names of application settings and connection strings. See example."
+);

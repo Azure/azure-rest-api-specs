@@ -1,0 +1,67 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Web;
+/**
+ * The source control OAuth token.
+ */
+@tenantResource
+model SourceControl
+  is Azure.ResourceManager.ProxyResource<SourceControlProperties> {
+  ...ResourceNameParameter<
+    Resource = SourceControl,
+    KeyName = "sourceControlType",
+    SegmentName = "sourcecontrols",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface SourceControls {
+  /**
+   * Description for Gets source control token
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GetSourceControl")
+  getSourceControl is ArmResourceRead<
+    SourceControl,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Description for Updates source control token
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("UpdateSourceControl")
+  updateSourceControl is ArmResourceCreateOrReplaceSync<
+    SourceControl,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResourceUpdatedResponse<SourceControl>
+  >;
+
+  /**
+   * Description for Gets the source controls available for Azure websites.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ListSourceControls")
+  listSourceControls is ArmResourceListByParent<
+    SourceControl,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = ArmResponse<SourceControlCollection>
+  >;
+}
+
+@@doc(SourceControl.name, "Type of source control");
+@@doc(SourceControl.properties, "SourceControl resource specific properties");
+@@doc(SourceControls.updateSourceControl::parameters.resource,
+  "Source control token information"
+);

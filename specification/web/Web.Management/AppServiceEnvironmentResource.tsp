@@ -1,0 +1,448 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Web;
+/**
+ * App Service Environment ARM resource.
+ */
+model AppServiceEnvironmentResource
+  is Azure.ResourceManager.TrackedResource<AppServiceEnvironment> {
+  ...ResourceNameParameter<
+    Resource = AppServiceEnvironmentResource,
+    KeyName = "name",
+    SegmentName = "hostingEnvironments",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface AppServiceEnvironmentResources {
+  /**
+   * Description for Get the properties of an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_Get")
+  get is ArmResourceRead<AppServiceEnvironmentResource>;
+
+  /**
+   * Description for Create or update an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("AppServiceEnvironments_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    AppServiceEnvironmentResource,
+    Response = ArmResourceUpdatedResponse<AppServiceEnvironmentResource> | ArmResourceCreatedResponse<
+      AppServiceEnvironmentResource,
+      ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: AppServiceEnvironmentResource;
+    })
+  >;
+
+  /**
+   * Description for Create or update an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("AppServiceEnvironments_Update")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    AppServiceEnvironmentResource,
+    PatchModel = AppServiceEnvironmentPatchResource,
+    Response = ArmResponse<AppServiceEnvironmentResource> | ArmResourceCreatedSyncResponse<AppServiceEnvironmentResource> | (AcceptedResponse & {
+      @bodyRoot
+      _: AppServiceEnvironmentResource;
+    })
+  >;
+
+  /**
+   * Description for Delete an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AppServiceEnvironmentResource,
+    Parameters = {
+      /**
+       * Specify <code>true</code> to force the deletion even if the App Service Environment contains resources. The default is <code>false</code>.
+       */
+      @query("forceDelete")
+      forceDelete?: boolean;
+    }
+  >;
+
+  /**
+   * Description for Get all App Service Environments in a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<
+    AppServiceEnvironmentResource,
+    Response = ArmResponse<AppServiceEnvironmentCollection>
+  >;
+
+  /**
+   * Description for Get all App Service Environments for a subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_List")
+  list is ArmListBySubscription<
+    AppServiceEnvironmentResource,
+    Response = ArmResponse<AppServiceEnvironmentCollection>
+  >;
+
+  /**
+   * Description for Get the used, available, and total worker capacity an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ListCapacities")
+  @get
+  @action("compute")
+  listCapacities is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<StampCapacityCollection>
+  >;
+
+  /**
+   * Description for Move an App Service Environment to a different VNET.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ChangeVnet")
+  @action("changeVirtualNetwork")
+  changeVnet is ArmResourceActionAsync<
+    AppServiceEnvironmentResource,
+    VirtualNetworkProfile,
+    ArmResponse<WebAppCollection>
+  >;
+
+  /**
+   * Description for Get diagnostic information for an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ListDiagnostics")
+  @get
+  @action("diagnostics")
+  listDiagnostics is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<HostingEnvironmentDiagnostics[]>
+  >;
+
+  /**
+   * Description for Get a diagnostics item for an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_GetDiagnosticsItem")
+  @get
+  @action("{diagnosticsName}")
+  getDiagnosticsItem is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<HostingEnvironmentDiagnostics>,
+    Parameters = {
+      /**
+       * Name of the diagnostics item.
+       */
+      @path
+      diagnosticsName: string;
+    }
+  >;
+
+  /**
+   * Description for Get the network endpoints of all inbound dependencies of an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints")
+  @get
+  @action("inboundNetworkDependenciesEndpoints")
+  getInboundNetworkDependenciesEndpoints is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<InboundEnvironmentEndpointCollection>
+  >;
+
+  /**
+   * Send a test notification that an upgrade is available for this App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_TestUpgradeAvailableNotification")
+  testUpgradeAvailableNotification is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    OkResponse
+  >;
+
+  /**
+   * Description for Initiate an upgrade of an App Service Environment if one is available.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_Upgrade")
+  upgrade is ArmResourceActionAsyncBase<
+    AppServiceEnvironmentResource,
+    void,
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>
+  >;
+
+  /**
+   * Description for List all currently running operations on the App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ListOperations")
+  @get
+  @action("operations")
+  listOperations is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<Operation[]>
+  >;
+
+  /**
+   * Description for Get the network endpoints of all outbound dependencies of an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_GetOutboundNetworkDependenciesEndpoints")
+  @get
+  @action("outboundNetworkDependenciesEndpoints")
+  getOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<OutboundEnvironmentEndpointCollection>
+  >;
+
+  /**
+   * Description for Gets the private link resources
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_GetPrivateLinkResources")
+  @get
+  @action("privateLinkResources")
+  getPrivateLinkResources is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<PrivateLinkResourcesWrapper>
+  >;
+
+  /**
+   * Description for Reboot all machines in an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_Reboot")
+  reboot is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    AcceptedResponse
+  >;
+
+  /**
+   * Description for Resume an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_Resume")
+  resume is ArmResourceActionAsync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<WebAppCollection>
+  >;
+
+  /**
+   * Description for Get all App Service plans in an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ListAppServicePlans")
+  @get
+  @action("serverfarms")
+  listAppServicePlans is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<AppServicePlanCollection>
+  >;
+
+  /**
+   * Description for Get all apps in an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ListWebApps")
+  @get
+  @action("sites")
+  listWebApps is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<WebAppCollection>,
+    Parameters = {
+      /**
+       * Comma separated list of app properties to include.
+       */
+      @query("propertiesToInclude")
+      propertiesToInclude?: string;
+    }
+  >;
+
+  /**
+   * Description for Suspend an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_Suspend")
+  suspend is ArmResourceActionAsync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<WebAppCollection>
+  >;
+
+  /**
+   * Description for Get global usage metrics of an App Service Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppServiceEnvironments_ListUsages")
+  @get
+  @action("usages")
+  listUsages is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<CsmUsageQuotaCollection>,
+    Parameters = {
+      /**
+       * Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Get past recommendations for an app, optionally specified by the time range.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_ListHistoryForHostingEnvironment")
+  @get
+  @action("recommendationHistory")
+  listHistoryForHostingEnvironment is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Name of the hosting environment.
+       */
+      @path
+      hostingEnvironmentName: string;
+
+      /**
+       * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
+       */
+      @query("expiredOnly")
+      expiredOnly?: boolean;
+
+      /**
+       * Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Get all recommendations for a hosting environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_ListRecommendedRulesForHostingEnvironment")
+  @get
+  @action("recommendations")
+  listRecommendedRulesForHostingEnvironment is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @path
+      hostingEnvironmentName: string;
+
+      /**
+       * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
+       */
+      @query("featured")
+      featured?: boolean;
+
+      /**
+       * Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Disable all recommendations for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_DisableAllForHostingEnvironment")
+  @action("disable")
+  disableAllForHostingEnvironment is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @query("environmentName")
+      environmentName: string;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @path
+      hostingEnvironmentName: string;
+    }
+  >;
+
+  /**
+   * Description for Reset all recommendation opt-out settings for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_ResetAllFiltersForHostingEnvironment")
+  @action("reset")
+  resetAllFiltersForHostingEnvironment is ArmResourceActionSync<
+    AppServiceEnvironmentResource,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @query("environmentName")
+      environmentName: string;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @path
+      hostingEnvironmentName: string;
+    }
+  >;
+}
+
+@@doc(AppServiceEnvironmentResource.name,
+  "Name of the App Service Environment."
+);
+@@doc(AppServiceEnvironmentResource.properties, "Core resource properties");
+@@doc(AppServiceEnvironmentResources.createOrUpdate::parameters.resource,
+  "Configuration details of the App Service Environment."
+);
+@@doc(AppServiceEnvironmentResources.update::parameters.properties,
+  "Configuration details of the App Service Environment."
+);
+@@doc(AppServiceEnvironmentResources.changeVnet::parameters.body,
+  "Details for the new virtual network."
+);

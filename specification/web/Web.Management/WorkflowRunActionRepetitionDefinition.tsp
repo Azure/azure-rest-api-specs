@@ -1,0 +1,200 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./WorkflowRunAction.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Web;
+/**
+ * The workflow run action repetition definition.
+ */
+@parentResource(WorkflowRunAction)
+model WorkflowRunActionRepetitionDefinition
+  is Azure.ResourceManager.TrackedResource<
+    WorkflowRunActionRepetitionProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = WorkflowRunActionRepetitionDefinition,
+    KeyName = "repetitionName",
+    SegmentName = "repetitions",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface WorkflowRunActionRepetitionDefinitionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: string,
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: string,
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: string,
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+
+        /** The workflow run name. */
+        @path
+        @segment("runs")
+        @key
+        runName: string,
+
+        /** The workflow action name. */
+        @path
+        @segment("actions")
+        @key
+        actionName: string,
+      },
+      {
+        /** The workflow repetition. */
+        @path
+        @segment("repetitions")
+        @key
+        repetitionName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface WorkflowRunActionRepetitionDefinitions {
+  /**
+   * Get a workflow run action repetition.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WorkflowRunActionRepetitions_Get")
+  get is WorkflowRunActionRepetitionDefinitionOps.Read<WorkflowRunActionRepetitionDefinition>;
+
+  /**
+   * Get all of a workflow run action repetitions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WorkflowRunActionRepetitions_List")
+  list is WorkflowRunActionRepetitionDefinitionOps.List<
+    WorkflowRunActionRepetitionDefinition,
+    Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>
+  >;
+
+  /**
+   * Lists a workflow run expression trace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WorkflowRunActionRepetitions_ListExpressionTraces")
+  listExpressionTraces is WorkflowRunActionRepetitionDefinitionOps.ActionSync<
+    WorkflowRunActionRepetitionDefinition,
+    void,
+    ArmResponse<ExpressionTraces>
+  >;
+}
+@armResourceOperations
+interface WorkflowRunActionScopeRepetitionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Site name. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** undefined */
+        @path
+        @segment("hostruntime")
+        @key
+        runtime: string,
+
+        /** undefined */
+        @path
+        @segment("webhooks")
+        @key
+        workflow: string,
+
+        /** undefined */
+        @path
+        @segment("api")
+        @key
+        management: string,
+
+        /** The workflow name. */
+        @path
+        @segment("workflows")
+        @key
+        workflowName: string,
+
+        /** The workflow run name. */
+        @path
+        @segment("runs")
+        @key
+        runName: string,
+
+        /** The workflow action name. */
+        @path
+        @segment("actions")
+        @key
+        actionName: string,
+      },
+      {
+        /** The workflow repetition. */
+        @path
+        @segment("scopeRepetitions")
+        @key
+        repetitionName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface WorkflowRunActionScopeRepetitions {
+  /**
+   * Get a workflow run action scoped repetition.
+   */
+  get is WorkflowRunActionScopeRepetitionOps.Read<WorkflowRunActionRepetitionDefinition>;
+
+  /**
+   * List the workflow run action scoped repetitions.
+   */
+  list is WorkflowRunActionScopeRepetitionOps.List<
+    WorkflowRunActionRepetitionDefinition,
+    Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>
+  >;
+}
+
+@@doc(WorkflowRunActionRepetitionDefinition.name, "The workflow repetition.");
+@@doc(WorkflowRunActionRepetitionDefinition.properties,
+  "The workflow run action repetition properties definition."
+);
