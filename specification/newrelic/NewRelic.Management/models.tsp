@@ -383,9 +383,7 @@ model AccountResource extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The resource-specific properties for this resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AccountProperties;
 }
 
@@ -664,9 +662,7 @@ model OrganizationResource
   /**
    * The resource-specific properties for this resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OrganizationProperties;
 }
 
@@ -703,9 +699,7 @@ model PlanDataResource extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The resource-specific properties for this resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PlanDataProperties;
 }
 
@@ -776,8 +770,6 @@ model NewRelicMonitorResourceUpdate {
   /**
    * The updatable properties of the NewRelicMonitorResource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NewRelicMonitorResourceUpdateProperties;
 }
 
@@ -1207,8 +1199,6 @@ model TagRuleUpdate {
   /**
    * The updatable properties of the TagRule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TagRuleUpdateProperties;
 }
 
