@@ -167,8 +167,8 @@ export async function main() {
   const sortedOldFile = sortOpenAPIDocument(processedOldFile);
 
   logHeader(`Processing new swagger from: ${newPath}...`);
-  const newFile = readFileContent(newPath!);
-  const processedNewFile = processDocument(JSON.parse(newFile.toString()));
+  const newFile = JSON.parse(readFileContent(newPath!).toString());
+  const processedNewFile = processDocument(newFile);
   const sortedNewFile = sortOpenAPIDocument(processedNewFile);
 
   logHeader("Comparing old and new Swagger files...");
@@ -197,8 +197,8 @@ export async function main() {
 
   let outputMarkdown = "";
   const compareResult = compareDocuments(
-    sortedOldFile,
-    sortedNewFile,
+    mergedOldfile,
+    newFile,
   );
   if (compareResult.length === 0) {
     logHeader("No differences found.");
