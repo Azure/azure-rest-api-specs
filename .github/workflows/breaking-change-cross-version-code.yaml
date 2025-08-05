@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code"
+name: "Breaking Change(Cross-Version) - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   validateBreakingChange:
-    name: "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code"
+    name: "Breaking Change(Cross-Version) - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -41,8 +41,8 @@ jobs:
       - if: |
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '')
-        name: Upload artifact with BreakingChangeReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with BreakingChangeReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
@@ -51,8 +51,8 @@ jobs:
       - if: |
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '')
-        name: Upload artifact with VersioningReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with VersioningReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"

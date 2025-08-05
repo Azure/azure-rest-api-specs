@@ -11,12 +11,11 @@ import {
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
-  TspConfigGoAzGenerateFakesTrueSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
-  TspConfigGoMgmtFixConstStutteringTrueSubRule,
+  TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -287,15 +286,6 @@ const goManagementModuleTestCases = createEmitterOptionTestCases(
   [new TspConfigGoMgmtModuleEqualStringSubRule()],
 );
 
-const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  managementTspconfigFolder,
-  "fix-const-stuttering",
-  true,
-  false,
-  [new TspConfigGoMgmtFixConstStutteringTrueSubRule()],
-);
-
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
@@ -311,16 +301,7 @@ const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
   "generate-fakes",
   true,
   false,
-  [new TspConfigGoAzGenerateFakesTrueSubRule()],
-);
-
-const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  "",
-  "generate-fakes",
-  true,
-  false,
-  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+  [new TspConfigGoMgmtGenerateFakesTrueSubRule()],
 );
 
 const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
@@ -619,7 +600,6 @@ options:
     subRules: [
       new TspConfigGoMgmtPackageDirectorySubRule(),
       new TspConfigGoMgmtModuleEqualStringSubRule(),
-      new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
     ],
     tspconfigContent: `
 options:
@@ -661,12 +641,10 @@ describe("tspconfig", function () {
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
     ...goManagementModuleTestCases,
-    ...goManagementFixConstStutteringTestCases,
     ...goManagementGenerateExamplesTestCases,
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
-    ...goDpGenerateFakesTestCases,
     ...goDpInjectSpansTestCases,
     ...goDpModuleTestCases,
     ...goDpPackageDirTestCases,
