@@ -47,6 +47,15 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot"]
 ```
 
+### Tag: package-2025-06-05-preview
+
+These settings apply only when `--tag=package-package-2025-06-05-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-2025-06-05-preview'
+input-file:
+- preview/2025-06-05-preview/RecommenderRP.json
+```
+
 ### Tag: package-2025-06-05
 
 These settings apply only when `--tag=package-package-2025-06-05` is specified on the command line

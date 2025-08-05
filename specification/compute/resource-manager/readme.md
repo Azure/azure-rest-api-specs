@@ -342,15 +342,6 @@ suppressions:
     reason: VirtualMachineImages_ListWithProperties, which derives from VirtualMachineImages_List operation, returns a fixed list and does not support paging as it is a legacy operation. 
 ```
 
-### Tag: package-2025-06-05-preview
-
-These settings apply only when `--tag=package-2025-06-05-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-06-05-preview'
-input-file:
-  - Microsoft.Compute/DiagnosticRP/preview/2025-06-05-preview/diagnostic.json
-```
-
 ### Tag: package-2025-03-01
 
 These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
