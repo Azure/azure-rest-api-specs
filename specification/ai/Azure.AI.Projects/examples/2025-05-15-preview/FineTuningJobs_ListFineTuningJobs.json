@@ -11,46 +11,46 @@
       "body": {
         "object": "fine_tuning.job",
         "data": [
-            {
-                "object": "list",
-                "id": "ftjob-1",
-                "created_at": "1/1/2025 10:00:00",
-                "finished_at": "1/1/2025 11:00:00",
-                "status": "succeeded",
-                "training_file": "FileId-1",
-                "validation_file": "FileId-2",
-                "model": "gpt-4o-mini-2024-07-18",
-                "modelProvider": "OAI",
-                "fine_tuned_model": "gpt-4o-mini-2024-07-18.ftjob-1",
-                "seed": 123,
-                "trained_tokens": 1000,
-                "hyperparameters": {
-                  "batch_size": 1,
-                  "learning_rate_multiplier": 1,
-                  "n_epochs": 1
-                },
-                "integrations": [
-                  {
-                    "type": "wandb",
-                    "wandb": {
-                      "project": "custom-wandb-project",
-                      "name": "ftjob-1",
-                      "tags": [
-                        "FTJob",
-                        "completed"
-                      ]
-                    }
-                  }
-                ],
-                "method": {
-                  "type": "supervised",
-                  "hyperparameters": {
-                    "batch_size": 1,
-                    "learning_rate_multiplier": 1,
-                    "n_epochs": 1
-                  }
+          {
+            "object": "list",
+            "id": "ftjob-1",
+            "organization_id": "Org123",
+            "created_at": "1/1/2025 10:00:00",
+            "finished_at": "1/1/2025 11:00:00",
+            "status": "succeeded",
+            "training_file": "FileId-1",
+            "validation_file": "FileId-2",
+            "model": "gpt-4o-mini-2024-07-18",
+            "fine_tuned_model": "gpt-4o-mini-2024-07-18.ftjob-1",
+            "seed": 123,
+            "trained_tokens": 1000,
+            "hyperparameters": {
+              "batch_size": 1,
+              "learning_rate_multiplier": 1,
+              "n_epochs": 1
+            },
+            "integrations": [
+              {
+                "type": "wandb",
+                "wandb": {
+                  "project": "custom-wandb-project",
+                  "name": "ftjob-1",
+                  "tags": [
+                    "FTJob",
+                    "completed"
+                  ]
                 }
+              }
+            ],
+            "method": {
+              "type": "supervised",
+              "hyperparameters": {
+                "batch_size": 1,
+                "learning_rate_multiplier": 1,
+                "n_epochs": 1
+              }
             }
+          }
         ],
         "has_more": false
       }

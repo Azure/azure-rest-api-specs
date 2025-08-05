@@ -25,7 +25,7 @@ model FineTuningJobTrainingMethod {
 }
 
 //
-// SFT fine-tuning
+// OAI SFT fine-tuning
 //
 
 @doc("The hyper parameter settings used in Supervised Fine-Tuning job.")
@@ -61,7 +61,7 @@ model FineTuningJobSFTTrainingMethod extends FineTuningJobTrainingMethod {
 }
 
 //
-// DPO fine-tuning
+// OAI DPO fine-tuning
 //
 
 @doc("The hyper parameter settings used in Direct Preference Optimization fine-tuning method.")
@@ -100,7 +100,7 @@ model FineTuningJobDPOTrainingMethod extends FineTuningJobTrainingMethod {
 }
 
 //
-// RFT fine-tuning
+// OAI RFT fine-tuning
 //
 
 // RFT graders
@@ -460,6 +460,104 @@ model FineTuningJobRFTTrainingMethod extends FineTuningJobTrainingMethod {
   @doc("Configuration for the reinforcement fine-tuning method.")
   reinforcement: FineTuningJobRFTTrainingMethodConfiguration;
 }
+
+//////////////////
+
+//
+// Mistral Completion fine-tuning
+//
+
+@doc("The hyper parameter settings used in Mistral Completion Fine-Tuning job.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobMistralCompletionHyperParameters {
+  @doc("The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset.")
+  training_steps?: int32;
+
+  @doc("A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.")
+  learning_rate?: float64 = 0.0001;
+
+  @doc("(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.")
+  weight_decay?: float64 = 0.1;
+
+  @doc("(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune")
+  warmup_fraction? : float64 = 0.05;
+
+  @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
+  epochs? : int32;
+
+  @doc("Seq len parameter")
+  seq_len? : int32;
+
+  @doc("Fim ratio parameter")
+  fim_ratio? : float64;
+}
+
+@doc("Configuration for Mistral Completion fine-tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobMistralCompletionTrainingMethodConfiguration {
+  @doc("The hyperparameters used for the Mistral Completion fine-tuning job.")
+  hyperparameters?: FineTuningJobMistralCompletionHyperParameters;
+}
+
+@doc("Mistral Completion Fine-Tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobMistralCompletionTrainingMethod extends FineTuningJobTrainingMethod {
+  type: "MistralCompletion";
+  
+  @doc("Configuration for Mistral Completion fine-tuning method.")
+  mistralCompletion: FineTuningJobMistralCompletionTrainingMethodConfiguration;
+}
+
+//////////////////
+
+//
+// Mistral Classifier fine-tuning
+//
+
+@doc("The hyper parameter settings used in Mistral Classifier Fine-Tuning job.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobMistralClassifierHyperParameters {
+  @doc("The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset.")
+  training_steps?: int32;
+
+  @doc("A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.")
+  learning_rate?: float64 = 0.0001;
+
+  @doc("(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.")
+  weight_decay?: float64 = 0.1;
+
+  @doc("(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune")
+  warmup_fraction? : float64 = 0.05;
+
+  @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
+  epochs? : int32;
+
+  @doc("Seq len parameter")
+  seq_len? : int32;
+}
+
+@doc("Configuration for Mistral Classifier fine-tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobMistralClassifierTrainingMethodConfiguration {
+  @doc("The hyperparameters used for the Mistral Classifier fine-tuning job.")
+  hyperparameters?: FineTuningJobMistralClassifierHyperParameters;
+}
+
+@doc("Mistral Classifier Fine-Tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobMistralClassifierTrainingMethod extends FineTuningJobTrainingMethod {
+  type: "MistralClassifier";
+  
+  @doc("Configuration for Mistral Classifier fine-tuning method.")
+  mistralClassifier: FineTuningJobMistralClassifierTrainingMethodConfiguration;
+}
+
 
 //////////////////
 
