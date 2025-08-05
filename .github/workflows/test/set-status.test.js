@@ -19,6 +19,93 @@ describe("setStatusImpl", () => {
     await expect(setStatusImpl({})).rejects.toThrow();
   });
 
+  it("throws when issue_number is null", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        // @ts-expect-error - Testing invalid input
+        issue_number: null,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is undefined", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        // @ts-expect-error - Testing invalid input
+        issue_number: undefined,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is NaN", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        issue_number: NaN,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is zero", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        issue_number: 0,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is negative", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        issue_number: -1,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
   it("sets success if approved by label", async () => {
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "test" }, { name: "Approved-Avocado" }],
