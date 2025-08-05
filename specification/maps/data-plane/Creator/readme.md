@@ -27,7 +27,7 @@ These are the global settings for Creator Client.
 ``` yaml
 title: CreatorClient
 openapi-type: data-plane
-tag: package-stable-V2
+tag: package-stable-2.0
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
