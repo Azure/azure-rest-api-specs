@@ -6349,6 +6349,59 @@
         "total_tokens"
       ]
     },
+    "RunStepConnectedAgent": {
+      "type": "object",
+      "description": "The detailed information about connected agent tool call.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of connected agent."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The JSON serialized query to the connected agent."
+        },
+        "output": {
+          "type": "string",
+          "description": "The tool output."
+        },
+        "run_id": {
+          "type": "string",
+          "description": "The run ID used by the connected agent.",
+          "x-ms-client-name": "runId"
+        },
+        "thread_id": {
+          "type": "string",
+          "description": "The thread ID used by the connected agent.",
+          "x-ms-client-name": "threadId"
+        },
+        "assistant_id": {
+          "type": "string",
+          "description": "The ID of a connected agent.",
+          "x-ms-client-name": "agentId"
+        }
+      }
+    },
+    "RunStepConnectedAgentToolCall": {
+      "type": "object",
+      "description": "A record of a call to the connected agent.",
+      "properties": {
+        "connected_agent": {
+          "$ref": "#/definitions/RunStepConnectedAgent",
+          "description": "The connected agent step information.",
+          "x-ms-client-name": "connectedAgent"
+        }
+      },
+      "required": [
+        "connected_agent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "connected_agent"
+    },
     "RunStepDeepResearchToolCall": {
       "type": "object",
       "description": "A record of a call to a Deep Research tool, issued by the model in evaluation of a defined tool, that represents\nexecuted deep research operations.",
@@ -6568,6 +6621,26 @@
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
+    },
+    "RunStepDeltaConnectedAgentToolCall": {
+      "type": "object",
+      "description": "Represents the invocation of connected agent as a part of a streaming run step.",
+      "properties": {
+        "connected_agent": {
+          "$ref": "#/definitions/RunStepConnectedAgent",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "x-ms-client-name": "connectedAgent"
+        }
+      },
+      "required": [
+        "connected_agent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "connected_agent"
     },
     "RunStepDeltaDeepResearchToolCall": {
       "type": "object",
