@@ -719,16 +719,6 @@ model NameDescriptionObject {
   description?: string;
 }
 
-/**
- * Application ID item
- */
-model AppId {
-  /**
-   * Application ID value
-   */
-  value: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ListAppIdResponse {
   /*
