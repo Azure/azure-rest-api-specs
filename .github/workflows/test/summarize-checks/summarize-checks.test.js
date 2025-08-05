@@ -146,7 +146,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         expectedComment,
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "FAILURE",
           summary:
             "❌ This PR cannot be merged because some requirements are not met. See the details.",
@@ -256,7 +256,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -283,7 +283,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -391,7 +391,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -499,7 +499,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -564,7 +564,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -635,7 +635,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -691,7 +691,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -739,7 +739,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -784,7 +784,7 @@ describe("Summarize Checks Unit Tests", () => {
       const targetBranch = "main";
       const labelNames = [];
       const expectedCheckOutput = {
-        name: "[TEST-IGNORE] Automated merging requirements met",
+        name: "Automated merging requirements met",
         result: "FAILURE",
         summary:
           "❌ This PR cannot be merged because some requirements are not met. See the details.",
@@ -827,7 +827,7 @@ describe("Summarize Checks Unit Tests", () => {
       const labelNames = [];
       const fyiCheckRuns = [];
       const expectedCheckOutput = {
-        name: "[TEST-IGNORE] Automated merging requirements met",
+        name: "Automated merging requirements met",
         result: "FAILURE",
         summary:
           "❌ This PR cannot be merged because some requirements are not met. See the details.",
