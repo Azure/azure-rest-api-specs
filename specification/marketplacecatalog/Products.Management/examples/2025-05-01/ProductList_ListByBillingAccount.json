@@ -1,0 +1,29 @@
+{
+  "title": "ProductList_ListByBillingAccount",
+  "operationId": "ProductList_ListByBillingAccount",
+  "parameters": {
+    "api-version": "2025-05-01",
+    "billingAccountId": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31",
+    "market": "US",
+    "language": "en",
+    "$filter": "productType eq 'VirtualMachine'",
+    "$select": "displayName,uniqueProductId,productType,publisherDisplayName",
+    "$search": "Microsoft"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "uniqueProductId": "microsoft_windowsserver2022datacenter_plan1",
+            "displayName": "Windows Server 2022 Datacenter",
+            "publisherDisplayName": "Microsoft",
+            "publisherType": "Microsoft",
+            "productType": "VirtualMachine"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
