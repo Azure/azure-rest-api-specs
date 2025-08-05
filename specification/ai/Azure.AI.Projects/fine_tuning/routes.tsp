@@ -99,6 +99,19 @@ interface FineTuningJobs {
     FineTuningJob
   >;
 
+  @doc("Delete a fine-tune job.")
+  @delete
+  @route("/{fine_tuning_job_id}")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  delete is Azure.Core.Foundations.Operation<
+    {
+        @doc("The ID of the fine-tuning job to delete.")
+        @path
+        fine_tuning_job_id: string;
+    },
+    Http.NoContentResponse
+  >;
+
   @doc("Get status updates for a fine-tuning job.")
   @get
   @route("/{fine_tuning_job_id}/events")

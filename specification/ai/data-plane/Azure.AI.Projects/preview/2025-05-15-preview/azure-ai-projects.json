@@ -1252,6 +1252,39 @@
             "$ref": "./examples/FineTuningJobs_Get_SuccessfulJob.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "FineTuningJobs_Delete",
+        "description": "Delete a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
       }
     },
     "/fine_tuning/jobs/{fine_tuning_job_id}/cancel": {
