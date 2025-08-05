@@ -9,14 +9,15 @@
     "api-version": "2025-02-01-preview",
     "parameters": {
       "identity": {
-        "type": "None"
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-umi": {}
+        }
       },
       "properties": {
         "databaseType": "AzureSqlDatabase",
         "serverName": "syncgroupcrud-3379.database.windows.net",
         "databaseName": "syncgroupcrud-7421",
-        "userName": "myUser",
-        "password": "password",
         "syncDirection": "Bidirectional",
         "usePrivateLinkConnection": true,
         "syncMemberAzureDatabaseResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/syncgroupcrud-65440/providers/Microsoft.Sql/servers/syncgroupcrud-8475/databases/syncgroupcrud-4328"
@@ -27,13 +28,18 @@
     "200": {
       "body": {
         "identity": {
-          "type": "None"
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-umi": {
+              "clientId": "e09c8507-0000-0000-97e2-18c5beec59dc",
+              "principalId": "0c29d9b7-0ae2-4014-96ea-faf8e0cf2bc7"
+            }
+          }
         },
         "properties": {
           "databaseType": "AzureSqlDatabase",
           "serverName": "syncgroupcrud-3379.database.windows.net",
           "databaseName": "syncgroupcrud-7421",
-          "userName": "myUser",
           "syncDirection": "Bidirectional",
           "syncState": "UnProvisioned",
           "usePrivateLinkConnection": true,
@@ -45,27 +51,10 @@
         "type": "Microsoft.Sql/servers/databases/syncGroups/syncMembers"
       }
     },
-    "201": {
-      "body": {
-        "identity": {
-          "type": "None"
-        },
-        "properties": {
-          "databaseType": "AzureSqlDatabase",
-          "serverName": "syncgroupcrud-3379.database.windows.net",
-          "databaseName": "syncgroupcrud-7421",
-          "userName": "myUser",
-          "syncDirection": "Bidirectional",
-          "syncState": "UnProvisioned",
-          "usePrivateLinkConnection": true,
-          "privateEndpointName": "PE_67FDBBD6-B2D8-4014-9CC6-C68ABBCFD481_syncmembercrud-4879",
-          "syncMemberAzureDatabaseResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/syncgroupcrud-65440/providers/Microsoft.Sql/servers/syncgroupcrud-8475/databases/syncgroupcrud-4328"
-        },
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/syncgroupcrud-65440/providers/Microsoft.Sql/servers/syncgroupcrud-8475/databases/syncgroupcrud-4328/syncGroups/syncgroupcrud-3187/syncMembers/syncmembercrud-4879",
-        "name": "syncmembercrud-4879",
-        "type": "Microsoft.Sql/servers/databases/syncGroups/syncMembers"
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/westus/operation/00000000-1111-2222-3333-444444444444?api-version=2022-11-01-preview"
       }
-    },
-    "202": {}
+    }
   }
 }
