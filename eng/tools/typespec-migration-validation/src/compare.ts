@@ -1,4 +1,4 @@
-import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Response, Refable } from "@azure-tools/typespec-autorest";
+import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Response, OpenAPI2Schema, OpenAPI2SchemaProperty, Ref, Refable } from "@azure-tools/typespec-autorest";
 
 interface Diff {
   before: any;
@@ -21,15 +21,94 @@ interface PathDiff extends Diff {
   type: "path" | "parameters" | "pageable" | "longrunning" | "finalstate" | "finalresult" | "responses" | "response";
 }
 
-export function printPathDiff(diff: PathDiff): string {
-  return `| ${diff.type} | ${diff.level} | The ${diff.type} of operation "${diff.operationId}" changed: ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
+/**
+ * properties: the property names of the definition should be the same
+ */
+interface DefinitionDiff extends Diff {
+  name: string;
+  type: "properties";
 }
 
-export function compareDocuments(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document) {
-  const diffs: PathDiff[] = [];
+export function printDiff(diff: PathDiff | DefinitionDiff): string {
+  if ("operationId" in diff) {
+    return `| ${diff.type} | ${diff.level} | The ${diff.type} of operation "${diff.operationId}" changed: ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
+  } else {
+    return `| ${diff.type} | ${diff.level} | The ${diff.type} of definition "${diff.name}" changed: ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
+  }
+}
+
+export function compareDocuments(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document): (PathDiff | DefinitionDiff)[] {
+  const diffs: (PathDiff | DefinitionDiff)[] = [];
   diffs.push(...comparePaths(oldDocument, newDocument));
+
+  // If not exists in the new document, it might be an orphaned definition previously
+  for (const definition in newDocument.definitions ?? {}) {
+    // If not exists in old document, it might be an anonymous definition previously
+    if (oldDocument.definitions?.[definition]) {
+      diffs.push(...compareDefinition(oldDocument.definitions[definition], oldDocument, newDocument.definitions![definition], newDocument, definition));
+    }
+  }
   return diffs;
 }
+
+function compareDefinition(oldDefinition: OpenAPI2Schema, oldDocument: OpenAPI2Document, newDefinition: OpenAPI2Schema, newDocument: OpenAPI2Document, name: string): DefinitionDiff[] {
+  const oldProperties = getAllProperties(oldDefinition, oldDocument);
+  const sortedOldProperties = Object.keys(oldProperties).sort().reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
+    obj[key] = oldProperties[key];
+    return obj;
+  }, {});
+
+  const newProperties = getAllProperties(newDefinition, newDocument);
+  const sortedNewProperties = Object.keys(newProperties).sort().reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
+    obj[key] = newProperties[key];
+    return obj;
+  }, {});
+
+  // First check if the properties are the same
+  const oldKeys = Object.keys(sortedOldProperties);
+  const newKeys = Object.keys(sortedNewProperties);
+  if (oldKeys.length !== newKeys.length) {
+    return [{
+      before: oldKeys,
+      after: newKeys,
+      name,
+      type: "properties",
+      level: "error"
+    }];
+  }
+  for (const key of oldKeys) {
+    if (!newKeys.includes(key)) {
+      return [{
+        before: oldKeys,
+        after: newKeys,
+        name,
+        type: "properties",
+        level: "error"
+      }];
+    }
+  }
+  for (const key of newKeys) {
+    if (!oldKeys.includes(key)) {
+      return [{
+        before: oldKeys,
+        after: newKeys,
+        name,
+        type: "properties",
+        level: "error"
+      }];
+    }
+  }
+
+  // Then check if the property types are the same
+  // for (const key of oldKeys) {
+  //   const oldProperty = sortedOldProperties[key];
+  //   const newProperty = sortedNewProperties[key];
+    
+  // }
+
+  return [];
+}
+
 
 function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document): PathDiff[] {
   const oldOperations = organizeOperationById(oldDocument);
@@ -239,3 +318,27 @@ function organizeOperationById(document: OpenAPI2Document): Record<string, [stri
   return operationMap;
 }
 
+function getAllProperties(schema: OpenAPI2Schema, document: OpenAPI2Document, properties: Record<string, OpenAPI2SchemaProperty> = {}): Record<string, OpenAPI2SchemaProperty> {
+  for (const baseSchema of schema.allOf ?? []) {
+    if (isRef(baseSchema)) {
+      const refPath = baseSchema.$ref;
+      const definitionName = refPath.split("/").pop();
+      const baseDefinition = document.definitions?.[definitionName!];
+      if (baseDefinition) {
+        getAllProperties(baseDefinition, document, properties);
+      }
+    }
+  }
+
+  if (schema.properties) {
+    for (const key in schema.properties) {
+      properties[key] = schema.properties[key];
+    }
+  }
+  return properties;
+}
+
+
+function isRef<T>(value: Refable<T>): value is Ref<T> {
+  return (value as Ref<T>).$ref !== undefined;
+}
