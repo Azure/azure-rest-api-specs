@@ -120,6 +120,53 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityBlocks": {
+      "get": {
+        "tags": [
+          "capacityBlocks"
+        ],
+        "operationId": "CapacityBlocks_Get",
+        "description": "Get available capacity blocks.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "An OData filter expression that describes a subset of capacity blocks to return. Mandatory parameters are sku, capacity, durationhours, start-date-range and end-date-range. Optional parameters are zone and location. The supported operator is eq. Example: $filter = sku eq Standard_D16s_v4 and capacity eq 4 and start-date-range eq 2025-06-25T00:00:00-07:00 and end-date-range eq 2025-06-27T00:00:00-07:00 and durationhours eq 24 and zone eq 1 and location eq westus"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CapacityBlocks"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns list of capacity block objects.": {
+            "$ref": "./examples/GetCapacityBlocks.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
