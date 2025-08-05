@@ -1128,7 +1128,43 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FineTuningPaginatedResponse"
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "Response type",
+                  "default": "list"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Items list.",
+                  "items": {
+                    "$ref": "#/definitions/FineTuningJob"
+                  }
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available."
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
@@ -1151,8 +1187,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FineTuningJob"
             }
@@ -1235,10 +1271,88 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/events": {
+      "get": {
+        "operationId": "FineTuningJobs_ListFineTuningEvents",
+        "description": "Get status updates for a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to get events for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last event from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of events to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "Response type",
+                  "default": "list"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Items list.",
+                  "items": {
+                    "$ref": "#/definitions/FineTuningJobEvent"
+                  }
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available."
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "has_more"
+              ]
             }
           },
           "default": {
@@ -1273,8 +1387,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FineTuningJob"
             }
@@ -1311,8 +1425,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FineTuningJob"
             }
@@ -2983,7 +3097,7 @@
         "created_at": {
           "type": "string",
           "format": "date-time",
-          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was created."
+          "description": "The time when the fine-tuning job was created."
         },
         "error": {
           "$ref": "#/definitions/FineTuningJobError",
@@ -2992,7 +3106,7 @@
         "estimated_finish": {
           "type": "string",
           "format": "date-time",
-          "description": "The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running."
+          "description": "The time when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running."
         },
         "fine_tuned_model": {
           "type": "string",
@@ -3001,7 +3115,7 @@
         "finished_at": {
           "type": "string",
           "format": "date-time",
-          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running."
+          "description": "The time when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running."
         },
         "hyperparameters": {
           "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
@@ -3229,6 +3343,50 @@
           "description": "The parameter that was invalid, usually training_file or validation_file. This field will be null if the failure was not parameter-specific."
         }
       }
+    },
+    "FineTuningJobEvent": {
+      "type": "object",
+      "description": "Fine-tuning job event object.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always fine_tuning.job.event",
+          "default": "fine_tuning.job.event"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the fine-tuning event was created."
+        },
+        "data": {
+          "description": "The data associated with the event."
+        },
+        "id": {
+          "type": "string",
+          "description": "The object identifier."
+        },
+        "level": {
+          "type": "string",
+          "description": "The log level of the event."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message of the event."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of event."
+        }
+      },
+      "required": [
+        "object",
+        "created_at",
+        "data",
+        "id",
+        "level",
+        "message",
+        "type"
+      ]
     },
     "FineTuningJobGraderMessage": {
       "type": "object",
@@ -3640,10 +3798,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "sampling_params": {
-          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
-          "description": "The sampling parameters for the model. Specific to AOAI API"
         }
       },
       "required": [
@@ -3691,31 +3845,6 @@
         }
       ],
       "x-ms-discriminator-value": "multi"
-    },
-    "FineTuningPaginatedResponse": {
-      "type": "object",
-      "description": "The response data for a requested list of items.",
-      "properties": {
-        "data": {
-          "type": "array",
-          "description": "Items list.",
-          "items": {
-            "$ref": "#/definitions/FineTuningJob"
-          }
-        },
-        "last_id": {
-          "type": "string",
-          "description": "The last ID represented in this list."
-        },
-        "has_more": {
-          "type": "boolean",
-          "description": "A value indicating whether there are additional values available."
-        }
-      },
-      "required": [
-        "data",
-        "has_more"
-      ]
     },
     "FineTuningPythonGrader": {
       "type": "object",

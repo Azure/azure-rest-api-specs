@@ -388,9 +388,6 @@ model FineTuningLabelModelGrader extends FineTuningGrader
 
    @doc("The labels that indicate a passing result. Must be a subset of labels.")
    passing_labels : Array<string>;
-
-   @doc("The sampling parameters for the model. Specific to AOAI API")
-   sampling_params? : FineTuningJobGraderModelSamplingParam;
 }
 
 // RFT graders end 
@@ -528,19 +525,19 @@ model FineTuningJob {
   @doc("The object type, which is always 'fine_tuning.job'. Parity with OAI SDK")
   object: string;
 
-  @doc("The Unix timestamp (in seconds) for when the fine-tuning job was created.")
+  @doc("The time when the fine-tuning job was created.")
   created_at: utcDateTime;
 
   @doc("For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.")
   error?: FineTuningJobError;
 
-  @doc("The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.")
+  @doc("The time when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.")
   estimated_finish?: utcDateTime;
 
   @doc("The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.")
   fine_tuned_model?: string;
 
-  @doc("The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.")
+  @doc("The time when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.")
   finished_at?: utcDateTime;
 
   @doc("The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs")
@@ -697,16 +694,41 @@ model FineTuningJobCreation {
 @doc("The response data for a requested list of items.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningPaginatedResponse {
+model FineTuningPaginatedResponse<T> {
+  @doc("Response type")
+  object : string = "list";
+
   @doc("Items list.")
   @pageItems
-  @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v1)
-  data: Array<FineTuningJob>;
-
-  @doc("The last ID represented in this list.")
-  last_id?: string;
+  data: Array<T>;
 
   @doc("A value indicating whether there are additional values available.")
   has_more: boolean;
+}
+
+@doc("Fine-tuning job event object.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobEvent {
+  @doc("The object type, which is always fine_tuning.job.event")
+  object : string = "fine_tuning.job.event";
+
+  @doc("The time when the fine-tuning event was created.")
+  created_at: utcDateTime;
+
+  @doc("The data associated with the event.")
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  data: unknown;
+
+  @doc("The object identifier.")
+  id : string;
+
+  @doc("The log level of the event.")
+  level : string;
+
+  @doc("The message of the event.")
+  message : string;
+
+  @doc("The type of event.")
+  type : string;
 }

@@ -16,8 +16,8 @@ namespace Azure.AI.Projects;
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 interface FineTuningJobs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get info about a fine-tuning job.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   get is Azure.Core.Foundations.Operation<
       {
         @doc("The ID of the fine-tuning job.")
@@ -27,28 +27,26 @@ interface FineTuningJobs {
       FineTuningJob
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Returns a list of finetune jobs")
   @get
   @list
-  // ToDo: add the same error response
-  listFineTuningJobs(
-      ...ApiVersionParameter;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  listFineTuningJobs is Azure.Core.Foundations.Operation<
+    {
+        @doc("Identifier for the last job from the previous pagination request.")
+        @query
+        after?: string;
 
-    @doc("Identifier for the last job from the previous pagination request.")
-    @query
-    after?: string;
+        @doc("Number of fine-tuning jobs to retrieve.")
+        @query
+        limit?: int32 = 20;
 
-    @doc("Number of fine-tuning jobs to retrieve.")
-    @query
-    limit?: int32 = 20;
-
-    @doc("Optional metadata filter. To filter, use the syntax metadata[k]=v. Alternatively, set metadata=null to indicate no metadata.")
-    @query
-    metadata?: string;
-    ): {
-      ...FineTuningPaginatedResponse;
-    };
+        @doc("Optional metadata filter. To filter, use the syntax metadata[k]=v. Alternatively, set metadata=null to indicate no metadata.")
+        @query
+        metadata?: string;
+    },
+    FineTuningPaginatedResponse<FineTuningJob>
+  >;
 
   @doc("Creates a fine-tuning job.")
   @post
@@ -59,7 +57,7 @@ interface FineTuningJobs {
       @body
       fineTuningJob: FineTuningJobCreation;
     },
-    ResourceCreatedResponse<FineTuningJob>
+    FineTuningJob
   >;
 
   @doc("Cancel a fine-tune job.")
@@ -72,7 +70,7 @@ interface FineTuningJobs {
         @path
         fine_tuning_job_id: string;
     },
-    ResourceCreatedResponse<FineTuningJob>
+    FineTuningJob
   >;
 
   @doc("Pause a fine-tune job.")
@@ -85,7 +83,7 @@ interface FineTuningJobs {
         @path
         fine_tuning_job_id: string;
     },
-    ResourceCreatedResponse<FineTuningJob>
+    FineTuningJob
   >;
 
   @doc("Resume a fine-tune job.")
@@ -98,19 +96,27 @@ interface FineTuningJobs {
         @path
         fine_tuning_job_id: string;
     },
-    ResourceCreatedResponse<FineTuningJob>
+    FineTuningJob
   >;
-/**
+
   @doc("Get status updates for a fine-tuning job.")
   @get
-  @route("/{fine_tuning_job_id}/cancel")
+  @route("/{fine_tuning_job_id}/events")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  cancel is Azure.Core.Foundations.Operation<
+  listFineTuningEvents is Azure.Core.Foundations.Operation<
     {
-        @doc("The ID of the fine-tuning job to cancel.")
+        @doc("The ID of the fine-tuning job to get events for.")
         @path
         fine_tuning_job_id: string;
+
+        @doc("Identifier for the last event from the previous pagination request.")
+        @query
+        after?: string;
+
+        @doc("Number of events to retrieve.")
+        @query
+        limit?: int32 = 20;
     },
-    ResourceCreatedResponse<FineTuningJob>
-  >;*/
+    FineTuningPaginatedResponse<FineTuningJobEvent>
+  >;
 }
