@@ -1211,7 +1211,7 @@ model ApiFlowOptions {
   audienceOverride?: string;
 
   /**
-   * Optional properties to specify the type of authentication for the Azure Data Transfer API Flow.
+   * Optional and for advanced used only. A list of authentication methods to use when accessing the Azure Data Transfer API Flow. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.
    */
   @added(Versions.v2025_05_30_preview)
   @OpenAPI.extension("x-ms-identifiers", #[])
@@ -1235,7 +1235,7 @@ model RemoteEndpointSettings {
   endpoint: string;
 
   /**
-   * Optional. A list of authentication methods to use against the remote endpoint.
+   * Optional and for advanced used only. A list of authentication methods to use when accessing the remote endpoint. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   authentication?: Authentication[];

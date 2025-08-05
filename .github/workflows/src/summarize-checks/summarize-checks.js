@@ -130,6 +130,7 @@ import path from "path";
  * @property {string} name
  * @property {string} summary
  * @property {"pending" | keyof typeof CheckConclusion} result
+ * @property {string} [target_url]
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -298,6 +299,9 @@ export default async function summarizeChecks({ github, context, core }) {
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
+  // Default target is this run itself
+  const target_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
   await summarizeChecksImpl(
     github,
     core,
@@ -307,6 +311,7 @@ export default async function summarizeChecks({ github, context, core }) {
     head_sha,
     context.eventName,
     targetBranch,
+    target_url,
   );
 }
 
@@ -341,6 +346,7 @@ export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
  * @param {string} head_sha
  * @param {string} event_name
  * @param {string} targetBranch
+ * @param {string} target_url
  * @returns {Promise<void>}
  */
 export async function summarizeChecksImpl(
@@ -352,6 +358,7 @@ export async function summarizeChecksImpl(
   head_sha,
   event_name,
   targetBranch,
+  target_url,
 ) {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
@@ -428,6 +435,8 @@ export async function summarizeChecksImpl(
     impactAssessment !== undefined,
   );
 
+  automatedChecksMet.target_url = target_url;
+
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
@@ -482,7 +491,7 @@ export async function updateCommitStatus(github, core, owner, repo, head_sha, ch
         ? checkResult.summary.substring(0, 137) + "..."
         : checkResult.summary,
     context: checkResult.name,
-    // target_url: undefined, // Optional: add a URL if you want to link to more details
+    target_url: checkResult.target_url,
   });
 
   core.info(
@@ -876,16 +885,20 @@ export async function createNextStepsComment(
   assessmentCompleted,
 ) {
   // select just the metadata that we need about the runs.
-  const requiredCheckInfos = requiredRuns
+  const failingCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
   // determine if required runs have any in-progress or queued runs
   // if there are any, we consider the requirements not met.
-  const requiredCheckInfosPresent = requiredRuns.some((run) => {
+  // if there are NO required runs, we also consider this to be a "requirements met" situation.
+  // there is a possibility that this will be a false positive, but it is better than
+  // assuming that the requirements are not met when they actually are.
+  const requiredCheckInfosPresent = requiredRuns.every((run) => {
     const status = run.status.toLowerCase();
-    return status !== "queued" && status !== "in_progress";
+    return status === "completed";
   });
+
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
@@ -895,7 +908,7 @@ export async function createNextStepsComment(
     labels,
     `${repo}/${targetBranch}`,
     requiredCheckInfosPresent,
-    requiredCheckInfos,
+    failingCheckInfos,
     fyiCheckInfos,
     assessmentCompleted,
   );
