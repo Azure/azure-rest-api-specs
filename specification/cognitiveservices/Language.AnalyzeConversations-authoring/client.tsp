@@ -262,8 +262,10 @@ namespace ConversationAuthoringClient {
 
   op `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
 
+  @access(Access.internal, "python")
   op getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
 
+  @access(Access.internal, "python")
   op getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
 }
 
@@ -285,8 +287,10 @@ namespace ConversationAuthoringProjectClient {
 
     deleteDeploymentFromResources is Language.Conversations.Authoring.ConversationAuthoringDeployment.deleteDeploymentFromResources;
 
+    @access(Access.internal, "python")
     getDeploymentDeleteFromResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus;
 
+    @access(Access.internal, "python")
     getDeploymentStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentStatus;
   }
 
@@ -307,8 +311,10 @@ namespace ConversationAuthoringProjectClient {
 
     unassignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignDeploymentResources;
 
+    @access(Access.internal, "python")
     getAssignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignDeploymentResourcesStatus;
 
+    @access(Access.internal, "python")
     getUnassignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignDeploymentResourcesStatus;
 
     swapDeployments is Language.Conversations.Authoring.ConversationAuthoringProject.swapDeployments;
