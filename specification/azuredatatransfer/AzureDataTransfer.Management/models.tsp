@@ -148,7 +148,6 @@ union LinkStatus {
 /**
  * Flow type for the specified resource. FlowType will be deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.
  */
-@removed(Versions.v2025_05_30_preview)
 union FlowType {
   string,
 
@@ -812,8 +811,13 @@ model PipelineProperties {
   /**
    * The flow types that are disabled for this pipeline
    */
-  @removed(Versions.v2025_05_30_preview)
   disabledFlowTypes?: FlowType[];
+
+    /**
+   * The DataClasses that are disabled for this pipeline
+   */
+  @added(Versions.v2025_05_30_preview)
+  disabledDataClass?: DataClass[];
 
   /**
    * Quarantine Download Storage Account

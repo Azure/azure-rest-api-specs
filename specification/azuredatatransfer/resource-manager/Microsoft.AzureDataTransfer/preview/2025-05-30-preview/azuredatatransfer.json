@@ -4040,6 +4040,102 @@
         ]
       }
     },
+    "FlowType": {
+      "type": "string",
+      "description": "Flow type for the specified resource. FlowType will be deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.",
+      "enum": [
+        "Unknown",
+        "Complex",
+        "DevSecOps",
+        "Messaging",
+        "Mission",
+        "MicrosoftInternal",
+        "BasicFiles",
+        "Data",
+        "Standard",
+        "StreamingVideo",
+        "Opaque",
+        "MissionOpaqueXML",
+        "DiskImages",
+        "API"
+      ],
+      "x-ms-enum": {
+        "name": "FlowType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "This type of flow is not set."
+          },
+          {
+            "name": "Complex",
+            "value": "Complex",
+            "description": "This flow sends complex documents, such as Microsoft Office documents of Portable document format files."
+          },
+          {
+            "name": "DevSecOps",
+            "value": "DevSecOps",
+            "description": "This flow sends source code files and artifacts."
+          },
+          {
+            "name": "Messaging",
+            "value": "Messaging",
+            "description": "This flow over the Azure Data Transfer low latency messaging subsystem."
+          },
+          {
+            "name": "Mission",
+            "value": "Mission",
+            "description": "This flow sends standard data but is subject to strict cloud owner approval."
+          },
+          {
+            "name": "MicrosoftInternal",
+            "value": "MicrosoftInternal",
+            "description": "This flow is assigned to internal Microsoft use cases."
+          },
+          {
+            "name": "BasicFiles",
+            "value": "BasicFiles",
+            "description": "This flow sends blobs that can be used for multiple use cases."
+          },
+          {
+            "name": "Data",
+            "value": "Data",
+            "description": "This flow sends blobs that can be used for multiple use cases."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "This flow sends blobs that can be used for multiple use cases."
+          },
+          {
+            "name": "StreamingVideo",
+            "value": "StreamingVideo",
+            "description": "This flow sends video streams."
+          },
+          {
+            "name": "Opaque",
+            "value": "Opaque",
+            "description": "This flow sends blobs but is subject to cloud owner approval."
+          },
+          {
+            "name": "MissionOpaqueXML",
+            "value": "MissionOpaqueXML",
+            "description": "This flow sends Extensible Markup Language that is subject to strict cloud owner approval"
+          },
+          {
+            "name": "DiskImages",
+            "value": "DiskImages",
+            "description": "This flow sends blobs that can be used for Virtual Machines."
+          },
+          {
+            "name": "API",
+            "value": "API",
+            "description": "This flow sends data via an Application Programmer Interface."
+          }
+        ]
+      }
+    },
     "FlowsPatch": {
       "type": "object",
       "description": "The flows resource patch definition.",
@@ -4817,6 +4913,20 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the pipeline",
           "readOnly": true
+        },
+        "disabledFlowTypes": {
+          "type": "array",
+          "description": "The flow types that are disabled for this pipeline",
+          "items": {
+            "$ref": "#/definitions/FlowType"
+          }
+        },
+        "disabledDataClass": {
+          "type": "array",
+          "description": "The DataClasses that are disabled for this pipeline",
+          "items": {
+            "$ref": "#/definitions/DataClass"
+          }
         },
         "quarantineDownloadStorageAccount": {
           "type": "string",
