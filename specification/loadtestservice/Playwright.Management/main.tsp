@@ -19,9 +19,9 @@ enum Versions {
   @doc("The 2025-07-01-preview version of Playwright Workspaces Resource manager API.")
   v2025_07_01_preview: "2025-07-01-preview",
 
-  /** 2025-10-01 version */
+  /** 2025-09-01 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @doc("The 2025-10-01 version of Playwright Workspaces Resource manager API.")
-  v2025_10_01: "2025-10-01",
+  @doc("The 2025-09-01 version of Playwright Workspaces Resource manager API.")
+  v2025_09_01: "2025-09-01",
 }
