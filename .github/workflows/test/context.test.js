@@ -276,6 +276,32 @@ describe("extractInputs", () => {
         });
 
         expect(github.rest.search.issuesAndPullRequests).toHaveBeenCalled();
+
+        // Simulate REST API throwing error, which should be handled, log a warning, and then
+        // treat like any other scenario with no pull requests.
+        github.rest.repos.listPullRequestsAssociatedWithCommit.mockRejectedValue(
+          new Error("test-error"),
+        );
+
+        await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+          owner: "TestRepoOwnerLogin",
+          repo: "TestRepoName",
+          head_sha: "abc123",
+          issue_number: 789,
+          run_id: 456,
+        });
+
+        // Simulate REST API throwing object, which should be handled, log a warning, and then
+        // treat like any other scenario with no pull requests.
+        github.rest.repos.listPullRequestsAssociatedWithCommit.mockRejectedValue("test-error");
+
+        await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+          owner: "TestRepoOwnerLogin",
+          repo: "TestRepoName",
+          head_sha: "abc123",
+          issue_number: 789,
+          run_id: 456,
+        });
       } else if (numPullRequests === 1 || numPullRequests === 2) {
         // Second PR is to a different repo, so expect same behavior with or without it
         await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
