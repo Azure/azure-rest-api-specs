@@ -69,6 +69,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     action?: string;
 
     /** The evidence for the authorization. */
+    @visibility(Lifecycle.Read)
     evidence: Record<string>;
   }
 
