@@ -2907,7 +2907,7 @@ model StorageAccountPropertiesCreateParameters {
    */
   routingPreference?: RoutingPreference;
 
-    /**
+  /**
    * Maintains information about the Internet protocol opted by the user.
    */
   dualStackEndpointPreference?: DualStackEndpointPreference;
@@ -3158,6 +3158,7 @@ model NetworkRuleSet {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   ipv6Rules?: IPRule[];
+
   /**
    * Specifies the default action of allow or deny when no other rules match.
    */
@@ -3555,7 +3556,7 @@ model StorageAccountProperties {
    */
   routingPreference?: RoutingPreference;
 
-    /**
+  /**
    * Maintains information about the Internet protocol opted by the user.
    */
   dualStackEndpointPreference?: DualStackEndpointPreference;
@@ -3685,7 +3686,7 @@ model Endpoints {
    */
   internetEndpoints?: StorageAccountInternetEndpoints;
 
-    /**
+  /**
    * Gets the IPv6 storage endpoints.
    */
   ipv6Endpoints?: StorageAccountIpv6Endpoints;
