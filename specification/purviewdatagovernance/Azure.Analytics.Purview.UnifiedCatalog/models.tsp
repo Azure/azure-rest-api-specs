@@ -276,34 +276,37 @@ model DataElementProperties {
   relationshipType?: string;
 }
 
-@doc("CatalogModelCriticalDataColumn.")
-model CatalogModelCriticalDataColumn {
+@doc("CriticalDataColumn.")
+@resource("criticalDataColumns")
+model CriticalDataColumn {
   @doc("The third additional property.")
   id?: uuid;
 
-  @doc("The name of the critical data column.")
-  name?: string;
+  @doc("name of the column.")
+  name: string;
 
-  @doc("The name of the systemData.")
+  @doc("Gets or Sets SystemData.")
   systemData?: CatalogModelSystemDataWithExpired;
 
-  @doc("The name of the domain.")
-  domain?: uuid;
+  @doc("The Id of the domain.")
+  @key("criticalDataColumnId")
+  @visibility(Lifecycle.Read)
+  domain: uuid;
 
-  @doc("The name of the asset.")
-  assetId?: uuid;
+  @doc("The Id of the asset.")
+  assetId: uuid;
 
   @doc("The description of the critical data column.")
   description?: string;
 
-  @doc("The classifications of the critical data column.")
+  @doc("A list of classification labels.")
   classifications?: string[];
 
   @doc("The data type of the critical data column.")
   dataType?: string;
 
   @doc("The name of the asset.")
-  assetName?: string;
+  assetName: string;
 }
 
 @doc("Properties for critical data column relationships.")
@@ -342,6 +345,8 @@ model SystemData {
 }
 
 @doc("Wrapper for relationship information between entities.")
+@resource("relationships")
+@parentResource(CriticalDataColumn)
 model RelationshipWrapper {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
@@ -353,6 +358,8 @@ model RelationshipWrapper {
   relationshipType?: string;
 
   @doc("Unique identifier of the related entity.")
+  @key
+  @visibility(Lifecycle.Read)
   entityId: uuid;
 }
 
@@ -411,21 +418,24 @@ model CatalogModelDataAssetSchema {
   type?: string;
 }
 
-@doc("CatalogModelDataAsset.")
-model CatalogModelDataAsset {
-  @doc("Unique identifier of the asset.")
-  id?: uuid;
+@doc("DataAsset.")
+@resource("dataAssets")
+model DataAsset {
+  @doc("Gets or Sets Id.")
+  @key("dataAssetId")
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
   @doc("Name of the asset.")
-  name?: string;
+  name: string;
 
   @doc("System data associated with the asset.")
   systemData?: CatalogModelSystemDataWithExpired;
 
-  @doc("Description of the asset.")
+  @doc("A description about the relationship.")
   description?: string;
 
-  @doc("Domain of the asset.")
+  @doc("Link to the owning domain.")
   domain?: string;
 
   @doc("Source of the asset.")
@@ -434,13 +444,13 @@ model CatalogModelDataAsset {
   @doc("Contacts associated with the asset.")
   contacts?: Record<CatalogModelContactsValueInner[]>;
 
-  @doc("Classifications associated with the asset.")
+  @doc("A list of classification labels.")
   classifications?: string[];
 
-  @doc("Unique identifier of the entity.")
+  @doc("Only one label is allowed. A GUID of the information protection label.")
   sensitivityLabel?: uuid;
 
-  @doc("Type of the asset.")
+  @doc("type of the data asset.")
   type?: string;
 
   @doc("Schema of the asset.")
@@ -449,18 +459,18 @@ model CatalogModelDataAsset {
   @doc("Lineage information associated with the asset.")
   lineage?: string[];
 
-  @doc("Data quality score of the asset.")
+  @doc("Data quality score for the data asset.")
   dataQualityScore?: float64;
 
-  @doc("URL to open the asset in the catalog.")
+  @doc("A redirection link..")
   openInUrl?: url;
 
   @doc("Type properties of the asset.")
   typeProperties?: string[];
 }
 
-@doc("DataAssetDataAssetQueryRequest.")
-model DataAssetDataAssetQueryRequest {
+@doc("DataAssetQueryRequest.")
+model DataAssetQueryRequest {
   @doc("Number of items to skip.")
   skip?: int32;
 
@@ -506,7 +516,7 @@ model FacetsResponse {
 model CriticalDataColumnsResponse {
   @doc("The list of critical data columns.")
   @items
-  value: CatalogModelCriticalDataColumn[];
+  value: CriticalDataColumn[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -530,7 +540,7 @@ model CriticalDataElementsResponse {
 model DataAssetsResponse {
   @doc("The list of data assets.")
   @items
-  value: CatalogModelDataAsset[];
+  value: DataAsset[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -1372,7 +1382,7 @@ alias CriticalDataElementBody = {
   body: CriticalDataElement;
 };
 
-alias UpdateCriticalDataElementParameters = {
+alias CriticalDataElementIdParameters = {
   @doc("The unique identifier of the critical data element.")
   criticalDataElementId: uuid;
 };
@@ -1393,7 +1403,7 @@ alias Duplicatecheck = {
 };
 
 @doc("The number of duplicate checks to perform.")
-model DeleteCriticalDataElementResponse {
+model DeleteResponse {
   @doc("Delete response.")
   @statusCode
   status: 204;
@@ -1408,4 +1418,55 @@ model CreateCriticalDataElementResponse {
   @doc("The request body containing query criteria.")
   @bodyRoot
   body: CriticalDataElement;
+}
+
+@doc("The number of duplicate checks to perform.")
+model CreateCriticalDataColumnResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  @bodyRoot
+  body: CriticalDataColumn;
+}
+
+alias CriticalDataColumnIdParameters = {
+  @doc("The unique identifier of the critical data Column.")
+  criticalDataColumnId: uuid;
+};
+
+@doc("The number of duplicate checks to perform.")
+model CreateDataAssetResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  @bodyRoot
+  body: DataAsset;
+}
+
+alias DataAssetIdParameter = {
+  @doc("The unique identifier of the critical data asset.")
+  dataAssetId: uuid;
+};
+
+@doc("Wrapper for relationship information between entities.")
+@resource("relationships")
+@parentResource(DataAsset)
+model DataAssetRelationshipWrapper {
+  @doc("System metadata for the relationship.")
+  systemData?: SystemData;
+
+  @doc("Description of the relationship.")
+  description?: string;
+
+  @doc("Type of the relationship.")
+  relationshipType?: string;
+
+  @doc("Unique identifier of the related entity.")
+  @key
+  @visibility(Lifecycle.Read)
+  entityId: uuid;
 }

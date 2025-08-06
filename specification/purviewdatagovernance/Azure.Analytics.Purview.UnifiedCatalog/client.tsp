@@ -25,27 +25,27 @@ using PurviewUnifiedCatalog;
   "DeleteCriticalDataElementRelationship"
 );
 @@clientName(GetCriticalDataElementFacetsAsync, "GetCriticalDataElementFacets");
-// @@clientName(CreateCriticalDataColumnAsync, "CreateCriticalDataColumn");
-// @@clientName(ListCriticalDataColumnAsync, "ListCriticalDataColumn");
-// @@clientName(GetCriticalDataColumnByIdAsync, "GetCriticalDataColumnById");
-// @@clientName(CreateCriticalDataColumnRelationshipAsync,
-//   "CreateCriticalDataColumnRelationship"
-// );
-// @@clientName(ListCriticalDataColumnRelationshipsAsync,
-//   "ListCriticalDataColumnRelationships"
-// );
-// @@clientName(DeleteCriticalDataColumnRelationshipAsync,
-//   "DeleteCriticalDataColumnRelationship"
-// );
-// @@clientName(ListDataAssetsAsync, "ListDataAssets");
-// @@clientName(CreateDataAssetAsync, "CreateDataAsset");
-// @@clientName(QueryDataAssetsAsync, "QueryDataAssets");
-// @@clientName(GetDataAssetByIdAsync, "GetDataAssetById");
-// @@clientName(UpdateDataAssetAsync, "UpdateDataAsset");
-// @@clientName(DeleteDataAssetByIdAsync, "DeleteDataAssetById");
-// @@clientName(ListDataAssetRelationshipsAsync, "ListDataAssetRelationships");
-// @@clientName(CreateDataAssetRelationshipAsync, "CreateDataAssetRelationship");
-// @@clientName(DeleteDataAssetRelationshipAsync, "DeleteDataAssetRelationship");
+@@clientName(CreateCriticalDataColumnAsync, "CreateCriticalDataColumn");
+@@clientName(ListCriticalDataColumnAsync, "ListCriticalDataColumn");
+@@clientName(GetCriticalDataColumnByIdAsync, "GetCriticalDataColumnById");
+@@clientName(CreateCriticalDataColumnRelationshipAsync,
+  "CreateCriticalDataColumnRelationship"
+);
+@@clientName(ListCriticalDataColumnRelationshipsAsync,
+  "ListCriticalDataColumnRelationships"
+);
+@@clientName(DeleteCriticalDataColumnRelationshipAsync,
+  "DeleteCriticalDataColumnRelationship"
+);
+@@clientName(ListDataAssetsAsync, "ListDataAssets");
+@@clientName(CreateDataAssetAsync, "CreateDataAsset");
+@@clientName(QueryDataAssetsAsync, "QueryDataAssets");
+@@clientName(GetDataAssetByIdAsync, "GetDataAssetById");
+@@clientName(UpdateDataAssetAsync, "UpdateDataAsset");
+@@clientName(DeleteDataAssetByIdAsync, "DeleteDataAssetById");
+@@clientName(ListDataAssetRelationshipsAsync, "ListDataAssetRelationships");
+@@clientName(CreateDataAssetRelationshipAsync, "CreateDataAssetRelationship");
+@@clientName(DeleteDataAssetRelationshipAsync, "DeleteDataAssetRelationship");
 // @@clientName(ListDataProductsAsync, "ListDataProducts");
 // @@clientName(CreateDataProductAsync, "CreateDataProduct");
 // @@clientName(QueryDataProductsAsync, "QueryDataProducts");
