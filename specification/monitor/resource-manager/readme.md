@@ -57,13 +57,10 @@ input-file:
   - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
   - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
   - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
-  - Microsoft.Insights/stable/2021-05-01/operations_API.json
   - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
   - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
   - Microsoft.Insights/stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
-  - Microsoft.Insights/stable/2022-06-01/actionGroups_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
-  - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
   - Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
   - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
   - Microsoft.Insights/stable/2024-02-01/metrics_API.json
@@ -73,7 +70,6 @@ input-file:
   - Microsoft.Insights/stable/2024-03-11/dataCollectionRules_API.json
   - Microsoft.Insights/PrivateLinkScopes/stable/2021-09-01/privateLinkScopes_API.json
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
-  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
 ```
 
 ### Tag: package-2025-01-01-preview
