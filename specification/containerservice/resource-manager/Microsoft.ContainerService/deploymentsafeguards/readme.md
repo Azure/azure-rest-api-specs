@@ -58,6 +58,15 @@ input-file:
   - preview/2025-05-02-preview/deploymentsafeguards.json
 ```
 
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - preview/2025-07-01/deploymentsafeguards.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
