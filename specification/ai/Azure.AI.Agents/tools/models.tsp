@@ -547,6 +547,7 @@ model RunStepBrowserAutomationToolCall extends RunStepToolCall {
   type: "browser_automation";
 
   @doc("Details of the browser automation tool call.")
+  @encodedName("application/json", "browser_automation")
   browserAutomation: BrowserAutomationToolCallDetails
 }
 
@@ -571,12 +572,15 @@ model BrowserAutomationToolCallDetails {
 @added(Versions.v2025_05_15_preview)
 model BrowserAutomationToolCallStep {
   @doc("The input provided to the Browser Automation tool.")
+  @encodedName("application/json", "last_step_result")
   lastStepResult: string;
 
   @doc("The output returned by the Browser Automation tool.")
+  @encodedName("application/json", "current_state")
   currentState: string;
 
   @doc("The next step to execute.")
+  @encodedName("application/json", "next_step")
   nextStep: string;
 }
 

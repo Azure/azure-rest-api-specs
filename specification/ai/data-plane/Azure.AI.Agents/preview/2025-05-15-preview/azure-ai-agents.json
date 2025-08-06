@@ -3673,23 +3673,26 @@
       "type": "object",
       "description": "Describes a single step of a Browser Automation tool execution.",
       "properties": {
-        "lastStepResult": {
+        "last_step_result": {
           "type": "string",
-          "description": "The input provided to the Browser Automation tool."
+          "description": "The input provided to the Browser Automation tool.",
+          "x-ms-client-name": "lastStepResult"
         },
-        "currentState": {
+        "current_state": {
           "type": "string",
-          "description": "The output returned by the Browser Automation tool."
+          "description": "The output returned by the Browser Automation tool.",
+          "x-ms-client-name": "currentState"
         },
-        "nextStep": {
+        "next_step": {
           "type": "string",
-          "description": "The next step to execute."
+          "description": "The next step to execute.",
+          "x-ms-client-name": "nextStep"
         }
       },
       "required": [
-        "lastStepResult",
-        "currentState",
-        "nextStep"
+        "last_step_result",
+        "current_state",
+        "next_step"
       ]
     },
     "BrowserAutomationToolConnectionParameters": {
@@ -6312,13 +6315,14 @@
       "type": "object",
       "description": "A record of a call to a Browser Automation tool issued by the Agent.",
       "properties": {
-        "browserAutomation": {
+        "browser_automation": {
           "$ref": "#/definitions/BrowserAutomationToolCallDetails",
-          "description": "Details of the browser automation tool call."
+          "description": "Details of the browser automation tool call.",
+          "x-ms-client-name": "browserAutomation"
         }
       },
       "required": [
-        "browserAutomation"
+        "browser_automation"
       ],
       "allOf": [
         {
