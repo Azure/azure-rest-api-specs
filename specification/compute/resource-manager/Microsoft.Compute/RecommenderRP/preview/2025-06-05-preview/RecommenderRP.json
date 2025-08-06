@@ -370,6 +370,20 @@
       "description": "Capacity block.",
       "x-ms-azure-resource": true,
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacityBlockProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CapacityBlockProperties": {
+      "description": "Contains additional properties of a capacity block",
+      "type": "object",
+      "properties": {
         "zone": {
           "description": "Logical Zone of the Capacity Block",
           "type": "integer",
@@ -392,12 +406,7 @@
           "description": "Schedule profile of the Capacity Block.",
           "$ref": "#/definitions/ScheduleProfile"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ScheduleProfile": {
       "type": "object",
