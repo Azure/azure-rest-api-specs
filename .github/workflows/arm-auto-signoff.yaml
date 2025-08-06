@@ -102,10 +102,9 @@ jobs:
       # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
       # Consumers should verify the "event_name" before attempting to extract from the artifact name.
       - if: |
-          (github.event_name == 'issue_comment' || 
-           github.event_name == 'workflow_run') &&
-          (fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
-           fromJson(steps.get-label-action.outputs.result).labelAction == 'remove')
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).headSha
         name: Upload artifact with head SHA
         uses: ./.github/actions/add-empty-artifact
         with:
@@ -117,10 +116,9 @@ jobs:
       # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
       # Consumers should verify the "event_name" before attempting to extract from the artifact name.
       - if: |
-          (github.event_name == 'issue_comment' || 
-           github.event_name == 'workflow_run') &&
-          (fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
-           fromJson(steps.get-label-action.outputs.result).labelAction == 'remove')
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:
