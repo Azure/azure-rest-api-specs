@@ -93,7 +93,7 @@ export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
   },
   "azure-sdk-for-net": {
     dataPlane: false,
-    managementPlane: true,
+    managementPlane: false,
   },
   "azure-sdk-for-python": {
     dataPlane: true,
