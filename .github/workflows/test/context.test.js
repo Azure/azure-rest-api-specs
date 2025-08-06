@@ -342,7 +342,9 @@ describe("extractInputs", () => {
     });
     await expect(
       extractInputs(github, context, createMockCore()),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: head-sha is not a valid full git SHA: 'not-full-git-sha']`);
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: head-sha is not a valid full git SHA: 'not-full-git-sha']`,
+    );
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [{ name: "issue-number=not-a-number" }] },
