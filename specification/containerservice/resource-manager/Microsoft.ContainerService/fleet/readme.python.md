@@ -7,7 +7,7 @@ title: ContainerServiceFleetMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-containerservicefleet
-package-version: 1.0.0b2
+package-version: 4.0.0b2
 clear-output-folder: true
 no-namespace-folders: true
 ```
@@ -19,7 +19,6 @@ Generate all API versions currently shipped for this package
 ```yaml $(python)
 multiapi: true
 batch:
-  - tag: package-2025-08-01-preview
   - tag: package-2025-04-01-preview
   - tag: package-2025-03-01
   - tag: package-2024-05-preview
@@ -39,16 +38,6 @@ batch:
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet/
 clear-output-folder: true
 perform-load: false
-```
-
-### Tag: package-2025-08-01-preview and python
- 
-These settings apply only when `--tag=package-2025-08-01-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
- 
-``` yaml $(tag) == 'package-2025-08-01-preview' && $(python)
-namespace: azure.mgmt.containerservicefleet.v2025_08_01_preview
-output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet/v2025_08_01_preview
 ```
 
 ### Tag: package-2025-04-01-preview and python
