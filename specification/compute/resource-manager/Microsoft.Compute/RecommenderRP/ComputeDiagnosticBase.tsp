@@ -31,8 +31,6 @@ interface ComputeDiagnosticBases {
   /**
    * Gets Spot Placement Scores metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SpotPlacementScores_Get")
   get is ArmResourceRead<
     ComputeDiagnosticBase,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -41,9 +39,7 @@ interface ComputeDiagnosticBases {
   /**
    * Generates placement scores for Spot VM skus.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("generate")
-  @operationId("SpotPlacementScores_Post")
   post is ArmResourceActionSync<
     ComputeDiagnosticBase,
     SpotPlacementScoresInput,
