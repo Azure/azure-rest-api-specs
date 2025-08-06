@@ -813,7 +813,7 @@ model PipelineProperties {
    */
   disabledFlowTypes?: FlowType[];
 
-    /**
+  /**
    * The DataClasses that are disabled for this pipeline
    */
   @added(Versions.v2025_05_30_preview)
