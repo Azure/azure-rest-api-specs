@@ -80,6 +80,19 @@ model DeploymentTemplate is AssetVersion {
   scoringPort?: int32;
 }
 
+@doc("Paged collection of DeploymentTemplate items.")
+@pagedResult
+model PagedDeploymentTemplate {
+  @doc("The list of Deployment Templates.")
+  @Azure.ResourceManager.identifiers(#[])
+  @items
+  value: DeploymentTemplate[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<DeploymentTemplate>;
+}
+
 @doc("Index resource Definition")
 model Index is AssetVersion {
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")

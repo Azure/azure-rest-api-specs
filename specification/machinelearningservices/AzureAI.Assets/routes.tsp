@@ -72,14 +72,10 @@ interface DeploymentTemplates {
   @doc("Delete a specific version of a deployment template.")
   @route("/registries/{registryName}/deploymenttemplates/{name}/versions/{version}")
   @delete
-  deleteGenericAsset is Azure.Core.Foundations.Operation<
+  deleteDeploymentTemplate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the AzureML registry.")
       registryName: string;
-
-      @doc("The type of the deployment template.")
-      @path
-      type: string;
 
       @doc("Name of the deployment template.")
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
@@ -92,6 +88,47 @@ interface DeploymentTemplates {
       version: string;
     },
     TypeSpec.Http.Response<200> | TypeSpec.Http.Response<204>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to use same model in both list calls."
+  @doc("List deployment templates.")
+  @route("/registries/{registryName}/deploymenttemplates")
+  @get
+  listDeploymentTemplates is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the AzureML registry.")
+      @path
+      registryName: string;
+
+      @doc("Filter by deployment template name.")
+      @query
+      name?: string;
+
+      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
+      @query
+      tags?: string;
+
+      @doc("Continuation token for pagination.")
+      @query
+      continuationToken?: string;
+
+      @doc("Continuation token for pagination (from header).")
+      @header
+      continuationTokenFromHeader?: string;
+
+      @doc("Maximum number of items to return.")
+      @query
+      count?: int32;
+
+      @doc("Filter by deployment template stage.")
+      @query
+      stage?: string;
+
+      @doc("View type for including/excluding (for example) archived entities.")
+      @query
+      listViewType?: string = "ActiveOnly";
+    },
+    PagedDeploymentTemplate
   >;
 
 }

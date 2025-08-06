@@ -21,7 +21,7 @@ using Azure.Core.Traits;
 )
 @service(#{ title: "Azure Machine Learning Data Plane Services" })
 @server(
-  "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices",
+  "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices",
   "Machinelearning Services Asset APIs",
   {
     @doc("""
