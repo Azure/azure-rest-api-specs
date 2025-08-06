@@ -354,3 +354,151 @@ op DeleteDataAssetRelationshipAsync is RpcOperation<
   },
   DeleteResponse
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves a list of data products.")
+@get
+op ListDataProductsAsync is UnifiedCatalogOperations.ResourceList<
+  DataProduct,
+  ListQueryParametersTrait<SkipQueryParameter &
+    TopQueryParameter &
+    OrderByQueryParameter & {
+      @doc("The unique identifier of the domain.")
+      @query
+      domainId?: uuid;
+    }>
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Creates a new data product.")
+@route("/dataProducts")
+@post
+op CreateDataProductAsync is RpcOperation<
+  DataProduct,
+  CreateDataProductResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Queries data products based on specified criteria.")
+@route("/dataProducts/query")
+@post
+op QueryDataProductsAsync is RpcOperation<
+  {
+    @doc("To check for duplicate data products.")
+    @query
+    duplicatecheck?: int32;
+
+    @doc("To filter by data product owner.")
+    @query
+    dataProductOwner: boolean;
+
+    @doc("The request body for the query.")
+    @bodyRoot
+    request: DataProductQueryRequest;
+  },
+  DataProductResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves facets for data products.")
+@route("/dataProducts/facets")
+@post
+op GetDataProductFacetsAsync is RpcOperation<
+   DataProductFacetRequest,
+  FacetsResponse
+>;
+
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves a data product by its dataProductId.")
+@get
+op GetDataProductByIdAsync is UnifiedCatalogOperations.ResourceRead<  
+  DataProduct
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Updates a data product by its DataProductId.")
+@route("/dataProducts/{dataProductId}")
+@put
+op UpdateDataProductAsync is RpcOperation<
+DataProductIdParameter & 
+  {
+    @doc("The updated data product.")
+    @bodyRoot
+    body: DataProduct;
+  },
+  DataProduct
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Deletes a data product by its dataProductId.")
+@delete
+op DeleteDataProductByIdAsync is UnifiedCatalogOperations.ResourceDelete<DataProduct>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves relationships for a data product.")
+@get
+op ListDataProductRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
+DataProductRelationshipWrapper,
+  ListQueryParametersTrait<
+  {    
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+  }>
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Creates a relationship for a data product.")
+@route("/dataProducts/{dataProductId}/relationships")
+@post
+op CreateDataProductRelationshipAsync is RpcOperation<
+  DataProductIdParameter & 
+  {
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+
+    @doc("The properties of the relationship to create.")
+    @bodyRoot
+    relationship: CriticalDataColumnRelationshipRequest;
+  },
+  DataProductRelationshipWrapper
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Deletes a relationship for a data product.")
+@route("/dataProducts/{dataProductId}/relationships")
+@delete
+op DeleteDataProductRelationshipAsync is RpcOperation<
+  DataProductIdParameter &
+  {
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+
+    @doc("The unique identifier of the critical data asset.")
+    @query
+    entityId: uuid;
+  },DeleteResponse
+>;

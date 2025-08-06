@@ -46,20 +46,20 @@ using PurviewUnifiedCatalog;
 @@clientName(ListDataAssetRelationshipsAsync, "ListDataAssetRelationships");
 @@clientName(CreateDataAssetRelationshipAsync, "CreateDataAssetRelationship");
 @@clientName(DeleteDataAssetRelationshipAsync, "DeleteDataAssetRelationship");
-// @@clientName(ListDataProductsAsync, "ListDataProducts");
-// @@clientName(CreateDataProductAsync, "CreateDataProduct");
-// @@clientName(QueryDataProductsAsync, "QueryDataProducts");
-// @@clientName(GetDataProductFacetsAsync, "GetDataProductFacets");
-// @@clientName(GetDataProductByIdAsync, "GetDataProductById");
-// @@clientName(UpdateDataProductAsync, "UpdateDataProduct");
-// @@clientName(DeleteDataProductByIdAsync, "DeleteDataProductById");
-// @@clientName(ListDataProductRelationshipsAsync, "ListDataProductRelationships");
-// @@clientName(CreateDataProductRelationshipAsync,
-//   "CreateDataProductRelationship"
-// );
-// @@clientName(DeleteDataProductRelationshipAsync,
-//   "DeleteDataProductRelationship"
-// );
+@@clientName(ListDataProductsAsync, "ListDataProducts");
+@@clientName(CreateDataProductAsync, "CreateDataProduct");
+@@clientName(QueryDataProductsAsync, "QueryDataProducts");
+@@clientName(GetDataProductFacetsAsync, "GetDataProductFacets");
+@@clientName(GetDataProductByIdAsync, "GetDataProductById");
+@@clientName(UpdateDataProductAsync, "UpdateDataProduct");
+@@clientName(DeleteDataProductByIdAsync, "DeleteDataProductById");
+@@clientName(ListDataProductRelationshipsAsync, "ListDataProductRelationships");
+@@clientName(CreateDataProductRelationshipAsync,
+  "CreateDataProductRelationship"
+);
+@@clientName(DeleteDataProductRelationshipAsync,
+  "DeleteDataProductRelationship"
+);
 // @@clientName(EnumerateDomainsAsync, "EnumerateDomains");
 // @@clientName(CreateDomainAsync, "CreateDomain");
 // @@clientName(UpdateDomainAsync, "UpdateDomain");

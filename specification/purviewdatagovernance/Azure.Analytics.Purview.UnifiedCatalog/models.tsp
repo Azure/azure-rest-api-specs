@@ -630,6 +630,7 @@ union UpdateFrequencyEnum {
 }
 
 @doc("Microsoft Purview Data Governance Catalog Model Data Product.")
+@resource("dataProducts")
 model DataProduct {
   @doc("The status of the data product.")
   status?: CatalogModelStatus;
@@ -644,7 +645,9 @@ model DataProduct {
   managedAttributes?: CatalogModelManagedAttribute[];
 
   @doc("The unique identifier of the data product.")
-  id?: uuid;
+  @key("dataProductId")
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
   @doc("The name of the data product.")
   name?: string;
@@ -1456,6 +1459,42 @@ alias DataAssetIdParameter = {
 @resource("relationships")
 @parentResource(DataAsset)
 model DataAssetRelationshipWrapper {
+  @doc("System metadata for the relationship.")
+  systemData?: SystemData;
+
+  @doc("Description of the relationship.")
+  description?: string;
+
+  @doc("Type of the relationship.")
+  relationshipType?: string;
+
+  @doc("Unique identifier of the related entity.")
+  @key
+  @visibility(Lifecycle.Read)
+  entityId: uuid;
+}
+
+@doc("The number of duplicate checks to perform.")
+model CreateDataProductResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  @bodyRoot
+  body: DataProduct;
+}
+
+alias DataProductIdParameter = {
+  @doc("The unique identifier of the critical data product.")
+  dataProductId: uuid;
+};
+
+
+@doc("Wrapper for relationship information between entities.")
+@resource("relationships")
+@parentResource(DataProduct)
+model DataProductRelationshipWrapper {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
