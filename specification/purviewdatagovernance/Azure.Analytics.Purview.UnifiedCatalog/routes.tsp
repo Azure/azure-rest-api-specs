@@ -551,3 +551,163 @@ op GetDomainByIdAsync is UnifiedCatalogOperations.ResourceRead<Domain>;
 @doc("Deletes an existing business domain.")
 @delete
 op DeleteDomainByIdAsync is UnifiedCatalogOperations.ResourceDelete<Domain>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Creates a new term in the catalog.")
+@route("/terms")
+@post
+op CreateTermAsync is RpcOperation<Term, CreateTermResponse>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves a list of terms based on domain, parentId, keyword, and other filters.")
+@get
+op ListTermAsync is UnifiedCatalogOperations.ResourceList<
+  Term,
+  ListQueryParametersTrait<SkipQueryParameter &
+    TopQueryParameter &
+    OrderByQueryParameter & {
+      @doc("The unique identifier of the domain.")
+      @query
+      domainId?: uuid;
+
+      @doc("The unique identifier of the parent term.")
+      @query
+      parentId?: uuid;
+
+      @doc("Search keyword.")
+      @query
+      keyword: string;
+
+      @doc("The depth of the term.")
+      @query
+      depth?: int32;
+    }>
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves a term by its unique identifier.")
+@route("/terms/{termId}")
+@put
+op UpdateTermAsync is RpcOperation<
+  TermIdParameter & {
+    @doc("The updated term data.")
+    @bodyRoot
+    term: Term;
+  },
+  Term
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves a term by its unique identifier.")
+@get
+op GetTermAsync is UnifiedCatalogOperations.ResourceRead<Term>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Deletes a term by its unique identifier.")
+@delete
+op DeleteTermAsync is UnifiedCatalogOperations.ResourceDelete<Term>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves terms based on specified criteria.")
+@route("/terms/query")
+@post
+op QueryTermsAsync is RpcOperation<
+  {
+    @doc("To check for duplicate terms.")
+    @query
+    duplicatecheck?: int32;
+
+    @doc("The request body containing query criteria.")
+    @bodyRoot
+    request: TermQueryRequest;
+  },
+  TermResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves facets for terms.")
+@route("/terms/facets")
+@post
+op GetTermFacetsAsync is RpcOperation<TermFacetRequest, FacetsResponse>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves hierarchies for a term by its unique identifier.")
+@route("/terms/{termId}/hierarchies")
+@get
+op ListHierarchyTermsAsync is RpcOperation<TermIdParameter, TermResponse>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves relationships for a term by its unique identifier.")
+@route("/terms/{termId}/relationships")
+@post
+op AddRelatedEntityAsync is RpcOperation<
+  TermIdParameter & {
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+
+    @doc("The type of relationship to retrieve.")
+    @bodyRoot
+    termRelation: TermRelationship;
+  },
+  TermRelationship
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Deletes relationships for a term by its unique identifier and specified entity type and relationship type.")
+@route("/terms/{termId}/relationships")
+@delete
+op DeleteRelatedTermAsync is RpcOperation<
+  TermIdParameter & {
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+
+    @doc("The type of relationship to retrieve.")
+    @query
+    relationshipType?: TermRelationshipType;
+
+    @doc("The unique identifier of the critical data asset.")
+    @query
+    entityId: uuid;
+  },
+  DeleteResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves relationships for a term by its unique identifier and specified entity type and relationship type.")
+@get
+op ListRelatedEntitiesAsync is UnifiedCatalogOperations.ResourceList<
+  TermRelationship,
+  ListQueryParametersTrait<{
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+
+    @doc("The type of relationship to retrieve.")
+    @query
+    relationshipType?: TermRelationshipType;
+  }>
+>;

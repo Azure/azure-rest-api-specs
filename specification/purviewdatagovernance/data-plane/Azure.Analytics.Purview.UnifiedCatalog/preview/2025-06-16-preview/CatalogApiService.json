@@ -65,6 +65,9 @@
     },
     {
       "name": "BusinessDomain"
+    },
+    {
+      "name": "Term"
     }
   ],
   "paths": {
@@ -3275,6 +3278,949 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/terms": {
+      "get": {
+        "operationId": "ListTermAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves a list of terms based on domain, parentId, keyword, and other filters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "query",
+            "description": "The unique identifier of the domain.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "The unique identifier of the parent term.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "Search keyword.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "depth",
+            "in": "query",
+            "description": "The depth of the term.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTerm"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTermAsync_MaximumSet": {
+            "$ref": "./examples/ListTermAsync_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "CreateTermAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Creates a new term in the catalog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Term"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Term"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateTermAsync_MaximumSet": {
+            "$ref": "./examples/CreateTermAsync_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/{termId}": {
+      "get": {
+        "operationId": "GetTermAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Term"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTermAsync_MaximumSet": {
+            "$ref": "./examples/GetTermAsync_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateTermAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the critical data term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "term",
+            "in": "body",
+            "description": "The updated term data.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Term"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Term"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateTermAsync_MaximumSet": {
+            "$ref": "./examples/UpdateTermAsync_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteTermAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Deletes a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTermAsync_MaximumSet": {
+            "$ref": "./examples/DeleteTermAsync_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/{termId}/hierarchies": {
+      "get": {
+        "operationId": "ListHierarchyTermsAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves hierarchies for a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the critical data term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListHierarchyTermsAsync_MaximumSet": {
+            "$ref": "./examples/ListHierarchyTermsAsync_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/terms/{termId}/relationships": {
+      "get": {
+        "operationId": "ListRelatedEntitiesAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves relationships for a term by its unique identifier and specified entity type and relationship type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The type of entity to retrieve relationships for.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "Domain entity category."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "Data product entity category."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "Term entity category."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "Data asset entity category."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "Objective entity category."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "Key result entity category."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "Critical data element entity category."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "Critical data column entity category."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "Custom metadata entity category."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "Attribute entity category."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "Attribute instance entity category."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "Workflow entity category."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "Catalog snapshot entity category."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "Workflow run entity category."
+                }
+              ]
+            }
+          },
+          {
+            "name": "relationshipType",
+            "in": "query",
+            "description": "The type of relationship to retrieve.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Related",
+              "Synonym",
+              "Parent"
+            ],
+            "x-ms-enum": {
+              "name": "TermRelationshipType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Related",
+                  "value": "Related",
+                  "description": "The status is Related."
+                },
+                {
+                  "name": "Synonym",
+                  "value": "Synonym",
+                  "description": "The status is Synonym."
+                },
+                {
+                  "name": "Parent",
+                  "value": "Parent",
+                  "description": "The status is Parent."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTermRelationship"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListRelatedEntitiesAsync_MaximumSet": {
+            "$ref": "./examples/ListRelatedEntitiesAsync_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "AddRelatedEntityAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves relationships for a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the critical data term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The type of entity to retrieve relationships for.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "Domain entity category."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "Data product entity category."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "Term entity category."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "Data asset entity category."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "Objective entity category."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "Key result entity category."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "Critical data element entity category."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "Critical data column entity category."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "Custom metadata entity category."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "Attribute entity category."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "Attribute instance entity category."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "Workflow entity category."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "Catalog snapshot entity category."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "Workflow run entity category."
+                }
+              ]
+            }
+          },
+          {
+            "name": "termRelation",
+            "in": "body",
+            "description": "The type of relationship to retrieve.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermRelationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TermRelationship"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AddRelatedEntityAsync_MaximumSet": {
+            "$ref": "./examples/AddRelatedEntityAsync_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteRelatedTermAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Deletes relationships for a term by its unique identifier and specified entity type and relationship type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the critical data term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The type of entity to retrieve relationships for.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "Domain entity category."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "Data product entity category."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "Term entity category."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "Data asset entity category."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "Objective entity category."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "Key result entity category."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "Critical data element entity category."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "Critical data column entity category."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "Custom metadata entity category."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "Attribute entity category."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "Attribute instance entity category."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "Workflow entity category."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "Catalog snapshot entity category."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "Workflow run entity category."
+                }
+              ]
+            }
+          },
+          {
+            "name": "relationshipType",
+            "in": "query",
+            "description": "The type of relationship to retrieve.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Related",
+              "Synonym",
+              "Parent"
+            ],
+            "x-ms-enum": {
+              "name": "TermRelationshipType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Related",
+                  "value": "Related",
+                  "description": "The status is Related."
+                },
+                {
+                  "name": "Synonym",
+                  "value": "Synonym",
+                  "description": "The status is Synonym."
+                },
+                {
+                  "name": "Parent",
+                  "value": "Parent",
+                  "description": "The status is Parent."
+                }
+              ]
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "query",
+            "description": "The unique identifier of the critical data asset.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteRelatedTermAsync_MaximumSet": {
+            "$ref": "./examples/DeleteRelatedTermAsync_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/facets": {
+      "post": {
+        "operationId": "GetTermFacetsAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves facets for terms.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermFacetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FacetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTermFacetsAsync_MaximumSet": {
+            "$ref": "./examples/GetTermFacetsAsync_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/query": {
+      "post": {
+        "operationId": "QueryTermsAsync",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves terms based on specified criteria.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "duplicatecheck",
+            "in": "query",
+            "description": "To check for duplicate terms.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request body containing query criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryTermsAsync_MaximumSet": {
+            "$ref": "./examples/QueryTermsAsync_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -3843,6 +4789,21 @@
         "expiredBy": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The unique identifier of the user who expired the record."
+        }
+      }
+    },
+    "CatalogModelTermResource": {
+      "type": "object",
+      "description": "Catalog model term resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the resource."
         }
       }
     },
@@ -4939,6 +5900,48 @@
         "value"
       ]
     },
+    "PagedTerm": {
+      "type": "object",
+      "description": "Paged collection of Term items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Term items on this page",
+          "items": {
+            "$ref": "#/definitions/Term"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTermRelationship": {
+      "type": "object",
+      "description": "Paged collection of TermRelationship items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TermRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/TermRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "RelatedCollectionParentCollectionTypeEnum": {
       "type": "string",
       "description": "Related collection parent collection type enumeration.",
@@ -5057,6 +6060,287 @@
           "description": "Unique identifier of the asset."
         }
       }
+    },
+    "Term": {
+      "type": "object",
+      "description": "Microsoft Purview Data Governance Catalog Model Term.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CatalogModelStatus",
+          "description": "The status of the term."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the term.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the term."
+        },
+        "systemData": {
+          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "description": "The system data of the term."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the term."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "The contacts associated with the term.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "domain": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The domain associated with the term."
+        },
+        "parentId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The parent term identifier."
+        },
+        "acronyms": {
+          "type": "array",
+          "description": "The list of acronyms for the term.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "The resources associated with the term.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelTermResource"
+          }
+        },
+        "isLeaf": {
+          "type": "boolean",
+          "description": "Whether the term is a leaf node."
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "The managed attributes associated with the term.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelManagedAttribute"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "id",
+        "name",
+        "domain"
+      ]
+    },
+    "TermFacetRequest": {
+      "type": "object",
+      "description": "TermFacetRequest.",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "To filter by Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "To filter by domain Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameKeyword": {
+          "type": "string",
+          "description": "To filter by name keyword."
+        },
+        "owners": {
+          "type": "array",
+          "description": "To filter by owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acronyms": {
+          "type": "array",
+          "description": "To filter by acronyms.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/SharedEntityStatus",
+          "description": "To filter by status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "To filter by multiple status.",
+          "items": {
+            "$ref": "#/definitions/SharedEntityStatus"
+          }
+        },
+        "facets": {
+          "type": "array",
+          "description": "To filter by multiple facets.",
+          "items": {
+            "$ref": "#/definitions/ModelsFacetRequestObject"
+          }
+        }
+      }
+    },
+    "TermQueryRequest": {
+      "type": "object",
+      "description": "Term query request model.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
+        },
+        "orderby": {
+          "type": "array",
+          "description": "Order by specifications for the query.",
+          "items": {
+            "$ref": "#/definitions/CatalogApiServiceOrderBy"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "Filter by term IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "Filter by domain IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameKeyword": {
+          "type": "string",
+          "description": "Filter by name keyword."
+        },
+        "status": {
+          "$ref": "#/definitions/CatalogModelStatus",
+          "description": "Filter by term status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "Filter by multiple term statuses.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelStatus"
+          }
+        },
+        "owners": {
+          "type": "array",
+          "description": "Filter by term owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acronyms": {
+          "type": "array",
+          "description": "Filter by term acronyms.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "Filter by managed attributes.",
+          "items": {
+            "$ref": "#/definitions/SharedSearchManageAttributeSearchFilter"
+          }
+        }
+      }
+    },
+    "TermRelationship": {
+      "type": "object",
+      "description": "TermRelationship.",
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the term relationship."
+        },
+        "description": {
+          "type": "string",
+          "description": "description for the term relationship"
+        },
+        "entityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the entity.",
+          "readOnly": true
+        },
+        "relationshipType": {
+          "$ref": "#/definitions/TermRelationshipType",
+          "description": "The type of the term relationship."
+        }
+      },
+      "required": [
+        "entityId"
+      ]
+    },
+    "TermRelationshipType": {
+      "type": "string",
+      "description": "TermRelationshipType",
+      "enum": [
+        "Related",
+        "Synonym",
+        "Parent"
+      ],
+      "x-ms-enum": {
+        "name": "TermRelationshipType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Related",
+            "value": "Related",
+            "description": "The status is Related."
+          },
+          {
+            "name": "Synonym",
+            "value": "Synonym",
+            "description": "The status is Synonym."
+          },
+          {
+            "name": "Parent",
+            "value": "Parent",
+            "description": "The status is Parent."
+          }
+        ]
+      }
+    },
+    "TermResponse": {
+      "type": "object",
+      "description": "Response containing a list of terms.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of terms.",
+          "items": {
+            "$ref": "#/definitions/Term"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "UpdateFrequencyEnum": {
       "type": "string",

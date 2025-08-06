@@ -945,15 +945,18 @@ model ControllersModelsPolicyAddAdminRequest {
 }
 
 @doc("Microsoft Purview Data Governance Catalog Model Term.")
+@resource("terms")
 model Term {
   @doc("The status of the term.")
-  status?: CatalogModelStatus;
+  status: CatalogModelStatus;
 
   @doc("The unique identifier of the term.")
-  id?: uuid;
+  @key("termId")
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
   @doc("The name of the term.")
-  name?: string;
+  name: string;
 
   @doc("The system data of the term.")
   systemData?: CatalogModelSystemDataWithExpired;
@@ -965,7 +968,7 @@ model Term {
   contacts?: Record<CatalogModelContactsValueInner[]>;
 
   @doc("The domain associated with the term.")
-  domain?: uuid;
+  domain: uuid;
 
   @doc("The parent term identifier.")
   parentId?: uuid;
@@ -1068,6 +1071,8 @@ model TermFacetRequest {
 }
 
 @doc("TermRelationship.")
+@resource("relationships")
+@parentResource(Term)
 model TermRelationship {
   @doc("System metadata for the term relationship.")
   systemData?: SystemData;
@@ -1076,7 +1081,9 @@ model TermRelationship {
   description?: string;
 
   @doc("The unique identifier of the entity.")
-  entityId?: uuid;
+  @key
+  @visibility(Lifecycle.Read)
+  entityId: uuid;
 
   @doc("The type of the term relationship.")
   relationshipType?: TermRelationshipType;
@@ -1526,4 +1533,20 @@ model CreateDomainResponse {
 alias DomainIdParameter = {
   @doc("The unique identifier of the critical data domain.")
   domainId: uuid;
+};
+
+@doc("The number of duplicate checks to perform.")
+model CreateTermResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  @bodyRoot
+  body: Term;
+}
+
+alias TermIdParameter = {
+  @doc("The unique identifier of the critical data term.")
+  termId: uuid;
 };
