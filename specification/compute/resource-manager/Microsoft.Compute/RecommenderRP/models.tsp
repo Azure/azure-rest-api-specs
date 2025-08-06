@@ -12,6 +12,7 @@ namespace Microsoft.Compute;
 /**
  * Contains additional properties of a diagnostic
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnosticProperties {
   /**
    * Describes what are the supported resource types for a diagnostic.
