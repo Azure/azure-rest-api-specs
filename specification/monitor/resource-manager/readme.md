@@ -57,8 +57,8 @@ input-file:
   - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
   - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
   - Microsoft.Insights/stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
+  - Microsoft.Insights/stable/2022-06-01/actionGroups_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
-  - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
   - Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
   - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
   - Microsoft.Insights/stable/2024-02-01/metrics_API.json
