@@ -411,6 +411,9 @@
           },
           {
             "$ref": "#/parameters/Upn"
+          },
+          {
+            "$ref": "#/parameters/BeginFrom"
           }
         ],
         "responses": {
@@ -3341,6 +3344,14 @@
       "x-ms-parameter-location": "method",
       "required": false,
       "type": "boolean"
+    },
+    "BeginFrom": {
+      "name": "beginFrom",
+      "in": "query",
+      "description": "Optional. A relative path within the specified directory where the listing will start from. For example, a recursive listing under directory folder1/folder2 with beginFrom as folder3/readmefile.txt will start listing from folder1/folder2/folder3/readmefile.txt. Please note that, multiple entity levels are supported for recursive listing. Non-recursive listing supports only one entity level. An error will appear if multiple entity levels are specified for non-recursive listing.",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "string"
     }
   },
   "definitions": {
