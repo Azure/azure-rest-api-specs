@@ -934,10 +934,14 @@ model BlobFlatListSegment {
 /** Represents a page list. */
 model PageList {
   /** The page ranges. */
-  @Xml.name("PageRange") pageRange?: PageRange[];
+  @Xml.unwrapped
+  @Xml.name("PageRange")
+  pageRange?: PageRange[];
 
   /** The clear ranges. */
-  @Xml.name("ClearRange") clearRange?: ClearRange[];
+  @Xml.unwrapped
+  @Xml.name("ClearRange")
+  clearRange?: ClearRange[];
 
   /** The next marker. */
   @continuationToken

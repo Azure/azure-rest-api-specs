@@ -1715,7 +1715,6 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1828,7 +1827,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=properties&UpdateSequenceNumber")
-        op updateSequenceNumber is StorageOperation<
+        op setSequenceNumber is StorageOperation<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
@@ -1846,7 +1845,6 @@ namespace Storage.Blob {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
           }
         >;
 
