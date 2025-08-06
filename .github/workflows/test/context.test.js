@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { fullGitSha } from "../../shared/test/examples.js";
 import { extractInputs } from "../src/context.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
@@ -307,7 +308,7 @@ describe("extractInputs", () => {
   it("workflow_run:completed:workflow_run", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: { artifacts: [{ name: "issue-number=123" }, { name: "head-sha=abc123" }] },
+      data: { artifacts: [{ name: "issue-number=123" }, { name: `head-sha=${fullGitSha}` }] },
     });
 
     const context = {
@@ -331,10 +332,17 @@ describe("extractInputs", () => {
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: "abc123",
+      head_sha: fullGitSha,
       issue_number: 123,
       run_id: 456,
     });
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "head-sha=not-full-git-sha" }] },
+    });
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: head-sha is not a valid full git SHA: 'not-full-git-sha']`);
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [{ name: "issue-number=not-a-number" }] },
@@ -387,7 +395,7 @@ describe("extractInputs", () => {
   it("workflow_run:completed:check_run", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: { artifacts: [{ name: "head-sha=abc123" }] },
+      data: { artifacts: [{ name: `head-sha=${fullGitSha}` }] },
     });
 
     const context = {
@@ -408,13 +416,10 @@ describe("extractInputs", () => {
       },
     };
 
-    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: { artifacts: [] },
-    });
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: "abc123",
+      head_sha: fullGitSha,
       issue_number: NaN,
       run_id: 456,
     });
