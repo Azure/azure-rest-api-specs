@@ -1,12 +1,17 @@
 // @ts-check
 
+import {
+  CheckConclusion,
+  CheckStatus,
+  CommitStatusState,
+  PER_PAGE_MAX,
+} from "../../shared/src/github.js";
 import { extractInputs } from "./context.js";
-import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from "./github.js";
 
 // TODO: Add tests
 /* v8 ignore start */
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} monitoredWorkflowName
  * @param {string} requiredStatusName
  * @param {string} overridingLabel
@@ -66,6 +71,12 @@ export async function setStatusImpl({
   requiredStatusName,
   overridingLabel,
 }) {
+  if (!Number.isInteger(issue_number) || issue_number <= 0) {
+    throw new Error(`issue_number must be a positive integer: ${issue_number}`);
+  }
+
+  core.setOutput("issue_number", issue_number);
+
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
@@ -139,27 +150,49 @@ export async function setStatusImpl({
     /**
      * Update target to the "Analyze Code" run, which contains the meaningful output.
      *
-     * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569
+     * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569
      */
     target_url = run.html_url;
 
     if (run.conclusion === CheckConclusion.FAILURE) {
-      /**
-       * Update target to point directly to the first failed job
-       *
-       * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
-       */
+      const jobSummaryArtifactName = "job-summary";
 
-      const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
-        owner,
-        repo,
-        run_id: run.id,
-        per_page: PER_PAGE_MAX,
-      });
-      const failedJobs = jobs.filter((job) => job.conclusion === CheckConclusion.FAILURE);
-      const failedJob = failedJobs[0];
-      if (failedJob?.html_url) {
-        target_url = `${failedJob.html_url}?pr=${issue_number}`;
+      // Check if run has a custom job summary
+      core.info(
+        `listWorkflowRunArtifacts(${owner}, ${repo}, ${run.id}, ${jobSummaryArtifactName})`,
+      );
+      const jobSummaryArtifacts = await github.paginate(
+        github.rest.actions.listWorkflowRunArtifacts,
+        {
+          owner: owner,
+          repo: repo,
+          run_id: run.id,
+          name: jobSummaryArtifactName,
+          per_page: PER_PAGE_MAX,
+        },
+      );
+
+      const hasJobSummary = jobSummaryArtifacts.length > 0;
+      core.info(`hasJobSummary: ${hasJobSummary}`);
+
+      if (!hasJobSummary) {
+        /**
+         * Update target to point directly to the first failed job
+         *
+         * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
+         */
+
+        const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+          owner,
+          repo,
+          run_id: run.id,
+          per_page: PER_PAGE_MAX,
+        });
+        const failedJobs = jobs.filter((job) => job.conclusion === CheckConclusion.FAILURE);
+        const failedJob = failedJobs[0];
+        if (failedJob?.html_url) {
+          target_url = `${failedJob.html_url}?pr=${issue_number}`;
+        }
       }
     }
   }
