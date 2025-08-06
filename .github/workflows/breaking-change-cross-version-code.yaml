@@ -27,6 +27,7 @@ jobs:
       - name: Breaking Change(Cross-Version) - Analyze Code
         id: breaking-change-cross-version-analyze-code
         run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
           npm exec --no -- openapi-diff-runner \
             --run-type "CrossVersion" \
             --spec-repo-path "$GITHUB_WORKSPACE" \
@@ -56,3 +57,13 @@ jobs:
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.breaking-change-cross-version-analyze-code.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.breaking-change-cross-version-analyze-code.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
