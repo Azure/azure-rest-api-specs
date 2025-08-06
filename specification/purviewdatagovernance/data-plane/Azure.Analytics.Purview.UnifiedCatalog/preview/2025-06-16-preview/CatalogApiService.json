@@ -62,9 +62,257 @@
     },
     {
       "name": "DataProduct"
+    },
+    {
+      "name": "BusinessDomain"
     }
   ],
   "paths": {
+    "/businessdomains": {
+      "get": {
+        "operationId": "EnumerateDomainsAsync",
+        "tags": [
+          "BusinessDomain"
+        ],
+        "description": "Retrieves a list of business domains.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skiptoken",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "skipToken"
+          },
+          {
+            "name": "writeOnly",
+            "in": "query",
+            "description": "writeOnly",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDomain"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnumerateDomainsAsync_MaximumSet": {
+            "$ref": "./examples/EnumerateDomainsAsync_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "CreateDomainAsync",
+        "tags": [
+          "BusinessDomain"
+        ],
+        "description": "Creates a new business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateDomainAsync_MaximumSet": {
+            "$ref": "./examples/CreateDomainAsync_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/businessdomains/{domainId}": {
+      "get": {
+        "operationId": "GetDomainByIdAsync",
+        "tags": [
+          "BusinessDomain"
+        ],
+        "description": "Retrieves an existing business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The parent domain identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDomainByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetDomainByIdAsync_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateDomainAsync",
+        "tags": [
+          "BusinessDomain"
+        ],
+        "description": "Updates an existing business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The unique identifier of the critical data domain.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The updated business domain.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateDomainAsync_MaximumSet": {
+            "$ref": "./examples/UpdateDomainAsync_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteDomainByIdAsync",
+        "tags": [
+          "BusinessDomain"
+        ],
+        "description": "Deletes an existing business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The parent domain identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDomainByIdAsync_MaximumSet": {
+            "$ref": "./examples/DeleteDomainByIdAsync_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/criticalDataColumns": {
       "get": {
         "operationId": "ListCriticalDataColumnAsync",
@@ -3393,6 +3641,58 @@
         ]
       }
     },
+    "CatalogModelDomainAllOfThumbnail": {
+      "type": "object",
+      "description": "Catalog model domain thumbnail properties.",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "The color of the thumbnail."
+        }
+      }
+    },
+    "CatalogModelDomainTypeEnum": {
+      "type": "string",
+      "description": "CatalogModelDomainTypeEnum",
+      "enum": [
+        "FunctionalUnit",
+        "LineOfBusiness",
+        "DataDomain",
+        "Regulatory",
+        "Project"
+      ],
+      "x-ms-enum": {
+        "name": "CatalogModelDomainTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FunctionalUnit",
+            "value": "FunctionalUnit",
+            "description": "The status is FunctionalUnit."
+          },
+          {
+            "name": "LineOfBusiness",
+            "value": "LineOfBusiness",
+            "description": "The status is LineOfBusiness."
+          },
+          {
+            "name": "DataDomain",
+            "value": "DataDomain",
+            "description": "The status is DataDomain."
+          },
+          {
+            "name": "Regulatory",
+            "value": "Regulatory",
+            "description": "The status is Regulatory."
+          },
+          {
+            "name": "Project",
+            "value": "Project",
+            "description": "The status is Project."
+          }
+        ]
+      }
+    },
     "CatalogModelExternalLink": {
       "type": "object",
       "description": "External link model for data product.",
@@ -3427,6 +3727,59 @@
         "isRequired": {
           "type": "boolean",
           "description": "Whether this attribute is required."
+        }
+      }
+    },
+    "CatalogModelPlatformDomain": {
+      "type": "object",
+      "description": "Catalog model platform domain.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the platform domain."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "The friendly name of the platform domain."
+        },
+        "relatedCollections": {
+          "type": "array",
+          "description": "The related collections of the platform domain.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelRelatedCollection"
+          }
+        }
+      }
+    },
+    "CatalogModelRelatedCollection": {
+      "type": "object",
+      "description": "Catalog model related collection.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the related collection."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "The friendly name of the related collection."
+        },
+        "parentCollection": {
+          "$ref": "#/definitions/CatalogModelRelatedCollectionParentCollection",
+          "description": "The parent collection of the related collection."
+        }
+      }
+    },
+    "CatalogModelRelatedCollectionParentCollection": {
+      "type": "object",
+      "description": "Catalog model related collection parent collection.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RelatedCollectionParentCollectionTypeEnum",
+          "description": "The type of the parent collection."
+        },
+        "refName": {
+          "type": "string",
+          "description": "The reference name of the parent collection."
         }
       }
     },
@@ -4286,6 +4639,70 @@
         "value"
       ]
     },
+    "Domain": {
+      "type": "object",
+      "description": "Catalog model domain.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CatalogModelStatus",
+          "description": "The status of the domain."
+        },
+        "type": {
+          "$ref": "#/definitions/CatalogModelDomainTypeEnum",
+          "description": "The type of the domain."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the domain."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the domain."
+        },
+        "isRestricted": {
+          "type": "boolean",
+          "description": "Whether the domain is restricted."
+        },
+        "systemData": {
+          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "description": "The system data of the domain."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the domain."
+        },
+        "parentId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The parent domain identifier.",
+          "readOnly": true
+        },
+        "thumbnail": {
+          "$ref": "#/definitions/CatalogModelDomainAllOfThumbnail",
+          "description": "The thumbnail properties of the domain."
+        },
+        "domains": {
+          "type": "array",
+          "description": "The list of platform domains.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelPlatformDomain"
+          }
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "The managed attributes associated with the domain.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelManagedAttribute"
+          }
+        }
+      },
+      "required": [
+        "systemData",
+        "parentId",
+        "thumbnail",
+        "domains",
+        "managedAttributes"
+      ]
+    },
     "FacetValue": {
       "type": "object",
       "description": "FacetValue.",
@@ -4480,6 +4897,27 @@
         "value"
       ]
     },
+    "PagedDomain": {
+      "type": "object",
+      "description": "Paged collection of Domain items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Domain items on this page",
+          "items": {
+            "$ref": "#/definitions/Domain"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedRelationshipWrapper": {
       "type": "object",
       "description": "Paged collection of RelationshipWrapper items",
@@ -4500,6 +4938,24 @@
       "required": [
         "value"
       ]
+    },
+    "RelatedCollectionParentCollectionTypeEnum": {
+      "type": "string",
+      "description": "Related collection parent collection type enumeration.",
+      "enum": [
+        "CollectionReference"
+      ],
+      "x-ms-enum": {
+        "name": "RelatedCollectionParentCollectionTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CollectionReference",
+            "value": "CollectionReference",
+            "description": "Collection reference type."
+          }
+        ]
+      }
     },
     "RelationshipWrapper": {
       "type": "object",

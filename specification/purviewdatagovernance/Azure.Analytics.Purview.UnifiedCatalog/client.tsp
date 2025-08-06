@@ -60,11 +60,11 @@ using PurviewUnifiedCatalog;
 @@clientName(DeleteDataProductRelationshipAsync,
   "DeleteDataProductRelationship"
 );
-// @@clientName(EnumerateDomainsAsync, "EnumerateDomains");
-// @@clientName(CreateDomainAsync, "CreateDomain");
-// @@clientName(UpdateDomainAsync, "UpdateDomain");
-// @@clientName(GetDomainByIdAsync, "GetDomainById");
-// @@clientName(DeleteDomainByIdAsync, "DeleteDomainById");
+@@clientName(EnumerateDomainsAsync, "EnumerateDomains");
+@@clientName(CreateDomainAsync, "CreateDomain");
+@@clientName(UpdateDomainAsync, "UpdateDomain");
+@@clientName(GetDomainByIdAsync, "GetDomainById");
+@@clientName(DeleteDomainByIdAsync, "DeleteDomainById");
 // @@clientName(CreateTermAsync, "CreateTerm");
 // @@clientName(ListTermAsync, "ListTerm");
 // @@clientName(UpdateTermAsync, "UpdateTerm");

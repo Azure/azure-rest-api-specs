@@ -412,19 +412,16 @@ op QueryDataProductsAsync is RpcOperation<
 @route("/dataProducts/facets")
 @post
 op GetDataProductFacetsAsync is RpcOperation<
-   DataProductFacetRequest,
+  DataProductFacetRequest,
   FacetsResponse
 >;
-
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Retrieves a data product by its dataProductId.")
 @get
-op GetDataProductByIdAsync is UnifiedCatalogOperations.ResourceRead<  
-  DataProduct
->;
+op GetDataProductByIdAsync is UnifiedCatalogOperations.ResourceRead<DataProduct>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -433,8 +430,7 @@ op GetDataProductByIdAsync is UnifiedCatalogOperations.ResourceRead<
 @route("/dataProducts/{dataProductId}")
 @put
 op UpdateDataProductAsync is RpcOperation<
-DataProductIdParameter & 
-  {
+  DataProductIdParameter & {
     @doc("The updated data product.")
     @bodyRoot
     body: DataProduct;
@@ -455,9 +451,8 @@ op DeleteDataProductByIdAsync is UnifiedCatalogOperations.ResourceDelete<DataPro
 @doc("Retrieves relationships for a data product.")
 @get
 op ListDataProductRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
-DataProductRelationshipWrapper,
-  ListQueryParametersTrait<
-  {    
+  DataProductRelationshipWrapper,
+  ListQueryParametersTrait<{
     @doc("The type of entity to retrieve relationships for.")
     @query
     entityType: EntityCategory;
@@ -471,8 +466,7 @@ DataProductRelationshipWrapper,
 @route("/dataProducts/{dataProductId}/relationships")
 @post
 op CreateDataProductRelationshipAsync is RpcOperation<
-  DataProductIdParameter & 
-  {
+  DataProductIdParameter & {
     @doc("The type of entity to retrieve relationships for.")
     @query
     entityType: EntityCategory;
@@ -491,8 +485,7 @@ op CreateDataProductRelationshipAsync is RpcOperation<
 @route("/dataProducts/{dataProductId}/relationships")
 @delete
 op DeleteDataProductRelationshipAsync is RpcOperation<
-  DataProductIdParameter &
-  {
+  DataProductIdParameter & {
     @doc("The type of entity to retrieve relationships for.")
     @query
     entityType: EntityCategory;
@@ -500,5 +493,61 @@ op DeleteDataProductRelationshipAsync is RpcOperation<
     @doc("The unique identifier of the critical data asset.")
     @query
     entityId: uuid;
-  },DeleteResponse
+  },
+  DeleteResponse
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Retrieves a list of business domains.")
+@get
+op EnumerateDomainsAsync is UnifiedCatalogOperations.ResourceList<
+  Domain,
+  ListQueryParametersTrait<{
+    @doc("skiptoken")
+    @query("$skipToken")
+    skipToken?: string;
+
+    @doc("writeOnly")
+    @query
+    writeOnly: boolean;
+  }>
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Creates a new business domain.")
+@route("/businessdomains")
+@post
+op CreateDomainAsync is RpcOperation<Domain, CreateDomainResponse>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Updates an existing business domain.")
+@route("/businessdomains/{domainId}")
+@put
+op UpdateDomainAsync is RpcOperation<
+  DomainIdParameter & {
+    @doc("The updated business domain.")
+    @bodyRoot
+    body: Domain;
+  },
+  Domain
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Retrieves an existing business domain.")
+@get
+op GetDomainByIdAsync is UnifiedCatalogOperations.ResourceRead<Domain>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Deletes an existing business domain.")
+@delete
+op DeleteDomainByIdAsync is UnifiedCatalogOperations.ResourceDelete<Domain>;

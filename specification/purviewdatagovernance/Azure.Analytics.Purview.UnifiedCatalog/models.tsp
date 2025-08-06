@@ -821,6 +821,7 @@ model DataProductFacetRequest {
 }
 
 @doc("Catalog model domain.")
+@resource("businessdomains")
 model Domain {
   @doc("The status of the domain.")
   status?: CatalogModelStatus;
@@ -838,22 +839,24 @@ model Domain {
   isRestricted?: boolean;
 
   @doc("The system data of the domain.")
-  systemData?: CatalogModelSystemDataWithExpired;
+  systemData: CatalogModelSystemDataWithExpired;
 
   @doc("The description of the domain.")
   description?: string;
 
   @doc("The parent domain identifier.")
-  parentId?: uuid;
+  @key("domainId")
+  @visibility(Lifecycle.Read)
+  parentId: uuid;
 
   @doc("The thumbnail properties of the domain.")
-  thumbnail?: CatalogModelDomainAllOfThumbnail;
+  thumbnail: CatalogModelDomainAllOfThumbnail;
 
   @doc("The list of platform domains.")
-  domains?: CatalogModelPlatformDomain[];
+  domains: CatalogModelPlatformDomain[];
 
   @doc("The managed attributes associated with the domain.")
-  managedAttributes?: CatalogModelManagedAttribute[];
+  managedAttributes: CatalogModelManagedAttribute[];
 }
 
 @doc("CatalogModelDomainTypeEnum")
@@ -1490,7 +1493,6 @@ alias DataProductIdParameter = {
   dataProductId: uuid;
 };
 
-
 @doc("Wrapper for relationship information between entities.")
 @resource("relationships")
 @parentResource(DataProduct)
@@ -1509,3 +1511,19 @@ model DataProductRelationshipWrapper {
   @visibility(Lifecycle.Read)
   entityId: uuid;
 }
+
+@doc("The number of duplicate checks to perform.")
+model CreateDomainResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  @bodyRoot
+  body: Domain;
+}
+
+alias DomainIdParameter = {
+  @doc("The unique identifier of the critical data domain.")
+  domainId: uuid;
+};
