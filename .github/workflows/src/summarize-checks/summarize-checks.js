@@ -732,7 +732,23 @@ export async function getCheckRunTuple(
         per_page: PER_PAGE_MAX,
       });
 
-      impactAssessmentWorkflowRun = workflowRuns[0].id;
+      if (workflowRuns.length === 0) {
+        core.warning(
+          `No workflow runs found for check suite ID: ${latestCheck._originalData.check_suite.id}`,
+        );
+      } else {
+        // Sort by updated_at to get the most recent run
+        const sortedRuns = workflowRuns.sort(
+          (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+        );
+        impactAssessmentWorkflowRun = sortedRuns[0].id;
+
+        if (workflowRuns.length > 1) {
+          core.info(
+            `Found ${workflowRuns.length} workflow runs for check suite ID: ${latestCheck._originalData.check_suite.id}, using most recent: ${sortedRuns[0].id}`,
+          );
+        }
+      }
     }
 
     // Create clean CheckRunData without temporary properties
