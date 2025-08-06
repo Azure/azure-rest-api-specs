@@ -2879,6 +2879,7 @@ model ProxyAgentSettings {
   /**
    * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux OS.
    */
+  @added(Versions.v2025_04_01)
   addProxyAgentExtension?: boolean;
 
   /**
