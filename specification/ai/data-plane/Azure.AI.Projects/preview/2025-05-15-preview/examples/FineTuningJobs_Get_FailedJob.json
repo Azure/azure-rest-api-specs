@@ -4,20 +4,21 @@
   "parameters": {
     "api-version": "2025-05-15-preview",
     "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
-    "id": "ftjob-1"
+    "fine_tuning_job_id": "ftjob-1"
   },
   "responses": {
     "200": {
       "body": {
         "object": "fine_tuning.job",
         "id": "ftjob-1",
-        "created_at": "1/1/2025 10:00:00",
-        "finished_at": "1/1/2025 11:00:00",
+        "organization_id": "Org123",
+        "created_at": "2025-01-01T10:00:00.00Z",
+        "finished_at": "2025-01-01T11:00:00.00Z",
         "status": "failed",
         "training_file": "FileId-1",
         "validation_file": "FileId-2",
         "model": "gpt-4o-mini-2024-07-18",
-        "modelProvider": "OAI",
+        "seed": 123,
         "hyperparameters": {
           "batch_size": 1,
           "learning_rate_multiplier": 1,
@@ -38,10 +39,12 @@
         ],
         "method": {
           "type": "supervised",
-          "hyperparameters": {
-            "batch_size": 1,
-            "learning_rate_multiplier": 1,
-            "n_epochs": 1
+          "supervised": {
+            "hyperparameters": {
+              "batch_size": 1,
+              "learning_rate_multiplier": 1,
+              "n_epochs": 1
+            }
           }
         },
         "error": {
