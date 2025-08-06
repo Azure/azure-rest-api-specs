@@ -4,12 +4,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Nginx.NginxPlus;
 
+@@clientName(Nginx.NginxPlus, "NginxManagementClient", "javascript");
+
 // Model name overrides
 @@clientName(ApiKeyResponseProperties, "NginxDeploymentApiKeyProperties");
 @@clientName(Certificate, "NginxCertificate");
 @@clientName(ApiKeyRequestProperties, "NginxDeploymentApiKeyRequestProperties");
 
-@@clientName(Nginx.NginxPlus, "NginxManagementClient", "javascript");
 @@clientName(ApiKey, "NginxDeploymentApiKeyResponse", "!csharp");
 @@clientName(ApiKeyRequest, "NginxDeploymentApiKeyRequest", "!csharp");
 @@clientName(AnalysisConfig, "AnalysisCreateConfig", "!csharp");
@@ -65,6 +66,8 @@ using Nginx.NginxPlus;
   "!csharp"
 );
 
+// Method name overrides
+@@clientName(Configurations.analyze, "analysis", "!csharp");
 // Client name for list operations
 @@clientName(NginxDeployments.listBySubscription, "list", "!csharp");
 @@clientName(ApiKeys.listByDeployment, "list", "!csharp");
