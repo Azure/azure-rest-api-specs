@@ -5,6 +5,10 @@ import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
 
+export const SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME = "Swagger BreakingChange - Analyze Code";
+export const CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME =
+  "Breaking Change(Cross-Version) - Analyze Code";
+
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
@@ -25,12 +29,12 @@ export default async function getLabelActions({ github, context, core }) {
   });
 
   const latestBreakingChangesRun = workflowRuns
-    .filter((wf) => wf.name === "[TEST-IGNORE] Swagger BreakingChange - Analyze Code")
+    .filter((wf) => wf.name === SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME)
     // Sort by "updated_at" descending
     .sort(invert(byDate((wf) => wf.updated_at)))[0];
 
   const latestCrossVersionBreakingChangesRun = workflowRuns
-    .filter((wf) => wf.name === "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code")
+    .filter((wf) => wf.name === CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME)
     // Sort by "updated_at" descending
     .sort(invert(byDate((wf) => wf.updated_at)))[0];
 
