@@ -39,36 +39,6 @@
   "responses": {
     "200": {
       "body": {
-        "dataSource": {
-          "type": "inlineData",
-          "data": {
-            "dataFormat": "queryResponseMessageFormat",
-            "messages": [
-              {
-                "query": "Hi",
-                "response": "hi"
-              },
-              {
-                "query": "tell me a joke",
-                "response": "no"
-              }
-            ]
-          }
-        },
-        "evaluators": [
-          {
-            "id": "azureai://built-in/evaluators/relevance",
-            "initializationParameters": {
-              "threshold": 0.8,
-              "model": "gpt-4o"
-            },
-            "dataMapping": {
-              "query": "${data.query}",
-              "response": "${data.response}",
-              "context": "${data.context}"
-            }
-          }
-        ],
         "metrics": [
           {
             "name": "Relevance",

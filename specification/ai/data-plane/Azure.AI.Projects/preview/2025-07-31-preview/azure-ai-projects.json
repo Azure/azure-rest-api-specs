@@ -1213,7 +1213,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OneEvaluation"
+              "$ref": "#/definitions/OneEvaluationResult"
             }
           },
           "default": {
@@ -4124,20 +4124,25 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "metrics": {
-          "type": "array",
-          "description": "Evaluation results from all the configured evaluators for this data row.",
-          "items": {
-            "$ref": "#/definitions/EvaluationMetric"
-          },
-          "readOnly": true
         }
       },
       "required": [
         "dataSource",
         "evaluators"
       ]
+    },
+    "OneEvaluationResult": {
+      "type": "object",
+      "description": "One Evaluation Result",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "description": "Evaluation results from all the configured evaluators.",
+          "items": {
+            "$ref": "#/definitions/EvaluationMetric"
+          }
+        }
+      }
     },
     "PagedConnection": {
       "type": "object",

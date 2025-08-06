@@ -340,9 +340,12 @@ model OneEvaluation {
 
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
+}
 
-  @doc("Evaluation results from all the configured evaluators for this data row.")
-  @visibility(Lifecycle.Read)
+@doc("One Evaluation Result")
+@added(Versions.v2025_07_31_preview)
+model OneEvaluationResult {
+  @doc("Evaluation results from all the configured evaluators.")
   metrics?: EvaluationMetric[];
 }
 

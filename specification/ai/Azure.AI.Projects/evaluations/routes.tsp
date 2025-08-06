@@ -111,7 +111,7 @@ interface Evaluations {
       @body
       oneEvaluation: OneEvaluation;
     },
-    OkResponse<OneEvaluation>
+    OkResponse<OneEvaluationResult>
   >;
 
   @doc("Updates specific properties of an existing evaluation. Supports modification of metadata fields including description, display name, and tags. Note: Core evaluation configuration such as data sources and evaluators cannot be modified after creation.")
