@@ -68,6 +68,7 @@ input-file:
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Insights/stable/2021-05-01/operations_API.json
   - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json  # Latest version
+  - Microsoft.Insights/stable/2022-06-01/actionGroups_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
 ```
 
