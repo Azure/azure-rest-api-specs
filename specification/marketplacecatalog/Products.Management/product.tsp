@@ -3,8 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Http;
-
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
@@ -127,63 +125,6 @@ model ProductSummary {
   attributes?: Attribute[];
 }
 
-@doc("The SKU properties, contains some of the attributes for faster OData filter")
-model SkuProperties {
-  @doc("The sku category")
-  category?: string;
-
-  @doc("The data disk type, such as 'Ssd'")
-  dataDiskType?: string;
-
-  @doc("The disk type, such as 'Ssd'")
-  diskType?: string;
-
-  @doc("The number of cores")
-  numberOfCores?: string;
-
-  @doc("The RAM")
-  ram?: string;
-
-  @doc("The number of virtual CPUs")
-  vCpu?: string;
-
-  @doc("The ARM SKU name")
-  armSkuName?: string;
-
-  @doc("The access tier, such as 'Standard'")
-  accessTier?: string;
-}
-
-@doc("SKU price related properties")
-model OfferingProperties {
-  @doc("The product code (UPN)")
-  productCode?: string;
-
-  @doc("The term id")
-  termId?: string;
-
-  @doc("The meter type")
-  meterType?: string;
-
-  @doc("The billing meter id")
-  billingMeterId?: string;
-
-  @doc("The offering id")
-  offeringId?: string;
-
-  @doc("Entitlement, Consumption or Reservation")
-  type?: string;
-}
-
-@doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.")
-model Attribute {
-  @doc("The attribute key")
-  key?: string;
-
-  @doc("The attribute value")
-  value?: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
 @doc("Summary description of the product")
@@ -284,13 +225,67 @@ model ProductDetails extends ProductSummary {
   productId: string;
 }
 
-@doc("Additional metadata")
-model PlanMetadata {
-  @doc("The VM image generation (applicable to Virtual Machine products only)")
-  generation?: string;
+@doc("Returns a subset of Plan attributes")
+model PlanSummary {
+  @doc("Plan identifier")
+  planId?: string;
 
-  @doc("Pointing to a planId which holds the alternative stack reference")
+  @doc("Unique plan identifier which is prefixed by combining uniqueProductId and PlanId with no separator in between")
+  uniquePlanId?: string;
+
+  @doc("Display name of the plan / sku")
+  displayName?: string;
+
+  @doc("Specifies the virtual machine processor architecture and generation. Applies exclusively to Virtual Machine product types.\n- `X64Gen1` - x64 processor architecture with Generation 1 virtual machine firmware and BIOS support\n- `X64Gen2` - x64 processor architecture with Generation 2 virtual machine firmware and UEFI support\n- `Arm64` - ARM 64-bit processor architecture optimized for energy efficiency and cloud-native workloads")
+  vmArchitectureType?: string;
+
+  @doc("Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment")
+  cspState?: string;
+
+  @doc("Expanded plan/SKU metadata.")
+  metadata?: PlanMetadata;
+
+  @doc("Alternative stack reference")
   altStackReference?: string;
+
+  @doc("Stack type : Classic, Gen1, Gen2")
+  stackType?: string;
+
+  @doc("The alternative architecture reference")
+  altArchitectureReference?: string;
+
+  @doc("Plan CategoryIds")
+  categoryIds?: string[];
+
+  @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
+  hasProtectedArtifacts?: boolean;
+
+  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing")
+  pricingTypes?: string[];
+
+  @doc("Defines the security enhancement level for virtual machine deployments. Applies exclusively to Virtual Machine product types.\n- `None` - Standard virtual machine security without additional protection features\n- `Trusted` - Trusted Launch security with secure boot and virtual Trusted Platform Module capabilities\n- `Confidential` - Confidential computing with memory encryption and attestation for sensitive workloads")
+  vmSecuritytypes?: string[];
+
+  @doc("The plan summary text")
+  summary?: string;
+
+  @doc("Plan / sku description")
+  description?: string;
+
+  @doc("The SKU id")
+  skuId?: string;
+
+  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
+  planType: string;
+
+  @doc("The order the plan is displayed in the 'Plans' table")
+  displayRank?: string;
+
+  @doc("Indication that the plan is accessible to restricted audience only")
+  isPrivate?: boolean;
+
+  @doc("Indication whether the SKU supports reservations")
+  hasRi?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
@@ -395,67 +390,70 @@ model PlanDetails extends PlanSummary {
   offeringProperties?: OfferingProperties[];
 }
 
-@doc("Returns a subset of Plan attributes")
-model PlanSummary {
-  @doc("Plan identifier")
-  planId?: string;
+@doc("The SKU properties, contains some of the attributes for faster OData filter")
+model SkuProperties {
+  @doc("The sku category")
+  category?: string;
 
-  @doc("Unique plan identifier which is prefixed by combining uniqueProductId and PlanId with no separator in between")
-  uniquePlanId?: string;
+  @doc("The data disk type, such as 'Ssd'")
+  dataDiskType?: string;
 
-  @doc("Display name of the plan / sku")
-  displayName?: string;
+  @doc("The disk type, such as 'Ssd'")
+  diskType?: string;
 
-  @doc("Specifies the virtual machine processor architecture and generation. Applies exclusively to Virtual Machine product types.\n- `X64Gen1` - x64 processor architecture with Generation 1 virtual machine firmware and BIOS support\n- `X64Gen2` - x64 processor architecture with Generation 2 virtual machine firmware and UEFI support\n- `Arm64` - ARM 64-bit processor architecture optimized for energy efficiency and cloud-native workloads")
-  vmArchitectureType?: string;
+  @doc("The number of cores")
+  numberOfCores?: string;
 
-  @doc("Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment")
-  cspState?: string;
+  @doc("The RAM")
+  ram?: string;
 
-  @doc("Expanded plan/SKU metadata.")
-  metadata?: PlanMetadata;
+  @doc("The number of virtual CPUs")
+  vCpu?: string;
 
-  @doc("Alternative stack reference")
+  @doc("The ARM SKU name")
+  armSkuName?: string;
+
+  @doc("The access tier, such as 'Standard'")
+  accessTier?: string;
+}
+
+@doc("SKU price related properties")
+model OfferingProperties {
+  @doc("The product code (UPN)")
+  productCode?: string;
+
+  @doc("The term id")
+  termId?: string;
+
+  @doc("The meter type")
+  meterType?: string;
+
+  @doc("The billing meter id")
+  billingMeterId?: string;
+
+  @doc("The offering id")
+  offeringId?: string;
+
+  @doc("Entitlement, Consumption or Reservation")
+  type?: string;
+}
+
+@doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.")
+model Attribute {
+  @doc("The attribute key")
+  key?: string;
+
+  @doc("The attribute value")
+  value?: string;
+}
+
+@doc("Additional metadata")
+model PlanMetadata {
+  @doc("The VM image generation (applicable to Virtual Machine products only)")
+  generation?: string;
+
+  @doc("Pointing to a planId which holds the alternative stack reference")
   altStackReference?: string;
-
-  @doc("Stack type : Classic, Gen1, Gen2")
-  stackType?: string;
-
-  @doc("The alternative architecture reference")
-  altArchitectureReference?: string;
-
-  @doc("Plan CategoryIds")
-  categoryIds?: string[];
-
-  @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
-  hasProtectedArtifacts?: boolean;
-
-  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing")
-  pricingTypes?: string[];
-
-  @doc("Defines the security enhancement level for virtual machine deployments. Applies exclusively to Virtual Machine product types.\n- `None` - Standard virtual machine security without additional protection features\n- `Trusted` - Trusted Launch security with secure boot and virtual Trusted Platform Module capabilities\n- `Confidential` - Confidential computing with memory encryption and attestation for sensitive workloads")
-  vmSecuritytypes?: string[];
-
-  @doc("The plan summary text")
-  summary?: string;
-
-  @doc("Plan / sku description")
-  description?: string;
-
-  @doc("The SKU id")
-  skuId?: string;
-
-  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
-  planType: string;
-
-  @doc("The order the plan is displayed in the 'Plans' table")
-  displayRank?: string;
-
-  @doc("Indication that the plan is accessible to restricted audience only")
-  isPrivate?: boolean;
-
-  @doc("Indication whether the SKU supports reservations")
-  hasRi?: boolean;
 }
 
 @doc("Plan level resources and configuration files")
@@ -712,118 +710,4 @@ model Image {
 
   @doc("Image type")
   type?: string;
-}
-
-// The following section contains query param models
-@doc("Marketplace Catalog API")
-model MarketParameter {
-  @query
-  @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
-  market: string;
-}
-
-@doc("Parameters for language selection")
-model LanguageParameter {
-  @query
-  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"")
-  language?: string = "en";
-}
-
-@doc("Parameters for location filtering")
-model LocationsParameter {
-  @query
-  @doc("Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
-  locations?: string[];
-}
-
-@doc("Parameters for preview product keys")
-model HideKeysParameter {
-  @query
-  @doc("This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.")
-  hideKeys?: string[];
-}
-
-@doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
-model IncludeStopSoldPlansParameter {
-  @query
-  @doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
-  includeStopSoldPlans?: boolean = false;
-}
-
-@doc("By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.")
-model ExcludeSkuDetailsParameter {
-  @query
-  @doc("By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.")
-  excludeSkuDetails?: boolean = false;
-}
-
-@doc("Include future availabilities parameter")
-model IncludeFutureAvailabilitiesParameter {
-  @query
-  @doc("Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE.")
-  includeFutureAvailabilities?: boolean = false;
-}
-
-@doc("SKU ID filter parameter")
-model SkuIdParameter {
-  @query
-  @doc("Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.")
-  skuId?: string;
-}
-
-@doc("Pricing audience header parameter")
-model PricingAudienceHeaderParameter {
-  @header("x-ms-pricing-audience")
-  @doc("DirectCommercial or PartnerCommercial, DirectCommercial is the default")
-  pricingAudience?: string;
-}
-
-@doc("Service parameter")
-model ServiceParameter {
-  @query
-  @doc("The service name of the product, such as 'Virtual Machines'")
-  service: string;
-}
-
-@doc("Service family parameter")
-model ServiceFamilyParameter {
-  @query
-  @doc("The service family of the product, such as 'Compute'")
-  serviceFamily: string;
-}
-
-// OData parameters
-@doc("OData Filter parameter")
-model OdataFilterParameter {
-  @query
-  @doc("Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`")
-  $filter?: string;
-}
-
-@doc("Search filter parameter")
-model SearchParameter {
-  @query
-  @doc("Optional search by display name, publisher display name, or keywords. Example $search=Microsoft")
-  $search?: string;
-}
-
-@doc("OData Select parameter")
-model OdataSelectParameter {
-  @query
-  @doc("Selects which properties to include in the results. Example: $select=displayName")
-  $select?: string;
-}
-
-@doc("OData Expand parameter")
-model OdataExpandParameter {
-  @query
-  @doc("Expands related entities inline")
-  $expand?: string;
-}
-
-@doc("OData Expand parameter")
-model OdataOrderByParameter {
-  @query
-  @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`'")
-  $orderBy?: string;
 }
