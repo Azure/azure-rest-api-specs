@@ -61,6 +61,9 @@ model SliResource {
   @visibility(Lifecycle.Read)
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
   streamingRuleLastUpdatedTimestamp?: string;
+
+  @doc("Defines the SLI properties associated with the SLI.")
+  sliProperties: SliProperties;
 }
 
 @doc("Represents the current execution state of an SLI.")

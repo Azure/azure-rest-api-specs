@@ -938,6 +938,10 @@
           "type": "string",
           "description": "The streaming rule last updated timestamp associated with the Sli resource.",
           "readOnly": true
+        },
+        "sliProperties": {
+          "$ref": "#/definitions/SliProperties",
+          "description": "Defines the SLI properties associated with the SLI."
         }
       },
       "required": [
@@ -945,7 +949,8 @@
         "category",
         "evaluationType",
         "destinationAmwAccounts",
-        "baselineProperties"
+        "baselineProperties",
+        "sliProperties"
       ]
     },
     "SpatialAggregation": {
