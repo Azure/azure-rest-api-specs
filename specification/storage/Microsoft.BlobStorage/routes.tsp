@@ -1715,7 +1715,6 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1846,7 +1845,6 @@ namespace Storage.Blob {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
           }
         >;
 

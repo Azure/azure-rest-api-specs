@@ -1138,7 +1138,7 @@ enum SequenceNumberActionType {
 alias SequenceNumberParameter = {
   /** Set for page blobs only. The sequence number is a user-controlled value that you can use to track requests. The value of the sequence number must be between 0 and 2^63 - 1. */
   @header("x-ms-blob-sequence-number")
-  blobSequenceNumber?: int64 = 0;
+  blobSequenceNumber: int64 = 0;
 };
 
 /** The blob content length required parameter. */
