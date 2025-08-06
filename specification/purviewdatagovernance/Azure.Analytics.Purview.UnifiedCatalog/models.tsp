@@ -1116,6 +1116,7 @@ union TermRelationshipType {
 }
 
 @doc("Objective with additional properties model.")
+@resource("objectives")
 model ObjectiveWithAdditionalProperties {
   @doc("The status of the objective.")
   status?: OkrSharedEntityStatus;
@@ -1124,10 +1125,12 @@ model ObjectiveWithAdditionalProperties {
   systemData?: OkrSystemDataWithExpired;
 
   @doc("The unique identifier of the objective.")
-  id?: uuid;
+  @key("objectiveId")
+  @visibility(Lifecycle.Read)
+  id: uuid;
 
   @doc("The definition of the objective.")
-  definition?: string;
+  definition: string;
 
   @doc("The domain associated with the objective.")
   domain?: uuid;
@@ -1312,9 +1315,11 @@ model ObjectiveQueryAdditionalProperties {
 }
 
 @doc("Microsoft Purview Data Governance Catalog Key Result.")
-model ModelKeyResult {
+@resource("keyResults")
+@parentResource(ObjectiveWithAdditionalProperties)
+model KeyResult {
   @doc("The status of the key result.")
-  status?: OverallStatusEnum;
+  status: OverallStatusEnum;
 
   @doc("The system data associated with the key result.")
   systemData?: SystemData;
@@ -1326,7 +1331,9 @@ model ModelKeyResult {
   definition?: string;
 
   @doc("The unique identifier of the domain.")
-  domainId?: uuid;
+  @key
+  @visibility(Lifecycle.Read)
+  domainId: uuid;
 
   @doc("The progress of the key result.")
   progress?: float64;
@@ -1343,7 +1350,7 @@ model ModelKeyResult {
 model ModelKeyResultResponse {
   @doc("The list of key results.")
   @items
-  value: ModelKeyResult[];
+  value: KeyResult[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -1549,4 +1556,39 @@ model CreateTermResponse {
 alias TermIdParameter = {
   @doc("The unique identifier of the critical data term.")
   termId: uuid;
+};
+
+@doc("The number of duplicate checks to perform.")
+model CreateObjectiveResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  @bodyRoot
+  body: ObjectiveWithAdditionalProperties;
+}
+
+alias ObjectiveIdParameter = {
+  @doc("The unique identifier of the critical data objective.")
+  objectiveId: uuid;
+};
+
+@doc("The number of duplicate checks to perform.")
+model CreateKeyResultResponse {
+  @doc("Create response.")
+  @statusCode
+  status: 201;
+
+  @doc("The request body containing query criteria.")
+  @bodyRoot
+  body: KeyResult;
+}
+
+alias GetKeyResultParameter = {
+  @doc("The unique identifier of the critical data objective.")
+  objectiveId: uuid;
+
+  @doc("The unique identifier of the key result (OKR).")
+  keyResultId: uuid;
 };

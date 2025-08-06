@@ -711,3 +711,149 @@ op ListRelatedEntitiesAsync is UnifiedCatalogOperations.ResourceList<
     relationshipType?: TermRelationshipType;
   }>
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves a list of objectives (OKRs) based on keyword, domainId, and other filters.")
+@get
+op ListObjectivesAsync is UnifiedCatalogOperations.ResourceList<
+  ObjectiveWithAdditionalProperties,
+  ListQueryParametersTrait<SkipQueryParameter &
+    TopQueryParameter &
+    OrderByQueryParameter & {
+      @doc("Search keyword for OKRs.")
+      @query
+      keyword: string;
+
+      @doc("The unique identifier of the domain.")
+      @query
+      domainId?: string;
+    }>
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Creates a new objective (OKR).")
+@route("/objectives")
+@post
+op CreateObjectiveAsync is RpcOperation<
+  ObjectiveWithAdditionalProperties,
+  CreateObjectiveResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Queries objectives (OKRs) based on specified criteria.")
+@route("/objectives/query")
+@post
+op QueryObjectivesAsync is RpcOperation<
+  {
+    @doc("Checks for duplicate OKRs.")
+    @query
+    duplicatecheck?: int32;
+
+    @doc("The request body for querying OKRs.")
+    @bodyRoot
+    body: ObjectiveQueryRequest;
+  },
+  ObjectiveWithAdditionalPropertiesResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves the facets for objectives (OKRs).")
+@route("/objectives/facets")
+@post
+op GetObjectiveFacetsAsync is RpcOperation<
+  ObjectiveFacetRequest,
+  FacetsResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Updates an existing objective (OKR) by ID.")
+@route("/objectives/{objectiveId}")
+@put
+op UpdateObjectiveAsync is RpcOperation<
+  ObjectiveIdParameter & {
+    @doc("The additional properties for the objective query.")
+    @bodyRoot
+    objective: ObjectiveQueryAdditionalProperties;
+  },
+  ObjectiveWithAdditionalProperties
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Deletes an existing objective (OKR) by ID.")
+@delete
+op DeleteObjectiveByIdAsync is UnifiedCatalogOperations.ResourceDelete<ObjectiveWithAdditionalProperties>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves an existing objective (OKR) by ID.")
+@get
+op GetObjectiveByIdAsync is UnifiedCatalogOperations.ResourceRead<ObjectiveWithAdditionalProperties>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves key results for a specific objective (OKR) by its ID.")
+@get
+op ListKeyResultsAsync is UnifiedCatalogOperations.ResourceList<KeyResult>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Creates a new key result for a specific objective (OKR) by its ID.")
+@route("/objectives/{objectiveId}/keyResults")
+@post
+op CreateKeyResultAsync is RpcOperation<
+  ObjectiveIdParameter & {
+    @doc("The body associated with the key result.")
+    @bodyRoot
+    keyResult: KeyResult;
+  },
+  KeyResult
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves a specific key result (OKR) by its ID.")
+@route("/objectives/{objectiveId}/keyResults/{keyResultId}")
+@get
+op GetKeyResultByIdAsync is RpcOperation<GetKeyResultParameter, KeyResult>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Updates an existing key result (OKR) by its ID.")
+@route("/objectives/{objectiveId}/keyResults/{keyResultId}")
+@put
+op UpdateKeyResultAsync is RpcOperation<
+  GetKeyResultParameter & {
+    @doc("The body associated with the key result output.")
+    @bodyRoot
+    keyResult: CatalogModelKeyResult;
+  },
+  CatalogModelKeyResultResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("OKR")
+@doc("Deletes an existing key result (OKR) by ID.")
+@route("/objectives/{objectiveId}/keyResults/{keyResultId}")
+@delete
+op DeleteKeyResultByIdAsync is RpcOperation<
+  GetKeyResultParameter,
+  DeleteResponse
+>;
