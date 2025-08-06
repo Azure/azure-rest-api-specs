@@ -47,7 +47,7 @@ input-file:
   - Microsoft.Insights/stable/2024-03-11/dataCollectionEndpoints_API.json
   - Microsoft.Insights/stable/2024-03-11/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/stable/2024-03-11/dataCollectionRules_API.json
-  - PrivateLinkScopes/stable/2021-09-01/privateLinkScopes_API.json
+  - Microsoft.Insights/PrivateLinkScopes/stable/2021-09-01/privateLinkScopes_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -68,6 +68,7 @@ input-file:
   - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
+  - Microsoft.Insights/stable/2021-05-01/operations_API.json
 ```
 
 ### Tag: package-2025-01-01-preview
