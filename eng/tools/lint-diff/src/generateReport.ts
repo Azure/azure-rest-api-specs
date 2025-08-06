@@ -1,16 +1,21 @@
+import { kebabCase } from "change-case";
 import { writeFile } from "node:fs/promises";
 import { relative } from "node:path";
-import { kebabCase } from "change-case";
-import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
-import { getPathToDependency, getDependencyVersion, relativizePath } from "./util.js";
 import { getViolations } from "./correlateResults.js";
-import { isFailure, isWarning } from "./util.js";
 import {
-  AutorestRunResult,
   AutoRestMessage,
+  AutorestRunResult,
   BeforeAfter,
   LintDiffViolation,
 } from "./lintdiff-types.js";
+import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
+import {
+  getDependencyVersion,
+  getPathToDependency,
+  isFailure,
+  isWarning,
+  relativizePath,
+} from "./util.js";
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 

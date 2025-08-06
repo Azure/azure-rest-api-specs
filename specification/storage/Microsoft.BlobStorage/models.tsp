@@ -571,7 +571,7 @@ model BlobPropertiesInternal {
   lastModified: utcDateTime;
 
   /** The blog ETag. */
-  @Xml.name("ETag") eTag: string;
+  @Xml.name("Etag") eTag: string;
 
   /** The content length of the blob. */
   @Xml.name("Content-Length") contentLength?: int64;

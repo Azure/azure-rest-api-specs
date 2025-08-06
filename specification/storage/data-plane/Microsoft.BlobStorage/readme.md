@@ -125,18 +125,18 @@ input-file:
 
 These settings apply only when `--tag=package-2025-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-11'
+```yaml $(tag) == 'package-2025-11'
 input-file:
-- stable/2025-11-05/blob.json
+  - stable/2025-11-05/blob.json
 ```
 
 ### Tag: package-2025-11-tsp
 
 These settings apply only when `--tag=package-2025-11-tsp` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-11-tsp'
+```yaml $(tag) == 'package-2025-11-tsp'
 input-file:
-- stable/2025-11-05/generated_blob.json
+  - stable/2025-11-05/generated_blob.json
 ```
 
 ### Suppression
@@ -166,10 +166,8 @@ directive:
     from: generated_blob.json
     reason: Service uses XML, not JSON, so cannot validate.
   - suppress: ValidFormats
-    reason: Properly specifying parameter format.
-  - suppress: MULTIPLE_BODY_PARAMETERS
     from: generated_blob.json
-    reason: These are multipart requests defined in typespec, the swagger is generated through typespec-autorest. FormData parameters aren't supported by autorest.
+    reason: Properly specifying parameter format.
   - suppress: EnumInsteadOfBoolean
     from: generated_blob.json
     reason: Existing API contract
