@@ -721,8 +721,9 @@ export async function getCheckRunTuple(
 
     // just handling both for ease of integration testing
     if (
-      latestCheck.name === "[TEST-IGNORE] Summarize PR Impact" ||
-      latestCheck.name === "Summarize PR Impact"
+      (latestCheck.name === "[TEST-IGNORE] Summarize PR Impact" ||
+        latestCheck.name === "Summarize PR Impact") &&
+      latestCheck.status === "completed"
     ) {
       const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
         owner,
