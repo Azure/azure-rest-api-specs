@@ -18,7 +18,7 @@ model Employee is TrackedResource<EmployeeProperties> {
 /** Employee properties */
 model EmployeeProperties {
   /** Age of employee */
-  @doc("age")
+  @doc("the age")
   age?: int32;
 
   /** City of employee */
