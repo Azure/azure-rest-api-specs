@@ -147,3 +147,22 @@ namespace Microsoft.RecoveryServices;
 @@scope(Operations.list, "!csharp");
 @@scope(getOperationStatus, "!csharp");
 @@scope(getOperationResult, "!csharp");
+@@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "csharp");
+@@clientName(AssociatedIdentity,
+  "RecoveryServicesAssociatedIdentity",
+  "csharp"
+);
+@@clientName(AzureMonitorAlertSettings,
+  "RecoveryServicesAzureMonitorAlertSettings",
+  "csharp"
+);
+@@clientName(ClassicAlertSettings,
+  "RecoveryServicesClassicAlertSettings",
+  "csharp"
+);
+@@clientName(EnhancedSecurityState,
+  "RecoveryServicesEnhancedSecurityState",
+  "csharp"
+);
+@@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
+@@clientName(State, "RecoveryServicesSourceScanState", "csharp");
