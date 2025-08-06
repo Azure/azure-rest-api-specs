@@ -2,12 +2,8 @@ namespace Microsoft.AzureImageTestingForLinux;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Autorest;
-using Azure.Core;
-using Azure.Core.Foundations;
 using OpenAPI;
 
 /*Temporary ArmResourceCreateOrUpdateSync until Typespec library updates*/
@@ -18,27 +14,28 @@ using OpenAPI;
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
 @autoRoute
 @doc("Create a {name}", TResource)
 @armResourceCreateOrUpdate(TResource)
 @put
 op ArmResourceCreateOrUpdateSyncCompliant<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponseSync<TResource> | Azure.ResourceManager.ErrorResponse;
 
 @doc("ARM update operation completed successfully.")
-model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Resource>
   is ArmResponse<TResource>;
 
 @doc("ARM create operation completed successfully.")
-model ArmCreatedResponseSync<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmCreatedResponseSync<TResource extends Azure.ResourceManager.Foundations.Resource>
   is Body<TResource> {
   ...CreatedResponse;
 }
@@ -50,6 +47,8 @@ model ArmCreatedResponseSync<TResource extends Azure.ResourceManager.Foundations
  * @param TBaseParameters Optional. Allows overriding the operation parameters
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
 @autoRoute
 @doc("Create a {name}", TResource)
 @extension("x-ms-long-running-operation", true)
@@ -60,12 +59,12 @@ model ArmCreatedResponseSync<TResource extends Azure.ResourceManager.Foundations
 @armResourceCreateOrUpdate(TResource)
 @put
 op ArmResourceCreateOrUpdateAsyncCompliant<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | Azure.ResourceManager.ErrorResponse;
