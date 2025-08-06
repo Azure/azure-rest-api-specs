@@ -597,8 +597,6 @@
 | `definitions.StorageMbCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.StorageTierCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.VirtualEndpoint.allOf[0].$ref` | `#/definitions/VirtualEndpointResourceForPatch` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/checkNameAvailability'].post.parameters[1].name` | `parameters` | `body` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/checkVirtualNetworkSubnetUsage'].post.parameters[1].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}'].put.parameters[3].schema.$ref` | `#/definitions/AdministratorMicrosoftEntraAdd` | `#/definitions/AdministratorMicrosoftEntra` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}'].put.parameters[3].schema.$ref` | `#/definitions/ConfigurationForUpdate` | `#/definitions/Configuration` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}'].get.parameters[1].maxLength` | `128` | `63` |

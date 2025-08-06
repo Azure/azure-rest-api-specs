@@ -163,3 +163,9 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(NameAvailabilityOperationGroup.checkGlobally::parameters.body,
   "parameters"
 );
+@@clientName(NameAvailabilityOperationGroup.checkWithLocation::parameters.body,
+  "parameters"
+);
+@@clientName(VirtualNetworkSubnetUsageOperationGroup.list::parameters.body,
+  "parameters"
+);
