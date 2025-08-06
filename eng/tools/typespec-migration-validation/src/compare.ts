@@ -46,7 +46,9 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
         level: "error"
       });
     }
-    pathDiffs.push(...compareOperation(oldOperations[operationId][1], newOperations[operationId][1], operationId));
+    else {
+      pathDiffs.push(...compareOperation(oldOperations[operationId][1], newOperations[operationId][1], operationId));
+    }    
   }
   for (const operationId in newOperations) {
     if (!oldOperations[operationId]) {

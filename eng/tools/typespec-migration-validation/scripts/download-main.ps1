@@ -95,7 +95,7 @@ if ($swaggerPath.StartsWith("specification")) {
   $swaggerPath = Join-Path $repoRoot $swaggerPath
 }
 
-if ($reportFile -eq $null) {
+if ([string]::IsNullOrEmpty($reportFile)) {
   Write-Host "Your next command: npx tsmv $swaggerInMain $swaggerPath --outputFolder {outputFolder}"
 }
 else {  
