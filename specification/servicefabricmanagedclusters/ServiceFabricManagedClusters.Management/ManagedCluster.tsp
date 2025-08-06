@@ -697,7 +697,11 @@ model ServiceEndpoint {
    * Specifies the resource id of the service endpoint to be used in the cluster.
    */
   @added(Versions.v2025_06_01_preview)
-  networkIdentifier?: Azure.Core.armResourceIdentifier;
+  networkIdentifier?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/publicIPAddresses";
+    }
+  ]>;
 }
 
 /**

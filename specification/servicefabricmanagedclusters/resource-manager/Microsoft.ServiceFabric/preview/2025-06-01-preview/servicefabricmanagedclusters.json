@@ -7311,7 +7311,14 @@
         "networkIdentifier": {
           "type": "string",
           "format": "arm-id",
-          "description": "Specifies the resource id of the service endpoint to be used in the cluster."
+          "description": "Specifies the resource id of the service endpoint to be used in the cluster.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPAddresses"
+              }
+            ]
+          }
         }
       },
       "required": [
