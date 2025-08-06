@@ -27,7 +27,7 @@ These are the global settings for the loadtestservice.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-12-01
+tag: package-2025-09-01
 ```
 
 ### Tag: package-2025-09-01
