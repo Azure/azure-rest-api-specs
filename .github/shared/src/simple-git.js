@@ -1,5 +1,5 @@
-import { simpleGit } from "simple-git";
 import { resolve } from "path";
+import { simpleGit } from "simple-git";
 
 /**
  *

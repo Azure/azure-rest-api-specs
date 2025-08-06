@@ -1,8 +1,8 @@
 // @ts-check
 
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { setSummary, annotateFileError, setOutput } from "../src/error-reporting.js";
 import fs from "fs/promises";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { annotateFileError, setOutput, setSummary } from "../src/error-reporting.js";
 
 describe("ErrorReporting", () => {
   let logSpy;

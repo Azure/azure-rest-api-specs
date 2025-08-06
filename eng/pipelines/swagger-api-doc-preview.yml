@@ -1,0 +1,235 @@
+trigger: none
+pr:
+  paths:
+    include:
+      # Trigger for files that will result in a doc preview build
+      - specification/**
+
+      # Smoke test on changed files
+      - eng/pipelines/swagger-api-doc-preview.yml
+      - eng/pipelines/templates/steps/set-sha-check.yml
+      - .github/shared/src/doc-preview.js
+      - .github/shared/cmd/api-doc-preview.js
+
+jobs:
+  - job: SwaggerApiDocPreview
+
+    pool:
+      name: $(LINUXPOOL)
+      vmImage: $(LINUXVMIMAGE)
+
+    variables:
+      - template: /eng/pipelines/templates/variables/globals.yml
+      - template: /eng/pipelines/templates/variables/image.yml
+      
+      - name: BranchName
+        value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestNumber)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
+      
+      - name: CurrentBuildUrl
+        value: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
+
+      - name: StatusName
+        value: 'Swagger ApiDocPreview'
+
+    steps:
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
+        parameters:
+          State: pending
+          TargetUrl: $(CurrentBuildUrl)
+          Description: 'Starting docs build'
+          Context: $(StatusName)
+
+      - checkout: self
+        # Fetch depth required to get list of changed files
+        fetchDepth: 2
+
+      - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+        parameters:
+          SkipCheckoutNone: true
+          TokenToUseForAuth: $(azuresdk-github-pat)
+          # Path does not need to be set because sparse-checkout.yml already
+          # checks out files in the repo root
+          Repositories:
+            - Name: MicrosoftDocs/AzureRestPreview
+              Commitish: main
+              WorkingDirectory: AzureRestPreview
+
+      - template: /eng/pipelines/templates/steps/npm-install.yml
+        parameters:
+          WorkingDirectory: .github/shared
+
+      - script: cmd/api-doc-preview.js --output ../../AzureRestPreview
+        displayName: Generate Swagger API documentation preview
+        workingDirectory: .github/shared
+
+      - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
+        parameters:
+          WorkingDirectory: AzureRestPreview
+          BaseRepoOwner: MicrosoftDocs
+          TargetRepoOwner: MicrosoftDocs
+          TargetRepoName: AzureRestPreview
+          BaseRepoBranch: $(BranchName)
+          CommitMsg: |
+            Update API Doc Preview
+            Build: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
+            PR: $(System.PullRequest.SourceRepositoryURI)/pull/$(System.PullRequest.PullRequestId)
+
+      - task: AzureCLI@2
+        displayName: Start docs build
+        condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+        inputs:
+          azureSubscription: msdocs-apidrop-connection
+          scriptType: pscore
+          scriptLocation: inlineScript
+          inlineScript: |
+            $buildStartRaw = az pipelines build queue `
+              --organization "https://dev.azure.com/apidrop/" `
+              --project "Content CI" `
+              --definition-id "8157" `
+              --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"$(BranchName)"}, "source_of_truth": "code"}'
+            $buildStartRaw | Set-Content buildstart.json
+            $buildStart = $buildStartRaw | ConvertFrom-Json
+            Write-Host "Build started at https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
+
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
+        parameters:
+          Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+          State: pending
+          TargetUrl: $(CurrentBuildUrl)
+          Description: 'Waiting for docs build to finish'
+          Context: $(StatusName)
+
+      - task: AzureCLI@2
+        displayName: Wait for docs build to finish
+        condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+        # Retry on failure to handle transient issues or builds that run longer
+        # than the token used by az CLI is valid
+        retryCountOnTaskFailure: 3
+        inputs:
+          azureSubscription: msdocs-apidrop-connection
+          scriptType: pscore
+          scriptLocation: inlineScript
+          inlineScript: |
+            $buildStart = Get-Content buildstart.json | ConvertFrom-Json
+
+            Write-Host "Waiting for build to finish: https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
+            
+            # Timeout in 10 minutes to avoid infinite waiting
+            $start = Get-Date
+            while (((Get-Date) - $start).TotalMinutes -lt 10) {
+              $runStatusRaw = az pipelines runs show `
+                --organization "https://dev.azure.com/apidrop/" `
+                --project "Content CI" `
+                --id "$($buildStart.id)"
+
+              if ($LASTEXITCODE) { 
+                Write-Host "Failed to get run status"
+                Write-Host "Exit code: $LASTEXITCODE"
+                Write-Host "Output: $runStatusRaw"
+                exit 1 
+              }
+
+              $runStatus = $runStatusRaw | ConvertFrom-Json
+              Write-Host "Run status: $($runStatus.status)"
+
+              if ($runStatus.status -eq "completed") {
+                break;
+              }
+              Start-Sleep -Seconds 10
+            }
+
+            Write-Host "Build completed with status: $($runStatus.result)"
+            Write-Host "Build logs: https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
+
+            Write-Host "Downloading artifact..."
+            $artifactDownloadRaw = az pipelines runs artifact download `
+              --organization "https://dev.azure.com/apidrop/" `
+              --project "Content CI" `
+              --run-id "$($buildStart.id)" `
+              --artifact-name "report" `
+              --path "./"
+
+            if ($LASTEXITCODE) {
+              Write-Host "Failed to download artifact"
+              Write-Host "Exit code: $LASTEXITCODE"
+              Write-Host "Output: $artifactDownloadRaw"
+              exit 1
+            }
+
+            Write-Host "Artifact downloaded successfully"
+
+      - pwsh: |
+          # Get build ID from buildstart.json (set during the "Start docs build" step)
+          $buildStart = Get-Content buildstart.json | ConvertFrom-Json
+          $buildLink = "https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
+
+          if (!(Test-Path -Path "./report.json")) {
+            Write-Host "Report file not found. Docs build may have failed or not produced the expected artifact."
+            Write-Host "##vso[task.setvariable variable=CheckUrl]${buildLink}"
+            Write-Host "##vso[task.setvariable variable=CheckDescription]Docs build failed with no output artifacts (click to see pipeline logs)"
+            Write-Host "##vso[task.setvariable variable=CheckState]failure"
+            exit 0
+          }
+
+          # Read the report.json file downloaded from the docs build artifact
+          $reportRaw = Get-Content -Path "./report.json" -Raw
+          $report = $reportRaw | ConvertFrom-Json -AsHashtable
+
+          if ($report.status -ne "Succeeded") {
+            Write-Host "Docs build failed with status: $($report.status)"
+            Write-Host "Report:"
+            Write-Host $reportRaw
+
+            Write-Host "##vso[task.setvariable variable=CheckUrl]${buildLink}"
+            Write-Host "##vso[task.setvariable variable=CheckDescription]Docs build failed (click to see pipeline logs)"
+            Write-Host "##vso[task.setvariable variable=CheckState]failure"
+
+            # Docs build failed, but this job should not fail unless it 
+            # encounters an unexpected error. The check status will be set in 
+            # the next task.
+            exit 0
+          }
+
+          Write-Host "Docs build succeeded with status: $($report.status)"
+
+          $docsPreviewUrl = "https://review.learn.microsoft.com/en-us/rest/api/azure-rest-preview/?branch=$([System.Web.HttpUtility]::UrlEncode($report.branch))&view=azure-rest-preview"
+          Write-Host "##vso[task.setvariable variable=CheckUrl]$docsPreviewUrl"
+          Write-Host "##vso[task.setvariable variable=CheckDescription]Docs build succeeded (click to see preview)"
+          Write-Host "##vso[task.setvariable variable=CheckState]success"
+          Write-Host "Docs preview URL: $docsPreviewUrl"
+
+          exit 0
+        displayName: Interpret docs build results
+        condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+
+      # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
+      # $(CheckDescription) variables set by api-doc-preview-interpret.js.
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
+        parameters:
+          DisplayName: Set PR status from docs build
+          Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+          State: $(CheckState)
+          TargetUrl: $(CheckUrl)
+          Description: $(CheckDescription)
+          Context: $(StatusName)
+
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
+        parameters:
+          DisplayName: Set PR status for no-op
+          Condition: and(succeeded(), ne(variables['HasChanges'], 'true'))
+          State: success
+          TargetUrl: $(CurrentBuildUrl)
+          Description: No files changed require docs build
+          Context: $(StatusName)
+
+      # In the event of a failure in this job (not the docs build job), set the 
+      # PR status to failed and link to the current build.
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
+        parameters:
+          DisplayName: Set PR status for job failure
+          # Only run if a previous step in the job failed
+          Condition: failed()
+          State: failure
+          TargetUrl: $(CurrentBuildUrl)
+          Description: 'Orchestration build failed (click to see logs)'
+          Context: $(StatusName)
