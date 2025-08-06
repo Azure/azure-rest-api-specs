@@ -39,7 +39,6 @@ interface StorageTaskAssignments {
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   @put
-  @Azure.Core.useFinalStateVia("location")
   create is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<
       StorageTaskAssignment,
@@ -56,7 +55,6 @@ interface StorageTaskAssignments {
    * Update storage task assignment properties
    */
   @patch(#{ implicitOptionality: false })
-  @Azure.Core.useFinalStateVia("location")
   update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
     ResourceInstanceParameters<
       StorageTaskAssignment,
@@ -80,7 +78,6 @@ interface StorageTaskAssignments {
     Foundations.Resource
   )
   @delete
-  @Azure.Core.useFinalStateVia("location")
   delete is Azure.ResourceManager.ArmResourceDeleteAsyncBase<
     Resource = StorageTaskAssignment,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
