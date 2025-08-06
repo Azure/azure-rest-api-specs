@@ -1,0 +1,43 @@
+{
+  "title": "Update Private Endpoint Connection.",
+  "operationId": "PrivateEndpointConnectionsInterface_Update",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "privateEndpointConnectionName": "pec1",
+    "resource": {
+      "properties": {
+        "privateEndpoint": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1"
+        },
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approved by johndoe@company.com",
+          "actionsRequired": "None"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnections/pec1",
+        "name": "pec1",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by johndoe@company.com",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}

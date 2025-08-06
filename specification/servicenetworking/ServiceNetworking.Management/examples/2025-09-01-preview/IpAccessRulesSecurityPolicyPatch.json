@@ -1,0 +1,35 @@
+{
+  "title": "Update IpAccessRules SecurityPolicy",
+  "operationId": "SecurityPoliciesInterface_Update",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "securityPolicyName": "sp1",
+    "properties": {
+      "properties": {
+        "ipAccessRulesPolicy": {
+          "rules": []
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ipAccessRules-0",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/securityPolicies",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/sample-tc/securityPolicies/ipAccessRules-0",
+        "location": "NorthCentralUS",
+        "properties": {
+          "policyType": "ipAccessRules",
+          "ipAccessRulesPolicy": {
+            "rules": []
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

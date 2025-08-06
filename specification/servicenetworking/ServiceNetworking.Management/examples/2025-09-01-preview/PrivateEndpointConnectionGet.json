@@ -1,0 +1,34 @@
+{
+  "title": "Get Private Endpoint Connection",
+  "operationId": "PrivateEndpointConnectionsInterface_Get",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "privateEndpointConnectionName": "pec1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnections/pec1",
+        "name": "pec1",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1"
+          },
+          "groupIds": [
+            "group1"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Pending",
+            "description": "Please approve my request, thanks.",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "title": "Put Private Endpoint Connection Proxy.",
+  "operationId": "PrivateEndpointConnectionProxiesInterface_Put",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "privateEndpointConnectionProxyName": "pecp1",
+    "remotePrivateEndpoint": {
+      "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1",
+      "manualPrivateLinkServiceConnections": [
+        {
+          "name": "plsconnection1",
+          "groupIds": [
+            "group1"
+          ],
+          "requestMessage": "Please approve my connection, thanks."
+        }
+      ],
+      "privateLinkServiceProxies": [
+        {
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1/privateLinkServiceProxies/pls1-proxy",
+          "remotePrivateLinkServiceConnectionState": {
+            "status": "Pending",
+            "description": "Please approve my connection, thanks.",
+            "actionsRequired": "None"
+          },
+          "remotePrivateEndpointConnection": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnections/pec1"
+          },
+          "groupConnectivityInformation": [
+            {
+              "groupId": "cassandra",
+              "memberName": "cassandra"
+            }
+          ]
+        }
+      ],
+      "connectionDetails": [
+        {
+          "id": "id1",
+          "privateIpAddress": "10.0.0.4",
+          "linkIdentifier": "53236",
+          "groupId": "cassandra",
+          "memberName": "cassandra"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnectionProxies/pecp1",
+        "name": "pecp1",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/privateEndpointConnectionProxies",
+        "etag": "...",
+        "location": "NorthCentralUS",
+        "remotePrivateEndpoint": {
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "plsconnection1",
+              "groupIds": [
+                "group1"
+              ],
+              "requestMessage": "Please approve my connection, thanks."
+            }
+          ],
+          "privateLinkServiceProxies": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1/privateLinkServiceProxies/pls1-proxy",
+              "remotePrivateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "Please approve my connection, thanks.",
+                "actionsRequired": "None"
+              },
+              "remotePrivateEndpointConnection": {
+                "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnections/pec1"
+              },
+              "groupConnectivityInformation": [
+                {
+                  "groupId": "cassandra",
+                  "memberName": "cassandra"
+                }
+              ]
+            }
+          ],
+          "connectionDetails": [
+            {
+              "id": "id1",
+              "privateIpAddress": "10.0.0.4",
+              "linkIdentifier": "53236",
+              "groupId": "cassandra",
+              "memberName": "cassandra"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnectionProxies/pecp1",
+        "name": "pecp1",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/privateEndpointConnectionProxies",
+        "etag": "...",
+        "location": "NorthCentralUS",
+        "remotePrivateEndpoint": {
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "plsconnection1",
+              "groupIds": [
+                "group1"
+              ],
+              "requestMessage": "Please approve my connection, thanks."
+            }
+          ],
+          "privateLinkServiceProxies": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/private-endpoint-1/privateLinkServiceProxies/pls1-proxy",
+              "remotePrivateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "Please approve my connection, thanks.",
+                "actionsRequired": "None"
+              },
+              "remotePrivateEndpointConnection": {
+                "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnections/pec1"
+              },
+              "groupConnectivityInformation": [
+                {
+                  "groupId": "cassandra",
+                  "memberName": "cassandra"
+                }
+              ]
+            }
+          ],
+          "connectionDetails": [
+            {
+              "id": "id1",
+              "privateIpAddress": "10.0.0.4",
+              "linkIdentifier": "53236",
+              "groupId": "cassandra",
+              "memberName": "cassandra"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
