@@ -3,20 +3,48 @@
   "operationId": "FineTuningJobs_Create",
   "parameters": {
     "api-version": "2025-05-15-preview",
-    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6"
+    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
+    "fineTuningJob" : {
+        "model": "gpt-4o-mini-2024-07-18",
+        "training_file": "FileId-1",
+        "integrations": [
+          {
+            "type": "wandb",
+            "wandb": {
+              "project": "custom-wandb-project",
+              "name": "ftjob-1",
+              "tags": [
+                "FTJob",
+                "completed"
+              ]
+            }
+          }
+        ],
+        "method": {
+          "type": "supervised",
+          "supervised" : {
+              "hyperparameters": {
+               "batch_size": 1,
+               "learning_rate_multiplier": 1,
+               "n_epochs": 1
+              }
+          }
+        },
+        "seed": 123,
+        "validation_file": "FileId-2"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "object": "fine_tuning.job",
         "id": "ftjob-1",
-        "created_at": "1/1/2025 10:00:00",
-        "finished_at": "1/1/2025 11:00:00",
+        "created_at": "01-01-2025T10:00:00.00Z",
+        "finished_at": "01-01-2025T11:00:00.00Z",
         "status": "succeeded",
         "training_file": "FileId-1",
         "validation_file": "FileId-2",
         "model": "gpt-4o-mini-2024-07-18",
-        "modelProvider": "OAI",
         "fine_tuned_model": "gpt-4o-mini-2024-07-18.ftjob-1",
         "seed": 123,
         "trained_tokens": 1000,
@@ -40,10 +68,12 @@
         ],
         "method": {
           "type": "supervised",
-          "hyperparameters": {
-            "batch_size": 1,
-            "learning_rate_multiplier": 1,
-            "n_epochs": 1
+          "supervised" : {
+              "hyperparameters": {
+               "batch_size": 1,
+               "learning_rate_multiplier": 1,
+               "n_epochs": 1
+              }
           }
         }
       }
