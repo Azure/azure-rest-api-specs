@@ -78,7 +78,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
   });
 
   it("removes label if not incremental typespec", async () => {
@@ -96,7 +96,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
 
   it("no-ops if incremental typespec in progress", async () => {
@@ -123,7 +123,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
   });
 
   it("removes label if no runs of incremental typespec", async () => {
@@ -146,7 +146,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
 
   it("uses latest run of incremental typespec", async () => {
@@ -184,7 +184,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
 
   it.each([
@@ -207,7 +207,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
   });
 
   it.each(["Swagger Avocado", "Swagger LintDiff"])(
@@ -239,7 +239,7 @@ describe("getLabelActionImpl", () => {
           github: github,
           core: core,
         }),
-      ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+      ).resolves.toEqual({ labelAction: LabelAction.Remove, headSha: "abc123", issueNumber: 123 });
     },
   );
 
@@ -299,7 +299,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
 
     github.rest.checks.listForRef.mockResolvedValue({
       data: {
@@ -321,7 +321,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.None, headSha: "abc123", issueNumber: 123 });
   });
 
   it("adds label if incremental tsp, labels match, and check succeeded", async () => {
@@ -356,6 +356,6 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ labelAction: LabelAction.Add, issueNumber: 123 });
+    ).resolves.toEqual({ labelAction: LabelAction.Add, headSha: "abc123", issueNumber: 123 });
   });
 });
