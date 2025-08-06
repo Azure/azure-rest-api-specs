@@ -71,6 +71,10 @@ export async function setStatusImpl({
   requiredStatusName,
   overridingLabel,
 }) {
+  if (!Number.isInteger(issue_number) || issue_number <= 0) {
+    throw new Error(`issue_number must be a positive integer: ${issue_number}`);
+  }
+
   core.setOutput("issue_number", issue_number);
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
