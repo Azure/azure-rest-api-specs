@@ -4122,6 +4122,11 @@ model StorageAccountPropertiesUpdateParameters {
   routingPreference?: RoutingPreference;
 
   /**
+   * Maintains information about the Internet protocol opted by the user.
+   */
+  dualStackEndpointPreference?: DualStackEndpointPreference;
+
+  /**
    * Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.
    */
   allowBlobPublicAccess?: boolean;
