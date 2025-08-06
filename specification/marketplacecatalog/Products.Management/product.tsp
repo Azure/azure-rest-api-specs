@@ -25,25 +25,25 @@ model ProductSummary {
   @doc("Publisher id")
   publisherId?: string;
 
-  @doc("Eligibility for Azure consumption commitment benefit")
-  azureBenefit?: AzureBenefit;
+  @doc("Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs")
+  azureBenefit?: string;
 
-  @doc("The product badges")
-  badges?: Badge[];
+  @doc("Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality")
+  badges?: string[];
 
-  @doc("Publisher type")
-  publisherType?: PublisherType;
+  @doc("Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance")
+  publisherType?: string;
 
-  @doc("Product publishing stage")
-  publishingStage?: PublishingStage;
+  @doc("Indicates the product availability status and customer access level within Azure Marketplace.\n- `Preview` - Limited availability to selected customers for testing and early access evaluation\n- `Public` - General availability to all Azure Marketplace customers for production deployment")
+  publishingStage?: string;
 
   @key
   @visibility(Lifecycle.Read)
   @doc("Unique product identifier")
   uniqueProductId: string;
 
-  @doc("The delivery method or deployment model")
-  productType: ProductType;
+  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
+  productType: string;
 
   @doc("Product sub type")
   productSubType?: string;
@@ -54,8 +54,8 @@ model ProductSummary {
   @doc("Operating system info for this product")
   operatingSystems?: string[];
 
-  @doc("The pricing types for this offer")
-  pricingTypes?: PricingType[];
+  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing")
+  pricingTypes?: string[];
 
   @doc("Publisher display name")
   publisherDisplayName?: string;
@@ -82,8 +82,8 @@ model ProductSummary {
   @doc("The privacy policy of the product")
   privacyPolicyUri?: string;
 
-  @doc("Rating buckets")
-  ratingBuckets?: RatingBucket[];
+  @doc("Categorizes products by customer rating thresholds for marketplace filtering and discovery.\n- `AboveOne` - Products with customer ratings exceeding 1.0 stars based on marketplace reviews\n- `AboveTwo` - Products with customer ratings exceeding 2.0 stars based on marketplace reviews\n- `AboveThree` - Products with customer ratings exceeding 3.0 stars based on marketplace reviews\n- `AboveFour` - Products with customer ratings exceeding 4.0 stars based on marketplace reviews")
+  ratingBuckets?: string[];
 
   @doc("Average rating for the offer")
   ratingAverage?: float64;
@@ -125,268 +125,6 @@ model ProductSummary {
   @doc("Set of products attributes")
   @OpenAPI.extension("x-ms-identifiers", #[])
   attributes?: Attribute[];
-}
-
-@doc("Eligibility for Azure consumption commitment benefit. For more details see: https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit")
-union AzureBenefit {
-  @doc("The product is eligible for Azure consumption commitment benefit")
-  Eligible: "Eligible",
-
-  @doc("The product is not eligible for Azure consumption commitment benefit")
-  NotEligible: "NotEligible",
-
-  string,
-}
-
-@doc("Badge type")
-union Badge {
-  @doc("Preferred Solution badge")
-  PreferredSolution: "PreferredSolution",
-
-  @doc("Power BI Certified badge")
-  PowerBICertified: "PowerBICertified",
-
-  @doc("Additional Purchase Requirement badge")
-  AdditionalPurchaseRequirement: "AdditionalPurchaseRequirement",
-
-  string,
-}
-
-@doc("A value indicating whether this is a Microsoft or third party product")
-union PublisherType {
-  @doc("Product is published by Microsoft (1st party product)")
-  Microsoft: "Microsoft",
-
-  @doc("Product is published by Third Party Vendor")
-  ThirdParty: "ThirdParty",
-
-  string,
-}
-
-@doc("Product publishing stage")
-union PublishingStage {
-  @doc("Product is available to restricted audience")
-  Preview: "Preview",
-
-  @doc("Product is publicly available in the Marketplace")
-  Public: "Public",
-
-  string,
-}
-
-@doc("Rating Bucket")
-union RatingBucket {
-  @doc("Above one star rating")
-  AboveOne: "AboveOne",
-
-  @doc("Above two stars rating")
-  AboveTwo: "AboveTwo",
-
-  @doc("Above three stars rating")
-  AboveThree: "AboveThree",
-
-  @doc("Above four stars rating")
-  AboveFour: "AboveFour",
-
-  string,
-}
-
-@doc("Supported legal terms type")
-union LegalTermsType {
-  @doc("No specific legal terms")
-  None: "None",
-
-  @doc("Microsoft Enterprise Agreement")
-  EA: "EA",
-
-  string,
-}
-
-@doc("VM Architecture Type. Applicable to Virtual Machine products only")
-union VmArchitectureType {
-  @doc("The VM image architecture of the plan is X64 Generation1")
-  X64Gen1: "X64Gen1",
-
-  @doc("The VM image architecture of the plan is X64 Generation2")
-  X64Gen2: "X64Gen2",
-
-  @doc("The VM image architecture of the plan is Arm64")
-  Arm64: "Arm64",
-
-  string,
-}
-
-@doc("Value showing whether the plan is available for purchase through CSP channel")
-union CspState {
-  @doc("Plan configured CSP program opt-in for any partner in the CSP Program")
-  OptIn: "OptIn",
-
-  @doc("Plan configured CSP program opt-out")
-  OptOut: "OptOut",
-
-  @doc("Plan configured CSP program opt-in for specific partners in the CSP program ISV selects")
-  SelectiveOptIn: "SelectiveOptIn",
-
-  string,
-}
-
-@doc("The pricing types for which this plan is designated")
-union PricingType {
-  @doc("Product has at least one plan that is free of charge")
-  Free: "Free",
-
-  @doc("Product has at least one plan that is free trial")
-  FreeTrial: "FreeTrial",
-
-  @doc("Product has at least one plan that is bring your own license")
-  Byol: "Byol",
-
-  @doc("Product has at least one plan that is Pay as you go")
-  Payg: "Payg",
-
-  @doc("Product has at least one plan that is Reserved Instance billing model")
-  Ri: "Ri",
-
-  string,
-}
-
-@doc("VM security type. Applicable to Virtual Machine products only")
-union VmSecurityType {
-  @doc("Default value")
-  None: "None",
-
-  @doc("Trusted Launch security")
-  Trusted: "Trusted",
-
-  @doc("Confidential security")
-  Confidential: "Confidential",
-
-  string,
-}
-
-@doc("The delivery method or deployment model")
-union ProductType {
-  @doc("Default value")
-  None: "None",
-
-  @doc("Dev Service")
-  DevService: "DevService",
-
-  @doc("Managed Application plan type")
-  ManagedApplication: "ManagedApplication",
-
-  @doc("Virtual Machine")
-  VirtualMachine: "VirtualMachine",
-
-  @doc("Azure Application")
-  AzureApplication: "AzureApplication",
-
-  @doc("Enum Container")
-  Container: "Container",
-
-  @doc("Software as a Service")
-  SaaS: "SaaS",
-
-  @doc("Solution Template")
-  SolutionTemplate: "SolutionTemplate",
-
-  @doc("IoT Edge Module")
-  IotEdgeModules: "IotEdgeModules",
-
-  @doc("Managed Service")
-  ManagedServices: "ManagedServices",
-
-  @doc("Container App")
-  ContainerApps: "ContainerApps",
-
-  @doc("Visual Studio Extension")
-  VisualStudioExtension: "VisualStudioExtension",
-
-  @doc("Dynamics Operations")
-  DynamicsOps: "DynamicsOps",
-
-  @doc("Dynamics CE")
-  DynamicsCE: "DynamicsCE",
-
-  @doc("Dynamics Business Central")
-  DynamicsBC: "DynamicsBC",
-
-  @doc("Power BI")
-  PowerBI: "PowerBI",
-
-  @doc("Consulting Services")
-  ConsultingServices: "ConsultingServices",
-
-  @doc("Co-sell Only")
-  CosellOnly: "CosellOnly",
-
-  @doc("Core Virtual Machine")
-  CoreVirtualMachine: "CoreVirtualMachine",
-
-  @doc("Power BI Visuals")
-  PowerBIVisuals: "PowerBIVisuals",
-
-  @doc("Office 365")
-  Office365: "Office365",
-
-  @doc("Azure Active Directory Applications")
-  AADApps: "AADApps",
-
-  @doc("Azure Services")
-  AzureServices: "AzureServices",
-
-  @doc("App Service")
-  AppService: "AppService",
-
-  @doc("Log Analytics")
-  LogAnalytics: "LogAnalytics",
-
-  @doc("Microsoft Product")
-  MicrosoftProduct: "MicrosoftProduct",
-
-  string,
-}
-
-@doc("The type of the artifact")
-union ArtifactType {
-  @doc("Contains link to the main ARM template")
-  Template: "Template",
-
-  @doc("Contains link to the nested ARM template")
-  Fragment: "Fragment",
-
-  @doc("Custom artifact type")
-  Custom: "Custom",
-
-  @doc("Metadata artifact type")
-  Metadata: "Metadata",
-
-  string,
-}
-
-@doc("Supported pricing audiences")
-union PricingAudience {
-  @doc("Available to commercial direct channel")
-  DirectCommercial: "DirectCommercial",
-
-  @doc("Available to Cloud Solution Providers (CSP)")
-  PartnerCommercial: "PartnerCommercial",
-
-  string,
-}
-
-@doc("Reason for stopping to sell an item")
-union StopSellReason {
-  @doc("End of support for the item")
-  EndOfSupport: "EndOfSupport",
-
-  @doc("Security issue with the item")
-  SecurityIssue: "SecurityIssue",
-
-  @doc("Other reason")
-  Other: "Other",
-
-  string,
 }
 
 @doc("The SKU properties, contains some of the attributes for faster OData filter")
@@ -447,120 +185,9 @@ model Attribute {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
 @doc("Summary description of the product")
-model ProductDetails {
-  @doc("Product display name")
-  displayName?: string;
-
-  @doc("Popularity of the product")
-  popularity?: float64;
-
-  @doc("Array of product categories")
-  categoryIds?: string[];
-
-  @doc("List of industry IDs the item belongs to")
-  industryIds?: string[];
-
-  @doc("Publisher id")
-  publisherId?: string;
-
-  @doc("Eligibility for Azure consumption commitment benefit")
-  azureBenefit?: AzureBenefit;
-
-  @doc("The product badges")
-  badges?: Badge[];
-
-  @doc("Publisher type")
-  publisherType?: PublisherType;
-
-  @doc("Product publishing stage")
-  publishingStage?: PublishingStage;
-
-  @key
-  @visibility(Lifecycle.Read)
-  @doc("Unique product identifier")
-  uniqueProductId: string;
-
-  @doc("The delivery method or deployment model")
-  productType: ProductType;
-
-  @doc("Product sub type")
-  productSubType?: string;
-
-  @doc("Product Family")
-  productFamily?: string;
-
-  @doc("Operating system info for this product")
-  operatingSystems?: string[];
-
-  @doc("The pricing types for this offer")
-  pricingTypes?: PricingType[];
-
-  @doc("Publisher display name")
-  publisherDisplayName?: string;
-
-  @doc("Product long summary")
-  longSummary?: string;
-
-  @doc("Product summary")
-  summary?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("Linked add-in types")
-  linkedAddInsTypes?: Record<string>;
-
-  @doc("URI to the small product icon")
-  smallIconUri?: string;
-
-  @doc("The product description text")
-  description?: string;
-
-  @doc("The legal terms of the product for the CSP")
-  cspLegalTermsUri?: string;
-
-  @doc("The privacy policy of the product")
-  privacyPolicyUri?: string;
-
-  @doc("Rating buckets")
-  ratingBuckets?: RatingBucket[];
-
-  @doc("Average rating for the offer")
-  ratingAverage?: float64;
-
-  @doc("Total number of ratings for the offer")
-  ratingCount?: int32;
-
-  @doc("Maps to the list of compatible products")
-  supportedProducts?: string[];
-
-  @doc("Product categories the offer belongs to")
-  applicableProducts?: string[];
-
-  @doc("Latest update date of the product")
-  lastModifiedDateTime?: string;
-
-  @doc("List of locations which are available on the SKUs")
-  locations?: string[];
-
-  @doc("The service family of the product, such as 'Compute'")
-  serviceFamily?: string;
-
-  @doc("The service name of the product, such as 'Virtual Machines'")
-  service?: string;
-
-  @doc("The unique id of the product")
-  productId?: string;
-
-  @doc("Indication whether the product has plans with reservations")
-  hasRiPlans?: boolean;
-
-  @doc("Indication if product has a representation in the marketplace")
-  hasMarketplaceFootprint?: boolean;
-
-  @doc("Set of products attributes")
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  attributes?: Attribute[];
-
+model ProductDetails extends ProductSummary {
   @doc("List of product videos")
   @OpenAPI.extension("x-ms-identifiers", #[])
   videos?: ProductVideo[];
@@ -569,7 +196,7 @@ model ProductDetails {
   @OpenAPI.extension("x-ms-identifiers", #[])
   images?: ImageGroup[];
 
-  @doc("List of linked Add Ins provided for the item")
+  @doc("List of linked add ins provided for the item")
   linkedAddIns?: string[];
 
   @doc("List of Links provided for the item")
@@ -594,17 +221,17 @@ model ProductDetails {
   @doc("The universal amendment link for an enterprise contract")
   universalAmendmentUrl?: string;
 
-  @doc("A value indicating whether the item is private")
+  @doc("Indicates if a product is private")
   isPrivate: boolean;
 
-  @doc("A value indicating whether sale of this item is stopped")
+  @doc("Indicates if a product is no longer available for sale")
   isStopSell: boolean;
 
   @doc("Legal terms URI")
   legalTermsUri?: string;
 
-  @doc("Legal terms type")
-  legalTermsType?: LegalTermsType;
+  @doc("Identifies the legal agreement framework governing product licensing and usage terms.\n- `None` - Standard marketplace terms apply without additional legal agreement requirements\n- `EA` - Microsoft Enterprise Agreement terms for volume licensing and enterprise customer deployments")
+  legalTermsType?: string;
 
   @doc("Support uri of the product")
   supportUri?: string;
@@ -636,7 +263,7 @@ model ProductDetails {
   @doc("Indication to disable sending email on purchase")
   disableSendEmailOnPurchase?: boolean;
 
-  @doc("Indicates if VM was originally CoreVirtualMachine")
+  @doc("Indicates if VM was originally a Core Virtual Machine")
   isCoreVm?: boolean;
 
   @doc("A StopSellInfo object providing stop sell related data")
@@ -652,6 +279,9 @@ model ProductDetails {
   // Override properties that differ from base class
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
+
+  @doc("The unique id of the product")
+  productId: string;
 }
 
 @doc("Additional metadata")
@@ -767,20 +397,20 @@ model PlanDetails extends PlanSummary {
 
 @doc("Returns a subset of Plan attributes")
 model PlanSummary {
-  @doc("Plan id")
+  @doc("Plan identifier")
   planId?: string;
 
-  @doc("Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between")
+  @doc("Unique plan identifier which is prefixed by combining uniqueProductId and PlanId with no separator in between")
   uniquePlanId?: string;
 
   @doc("Display name of the plan / sku")
   displayName?: string;
 
-  @doc("VM Architecture Type. Applicable to Virtual Machine products only.")
-  vmArchitectureType?: VmArchitectureType;
+  @doc("Specifies the virtual machine processor architecture and generation. Applies exclusively to Virtual Machine product types.\n- `X64Gen1` - x64 processor architecture with Generation 1 virtual machine firmware and BIOS support\n- `X64Gen2` - x64 processor architecture with Generation 2 virtual machine firmware and UEFI support\n- `Arm64` - ARM 64-bit processor architecture optimized for energy efficiency and cloud-native workloads")
+  vmArchitectureType?: string;
 
-  @doc("Value showing whether the plan is available for purchase through CSP channel.")
-  cspState?: CspState;
+  @doc("Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment")
+  cspState?: string;
 
   @doc("Expanded plan/SKU metadata.")
   metadata?: PlanMetadata;
@@ -800,11 +430,11 @@ model PlanSummary {
   @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
   hasProtectedArtifacts?: boolean;
 
-  @doc("The list of the pricing types for which this plan is designated")
-  pricingTypes?: PricingType[];
+  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing")
+  pricingTypes?: string[];
 
-  @doc("VM security types")
-  vmSecuritytypes?: VmSecurityType[];
+  @doc("Defines the security enhancement level for virtual machine deployments. Applies exclusively to Virtual Machine product types.\n- `None` - Standard virtual machine security without additional protection features\n- `Trusted` - Trusted Launch security with secure boot and virtual Trusted Platform Module capabilities\n- `Confidential` - Confidential computing with memory encryption and attestation for sensitive workloads")
+  vmSecuritytypes?: string[];
 
   @doc("The plan summary text")
   summary?: string;
@@ -815,8 +445,8 @@ model PlanSummary {
   @doc("The SKU id")
   skuId?: string;
 
-  @doc("Managed Application or Solution template plan type")
-  planType: ProductType;
+  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
+  planType: string;
 
   @doc("The order the plan is displayed in the 'Plans' table")
   displayRank?: string;
@@ -836,8 +466,8 @@ model Artifact {
   @doc("Artifact uri")
   uri?: string;
 
-  @doc("The type of the artifact")
-  artifactType: ArtifactType;
+  @doc("Defines the artifact resource type and its role in the marketplace offering deployment process.\n- `Template` - Primary Azure Resource Manager template containing the main deployment configuration\n- `Fragment` - Nested Azure Resource Manager template referenced by the primary template for modular deployments\n- `Custom` - Publisher-defined artifact with specialized deployment or configuration requirements\n- `Metadata` - Supplementary information and configuration data supporting the deployment process")
+  artifactType: string;
 }
 
 @doc("The percentage discount for 3rd party virtual machines software reservations")
@@ -854,8 +484,8 @@ model StopSellInfo {
   @doc("A value indicating when the sale of this item is going to be stopped")
   startDate?: utcDateTime;
 
-  @doc("A value indicating the reason for stopping to sell this item")
-  reason?: StopSellReason;
+  @doc("Specifies the business or technical justification for discontinuing product sales in the marketplace.\n- `EndOfSupport` - Product lifecycle has reached end-of-support status with no further updates or maintenance\n- `SecurityIssue` - Critical security vulnerability or compliance issue requiring immediate sales suspension\n- `Other` - Alternative business reason not covered by standard discontinuation categories")
+  reason?: string;
 
   @doc("A value indicating an ID of an alternative offer provided by the same publisher")
   alternativeOfferId?: string;
@@ -1004,8 +634,8 @@ model Availability {
   @doc("Applicable billing meter information")
   meter?: Meter;
 
-  @doc("Supported pricing audiences")
-  pricingAudience: PricingAudience;
+  @doc("Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `DirectCommercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `PartnerCommercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
+  pricingAudience: string;
 
   @doc("List of applicable terms")
   @OpenAPI.extension("x-ms-identifiers", #[])
