@@ -104,13 +104,6 @@ union CommunicationDirection {
 }
 
 /**
- * Content type.
- */
-union TranscriptContentType {
-  string,
-}
-
-/**
  * The type of identity that created the resource.
  */
 union CreatedByType {
@@ -749,7 +742,7 @@ model MessageProperties {
    * Content type.
    */
   @visibility(Lifecycle.Read)
-  contentType?: TranscriptContentType;
+  contentType?: string;
 
   /**
    * Direction of communication.
