@@ -1,4 +1,3 @@
-import { fullGitSha } from "@azure-tools/specs-shared/test/examples";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -424,7 +423,7 @@ describe("commands.ts", () => {
         localSdkRepoPath: "",
         prNumber: "123",
         sdkRepoName: "",
-        specCommitSha: fullGitSha,
+        specCommitSha: "abc123",
         specRepoHttpsUrl: "",
       };
       const mockResult = "succeeded";
@@ -459,7 +458,7 @@ describe("commands.ts", () => {
           {
             language: "azure-sdk-for-js",
             result: "succeeded",
-            headSha: fullGitSha,
+            headSha: "abc123",
             prNumber: "123",
             labelAction: false,
             isSpecGenSdkCheckRequired: false,
