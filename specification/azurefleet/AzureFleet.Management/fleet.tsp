@@ -108,7 +108,11 @@ model FleetProperties {
   @added(Versions.v2025_07_01_preview)
   mode?: FleetMode;
 
-  /** CapacityType of the Fleet. */
+  /**
+   * Specifies capacity type for Fleet Regular and Spot priority profiles.
+   * capacityType is an immutable property. Once set during Fleet creation, it cannot be updated.
+   * Specifying different capacity type for Fleet Regular and Spot priority profiles is not allowed.
+   */
   @added(Versions.v2025_07_01_preview)
   capacityType?: CapacityType;
 
@@ -550,7 +554,10 @@ union CapacityType {
   /** Default. VM is the default capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VMs. */
   VM: "VM",
 
-  /** VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus. */
+  /**
+   * VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus.
+   * If VCpu capacity is not exactly divisible by VCpu count in VMSizes, Fleet capacity in VCpus will be overprovisioned by default.
+   */
   VCpu: "VCpu",
 }
 

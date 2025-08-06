@@ -979,7 +979,7 @@
           {
             "name": "VCpu",
             "value": "VCpu",
-            "description": "VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus."
+            "description": "VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus.\nIf VCpu capacity is not exactly divisible by VCpu count in VMSizes, Fleet capacity in VCpus will be overprovisioned by default."
           }
         ]
       }
@@ -1444,7 +1444,7 @@
         },
         "capacityType": {
           "$ref": "#/definitions/CapacityType",
-          "description": "CapacityType of the Fleet."
+          "description": "Specifies capacity type for Fleet Regular and Spot priority profiles.\ncapacityType is an immutable property. Once set during Fleet creation, it cannot be updated.\nSpecifying different capacity type for Fleet Regular and Spot priority profiles is not allowed."
         },
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
