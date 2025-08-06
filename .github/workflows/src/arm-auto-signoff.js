@@ -1,7 +1,8 @@
 // @ts-check
 
 import { setEquals } from "../../shared/src/equality.js";
-import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
+import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
 import { LabelAction } from "./label.js";
 
@@ -139,46 +140,49 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return removeAction;
   }
 
-  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
+  const statuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
     owner: owner,
     repo: repo,
     ref: head_sha,
     per_page: PER_PAGE_MAX,
   });
 
-  const requiredCheckNames = ["Swagger LintDiff", "Swagger Avocado"];
+  const requiredStatusNames = ["Swagger LintDiff", "Swagger Avocado"];
 
   /**
-   * @type {typeof checkRuns.check_runs}
+   * @type {typeof statuses}
    */
-  let requiredCheckRuns = [];
+  let requiredStatuses = [];
 
-  for (const checkName of requiredCheckNames) {
-    const matchingRuns = checkRuns.filter((run) => run.name === checkName);
+  for (const statusName of requiredStatusNames) {
+    const matchingStatuses = statuses
+      .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
+      .sort(invert(byDate((status) => status.updated_at)));
 
-    if (matchingRuns.length > 1) {
-      throw new Error(`Unexpected number of checks named '${checkName}': ${matchingRuns.length}`);
-    }
+    const matchingStatus = matchingStatuses.length === 1 ? matchingStatuses[0] : undefined;
 
-    const matchingRun = matchingRuns.length === 1 ? matchingRuns[0] : undefined;
+    core.info(`${statusName}: State='${matchingStatus?.state}'`);
 
-    core.info(
-      `${checkName}: Status='${matchingRun?.status}', Conclusion='${matchingRun?.conclusion}'`,
-    );
-
-    if (matchingRun && matchingRun.status === "completed" && matchingRun.conclusion !== "success") {
-      core.info(`Check '${checkName}' did not succeed`);
+    if (
+      matchingStatus &&
+      (matchingStatus.state === CommitStatusState.ERROR ||
+        matchingStatus.state === CommitStatusState.FAILURE)
+    ) {
+      core.info(`Status '${matchingStatus}' did not succeed`);
       return removeAction;
     }
 
-    if (matchingRun) {
-      requiredCheckRuns.push(matchingRun);
+    if (matchingStatus) {
+      requiredStatuses.push(matchingStatus);
     }
   }
 
   if (
-    setEquals(new Set(requiredCheckRuns.map((run) => run.name)), new Set(requiredCheckNames)) &&
-    requiredCheckRuns.every((run) => run.status === "completed" && run.conclusion === "success")
+    setEquals(
+      new Set(requiredStatuses.map((status) => status.context)),
+      new Set(requiredStatusNames),
+    ) &&
+    requiredStatuses.every((status) => status.state === CommitStatusState.SUCCESS)
   ) {
     core.info("All requirements met for auto-signoff");
     return labelActions[LabelAction.Add];
