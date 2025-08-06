@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "batchUrl": "account.region.batch.azure.com",
+    "api-version": "9999-09-09",
+    "poolId": "pool",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 17 Feb 2017 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "pool",
+        "url": "https://account.region.batch.azure.com/pools/pool",
+        "eTag": "0x8DDB7ADE50EE47F",
+        "lastModified": "2025-06-30T08:12:45.6662143Z",
+        "creationTime": "2025-06-30T08:12:45.6662134Z",
+        "state": "active",
+        "stateTransitionTime": "2025-06-30T08:12:45.6662134Z",
+        "allocationState": "steady",
+        "allocationStateTransitionTime": "2025-06-30T08:13:38.0293152Z",
+        "vmSize": "standard_d2s_v3",
+        "resizeTimeout": "PT15M",
+        "currentDedicatedNodes": 1,
+        "targetDedicatedNodes": 1,
+        "currentLowPriorityNodes": 0,
+        "targetLowPriorityNodes": 0,
+        "enableAutoScale": false,
+        "enableInterNodeCommunication": false,
+        "certificateReferences": [],
+        "taskSlotsPerNode": 1,
+        "taskSchedulingPolicy": {
+          "nodeFillType": "Spread",
+          "jobDefaultOrder": "none"
+        },
+        "virtualMachineConfiguration": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2019-datacenter-core-g2",
+            "version": "latest"
+          },
+          "osDisk": {
+            "ephemeralOSDiskSettings": {},
+            "managedDisk": {
+              "storageAccountType": "standard_lrs",
+              "diskEncryptionSet": {
+                "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+              }
+            },
+            "caching": "None"
+          },
+          "nodeAgentSKUId": "batch.node.windows amd64",
+          "dataDisks": [
+            {
+              "lun": 0,
+              "caching": "none",
+              "diskSizeGB": 1024,
+              "managedDisk": {
+                "storageAccountType": "standard_lrs",
+                "diskEncryptionSet": {
+                  "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                }
+              }
+            }
+          ]
+        },
+        "currentNodeCommunicationMode": "simplified"
+      }
+    }
+  }
+}
