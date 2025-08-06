@@ -173,8 +173,10 @@ stages:
           sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
 
           if [ "$(Build.Reason)" = "Manual" ]; then
-            sdk_gen_info="$sdk_gen_info $'\n'Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
-            sdk_gen_info="$sdk_gen_info $'\n'Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release."
+            sdk_gen_info="$sdk_gen_info"$'\n'
+            sdk_gen_info="$sdk_gen_info Pipeline run: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
+            sdk_gen_info="$sdk_gen_info"$'\n'
+            sdk_gen_info="$sdk_gen_info Refer to https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites to prepare for SDK release."
           fi
           echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
           echo "$sdk_gen_info"
@@ -194,7 +196,11 @@ stages:
         displayName: 'Generate SDK'
 
       - pwsh: |
-          $diff = git diff HEAD^ HEAD
+          Write-Host "=== Git Status ===" -ForegroundColor Yellow
+          git status --porcelain
+          
+          Write-Host "`n=== Git Diff (unstaged changes) ===" -ForegroundColor Yellow
+          $diff = git diff
           foreach ($line in $diff) {
             if ($line.StartsWith("+")) {
               Write-Host "`e[32m$line`e[0m"
@@ -204,6 +210,9 @@ stages:
               Write-Host $line
             }
           }
+          
+          Write-Host "`n=== Untracked Files ===" -ForegroundColor Yellow
+          git ls-files --others --exclude-standard
         workingDirectory: $(SdkRepoDirectory)
         displayName: 'Print SDK Repo Git Diff with Color'
 
