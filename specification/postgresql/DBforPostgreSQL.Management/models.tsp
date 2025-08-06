@@ -3466,3 +3466,5 @@ model PrivateDnsZoneSuffix {
   @visibility(Lifecycle.Read)
   value?: string;
 }
+
+model OperationList is Azure.Core.Page<Operation>;

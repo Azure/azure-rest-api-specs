@@ -45,6 +45,7 @@ interface Servers {
    * Creates a new server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
     Response = ArmAcceptedLroResponse

@@ -145,6 +145,7 @@
 | `definitions.LtrServerBackupOperationList.required__added` | added | `["value"]` |
 | `definitions.MigrationList.required__added` | added | `["value"]` |
 | `definitions.ObjectRecommendationList.required__added` | added | `["value"]` |
+| `definitions.OperationList.required__added` | added | `["value"]` |
 | `definitions.PrivateEndpointConnectionList.required__added` | added | `["value"]` |
 | `definitions.PrivateLinkResourceList.required__added` | added | `["value"]` |
 | `definitions.QuotaUsageList.required__added` | added | `["value"]` |
@@ -357,7 +358,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}'].patch['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings/{threatProtectionName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
@@ -395,24 +395,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AdministratorMicrosoftEntraPropertiesForAdd__deleted` | deleted | `{"type":"object","properties":{"principalType":{"type":"string","enum":["Unknown","User","Group","Se...` |
-
-### Changes for `Operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Operation__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","readOnly":true},"display":{"$ref":"#/definit...` |
-
-### Changes for `OperationDisplay`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationDisplay__deleted` | deleted | `{"type":"object","properties":{"provider":{"type":"string","readOnly":true},"resource":{"type":"stri...` |
-
-### Changes for `OperationList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationList__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `UserAssignedIdentityMap`
 
@@ -536,6 +518,7 @@
 |------|------------|-------|
 | `definitions.CapabilityList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
 | `definitions.ObjectRecommendationList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
+| `definitions.OperationList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
 | `definitions.QuotaUsageList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
 | `definitions.TuningOptionsList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
 
@@ -584,10 +567,17 @@
 | `definitions.TuningOptions.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
 | `definitions.VirtualEndpoint.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
 
+### Changes for `x-ms-client-flatten`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Operation.properties.properties['x-ms-client-flatten__deleted']` | deleted | `false` |
+
 ### Changes for `additionalProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.Operation.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
 | `definitions.UserAssignedIdentity.properties.userAssignedIdentities.additionalProperties__added` | added | `{"$ref":"#/definitions/UserIdentity"}` |
 
 ## Modified Values
@@ -607,8 +597,6 @@
 | `definitions.StorageMbCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.StorageTierCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.VirtualEndpoint.allOf[0].$ref` | `#/definitions/VirtualEndpointResourceForPatch` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
-| `paths['/providers/microsoft.DBforPostgreSQL/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationList` | `../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/checkNameAvailability'].post.parameters[0].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/checkNameAvailability'].post.parameters[1].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/checkVirtualNetworkSubnetUsage'].post.parameters[1].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}'].put.parameters[3].schema.$ref` | `#/definitions/AdministratorMicrosoftEntraAdd` | `#/definitions/AdministratorMicrosoftEntra` |

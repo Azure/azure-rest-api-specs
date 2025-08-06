@@ -160,3 +160,6 @@ using Microsoft.DBforPostgreSQL;
 @@clientLocation(VirtualNetworkSubnetUsageOperationGroup.list,
   "VirtualNetworkSubnetUsage"
 );
+@@clientName(NameAvailabilityOperationGroup.checkGlobally::parameters.body,
+  "parameters"
+);
