@@ -32,14 +32,10 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-08
+tag: package-2025-01-01-preview
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
-  - suppress: MULTIPLE_API_VERSION
-    reason: "Multiple actionGroups API versions are required to maintain backward compatibility for notification endpoints that were removed in newer versions. The 2022-06-01 version provides subscription and resource group level notification endpoints that are not available in 2023-01-01."
-  - suppress: NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
-    reason: "Multiple actionGroups API versions are included to provide complete API coverage. The latest version (2023-01-01) lacks some endpoints available in 2022-06-01."
 ```
 
 ### Tag: package-2025-08
