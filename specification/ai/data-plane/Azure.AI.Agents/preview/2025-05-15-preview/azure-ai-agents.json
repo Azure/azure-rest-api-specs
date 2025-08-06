@@ -3643,6 +3643,55 @@
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
+    "BrowserAutomationToolCallDetails": {
+      "type": "object",
+      "description": "Details of a Browser Automation tool call.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input provided to the Browser Automation tool."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output returned by the Browser Automation tool."
+        },
+        "steps": {
+          "type": "array",
+          "description": "The steps the Browser Automation tool executed.",
+          "items": {
+            "$ref": "#/definitions/BrowserAutomationToolCallStep"
+          }
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "steps"
+      ]
+    },
+    "BrowserAutomationToolCallStep": {
+      "type": "object",
+      "description": "Describes a single step of a Browser Automation tool execution.",
+      "properties": {
+        "lastStepResult": {
+          "type": "string",
+          "description": "The input provided to the Browser Automation tool."
+        },
+        "currentState": {
+          "type": "string",
+          "description": "The output returned by the Browser Automation tool."
+        },
+        "nextStep": {
+          "type": "string",
+          "description": "The next step to execute."
+        }
+      },
+      "required": [
+        "lastStepResult",
+        "currentState",
+        "nextStep"
+      ]
+    },
     "BrowserAutomationToolConnectionParameters": {
       "type": "object",
       "description": "Definition of input parameters for the connection used by the Browser Automation Tool.",
@@ -6258,6 +6307,25 @@
         }
       ],
       "x-ms-discriminator-value": "bing_grounding"
+    },
+    "RunStepBrowserAutomationToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Browser Automation tool issued by the Agent.",
+      "properties": {
+        "browserAutomation": {
+          "$ref": "#/definitions/BrowserAutomationToolCallDetails",
+          "description": "Details of the browser automation tool call."
+        }
+      },
+      "required": [
+        "browserAutomation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation"
     },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",

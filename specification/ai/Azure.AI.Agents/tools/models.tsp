@@ -539,6 +539,48 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
+  A record of a call to a Browser Automation tool issued by the Agent.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("Details of the browser automation tool call.")
+  browserAutomation: BrowserAutomationToolCallDetails
+}
+
+@doc("""
+  Details of a Browser Automation tool call.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallDetails {
+  @doc("The input provided to the Browser Automation tool.")
+  input: string;
+
+  @doc("The output returned by the Browser Automation tool.")
+  output: string;
+
+  @doc("The steps the Browser Automation tool executed.")
+  steps: BrowserAutomationToolCallStep[];
+}
+
+@doc("""
+  Describes a single step of a Browser Automation tool execution.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallStep {
+  @doc("The input provided to the Browser Automation tool.")
+  lastStepResult: string;
+
+  @doc("The output returned by the Browser Automation tool.")
+  currentState: string;
+
+  @doc("The next step to execute.")
+  nextStep: string;
+}
+
+@doc("""
   A record of a call to a MCP tool, issued by the model in evaluation of a defined tool, that represents
   executed MCP actions.
   """)
