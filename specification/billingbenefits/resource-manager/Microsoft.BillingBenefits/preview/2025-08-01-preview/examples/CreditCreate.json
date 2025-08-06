@@ -3,10 +3,17 @@
     "subscriptionId": "97ee05f2-07d5-494d-908c-081a197f4277",
     "resourceGroupName": "resource_group_name_01",
     "creditName": "credit_20231212",
-    "api-version": "2025-05-01-preview",
+    "api-version": "2025-08-01-preview",
     "body": {
       "properties": {
-        "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4"
+        "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
+        "credit": {
+          "grain": "FullTerm",
+          "amount": 20000,
+          "currencyCode": "USD"
+        },
+        "startAt": "2023-12-12T00:00:00Z",
+        "endAt": "2024-01-12T00:00:00Z"
       },
       "location": "global",
       "tags": {
@@ -18,8 +25,8 @@
   "responses": {
     "201": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2024-03-01-preview",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2024-03-01-preview",
+        "Location": "https://management.azure.com/subscriptions97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-08-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-08-01-preview",
         "Retry-After": 5
       },
       "body": {
@@ -27,20 +34,16 @@
         "name": "credit_20231212",
         "type": "Microsoft.BillingBenefits/credits",
         "properties": {
-          "productCode": "18eb6fdd-37c1-479b-b9be-550dbc461842",
-          "creditType": "PromotionalCredit",
+          "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
           "credit": {
             "grain": "FullTerm",
             "amount": 20000,
             "currencyCode": "USD"
           },
           "startAt": "2023-12-12T00:00:00Z",
-          "endAt": "2024-01-12T00:00:00Z",
-          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/billingProfiles/{billingProfileId}",
-          "customerId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/customers/{customerId}",
-          "provisioningState": "Pending",
-          "provisioningSubState": "None"
+          "endAt": "2024-12-12T00:00:00Z",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{enrollmentId}",
+          "status": "Pending"
         },
         "location": "global",
         "tags": {
@@ -61,20 +64,16 @@
         "name": "credit_20231212",
         "type": "Microsoft.BillingBenefits/credits",
         "properties": {
-          "productCode": "18eb6fdd-37c1-479b-b9be-550dbc461842",
-          "creditType": "PromotionalCredit",
+          "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
           "credit": {
             "grain": "FullTerm",
             "amount": 20000,
             "currencyCode": "USD"
           },
           "startAt": "2023-12-12T00:00:00Z",
-          "endAt": "2024-01-12T00:00:00Z",
-          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/billingProfiles/{billingProfileId}",
-          "customerId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/customers/{customerId}",
-          "provisioningState": "Succeeded",
-          "provisioningSubState": "None"
+          "endAt": "2024-12-12T00:00:00Z",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{enrollmentId}",
+          "status": "Succeeded"
         },
         "location": "global",
         "tags": {
