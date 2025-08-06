@@ -25,9 +25,11 @@ model NginxDeployment extends Foundations.TrackedResource {
   name: string;
 
   ...ManagedServiceIdentityProperty;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+
   /** The resource-specific properties for this resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   properties?: NginxDeploymentProperties;
+
   ...ResourceSkuProperty;
 }
 

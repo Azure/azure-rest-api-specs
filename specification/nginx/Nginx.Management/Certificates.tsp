@@ -12,8 +12,9 @@ namespace Nginx.NginxPlus;
 @parentResource(NginxDeployment)
 model Certificate is ProxyResource<NginxCertificateProperties> {
   ...ResourceNameParameter<Certificate>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+
   /** Gets or sets the location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   location?: string;
 }
 
