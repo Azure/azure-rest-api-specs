@@ -719,10 +719,12 @@ export async function getCheckRunTuple(
 
     const latestCheck = sortedChecks[0];
 
-    // just handling both for ease of integration testing
+    // just handling both names for ease of integration testing
     if (
-      latestCheck.name === "[TEST-IGNORE] Summarize PR Impact" ||
-      latestCheck.name === "Summarize PR Impact"
+      (latestCheck.name === "[TEST-IGNORE] Summarize PR Impact" ||
+        latestCheck.name === "Summarize PR Impact") &&
+      latestCheck.status === "completed" &&
+      latestCheck.conclusion === "success"
     ) {
       const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
         owner,
@@ -785,6 +787,8 @@ export async function getCheckRunTuple(
     if (branchRules) {
       requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules);
     }
+  } else {
+    requiredCheckNames = ["Summarize PR Impact", "[TEST-IGNORE] Summarize PR Impact"];
   }
 
   const filteredReqCheckRuns = unifiedCheckRuns.filter(
