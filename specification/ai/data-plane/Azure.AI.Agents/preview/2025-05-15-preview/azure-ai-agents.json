@@ -4582,6 +4582,21 @@
         ]
       }
     },
+    "MCPApprovalPerTool": {
+      "type": "object",
+      "description": "Customized MCP approval object, listing tools requiring and not requiring approvals",
+      "properties": {
+        "never": {
+          "$ref": "#/definitions/MCPToolList",
+          "description": "The list of tools, not requiring approval."
+        },
+        "always": {
+          "$ref": "#/definitions/MCPToolList",
+          "description": "The list of tools, always requiring approval."
+        }
+      }
+    },
+    "MCPRequiredApproval": {},
     "MCPToolDefinition": {
       "type": "object",
       "description": "The input definition information for a MCP tool which defines a MCP server endpoint",
@@ -4616,6 +4631,23 @@
       ],
       "x-ms-discriminator-value": "mcp"
     },
+    "MCPToolList": {
+      "type": "object",
+      "description": "The object, containing list of tools for approvals.",
+      "properties": {
+        "tool_names": {
+          "type": "array",
+          "description": "The list of tools for approval.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "toolNames"
+        }
+      },
+      "required": [
+        "tool_names"
+      ]
+    },
     "MCPToolResource": {
       "type": "object",
       "description": "A set of resources that are used by the `mcp` tool.",
@@ -4633,15 +4665,8 @@
           }
         },
         "require_approval": {
-          "type": "string",
+          "$ref": "#/definitions/MCPRequiredApproval",
           "description": "Does MCP server require approval",
-          "enum": [
-            "never",
-            "always"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          },
           "x-ms-client-name": "requireApproval"
         }
       },
@@ -6372,6 +6397,52 @@
         }
       }
     },
+    "RunStepDeltaAzureAISearchToolCall": {
+      "type": "object",
+      "description": "Represents the Azure AI Search in a streaming run step.",
+      "properties": {
+        "azure_ai_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "azureAISearch"
+        }
+      },
+      "required": [
+        "azure_ai_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search"
+    },
+    "RunStepDeltaBingGroundingToolCall": {
+      "type": "object",
+      "description": "Represents the bing grounding tool call in a streaming run step.",
+      "properties": {
+        "bing_grounding": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingGrounding"
+        }
+      },
+      "required": [
+        "bing_grounding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_grounding"
+    },
     "RunStepDeltaChunk": {
       "type": "object",
       "description": "Represents a run step delta i.e. any changed fields on a run step during streaming.",
@@ -6498,6 +6569,26 @@
       ],
       "x-ms-discriminator-value": "code_interpreter"
     },
+    "RunStepDeltaDeepResearchToolCall": {
+      "type": "object",
+      "description": "Represents the Deep research in a streaming run step.",
+      "properties": {
+        "deep_research": {
+          "$ref": "#/definitions/RunStepDeepResearchToolCallDetails",
+          "description": "The details of DeepResearch tool call.",
+          "x-ms-client-name": "deepResearch"
+        }
+      },
+      "required": [
+        "deep_research"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "deep_research"
+    },
     "RunStepDeltaDetail": {
       "type": "object",
       "description": "Represents a single run step detail item in a streaming run step's delta payload.",
@@ -6564,6 +6655,51 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "RunStepDeltaMCPObject": {
+      "type": "object",
+      "description": "Represents an invocation of mcp as part of a streaming run step.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "items": {
+            "$ref": "#/definitions/RunStepDeltaMcpToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaDetail"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
+    "RunStepDeltaMcpToolCall": {
+      "type": "object",
+      "description": "Represents the function data in a streaming run step MCP call.*",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of a response."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for MCP call."
+        }
+      },
+      "required": [
+        "index",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
     "RunStepDeltaMessageCreation": {
       "type": "object",
       "description": "Represents a message creation within a streaming run step delta.",
@@ -6591,6 +6727,49 @@
           "x-ms-client-name": "messageId"
         }
       }
+    },
+    "RunStepDeltaOpenAPIObject": {
+      "type": "object",
+      "description": "Represents an invocation of openapi as part of a streaming run step.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "items": {
+            "$ref": "#/definitions/RunStepDeltaOpenAPIToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaDetail"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
+    },
+    "RunStepDeltaOpenAPIToolCall": {
+      "type": "object",
+      "description": "Represents the openapi tool call in a streaming run step.",
+      "properties": {
+        "openapi": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "openAPI"
+        }
+      },
+      "required": [
+        "openapi"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
     },
     "RunStepDeltaToolCall": {
       "type": "object",
