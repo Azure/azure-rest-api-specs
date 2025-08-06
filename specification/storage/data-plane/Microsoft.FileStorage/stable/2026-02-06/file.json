@@ -7288,6 +7288,10 @@
         "Smb": {
           "description": "Settings for SMB protocol.",
           "$ref": "#/definitions/ShareSmbSettings"
+        },
+        "Nfs": {
+          "description": "Settings for NFS protocol.",
+          "$ref": "#/definitions/ShareNfsSettings"
         }
       }
     },
@@ -7533,6 +7537,35 @@
         "Multichannel": {
           "description": "Settings for SMB Multichannel.",
           "$ref": "#/definitions/SmbMultichannel"
+        },
+        "EncryptionInTransit": {
+          "description": "Enable or disable encryption in transit.",
+          "type": "object",
+          "properties": {
+            "Required": {
+              "description": "If encryption in transit is required",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "ShareNfsSettings": {
+      "description": "Settings for SMB protocol.",
+      "type": "object",
+      "xml": {
+        "name": "NFS"
+      },
+      "properties": {
+        "EncryptionInTransit": {
+          "description": "Enable or disable encryption in transit.",
+          "type": "object",
+          "properties": {
+            "Required": {
+              "description": "If encryption in transit is required",
+              "type": "boolean"
+            }
+          }
         }
       }
     },
