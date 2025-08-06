@@ -31,9 +31,6 @@ model TextContent extends AIContent {
 model ImageSource {
   @doc("A publicly accessible image URL.")
   url?: string;
-
-  @doc("Base64-encoded image data.")
-  b64_json?: string;
 }
 
 @doc("Content for image URL messages in AI conversations.")
