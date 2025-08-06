@@ -26,7 +26,16 @@ These are the global settings for the SearchManagementClient API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-05-01
+tag: package-2025-10-01-preview
+```
+
+### Tag: package-2025-10-01-preview
+
+These settings apply only when `--tag=package-2025-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-01-preview'
+input-file:
+  - Microsoft.Search/stable/2025-10-01-preview/search.json
 ```
 
 ### Tag: package-2025-05-01
