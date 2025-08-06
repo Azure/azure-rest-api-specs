@@ -32,7 +32,7 @@ model SpotPlacementScoresInput {
   /**
    * The desired virtual machine SKU sizes.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "ResourceSize is a non-resource data structure representing SKU metadata; it is not individually addressable and does not require identifiers."
   desiredSizes?: ResourceSize[];
 
   /**
@@ -68,7 +68,7 @@ model SpotPlacementScoresResponse {
   /**
    * The desired virtual machine SKU sizes.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "ResourceSize is a non-resource data structure representing SKU metadata; it is not individually addressable and does not require identifiers."
   desiredSizes?: ResourceSize[];
 
   /**
@@ -84,7 +84,7 @@ model SpotPlacementScoresResponse {
   /**
    * A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "PlacementScore is a non-resource data model used for telemetry and scoring; items are not uniquely addressable and do not require x-ms-identifiers."
   placementScores?: PlacementScore[];
 }
 
