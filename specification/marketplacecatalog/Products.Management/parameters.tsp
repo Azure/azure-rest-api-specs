@@ -24,8 +24,8 @@ const IncludeStopSoldPlansParameterDescription = "Indicates whether to include i
 const LookUpOfferInTenantLevelParameterDescription = "Indicates whether to use the tenant in context to fetch the product. By default, lookUpOfferInTenantLevel is set to FALSE.";
 const MarketSingleParameterDescription = "Product market value that will be used to fetch the product and affect the returning result.Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'";
 const IncludeHiddenPlansParameterDescription = "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.";
-const PlanIdParameterDescription = "Optional to pass the plan id to filter to a specific plan whitin the product. If not specified, the response will include all plans of the product.";
-const SkuIdParameterDescription = "Optional to pass the sku id to filter to a specific sku whitin the product. If not specified, the response will include all skus of the product.";
+const PlanIdParameterDescription = "Optional to pass the plan id to filter to a specific plan within the product. If not specified, the response will include all plans of the product.";
+const SkuIdParameterDescription = "Optional to pass the sku id to filter to a specific sku within the product. If not specified, the response will include all skus of the product.";
 const IncludeServiceInstructionTemplatesParameterDescription = "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.";
 
 /** Product
