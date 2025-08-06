@@ -103,6 +103,15 @@ directive:
     reason: False-positive. Identity property is never defined on the model.
 ```
 
+### Tag: package-preview-2025-08-01-preview
+
+These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-01-preview'
+input-file:
+  - Microsoft.BillingBenefits/preview/2025-08-01-preview/billingbenefits.json
+```
+
 ### Tag: package-preview-2025-05-01-preview
 
 These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
