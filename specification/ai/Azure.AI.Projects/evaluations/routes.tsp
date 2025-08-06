@@ -46,7 +46,7 @@ interface Evaluations {
   >;
 
   // create is deprecated from version v2025_07_31_preview onwards.
-  // so it has 2 entries here (create and createDeprecated)
+  #deprecated "Use /evaluations/runs:runBatch or /evaluations/runs:runSingle instead."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an evaluation run.")
   @route("runs:run")
@@ -62,7 +62,7 @@ interface Evaluations {
     ResourceCreatedResponse<Evaluation>
   >;
 
-  #deprecated "Use createBatchEvaluation or createOneEvaluation"
+  #deprecated "Use /evaluations/runs:runBatch or /evaluations/runs:runSingle instead."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an agent evaluation run.")
   @route("runs:runAgent")
