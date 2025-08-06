@@ -3,52 +3,52 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.NetworkCloud;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MachineSkuSlot.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageApplianceSkuSlot.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(OperationStatusResult.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BareMetalMachinePatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CloudServicesNetworkPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ClusterPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BareMetalMachineKeySetPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BmcKeySetPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ClusterMetricsConfigurationPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubernetesClusterPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AgentPoolPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubernetesClusterFeaturePatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RackPatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAppliancePatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VirtualMachinePatchParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConsolePatchParameters.properties);
 
 @@clientName(BareMetalMachines.createOrUpdate::parameters.resource,
@@ -75,7 +75,7 @@ using Microsoft.NetworkCloud;
 @@clientName(BareMetalMachines.runReadCommands::parameters.body,
   "bareMetalMachineRunReadCommandsParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BareMetalMachine.properties);
 
 @@clientName(CloudServicesNetworks.createOrUpdate::parameters.resource,
@@ -84,7 +84,7 @@ using Microsoft.NetworkCloud;
 @@clientName(CloudServicesNetworks.update::parameters.properties,
   "cloudServicesNetworkUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CloudServicesNetwork.properties);
 
 @@clientName(ClusterManagers.createOrUpdate::parameters.resource,
@@ -93,7 +93,7 @@ using Microsoft.NetworkCloud;
 @@clientName(ClusterManagers.update::parameters.properties,
   "clusterManagerUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ClusterManager.properties);
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "clusterParameters");
@@ -108,7 +108,7 @@ using Microsoft.NetworkCloud;
 @@clientName(Clusters.updateVersion::parameters.body,
   "clusterUpdateVersionParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Cluster.properties);
 
 @@clientName(KubernetesClusters.createOrUpdate::parameters.resource,
@@ -120,7 +120,7 @@ using Microsoft.NetworkCloud;
 @@clientName(KubernetesClusters.restartNode::parameters.body,
   "kubernetesClusterRestartNodeParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubernetesCluster.properties);
 
 @@clientName(L2Networks.createOrUpdate::parameters.resource,
@@ -129,7 +129,7 @@ using Microsoft.NetworkCloud;
 @@clientName(L2Networks.update::parameters.properties,
   "l2NetworkUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(L2Network.properties);
 
 @@clientName(L3Networks.createOrUpdate::parameters.resource,
@@ -138,15 +138,15 @@ using Microsoft.NetworkCloud;
 @@clientName(L3Networks.update::parameters.properties,
   "l3NetworkUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(L3Network.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RackSku.properties);
 
 @@clientName(Racks.createOrUpdate::parameters.resource, "rackParameters");
 @@clientName(Racks.update::parameters.properties, "rackUpdateParameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Rack.properties);
 
 @@clientName(StorageAppliances.createOrUpdate::parameters.resource,
@@ -158,7 +158,7 @@ using Microsoft.NetworkCloud;
 @@clientName(StorageAppliances.enableRemoteVendorManagement::parameters.body,
   "storageApplianceEnableRemoteVendorManagementParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAppliance.properties);
 
 @@clientName(TrunkedNetworks.createOrUpdate::parameters.resource,
@@ -167,7 +167,7 @@ using Microsoft.NetworkCloud;
 @@clientName(TrunkedNetworks.update::parameters.properties,
   "trunkedNetworkUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TrunkedNetwork.properties);
 
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource,
@@ -179,12 +179,12 @@ using Microsoft.NetworkCloud;
 @@clientName(VirtualMachines.powerOff::parameters.body,
   "virtualMachinePowerOffParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VirtualMachine.properties);
 
 @@clientName(Volumes.createOrUpdate::parameters.resource, "volumeParameters");
 @@clientName(Volumes.update::parameters.properties, "volumeUpdateParameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Volume.properties);
 
 @@clientName(BareMetalMachineKeySets.createOrUpdate::parameters.resource,
@@ -193,7 +193,7 @@ using Microsoft.NetworkCloud;
 @@clientName(BareMetalMachineKeySets.update::parameters.properties,
   "bareMetalMachineKeySetUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BareMetalMachineKeySet.properties);
 
 @@clientName(BmcKeySets.createOrUpdate::parameters.resource,
@@ -202,7 +202,7 @@ using Microsoft.NetworkCloud;
 @@clientName(BmcKeySets.update::parameters.properties,
   "bmcKeySetUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BmcKeySet.properties);
 
 @@clientLocation(ClusterMetricsConfigurations.get, "MetricsConfigurations");
@@ -220,7 +220,7 @@ using Microsoft.NetworkCloud;
 @@clientLocation(ClusterMetricsConfigurations.listByCluster,
   "MetricsConfigurations"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ClusterMetricsConfiguration.properties);
 
 @@clientName(AgentPools.createOrUpdate::parameters.resource,
@@ -229,7 +229,7 @@ using Microsoft.NetworkCloud;
 @@clientName(AgentPools.update::parameters.properties,
   "agentPoolUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AgentPool.properties);
 
 @@clientName(KubernetesClusterFeatures.createOrUpdate::parameters.resource,
@@ -238,10 +238,10 @@ using Microsoft.NetworkCloud;
 @@clientName(KubernetesClusterFeatures.update::parameters.properties,
   "kubernetesClusterFeatureUpdateParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubernetesClusterFeature.properties);
 
 @@clientName(Consoles.createOrUpdate::parameters.resource, "consoleParameters");
 @@clientName(Consoles.update::parameters.properties, "consoleUpdateParameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Console.properties);

@@ -26,7 +26,7 @@ model Cluster
   /**
    * The extended location of the cluster manager associated with the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation: ExtendedLocation;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -64,7 +64,7 @@ interface Clusters {
   /**
    * Patch the properties of the provided cluster, or update the tags associated with the cluster. Properties and tag updates can be done independently.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Cluster,

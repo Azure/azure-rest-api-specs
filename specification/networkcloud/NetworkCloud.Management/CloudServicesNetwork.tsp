@@ -29,7 +29,7 @@ model CloudServicesNetwork
   /**
    * The extended location of the cluster associated with the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation: ExtendedLocation;
 }
 
@@ -65,7 +65,7 @@ interface CloudServicesNetworks {
   /**
    * Update properties of the provided cloud services network, or update the tags associated with it. Properties and tag updates can be done independently.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     CloudServicesNetwork,

@@ -58,7 +58,7 @@ interface KubernetesClusterFeatures {
   /**
    * Patch properties of the provided Kubernetes cluster feature.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     KubernetesClusterFeature,
