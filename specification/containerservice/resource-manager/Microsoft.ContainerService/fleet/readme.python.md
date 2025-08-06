@@ -38,6 +38,7 @@ batch:
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet/
 clear-output-folder: true
 perform-load: false
+default-api: package-2025-08-01-preview
 ```
 
 ### Tag: package-2025-08-01-preview and python
