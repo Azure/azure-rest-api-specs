@@ -451,19 +451,19 @@ union PublicIPAddressType {
   string,
 }
 
-@doc("The ARM ID for a Network Interface.")
+@doc("The Azure Resource ID for a Network Interface.")
 model NetworkInterfaceArmReference {
-  @doc("The ARM ID for a Network Interface.")
+  @doc("The Azure Resource ID for a Network Interface.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
     }
   ]>;
 }
-@doc("The ARM ID for a Network Interface.")
+@doc("The Azure Resource ID for a Network Interface.")
 model SubnetIpConfigurationReference {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
-  @doc("The ARM ID for a Network Interface.")
+  @doc("The Azure Resource ID for a Network Interface.")
   ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
@@ -472,9 +472,9 @@ model SubnetIpConfigurationReference {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("The ARM ID for a resource consuming IP on a subnet")
+@doc("The Azure Resource ID for a resource consuming IP on a subnet")
 model VirtualNetworkSubnetIpConfigurationReference {
-  @doc("The ARM ID for a Network Interface.")
+  @doc("The Azure Resource ID for a Network Interface.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
@@ -482,9 +482,9 @@ model VirtualNetworkSubnetIpConfigurationReference {
   ]>;
 }
 
-@doc("The ARM ID for a Network Security Group.")
+@doc("The Azure Resource ID for a Network Security Group.")
 model NetworkSecurityGroupArmReference {
-  @doc("The ARM ID for a Network Security Group.")
+  @doc("The Azure Resource ID for a Network Security Group.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkSecurityGroups";
@@ -492,9 +492,9 @@ model NetworkSecurityGroupArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Logical Network.")
+@doc("The Azure Resource ID for a Logical Network.")
 model LogicalNetworkArmReference {
-  @doc("The ARM ID for a Logical Network.")
+  @doc("The Azure Resource ID for a Logical Network.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
@@ -518,9 +518,9 @@ model LogicalNetworkArmReference {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("The ARM ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+@doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
 model ManagedNetworkFabricArmReference {
-  @doc("The ARM ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+  @doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/l2isolationdomains";
@@ -532,9 +532,9 @@ model ManagedNetworkFabricArmReference {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("The ARM ID for a Virtual Network subnet")
+@doc("The Azure Resource ID for a Virtual Network subnet")
 model VirtualNetworkSubnetArmReference {
-  @doc("The ARM ID for a Virtual Network subnet.")
+  @doc("The Azure Resource ID for a Virtual Network subnet.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualnetwork/subnets";
@@ -544,9 +544,9 @@ model VirtualNetworkSubnetArmReference {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
-@doc("The ARM ID of a Public IP resource")
+@doc("The Azure Resource ID of a Public IP resource")
 model PublicIPAddressArmReference {
-  @doc("The ARM ID of a Public IP resource")
+  @doc("The Azure Resource ID of a Public IP resource")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/publicIPAddresses";
@@ -556,9 +556,9 @@ model PublicIPAddressArmReference {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
-@doc("The ARM ID of an IPConfiguration resource")
+@doc("The Azure Resource ID of an IPConfiguration resource")
 model IPConfigurationArmReference {
-  @doc("The ARM ID of an IPConfiguration resource")
+  @doc("The Azure Resource ID of an IPConfiguration resource")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations";
@@ -569,9 +569,9 @@ model IPConfigurationArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Virtual Machine.")
+@doc("The Azure Resource ID for a Virtual Machine.")
 model VirtualMachineArmReference {
-  @doc("The ARM ID for a Virtual Machine.")
+  @doc("The Azure Resource ID for a Virtual Machine.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
@@ -579,9 +579,9 @@ model VirtualMachineArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Storage Container.")
+@doc("The Azure Resource ID for a Storage Container.")
 model StorageContainerArmReference {
-  @doc("The ARM ID for a Storage Container.")
+  @doc("The Azure Resource ID for a Storage Container.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
@@ -589,9 +589,9 @@ model StorageContainerArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Gallery Image.")
+@doc("The Azure Resource ID for a Gallery Image.")
 model ImageArmReference {
-  @doc("The ARM ID for an image resource used by the virtual machine instance.")
+  @doc("The Azure Resource ID for an image resource used by the virtual machine instance.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   id?: armResourceIdentifier<[
     {
@@ -603,9 +603,9 @@ model ImageArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Virtual Hard Disk.")
+@doc("The Azure Resource ID for a Virtual Hard Disk.")
 model VirtualHardDiskArmReference {
-  @doc("The ARM ID for a Virtual Hard Disk.")
+  @doc("The Azure Resource ID for a Virtual Hard Disk.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualHardDisks";
@@ -1235,7 +1235,7 @@ model VirtualNetworkProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
-  @doc("The observed state of Virtual Network")
+  @doc("The observed status of Virtual Network")
   status?: VirtualNetworkStatus;
 }
 
@@ -1254,7 +1254,7 @@ model VirtualNetworkDhcpOptions {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("The observed state of the virtual network")
+@doc("The observed status of the virtual network")
 model VirtualNetworkStatus {
   @doc("VirtualNetwork provisioning error code")
   errorCode?: string;
@@ -1296,7 +1296,7 @@ model VirtualNetworkSubnetProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
-  @doc("The observed state of the virtual network subnet resource.")
+  @doc("The observed status of the virtual network subnet resource.")
   @visibility(Lifecycle.Read)
   status?: VirtualNetworkSubnetStatus;
 }
@@ -1332,7 +1332,7 @@ model PublicIPAddressProperties {
   @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
   publicIPAddressVersion?: PublicIPAddressType;
 
-  @doc("ipAllocationScope: Arm Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP")
+  @doc("ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP")
   ipAllocationScope?: string;
 
   @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
@@ -1591,7 +1591,7 @@ model VirtualHardDiskStatus {
   uploadStatus?: VirtualHardDiskUploadStatus;
 
   @added(Versions.v2025_06_01_preview)
-  @doc("ARM IDs of the VMs that are consuming the VHD.")
+  @doc("Azure Resource IDs of the VMs that are consuming the VHD.")
   managedBy?: string[];
 
   @added(Versions.v2025_06_01_preview)
@@ -1677,7 +1677,7 @@ model VirtualHardDiskUploadRequest {
 @added(Versions.v2024_05_01_preview)
 @doc("Response for uploading virtual hard disk.")
 model VirtualHardDiskUploadResponse {
-  @doc("The ARM ID for a Virtual Hard Disk.")
+  @doc("The Azure Resource ID for a Virtual Hard Disk.")
   virtualHardDiskId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualHardDisks";
