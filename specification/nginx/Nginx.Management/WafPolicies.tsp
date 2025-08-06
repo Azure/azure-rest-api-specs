@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Rest;
 using Azure.ResourceManager;
 
-namespace NGINX.NGINXPLUS;
+namespace Nginx.NginxPlus;
 
 /**
  * Represents a WAF policy resource under a given Nginx deployment.
