@@ -428,8 +428,7 @@ model FineTuningJobRFTResponseFormat {
 @doc("Gets the response format for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTResponseJsonSchema
-  extends FineTuningJobRFTResponseFormat {
+model FineTuningJobRFTResponseJsonSchema extends FineTuningJobRFTResponseFormat {
   type: "json_schema";
 
   @doc("JSON schema response for RFT")
@@ -503,8 +502,7 @@ model FineTuningJobMistralCompletionTrainingMethodConfiguration {
 @doc("Mistral Completion Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralCompletionTrainingMethod
-  extends FineTuningJobTrainingMethod {
+model FineTuningJobMistralCompletionTrainingMethod extends FineTuningJobTrainingMethod {
   type: "MistralCompletion";
 
   @doc("Configuration for Mistral Completion fine-tuning method.")
@@ -551,8 +549,7 @@ model FineTuningJobMistralClassifierTrainingMethodConfiguration {
 @doc("Mistral Classifier Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralClassifierTrainingMethod
-  extends FineTuningJobTrainingMethod {
+model FineTuningJobMistralClassifierTrainingMethod extends FineTuningJobTrainingMethod {
   type: "MistralClassifier";
 
   @doc("Configuration for Mistral Classifier fine-tuning method.")
