@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./product.tsp";
+import "./parameters.tsp";
 
 using Http;
 using Rest;
@@ -35,15 +36,6 @@ model ProductSingle is ProxyResource<ProductDetails> {
   ...ResourceNameParameter<ProductSingle>;
 }
 
-/** Product id path parameter */
-model ProductIdParameter {
-  /** The ID of the product */
-  @path
-  @segment("providers/Microsoft.Marketplace/products")
-  @minLength(1)
-  productId: string;
-}
-
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations(Products)
@@ -55,26 +47,74 @@ interface ProductList {
   listByTenant(
     ...ApiVersionParameter,
 
-    @doc("The market in which the product is available.")
+    @doc(MarketParameterDescription)
     @query
     market?: string,
 
-    @doc("The language to filter by")
+    @doc(LanguageParameterDescription)
     @query
-    language?: string,
+    language?: string = "en",
+
+    @doc(ExcludePublicParameterDescription)
+    @query
+    excludePublicOffersAndPublicPlans?: boolean = false,
+
+    @doc(PricingAudienceParameterDescription)
+    @query
+    pricingAudience?: string = "Direct-Commercial",
+
+    @doc(FilterOdataParameterDescription)
+    @query
+    $filter?: string,
+
+    @doc(SelectOdataParameterDescription)
+    @query
+    $select?: string,
+
+    @doc(ExpandOdataParameterDescription)
+    @query
+    $expand?: string,
+
+    @doc(OrderByOdataParameterDescription)
+    @query
+    $orderBy?: string,
+
+    @doc(SearchParameterDescription)
+    @query
+    $search?: string,
   ): ArmResponse<ResourceListCustomResult<ProductSummary>> | ErrorResponse;
 
   /** Lists products for subscription. */
   listBySubscription is ArmListBySubscriptionCustom<
     Products,
     Parameters = {
-      @doc("The market in which the product is available.")
+      @doc(LanguageParameterDescription)
       @query
-      market?: string;
+      language?: string = "en";
 
-      @doc("The language to filter by")
+      @doc(ExcludePublicParameterDescription)
       @query
-      language?: string;
+      excludePublicOffersAndPublicPlans?: boolean = false;
+
+      @doc(FilterOdataParameterDescription)
+      @query
+      $filter?: string;
+
+      @doc(SelectOdataParameterDescription)
+      @query
+      $select?: string;
+
+      @doc(ExpandOdataParameterDescription)
+      @query
+      $expand?: string;
+
+      @doc(OrderByOdataParameterDescription)
+      @query
+      $orderBy?: string;
+
+      @doc(SearchParameterDescription)
+      @query
+      $search?: string;
     },
     Response = ResourceListCustomResult<ProductSummary>
   >;
@@ -83,13 +123,37 @@ interface ProductList {
   listByBillingAccount is ArmListByBillingAccount<
     Products,
     Parameters = {
-      @doc("The market in which the product is available.")
+      @doc(LanguageParameterDescription)
       @query
-      market?: string;
+      language?: string = "en";
 
-      @doc("The language to filter by")
+      @doc(ExcludePublicParameterDescription)
       @query
-      language?: string;
+      excludePublicOffersAndPublicPlans?: boolean = false;
+
+      @doc(LocationsarameterDescription)
+      @query
+      locations?: string;
+
+      @doc(FilterOdataParameterDescription)
+      @query
+      $filter?: string;
+
+      @doc(SelectOdataParameterDescription)
+      @query
+      $select?: string;
+
+      @doc(ExpandOdataParameterDescription)
+      @query
+      $expand?: string;
+
+      @doc(OrderByOdataParameterDescription)
+      @query
+      $orderBy?: string;
+
+      @doc(SearchParameterDescription)
+      @query
+      $search?: string;
     },
     Response = ResourceListCustomResult<ProductSummary>
   >;
@@ -98,13 +162,37 @@ interface ProductList {
   listByBillingProfile is ArmListByBillingProfile<
     Products,
     Parameters = {
-      @doc("The market in which the product is available.")
+      @doc(LanguageParameterDescription)
       @query
-      market?: string;
+      language?: string = "en";
 
-      @doc("The language to filter by")
+      @doc(ExcludePublicParameterDescription)
       @query
-      language?: string;
+      excludePublicOffersAndPublicPlans?: boolean = false;
+
+      @doc(LocationsarameterDescription)
+      @query
+      locations?: string;
+
+      @doc(FilterOdataParameterDescription)
+      @query
+      $filter?: string;
+
+      @doc(SelectOdataParameterDescription)
+      @query
+      $select?: string;
+
+      @doc(ExpandOdataParameterDescription)
+      @query
+      $expand?: string;
+
+      @doc(OrderByOdataParameterDescription)
+      @query
+      $orderBy?: string;
+
+      @doc(SearchParameterDescription)
+      @query
+      $search?: string;
     },
     Response = ResourceListCustomResult<ProductSummary>
   >;
@@ -120,25 +208,33 @@ interface ProductGet {
     ...ApiVersionParameter,
     ...ProductIdParameter,
 
-    @doc("The market in which the product is available.")
+    @doc(MarketSingleParameterDescription)
     @query
     market: string,
 
-    @doc("Whether to include stop-sold plans in the response.")
+    @doc(IncludeStopSoldPlansParameterDescription)
     @query
-    includeStopSoldPlans?: boolean,
+    includeStopSoldPlans?: boolean = false,
 
-    @doc("The language to filter by")
+    @doc(LanguageParameterDescription)
     @query
     language?: string,
 
-    @doc("Whether to include hidden plans in the response.")
+    @doc(IncludeHiddenPlansParameterDescription)
     @query
-    includeHiddenPlans?: boolean,
+    includeHiddenPlans?: boolean = false,
 
-    @doc("Whether to include service instruction templates in the response.")
+    @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
-    includeServiceInstructionTemplates?: boolean,
+    includeServiceInstructionTemplates?: boolean = false,
+
+    @doc(PlanIdParameterDescription)
+    @query
+    planId?: string,
+
+    @doc(SkuIdParameterDescription)
+    @query
+    skuId?: string,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by subscription. */
@@ -150,25 +246,33 @@ interface ProductGet {
     ...SubscriptionIdParameter,
     ...ProductIdParameter,
 
-    @doc("The market in which the product is available.")
-    @query
-    market: string,
-
-    @doc("Whether to include stop-sold plans in the response.")
+    @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
-    @doc("The language to filter by")
+    @doc(LanguageParameterDescription)
     @query
     language?: string,
 
-    @doc("Whether to include hidden plans in the response.")
+    @doc(IncludeHiddenPlansParameterDescription)
     @query
-    includeHiddenPlans?: boolean,
+    includeHiddenPlans?: boolean = false,
 
-    @doc("Whether to include service instruction templates in the response.")
+    @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
-    includeServiceInstructionTemplates?: boolean,
+    includeServiceInstructionTemplates?: boolean = false,
+
+    @doc(PlanIdParameterDescription)
+    @query
+    planId?: string,
+
+    @doc(SkuIdParameterDescription)
+    @query
+    skuId?: string,
+
+    @doc(LookUpOfferInTenantLevelParameterDescription)
+    @query
+    lookUpOfferInTenantLevel?: boolean = false,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing account. */
@@ -180,25 +284,29 @@ interface ProductGet {
     ...BillingAccountIdParameter,
     ...ProductIdParameter,
 
-    @doc("The market in which the product is available.")
-    @query
-    market: string,
-
-    @doc("Whether to include stop-sold plans in the response.")
+    @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
-    @doc("The language to filter by")
+    @doc(LanguageParameterDescription)
     @query
     language?: string,
 
-    @doc("Whether to include hidden plans in the response.")
+    @doc(IncludeHiddenPlansParameterDescription)
     @query
-    includeHiddenPlans?: boolean,
+    includeHiddenPlans?: boolean = false,
 
-    @doc("Whether to include service instruction templates in the response.")
+    @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
-    includeServiceInstructionTemplates?: boolean,
+    includeServiceInstructionTemplates?: boolean = false,
+
+    @doc(PlanIdParameterDescription)
+    @query
+    planId?: string,
+
+    @doc(SkuIdParameterDescription)
+    @query
+    skuId?: string,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing profile. */
@@ -211,25 +319,29 @@ interface ProductGet {
     ...BillingProfileIdParameter,
     ...ProductIdParameter,
 
-    @doc("The market in which the product is available.")
-    @query
-    market: string,
-
-    @doc("Whether to include stop-sold plans in the response.")
+    @doc(IncludeStopSoldPlansParameterDescription)
     @query
     includeStopSoldPlans?: boolean,
 
-    @doc("The language to filter by")
+    @doc(LanguageParameterDescription)
     @query
     language?: string,
 
-    @doc("Whether to include hidden plans in the response.")
+    @doc(IncludeHiddenPlansParameterDescription)
     @query
-    includeHiddenPlans?: boolean,
+    includeHiddenPlans?: boolean = false,
 
-    @doc("Whether to include service instruction templates in the response.")
+    @doc(IncludeServiceInstructionTemplatesParameterDescription)
     @query
-    includeServiceInstructionTemplates?: boolean,
+    includeServiceInstructionTemplates?: boolean = false,
+
+    @doc(PlanIdParameterDescription)
+    @query
+    planId?: string,
+
+    @doc(SkuIdParameterDescription)
+    @query
+    skuId?: string,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 }
 
@@ -310,26 +422,4 @@ model BillingProfileBaseParameters
   is Azure.ResourceManager.Foundations.TenantBaseParameters {
   ...BillingAccountIdParameter;
   ...BillingProfileIdParameter;
-}
-
-/**
- * The default billing account id parameter type.
- */
-model BillingAccountIdParameter {
-  /** The ID of the target billing account. */
-  @path
-  @segment("providers/Microsoft.Billing/billingAccounts")
-  @minLength(1)
-  billingAccountId: string;
-}
-
-/**
- * The default billing account id parameter type.
- */
-model BillingProfileIdParameter {
-  /** The ID of the target billing account. */
-  @path
-  @segment("billingProfiles")
-  @minLength(1)
-  billingProfileId: string;
 }

@@ -68,16 +68,60 @@
             "$ref": "#/parameters/BillingProfileIdParameter"
           },
           {
-            "name": "market",
+            "name": "language",
             "in": "query",
-            "description": "The market in which the product is available.",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "required": false,
+            "type": "string",
+            "default": "en"
+          },
+          {
+            "name": "excludePublicOffersAndPublicPlans",
+            "in": "query",
+            "description": "Whether to exclude public offers and public plans from the response. Default is false, which means that public offers and public plans are included in the response. If set to true, only private plans will be returned.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
             "required": false,
             "type": "string"
           },
           {
-            "name": "language",
+            "name": "$filter",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: $select=displayName",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "description": "Optional search by display name, publisher display name, or keywords. Example $search=Microsoft",
             "required": false,
             "type": "string"
           }
@@ -127,39 +171,48 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "name": "market",
-            "in": "query",
-            "description": "The market in which the product is available.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Whether to include stop-sold plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Whether to include hidden plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Whether to include service instruction templates in the response.",
+            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "planId",
+            "in": "query",
+            "description": "Optional to pass the plan id to filter to a specific plan whitin the product. If not specified, the response will include all plans of the product.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skuId",
+            "in": "query",
+            "description": "Optional to pass the sku id to filter to a specific sku whitin the product. If not specified, the response will include all skus of the product.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -198,16 +251,60 @@
             "$ref": "#/parameters/BillingAccountIdParameter"
           },
           {
-            "name": "market",
+            "name": "language",
             "in": "query",
-            "description": "The market in which the product is available.",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "required": false,
+            "type": "string",
+            "default": "en"
+          },
+          {
+            "name": "excludePublicOffersAndPublicPlans",
+            "in": "query",
+            "description": "Whether to exclude public offers and public plans from the response. Default is false, which means that public offers and public plans are included in the response. If set to true, only private plans will be returned.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
             "required": false,
             "type": "string"
           },
           {
-            "name": "language",
+            "name": "$filter",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: $select=displayName",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "description": "Optional search by display name, publisher display name, or keywords. Example $search=Microsoft",
             "required": false,
             "type": "string"
           }
@@ -254,39 +351,48 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "name": "market",
-            "in": "query",
-            "description": "The market in which the product is available.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Whether to include stop-sold plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Whether to include hidden plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Whether to include service instruction templates in the response.",
+            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "planId",
+            "in": "query",
+            "description": "Optional to pass the plan id to filter to a specific plan whitin the product. If not specified, the response will include all plans of the product.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skuId",
+            "in": "query",
+            "description": "Optional to pass the sku id to filter to a specific sku whitin the product. If not specified, the response will include all skus of the product.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -360,14 +466,66 @@
           {
             "name": "market",
             "in": "query",
-            "description": "The market in which the product is available.",
+            "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
             "required": false,
             "type": "string"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "required": false,
+            "type": "string",
+            "default": "en"
+          },
+          {
+            "name": "excludePublicOffersAndPublicPlans",
+            "in": "query",
+            "description": "Whether to exclude public offers and public plans from the response. Default is false, which means that public offers and public plans are included in the response. If set to true, only private plans will be returned.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "pricingAudience",
+            "in": "query",
+            "description": "Direct-Commercial or Partner-Commercial, Direct-Commercial is the default. This value is used to determine the pricing audience for the product. If not specified, the default value is DirectCommercial.",
+            "required": false,
+            "type": "string",
+            "default": "Direct-Commercial"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Selects which properties to include in the results. Example: $select=displayName",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "description": "Optional search by display name, publisher display name, or keywords. Example $search=Microsoft",
             "required": false,
             "type": "string"
           }
@@ -413,37 +571,54 @@
           {
             "name": "market",
             "in": "query",
-            "description": "The market in which the product is available.",
+            "description": "Product market value that will be used to fetch the product and affect the returning result.Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
             "required": true,
             "type": "string"
           },
           {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Whether to include stop-sold plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "language",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Whether to include hidden plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Whether to include service instruction templates in the response.",
+            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "planId",
+            "in": "query",
+            "description": "Optional to pass the plan id to filter to a specific plan whitin the product. If not specified, the response will include all plans of the product.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skuId",
+            "in": "query",
+            "description": "Optional to pass the sku id to filter to a specific sku whitin the product. If not specified, the response will include all skus of the product.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -482,16 +657,53 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "market",
+            "name": "language",
             "in": "query",
-            "description": "The market in which the product is available.",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+            "required": false,
+            "type": "string",
+            "default": "en"
+          },
+          {
+            "name": "excludePublicOffersAndPublicPlans",
+            "in": "query",
+            "description": "Whether to exclude public offers and public plans from the response. Default is false, which means that public offers and public plans are included in the response. If set to true, only private plans will be returned.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`",
             "required": false,
             "type": "string"
           },
           {
-            "name": "language",
+            "name": "$select",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Selects which properties to include in the results. Example: $select=displayName",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands related entities inline",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderBy",
+            "in": "query",
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "description": "Optional search by display name, publisher display name, or keywords. Example $search=Microsoft",
             "required": false,
             "type": "string"
           }
@@ -538,39 +750,56 @@
             "$ref": "#/parameters/ProductIdParameter"
           },
           {
-            "name": "market",
-            "in": "query",
-            "description": "The market in which the product is available.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "includeStopSoldPlans",
             "in": "query",
-            "description": "Whether to include stop-sold plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
             "required": false,
             "type": "boolean"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "The language to filter by",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
             "required": false,
             "type": "string"
           },
           {
             "name": "includeHiddenPlans",
             "in": "query",
-            "description": "Whether to include hidden plans in the response.",
+            "description": "Indicates whether to include in the response the product's plans that are hidden. By default, includeHiddenPlans is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeServiceInstructionTemplates",
             "in": "query",
-            "description": "Whether to include service instruction templates in the response.",
+            "description": "Indicates whether to include in the response the product's service instruction templates. By default, includeServiceInstructionTemplates is set to FALSE.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "planId",
+            "in": "query",
+            "description": "Optional to pass the plan id to filter to a specific plan whitin the product. If not specified, the response will include all plans of the product.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skuId",
+            "in": "query",
+            "description": "Optional to pass the sku id to filter to a specific sku whitin the product. If not specified, the response will include all skus of the product.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lookUpOfferInTenantLevel",
+            "in": "query",
+            "description": "Indicates whether to use the tenant in context to fetch the product. By default, lookUpOfferInTenantLevel is set to FALSE.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
