@@ -35,7 +35,7 @@ interface CodeExecution {
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    SessionCodeExecutionResource&
+    SessionCodeExecutionResource &
       ExecutionOperationIdHeader &
       Foundations.LongRunningStatusLocation,
     CodeExecutionTraits
