@@ -1,4 +1,5 @@
 import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Response, OpenAPI2Schema, OpenAPI2SchemaProperty, Ref, Refable } from "@azure-tools/typespec-autorest";
+import { getCommonTypeDefinition, getDefinitionFromCommonType } from "./commonType.js";
 
 interface Diff {
   before: any;
@@ -23,17 +24,55 @@ interface PathDiff extends Diff {
 
 /**
  * properties: the property names of the definition should be the same
+ * property: the property should have same schema
+ * required: the required properties of the definition should be the same
  */
 interface DefinitionDiff extends Diff {
   name: string;
-  type: "properties";
+  propertyName?: string;
+  changeType?: string;
+  type: "properties" | "property" | "required";
 }
 
 export function printDiff(diff: PathDiff | DefinitionDiff): string {
   if ("operationId" in diff) {
-    return `| ${diff.type} | ${diff.level} | The ${diff.type} of operation "${diff.operationId}" changed: ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
+    return `| ${diff.type} | ${diff.level} | ${getPathDiffMessage(diff)} ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
   } else {
-    return `| ${diff.type} | ${diff.level} | The ${diff.type} of definition "${diff.name}" changed: ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
+    return `| ${diff.type} | ${diff.level} | ${getDefinitionDiffMessage(diff)} ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
+  }
+}
+
+function getPathDiffMessage(diff: PathDiff): string {
+  switch (diff.type) {
+    case "path":
+      return `The path for operation "${diff.operationId}" changed:`;
+    case "parameters":
+      return `The number of parameters for operation "${diff.operationId}" changed:`;
+    case "pageable":
+      return `The pageable for operation "${diff.operationId}" changed:`;
+    case "longrunning":
+      return `The long-running status for operation "${diff.operationId}" changed:`;
+    case "finalstate":
+      return `The final state for operation "${diff.operationId}" changed:`;
+    case "finalresult":
+      return `The final result schema for operation "${diff.operationId}" changed:`;
+    case "responses":
+      return `The response codes for operation "${diff.operationId}" changed:`;
+    case "response":
+      return `The response schema for operation "${diff.operationId}" changed:`;
+    default:
+      return `The ${diff.type} for operation "${diff.operationId}" changed:`;
+  }
+}
+
+function getDefinitionDiffMessage(diff: DefinitionDiff): string {
+  switch (diff.type) {
+    case "properties":
+      return `The property names of definition "${diff.name}" changed:`;
+    case "property":
+      return `The ${diff.changeType} of property "${diff.propertyName}" in definition "${diff.name}" changed:`;
+    case "required":
+      return `The required properties of definition "${diff.name}" changed:`;
   }
 }
 
@@ -52,6 +91,23 @@ export function compareDocuments(oldDocument: OpenAPI2Document, newDocument: Ope
 }
 
 function compareDefinition(oldDefinition: OpenAPI2Schema, oldDocument: OpenAPI2Document, newDefinition: OpenAPI2Schema, newDocument: OpenAPI2Document, name: string): DefinitionDiff[] {
+  const diffs: DefinitionDiff[] = [];
+
+  const oldRequired = oldDefinition.required || [];
+  const newRequired = newDefinition.required || [];
+  
+  if (oldRequired.length !== newRequired.length || 
+      !oldRequired.every(item => newRequired.includes(item)) ||
+      !newRequired.every(item => oldRequired.includes(item))) {
+    diffs.push({
+      before: oldRequired,
+      after: newRequired,
+      name,
+      type: "required",
+      level: "warning",
+    });
+  }
+
   const oldProperties = getAllProperties(oldDefinition, oldDocument);
   const sortedOldProperties = Object.keys(oldProperties).sort().reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
     obj[key] = oldProperties[key];
@@ -68,47 +124,73 @@ function compareDefinition(oldDefinition: OpenAPI2Schema, oldDocument: OpenAPI2D
   const oldKeys = Object.keys(sortedOldProperties);
   const newKeys = Object.keys(sortedNewProperties);
   if (oldKeys.length !== newKeys.length) {
-    return [{
+    // Check if newKeys has exactly one more key and it's systemData
+    const isSystemDataOnlyDifference = newKeys.length === oldKeys.length + 1 && 
+      newKeys.filter(key => !oldKeys.includes(key)).length === 1 &&
+      newKeys.filter(key => !oldKeys.includes(key))[0] === 'systemData';
+    
+    diffs.push({
       before: oldKeys,
       after: newKeys,
       name,
       type: "properties",
-      level: "error"
-    }];
+      level: isSystemDataOnlyDifference ? "warning" : "error"
+    });
   }
   for (const key of oldKeys) {
     if (!newKeys.includes(key)) {
-      return [{
+      diffs.push({
         before: oldKeys,
         after: newKeys,
         name,
         type: "properties",
         level: "error"
-      }];
+      });
     }
   }
   for (const key of newKeys) {
     if (!oldKeys.includes(key)) {
-      return [{
+      // Check if the only additional key is systemData
+      const additionalKeys = newKeys.filter(k => !oldKeys.includes(k));
+      const isOnlySystemData = additionalKeys.length === 1 && additionalKeys[0] === 'systemData';
+      
+      diffs.push({
         before: oldKeys,
         after: newKeys,
         name,
         type: "properties",
-        level: "error"
-      }];
+        level: isOnlySystemData ? "warning" : "error"
+      });
     }
   }
 
   // Then check if the property types are the same
-  // for (const key of oldKeys) {
-  //   const oldProperty = sortedOldProperties[key];
-  //   const newProperty = sortedNewProperties[key];
-    
-  // }
+  for (const key of oldKeys) {
+    const oldProperty = sortedOldProperties[key];
+    const newProperty = sortedNewProperties[key];
+    diffs.push(...compareDefinitionProperty(oldProperty, newProperty, oldDocument, newDocument, key, name));
+  }
+
+  return diffs;
+}
+
+function compareDefinitionProperty(oldProperty: OpenAPI2SchemaProperty, newProperty: OpenAPI2SchemaProperty, oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document, propertyName: string, modelName: string): DefinitionDiff[] {
+  const oldPropertySchema = schemaPropertyToSchema(oldProperty, oldDocument);
+  const newPropertySchema = schemaPropertyToSchema(newProperty, newDocument);
+  if (!oldPropertySchema || !newPropertySchema) {
+    return [{
+      before: oldPropertySchema,
+      after: newPropertySchema,
+      name: modelName,
+      propertyName,
+      changeType: "type",
+      type: "property",
+      level: "error",
+    }];
+  }
 
   return [];
 }
-
 
 function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document): PathDiff[] {
   const oldOperations = organizeOperationById(oldDocument);
@@ -322,10 +404,23 @@ function getAllProperties(schema: OpenAPI2Schema, document: OpenAPI2Document, pr
   for (const baseSchema of schema.allOf ?? []) {
     if (isRef(baseSchema)) {
       const refPath = baseSchema.$ref;
-      const definitionName = refPath.split("/").pop();
-      const baseDefinition = document.definitions?.[definitionName!];
-      if (baseDefinition) {
-        getAllProperties(baseDefinition, document, properties);
+      const commonTypeDefinition = getCommonTypeDefinition(refPath);
+      if (commonTypeDefinition) {
+        getAllProperties(commonTypeDefinition[0], commonTypeDefinition[1], properties);
+      }
+      else {
+        const definitionName = refPath.split("/").pop();
+        const baseDefinition = document.definitions?.[definitionName!];
+        if (baseDefinition) {
+          getAllProperties(baseDefinition, document, properties);
+        }
+      }
+    }
+    else {
+      if (baseSchema.properties) {
+        for (const key in baseSchema.properties) {
+          properties[key] = baseSchema.properties[key];
+        }
       }
     }
   }
@@ -338,6 +433,33 @@ function getAllProperties(schema: OpenAPI2Schema, document: OpenAPI2Document, pr
   return properties;
 }
 
+function schemaPropertyToSchema(property: OpenAPI2SchemaProperty, document: OpenAPI2Document): OpenAPI2Schema | undefined {
+  if (isRef(property)) {
+    const { $ref, ...propertyWithoutRef } = property;
+    const commonTypeDefinition = getCommonTypeDefinition($ref);
+    if (commonTypeDefinition) {
+      return { ...propertyWithoutRef, ...commonTypeDefinition[0] };
+    }
+    else {
+      const definitionName = $ref.split("/").pop();
+      return { ...getDefinition(definitionName!, document), ...propertyWithoutRef };
+    }
+  }
+  
+  return property as OpenAPI2Schema;
+}
+
+function getDefinition(definitionName: string, document: OpenAPI2Document): OpenAPI2Schema | undefined {
+  if (document.definitions && document.definitions[definitionName]) {
+    return document.definitions[definitionName];
+  }
+  const commonTypeDefinition = getDefinitionFromCommonType(definitionName);
+  if (commonTypeDefinition) {
+    return commonTypeDefinition;
+  }
+
+  return undefined;
+}
 
 function isRef<T>(value: Refable<T>): value is Ref<T> {
   return (value as Ref<T>).$ref !== undefined;
