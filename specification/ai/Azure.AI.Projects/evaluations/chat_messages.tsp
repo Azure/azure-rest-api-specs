@@ -26,14 +26,25 @@ model TextContent extends AIContent {
   text: string;
 }
 
+@doc("Image source")
+@added(Versions.v2025_07_31_preview)
+model ImageSource {
+  @doc("A publicly accessible image URL.")
+  url?: string;
+
+  @doc("Base64-encoded image data.")
+  b64_json?: string;
+}
+
 @doc("Content for image URL messages in AI conversations.")
 @added(Versions.v2025_07_31_preview)
 model ImageUrlContent extends AIContent {
   @doc("The content of the image URL message.")
   type: "image_url";
 
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
   @doc("The URL of the image.")
-  imageUrl: string;
+  image_url: string | ImageSource;
 }
 
 @doc("Content for text messages in AI conversations.")

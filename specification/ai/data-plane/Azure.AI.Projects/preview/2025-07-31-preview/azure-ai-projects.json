@@ -3680,17 +3680,30 @@
       ],
       "x-ms-discriminator-value": "FoundryModelInline"
     },
+    "ImageSource": {
+      "type": "object",
+      "description": "Image source",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A publicly accessible image URL."
+        },
+        "b64_json": {
+          "type": "string",
+          "description": "Base64-encoded image data."
+        }
+      }
+    },
     "ImageUrlContent": {
       "type": "object",
       "description": "Content for image URL messages in AI conversations.",
       "properties": {
-        "imageUrl": {
-          "type": "string",
+        "image_url": {
           "description": "The URL of the image."
         }
       },
       "required": [
-        "imageUrl"
+        "image_url"
       ],
       "allOf": [
         {
