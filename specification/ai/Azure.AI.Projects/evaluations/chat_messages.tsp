@@ -39,9 +39,8 @@ model ImageUrlContent extends AIContent {
   @doc("The content of the image URL message.")
   type: "image_url";
 
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
   @doc("The URL of the image.")
-  image_url: string | ImageSource;
+  image_url: ImageSource;
 }
 
 @doc("Content for text messages in AI conversations.")
