@@ -571,15 +571,15 @@ model BrowserAutomationToolCallDetails {
   """)
 @added(Versions.v2025_05_15_preview)
 model BrowserAutomationToolCallStep {
-  @doc("The input provided to the Browser Automation tool.")
+  @doc("The result of the last step executed with the Browser.")
   @encodedName("application/json", "last_step_result")
   lastStepResult: string;
 
-  @doc("The output returned by the Browser Automation tool.")
+  @doc("The current state of execution with the Browser.")
   @encodedName("application/json", "current_state")
   currentState: string;
 
-  @doc("The next step to execute.")
+  @doc("The next step to execute with the Browser.")
   @encodedName("application/json", "next_step")
   nextStep: string;
 }
