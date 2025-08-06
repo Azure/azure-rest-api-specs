@@ -1981,13 +1981,11 @@ model AccountUsage {
   /**
    * Usage of provisioned storage, IOPS, bandwidth and number of file shares across all live shares or soft-deleted shares in the account.
    */
-  @visibility(Lifecycle.Read)
   liveShares?: AccountUsageElements;
 
   /**
    * Usage of provisioned storage, IOPS, bandwidth and number of file shares across all live shares or soft-deleted shares in the account.
    */
-  @visibility(Lifecycle.Read)
   softDeletedShares?: AccountUsageElements;
 }
 
