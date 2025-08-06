@@ -816,7 +816,7 @@ model FineTuningJobEvent {
 
   @doc("The data associated with the event.")
   #suppress "@azure-tools/typespec-azure-core/no-unknown"
-  data: unknown;
+  data?: unknown;
 
   @doc("The object identifier.")
   id : string;
@@ -828,7 +828,7 @@ model FineTuningJobEvent {
   message : string;
 
   @doc("The type of event.")
-  type : string;
+  type? : string;
 }
 
 @doc("Metrics at the step number during the fine-tuning job.")
@@ -836,25 +836,25 @@ model FineTuningJobEvent {
 @removed(Versions.v1)
 model FineTuningJobCheckpointMetric {
   @doc("metric full validation loss")
-  full_valid_loss : float64;
+  full_valid_loss? : float64;
 
   @doc("metric full valid mean token accuracy")
-  full_valid_mean_token_accuracy : float64;
+  full_valid_mean_token_accuracy? : float64;
 
   @doc("metric step")
-  step : float64;
+  step? : float64;
 
   @doc("metric train loss")
-  train_loss : float64;
+  train_loss? : float64;
 
   @doc("metric train mean token accuracy")
-  train_mean_token_accuracy : float64;
+  train_mean_token_accuracy? : float64;
 
   @doc("metric valid loss")
-  valid_loss : float64;
+  valid_loss? : float64;
 
   @doc("metric valid mean token accuracy")
-  valid_mean_token_accuracy : float64;
+  valid_mean_token_accuracy? : float64;
 }
 
 @doc("The fine_tuning.job.checkpoint object represents a model checkpoint for a fine-tuning job that is ready to use.")

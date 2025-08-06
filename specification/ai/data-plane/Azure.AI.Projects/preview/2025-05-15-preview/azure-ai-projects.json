@@ -1170,7 +1170,7 @@
         },
         "x-ms-examples": {
           "List FineTuning jobs": {
-            "$ref": "./examples/FineTuningJobs_ListFineTuningJobs.json"
+            "$ref": "./examples/FineTuningJobs_ListJobs.json"
           }
         }
       },
@@ -1420,6 +1420,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "List the checkpoints from a FineTuning jobs": {
+            "$ref": "./examples/FineTuningJobs_ListCheckpoints.json"
+          }
         }
       }
     },
@@ -1497,6 +1502,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List the events from a FineTuning jobs": {
+            "$ref": "./examples/FineTuningJobs_ListEvents.json"
           }
         }
       }
@@ -3435,16 +3445,7 @@
           "format": "double",
           "description": "metric valid mean token accuracy"
         }
-      },
-      "required": [
-        "full_valid_loss",
-        "full_valid_mean_token_accuracy",
-        "step",
-        "train_loss",
-        "train_mean_token_accuracy",
-        "valid_loss",
-        "valid_mean_token_accuracy"
-      ]
+      }
     },
     "FineTuningJobCreation": {
       "type": "object",
@@ -3619,11 +3620,9 @@
       "required": [
         "object",
         "created_at",
-        "data",
         "id",
         "level",
-        "message",
-        "type"
+        "message"
       ]
     },
     "FineTuningJobGraderMessage": {

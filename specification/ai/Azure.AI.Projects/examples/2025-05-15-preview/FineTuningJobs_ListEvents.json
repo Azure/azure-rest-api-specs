@@ -1,0 +1,27 @@
+{
+  "title": "List the events from a FineTuning jobs",
+  "operationId": "FineTuningJobs_ListFineTuningJobEvents",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
+    "fine_tuning_job_id": "ftjob-1",
+    "limit": "2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "list",
+        "data": [
+          {
+            "object": "fine_tuning.job.event",
+            "created_at": "2025-01-01T10:00:00.00Z",
+            "id": "ftevent-1",
+            "level": "info",
+            "message": "job started"
+          }
+        ],
+        "has_more": false
+      }
+    }
+  }
+}
