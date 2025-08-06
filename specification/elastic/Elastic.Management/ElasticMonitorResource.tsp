@@ -302,6 +302,8 @@ interface ElasticMonitorResources {
     {
       @body body: void;
     },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Parameters = {
       /**
        * List of ips
@@ -331,6 +333,8 @@ interface ElasticMonitorResources {
     {
       @body body: void;
     },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>,
     Parameters = {
       /**
        * Name of the traffic filter
