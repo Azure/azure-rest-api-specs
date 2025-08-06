@@ -55,7 +55,7 @@ model FineTuningJobSFTTrainingMethodConfiguration {
 @removed(Versions.v1)
 model FineTuningJobSFTTrainingMethod extends FineTuningJobTrainingMethod {
   type: "supervised";
-  
+
   @doc("Configuration for the supervised fine-tuning method.")
   supervised: FineTuningJobSFTTrainingMethodConfiguration;
 }
@@ -67,7 +67,7 @@ model FineTuningJobSFTTrainingMethod extends FineTuningJobTrainingMethod {
 @doc("The hyper parameter settings used in Direct Preference Optimization fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobDPOHyperParameters { 
+model FineTuningJobDPOHyperParameters {
   @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
   batch_size?: int32;
 
@@ -130,7 +130,7 @@ union FineTuningStringOperation {
   like: "like",
 
   @doc("Not like operator")
-  ilike: "ilike"
+  ilike: "ilike",
 }
 
 @doc("A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.")
@@ -158,38 +158,38 @@ model FineTuningStringCheckGrader extends FineTuningGrader {
 union FineTuningEvaluationMetric {
   string,
 
-    @doc("bleu")
-    bleu: "bleu",
+  @doc("bleu")
+  bleu: "bleu",
 
-    @doc("fuzzy_match")
-    fuzzy_match: "fuzzy_match",
+  @doc("fuzzy_match")
+  fuzzy_match: "fuzzy_match",
 
-    @doc("gleu")
-    gleu: "gleu",
+  @doc("gleu")
+  gleu: "gleu",
 
-    @doc("meteor")
-    meteor: "meteor",
+  @doc("meteor")
+  meteor: "meteor",
 
-    @doc("rouge_1")
-    rouge_1: "rouge_1",
+  @doc("rouge_1")
+  rouge_1: "rouge_1",
 
-    @doc("rouge_2")
-    rouge_2: "rouge_2",
+  @doc("rouge_2")
+  rouge_2: "rouge_2",
 
-    @doc("rouge_3")
-    rouge_3: "rouge_3",
+  @doc("rouge_3")
+  rouge_3: "rouge_3",
 
-    @doc("rouge_4")
-    rouge_4: "rouge_4",
+  @doc("rouge_4")
+  rouge_4: "rouge_4",
 
-    @doc("rouge_5")
-    rouge_5: "rouge_5",
+  @doc("rouge_5")
+  rouge_5: "rouge_5",
 
-    @doc("rouge_l")
-    rouge_l: "rouge_l",
+  @doc("rouge_l")
+  rouge_l: "rouge_l",
 
-    @doc("cosine")
-    cosine: "cosine"
+  @doc("cosine")
+  cosine: "cosine",
 }
 
 @doc("ScoreModelGrader uses a model to assign a score to the input.")
@@ -234,58 +234,59 @@ model FineTuningPythonGrader extends FineTuningGrader {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 union FineTuningJobGraderMessageRole {
-   string,
+  string,
 
-   @doc("doc message role")
-   user : "user",
+  @doc("doc message role")
+  user: "user",
 
-   @doc("system message role")
-   system : "system",
+  @doc("system message role")
+  system: "system",
 
-   @doc("developer message role")
-   developer : "developer",
+  @doc("developer message role")
+  developer: "developer",
 
-   @doc("assistant message role")
-   assistant : "assistant"
+  @doc("assistant message role")
+  assistant: "assistant",
 }
 
 @doc("Training RFT message content base class.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessageContentBase {
+model FineTuningJobGraderMessageContentBase {}
+
+@doc("Training RFT message content base class.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobGraderMessageTextContent
+  is FineTuningJobGraderMessageContentBase {
+  @doc("type field")
+  type: string;
+
+  @doc("text field")
+  text: string;
 }
 
 @doc("Training RFT message content base class.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessageTextContent is FineTuningJobGraderMessageContentBase {
-   @doc("type field")
-   type : string;
-
-   @doc("text field")
-   text : string;
-}
-
-@doc("Training RFT message content base class.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobGraderMessageSimpleContent is FineTuningJobGraderMessageContentBase {
-   @doc("content field")
-   content : string;
+model FineTuningJobGraderMessageSimpleContent
+  is FineTuningJobGraderMessageContentBase {
+  @doc("content field")
+  content: string;
 }
 
 @doc("A ScoreModelGrader object that uses a model to assign a score to the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobGraderMessage {
-   @doc("Message type")
-   type : string;
+  @doc("Message type")
+  type: string;
 
-   @doc("Message role")
-   role : FineTuningJobGraderMessageRole;
+  @doc("Message role")
+  role: FineTuningJobGraderMessageRole;
 
-   @doc("Message content")
-   content : FineTuningJobGraderMessageContentBase;
+  @doc("Message content")
+  content: FineTuningJobGraderMessageContentBase;
 }
 
 @doc("The sampling parameters for the model.")
@@ -295,34 +296,33 @@ union FineTuningJobGraderReasoningEffort {
   string,
 
   @doc("Low reasoning effort")
-  low: "low";
+  low: "low",
 
   @doc("Medium reasoning effort")
-  medium: "medium";
+  medium: "medium",
 
   @doc("High reasoning effort")
-  high: "high";
+  high: "high",
 }
 
 @doc("The sampling parameters for the model.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderModelSamplingParam
-{
-   @doc("Seed parameter")
-   seed?: int32;
+model FineTuningJobGraderModelSamplingParam {
+  @doc("Seed parameter")
+  seed?: int32;
 
-   @doc("Temperature parameter")
-   temperature? : float64;
+  @doc("Temperature parameter")
+  temperature?: float64;
 
-   @doc("Max completions tokens parameter")
-   max_completions_tokens?: int32;
+  @doc("Max completions tokens parameter")
+  max_completions_tokens?: int32;
 
-   @doc("Top parameter")
-   top_p? : float64;
+  @doc("Top parameter")
+  top_p?: float64;
 
-   @doc("Reasoning effort parameter")
-   reasoning_effort?: FineTuningJobGraderReasoningEffort;
+  @doc("Reasoning effort parameter")
+  reasoning_effort?: FineTuningJobGraderReasoningEffort;
 }
 
 @doc("A ScoreModelGrader object that uses a model to assign a score to the input.")
@@ -330,7 +330,7 @@ model FineTuningJobGraderModelSamplingParam
 @removed(Versions.v1)
 model FineTuningScoreModelGrader extends FineTuningGrader {
   type: "score_model";
-  
+
   //@doc("The input text. This may include template strings.")
   input: Array<FineTuningJobGraderMessage>;
 
@@ -342,9 +342,9 @@ model FineTuningScoreModelGrader extends FineTuningGrader {
 
   @doc("The model to use for the evaluation.")
   range?: Array<float64>;
-  
+
   @doc("The sampling parameters for the model.")
-  sampling_params? : FineTuningJobGraderModelSamplingParam;
+  sampling_params?: FineTuningJobGraderModelSamplingParam;
 
   @doc("TBD")
   pass_threshold?: float64;
@@ -353,49 +353,47 @@ model FineTuningScoreModelGrader extends FineTuningGrader {
 @doc("A MultiGrader object combines the output of multiple graders to produce a single score.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningMultiGrader extends FineTuningGrader
-{
-   type : "multi";
+model FineTuningMultiGrader extends FineTuningGrader {
+  type: "multi";
 
-   @doc("A formula to calculate the output based on grader results.")
-   calculate_output : string;
+  @doc("A formula to calculate the output based on grader results.")
+  calculate_output: string;
 
-   @doc("Graders to be combined")
-   graders : Record<FineTuningGrader>;
+  @doc("Graders to be combined")
+  graders: Record<FineTuningGrader>;
 
-   @doc("The name of the grader.")
-   name : string;
+  @doc("The name of the grader.")
+  name: string;
 }
 
 @doc("A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningLabelModelGrader extends FineTuningGrader
-{
-   type : "label_model";
+model FineTuningLabelModelGrader extends FineTuningGrader {
+  type: "label_model";
 
-   @doc("input labels")
-   input : Array<FineTuningJobGraderMessage>;
+  @doc("input labels")
+  input: Array<FineTuningJobGraderMessage>;
 
-   @doc("The labels to assign to each item in the evaluation.")
-   labels : Array<string>;
+  @doc("The labels to assign to each item in the evaluation.")
+  labels: Array<string>;
 
-   @doc("The model to use for the evaluation. Must support structured outputs.")
+  @doc("The model to use for the evaluation. Must support structured outputs.")
   `model`: string;
 
-   @doc("The name of the grader.")
-   name : string;
+  @doc("The name of the grader.")
+  name: string;
 
-   @doc("The labels that indicate a passing result. Must be a subset of labels.")
-   passing_labels : Array<string>;
+  @doc("The labels that indicate a passing result. Must be a subset of labels.")
+  passing_labels: Array<string>;
 }
 
-// RFT graders end 
+// RFT graders end
 
 @doc("Configuration for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTHyperParameters { 
+model FineTuningJobRFTHyperParameters {
   @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
   batch_size?: int32;
 
@@ -430,17 +428,18 @@ model FineTuningJobRFTResponseFormat {
 @doc("Gets the response format for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTResponseJsonSchema extends FineTuningJobRFTResponseFormat {
+model FineTuningJobRFTResponseJsonSchema
+  extends FineTuningJobRFTResponseFormat {
   type: "json_schema";
 
   @doc("JSON schema response for RFT")
-  json_schema: Record<unknown>
+  json_schema: Record<unknown>;
 }
 
 @doc("Configuration for the reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTTrainingMethodConfiguration { 
+model FineTuningJobRFTTrainingMethodConfiguration {
   @doc("The grader used for the fine-tuning job.")
   grader: FineTuningGrader;
 
@@ -481,16 +480,16 @@ model FineTuningJobMistralCompletionHyperParameters {
   weight_decay?: float64 = 0.1;
 
   @doc("(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune")
-  warmup_fraction? : float64 = 0.05;
+  warmup_fraction?: float64 = 0.05;
 
   @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
-  epochs? : int32;
+  epochs?: int32;
 
   @doc("Seq len parameter")
-  seq_len? : int32;
+  seq_len?: int32;
 
   @doc("Fim ratio parameter")
-  fim_ratio? : float64;
+  fim_ratio?: float64;
 }
 
 @doc("Configuration for Mistral Completion fine-tuning method.")
@@ -504,9 +503,10 @@ model FineTuningJobMistralCompletionTrainingMethodConfiguration {
 @doc("Mistral Completion Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralCompletionTrainingMethod extends FineTuningJobTrainingMethod {
+model FineTuningJobMistralCompletionTrainingMethod
+  extends FineTuningJobTrainingMethod {
   type: "MistralCompletion";
-  
+
   @doc("Configuration for Mistral Completion fine-tuning method.")
   mistralCompletion: FineTuningJobMistralCompletionTrainingMethodConfiguration;
 }
@@ -531,13 +531,13 @@ model FineTuningJobMistralClassifierHyperParameters {
   weight_decay?: float64 = 0.1;
 
   @doc("(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune")
-  warmup_fraction? : float64 = 0.05;
+  warmup_fraction?: float64 = 0.05;
 
   @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
-  epochs? : int32;
+  epochs?: int32;
 
   @doc("Seq len parameter")
-  seq_len? : int32;
+  seq_len?: int32;
 }
 
 @doc("Configuration for Mistral Classifier fine-tuning method.")
@@ -551,13 +551,13 @@ model FineTuningJobMistralClassifierTrainingMethodConfiguration {
 @doc("Mistral Classifier Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralClassifierTrainingMethod extends FineTuningJobTrainingMethod {
+model FineTuningJobMistralClassifierTrainingMethod
+  extends FineTuningJobTrainingMethod {
   type: "MistralClassifier";
-  
+
   @doc("Configuration for Mistral Classifier fine-tuning method.")
   mistralClassifier: FineTuningJobMistralClassifierTrainingMethodConfiguration;
 }
-
 
 //////////////////
 
@@ -639,16 +639,16 @@ model FineTuningJob {
   finished_at?: utcDateTime;
 
   @doc("The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs")
-  hyperparameters? : FineTuningJobSFTHyperParameters;
+  hyperparameters?: FineTuningJobSFTHyperParameters;
 
   @doc("A list of integrations to enable for this fine-tuning job.")
   integrations?: Array<FineTuningJobIntegration>;
 
   /**
-  * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
-  *
-  * Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
-  */
+   * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
+   *
+   * Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+   */
   metadata?: Record<string>;
 
   @doc("The method used for fine-tuning.")
@@ -658,7 +658,7 @@ model FineTuningJob {
   `model`: string;
 
   @doc("The organization that owns the fine-tuning job.")
-  organization_id : string;
+  organization_id: string;
 
   @doc("The compiled results file ID(s) for the fine-tuning job. The file is only available for successfully completed fine-tune runs.")
   result_files?: Array<string>;
@@ -679,16 +679,16 @@ model FineTuningJob {
   validation_file?: string;
 
   @doc("The additional 1P parameters used to train the fine-tuned model. This is Azure AI specific parameter.")
-  additional_Parameters? : Record<string>;
+  additional_Parameters?: Record<string>;
 
   @doc("A string of up to 64 characters that will be added to your fine-tuned model name.")
-  suffix? : string;
+  suffix?: string;
 
   @doc("The SKU used for training. This is Azure AI specific parameter")
-  TrainingType? : TrainingType;
+  TrainingType?: TrainingType;
 
   @doc("Inference configurations. This is Azure AI specific parameter")
-  inference_configs? : InferenceConfigs;
+  inference_configs?: InferenceConfigs;
 }
 
 @doc("SKU available for training")
@@ -704,7 +704,7 @@ union TrainingType {
   GlobalStandard: "GlobalStandard",
 
   @doc("DeveloperTier training job uses inference capacity when available")
-  DeveloperTier: "DeveloperTier"
+  DeveloperTier: "DeveloperTier",
 }
 
 @doc("SKU available for training")
@@ -720,7 +720,7 @@ union InferenceSku {
   Standard: "Standard",
 
   @doc("Global Standard refers to a cross-region pay-go inference sku.")
-  GlobalStandard: "GlobalStandard"
+  GlobalStandard: "GlobalStandard",
 }
 
 @doc("Inference configurations")
@@ -728,19 +728,19 @@ union InferenceSku {
 @removed(Versions.v1)
 model InferenceConfigs {
   @doc("Is model deployed after tuning completes")
-  auto_inference_enabled?: boolean,
+  auto_inference_enabled?: boolean;
 
   @doc("SKU used for inference")
-  inference_sku?: InferenceSku,
+  inference_sku?: InferenceSku;
 
   @doc("Deployment identifier")
-  auto_deployment_id?: string,
+  auto_deployment_id?: string;
 
   @doc("Deployment status")
-  auto_deployment_status?: string,
+  auto_deployment_status?: string;
 
   @doc("Deployment error information")
-  auto_deployment_error_message?: string
+  auto_deployment_error_message?: string;
 }
 
 //
@@ -764,10 +764,10 @@ model FineTuningJobCreation {
   integrations?: Array<FineTuningJobIntegration>;
 
   /**
-  * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
-  *
-  * Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
-  */
+   * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
+   *
+   * Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+   */
   metadata?: Record<string>;
 
   @doc("The method used for fine-tuning.")
@@ -783,10 +783,10 @@ model FineTuningJobCreation {
   validation_file?: string;
 
   @doc("The SKU used for training. This is Azure AI specific parameter")
-  TrainingType? : TrainingType;
+  TrainingType?: TrainingType;
 
   @doc("Inference configurations. This is Azure AI specific parameter")
-  inference_configs? : InferenceConfigs;
+  inference_configs?: InferenceConfigs;
 }
 
 @doc("The response data for a requested list of items.")
@@ -794,7 +794,7 @@ model FineTuningJobCreation {
 @removed(Versions.v1)
 model FineTuningPaginatedResponse<T> {
   @doc("Response type")
-  object : string = "list";
+  object: string = "list";
 
   @doc("Items list.")
   @pageItems
@@ -809,26 +809,26 @@ model FineTuningPaginatedResponse<T> {
 @removed(Versions.v1)
 model FineTuningJobEvent {
   @doc("The object type, which is always fine_tuning.job.event")
-  object : string = "fine_tuning.job.event";
+  object: string = "fine_tuning.job.event";
 
   @doc("The time when the fine-tuning event was created.")
   created_at: utcDateTime;
 
-  @doc("The data associated with the event.")
   #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  @doc("The data associated with the event.")
   data?: unknown;
 
   @doc("The object identifier.")
-  id : string;
+  id: string;
 
   @doc("The log level of the event.")
-  level : string;
+  level: string;
 
   @doc("The message of the event.")
-  message : string;
+  message: string;
 
   @doc("The type of event.")
-  type? : string;
+  type?: string;
 }
 
 @doc("Metrics at the step number during the fine-tuning job.")
@@ -836,25 +836,25 @@ model FineTuningJobEvent {
 @removed(Versions.v1)
 model FineTuningJobCheckpointMetric {
   @doc("metric full validation loss")
-  full_valid_loss? : float64;
+  full_valid_loss?: float64;
 
   @doc("metric full valid mean token accuracy")
-  full_valid_mean_token_accuracy? : float64;
+  full_valid_mean_token_accuracy?: float64;
 
   @doc("metric step")
-  step? : float64;
+  step?: float64;
 
   @doc("metric train loss")
-  train_loss? : float64;
+  train_loss?: float64;
 
   @doc("metric train mean token accuracy")
-  train_mean_token_accuracy? : float64;
+  train_mean_token_accuracy?: float64;
 
   @doc("metric valid loss")
-  valid_loss? : float64;
+  valid_loss?: float64;
 
   @doc("metric valid mean token accuracy")
-  valid_mean_token_accuracy? : float64;
+  valid_mean_token_accuracy?: float64;
 }
 
 @doc("The fine_tuning.job.checkpoint object represents a model checkpoint for a fine-tuning job that is ready to use.")
@@ -862,23 +862,23 @@ model FineTuningJobCheckpointMetric {
 @removed(Versions.v1)
 model FineTuningJobCheckpoint {
   @doc("The object type, which is always fine_tuning.job.checkpoint")
-  object : string = "fine_tuning.job.checkpoint";
+  object: string = "fine_tuning.job.checkpoint";
 
   @doc("The time when the fine-tuning checkpoint was created.")
   created_at: utcDateTime;
 
   @doc("The name of the fine-tuned checkpoint model that is created.")
-  fine_tuned_model_checkpoint : string;
+  fine_tuned_model_checkpoint: string;
 
   @doc("The name of the fine-tuning job that this checkpoint was created from.")
-  fine_tuning_job_id : string;
+  fine_tuning_job_id: string;
 
   @doc("The checkpoint identifier, which can be referenced in the API endpoints.")
-  id : string;
+  id: string;
 
   @doc("Metrics at the step number during the fine-tuning job.")
-  metrics : FineTuningJobCheckpointMetric;
+  metrics: FineTuningJobCheckpointMetric;
 
   @doc("The step number that the checkpoint was created at.")
-  step_number : int32;
+  step_number: int32;
 }
