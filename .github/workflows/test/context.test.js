@@ -307,7 +307,7 @@ describe("extractInputs", () => {
   it("workflow_run:completed:workflow_run", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: { artifacts: [{ name: "issue-number=123" }] },
+      data: { artifacts: [{ name: "issue-number=123" }, { name: "head-sha=abc123" }] },
     });
 
     const context = {
@@ -316,7 +316,7 @@ describe("extractInputs", () => {
         action: "completed",
         workflow_run: {
           event: "workflow_run",
-          head_sha: "abc123",
+          head_sha: "def456",
           id: 456,
           repository: {
             name: "TestRepoName",
@@ -342,7 +342,7 @@ describe("extractInputs", () => {
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: "abc123",
+      head_sha: "",
       issue_number: NaN,
       run_id: 456,
     });
@@ -353,7 +353,7 @@ describe("extractInputs", () => {
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: "abc123",
+      head_sha: "",
       issue_number: NaN,
       run_id: 456,
     });
@@ -364,7 +364,7 @@ describe("extractInputs", () => {
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: "abc123",
+      head_sha: "",
       issue_number: NaN,
       run_id: 456,
     });
@@ -387,7 +387,7 @@ describe("extractInputs", () => {
   it("workflow_run:completed:check_run", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: { artifacts: [] },
+      data: { artifacts: [{ name: "head-sha=abc123" }] },
     });
 
     const context = {
@@ -396,7 +396,7 @@ describe("extractInputs", () => {
         action: "completed",
         workflow_run: {
           event: "check_run",
-          head_sha: "abc123",
+          head_sha: "def456",
           id: 456,
           repository: {
             name: "TestRepoName",
