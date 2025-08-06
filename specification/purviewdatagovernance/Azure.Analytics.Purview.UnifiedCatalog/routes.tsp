@@ -821,7 +821,7 @@ op CreateKeyResultAsync is RpcOperation<
     @bodyRoot
     keyResult: KeyResult;
   },
-  KeyResult
+  CreateKeyResultResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
