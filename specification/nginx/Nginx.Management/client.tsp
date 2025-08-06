@@ -7,10 +7,13 @@ using Nginx.NginxPlus;
 @@clientName(Nginx.NginxPlus, "NginxManagementClient", "javascript");
 
 // Model name overrides
-@@clientName(ApiKeyResponseProperties, "NginxDeploymentApiKeyProperties");
 @@clientName(Certificate, "NginxCertificate");
 @@clientName(ApiKeyRequestProperties, "NginxDeploymentApiKeyRequestProperties");
 
+@@clientName(ApiKeyResponseProperties,
+  "NginxDeploymentApiKeyResponseProperties",
+  "!csharp"
+);
 @@clientName(ApiKey, "NginxDeploymentApiKeyResponse", "!csharp");
 @@clientName(ApiKeyRequest, "NginxDeploymentApiKeyRequest", "!csharp");
 @@clientName(AnalysisConfig, "AnalysisCreateConfig", "!csharp");
@@ -127,6 +130,10 @@ using Nginx.NginxPlus;
 );
 @@alternateType(ApiKeyResponseProperties.endDateTime, utcDateTime, "csharp");
 @@alternateType(ApiKeyRequestProperties.endDateTime, utcDateTime, "csharp");
+@@clientName(ApiKeyResponseProperties,
+  "NginxDeploymentApiKeyProperties",
+  "csharp"
+);
 @@clientName(AnalysisCreate, "NginxAnalysisContent", "csharp");
 @@clientName(AnalysisConfig, "NginxAnalysisConfig", "csharp");
 @@clientName(NginxCertificateErrorResponseBody,
