@@ -150,6 +150,11 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     per_page: PER_PAGE_MAX,
   });
 
+  core.info("Statuses:");
+  statuses.forEach((status) => {
+    core.info(`- ${status.context}: ${status.state}`);
+  });
+
   const requiredStatusNames = ["Swagger LintDiff", "Swagger Avocado"];
 
   /**
