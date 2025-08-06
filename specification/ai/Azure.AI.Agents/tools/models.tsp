@@ -548,7 +548,7 @@ model RunStepBrowserAutomationToolCall extends RunStepToolCall {
 
   @doc("Details of the browser automation tool call.")
   @encodedName("application/json", "browser_automation")
-  browserAutomation: BrowserAutomationToolCallDetails
+  browserAutomation: BrowserAutomationToolCallDetails;
 }
 
 @doc("""
