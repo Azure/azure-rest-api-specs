@@ -7,7 +7,7 @@ using Rest;
 using Http;
 using Azure.ResourceManager;
 
-namespace NGINX.NGINXPLUS;
+namespace Nginx.NginxPlus;
 
 /**
  * API key resource returned by the service.
@@ -44,7 +44,7 @@ model ApiKeyResponseProperties {
   /**
    * Expiry of the key in UTC date-time format.
    */
-  endDateTime: string;
+  endDateTime?: string;
 }
 
 /**
@@ -61,7 +61,7 @@ model ApiKeyRequestProperties {
   /**
    * Expiry of the key in UTC date-time format.
    */
-  endDateTime: string;
+  endDateTime?: string;
 }
 
 /**
