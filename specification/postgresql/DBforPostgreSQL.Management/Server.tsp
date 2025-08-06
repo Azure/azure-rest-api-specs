@@ -54,8 +54,15 @@ interface Servers {
   /**
    * Updates an existing server. The request body can contain one or multiple of the properties present in the normal server definition.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Server, PatchModel = ServerForPatch>;
+  update is ArmCustomPatchAsync<
+    Server,
+    PatchModel = ServerForPatch,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
+  >;
 
   /**
    * Deletes or drops an existing server.

@@ -653,15 +653,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -713,7 +711,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -926,7 +924,7 @@
             "description": "Required parameters for adding a server administrator associated to a Microsoft Entra principal.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AdministratorMicrosoftEntra"
+              "$ref": "#/definitions/AdministratorMicrosoftEntraAdd"
             }
           }
         ],
@@ -934,6 +932,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -958,7 +960,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -4322,6 +4324,17 @@
         }
       ]
     },
+    "AdministratorMicrosoftEntraAdd": {
+      "type": "object",
+      "description": "Server administrator associated to a Microsoft Entra principal.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorMicrosoftEntraPropertiesForAdd",
+          "description": "Properties of the server administrator associated to a Microsoft Entra principal.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "AdministratorMicrosoftEntraList": {
       "type": "object",
       "description": "List of server administrators associated to Microsoft Entra principals.",
@@ -4379,6 +4392,38 @@
           "description": "Identifier of the tenant in which the Microsoft Entra principal exists.",
           "x-ms-mutability": [
             "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "AdministratorMicrosoftEntraPropertiesForAdd": {
+      "type": "object",
+      "description": "Properties of a server administrator associated to a Microsoft Entra principal.",
+      "properties": {
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "Type of Microsoft Entra principal to which the server administrator is associated.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "principalName": {
+          "type": "string",
+          "description": "Name of the Microsoft Entra principal.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Identifier of the tenant in which the Microsoft Entra principal exists.",
+          "x-ms-mutability": [
             "update",
             "create"
           ]
