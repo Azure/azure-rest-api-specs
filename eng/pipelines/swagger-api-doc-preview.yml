@@ -159,13 +159,21 @@ jobs:
             Write-Host "Artifact downloaded successfully"
 
       - pwsh: |
-          # Read the report.json file downloaded from the docs build artifact
-          $reportRaw = Get-Content -Path "./report.json" -Raw
-          $report = $reportRaw | ConvertFrom-Json -AsHashtable
-
           # Get build ID from buildstart.json (set during the "Start docs build" step)
           $buildStart = Get-Content buildstart.json | ConvertFrom-Json
           $buildLink = "https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
+
+          if (!(Test-Path -Path "./report.json")) {
+            Write-Host "Report file not found. Docs build may have failed or not produced the expected artifact."
+            Write-Host "##vso[task.setvariable variable=CheckUrl]${buildLink}"
+            Write-Host "##vso[task.setvariable variable=CheckDescription]Docs build failed with no output artifacts (click to see pipeline logs)"
+            Write-Host "##vso[task.setvariable variable=CheckState]failure"
+            exit 0
+          }
+
+          # Read the report.json file downloaded from the docs build artifact
+          $reportRaw = Get-Content -Path "./report.json" -Raw
+          $report = $reportRaw | ConvertFrom-Json -AsHashtable
 
           if ($report.status -ne "Succeeded") {
             Write-Host "Docs build failed with status: $($report.status)"
