@@ -2907,6 +2907,11 @@ model StorageAccountPropertiesCreateParameters {
    */
   routingPreference?: RoutingPreference;
 
+    /**
+   * Maintains information about the Internet protocol opted by the user.
+   */
+  dualStackEndpointPreference?: DualStackEndpointPreference;
+
   /**
    * Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.
    */
@@ -2947,12 +2952,6 @@ model StorageAccountPropertiesCreateParameters {
    * Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.
    */
   dnsEndpointType?: DnsEndpointType;
-
-  /**
-   * Creation time of the deleted account. This property should only be provided while requesting deleted storage account recovery.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  deletedAccountCreationTime?: utcDateTime;
 }
 
 /**
@@ -3155,6 +3154,11 @@ model NetworkRuleSet {
   ipRules?: IPRule[];
 
   /**
+   * Sets the IPv6 ACL rules.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  ipv6Rules?: IPRule[];
+  /**
    * Specifies the default action of allow or deny when no other rules match.
    */
   defaultAction: DefaultAction = DefaultAction.Allow;
@@ -3200,7 +3204,7 @@ model VirtualNetworkRule {
  */
 model IPRule {
   /**
-   * Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
+   * Specifies the IP or IP range in CIDR format.
    */
   value: string;
 
@@ -3342,6 +3346,16 @@ model RoutingPreference {
    * A boolean flag which indicates whether internet routing storage endpoints are to be published
    */
   publishInternetEndpoints?: boolean;
+}
+
+/**
+ * Dual-stack endpoint preference defines whether IPv6 endpoints are going to be published.
+ */
+model DualStackEndpointPreference {
+  /**
+   * A boolean flag which indicates whether IPv6 storage endpoints are to be published.
+   */
+  publishIpv6Endpoint?: boolean;
 }
 
 /**
@@ -3541,6 +3555,11 @@ model StorageAccountProperties {
    */
   routingPreference?: RoutingPreference;
 
+    /**
+   * Maintains information about the Internet protocol opted by the user.
+   */
+  dualStackEndpointPreference?: DualStackEndpointPreference;
+
   /**
    * Blob restore status
    */
@@ -3665,6 +3684,11 @@ model Endpoints {
    * Gets the internet routing storage endpoints
    */
   internetEndpoints?: StorageAccountInternetEndpoints;
+
+    /**
+   * Gets the IPv6 storage endpoints.
+   */
+  ipv6Endpoints?: StorageAccountIpv6Endpoints;
 }
 
 /**
@@ -3735,6 +3759,57 @@ model StorageAccountInternetEndpoints {
    */
   @visibility(Lifecycle.Read)
   dfs?: string;
+}
+
+/**
+ * The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via an IPv6 endpoint.
+ */
+model StorageAccountIpv6Endpoints {
+  /**
+   * Gets the blob endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  blob?: string;
+
+  /**
+   * Gets the queue endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  queue?: string;
+
+  /**
+   * Gets the table endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  table?: string;
+
+  /**
+   * Gets the file endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  file?: string;
+
+  /**
+   * Gets the web endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  web?: string;
+
+  /**
+   * Gets the dfs endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  dfs?: string;
+
+  /**
+   * Gets the microsoft routing storage endpoints.
+   */
+  microsoftEndpoints?: StorageAccountMicrosoftEndpoints;
+
+  /**
+   * Gets the internet routing storage endpoints
+   */
+  internetEndpoints?: StorageAccountInternetEndpoints;
 }
 
 /**
@@ -4436,7 +4511,7 @@ model ListServiceSasResponse {
 }
 
 /**
- * The properties of a storage account’s ongoing or enqueued migration.
+ * The properties of a storage account's ongoing or enqueued migration.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageAccountMigrationProperties {

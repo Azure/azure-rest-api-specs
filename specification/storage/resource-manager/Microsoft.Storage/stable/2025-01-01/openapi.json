@@ -574,9 +574,6 @@
           }
         },
         "x-ms-examples": {
-          "DeletedStorageAccountRestore": {
-            "$ref": "./examples/DeletedStorageAccountRestore.json"
-          },
           "NfsV3AccountCreate": {
             "$ref": "./examples/NfsV3AccountCreate.json"
           },
@@ -6113,7 +6110,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -6201,7 +6198,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -6277,7 +6274,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -8140,6 +8137,16 @@
         ]
       }
     },
+    "DualStackEndpointPreference": {
+      "type": "object",
+      "description": "Dual-stack endpoint preference defines whether IPv6 endpoints are going to be published.",
+      "properties": {
+        "publishIpv6Endpoint": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether IPv6 storage endpoints are to be published."
+        }
+      }
+    },
     "EnabledProtocols": {
       "type": "string",
       "description": "The authentication protocol that is used for the file share. Can only be specified when creating a share.",
@@ -8460,6 +8467,10 @@
         "internetEndpoints": {
           "$ref": "#/definitions/StorageAccountInternetEndpoints",
           "description": "Gets the internet routing storage endpoints"
+        },
+        "ipv6Endpoints": {
+          "$ref": "#/definitions/StorageAccountIpv6Endpoints",
+          "description": "Gets the IPv6 storage endpoints."
         }
       }
     },
@@ -9098,7 +9109,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.",
+          "description": "Specifies the IP or IP range in CIDR format.",
           "x-ms-client-name": "IPAddressOrRange"
         },
         "action": {
@@ -10611,6 +10622,14 @@
         "ipRules": {
           "type": "array",
           "description": "Sets the IP ACL rules",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "ipv6Rules": {
+          "type": "array",
+          "description": "Sets the IPv6 ACL rules.",
           "items": {
             "$ref": "#/definitions/IPRule"
           },
@@ -12707,6 +12726,50 @@
         }
       }
     },
+    "StorageAccountIpv6Endpoints": {
+      "type": "object",
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via an IPv6 endpoint.",
+      "properties": {
+        "blob": {
+          "type": "string",
+          "description": "Gets the blob endpoint.",
+          "readOnly": true
+        },
+        "queue": {
+          "type": "string",
+          "description": "Gets the queue endpoint.",
+          "readOnly": true
+        },
+        "table": {
+          "type": "string",
+          "description": "Gets the table endpoint.",
+          "readOnly": true
+        },
+        "file": {
+          "type": "string",
+          "description": "Gets the file endpoint.",
+          "readOnly": true
+        },
+        "web": {
+          "type": "string",
+          "description": "Gets the web endpoint.",
+          "readOnly": true
+        },
+        "dfs": {
+          "type": "string",
+          "description": "Gets the dfs endpoint.",
+          "readOnly": true
+        },
+        "microsoftEndpoints": {
+          "$ref": "#/definitions/StorageAccountMicrosoftEndpoints",
+          "description": "Gets the microsoft routing storage endpoints."
+        },
+        "internetEndpoints": {
+          "$ref": "#/definitions/StorageAccountInternetEndpoints",
+          "description": "Gets the internet routing storage endpoints"
+        }
+      }
+    },
     "StorageAccountKey": {
       "type": "object",
       "description": "An access key for the storage account.",
@@ -12828,7 +12891,7 @@
     },
     "StorageAccountMigrationProperties": {
       "type": "object",
-      "description": "The properties of a storage account’s ongoing or enqueued migration.",
+      "description": "The properties of a storage account's ongoing or enqueued migration.",
       "properties": {
         "targetSkuName": {
           "$ref": "#/definitions/SkuName",
@@ -12999,6 +13062,10 @@
           "description": "Maintains information about the network routing choice opted by the user for data transfer",
           "x-ms-client-name": "RoutingPreference"
         },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
+        },
         "blobRestoreStatus": {
           "$ref": "#/definitions/BlobRestoreStatus",
           "description": "Blob restore status",
@@ -13142,6 +13209,10 @@
           "description": "Maintains information about the network routing choice opted by the user for data transfer",
           "x-ms-client-name": "RoutingPreference"
         },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
+        },
         "allowBlobPublicAccess": {
           "type": "boolean",
           "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is false for this property.",
@@ -13176,11 +13247,6 @@
         "dnsEndpointType": {
           "$ref": "#/definitions/DnsEndpointType",
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
-        },
-        "deletedAccountCreationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the deleted account. This property should only be provided while requesting deleted storage account recovery."
         }
       }
     },
