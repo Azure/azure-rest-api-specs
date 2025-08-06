@@ -75,6 +75,7 @@ export async function setStatusImpl({
     throw new Error(`issue_number must be a positive integer: ${issue_number}`);
   }
 
+  core.setOutput("head_sha", head_sha);
   core.setOutput("issue_number", issue_number);
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
