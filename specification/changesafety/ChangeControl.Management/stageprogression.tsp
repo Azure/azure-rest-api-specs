@@ -130,6 +130,15 @@ scalar StageProgressionResourceId
 interface StageProgressions {
   get is ArmResourceRead<StageProgression>;
 
+  @added(Versions.v2025_03_01_preview)
+  getAtSubscriptionLevel is ArmResourceRead<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
   createOrUpdate is ArmResourceCreateOrReplaceSync<StageProgression>;
   createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
     StageProgression,
