@@ -14,14 +14,14 @@ parameters:
 steps:
   - task: PublishPipelineArtifact@1
     condition: and(succeeded(), ${{ parameters.CustomCondition }})
-    displayName: ${{ format('Publish {0} Artifacts', parameters.ArtifactName) }}
+    displayName: 'Publish ${{ parameters.ArtifactName }} Artifacts'
     inputs:
       artifactName: '${{ parameters.ArtifactName }}'
       path: '${{ parameters.ArtifactPath }}'
 
   - task: PublishPipelineArtifact@1
     condition: and(failed(), ${{ parameters.CustomCondition }})
-    displayName: ${{ format('Publish failed {0} Artifacts', parameters.ArtifactName) }}
+    displayName: 'Publish failed ${{ parameters.ArtifactName }} Artifacts'
     inputs:
       artifactName: '${{ parameters.ArtifactName }}-FailedAttempt$(System.JobAttempt)'
       path: '${{ parameters.ArtifactPath }}'
