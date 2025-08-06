@@ -1406,6 +1406,7 @@ model MetricsStatusRequestParameter {
  * Reusable representation of an email address
  */
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
+@mediaTypeHint("application/json")
 scalar email extends string;
 
 @@OpenAPI.extension(AppServicesListResponse.value,
