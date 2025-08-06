@@ -48,13 +48,15 @@ interface Clusters {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     }
   >;
@@ -71,19 +73,27 @@ interface Clusters {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = Cluster> &
+    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Cluster;
+
+      /**
+       * The URL to retrieve the status of the asynchronous operation.
+       */
+      @header("Location")
+      location?: string;
     }),
     OptionalRequestBody = true
   >;
@@ -97,16 +107,18 @@ interface Clusters {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<OperationStatusResult> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -128,39 +140,43 @@ interface Clusters {
   /**
    * Trigger the continuation of an update for a cluster with a matching update strategy that has paused after completing a segment of the update.
    */
-  continueUpdateVersion is ArmResourceActionAsync<
+  continueUpdateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterContinueUpdateVersionParameters,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
   /**
    * Deploy the cluster using the rack configuration provided during creation.
    */
-  deploy is ArmResourceActionAsync<
+  deploy is ArmResourceActionAsyncBase<
     Cluster,
     ClusterDeployParameters,
-    ArmResponse<OperationStatusResult>,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
 
   /**
    * Triggers the execution of a runtime protection scan to detect and remediate detected issues, in accordance with the cluster configuration.
    */
-  scanRuntime is ArmResourceActionAsync<
+  scanRuntime is ArmResourceActionAsyncBase<
     Cluster,
     ClusterScanRuntimeParameters,
-    ArmResponse<OperationStatusResult>,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
 
   /**
    * Update the version of the provided cluster to one of the available supported versions.
    */
-  updateVersion is ArmResourceActionAsync<
+  updateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterUpdateVersionParameters,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 }
 

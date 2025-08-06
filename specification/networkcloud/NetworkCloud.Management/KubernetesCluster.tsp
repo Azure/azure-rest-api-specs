@@ -46,13 +46,15 @@ interface KubernetesClusters {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     }
   >;
@@ -69,19 +71,27 @@ interface KubernetesClusters {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<KubernetesCluster> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = KubernetesCluster> &
+    Response = ArmResponse<KubernetesCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = KubernetesCluster> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: KubernetesCluster;
+
+      /**
+       * The URL to retrieve the status of the asynchronous operation.
+       */
+      @header("Location")
+      location?: string;
     }),
     OptionalRequestBody = true
   >;
@@ -95,16 +105,18 @@ interface KubernetesClusters {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<OperationStatusResult> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -126,10 +138,11 @@ interface KubernetesClusters {
   /**
    * Restart a targeted node of a Kubernetes cluster.
    */
-  restartNode is ArmResourceActionAsync<
+  restartNode is ArmResourceActionAsyncBase<
     KubernetesCluster,
     KubernetesClusterRestartNodeParameters,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<KubernetesCluster>
   >;
 }
 

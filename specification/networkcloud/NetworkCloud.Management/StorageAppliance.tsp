@@ -47,13 +47,15 @@ interface StorageAppliances {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     }
   >;
@@ -70,19 +72,27 @@ interface StorageAppliances {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<StorageAppliance> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = StorageAppliance> &
+    Response = ArmResponse<StorageAppliance> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageAppliance> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: StorageAppliance;
+
+      /**
+       * The URL to retrieve the status of the asynchronous operation.
+       */
+      @header("Location")
+      location: string;
     }),
     OptionalRequestBody = true
   >;
@@ -97,16 +107,18 @@ interface StorageAppliances {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<OperationStatusResult> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -128,19 +140,21 @@ interface StorageAppliances {
   /**
    * Disable remote vendor management of the provided storage appliance.
    */
-  disableRemoteVendorManagement is ArmResourceActionAsync<
+  disableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     void,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>
   >;
 
   /**
    * Enable remote vendor management of the provided storage appliance.
    */
-  enableRemoteVendorManagement is ArmResourceActionAsync<
+  enableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     StorageApplianceEnableRemoteVendorManagementParameters,
-    ArmResponse<OperationStatusResult>,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>,
     OptionalRequestBody = true
   >;
 }

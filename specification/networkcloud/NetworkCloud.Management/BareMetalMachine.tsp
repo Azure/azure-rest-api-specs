@@ -47,13 +47,15 @@ interface BareMetalMachines {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     }
   >;
@@ -70,19 +72,27 @@ interface BareMetalMachines {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<BareMetalMachine> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = BareMetalMachine> &
+    Response = ArmResponse<BareMetalMachine> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BareMetalMachine> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BareMetalMachine;
+
+      /**
+       * The URL to retrieve the status of the asynchronous operation.
+       */
+      @header("Location")
+      location?: string;
     }),
     OptionalRequestBody = true
   >;
@@ -97,16 +107,18 @@ interface BareMetalMachines {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResponse<OperationStatusResult> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -128,94 +140,104 @@ interface BareMetalMachines {
   /**
    * Cordon the provided bare metal machine's Kubernetes node.
    */
-  cordon is ArmResourceActionAsync<
+  cordon is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineCordonParameters,
-    ArmResponse<OperationStatusResult>,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
 
   /**
    * Power off the provided bare metal machine.
    */
-  powerOff is ArmResourceActionAsync<
+  powerOff is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachinePowerOffParameters,
-    ArmResponse<OperationStatusResult>,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
 
   /**
    * Reimage the provided bare metal machine.
    */
-  reimage is ArmResourceActionAsync<
+  reimage is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Replace the provided bare metal machine.
    */
-  replace is ArmResourceActionAsync<
+  replace is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineReplaceParameters,
-    ArmResponse<OperationStatusResult>,
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
 
   /**
    * Restart the provided bare metal machine.
    */
-  restart is ArmResourceActionAsync<
+  restart is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Run the command or the script on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
-  runCommand is ArmResourceActionAsync<
+  runCommand is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunCommandParameters,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Run one or more data extractions on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
-  runDataExtracts is ArmResourceActionAsync<
+  runDataExtracts is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Run one or more read-only commands on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
-  runReadCommands is ArmResourceActionAsync<
+  runReadCommands is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunReadCommandsParameters,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Start the provided bare metal machine.
    */
-  start is ArmResourceActionAsync<
+  start is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
   /**
    * Uncordon the provided bare metal machine's Kubernetes node.
    */
-  uncordon is ArmResourceActionAsync<
+  uncordon is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmResponse<OperationStatusResult>
+    Response = ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 }
 

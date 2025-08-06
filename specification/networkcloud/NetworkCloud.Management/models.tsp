@@ -1667,6 +1667,7 @@ model AdministrativeCredentials {
    * The password of the administrator of the device used during initialization.
    */
   @minLength(1)
+  @secret
   password: string;
 
   /**
@@ -1944,7 +1945,7 @@ model CloudServicesNetworkProperties {
   /**
    * The indicator of whether the platform default endpoints are allowed for the egress traffic.
    */
-  enableDefaultEgressEndpoints?: CloudServicesNetworkEnableDefaultEgressEndpoints;
+  enableDefaultEgressEndpoints?: CloudServicesNetworkEnableDefaultEgressEndpoints = CloudServicesNetworkEnableDefaultEgressEndpoints.True;
 
   /**
    * The full list of additional and default egress endpoints that are currently enabled.
@@ -1991,6 +1992,7 @@ model EgressEndpoint {
    * The list of endpoint dependencies.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @minItems(1)
   endpoints: EndpointDependency[];
 }
 
@@ -2473,7 +2475,8 @@ model IdentitySelector {
   /**
    * The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.
    */
-  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier | null;
 }
 
 /**
@@ -2524,6 +2527,7 @@ model ClusterCapacity {
   /**
    * The remaining appliance-based storage in GB available for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableApplianceStorageGB?: int64;
 
   /**
@@ -2534,16 +2538,19 @@ model ClusterCapacity {
   /**
    * The remaining machine or host-based storage in GB available for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableHostStorageGB?: int64;
 
   /**
    * The remaining memory in GB that are available in this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableMemoryGB?: int64;
 
   /**
    * The total appliance-based storage in GB supported by this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalApplianceStorageGB?: int64;
 
   /**
@@ -2554,11 +2561,13 @@ model ClusterCapacity {
   /**
    * The total machine or host-based storage in GB supported by this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalHostStorageGB?: int64;
 
   /**
    * The total memory supported by this cluster for workload use. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalMemoryGB?: int64;
 }
 
@@ -2574,6 +2583,7 @@ model ServicePrincipalInformation {
   /**
    * The password of the service principal.
    */
+  @secret
   password: string;
 
   /**
@@ -2619,6 +2629,7 @@ model ValidationThreshold {
   /**
    * The numeric threshold value.
    */
+  @minValue(0)
   value: int64;
 }
 
@@ -2690,12 +2701,14 @@ model ClusterUpdateStrategy {
   /**
    * The numeric threshold value.
    */
+  @minValue(0)
   thresholdValue: int64;
 
   /**
    * The time to wait between the increments of update defined by the strategy.
    */
   @maxValue(60)
+  @minValue(0)
   waitTimeMinutes?: int64 = 15;
 }
 
@@ -2706,7 +2719,7 @@ model VulnerabilityScanningSettings {
   /**
    * The mode selection for container vulnerability scanning.
    */
-  containerScan?: VulnerabilityScanningSettingsContainerScan;
+  containerScan?: VulnerabilityScanningSettingsContainerScan = VulnerabilityScanningSettingsContainerScan.Enabled;
 }
 
 /**
@@ -2793,6 +2806,7 @@ model KubernetesClusterProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @minItems(1)
   initialAgentPoolConfigurations: InitialAgentPoolConfiguration[];
 
   /**
@@ -2833,6 +2847,7 @@ model AadConfiguration {
    * The list of Azure Active Directory group object IDs that will have an administrative role on the Kubernetes cluster.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minItems(1)
   adminGroupObjectIds: string[];
 }
 
@@ -2849,6 +2864,7 @@ model AdministratorConfiguration {
   /**
    * The SSH configuration for the operating systems that run the nodes in the Kubernetes cluster. In some cases, specification of public keys may be required to produce a working environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sshPublicKeys?: SshPublicKey[];
 }
 
@@ -2975,6 +2991,7 @@ model InitialAgentPoolConfiguration {
   /**
    * The labels applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   labels?: KubernetesLabel[];
 
@@ -2994,6 +3011,7 @@ model InitialAgentPoolConfiguration {
   /**
    * The taints applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taints?: KubernetesLabel[];
 
@@ -3032,18 +3050,21 @@ model AttachedNetworkConfiguration {
   /**
    * The list of Layer 2 Networks and related configuration for attachment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   l2Networks?: L2NetworkAttachmentConfiguration[];
 
   /**
    * The list of Layer 3 Networks and related configuration for attachment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   l3Networks?: L3NetworkAttachmentConfiguration[];
 
   /**
    * The list of Trunked Networks and related configuration for attachment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   trunkedNetworks?: TrunkedNetworkAttachmentConfiguration[];
 }
@@ -3066,7 +3087,7 @@ model L2NetworkAttachmentConfiguration {
    * The indicator of how this network will be utilized by the Kubernetes cluster.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  pluginType?: KubernetesPluginType;
+  pluginType?: KubernetesPluginType = KubernetesPluginType.SRIOV;
 }
 
 /**
@@ -3093,7 +3114,7 @@ model L3NetworkAttachmentConfiguration {
    * The indicator of how this network will be utilized by the Kubernetes cluster.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  pluginType?: KubernetesPluginType;
+  pluginType?: KubernetesPluginType = KubernetesPluginType.SRIOV;
 }
 
 /**
@@ -3114,7 +3135,7 @@ model TrunkedNetworkAttachmentConfiguration {
    * The indicator of how this network will be utilized by the Kubernetes cluster.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  pluginType?: KubernetesPluginType;
+  pluginType?: KubernetesPluginType = KubernetesPluginType.SRIOV;
 }
 
 /**
@@ -3278,7 +3299,7 @@ model ServiceLoadBalancerBgpPeer {
    * The indicator of BFD enablement for this BgpPeer.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  bfdEnabled?: BfdEnabled;
+  bfdEnabled?: BfdEnabled = BfdEnabled.False;
 
   /**
    * The indicator to enable multi-hop peering support.
@@ -3303,6 +3324,7 @@ model ServiceLoadBalancerBgpPeer {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxValue(4294967295)
+  @minValue(0)
   myAsn?: int64;
 
   /**
@@ -3318,6 +3340,7 @@ model ServiceLoadBalancerBgpPeer {
   @visibility(Lifecycle.Create)
   @maxLength(80)
   @pattern("^[a-zA-Z0-9]{0,80}$")
+  @secret
   password?: string;
 
   /**
@@ -3331,6 +3354,7 @@ model ServiceLoadBalancerBgpPeer {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxValue(4294967295)
+  @minValue(0)
   peerAsn: int64;
 
   /**
@@ -3354,7 +3378,7 @@ model IpAddressPool {
    * The indicator to determine if automatic allocation from the pool should occur.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  autoAssign?: BfdEnabled;
+  autoAssign?: BfdEnabled = BfdEnabled.True;
 
   /**
    * The name used to identify this IP address pool for association with a BGP advertisement.
@@ -3367,7 +3391,7 @@ model IpAddressPool {
    * The indicator to prevent the use of IP addresses ending with .0 and .255 for this pool. Enabling this option will only use IP addresses between .1 and .254 inclusive.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  onlyUseHostIps?: BfdEnabled;
+  onlyUseHostIps?: BfdEnabled = BfdEnabled.True;
 }
 
 /**
@@ -3429,6 +3453,7 @@ model KubernetesClusterNode {
   /**
    * The size of the disk configured for this node. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   diskSizeGB?: int64;
 
@@ -3454,6 +3479,7 @@ model KubernetesClusterNode {
   /**
    * The amount of memory configured for this node, derived from the vm SKU specified. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memorySizeGB?: int64;
 
@@ -3613,7 +3639,7 @@ model L2NetworkProperties {
    * Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hybridAksPluginType?: HybridAksPluginType;
+  hybridAksPluginType?: HybridAksPluginType = HybridAksPluginType.SRIOV;
 
   /**
    * The default interface name for this L2 network in the virtual machine. This name can be overridden by the name supplied in the network attachment configuration of that virtual machine.
@@ -3691,7 +3717,7 @@ model L3NetworkProperties {
    * Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hybridAksPluginType?: HybridAksPluginType;
+  hybridAksPluginType?: HybridAksPluginType = HybridAksPluginType.SRIOV;
 
   /**
    * The default interface name for this L3 network in the virtual machine. This name can be overridden by the name supplied in the network attachment configuration of that virtual machine.
@@ -3868,6 +3894,7 @@ model MachineSkuProperties {
   /**
    * The maximum amount of memory. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memoryCapacityGB?: int64;
 
@@ -3904,6 +3931,7 @@ model MachineDisk {
   /**
    * The maximum amount of storage. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   capacityGB?: int64;
 
@@ -3992,6 +4020,7 @@ model StorageApplianceSkuProperties {
   /**
    * The maximum capacity of the storage appliance. Measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   capacityGB?: int64;
 
@@ -4227,7 +4256,7 @@ model TrunkedNetworkProperties {
    * Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hybridAksPluginType?: HybridAksPluginType;
+  hybridAksPluginType?: HybridAksPluginType = HybridAksPluginType.SRIOV;
 
   /**
    * The default interface name for this trunked network in the virtual machine. This name can be overridden by the name supplied in the network attachment configuration of that virtual machine.
@@ -4241,6 +4270,7 @@ model TrunkedNetworkProperties {
    * The list of resource IDs representing the Network Fabric isolation domains. It can be any combination of l2IsolationDomain and l3IsolationDomain resources.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minItems(1)
   isolationDomainIds: string[];
 
   /**
@@ -4259,6 +4289,7 @@ model TrunkedNetworkProperties {
    * The list of vlans that are selected from the isolation domains for trunking.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minItems(1)
   vlans: int64[];
 }
 
@@ -4343,6 +4374,7 @@ model VirtualMachineProperties {
   /**
    * The memory size of the virtual machine. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minValue(1)
   memorySizeGB: int64;
@@ -4489,6 +4521,7 @@ model OsDisk {
   /**
    * The size of the disk. Required if the createOption is Ephemeral. Allocations are measured in gibibytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeGB: int64;
 }
 
@@ -4500,6 +4533,7 @@ model ImageRepositoryCredentials {
    * The password or token used to access an image in the target repository.
    */
   @minLength(1)
+  @secret
   password: string;
 
   /**
@@ -4601,6 +4635,7 @@ model OperationStatusResult {
    */
   @visibility(Lifecycle.Read)
   @maxValue(100)
+  @minValue(0)
   percentComplete?: float32;
 
   /**
@@ -4774,6 +4809,7 @@ model BareMetalMachineRunDataExtractsParameters {
    * The list of curated data extraction commands to be executed directly against the target machine.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @minItems(1)
   commands: BareMetalMachineCommandSpecification[];
 
   /**
@@ -4808,6 +4844,7 @@ model BareMetalMachineRunReadCommandsParameters {
    * The list of read-only commands to be executed directly against the target machine.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @minItems(1)
   commands: BareMetalMachineCommandSpecification[];
 
   /**
@@ -4904,7 +4941,8 @@ model ClusterPatchProperties {
   /**
    * The settings for the log analytics workspace used for output of logs from this cluster.
    */
-  analyticsOutputSettings?: AnalyticsOutputSettings;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  analyticsOutputSettings?: AnalyticsOutputSettings | null;
 
   /**
    * The customer-provided location information to identify where the cluster resides.
@@ -4914,17 +4952,20 @@ model ClusterPatchProperties {
   /**
    * The service principal to be used by the cluster during Arc Appliance installation.
    */
-  clusterServicePrincipal?: ServicePrincipalInformation;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  clusterServicePrincipal?: ServicePrincipalInformation | null;
 
   /**
    * The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts.
    */
-  commandOutputSettings?: CommandOutputSettings;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  commandOutputSettings?: CommandOutputSettings | null;
 
   /**
    * The validation threshold indicating the allowable failures of compute machines during environment validation and deployment.
    */
-  computeDeploymentThreshold?: ValidationThreshold;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  computeDeploymentThreshold?: ValidationThreshold | null;
 
   /**
    * The list of rack definitions for the compute racks in a multi-rack
@@ -4936,27 +4977,32 @@ model ClusterPatchProperties {
   /**
    * The settings for cluster runtime protection.
    */
-  runtimeProtectionConfiguration?: RuntimeProtectionConfiguration;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  runtimeProtectionConfiguration?: RuntimeProtectionConfiguration | null;
 
   /**
    * The configuration for use of a key vault to store secrets for later retrieval by the operator.
    */
-  secretArchive?: ClusterSecretArchive;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  secretArchive?: ClusterSecretArchive | null;
 
   /**
    * The settings for the secret archive used to hold credentials for the cluster.
    */
-  secretArchiveSettings?: SecretArchiveSettings;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  secretArchiveSettings?: SecretArchiveSettings | null;
 
   /**
    * The strategy for updating the cluster.
    */
-  updateStrategy?: ClusterUpdateStrategy;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  updateStrategy?: ClusterUpdateStrategy | null;
 
   /**
    * The settings for how security vulnerability scanning is applied to the cluster.
    */
-  vulnerabilityScanningSettings?: VulnerabilityScanningSettingsPatch;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  vulnerabilityScanningSettings?: VulnerabilityScanningSettingsPatch | null;
 }
 
 /**
@@ -5485,6 +5531,7 @@ model AgentPoolProperties {
   /**
    * The labels applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   labels?: KubernetesLabel[];
 
@@ -5503,6 +5550,7 @@ model AgentPoolProperties {
   /**
    * The taints applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taints?: KubernetesLabel[];
 
@@ -5965,6 +6013,7 @@ model AgentPoolConfiguration {
   /**
    * The labels applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   labels?: KubernetesLabel[];
 
@@ -5977,6 +6026,7 @@ model AgentPoolConfiguration {
   /**
    * The taints applied to the nodes in this agent pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   taints?: KubernetesLabel[];
 

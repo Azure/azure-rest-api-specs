@@ -1,29 +1,45 @@
 {
   "parameters": {
     "api-version": "2025-02-01",
-    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "volumeName": "volumeName",
     "volumeParameters": {
+      "extendedLocation": {
+        "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+        "type": "CustomLocation"
+      },
       "location": "location",
+      "properties": {
+        "sizeMiB": 10000
+      },
       "tags": {
         "key1": "myvalue1",
         "key2": "myvalue2"
-      },
-      "extendedLocation": {
-        "type": "CustomLocation",
-        "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
-      },
-      "properties": {
-        "sizeMiB": 10000
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/volumes/volumeName",
         "name": "volumeName",
+        "type": "Microsoft.NetworkCloud/volumes",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/volumes/volumeName",
+        "location": "location",
+        "properties": {
+          "attachedTo": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "detailedStatus": "Active",
+          "detailedStatusMessage": "Volume is available",
+          "provisioningState": "Succeeded",
+          "serialNumber": "XXXX-XXXX-XXXX-XXXX",
+          "sizeMiB": 10000
+        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -32,32 +48,32 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
-        "type": "Microsoft.NetworkCloud/volumes",
-        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
-        },
-        "extendedLocation": {
-          "type": "CustomLocation",
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
-        },
-        "properties": {
-          "sizeMiB": 10000,
-          "provisioningState": "Succeeded",
-          "serialNumber": "XXXX-XXXX-XXXX-XXXX",
-          "attachedTo": [
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
-          ],
-          "detailedStatus": "Active",
-          "detailedStatusMessage": "Volume is available"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/volumes/volumeName",
         "name": "volumeName",
+        "type": "Microsoft.NetworkCloud/volumes",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/volumes/volumeName",
+        "location": "location",
+        "properties": {
+          "attachedTo": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "detailedStatus": "Active",
+          "detailedStatusMessage": "Volume is available",
+          "provisioningState": "Succeeded",
+          "serialNumber": "XXXX-XXXX-XXXX-XXXX",
+          "sizeMiB": 10000
+        },
         "systemData": {
           "createdAt": "2021-01-22T13:27:03.008Z",
           "createdBy": "identityA",
@@ -66,30 +82,16 @@
           "lastModifiedBy": "identityB",
           "lastModifiedByType": "User"
         },
-        "type": "Microsoft.NetworkCloud/volumes",
-        "location": "location",
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
-        },
-        "extendedLocation": {
-          "type": "CustomLocation",
-          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
-        },
-        "properties": {
-          "sizeMiB": 10000,
-          "provisioningState": "Succeeded",
-          "serialNumber": "XXXX-XXXX-XXXX-XXXX",
-          "attachedTo": [
-            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
-          ],
-          "detailedStatus": "Active",
-          "detailedStatusMessage": "Volume is available"
         }
       },
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2025-02-01"
       }
     }
-  }
+  },
+  "operationId": "Volumes_CreateOrUpdate",
+  "title": "Create or update volume"
 }
