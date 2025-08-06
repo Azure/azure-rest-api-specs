@@ -4,13 +4,26 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Nginx.NginxPlus;
 
+// Model name overrides
 @@clientName(ApiKeyResponseProperties, "NginxDeploymentApiKeyProperties");
+@@clientName(Certificate, "NginxCertificate");
+@@clientName(ApiKeyRequestProperties, "NginxDeploymentApiKeyRequestProperties");
 
 @@clientName(Nginx.NginxPlus, "NginxManagementClient", "javascript");
-
+@@clientName(ApiKey, "NginxDeploymentApiKeyResponse", "!csharp");
+@@clientName(ApiKeyRequest, "NginxDeploymentApiKeyRequest", "!csharp");
 @@clientName(AnalysisConfig, "AnalysisCreateConfig", "!csharp");
 @@clientName(AnalysisResultContent, "AnalysisResultData", "!csharp");
+@@clientName(Configuration, "NginxConfigurationResponse", "!csharp");
 @@clientName(DiagnosticLevel, "Level", "!csharp");
+@@clientName(NginxConfigurationProtectedFileResult,
+  "NginxConfigurationProtectedFileResponse",
+  "!csharp"
+);
+@@clientName(NginxConfigurationProtectedFileContent,
+  "NginxConfigurationProtectedFileRequest",
+  "!csharp"
+);
 
 // CommonTypes
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
@@ -121,16 +134,11 @@ using Nginx.NginxPlus;
   "csharp"
 );
 
-@@clientName(Certificate, "NginxCertificate", "csharp");
 @@clientName(AnalysisResult, "NginxAnalysisResult", "csharp");
 @@clientName(WafPolicy, "NginxDeploymentWafPolicy", "csharp");
 @@clientName(AnalysisDiagnostic, "NginxAnalysisDiagnostic", "csharp");
 @@clientName(DiagnosticItem, "NginxDiagnosticItem", "csharp");
 @@clientName(ProvisioningState, "NginxProvisioningState", "csharp");
-@@clientName(ApiKeyRequestProperties,
-  "NginxDeploymentApiKeyRequestProperties",
-  "csharp"
-);
 @@clientName(AutoScaleSettings, "NginxDeploymentAutoScaleSettings", "csharp");
 @@clientName(AutoUpgradeProfile, "NginxDeploymentAutoUpgradeProfile", "csharp");
 @@clientName(ScaleProfile, "NginxScaleProfile", "csharp");
