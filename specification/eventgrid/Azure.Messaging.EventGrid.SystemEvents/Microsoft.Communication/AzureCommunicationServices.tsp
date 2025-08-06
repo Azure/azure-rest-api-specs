@@ -768,9 +768,11 @@ model AcsRouterJobEventData extends AcsRouterEventData {
   queueId?: string;
 
   /** Router Job events Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Jobs events Tags */
+  @visibility(Lifecycle.Read)
   tags: Record<string>;
 }
 
