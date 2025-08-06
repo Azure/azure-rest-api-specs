@@ -1,15 +1,15 @@
-import { describe, test, expect, beforeEach, vi } from "vitest";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   findFilesRecursive,
   findReadmeFiles,
-  getRelativePathFromSpecification,
   getArgumentValue,
+  getRelativePathFromSpecification,
   mapToObject,
-  objectToMap,
   normalizePath,
+  objectToMap,
 } from "../../src/utils.js";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
