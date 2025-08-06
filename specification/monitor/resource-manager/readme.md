@@ -66,6 +66,9 @@ input-file:
   - Microsoft.Insights/stable/2024-03-11/dataCollectionRules_API.json
   - Microsoft.Insights/PrivateLinkScopes/stable/2021-09-01/privateLinkScopes_API.json
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
+  - Microsoft.Insights/stable/2021-05-01/operations_API.json
+  - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json  # Latest version
+  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
 ```
 
 ### Tag: package-2025-01-01-preview
