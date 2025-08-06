@@ -1,35 +1,34 @@
 #!/usr/bin/env node
 
-import * as fs from "fs";
+import { existsSync, readFileSync } from "fs";
 import { glob } from "glob";
-import * as path from "path";
+import { dirname, join, resolve } from "path";
 
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
-import * as _ from "lodash";
-
-import { breakingChangesCheckType } from "@azure-tools/specs-shared/breaking-change";
+import pkg from "lodash";
+const { isEqual } = pkg;
 
 import {
-  DiffResult,
-  ReadmeTag,
-  FileTypes,
-  ChangeTypes,
-  PRChange,
   ChangeHandler,
+  ChangeTypes,
+  DiffResult,
+  FileTypes,
+  PRChange,
+  ReadmeTag,
 } from "./diff-types.js";
 
-import { PRType, Label, LabelContext } from "./labelling-types.js";
+import { Label, LabelContext, PRType } from "./labelling-types.js";
 
 import { ImpactAssessment } from "./ImpactAssessment.js";
 import { PRContext } from "./PRContext.js";
 
+import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
-
-export const breakingChangeLabelVarName = "breakingChangeVar";
-export const crossVersionBreakingChangeLabelVarName = "crossVersionBreakingChangeVar";
+import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
+// TODO: move to .github/shared
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
   const handlers: ChangeHandler[] = [];
   let isAddingNewApiVersion = false;
@@ -39,7 +38,7 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
 
   const createSwaggerFileHandler = () => {
     return (e: PRChange) => {
-      if (e.changeType === "Addition") {
+      if (e.changeType === ChangeTypes.Addition) {
         const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
         if (apiVersion) {
           apiVersionSet.add(apiVersion);
@@ -49,7 +48,7 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
           rpFolders.add(rpFolder);
         }
         console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
-      } else if (e.changeType === "Update") {
+      } else if (e.changeType === ChangeTypes.Update) {
         const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
         if (rpFolder !== undefined) {
           rpFolders.add(rpFolder);
@@ -72,7 +71,7 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
     return false;
   }
 
-  const targetBranchRPFolder = path.resolve(context.targetDirectory, firstRPFolder);
+  const targetBranchRPFolder = resolve(context.targetDirectory, firstRPFolder);
 
   console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
 
@@ -92,30 +91,21 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
 export async function evaluateImpact(
   context: PRContext,
   labelContext: LabelContext,
+  mainSpecFolders: string[],
 ): Promise<ImpactAssessment> {
   const typeSpecLabelShouldBePresent = await processTypeSpec(context, labelContext);
 
   // examine changed files. if changedpaths includes data-plane, add "data-plane"
   // same for "resource-manager". We care about whether resourcemanager will be present for a later check
-  const { resourceManagerLabelShouldBePresent } = await processPRType(context, labelContext);
+  const { resourceManagerLabelShouldBePresent, dataPlaneShouldBePresent } = await processPRType(
+    context,
+    labelContext,
+  );
 
   // Has to be run in a PR context. Uses addition and update to understand
   // if the suppressions have been changed. If they have, suppressionReviewRequired must be added
   // as a label
   const suppressionRequired = await processSuppression(context, labelContext);
-  console.log(`suppressionRequired: ${suppressionRequired}`);
-
-  // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
-  let versioningReviewRequiredLabelShouldBePresent: boolean = false;
-  let breakingChangeReviewRequiredLabelShouldBePresent: boolean = false;
-  try {
-    ({
-      versioningReviewRequiredLabelShouldBePresent,
-      breakingChangeReviewRequiredLabelShouldBePresent,
-    } = await processBreakingChangeLabels(context, labelContext));
-  } catch (error) {
-    console.error("Error processing breaking change labels:", error);
-  }
 
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
   const { rpaasLabelShouldBePresent } = await processRPaaS(context, labelContext);
@@ -146,34 +136,33 @@ export async function evaluateImpact(
       labelContext,
       resourceManagerLabelShouldBePresent,
       rpaasLabelShouldBePresent,
+      mainSpecFolders,
     );
 
   const newApiVersion = await isNewApiVersion(context);
 
   return {
-    suppressionReviewRequired: labelContext.toAdd.has("suppressionsReviewRequired"),
-    versioningReviewRequired: versioningReviewRequiredLabelShouldBePresent,
-    breakingChangeReviewRequired: breakingChangeReviewRequiredLabelShouldBePresent,
+    suppressionReviewRequired: suppressionRequired,
     rpaasChange: rpaasLabelShouldBePresent,
     newRP: newRPNamespaceLabelShouldBePresent,
     rpaasRPMissing: ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasRpNotInPrivateRepo: ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
     resourceManagerRequired: resourceManagerLabelShouldBePresent,
+    dataPlaneRequired: dataPlaneShouldBePresent,
     rpaasExceptionRequired: rpaasExceptionLabelShouldBePresent,
     typeSpecChanged: typeSpecLabelShouldBePresent,
     isNewApiVersion: newApiVersion,
     isDraft: context.isDraft,
-    labelContext: labelContext,
     targetBranch: context.targetBranch,
   };
 }
 
 export function isManagementPR(filePaths: string[]): boolean {
-  return filePaths.some((it) => it.includes("resource-manager"));
+  return filePaths.some(resourceManager);
 }
 
 export function isDataPlanePR(filePaths: string[]): boolean {
-  return filePaths.some((it) => it.includes("data-plane"));
+  return filePaths.some(dataPlane);
 }
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
@@ -194,7 +183,7 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 }
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
-  const swagger = fs.readFileSync(swaggerFile).toString();
+  const swagger = readFileSync(swaggerFile).toString();
   const swaggerObject = JSON.parse(swagger);
   if (swaggerObject["info"] && swaggerObject["info"]["version"]) {
     return swaggerObject["info"]["version"];
@@ -248,167 +237,6 @@ export const getResourceProviderFromFilePath = (filePath: string): string | unde
   return undefined;
 };
 
-// todo: download the labels from the breaking change check run
-// right now this logic is coded to parse the ADO build variables that are set
-// by the breakingchange run in an earlier job.
-async function processBreakingChangeLabels(
-  prContext: PRContext,
-  labelContext: LabelContext,
-): Promise<{
-  versioningReviewRequiredLabelShouldBePresent: boolean;
-  breakingChangeReviewRequiredLabelShouldBePresent: boolean;
-}> {
-  console.log("ENTER definition processBreakingChangeLabels");
-
-  // Debug the breakingChangesCheckType import
-  console.log("breakingChangesCheckType:", breakingChangesCheckType);
-  console.log("breakingChangesCheckType.SameVersion:", breakingChangesCheckType?.SameVersion);
-  console.log("breakingChangesCheckType.CrossVersion:", breakingChangesCheckType?.CrossVersion);
-
-  const prTargetsProductionBranch: boolean = checkPrTargetsProductionBranch(prContext);
-  const breakingChangesLabelsFromOad = getBreakingChangesLabelsFromOad();
-
-  const versioningReviewRequiredLabel = new Label(
-    breakingChangesCheckType.SameVersion.reviewRequiredLabel,
-    labelContext.present,
-  );
-
-  const breakingChangeReviewRequiredLabel = new Label(
-    breakingChangesCheckType.CrossVersion.reviewRequiredLabel,
-    labelContext.present,
-  );
-
-  const versioningApprovalLabels = breakingChangesCheckType.SameVersion.approvalLabels.map(
-    (label: string) => new Label(label, labelContext.present),
-  );
-  const breakingChangeApprovalLabels = breakingChangesCheckType.CrossVersion.approvalLabels.map(
-    (label: string) => new Label(label, labelContext.present),
-  );
-
-  // ----- Breaking changes label processing logic -----
-  // These lines implement the set of rules determining which of the breaking change
-  // labels should be present on given PR.
-  // The doc describing breaking change review rules can be found here:
-  // https://aka.ms/brch-dev
-
-  // ❗ IMPORTANT ❗: this MUST be set BEFORE versioningReviewRequiredLabel.shouldBePresent
-  // due to logical dependency
-  breakingChangeReviewRequiredLabel.shouldBePresent =
-    // "BreakingChangeReviewRequired" label should be present if
-    // 1. The PR targets a production branch
-    prTargetsProductionBranch &&
-    // 2. AND given OAD run determined it is still applicable.
-    breakingChangesLabelsFromOad.includes(breakingChangeReviewRequiredLabel.name);
-
-  // ❗ IMPORTANT ❗: this MUST be set AFTER breakingChangeReviewRequiredLabel.shouldBePresent
-  // due to logical dependency
-  versioningReviewRequiredLabel.shouldBePresent =
-    // "VersioningReviewRequired" label should be unconditionally removed if
-    // the label "BreakingChangeReviewRequired" should be present.
-    !breakingChangeReviewRequiredLabel.shouldBePresent &&
-    // AND "VersioningReviewRequired" label should be present if
-    // 1. The PR targets a production branch
-    prTargetsProductionBranch &&
-    // 2. AND given OAD run determined it is still applicable.
-    breakingChangesLabelsFromOad.includes(versioningReviewRequiredLabel.name);
-
-  versioningApprovalLabels.forEach((approvalLabel) => {
-    approvalLabel.shouldBePresent =
-      approvalLabel.present && versioningReviewRequiredLabel.shouldBePresent;
-  });
-
-  breakingChangeApprovalLabels.forEach((approvalLabel) => {
-    approvalLabel.shouldBePresent =
-      approvalLabel.present && breakingChangeReviewRequiredLabel.shouldBePresent;
-  });
-
-  // ----------
-
-  applyLabelsStateChanges(labelContext.toAdd, labelContext.toRemove);
-
-  logDiagInfo();
-
-  return {
-    versioningReviewRequiredLabelShouldBePresent: versioningReviewRequiredLabel.shouldBePresent,
-    breakingChangeReviewRequiredLabelShouldBePresent:
-      breakingChangeReviewRequiredLabel.shouldBePresent,
-  };
-
-  /**
-   * Get labels denoting required breaking change or versioning review.
-   * The labels are read from ADO pipeline environment variables.
-   * These variables are set to appropriate value by BreakingChangesRuleManager.addBreakingChangeLabels().
-   * Read that function's comment for details.
-   */
-  function getBreakingChangesLabelsFromOad(): string[] {
-    const oadLabelsEnvVars = [
-      breakingChangeLabelVarName.toUpperCase(),
-      crossVersionBreakingChangeLabelVarName.toUpperCase(),
-    ];
-    let breakingChangeLabelsFromOad: string[] = _.uniq(
-      oadLabelsEnvVars
-        .map((labelSenderEnvVar) => process.env[labelSenderEnvVar])
-        .filter((envVarValue) => envVarValue !== undefined)
-        .map((envVarValue) => envVarValue?.split(",") || [])
-        .reduce(
-          (accumulatedLabels, currentEnvVarLabels) => accumulatedLabels.concat(currentEnvVarLabels),
-          [],
-        ),
-    ).filter((label) => label);
-    return breakingChangeLabelsFromOad;
-  }
-
-  function applyLabelsStateChanges(labelsToAdd: Set<string>, labelsToRemove: Set<string>) {
-    breakingChangeReviewRequiredLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    versioningReviewRequiredLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    versioningApprovalLabels.forEach((approvalLabel) => {
-      approvalLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    });
-    breakingChangeApprovalLabels.forEach((approvalLabel) => {
-      approvalLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    });
-  }
-
-  function logDiagInfo() {
-    if (
-      !prTargetsProductionBranch &&
-      (breakingChangesLabelsFromOad.includes(breakingChangeReviewRequiredLabel.name) ||
-        breakingChangesLabelsFromOad.includes(versioningReviewRequiredLabel.name))
-    ) {
-      // We are using this log as a metric to track and measure impact of the work on improving "breaking changes" tooling. Log statement added around 11/29/2023.
-      // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
-      // Note it duplicates the label "shouldBePresent" ruleset logic.
-      console.log(
-        `processBreakingChangeLabels: PR: ${`https://github.com/${prContext.owner}/${prContext.repo}/pull/${prContext.prNumber}`}, targetBranch: ${prContext.targetBranch}. ` +
-          `The addition of 'BreakingChangesReviewRequired' or 'VersioningReviewRequired' labels has been prevented ` +
-          `because we checked that the PR is not targeting a production branch.`,
-      );
-    }
-
-    console.log(
-      `processBreakingChangeLabels returned. ` +
-        `prTargetsProductionBranch: ${prTargetsProductionBranch}, ` +
-        breakingChangeReviewRequiredLabel.logString() +
-        versioningReviewRequiredLabel.logString(),
-    );
-  }
-}
-
-/**
- * The "production" branches are defined at https://aka.ms/azsdk/pr-brch-deep
- */
-function checkPrTargetsProductionBranch(prContext: PRContext): boolean {
-  const targetsPublicProductionBranch =
-    prContext.repo.includes("azure-rest-api-specs") &&
-    prContext.repo !== "azure-rest-api-specs-pr" &&
-    prContext.targetBranch === "main";
-
-  const targetsPrivateProductionBranch =
-    prContext.repo === "azure-rest-api-specs-pr" && prContext.targetBranch === "RPSaaSMaster";
-
-  return targetsPublicProductionBranch || targetsPrivateProductionBranch;
-}
-
 async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Promise<boolean> {
   console.log("ENTER definition processTypeSpec");
   const typeSpecLabel = new Label("TypeSpec", labelContext.present);
@@ -424,7 +252,10 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
   };
   const swaggerFileHandler = () => {
     return (prChange: PRChange) => {
-      if (prChange.changeType !== "Deletion" && isSwaggerGeneratedByTypeSpec(prChange.filePath)) {
+      if (
+        prChange.changeType !== ChangeTypes.Deletion &&
+        isSwaggerGeneratedByTypeSpec(prChange.filePath)
+      ) {
         typeSpecLabel.shouldBePresent = true;
       }
     };
@@ -442,7 +273,7 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    return !!JSON.parse(fs.readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
+    return !!JSON.parse(readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
   } catch {
     return false;
   }
@@ -503,22 +334,28 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
   }
 
   function genChanges(type: FileTypes, diffs: DiffResult<string>) {
-    newChanges(type, "Addition", diffs.additions);
-    newChanges(type, "Deletion", diffs.deletions);
-    newChanges(type, "Update", diffs.changes);
+    newChanges(type, ChangeTypes.Addition, diffs.additions);
+    newChanges(type, ChangeTypes.Deletion, diffs.deletions);
+    newChanges(type, ChangeTypes.Update, diffs.changes);
   }
 
   function genReadmeChanges(readmeDiffs?: DiffResult<ReadmeTag>) {
     if (readmeDiffs) {
-      readmeDiffs.additions?.forEach((d) => newChange("ReadmeFile", "Addition", d.readme, d.tags));
-      readmeDiffs.changes?.forEach((d) => newChange("ReadmeFile", "Update", d.readme, d.tags));
-      readmeDiffs.deletions?.forEach((d) => newChange("ReadmeFile", "Deletion", d.readme, d.tags));
+      readmeDiffs.additions?.forEach((d) =>
+        newChange(FileTypes.ReadmeFile, ChangeTypes.Addition, d.readme, d.tags),
+      );
+      readmeDiffs.changes?.forEach((d) =>
+        newChange(FileTypes.ReadmeFile, ChangeTypes.Update, d.readme, d.tags),
+      );
+      readmeDiffs.deletions?.forEach((d) =>
+        newChange(FileTypes.ReadmeFile, ChangeTypes.Deletion, d.readme, d.tags),
+      );
     }
   }
 
-  genChanges("SwaggerFile", ctx.getSwaggerDiffs());
-  genChanges("TypeSpecFile", ctx.getTypeSpecDiffs());
-  genChanges("ExampleFile", ctx.getExampleDiffs());
+  genChanges(FileTypes.SwaggerFile, ctx.getSwaggerDiffs());
+  genChanges(FileTypes.TypeSpecFile, ctx.getTypeSpecDiffs());
+  genChanges(FileTypes.ExampleFile, ctx.getExampleDiffs());
   genReadmeChanges(await ctx.getReadmeDiffs());
 
   console.log("RETURN definition getPRChanges");
@@ -531,19 +368,19 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
 async function processPRType(
   context: PRContext,
   labelContext: LabelContext,
-): Promise<{ resourceManagerLabelShouldBePresent: boolean }> {
+): Promise<{ resourceManagerLabelShouldBePresent: boolean; dataPlaneShouldBePresent: boolean }> {
   console.log("ENTER definition processPRType");
   const types: PRType[] = await getPRType(context);
 
   const resourceManagerLabelShouldBePresent = processPRTypeLabel(
-    "resource-manager",
+    PRType.ResourceManager,
     types,
     labelContext,
   );
-  processPRTypeLabel("data-plane", types, labelContext);
+  const dataPlaneShouldBePresent = processPRTypeLabel(PRType.DataPlane, types, labelContext);
 
   console.log("RETURN definition processPRType");
-  return { resourceManagerLabelShouldBePresent };
+  return { resourceManagerLabelShouldBePresent, dataPlaneShouldBePresent };
 }
 
 async function getPRType(context: PRContext): Promise<PRType[]> {
@@ -557,10 +394,10 @@ async function getPRType(context: PRContext): Promise<PRType[]> {
   const prTypes: PRType[] = [];
   if (changedFilePaths.length > 0) {
     if (isDataPlanePR(changedFilePaths)) {
-      prTypes.push("data-plane");
+      prTypes.push(PRType.DataPlane);
     }
     if (isManagementPR(changedFilePaths)) {
-      prTypes.push("resource-manager");
+      prTypes.push(PRType.ResourceManager);
     }
   }
   console.log("RETURN definition getPRType");
@@ -606,11 +443,11 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
   const createReadmeFileHandler = () => {
     return (e: PRChange) => {
       if (
-        (e.changeType === "Addition" && getSuppressions(e.filePath).length) ||
-        (e.changeType === "Update" &&
+        (e.changeType === ChangeTypes.Addition && getSuppressions(e.filePath).length) ||
+        (e.changeType === ChangeTypes.Update &&
           diffSuppression(
-            path.resolve(context.targetDirectory, e.filePath),
-            path.resolve(context.sourceDirectory, e.filePath),
+            resolve(context.targetDirectory, e.filePath),
+            resolve(context.sourceDirectory, e.filePath),
           ).length)
       ) {
         suppressionReviewRequiredLabel.shouldBePresent = true;
@@ -658,7 +495,7 @@ function getSuppressions(readmePath: string) {
   };
   let suppressionResult: any[] = [];
   try {
-    const readme = fs.readFileSync(readmePath).toString();
+    const readme = readFileSync(readmePath).toString();
     const codeBlocks = getAllCodeBlockNodes(new commonmark.Parser().parse(readme));
     for (const block of codeBlocks) {
       if (block.literal) {
@@ -687,7 +524,7 @@ export function diffSuppression(readmeBefore: string, readmeAfter: string) {
     const properties = ["suppress", "from", "where", "code", "reason"];
     if (
       -1 ===
-      beforeSuppressions.findIndex((s) => properties.every((p) => _.isEqual(s[p], suppression[p])))
+      beforeSuppressions.findIndex((s) => properties.every((p) => isEqual(s[p], suppression[p])))
     ) {
       newSuppressions.push(suppression);
     }
@@ -708,8 +545,8 @@ async function processRPaaS(
   const createReadmeFileHandler = () => {
     return async (e: PRChange) => {
       if (
-        e.changeType !== "Deletion" &&
-        (await isRPSaaS(path.join(context.sourceDirectory, e.filePath)))
+        e.changeType !== ChangeTypes.Deletion &&
+        (await isRPSaaS(join(context.sourceDirectory, e.filePath)))
       ) {
         rpaasLabel.shouldBePresent = true;
       }
@@ -757,12 +594,12 @@ async function processNewRPNamespace(
   if (!skip) {
     const createSwaggerFileHandler = () => {
       return (e: PRChange) => {
-        if (e.changeType === "Addition") {
-          const rpFolder = getRPFolderFromSwaggerFile(path.dirname(e.filePath));
+        if (e.changeType === ChangeTypes.Addition) {
+          const rpFolder = getRPFolderFromSwaggerFile(dirname(e.filePath));
           console.log(`Processing newRPNameSpace rpFolder: ${rpFolder}`);
           if (rpFolder !== undefined) {
-            const rpFolderFullPath = path.resolve(context.targetDirectory, rpFolder);
-            if (!fs.existsSync(rpFolderFullPath)) {
+            const rpFolderFullPath = resolve(context.targetDirectory, rpFolder);
+            if (!existsSync(rpFolderFullPath)) {
               console.log(`Adding newRPNameSpace rpFolder: ${rpFolder}`);
               newRPNamespaceLabel.shouldBePresent = true;
             }
@@ -841,12 +678,64 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   };
 }
 
-// CODESYNC: see entries for related labels in https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
+export const getRPaaSFolderList = async (
+  client: Octokit,
+  owner: string,
+  repoName: string,
+): Promise<string[]> => {
+  const branch = "main";
+  const folder = "specification";
+
+  const res = await client.rest.repos.getContent({
+    owner,
+    repo: repoName,
+    path: folder,
+    ref: branch,
+  });
+
+  console.log(
+    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`,
+  );
+
+  // Extract folder names from the response
+  if (Array.isArray(res.data)) {
+    const folderNames = res.data
+      .filter((item: any) => item.type === "dir") // Only get directories
+      .map((item: any) => item.name); // Extract the name property
+
+    console.log(`Found ${folderNames.length} folders: ${folderNames.join(", ")}`);
+    return folderNames;
+  }
+
+  console.log("No folders found or unexpected response format");
+  return [];
+};
+
+export function getRPRootFolderName(swaggerFile: string): string | undefined {
+  const RPFolder = getRPFolderFromSwaggerFile(swaggerFile);
+  const dirList = RPFolder?.split("/");
+  let idx = 0;
+  //find the index of "specification" in the path
+  for (let i = 0; i < dirList!.length; i++) {
+    if (dirList![i] === "specification") {
+      idx = i;
+      break;
+    }
+  }
+  // The RP root folder name is the folder name after "specification"
+  if (idx + 1 < dirList!.length) {
+    return dirList![idx + 1];
+  }
+
+  return undefined;
+}
+
 async function processRpaasRpNotInPrivateRepoLabel(
   context: PRContext,
   labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean,
+  rpFolderNames: string[],
 ): Promise<{ ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRpaasRpNotInPrivateRepoLabel");
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
@@ -871,44 +760,38 @@ async function processRpaasRpNotInPrivateRepoLabel(
     }
   }
 
-  // todo: retrieve the list and populate this value properly.
-  // if (!skip) {
-  //   // this is a request to get the list of RPaaS folders from azure-rest-api-specs-pr -> RPSaasMaster branch -> dump specification folder
-  //   // names
-  //   const rpaasRPFolderList = await getRPaaSFolderList();
-  //   const rpFolderNames: string[] = rpaasRPFolderList.map((f) => f.name);
+  if (!skip) {
+    console.log(`RPaaS RP folder list: ${rpFolderNames}`);
 
-  //   console.log(`RPaaS RP folder list: ${rpFolderNames}`);
+    const handlers: ChangeHandler[] = [];
 
-  //   const handlers: ChangeHandler[] = [];
+    const processPrChange = () => {
+      return (e: PRChange) => {
+        if (e.changeType === ChangeTypes.Addition) {
+          const rpFolderName = getRPRootFolderName(e.filePath);
+          console.log(
+            `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`,
+          );
 
-  //   const processPrChange = () => {
-  //     return (e: PRChange) => {
-  //       if (e.changeType === "Addition") {
-  //         const rpFolderName = getRPRootFolderName(e.filePath);
-  //         console.log(
-  //           `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`
-  //         );
+          if (rpFolderName === undefined) {
+            console.log(`RP folder is undefined for changed file path '${e.filePath}'.`);
+            return;
+          }
 
-  //         if (rpFolderName === undefined) {
-  //           console.log(`RP folder is undefined for changed file path '${e.filePath}'.`);
-  //           return;
-  //         }
+          if (!rpFolderNames.includes(rpFolderName)) {
+            console.log(
+              `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. ` +
+                `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`,
+            );
+            ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
+          }
+        }
+      };
+    };
 
-  //         if (!rpFolderNames.includes(rpFolderName)) {
-  //           console.log(
-  //             `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. `
-  //             + `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`
-  //           );
-  //           ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
-  //         }
-  //       }
-  //     };
-  //   };
-
-  //   handlers.push({ SwaggerFile: processPrChange() });
-  //   await processPrChanges(context, handlers);
-  // }
+    handlers.push({ SwaggerFile: processPrChange() });
+    await processPrChanges(context, handlers);
+  }
 
   ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processRpaasRpNotInPrivateRepoLabel");
