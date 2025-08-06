@@ -2,6 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 import { isFullGitSha } from "../src/git";
+import { fullGitSha } from "./examples";
 
 describe("git", () => {
   it.each([
@@ -16,6 +17,7 @@ describe("git", () => {
     ["aBcDe_0189".repeat(4), false],
     // Valid
     ["aBcDeF0189".repeat(4), true],
+    [fullGitSha, true],
   ])("isFullGitSha(%o) => %o", (string, result) => {
     // @ts-expect-error Testing invalid input types
     expect(isFullGitSha(string)).toBe(result);
