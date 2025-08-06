@@ -1021,7 +1021,7 @@
               "description": "The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."
             }
           },
-          "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. See documentation for details https://aka.ms/BlockCapacityReservation."
+          "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details."
         }
       },
       "description": "Properties of the Capacity reservation."
@@ -1072,7 +1072,7 @@
           "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
         }
       ],
-      "description": "Specifies information about the capacity reservation. Only tags and sku.capacity can be updated. Only tags can be updated for Block Capacity Reservation."
+      "description": "Specifies information about the capacity reservation. sku.capacity cannot be updated for Block Capacity Reservation. Tags can be update for all Capacity Reservation Types."
     },
     "CapacityReservationListResult": {
       "type": "object",
