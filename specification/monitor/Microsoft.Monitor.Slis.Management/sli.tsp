@@ -40,7 +40,7 @@ model SliResource {
 
   @visibility(Lifecycle.Read)
   @doc("Indicates the current execution status of the SLI resource in ARM responses.")
-  executionState?: ExecutionState;
+  executionState: ExecutionState;
 
   @doc("Destination AMW accounts.")
   @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
@@ -49,18 +49,18 @@ model SliResource {
   @visibility(Lifecycle.Read)
   @doc("The destination Azure Monitor Workspace (AMW) accounts where the SLI emits metrics.")
   @OpenAPI.extension("x-ms-identifiers", #["metricNamespace", "metricName"])
-  destinationMetrics?: Metric[];
+  destinationMetrics: Metric[];
 
   @doc("Defines the SLO baseline associated with the SLI.")
   baselineProperties: BaselineProperties;
 
   @visibility(Lifecycle.Read)
   @doc("The streaming rule Id associated with the Sli resource.")
-  streamingRuleId?: string;
+  streamingRuleId: string;
 
   @visibility(Lifecycle.Read)
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
-  streamingRuleLastUpdatedTimestamp?: string;
+  streamingRuleLastUpdatedTimestamp: string;
 
   @doc("Defines the SLI properties associated with the SLI.")
   sliProperties: SliProperties;
@@ -72,7 +72,7 @@ model ExecutionState {
   state: string;
 
   @doc("A descriptive message related to the execution state.")
-  message: string;
+  message?: string;
 }
 
 @doc("Represents an Azure Monitor Workspace (AMW) account used for emitting metrics.")
