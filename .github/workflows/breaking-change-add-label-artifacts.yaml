@@ -1,10 +1,10 @@
-name: "[TEST-IGNORE] Breaking Change - Add Label Artifacts"
+name: "Breaking Change - Add Label Artifacts"
 
 on:
   workflow_run:
     workflows:
-      - "\\[TEST-IGNORE\\] Swagger BreakingChange - Analyze Code"
-      - "\\[TEST-IGNORE\\] Breaking Change(Cross-Version) - Analyze Code"
+      - "Swagger BreakingChange - Analyze Code"
+      - "Breaking Change(Cross-Version) - Analyze Code"
     types: [completed]
 
 permissions:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   breaking-change-add-label-artifacts:
-    name: "[TEST-IGNORE] Breaking Change - Add Label Artifacts"
+    name: "Breaking Change - Add Label Artifacts"
 
     runs-on: ubuntu-24.04
 

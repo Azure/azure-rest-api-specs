@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
-import getLabelActions from "../src/breaking-change-add-label-artifacts.js";
+import getLabelActions, {
+  CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
+  SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME,
+} from "../src/breaking-change-add-label-artifacts.js";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.js";
 
 // Mock dependencies
@@ -66,18 +69,8 @@ describe("breaking-change-add-label-artifacts", () => {
   };
 
   const createStandardWorkflowRuns = () => [
-    createMockWorkflowRun(
-      "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-      "completed",
-      "success",
-      1,
-    ),
-    createMockWorkflowRun(
-      "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
-      "completed",
-      "success",
-      2,
-    ),
+    createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "completed", "success", 1),
+    createMockWorkflowRun(CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME, "completed", "success", 2),
   ];
 
   const expectStandardOutputs = (breakingChangeValue, versioningValue) => {
@@ -110,14 +103,14 @@ describe("breaking-change-add-label-artifacts", () => {
 
       const mockWorkflowRuns = [
         createMockWorkflowRun(
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+          SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME,
           "completed",
           "success",
           1,
           "2024-01-01T12:00:00Z",
         ),
         createMockWorkflowRun(
-          "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
+          CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
           "completed",
           "success",
           2,
@@ -206,14 +199,9 @@ describe("breaking-change-add-label-artifacts", () => {
       await setupMockInputs();
 
       const mockWorkflowRuns = [
+        createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "in_progress", null, 1),
         createMockWorkflowRun(
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-          "in_progress",
-          null,
-          1,
-        ),
-        createMockWorkflowRun(
-          "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
+          CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
           "completed",
           "success",
           2,
@@ -231,18 +219,8 @@ describe("breaking-change-add-label-artifacts", () => {
       await setupMockInputs();
 
       const mockWorkflowRuns = [
-        createMockWorkflowRun(
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-          "completed",
-          "success",
-          1,
-        ),
-        createMockWorkflowRun(
-          "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
-          "queued",
-          null,
-          2,
-        ),
+        createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "completed", "success", 1),
+        createMockWorkflowRun(CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME, "queued", null, 2),
       ];
 
       setupWorkflowRunsMock(mockWorkflowRuns);
@@ -257,7 +235,7 @@ describe("breaking-change-add-label-artifacts", () => {
 
       const mockWorkflowRuns = [
         createMockWorkflowRun(
-          "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
+          CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
           "completed",
           "success",
           2,
@@ -278,12 +256,7 @@ describe("breaking-change-add-label-artifacts", () => {
       await setupMockInputs();
 
       const mockWorkflowRuns = [
-        createMockWorkflowRun(
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-          "completed",
-          "success",
-          1,
-        ),
+        createMockWorkflowRun(SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME, "completed", "success", 1),
         createMockWorkflowRun("Other Workflow", "completed", "success", 3),
       ];
 
@@ -421,7 +394,7 @@ describe("breaking-change-add-label-artifacts", () => {
       const mockWorkflowRuns = [
         {
           ...createMockWorkflowRun(
-            "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+            SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME,
             "completed",
             "failure",
             1,
@@ -429,7 +402,7 @@ describe("breaking-change-add-label-artifacts", () => {
         },
         {
           ...createMockWorkflowRun(
-            "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
+            CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
             "in_progress",
             null,
             2,
@@ -445,10 +418,10 @@ describe("breaking-change-add-label-artifacts", () => {
 
       // Should log status for in_progress and conclusion for completed
       expect(mockCore.info).toHaveBeenCalledWith(
-        "- [TEST-IGNORE] Swagger BreakingChange - Analyze Code: failure",
+        `- ${SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME}: failure`,
       );
       expect(mockCore.info).toHaveBeenCalledWith(
-        "- [TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code: in_progress",
+        `- ${CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME}: in_progress`,
       );
     });
   });
