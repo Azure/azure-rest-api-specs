@@ -134,7 +134,7 @@ union PrivateLinkServiceConnectionStatus {
 }
 
 /**
- * Device Registry Namespace MI authentication type: UserAssigned, SystemAssigned.
+ * Device Registry Namespace MI authentication type: UserAssigned, and SystemAssigned.
  */
 union DeviceRegistryNamespaceAuthenticationType {
   string,
