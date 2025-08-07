@@ -11,33 +11,351 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeprofiles/default",
         "name": "default",
         "properties": {
-          "agentPoolProfiles": [
-            {
-              "kubernetesVersion": "1.7.7",
-              "name": "agent",
-              "osType": "Linux",
-              "upgrades": [
-                {
-                  "kubernetesVersion": "1.7.9"
-                },
-                {
-                  "kubernetesVersion": "1.7.11",
-                  "isPreview": true
-                }
-              ]
-            }
-          ],
+          "agentPoolProfiles": null,
           "controlPlaneProfile": {
-            "kubernetesVersion": "1.7.7",
-            "name": "master",
+            "componentsByReleases": [
+              {
+                "components": [
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-policy-webhook",
+                    "version": "1.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-policy",
+                    "version": "1.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "open-policy-agent-gatekeeper",
+                    "version": "v3.19.1-1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-csi-driver",
+                    "version": "v1.5.1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-csi-driver-windows",
+                    "version": "v1.5.1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-driver-registrar-linux",
+                    "version": "v2.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-driver-registrar-windows",
+                    "version": "v2.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-livenessprobe-linux",
+                    "version": "v2.15.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-livenessprobe-windows",
+                    "version": "v2.15.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-provider-azure",
+                    "version": "v1.7.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-provider-azure-windows",
+                    "version": "v1.7.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "ama-logs-linux",
+                    "version": "3.1.27"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "ama-logs-win",
+                    "version": "win-3.1.27"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-cfg-reader",
+                    "version": "6.18.0-main-06-19-2025-4901e151-cfg"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-ksm",
+                    "version": "v2.15.0-4"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-linux",
+                    "version": "6.18.0-main-06-19-2025-4901e151"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-target-allocator",
+                    "version": "6.18.0-main-06-19-2025-4901e151-targetallocator"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-windows",
+                    "version": "6.18.0-main-06-19-2025-4901e151-win"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "kube-state-metrics",
+                    "version": "v2.15.0-4"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "cloud-provider-node-manager-linux",
+                    "version": "v1.32.5"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "cloud-provider-node-manager-windows",
+                    "version": "v1.32.5"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "health-probe-proxy",
+                    "version": "v1.29.1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "image-cleaner",
+                    "version": "v1.4.0-4"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "kubelet-serving-csr-approver",
+                    "version": "v0.0.7"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "workload-identity-webhook",
+                    "version": "v1.5.1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "coredns",
+                    "version": "v1.11.3-8"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "metrics-server",
+                    "version": "v0.7.2-7"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-agent-enterprise",
+                    "version": "v0.1.11"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-agent-win",
+                    "version": "v0.0.36"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-agent",
+                    "version": "v0.0.36"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-operator",
+                    "version": "v0.1.11"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "kube-proxy",
+                    "version": "Not Found"
+                  }
+                ],
+                "kubernetesVersion": "1.32"
+              },
+              {
+                "components": [
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-policy-webhook",
+                    "version": "1.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-policy",
+                    "version": "1.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "open-policy-agent-gatekeeper",
+                    "version": "v3.19.1-1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-csi-driver",
+                    "version": "v1.5.1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-csi-driver-windows",
+                    "version": "v1.5.1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-driver-registrar-linux",
+                    "version": "v2.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-driver-registrar-windows",
+                    "version": "v2.13.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-livenessprobe-linux",
+                    "version": "v2.15.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-livenessprobe-windows",
+                    "version": "v2.15.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-provider-azure",
+                    "version": "v1.7.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "secrets-store-provider-azure-windows",
+                    "version": "v1.7.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "ama-logs-linux",
+                    "version": "3.1.27"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "ama-logs-win",
+                    "version": "win-3.1.27"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-cfg-reader",
+                    "version": "6.18.0-main-06-19-2025-4901e151-cfg"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-ksm",
+                    "version": "v2.15.0-4"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-linux",
+                    "version": "6.18.0-main-06-19-2025-4901e151"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-target-allocator",
+                    "version": "6.18.0-main-06-19-2025-4901e151-targetallocator"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "azure-monitor-metrics-windows",
+                    "version": "6.18.0-main-06-19-2025-4901e151-win"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "kube-state-metrics",
+                    "version": "v2.15.0-4"
+                  },
+                  {
+                    "hasBreakingChanges": true,
+                    "name": "cloud-provider-node-manager-linux",
+                    "version": "v1.33.0"
+                  },
+                  {
+                    "hasBreakingChanges": true,
+                    "name": "cloud-provider-node-manager-windows",
+                    "version": "v1.33.0"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "health-probe-proxy",
+                    "version": "v1.29.1"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "image-cleaner",
+                    "version": "v1.4.0-4"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "kubelet-serving-csr-approver",
+                    "version": "v0.0.7"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "workload-identity-webhook",
+                    "version": "v1.5.1"
+                  },
+                  {
+                    "hasBreakingChanges": true,
+                    "name": "coredns",
+                    "version": "v1.12.1-2"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "metrics-server",
+                    "version": "v0.7.2-7"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-agent-enterprise",
+                    "version": "v0.1.11"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-agent-win",
+                    "version": "v0.0.36"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-agent",
+                    "version": "v0.0.36"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "retina-operator",
+                    "version": "v0.1.11"
+                  },
+                  {
+                    "hasBreakingChanges": false,
+                    "name": "kube-proxy",
+                    "version": "Not Found"
+                  }
+                ],
+                "kubernetesVersion": "1.33"
+              }
+            ],
+            "kubernetesVersion": "1.32.6",
             "osType": "Linux",
             "upgrades": [
               {
-                "kubernetesVersion": "1.7.9",
-                "isPreview": true
+                "kubernetesVersion": "1.33.2"
               },
               {
-                "kubernetesVersion": "1.7.11"
+                "kubernetesVersion": "1.33.1"
+              },
+              {
+                "kubernetesVersion": "1.33.0"
               }
             ]
           }
