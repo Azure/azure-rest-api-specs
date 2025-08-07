@@ -35,15 +35,17 @@ export async function updateLabelsImpl({
   github,
   core,
 }) {
-  if (!isFullGitSha(head_sha)) {
-    throw new Error(`head_sha is not a valid full git SHA: '${head_sha}'`);
+  if (isFullGitSha(head_sha)) {
+    core.setOutput("head_sha", head_sha);
+  } else {
+    core.info(`head_sha is not a valid full git SHA: '${head_sha}'`);
   }
-  core.setOutput("head_sha", head_sha);
 
-  if (!Number.isInteger(issue_number) || issue_number <= 0) {
-    throw new Error(`issue_number must be a positive integer: ${issue_number}`);
+  if (Number.isInteger(issue_number) && issue_number > 0) {
+    core.setOutput("issue_number", issue_number);
+  } else {
+    core.info(`issue_number must be a positive integer: ${issue_number}`);
   }
-  core.setOutput("issue_number", issue_number);
 
   /** @type {string[]} */
   let artifactNames = [];
