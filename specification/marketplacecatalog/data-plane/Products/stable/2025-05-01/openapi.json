@@ -28,7 +28,7 @@
   "securityDefinitions": {
     "DiscoveryApiKey": {
       "type": "apiKey",
-      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview",
+      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview)",
       "name": "X-API-Key",
       "in": "header"
     }
@@ -1140,16 +1140,11 @@
           "items": {
             "$ref": "#/definitions/PlanDetails"
           }
-        },
-        "productId": {
-          "type": "string",
-          "description": "The unique id of the product"
         }
       },
       "required": [
         "isPrivate",
-        "isStopSell",
-        "productId"
+        "isStopSell"
       ],
       "allOf": [
         {
@@ -1336,7 +1331,7 @@
         },
         "productId": {
           "type": "string",
-          "description": "The unique id of the product"
+          "description": "A unique commercial identifier used to reference a specific product in transactional operations such as purchases, invoicing, and metering. This Id  services entitlement validation, and billing across systems"
         },
         "hasRiPlans": {
           "type": "boolean",
@@ -1344,7 +1339,7 @@
         },
         "hasMarketplaceFootprint": {
           "type": "boolean",
-          "description": "Indication if product has a representation in the marketplace"
+          "description": "Indication of whether product appears in Azure Marketplace?"
         },
         "attributes": {
           "type": "array",
@@ -1383,11 +1378,11 @@
     },
     "ProrationPolicy": {
       "type": "object",
-      "description": "Proration policy",
+      "description": "Defines the rules for calculating prorated charges or refunds for a subscription",
       "properties": {
         "minimumProratedUnits": {
           "type": "string",
-          "description": "Minimum prorated units"
+          "description": "Specifies the smallest time unit (ISO 8601 duration) used in proration, e.g., P1D for one day"
         }
       }
     },
@@ -1504,7 +1499,7 @@
         },
         "productSubType": {
           "type": "string",
-          "description": "Product sub type"
+          "description": "Denotes product sub group type, for example: 'Azure'"
         },
         "summary": {
           "type": "string",
@@ -1651,7 +1646,7 @@
       "properties": {
         "termDescriptionParameters": {
           "type": "array",
-          "description": "Term description parameters",
+          "description": "The parameters of the term description",
           "items": {
             "$ref": "#/definitions/TermDescriptionParameter"
           }
@@ -1666,7 +1661,7 @@
         },
         "prorationPolicy": {
           "$ref": "#/definitions/ProrationPolicy",
-          "description": "Proration policy"
+          "description": "Defines the rules for calculating prorated charges or refunds for a subscription"
         },
         "termDescription": {
           "type": "string",
@@ -1700,7 +1695,7 @@
     },
     "TermDescriptionParameter": {
       "type": "object",
-      "description": "Term description parameters",
+      "description": "The parameters of the term description",
       "properties": {
         "parameter": {
           "type": "string",

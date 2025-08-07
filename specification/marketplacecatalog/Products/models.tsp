@@ -35,7 +35,7 @@ model SkuSummary {
   @doc("Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
   productType?: string;
 
-  @doc("Product sub type")
+  @doc("Denotes product sub group type, for example: 'Azure'")
   productSubType?: string;
 
   @doc("Product summary")
@@ -269,13 +269,13 @@ model ProductSummary {
   @doc("The service name of the product, such as 'Virtual Machines'")
   service?: string;
 
-  @doc("The unique id of the product")
+  @doc("A unique commercial identifier used to reference a specific product in transactional operations such as purchases, invoicing, and metering. This Id  services entitlement validation, and billing across systems")
   productId?: string;
 
   @doc("Indication whether the product has plans with reservations")
   hasRiPlans?: boolean;
 
-  @doc("Indication if product has a representation in the marketplace")
+  @doc("Indication of whether product appears in Azure Marketplace?")
   hasMarketplaceFootprint?: boolean;
 
   @doc("Set of products attributes")
@@ -403,9 +403,6 @@ model ProductDetails extends ProductSummary {
   // Override properties that differ from base class
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
-
-  @doc("The unique id of the product")
-  productId: string;
 }
 
 @doc("Sku object related to given plan")
@@ -688,7 +685,7 @@ model Meter {
   includedQuantityProperties?: IncludedQuantityProperty[];
 }
 
-@doc("Term description parameters")
+@doc("The parameters of the term description")
 model TermDescriptionParameter {
   @doc("Parameter")
   parameter?: string;
@@ -697,9 +694,9 @@ model TermDescriptionParameter {
   value?: string;
 }
 
-@doc("Proration policy")
+@doc("Defines the rules for calculating prorated charges or refunds for a subscription")
 model ProrationPolicy {
-  @doc("Minimum prorated units")
+  @doc("Specifies the smallest time unit (ISO 8601 duration) used in proration, e.g., P1D for one day")
   minimumProratedUnits?: string;
 }
 
@@ -729,7 +726,7 @@ model BillingComponent {
 
 @doc("Applicable term")
 model Term {
-  @doc("Term description parameters")
+  @doc("The parameters of the term description")
   termDescriptionParameters?: TermDescriptionParameter[];
 
   @doc("Term id")
@@ -738,7 +735,7 @@ model Term {
   @doc("Term unit")
   termUnit?: string;
 
-  @doc("Proration policy")
+  @doc("Defines the rules for calculating prorated charges or refunds for a subscription")
   prorationPolicy?: ProrationPolicy;
 
   @doc("Term description")
@@ -991,5 +988,5 @@ model OdataOrderByParameter {
 }
 
 // API key def
-@doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview")
+@doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview)")
 model DiscoveryApiKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;
