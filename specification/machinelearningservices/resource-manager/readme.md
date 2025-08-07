@@ -89,17 +89,16 @@ suppressions:
       - $.definitions["CapabilityHostResource"]
   - code: AvoidAdditionalProperties
     reason: These are hyperparameters which can vary by model and the finetuning task type,
-    so cannot have strictly typed properties.
+      so cannot have strictly typed properties.
     where:
       - $.definitions.CustomModelFineTuning.properties.hyperParameters
   - code: AvoidAdditionalProperties
     reason: ModelID is a string representing the asset id for the model. The list of modelIds is dynamic since it based
-    on which models the user previously attempted to add to the InferenceGroup
+      on which models the user previously attempted to add to the InferenceGroup
     where:
       - $.definitions.DeltaModelStatusResponse.properties.deltaModels
   - code: AvoidAdditionalProperties
-    reason: JobOutputs is a common-type predefined reference, which is allowed under scenario 2 of
-    AvoidAdditionalProperties
+    reason: JobOutputs is a common-type predefined reference, which is an allowed scenario
     where:
       - $.definitions.FineTuningJob.properties.outputs
   - code: AvoidAdditionalProperties
@@ -112,8 +111,8 @@ suppressions:
       - $.definitions.SparkJob.properties.conf
   - code: AvoidAdditionalProperties
     reason: This is for feature parity with other job type like commandjob, sweepjob etc.
-       We have one interface for all type of job and other job take environment variable like this to match with them 
-       we also pass environment variable in this format. please check existing "CommandJob" in same file.
+      We have one interface for all type of job and other job take environment variable like this to match with them 
+      we also pass environment variable in this format. please check existing "CommandJob" in same file.
     where:
       - $.definitions.SparkJob.properties.environmentVariables
   - code: AvoidAdditionalProperties
@@ -198,8 +197,8 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     reason: Service already using response pattern without provisioning state for all previous existing outbound rules APIs.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}].put
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
 ```
 
 ### Tag: package-2025-06-01
@@ -437,8 +436,8 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     reason: Service already using response pattern without provisioning state for all previous existing outbound rules APIs.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}].put
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
 ```
 
 ### Tag: package-preview-2025-01
