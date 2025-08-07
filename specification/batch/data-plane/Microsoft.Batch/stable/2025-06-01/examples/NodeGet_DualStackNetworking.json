@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "batchUrl": "account.region.batch.azure.com",
+    "api-version": "9999-09-09",
+    "poolId": "dualstackpool",
+    "nodeId": "tvmps_5d8adec89961dcc011329b38df999a841f6cc815a5710678b741f04b33556ed2_d",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 27 Jun 2025 08:55:44 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "odata.metadata": "https://account.region.batch.azure.com/$metadata#nodes/@Element",
+        "id": "tvmps_5d8adec89961dcc011329b38df999a841f6cc815a5710678b741f04b33556ed2_d",
+        "url": "https://account.region.batch.azure.com/pools/dualstackpool/nodes/tvmps_5d8adec89961dcc011329b38df999a841f6cc815a5710678b741f04b33556ed2_d",
+        "state": "idle",
+        "schedulingState": "enabled",
+        "stateTransitionTime": "2025-06-27T08:51:17.021378Z",
+        "lastBootTime": "2025-06-27T08:51:16.946957Z",
+        "allocationTime": "2025-06-27T08:50:40.7175322Z",
+        "ipAddress": "10.0.0.4",
+        "ipv6Address": "fd00::4",
+        "affinityId": "TVM:tvmps_5d8adec89961dcc011329b38df999a841f6cc815a5710678b741f04b33556ed2_d",
+        "vmSize": "standard_d2s_v3",
+        "totalTasksRun": 0,
+        "totalTasksSucceeded": 0,
+        "runningTasksCount": 0,
+        "runningTaskSlotsCount": 0,
+        "isDedicated": true,
+        "endpointConfiguration": {
+          "inboundEndpoints": [
+            {
+              "name": "sshpool.1",
+              "protocol": "tcp",
+              "publicIPAddress": "1.1.1.1",
+              "publicFQDN": "dns53adb2f8-ce95-4191-ad79-c65c9572b083-azurebatch-cloudservice.westcentralus.cloudapp.azure.com",
+              "frontendPort": 40000,
+              "backendPort": 22
+            },
+            {
+              "name": "sshpool-ipv6.1",
+              "protocol": "tcp",
+              "publicIPAddress": "fd00::1",
+              "publicFQDN": "dns53adb2f8-ce95-4191-ad79-c65c9572b083-azurebatch-cloudservice.westcentralus.cloudapp.azure.com",
+              "frontendPort": 40000,
+              "backendPort": 22
+            }
+          ]
+        },
+        "nodeAgentInfo": {
+          "lastUpdateTime": "2025-06-27T08:51:16.946957Z",
+          "version": "1.12.19"
+        },
+        "virtualMachineInfo": {
+          "imageReference": {
+            "publisher": "Canonical",
+            "offer": "0001-com-ubuntu-server-focal",
+            "sku": "20_04-lts",
+            "version": "latest",
+            "exactVersion": "latest"
+          }
+        }
+      }
+    }
+  }
+}

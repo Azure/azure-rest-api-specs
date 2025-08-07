@@ -27,7 +27,16 @@ These are the global settings for the Batch API.
 ``` yaml
 title: BatchServiceClient
 openapi-type: data-plane
-tag: package-2024-07
+tag: package-2025-06
+```
+
+### Tag: package-2025-06
+
+These settings apply only when `--tag=package-2025-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06'
+input-file:
+  - Azure.Batch/stable/2025-06-01/BatchService.json
 ```
 
 ### Tag: package-2024-07.20.0
@@ -37,6 +46,15 @@ These settings apply only when `--tag=package-2024-07.20.0` is specified on the 
 ```yaml $(tag) == 'package-2024-07.20.0-preview'
 input-file:
   - Azure.Batch/preview/2024-07-01.20.0/BatchService.json
+```
+
+### Tag: package-2025-06.21.0
+
+These settings apply only when `--tag=package-2025-06.21.0` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06.21.0'
+input-file:
+  - Microsoft.Batch/stable/2025-06-01/BatchService.json
 ```
 
 ### Tag: package-2024-07
@@ -238,7 +256,6 @@ directive:
   - suppress: R2007
     where:
       - $.paths["/jobschedules/{jobScheduleId}"].delete
-      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete
       - $.paths["/jobschedules/{jobScheduleId}/terminate"].post
       - $.paths["/jobs/{jobId}"].delete
       - $.paths["/jobs/{jobId}/disable"].post
@@ -286,9 +303,6 @@ directive:
 
   - suppress: R2066
     where:
-      - $.paths["/certificates"].post.operationId
-      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].post.operationId
-      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete"].post.operationId
       - $.paths["/jobs"].post.operationId
       - $.paths["/jobschedules"].post.operationId
       - $.paths["/jobs/{jobId}/tasks"].post.operationId
@@ -327,7 +341,6 @@ directive:
 
   - suppress: R4011
     where:
-      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete.responses
       - $.paths["/jobs/{jobId}/tasks/{taskId}/files/{filePath}"].delete.responses
       - $.paths["/pools/{poolId}/nodes/{nodeId}/files/{filePath}"].delete.responses
       - $.paths["/jobschedules/{jobScheduleId}"].delete.responses
@@ -346,7 +359,6 @@ suppressions:
    where: 
      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
-     - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete
    reason: Service does not return 200, nor supply location header.
 
 ```
