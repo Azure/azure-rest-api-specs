@@ -9,6 +9,10 @@
     - options.@azure-tools/typespec-go.inject-spans
     - options.@azure-tools/typespec-go.service-dir
     - options.@azure-tools/typespec-go.package-dir
+    # Suppress validation for a csharp emitter options
+    - options.@azure-tools/typespec-csharp.package-dir
+    - options.@azure-tools/typespec-csharp.namespace
+    - options.@azure-tools/typespec-csharp.clear-output-folder
   reason: "Go SDK currently Not mandatory for Data-plane"
 - tool: TypeSpecValidation
   paths:
