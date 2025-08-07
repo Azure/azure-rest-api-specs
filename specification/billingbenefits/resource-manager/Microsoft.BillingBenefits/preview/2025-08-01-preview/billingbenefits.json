@@ -2601,6 +2601,362 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}": {
+      "put": {
+        "description": "Create or update a conditional credit.",
+        "operationId": "ConditionalCredits_CreateOrUpdate",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConditionalCreditCreatePrimary": {
+            "$ref": "./examples/ConditionalCreditCreatePrimary.json"
+          },
+          "ConditionalCreditCreateContributor": {
+            "$ref": "./examples/ConditionalCreditCreateContributor.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            }
+          },
+          "201": {
+            "description": "The request is being processed.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a conditional credit.",
+        "operationId": "ConditionalCredits_Get",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditGet": {
+            "$ref": "./examples/ConditionalCreditGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a conditional credit.",
+        "operationId": "ConditionalCredits_Update",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConditionalCreditUpdate": {
+            "$ref": "./examples/ConditionalCreditUpdate.json"
+          },
+          "ConditionalCreditUpdateContributor": {
+            "$ref": "./examples/ConditionalCreditUpdateContributor.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditPatchRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a conditional credit.",
+        "operationId": "ConditionalCredits_Delete",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConditionalCreditDelete": {
+            "$ref": "./examples/ConditionalCreditDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits": {
+      "get": {
+        "description": "List conditional credits by resource group.",
+        "operationId": "ConditionalCredits_ListByResourceGroup",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditsListByResourceGroup": {
+            "$ref": "./examples/ConditionalCreditsListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of conditional credits under the given resource group.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/conditionalCredits": {
+      "get": {
+        "description": "List conditional credits by subscription.",
+        "operationId": "ConditionalCredits_ListBySubscription",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditsListBySubscription": {
+            "$ref": "./examples/ConditionalCreditsListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List conditional credits at subscription level.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits": {
+      "get": {
+        "description": "List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts",
+        "operationId": "ConditionalCredits_ScopeList",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditScopeList": {
+            "$ref": "./examples/ApplicableConditionalCreditList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of conditional credits that are applicable for a given scope.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3075,7 +3431,10 @@
             "scopes": [
               "ResourceGroup"
             ],
-            "type": "Microsoft.BillingBenefits/discounts"
+            "type": [
+              "Microsoft.BillingBenefits/discounts",
+              "Microsoft.BillingBenefits/conditionalCredits"
+            ]
           }
         ]
       },
@@ -5347,6 +5706,10 @@
         "benefitType": {
           "$ref": "#/definitions/BenefitType",
           "description": "Type of benefit to validate. This is used to determine the model type for validation."
+        },
+        "empowerment": {
+          "$ref": "#/definitions/EmpowermentConfiguration",
+          "description": "Empowerment configuration for validation rule relaxation"
         }
       },
       "discriminator": "benefitType"
@@ -5479,6 +5842,434 @@
             ]
           },
           "description": "Fully-qualified resource identifier of the primary MACC. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}."
+        }
+      }
+    },
+    "ConditionalCredit": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "Resource definition for Conditional Credits.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Conditional credit properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConditionalCreditProperties"
+        }
+      }
+    },
+    "ConditionalCreditProperties": {
+      "type": "object",
+      "description": "Properties belonging to conditional credits.",
+      "discriminator": "entityType",
+      "required": [
+        "entityType"
+      ],
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/ConditionalCreditEntityType"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the conditional credit"
+        },
+        "billingAccountResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "Tenant"
+                ],
+                "type": "Microsoft.Billing/billingAccounts"
+              }
+            ]
+          },
+          "description": "The billing account resource ID"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "description": "The provisioning state of the resource"
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Pending",
+            "Active",
+            "Canceled",
+            "Completed",
+            "PendingSettlement"
+          ],
+          "x-ms-enum": {
+            "name": "ConditionalCreditStatus",
+            "modelAsString": true
+          },
+          "description": "The status of the conditional credit"
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date of the conditional credit"
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End date of the conditional credit (derived from last milestone)"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code for the conditional credit"
+        },
+        "benefitResourceId": {
+          "$ref": "#/definitions/BenefitResourceId"
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalCreditMilestoneBase"
+          },
+          "description": "List of conditional credit milestones (schema varies by entity type)"
+        }
+      }
+    },
+    "PrimaryConditionalCreditProperties": {
+      "type": "object",
+      "description": "Properties for primary conditional credit.",
+      "x-ms-discriminator-value": "Primary",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionalCreditProperties"
+        }
+      ],
+      "required": [
+        "entityType",
+        "productCode",
+        "startAt",
+        "systemId"
+      ],
+      "properties": {
+        "entityType": {
+          "type": "string",
+          "enum": [
+            "Primary"
+          ],
+          "x-ms-enum": {
+            "name": "PrimaryEntityType",
+            "modelAsString": true
+          },
+          "description": "Type of conditional credit entity"
+        },
+        "systemId": {
+          "type": "string",
+          "description": "System identifier shared between primary and contributor conditional credits representing the same conditional credit program"
+        },
+        "allowContributors": {
+          "$ref": "#/definitions/EnablementMode",
+          "description": "Whether this conditional credit allows contributor billing accounts"
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalCreditMilestone"
+          },
+          "description": "List of milestones for this conditional credit (must include awards)"
+        }
+      }
+    },
+    "ContributorConditionalCreditProperties": {
+      "type": "object",
+      "description": "Properties for contributor conditional credit.",
+      "x-ms-discriminator-value": "Contributor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionalCreditProperties"
+        }
+      ],
+      "required": [
+        "entityType",
+        "primaryResourceId",
+        "systemId",
+        "productCode",
+        "startAt"
+      ],
+      "properties": {
+        "entityType": {
+          "type": "string",
+          "enum": [
+            "Contributor"
+          ],
+          "x-ms-enum": {
+            "name": "ContributorEntityType",
+            "modelAsString": true
+          },
+          "description": "Type of conditional credit entity"
+        },
+        "primaryResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "scopes": [
+                  "ResourceGroup"
+                ],
+                "type": "Microsoft.BillingBenefits/conditionalCredits"
+              }
+            ]
+          },
+          "description": "Resource ID of the primary conditional credit (required for contributors)"
+        },
+        "systemId": {
+          "type": "string",
+          "description": "System identifier shared between primary and contributor conditional credits representing the same conditional credit program"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code for the contributor conditional credit"
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date when the contributor begins contributing"
+        },
+        "milestones": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ContributorConditionalCreditMilestone"
+          },
+          "description": "List of milestones copied from primary conditional credit (excludes award details)"
+        }
+      }
+    },
+    "ConditionalCreditEntityType": {
+      "type": "string",
+      "description": "Type of conditional credit entity",
+      "enum": [
+        "Primary",
+        "Contributor"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionalCreditEntityType",
+        "modelAsString": true
+      }
+    },
+    "ConditionalCreditMilestoneBase": {
+      "type": "object",
+      "description": "Base milestone definition for conditional credits",
+      "required": [
+        "milestoneId",
+        "name",
+        "endAt",
+        "spendTarget"
+      ],
+      "properties": {
+        "milestoneId": {
+          "type": "string",
+          "description": "Unique identifier for the milestone"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for the milestone"
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Scheduled",
+            "Active",
+            "Completed",
+            "Missed",
+            "Canceled",
+            "PendingSettlement"
+          ],
+          "x-ms-enum": {
+            "name": "MilestoneStatus",
+            "modelAsString": true
+          },
+          "description": "Current status of the milestone"
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date for this milestone"
+        },
+        "spendTarget": {
+          "$ref": "#/definitions/SpendTarget",
+          "description": "Spend target for this milestone"
+        },
+        "award": {
+          "$ref": "#/definitions/Award",
+          "description": "Award details for this milestone (only present for primary conditional credits)"
+        }
+      }
+    },
+    "ConditionalCreditMilestone": {
+      "type": "object",
+      "description": "Milestone definition within a conditional credit",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionalCreditMilestoneBase"
+        }
+      ],
+      "required": [
+        "award"
+      ],
+      "properties": {
+        "award": {
+          "$ref": "#/definitions/Award",
+          "description": "Award details for this milestone"
+        }
+      }
+    },
+    "ContributorConditionalCreditMilestone": {
+      "type": "object",
+      "description": "Milestone definition for contributor conditional credit (excludes award details)",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionalCreditMilestoneBase"
+        }
+      ]
+    },
+    "SpendTarget": {
+      "$ref": "#/definitions/Commitment",
+      "description": "Spend target specification"
+    },
+    "Award": {
+      "type": "object",
+      "description": "Award details for milestone completion",
+      "required": [
+        "credit",
+        "startAt",
+        "endAt",
+        "resourceId",
+        "systemId",
+        "balanceVersion"
+      ],
+      "properties": {
+        "credit": {
+          "$ref": "#/definitions/Commitment",
+          "description": "Credit amount to be awarded"
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date when the credit becomes effective"
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date when the credit expires"
+        },
+        "resourceId": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "Resource ID for the awarded credit.",
+          "readOnly": true
+        },
+        "systemId": {
+          "$ref": "#/definitions/SystemId",
+          "description": "This is the globally unique identifier of the credit which will not change for its lifetime.",
+          "readOnly": true
+        },
+        "balanceVersion": {
+          "$ref": "#/definitions/BalanceVersion",
+          "readOnly": true
+        }
+      }
+    },
+    "ConditionalCreditPatchRequest": {
+      "type": "object",
+      "description": "Conditional credit patch request",
+      "properties": {
+        "properties": {
+          "description": "Conditional credit patch request properties",
+          "$ref": "#/definitions/ConditionalCreditPatchRequestProperties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConditionalCreditPatchRequestProperties": {
+      "type": "object",
+      "description": "Conditional credit patch request properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the conditional credit"
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalCreditMilestone"
+          },
+          "description": "Updated milestones list (only applicable for primary conditional credits)"
+        }
+      }
+    },
+    "ConditionalCreditList": {
+      "type": "object",
+      "description": "List of conditional credits",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionalCredit"
+          },
+          "description": "List of conditional credits"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results"
+        }
+      }
+    },
+    "EmpowermentConfiguration": {
+      "type": "object",
+      "description": "Empowerment configuration for validation rule relaxation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User-readable name of the empowerment"
+        },
+        "token": {
+          "type": "string",
+          "description": "Signed token for empowerment validation"
+        }
+      }
+    },
+    "ConditionalCreditsValidateModel": {
+      "type": "object",
+      "description": "Conditional Credits validate model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitValidateModel"
+        }
+      ],
+      "x-ms-discriminator-value": "ConditionalCredits",
+      "properties": {
+        "properties": {
+          "description": "Conditional Credits validate properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConditionalCreditProperties"
         }
       }
     }
@@ -5745,6 +6536,35 @@
       "description": "Credit source patch request",
       "schema": {
         "$ref": "#/definitions/CreditSourcePatchRequest"
+      }
+    },
+    "ConditionalCreditNameParameter": {
+      "name": "conditionalCreditName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-\\.]+$",
+      "description": "Name of the conditional credit"
+    },
+    "ConditionalCreditRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for creating a conditional credit",
+      "schema": {
+        "$ref": "#/definitions/ConditionalCredit"
+      }
+    },
+    "ConditionalCreditPatchRequestParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for updating a conditional credit",
+      "schema": {
+        "$ref": "#/definitions/ConditionalCreditPatchRequest"
       }
     }
   }

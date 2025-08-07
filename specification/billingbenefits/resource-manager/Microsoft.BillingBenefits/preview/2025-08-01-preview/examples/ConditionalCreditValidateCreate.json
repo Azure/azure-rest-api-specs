@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "Validation Test CACO",
+            "systemId": "CACO-SYSTEM-001",
+            "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+            "startAt": "2024-12-01T00:00:00Z",
+            "allowContributors": "Disabled",
+            "milestones": [
+              {
+                "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+                "name": "Q1 Target",
+                "spendTarget": {
+                  "amount": 50000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "credit": {
+                    "amount": 5000,
+                    "currencyCode": "USD"
+                  },
+                  "startAt": "2025-04-01T00:00:00Z",
+                  "endAt": "2025-06-30T00:00:00Z"
+                },
+                "endAt": "2025-03-31T00:00:00Z"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true,
+            "resourceId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47/resourceGroups/myRG/providers/Microsoft.BillingBenefits/conditionalCredits/validationTest",
+            "systemId": "CACO-SYSTEM-001"
+          }
+        ]
+      }
+    }
+  }
+}
