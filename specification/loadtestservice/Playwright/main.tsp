@@ -13,8 +13,8 @@ using TypeSpec.Versioning;
   "Playwright Service API Endpoint",
   {
     @doc("""
-      Supported Playwright Service API Endpoints (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.
-      You can also find this value in the Azure Playwright Workspace property, such as `dataplaneUri`.
+      Playwright Service API endpoint (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.
+      The region corresponds to your Azure Playwright workspace location. You can find this value in your Azure Playwright workspace properties under `dataplaneUri`.
       """)
     endpoint: string,
   }
@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
     OAuth2Auth<[
       {
         type: OAuth2FlowType.implicit,
-        description: "We can use OAuth2 Implicit flow to get the auth token for calling the APIs.",
+        description: "OAuth2 Implicit flow for client-side applications. Suitable for single-page applications and scenarios where client secrets cannot be securely stored.",
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
         scopes: ["https://playwright.microsoft.com/.default"],
       }
@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
     OAuth2Auth<[
       {
         type: OAuth2FlowType.authorizationCode,
-        description: "We can use OAuth2 Authorization Code flow to get the auth token for calling the APIs.",
+        description: "OAuth2 Authorization Code flow for server-side applications. Recommended for applications that can securely store client secrets.",
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
         tokenUrl: "https://login.microsoftonline.com/common/v2.0/oauth2/token",
         scopes: ["https://playwright.microsoft.com/.default"],
@@ -44,9 +44,13 @@ using TypeSpec.Versioning;
 @versioned(Playwright.Versions)
 namespace Playwright;
 
-@doc("Playwright Service API Versions.")
+@doc("Available versions of the Playwright Service API.")
 enum Versions {
-  @doc("Version 2025-07-01-preview")
+  @doc("Preview version 2025-07-01-preview with experimental features.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_07_01_preview: "2025-07-01-preview",
+
+  @doc("Stable version 2025-09-01 with general availability features.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_09_01: "2025-09-01",
 }
