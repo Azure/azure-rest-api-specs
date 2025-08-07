@@ -38,7 +38,8 @@ directive:
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: Microsoft.Insights/stable/2024-02-01/metrics_API.json
-    reason: "Suppressing validator error due to TypeError in azure-openapi-validator core processing. The validator encounters a 'Cannot read properties of undefined (reading 'readOnly')' error when processing this specification."
+    where: $.definitions.Metric
+    reason: "Metrics query result is not an ARM resource; id/name/type are data fields."
 ```
 
 ### Tag: package-2025-08
