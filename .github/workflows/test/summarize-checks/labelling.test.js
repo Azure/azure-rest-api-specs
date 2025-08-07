@@ -131,7 +131,7 @@ describe("update labels", () => {
       },
     },
     {
-      description: "Shouldn't add ARMReview when blocked on RPaaS config",
+      description: "Shouldn't add any ARM process updates when not ready for ARM review",
       existingLabels: ["other-label"],
       expectedLabelsToAdd: [
         "TypeSpec",
@@ -139,7 +139,6 @@ describe("update labels", () => {
         "CI-NewRPNamespaceWithoutRPaaS",
         "NotReadyForARMReview",
         "ARMReview",
-        "WaitForARMFeedback",
         "new-api-version",
       ],
       expectedLabelsToRemove: [],
