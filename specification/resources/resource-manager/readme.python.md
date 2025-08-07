@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-privatelinks-2020-05 --python` is 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-privatelinks-2020-05'
+title: ResourcePrivateLinkClient
 namespace: azure.mgmt.resource.privatelinks
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks
 ```
@@ -47,6 +48,7 @@ These settings apply only when `--tag=package-features-2021-07 --python` is spec
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-features-2021-07'
+title: FeatureClient
 namespace: azure.mgmt.resource.features
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features
 ```
@@ -57,6 +59,7 @@ These settings apply only when `--tag=package-links-2016-09 --python` is specifi
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-links-2016-09'
+title: ManagementLinkClient
 namespace: azure.mgmt.resource.links
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links
 ```
@@ -67,6 +70,7 @@ These settings apply only when `--tag=package-locks-2016-09 --python` is specifi
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-locks-2016-09'
+title: ManagementLockClient
 namespace: azure.mgmt.resource.locks
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks
 ```
@@ -77,6 +81,7 @@ These settings apply only when `--tag=package-managedapplications-2019-07 --pyth
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-managedapplications-2019-07'
+title: ApplicationClient
 namespace: azure.mgmt.resource.managedapplications
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
 ```
@@ -87,6 +92,7 @@ These settings apply only when `--tag=package-policy-2023-04 --python` is specif
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-policy-2023-04'
+title: PolicyClient
 namespace: azure.mgmt.resource.policy
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy
 ```
@@ -108,6 +114,7 @@ These settings apply only when `--tag=package-subscriptions-2022-12 --python` is
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-subscriptions-2022-12'
+title: SubscriptionClient
 namespace: azure.mgmt.resource.subscriptions
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions
 ```
@@ -118,18 +125,9 @@ These settings apply only when `--tag=package-changes-2022-05 --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-changes-2022-05'
+title: ChangesClient
 namespace: azure.mgmt.resource.changes
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes
-```
-
-### Tag: package-privatelinks-2020-05 and python
-
-These settings apply only when `--tag=package-privatelinks-2020-05 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-privatelinks-2020-05'
-namespace: azure.mgmt.resource.privatelinks
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks
 ```
 
 ### Tag: package-databoundaries-2024-08 and python
@@ -138,6 +136,7 @@ These settings apply only when `--tag=package-databoundaries-2024-08 --python` i
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-databoundaries-2024-08'
+title: DataBoundaryMgmtClient
 namespace: azure.mgmt.resource.databoundaries
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries
 directive:
