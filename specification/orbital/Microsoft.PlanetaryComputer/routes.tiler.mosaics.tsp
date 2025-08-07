@@ -298,6 +298,9 @@ interface MosaicsWmtsMosaics {
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
+      ...AssetQueryParameters;
+      ...AlgorithmQueryParameters;
+
       /**
        * Search Id (pgSTAC Search Hash)
        */
@@ -327,6 +330,8 @@ interface MosaicsWmtsMosaics {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
     WmtsCapabilitiesXmlResponse | NoContentResponse
   >;
@@ -343,6 +348,9 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
+      ...AssetQueryParameters;
+      ...AlgorithmQueryParameters;
+
       /**
        * Search Id (pgSTAC Search Hash)
        */
@@ -373,6 +381,8 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
     WmtsCapabilitiesXmlResponse | NoContentResponse
   >;
