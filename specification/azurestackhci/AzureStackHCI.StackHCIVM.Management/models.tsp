@@ -451,6 +451,57 @@ union PublicIPAddressType {
   string,
 }
 
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric resource type")
+union FabricResourceTypeEnum {
+  @doc("Fabric resource of L2IsolationDomain type")
+  L2IsolationDomain: "L2IsolationDomain",
+
+  @doc("Fabric resource of L3InternalNetwork type")
+  L3InternalNetwork: "L3InternalNetwork",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric connection health state type")
+union FabricConnectionHealthEnum {
+  @doc("Fabric connection health state - healthy type")
+  Healthy: "Healthy",
+
+  @doc("Fabric connection health state - warning type")
+  Warning: "Warning",
+
+  @doc("Fabric connection health state - error type")
+  Error: "Error",
+
+  @doc("Fabric connection health state - unknown type")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric integration state type")
+union FabricIntegrationStateEnum {
+  @doc("Fabric integration state - connected type")
+  Connected: "Connected",
+
+  @doc("Fabric integration state - disconnected type")
+  Disconnected: "Disconnected",
+
+  @doc("Fabric integration state - misconfigured type")
+  Misconfigured: "Misconfigured",
+
+  @doc("Fabric integration state - notapplicable type")
+  NotApplicable: "NotApplicable",
+
+  @doc("Fabric integration state - connecting type")
+  Connecting: "Connecting",
+
+  string,
+}
+
 @doc("The Azure Resource ID for a Network Interface.")
 model NetworkInterfaceArmReference {
   @doc("The Azure Resource ID for a Network Interface.")
@@ -521,7 +572,7 @@ model LogicalNetworkArmReference {
 @doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
 model ManagedNetworkFabricArmReference {
   @doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
-  id?: armResourceIdentifier<[
+  resourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/l2isolationdomains";
     },
@@ -535,7 +586,7 @@ model ManagedNetworkFabricArmReference {
 @doc("The Azure Resource ID for a Virtual Network subnet")
 model VirtualNetworkSubnetArmReference {
   @doc("The Azure Resource ID for a Virtual Network subnet.")
-  id?: armResourceIdentifier<[
+  resourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualnetwork/subnets";
     }
@@ -547,7 +598,7 @@ model VirtualNetworkSubnetArmReference {
 @doc("The Azure Resource ID of a Public IP resource")
 model PublicIPAddressArmReference {
   @doc("The Azure Resource ID of a Public IP resource")
-  id?: armResourceIdentifier<[
+  resourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/publicIPAddresses";
     }
@@ -559,7 +610,7 @@ model PublicIPAddressArmReference {
 @doc("The Azure Resource ID of an IPConfiguration resource")
 model IPConfigurationArmReference {
   @doc("The Azure Resource ID of an IPConfiguration resource")
-  id?: armResourceIdentifier<[
+  resourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations";
     },
@@ -1128,7 +1179,7 @@ model FabricIssue {
 
   @doc("Timestamp of the issue as ISO 8601 string")
   @visibility(Lifecycle.Read)
-  timestamp?: string;
+  timestamp?: utcDateTime;
 }
 
 @added(Versions.v2025_09_01_preview)
@@ -1136,19 +1187,19 @@ model FabricIssue {
 model FabricIntegrationStatus {
   @doc("Current fabric integration state.")
   @visibility(Lifecycle.Read)
-  state?: string;
+  state?: FabricIntegrationStateEnum;
 
   @doc("Health status of the fabric connection.")
   @visibility(Lifecycle.Read)
-  health?: string;
+  health?: FabricConnectionHealthEnum;
 
   @doc("Timestamp of the last fabric health check as ISO 8601 string")
   @visibility(Lifecycle.Read)
-  lastChecked?: string;
+  lastChecked?: utcDateTime;
 
   @doc("Type of fabric resource referenced.")
   @visibility(Lifecycle.Read)
-  resourceType?: string;
+  resourceType?: FabricResourceTypeEnum;
 
   @doc("Issues raised by fabric")
   @visibility(Lifecycle.Read)
@@ -1333,7 +1384,14 @@ model PublicIPAddressProperties {
   publicIPAddressVersion?: PublicIPAddressType;
 
   @doc("ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP")
-  ipAllocationScope?: string;
+  ipAllocationScope?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/publicIPAddresses";
+    }
+  ]>;
 
   @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
   ipAddress?: string;

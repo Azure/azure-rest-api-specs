@@ -5017,27 +5017,106 @@
         ]
       }
     },
+    "FabricConnectionHealthEnum": {
+      "type": "string",
+      "description": "Fabric connection health state type",
+      "enum": [
+        "Healthy",
+        "Warning",
+        "Error",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "FabricConnectionHealthEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Fabric connection health state - healthy type"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Fabric connection health state - warning type"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Fabric connection health state - error type"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Fabric connection health state - unknown type"
+          }
+        ]
+      }
+    },
+    "FabricIntegrationStateEnum": {
+      "type": "string",
+      "description": "Fabric integration state type",
+      "enum": [
+        "Connected",
+        "Disconnected",
+        "Misconfigured",
+        "NotApplicable",
+        "Connecting"
+      ],
+      "x-ms-enum": {
+        "name": "FabricIntegrationStateEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Fabric integration state - connected type"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Fabric integration state - disconnected type"
+          },
+          {
+            "name": "Misconfigured",
+            "value": "Misconfigured",
+            "description": "Fabric integration state - misconfigured type"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Fabric integration state - notapplicable type"
+          },
+          {
+            "name": "Connecting",
+            "value": "Connecting",
+            "description": "Fabric integration state - connecting type"
+          }
+        ]
+      }
+    },
     "FabricIntegrationStatus": {
       "type": "object",
       "description": "Enhanced fabric integration status with detailed health monitoring and connectivity state.",
       "properties": {
         "state": {
-          "type": "string",
+          "$ref": "#/definitions/FabricIntegrationStateEnum",
           "description": "Current fabric integration state.",
           "readOnly": true
         },
         "health": {
-          "type": "string",
+          "$ref": "#/definitions/FabricConnectionHealthEnum",
           "description": "Health status of the fabric connection.",
           "readOnly": true
         },
         "lastChecked": {
           "type": "string",
+          "format": "date-time",
           "description": "Timestamp of the last fabric health check as ISO 8601 string",
           "readOnly": true
         },
         "resourceType": {
-          "type": "string",
+          "$ref": "#/definitions/FabricResourceTypeEnum",
           "description": "Type of fabric resource referenced.",
           "readOnly": true
         },
@@ -5078,9 +5157,34 @@
         },
         "timestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "Timestamp of the issue as ISO 8601 string",
           "readOnly": true
         }
+      }
+    },
+    "FabricResourceTypeEnum": {
+      "type": "string",
+      "description": "Fabric resource type",
+      "enum": [
+        "L2IsolationDomain",
+        "L3InternalNetwork"
+      ],
+      "x-ms-enum": {
+        "name": "FabricResourceTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "L2IsolationDomain",
+            "value": "L2IsolationDomain",
+            "description": "Fabric resource of L2IsolationDomain type"
+          },
+          {
+            "name": "L3InternalNetwork",
+            "value": "L3InternalNetwork",
+            "description": "Fabric resource of L3InternalNetwork type"
+          }
+        ]
       }
     },
     "GalleryDiskImage": {
@@ -5665,7 +5769,7 @@
       "type": "object",
       "description": "The Azure Resource ID of an IPConfiguration resource",
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of an IPConfiguration resource",
@@ -6110,7 +6214,7 @@
       "type": "object",
       "description": "The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network",
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network",
@@ -6854,7 +6958,7 @@
       "type": "object",
       "description": "The Azure Resource ID of a Public IP resource",
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of a Public IP resource",
@@ -6899,7 +7003,18 @@
         },
         "ipAllocationScope": {
           "type": "string",
-          "description": "ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP"
+          "format": "arm-id",
+          "description": "ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              },
+              {
+                "type": "Microsoft.AzureStackHCI/publicIPAddresses"
+              }
+            ]
+          }
         },
         "ipAddress": {
           "type": "string",
@@ -8807,7 +8922,7 @@
       "type": "object",
       "description": "The Azure Resource ID for a Virtual Network subnet",
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID for a Virtual Network subnet.",
