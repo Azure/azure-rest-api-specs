@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-11'
 input-file:
-  - Microsoft.IoTCentral/preview/2021-11-01-preview/iotcentral.json
+  - preview/2021-11-01-preview/iotcentral.json
 directive:
   - suppress: R4009
     from: iotcentral.json
@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-06'
 input-file:
-  - Microsoft.IoTCentral/stable/2021-06-01/iotcentral.json
+  - stable/2021-06-01/iotcentral.json
 directive:
   - suppress: R4009
     from: iotcentral.json
@@ -79,7 +79,7 @@ These settings apply only when `--tag=package-2018-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-09-01'
 input-file:
-- Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json
+- stable/2018-09-01/iotcentral.json
 ```
 
 ---
