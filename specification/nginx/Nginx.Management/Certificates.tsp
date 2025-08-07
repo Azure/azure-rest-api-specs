@@ -6,16 +6,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Rest;
 using Azure.ResourceManager;
 
-namespace Nginx.NginxPlus;
+namespace NGINX.NGINXPLUS;
 
 /** NginxCertificate resource */
 @parentResource(NginxDeployment)
 model Certificate is ProxyResource<NginxCertificateProperties> {
   ...ResourceNameParameter<Certificate>;
-
-  /** Gets or sets the location. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  location?: string;
 }
 
 /**
@@ -41,7 +37,7 @@ model NginxCertificateProperties {
   /**
    * The Key Vault secret ID. Example: `https://myvault.vault.azure.net/secrets/mysecret/1234567890abcdef1234567890abcdef`.
    */
-  keyVaultSecretId?: string;
+  keyVaultSecretId?: url;
 
   /**
    * The SHA1 thumbprint of the certificate.
