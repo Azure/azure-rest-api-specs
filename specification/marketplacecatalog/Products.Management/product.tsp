@@ -596,7 +596,7 @@ model Term {
   @doc("Term unit")
   termUnit?: string;
 
-  @doc("Proration policy")
+  @doc("Defines the rules for calculating prorated charges or refunds for a subscription.")
   prorationPolicy?: ProrationPolicy;
 
   @doc("Term description")
