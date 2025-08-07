@@ -960,9 +960,19 @@ model TestRunInsightColumn {
 
 @doc("Error details if there is any failure in load test run")
 model ErrorDetails {
+  @doc("Error code if there is any failure in load test run.")
+  @visibility(Lifecycle.Read)
+  @added(APIVersions.v2025_03_01_preview)
+  code?: string;
+
   @doc("Error details in case test run was not successfully run.")
   @visibility(Lifecycle.Read)
   message?: string;
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("A dictionary for storing additional error information for better context. Each key is a property name (e.g., \"Description\", \"Resolution\", \"Category\", \"Region\"), and its value is an array of strings with relevant details.")
+  @visibility(Lifecycle.Read)
+  properties?: Record<string[]>;
 }
 
 @doc("Test run statistics.")
