@@ -7,7 +7,7 @@ using Rest;
 using Http;
 using Azure.ResourceManager;
 
-namespace Nginx.NginxPlus;
+namespace NGINX.NGINXPLUS;
 
 /**
  * Represents an Nginx configuration resource.
@@ -160,9 +160,9 @@ model NginxConfigurationRequestProperties {
 }
 
 /**
- * The request body for creating an analysis for an Nginx configuration.
+ * The request body for creating an analysis for an NGINX configuration.
  */
-@doc("The request body for creating an analysis for an Nginx configuration.")
+@doc("The request body for creating an analysis for an NGINX configuration.")
 model AnalysisCreate {
   /**
    * Configuration details for analysis.
@@ -175,7 +175,7 @@ model AnalysisCreate {
  */
 model AnalysisConfig {
   /**
-   * The root file of the Nginx config file(s). It must match one of the files' filepath.
+   * The root file of the NGINX config file(s). It must match one of the files' filepath.
    */
   rootFile?: string;
 
@@ -228,7 +228,7 @@ model AnalysisResultContent {
 }
 
 /**
- * An error object found during the analysis of an Nginx configuration.
+ * An error object found during the analysis of an NGINX configuration.
  */
 model AnalysisDiagnostic {
   /**
@@ -268,7 +268,7 @@ model AnalysisDiagnostic {
 }
 
 /**
- * A diagnostic is a message associated with an Nginx config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category.
+ * A diagnostic is a message associated with an NGINX config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category.
  */
 model DiagnosticItem {
   /**

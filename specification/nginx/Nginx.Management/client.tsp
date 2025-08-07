@@ -2,24 +2,26 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Nginx.NginxPlus;
+using NGINX.NGINXPLUS;
 
-@@clientName(Nginx.NginxPlus, "NginxManagementClient", "javascript");
+@@clientName(NGINX.NGINXPLUS, "NginxManagementClient", "javascript");
+
+// Method name overrides
+@@clientName(Configurations.analyze, "analysis", "!csharp");
 
 // Model name overrides
-@@clientName(Certificate, "NginxCertificate");
-@@clientName(ApiKeyRequestProperties, "NginxDeploymentApiKeyRequestProperties");
-
+@@clientName(Certificate, "NginxCertificate", "!csharp");
+@@clientName(ApiKey, "NginxDeploymentApiKeyResponse", "!csharp");
 @@clientName(ApiKeyResponseProperties,
   "NginxDeploymentApiKeyResponseProperties",
   "!csharp"
 );
-@@clientName(ApiKey, "NginxDeploymentApiKeyResponse", "!csharp");
 @@clientName(ApiKeyRequest, "NginxDeploymentApiKeyRequest", "!csharp");
-@@clientName(AnalysisConfig, "AnalysisCreateConfig", "!csharp");
-@@clientName(AnalysisResultContent, "AnalysisResultData", "!csharp");
+@@clientName(ApiKeyRequestProperties,
+  "NginxDeploymentApiKeyRequestProperties",
+  "!csharp"
+);
 @@clientName(Configuration, "NginxConfigurationResponse", "!csharp");
-@@clientName(DiagnosticLevel, "Level", "!csharp");
 @@clientName(NginxConfigurationProtectedFileResult,
   "NginxConfigurationProtectedFileResponse",
   "!csharp"
@@ -28,6 +30,9 @@ using Nginx.NginxPlus;
   "NginxConfigurationProtectedFileRequest",
   "!csharp"
 );
+@@clientName(AnalysisConfig, "AnalysisCreateConfig", "!csharp");
+@@clientName(AnalysisResultContent, "AnalysisResultData", "!csharp");
+@@clientName(DiagnosticLevel, "Level", "!csharp");
 
 // CommonTypes
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
@@ -44,6 +49,7 @@ using Nginx.NginxPlus;
 );
 // Sku has many more properties than ResourceSku
 @@clientName(Azure.ResourceManager.CommonTypes.Sku, "ResourceSku", "!csharp");
+
 // Anonymous model named by m4
 @@clientName(NginxAppProtect,
   "NginxDeploymentPropertiesNginxAppProtect",
@@ -69,8 +75,6 @@ using Nginx.NginxPlus;
   "!csharp"
 );
 
-// Method name overrides
-@@clientName(Configurations.analyze, "analysis", "!csharp");
 // Client name for list operations
 @@clientName(NginxDeployments.listBySubscription, "list", "!csharp");
 @@clientName(ApiKeys.listByDeployment, "list", "!csharp");
@@ -109,64 +113,4 @@ using Nginx.NginxPlus;
 @@clientName(NginxPrivateIPAddress.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
-);
-
-@@alternateType(Certificate.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(NginxNetworkInterfaceConfiguration.subnetId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(NginxPrivateIPAddress.privateIPAddress,
-  Azure.Core.ipV4Address,
-  "csharp"
-);
-@@alternateType(NginxPrivateIPAddress.subnetId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(NginxCertificateProperties.keyVaultSecretCreated,
-  utcDateTime,
-  "csharp"
-);
-@@alternateType(ApiKeyResponseProperties.endDateTime, utcDateTime, "csharp");
-@@alternateType(ApiKeyRequestProperties.endDateTime, utcDateTime, "csharp");
-@@clientName(ApiKeyResponseProperties,
-  "NginxDeploymentApiKeyProperties",
-  "csharp"
-);
-@@clientName(AnalysisCreate, "NginxAnalysisContent", "csharp");
-@@clientName(AnalysisConfig, "NginxAnalysisConfig", "csharp");
-@@clientName(NginxCertificateErrorResponseBody,
-  "NginxCertificateError",
-  "csharp"
-);
-@@clientName(ActivationState, "NginxWafActivationState", "csharp");
-@@clientName(AnalysisResultContent, "NginxAnalysisResultDetails", "csharp");
-@@clientName(DiagnosticLevel, "NginxDiagnosticLevel", "csharp");
-@@clientName(Configuration, "NginxConfiguration", "csharp");
-@@clientName(NginxConfigurationResponseProperties,
-  "NginxConfigurationProperties",
-  "csharp"
-);
-@@clientName(ApiKey, "NginxDeploymentApiKey", "csharp");
-@@clientName(NginxConfigurationRequestProperties,
-  "NginxConfigurationCreateOrUpdateProperties",
-  "csharp"
-);
-
-@@clientName(AnalysisResult, "NginxAnalysisResult", "csharp");
-@@clientName(WafPolicy, "NginxDeploymentWafPolicy", "csharp");
-@@clientName(AnalysisDiagnostic, "NginxAnalysisDiagnostic", "csharp");
-@@clientName(DiagnosticItem, "NginxDiagnosticItem", "csharp");
-@@clientName(ProvisioningState, "NginxProvisioningState", "csharp");
-@@clientName(AutoScaleSettings, "NginxDeploymentAutoScaleSettings", "csharp");
-@@clientName(AutoUpgradeProfile, "NginxDeploymentAutoUpgradeProfile", "csharp");
-@@clientName(ScaleProfile, "NginxScaleProfile", "csharp");
-@@clientName(ScaleProfileCapacity, "NginxScaleProfileCapacity", "csharp");
-@@clientName(WebApplicationFirewallSettings, "NginxWafSettings", "csharp");
-@@clientName(WebApplicationFirewallStatus, "NginxWafStatus", "csharp");
-@@clientName(WebApplicationFirewallPackage, "NginxWafPackage", "csharp");
-@@clientName(WebApplicationFirewallComponentVersions,
-  "NginxWafComponentVersions",
-  "csharp"
 );
