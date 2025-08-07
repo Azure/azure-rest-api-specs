@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.EdgeOrder/stable/2024-02-01/edgeorder.json
+  - stable/2024-02-01/edgeorder.json
 ```
 ### Tag: package-2022-05-preview
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2022-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-05-preview'
 input-file:
-- Microsoft.EdgeOrder/preview/2022-05-01-preview/edgeorder.json
+- preview/2022-05-01-preview/edgeorder.json
 ```
 
 ---
@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2021-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-12'
 input-file:
-- Microsoft.EdgeOrder/stable/2021-12-01/edgeorder.json
+- stable/2021-12-01/edgeorder.json
 ```
 
 ---
@@ -68,7 +68,7 @@ These settings apply only when `--tag=package-2020-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-12-preview'
 input-file:
-- Microsoft.EdgeOrder/preview/2020-12-01-preview/edgeorder.json
+- preview/2020-12-01-preview/edgeorder.json
 ```
 
 ---
