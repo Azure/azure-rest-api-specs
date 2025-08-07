@@ -395,7 +395,7 @@ union DevBoxActionSourceType {
   @added(APIVersions.v2025_08_01_preview)
   @doc("The action was triggered by a Dev Box admin.")
   Admin: "Admin",
-  
+
   @added(APIVersions.v2025_08_01_preview)
   @doc("The action was triggered by a Project.")
   Project: "Project",
