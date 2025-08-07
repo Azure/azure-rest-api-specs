@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest";
 import { processArmReviewLabels } from "../../src/summarize-checks/labelling.js";
 import {
   createNextStepsComment,
-  extractRunsFromGraphQLResponse,
   getCheckInfo,
   getCheckRunTuple,
   getExistingLabels,
@@ -105,6 +104,7 @@ describe("Summarize Checks Integration Tests", () => {
           pr.base.ref,
           requiredCheckRuns,
           fyiCheckRuns,
+          impactAssessment !== undefined,
         );
 
         const actualLabels = [...labelContext.toAdd, ...labelContext.present];
@@ -853,22 +853,6 @@ describe("Summarize Checks Unit Tests", () => {
       );
 
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
-    });
-
-    it("should extract check info from raw check response data", async () => {
-      const expectedCheckRunId = 16582733356;
-      const response = await import("./fixtures/RawGraphQLResponse.json", {
-        assert: { type: "json" },
-      });
-      const [requiredCheckRuns, fyiCheckRuns, impactAssessmentWorkflowId] =
-        await extractRunsFromGraphQLResponse(response);
-
-      expect(requiredCheckRuns).toBeDefined();
-      expect(fyiCheckRuns).toBeDefined();
-      expect(impactAssessmentWorkflowId).toBeDefined();
-      expect(requiredCheckRuns.length).toEqual(11);
-      expect(fyiCheckRuns.length).toEqual(0);
-      expect(impactAssessmentWorkflowId).toEqual(expectedCheckRunId);
     });
   });
 
