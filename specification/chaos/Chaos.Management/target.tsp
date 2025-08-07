@@ -36,7 +36,7 @@ interface Targets {
   /**
    * Get a list of Target resources that extend a tracked regional resource.
    */
-  list is ArmResourceListByParent<
+  getAll is ArmResourceListByParent<
     Target,
     {
       ...TargetParentResourceParameters;
