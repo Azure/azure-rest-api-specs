@@ -74,6 +74,7 @@ describe("breaking-change-add-label-artifacts", () => {
   ];
 
   const expectStandardOutputs = (breakingChangeValue, versioningValue) => {
+    expect(mockCore.setOutput).toHaveBeenCalledWith("head_sha", mockInputs.head_sha);
     expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", mockInputs.issue_number);
     expect(mockCore.setOutput).toHaveBeenCalledWith(
       "breakingChangeReviewLabelName",
