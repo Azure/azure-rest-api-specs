@@ -12852,27 +12852,6 @@
         "returned"
       ]
     },
-    "ContextExtensionUpdate": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification\n\nContext information for a search response including pagination details.",
-      "properties": {
-        "returned": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of items returned in the response."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of items requested."
-        },
-        "matched": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of items matching the query."
-        }
-      }
-    },
     "CqlFilter": {
       "type": "object",
       "description": "Represent a CQL2 query\n\nhttps://github.com/stac-api-extensions/filter",
@@ -13169,77 +13148,8 @@
       "description": "Represents a GeoJSON geometry object as defined by RFC 7946.\n\nSupported geometry types include:\n- **Point**: A single geographic coordinate.\n- **LineString**: A sequence of geographic coordinates forming a line.\n- **Polygon**: A closed shape defined by linear rings.\n- **MultiPoint**: A collection of Points.\n- **MultiLineString**: A collection of LineStrings.\n- **MultiPolygon**: A collection of Polygons.\n\nUsed for spatial filtering in STAC.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/GeometryType",
-          "description": "The type of the geometry."
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Optional bounding box of the geometry.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "GeometryType": {
-      "type": "string",
-      "enum": [
-        "Point",
-        "LineString",
-        "Polygon",
-        "MultiPoint",
-        "MultiLineString",
-        "MultiPolygon"
-      ],
-      "x-ms-enum": {
-        "name": "GeometryType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Point",
-            "value": "Point",
-            "description": "Represents a Point geometry."
-          },
-          {
-            "name": "LineString",
-            "value": "LineString",
-            "description": "Represents a LineString geometry."
-          },
-          {
-            "name": "Polygon",
-            "value": "Polygon",
-            "description": "Represents a Polygon geometry."
-          },
-          {
-            "name": "MultiPoint",
-            "value": "MultiPoint",
-            "description": "Represents a MultiPoint geometry."
-          },
-          {
-            "name": "MultiLineString",
-            "value": "MultiLineString",
-            "description": "Represents a MultiLineString geometry."
-          },
-          {
-            "name": "MultiPolygon",
-            "value": "MultiPolygon",
-            "description": "Represents a MultiPolygon geometry."
-          }
-        ]
-      }
-    },
-    "GeometryUpdate": {
-      "type": "object",
-      "description": "Represents a GeoJSON geometry object as defined by RFC 7946.\n\nSupported geometry types include:\n- **Point**: A single geographic coordinate.\n- **LineString**: A sequence of geographic coordinates forming a line.\n- **Polygon**: A closed shape defined by linear rings.\n- **MultiPoint**: A collection of Points.\n- **MultiLineString**: A collection of LineStrings.\n- **MultiPolygon**: A collection of Polygons.\n\nUsed for spatial filtering in STAC.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/GeometryType",
-          "description": "The type of the geometry."
+          "type": "string",
+          "description": "Discriminator property for Geometry."
         },
         "bbox": {
           "type": "array",
@@ -13403,6 +13313,20 @@
           }
         ]
       }
+    },
+    "ImageResponse": {
+      "type": "object",
+      "description": "Response model for image exports",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the exported image"
+        }
+      },
+      "required": [
+        "url"
+      ]
     },
     "ImageTiffResponse": {
       "type": "object",
@@ -14027,37 +13951,6 @@
       ],
       "x-ms-discriminator-value": "FeatureCollection"
     },
-    "ItemCollectionModelUpdate": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md\n\nRepresents a collection of STAC Items as a GeoJSON FeatureCollection.",
-      "properties": {
-        "features": {
-          "type": "array",
-          "description": "Array of STAC Items in the collection.",
-          "items": {
-            "$ref": "#/definitions/StacItemModel"
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box of all items in format [west, south, east, north].",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "context": {
-          "$ref": "#/definitions/ContextExtensionUpdate",
-          "description": "Context information for the search response."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/StacItemOrItemCollectionUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "FeatureCollection"
-    },
     "ItemCollectionType": {
       "type": "string",
       "description": "Represents the GeoJSON feature collection type for STAC item collections.",
@@ -14360,26 +14253,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Geometry"
-        }
-      ],
-      "x-ms-discriminator-value": "LineString"
-    },
-    "LineStringUpdate": {
-      "type": "object",
-      "description": "Represents a LineString.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "The coordinates of the linestring.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeometryUpdate"
         }
       ],
       "x-ms-discriminator-value": "LineString"
@@ -14825,29 +14698,6 @@
       ],
       "x-ms-discriminator-value": "MultiLineString"
     },
-    "MultiLineStringUpdate": {
-      "type": "object",
-      "description": "Represents a MultiLineString.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "The coordinates of the multilinestring.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeometryUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "MultiLineString"
-    },
     "MultiPoint": {
       "type": "object",
       "description": "Represents a MultiPoint.",
@@ -14867,26 +14717,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Geometry"
-        }
-      ],
-      "x-ms-discriminator-value": "MultiPoint"
-    },
-    "MultiPointUpdate": {
-      "type": "object",
-      "description": "Represents a MultiPoint.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "The coordinates of the multipoint.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeometryUpdate"
         }
       ],
       "x-ms-discriminator-value": "MultiPoint"
@@ -14916,32 +14746,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Geometry"
-        }
-      ],
-      "x-ms-discriminator-value": "MultiPolygon"
-    },
-    "MultiPolygonUpdate": {
-      "type": "object",
-      "description": "Represents a MultiPolygon.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "The coordinates of the multipolygon.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeometryUpdate"
         }
       ],
       "x-ms-discriminator-value": "MultiPolygon"
@@ -15338,22 +15142,6 @@
       ],
       "x-ms-discriminator-value": "Point"
     },
-    "PointUpdate": {
-      "type": "object",
-      "description": "Represents a GeoJSON Point geometry.",
-      "properties": {
-        "coordinates": {
-          "type": "string",
-          "description": "The coordinates of the point as [longitude, latitude]."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeometryUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "Point"
-    },
     "Polygon": {
       "type": "object",
       "description": "Represents a Polygon.",
@@ -15379,32 +15167,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Geometry"
-        }
-      ],
-      "x-ms-discriminator-value": "Polygon"
-    },
-    "PolygonUpdate": {
-      "type": "object",
-      "description": "Represents a Polygon.",
-      "properties": {
-        "coordinates": {
-          "type": "array",
-          "description": "The coordinates of the polygon.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "number",
-                "format": "double"
-              }
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeometryUpdate"
         }
       ],
       "x-ms-discriminator-value": "Polygon"
@@ -16360,7 +16122,7 @@
       "description": "Represents a STAC Item, which is a GeoJSON Feature with additional metadata.",
       "properties": {
         "geometry": {
-          "$ref": "#/definitions/GeometryUpdate",
+          "$ref": "#/definitions/Geometry",
           "description": "Geometry object defining the feature's shape"
         },
         "bbox": {
@@ -16408,7 +16170,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/StacItemOrItemCollectionUpdate"
+          "$ref": "#/definitions/StacItemOrItemCollection"
         }
       ],
       "x-ms-discriminator-value": "Feature"
@@ -16418,60 +16180,8 @@
       "description": "Base type for STAC items and collections with discriminator.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/StacModelType",
-          "description": "The type discriminator for STAC resources."
-        },
-        "stac_version": {
           "type": "string",
-          "description": "Stac Version",
-          "default": "1.0.0",
-          "minLength": 1,
-          "x-ms-client-name": "stacVersion"
-        },
-        "links": {
-          "type": "array",
-          "description": "Links to related resources and endpoints.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        },
-        "msft:_created": {
-          "type": "string",
-          "description": "MSFT Created",
-          "x-ms-client-name": "msftCreated"
-        },
-        "msft:_updated": {
-          "type": "string",
-          "description": "MSFT Updated",
-          "x-ms-client-name": "msftUpdated"
-        },
-        "msft:short_description": {
-          "type": "string",
-          "description": "MSFT Short Description",
-          "maxLength": 300,
-          "x-ms-client-name": "msftShortDescription"
-        },
-        "stac_extensions": {
-          "type": "array",
-          "description": "URLs to STAC extensions implemented by this STAC resource.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "stacExtensions"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "StacItemOrItemCollectionUpdate": {
-      "type": "object",
-      "description": "Base type for STAC items and collections with discriminator.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/StacModelType",
-          "description": "The type discriminator for STAC resources."
+          "description": "Discriminator property for StacItemOrItemCollection."
         },
         "stac_version": {
           "type": "string",

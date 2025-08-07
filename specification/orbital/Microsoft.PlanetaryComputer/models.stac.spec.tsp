@@ -639,13 +639,9 @@ union StacModelType {
 /**
  * Base type for STAC items and collections with discriminator.
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Work around Python SDK bug."
 @discriminator("type")
 model StacItemOrItemCollection {
-  /**
-   * The type discriminator for STAC resources.
-   */
-  type: StacModelType;
-
   /**
    * Stac Version
    */

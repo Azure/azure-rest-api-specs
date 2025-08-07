@@ -86,20 +86,22 @@ union FeatureType {
  *
  * Used for spatial filtering in STAC.
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Work around Python SDK bug."
 @discriminator("type")
 model Geometry {
-  /**
-   * The type of the geometry.
-   */
-  type: GeometryType;
-
   /**
    * Optional bounding box of the geometry.
    */
   bbox?: float64[];
 }
 
+/**
+ * Represents the type of a GeoJSON geometry.
+ */
 union GeometryType {
+  /**
+   * Represents a generic geometry type.
+   */
   string,
 
   /**

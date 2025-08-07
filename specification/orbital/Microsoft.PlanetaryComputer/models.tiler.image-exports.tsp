@@ -51,3 +51,13 @@ model ImageRequest {
    */
   mask?: boolean;
 }
+
+/**
+ * Response model for image exports
+ */
+model ImageResponse {
+  /**
+   * URL of the exported image
+   */
+  url: url;
+}
