@@ -50,3 +50,11 @@ model DevBoxAddOnNameParameter {
   @path
   addOnName: string;
 }
+
+@doc("The scheduled datetime query parameter.")
+@added(APIVersions.v2025_08_01_preview)
+model ScheduledDeleteOnQueryParameter {
+  @doc("The scheduled time of the Dev Box action, in RFC3339 format.")
+  @query("scheduledDeleteOn")
+  scheduledDate: utcDateTime;
+}
