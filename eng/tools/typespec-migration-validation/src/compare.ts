@@ -204,29 +204,6 @@ function compareDefinitionProperty(oldProperty: OpenAPI2SchemaProperty, newPrope
   return [];
 }
 
-// function compareDefinitionSchema(oldSchema: OpenAPI2Schema, newSchema: OpenAPI2Schema, modelJsonPath: string, propertyName: string): DefinitionDiff[] {
-//   const diffs: DefinitionDiff[] = [];
-
-//   if ((oldSchema.type ?? "object") !== (newSchema.type ?? "object")) {
-//     diffs.push({
-//       before: oldSchema.type,
-//       after: newSchema.type,
-//       name: modelJsonPath,
-//       propertyName,
-//       type: "property",
-//       changeType: "type",
-//       level: "warning"
-//     });
-//   }
-
-//   const sortedOldProperties = Object.keys(oldSchema.properties).sort().reduce((obj: Record<string, OpenAPI2SchemaProperty>, key) => {
-//     obj[key] = oldProperties[key];
-//     return obj;
-//   }, {});
-
-//   return diffs;
-// }
-
 function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document): PathDiff[] {
   const oldOperations = organizeOperationById(oldDocument);
   const newOperations = organizeOperationById(newDocument);
