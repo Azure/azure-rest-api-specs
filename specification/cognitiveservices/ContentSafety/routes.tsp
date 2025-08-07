@@ -425,6 +425,7 @@ interface TextCustomizedCategoryOperations {
   @doc("Create a new Custom Category or a new version of an existing Custom Category. This will submit a long running operation.")
   createOrReplaceTextCustomCategoryVersion is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomCategoryVersion>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard resource path (or whatever reason you are using Foundations.Operation for this)"
   @summary("Custom Category - Get")
   @doc("Get the specified or latest version of the given Custom Category.")
   @route("/text/categories/{categoryName}")
