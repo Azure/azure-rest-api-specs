@@ -442,7 +442,7 @@ interface DevBoxes {
   scheduleDeleteAction is StandardResourceOperations.ResourceAction<
     DevBox,
     {
-      ...ScheduledDeleteOnQueryParameter;
+      ...DeleteAtQueryParameter;
     },
     DevBoxAction
   >;

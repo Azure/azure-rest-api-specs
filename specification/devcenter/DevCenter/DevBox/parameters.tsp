@@ -53,8 +53,8 @@ model DevBoxAddOnNameParameter {
 
 @doc("The scheduled datetime query parameter.")
 @added(APIVersions.v2025_08_01_preview)
-model ScheduledDeleteOnQueryParameter {
-  @doc("The scheduled time of the Dev Box action, in RFC3339 format.")
-  @query("scheduledDeleteOn")
+model DeleteAtQueryParameter {
+  @doc("The scheduled deletion time of the Dev Box, in RFC3339 format.")
+  @query("deleteAt")
   scheduledDate: utcDateTime;
 }

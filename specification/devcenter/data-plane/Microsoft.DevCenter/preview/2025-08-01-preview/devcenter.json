@@ -2164,7 +2164,7 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
-            "$ref": "#/parameters/ScheduledDeleteOnQueryParameter"
+            "$ref": "#/parameters/DeleteAtQueryParameter"
           }
         ],
         "responses": {
@@ -8643,6 +8643,16 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "delayUntil"
     },
+    "DeleteAtQueryParameter": {
+      "name": "deleteAt",
+      "in": "query",
+      "description": "The scheduled deletion time of the Dev Box, in RFC3339 format.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "scheduledDate"
+    },
     "DevBoxAddOnNameParameter": {
       "name": "addOnName",
       "in": "path",
@@ -8702,16 +8712,6 @@
       "maxLength": 63,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "x-ms-parameter-location": "method"
-    },
-    "ScheduledDeleteOnQueryParameter": {
-      "name": "scheduledDeleteOn",
-      "in": "query",
-      "description": "The scheduled time of the Dev Box action, in RFC3339 format.",
-      "required": true,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "scheduledDate"
     },
     "SnapshotIdQueryParameter": {
       "name": "snapshotId",
