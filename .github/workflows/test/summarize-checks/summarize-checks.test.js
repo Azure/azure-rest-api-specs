@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest";
 import { processArmReviewLabels } from "../../src/summarize-checks/labelling.js";
 import {
   createNextStepsComment,
-  extractRunsFromGraphQLResponse,
   getCheckInfo,
   getCheckRunTuple,
   getExistingLabels,
@@ -77,20 +76,15 @@ function applicableLabel(input) {
     "NotReadyForARMReview",
     "WaitForARMFeedback",
     "ARMChangesRequested",
-    "ARMSignedOff"
-  ]
+    "ARMSignedOff",
+  ];
 
   return applicableLabels.includes(input);
 }
 
 describe("Summarize Checks Integration Tests", () => {
   describe("Repro a PR summarize-checks invocation", () => {
-    const testCases = [
-      36439,
-      36437,
-      36436,
-      36435
-    ]
+    const testCases = [36439, 36437, 36436, 36435];
 
     it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST).each(testCases)(
       "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
@@ -111,7 +105,12 @@ describe("Summarize Checks Integration Tests", () => {
         const head_sha = pr.head.sha;
         const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
         const expectedCheckRun = await getExistingAMR(github, owner, repo, head_sha);
-        const expectedNextStepsComment = await getNextStepsComment(github, owner, repo, issue_number);
+        const expectedNextStepsComment = await getNextStepsComment(
+          github,
+          owner,
+          repo,
+          issue_number,
+        );
         const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
           github,
           mockCore,
@@ -123,7 +122,9 @@ describe("Summarize Checks Integration Tests", () => {
         );
 
         // discard everything from start set that would be possibly set by summarize-checks
-        let adjustedStartLabels = expectedLabels.filter((x) => { return !applicableLabel(x); });
+        let adjustedStartLabels = expectedLabels.filter((x) => {
+          return !applicableLabel(x);
+        });
         let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
 
         adjustedStartLabels = adjustedStartLabels.filter(
@@ -142,7 +143,7 @@ describe("Summarize Checks Integration Tests", () => {
           pr.base.ref,
           requiredCheckRuns,
           fyiCheckRuns,
-          impactAssessment !== undefined
+          impactAssessment !== undefined,
         );
 
         const actualLabels = [...labelContext.toAdd, ...labelContext.present];
@@ -897,22 +898,6 @@ describe("Summarize Checks Unit Tests", () => {
       );
 
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
-    });
-
-    it("should extract check info from raw check response data", async () => {
-      const expectedCheckRunId = 16582733356;
-      const response = await import("./fixtures/RawGraphQLResponse.json", {
-        assert: { type: "json" },
-      });
-      const [requiredCheckRuns, fyiCheckRuns, impactAssessmentWorkflowId] =
-        await extractRunsFromGraphQLResponse(response);
-
-      expect(requiredCheckRuns).toBeDefined();
-      expect(fyiCheckRuns).toBeDefined();
-      expect(impactAssessmentWorkflowId).toBeDefined();
-      expect(requiredCheckRuns.length).toEqual(11);
-      expect(fyiCheckRuns.length).toEqual(0);
-      expect(impactAssessmentWorkflowId).toEqual(expectedCheckRunId);
     });
   });
 

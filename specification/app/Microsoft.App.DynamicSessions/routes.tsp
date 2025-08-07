@@ -25,23 +25,20 @@ alias CodeExecutionTraits = BaseOperationTraits &
 alias CodeExecutionOperations = Azure.Core.ResourceOperations<CodeExecutionTraits>;
 
 interface CodeExecution {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("Execute code in a session.")
   @route("/executions")
-  @pollingOperation(CodeExecution.get)
-  execute is Foundations.Operation<
+  execute is RpcOperation<
     {
-      ...SessionIdentifier;
       ...ExecutionOperationIdHeader;
 
       @doc("The request to execute code.")
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    AcceptedResponse &
-      SessionCodeExecutionResource &
+    SessionCodeExecutionResource &
       ExecutionOperationIdHeader &
-      Foundations.LongRunningStatusLocation
+      Foundations.LongRunningStatusLocation,
+    CodeExecutionTraits
   >;
 
   @doc("Get the code execution result.")
