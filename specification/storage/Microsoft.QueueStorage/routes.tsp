@@ -63,7 +63,7 @@ namespace Storage.Queues {
     queueName: string;
   };
 
-  // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
+  /** The metadata headers. */
   alias MetadataHeaders = {
     /** The metadata headers. */
     @alternateType(Record<string>, "rust")
@@ -241,7 +241,11 @@ namespace Storage.Queues {
       {
         ...QueueNamePathParameter;
         ...TimeoutParameter;
-        ...MetadataHeaders;
+
+        /** The metadata headers. */
+        @alternateType(Record<string>, "rust")
+        @header("x-ms-meta")
+        metadata: string;
       },
       {
         @statusCode statusCode: 204;
