@@ -3,4 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.AzureStackHCI, "AzureStackHCIClient", "python");
+@@clientName(Microsoft.AzureStackHCI, "AzureStackHCIVmClient", "python");
