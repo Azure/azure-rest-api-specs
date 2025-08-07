@@ -15,7 +15,8 @@ enum ListQueuesIncludeType {
 }
 
 /** The service properties. */
-model StorageServiceProperties {
+@Xml.name("StorageServiceProperties")
+model QueueServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
 

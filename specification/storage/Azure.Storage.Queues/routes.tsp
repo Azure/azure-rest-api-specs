@@ -122,7 +122,7 @@ namespace Storage.Queues {
 
       /** The storage service properties to set. */
       @body
-      storageServiceProperties: StorageServiceProperties;
+      queueServiceProperties: QueueServiceProperties;
     },
     {
       @statusCode statusCode: 202;
@@ -136,7 +136,7 @@ namespace Storage.Queues {
   @route("?restype=service&comp=properties")
   op getProperties is StorageOperation<
     TimeoutParameter,
-    StorageServiceProperties
+    QueueServiceProperties
   >;
 
   /** Retrieves statistics related to replication for the Queue service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
