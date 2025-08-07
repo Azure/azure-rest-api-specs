@@ -4,8 +4,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
+import "./scheduledactionmodels.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
@@ -116,4 +118,89 @@ interface ScheduledActions {
     ...Params,
     @body @doc("The request body") requestBody: GetOperationErrorsRequest,
   ): ArmResponse<GetOperationErrorsResponse> | ErrorResponse;
+
+  // Recurring scheduledaction routes
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  get is ArmResourceRead<ScheduledAction>;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  update is ArmCustomPatchSync<
+    ScheduledAction,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ScheduledAction,
+      ScheduledActionProperties
+    >
+  >;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  delete is ArmResourceDeleteWithoutOkAsync<ScheduledAction>;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  listByResourceGroup is ArmResourceListByParent<ScheduledAction>;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  listBySubscription is ArmListBySubscription<ScheduledAction>;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  @autoRoute
+  @listsResource(ScheduledActionResource)
+  @armResourceList(ScheduledActionResource)
+  @get
+  @doc("List resources attached to Scheduled Actions")
+  listResources(
+    ...ResourceInstanceParameters<ScheduledActionResource>,
+  ): ArmResponse<ResourceListResponse> | ErrorResponse;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  attachResources is ArmResourceActionSync<
+    ScheduledAction,
+    ResourceAttachRequest,
+    ResourceOperationResponse
+  >;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  detachResources is ArmResourceActionSync<
+    ScheduledAction,
+    ResourceDetachRequest,
+    ResourceOperationResponse
+  >;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  patchResources is ArmResourceActionSync<
+    ScheduledAction,
+    ResourcePatchRequest,
+    ResourceOperationResponse
+  >;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  disable is ArmResourceActionSync<ScheduledAction, void, OkResponse>;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  enable is ArmResourceActionSync<ScheduledAction, void, OkResponse>;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  cancelNextOccurrence is ArmResourceActionSync<
+    ScheduledAction,
+    CancelOccurrenceRequest,
+    ResourceOperationResponse
+  >;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  triggerManualOccurrence is ArmResourceActionSync<
+    ScheduledAction,
+    void,
+    Occurrence
+  >;
+  // Recurring scheduledaction routes
 }
+
+// Recurring scheduledaction extension routes
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@armResourceOperations
+interface ScheduledActionExtension {
+  listByVms is ArmResourceListByParent<ScheduledActionResources>;
+}
+// Recurring scheduledaction extension routes
