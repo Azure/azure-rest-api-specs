@@ -399,7 +399,7 @@ describe("Summarize Checks Unit Tests", () => {
           status: "COMPLETED",
           conclusion: "SUCCESS",
           checkInfo: getCheckInfo("SpellCheck"),
-        }
+        },
       ];
 
       const fyiCheckRuns = [
@@ -408,7 +408,7 @@ describe("Summarize Checks Unit Tests", () => {
           status: "COMPLETED",
           conclusion: "FAILURE",
           checkInfo: getCheckInfo("license/cla"),
-        }
+        },
       ];
 
       const output = await createNextStepsComment(
