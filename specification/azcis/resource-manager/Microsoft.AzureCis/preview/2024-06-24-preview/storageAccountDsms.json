@@ -187,7 +187,9 @@
             "description": "The name of resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
@@ -232,7 +234,9 @@
             "description": "The name of resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
             "name": "resource",
@@ -379,15 +383,25 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Filter tag name."
+          "description": "Filter tag name, can have 1 - 128 characters.",
+          "minLength": 1,
+          "maxLength": 128
         },
         "operator": {
           "type": "string",
-          "description": "Comparison operator."
+          "description": "Comparison operator used for object comparison and filtering. Currently only equality operator (\"==\") is supported.",
+          "enum": [
+            "=="
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "value": {
           "type": "string",
-          "description": "Filter tag value."
+          "description": "Filter tag value used for tag based filtering, can have 0 - 256 characters.",
+          "minLength": 0,
+          "maxLength": 256
         }
       },
       "required": [
@@ -522,13 +536,7 @@
       },
       "required": [
         "name",
-        "enabled",
-        "baseBlobPolicy",
-        "snapshotPolicy",
-        "versionPolicy",
-        "blobTypesFilter",
-        "prefixMatchFilter",
-        "blobIndexMatchFilter"
+        "enabled"
       ]
     },
     "Replicate": {

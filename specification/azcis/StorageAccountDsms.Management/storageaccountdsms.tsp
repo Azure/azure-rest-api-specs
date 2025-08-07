@@ -1,12 +1,10 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/http";
 import "@typespec/rest";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -255,25 +253,25 @@ model LifecycleManagementPolicyRule {
 
   @doc("Policy for base blobs.")
   @Azure.ResourceManager.identifiers(#[])
-  baseBlobPolicy: Array<LcmActionPolicy>;
+  baseBlobPolicy?: Array<LcmActionPolicy>;
 
   @doc("Policy for snapshots.")
   @Azure.ResourceManager.identifiers(#[])
-  snapshotPolicy: Array<LcmActionPolicy>;
+  snapshotPolicy?: Array<LcmActionPolicy>;
 
   @doc("Policy for versions.")
   @Azure.ResourceManager.identifiers(#[])
-  versionPolicy: Array<LcmActionPolicy>;
+  versionPolicy?: Array<LcmActionPolicy>;
 
   @doc("A string, containing BlobTypes to filter, separated with a semicolon. Acceptable values: 'blockBlob', 'appendBlob'.")
-  blobTypesFilter: "blockBlob" | "appendBlob" | string;
+  blobTypesFilter?: "blockBlob" | "appendBlob" | string;
 
   @doc("List of prefixes to filter by.")
-  prefixMatchFilter: Array<string>;
+  prefixMatchFilter?: Array<string>;
 
   @doc("List of blob index match filters.")
   @Azure.ResourceManager.identifiers(#[])
-  blobIndexMatchFilter: Array<BlobIndexMatch>;
+  blobIndexMatchFilter?: Array<BlobIndexMatch>;
 }
 
 @doc("Lifecycle Management Policy details for a specific action in a rule.")
@@ -302,13 +300,17 @@ model LcmActionPolicy {
 
 @doc("Blob Index Match filter.")
 model BlobIndexMatch {
-  @doc("Filter tag name.")
+  @doc("Filter tag name, can have 1 - 128 characters.")
+  @minLength(1)
+  @maxLength(128)
   name: string;
 
-  @doc("Comparison operator.")
-  operator: string;
+  @doc("Comparison operator used for object comparison and filtering. Currently only equality operator (\"==\") is supported.")
+  operator: "==" | string;
 
-  @doc("Filter tag value.")
+  @doc("Filter tag value used for tag based filtering, can have 0 - 256 characters.")
+  @minLength(0)
+  @maxLength(256)
   value: string;
 }
 
@@ -328,7 +330,9 @@ model DualStackEndpointPreference {
 model StorageAccountDsmsResource
   is ProxyResource<StorageAccountDsmsResourceProperties> { // This can be TrackedResource based on resourcetype.
   @doc("The name of resource.")
-  @pattern("^[a-zA-Z0-9-]{3,80}$")
+  @pattern("^[a-zA-Z0-9-]*$")
+  @minLength(3)
+  @maxLength(80)
   @key("resourceName")
   @segment("storageAccountDsms") // Start with lower case. Should be plural.
   @visibility(Lifecycle.Read)
