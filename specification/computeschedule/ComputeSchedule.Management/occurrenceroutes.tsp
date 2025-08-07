@@ -22,7 +22,7 @@ namespace Microsoft.ComputeSchedule;
 interface OccurrencesOld {
   get is ArmResourceRead<OccurrenceOld>;
   listByAutoAction is ArmResourceListByParent<OccurrenceOld>;
-
+  @list
   listResources is ArmResourceActionSync<
     OccurrenceOld,
     void,
@@ -45,6 +45,7 @@ interface Occurrences {
   @autoRoute
   @listsResource(OccurrenceResource)
   @armResourceList(OccurrenceResource)
+  @list
   @get
   @doc("List resources attached to Scheduled Actions for the given occurrence")
   listResources(
