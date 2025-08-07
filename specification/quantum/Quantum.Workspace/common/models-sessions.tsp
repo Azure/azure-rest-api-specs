@@ -66,3 +66,23 @@ model SessionDetails extends ItemDetails {
   @visibility(Lifecycle.Read)
   status?: SessionStatus;
 }
+
+/** Session update options */
+@resource("sessionUpdateOptions")
+@parentResource(Quantum.Workspace.QuantumWorkspace)
+model SessionUpdateOptions {
+  /** Id of the session. */
+  @key("sessionId")
+  @visibility(Lifecycle.Read)
+  id: WorkspaceItemId;
+
+  /** The name of the session. */
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Tags associated with the session.
+   */
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  tags?: Record<string>;
+}
