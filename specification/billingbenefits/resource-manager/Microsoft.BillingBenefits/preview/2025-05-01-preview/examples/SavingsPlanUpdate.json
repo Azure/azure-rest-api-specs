@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000",
+    "savingsPlanId": "30000000-0000-0000-0000-000000000000",
+    "api-version": "2024-11-01-preview",
+    "body": {
+      "properties": {
+        "displayName": "TestDisplayName",
+        "appliedScopeType": "Single",
+        "appliedScopeProperties": {
+          "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
+        },
+        "renew": true,
+        "renewProperties": {
+          "purchaseProperties": {
+            "sku": {
+              "name": "Compute_Savings_Plan"
+            },
+            "properties": {
+              "displayName": "TestDisplayName_renewed",
+              "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+              "term": "P1Y",
+              "billingPlan": "P1M",
+              "renew": false,
+              "appliedScopeType": "Single",
+              "appliedScopeProperties": {
+                "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
+              },
+              "commitment": {
+                "currencyCode": "USD",
+                "amount": 15.23,
+                "grain": "Hourly"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/microsoft.billingbenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
+        "name": "30000000-0000-0000-0000-000000000000",
+        "type": "microsoft.billingbenefits/savingsPlanOrders/savingsPlans",
+        "sku": {
+          "name": "Compute_Savings_Plan"
+        },
+        "properties": {
+          "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+          "billingPlan": "P1M",
+          "appliedScopeProperties": {
+            "subscriptionId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+            "displayName": "Azure subscription 1"
+          },
+          "commitment": {
+            "grain": "Hourly",
+            "currencyCode": "USD",
+            "amount": 0.001
+          },
+          "renew": true,
+          "appliedScopeType": "Single",
+          "displayName": "riName",
+          "provisioningState": "Succeeded",
+          "term": "P3Y",
+          "displayProvisioningState": "Succeeded",
+          "userFriendlyAppliedScopeType": "Single",
+          "expiryDateTime": "2025-10-27T00:34:33.6697600Z",
+          "purchaseDateTime": "2022-10-27T00:32:45.5823486Z",
+          "benefitStartTime": "2022-10-27T00:34:33.6697600Z",
+          "effectiveDateTime": "2022-11-10T00:12:54.549373Z",
+          "utilization": {
+            "trend": "DOWN",
+            "aggregates": [
+              {
+                "grain": 1.0,
+                "grainUnit": "days",
+                "value": 100.0,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 7.0,
+                "grainUnit": "days",
+                "value": 37.0,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 30.0,
+                "grainUnit": "days",
+                "value": 53.85,
+                "valueUnit": "percentage"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {
+      "description": "The request is completed.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2020-07-01"
+      }
+    },
+    "404": {}
+  }
+}
