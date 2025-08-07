@@ -163,6 +163,8 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   let requiredStatuses = [];
 
   for (const statusName of requiredStatusNames) {
+    // The "statuses" array may contain multiple statuses with the same "context" (aka "name"),
+    // but different states and update times.  We only care about the latest.
     const matchingStatuses = statuses
       .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
       .sort(invert(byDate((status) => status.updated_at)));
@@ -196,7 +198,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return labelActions[LabelAction.Add];
   }
 
-  // If any checks are missing or not completed, no-op to prevent frequent remove/add label as checks re-run
-  core.info("One or more checks are still in-progress");
+  // If any statuses are missing or pending, no-op to prevent frequent remove/add label as checks re-run
+  core.info("One or more statuses are still pending");
   return labelActions[LabelAction.None];
 }
