@@ -690,6 +690,17 @@ model RunStepDeepResearchToolCall extends RunStepToolCall {
   deepResearch: RunStepDeepResearchToolCallDetails;
 }
 
+/** A record of a call to the connected agent. */
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgentToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'connected_agent'.")
+  type: "connected_agent";
+
+  @doc("The connected agent step information.")
+  @encodedName("application/json", "connected_agent")
+  connectedAgent: RunStepConnectedAgent;
+}
+
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
@@ -783,6 +794,33 @@ model RunStepDeepResearchToolCallDetails {
 
   @doc("The final output for the deep research tool.")
   output?: string;
+}
+
+// Call details: ConnectedAgent
+
+@doc("The detailed information about connected agent tool call.")
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgent {
+  @doc("The name of connected agent.")
+  name?: string;
+
+  @doc("The JSON serialized query to the connected agent.")
+  arguments?: string;
+
+  @doc("The tool output.")
+  output?: string;
+
+  @doc("The run ID used by the connected agent.")
+  @encodedName("application/json", "run_id")
+  runId?: string;
+
+  @doc("The thread ID used by the connected agent.")
+  @encodedName("application/json", "thread_id")
+  threadId?: string;
+
+  @doc("The ID of a connected agent.")
+  @encodedName("application/json", "assistant_id")
+  agentId?: string;
 }
 
 //
