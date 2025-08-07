@@ -1,0 +1,130 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.NetworkCloud;
+/**
+ * Volume represents storage made available for use by resources running on the cluster.
+ */
+model Volume is Azure.ResourceManager.TrackedResource<VolumeProperties, false> {
+  ...ResourceNameParameter<
+    Resource = Volume,
+    KeyName = "volumeName",
+    SegmentName = "volumes",
+    NamePattern = "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])$"
+  >;
+  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * The extended location of the cluster associated with the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  extendedLocation: ExtendedLocation;
+}
+
+@armResourceOperations
+interface Volumes {
+  /**
+   * Get properties of the provided volume.
+   */
+  get is ArmResourceRead<Volume>;
+
+  /**
+   * Create a new volume or update the properties of the existing one.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Volume,
+    Parameters = {
+      /**
+       * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
+      `If-Match`?: string;
+
+      /**
+       * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
+      `If-None-Match`?: string;
+    }
+  >;
+
+  /**
+   * Update tags associated with the provided volume.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is Azure.ResourceManager.Legacy.CustomPatchSync<
+    Volume,
+    PatchModel = VolumePatchParameters,
+    Parameters = {
+      /**
+       * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
+      `If-Match`?: string;
+
+      /**
+       * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
+      `If-None-Match`?: string;
+    },
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * Delete the provided volume.
+   */
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Volume,
+    Parameters = {
+      /**
+       * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
+      `If-Match`?: string;
+
+      /**
+       * Set to '*' to allow a new record set to be created, but to prevent updating an existing resource. Other values will result in error from server as they are not supported.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-None-Match")
+      `If-None-Match`?: string;
+    },
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Get a list of volumes in the provided resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<
+    Volume,
+    Response = ArmResponse<VolumeList>
+  >;
+
+  /**
+   * Get a list of volumes in the provided subscription.
+   */
+  listBySubscription is ArmListBySubscription<
+    Volume,
+    Response = ArmResponse<VolumeList>
+  >;
+}
+
+@@doc(Volume.name, "The name of the volume.");
+@@encodedName(Volume.eTag, "application/json", "etag");
+@@doc(Volume.properties, "The list of the resource properties.");
+@@doc(Volumes.createOrUpdate::parameters.resource, "The request body.");
+@@doc(Volumes.update::parameters.properties, "The request body.");
