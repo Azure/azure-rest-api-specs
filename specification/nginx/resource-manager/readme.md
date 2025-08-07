@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Nginx.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for Nginx, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,8 +19,9 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information
 
+
+### Basic Information
 These are the global settings for the Nginx API.
 
 ``` yaml
@@ -36,80 +37,80 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
-  - Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json
+  - NGINX.NGINXPLUS/preview/2025-03-01-preview/openapi.json
 
 suppressions:
   - code: GetCollectionResponseSchema
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/wafPolicies"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies"]
     reason: This is by design to avoid high bandwidth consumption as agreed with the partner
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"].put
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"].put
     reason: This is by design. We do not return provided file contents in the response. 
   - code: PutResponseCodes
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
     reason: This is a synchronous API returns a 200 as agreed with the partner. 
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/providers/Nginx.NginxPlus/operations"]
+    where: $.paths["/providers/NGINX.NGINXPLUS/operations"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Nginx.NginxPlus/nginxDeployments"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/NGINX.NGINXPLUS/nginxDeployments"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/certificates"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/certificates"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/certificates/{certificateName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/certificates/{certificateName}"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}/analyze"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}/analyze"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/listDefaultWafPolicies"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/listDefaultWafPolicies"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/wafPolicies"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies"]
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/wafPolicies/{wafPolicyName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies/{wafPolicyName}"]
 ```
 
 ### Tag: package-2024-11-01-preview
@@ -118,7 +119,7 @@ These settings apply only when `--tag=package-2024-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-11-01-preview'
 input-file:
-  - Nginx.NginxPlus/preview/2024-11-01-preview/swagger.json
+  - NGINX.NGINXPLUS/preview/2024-11-01-preview/swagger.json
 ```
 
 ### Tag: package-2024-09-01-preview
@@ -127,7 +128,7 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - Nginx.NginxPlus/preview/2024-09-01-preview/swagger.json
+  - NGINX.NGINXPLUS/preview/2024-09-01-preview/swagger.json
 ```
 
 ### Tag: package-2024-06-01-preview
@@ -136,8 +137,9 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
-- Nginx.NginxPlus/preview/2024-06-01-preview/swagger.json
+- NGINX.NGINXPLUS/preview/2024-06-01-preview/swagger.json
 ```
+
 
 ### Tag: package-2024-01-01-preview
 
@@ -145,7 +147,7 @@ These settings apply only when `--tag=package-2024-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-01-01-preview'
 input-file:
-- Nginx.NginxPlus/preview/2024-01-01-preview/swagger.json
+- NGINX.NGINXPLUS/preview/2024-01-01-preview/swagger.json
 ```
 
 ### Tag: package-2023-09-01
@@ -154,8 +156,9 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-09-01'
 input-file:
-- Nginx.NginxPlus/stable/2023-09-01/swagger.json
+- NGINX.NGINXPLUS/stable/2023-09-01/swagger.json
 ```
+
 
 ### Tag: package-2023-04-01
 
@@ -163,16 +166,7 @@ These settings apply only when `--tag=package-2023-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-04-01'
 input-file:
-- Nginx.NginxPlus/stable/2023-04-01/swagger.json
-```
-
-### Tag: package-2022-11-01-preview
-
-These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-11-01-preview'
-input-file:
-- Nginx.NginxPlus/preview/2022-11-01-preview/swagger.json
+- NGINX.NGINXPLUS/stable/2023-04-01/swagger.json
 ```
 
 ### Tag: package-2022-08-01
@@ -181,7 +175,7 @@ These settings apply only when `--tag=package-2022-08-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-08-01'
 input-file:
-- Nginx.NginxPlus/stable/2022-08-01/swagger.json
+- NGINX.NGINXPLUS/stable/2022-08-01/swagger.json
 ```
 
 ### Tag: package-2021-05-01-preview
@@ -190,18 +184,16 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-- Nginx.NginxPlus/preview/2021-05-01-preview/swagger.json
+- NGINX.NGINXPLUS/preview/2021-05-01-preview/swagger.json
 ```
 
 ## Suppression
-
 ``` yaml
 directive:
   - suppress: PutRequestResponseSchemeArm
     from: swagger.json
     reason: Temporary suppression needed to avoid delays for business needs and maintain production timelines. It's also approved before in previous PR in private repo.
-```
-
+```    
 ---
 
 # Code Generation
