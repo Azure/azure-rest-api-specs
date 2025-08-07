@@ -503,7 +503,7 @@ model FineTuningJobMistralCompletionTrainingMethodConfiguration {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobMistralCompletionTrainingMethod extends FineTuningJobTrainingMethod {
-  type: "MistralCompletion";
+  type: "mistralCompletion";
 
   @doc("Configuration for Mistral Completion fine-tuning method.")
   mistralCompletion: FineTuningJobMistralCompletionTrainingMethodConfiguration;
@@ -550,7 +550,7 @@ model FineTuningJobMistralClassifierTrainingMethodConfiguration {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobMistralClassifierTrainingMethod extends FineTuningJobTrainingMethod {
-  type: "MistralClassifier";
+  type: "mistralClassifier";
 
   @doc("Configuration for Mistral Classifier fine-tuning method.")
   mistralClassifier: FineTuningJobMistralClassifierTrainingMethodConfiguration;
