@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/azurestackhci"
+    default: "sdk/azurestackhcivm"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,6 +13,7 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/StackHCIVM/{version-status}/{version}/stackhcivm.json"
   "@azure-tools/typespec-python":
+    service-dir: "sdk/azurestackhci"
     package-dir: "azure-mgmt-azurestackhcivm"
     namespace: "azure.mgmt.azurestackhcivm"
     flavor: "azure"
