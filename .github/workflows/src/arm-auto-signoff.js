@@ -169,7 +169,8 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
       .sort(invert(byDate((status) => status.updated_at)));
 
-    const matchingStatus = matchingStatuses.length >= 1 ? matchingStatuses[0] : undefined;
+    // undefined if matchingStatuses.length === 0 (which is OK)
+    const matchingStatus = matchingStatuses[0];
 
     core.info(`${statusName}: State='${matchingStatus?.state}'`);
 
