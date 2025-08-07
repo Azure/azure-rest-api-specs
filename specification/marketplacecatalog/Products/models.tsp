@@ -171,10 +171,10 @@ model ProductSummary {
   @doc("Popularity of the product")
   popularity?: float64;
 
-  @doc("Array of product categories")
+  @doc("Identifiers of categories associated with the product. Used for classification, filtering, and product discovery")
   categoryIds?: string[];
 
-  @doc("List of industry IDs the item belongs to")
+  @doc("Identifiers of industries associated with the product. Used for classification, filtering, and product discovery")
   industryIds?: string[];
 
   @doc("Publisher id")
@@ -280,6 +280,9 @@ model ProductSummary {
 
   @doc("Set of products attributes")
   attributes?: Attribute[];
+
+  @doc("Used to map SaaS apps to their Azure AD appIds")
+  activeDirectoryAppId?: string;
 }
 
 @doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services")

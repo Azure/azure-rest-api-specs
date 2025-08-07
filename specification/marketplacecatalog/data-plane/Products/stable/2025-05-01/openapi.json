@@ -1167,14 +1167,14 @@
         },
         "categoryIds": {
           "type": "array",
-          "description": "Array of product categories",
+          "description": "Identifiers of categories associated with the product. Used for classification, filtering, and product discovery",
           "items": {
             "type": "string"
           }
         },
         "industryIds": {
           "type": "array",
-          "description": "List of industry IDs the item belongs to",
+          "description": "Identifiers of industries associated with the product. Used for classification, filtering, and product discovery",
           "items": {
             "type": "string"
           }
@@ -1347,6 +1347,10 @@
           "items": {
             "$ref": "#/definitions/Attribute"
           }
+        },
+        "activeDirectoryAppId": {
+          "type": "string",
+          "description": "Used to map SaaS apps to their Azure AD appIds"
         }
       },
       "required": [
