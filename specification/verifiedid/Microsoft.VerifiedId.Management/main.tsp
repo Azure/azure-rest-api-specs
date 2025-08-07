@@ -73,6 +73,8 @@ interface Authorities {
     >
   >;
   delete is ArmResourceDeleteSync<Authority>;
+  @list
   listByResourceGroup is ArmResourceListByParent<Authority>;
+  @list
   listBySubscription is ArmListBySubscription<Authority>;
 }
