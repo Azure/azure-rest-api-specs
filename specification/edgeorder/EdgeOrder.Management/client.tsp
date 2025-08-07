@@ -10,7 +10,6 @@ using Microsoft.EdgeOrder;
   "EdgeOrderItemDetailsPatch",
   "csharp"
 );
-@@clientName(TypeSpec.Http.OkResponse, "EdgeOrderOkResponseResult", "csharp");
 @@clientName(OrderItemUpdateParameter, "EdgeOrderItemPatch", "csharp");
 @@clientName(WeightMeasurementUnit, "ProductWeightMeasurementUnit", "csharp");
 @@clientName(Specification, "ProductSpecification", "csharp");
@@ -60,6 +59,10 @@ using Microsoft.EdgeOrder;
 @@clientName(Product, "EdgeOrderProduct", "csharp");
 @@clientName(ReturnOrderItemDetails, "EdgeOrderItemReturnContent", "csharp");
 @@clientName(OrderItemDetails, "EdgeOrderItemDetails", "csharp");
+@@clientName(OrderItemDetails.managementRpDetailsList,
+  "ManagementRPDetailsList",
+  "csharp"
+);
 @@clientName(CancellationReason, "EdgeOrderItemCancellationReason", "csharp");
 @@clientName(AddressProperties, "EdgeOrderItemAddressProperties", "csharp");
 @@clientName(AddressDetails, "EdgeOrderItemAddressDetails", "csharp");
@@ -83,12 +86,15 @@ using Microsoft.EdgeOrder;
   "IsShippingBoxRequired",
   "csharp"
 );
+@@clientName(WeightMeasurementUnit.LBS, "Lbs", "csharp");
+@@clientName(WeightMeasurementUnit.KGS, "Kgs", "csharp");
+@@clientName(AvailabilityStage.Signup, "SignUp", "csharp");
 @@alternateType(OrderItemProperties.orderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(OrderProperties.orderItemIds,
-  Azure.Core.armResourceIdentifier,
+  Azure.Core.armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(ReverseShippingDetails.trackingUrl, url, "csharp");
