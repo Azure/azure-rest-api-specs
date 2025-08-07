@@ -36,10 +36,6 @@ tag: package-2025-08
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: Microsoft.Insights/stable/2024-02-01/metrics_API.json
-    where: $.definitions.Metric
-    reason: "Metrics query result is not an ARM resource; id/name/type are data fields."
 ```
 
 ### Tag: package-2025-08
@@ -73,6 +69,11 @@ input-file:
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
   - Microsoft.Insights/stable/2021-05-01/operations_API.json
+
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: metrics_API.json
+    reason: Metrics query result is not an ARM resource; id/name/type are data fields.
 ```
 
 ### Tag: package-2025-01-01-preview
@@ -1569,7 +1570,7 @@ directive:
     reason: "LocalizableString exists in other swaggers my team can not modify"
   - suppress: RequiredPropertiesMissingInResourceModel
     from: metrics_API.json
-    where: $.definitions.LocalizableString
+    where: $.definitions.Metric
     reason: "Both the request body and response are not ARM level resources"
   - suppress: MissingTypeObject
     from: metricDefinitions_API.json
