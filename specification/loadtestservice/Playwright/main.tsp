@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
   {
     @doc("""
       Supported Playwright Service API Endpoints (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.
-      You can also find this value in the Azure Playwright Workspace property, such as `dataplaneUri`.
+      You can also find this value in the Azure Playwright Workspace property - `dataplaneUri`.
       """)
     endpoint: string,
   }
@@ -49,4 +49,8 @@ enum Versions {
   @doc("Version 2025-07-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_07_01_preview: "2025-07-01-preview",
+
+  @doc("Version 2025-09-01")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_09_01: "2025-09-01",
 }
