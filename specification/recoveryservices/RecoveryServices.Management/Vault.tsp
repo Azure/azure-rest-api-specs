@@ -299,6 +299,7 @@ interface Vaults {
    */
   @get
   @action("replicationUsages")
+  @list
   list is VaultOps.ActionSync<Vault, void, ArmResponse<ReplicationUsageList>>;
 
   /**
@@ -306,6 +307,7 @@ interface Vaults {
    */
   @get
   @action("usages")
+  @list
   listByVaults is VaultOps.ActionSync<Vault, void, ArmResponse<VaultUsageList>>;
 }
 @armResourceOperations

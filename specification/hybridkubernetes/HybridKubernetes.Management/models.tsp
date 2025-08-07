@@ -639,12 +639,11 @@ model ConnectedClusterList is Azure.Core.Page<ConnectedCluster>;
 /**
  * The paginated list of connected cluster API operations.
  */
-@Azure.Core.pagedResult
 model OperationList {
   /**
    * The list of connected cluster API operations.
    */
-  @Azure.Core.items
+  @pageItems
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: Operation[];
