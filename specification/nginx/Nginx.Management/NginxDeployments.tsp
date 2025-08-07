@@ -7,29 +7,20 @@ using Rest;
 using Http;
 using Azure.ResourceManager;
 
-namespace Nginx.NginxPlus;
+namespace NGINX.NGINXPLUS;
 
 /**
  * Represents an Nginx deployment resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@Azure.ResourceManager.Private.armResourceInternal(NginxDeploymentProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model NginxDeployment extends Foundations.TrackedResource {
+model NginxDeployment is TrackedResource<NginxDeploymentProperties> {
   /** The name of the Nginx deployment resource. */
   @pattern("^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$")
-  @key("deploymentName")
+  @key("nginxDeploymentName")
   @segment("nginxDeployments")
   @path
   name: string;
 
   ...ManagedServiceIdentityProperty;
-
-  /** The resource-specific properties for this resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  properties?: NginxDeploymentProperties;
-
   ...ResourceSkuProperty;
 }
 
@@ -177,7 +168,7 @@ model NginxDeploymentProperties {
   /**
    * Whether diagnostics support is enabled.
    */
-  enableDiagnosticsSupport?: boolean;
+  enableDiagnosticsSupport: boolean;
 
   /**
    * Logging configuration.
