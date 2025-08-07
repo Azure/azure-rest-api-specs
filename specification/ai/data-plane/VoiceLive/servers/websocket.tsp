@@ -29,30 +29,55 @@ using Azure.Core;
 
 
 namespace VoiceLive;
-op force_models(session: ClientEventSessionUpdate):
-  ServerEventSessionUpdated
-  | ServerEventSessionCreated
-  | ServerEventError
-  | ServerEventResponseTextDelta
-  | ServerEventResponseAudioDelta
-  | ServerEventConversationItemCreated
-  | ServerEventConversationItemDeleted
-  | ServerEventConversationItemRetrieved
-  | ServerEventConversationItemTruncated
-  | ServerEventConversationItemInputAudioTranscriptionCompleted
-  | ServerEventConversationItemInputAudioTranscriptionDelta
-  | ServerEventConversationItemInputAudioTranscriptionFailed
-  | ServerEventInputAudioBufferCommitted
-  | ServerEventInputAudioBufferCleared
-  | ServerEventInputAudioBufferSpeechStarted
-  | ServerEventInputAudioBufferSpeechStopped
-  | ServerEventResponseCreated
-  | ServerEventResponseDone
-  | ServerEventResponseOutputItemAdded
-  | ServerEventResponseOutputItemDone
-  | ServerEventResponseContentPartAdded
-  | ServerEventResponseContentPartDone
-  | ServerEventResponseTextDone
-  | ServerEventResponseAudioTranscriptDelta
-  | ServerEventResponseAudioTranscriptDone
-  | ServerEventResponseAudioDone;
+
+// Union of all client events that can be passed into `force_models`
+alias ForceModelClientEvent =
+  ClientEventSessionUpdate |
+  ClientEventInputAudioBufferAppend |
+  ClientEventInputAudioBufferCommit |
+  ClientEventInputAudioBufferClear |
+  ClientEventInputAudioTurnStart |
+  ClientEventInputAudioTurnAppend |
+  ClientEventInputAudioTurnEnd |
+  ClientEventInputAudioTurnCancel |
+  ClientEventInputAudioClear |
+  ClientEventConversationItemCreate |
+  ClientEventConversationItemRetrieve |
+  ClientEventConversationItemTruncate |
+  ClientEventConversationItemDelete |
+  ClientEventResponseCreate |
+  ClientEventResponseCancel |
+  ClientEventSessionAvatarConnect;
+
+// Union of all server events that can be returned from `force_models`
+alias ForceModelServerEvent =
+  ServerEventSessionAvatarConnecting |
+  ServerEventSessionCreated |
+  ServerEventSessionUpdated |
+  ServerEventError |
+  ServerEventResponseTextDelta |
+  ServerEventResponseAudioDelta |
+  ServerEventConversationItemCreated |
+  ServerEventConversationItemDeleted |
+  ServerEventConversationItemRetrieved |
+  ServerEventConversationItemTruncated |
+  ServerEventConversationItemInputAudioTranscriptionCompleted |
+  ServerEventConversationItemInputAudioTranscriptionDelta |
+  ServerEventConversationItemInputAudioTranscriptionFailed |
+  ServerEventInputAudioBufferCommitted |
+  ServerEventInputAudioBufferCleared |
+  ServerEventInputAudioBufferSpeechStarted |
+  ServerEventInputAudioBufferSpeechStopped |
+  ServerEventResponseCreated |
+  ServerEventResponseDone |
+  ServerEventResponseOutputItemAdded |
+  ServerEventResponseOutputItemDone |
+  ServerEventResponseContentPartAdded |
+  ServerEventResponseContentPartDone |
+  ServerEventResponseTextDone |
+  ServerEventResponseAudioTranscriptDelta |
+  ServerEventResponseAudioTranscriptDone |
+  ServerEventResponseAudioDone;
+
+// Operation definition
+op force_models(event: ForceModelClientEvent): ForceModelServerEvent;
