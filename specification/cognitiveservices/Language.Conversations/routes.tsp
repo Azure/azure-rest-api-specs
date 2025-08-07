@@ -48,6 +48,7 @@ op analyzeConversationsJobStatus is languageOperations.ResourceRead<
 @added(Versions.v2023_04_01)
 @route("/analyze-conversations/jobs")
 @pollingOperation(analyzeConversationsJobStatus)
+@access(Access.internal, "python")
 op analyzeConversationsSubmitJob is Foundations.LongRunningOperation<
   {
     /** The input for the analyze conversations operation. */
