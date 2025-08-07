@@ -84,7 +84,7 @@ model AzureCustomVoice {
   temperature?: float32;
 
   @doc("Optional custom lexicon URL.")
-  custom_lexicon_url?: string;
+  custom_lexicon_url?: url;
 
   @doc("Preferred locale list for voice rendering.")
   prefer_locales?: string[];
@@ -261,7 +261,7 @@ model AvatarConfig {
 @doc("ICE server configuration for WebRTC connection negotiation.")
 model IceServer {
   @doc("List of ICE server URLs (e.g., TURN or STUN endpoints).")
-  urls: string[];
+  urls: url[];
 
   @doc("Optional username used for authentication with the ICE server.")
   username?: string;
