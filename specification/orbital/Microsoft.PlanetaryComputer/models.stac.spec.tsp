@@ -352,7 +352,7 @@ model FeatureCollections {
    * Array of STAC collections available in the catalog.
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  collections: StacCollectionModel[];
+  collections: StacCollection[];
 }
 
 /**
@@ -368,7 +368,7 @@ model StacCollectionSummaries is Record<unknown>;
  * Represents a STAC collection.
  */
 @resource("collections")
-model StacCollectionModel {
+model StacCollection {
   ...MicrosoftStacProperties;
   ...StacExtensionsList;
 
@@ -662,8 +662,8 @@ model StacItemOrItemCollection {
  * Represents a STAC Item, which is a GeoJSON Feature with additional metadata.
  */
 @resource("items")
-@parentResource(StacCollectionModel)
-model StacItemModel extends StacItemOrItemCollection {
+@parentResource(StacCollection)
+model StacItem extends StacItemOrItemCollection {
   ...FeatureBase;
 
   /**
@@ -751,7 +751,7 @@ model ItemProperties {
  *
  * Represents a collection of STAC Items as a GeoJSON FeatureCollection.
  */
-model ItemCollectionModel extends StacItemOrItemCollection {
+model ItemCollection extends StacItemOrItemCollection {
   /**
    * GeoJSON FeatureCollection type.
    */
@@ -760,7 +760,7 @@ model ItemCollectionModel extends StacItemOrItemCollection {
   /**
    * Array of STAC Items in the collection.
    */
-  features: StacItemModel[];
+  features: StacItem[];
 
   /**
    * Bounding box of all items in format [west, south, east, north].

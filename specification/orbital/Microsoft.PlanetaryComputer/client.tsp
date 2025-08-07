@@ -108,6 +108,12 @@ namespace Customizations;
 @@clientName(Resampling, "ResamplingMethod", "csharp");
 @@clientName(Tilematrixsetid, "TileMatrixSetId", "csharp");
 
+// Additional model renames for C#
+@@clientName(RenderOption, "RenderOptionModel", "csharp");
+@@clientName(StacCollection, "StacCollectionModel", "csharp");
+@@clientName(StacItem, "StacItemModel", "csharp");
+@@clientName(ItemCollection, "ItemCollectionModel", "csharp");
+
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(

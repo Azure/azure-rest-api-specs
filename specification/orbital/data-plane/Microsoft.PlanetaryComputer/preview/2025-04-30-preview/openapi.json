@@ -1527,7 +1527,7 @@
             "description": "Request GeoJson body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItemModel"
+              "$ref": "#/definitions/StacItem"
             }
           }
         ],
@@ -2997,7 +2997,7 @@
             "description": "Request GeoJson body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ItemCollectionModel"
+              "$ref": "#/definitions/ItemCollection"
             }
           }
         ],
@@ -8637,7 +8637,7 @@
             "description": "Request collection body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacCollectionModel"
+              "$ref": "#/definitions/StacCollection"
             }
           }
         ],
@@ -8746,7 +8746,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacCollectionModel"
+              "$ref": "#/definitions/StacCollection"
             }
           },
           "default": {
@@ -8788,7 +8788,7 @@
             "description": "Request collection body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacCollectionModel"
+              "$ref": "#/definitions/StacCollection"
             }
           }
         ],
@@ -8935,13 +8935,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacCollectionModel"
+              "$ref": "#/definitions/StacCollection"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/StacCollectionModel"
+              "$ref": "#/definitions/StacCollection"
             }
           },
           "default": {
@@ -9016,13 +9016,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacCollectionModel"
+              "$ref": "#/definitions/StacCollection"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/StacCollectionModel"
+              "$ref": "#/definitions/StacCollection"
             }
           },
           "default": {
@@ -9588,7 +9588,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RenderOptionModel"
+                "$ref": "#/definitions/RenderOption"
               }
             }
           },
@@ -9640,7 +9640,7 @@
             "description": "Render option configuration to be created or updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RenderOptionModel"
+              "$ref": "#/definitions/RenderOption"
             }
           }
         ],
@@ -9648,13 +9648,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RenderOptionModel"
+              "$ref": "#/definitions/RenderOption"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RenderOptionModel"
+              "$ref": "#/definitions/RenderOption"
             }
           },
           "default": {
@@ -9714,7 +9714,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/RenderOptionModel"
+                "$ref": "#/definitions/RenderOption"
               }
             }
           },
@@ -9772,7 +9772,7 @@
             "description": "Render option configuration to be created or updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RenderOptionModel"
+              "$ref": "#/definitions/RenderOption"
             }
           }
         ],
@@ -9780,13 +9780,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RenderOptionModel"
+              "$ref": "#/definitions/RenderOption"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RenderOptionModel"
+              "$ref": "#/definitions/RenderOption"
             }
           },
           "default": {
@@ -10015,7 +10015,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ItemCollectionModel"
+              "$ref": "#/definitions/ItemCollection"
             }
           },
           "default": {
@@ -10053,7 +10053,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "STAC Item or ItemCollection\n\nRepresents a STAC Item or ItemCollectionModel as defined by the STAC 1.0.0 standard.\n\n**Item**: A GeoJSON Feature that represents a single spatiotemporal asset.\nIt includes metadata such as geometry, datetime, and links to related assets.\nExample: A satellite image with its metadata.\n\n**ItemCollectionModel**: A GeoJSON FeatureCollection that contains multiple Items.\nIt is used to group multiple related Items together, such as a collection of satellite images.\n\nThis union allows the request body to accept either a single Item or a collection of Items.",
+            "description": "STAC Item or ItemCollection\n\nRepresents a STAC Item or ItemCollection as defined by the STAC 1.0.0 standard.\n\n**Item**: A GeoJSON Feature that represents a single spatiotemporal asset.\nIt includes metadata such as geometry, datetime, and links to related assets.\nExample: A satellite image with its metadata.\n\n**ItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.\nIt is used to group multiple related Items together, such as a collection of satellite images.\n\nThis union allows the request body to accept either a single Item or a collection of Items.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StacItemOrItemCollection"
@@ -10131,7 +10131,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StacItemModel"
+              "$ref": "#/definitions/StacItem"
             }
           },
           "default": {
@@ -10181,7 +10181,7 @@
             "description": "STAC Item",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItemModel"
+              "$ref": "#/definitions/StacItem"
             }
           }
         ],
@@ -10258,7 +10258,7 @@
             "description": "STAC Item",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItemModelUpdate"
+              "$ref": "#/definitions/StacItemUpdate"
             }
           }
         ],
@@ -10906,7 +10906,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ItemCollectionModel"
+              "$ref": "#/definitions/ItemCollection"
             }
           },
           "204": {
@@ -10956,7 +10956,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ItemCollectionModel"
+              "$ref": "#/definitions/ItemCollection"
             }
           },
           "204": {
@@ -13004,7 +13004,7 @@
           "type": "array",
           "description": "Array of STAC collections available in the catalog.",
           "items": {
-            "$ref": "#/definitions/StacCollectionModel"
+            "$ref": "#/definitions/StacCollection"
           }
         }
       },
@@ -14008,7 +14008,7 @@
       }
     },
     "IntervalLegendsElement": {},
-    "ItemCollectionModel": {
+    "ItemCollection": {
       "type": "object",
       "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md\n\nRepresents a collection of STAC Items as a GeoJSON FeatureCollection.",
       "properties": {
@@ -14016,7 +14016,7 @@
           "type": "array",
           "description": "Array of STAC Items in the collection.",
           "items": {
-            "$ref": "#/definitions/StacItemModel"
+            "$ref": "#/definitions/StacItem"
           }
         },
         "bbox": {
@@ -14746,7 +14746,7 @@
           "type": "array",
           "description": "Available render options for visualizing the data.",
           "items": {
-            "$ref": "#/definitions/RenderOptionModel"
+            "$ref": "#/definitions/RenderOption"
           }
         },
         "defaultLocation": {
@@ -15484,56 +15484,7 @@
         "searchId"
       ]
     },
-    "RenderOptionCondition": {
-      "type": "object",
-      "description": "Defines a condition for enabling a render option.",
-      "properties": {
-        "property": {
-          "type": "string",
-          "description": "Property name to check in the active CQL filter."
-        },
-        "value": {
-          "type": "string",
-          "description": "Value that the property must equal."
-        }
-      },
-      "required": [
-        "property"
-      ]
-    },
-    "RenderOptionLegend": {
-      "type": "object",
-      "description": "Configuration for generating a data legend.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/LegendConfigType",
-          "description": "Legend type to make,\none of: `continuous`,\n`classmap`,\n`interval` or `none`\n(note, `none` is a string literal)."
-        },
-        "labels": {
-          "type": "array",
-          "description": "Text labels to display on the legend.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "trimStart": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of items to trim from the start of the legend definition. Used if\nthere are values important for rendering (e.g. nodata) that aren't desirable in\nthe legend."
-        },
-        "trimEnd": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of items to trim from the end of the legend."
-        },
-        "scaleFactor": {
-          "type": "number",
-          "format": "float",
-          "description": "A factor to multiply interval legend labels by. Useful for scaled rasters whose\ncolormap definitions map to unscaled values, effectively showing legend labels\nas scaled values."
-        }
-      }
-    },
-    "RenderOptionModel": {
+    "RenderOption": {
       "type": "object",
       "description": "Defines visualization parameters for rendering data on a map.",
       "properties": {
@@ -15615,6 +15566,55 @@
         "id",
         "name"
       ]
+    },
+    "RenderOptionCondition": {
+      "type": "object",
+      "description": "Defines a condition for enabling a render option.",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "Property name to check in the active CQL filter."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value that the property must equal."
+        }
+      },
+      "required": [
+        "property"
+      ]
+    },
+    "RenderOptionLegend": {
+      "type": "object",
+      "description": "Configuration for generating a data legend.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/LegendConfigType",
+          "description": "Legend type to make,\none of: `continuous`,\n`classmap`,\n`interval` or `none`\n(note, `none` is a string literal)."
+        },
+        "labels": {
+          "type": "array",
+          "description": "Text labels to display on the legend.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trimStart": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items to trim from the start of the legend definition. Used if\nthere are values important for rendering (e.g. nodata) that aren't desirable in\nthe legend."
+        },
+        "trimEnd": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to trim from the end of the legend."
+        },
+        "scaleFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "A factor to multiply interval legend labels by. Useful for scaled rasters whose\ncolormap definitions map to unscaled values, effectively showing legend labels\nas scaled values."
+        }
+      }
     },
     "RenderOptionType": {
       "type": "string",
@@ -16012,7 +16012,7 @@
         }
       }
     },
-    "StacCollectionModel": {
+    "StacCollection": {
       "type": "object",
       "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md\n\nRepresents a STAC collection.",
       "properties": {
@@ -16143,7 +16143,7 @@
         }
       }
     },
-    "StacItemModel": {
+    "StacItem": {
       "type": "object",
       "description": "Represents a STAC Item, which is a GeoJSON Feature with additional metadata.",
       "properties": {
@@ -16208,7 +16208,59 @@
       ],
       "x-ms-discriminator-value": "Feature"
     },
-    "StacItemModelUpdate": {
+    "StacItemOrItemCollection": {
+      "type": "object",
+      "description": "Base type for STAC items and collections with discriminator.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for StacItemOrItemCollection."
+        },
+        "stac_version": {
+          "type": "string",
+          "description": "Stac Version",
+          "default": "1.0.0",
+          "minLength": 1,
+          "x-ms-client-name": "stacVersion"
+        },
+        "links": {
+          "type": "array",
+          "description": "Links to related resources and endpoints.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "msft:_created": {
+          "type": "string",
+          "description": "MSFT Created",
+          "x-ms-client-name": "msftCreated"
+        },
+        "msft:_updated": {
+          "type": "string",
+          "description": "MSFT Updated",
+          "x-ms-client-name": "msftUpdated"
+        },
+        "msft:short_description": {
+          "type": "string",
+          "description": "MSFT Short Description",
+          "maxLength": 300,
+          "x-ms-client-name": "msftShortDescription"
+        },
+        "stac_extensions": {
+          "type": "array",
+          "description": "URLs to STAC extensions implemented by this STAC resource.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "stacExtensions"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "StacItemUpdate": {
       "type": "object",
       "description": "Represents a STAC Item, which is a GeoJSON Feature with additional metadata.",
       "properties": {
@@ -16265,58 +16317,6 @@
         }
       ],
       "x-ms-discriminator-value": "Feature"
-    },
-    "StacItemOrItemCollection": {
-      "type": "object",
-      "description": "Base type for STAC items and collections with discriminator.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Discriminator property for StacItemOrItemCollection."
-        },
-        "stac_version": {
-          "type": "string",
-          "description": "Stac Version",
-          "default": "1.0.0",
-          "minLength": 1,
-          "x-ms-client-name": "stacVersion"
-        },
-        "links": {
-          "type": "array",
-          "description": "Links to related resources and endpoints.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        },
-        "msft:_created": {
-          "type": "string",
-          "description": "MSFT Created",
-          "x-ms-client-name": "msftCreated"
-        },
-        "msft:_updated": {
-          "type": "string",
-          "description": "MSFT Updated",
-          "x-ms-client-name": "msftUpdated"
-        },
-        "msft:short_description": {
-          "type": "string",
-          "description": "MSFT Short Description",
-          "maxLength": 300,
-          "x-ms-client-name": "msftShortDescription"
-        },
-        "stac_extensions": {
-          "type": "array",
-          "description": "URLs to STAC extensions implemented by this STAC resource.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "stacExtensions"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
     },
     "StacModelType": {
       "type": "string",
