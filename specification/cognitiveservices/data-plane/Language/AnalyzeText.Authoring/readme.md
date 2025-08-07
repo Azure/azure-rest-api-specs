@@ -31,7 +31,7 @@ These settings apply only when `--tag=release_2025_05_15_preview` is specified o
 input-file:
   - preview/2025-05-15-preview/analyzetext-authoring.json
 title:
-  Microsoft Cognitive Language Service
+  Microsoft Cognitive Language Service - Text Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -44,7 +44,7 @@ These settings apply only when `--tag=release_2024_11_15_preview` is specified o
 input-file:
   - preview/2024-11-15-preview/analyzetext-authoring.json
 title:
-  Microsoft Cognitive Language Service
+  Microsoft Cognitive Language Service - Text Authoring
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -57,7 +57,22 @@ These settings apply only when `--tag=release_2023_04_01` is specified on the co
 input-file:
   - stable/2023-04-01/analyzetext-authoring.json
 title:
-  Microsoft Cognitive Language Service
+  Microsoft Cognitive Language Service - Text Authoring
+modelerfour:
+  lenient-model-deduplication: true
+
+```
+
+### Release 2022-05-01
+
+These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2022_05_01'
+input-file:
+  - stable/2022-05-01/analyzetext-authoring.json
+  - stable/2022-05-01/common.json
+title:
+  Microsoft Cognitive Language Service - Text Authoring
 modelerfour:
   lenient-model-deduplication: true
 
