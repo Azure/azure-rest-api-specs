@@ -29,7 +29,15 @@ title: PlaywrightServiceClient
 description: Microsoft Playwright Service Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-07-01-preview
+tag: package-2025-09-01
+```
+
+### Tag: package-2025-09-01
+These settings apply only when `--tag=2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - stable/2025-09-01/playwright.json
 ```
 
 ### Tag: package-2025-07-01-preview

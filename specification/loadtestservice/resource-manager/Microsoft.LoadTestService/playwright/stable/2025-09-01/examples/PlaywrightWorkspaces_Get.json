@@ -1,20 +1,11 @@
 {
-  "title": "PlaywrightWorkspaces_Update",
-  "operationId": "PlaywrightWorkspaces_Update",
+  "title": "PlaywrightWorkspaces_Get",
+  "operationId": "PlaywrightWorkspaces_Get",
   "parameters": {
-    "api-version": "2025-07-01-preview",
+    "api-version": "2025-09-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "dummyrg",
-    "playwrightWorkspaceName": "myWorkspace",
-    "properties": {
-      "tags": {
-        "Team": "Dev Exp",
-        "Division": "LT"
-      },
-      "properties": {
-        "regionalAffinity": "Disabled"
-      }
-    }
+    "playwrightWorkspaceName": "myWorkspace"
   },
   "responses": {
     "200": {
@@ -22,7 +13,7 @@
         "location": "westus3",
         "properties": {
           "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
-          "regionalAffinity": "Disabled",
+          "regionalAffinity": "Enabled",
           "localAuth": "Enabled",
           "workspaceId": "00000000-0000-0000-0000-000000000000",
           "provisioningState": "Succeeded"
@@ -31,8 +22,7 @@
         "name": "myWorkspace",
         "type": "Microsoft.LoadTestService/PlaywrightWorkspaces",
         "tags": {
-          "Team": "Dev Exp",
-          "Division": "LT"
+          "Team": "Dev Exp"
         },
         "systemData": {
           "createdBy": "userId1001",
