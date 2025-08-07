@@ -1,5 +1,6 @@
 // @ts-check
 
+import { isFullGitSha } from "../../shared/src/git.js";
 import {
   CheckConclusion,
   CheckStatus,
@@ -71,10 +72,14 @@ export async function setStatusImpl({
   requiredStatusName,
   overridingLabel,
 }) {
+  if (!isFullGitSha(head_sha)) {
+    throw new Error(`head_sha is not a valid full git SHA: '${head_sha}'`);
+  }
+  core.setOutput("head_sha", head_sha);
+
   if (!Number.isInteger(issue_number) || issue_number <= 0) {
     throw new Error(`issue_number must be a positive integer: ${issue_number}`);
   }
-
   core.setOutput("issue_number", issue_number);
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
