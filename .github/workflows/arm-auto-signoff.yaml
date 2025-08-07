@@ -97,15 +97,28 @@ jobs:
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
 
+      # Required for consumers to identify the head SHA associated with this workflow run.
+      # Output can be trusted, because it was uploaded from a workflow that is trusted,
+      # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
+      # Consumers should verify the "event_name" before attempting to extract from the artifact name.
+      - if: |
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).headSha
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).headSha }}"
+
       # Required for consumers to identify the PR associated with this workflow run.
       # Output can be trusted, because it was uploaded from a workflow that is trusted,
       # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
       # Consumers should verify the "event_name" before attempting to extract from the artifact name.
       - if: |
-          (github.event_name == 'issue_comment' || 
-           github.event_name == 'workflow_run') &&
-          (fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
-           fromJson(steps.get-label-action.outputs.result).labelAction == 'remove')
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:

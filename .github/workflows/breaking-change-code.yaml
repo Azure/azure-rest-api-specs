@@ -27,6 +27,7 @@ jobs:
       - name: Swagger Breaking Change - Analyze Code
         id: swagger-breaking-change-analyze-code
         run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
           npm exec --no -- openapi-diff-runner \
             --spec-repo-path "$GITHUB_WORKSPACE" \
             --pr-source-branch "$GITHUB_HEAD_REF" \
@@ -55,3 +56,13 @@ jobs:
         with:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.swagger-breaking-change-analyze-code.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.swagger-breaking-change-analyze-code.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore

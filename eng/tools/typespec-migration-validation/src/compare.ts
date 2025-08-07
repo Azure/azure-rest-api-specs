@@ -1,4 +1,4 @@
-import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Response, Ref, Refable } from "@azure-tools/typespec-autorest";
+import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Response, Refable } from "@azure-tools/typespec-autorest";
 
 interface Diff {
   before: any;
@@ -46,7 +46,9 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
         level: "error"
       });
     }
-    pathDiffs.push(...compareOperation(oldOperations[operationId][1], newOperations[operationId][1], operationId));
+    else {
+      pathDiffs.push(...compareOperation(oldOperations[operationId][1], newOperations[operationId][1], operationId));
+    }    
   }
   for (const operationId in newOperations) {
     if (!oldOperations[operationId]) {
@@ -177,23 +179,26 @@ function compareLongRunning(oldOperation: OpenAPI2Operation, newOperation: OpenA
     });
   }
 
-  const newFinalResult = newOperation["x-ms-long-running-operation-options"]?.["final-state-schema"];
-  if (newFinalResult !== getResponseSchema(oldOperation.responses?.["200"])) {
-    pathDiffs.push({
-      before: getResponseSchema(oldOperation.responses?.["200"]),
-      after: newFinalResult,
-      operationId: operationId,
-      type: "finalresult",
-      level: "error"
-    });
-  }
+  if (oldLongRunning) {
+    const newFinalResult = newOperation["x-ms-long-running-operation-options"]?.["final-state-schema"];
+    const newFinalResultSchema = newFinalResult?.split("/").pop();
+    if (newFinalResultSchema !== getResponseSchema(oldOperation.responses?.["200"])) {
+      pathDiffs.push({
+        before: getResponseSchema(oldOperation.responses?.["200"]),
+        after: newFinalResultSchema,
+        operationId: operationId,
+        type: "finalresult",
+        level: "error"
+      });
+    }
+  }  
 
   return pathDiffs;
 }
 
 function getResponseSchema(response: Refable<OpenAPI2Response> | undefined): string | undefined {
-  if (response && (response as Ref<OpenAPI2Response>).$ref) {
-    const refPath = (response as Ref<OpenAPI2Response>).$ref;
+  if (response && (response as OpenAPI2Response).schema && ((response as OpenAPI2Response).schema as any).$ref) {
+    const refPath = ((response as OpenAPI2Response).schema as any).$ref;
     return refPath.split("/").pop();
   }
 

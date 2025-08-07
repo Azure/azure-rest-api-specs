@@ -33,20 +33,23 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {string} params.head_sha
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
+ * @returns {Promise<{labelAction: LabelAction, headSha: string, issueNumber: number}>}
  */
 export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, github, core }) {
   const labelActions = {
     [LabelAction.None]: {
       labelAction: LabelAction.None,
+      headSha: head_sha,
       issueNumber: issue_number,
     },
     [LabelAction.Add]: {
       labelAction: LabelAction.Add,
+      headSha: head_sha,
       issueNumber: issue_number,
     },
     [LabelAction.Remove]: {
       labelAction: LabelAction.Remove,
+      headSha: head_sha,
       issueNumber: issue_number,
     },
   };
