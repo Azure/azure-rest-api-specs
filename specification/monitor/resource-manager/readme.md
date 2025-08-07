@@ -1568,7 +1568,7 @@ directive:
     reason: "LocalizableString exists in other swaggers my team can not modify"
   - suppress: RequiredPropertiesMissingInResourceModel
     from: metrics_API.json
-    where: $.paths
+    where: $.definitions.LocalizableString
     reason: "Both the request body and response are not ARM level resources"
   - suppress: MissingTypeObject
     from: metricDefinitions_API.json
