@@ -785,7 +785,12 @@ export async function getCheckRunTuple(
     });
 
     if (branchRules) {
-      requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules);
+      requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules).filter(
+        // "Automated merging requirements met" may be required in repo settings, to ensure PRs cannot be merged unless
+        // it's passing.  However, it must be excluded from our list of requiredCheckNames, since it's status is set
+        // by our own workflow.  If this check isn't excluded, it creates a deadlock where it can never be set.
+        (checkName) => checkName !== AUTOMATED_CHECK_NAME,
+      );
     }
   } else {
     requiredCheckNames = ["Summarize PR Impact", "[TEST-IGNORE] Summarize PR Impact"];
