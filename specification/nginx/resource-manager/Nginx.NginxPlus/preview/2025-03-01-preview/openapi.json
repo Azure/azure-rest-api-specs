@@ -2371,12 +2371,12 @@
         },
         "webApplicationFirewallStatus": {
           "$ref": "#/definitions/WebApplicationFirewallStatus",
-          "description": "Web application firewall status."
+          "description": "Web application firewall status.",
+          "readOnly": true
         }
       },
       "required": [
-        "webApplicationFirewallSettings",
-        "webApplicationFirewallStatus"
+        "webApplicationFirewallSettings"
       ]
     },
     "NginxAppProtectUpdate": {
@@ -2386,10 +2386,6 @@
         "webApplicationFirewallSettings": {
           "$ref": "#/definitions/WebApplicationFirewallSettingsUpdate",
           "description": "Web application firewall settings."
-        },
-        "webApplicationFirewallStatus": {
-          "$ref": "#/definitions/WebApplicationFirewallStatusUpdate",
-          "description": "Web application firewall status."
         }
       }
     },
@@ -2762,7 +2758,8 @@
         },
         "nginxVersion": {
           "type": "string",
-          "description": "The Nginx version."
+          "description": "The Nginx version.",
+          "readOnly": true
         },
         "networkProfile": {
           "$ref": "#/definitions/NginxNetworkProfile",
@@ -2770,7 +2767,8 @@
         },
         "ipAddress": {
           "type": "string",
-          "description": "The IP address of the deployment."
+          "description": "The IP address of the deployment.",
+          "readOnly": true
         },
         "enableDiagnosticsSupport": {
           "type": "boolean",
@@ -2798,20 +2796,10 @@
         },
         "dataplaneApiEndpoint": {
           "type": "string",
-          "description": "Dataplane API endpoint."
+          "description": "Dataplane API endpoint.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "nginxVersion",
-        "networkProfile",
-        "ipAddress",
-        "logging",
-        "scalingProperties",
-        "autoUpgradeProfile",
-        "userProfile",
-        "nginxAppProtect",
-        "dataplaneApiEndpoint"
-      ]
+      }
     },
     "NginxDeploymentScalingProperties": {
       "type": "object",
@@ -2930,17 +2918,9 @@
       "type": "object",
       "description": "The updatable properties of the NginxDeployment.",
       "properties": {
-        "nginxVersion": {
-          "type": "string",
-          "description": "The Nginx version."
-        },
         "networkProfile": {
           "$ref": "#/definitions/NginxNetworkProfileUpdate",
           "description": "The network profile."
-        },
-        "ipAddress": {
-          "type": "string",
-          "description": "The IP address of the deployment."
         },
         "enableDiagnosticsSupport": {
           "type": "boolean",
@@ -2965,10 +2945,6 @@
         "nginxAppProtect": {
           "$ref": "#/definitions/NginxAppProtectUpdate",
           "description": "Nginx App Protect configuration."
-        },
-        "dataplaneApiEndpoint": {
-          "type": "string",
-          "description": "Dataplane API endpoint."
         }
       }
     },
@@ -3488,20 +3464,6 @@
         "wafNginxVersion"
       ]
     },
-    "WebApplicationFirewallComponentVersionsUpdate": {
-      "type": "object",
-      "description": "Component versions for the web application firewall.",
-      "properties": {
-        "wafEngineVersion": {
-          "type": "string",
-          "description": "WAF engine version."
-        },
-        "wafNginxVersion": {
-          "type": "string",
-          "description": "WAF Nginx version."
-        }
-      }
-    },
     "WebApplicationFirewallPackage": {
       "type": "object",
       "description": "Web application firewall package information.",
@@ -3519,20 +3481,6 @@
         "version",
         "revisionDatetime"
       ]
-    },
-    "WebApplicationFirewallPackageUpdate": {
-      "type": "object",
-      "description": "Web application firewall package information.",
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "The package version."
-        },
-        "revisionDatetime": {
-          "type": "string",
-          "description": "The revision datetime."
-        }
-      }
     },
     "WebApplicationFirewallSettings": {
       "type": "object",
@@ -3589,32 +3537,6 @@
         "threatCampaignsPackage",
         "componentVersions"
       ]
-    },
-    "WebApplicationFirewallStatusUpdate": {
-      "type": "object",
-      "description": "Web application firewall status.",
-      "properties": {
-        "wafRelease": {
-          "type": "string",
-          "description": "The WAF release version."
-        },
-        "attackSignaturesPackage": {
-          "$ref": "#/definitions/WebApplicationFirewallPackageUpdate",
-          "description": "Attack signatures package."
-        },
-        "botSignaturesPackage": {
-          "$ref": "#/definitions/WebApplicationFirewallPackageUpdate",
-          "description": "Bot signatures package."
-        },
-        "threatCampaignsPackage": {
-          "$ref": "#/definitions/WebApplicationFirewallPackageUpdate",
-          "description": "Threat campaigns package."
-        },
-        "componentVersions": {
-          "$ref": "#/definitions/WebApplicationFirewallComponentVersionsUpdate",
-          "description": "Component versions."
-        }
-      }
     }
   },
   "parameters": {}

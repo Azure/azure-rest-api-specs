@@ -162,17 +162,19 @@ model NginxDeploymentProperties {
   /**
    * The Nginx version.
    */
-  nginxVersion: string;
+  @visibility(Lifecycle.Read)
+  nginxVersion?: string;
 
   /**
    * The network profile.
    */
-  networkProfile: NginxNetworkProfile;
+  networkProfile?: NginxNetworkProfile;
 
   /**
    * The IP address of the deployment.
    */
-  ipAddress: string;
+  @visibility(Lifecycle.Read)
+  ipAddress?: string;
 
   /**
    * Whether diagnostics support is enabled.
@@ -182,32 +184,33 @@ model NginxDeploymentProperties {
   /**
    * Logging configuration.
    */
-  logging: NginxLogging;
+  logging?: NginxLogging;
 
   /**
    * Scaling properties.
    */
-  scalingProperties: NginxDeploymentScalingProperties;
+  scalingProperties?: NginxDeploymentScalingProperties;
 
   /**
    * Auto-upgrade profile.
    */
-  autoUpgradeProfile: AutoUpgradeProfile;
+  autoUpgradeProfile?: AutoUpgradeProfile;
 
   /**
    * User profile.
    */
-  userProfile: NginxDeploymentUserProfile;
+  userProfile?: NginxDeploymentUserProfile;
 
   /**
    * Nginx App Protect configuration.
    */
-  nginxAppProtect: NginxAppProtect;
+  nginxAppProtect?: NginxAppProtect;
 
   /**
    * Dataplane API endpoint.
    */
-  dataplaneApiEndpoint: string;
+  @visibility(Lifecycle.Read)
+  dataplaneApiEndpoint?: string;
 }
 
 /**
@@ -449,7 +452,8 @@ model NginxAppProtect {
   /**
    * Web application firewall status.
    */
-  webApplicationFirewallStatus: WebApplicationFirewallStatus;
+  @visibility(Lifecycle.Read)
+  webApplicationFirewallStatus?: WebApplicationFirewallStatus;
 }
 
 /**
