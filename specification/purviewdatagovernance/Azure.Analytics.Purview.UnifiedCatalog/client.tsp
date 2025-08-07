@@ -11,6 +11,7 @@ using PurviewUnifiedCatalog;
 @client({
   name: "UnifiedCatalogClient",
   service: PurviewUnifiedCatalog,
+  scope: "csharp",
 })
 namespace Customizations;
 
