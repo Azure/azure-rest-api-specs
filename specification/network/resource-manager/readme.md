@@ -4177,11 +4177,11 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     from: virtualWan.json
-	where: $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.network/virtualwans/{virtualWanName}/p2svpnserverconfigurations/{p2svpnserverconfigurationName}"]
+	where: $.paths["/subscriptions/{}/resourcegroups/{}/providers/microsoft.network/virtualwans/{}/p2svpnserverconfigurations/{}"]
     reason: This API path is not supported by default api version 2024-07-01 and should not be included in the default tag. This operation has been removed from versions after 2019-08-01.
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
     from: virtualWan.json
-	where: $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.network/virtualwans/{virtualWanName}/p2svpnserverconfigurations"]
+	where: $.paths["/subscriptions/{}/resourcegroups/{}/providers/microsoft.network/virtualwans/{}/p2svpnserverconfigurations"]
     reason: This API path is not supported by default api version 2024-07-01 and should not be included in the default tag.	This operation has been removed from versions after 2019-08-01.
 
 suppressions:
