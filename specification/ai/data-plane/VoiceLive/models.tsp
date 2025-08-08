@@ -1328,3 +1328,57 @@ model EmotionCandidate {
   emotion: string;
   confidence: float32;
 }
+
+// Tool customization (apply_discriminator): apply discriminated type
+/** Returned when the model-generated function call arguments are updated. */
+model ServerEventResponseFunctionCallArgumentsDelta
+  extends ServerEvent {
+  @doc("""
+    The event type, must be `response.function_call_arguments.delta`.
+    """)
+  type: ServerEventType.response_function_call_arguments_delta;
+
+  /** The ID of the response. */
+  response_id: string;
+
+  /** The ID of the function call item. */
+  item_id: string;
+
+  /** The index of the output item in the response. */
+  output_index: int32;
+
+  /** The ID of the function call. */
+  call_id: string;
+
+  /** The arguments delta as a JSON string. */
+  delta: string;
+}
+
+// Tool customization (apply_discriminator): apply discriminated type
+/**
+ * Returned when the model-generated function call arguments are done streaming.
+ * Also emitted when a Response is interrupted, incomplete, or cancelled.
+ */
+model ServerEventResponseFunctionCallArgumentsDone
+  extends ServerEvent {
+  @doc("""
+    The event type, must be `response.function_call_arguments.done`.
+    """)
+  type: ServerEventType.response_function_call_arguments_done;
+
+  /** The ID of the response. */
+  response_id: string;
+
+  /** The ID of the function call item. */
+  item_id: string;
+
+  /** The index of the output item in the response. */
+  output_index: int32;
+
+  /** The ID of the function call. */
+  call_id: string;
+
+  /** The final arguments as a JSON string. */
+  arguments: string;
+}
+

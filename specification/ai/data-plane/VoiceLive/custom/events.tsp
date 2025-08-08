@@ -60,4 +60,6 @@ union ServerEventType {
   response_audio_timestamp_done: "response.audio_timestamp.done",
   response_animation_viseme_delta: "response.animation_viseme.delta",
   response_animation_viseme_done: "response.animation_viseme.done",
+  response_function_call_arguments_delta: "response.function_call_arguments.delta",
+  response_function_call_arguments_done: "response.function_call_arguments.done",
 }
