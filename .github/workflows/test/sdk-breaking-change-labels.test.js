@@ -188,7 +188,6 @@ describe("sdk-breaking-change-labels", () => {
       expect(result).toEqual({
         labelName: "",
         labelAction: LabelAction.None,
-        headSha: "",
         issueNumber: NaN,
       });
 
@@ -259,7 +258,6 @@ describe("sdk-breaking-change-labels", () => {
       expect(result).toEqual({
         labelName: "",
         labelAction: LabelAction.None,
-        headSha: "",
         issueNumber: NaN,
       });
     });

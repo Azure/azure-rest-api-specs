@@ -1,8 +1,7 @@
 // @ts-check
 
 import { setEquals } from "../../shared/src/equality.js";
-import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
-import { byDate, invert } from "../../shared/src/sort.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "./context.js";
 import { LabelAction } from "./label.js";
 
@@ -34,29 +33,25 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {string} params.head_sha
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<{labelAction: LabelAction, headSha: string, issueNumber: number}>}
+ * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, github, core }) {
   const labelActions = {
     [LabelAction.None]: {
       labelAction: LabelAction.None,
-      headSha: head_sha,
       issueNumber: issue_number,
     },
     [LabelAction.Add]: {
       labelAction: LabelAction.Add,
-      headSha: head_sha,
       issueNumber: issue_number,
     },
     [LabelAction.Remove]: {
       labelAction: LabelAction.Remove,
-      headSha: head_sha,
       issueNumber: issue_number,
     },
   };
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
-  // permissions: { issues: read, pull-requests: read }
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
     repo: repo,
@@ -73,7 +68,6 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
 
   core.info(`Labels: ${labelNames}`);
 
-  // permissions: { actions: read }
   const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
     owner,
     repo,
@@ -108,7 +102,6 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
         return removeAction;
       }
 
-      // permissions: { actions: read }
       const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
         owner,
         repo,
@@ -146,64 +139,52 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return removeAction;
   }
 
-  // permissions: { statuses: read }
-  const statuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
+  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
     owner: owner,
     repo: repo,
     ref: head_sha,
     per_page: PER_PAGE_MAX,
   });
 
-  core.info("Statuses:");
-  statuses.forEach((status) => {
-    core.info(`- ${status.context}: ${status.state}`);
-  });
-
-  const requiredStatusNames = ["Swagger LintDiff", "Swagger Avocado"];
+  const requiredCheckNames = ["Swagger LintDiff", "Swagger Avocado"];
 
   /**
-   * @type {typeof statuses}
+   * @type {typeof checkRuns.check_runs}
    */
-  let requiredStatuses = [];
+  let requiredCheckRuns = [];
 
-  for (const statusName of requiredStatusNames) {
-    // The "statuses" array may contain multiple statuses with the same "context" (aka "name"),
-    // but different states and update times.  We only care about the latest.
-    const matchingStatuses = statuses
-      .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
-      .sort(invert(byDate((status) => status.updated_at)));
+  for (const checkName of requiredCheckNames) {
+    const matchingRuns = checkRuns.filter((run) => run.name === checkName);
 
-    // undefined if matchingStatuses.length === 0 (which is OK)
-    const matchingStatus = matchingStatuses[0];
+    if (matchingRuns.length > 1) {
+      throw new Error(`Unexpected number of checks named '${checkName}': ${matchingRuns.length}`);
+    }
 
-    core.info(`${statusName}: State='${matchingStatus?.state}'`);
+    const matchingRun = matchingRuns.length === 1 ? matchingRuns[0] : undefined;
 
-    if (
-      matchingStatus &&
-      (matchingStatus.state === CommitStatusState.ERROR ||
-        matchingStatus.state === CommitStatusState.FAILURE)
-    ) {
-      core.info(`Status '${matchingStatus}' did not succeed`);
+    core.info(
+      `${checkName}: Status='${matchingRun?.status}', Conclusion='${matchingRun?.conclusion}'`,
+    );
+
+    if (matchingRun && matchingRun.status === "completed" && matchingRun.conclusion !== "success") {
+      core.info(`Check '${checkName}' did not succeed`);
       return removeAction;
     }
 
-    if (matchingStatus) {
-      requiredStatuses.push(matchingStatus);
+    if (matchingRun) {
+      requiredCheckRuns.push(matchingRun);
     }
   }
 
   if (
-    setEquals(
-      new Set(requiredStatuses.map((status) => status.context)),
-      new Set(requiredStatusNames),
-    ) &&
-    requiredStatuses.every((status) => status.state === CommitStatusState.SUCCESS)
+    setEquals(new Set(requiredCheckRuns.map((run) => run.name)), new Set(requiredCheckNames)) &&
+    requiredCheckRuns.every((run) => run.status === "completed" && run.conclusion === "success")
   ) {
     core.info("All requirements met for auto-signoff");
     return labelActions[LabelAction.Add];
   }
 
-  // If any statuses are missing or pending, no-op to prevent frequent remove/add label as checks re-run
-  core.info("One or more statuses are still pending");
+  // If any checks are missing or not completed, no-op to prevent frequent remove/add label as checks re-run
+  core.info("One or more checks are still in-progress");
   return labelActions[LabelAction.None];
 }

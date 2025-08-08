@@ -177,7 +177,6 @@ op getKey is KeyVaultOperation<
 @summary("Retrieves a list of individual key versions with the same key name.")
 @route("/keys/{key-name}/versions")
 @get
-@list
 op getKeyVersions is KeyVaultOperation<
   {
     /**
@@ -206,7 +205,6 @@ op getKeyVersions is KeyVaultOperation<
 @summary("List keys in the specified vault.")
 @route("/keys")
 @get
-@list
 op getKeys is KeyVaultOperation<
   {
     /**
@@ -524,7 +522,6 @@ op release is KeyVaultOperation<
 @summary("Lists the deleted keys in the specified vault.")
 @route("/deletedkeys")
 @get
-@list
 op getDeletedKeys is KeyVaultOperation<
   {
     /**

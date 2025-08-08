@@ -39,7 +39,6 @@ interface ActiveSessionHostConfigurations {
    */
   @action("activeSessionHostConfigurations")
   @get
-  @list
   listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,

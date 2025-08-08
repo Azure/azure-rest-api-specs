@@ -1239,7 +1239,6 @@ model BatchSubTasksListOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List SubTasks operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-@list
 op listSubTasksCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.ListSubTasksRequiredParameters;

@@ -68,7 +68,6 @@ interface FabricCapacities {
   @get
   @doc("List eligible SKUs for a Microsoft Fabric resource")
   @segment("skus")
-  @list
   listSkusForCapacity(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -81,7 +80,6 @@ interface FabricCapacities {
   @get
   @doc("List eligible SKUs for Microsoft Fabric resource provider")
   @segment("skus")
-  @list
   listSkus(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -92,7 +90,6 @@ interface FabricCapacities {
   @get
   @doc("List the current consumption and limit in this location for the provided subscription")
   @segment("usages")
-  @list
   listUsages(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

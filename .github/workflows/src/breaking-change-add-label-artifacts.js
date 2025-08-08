@@ -74,7 +74,6 @@ export default async function getLabelActions({ github, context, core }) {
     })
   ).map((a) => a.name);
 
-  core.setOutput("head_sha", head_sha);
   core.setOutput("issue_number", issue_number);
 
   if (

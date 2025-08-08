@@ -421,9 +421,8 @@ describe("commands.ts", () => {
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
-        prNumber: "123",
         sdkRepoName: "",
-        specCommitSha: "abc123",
+        specCommitSha: "",
         specRepoHttpsUrl: "",
       };
       const mockResult = "succeeded";
@@ -458,8 +457,6 @@ describe("commands.ts", () => {
           {
             language: "azure-sdk-for-js",
             result: "succeeded",
-            headSha: "abc123",
-            prNumber: "123",
             labelAction: false,
             isSpecGenSdkCheckRequired: false,
             apiViewRequestData: [],
@@ -589,7 +586,6 @@ describe("commands.ts", () => {
           {
             language: "azure-sdk-for-go",
             result: "succeeded",
-            headSha: "",
             labelAction: false,
             isSpecGenSdkCheckRequired: false, // This should be false when sdkGenerationExecuted is false
             apiViewRequestData: [],

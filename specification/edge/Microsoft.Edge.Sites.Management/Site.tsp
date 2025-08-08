@@ -61,7 +61,6 @@ interface SitesByServiceGroup {
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
   @doc("list Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  @list
   listByServiceGroup(
     ...ApiVersionParameter,
 

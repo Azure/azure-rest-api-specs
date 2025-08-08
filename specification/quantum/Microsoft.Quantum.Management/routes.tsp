@@ -11,6 +11,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Quantum;
@@ -29,7 +30,6 @@ interface Offerings {
   @autoRoute
   @get
   @action("offerings")
-  @list
   list is ArmProviderActionSync<
     Response = OfferingsListResult,
     Scope = SubscriptionActionScope,

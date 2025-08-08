@@ -134,7 +134,6 @@ op getSecret is KeyVaultOperation<
 @summary("List secrets in a specified key vault.")
 @route("/secrets")
 @get
-@list
 op getSecrets is KeyVaultOperation<
   {
     /**
@@ -156,7 +155,6 @@ op getSecrets is KeyVaultOperation<
 @summary("List all versions of the specified secret.")
 @route("/secrets/{secret-name}/versions")
 @get
-@list
 op getSecretVersions is KeyVaultOperation<
   {
     /**
@@ -185,7 +183,6 @@ op getSecretVersions is KeyVaultOperation<
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
-@list
 op getDeletedSecrets is KeyVaultOperation<
   {
     /**

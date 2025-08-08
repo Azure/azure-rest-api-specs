@@ -205,11 +205,12 @@ model ErrorDetails {
 /**
  * Response for MaintenanceConfigurations list
  */
+@pagedResult
 model ListMaintenanceConfigurationsResult {
   /**
    * The list of maintenance Configurations
    */
-  @pageItems
+  @items
   value?: MaintenanceConfiguration[];
 
   /**
@@ -473,11 +474,12 @@ model TagSettingsProperties {
 /**
  * Response for ConfigurationAssignments list
  */
+@pagedResult
 model ListConfigurationAssignmentsResult {
   /**
    * The list of configuration Assignments
    */
-  @pageItems
+  @items
   value?: ConfigurationAssignment[];
 
   /**
@@ -490,11 +492,12 @@ model ListConfigurationAssignmentsResult {
 /**
  * Response for ApplyUpdate list
  */
+@pagedResult
 model ListApplyUpdate {
   /**
    * The list of apply updates
    */
-  @pageItems
+  @items
   value?: ApplyUpdate[];
 
   /**
@@ -532,11 +535,12 @@ model OperationInfo {
 /**
  * Response for Updates list
  */
+@pagedResult
 model ListUpdatesResult {
   /**
    * The pending updates
    */
-  @pageItems
+  @items
   @OpenAPI.extension("x-ms-identifiers", #[])
   value?: Update[];
 
@@ -597,6 +601,7 @@ model UpdateProperties {
 /**
  * Result of the List Operations operation
  */
+@Azure.Core.pagedResult
 model OperationsListResult {
   /**
    * The link used to get the next page of operations.
@@ -607,7 +612,7 @@ model OperationsListResult {
   /**
    * A collection of operations
    */
-  @pageItems
+  @Azure.Core.items
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: Operation[];
 }

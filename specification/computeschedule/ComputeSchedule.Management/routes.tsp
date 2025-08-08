@@ -150,7 +150,6 @@ interface ScheduledActions {
   @armResourceList(ScheduledActionResource)
   @get
   @doc("List resources attached to Scheduled Actions")
-  @list
   listResources(
     ...ResourceInstanceParameters<ScheduledActionResource>,
   ): ArmResponse<ResourceListResponse> | ErrorResponse;

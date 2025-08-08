@@ -948,7 +948,7 @@ model PrivateLinkResourceListResult {
   /**
    * Array of private link resources
    */
-  @pageItems
+  @items
   value: PrivateLinkResource[];
 
   /**

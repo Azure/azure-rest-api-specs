@@ -70,7 +70,6 @@ interface SqlVirtualMachineGroups {
    */
   @get
   @action("sqlVirtualMachines")
-  @list
   listBySqlVmGroup is ArmResourceActionSync<
     SqlVirtualMachineGroup,
     void,

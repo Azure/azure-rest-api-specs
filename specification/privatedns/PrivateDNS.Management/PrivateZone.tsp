@@ -160,7 +160,6 @@ interface PrivateZones {
    */
   @get
   @action("ALL")
-  @list
   recordSetsList is ArmResourceActionSync<
     PrivateZone,
     void,

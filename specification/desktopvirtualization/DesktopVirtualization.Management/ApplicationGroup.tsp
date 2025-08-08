@@ -37,7 +37,6 @@ interface StartMenuItems {
    */
   @get
   @action("startMenuItems")
-  @list
   list is Azure.ResourceManager.ArmResourceActionSync<
     ApplicationGroup,
     void,

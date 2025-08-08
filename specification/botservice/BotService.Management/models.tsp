@@ -14,6 +14,7 @@ namespace Microsoft.BotService;
 /**
  * The list of bot service operation response.
  */
+@Azure.Core.pagedResult
 model OperationEntityListResult {
   /**
    * The link used to get the next page of operations.
@@ -24,7 +25,7 @@ model OperationEntityListResult {
   /**
    * The list of operations.
    */
-  @pageItems
+  @Azure.Core.items
   value: OperationEntity[];
 }
 
@@ -1564,11 +1565,12 @@ model OperationResultsDescription {
 /**
  * List of private endpoint connection associated with the specified storage account
  */
+@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * Array of private endpoint connections
    */
-  @pageItems
+  @items
   value?: PrivateEndpointConnection[];
 
   /**

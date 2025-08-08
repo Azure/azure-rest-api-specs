@@ -22,7 +22,6 @@ interface SkusOperationGroup {
   @autoRoute
   @get
   @action("skus")
-  @list
   list is ArmProviderActionSync<
     Response = SkuInformationList,
     Scope = SubscriptionActionScope,

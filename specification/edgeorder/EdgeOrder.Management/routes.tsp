@@ -19,7 +19,6 @@ interface ProductsAndConfigurationsOperationGroup {
    * List configurations for the given product family, product line and product for the given subscription.
    */
   @autoRoute
-  @list
   listConfigurations is ArmProviderActionSync<
     Request = ConfigurationsRequest,
     Response = Configurations,
@@ -36,7 +35,6 @@ interface ProductsAndConfigurationsOperationGroup {
    * List product families for the given subscription.
    */
   @autoRoute
-  @list
   listProductFamilies is ArmProviderActionSync<
     Request = ProductFamiliesRequest,
     Response = ProductFamilies,
@@ -60,7 +58,6 @@ interface ProductsAndConfigurationsOperationGroup {
    */
   @autoRoute
   @action("productFamiliesMetadata")
-  @list
   listProductFamiliesMetadata is ArmProviderActionSync<
     Response = ProductFamiliesMetadata,
     Scope = SubscriptionActionScope,
@@ -82,7 +79,6 @@ interface OrdersOperationGroup {
   @autoRoute
   @get
   @action("orders")
-  @list
   listBySubscription is ArmProviderActionSync<
     Response = OrderResourceList,
     Scope = SubscriptionActionScope,
@@ -106,7 +102,6 @@ interface OrdersOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders")
   @get
-  @list
   listByResourceGroup(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

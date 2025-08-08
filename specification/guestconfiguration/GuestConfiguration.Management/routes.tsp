@@ -20,7 +20,6 @@ interface GuestConfigurationAssignmentsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
   @get
-  @list
   rGList(
     ...ApiVersionParameter,
     ...ResourceGroupParameter,

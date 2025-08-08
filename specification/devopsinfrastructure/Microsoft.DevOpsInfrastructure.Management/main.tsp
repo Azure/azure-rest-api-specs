@@ -710,7 +710,6 @@ interface SubscriptionUsages {
   @get
   @armResourceList(Location)
   @doc("List Quota resources by subscription ID")
-  @list
   usages(
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,

@@ -61,10 +61,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ExecutionOperationIdHeader"
+            "$ref": "#/parameters/SessionIdentifier"
           },
           {
-            "$ref": "#/parameters/SessionIdentifier"
+            "$ref": "#/parameters/ExecutionOperationIdHeader"
           },
           {
             "name": "codeExecutionRequest",
@@ -77,8 +77,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/SessionCodeExecutionResource"
             },

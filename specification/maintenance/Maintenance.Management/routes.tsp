@@ -132,7 +132,6 @@ interface ApplyUpdateForResourceGroupOperationGroup {
   @summary("Get Configuration records within a subscription and resource group")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates")
   @get
-  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -149,7 +148,6 @@ interface ConfigurationAssignmentForResourceGroupOperationGroup {
   @summary("Get Configuration records within a subscription and resource group")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments")
   @get
-  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -184,7 +182,6 @@ interface UpdatesOperationGroup {
   @summary("Get Updates to resource")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates")
   @get
-  @list
   listParent(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -227,7 +224,6 @@ interface UpdatesOperationGroup {
   @summary("Get Updates to resource")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates")
   @get
-  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

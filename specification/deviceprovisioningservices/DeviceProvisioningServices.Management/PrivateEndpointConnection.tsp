@@ -7,6 +7,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Devices;
 /**
@@ -106,17 +107,9 @@ interface PrivateEndpointConnections {
   /**
    * List private endpoint connection properties
    */
-  @action("privateEndpointConnections")
-  @get
-  listPrivateEndpointConnections is ArmProviderActionSync<
-    void,
-    ArmResponse<PrivateEndpointConnectionsList>,
-    {},
-    {
-      /** Name of the provisioning service to retrieve. */
-      @path @segment("provisioningServices") resourceName: string;
-    },
-    ErrorDetails
+  listPrivateEndpointConnections is PrivateEndpointConnectionsOps.List<
+    PrivateEndpointConnection,
+    Response = ArmResponse<PrivateEndpointConnectionsList>
   >;
 }
 

@@ -174,7 +174,6 @@ interface NodeTypes {
    * Gets the list of recent fault simulations for the node type.
    */
   @tag("FaultSimulation")
-  @list
   listFaultSimulation is ArmResourceActionSync<
     NodeType,
     void,
@@ -191,7 +190,6 @@ interface NodeTypeSkus {
   @get
   @action("skus")
   @operationId("NodeTypeSkus_List")
-  @list
   list is ArmResourceActionSync<
     NodeType,
     void,

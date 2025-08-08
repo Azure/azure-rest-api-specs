@@ -13,11 +13,12 @@ namespace Microsoft.Confluent;
 /**
  * Result of GET request to list Confluent operations.
  */
+@Azure.Core.pagedResult
 model OperationListResult {
   /**
    * List of Confluent operations supported by the Microsoft.Confluent provider.
    */
-  @pageItems
+  @Azure.Core.items
   value: OperationResult[];
 
   /**

@@ -88,7 +88,7 @@ interface VaultOpsWithCloudError
       ErrorType = CloudError
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultCreateOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -105,7 +105,7 @@ interface VaultCreateOps
       >>
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultCreateOpsWithCloudError
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -123,7 +123,7 @@ interface VaultCreateOpsWithCloudError
       ErrorType = CloudError
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -149,7 +149,7 @@ interface VaultOperationOps
       }
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -174,7 +174,7 @@ interface VaultStatusOps
       ErrorType = CloudError
     > {}
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultDeleteOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -199,7 +199,7 @@ interface VaultDeleteOps
         identityName: string,
       }
     > {}
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface Vaults {
   /**
    * Get the Vault details.
@@ -258,18 +258,17 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
   create is Azure.ResourceManager.Legacy.UpdateOperation<
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
-      ...Azure.ResourceManager.Legacy.Provider;
 
       /**
        * The name of the recovery services vault.
        */
       @path
-      @segment("vaults")
       vaultName: string;
 
       /**
@@ -300,7 +299,6 @@ interface Vaults {
    */
   @get
   @action("replicationUsages")
-  @list
   list is VaultOps.ActionSync<Vault, void, ArmResponse<ReplicationUsageList>>;
 
   /**
@@ -308,7 +306,6 @@ interface Vaults {
    */
   @get
   @action("usages")
-  @list
   listByVaults is VaultOps.ActionSync<Vault, void, ArmResponse<VaultUsageList>>;
 }
 @armResourceOperations

@@ -1529,11 +1529,12 @@ model DiskEncryptionSetUpdateProperties {
 /**
  * FIXME: Custom Page for string
  */
+@Azure.Core.pagedResult
 @friendlyName("Paged{name}", Resource)
 @doc("Paged collection of string items")
 model CustomPage<Resource extends string> {
   @doc("The items on this page")
-  @pageItems
+  @Azure.Core.items
   value: Resource[];
 
   @doc("The link to the next page of items")

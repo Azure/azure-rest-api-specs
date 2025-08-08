@@ -91,7 +91,6 @@ interface DiskEncryptionSets {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb"
   @get
   @action("associatedResources")
-  @list
   listAssociatedResources is ComputeResourceActionSync<
     DiskEncryptionSet,
     void,

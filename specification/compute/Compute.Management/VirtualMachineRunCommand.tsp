@@ -96,7 +96,6 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to get all run commands of a Virtual Machine.
    */
-  @list
   listByVirtualMachine is VirtualMachineRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {
@@ -195,7 +194,6 @@ interface VirtualMachineScaleSetVMRunCommands {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMRunCommands_List")
-  @list
   list is VirtualMachineScaleSetVMRunCommandOps.List<
     VirtualMachineRunCommand,
     Parameters = {
