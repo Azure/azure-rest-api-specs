@@ -15,12 +15,11 @@ namespace Microsoft.BillingBenefits;
 /**
  * Represents the result of listing savings plan models
  */
-@Azure.Core.pagedResult
 model SavingsPlanModelListResult {
   /**
    * The list of savings plans.
    */
-  @Azure.Core.items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: SavingsPlanModel[];
 
@@ -1817,6 +1816,7 @@ model MarketSetPricesItems {
 /**
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DiscountTypeCustomPrice)
 model DiscountTypeCustomPriceMultiCurrency extends DiscountTypeProperties {
@@ -1840,6 +1840,7 @@ model AppliedDiscount extends Azure.ResourceManager.Foundations.ProxyResource {
   properties?: DiscountProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpandParameter {
   /**
    * The expand query parameter.

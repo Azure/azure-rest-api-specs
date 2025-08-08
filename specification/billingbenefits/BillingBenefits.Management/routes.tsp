@@ -21,6 +21,7 @@ interface SavingsPlanOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
+  @list
   @action("savingsPlans")
   listAll is ArmProviderActionSync<
     Response = SavingsPlanModelListResult,
@@ -73,6 +74,7 @@ interface DiscountsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts")
   @get
+  @list
   scopeList(
     ...ApiVersionParameter,
 

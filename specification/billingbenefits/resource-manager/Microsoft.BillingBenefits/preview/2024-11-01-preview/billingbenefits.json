@@ -240,7 +240,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ReservationOrderAliasResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -356,7 +357,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SavingsPlanOrderAliasModel"
         },
         "x-ms-long-running-operation": true
       }
@@ -1047,7 +1049,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Discount"
         },
         "x-ms-long-running-operation": true
       },
@@ -1119,7 +1122,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Discount"
         },
         "x-ms-long-running-operation": true
       },
@@ -1932,27 +1936,9 @@
     "DiscountTypeCustomPriceMultiCurrency": {
       "type": "object",
       "description": "Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.",
-      "properties": {
-        "productFamilyName": {
-          "type": "string",
-          "description": "Product family for which the discount is given. Validation: Optional"
-        },
-        "productId": {
-          "type": "string",
-          "description": "Product ID for which the discount is given. Validation: Optional. No specific format, example: DZH318Z09V6F"
-        },
-        "skuId": {
-          "type": "string",
-          "description": "ResourceSku for the given discount. Validation: Optional."
-        },
-        "customPriceProperties": {
-          "$ref": "#/definitions/CustomPriceProperties",
-          "description": "Custom price properties for a given discount."
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/DiscountTypeProperties"
+          "$ref": "#/definitions/DiscountTypeCustomPrice"
         }
       ],
       "x-ms-discriminator-value": "CustomPriceMultiCurrency"
