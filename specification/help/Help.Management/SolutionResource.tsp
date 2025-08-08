@@ -23,7 +23,7 @@ model SolutionResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface SolutionResourcesOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {

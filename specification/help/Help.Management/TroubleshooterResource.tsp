@@ -23,7 +23,7 @@ model TroubleshooterResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface TroubleshooterResourcesOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -60,7 +60,9 @@ interface TroubleshooterResources {
     Extension.ScopeParameter,
     TroubleshooterResource,
     ContinueRequestBody,
-    NoContentResponse,
+    NoContentResponse & {
+      @header location?: string;
+    },
     OptionalRequestBody = true
   >;
 
@@ -71,7 +73,9 @@ interface TroubleshooterResources {
     Extension.ScopeParameter,
     TroubleshooterResource,
     void,
-    NoContentResponse
+    NoContentResponse & {
+      @header location?: string;
+    }
   >;
 
   /**
@@ -81,7 +85,9 @@ interface TroubleshooterResources {
     Extension.ScopeParameter,
     TroubleshooterResource,
     void,
-    ArmResponse<RestartTroubleshooterResponse>
+    ArmResponse<RestartTroubleshooterResponse> & {
+      @header location?: string;
+    }
   >;
 }
 

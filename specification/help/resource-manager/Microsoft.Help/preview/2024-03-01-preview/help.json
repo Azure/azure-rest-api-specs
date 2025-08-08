@@ -68,12 +68,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "CheckNameAvailabilityRequest",
@@ -81,7 +76,7 @@
             "description": "The required parameters for availability check.",
             "required": false,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -790,7 +785,12 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Azure operation completed successfully.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -838,7 +838,12 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Azure operation completed successfully.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -889,6 +894,11 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RestartTroubleshooterResponse"
+            },
+            "headers": {
+              "location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1202,6 +1212,20 @@
             "value": "Information"
           }
         ]
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The check availability request body.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource for which availability needs to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
       }
     },
     "CheckNameAvailabilityResponse": {
@@ -2891,5 +2915,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "scope",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }
