@@ -411,8 +411,8 @@ export const breakingChangesCheckType = {
  * @returns {void}
  */
 export function processArmReviewLabels(context, existingLabels) {
-  // only kick this off if the ARMReview label is present
-  if (existingLabels.includes("ARMReview")) {
+  // only kick this off if the ARMReview label is present and NotReadyForARMReview is not present
+  if (existingLabels.includes("ARMReview") && !existingLabels.includes("NotReadyForARMReview")) {
     // the important part about how this will work depends how the users use it
     // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
     // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
