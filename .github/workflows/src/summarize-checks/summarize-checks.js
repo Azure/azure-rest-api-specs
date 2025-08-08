@@ -445,7 +445,7 @@ export async function summarizeChecksImpl(
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
-  core.summary.addRaw(commentBody);
+  core.summary.addRaw(`\n${commentBody}\n\n`);
 
   // this will remain commented until we're comfortable with the change.
   // await commentOrUpdate(
