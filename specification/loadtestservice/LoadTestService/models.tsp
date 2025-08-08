@@ -1264,7 +1264,6 @@ model DimensionValue {
 }
 
 @doc("Metrics dimension values.")
-@pagedResult
 model DimensionValueList {
   @doc("The dimension name")
   @visibility(Lifecycle.Read)
@@ -1272,7 +1271,7 @@ model DimensionValueList {
   name?: string;
 
   @doc("The dimension value")
-  @items
+  @pageItems
   value?: string[];
 
   @doc("Link for the next set of values in case of paginated results, if applicable.")
