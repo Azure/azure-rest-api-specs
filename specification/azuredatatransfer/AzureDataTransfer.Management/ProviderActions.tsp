@@ -37,18 +37,10 @@ interface AzureDataTransfer {
   /**
    * Retrieves a list of FlowProfile resources associated with a specified pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @added(Versions.v2025_05_30_preview)
-  @operationId("AzureDataTransfer_listFlowProfiles")
   @autoRoute
   listFlowProfiles is ArmProviderActionSync<
-    Request = {
-      /**
-       * The name of the pipeline for which to retrieve associated FlowProfiles.
-       */
-      @bodyRoot
-      pipeline?: string;
-    },
+    Request = ListFlowProfilesRequest,
     Response = {
       /**
        * A list of FlowProfile metadata created under the specified pipeline.

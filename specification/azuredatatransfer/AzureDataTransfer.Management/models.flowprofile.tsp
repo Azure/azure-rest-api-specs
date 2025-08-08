@@ -11,6 +11,17 @@ using TypeSpec.Versioning;
 namespace Microsoft.AzureDataTransfer;
 
 /**
+ * Defines the required request body for retrieving FlowProfile information for a provided pipeline.
+ */
+@added(Versions.v2025_05_30_preview)
+model ListFlowProfilesRequest {
+  /**
+   * The name of the pipeline for which to retrieve associated FlowProfiles.
+   */
+  pipeline?: string;
+}
+
+/**
  * Defines the patchable properties for a FlowProfile resource.
  */
 @added(Versions.v2025_05_30_preview)
@@ -38,17 +49,17 @@ model FlowProfilePatchProperties {
   /**
    * A description of the FlowProfile that defines the replication scenario.
    */
-  description: string;
+  description?: string;
 
   /**
    * A set of configurable rulesets applied to this FlowProfile.
    */
-  rulesets: FlowProfileRulesets;
+  rulesets?: FlowProfileRulesets;
 
   /**
    * The operational status of the FlowProfile.
    */
-  status: FlowProfileStatus;
+  status?: FlowProfileStatus;
 }
 
 /**
