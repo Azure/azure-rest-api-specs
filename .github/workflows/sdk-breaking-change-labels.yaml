@@ -59,7 +59,7 @@ jobs:
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' }}"
 
       - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).headSha }}
-        name: Upload artifact with issue number
+        name: Upload artifact with head SHA
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "head-sha"

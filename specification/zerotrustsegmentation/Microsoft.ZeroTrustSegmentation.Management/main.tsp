@@ -264,7 +264,9 @@ interface SegmentationManagers {
     SegmentationManagerProperties
   >;
   delete is ArmResourceDeleteSync<SegmentationManager>;
+  @list
   listByResourceGroup is ArmResourceListByParent<SegmentationManager>;
+  @list
   listBySubscription is ArmListBySubscription<SegmentationManager>;
 
   setLabels is ArmResourceActionNoContentSync<

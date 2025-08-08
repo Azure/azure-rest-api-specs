@@ -62,9 +62,11 @@ interface InstanceMonitors {
   delete is ArmResourceDeleteWithoutOkAsync<InstanceMonitor>;
 
   /** List instance monitors by resource group */
+  @list
   listByResourceGroup is ArmResourceListByParent<InstanceMonitor>;
 
   /** List instance group monitors by subscription */
+  @list
   listBySubscription is ArmListBySubscription<InstanceMonitor>;
 
   /** Get the health status of the instance */

@@ -53,5 +53,6 @@ interface SharedServerInstances {
   /**
    * Lists the Epic Shared Services Instance resource for the given Virtual Instance for Epic solutions resource.
    */
+  @list
   listByEpicVirtualInstance is ArmResourceListByParent<SharedServerInstance>;
 }
