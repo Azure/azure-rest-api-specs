@@ -653,6 +653,7 @@ op GetTermFacetsAsync is RpcOperation<TermFacetRequest, FacetsResponse>;
 @tag("Term")
 @doc("Retrieves hierarchies for a term by its unique identifier.")
 @route("/terms/{termId}/hierarchies")
+@list
 @get
 op ListHierarchyTermsAsync is RpcOperation<TermIdParameter, TermResponse>;
 
