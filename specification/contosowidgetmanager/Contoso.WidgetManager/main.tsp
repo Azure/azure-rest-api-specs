@@ -38,7 +38,7 @@ model WidgetSuite {
 
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
-  
+
   @doc("test.")
   test: string;
 }
