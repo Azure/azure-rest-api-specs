@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StorageMoverClient",
-    "version": "2024-07-01",
+    "version": "2025-07-01",
     "description": "The Azure Storage Mover REST API.",
     "x-typespec-generated": [
       {
@@ -792,8 +792,14 @@
           }
         },
         "x-ms-examples": {
+          "Endpoints_Get_AzureMultiCloudConnector": {
+            "$ref": "./examples/Endpoints_Get_AzureMultiCloudConnector.json"
+          },
           "Endpoints_Get_AzureStorageBlobContainer": {
             "$ref": "./examples/Endpoints_Get_AzureStorageBlobContainer.json"
+          },
+          "Endpoints_Get_AzureStorageNfsFileShare": {
+            "$ref": "./examples/Endpoints_Get_AzureStorageNfsFileShare.json"
           },
           "Endpoints_Get_AzureStorageSmbFileShare": {
             "$ref": "./examples/Endpoints_Get_AzureStorageSmbFileShare.json"
@@ -861,8 +867,14 @@
           }
         },
         "x-ms-examples": {
+          "Endpoints_CreateOrUpdate_AzureMultiCloudConnector": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_AzureMultiCloudConnector.json"
+          },
           "Endpoints_CreateOrUpdate_AzureStorageBlobContainer": {
             "$ref": "./examples/Endpoints_CreateOrUpdate_AzureStorageBlobContainer.json"
+          },
+          "Endpoints_CreateOrUpdate_AzureStorageNfsFileShare": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_AzureStorageNfsFileShare.json"
           },
           "Endpoints_CreateOrUpdate_AzureStorageSmbFileShare": {
             "$ref": "./examples/Endpoints_CreateOrUpdate_AzureStorageSmbFileShare.json"
@@ -930,8 +942,14 @@
           }
         },
         "x-ms-examples": {
+          "Endpoints_Update_AzureMultiCloudConnector": {
+            "$ref": "./examples/Endpoints_Update_AzureMultiCloudConnector.json"
+          },
           "Endpoints_Update_AzureStorageBlobContainer": {
             "$ref": "./examples/Endpoints_Update_AzureStorageBlobContainer.json"
+          },
+          "Endpoints_Update_AzureStorageNfsFileShare": {
+            "$ref": "./examples/Endpoints_Update_AzureStorageNfsFileShare.json"
           },
           "Endpoints_Update_AzureStorageSmbFileShare": {
             "$ref": "./examples/Endpoints_Update_AzureStorageSmbFileShare.json"
@@ -1484,6 +1502,9 @@
         "x-ms-examples": {
           "JobDefinitions_CreateOrUpdate": {
             "$ref": "./examples/JobDefinitions_CreateOrUpdate.json"
+          },
+          "JobDefinitions_CreateOrUpdate_CloudToCloud": {
+            "$ref": "./examples/JobDefinitions_CreateOrUpdate_CloudToCloud.json"
           }
         }
       },
@@ -2107,6 +2128,60 @@
       ],
       "x-ms-discriminator-value": "AzureKeyVaultSmb"
     },
+    "AzureMultiCloudConnectorEndpointProperties": {
+      "type": "object",
+      "description": "The properties of Azure MultiCloudConnector endpoint.",
+      "properties": {
+        "multiCloudConnectorId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the MultiCloud Connector resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridConnectivity/publicCloudConnectors"
+              }
+            ]
+          }
+        },
+        "awsS3BucketId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The AWS S3 bucket ARM resource Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AwsConnector/s3Buckets"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "multiCloudConnectorId",
+        "awsS3BucketId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMultiCloudConnector"
+    },
+    "AzureMultiCloudConnectorEndpointUpdateProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage NFS file share endpoint to update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMultiCloudConnector"
+    },
     "AzureStorageBlobContainerEndpointProperties": {
       "type": "object",
       "description": "The properties of Azure Storage blob container endpoint.",
@@ -2155,6 +2230,56 @@
         }
       ],
       "x-ms-discriminator-value": "AzureStorageBlobContainer"
+    },
+    "AzureStorageNfsFileShareEndpointProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage NFS file share endpoint.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the storage account.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "fileShareName": {
+          "type": "string",
+          "description": "The name of the Azure Storage NFS file share.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "storageAccountResourceId",
+        "fileShareName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageNfsFileShare"
+    },
+    "AzureStorageNfsFileShareEndpointUpdateProperties": {
+      "type": "object",
+      "description": "The properties of Azure Storage NFS file share endpoint to update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointBaseUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureStorageNfsFileShare"
     },
     "AzureStorageSmbFileShareEndpointProperties": {
       "type": "object",
@@ -2287,6 +2412,14 @@
         "properties": {
           "$ref": "#/definitions/EndpointBaseProperties",
           "description": "The resource specific properties for the Storage Mover resource."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity of the resource. This property is only available on the latest version."
         }
       },
       "required": [
@@ -2332,6 +2465,10 @@
         "properties": {
           "$ref": "#/definitions/EndpointBaseUpdateProperties",
           "description": "The Endpoint resource, which contains information about file sources and targets."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed system identity assigned to this resource."
         }
       }
     },
@@ -2386,7 +2523,9 @@
         "AzureStorageBlobContainer",
         "NfsMount",
         "AzureStorageSmbFileShare",
-        "SmbMount"
+        "SmbMount",
+        "AzureMultiCloudConnector",
+        "AzureStorageNfsFileShare"
       ],
       "x-ms-enum": {
         "name": "EndpointType",
@@ -2407,6 +2546,14 @@
           {
             "name": "SmbMount",
             "value": "SmbMount"
+          },
+          {
+            "name": "AzureMultiCloudConnector",
+            "value": "AzureMultiCloudConnector"
+          },
+          {
+            "name": "AzureStorageNfsFileShare",
+            "value": "AzureStorageNfsFileShare"
           }
         ]
       }
@@ -2459,6 +2606,29 @@
         "description": {
           "type": "string",
           "description": "A description for the Job Definition. OnPremToCloud is for migrating data from on-premises to cloud. CloudToCloud is for migrating data between cloud to cloud."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "The type of the Job.",
+          "default": "OnPremToCloud",
+          "enum": [
+            "OnPremToCloud",
+            "CloudToCloud"
+          ],
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "OnPremToCloud",
+                "value": "OnPremToCloud"
+              },
+              {
+                "name": "CloudToCloud",
+                "value": "CloudToCloud"
+              }
+            ]
+          }
         },
         "copyMode": {
           "$ref": "#/definitions/CopyMode",
@@ -2529,6 +2699,20 @@
           "type": "string",
           "description": "Fully qualified resource id of the Agent to assign for new Job Runs of this Job Definition.",
           "readOnly": true
+        },
+        "sourceTargetMap": {
+          "type": "object",
+          "description": "The list of cloud endpoints to migrate.",
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SourceTargetMap"
+              },
+              "readOnly": true,
+              "x-ms-identifiers": []
+            }
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3132,6 +3316,74 @@
       ],
       "x-ms-discriminator-value": "SmbMount"
     },
+    "SourceEndpoint": {
+      "type": "object",
+      "description": "The source endpoint resource for source and target mapping.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceEndpointProperties",
+          "description": "The properties of the cloud source endpoint to migrate."
+        }
+      }
+    },
+    "SourceEndpointProperties": {
+      "type": "object",
+      "description": "The properties of the cloud source endpoint to migrate.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the cloud source endpoint to migrate."
+        },
+        "sourceEndpointResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the cloud source endpoint to migrate.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageMover/storageMovers/endpoints"
+              }
+            ]
+          }
+        },
+        "awsS3BucketId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the AWS S3 bucket to migrate.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageMover/storageMovers/endpoints"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SourceTargetMap": {
+      "type": "object",
+      "description": "The properties of cloud endpoints to migrate.",
+      "properties": {
+        "sourceEndpoint": {
+          "$ref": "#/definitions/SourceEndpoint"
+        },
+        "targetEndpoint": {
+          "$ref": "#/definitions/TargetEndpoint"
+        }
+      },
+      "required": [
+        "sourceEndpoint",
+        "targetEndpoint"
+      ]
+    },
     "StorageMover": {
       "type": "object",
       "description": "The Storage Mover resource, which is a container for a group of Agents, Projects, and Endpoints.",
@@ -3210,6 +3462,66 @@
         "description": {
           "type": "string",
           "description": "A description for the Storage Mover."
+        }
+      }
+    },
+    "TargetEndpoint": {
+      "type": "object",
+      "description": "The target endpoint resource for source and target mapping.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TargetEndpointProperties",
+          "description": "The properties of the cloud target endpoint to migrate."
+        }
+      }
+    },
+    "TargetEndpointProperties": {
+      "type": "object",
+      "description": "The properties of the cloud target endpoint to migrate.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the cloud target endpoint to migrate."
+        },
+        "targetEndpointResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the cloud target endpoint to migrate.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageMover/storageMovers/endpoints"
+              }
+            ]
+          }
+        },
+        "azureStorageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ARM resource ID of the Azure Storage account.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "azureStorageBlobContainerName": {
+          "type": "string",
+          "description": "The name of the Azure Storage blob container.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
