@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ApplicationResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -245,7 +247,15 @@ model StatelessServiceProperties extends ServiceResourceProperties {
   /**
    * MinInstancePercentage is the minimum percentage of InstanceCount that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstancePercentage computation, -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service.
    */
-  minInstancePercentage?: int32;
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "minInstancePercentage")
+  formerMinInstancePercentage?: int32;
+
+  /**
+   * MinInstancePercentage is the minimum percentage of InstanceCount that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstancePercentage computation, -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service.
+   */
+  @added(Versions.v2025_07_01_preview)
+  minInstancePercentage?: int32 = 50;
 
   /**
    * The kind of service (Stateless or Stateful).
