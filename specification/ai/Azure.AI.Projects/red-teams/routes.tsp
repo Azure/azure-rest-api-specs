@@ -18,7 +18,6 @@ alias RedTeamOperations = Azure.Core.ResourceOperations<RedTeamServiceTraits>;
 
 @route("redTeams")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 interface RedTeams {
   @doc("Get a redteam by name.")
   get is RedTeamOperations.ResourceRead<RedTeam>;
