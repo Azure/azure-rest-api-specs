@@ -83,16 +83,6 @@
         ],
         "summary": "Create Static Image",
         "description": "Create a new image export.",
-        "produces": [
-          "image/png",
-          "image/jpeg",
-          "image/jpg",
-          "image/webp",
-          "image/jp2",
-          "image/tiff; application=geotiff",
-          "application/x-binary",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -118,9 +108,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Return an image.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "file"
+              "$ref": "#/definitions/ImageResponse"
             }
           },
           "default": {
