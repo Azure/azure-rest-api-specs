@@ -2,6 +2,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
+using Azure.ResourceManager.Foundations;
 using Microsoft.StorageActions;
 
 @@clientName(Microsoft.StorageActions, "StorageActionsMgmtClient", "python");
@@ -23,17 +25,18 @@ using Microsoft.StorageActions;
   "GetStorageTaskAssignments",
   "csharp"
 );
-@@clientName(StorageTasks.list,
-  "GetStorageTasksReports",
-  "csharp"
-);
+@@clientName(StorageTasks.list, "GetStorageTasksReports", "csharp");
 @@clientName(StorageTasksOperationGroup.previewActions,
   "PreviewActions",
   "csharp"
 );
 
 namespace Azure.ResourceManager.Models {
-  model SubResource { }
+  model SubResource {}
 }
 
-@@alternateType(Microsoft.StorageActions.StorageTaskAssignmentsListResult.value, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(Microsoft.StorageActions.StorageTaskAssignmentsListResult.value,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(TrackedResource.location, azureLocation, "csharp");
