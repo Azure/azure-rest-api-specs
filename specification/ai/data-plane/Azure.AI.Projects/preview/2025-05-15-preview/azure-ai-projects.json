@@ -3543,33 +3543,6 @@
         "message"
       ]
     },
-    "FineTuningJobGraderMessage": {
-      "type": "object",
-      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Message type"
-        },
-        "role": {
-          "$ref": "#/definitions/FineTuningJobGraderMessageRole",
-          "description": "Message role"
-        },
-        "content": {
-          "$ref": "#/definitions/FineTuningJobGraderMessageContentBase",
-          "description": "Message content"
-        }
-      },
-      "required": [
-        "type",
-        "role",
-        "content"
-      ]
-    },
-    "FineTuningJobGraderMessageContentBase": {
-      "type": "object",
-      "description": "Training RFT message content base class."
-    },
     "FineTuningJobGraderMessageRole": {
       "type": "string",
       "description": "Training RFT message role options.",
@@ -3605,37 +3578,6 @@
           }
         ]
       }
-    },
-    "FineTuningJobGraderMessageSimpleContent": {
-      "type": "object",
-      "description": "Training RFT message content base class.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "content field"
-        }
-      },
-      "required": [
-        "content"
-      ]
-    },
-    "FineTuningJobGraderMessageTextContent": {
-      "type": "object",
-      "description": "Training RFT message content base class.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "type field"
-        },
-        "text": {
-          "type": "string",
-          "description": "text field"
-        }
-      },
-      "required": [
-        "type",
-        "text"
-      ]
     },
     "FineTuningJobGraderModelSamplingParam": {
       "type": "object",
@@ -3751,7 +3693,7 @@
           "type": "array",
           "description": "input labels",
           "items": {
-            "$ref": "#/definitions/FineTuningJobGraderMessage"
+            "$ref": "#/definitions/Input"
           }
         },
         "labels": {
@@ -3993,6 +3935,57 @@
         ]
       }
     },
+    "Input": {
+      "type": "object",
+      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Message type"
+        },
+        "role": {
+          "$ref": "#/definitions/FineTuningJobGraderMessageRole",
+          "description": "Message role"
+        },
+        "content": {
+          "$ref": "#/definitions/InputContent",
+          "description": "Message content"
+        }
+      },
+      "required": [
+        "type",
+        "role",
+        "content"
+      ]
+    },
+    "InputContent": {
+      "type": "object",
+      "description": "Base for inputs to the model."
+    },
+    "InputContentOutputText": {
+      "type": "object",
+      "description": "Inputs to the model - can contain template strings.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the output text. Always `output_text`.",
+          "enum": [
+            "output_text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "The text output from the model."
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ]
+    },
     "InputData": {
       "type": "object",
       "description": "Abstract data class.",
@@ -4025,6 +4018,19 @@
         }
       ],
       "x-ms-discriminator-value": "dataset"
+    },
+    "InputSimpleContent": {
+      "type": "object",
+      "description": "Inputs to the model - can contain template strings.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "content field"
+        }
+      },
+      "required": [
+        "content"
+      ]
     },
     "Integration": {
       "type": "object",
@@ -4182,7 +4188,7 @@
     },
     "Method": {
       "type": "object",
-      "description": "The method used for fine-tuning. Abstract base class",
+      "description": "The method used for fine-tuning.",
       "properties": {
         "type": {
           "$ref": "#/definitions/MethodTrainingType",
@@ -4209,7 +4215,6 @@
           "description": "Configuration for the Mistral Completion fine-tuning method."
         }
       },
-      "discriminator": "type",
       "required": [
         "type"
       ]
@@ -4901,6 +4906,30 @@
       ],
       "x-ms-discriminator-value": "json_schema"
     },
+    "ResponseInputTextParam": {
+      "type": "object",
+      "description": "Inputs to the model - can contain template strings.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the input item. Always `input_text`",
+          "enum": [
+            "input_text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "The text input to the model."
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ]
+    },
     "RiskCategory": {
       "type": "string",
       "description": "Risk category for the attack objective.",
@@ -4989,7 +5018,7 @@
           "type": "array",
           "description": "The input text. This may include template strings.",
           "items": {
-            "$ref": "#/definitions/FineTuningJobGraderMessage"
+            "$ref": "#/definitions/Input"
           }
         },
         "model": {
