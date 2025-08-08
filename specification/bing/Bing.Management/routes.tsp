@@ -21,6 +21,7 @@ interface SkusOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
+  @list
   @action("skus")
   list is ArmProviderActionSync<
     Response = ResourceSkusResult,
