@@ -273,6 +273,17 @@ model RunStepDeltaOpenAPIObject extends RunStepDeltaDetail {
   toolCalls?: RunStepDeltaOpenAPIToolCall[];
 }
 
+/** Represents the invocation of connected agent as a part of a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaConnectedAgentToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "connected_agent". */
+  type: "connected_agent";
+
+  /** The collection of tool calls for the tool call detail item. */
+  @encodedName("application/json", "connected_agent")
+  connectedAgent: RunStepConnectedAgent;
+}
+
 /** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
 @discriminator("type")
 @added(Versions.v2025_05_01)
