@@ -51,10 +51,12 @@ interface EpicVirtualInstances {
   /**
    * Gets all Virtual Instances for Epic solution resources in a Resource Group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<EpicVirtualInstance>;
 
   /**
    * Gets all Virtual Instances for Epic solutions resources in a Subscription.
    */
+  @list
   listBySubscription is ArmListBySubscription<EpicVirtualInstance>;
 }

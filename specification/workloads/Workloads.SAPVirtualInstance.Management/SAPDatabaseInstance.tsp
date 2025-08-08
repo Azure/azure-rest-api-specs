@@ -52,6 +52,7 @@ interface SAPDatabaseInstances {
   /**
    * Lists the Database resources associated with a Virtual Instance for SAP solutions resource.
    */
+  @list
   list is ArmResourceListByParent<SAPDatabaseInstance>;
 
   /**

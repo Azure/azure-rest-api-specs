@@ -136,11 +136,21 @@ us in the [Docs Support Teams Channel](https://aka.ms/ci-fix/api-docs-help)`;
  * @param {string[]} swaggerFiles
  **/
 export function getSwaggersToProcess(swaggerFiles) {
-  const swaggerFileObjs = swaggerFiles.map(parseSwaggerFilePath);
+  const swaggerFileObjs = [];
+  for (const file of swaggerFiles) {
+    try {
+      const parsed = parseSwaggerFilePath(file);
+      swaggerFileObjs.push(parsed);
+    } catch (error) {
+      console.log(`Skipping file "${file}" due to parsing error: ${error}`);
+      continue;
+    }
+  }
 
   const versions = swaggerFileObjs.map((obj) => obj.apiVersion).filter(Boolean);
   if (versions.length === 0) {
-    throw new Error("No new API versions found in eligible swagger files.");
+    console.log("No API versions found in eligible swagger files.");
+    return { selectedVersion: null, swaggersToProcess: [] };
   }
   const uniqueVersions = Array.from(new Set(versions));
 

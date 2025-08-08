@@ -1,0 +1,103 @@
+{
+  "title": "InventoryConfigurations_ListBySubscription",
+  "operationId": "InventoryConfigurations_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "windows": {
+                "software": {
+                  "enabled": "true",
+                  "assessment": {
+                    "enabled": "true",
+                    "collectionIds": [
+                      "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/MySoftwareCollection"
+                    ]
+                  }
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "environment": "production"
+            },
+            "location": "westus",
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.UpdateManager/inventoryconfigurations/inventoryconfig1",
+            "name": "inventoryconfig1",
+            "type": "Microsoft.UpdateManager/inventoryconfigurations",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            }
+          },
+          {
+            "properties": {
+              "windows": {
+                "software": {
+                  "enabled": "false"
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "environment": "development"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgother/providers/Microsoft.UpdateManager/inventoryconfigurations/inventoryconfig2",
+            "name": "inventoryconfig2",
+            "type": "Microsoft.UpdateManager/inventoryconfigurations",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            }
+          },
+          {
+            "properties": {
+              "windows": {
+                "software": {
+                  "enabled": "true",
+                  "assessment": {
+                    "enabled": "false",
+                    "collectionIds": [
+                      "/subscriptions/783fd652-64f3-4680-81e9-0b978c542005/resourceGroups/aumPatchRG/providers/Microsoft.UpdateManager/SoftwareCollections/MySoftwareCollection"
+                    ]
+                  }
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "environment": "staging"
+            },
+            "location": "centralus",
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgstaging/providers/Microsoft.UpdateManager/inventoryconfigurations/inventoryconfig3",
+            "name": "inventoryconfig3",
+            "type": "Microsoft.UpdateManager/inventoryconfigurations",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
