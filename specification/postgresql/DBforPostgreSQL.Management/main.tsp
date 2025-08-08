@@ -37,6 +37,7 @@ using TypeSpec.Versioning;
 /**
  * The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "PostgreSQLManagementClient" })
 @versioned(Versions)
@@ -62,6 +63,7 @@ enum Versions {
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")

@@ -59,9 +59,6 @@
           "List all available REST API operations.": {
             "$ref": "./examples/OperationsList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -158,9 +155,6 @@
           "List the capabilities available in a given location for a specific subscription.": {
             "$ref": "./examples/CapabilitiesByLocationList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -279,9 +273,6 @@
           "List of quota usages for servers": {
             "$ref": "./examples/QuotaUsagesForFlexibleServers.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1037,9 +1028,6 @@
           "List the capabilities available for a given server.": {
             "$ref": "./examples/CapabilitiesByServerList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1654,9 +1642,6 @@
           "List all captured logs for download in a server.": {
             "$ref": "./examples/CapturedLogsListByServer.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1769,12 +1754,28 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/LtrPreBackupResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           },
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CustomErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "ErrorCode string in the event of a failure."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           }
         },
@@ -2335,9 +2336,6 @@
           "List all read replicas of a server.": {
             "$ref": "./examples/ReplicasListByServer.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2464,7 +2462,17 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CustomErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "ErrorCode string in the event of a failure."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           }
         },
@@ -2666,9 +2674,6 @@
           "List available table recommendations.": {
             "$ref": "./examples/TuningOptionsListTableRecommendations.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2851,8 +2856,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -3204,9 +3208,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>": {
-      "type": "object"
-    },
     "Backup": {
       "type": "object",
       "properties": {
@@ -3217,6 +3218,7 @@
         },
         "geoRedundantBackup": {
           "type": "string",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -3769,6 +3771,14 @@
           "readOnly": true
         }
       }
+    },
+    "CustomErrorResponse": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        }
+      ]
     },
     "DataEncryption": {
       "type": "object",
@@ -6272,7 +6282,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualEndpointResourceForPatch",
+          "type": "object",
           "x-ms-client-flatten": true
         }
       },

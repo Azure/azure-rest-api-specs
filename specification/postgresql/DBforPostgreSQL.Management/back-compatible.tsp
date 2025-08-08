@@ -122,7 +122,7 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(Servers.checkPrerequisites::parameters.body, "parameters");
 @@clientLocation(Servers.start, "BackupsLongTermRetention");
 @@clientName(Servers.start::parameters.body, "parameters");
-@@clientLocation(Servers.checkNameAvailability, "Migrations");
+@@clientLocation(Servers.checkNameAvailability, Migrations);
 @@clientName(Servers.checkNameAvailability::parameters.body, "parameters");
 @@clientLocation(Servers.replicasListByServer, "Replicas");
 @@clientName(Servers.replicasListByServer, "ListByServer");

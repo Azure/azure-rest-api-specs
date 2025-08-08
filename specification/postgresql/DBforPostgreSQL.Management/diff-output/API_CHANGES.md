@@ -1,5 +1,17 @@
 ## Swagger Changes
 
+### Changes for `x-ms-pageable`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/providers/microsoft.DBforPostgreSQL/operations'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/capabilities'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/usages'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/capabilities'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/logFiles'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/replicas'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+
 ### Changes for `$ref`
 
 | Path | Change Type | Value |
@@ -354,37 +366,23 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations'].get.parameters[0].maxLength__added` | added | `63` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints'].get.parameters[0].maxLength__added` | added | `63` |
 
-### Changes for `headers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup'].post.responses.200.headers__deleted` | deleted | `{"x-ms-request-id":{"type":"string","description":"A unique ID for the current operation, service ge...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup'].post.responses.default.headers__deleted` | deleted | `{"x-ms-error-code":{"type":"string","description":"ErrorCode string in the event of a failure."},"x-...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup'].post.responses.default.headers__deleted` | deleted | `{"x-ms-error-code":{"type":"string","description":"ErrorCode string in the event of a failure."},"x-...` |
-
-### Changes for `final-state-schema`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E` |
-
 ### Changes for `UserAssignedIdentityMap`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.UserAssignedIdentityMap__deleted` | deleted | `{"type":"object","additionalProperties":{"$ref":"#/definitions/UserIdentity"}}` |
 
-### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: string, retryAfter: int32 }>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: string, retryAfter: int32 }>__added']` | added | `{"type":"object"}` |
-
 ### Changes for `CapabilityBase`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.CapabilityBase__added` | added | `{"type":"object","properties":{"status":{"type":"string","enum":["Visible","Available","Default","Di...` |
+
+### Changes for `CustomErrorResponse`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CustomErrorResponse__added` | added | `{"type":"object","allOf":[{"$ref":"../../../../../common-types/resource-management/v6/types.json#/de...` |
 
 ### Changes for `ObjectRecommendationPropertiesAnalyzedWorkload`
 
@@ -433,28 +431,6 @@
 | `definitions.Network.properties.privateDnsZoneArmResourceId.format__added` | added | `arm-id` |
 | `definitions.ServerProperties.properties.sourceServerResourceId.format__added` | added | `arm-id` |
 
-### Changes for `default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Backup.properties.geoRedundantBackup.default__deleted` | deleted | `Disabled` |
-| `definitions.ServerProperties.properties.authConfig.default__deleted` | deleted | `null` |
-| `definitions.ServerProperties.properties.backup.default__deleted` | deleted | `null` |
-| `definitions.ServerProperties.properties.cluster.default__deleted` | deleted | `null` |
-| `definitions.ServerProperties.properties.dataEncryption.default__deleted` | deleted | `null` |
-| `definitions.ServerProperties.properties.highAvailability.default__deleted` | deleted | `null` |
-| `definitions.ServerProperties.properties.maintenanceWindow.default__deleted` | deleted | `null` |
-| `definitions.ServerProperties.properties.network.default__deleted` | deleted | `null` |
-| `definitions.ServerProperties.properties.storage.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.authConfig.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.backup.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.cluster.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.dataEncryption.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.highAvailability.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.maintenanceWindow.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.network.default__deleted` | deleted | `null` |
-| `definitions.ServerPropertiesForPatch.properties.storage.default__deleted` | deleted | `null` |
-
 ### Changes for `x-ms-secret`
 
 | Path | Change Type | Value |
@@ -495,13 +471,34 @@
 | `definitions.ObjectRecommendationProperties.properties.implementationDetails.properties__deleted` | deleted | `{"method":{"type":"string","description":"Method of implementation for recommended action."},"script...` |
 | `definitions.PrivateDnsZoneSuffix.properties__added` | added | `{"value":{"type":"string","readOnly":true}}` |
 | `definitions.TuningOptions.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
-| `definitions.VirtualEndpoint.properties__added` | added | `{"properties":{"$ref":"#/definitions/VirtualEndpointResourceForPatch","x-ms-client-flatten":true}}` |
+| `definitions.VirtualEndpoint.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
 
 ### Changes for `x-ms-client-flatten`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.Operation.properties.properties['x-ms-client-flatten__deleted']` | deleted | `false` |
+
+### Changes for `default`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServerProperties.properties.authConfig.default__deleted` | deleted | `null` |
+| `definitions.ServerProperties.properties.backup.default__deleted` | deleted | `null` |
+| `definitions.ServerProperties.properties.cluster.default__deleted` | deleted | `null` |
+| `definitions.ServerProperties.properties.dataEncryption.default__deleted` | deleted | `null` |
+| `definitions.ServerProperties.properties.highAvailability.default__deleted` | deleted | `null` |
+| `definitions.ServerProperties.properties.maintenanceWindow.default__deleted` | deleted | `null` |
+| `definitions.ServerProperties.properties.network.default__deleted` | deleted | `null` |
+| `definitions.ServerProperties.properties.storage.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.authConfig.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.backup.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.cluster.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.dataEncryption.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.highAvailability.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.maintenanceWindow.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.network.default__deleted` | deleted | `null` |
+| `definitions.ServerPropertiesForPatch.properties.storage.default__deleted` | deleted | `null` |
 
 ### Changes for `additionalProperties`
 
@@ -526,8 +523,10 @@
 | `definitions.StorageMbCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.StorageTierCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.VirtualEndpoint.allOf[0].$ref` | `#/definitions/VirtualEndpointResourceForPatch` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup'].post.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` | `#/definitions/CustomErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.parameters[2].schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateLinkResources/{groupName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource` | `#/definitions/PrivateLinkResource` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/replicas'].get.responses.200.schema.$ref` | `./Servers.json#/definitions/ServerList` | `#/definitions/ServerList` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup'].post.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` | `#/definitions/CustomErrorResponse` |
 

@@ -920,7 +920,6 @@ model AdministratorMicrosoftEntraAdd {
    * Properties of the server administrator associated to a Microsoft Entra principal.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AdministratorMicrosoftEntraPropertiesForAdd;
 }
 
@@ -1415,7 +1414,6 @@ model CapturedLog extends Azure.ResourceManager.CommonTypes.ProxyResource {
    * Properties of a log file.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CapturedLogProperties;
 }
 
@@ -1534,7 +1532,6 @@ model ConfigurationForUpdate {
    * Properties of a configuration (also known as server parameter).
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ConfigurationProperties;
 }
 
@@ -1588,6 +1585,7 @@ model FirewallRuleList is Azure.Core.Page<FirewallRule>;
  * A request that is made for pre-backup.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LtrPreBackupRequest extends BackupRequestBase {}
 
 /**
@@ -1618,7 +1616,6 @@ model LtrPreBackupResponse {
    * Additional Properties for the pre backup response
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: BackupsLongTermRetentionResponseProperties;
 }
 
@@ -1661,7 +1658,6 @@ model BackupsLongTermRetentionResponse {
    * Long Term Retention Backup Operation Resource Properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: LtrBackupOperationResponseProperties;
 }
 
@@ -2193,7 +2189,6 @@ model MigrationResourceForPatch {
    * Migration properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MigrationPropertiesForPatch;
 
   /**
@@ -2661,6 +2656,7 @@ model ServerProperties {
   /**
    * Creation time (in ISO8601 format) of the backup which you want to restore in the new server. It's required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', or 'ReviveDropped'.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   pointInTimeUTC?: utcDateTime;
@@ -2714,6 +2710,7 @@ model Storage {
   /**
    * Size of storage assigned to a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageSizeGB?: int32;
 
   /**
@@ -2769,6 +2766,7 @@ model DataEncryption {
   /**
    * URI of the key in Azure Key Vault used for data encryption of the primary storage associated to a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   primaryKeyURI?: string;
 
   /**
@@ -2779,6 +2777,7 @@ model DataEncryption {
   /**
    * Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a server that is configured to support geographically redundant backups.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   geoBackupKeyURI?: string;
 
   /**
@@ -2817,7 +2816,7 @@ model Backup {
    * Indicates if the server is configured to create geographically redundant backups.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  geoRedundantBackup?: GeographicallyRedundantBackup;
+  geoRedundantBackup?: GeographicallyRedundantBackup = GeographicallyRedundantBackup.Disabled;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
@@ -2968,7 +2967,6 @@ model ServerForPatch {
    * Properties of the server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ServerPropertiesForPatch;
 
   /**
@@ -3199,7 +3197,7 @@ model ObjectRecommendation
    * Properties of an object recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @visibility(Lifecycle.Read)
   properties?: ObjectRecommendationProperties;
 }
 
@@ -3383,7 +3381,6 @@ model VirtualEndpointResourceForPatch {
    * Properties of the pair of virtual endpoints.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualEndpointResourceProperties;
 }
 
@@ -3471,6 +3468,21 @@ model PrivateDnsZoneSuffix {
    */
   @visibility(Lifecycle.Read)
   value?: string;
+}
+
+/**
+ * Custom error response for the service.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model CustomErrorResponse extends Azure.ResourceManager.ErrorResponse {
+  @header("x-ms-error-code")
+  @doc("ErrorCode string in the event of a failure.")
+  errorCode?: string;
+
+  @header("x-ms-request-id")
+  @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
+  requestId?: string;
 }
 
 model OperationList is Azure.Core.Page<Operation>;

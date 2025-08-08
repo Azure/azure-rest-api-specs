@@ -46,6 +46,9 @@
       "name": "AdministratorMicrosoftEntras"
     },
     {
+      "name": "Migrations"
+    },
+    {
       "name": "Servers"
     },
     {
@@ -65,9 +68,6 @@
     },
     {
       "name": "BackupsLongTermRetentionOperations"
-    },
-    {
-      "name": "Migrations"
     },
     {
       "name": "PrivateEndpointConnections"
@@ -143,9 +143,6 @@
           "List all available REST API operations.": {
             "$ref": "./examples/OperationsList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -269,9 +266,6 @@
           "List the capabilities available in a given location for a specific subscription.": {
             "$ref": "./examples/CapabilitiesByLocationList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -416,9 +410,6 @@
           "List of quota usages for servers": {
             "$ref": "./examples/QuotaUsagesForFlexibleServers.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1553,9 +1544,6 @@
           "List the capabilities available for a given server.": {
             "$ref": "./examples/CapabilitiesByServerList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2468,9 +2456,6 @@
           "List all captured logs for download in a server.": {
             "$ref": "./examples/CapturedLogsListByServer.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2624,15 +2609,31 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/LtrPreBackupResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CustomErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "ErrorCode string in the event of a failure."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           }
         },
@@ -3409,9 +3410,6 @@
           "List all read replicas of a server.": {
             "$ref": "./examples/ReplicasListByServer.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3588,7 +3586,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BackupsLongTermRetentionResponse"
             },
@@ -3600,7 +3598,7 @@
             }
           },
           "202": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -3624,7 +3622,17 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CustomErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "ErrorCode string in the event of a failure."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           }
         },
@@ -3942,9 +3950,6 @@
           "List available table recommendations.": {
             "$ref": "./examples/TuningOptionsListTableRecommendations.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4194,6 +4199,10 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -4214,8 +4223,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -4586,10 +4594,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>": {
-      "type": "object",
-      "description": "Resource operation accepted."
-    },
     "AzureManagedDiskPerformanceTier": {
       "type": "string",
       "description": "Storage tier of a server.",
@@ -4683,8 +4687,27 @@
           "default": 7
         },
         "geoRedundantBackup": {
-          "$ref": "#/definitions/GeographicallyRedundantBackup",
+          "type": "string",
           "description": "Indicates if the server is configured to create geographically redundant backups.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeographicallyRedundantBackup",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -5372,6 +5395,15 @@
           }
         ]
       }
+    },
+    "CustomErrorResponse": {
+      "type": "object",
+      "description": "Custom error response for the service.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        }
+      ]
     },
     "DataEncryption": {
       "type": "object",
@@ -7045,6 +7077,7 @@
         "properties": {
           "$ref": "#/definitions/ObjectRecommendationProperties",
           "description": "Properties of an object recommendation.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -9081,7 +9114,7 @@
       "description": "Pair of virtual endpoints for a server.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualEndpointResourceForPatch",
+          "type": "object",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }

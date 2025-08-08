@@ -20,6 +20,8 @@ namespace Microsoft.DBforPostgreSQL;
  * @template Response Optional. The success response for the createOrReplace operation
  * @template Error Optional. The error response, if non-standard.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.enforceConstraint(Resource, Foundations.Resource)
 op CustomArmResourceCreateOrReplaceAsync<
   Resource extends Foundations.SimpleResource,
@@ -50,6 +52,9 @@ op CustomArmResourceCreateOrReplaceAsync<
  * @template Response Optional. The success response for the createOrUpdate operation
  * @template Error Optional. The error response, if non-standard.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @doc("Create a {name}", Resource)
 @armResourceCreateOrUpdate(Resource)
@@ -84,6 +89,8 @@ op CustomArmResourceCreateOrUpdateAsync<
  * @template Response The response or union of responses for success.
  * @template ErrorResponse The error response.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op CustomArmCreateOperation<
   HttpParameters extends {},
   BodyParameter extends {},

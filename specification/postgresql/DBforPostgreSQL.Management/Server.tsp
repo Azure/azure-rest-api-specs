@@ -115,10 +115,16 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupsLongTermRetention_CheckPrerequisites")
   @action("ltrPreBackup")
-  checkPrerequisites is ArmResourceActionSync<
+  checkPrerequisites is ArmResourceActionAsyncBase<
     Server,
     LtrPreBackupRequest,
-    ArmResponse<LtrPreBackupResponse>
+    Response = LtrPreBackupResponse & {
+      @header("x-ms-request-id")
+      @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
+      requestId?: string;
+    },
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
+    Error = CustomErrorResponse
   >;
 
   /**
@@ -127,7 +133,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupsLongTermRetention_Start")
   @action("startLtrBackup")
-  start is ArmResourceActionSync<
+  start is ArmResourceActionAsyncBase<
     Server,
     BackupsLongTermRetentionRequest,
     (BackupsLongTermRetentionResponse & {
@@ -140,7 +146,9 @@ interface Servers {
       @header("x-ms-request-id")
       @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
       requestId?: string;
-    })
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
+    Error = CustomErrorResponse
   >;
 
   /**

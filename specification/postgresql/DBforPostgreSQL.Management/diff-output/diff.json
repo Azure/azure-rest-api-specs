@@ -1,7 +1,17 @@
 {
   "paths": {
+    "/providers/microsoft.DBforPostgreSQL/operations": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
       "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           [
             "~",
@@ -62,6 +72,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/usages": {
       "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           [
             "~",
@@ -431,6 +444,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/capabilities": {
       "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           [
             "~",
@@ -772,6 +788,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/logFiles": {
       "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           [
             "~",
@@ -856,23 +875,11 @@
           ]
         ],
         "responses": {
-          "200": {
-            "headers__deleted": {
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
-              }
-            }
-          },
           "default": {
-            "headers__deleted": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "ErrorCode string in the event of a failure."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse",
+                "__new": "#/definitions/CustomErrorResponse"
               }
             }
           }
@@ -1193,6 +1200,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/replicas": {
       "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           [
             "~",
@@ -1283,14 +1293,10 @@
         ],
         "responses": {
           "default": {
-            "headers__deleted": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "ErrorCode string in the event of a failure."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse",
+                "__new": "#/definitions/CustomErrorResponse"
               }
             }
           }
@@ -1359,6 +1365,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations": {
       "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           [
             "~",
@@ -1498,10 +1507,7 @@
           [
             " "
           ]
-        ],
-        "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
-        }
+        ]
       },
       "delete": {
         "parameters": [
@@ -1537,9 +1543,6 @@
         "$ref": "#/definitions/UserIdentity"
       }
     },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>__added": {
-      "type": "object"
-    },
     "CapabilityBase__added": {
       "type": "object",
       "properties": {
@@ -1562,6 +1565,14 @@
           "readOnly": true
         }
       }
+    },
+    "CustomErrorResponse__added": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        }
+      ]
     },
     "ObjectRecommendationPropertiesAnalyzedWorkload__added": {
       "type": "object",
@@ -1652,13 +1663,6 @@
       "required__added": [
         "value"
       ]
-    },
-    "Backup": {
-      "properties": {
-        "geoRedundantBackup": {
-          "default__deleted": "Disabled"
-        }
-      }
     },
     "BackupAutomaticAndOnDemandList": {
       "required__added": [
@@ -2112,7 +2116,7 @@
     "VirtualEndpoint": {
       "properties__added": {
         "properties": {
-          "$ref": "#/definitions/VirtualEndpointResourceForPatch",
+          "type": "object",
           "x-ms-client-flatten": true
         }
       },

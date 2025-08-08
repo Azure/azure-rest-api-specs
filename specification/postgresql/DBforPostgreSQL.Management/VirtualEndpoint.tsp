@@ -16,9 +16,10 @@ namespace Microsoft.DBforPostgreSQL;
 /**
  * Pair of virtual endpoints for a server.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-model VirtualEndpoint
-  is Azure.ResourceManager.ProxyResource<VirtualEndpointResourceForPatch> {
+model VirtualEndpoint is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = VirtualEndpoint,
     KeyName = "virtualEndpointName",
@@ -55,6 +56,7 @@ interface VirtualEndpoints {
     VirtualEndpoint,
     PatchModel = VirtualEndpointResourceForPatch,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
