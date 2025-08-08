@@ -3,10 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureDataTransfer;
@@ -107,18 +104,18 @@ union ConnectionStatus {
 }
 
 /**
- * Status of force disablement
+ * Defines different disablement statuses and the circumstances in why they were disabled.
  */
 union ForceDisabledStatus {
   string,
 
   /**
-   * This Flow has been disabled as the connection has been disabled.
+   * Defines disablement of a Flow due to the parent connection being disabled.
    */
   ConnectionForceDisabled: "ConnectionForceDisabled",
 
   /**
-   * This Flow has been disabled as the flow type this flow uses has been disabled.
+   * Defines disablement of a Flow due to the linked flow type being disabled.
    */
   FlowTypeForceDisabled: "FlowTypeForceDisabled",
 }
@@ -130,20 +127,18 @@ union LinkStatus {
   string,
 
   /**
-   * The pipeline, connection, or flow is currently linked with another corresponding pipeline,
-   * connection, or flow, and can be used.
+   * The pipeline, connection, or flow is currently linked with another corresponding pipeline, connection, or flow, and can be used.
    */
   Linked: "Linked",
 
   /**
-   * The pipeline, connection, or flow is not linked with another corresponding pipeline,
-   * connection, or flow, and cannot be used.
+   * The pipeline, connection, or flow is not linked with another corresponding pipeline, connection, or flow, and cannot be used.
    */
   Unlinked: "Unlinked",
 }
 
 /**
- * Flow type for the specified resource
+ * Flow type for the specified resource. FlowType will be deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.
  */
 union FlowType {
   string,
@@ -169,7 +164,7 @@ union FlowType {
   Messaging: "Messaging",
 
   /**
-   * This flow sends data that will not be processed by any security system.
+   * This flow sends standard data but is subject to strict cloud owner approval.
    */
   Mission: "Mission",
 
@@ -199,12 +194,12 @@ union FlowType {
   StreamingVideo: "StreamingVideo",
 
   /**
-   * This flow sends blobs that will not be processed by any security system.
+   * This flow sends blobs but is subject to cloud owner approval.
    */
   Opaque: "Opaque",
 
   /**
-   * This flow sends Extensible Markup Language that will not be processed by any security system.
+   * This flow sends Extensible Markup Language that is subject to strict cloud owner approval
    */
   MissionOpaqueXML: "MissionOpaqueXML",
 
@@ -261,6 +256,40 @@ union OperationStatusEnum {
    * The last patch request for this connection completed.
    */
   Succeeded: "Succeeded",
+}
+
+/**
+ * The allowed statuses of a FlowProfile.
+ */
+union FlowProfileStatus {
+  string,
+
+  /**
+   * Defines a FlowProfile that can no longer be selected.
+   */
+  Obsolete: "Obsolete",
+
+  /**
+   * Defines a FlowProfile that is enabled.
+   */
+  Enabled: "Enabled",
+}
+
+/**
+ * Enablement statuses
+ */
+union EnablementStatus {
+  string,
+
+  /**
+   * Represents an enabled status.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Represents a disabled status.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -360,8 +389,7 @@ union IdentityTranslation {
   string,
 
   /**
-   * The API flow will make use of the user identity that called this API flow, and pass that token
-   * through the boundary.
+   * The API flow will make use of the user identity that called this API flow, and pass that token through the boundary.
    */
   UserIdentity: "UserIdentity",
 
@@ -416,7 +444,7 @@ union TargetType {
 }
 
 /**
- * The request used to list approved schemas within the resource provider.
+ * The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest will be deprecated after from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.
  */
 model ListApprovedSchemasRequest {
   /**
@@ -431,7 +459,7 @@ model ListApprovedSchemasRequest {
 }
 
 /**
- * The schemas list result.
+ * The schemas list result. SchemaListResults will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.
  */
 model SchemasListResult {
   /**
@@ -441,7 +469,7 @@ model SchemasListResult {
 }
 
 /**
- * The schema object.
+ * The schema object. Schemas will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.
  */
 model Schema {
   /**
@@ -486,7 +514,7 @@ model Schema {
 }
 
 /**
- * Result of the schema validation.
+ * Result of the schema validation. ValidateSchemaResult will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.
  */
 model ValidateSchemaResult {
   /**
@@ -550,7 +578,7 @@ model ConnectionProperties {
   linkedConnectionId?: string;
 
   /**
-   * The flow types being requested for this connection
+   * The flow types being requested for this connection. This FlowType property is deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.
    */
   flowTypes?: FlowType[];
 
@@ -632,7 +660,7 @@ model PipelineProperties {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["id"])
-  connections?: Read<PipelineConnection>[];
+  connections?: ReadPipelineConnection[];
 
   /**
    * Subscribers of this resource
@@ -652,7 +680,7 @@ model PipelineProperties {
   policies?: string[];
 
   /**
-   * The flow types allowed for this pipeline
+   * The flow type for this flow
    */
   flowTypes?: FlowType[];
 
@@ -718,25 +746,6 @@ model PipelineConnection {
    */
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
-
-  /**
-   * Connection properties inside pipeline
-   */
-  @visibility(Lifecycle.Read)
-  properties?: PipelineConnectionProperties;
-}
-
-/**
- * Connection properties inside pipeline
- */
-model PipelineConnectionProperties {
-  ...Record<unknown>;
-
-  /**
-   * Internal metadata of the connection inside pipeline.
-   */
-  @visibility(Lifecycle.Read)
-  internalMetadata?: InternalMetadataProperties;
 }
 
 /**
@@ -1012,7 +1021,7 @@ model MessagingOptions {
  */
 model ApiFlowOptions {
   /**
-   * Remote host to which communication needs to be made
+   * Remote host to which communication needs to be made. Deprecated starting 2025-05-30-preview.
    */
   remoteEndpoint?: string;
 
@@ -1027,22 +1036,22 @@ model ApiFlowOptions {
   apiMode?: ApiMode;
 
   /**
-   * Flag for if Azure Data Transfer API Flow should extract the user token
+   * Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. Deprecated starting 2025-05-30-preview.
    */
   identityTranslation?: IdentityTranslation;
 
   /**
-   * Sender's app user assigned Manage Identity client ID
+   * Sender's app user assigned Manage Identity client ID. Deprecated starting 2025-05-30-preview.
    */
   senderClientId?: string;
 
   /**
-   * Remote stub app registration Client ID
+   * Remote stub app registration Client ID. Deprecated starting 2025-05-30-preview.
    */
   remoteCallingModeClientId?: string;
 
   /**
-   * Optional field to override the audience of the remote endpoint
+   * Optional field to override the audience of the remote endpoint. Deprecated starting 2025-05-30-preview.
    */
   audienceOverride?: string;
 }
@@ -1344,4 +1353,59 @@ model AzureResourceManagerArmResponsePipeline {
    * The body type of the operation request or response.
    */
   body: Pipeline;
+}
+
+/**
+ * The ReadPipelineconnection.
+ */
+model ReadPipelineConnection {
+  ...Record<unknown>;
+
+  /**
+   * Connection id inside pipeline
+   */
+  id: string;
+
+  /**
+   * Connection name inside pipeline
+   */
+  name?: string;
+
+  /**
+   * Connection type inside pipeline
+   */
+  type?: string;
+
+  /**
+   * Connection location inside pipeline
+   */
+  location?: string;
+
+  /**
+   * Connection etag inside pipeline
+   */
+  etag?: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  systemData?: SystemData;
+
+  /**
+   * Connection properties inside pipeline
+   */
+  properties?: PipelineConnectionProperties;
+}
+
+/**
+ * Connection properties inside pipeline
+ */
+model PipelineConnectionProperties {
+  ...Record<unknown>;
+
+  /**
+   * Internal metadata of the connection inside pipeline.
+   */
+  @visibility(Lifecycle.Read)
+  internalMetadata?: InternalMetadataProperties;
 }
