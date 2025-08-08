@@ -52,6 +52,20 @@ interface LoadTestAdministration {
     ListQueryParametersTrait<ListTestQueryParams>
   >;
 
+  @summary("Clone a load test.")
+  @doc("""
+    Clone the given test with optional overrides applied to the clone test.
+    """)
+  @pollingOperation(Operations.getStatus)
+  @finalOperation(LoadTestAdministration.getTest)
+  @added(APIVersions.v2025_03_01_preview)
+  @action("clone")
+  cloneTest is StandardResourceOperations.LongRunningResourceAction<
+    Test,
+    CloneTestRequest,
+    never
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
@@ -241,6 +255,53 @@ interface LoadTestRun {
   @doc("Stop test run by test run Id.")
   @operationId("LoadTestRun_StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Get the latest insights for the test run.")
+  @doc("Get the latest insights for the test run.")
+  @added(APIVersions.v2025_03_01_preview)
+  @route("/test-runs/{testRunId}/insights/latest")
+  @get
+  getLatestInsights is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
+      @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
+      testRunId: string;
+    },
+    TestRunInsights
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Generate insights for the test run.")
+  @doc("Generate insights for the test run.")
+  @pollingOperation(LoadTestRun.getLatestInsights)
+  @added(APIVersions.v2025_03_01_preview)
+  @route("/test-runs/{testRunId}/insights:generate")
+  @post
+  generateInsights is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
+      @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
+      testRunId: string;
+    },
+    {
+      @statusCode statusCode: 202;
+      @header("Operation-Location") operationLocation: url;
+      @bodyRoot @added(APIVersions.v2025_03_01_preview) body: OperationStatus;
+    }
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
@@ -447,6 +508,14 @@ interface LoadTestRun {
     },
     TestRunServerMetricsConfiguration
   >;
+}
+
+@tag("Operations")
+interface Operations {
+  @added(APIVersions.v2025_03_01_preview)
+  @summary("Get the status of a long running operation.")
+  @doc("Get the status of a long running operation.")
+  getStatus is StandardResourceOperations.ResourceRead<OperationStatus>;
 }
 
 // NOTE(mitsha): In clients.tsp, when we use `op is <Op>` syntax, it removes all the decorators defined on the interface
