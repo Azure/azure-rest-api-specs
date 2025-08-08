@@ -504,6 +504,7 @@ model SavingsPlanOrderModelProperties {
   @visibility(Lifecycle.Read)
   customerId?: Azure.Core.armResourceIdentifier<[
     {
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts/customers";
     }
   ]>;
@@ -514,6 +515,7 @@ model SavingsPlanOrderModelProperties {
   @visibility(Lifecycle.Read)
   billingAccountId?: Azure.Core.armResourceIdentifier<[
     {
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts";
     }
   ]>;
@@ -548,9 +550,7 @@ model SavingsPlanOrderModelProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   savingsPlans?: string[];
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
   extendedStatusInfo?: ExtendedStatusInfo;
 }
 
@@ -724,6 +724,7 @@ model SavingsPlanModelProperties {
   @visibility(Lifecycle.Read)
   customerId?: Azure.Core.armResourceIdentifier<[
     {
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts/customers";
     }
   ]>;
@@ -734,6 +735,7 @@ model SavingsPlanModelProperties {
   @visibility(Lifecycle.Read)
   billingAccountId?: Azure.Core.armResourceIdentifier<[
     {
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts";
     }
   ]>;
@@ -797,18 +799,16 @@ model SavingsPlanModelProperties {
   benefitStartTime?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
   extendedStatusInfo?: ExtendedStatusInfo;
 
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * Savings plan utilization
    */
-  @visibility(Lifecycle.Read)
   utilization?: Utilization;
 
   /**
@@ -936,7 +936,7 @@ model PurchaseRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * Properties specific to applied scope type. Not required if not applicable.
@@ -1330,6 +1330,7 @@ model DiscountProperties {
   billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Billing/billingAccounts";
+      scopes: ["Tenant"];
     }
   ]>;
 
@@ -1340,6 +1341,7 @@ model DiscountProperties {
   customerResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Billing/billingAccounts/customers";
+      scopes: ["Tenant"];
     }
   ]>;
 
@@ -1361,6 +1363,7 @@ model DiscountProperties {
   benefitResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.BillingBenefits/discounts";
+      scopes: ["ResourceGroup"];
     }
   ]>;
 
@@ -1542,6 +1545,7 @@ model EntityTypeAffiliateDiscount extends DiscountProperties {
   primaryResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.BillingBenefits/discounts";
+      scopes: ["ResourceGroup"];
     }
   ]>;
 
@@ -1851,4 +1855,3 @@ model ExpandParameter {
   @query("$expand")
   $expand?: string;
 }
-@@pageItems(DiscountList.value);

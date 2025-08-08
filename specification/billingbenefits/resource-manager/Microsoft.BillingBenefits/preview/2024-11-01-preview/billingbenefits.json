@@ -1715,7 +1715,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts"
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "Tenant"
+                ]
               }
             ]
           }
@@ -1728,7 +1731,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts/customers"
+                "type": "Microsoft.Billing/billingAccounts/customers",
+                "scopes": [
+                  "Tenant"
+                ]
               }
             ]
           }
@@ -1750,7 +1756,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.BillingBenefits/discounts"
+                "type": "Microsoft.BillingBenefits/discounts",
+                "scopes": [
+                  "ResourceGroup"
+                ]
               }
             ]
           }
@@ -2056,7 +2065,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.BillingBenefits/discounts"
+                "type": "Microsoft.BillingBenefits/discounts",
+                "scopes": [
+                  "ResourceGroup"
+                ]
               }
             ]
           }
@@ -2514,7 +2526,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "appliedScopeProperties": {
           "$ref": "#/definitions/AppliedScopeProperties",
@@ -3025,6 +3038,9 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "scopes": [
+                  "Tenant"
+                ],
                 "type": "Microsoft.Billing/billingAccounts/customers"
               }
             ]
@@ -3038,6 +3054,9 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "scopes": [
+                  "Tenant"
+                ],
                 "type": "Microsoft.Billing/billingAccounts"
               }
             ]
@@ -3092,17 +3111,16 @@
           "description": "This is the DateTime when the savings plan benefit started."
         },
         "extendedStatusInfo": {
-          "$ref": "#/definitions/ExtendedStatusInfo",
-          "readOnly": true
+          "$ref": "#/definitions/ExtendedStatusInfo"
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "utilization": {
           "$ref": "#/definitions/Utilization",
-          "description": "Savings plan utilization",
-          "readOnly": true
+          "description": "Savings plan utilization"
         },
         "renewSource": {
           "type": "string",
@@ -3278,6 +3296,9 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "scopes": [
+                  "Tenant"
+                ],
                 "type": "Microsoft.Billing/billingAccounts/customers"
               }
             ]
@@ -3291,6 +3312,9 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
+                "scopes": [
+                  "Tenant"
+                ],
                 "type": "Microsoft.Billing/billingAccounts"
               }
             ]
@@ -3326,8 +3350,7 @@
           }
         },
         "extendedStatusInfo": {
-          "$ref": "#/definitions/ExtendedStatusInfo",
-          "readOnly": true
+          "$ref": "#/definitions/ExtendedStatusInfo"
         }
       }
     },
