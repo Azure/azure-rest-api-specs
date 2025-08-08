@@ -12,6 +12,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
+import "./back-compatible.tsp";
 import "./Domain.tsp";
 import "./DomainOwnershipIdentifier.tsp";
 import "./TopLevelDomain.tsp";
@@ -24,10 +25,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * WebSite Management Client
+ * 
  */
 @armProviderNamespace
-@service(#{ title: "WebSiteManagementClient" })
+@service(#{ title: "TopLevelDomains API Client" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

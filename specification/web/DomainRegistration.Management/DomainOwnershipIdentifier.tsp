@@ -16,7 +16,13 @@ namespace Microsoft.DomainRegistration;
  */
 @parentResource(Domain)
 model DomainOwnershipIdentifier
-  is Azure.ResourceManager.ProxyResource<DomainOwnershipIdentifierProperties> {
+  is Azure.ResourceManager.ProxyResource<
+    {
+      /**
+       * Ownership Id.
+       */
+      ownershipId?: string;
+    }> {
   ...ResourceNameParameter<
     Resource = DomainOwnershipIdentifier,
     KeyName = "name",

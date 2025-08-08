@@ -1,303 +1,305 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "testrg123",
-    "domainName": "example.com",
     "api-version": "2024-11-01",
     "domain": {
       "location": "global",
-      "tags": {},
       "properties": {
         "authCode": "exampleAuthCode",
-        "privacy": false,
         "autoRenew": true,
-        "dnsType": "DefaultDomainRegistrarDns",
         "consent": {
+          "agreedAt": "2021-09-10T19:30:53Z",
+          "agreedBy": "192.0.2.1",
           "agreementKeys": [
             "agreementKey1"
-          ],
-          "agreedBy": "192.0.2.1",
-          "agreedAt": "2021-09-10T19:30:53Z"
-        },
-        "contactTech": {
-          "email": "tech@email.com",
-          "fax": "1-245-534-2242",
-          "nameFirst": "John",
-          "nameLast": "Doe",
-          "nameMiddle": "",
-          "jobTitle": "Tech",
-          "organization": "Microsoft Inc.",
-          "phone": "1-245-534-2242",
-          "addressMailing": {
-            "address1": "3400 State St",
-            "city": "Chicago",
-            "state": "IL",
-            "country": "United States",
-            "postalCode": "67098"
-          }
-        },
-        "contactBilling": {
-          "email": "billing@email.com",
-          "fax": "1-245-534-2242",
-          "nameFirst": "John",
-          "nameLast": "Doe",
-          "nameMiddle": "",
-          "jobTitle": "Billing",
-          "organization": "Microsoft Inc.",
-          "phone": "1-245-534-2242",
-          "addressMailing": {
-            "address1": "3400 State St",
-            "city": "Chicago",
-            "state": "IL",
-            "country": "United States",
-            "postalCode": "67098"
-          }
+          ]
         },
         "contactAdmin": {
+          "addressMailing": {
+            "address1": "3400 State St",
+            "city": "Chicago",
+            "country": "United States",
+            "postalCode": "67098",
+            "state": "IL"
+          },
           "email": "admin@email.com",
           "fax": "1-245-534-2242",
+          "jobTitle": "Admin",
           "nameFirst": "John",
           "nameLast": "Doe",
           "nameMiddle": "",
-          "jobTitle": "Admin",
           "organization": "Microsoft Inc.",
-          "phone": "1-245-534-2242",
+          "phone": "1-245-534-2242"
+        },
+        "contactBilling": {
           "addressMailing": {
             "address1": "3400 State St",
             "city": "Chicago",
-            "state": "IL",
             "country": "United States",
-            "postalCode": "67098"
-          }
+            "postalCode": "67098",
+            "state": "IL"
+          },
+          "email": "billing@email.com",
+          "fax": "1-245-534-2242",
+          "jobTitle": "Billing",
+          "nameFirst": "John",
+          "nameLast": "Doe",
+          "nameMiddle": "",
+          "organization": "Microsoft Inc.",
+          "phone": "1-245-534-2242"
         },
         "contactRegistrant": {
-          "email": "registrant@email.com",
-          "fax": "1-245-534-2242",
-          "nameFirst": "John",
-          "nameLast": "Doe",
-          "nameMiddle": "",
-          "jobTitle": "Registrant",
-          "organization": "Microsoft Inc.",
-          "phone": "1-245-534-2242",
           "addressMailing": {
             "address1": "3400 State St",
             "city": "Chicago",
-            "state": "IL",
             "country": "United States",
-            "postalCode": "67098"
-          }
-        }
-      }
-    }
+            "postalCode": "67098",
+            "state": "IL"
+          },
+          "email": "registrant@email.com",
+          "fax": "1-245-534-2242",
+          "jobTitle": "Registrant",
+          "nameFirst": "John",
+          "nameLast": "Doe",
+          "nameMiddle": "",
+          "organization": "Microsoft Inc.",
+          "phone": "1-245-534-2242"
+        },
+        "contactTech": {
+          "addressMailing": {
+            "address1": "3400 State St",
+            "city": "Chicago",
+            "country": "United States",
+            "postalCode": "67098",
+            "state": "IL"
+          },
+          "email": "tech@email.com",
+          "fax": "1-245-534-2242",
+          "jobTitle": "Tech",
+          "nameFirst": "John",
+          "nameLast": "Doe",
+          "nameMiddle": "",
+          "organization": "Microsoft Inc.",
+          "phone": "1-245-534-2242"
+        },
+        "dnsType": "DefaultDomainRegistrarDns",
+        "privacy": false
+      },
+      "tags": {}
+    },
+    "domainName": "example.com",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.DomainRegistration/domains/example.com",
         "name": "example.com",
         "type": "Microsoft.DomainRegistration/domains",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.DomainRegistration/domains/example.com",
         "location": "global",
-        "tags": {},
         "properties": {
           "authCode": "exampleAuthCode",
-          "registrationStatus": "Active",
-          "provisioningState": "Succeeded",
+          "autoRenew": true,
+          "consent": {
+            "agreedAt": "2021-09-10T19:30:53Z",
+            "agreedBy": "192.0.2.1",
+            "agreementKeys": [
+              "agreementKey1"
+            ]
+          },
+          "contactAdmin": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "admin@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Admin",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "contactBilling": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "billing@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Billing",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "contactRegistrant": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "registrant@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Registrant",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "contactTech": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "tech@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Tech",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "createdTime": "2021-09-10T19:30:53Z",
+          "dnsType": "DefaultDomainRegistrarDns",
+          "domainNotRenewableReasons": [
+            "ExpirationNotInRenewalTimeRange"
+          ],
+          "expirationTime": "2022-09-10T19:30:53Z",
+          "managedHostNames": [],
           "nameServers": [
             "ns01.ote.domaincontrol.com",
             "ns02.ote.domaincontrol.com"
           ],
           "privacy": false,
-          "createdTime": "2021-09-10T19:30:53Z",
-          "expirationTime": "2022-09-10T19:30:53Z",
-          "autoRenew": true,
+          "provisioningState": "Succeeded",
           "readyForDnsRecordManagement": true,
-          "managedHostNames": [],
-          "domainNotRenewableReasons": [
-            "ExpirationNotInRenewalTimeRange"
-          ],
-          "dnsType": "DefaultDomainRegistrarDns",
-          "consent": {
-            "agreementKeys": [
-              "agreementKey1"
-            ],
-            "agreedBy": "192.0.2.1",
-            "agreedAt": "2021-09-10T19:30:53Z"
-          },
-          "contactTech": {
-            "email": "tech@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Tech",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          },
-          "contactBilling": {
-            "email": "billing@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Billing",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          },
-          "contactAdmin": {
-            "email": "admin@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Admin",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          },
-          "contactRegistrant": {
-            "email": "registrant@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Registrant",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          }
-        }
-      }
+          "registrationStatus": "Active"
+        },
+        "tags": {}
+      },
+      "headers": {}
     },
     "202": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.DomainRegistration/domains/example.com",
         "name": "example.com",
         "type": "Microsoft.DomainRegistration/domains",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.DomainRegistration/domains/example.com",
         "location": "global",
-        "tags": {},
         "properties": {
           "authCode": "exampleAuthCode",
-          "registrationStatus": "Active",
-          "provisioningState": "Succeeded",
+          "autoRenew": true,
+          "consent": {
+            "agreedAt": "2021-09-10T19:30:53Z",
+            "agreedBy": "192.0.2.1",
+            "agreementKeys": [
+              "agreementKey1"
+            ]
+          },
+          "contactAdmin": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "admin@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Admin",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "contactBilling": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "billing@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Billing",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "contactRegistrant": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "registrant@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Registrant",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "contactTech": {
+            "addressMailing": {
+              "address1": "3400 State St",
+              "city": "Chicago",
+              "country": "United States",
+              "postalCode": "67098",
+              "state": "IL"
+            },
+            "email": "tech@email.com",
+            "fax": "1-245-534-2242",
+            "jobTitle": "Tech",
+            "nameFirst": "John",
+            "nameLast": "Doe",
+            "nameMiddle": "",
+            "organization": "Microsoft Inc.",
+            "phone": "1-245-534-2242"
+          },
+          "createdTime": "2021-09-10T19:30:53Z",
+          "dnsType": "DefaultDomainRegistrarDns",
+          "domainNotRenewableReasons": [
+            "ExpirationNotInRenewalTimeRange"
+          ],
+          "expirationTime": "2022-09-10T19:30:53Z",
+          "managedHostNames": [],
           "nameServers": [
             "ns01.ote.domaincontrol.com",
             "ns02.ote.domaincontrol.com"
           ],
           "privacy": false,
-          "createdTime": "2021-09-10T19:30:53Z",
-          "expirationTime": "2022-09-10T19:30:53Z",
-          "autoRenew": true,
+          "provisioningState": "Succeeded",
           "readyForDnsRecordManagement": true,
-          "managedHostNames": [],
-          "domainNotRenewableReasons": [
-            "ExpirationNotInRenewalTimeRange"
-          ],
-          "dnsType": "DefaultDomainRegistrarDns",
-          "consent": {
-            "agreementKeys": [
-              "agreementKey1"
-            ],
-            "agreedBy": "192.0.2.1",
-            "agreedAt": "2021-09-10T19:30:53Z"
-          },
-          "contactTech": {
-            "email": "tech@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Tech",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          },
-          "contactBilling": {
-            "email": "billing@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Billing",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          },
-          "contactAdmin": {
-            "email": "admin@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Admin",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          },
-          "contactRegistrant": {
-            "email": "registrant@email.com",
-            "fax": "1-245-534-2242",
-            "nameFirst": "John",
-            "nameLast": "Doe",
-            "nameMiddle": "",
-            "jobTitle": "Registrant",
-            "organization": "Microsoft Inc.",
-            "phone": "1-245-534-2242",
-            "addressMailing": {
-              "address1": "3400 State St",
-              "city": "Chicago",
-              "state": "IL",
-              "country": "United States",
-              "postalCode": "67098"
-            }
-          }
-        }
-      }
+          "registrationStatus": "Active"
+        },
+        "tags": {}
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Domains_CreateOrUpdate",
+  "title": "Create App Service Domain"
 }

@@ -13,14 +13,176 @@ namespace Microsoft.DomainRegistration;
 /**
  * Information about a domain.
  */
-model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
+model Domain is Azure.ResourceManager.TrackedResource< Properties={
+  /**
+   * Administrative contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactAdmin: Contact;
+
+  /**
+   * Billing contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactBilling: Contact;
+
+  /**
+   * Registrant contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactRegistrant: Contact;
+
+  /**
+   * Technical contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactTech: Contact;
+
+  /**
+   * Domain registration status.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-enum", #{name:"DomainStatus", modelAsString: false})
+  registrationStatus?:
+      "Active" |
+      "Awaiting" |
+      "Cancelled" |
+      "Confiscated" |
+      "Disabled" |
+      "Excluded" |
+      "Expired" |
+      "Failed" |
+      "Held" |
+      "Locked" |
+      "Parked" |
+      "Pending" |
+      "Reserved" |
+      "Reverted" |
+      "Suspended" |
+      "Transferred" |
+      "Unknown" |
+      "Unlocked" |
+      "Unparked" |
+      "Updated" |
+      "JsonConverterFailed";
+
+  /**
+   * Domain provisioning state.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-enum", #{name:"ProvisioningState", modelAsString: false})
+  provisioningState?:
+    "Succeeded" |
+    "Failed" |
+    "Canceled" |
+    "InProgress" |
+    "Deleting";
+
+  /**
+   * Name servers.
+   */
+  @visibility(Lifecycle.Read)
+  nameServers?: string[];
+
+  /**
+   * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
+   */
+  privacy?: boolean;
+
+  /**
+   * Domain creation timestamp.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdTime?: utcDateTime;
+
+  /**
+   * Domain expiration timestamp.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationTime?: utcDateTime;
+
+  /**
+   * Timestamp when the domain was renewed last time.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastRenewedTime?: utcDateTime;
+
+  /**
+   * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
+   */
+  autoRenew?: boolean = true;
+
+  /**
+   * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
+   *  it is hosted on name servers Azure has programmatic access to.
+   */
+  @visibility(Lifecycle.Read)
+  readyForDnsRecordManagement?: boolean;
+
+  /**
+   * All hostnames derived from the domain and assigned to Azure resources.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  managedHostNames?: HostName[];
+
+  /**
+   * Legal agreement consent.
+   */
+  @visibility(Lifecycle.Create)
+  consent: DomainPurchaseConsent;
+
+  /**
+   * Reasons why domain is not renewable.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-enum", #{name:"ResourceNotRenewableReason"})
+  domainNotRenewableReasons?: (
+      | "RegistrationStatusNotSupportedForRenewal"
+      | "ExpirationNotInRenewalTimeRange"
+      | "SubscriptionNotActive"
+      | string)[];
+
+  /**
+   * Current DNS type
+   */
+  @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
+  dnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
+
+  /**
+   * Azure DNS Zone to use
+   */
+  dnsZoneId?: string;
+
+  /**
+   * Target DNS type (would be used for migration)
+   */
+  @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
+  targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
+
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  authCode?: string;
+}> {
   ...ResourceNameParameter<
-    Resource = Domain,
+    Resource = {},
     KeyName = "domainName",
     SegmentName = "domains",
     NamePattern = ""
   >;
 }
+
+model DomainUpdate is Azure.ResourceManager.TrackedResource<Domain> {
+  ...ResourceNameParameter<
+    Resource = Domain,
+    KeyName = "domainName",
+    SegmentName = "domains",
+    NamePattern = "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
+  >;
+}
+
 
 @armResourceOperations
 interface Domains {
@@ -33,7 +195,7 @@ interface Domains {
    * Description for Creates or updates a domain.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Domain,
+    DomainUpdate,
     Response = ArmResourceUpdatedResponse<Domain> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Domain;
@@ -46,7 +208,7 @@ interface Domains {
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
-    Domain,
+    DomainUpdate,
     PatchModel = DomainPatchResource,
     Response = ArmResponse<Domain> | (AcceptedResponse & {
       @bodyRoot
@@ -97,7 +259,7 @@ interface Domains {
    * Transfer out domain to another registrar
    */
   @put
-  transferOut is ArmResourceActionSync<Domain, void, ArmResponse<Domain>>;
+  transferOut is ArmResourceActionSync<Domain, void, ArmResponse<Domain> | BadRequestResponse>;
 }
 
 @@doc(Domain.name, "Name of the domain.");

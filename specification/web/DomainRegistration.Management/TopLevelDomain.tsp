@@ -15,7 +15,12 @@ namespace Microsoft.DomainRegistration;
  */
 @subscriptionResource
 model TopLevelDomain
-  is Azure.ResourceManager.ProxyResource<TopLevelDomainProperties> {
+  is Azure.ResourceManager.ProxyResource<{
+  /**
+   * If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.
+   */
+  privacy?: boolean;
+}> {
   ...ResourceNameParameter<
     Resource = TopLevelDomain,
     KeyName = "name",
@@ -46,6 +51,7 @@ interface TopLevelDomains {
   /**
    * Description for Gets all legal agreements that user needs to accept before purchasing a domain.
    */
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   listAgreements is ArmResourceActionSync<
     TopLevelDomain,
     TopLevelDomainAgreementOption,

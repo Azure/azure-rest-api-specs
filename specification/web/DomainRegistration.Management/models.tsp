@@ -309,124 +309,7 @@ model DomainCollection is Azure.Core.Page<Domain>;
 /**
  * Domain resource specific properties
  */
-model DomainProperties {
-  /**
-   * Administrative contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactAdmin: Contact;
-
-  /**
-   * Billing contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactBilling: Contact;
-
-  /**
-   * Registrant contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactRegistrant: Contact;
-
-  /**
-   * Technical contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactTech: Contact;
-
-  /**
-   * Domain registration status.
-   */
-  @visibility(Lifecycle.Read)
-  registrationStatus?: DomainStatus;
-
-  /**
-   * Domain provisioning state.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * Name servers.
-   */
-  @visibility(Lifecycle.Read)
-  nameServers?: string[];
-
-  /**
-   * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
-   */
-  privacy?: boolean;
-
-  /**
-   * Domain creation timestamp.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdTime?: utcDateTime;
-
-  /**
-   * Domain expiration timestamp.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expirationTime?: utcDateTime;
-
-  /**
-   * Timestamp when the domain was renewed last time.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastRenewedTime?: utcDateTime;
-
-  /**
-   * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
-   */
-  autoRenew?: boolean = true;
-
-  /**
-   * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
-   *  it is hosted on name servers Azure has programmatic access to.
-   */
-  @visibility(Lifecycle.Read)
-  readyForDnsRecordManagement?: boolean;
-
-  /**
-   * All hostnames derived from the domain and assigned to Azure resources.
-   */
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
-  managedHostNames?: HostName[];
-
-  /**
-   * Legal agreement consent.
-   */
-  @visibility(Lifecycle.Create)
-  consent: DomainPurchaseConsent;
-
-  /**
-   * Reasons why domain is not renewable.
-   */
-  @visibility(Lifecycle.Read)
-  domainNotRenewableReasons?: ResourceNotRenewableReason[];
-
-  /**
-   * Current DNS type
-   */
-  dnsType?: DnsType;
-
-  /**
-   * Azure DNS Zone to use
-   */
-  dnsZoneId?: string;
-
-  /**
-   * Target DNS type (would be used for migration)
-   */
-  targetDnsType?: DnsType;
-
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  authCode?: string;
-}
+model DomainProperties {}
 
 /**
  * Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois
@@ -655,162 +538,169 @@ model NameIdentifierCollection is Azure.Core.Page<NameIdentifier>;
  * ARM resource for a domain.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DomainPatchResource extends ProxyOnlyResource {
+model DomainPatchResource extends ProxyOnlyResource{
   /**
    * DomainPatchResource resource specific properties
    */
-  properties?: DomainPatchResourceProperties;
-}
+  properties?: {
+    /**
+     * Administrative contact.
+     */
+    @visibility(Lifecycle.Create)
+    contactAdmin: Contact;
 
-/**
- * DomainPatchResource resource specific properties
- */
-model DomainPatchResourceProperties {
-  /**
-   * Administrative contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactAdmin: Contact;
+    /**
+     * Billing contact.
+     */
+    @visibility(Lifecycle.Create)
+    contactBilling: Contact;
 
-  /**
-   * Billing contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactBilling: Contact;
+    /**
+     * Registrant contact.
+     */
+    @visibility(Lifecycle.Create)
+    contactRegistrant: Contact;
 
-  /**
-   * Registrant contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactRegistrant: Contact;
+    /**
+     * Technical contact.
+     */
+    @visibility(Lifecycle.Create)
+    contactTech: Contact;
 
-  /**
-   * Technical contact.
-   */
-  @visibility(Lifecycle.Create)
-  contactTech: Contact;
+    /**
+     * Domain registration status.
+     */
+    @visibility(Lifecycle.Read)
+    @OpenAPI.extension("x-ms-enum", #{name:"DomainStatus", modelAsString: false})
+    registrationStatus?:
+      | "Active"
+      | "Awaiting"
+      | "Cancelled"
+      | "Confiscated"
+      | "Disabled"
+      | "Excluded"
+      | "Expired"
+      | "Failed"
+      | "Held"
+      | "Locked"
+      | "Parked"
+      | "Pending"
+      | "Reserved"
+      | "Reverted"
+      | "Suspended"
+      | "Transferred"
+      | "Unknown"
+      | "Unlocked"
+      | "Unparked"
+      | "Updated"
+      | "JsonConverterFailed";
 
-  /**
-   * Domain registration status.
-   */
-  @visibility(Lifecycle.Read)
-  registrationStatus?: DomainStatus;
+    /**
+     * Domain provisioning state.
+     */
+    @visibility(Lifecycle.Read)
+    @OpenAPI.extension("x-ms-enum", #{name:"ProvisioningState", modelAsString: false})
+    provisioningState?:
+      | "Succeeded"
+      | "Failed"
+      | "Canceled"
+      | "InProgress"
+      | "Deleting";
 
-  /**
-   * Domain provisioning state.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+    /**
+     * Name servers.
+     */
+    @visibility(Lifecycle.Read)
+    nameServers?: string[];
 
-  /**
-   * Name servers.
-   */
-  @visibility(Lifecycle.Read)
-  nameServers?: string[];
+    /**
+     * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
+     */
+    privacy?: boolean;
 
-  /**
-   * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
-   */
-  privacy?: boolean;
+    /**
+     * Domain creation timestamp.
+     */
+    @visibility(Lifecycle.Read)
+    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+    createdTime?: utcDateTime;
 
-  /**
-   * Domain creation timestamp.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdTime?: utcDateTime;
+    /**
+     * Domain expiration timestamp.
+     */
+    @visibility(Lifecycle.Read)
+    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+    expirationTime?: utcDateTime;
 
-  /**
-   * Domain expiration timestamp.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expirationTime?: utcDateTime;
+    /**
+     * Timestamp when the domain was renewed last time.
+     */
+    @visibility(Lifecycle.Read)
+    // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+    lastRenewedTime?: utcDateTime;
 
-  /**
-   * Timestamp when the domain was renewed last time.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastRenewedTime?: utcDateTime;
+    /**
+     * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
+     */
+    autoRenew?: boolean = true;
 
-  /**
-   * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
-   */
-  autoRenew?: boolean = true;
+    /**
+     * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
+     *  it is hosted on name servers Azure has programmatic access to.
+     */
+    @visibility(Lifecycle.Read)
+    readyForDnsRecordManagement?: boolean;
 
-  /**
-   * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
-   *  it is hosted on name servers Azure has programmatic access to.
-   */
-  @visibility(Lifecycle.Read)
-  readyForDnsRecordManagement?: boolean;
+    /**
+     * All hostnames derived from the domain and assigned to Azure resources.
+     */
+    @visibility(Lifecycle.Read)
+    @OpenAPI.extension("x-ms-identifiers", #["name"])
+    managedHostNames?: HostName[];
 
-  /**
-   * All hostnames derived from the domain and assigned to Azure resources.
-   */
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
-  managedHostNames?: HostName[];
+    /**
+     * Legal agreement consent.
+     */
+    @visibility(Lifecycle.Create)
+    consent: DomainPurchaseConsent;
 
-  /**
-   * Legal agreement consent.
-   */
-  @visibility(Lifecycle.Create)
-  consent: DomainPurchaseConsent;
+    /**
+     * Reasons why domain is not renewable.
+     */
+    @visibility(Lifecycle.Read)
+    @OpenAPI.extension("x-ms-enum", #{name:"ResourceNotRenewableReason"})
+    domainNotRenewableReasons?: (
+      | "RegistrationStatusNotSupportedForRenewal"
+      | "ExpirationNotInRenewalTimeRange"
+      | "SubscriptionNotActive"
+      | string)[];
 
-  /**
-   * Reasons why domain is not renewable.
-   */
-  @visibility(Lifecycle.Read)
-  domainNotRenewableReasons?: ResourceNotRenewableReason[];
+    /**
+     * Current DNS type
+     */
+    @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
+    dnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
 
-  /**
-   * Current DNS type
-   */
-  dnsType?: DnsType;
+    /**
+     * Azure DNS Zone to use
+     */
+    dnsZoneId?: string;
 
-  /**
-   * Azure DNS Zone to use
-   */
-  dnsZoneId?: string;
+    /**
+     * Target DNS type (would be used for migration)
+     */
+    @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
+    targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
 
-  /**
-   * Target DNS type (would be used for migration)
-   */
-  targetDnsType?: DnsType;
-
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  authCode?: string;
+    @visibility(Lifecycle.Read, Lifecycle.Create)
+    authCode?: string;
+  };
 }
 
 /**
  * Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
  */
-model ProxyOnlyResource {
-  /**
-   * Resource Id.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource Name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Kind of resource.
-   */
-  kind?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
+model ProxyOnlyResource {}
 
 /**
  * Collection of domain ownership identifiers.
@@ -819,29 +709,9 @@ model DomainOwnershipIdentifierCollection
   is Azure.Core.Page<DomainOwnershipIdentifier>;
 
 /**
- * DomainOwnershipIdentifier resource specific properties
- */
-model DomainOwnershipIdentifierProperties {
-  /**
-   * Ownership Id.
-   */
-  ownershipId?: string;
-}
-
-/**
  * Collection of Top-level domains.
  */
 model TopLevelDomainCollection is Azure.Core.Page<TopLevelDomain>;
-
-/**
- * TopLevelDomain resource specific properties
- */
-model TopLevelDomainProperties {
-  /**
-   * If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.
-   */
-  privacy?: boolean;
-}
 
 /**
  * Options for retrieving the list of top level domain legal agreements.
