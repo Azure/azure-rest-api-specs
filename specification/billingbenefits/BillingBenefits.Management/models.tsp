@@ -1851,3 +1851,4 @@ model ExpandParameter {
   @query("$expand")
   $expand?: string;
 }
+@@pageItems(DiscountList.value);

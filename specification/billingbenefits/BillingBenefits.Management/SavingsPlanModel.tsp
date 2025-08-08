@@ -66,7 +66,7 @@ interface SavingsPlanModels {
   update is ArmCustomPatchAsync<
     SavingsPlanModel,
     PatchModel = SavingsPlanUpdateRequest,
-    Response = ArmResponse<SavingsPlanModel> | ArmAcceptedLroResponse | ArmResourceNotFoundResponse
+    Response = ArmResponse<SavingsPlanModel> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SavingsPlanModel>> | ArmResourceNotFoundResponse
   >;
 
   /**

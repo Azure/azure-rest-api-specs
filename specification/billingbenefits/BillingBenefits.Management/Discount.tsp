@@ -122,7 +122,7 @@ interface Discounts {
     Discount,
     void,
     ArmResponse<Discount>,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Discount> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
