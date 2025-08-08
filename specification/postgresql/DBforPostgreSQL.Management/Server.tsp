@@ -24,13 +24,13 @@ model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
   /**
    * Compute tier and size of a server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * User assigned managed identities assigned to the server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: UserAssignedIdentity;
 }
 
@@ -44,7 +44,7 @@ interface Servers {
   /**
    * Creates a new server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
@@ -90,7 +90,7 @@ interface Servers {
   /**
    * Lists the capabilities available for a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CapabilitiesByServer_List")
   @get
   @action("capabilities")
@@ -99,7 +99,7 @@ interface Servers {
   /**
    * Lists all captured logs for download in a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CapturedLogs_ListByServer")
   @get
   @action("logFiles")
@@ -112,7 +112,7 @@ interface Servers {
   /**
    * Performs all checks required for a long term retention backup operation to succeed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BackupsLongTermRetention_CheckPrerequisites")
   @action("ltrPreBackup")
   checkPrerequisites is ArmResourceActionAsyncBase<
@@ -130,7 +130,7 @@ interface Servers {
   /**
    * Initiates a long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BackupsLongTermRetention_Start")
   @action("startLtrBackup")
   start is ArmResourceActionAsyncBase<
@@ -154,7 +154,7 @@ interface Servers {
   /**
    * Checks if a proposed migration name is valid and available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Migrations_CheckNameAvailability")
   @action("checkMigrationNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
@@ -166,7 +166,7 @@ interface Servers {
   /**
    * Lists all read replicas of a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Replicas_ListByServer")
   @get
   @action("replicas")
@@ -190,7 +190,7 @@ interface Servers {
   /**
    * Starts a stopped server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Servers_Start")
   @action("start")
   serversStart is ArmResourceActionAsyncBase<

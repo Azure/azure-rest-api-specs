@@ -31,7 +31,7 @@ interface BackupAutomaticAndOnDemands {
   /**
    * Gets information of an on demand backup, given its name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BackupsAutomaticAndOnDemand_Get")
   get is ArmResourceRead<BackupAutomaticAndOnDemand>;
 
@@ -39,8 +39,8 @@ interface BackupAutomaticAndOnDemands {
   /**
    * Creates an on demand backup of a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("BackupsAutomaticAndOnDemand_Create")
   create is CustomArmResourceCreateOrReplaceAsync<
@@ -53,14 +53,14 @@ interface BackupAutomaticAndOnDemands {
   /**
    * Deletes a specific backup, given its name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BackupsAutomaticAndOnDemand_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<BackupAutomaticAndOnDemand>;
 
   /**
    * Lists all available backups of a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BackupsAutomaticAndOnDemand_ListByServer")
   listByServer is ArmResourceListByParent<
     BackupAutomaticAndOnDemand,

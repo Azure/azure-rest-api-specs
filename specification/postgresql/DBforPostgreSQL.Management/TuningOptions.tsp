@@ -33,14 +33,14 @@ interface TuningOptionsOperationGroup {
   /**
    * Gets the tuning options of a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TuningOptions_Get")
   get is ArmResourceRead<TuningOptions>;
 
   /**
    * Lists the tuning options of a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TuningOptions_ListByServer")
   listByServer is ArmResourceListByParent<
     TuningOptions,
@@ -50,7 +50,7 @@ interface TuningOptionsOperationGroup {
   /**
    * Lists available object recommendations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TuningOptions_ListRecommendations")
   @get
   @action("recommendations")

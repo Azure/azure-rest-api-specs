@@ -36,7 +36,7 @@ interface Configurations {
   /**
    * Updates, using Put verb, the value assigned to a specific modifiable configuration (also known as server parameter) of a server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @useFinalStateVia("azure-async-operation")
   @put
   put is Azure.ResourceManager.Foundations.ArmCreateOperation<
