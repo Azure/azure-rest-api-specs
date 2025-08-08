@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_01",
+    "maccName": "macc_20230614",
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "properties": {
+        "automaticShortfall": "Disabled",
+        "automaticShortfallSuppressReason": {
+          "code": "CustomerRequestedSuppression",
+          "message": "Customer explicitly requested to disable automatic shortfall charging"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
+        "name": "macc_20230614",
+        "type": "Microsoft.BillingBenefits/maccs",
+        "properties": {
+          "entityType": "Primary",
+          "displayName": "macc 20230614",
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "commitment": {
+            "grain": "FullTerm",
+            "amount": 20000,
+            "currencyCode": "USD"
+          },
+          "startAt": "2023-07-01T00:00:00Z",
+          "endAt": "2026-07-01T00:00:00Z",
+          "systemId": "13810867107109237",
+          "allowContributors": true,
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "provisioningState": "Succeeded",
+          "status": "Active",
+          "automaticShortfall": "Disabled",
+          "automaticShortfallSuppressReason": {
+            "code": "CustomerRequestedSuppression",
+            "message": "Customer explicitly requested to disable automatic shortfall."
+          }
+        },
+        "location": "global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "systemData": {
+          "createdByType": "User",
+          "createdAt": "2023-02-01T01:01:01.1075056Z",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-02-01T01:01:01.1075056Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2023-11-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2023-11-01-preview",
+        "Retry-After": 5
+      }
+    }
+  }
+}
