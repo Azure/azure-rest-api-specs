@@ -58,3 +58,13 @@ using Microsoft.DataProtection;
 @@clientName(BackupInstanceResources.stopProtection::parameters.body,
   "parameters"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AzureBackupRestoreWithRehydrationRequest,
+  AzureBackupRecoveryPointBasedRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AdlsBlobBackupDatasourceParameters,
+  BlobBackupDatasourceParameters
+);

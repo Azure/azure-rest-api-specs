@@ -4505,21 +4505,9 @@
     "AdlsBlobBackupDatasourceParameters": {
       "type": "object",
       "description": "Parameters to be used during configuration of backup of azure data lake storage account blobs",
-      "properties": {
-        "containersList": {
-          "type": "array",
-          "description": "List of containers to be backed up during configuration of backup of blobs",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "containersList"
-      ],
       "allOf": [
         {
-          "$ref": "#/definitions/BackupDatasourceParameters"
+          "$ref": "#/definitions/BlobBackupDatasourceParameters"
         }
       ],
       "x-ms-discriminator-value": "AdlsBlobBackupDatasourceParameters"
@@ -5030,9 +5018,6 @@
       "type": "object",
       "description": "AzureBackup Restore with Rehydration Request",
       "properties": {
-        "recoveryPointId": {
-          "type": "string"
-        },
         "rehydrationPriority": {
           "$ref": "#/definitions/RehydrationPriority",
           "description": "Priority to be used for rehydration. Values High or Standard"
@@ -5043,13 +5028,12 @@
         }
       },
       "required": [
-        "recoveryPointId",
         "rehydrationPriority",
         "rehydrationRetentionDuration"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AzureBackupRestoreRequest"
+          "$ref": "#/definitions/AzureBackupRecoveryPointBasedRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureBackupRestoreWithRehydrationRequest"
