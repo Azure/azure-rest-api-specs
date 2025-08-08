@@ -16,6 +16,7 @@ import {
   getChangedFiles,
   getChangedFilesStatuses,
   json,
+  quickstartTemplate,
   readme,
   resourceManager,
   scenario,
@@ -40,6 +41,20 @@ describe("changedFiles", () => {
     vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(files.join("\n"));
 
     await expect(getChangedFiles(options)).resolves.toEqual(files);
+    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
+
+    const specFiles = files.filter((f) => f.startsWith("specification"));
+    vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(specFiles.join("\n"));
+    await expect(getChangedFiles({ ...options, paths: ["specification"] })).resolves.toEqual(
+      specFiles,
+    );
+    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
+      "--name-only",
+      "HEAD^",
+      "HEAD",
+      "--",
+      "specification",
+    ]);
   });
 
   const files = [
@@ -62,6 +77,7 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+    "specification/compute/quickstart-templates/swagger.json",
   ];
 
   const filesResolved = files.map((f) => resolve(f));
@@ -77,6 +93,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+      "specification/compute/quickstart-templates/swagger.json",
     ];
 
     expect(files.filter(json)).toEqual(expected);
@@ -140,6 +157,12 @@ describe("changedFiles", () => {
     expect(filesResolved.filter(example)).toEqual(expected.map((f) => resolve(f)));
   });
 
+  it("filter:quickstartTemplate", () => {
+    const expected = ["specification/compute/quickstart-templates/swagger.json"];
+
+    expect(files.filter(quickstartTemplate)).toEqual(expected);
+  });
+
   it("filter:scenarios", () => {
     const expected = [
       "not-spec/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
@@ -165,6 +188,7 @@ describe("changedFiles", () => {
       "should categorize files correctly with all types of changes (%o)",
       async (options) => {
         const gitOutput = [
+          "M\t.github/src/changed-files.js",
           "A\tspecification/new-service/readme.md",
           "M\tspecification/existing-service/main.tsp",
           "D\tspecification/old-service/contoso.json",
@@ -174,7 +198,31 @@ describe("changedFiles", () => {
         ].join("\n");
 
         vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
-        const result = await getChangedFilesStatuses(options);
+        let result = await getChangedFilesStatuses(options);
+        expect(result).toEqual({
+          additions: ["specification/new-service/readme.md", "specification/service/derived.json"],
+          modifications: [
+            ".github/src/changed-files.js",
+            "specification/existing-service/main.tsp",
+            "specification/service/type-changed.json",
+          ],
+          deletions: ["specification/old-service/contoso.json"],
+          renames: [
+            {
+              from: "specification/service/old-name.json",
+              to: "specification/service/new-name.json",
+            },
+          ],
+          total: 7,
+        });
+        expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-status", "HEAD^", "HEAD"]);
+
+        const specGitOutput = gitOutput
+          .split("\n")
+          .filter((f) => f.includes("specification/"))
+          .join("\n");
+        vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(specGitOutput);
+        result = await getChangedFilesStatuses({ ...options, paths: ["specification"] });
         expect(result).toEqual({
           additions: ["specification/new-service/readme.md", "specification/service/derived.json"],
           modifications: [
@@ -190,6 +238,13 @@ describe("changedFiles", () => {
           ],
           total: 6,
         });
+        expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
+          "--name-status",
+          "HEAD^",
+          "HEAD",
+          "--",
+          "specification",
+        ]);
       },
     );
 

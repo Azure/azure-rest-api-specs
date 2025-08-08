@@ -111,7 +111,7 @@ interface PrivateEndpointConnections {
   listPrivateEndpointConnections is ArmProviderActionSync<
     void,
     ArmResponse<PrivateEndpointConnectionsList>,
-    PrivateEndpointConnection,
+    {},
     {
       /** Name of the provisioning service to retrieve. */
       @path @segment("provisioningServices") resourceName: string;
