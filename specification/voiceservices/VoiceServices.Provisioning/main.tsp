@@ -953,6 +953,7 @@ interface TeamsRequestsForInformation {
 @get
 @readsResource(NumberResource)
 @doc("List all the Numbers associated with this Communications Gateway.")
+@list
 op listNumbers is RpcOperation<
   {
     ...StandardListQueryParameters;
