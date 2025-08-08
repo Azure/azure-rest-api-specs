@@ -1,6 +1,5 @@
 import { Octokit } from "@octokit/rest";
 import { describe, expect, it } from "vitest";
-import { processArmReviewLabels } from "../../src/summarize-checks/labelling.js";
 import {
   createNextStepsComment,
   getCheckInfo,
@@ -119,135 +118,7 @@ describe("Summarize Checks Integration Tests", () => {
 
 describe("Summarize Checks Unit Tests", () => {
   describe("check result processing", () => {
-    it("Should generate summary for a mockdata PR scenario", async () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-      const labelNames = [
-        "Cognitive Services",
-        "data-plane",
-        "TypeSpec",
-        "VersioningReviewRequired",
-      ];
-      const fyiCheckRuns = [];
-      const expectedComment =
-        "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul>" +
-        "<li>❌ This PR targets either the <code>main</code> branch of the public specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. " +
-        "These branches are not intended for iterative development. Therefore, you must acknowledge you understand that after this PR is merged, the APIs are considered " +
-        "shipped to Azure customers. Any further attempts at in-place modifications to the APIs will be subject to Azure's versioning " +
-        "and breaking change policies. <b>Additionally, for control plane APIs, you must acknowledge that you are following all " +
-        'the best practices documented by ARM at <a href="https://aka.ms/armapibestpractices">aka.ms/armapibestpractices</a>.</b> ' +
-        "If you do intend to release the APIs to your customers by merging this PR, add the <code>PublishToCustomers</code> label " +
-        "to your PR in acknowledgement of the above. Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> " +
-        '(see <a href="https://aka.ms/azsdk/api-versions#release--branches">aka.ms/azsdk/api-versions#release--branches</a>).</li>' +
-        "<li>❌ This PR has at least one change violating Azure versioning policy (label: <code>VersioningReviewRequired</code>).<br/>To unblock this PR, either a) " +
-        'introduce a new API version with these changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.' +
-        "</li><li>❌ The required check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult " +
-        'the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>';
-      const expectedOutput = [
-        expectedComment,
-        {
-          name: "[TEST-IGNORE] Automated merging requirements met",
-          result: "FAILURE",
-          summary:
-            "❌ This PR cannot be merged because some requirements are not met. See the details.",
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-        {
-          name: "TypeSpec Requirement",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Requirement"),
-        },
-        {
-          name: "Protected Files",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Protected Files"),
-        },
-        {
-          name: "TypeSpec Validation",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-        {
-          name: "Breaking Change(Cross-Version)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "Swagger ModelValidation",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger ModelValidation"),
-        },
-        {
-          name: "Swagger SemanticValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger SemanticValidation"),
-        },
-        {
-          name: "Swagger Lint(RPaaS)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
-        },
-        {
-          name: "Automated merging requirements met",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Automated merging requirements met"),
-        },
-        {
-          name: "license/cla",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("license/cla"),
-        },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
-      ];
-
-      const output = await createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate completed summary for no matched check suites", async () => {
+    it("should generate success summary for no matched check suites (completed impactAssessment)", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = [];
@@ -367,6 +238,271 @@ describe("Summarize Checks Unit Tests", () => {
           status: "COMPLETED",
           conclusion: "SUCCESS",
           checkInfo: getCheckInfo("Swagger PrettierCheck"),
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    it("should generate success summary with completed required checks but in-progress FYI", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const expectedOutput = [
+        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "SUCCESS",
+          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
+        },
+      ];
+
+      const requiredCheckRuns = [
+        {
+          name: "SpellCheck",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("SpellCheck"),
+        },
+        {
+          name: "TypeSpec Requirement",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("TypeSpec Requirement"),
+        },
+      ];
+
+      const fyiCheckRuns = [
+        {
+          name: "Swagger Avocado",
+          status: "QUEUED",
+          conclusion: null,
+          checkInfo: {
+            precedence: 1,
+            name: "Swagger Avocado",
+            suppressionLabels: [],
+            troubleshootingGuide:
+              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
+          },
+        },
+        {
+          name: "license/cla",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: {
+            precedence: 0,
+            name: "license/cla",
+            suppressionLabels: [],
+            troubleshootingGuide:
+              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
+          },
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    // this case should NEVER occur in practice, due to Summarize PR Impact being made a "required" check, but in cases
+    // where the user is targeting a branch that is not the main branch, we may have no required checks
+    // but still have FYI checks in progress. This is a regression test to ensure we handle this case correctly.
+    it("should generate success summary with 0 required checks but in-progress FYI", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const expectedOutput = [
+        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "SUCCESS",
+          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
+        },
+      ];
+
+      const requiredCheckRuns = [];
+
+      const fyiCheckRuns = [
+        {
+          name: "Swagger Avocado",
+          status: "QUEUED",
+          conclusion: null,
+          checkInfo: {
+            precedence: 1,
+            name: "Swagger Avocado",
+            suppressionLabels: [],
+            troubleshootingGuide:
+              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
+          },
+        },
+        {
+          name: "license/cla",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: {
+            precedence: 0,
+            name: "license/cla",
+            suppressionLabels: [],
+            troubleshootingGuide:
+              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
+          },
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    it("should generate success with warning for error FYI", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const expectedOutput = [
+        `<h2>Next Steps to Merge</h2>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>license/cla</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>If you still want to proceed merging this PR without addressing the above failures, refer to step 4 in the <a href="https://aka.ms/azsdk/pr-diagram">PR workflow diagram</a>.`,
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "SUCCESS",
+          summary: `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, but soon these requirements will be blocking.<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.<br/>If you want to proceed with merging this PR without fixing them, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`,
+        },
+      ];
+      const requiredCheckRuns = [
+        {
+          name: "SpellCheck",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("SpellCheck"),
+        },
+      ];
+
+      const fyiCheckRuns = [
+        {
+          name: "license/cla",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("license/cla"),
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    it("should generate pending summary when checks are partially in progress", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const fyiCheckRuns = [];
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
+      ];
+
+      const requiredCheckRuns = [
+        {
+          name: "TypeSpec Validation",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+        {
+          name: "Swagger Avocado",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger Avocado"),
+        },
+        {
+          name: "license/cla",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("license/cla"),
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    it("should generate pending summary when checks are in progress", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const fyiCheckRuns = [];
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
+      ];
+
+      const requiredCheckRuns = [
+        {
+          name: "TypeSpec Validation",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+        {
+          name: "Swagger Avocado",
+          status: "QUEUED",
+          conclusion: null,
+          checkInfo: getCheckInfo("Swagger Avocado"),
+        },
+        {
+          name: "license/cla",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("license/cla"),
         },
       ];
 
@@ -557,16 +693,37 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate completed summary with completed required checks but in-progress FYI", async () => {
+    it("Should generate error summary for a PR scenario with labeling issues", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
-      const labelNames = [];
+      const labelNames = [
+        "Cognitive Services",
+        "data-plane",
+        "TypeSpec",
+        "VersioningReviewRequired",
+      ];
+      const fyiCheckRuns = [];
+      const expectedComment =
+        "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul>" +
+        "<li>❌ This PR targets either the <code>main</code> branch of the public specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. " +
+        "These branches are not intended for iterative development. Therefore, you must acknowledge you understand that after this PR is merged, the APIs are considered " +
+        "shipped to Azure customers. Any further attempts at in-place modifications to the APIs will be subject to Azure's versioning " +
+        "and breaking change policies. <b>Additionally, for control plane APIs, you must acknowledge that you are following all " +
+        'the best practices documented by ARM at <a href="https://aka.ms/armapibestpractices">aka.ms/armapibestpractices</a>.</b> ' +
+        "If you do intend to release the APIs to your customers by merging this PR, add the <code>PublishToCustomers</code> label " +
+        "to your PR in acknowledgement of the above. Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> " +
+        '(see <a href="https://aka.ms/azsdk/api-versions#release--branches">aka.ms/azsdk/api-versions#release--branches</a>).</li>' +
+        "<li>❌ This PR has at least one change violating Azure versioning policy (label: <code>VersioningReviewRequired</code>).<br/>To unblock this PR, either a) " +
+        'introduce a new API version with these changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.' +
+        "</li><li>❌ The required check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult " +
+        'the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>';
       const expectedOutput = [
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
+        expectedComment,
         {
           name: "[TEST-IGNORE] Automated merging requirements met",
-          result: "SUCCESS",
-          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
+          result: "FAILURE",
+          summary:
+            "❌ This PR cannot be merged because some requirements are not met. See the details.",
         },
       ];
 
@@ -583,126 +740,29 @@ describe("Summarize Checks Unit Tests", () => {
           conclusion: "SUCCESS",
           checkInfo: getCheckInfo("TypeSpec Requirement"),
         },
-      ];
-
-      const fyiCheckRuns = [
         {
-          name: "Swagger Avocado",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          name: "Protected Files",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Protected Files"),
         },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-      ];
-
-      const output = await createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    // this case should NEVER occur in practice, due to Summarize PR Impact being made a "required" check, but in cases
-    // where the user is targeting a branch that is not the main branch, we may have no required checks
-    // but still have FYI checks in progress. This is a regression test to ensure we handle this case correctly.
-    it("should generate completed summary with 0 required checks but in-progress FYI", async () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-      const labelNames = [];
-      const expectedOutput = [
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
-        {
-          name: "[TEST-IGNORE] Automated merging requirements met",
-          result: "SUCCESS",
-          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
-        },
-      ];
-
-      const requiredCheckRuns = [];
-
-      const fyiCheckRuns = [
-        {
-          name: "Swagger Avocado",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-      ];
-
-      const output = await createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate pending summary when checks are partially in progress", async () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-      const labelNames = [];
-      const fyiCheckRuns = [];
-      const expectedOutput = [
-        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
-        {
-          name: "[TEST-IGNORE] Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
-        },
-      ];
-
-      const requiredCheckRuns = [
         {
           name: "TypeSpec Validation",
-          status: "IN_PROGRESS",
-          conclusion: null,
+          status: "COMPLETED",
+          conclusion: "FAILURE",
           checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+        {
+          name: "Swagger BreakingChange",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
+        },
+        {
+          name: "Breaking Change(Cross-Version)",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
         },
         {
           name: "Swagger Avocado",
@@ -711,10 +771,40 @@ describe("Summarize Checks Unit Tests", () => {
           checkInfo: getCheckInfo("Swagger Avocado"),
         },
         {
+          name: "Swagger ModelValidation",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Swagger ModelValidation"),
+        },
+        {
+          name: "Swagger SemanticValidation",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger SemanticValidation"),
+        },
+        {
+          name: "Swagger Lint(RPaaS)",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
+        },
+        {
+          name: "Automated merging requirements met",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Automated merging requirements met"),
+        },
+        {
           name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
           checkInfo: getCheckInfo("license/cla"),
+        },
+        {
+          name: "Swagger PrettierCheck",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger PrettierCheck"),
         },
       ];
 
@@ -731,42 +821,37 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate pending summary when checks are in progress", async () => {
+    it("should generate error summary with a failed required check, and failed FYI checks", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = [];
-      const fyiCheckRuns = [];
-      const expectedOutput = [
-        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+      const expectedCheckOutput = {
+        name: "[TEST-IGNORE] Automated merging requirements met",
+        result: "FAILURE",
+        summary:
+          "❌ This PR cannot be merged because some requirements are not met. See the details.",
+      };
+      const expectedCommentOutput = `<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ The required check named <code>Swagger BreakingChange</code> has failed. To unblock this PR, follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.</li></ul><br/>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>`;
+
+      const fyiCheckRuns = [
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+          name: "TypeSpec Validation",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("TypeSpec Validation"),
         },
       ];
 
       const requiredCheckRuns = [
         {
-          name: "TypeSpec Validation",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("license/cla"),
+          name: "Swagger BreakingChange",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
         },
       ];
 
-      const output = await createNextStepsComment(
+      const [commentOutput, automatedCheckOutput] = await createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -776,7 +861,8 @@ describe("Summarize Checks Unit Tests", () => {
         true, // assessmentCompleted
       );
 
-      expect(output).toEqual(expectedOutput);
+      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
+      expect(commentOutput).toEqual(expectedCommentOutput);
     });
 
     it("should generate error summary with a failed required check, and in-progress FYI checks", async () => {
@@ -854,136 +940,5 @@ describe("Summarize Checks Unit Tests", () => {
 
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
     });
-  });
-
-  describe("update labels", () => {
-    const testCases = [
-      {
-        description: "Add ARMReview and resource-manager labels when existing labels are empty",
-        existingLabels: ["other-label"],
-        expectedLabelsToAdd: ["ARMReview", "resource-manager", "TypeSpec", "WaitForARMFeedback"],
-        expectedLabelsToRemove: [],
-        impactAssessment: {
-          suppressionReviewRequired: false,
-          rpaasChange: false,
-          newRP: false,
-          rpaasRPMissing: false,
-          rpaasRpNotInPrivateRepo: false,
-          resourceManagerRequired: true,
-          dataPlaneRequired: false,
-          rpaasExceptionRequired: false,
-          typeSpecChanged: true,
-          isNewApiVersion: false,
-          isDraft: false,
-          targetBranch: "main",
-        },
-      },
-      {
-        description: "We shouldn't add ARM review if resourceManagerRequired is false",
-        existingLabels: ["other-label"],
-        expectedLabelsToAdd: ["TypeSpec"],
-        expectedLabelsToRemove: [],
-        impactAssessment: {
-          suppressionReviewRequired: false,
-          rpaasChange: false,
-          newRP: false,
-          rpaasRPMissing: false,
-          rpaasRpNotInPrivateRepo: false,
-          resourceManagerRequired: false,
-          dataPlaneRequired: false,
-          rpaasExceptionRequired: false,
-          typeSpecChanged: true,
-          isNewApiVersion: false,
-          isDraft: false,
-          targetBranch: "main",
-        },
-      },
-    ];
-    it.each(testCases)(
-      "$description",
-      async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
-        const labelContext = await updateLabels(existingLabels, impactAssessment);
-
-        expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
-        expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
-      },
-    );
-  });
-
-  describe("ARM review process labelling", () => {
-    const testCases = [
-      {
-        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label", "ARMReview"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"],
-      },
-      {
-        existingLabels: ["other-label", "ARMChangesRequested"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: [],
-      },
-      {
-        existingLabels: [
-          "WaitForARMFeedback",
-          "ARMSignedOff",
-          "ARMChangesRequested",
-          "other-label",
-          "ARMReview",
-        ],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"],
-      },
-      {
-        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label", "ARMReview"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"],
-      },
-      {
-        existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label", "ARMReview"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["ARMChangesRequested"],
-      },
-      {
-        existingLabels: ["other-label", "ARMSignedOff"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: [],
-      },
-      {
-        existingLabels: ["WaitForARMFeedback", "other-label", "ARMReview"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: [],
-      },
-      {
-        existingLabels: ["other-label", "ARMReview"],
-        expectedLabelsToAdd: ["WaitForARMFeedback"],
-        expectedLabelsToRemove: [],
-      },
-      {
-        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "ARMReview"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"],
-      },
-      {
-        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "ARMReview"],
-        expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"],
-      },
-    ];
-
-    it.each(testCases)(
-      "$description",
-      async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
-        /** @type {import("./labelling.js").LabelContext} */
-        const labelContext = {
-          present: new Set(),
-          toAdd: new Set(),
-          toRemove: new Set(),
-        };
-        await processArmReviewLabels(labelContext, existingLabels);
-
-        expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
-        expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
-      },
-    );
   });
 });
