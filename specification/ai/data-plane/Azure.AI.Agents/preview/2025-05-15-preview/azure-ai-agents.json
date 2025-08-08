@@ -447,6 +447,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Files_UploadFile_MaximumSet": {
+            "$ref": "./examples/Files_UploadFile_MaximumSet_Gen.json"
+          },
+          "Files_UploadFile_MinimumSet": {
+            "$ref": "./examples/Files_UploadFile_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -707,6 +715,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Threads_CreateThread_MaximumSet": {
+            "$ref": "./examples/Threads_CreateThread_MaximumSet_Gen.json"
+          },
+          "Threads_CreateThread_MinimumSet": {
+            "$ref": "./examples/Threads_CreateThread_MinimumSet_Gen.json"
           }
         }
       }
@@ -983,6 +999,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Messages_CreateMessage_MaximumSet": {
+            "$ref": "./examples/Messages_CreateMessage_MaximumSet_Gen.json"
+          },
+          "Messages_CreateMessage_MinimumSet": {
+            "$ref": "./examples/Messages_CreateMessage_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1200,6 +1224,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_ListRuns_MaximumSet": {
+            "$ref": "./examples/Runs_ListRuns_MaximumSet_Gen.json"
+          },
+          "Runs_ListRuns_MinimumSet": {
+            "$ref": "./examples/Runs_ListRuns_MinimumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -1264,6 +1296,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_CreateRun_MaximumSet": {
+            "$ref": "./examples/Runs_CreateRun_MaximumSet_Gen.json"
+          },
+          "Runs_CreateRun_MinimumSet": {
+            "$ref": "./examples/Runs_CreateRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1302,6 +1342,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_GetRun_MaximumSet": {
+            "$ref": "./examples/Runs_GetRun_MaximumSet_Gen.json"
+          },
+          "Runs_GetRun_MinimumSet": {
+            "$ref": "./examples/Runs_GetRun_MinimumSet_Gen.json"
           }
         }
       },
@@ -1358,6 +1406,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_UpdateRun_MaximumSet": {
+            "$ref": "./examples/Runs_UpdateRun_MaximumSet_Gen.json"
+          },
+          "Runs_UpdateRun_MinimumSet": {
+            "$ref": "./examples/Runs_UpdateRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1396,6 +1452,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_CancelRun_MaximumSet": {
+            "$ref": "./examples/Runs_CancelRun_MaximumSet_Gen.json"
+          },
+          "Runs_CancelRun_MinimumSet": {
+            "$ref": "./examples/Runs_CancelRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1665,15 +1729,20 @@
                   },
                   "x-ms-client-name": "toolOutputs"
                 },
+                "tool_approvals": {
+                  "type": "array",
+                  "description": "A list of tool approvals allowing data to be sent to tools.",
+                  "items": {
+                    "$ref": "#/definitions/ToolApproval"
+                  },
+                  "x-ms-client-name": "toolApprovals"
+                },
                 "stream": {
                   "type": "boolean",
                   "description": "If true, returns a stream of events that happen during the Run as SSE, terminating at `[DONE]`.",
                   "x-nullable": true
                 }
-              },
-              "required": [
-                "tool_outputs"
-              ]
+              }
             }
           }
         ],
@@ -1689,6 +1758,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_SubmitToolOutputsToRun_MaximumSet": {
+            "$ref": "./examples/Runs_SubmitToolOutputsToRun_MaximumSet_Gen.json"
+          },
+          "Runs_SubmitToolOutputsToRun_MinimumSet": {
+            "$ref": "./examples/Runs_SubmitToolOutputsToRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1722,6 +1799,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateThreadAndRun_MaximumSet": {
+            "$ref": "./examples/CreateThreadAndRun_MaximumSet_Gen.json"
+          },
+          "CreateThreadAndRun_MinimumSet": {
+            "$ref": "./examples/CreateThreadAndRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -2533,6 +2618,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "VectorStoreFiles_CreateVectorStoreFile_MaximumSet": {
+            "$ref": "./examples/VectorStoreFiles_CreateVectorStoreFile_MaximumSet_Gen.json"
+          },
+          "VectorStoreFiles_CreateVectorStoreFile_MinimumSet": {
+            "$ref": "./examples/VectorStoreFiles_CreateVectorStoreFile_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -3101,7 +3194,9 @@
         "sharepoint_grounding",
         "azure_ai_search",
         "bing_custom_search",
-        "connected_agent"
+        "connected_agent",
+        "deep_research",
+        "mcp"
       ],
       "x-ms-enum": {
         "name": "AgentsNamedToolChoiceType",
@@ -3151,6 +3246,16 @@
             "name": "connectedAgent",
             "value": "connected_agent",
             "description": "Tool type `connected_agent`"
+          },
+          {
+            "name": "deepResearch",
+            "value": "deep_research",
+            "description": "Tool type `deep_research`"
+          },
+          {
+            "name": "mcp",
+            "value": "mcp",
+            "description": "Tool type `mcp`"
           }
         ]
       }
@@ -3538,6 +3643,104 @@
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
+    "BrowserAutomationToolCallDetails": {
+      "type": "object",
+      "description": "Details of a Browser Automation tool call.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input provided to the Browser Automation tool."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output returned by the Browser Automation tool."
+        },
+        "steps": {
+          "type": "array",
+          "description": "The steps the Browser Automation tool executed.",
+          "items": {
+            "$ref": "#/definitions/BrowserAutomationToolCallStep"
+          }
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "steps"
+      ]
+    },
+    "BrowserAutomationToolCallStep": {
+      "type": "object",
+      "description": "Describes a single step of a Browser Automation tool execution.",
+      "properties": {
+        "last_step_result": {
+          "type": "string",
+          "description": "The result of the last step executed with the Browser.",
+          "x-ms-client-name": "lastStepResult"
+        },
+        "current_state": {
+          "type": "string",
+          "description": "The current state of execution with the Browser.",
+          "x-ms-client-name": "currentState"
+        },
+        "next_step": {
+          "type": "string",
+          "description": "The next step to execute with the Browser.",
+          "x-ms-client-name": "nextStep"
+        }
+      },
+      "required": [
+        "last_step_result",
+        "current_state",
+        "next_step"
+      ]
+    },
+    "BrowserAutomationToolConnectionParameters": {
+      "type": "object",
+      "description": "Definition of input parameters for the connection used by the Browser Automation Tool.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the connection to your Azure Playwright resource."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "BrowserAutomationToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent.",
+      "properties": {
+        "browser_automation": {
+          "$ref": "#/definitions/BrowserAutomationToolParameters",
+          "description": "The Browser Automation Tool parameters.",
+          "x-ms-client-name": "browserAutomation"
+        }
+      },
+      "required": [
+        "browser_automation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation"
+    },
+    "BrowserAutomationToolParameters": {
+      "type": "object",
+      "description": "Definition of input parameters for the Browser Automation Tool.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BrowserAutomationToolConnectionParameters",
+          "description": "The connection parameters associated with the Browser Automation Tool."
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an agent.",
@@ -3835,6 +4038,11 @@
             "$ref": "#/definitions/ToolDefinition"
           }
         },
+        "tool_resources": {
+          "$ref": "#/definitions/ToolResources",
+          "description": "The overridden enabled tool resources that the agent should use to run the thread.",
+          "x-nullable": true
+        },
         "stream": {
           "type": "boolean",
           "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
@@ -3903,6 +4111,63 @@
       "required": [
         "assistant_id"
       ]
+    },
+    "DeepResearchBingGroundingConnection": {
+      "type": "object",
+      "description": "The connection resource ID for the Bing grounding resource .",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "The connection ID for the Bing grounding connection.",
+          "x-ms-client-name": "connectionId"
+        }
+      },
+      "required": [
+        "connection_id"
+      ]
+    },
+    "DeepResearchDetails": {
+      "type": "object",
+      "description": "The details of the Deep Research tool.",
+      "properties": {
+        "deep_research_model": {
+          "type": "string",
+          "description": "The deep research model deployment name.",
+          "x-ms-client-name": "model"
+        },
+        "bing_grounding_connections": {
+          "type": "array",
+          "description": "The array containing Bing grounding connection IDs to enhance deep research capabilities.",
+          "items": {
+            "$ref": "#/definitions/DeepResearchBingGroundingConnection"
+          },
+          "x-ms-client-name": "bingGroundingConnections"
+        }
+      },
+      "required": [
+        "deep_research_model",
+        "bing_grounding_connections"
+      ]
+    },
+    "DeepResearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Deep Research tool as used to configure an agent.",
+      "properties": {
+        "deep_research": {
+          "$ref": "#/definitions/DeepResearchDetails",
+          "description": "The deep_research tool definition configuration.",
+          "x-ms-client-name": "deepResearch"
+        }
+      },
+      "required": [
+        "deep_research"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "deep_research"
     },
     "DoneEvent": {
       "type": "string",
@@ -4414,6 +4679,99 @@
           }
         ]
       }
+    },
+    "MCPApprovalPerTool": {
+      "type": "object",
+      "description": "Customized MCP approval object, listing tools requiring and not requiring approvals",
+      "properties": {
+        "never": {
+          "$ref": "#/definitions/MCPToolList",
+          "description": "The list of tools, not requiring approval."
+        },
+        "always": {
+          "$ref": "#/definitions/MCPToolList",
+          "description": "The list of tools, always requiring approval."
+        }
+      }
+    },
+    "MCPRequiredApproval": {},
+    "MCPToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a MCP tool which defines a MCP server endpoint",
+      "properties": {
+        "server_label": {
+          "type": "string",
+          "description": "The label for the MCP server",
+          "x-ms-client-name": "serverLabel"
+        },
+        "server_url": {
+          "type": "string",
+          "description": "The endpoint for the MCP server",
+          "x-ms-client-name": "serverUrl"
+        },
+        "allowed_tools": {
+          "type": "array",
+          "description": "List of allowed tools for MCP server",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "allowedTools"
+        }
+      },
+      "required": [
+        "server_label",
+        "server_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
+    "MCPToolList": {
+      "type": "object",
+      "description": "The object, containing list of tools for approvals.",
+      "properties": {
+        "tool_names": {
+          "type": "array",
+          "description": "The list of tools for approval.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "toolNames"
+        }
+      },
+      "required": [
+        "tool_names"
+      ]
+    },
+    "MCPToolResource": {
+      "type": "object",
+      "description": "A set of resources that are used by the `mcp` tool.",
+      "properties": {
+        "server_label": {
+          "type": "string",
+          "description": "The label for the MCP server",
+          "x-ms-client-name": "serverLabel"
+        },
+        "headers": {
+          "type": "object",
+          "description": "The headers for the MCP server updates",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "require_approval": {
+          "$ref": "#/definitions/MCPRequiredApproval",
+          "description": "Does MCP server require approval",
+          "x-ms-client-name": "requireApproval"
+        }
+      },
+      "required": [
+        "server_label",
+        "headers"
+      ]
     },
     "MessageAttachment": {
       "type": "object",
@@ -5523,6 +5881,35 @@
         "arguments"
       ]
     },
+    "RequiredMcpToolCall": {
+      "type": "object",
+      "description": "A representation of a requested call to a MCP tool, needed by the model to continue evaluation of a run.",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to use when invoking the mcp tool, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the function used on the MCP server."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the MCP server."
+        }
+      },
+      "required": [
+        "arguments",
+        "name",
+        "server_label"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequiredToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
     "RequiredToolCall": {
       "type": "object",
       "description": "An abstract representation of a tool invocation needed by the model to continue a run.",
@@ -5924,6 +6311,26 @@
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
+    "RunStepBrowserAutomationToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Browser Automation tool issued by the Agent.",
+      "properties": {
+        "browser_automation": {
+          "$ref": "#/definitions/BrowserAutomationToolCallDetails",
+          "description": "Details of the browser automation tool call.",
+          "x-ms-client-name": "browserAutomation"
+        }
+      },
+      "required": [
+        "browser_automation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation"
+    },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",
       "description": "A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.",
@@ -6060,6 +6467,96 @@
         "total_tokens"
       ]
     },
+    "RunStepConnectedAgent": {
+      "type": "object",
+      "description": "The detailed information about connected agent tool call.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of connected agent."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The JSON serialized query to the connected agent."
+        },
+        "output": {
+          "type": "string",
+          "description": "The tool output."
+        },
+        "run_id": {
+          "type": "string",
+          "description": "The run ID used by the connected agent.",
+          "x-ms-client-name": "runId"
+        },
+        "thread_id": {
+          "type": "string",
+          "description": "The thread ID used by the connected agent.",
+          "x-ms-client-name": "threadId"
+        },
+        "assistant_id": {
+          "type": "string",
+          "description": "The ID of a connected agent.",
+          "x-ms-client-name": "agentId"
+        }
+      }
+    },
+    "RunStepConnectedAgentToolCall": {
+      "type": "object",
+      "description": "A record of a call to the connected agent.",
+      "properties": {
+        "connected_agent": {
+          "$ref": "#/definitions/RunStepConnectedAgent",
+          "description": "The connected agent step information.",
+          "x-ms-client-name": "connectedAgent"
+        }
+      },
+      "required": [
+        "connected_agent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "connected_agent"
+    },
+    "RunStepDeepResearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Deep Research tool, issued by the model in evaluation of a defined tool, that represents\nexecuted deep research operations.",
+      "properties": {
+        "deep_research": {
+          "$ref": "#/definitions/RunStepDeepResearchToolCallDetails",
+          "description": "The detailed information about the automated browser tasks performed by the model.",
+          "x-ms-client-name": "deepResearch"
+        }
+      },
+      "required": [
+        "deep_research"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "deep_research"
+    },
+    "RunStepDeepResearchToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information about the deep research tasks performed by the model.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input provided by the model to the deep research tool."
+        },
+        "output": {
+          "type": "string",
+          "description": "The final output for the deep research tool."
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
     "RunStepDelta": {
       "type": "object",
       "description": "Represents the delta payload in a streaming run step delta chunk.",
@@ -6070,6 +6567,52 @@
           "x-ms-client-name": "stepDetails"
         }
       }
+    },
+    "RunStepDeltaAzureAISearchToolCall": {
+      "type": "object",
+      "description": "Represents the Azure AI Search in a streaming run step.",
+      "properties": {
+        "azure_ai_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "azureAISearch"
+        }
+      },
+      "required": [
+        "azure_ai_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search"
+    },
+    "RunStepDeltaBingGroundingToolCall": {
+      "type": "object",
+      "description": "Represents the bing grounding tool call in a streaming run step.",
+      "properties": {
+        "bing_grounding": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingGrounding"
+        }
+      },
+      "required": [
+        "bing_grounding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_grounding"
     },
     "RunStepDeltaChunk": {
       "type": "object",
@@ -6197,6 +6740,46 @@
       ],
       "x-ms-discriminator-value": "code_interpreter"
     },
+    "RunStepDeltaConnectedAgentToolCall": {
+      "type": "object",
+      "description": "Represents the invocation of connected agent as a part of a streaming run step.",
+      "properties": {
+        "connected_agent": {
+          "$ref": "#/definitions/RunStepConnectedAgent",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "x-ms-client-name": "connectedAgent"
+        }
+      },
+      "required": [
+        "connected_agent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "connected_agent"
+    },
+    "RunStepDeltaDeepResearchToolCall": {
+      "type": "object",
+      "description": "Represents the Deep research in a streaming run step.",
+      "properties": {
+        "deep_research": {
+          "$ref": "#/definitions/RunStepDeepResearchToolCallDetails",
+          "description": "The details of DeepResearch tool call.",
+          "x-ms-client-name": "deepResearch"
+        }
+      },
+      "required": [
+        "deep_research"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "deep_research"
+    },
     "RunStepDeltaDetail": {
       "type": "object",
       "description": "Represents a single run step detail item in a streaming run step's delta payload.",
@@ -6263,6 +6846,51 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "RunStepDeltaMCPObject": {
+      "type": "object",
+      "description": "Represents an invocation of mcp as part of a streaming run step.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "items": {
+            "$ref": "#/definitions/RunStepDeltaMcpToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaDetail"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
+    "RunStepDeltaMcpToolCall": {
+      "type": "object",
+      "description": "Represents the function data in a streaming run step MCP call.*",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of a response."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for MCP call."
+        }
+      },
+      "required": [
+        "index",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
     "RunStepDeltaMessageCreation": {
       "type": "object",
       "description": "Represents a message creation within a streaming run step delta.",
@@ -6290,6 +6918,49 @@
           "x-ms-client-name": "messageId"
         }
       }
+    },
+    "RunStepDeltaOpenAPIObject": {
+      "type": "object",
+      "description": "Represents an invocation of openapi as part of a streaming run step.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "items": {
+            "$ref": "#/definitions/RunStepDeltaOpenAPIToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaDetail"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
+    },
+    "RunStepDeltaOpenAPIToolCall": {
+      "type": "object",
+      "description": "Represents the openapi tool call in a streaming run step.",
+      "properties": {
+        "openapi": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "openAPI"
+        }
+      },
+      "required": [
+        "openapi"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
     },
     "RunStepDeltaToolCall": {
       "type": "object",
@@ -6509,6 +7180,40 @@
         "name",
         "arguments"
       ]
+    },
+    "RunStepMcpToolCall": {
+      "type": "object",
+      "description": "A record of a call to a MCP tool, issued by the model in evaluation of a defined tool, that represents\nexecuted MCP actions.",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "Arguments to the MCP tool call, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the function used on the MCP server."
+        },
+        "output": {
+          "type": "string",
+          "description": "Output of the MCP tool call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label for the MCP server",
+          "x-ms-client-name": "serverLabel"
+        }
+      },
+      "required": [
+        "arguments",
+        "name",
+        "output"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
     },
     "RunStepMessageCreationDetails": {
       "type": "object",
@@ -6880,6 +7585,43 @@
         }
       ],
       "x-ms-discriminator-value": "sharepoint_grounding"
+    },
+    "SubmitToolApprovalAction": {
+      "type": "object",
+      "description": "The details for required tool call approval that must be submitted for an agent thread run to continue.",
+      "properties": {
+        "submit_tool_approval": {
+          "$ref": "#/definitions/SubmitToolApprovalDetails",
+          "description": "The details describing tools that should be approved to continue run.",
+          "x-ms-client-name": "submitToolApproval"
+        }
+      },
+      "required": [
+        "submit_tool_approval"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequiredAction"
+        }
+      ],
+      "x-ms-discriminator-value": "submit_tool_approval"
+    },
+    "SubmitToolApprovalDetails": {
+      "type": "object",
+      "description": "The details describing tools that should be approved.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The list of tool calls that must be approved for the agent thread run to continue.",
+          "items": {
+            "$ref": "#/definitions/RequiredToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "required": [
+        "tool_calls"
+      ]
     },
     "SubmitToolOutputsAction": {
       "type": "object",
@@ -7313,6 +8055,32 @@
         ]
       }
     },
+    "ToolApproval": {
+      "type": "object",
+      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "properties": {
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
+          "x-ms-client-name": "toolCallId"
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "The approval boolean value to be submitted."
+        },
+        "headers": {
+          "type": "object",
+          "description": "Headers to be attached to the approval.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tool_call_id",
+        "approve"
+      ]
+    },
     "ToolConnection": {
       "type": "object",
       "description": "A connection resource.",
@@ -7389,6 +8157,13 @@
           "$ref": "#/definitions/AzureAISearchToolResource",
           "description": "Resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
           "x-ms-client-name": "azureAISearch"
+        },
+        "mcp": {
+          "type": "array",
+          "description": "Resources to be used by the `mcp` tool consisting of a server label and headers.",
+          "items": {
+            "$ref": "#/definitions/MCPToolResource"
+          }
         }
       }
     },

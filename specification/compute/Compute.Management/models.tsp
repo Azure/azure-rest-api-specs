@@ -1117,13 +1117,6 @@ union AlternativeType {
   Plan: "Plan",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-union Expand {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Properties: "Properties",
-}
-
 /**
  * Specifies the type of the proximity placement group. Possible values are: **Standard** : Co-locate resources within an Azure region or Availability Zone. **Ultra** : For future use.
  */
@@ -1499,12 +1492,11 @@ model UsageName {
 /**
  * The List Virtual Machine operation response.
  */
-@pagedResult
 model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes.
    */
-  @items
+  @pageItems
   @identifiers(#["name"])
   value?: VirtualMachineSize[];
 
@@ -5587,6 +5579,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
    * The list of VMSS VM extensions
    */
   @identifiers(#["name", "id"])
+  @pageItems
   value?: VirtualMachineScaleSetVMExtension[];
 }
 
@@ -6381,6 +6374,7 @@ model VirtualMachineExtensionsListResult {
   /**
    * The list of extensions
    */
+  @pageItems
   value?: VirtualMachineExtension[];
 }
 
@@ -6830,24 +6824,6 @@ model VmImagesInEdgeZoneListResult {
    * The URI to fetch the next page of VMImages in EdgeZone. Call ListNext() with this URI to fetch the next page of VmImages.
    */
   nextLink?: string;
-}
-
-/**
- * The List Virtual Machine Images operation response.
- */
-@pagedResult
-model VirtualMachineImagesWithPropertiesListResult {
-  /**
-   * The VirtualMachineImage items on this page
-   */
-  @items
-  value?: VirtualMachineImage[];
-
-  /**
-   * The link to the next page of items
-   */
-  @nextLink
-  nextLink?: ResourceLocation<VirtualMachineImage>;
 }
 
 /**
@@ -7314,12 +7290,11 @@ model DedicatedHostUpdate extends UpdateResource {
 /**
  * The List Dedicated Host sizes operation response.
  */
-@pagedResult
 model DedicatedHostSizeListResult {
   /**
    * The list of dedicated host sizes.
    */
-  @items
+  @pageItems
   value?: string[];
 
   /**

@@ -217,6 +217,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
 ## CLI
 
 See configuration in [readme.cli.md](./readme.cli.md)

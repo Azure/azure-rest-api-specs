@@ -143,6 +143,35 @@ model ConnectedAgentToolDefinition extends ToolDefinition {
   @encodedName("application/json", "connected_agent")
   connectedAgent: ConnectedAgentDetails;
 }
+@doc("The input definition information for a Deep Research tool as used to configure an agent.")
+@added(Versions.v2025_05_15_preview)
+model DeepResearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'deep_research'.")
+  type: "deep_research";
+
+  @doc("The deep_research tool definition configuration.")
+  @encodedName("application/json", "deep_research")
+  deepResearch: DeepResearchDetails;
+}
+
+@doc("The input definition information for a MCP tool which defines a MCP server endpoint")
+@added(Versions.v2025_05_15_preview)
+model MCPToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'mcp'.")
+  type: "mcp";
+
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel: string;
+
+  @doc("The endpoint for the MCP server")
+  @encodedName("application/json", "server_url")
+  serverUrl: string;
+
+  @doc("List of allowed tools for MCP server")
+  @encodedName("application/json", "allowed_tools")
+  allowedTools?: string[];
+}
 
 // Definition details: File Search
 
@@ -177,6 +206,31 @@ model AzureFunctionToolDefinition extends ToolDefinition {
   @doc("The definition of the concrete function that the function tool should call.")
   @encodedName("application/json", "azure_function")
   azureFunction: AzureFunctionDefinition;
+}
+
+@doc("The input definition information for a Browser Automation Tool, as used to configure an Agent.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("The Browser Automation Tool parameters.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationToolParameters;
+}
+
+@doc("Definition of input parameters for the Browser Automation Tool.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolParameters {
+  @doc("The connection parameters associated with the Browser Automation Tool.")
+  connection: BrowserAutomationToolConnectionParameters;
+}
+
+@doc("Definition of input parameters for the connection used by the Browser Automation Tool.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolConnectionParameters {
+  @doc("The ID of the connection to your Azure Playwright resource.")
+  id: string;
 }
 
 /**
@@ -350,6 +404,22 @@ model RequiredFunctionToolCallDetails {
   arguments: string;
 }
 
+@doc("A representation of a requested call to a MCP tool, needed by the model to continue evaluation of a run.")
+@added(Versions.v2025_05_15_preview)
+model RequiredMcpToolCall extends RequiredToolCall {
+  @doc("The object type of the required tool call. Always 'mcp' for MCP tools.")
+  type: "mcp";
+
+  @doc("The arguments to use when invoking the mcp tool, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
+  arguments: string;
+
+  @doc("The name of the function used on the MCP server.")
+  name: string;
+
+  @doc("The label of the MCP server.")
+  server_label: string;
+}
+
 //
 // Tool calls -- present in run steps and provide information about tool execution
 //
@@ -469,6 +539,75 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
+  A record of a call to a Browser Automation tool issued by the Agent.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("Details of the browser automation tool call.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationToolCallDetails;
+}
+
+@doc("""
+  Details of a Browser Automation tool call.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallDetails {
+  @doc("The input provided to the Browser Automation tool.")
+  input: string;
+
+  @doc("The output returned by the Browser Automation tool.")
+  output: string;
+
+  @doc("The steps the Browser Automation tool executed.")
+  steps: BrowserAutomationToolCallStep[];
+}
+
+@doc("""
+  Describes a single step of a Browser Automation tool execution.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallStep {
+  @doc("The result of the last step executed with the Browser.")
+  @encodedName("application/json", "last_step_result")
+  lastStepResult: string;
+
+  @doc("The current state of execution with the Browser.")
+  @encodedName("application/json", "current_state")
+  currentState: string;
+
+  @doc("The next step to execute with the Browser.")
+  @encodedName("application/json", "next_step")
+  nextStep: string;
+}
+
+@doc("""
+  A record of a call to a MCP tool, issued by the model in evaluation of a defined tool, that represents
+  executed MCP actions.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepMcpToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'mcp'.")
+  type: "mcp";
+
+  @doc("Arguments to the MCP tool call, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
+  arguments: string;
+
+  @doc("Name of the function used on the MCP server.")
+  name: string;
+
+  @doc("Output of the MCP tool call.")
+  output: string;
+
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel?: string;
+}
+
+@doc("""
   A record of a call to a SharePoint tool, issued by the model in evaluation of a defined tool, that represents
   executed SharePoint actions.
   """)
@@ -535,6 +674,31 @@ model RunStepOpenAPIToolCall extends RunStepToolCall {
   @doc("Reserved for future use.")
   @encodedName("application/json", "openapi")
   openAPI: Record<string>;
+}
+
+@doc("""
+  A record of a call to a Deep Research tool, issued by the model in evaluation of a defined tool, that represents
+  executed deep research operations.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepDeepResearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'deep_research'.")
+  type: "deep_research";
+
+  @doc("The detailed information about the automated browser tasks performed by the model.")
+  @encodedName("application/json", "deep_research")
+  deepResearch: RunStepDeepResearchToolCallDetails;
+}
+
+/** A record of a call to the connected agent. */
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgentToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'connected_agent'.")
+  type: "connected_agent";
+
+  @doc("The connected agent step information.")
+  @encodedName("application/json", "connected_agent")
+  connectedAgent: RunStepConnectedAgent;
 }
 
 // Call details: Code Interpreter
@@ -621,6 +785,44 @@ model BingGroundingSearchConfiguration {
   freshness?: string;
 }
 
+// Call details: Deep Research
+@doc("The detailed information about the deep research tasks performed by the model.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeepResearchToolCallDetails {
+  @doc("The input provided by the model to the deep research tool.")
+  input: string;
+
+  @doc("The final output for the deep research tool.")
+  output?: string;
+}
+
+// Call details: ConnectedAgent
+
+@doc("The detailed information about connected agent tool call.")
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgent {
+  @doc("The name of connected agent.")
+  name?: string;
+
+  @doc("The JSON serialized query to the connected agent.")
+  arguments?: string;
+
+  @doc("The tool output.")
+  output?: string;
+
+  @doc("The run ID used by the connected agent.")
+  @encodedName("application/json", "run_id")
+  runId?: string;
+
+  @doc("The thread ID used by the connected agent.")
+  @encodedName("application/json", "thread_id")
+  threadId?: string;
+
+  @doc("The ID of a connected agent.")
+  @encodedName("application/json", "assistant_id")
+  agentId?: string;
+}
+
 //
 // Tool outputs -- structured data that provides requested information from tools back to the model
 //
@@ -634,6 +836,24 @@ model ToolOutput {
 
   @doc("The output from the tool to be submitted.")
   output?: string;
+}
+
+//
+// Tool approvals -- structured data that allows the client to send data to tool
+//
+
+@doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
+@added(Versions.v2025_05_15_preview)
+model ToolApproval {
+  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
+  @encodedName("application/json", "tool_call_id")
+  toolCallId: string;
+
+  @doc("The approval boolean value to be submitted.")
+  approve: boolean;
+
+  @doc("Headers to be attached to the approval.")
+  headers?: Record<string>;
 }
 
 /**
@@ -708,6 +928,14 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `connected_agent` */
   connectedAgent: "connected_agent",
+
+  /** Tool type `deep_research` */
+  @added(Versions.v2025_05_15_preview)
+  deepResearch: "deep_research",
+
+  /** Tool type `mcp` */
+  @added(Versions.v2025_05_15_preview)
+  mcp: "mcp",
 }
 
 /** The function name that will be used, if using the `function` tool */
@@ -780,6 +1008,30 @@ model ConnectedAgentDetails {
 
   @doc("A description of what the agent does, used by the model to choose when and how to call the agent.")
   description: string;
+}
+
+/**
+ * The details of the Deep Research tool.
+ */
+@added(Versions.v2025_05_15_preview)
+model DeepResearchDetails {
+  @doc("The deep research model deployment name.")
+  @encodedName("application/json", "deep_research_model")
+  `model`: string;
+
+  @doc("The array containing Bing grounding connection IDs to enhance deep research capabilities.")
+  @encodedName("application/json", "bing_grounding_connections")
+  bingGroundingConnections: DeepResearchBingGroundingConnection[];
+}
+
+/**
+ * The connection resource ID for the Bing grounding resource .
+ */
+@added(Versions.v2025_05_15_preview)
+model DeepResearchBingGroundingConnection {
+  @doc("The connection ID for the Bing grounding connection.")
+  @encodedName("application/json", "connection_id")
+  connectionId: string;
 }
 
 /**

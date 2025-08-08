@@ -1,0 +1,413 @@
+{
+  "title": "Organizations_Update_MaximumSet",
+  "operationId": "Organizations_Update",
+  "parameters": {
+    "api-version": "2025-06-23-preview",
+    "subscriptionId": "DFF26289-4E9C-46D0-890E-F8BE27BDA8C2",
+    "resourceGroupName": "rgneon",
+    "organizationName": "myOrganization",
+    "properties": {
+      "properties": {
+        "marketplaceDetails": {
+          "subscriptionId": "11111111-2222-3333-4444-555555555555",
+          "subscriptionStatus": "Fulfilled",
+          "offerDetails": {
+            "publisherId": "neon",
+            "offerId": "neon-postgres",
+            "planId": "standard",
+            "planName": "Standard Plan",
+            "termUnit": "P1M",
+            "termId": "hjk5-pou9-mnb8"
+          }
+        },
+        "userDetails": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "emailAddress": "john.doe@example.com",
+          "upn": "johndoe",
+          "phoneNumber": "555-123-4567"
+        },
+        "companyDetails": {
+          "companyName": "Contoso Ltd.",
+          "country": "United States",
+          "officeAddress": "123 Main Street, Seattle, WA 98101",
+          "businessPhone": "555-987-6543",
+          "domain": "contoso.com",
+          "numberOfEmployees": 250
+        },
+        "partnerOrganizationProperties": {
+          "organizationId": "org-123456",
+          "organizationName": "myOrganization",
+          "singleSignOnProperties": {
+            "singleSignOnState": "Configured",
+            "enterpriseAppId": "12345678-abcd-1234-efgh-123456789012",
+            "singleSignOnUrl": "https://login.microsoftonline.com/contoso.com",
+            "aadDomains": [
+              "contoso.com"
+            ]
+          }
+        },
+        "projectProperties": {
+          "entityName": "myProject",
+          "attributes": [
+            {
+              "name": "environment",
+              "value": "development"
+            }
+          ],
+          "regionId": "westus",
+          "storage": 22,
+          "pgVersion": 23,
+          "historyRetention": 16,
+          "defaultEndpointSettings": {
+            "autoscalingLimitMinCu": 11,
+            "autoscalingLimitMaxCu": 11
+          },
+          "branch": {
+            "entityName": "main",
+            "attributes": [
+              {
+                "name": "environment",
+                "value": "development"
+              }
+            ],
+            "projectId": "project-123",
+            "parentId": "main-branch",
+            "roles": [
+              {
+                "entityName": "read_only_role",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "branchId": "branch-123",
+                "permissions": [
+                  "SELECT"
+                ],
+                "isSuperUser": true
+              }
+            ],
+            "databases": [
+              {
+                "entityName": "appdb",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "branchId": "branch-123",
+                "ownerName": "postgres"
+              }
+            ],
+            "endpoints": [
+              {
+                "entityName": "primary-endpoint",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "projectId": "project-123",
+                "branchId": "branch-123",
+                "endpointType": "read_write",
+                "size": {
+                  "autoscalingLimitMinCu": 1,
+                  "autoscalingLimitMaxCu": 4
+                }
+              }
+            ]
+          },
+          "roles": [
+            {
+              "entityName": "admin_role",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "development"
+                }
+              ],
+              "branchId": "branch-123",
+              "permissions": [
+                "ALL"
+              ],
+              "isSuperUser": true
+            }
+          ],
+          "databases": [
+            {
+              "entityName": "postgres",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "development"
+                }
+              ],
+              "branchId": "branch-123",
+              "ownerName": "postgres"
+            }
+          ],
+          "endpoints": [
+            {
+              "entityName": "readonly-endpoint",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "development"
+                }
+              ],
+              "projectId": "project-123",
+              "branchId": "branch-123",
+              "endpointType": "read_only",
+              "size": {
+                "autoscalingLimitMinCu": 1,
+                "autoscalingLimitMaxCu": 2
+              }
+            }
+          ]
+        }
+      },
+      "tags": {
+        "key2979": "ovumlkykfrh"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "marketplaceDetails": {
+            "subscriptionId": "gnxsxkxxt",
+            "subscriptionStatus": "PendingFulfillmentStart",
+            "offerDetails": {
+              "publisherId": "wjlfubcaepxddvghkjvtbh",
+              "offerId": "prgwvptmykcx",
+              "planId": "n",
+              "planName": "bcuqcroufozznnfrlyrmfw",
+              "termUnit": "wf",
+              "termId": "llsxsbnzzyeqbhqfwcw"
+            }
+          },
+          "userDetails": {
+            "firstName": "scglor",
+            "lastName": "itno",
+            "emailAddress": "john.doe@example.com",
+            "upn": "u",
+            "phoneNumber": "mohwnhp"
+          },
+          "companyDetails": {
+            "companyName": "qyngwdcaosluxgf",
+            "country": "mlhfqsafj",
+            "officeAddress": "vsutnqbvtiqdirqwnaxacswgxmd",
+            "businessPhone": "dqgpbunwjvxxtegiu",
+            "domain": "ysxipcfkcmdn",
+            "numberOfEmployees": 30
+          },
+          "provisioningState": "Succeeded",
+          "partnerOrganizationProperties": {
+            "organizationId": "zcqpwyzskwxqlwr",
+            "organizationName": "myOrganization",
+            "singleSignOnProperties": {
+              "singleSignOnState": "Initial",
+              "enterpriseAppId": "ggmgrjgedvlvtlsfltkkqhqcqyt",
+              "singleSignOnUrl": "jqhuivzksfztp",
+              "aadDomains": [
+                "qynybhkjlclbpekjsjstsefe"
+              ]
+            }
+          },
+          "projectProperties": {
+            "entityId": "project-123",
+            "entityName": "myProject",
+            "createdAt": "2023-06-15T10:00:00Z",
+            "provisioningState": "Succeeded",
+            "attributes": [
+              {
+                "name": "environment",
+                "value": "development"
+              }
+            ],
+            "regionId": "westus",
+            "storage": 22,
+            "pgVersion": 23,
+            "historyRetention": 16,
+            "defaultEndpointSettings": {
+              "autoscalingLimitMinCu": 11,
+              "autoscalingLimitMaxCu": 11
+            },
+            "branch": {
+              "entityId": "branch-123",
+              "entityName": "main",
+              "createdAt": "2023-06-15T10:00:00Z",
+              "provisioningState": "Succeeded",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "development"
+                }
+              ],
+              "projectId": "project-123",
+              "parentId": "main-branch",
+              "roleName": "admin",
+              "databaseName": "postgres",
+              "roles": [
+                {
+                  "entityId": "role-123",
+                  "entityName": "read_only_role",
+                  "createdAt": "2023-06-15T10:00:00Z",
+                  "provisioningState": "Succeeded",
+                  "attributes": [
+                    {
+                      "name": "environment",
+                      "value": "development"
+                    }
+                  ],
+                  "branchId": "branch-123",
+                  "permissions": [
+                    "SELECT"
+                  ],
+                  "isSuperUser": true,
+                  "roleName": "reader",
+                  "lastUpdated": "2023-06-15T10:05:00Z",
+                  "owns": "neonDb + 2"
+                }
+              ],
+              "databases": [
+                {
+                  "entityId": "db-123",
+                  "entityName": "appdb",
+                  "createdAt": "2023-06-15T10:00:00Z",
+                  "provisioningState": "Succeeded",
+                  "attributes": [
+                    {
+                      "name": "environment",
+                      "value": "development"
+                    }
+                  ],
+                  "branchId": "branch-123",
+                  "ownerName": "postgres",
+                  "databaseName": "appdb",
+                  "lastUpdated": "2023-06-15T10:05:00Z"
+                }
+              ],
+              "endpoints": [
+                {
+                  "entityId": "endpoint-123",
+                  "entityName": "primary-endpoint",
+                  "createdAt": "2023-06-15T10:00:00Z",
+                  "provisioningState": "Succeeded",
+                  "attributes": [
+                    {
+                      "name": "environment",
+                      "value": "development"
+                    }
+                  ],
+                  "projectId": "project-123",
+                  "branchId": "branch-123",
+                  "endpointType": "read_write",
+                  "endpointId": "endpoint-123",
+                  "computeName": "primary",
+                  "status": "active",
+                  "lastActive": "2023-06-15T10:30:00Z",
+                  "size": {
+                    "autoscalingLimitMinCu": 1,
+                    "autoscalingLimitMaxCu": 4
+                  }
+                }
+              ],
+              "branchId": "branch-123"
+            },
+            "roles": [
+              {
+                "entityId": "role-456",
+                "entityName": "admin_role",
+                "createdAt": "2023-06-15T10:00:00Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "branchId": "branch-123",
+                "permissions": [
+                  "ALL"
+                ],
+                "isSuperUser": true,
+                "roleName": "admin",
+                "lastUpdated": "2023-06-15T10:05:00Z",
+                "owns": "neonDb + 2"
+              }
+            ],
+            "databases": [
+              {
+                "entityId": "db-456",
+                "entityName": "postgres",
+                "createdAt": "2023-06-15T10:00:00Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "branchId": "branch-123",
+                "ownerName": "postgres",
+                "databaseName": "postgres",
+                "lastUpdated": "2023-06-15T10:05:00Z"
+              }
+            ],
+            "endpoints": [
+              {
+                "entityId": "endpoint-456",
+                "entityName": "readonly-endpoint",
+                "createdAt": "2023-06-15T10:00:00Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "projectId": "project-123",
+                "branchId": "branch-123",
+                "endpointType": "read_only",
+                "endpointId": "endpoint-456",
+                "computeName": "readonly",
+                "status": "active",
+                "lastActive": "2023-06-15T10:30:00Z",
+                "size": {
+                  "autoscalingLimitMinCu": 1,
+                  "autoscalingLimitMaxCu": 2
+                }
+              }
+            ]
+          }
+        },
+        "tags": {
+          "key439": "oelsukziksikdouupyehsqg"
+        },
+        "location": "westus",
+        "id": "/subscriptions/DFF26289-4E9C-46D0-890E-F8BE27BDA8C2/resourceGroups/rgneon/providers/Microsoft.Neon.Postgres/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Microsoft.Neon.Postgres/organizations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-15T10:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-15T10:05:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

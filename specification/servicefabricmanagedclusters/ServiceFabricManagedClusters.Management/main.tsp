@@ -45,6 +45,7 @@ interface Operations {
   @route("/providers/Microsoft.ServiceFabric/operations")
   @get
   @armResourceList(OperationListResult)
+  @list
   list(
     ...ApiVersionParameter,
   ): ArmResponse<OperationListResult> | ErrorResponse;
