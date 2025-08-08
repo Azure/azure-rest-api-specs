@@ -18,7 +18,7 @@ import {
   formatDifferenceReport,
   formatModifiedValuesReport,
 } from "./summary.js";
-import { compareDocuments, printPathDiff } from "./compare.js";
+import { compareDocuments, printDiff } from "./compare.js";
 import { writeFile } from "fs/promises";
 
 function parseArguments() {
@@ -218,7 +218,7 @@ export async function main() {
     outputMarkdown += "| Type | Level | Message |\n";
     outputMarkdown += "| ---- | ----- | ------- |\n";
     for (const diff of compareResult) {
-      outputMarkdown += printPathDiff(diff);
+      outputMarkdown += printDiff(diff);
     }
     console.log(outputMarkdown);
   }  

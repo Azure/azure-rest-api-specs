@@ -57,6 +57,7 @@ interface SitesByServiceGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
   @doc("list Site at SG scope")
+  @list
   listByServiceGroup(
     ...ApiVersionParameter,
 
@@ -83,6 +84,7 @@ interface SitesByServiceGroup {
   ): ArmResponse<Site> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PUT call"
+  @Azure.Core.useFinalStateVia("original-uri")
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @put
   @doc("create or update Site at SG scope")
