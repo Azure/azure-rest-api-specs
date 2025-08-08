@@ -5957,23 +5957,11 @@
         }
       ],
       "required": [
-        "entityType",
         "productCode",
         "startAt",
         "systemId"
       ],
       "properties": {
-        "entityType": {
-          "type": "string",
-          "enum": [
-            "Primary"
-          ],
-          "x-ms-enum": {
-            "name": "PrimaryEntityType",
-            "modelAsString": true
-          },
-          "description": "Type of conditional credit entity"
-        },
         "systemId": {
           "type": "string",
           "description": "System identifier shared between primary and contributor conditional credits representing the same conditional credit program"
@@ -6001,24 +5989,12 @@
         }
       ],
       "required": [
-        "entityType",
         "primaryResourceId",
         "systemId",
         "productCode",
         "startAt"
       ],
       "properties": {
-        "entityType": {
-          "type": "string",
-          "enum": [
-            "Contributor"
-          ],
-          "x-ms-enum": {
-            "name": "ContributorEntityType",
-            "modelAsString": true
-          },
-          "description": "Type of conditional credit entity"
-        },
         "primaryResourceId": {
           "type": "string",
           "format": "arm-id",
