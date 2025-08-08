@@ -364,6 +364,7 @@ export async function summarizeChecksImpl(
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
   const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.summary.addRaw("PR: ");
   core.summary.addLink(prUrl, prUrl);
 
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
