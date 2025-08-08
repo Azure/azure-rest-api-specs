@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CommunicationMessagesClient",
-    "version": "2025-04-01-preview",
+    "version": "2025-09-01-preview",
     "description": "Azure Communication Messages Service",
     "x-typespec-generated": [
       {
@@ -67,6 +67,9 @@
     },
     {
       "name": "Notifications"
+    },
+    {
+      "name": "ReadReceipts"
     },
     {
       "name": "Stream"
@@ -135,11 +138,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets a list of templates": {
-            "$ref": "./examples/Template_ListTemplates.json"
           }
         },
         "x-ms-pageable": {
@@ -212,11 +210,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Retrieves list of conversations": {
-            "$ref": "./examples/ConversationThread_ListConversations.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -258,11 +251,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a new conversation": {
-            "$ref": "./examples/ConversationAdministration_CreateConversation.json"
           }
         }
       }
@@ -314,11 +302,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the details of a specific conversation": {
-            "$ref": "./examples/ConversationAdministration_GetConversation.json"
           }
         }
       },
@@ -395,11 +378,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a specific conversation": {
-            "$ref": "./examples/ConversationAdministration_DeleteConversation.json"
           }
         }
       }
@@ -478,11 +456,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Terminates a specific conversation": {
-            "$ref": "./examples/ConversationAdministration_TerminateConversation.json"
           }
         }
       }
@@ -565,11 +538,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get AI Analysis of a conversation": {
-            "$ref": "./examples/ConversationThread_AnalyzeConversation.json"
-          }
         }
       }
     },
@@ -635,11 +603,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves list of conversation messages": {
-            "$ref": "./examples/ConversationThread_ListMessages.json"
           }
         },
         "x-ms-pageable": {
@@ -728,11 +691,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Sends a conversation message from Business to User": {
-            "$ref": "./examples/ConversationThread_SendMessage.json"
-          }
         }
       }
     },
@@ -816,11 +774,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Adds participants to a specific conversation": {
-            "$ref": "./examples/ConversationThread_AddParticipants.json"
           }
         }
       }
@@ -906,11 +859,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "remove a participant from a conversation": {
-            "$ref": "./examples/ConversationThread_RemoveParticipants.json"
-          }
         }
       }
     },
@@ -988,40 +936,79 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Sends a notification message - Interactive Button": {
-            "$ref": "./examples/NotificationMessages_SendButtonInteractiveMessage.json"
+        }
+      }
+    },
+    "/messages/readreceipts:send": {
+      "post": {
+        "operationId": "ReadReceiptsOperations_Send",
+        "tags": [
+          "ReadReceipts"
+        ],
+        "description": "Sends a read receipt update from Business to User.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
-          "Sends a notification message - Interactive List": {
-            "$ref": "./examples/NotificationMessages_SendListInteractiveMessage.json"
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
           },
-          "Sends a notification message - Interactive Url": {
-            "$ref": "./examples/NotificationMessages_SendUrlInteractiveMessage.json"
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           },
-          "Sends a notification message - Reaction": {
-            "$ref": "./examples/NotificationMessages_SendReaction.json"
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
-          "Sends a notification message - Sticker": {
-            "$ref": "./examples/NotificationMessages_SendSticker.json"
+          {
+            "$ref": "#/parameters/ReadReceiptSendRequestBody"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
-          "Sends a notification message - Template": {
-            "$ref": "./examples/NotificationMessages_SendTemplate.json"
-          },
-          "Sends a notification message - audio": {
-            "$ref": "./examples/NotificationMessages_SendAudio.json"
-          },
-          "Sends a notification message - document": {
-            "$ref": "./examples/NotificationMessages_SendDocument.json"
-          },
-          "Sends a notification message - image": {
-            "$ref": "./examples/NotificationMessages_SendImage.json"
-          },
-          "Sends a notification message - text": {
-            "$ref": "./examples/NotificationMessages_SendText.json"
-          },
-          "Sends a notification message - video": {
-            "$ref": "./examples/NotificationMessages_SendVideo.json"
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -1077,11 +1064,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Download media": {
-            "$ref": "./examples/Stream_GetMedia.json"
           }
         }
       }
@@ -2589,6 +2571,28 @@
       ],
       "x-ms-discriminator-value": "reaction"
     },
+    "ReadReceiptContent": {
+      "type": "object",
+      "description": "A request to send a status update.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The id of the message this status refers to."
+        },
+        "channelRegistrationId": {
+          "type": "string",
+          "description": "The Channel Registration ID for the Business Identifier."
+        },
+        "typingIndicator": {
+          "type": "boolean",
+          "description": "Whether this status update includes a typing indicator."
+        }
+      },
+      "required": [
+        "messageId",
+        "channelRegistrationId"
+      ]
+    },
     "RemoveParticipantsOptions": {
       "type": "object",
       "description": "Request payload for removing participants from a conversation.",
@@ -3117,6 +3121,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/NotificationContent"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ReadReceiptSendRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the read receipt update to send.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ReadReceiptContent"
       },
       "x-ms-parameter-location": "method"
     },
