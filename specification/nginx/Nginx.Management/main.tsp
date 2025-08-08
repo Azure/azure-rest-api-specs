@@ -16,7 +16,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service(#{ title: "Microsoft.Nginx.NginxPlus management service" })
 @versioned(Versions)
-namespace Nginx.NginxPlus;
+namespace NGINX.NGINXPLUS;
 
 /** The available API versions. */
 enum Versions {
