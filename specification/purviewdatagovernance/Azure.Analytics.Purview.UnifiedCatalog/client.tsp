@@ -8,13 +8,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using PurviewUnifiedCatalog;
 
-@client(
-  {
-    name: "UnifiedCatalogClient",
-    service: PurviewUnifiedCatalog,
-  },
-  "python"
-)
+@client({
+  name: "UnifiedCatalogClient",
+  service: PurviewUnifiedCatalog,
+})
 namespace Customizations;
 
 @@clientName(ListCriticalDataElementAsync, "ListCriticalDataElement");
