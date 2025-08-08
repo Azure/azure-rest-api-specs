@@ -12,26 +12,13 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 //
-// fine-tuning types
-//
-
-@doc("The method used for fine-tuning. Abstract base class")
-@discriminator("type")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobTrainingMethod {
-  @doc("The type of method. Is either supervised, dpo, or reinforcement.")
-  type: string;
-}
-
-//
 // OAI SFT fine-tuning
 //
 
 @doc("The hyper parameter settings used in Supervised Fine-Tuning job.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobSFTHyperParameters {
+model SupervisedHyperparametersParam {
   @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
   batch_size?: int32;
 
@@ -42,22 +29,15 @@ model FineTuningJobSFTHyperParameters {
   n_epochs?: int32;
 }
 
-@doc("Configuration for the supervised fine-tuning method.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobSFTTrainingMethodConfiguration {
-  @doc("The hyperparameters used for the SFT fine-tuning job.")
-  hyperparameters?: FineTuningJobSFTHyperParameters;
-}
-
 @doc("Supervised Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobSFTTrainingMethod extends FineTuningJobTrainingMethod {
+model SupervisedMethodParam {
+  @doc("Supervised fine-tuning type")
   type: "supervised";
 
-  @doc("Configuration for the supervised fine-tuning method.")
-  supervised: FineTuningJobSFTTrainingMethodConfiguration;
+  @doc("The hyperparameters used for the SFT fine-tuning job.")
+  hyperparameters?: SupervisedHyperparametersParam;
 }
 
 //
@@ -67,7 +47,7 @@ model FineTuningJobSFTTrainingMethod extends FineTuningJobTrainingMethod {
 @doc("The hyper parameter settings used in Direct Preference Optimization fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobDPOHyperParameters {
+model DpoHyperparametersParam {
   @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
   batch_size?: int32;
 
@@ -84,19 +64,12 @@ model FineTuningJobDPOHyperParameters {
 @doc("Configuration for the Direct Preference Optimization fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobDPOTrainingMethodConfiguration {
-  @doc("The hyperparameters used for the DPO fine-tuning job.")
-  hyperparameters?: FineTuningJobDPOHyperParameters;
-}
-
-@doc("Configuration for the Direct Preference Optimization fine-tuning method.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobDPOTrainingMethod extends FineTuningJobTrainingMethod {
+model DpoMethodParam {
+  @doc("DPO fine-tuning type")
   type: "dpo";
 
-  @doc("Configuration for the DPO fine-tuning method.")
-  dpo: FineTuningJobDPOTrainingMethodConfiguration;
+  @doc("The hyperparameters used for the DPO fine-tuning job.")
+  hyperparameters?: DpoHyperparametersParam;
 }
 
 //
@@ -136,7 +109,7 @@ union FineTuningStringOperation {
 @doc("A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningStringCheckGrader extends FineTuningGrader {
+model StringCheckGraderParam extends FineTuningGrader {
   type: "string_check";
 
   @doc("The input text. This may include template strings.")
@@ -195,7 +168,7 @@ union FineTuningEvaluationMetric {
 @doc("ScoreModelGrader uses a model to assign a score to the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningTextSimilarityGrader extends FineTuningGrader {
+model TextSimilarityGraderParam extends FineTuningGrader {
   type: "text_similarity";
 
   @doc("The evaluation metric to use")
@@ -217,7 +190,7 @@ model FineTuningTextSimilarityGrader extends FineTuningGrader {
 @doc("A PythonGrader object that runs a python script on the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningPythonGrader extends FineTuningGrader {
+model PythonGraderParam extends FineTuningGrader {
   type: "python";
 
   @doc("The name of the grader.")
@@ -328,10 +301,10 @@ model FineTuningJobGraderModelSamplingParam {
 @doc("A ScoreModelGrader object that uses a model to assign a score to the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningScoreModelGrader extends FineTuningGrader {
+model ScoreModelGraderParam extends FineTuningGrader {
   type: "score_model";
 
-  //@doc("The input text. This may include template strings.")
+  @doc("The input text. This may include template strings.")
   input: Array<FineTuningJobGraderMessage>;
 
   @doc("The model to use for the evaluation.")
@@ -353,7 +326,7 @@ model FineTuningScoreModelGrader extends FineTuningGrader {
 @doc("A MultiGrader object combines the output of multiple graders to produce a single score.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningMultiGrader extends FineTuningGrader {
+model MultiGraderParam extends FineTuningGrader {
   type: "multi";
 
   @doc("A formula to calculate the output based on grader results.")
@@ -393,7 +366,7 @@ model FineTuningLabelModelGrader extends FineTuningGrader {
 @doc("Configuration for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTHyperParameters {
+model ReinforcementHyperparametersParam {
   @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
   batch_size?: int32;
 
@@ -420,7 +393,7 @@ model FineTuningJobRFTHyperParameters {
 @discriminator("type")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTResponseFormat {
+model ReinforcementResponseFormat {
   @doc("Response format request - Currently only JSON schema is supported")
   type: string;
 }
@@ -428,35 +401,28 @@ model FineTuningJobRFTResponseFormat {
 @doc("Gets the response format for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTResponseJsonSchema extends FineTuningJobRFTResponseFormat {
+model ReinforcementResponseJsonSchema extends ReinforcementResponseFormat {
   type: "json_schema";
 
   @doc("JSON schema response for RFT")
   json_schema: Record<unknown>;
 }
 
-@doc("Configuration for the reinforcement fine-tuning method.")
+@doc("Configuration for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTTrainingMethodConfiguration {
+model ReinforcementMethodParam {
+  @doc("Reinforcement fine-tuning type")
+  type: "reinforcement";
+
   @doc("The grader used for the fine-tuning job.")
   grader: FineTuningGrader;
 
   @doc("The hyperparameters used for the reinforcement fine-tuning job.")
-  hyperparameters?: FineTuningJobRFTHyperParameters;
+  hyperparameters?: ReinforcementHyperparametersParam;
 
   @doc("Gets the response format for the Reinforcement fine-tuning job.")
-  response_format?: FineTuningJobRFTResponseFormat;
-}
-
-@doc("Configuration for the Reinforcement fine-tuning method.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobRFTTrainingMethod extends FineTuningJobTrainingMethod {
-  type: "reinforcement";
-
-  @doc("Configuration for the reinforcement fine-tuning method.")
-  reinforcement: FineTuningJobRFTTrainingMethodConfiguration;
+  response_format?: ReinforcementResponseFormat;
 }
 
 //////////////////
@@ -468,7 +434,7 @@ model FineTuningJobRFTTrainingMethod extends FineTuningJobTrainingMethod {
 @doc("The hyper parameter settings used in Mistral Completion Fine-Tuning job.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralCompletionHyperParameters {
+model MistralCompletionHyperParameters {
   @doc("The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset.")
   training_steps?: int32;
 
@@ -491,22 +457,15 @@ model FineTuningJobMistralCompletionHyperParameters {
   fim_ratio?: float64;
 }
 
-@doc("Configuration for Mistral Completion fine-tuning method.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobMistralCompletionTrainingMethodConfiguration {
-  @doc("The hyperparameters used for the Mistral Completion fine-tuning job.")
-  hyperparameters?: FineTuningJobMistralCompletionHyperParameters;
-}
-
 @doc("Mistral Completion Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralCompletionTrainingMethod extends FineTuningJobTrainingMethod {
+model MistralCompletionParam {
+  @doc("Mistral Completion fine-tuning type")
   type: "mistralCompletion";
 
-  @doc("Configuration for Mistral Completion fine-tuning method.")
-  mistralCompletion: FineTuningJobMistralCompletionTrainingMethodConfiguration;
+  @doc("The hyperparameters used for the Mistral Completion fine-tuning job.")
+  hyperparameters?: MistralCompletionHyperParameters;
 }
 
 //////////////////
@@ -518,7 +477,7 @@ model FineTuningJobMistralCompletionTrainingMethod extends FineTuningJobTraining
 @doc("The hyper parameter settings used in Mistral Classifier Fine-Tuning job.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralClassifierHyperParameters {
+model MistralClassifierHyperparametersParam {
   @doc("The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset.")
   training_steps?: int32;
 
@@ -538,22 +497,15 @@ model FineTuningJobMistralClassifierHyperParameters {
   seq_len?: int32;
 }
 
-@doc("Configuration for Mistral Classifier fine-tuning method.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobMistralClassifierTrainingMethodConfiguration {
-  @doc("The hyperparameters used for the Mistral Classifier fine-tuning job.")
-  hyperparameters?: FineTuningJobMistralClassifierHyperParameters;
-}
-
 @doc("Mistral Classifier Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobMistralClassifierTrainingMethod extends FineTuningJobTrainingMethod {
+model MistralClassifierMethodParam {
+  @doc("Mistral Classifier fine-tuning type")
   type: "mistralClassifier";
 
-  @doc("Configuration for Mistral Classifier fine-tuning method.")
-  mistralClassifier: FineTuningJobMistralClassifierTrainingMethodConfiguration;
+  @doc("The hyperparameters used for the Mistral Classifier fine-tuning job.")
+  hyperparameters?: MistralClassifierHyperparametersParam;
 }
 
 //////////////////
@@ -579,7 +531,7 @@ model FineTuningJobError {
 @doc("The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobIntegrationWeightsAndBiases {
+model IntegrationWandb {
   @doc("The name of the project that the new run will be created under.")
   project: string;
 
@@ -596,15 +548,77 @@ model FineTuningJobIntegrationWeightsAndBiases {
 @doc("Integration to enable for fine-tuning job.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobIntegration {
+model Integration {
   @doc("The type of integration to enable. Currently, only 'wandb' (Weights and Biases) is supported.")
   type: string;
 
   @doc("The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.")
-  wandb: FineTuningJobIntegrationWeightsAndBiases;
+  wandb: IntegrationWandb;
 }
 
 // Fine-tuning integration with W&B ends
+
+// Training method
+
+@doc("Training method types")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union MethodTrainingType {
+  string,
+
+  @doc("Supervised fine-tuning type")
+  supervised: "supervised",
+
+  @doc("DPO fine-tuning type")
+  dpo: "dpo",
+
+  @doc("Reinforcement fine-tuning type")
+  reinforcement: "reinforcement",
+
+  @doc("Mistral Completion fine-tuning type")
+  mistralCompletion: "mistralCompletion",
+
+  @doc("Mistral Classifier fine-tuning type")
+  mistralClassifier: "mistralClassifier",
+}
+
+@doc("The method used for fine-tuning. Abstract base class")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Method {
+  @doc("The type of training method.")
+  type: MethodTrainingType;
+
+  @doc("Configuration for the supervised fine-tuning method.")
+  supervised?: SupervisedMethodParam;
+
+  @doc("Configuration for the DPO fine-tuning method.")
+  dpo?: DpoMethodParam;
+
+  @doc("Configuration for the reinforcement fine-tuning method.")
+  reinforcement?: ReinforcementMethodParam;
+
+  @doc("Configuration for the Mistral Classifier fine-tuning method.")
+  mistralClassifier?: MistralClassifierMethodParam;
+
+  @doc("Configuration for the Mistral Completion fine-tuning method.")
+  mistralCompletion?: MistralCompletionParam;
+}
+
+@doc("The hyperparameters used for the fine-tuning job. This value is now deprecated sin favor of `method`, and should be passed in under the `method` parameter.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Hyperparameters {
+  @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
+  batch_size?: int32;
+
+  @doc("Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.")
+  learning_rate_multiplier?: int32;
+
+  @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
+  n_epochs?: int32;
+}
 
 //
 // Fine-Tuning job
@@ -636,10 +650,10 @@ model FineTuningJob {
   finished_at?: utcDateTime;
 
   @doc("The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs")
-  hyperparameters?: FineTuningJobSFTHyperParameters;
+  hyperparameters?: Hyperparameters;
 
   @doc("A list of integrations to enable for this fine-tuning job.")
-  integrations?: Array<FineTuningJobIntegration>;
+  integrations?: Array<Integration>;
 
   /**
    * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
@@ -649,7 +663,7 @@ model FineTuningJob {
   metadata?: Record<string>;
 
   @doc("The method used for fine-tuning.")
-  method: FineTuningJobTrainingMethod;
+  method: Method;
 
   @doc("The base model that is being fine-tuned.")
   `model`: string;
@@ -747,7 +761,7 @@ model InferenceConfigs {
 @doc("Fine-Tuning Job")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobCreation {
+model JobCreateParams {
   @doc("The base model that is being fine-tuned.")
   `model`: string;
 
@@ -755,10 +769,10 @@ model FineTuningJobCreation {
   training_file: string;
 
   @doc("The hyperparameters used for the SFT fine-tuning job. This value is now deprecated in favor of method, and should be passed in under the method parameter.")
-  hyperparameters?: FineTuningJobSFTHyperParameters;
+  hyperparameters?: Hyperparameters;
 
   @doc("A list of integrations to enable for this fine-tuning job.")
-  integrations?: Array<FineTuningJobIntegration>;
+  integrations?: Array<Integration>;
 
   /**
    * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
@@ -768,7 +782,7 @@ model FineTuningJobCreation {
   metadata?: Record<string>;
 
   @doc("The method used for fine-tuning.")
-  method: FineTuningJobTrainingMethod;
+  method: Method;
 
   @doc("The seed used for the fine-tuning job.")
   seed: int32;

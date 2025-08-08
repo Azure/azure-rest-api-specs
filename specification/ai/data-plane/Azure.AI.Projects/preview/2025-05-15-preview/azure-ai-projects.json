@@ -1187,7 +1187,7 @@
             "description": "fine-tuning job",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FineTuningJobCreation"
+              "$ref": "#/definitions/JobCreateParams"
             }
           }
         ],
@@ -2921,6 +2921,55 @@
       ],
       "x-ms-discriminator-value": "developer"
     },
+    "DpoHyperparametersParam": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Direct Preference Optimization fine-tuning method.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "beta": {
+          "type": "number",
+          "format": "double",
+          "description": "The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model."
+        },
+        "learning_rate_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
+    },
+    "DpoMethodParam": {
+      "type": "object",
+      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "DPO fine-tuning type",
+          "enum": [
+            "dpo"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/DpoHyperparametersParam",
+          "description": "The hyperparameters used for the DPO fine-tuning job."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -3270,14 +3319,14 @@
           "description": "The time when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running."
         },
         "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
+          "$ref": "#/definitions/Hyperparameters",
           "description": "The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs"
         },
         "integrations": {
           "type": "array",
           "description": "A list of integrations to enable for this fine-tuning job.",
           "items": {
-            "$ref": "#/definitions/FineTuningJobIntegration"
+            "$ref": "#/definitions/Integration"
           }
         },
         "metadata": {
@@ -3288,7 +3337,7 @@
           }
         },
         "method": {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod",
+          "$ref": "#/definitions/Method",
           "description": "The method used for fine-tuning."
         },
         "model": {
@@ -3444,124 +3493,6 @@
           "type": "number",
           "format": "double",
           "description": "metric valid mean token accuracy"
-        }
-      }
-    },
-    "FineTuningJobCreation": {
-      "type": "object",
-      "description": "Fine-Tuning Job",
-      "properties": {
-        "model": {
-          "type": "string",
-          "description": "The base model that is being fine-tuned."
-        },
-        "training_file": {
-          "type": "string",
-          "description": "The file ID used for training. You can retrieve the training data with the Files API."
-        },
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
-          "description": "The hyperparameters used for the SFT fine-tuning job. This value is now deprecated in favor of method, and should be passed in under the method parameter."
-        },
-        "integrations": {
-          "type": "array",
-          "description": "A list of integrations to enable for this fine-tuning job.",
-          "items": {
-            "$ref": "#/definitions/FineTuningJobIntegration"
-          }
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "method": {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod",
-          "description": "The method used for fine-tuning."
-        },
-        "seed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The seed used for the fine-tuning job."
-        },
-        "suffix": {
-          "type": "string",
-          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
-        },
-        "validation_file": {
-          "type": "string",
-          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
-        },
-        "TrainingType": {
-          "$ref": "#/definitions/TrainingType",
-          "description": "The SKU used for training. This is Azure AI specific parameter"
-        },
-        "inference_configs": {
-          "$ref": "#/definitions/InferenceConfigs",
-          "description": "Inference configurations. This is Azure AI specific parameter"
-        }
-      },
-      "required": [
-        "model",
-        "training_file",
-        "method",
-        "seed"
-      ]
-    },
-    "FineTuningJobDPOHyperParameters": {
-      "type": "object",
-      "description": "The hyper parameter settings used in Direct Preference Optimization fine-tuning method.",
-      "properties": {
-        "batch_size": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
-        },
-        "beta": {
-          "type": "number",
-          "format": "double",
-          "description": "The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model."
-        },
-        "learning_rate_multiplier": {
-          "type": "number",
-          "format": "double",
-          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
-        },
-        "n_epochs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
-        }
-      }
-    },
-    "FineTuningJobDPOTrainingMethod": {
-      "type": "object",
-      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
-      "properties": {
-        "dpo": {
-          "$ref": "#/definitions/FineTuningJobDPOTrainingMethodConfiguration",
-          "description": "Configuration for the DPO fine-tuning method."
-        }
-      },
-      "required": [
-        "dpo"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod"
-        }
-      ],
-      "x-ms-discriminator-value": "dpo"
-    },
-    "FineTuningJobDPOTrainingMethodConfiguration": {
-      "type": "object",
-      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
-      "properties": {
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobDPOHyperParameters",
-          "description": "The hyperparameters used for the DPO fine-tuning job."
         }
       }
     },
@@ -3779,371 +3710,6 @@
         ]
       }
     },
-    "FineTuningJobIntegration": {
-      "type": "object",
-      "description": "Integration to enable for fine-tuning job.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of integration to enable. Currently, only 'wandb' (Weights and Biases) is supported."
-        },
-        "wandb": {
-          "$ref": "#/definitions/FineTuningJobIntegrationWeightsAndBiases",
-          "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run."
-        }
-      },
-      "required": [
-        "type",
-        "wandb"
-      ]
-    },
-    "FineTuningJobIntegrationWeightsAndBiases": {
-      "type": "object",
-      "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.",
-      "properties": {
-        "project": {
-          "type": "string",
-          "description": "The name of the project that the new run will be created under."
-        },
-        "entity": {
-          "type": "string",
-          "description": "The entity to use for the run. This allows you to set the team or username of the WandB user that you would like associated with the run. If not set, the default entity for the registered WandB API key is used."
-        },
-        "name": {
-          "type": "string",
-          "description": "A display name to set for the run. If not set, we will use the Job ID as the name."
-        },
-        "tags": {
-          "type": "array",
-          "description": "A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some default tags are generated by OpenAI: 'openai/finetune', 'openai/{base-model}', 'openai/{ftjob}.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "project"
-      ]
-    },
-    "FineTuningJobMistralClassifierHyperParameters": {
-      "type": "object",
-      "description": "The hyper parameter settings used in Mistral Classifier Fine-Tuning job.",
-      "properties": {
-        "training_steps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
-        },
-        "learning_rate": {
-          "type": "number",
-          "format": "double",
-          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
-          "default": 0.0001
-        },
-        "weight_decay": {
-          "type": "number",
-          "format": "double",
-          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
-          "default": 0.1
-        },
-        "warmup_fraction": {
-          "type": "number",
-          "format": "double",
-          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
-          "default": 0.05
-        },
-        "epochs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
-        },
-        "seq_len": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seq len parameter"
-        }
-      }
-    },
-    "FineTuningJobMistralClassifierTrainingMethod": {
-      "type": "object",
-      "description": "Mistral Classifier Fine-Tuning method.",
-      "properties": {
-        "mistralClassifier": {
-          "$ref": "#/definitions/FineTuningJobMistralClassifierTrainingMethodConfiguration",
-          "description": "Configuration for Mistral Classifier fine-tuning method."
-        }
-      },
-      "required": [
-        "mistralClassifier"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod"
-        }
-      ],
-      "x-ms-discriminator-value": "mistralClassifier"
-    },
-    "FineTuningJobMistralClassifierTrainingMethodConfiguration": {
-      "type": "object",
-      "description": "Configuration for Mistral Classifier fine-tuning method.",
-      "properties": {
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobMistralClassifierHyperParameters",
-          "description": "The hyperparameters used for the Mistral Classifier fine-tuning job."
-        }
-      }
-    },
-    "FineTuningJobMistralCompletionHyperParameters": {
-      "type": "object",
-      "description": "The hyper parameter settings used in Mistral Completion Fine-Tuning job.",
-      "properties": {
-        "training_steps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
-        },
-        "learning_rate": {
-          "type": "number",
-          "format": "double",
-          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
-          "default": 0.0001
-        },
-        "weight_decay": {
-          "type": "number",
-          "format": "double",
-          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
-          "default": 0.1
-        },
-        "warmup_fraction": {
-          "type": "number",
-          "format": "double",
-          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
-          "default": 0.05
-        },
-        "epochs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
-        },
-        "seq_len": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seq len parameter"
-        },
-        "fim_ratio": {
-          "type": "number",
-          "format": "double",
-          "description": "Fim ratio parameter"
-        }
-      }
-    },
-    "FineTuningJobMistralCompletionTrainingMethod": {
-      "type": "object",
-      "description": "Mistral Completion Fine-Tuning method.",
-      "properties": {
-        "mistralCompletion": {
-          "$ref": "#/definitions/FineTuningJobMistralCompletionTrainingMethodConfiguration",
-          "description": "Configuration for Mistral Completion fine-tuning method."
-        }
-      },
-      "required": [
-        "mistralCompletion"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod"
-        }
-      ],
-      "x-ms-discriminator-value": "mistralCompletion"
-    },
-    "FineTuningJobMistralCompletionTrainingMethodConfiguration": {
-      "type": "object",
-      "description": "Configuration for Mistral Completion fine-tuning method.",
-      "properties": {
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobMistralCompletionHyperParameters",
-          "description": "The hyperparameters used for the Mistral Completion fine-tuning job."
-        }
-      }
-    },
-    "FineTuningJobRFTHyperParameters": {
-      "type": "object",
-      "description": "Configuration for the Reinforcement fine-tuning method.",
-      "properties": {
-        "batch_size": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
-        },
-        "compute_multiplier": {
-          "type": "number",
-          "format": "double",
-          "description": "Multiplier on amount of compute used for exploring search space during training."
-        },
-        "eval_interval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of training steps between evaluation runs."
-        },
-        "eval_samples": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of evaluation samples to generate per training step."
-        },
-        "learning_rate_multiplier": {
-          "type": "number",
-          "format": "double",
-          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
-        },
-        "n_epochs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
-        },
-        "reasoning_effort": {
-          "type": "string",
-          "description": "Level of reasoning effort."
-        }
-      }
-    },
-    "FineTuningJobRFTResponseFormat": {
-      "type": "object",
-      "description": "Gets the response format for the Reinforcement fine-tuning method.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Response format request - Currently only JSON schema is supported"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "FineTuningJobRFTResponseJsonSchema": {
-      "type": "object",
-      "description": "Gets the response format for the Reinforcement fine-tuning method.",
-      "properties": {
-        "json_schema": {
-          "type": "object",
-          "description": "JSON schema response for RFT",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "json_schema"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobRFTResponseFormat"
-        }
-      ],
-      "x-ms-discriminator-value": "json_schema"
-    },
-    "FineTuningJobRFTTrainingMethod": {
-      "type": "object",
-      "description": "Configuration for the Reinforcement fine-tuning method.",
-      "properties": {
-        "reinforcement": {
-          "$ref": "#/definitions/FineTuningJobRFTTrainingMethodConfiguration",
-          "description": "Configuration for the reinforcement fine-tuning method."
-        }
-      },
-      "required": [
-        "reinforcement"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod"
-        }
-      ],
-      "x-ms-discriminator-value": "reinforcement"
-    },
-    "FineTuningJobRFTTrainingMethodConfiguration": {
-      "type": "object",
-      "description": "Configuration for the reinforcement fine-tuning method.",
-      "properties": {
-        "grader": {
-          "$ref": "#/definitions/FineTuningGrader",
-          "description": "The grader used for the fine-tuning job."
-        },
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobRFTHyperParameters",
-          "description": "The hyperparameters used for the reinforcement fine-tuning job."
-        },
-        "response_format": {
-          "$ref": "#/definitions/FineTuningJobRFTResponseFormat",
-          "description": "Gets the response format for the Reinforcement fine-tuning job."
-        }
-      },
-      "required": [
-        "grader"
-      ]
-    },
-    "FineTuningJobSFTHyperParameters": {
-      "type": "object",
-      "description": "The hyper parameter settings used in Supervised Fine-Tuning job.",
-      "properties": {
-        "batch_size": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
-        },
-        "learning_rate_multiplier": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
-        },
-        "n_epochs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
-        }
-      }
-    },
-    "FineTuningJobSFTTrainingMethod": {
-      "type": "object",
-      "description": "Supervised Fine-Tuning method.",
-      "properties": {
-        "supervised": {
-          "$ref": "#/definitions/FineTuningJobSFTTrainingMethodConfiguration",
-          "description": "Configuration for the supervised fine-tuning method."
-        }
-      },
-      "required": [
-        "supervised"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod"
-        }
-      ],
-      "x-ms-discriminator-value": "supervised"
-    },
-    "FineTuningJobSFTTrainingMethodConfiguration": {
-      "type": "object",
-      "description": "Configuration for the supervised fine-tuning method.",
-      "properties": {
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
-          "description": "The hyperparameters used for the SFT fine-tuning job."
-        }
-      }
-    },
-    "FineTuningJobTrainingMethod": {
-      "type": "object",
-      "description": "The method used for fine-tuning. Abstract base class",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of method. Is either supervised, dpo, or reinforcement."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
     "FineTuningLabelModelGrader": {
       "type": "object",
       "description": "A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.",
@@ -4192,148 +3758,6 @@
       ],
       "x-ms-discriminator-value": "label_model"
     },
-    "FineTuningMultiGrader": {
-      "type": "object",
-      "description": "A MultiGrader object combines the output of multiple graders to produce a single score.",
-      "properties": {
-        "calculate_output": {
-          "type": "string",
-          "description": "A formula to calculate the output based on grader results."
-        },
-        "graders": {
-          "type": "object",
-          "description": "Graders to be combined",
-          "additionalProperties": {
-            "$ref": "#/definitions/FineTuningGrader"
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        }
-      },
-      "required": [
-        "calculate_output",
-        "graders",
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "multi"
-    },
-    "FineTuningPythonGrader": {
-      "type": "object",
-      "description": "A PythonGrader object that runs a python script on the input.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "source": {
-          "type": "string",
-          "description": "The source code of the python script."
-        },
-        "image_tag": {
-          "type": "string",
-          "description": "The image tag to use for the python script."
-        }
-      },
-      "required": [
-        "name",
-        "source"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "python"
-    },
-    "FineTuningScoreModelGrader": {
-      "type": "object",
-      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
-      "properties": {
-        "input": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FineTuningJobGraderMessage"
-          }
-        },
-        "model": {
-          "type": "string",
-          "description": "The model to use for the evaluation."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "range": {
-          "type": "array",
-          "description": "The model to use for the evaluation.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "sampling_params": {
-          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
-          "description": "The sampling parameters for the model."
-        },
-        "pass_threshold": {
-          "type": "number",
-          "format": "double",
-          "description": "TBD"
-        }
-      },
-      "required": [
-        "input",
-        "model",
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "score_model"
-    },
-    "FineTuningStringCheckGrader": {
-      "type": "object",
-      "description": "A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.",
-      "properties": {
-        "input": {
-          "type": "string",
-          "description": "The input text. This may include template strings."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "operation": {
-          "$ref": "#/definitions/FineTuningStringOperation",
-          "description": "The string check operation to perform. One of eq, ne, like, or ilike."
-        },
-        "reference": {
-          "type": "string",
-          "description": "The reference text. This may include template strings."
-        }
-      },
-      "required": [
-        "input",
-        "name",
-        "operation",
-        "reference"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "string_check"
-    },
     "FineTuningStringOperation": {
       "type": "string",
       "description": "String operations used in RFT string check grader",
@@ -4370,45 +3794,6 @@
         ]
       }
     },
-    "FineTuningTextSimilarityGrader": {
-      "type": "object",
-      "description": "ScoreModelGrader uses a model to assign a score to the input.",
-      "properties": {
-        "evaluation_metric": {
-          "$ref": "#/definitions/FineTuningEvaluationMetric",
-          "description": "The evaluation metric to use"
-        },
-        "input": {
-          "type": "string",
-          "description": "The text being graded."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "reference": {
-          "type": "string",
-          "description": "The text being graded against."
-        },
-        "pass_threshold": {
-          "type": "number",
-          "format": "double",
-          "description": "TBD"
-        }
-      },
-      "required": [
-        "evaluation_metric",
-        "input",
-        "name",
-        "reference"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "text_similarity"
-    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
@@ -4418,6 +3803,27 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
+    },
+    "Hyperparameters": {
+      "type": "object",
+      "description": "The hyperparameters used for the fine-tuning job. This value is now deprecated sin favor of `method`, and should be passed in under the `method` parameter.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "learning_rate_multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
     },
     "Index": {
       "type": "object",
@@ -4587,6 +3993,115 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "Integration": {
+      "type": "object",
+      "description": "Integration to enable for fine-tuning job.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of integration to enable. Currently, only 'wandb' (Weights and Biases) is supported."
+        },
+        "wandb": {
+          "$ref": "#/definitions/IntegrationWandb",
+          "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run."
+        }
+      },
+      "required": [
+        "type",
+        "wandb"
+      ]
+    },
+    "IntegrationWandb": {
+      "type": "object",
+      "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.",
+      "properties": {
+        "project": {
+          "type": "string",
+          "description": "The name of the project that the new run will be created under."
+        },
+        "entity": {
+          "type": "string",
+          "description": "The entity to use for the run. This allows you to set the team or username of the WandB user that you would like associated with the run. If not set, the default entity for the registered WandB API key is used."
+        },
+        "name": {
+          "type": "string",
+          "description": "A display name to set for the run. If not set, we will use the Job ID as the name."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some default tags are generated by OpenAI: 'openai/finetune', 'openai/{base-model}', 'openai/{ftjob}.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "project"
+      ]
+    },
+    "JobCreateParams": {
+      "type": "object",
+      "description": "Fine-Tuning Job",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The base model that is being fine-tuned."
+        },
+        "training_file": {
+          "type": "string",
+          "description": "The file ID used for training. You can retrieve the training data with the Files API."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/Hyperparameters",
+          "description": "The hyperparameters used for the SFT fine-tuning job. This value is now deprecated in favor of method, and should be passed in under the method parameter."
+        },
+        "integrations": {
+          "type": "array",
+          "description": "A list of integrations to enable for this fine-tuning job.",
+          "items": {
+            "$ref": "#/definitions/Integration"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "$ref": "#/definitions/Method",
+          "description": "The method used for fine-tuning."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seed used for the fine-tuning job."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
+        },
+        "validation_file": {
+          "type": "string",
+          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
+        },
+        "TrainingType": {
+          "$ref": "#/definitions/TrainingType",
+          "description": "The SKU used for training. This is Azure AI specific parameter"
+        },
+        "inference_configs": {
+          "$ref": "#/definitions/InferenceConfigs",
+          "description": "Inference configurations. This is Azure AI specific parameter"
+        }
+      },
+      "required": [
+        "model",
+        "training_file",
+        "method",
+        "seed"
+      ]
+    },
     "ManagedAzureAISearchIndex": {
       "type": "object",
       "description": "Managed Azure AI Search Index Definition",
@@ -4630,6 +4145,211 @@
       "discriminator": "role",
       "required": [
         "role"
+      ]
+    },
+    "Method": {
+      "type": "object",
+      "description": "The method used for fine-tuning. Abstract base class",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/MethodTrainingType",
+          "description": "The type of training method."
+        },
+        "supervised": {
+          "$ref": "#/definitions/SupervisedMethodParam",
+          "description": "Configuration for the supervised fine-tuning method."
+        },
+        "dpo": {
+          "$ref": "#/definitions/DpoMethodParam",
+          "description": "Configuration for the DPO fine-tuning method."
+        },
+        "reinforcement": {
+          "$ref": "#/definitions/ReinforcementMethodParam",
+          "description": "Configuration for the reinforcement fine-tuning method."
+        },
+        "mistralClassifier": {
+          "$ref": "#/definitions/MistralClassifierMethodParam",
+          "description": "Configuration for the Mistral Classifier fine-tuning method."
+        },
+        "mistralCompletion": {
+          "$ref": "#/definitions/MistralCompletionParam",
+          "description": "Configuration for the Mistral Completion fine-tuning method."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "MethodTrainingType": {
+      "type": "string",
+      "description": "Training method types",
+      "enum": [
+        "supervised",
+        "dpo",
+        "reinforcement",
+        "mistralCompletion",
+        "mistralClassifier"
+      ],
+      "x-ms-enum": {
+        "name": "MethodTrainingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "supervised",
+            "value": "supervised",
+            "description": "Supervised fine-tuning type"
+          },
+          {
+            "name": "dpo",
+            "value": "dpo",
+            "description": "DPO fine-tuning type"
+          },
+          {
+            "name": "reinforcement",
+            "value": "reinforcement",
+            "description": "Reinforcement fine-tuning type"
+          },
+          {
+            "name": "mistralCompletion",
+            "value": "mistralCompletion",
+            "description": "Mistral Completion fine-tuning type"
+          },
+          {
+            "name": "mistralClassifier",
+            "value": "mistralClassifier",
+            "description": "Mistral Classifier fine-tuning type"
+          }
+        ]
+      }
+    },
+    "MistralClassifierHyperparametersParam": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Mistral Classifier Fine-Tuning job.",
+      "properties": {
+        "training_steps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
+        },
+        "learning_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
+          "default": 0.0001
+        },
+        "weight_decay": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
+          "default": 0.1
+        },
+        "warmup_fraction": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
+          "default": 0.05
+        },
+        "epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "seq_len": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seq len parameter"
+        }
+      }
+    },
+    "MistralClassifierMethodParam": {
+      "type": "object",
+      "description": "Mistral Classifier Fine-Tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Mistral Classifier fine-tuning type",
+          "enum": [
+            "mistralClassifier"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/MistralClassifierHyperparametersParam",
+          "description": "The hyperparameters used for the Mistral Classifier fine-tuning job."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "MistralCompletionHyperParameters": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Mistral Completion Fine-Tuning job.",
+      "properties": {
+        "training_steps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
+        },
+        "learning_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
+          "default": 0.0001
+        },
+        "weight_decay": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
+          "default": 0.1
+        },
+        "warmup_fraction": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
+          "default": 0.05
+        },
+        "epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "seq_len": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seq len parameter"
+        },
+        "fim_ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Fim ratio parameter"
+        }
+      }
+    },
+    "MistralCompletionParam": {
+      "type": "object",
+      "description": "Mistral Completion Fine-Tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Mistral Completion fine-tuning type",
+          "enum": [
+            "mistralCompletion"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/MistralCompletionHyperParameters",
+          "description": "The hyperparameters used for the Mistral Completion fine-tuning job."
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "ModelDeployment": {
@@ -4683,6 +4403,38 @@
         }
       ],
       "x-ms-discriminator-value": "ModelDeployment"
+    },
+    "MultiGraderParam": {
+      "type": "object",
+      "description": "A MultiGrader object combines the output of multiple graders to produce a single score.",
+      "properties": {
+        "calculate_output": {
+          "type": "string",
+          "description": "A formula to calculate the output based on grader results."
+        },
+        "graders": {
+          "type": "object",
+          "description": "Graders to be combined",
+          "additionalProperties": {
+            "$ref": "#/definitions/FineTuningGrader"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        }
+      },
+      "required": [
+        "calculate_output",
+        "graders",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "multi"
     },
     "NoAuthenticationCredentials": {
       "type": "object",
@@ -4922,6 +4674,34 @@
         ]
       }
     },
+    "PythonGraderParam": {
+      "type": "object",
+      "description": "A PythonGrader object that runs a python script on the input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "source": {
+          "type": "string",
+          "description": "The source code of the python script."
+        },
+        "image_tag": {
+          "type": "string",
+          "description": "The image tag to use for the python script."
+        }
+      },
+      "required": [
+        "name",
+        "source"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "python"
+    },
     "RedTeam": {
       "type": "object",
       "description": "Red team details.",
@@ -4992,6 +4772,112 @@
         "id",
         "target"
       ]
+    },
+    "ReinforcementHyperparametersParam": {
+      "type": "object",
+      "description": "Configuration for the Reinforcement fine-tuning method.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "compute_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Multiplier on amount of compute used for exploring search space during training."
+        },
+        "eval_interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps between evaluation runs."
+        },
+        "eval_samples": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of evaluation samples to generate per training step."
+        },
+        "learning_rate_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "reasoning_effort": {
+          "type": "string",
+          "description": "Level of reasoning effort."
+        }
+      }
+    },
+    "ReinforcementMethodParam": {
+      "type": "object",
+      "description": "Configuration for the Reinforcement fine-tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Reinforcement fine-tuning type",
+          "enum": [
+            "reinforcement"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "grader": {
+          "$ref": "#/definitions/FineTuningGrader",
+          "description": "The grader used for the fine-tuning job."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/ReinforcementHyperparametersParam",
+          "description": "The hyperparameters used for the reinforcement fine-tuning job."
+        },
+        "response_format": {
+          "$ref": "#/definitions/ReinforcementResponseFormat",
+          "description": "Gets the response format for the Reinforcement fine-tuning job."
+        }
+      },
+      "required": [
+        "type",
+        "grader"
+      ]
+    },
+    "ReinforcementResponseFormat": {
+      "type": "object",
+      "description": "Gets the response format for the Reinforcement fine-tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Response format request - Currently only JSON schema is supported"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ReinforcementResponseJsonSchema": {
+      "type": "object",
+      "description": "Gets the response format for the Reinforcement fine-tuning method.",
+      "properties": {
+        "json_schema": {
+          "type": "object",
+          "description": "JSON schema response for RFT",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "json_schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReinforcementResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_schema"
     },
     "RiskCategory": {
       "type": "string",
@@ -5073,6 +4959,55 @@
         "type"
       ]
     },
+    "ScoreModelGraderParam": {
+      "type": "object",
+      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "The input text. This may include template strings.",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobGraderMessage"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for the evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "range": {
+          "type": "array",
+          "description": "The model to use for the evaluation.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "sampling_params": {
+          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
+          "description": "The sampling parameters for the model."
+        },
+        "pass_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "TBD"
+        }
+      },
+      "required": [
+        "input",
+        "model",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "score_model"
+    },
     "Sku": {
       "type": "object",
       "description": "Sku information",
@@ -5107,6 +5042,84 @@
         "tier"
       ]
     },
+    "StringCheckGraderParam": {
+      "type": "object",
+      "description": "A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input text. This may include template strings."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "operation": {
+          "$ref": "#/definitions/FineTuningStringOperation",
+          "description": "The string check operation to perform. One of eq, ne, like, or ilike."
+        },
+        "reference": {
+          "type": "string",
+          "description": "The reference text. This may include template strings."
+        }
+      },
+      "required": [
+        "input",
+        "name",
+        "operation",
+        "reference"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "string_check"
+    },
+    "SupervisedHyperparametersParam": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Supervised Fine-Tuning job.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "learning_rate_multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
+    },
+    "SupervisedMethodParam": {
+      "type": "object",
+      "description": "Supervised Fine-Tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Supervised fine-tuning type",
+          "enum": [
+            "supervised"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/SupervisedHyperparametersParam",
+          "description": "The hyperparameters used for the SFT fine-tuning job."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "SystemMessage": {
       "type": "object",
       "description": "A message authored by the system to guide model behavior.",
@@ -5139,6 +5152,45 @@
       "required": [
         "type"
       ]
+    },
+    "TextSimilarityGraderParam": {
+      "type": "object",
+      "description": "ScoreModelGrader uses a model to assign a score to the input.",
+      "properties": {
+        "evaluation_metric": {
+          "$ref": "#/definitions/FineTuningEvaluationMetric",
+          "description": "The evaluation metric to use"
+        },
+        "input": {
+          "type": "string",
+          "description": "The text being graded."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "reference": {
+          "type": "string",
+          "description": "The text being graded against."
+        },
+        "pass_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "TBD"
+        }
+      },
+      "required": [
+        "evaluation_metric",
+        "input",
+        "name",
+        "reference"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "text_similarity"
     },
     "TrainingType": {
       "type": "string",

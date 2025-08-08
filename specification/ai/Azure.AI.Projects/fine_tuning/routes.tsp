@@ -55,7 +55,7 @@ interface FineTuningJobs {
     {
       @doc("fine-tuning job")
       @body
-      fineTuningJob: FineTuningJobCreation;
+      fineTuningJob: JobCreateParams;
     },
     FineTuningJob
   >;
