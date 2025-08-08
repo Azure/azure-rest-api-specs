@@ -443,6 +443,17 @@ interface DevBoxes {
     DevBoxActionsDelayMultipleResult
   >;
 
+  @doc("Creates an action to schedule the deletion of a Dev Box")
+  @added(APIVersions.v2025_08_01_preview)
+  @action("scheduleDelete")
+  scheduleDeleteAction is StandardResourceOperations.ResourceAction<
+    DevBox,
+    {
+      ...DeleteAtQueryParameter;
+    },
+    DevBoxAction
+  >;
+
   @doc("Lists operations on the Dev Box which have occurred within the past 90 days.")
   @added(APIVersions.v2024_02_01)
   listOperations is StandardResourceOperations.ResourceList<DevBoxOperation>;
