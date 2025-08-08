@@ -1681,3 +1681,4 @@ model ClientDiscoveryResponse
 @@doc(VaultPropertiesRedundancySettings.crossRegionRestore,
   "Flag to show if Cross Region Restore is enabled on the Vault or not"
 );
+@@pageItems(ClientDiscoveryResponse.value);
