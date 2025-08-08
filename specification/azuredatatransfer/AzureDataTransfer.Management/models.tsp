@@ -1501,7 +1501,8 @@ model Action {
   /**
    * Targets for the action
    */
-  targets: string[];
+  @madeOptional(Versions.v2025_05_30_preview)
+  targets?: string[];
 
   /**
    * Business justification for the action
