@@ -31,7 +31,6 @@ model SupportTicketDetails
 /**
  * [Placeholder] Description for page model
  */
-@pagedResult
 model SupportTicketsListResult {
   /**
    * [Placeholder] Description for nextLink property
@@ -42,7 +41,7 @@ model SupportTicketsListResult {
   /**
    * [Placeholder] Description for value property
    */
-  @items
+  @pageItems
   value?: SupportTicketDetails[];
 }
 
@@ -77,7 +76,8 @@ interface SupportTickets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is SupportTicketOps.CreateOrUpdateAsync<
     SupportTicketDetails,
-    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SupportTicketDetails> & Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SupportTicketDetails> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -151,7 +151,8 @@ interface SupportTicketsNoSubscription {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is SupportTicketsNoSubscriptionOps.CreateOrUpdateAsync<
     SupportTicketDetails,
-    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SupportTicketDetails> & Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SupportTicketDetails> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

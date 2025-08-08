@@ -28,7 +28,6 @@ model FileDetails
 /**
  * [Placeholder] Description for page model
  */
-@pagedResult
 model FilesListResult {
   /**
    * [Placeholder] Description for nextLink property
@@ -39,7 +38,7 @@ model FilesListResult {
   /**
    * [Placeholder] Description for value property
    */
-  @items
+  @pageItems
   value?: FileDetails[];
 }
 

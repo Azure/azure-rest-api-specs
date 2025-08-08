@@ -175,7 +175,6 @@ model OperationDisplay {
 /**
  * Collection of Service resources.
  */
-@pagedResult
 model ServicesListResult {
   /**
    * The link to the next page of items
@@ -186,7 +185,7 @@ model ServicesListResult {
   /**
    * List of Service resources.
    */
-  @items
+  @pageItems
   value?: Service[];
 }
 
@@ -209,7 +208,6 @@ model ServiceProperties {
 /**
  * Collection of ProblemClassification resources.
  */
-@pagedResult
 model ProblemClassificationsListResult {
   /**
    * The link to the next page of items
@@ -220,7 +218,7 @@ model ProblemClassificationsListResult {
   /**
    * List of ProblemClassification resources.
    */
-  @items
+  @pageItems
   value?: ProblemClassification[];
 }
 

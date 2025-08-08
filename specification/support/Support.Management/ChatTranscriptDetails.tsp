@@ -29,7 +29,6 @@ model ChatTranscriptDetails
 /**
  * [Placeholder] Description for page model
  */
-@pagedResult
 model ChatTranscriptsListResult {
   /**
    * [Placeholder] Description for nextLink property
@@ -40,7 +39,7 @@ model ChatTranscriptsListResult {
   /**
    * [Placeholder] Description for value property
    */
-  @items
+  @pageItems
   value?: ChatTranscriptDetails[];
 }
 
