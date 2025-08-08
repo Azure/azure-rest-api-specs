@@ -40,7 +40,7 @@ model SolutionMetadata
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("solutionMetadataName")
-  @segment("SolutionMetadatas")
+  @segment("solutionMetadatas")
   name: string;
 
   ...ExtendedLocationProperty;

@@ -10,6 +10,8 @@ import "./SchemaVersion.tsp";
 import "./SchemaReference.tsp";
 import "./Solution.tsp";
 import "./SolutionVersion.tsp";
+import "./SolutionMetadata.tsp";
+import "./SolutionMetadataVersion.tsp";
 import "./Target.tsp";
 import "./TargetTemplate.tsp";
 import "./SolutionTemplate.tsp";

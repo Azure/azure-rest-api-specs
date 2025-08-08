@@ -67,6 +67,12 @@
       "name": "Solutions"
     },
     {
+      "name": "SolutionMetadatas"
+    },
+    {
+      "name": "SolutionMetadataVersions"
+    },
+    {
       "name": "SolutionTemplateVersions"
     },
     {
@@ -248,6 +254,584 @@
             }
           }
         }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/solutionMetadatas": {
+      "get": {
+        "operationId": "SolutionMetadatas_ListByTarget",
+        "tags": [
+          "SolutionMetadatas"
+        ],
+        "description": "List Solution resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/solutionMetadatas/{solutionMetadataName}": {
+      "get": {
+        "operationId": "SolutionMetadatas_Get",
+        "tags": [
+          "SolutionMetadatas"
+        ],
+        "description": "Get a Solution resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SolutionMetadatas_CreateOrUpdate",
+        "tags": [
+          "SolutionMetadatas"
+        ],
+        "description": "Create or update a Solution Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SolutionMetadata' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadata"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolutionMetadata' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadata"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SolutionMetadatas_Update",
+        "tags": [
+          "SolutionMetadatas"
+        ],
+        "description": "Update a Solution Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadata"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SolutionMetadatas_Delete",
+        "tags": [
+          "SolutionMetadatas"
+        ],
+        "description": "Delete a Solution Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/solutionMetadatas/{solutionMetadataName}/versions": {
+      "get": {
+        "operationId": "SolutionMetadataVersions_ListByTarget",
+        "tags": [
+          "SolutionMetadataVersions"
+        ],
+        "description": "List Solution resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/solutionMetadatas/{solutionMetadataName}/versions/{solutionMetadataVersionName}": {
+      "get": {
+        "operationId": "SolutionMetadataVersions_Get",
+        "tags": [
+          "SolutionMetadataVersions"
+        ],
+        "description": "Get a Solution resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionMetadataVersionName",
+            "in": "path",
+            "description": "Name of the solution metadata version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SolutionMetadataVersions_CreateOrUpdate",
+        "tags": [
+          "SolutionMetadataVersions"
+        ],
+        "description": "Create or update a Solution Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionMetadataVersionName",
+            "in": "path",
+            "description": "Name of the solution metadata version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SolutionMetadataVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolutionMetadataVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SolutionMetadataVersions_Update",
+        "tags": [
+          "SolutionMetadataVersions"
+        ],
+        "description": "Update a Solution Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionMetadataVersionName",
+            "in": "path",
+            "description": "Name of the solution metadata version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionMetadataVersion"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SolutionMetadataVersions_Delete",
+        "tags": [
+          "SolutionMetadataVersions"
+        ],
+        "description": "Delete a Solution Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionMetadataName",
+            "in": "path",
+            "description": "Name of the solution metadata",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionMetadataVersionName",
+            "in": "path",
+            "description": "Name of the solution metadata version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/configTemplates": {
@@ -9057,6 +9641,186 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "SolutionMetadata": {
+      "type": "object",
+      "description": "Solution Metadata Resource attached to a Target or Site",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionMetadataProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionMetadataListResult": {
+      "type": "object",
+      "description": "The response of a SolutionMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionMetadataProperties": {
+      "type": "object",
+      "description": "Solution Metadata Properties",
+      "properties": {
+        "solutionTemplateId": {
+          "type": "string",
+          "description": "Solution template Id",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      }
+    },
+    "SolutionMetadataUpdate": {
+      "type": "object",
+      "description": "Solution Metadata Resource attached to a Target or Site",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionMetadataProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionMetadataVersion": {
+      "type": "object",
+      "description": "Solution Metadata Version Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionMetadataVersionProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionMetadataVersionListResult": {
+      "type": "object",
+      "description": "The response of a SolutionMetadataVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionMetadataVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionMetadataVersionProperties": {
+      "type": "object",
+      "description": "Solution Metadata Version Properties",
+      "properties": {
+        "solutionTemplateVersionId": {
+          "type": "string",
+          "description": "Solution template version Id",
+          "readOnly": true
+        },
+        "dynamicSchemaId": {
+          "type": "string",
+          "description": "Dynamic Schema Id for the solution template version",
+          "readOnly": true
+        },
+        "dynamicConfigurationId": {
+          "type": "string",
+          "description": "Dynamic Configuration Id for the solution template version",
+          "readOnly": true
+        },
+        "configurationStatus": {
+          "type": "string",
+          "description": "Configuration status of the solution template version",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "solutionTemplateVersionId"
+      ]
+    },
+    "SolutionMetadataVersionPropertiesUpdate": {
+      "type": "object",
+      "description": "Solution Metadata Version Properties"
+    },
+    "SolutionMetadataVersionUpdate": {
+      "type": "object",
+      "description": "Solution Metadata Version Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionMetadataVersionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "SolutionProperties": {
