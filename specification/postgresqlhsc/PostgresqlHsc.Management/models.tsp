@@ -6,6 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;
 
@@ -365,6 +366,7 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @uniqueItems
   serverNames?: ServerNameItem[];
 
   /**
@@ -394,6 +396,7 @@ model ClusterProperties {
    * The array of read replica clusters.
    */
   @visibility(Lifecycle.Read)
+  @uniqueItems
   readReplicas?: string[];
 
   /**
@@ -692,6 +695,7 @@ model ConfigurationProperties {
    * The list of server role group configuration values.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @uniqueItems
   serverRoleGroupConfigurations: ServerRoleGroupConfiguration[];
 
   /**

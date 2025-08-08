@@ -2517,6 +2517,7 @@
         "serverNames": {
           "type": "array",
           "description": "The list of server names in the cluster",
+          "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/ServerNameItem"
           },
@@ -2546,6 +2547,7 @@
         "readReplicas": {
           "type": "array",
           "description": "The array of read replica clusters.",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           },
@@ -2814,6 +2816,7 @@
         "serverRoleGroupConfigurations": {
           "type": "array",
           "description": "The list of server role group configuration values.",
+          "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/ServerRoleGroupConfiguration"
           },
