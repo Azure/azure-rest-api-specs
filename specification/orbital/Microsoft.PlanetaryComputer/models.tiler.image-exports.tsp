@@ -3,9 +3,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.common.images.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-
 namespace Microsoft.PlanetaryComputer;
 
 /**
@@ -15,12 +12,13 @@ model ImageRequest {
   /**
    * Cql
    */
-  cql: Cql;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  cql: CqlFilter;
 
   /**
    * Geometry
    */
-  geometry?: GeoJson;
+  geometry?: Geometry;
 
   /**
    * JSON-encoded visualization parameters
@@ -52,4 +50,14 @@ model ImageRequest {
    * Whether to apply masking to invalid or no-data areas
    */
   mask?: boolean;
+}
+
+/**
+ * Response model for image exports
+ */
+model ImageResponse {
+  /**
+   * URL of the exported image
+   */
+  url: url;
 }

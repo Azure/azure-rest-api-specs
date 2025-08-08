@@ -32,7 +32,7 @@ namespace Ingestions {
 
     @doc("Definition of the ingestion")
     @body
-    definition: IngestionDefinitionCreation,
+    definition: IngestionDefinition,
   ): {
     @doc("Url of the created ingestion")
     @header
@@ -57,7 +57,7 @@ namespace Ingestions {
 
     @doc("Ingestion properties to update")
     @body
-    definition: PatchRequest,
+    definition: IngestionDefinition,
   ): {
     @statusCode statusCode: 200;
 
@@ -96,15 +96,20 @@ namespace Ingestions {
     nextLink?: url;
   }
 
-  @doc("Spatio geo-catalog ingestion creation model")
-  model IngestionDefinitionCreation {
+  @doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
+  model IngestionDefinition {
+    @doc("Ingestion id")
+    @visibility(Lifecycle.Read)
+    id: uuid;
+
     @doc("Ingestion type")
+    @visibility(Lifecycle.Create, Lifecycle.Read)
     importType: IngestionType;
 
     @doc("Ingestion name")
     displayName?: string;
 
-    @doc("Source catalog URL. *Required for StaticCatalog ingestion type")
+    @doc("Source catalog URL. Required for StaticCatalog ingestion type")
     sourceCatalogUrl?: url;
 
     @doc("Skip processing existing items in the catalog")
@@ -112,33 +117,14 @@ namespace Ingestions {
 
     @doc("Keep original source assets")
     keepOriginalAssets?: boolean;
-  }
-
-  @doc("Spatio geo-catalog ingestion definition")
-  model IngestionDefinition is IngestionDefinitionCreation {
-    @doc("Ingestion id")
-    id: uuid;
 
     @doc("Ingestion creation time")
+    @visibility(Lifecycle.Read)
     creationTime: utcDateTime;
 
     @doc("Ingestion status")
+    @visibility(Lifecycle.Read)
     status: IngestionStatus;
-  }
-
-  @doc("Patch request model")
-  model PatchRequest {
-    @doc("Ingestion name")
-    displayName?: string;
-
-    @doc("Source catalog URL")
-    sourceCatalogUrl?: url;
-
-    @doc("Skip processing existing items in the catalog")
-    skipExistingItems?: boolean;
-
-    @doc("Keep original source assets")
-    keepOriginalAssets?: boolean;
   }
 
   @doc("Ingestion type")
@@ -207,12 +193,12 @@ namespace Ingestions {
       nextLink?: url;
     }
 
-    @doc("Spatio geo-catalog ingestion run")
+    @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
     model IngestionRun {
       @doc("Run id")
       id: uuid;
 
-      @doc("Run id which this run is associated to becase has been retried or rerun")
+      @doc("Run id which this run is associated to because it has been retried or rerun")
       parentRunId?: uuid;
 
       @doc("Operation")
@@ -231,7 +217,7 @@ namespace Ingestions {
       keepOriginalAssets?: boolean;
     }
 
-    @doc("Spatio geo-catalog ingestion run operation")
+    @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run operation")
     model IngestionRunOperation {
       @doc("Operation id")
       id: uuid;
@@ -376,19 +362,18 @@ namespace StacItems {
      *
      * Represents a STAC Item or ItemCollection as defined by the STAC 1.0.0 standard.
      *
-     * - **Item**: A GeoJSON Feature that represents a single spatiotemporal asset.
-     *   It includes metadata such as geometry, datetime, and links to related assets.
-     *   Example: A satellite image with its metadata.
+     * **Item**: A GeoJSON Feature that represents a single spatiotemporal asset.
+     * It includes metadata such as geometry, datetime, and links to related assets.
+     * Example: A satellite image with its metadata.
      *
-     * - **ItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.
-     *   It is used to group multiple related Items together, such as a collection of satellite images.
+     * **ItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.
+     * It is used to group multiple related Items together, such as a collection of satellite images.
      *
      * This union allows the request body to accept either a single Item or a collection of Items.
      */
-    #suppress "@azure-tools/typespec-autorest/union-unsupported" ""
     #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
     @body
-    body: StacItem | ItemCollection,
+    body: StacItemOrItemCollection,
   ): {
     @pollingLocation
     @doc("Url used to monitor the background operation")
@@ -531,7 +516,7 @@ namespace IngestionSources {
 
     @doc("Definition of the ingestion source")
     @body
-    ingestionSource: IngestionSourceCreate,
+    ingestionSource: IngestionSource,
   ): {
     @doc("Url of the created ingestion source")
     @header
@@ -558,7 +543,7 @@ namespace IngestionSources {
 
     @doc("Definition of the ingestion source")
     @body
-    ingestionSource: IngestionSourceCreate,
+    ingestionSource: IngestionSource,
   ): {
     @doc("Url of the created ingestion source")
     @header
@@ -632,17 +617,8 @@ namespace IngestionSources {
     id: uuid;
 
     @doc("Created time in UTC format")
+    @visibility(Lifecycle.Read)
     created: utcDateTime;
-
-    @doc("Discriminator for the ingestion source")
-    kind: IngestionSourceType;
-  }
-
-  @doc("Ingestion Source")
-  @discriminator("kind")
-  model IngestionSourceCreate {
-    @doc("Ingestion source id")
-    id: uuid;
 
     @doc("Discriminator for the ingestion source")
     kind: IngestionSourceType;
@@ -667,42 +643,22 @@ namespace IngestionSources {
     connectionInfo: SasTokenConnection;
   }
 
-  @doc("SAS Token ingestion source")
-  model SasTokenIngestionSourceCreate extends IngestionSourceCreate {
-    kind: IngestionSourceType.SasToken;
-
-    @doc("SAS token connection information")
-    connectionInfo: SasTokenConnectionCreate;
-  }
-
   @doc("SAS Token connection information")
   model SasTokenConnection {
     @doc("Azure Blob Storage container URL")
     containerUrl: url;
 
-    @doc("Azure Blob Storage SAS token expiration in UTC format")
-    expiration: utcDateTime;
-  }
-
-  @doc("SAS Token connection information")
-  model SasTokenConnectionCreate {
-    @doc("Azure Blob Storage container URL")
-    containerUrl: url;
-
     @doc("SAS token")
-    sasToken: string;
+    @visibility(Lifecycle.Create, Lifecycle.Update)
+    sasToken?: string;
+
+    @doc("Azure Blob Storage SAS token expiration in UTC format")
+    @visibility(Lifecycle.Read)
+    expiration?: utcDateTime;
   }
 
   @doc("Managed Identity ingestion source")
   model ManagedIdentityIngestionSource extends IngestionSource {
-    kind: IngestionSourceType.BlobManagedIdentity;
-
-    @doc("Managed identity connection information")
-    connectionInfo: ManagedIdentityConnection;
-  }
-
-  @doc("Managed Identity ingestion source")
-  model ManagedIdentityIngestionSourceCreate extends IngestionSourceCreate {
     kind: IngestionSourceType.BlobManagedIdentity;
 
     @doc("Managed identity connection information")
@@ -796,7 +752,7 @@ model OperationsPagedResponse {
   nextLink?: url;
 }
 
-@doc("Spatio geo-catalog operation")
+@doc("Microsoft Planetary Computer Pro geo-catalog operation")
 model Operation {
   @doc("Operation id")
   id: uuid;

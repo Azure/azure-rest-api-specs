@@ -112,7 +112,7 @@ interface TilerInfoGeoJsonOperations {
       @query(#{ explode: true })
       assets?: string[];
     },
-    FeaturePolygonDictStrRioTilerModelsInfo
+    TilerInfoGeoJsonFeature
   >;
 }
 
@@ -258,7 +258,7 @@ interface TilerGeoJsonStatistics {
        * Request GeoJson body
        */
       @body
-      body: GeoJson;
+      body: ItemCollection;
     },
     GeoJsonStatisticsItemCollectionResponse
   >;
@@ -1055,7 +1055,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: GeoJson;
+      body: StacItem;
     },
     TileResponse
   >;
@@ -1127,7 +1127,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: GeoJson;
+      body: Geometry;
     },
     TileResponse
   >;

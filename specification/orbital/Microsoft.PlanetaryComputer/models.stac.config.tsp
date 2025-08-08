@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./models.stac.spec.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
@@ -38,8 +37,9 @@ model RenderOption {
 
   /**
    * A URL query-string encoded string of TiTiler rendering options. Valid only for
-   * `raster-tile` types.  See 'Query Parameters':
-   * https://developmentseed.org/titiler/endpoints/cog/#description
+   * `raster-tile` types.
+   *
+   * See [Query Parameters](https://developmentseed.org/titiler/endpoints/cog/#description).
    */
   options?: string;
 
@@ -188,12 +188,9 @@ union RenderOptionType {
 }
 
 /**
-* Legend type to make,
- one of: `continuous`,
- `classmap`,
- `interval` or `none`
-* (note, `none` is a string literal).
-*/
+ * Legend type to make, one of: `continuous`, `classmap`, `interval` or `none`
+ * (note, `none` is a string literal).
+ */
 /**
  * Defines the legend configuration types for data visualization.
  */
@@ -265,7 +262,8 @@ model MosaicInfo {
   /**
    * A list of CQL-JSON expressions to use as the default for  this collection.
    */
-  defaultCustomQuery?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  defaultCustomQuery?: CqlFilter;
 }
 
 /**
@@ -294,7 +292,8 @@ model Mosaic {
   /**
    * A list of valid CQL2-JSON expressions used to filter the collection to moasic.
    */
-  cql: Cql[];
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  cql: CqlFilter[];
 }
 
 /**
@@ -408,9 +407,9 @@ model AuthConfig {
 }
 
 /**
- * FormData model for file upload.
+ * FormContent model for file upload.
  */
-model FormData {
+model FormContent {
   /**
    * Asset metadata
    */
