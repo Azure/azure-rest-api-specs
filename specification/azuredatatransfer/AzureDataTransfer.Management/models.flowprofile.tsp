@@ -257,12 +257,12 @@ model MimeFilterRuleset {
   /**
    * Specifies whether the filter is an allow list or deny list. For more detail, please refer to the FilterType model.
    */
-  type: FilterType;
+  type?: FilterType;
 
   /**
    * Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model.
    */
-  filters: MimeTypeFilter;
+  filters?: MimeTypeFilter;
 }
 
 /**
@@ -277,12 +277,12 @@ model MimeTypeFilter {
     "^[a-z]+/[a-zA-Z0-9+\\-\\+.]+$",
     "Value must be a valid IANA Media type."
   )
-  media: string;
+  media?: string;
 
   /**
    * A list of file extensions associated with the specified Media type (e.g., .json, .png). To specify files with no extension, use an empty string ""."
    */
-  extensions: string[];
+  extensions?: string[];
 }
 
 /**
@@ -311,17 +311,17 @@ model XmlFilterRuleset {
   /**
    * The default XML namespace used for schema validation.
    */
-  defaultNamespace: string;
+  defaultNamespace?: string;
 
   /**
    * Defines the method for referencing the xml schema.
    */
-  reference: XmlReferenceType = XmlReferenceType.Inline;
+  reference?: XmlReferenceType = XmlReferenceType.Inline;
 
   /**
    * The inline XSD schema to be used for validation.
    */
-  schema: string;
+  schema?: string;
 }
 
 /**
@@ -349,7 +349,7 @@ model TextMatchingRuleset {
     "x-ms-identifiers",
     #["text", "matchType", "caseSensitivity"]
   )
-  deny: {
+  deny?: {
     ...TextMatch;
   }[];
 }
