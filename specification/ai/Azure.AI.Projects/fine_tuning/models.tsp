@@ -216,36 +216,48 @@ union FineTuningJobGraderMessageRole {
   assistant: "assistant",
 }
 
-@doc("Training RFT message content base class.")
+@doc("Base for inputs to the model.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessageContentBase {}
+model InputContent {}
 
-@doc("Training RFT message content base class.")
+@doc("Inputs to the model - can contain template strings.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessageTextContent
-  is FineTuningJobGraderMessageContentBase {
-  @doc("type field")
-  type: string;
+model ResponseInputTextParam
+  is InputContent {
+  @doc("The type of the input item. Always `input_text`")
+  type: "input_text";
 
-  @doc("text field")
+  @doc("The text input to the model.")
   text: string;
 }
 
-@doc("Training RFT message content base class.")
+@doc("Inputs to the model - can contain template strings.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessageSimpleContent
-  is FineTuningJobGraderMessageContentBase {
+model InputSimpleContent
+  is InputContent {
   @doc("content field")
   content: string;
+}
+
+@doc("Inputs to the model - can contain template strings.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InputContentOutputText
+  is InputContent {
+  @doc("The type of the output text. Always `output_text`.")
+  type: "output_text";
+
+  @doc("The text output from the model.")
+  text: string;
 }
 
 @doc("A ScoreModelGrader object that uses a model to assign a score to the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessage {
+model Input {
   @doc("Message type")
   type: string;
 
@@ -253,7 +265,7 @@ model FineTuningJobGraderMessage {
   role: FineTuningJobGraderMessageRole;
 
   @doc("Message content")
-  content: FineTuningJobGraderMessageContentBase;
+  content: InputContent;
 }
 
 @doc("The sampling parameters for the model.")
@@ -299,7 +311,7 @@ model ScoreModelGraderParam extends FineTuningGrader {
   type: "score_model";
 
   @doc("The input text. This may include template strings.")
-  input: Array<FineTuningJobGraderMessage>;
+  input: Array<Input>;
 
   @doc("The model to use for the evaluation.")
   `model`: string;
@@ -340,7 +352,7 @@ model FineTuningLabelModelGrader extends FineTuningGrader {
   type: "label_model";
 
   @doc("input labels")
-  input: Array<FineTuningJobGraderMessage>;
+  input: Array<Input>;
 
   @doc("The labels to assign to each item in the evaluation.")
   labels: Array<string>;
