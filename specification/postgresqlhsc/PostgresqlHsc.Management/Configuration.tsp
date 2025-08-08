@@ -36,6 +36,7 @@ interface Configurations {
   /**
    * List all the configurations of a cluster.
    */
+  @list
   listByCluster is ArmResourceListByParent<
     Configuration,
     Response = ClusterConfigurationListResult
@@ -46,6 +47,7 @@ interface Configurations {
    */
   @get
   @action("configurations")
+  @list
   listByServer is ArmResourceActionSync<
     ClusterServer,
     void,
@@ -56,13 +58,12 @@ interface Configurations {
 /**
  * Pagination result of configurations.
  */
-@pagedResult
 model ClusterConfigurationListResult {
   /**
    * The list of configurations.
    */
   @doc("The list of configurations.")
-  @items
+  @pageItems
   value?: Configuration[];
 
   /**
