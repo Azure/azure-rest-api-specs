@@ -3643,6 +3643,104 @@
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
+    "BrowserAutomationToolCallDetails": {
+      "type": "object",
+      "description": "Details of a Browser Automation tool call.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input provided to the Browser Automation tool."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output returned by the Browser Automation tool."
+        },
+        "steps": {
+          "type": "array",
+          "description": "The steps the Browser Automation tool executed.",
+          "items": {
+            "$ref": "#/definitions/BrowserAutomationToolCallStep"
+          }
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "steps"
+      ]
+    },
+    "BrowserAutomationToolCallStep": {
+      "type": "object",
+      "description": "Describes a single step of a Browser Automation tool execution.",
+      "properties": {
+        "last_step_result": {
+          "type": "string",
+          "description": "The result of the last step executed with the Browser.",
+          "x-ms-client-name": "lastStepResult"
+        },
+        "current_state": {
+          "type": "string",
+          "description": "The current state of execution with the Browser.",
+          "x-ms-client-name": "currentState"
+        },
+        "next_step": {
+          "type": "string",
+          "description": "The next step to execute with the Browser.",
+          "x-ms-client-name": "nextStep"
+        }
+      },
+      "required": [
+        "last_step_result",
+        "current_state",
+        "next_step"
+      ]
+    },
+    "BrowserAutomationToolConnectionParameters": {
+      "type": "object",
+      "description": "Definition of input parameters for the connection used by the Browser Automation Tool.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the connection to your Azure Playwright resource."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "BrowserAutomationToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent.",
+      "properties": {
+        "browser_automation": {
+          "$ref": "#/definitions/BrowserAutomationToolParameters",
+          "description": "The Browser Automation Tool parameters.",
+          "x-ms-client-name": "browserAutomation"
+        }
+      },
+      "required": [
+        "browser_automation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation"
+    },
+    "BrowserAutomationToolParameters": {
+      "type": "object",
+      "description": "Definition of input parameters for the Browser Automation Tool.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BrowserAutomationToolConnectionParameters",
+          "description": "The connection parameters associated with the Browser Automation Tool."
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an agent.",
@@ -6213,6 +6311,26 @@
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
+    "RunStepBrowserAutomationToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Browser Automation tool issued by the Agent.",
+      "properties": {
+        "browser_automation": {
+          "$ref": "#/definitions/BrowserAutomationToolCallDetails",
+          "description": "Details of the browser automation tool call.",
+          "x-ms-client-name": "browserAutomation"
+        }
+      },
+      "required": [
+        "browser_automation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation"
+    },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",
       "description": "A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.",
@@ -6348,6 +6466,59 @@
         "prompt_tokens",
         "total_tokens"
       ]
+    },
+    "RunStepConnectedAgent": {
+      "type": "object",
+      "description": "The detailed information about connected agent tool call.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of connected agent."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The JSON serialized query to the connected agent."
+        },
+        "output": {
+          "type": "string",
+          "description": "The tool output."
+        },
+        "run_id": {
+          "type": "string",
+          "description": "The run ID used by the connected agent.",
+          "x-ms-client-name": "runId"
+        },
+        "thread_id": {
+          "type": "string",
+          "description": "The thread ID used by the connected agent.",
+          "x-ms-client-name": "threadId"
+        },
+        "assistant_id": {
+          "type": "string",
+          "description": "The ID of a connected agent.",
+          "x-ms-client-name": "agentId"
+        }
+      }
+    },
+    "RunStepConnectedAgentToolCall": {
+      "type": "object",
+      "description": "A record of a call to the connected agent.",
+      "properties": {
+        "connected_agent": {
+          "$ref": "#/definitions/RunStepConnectedAgent",
+          "description": "The connected agent step information.",
+          "x-ms-client-name": "connectedAgent"
+        }
+      },
+      "required": [
+        "connected_agent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "connected_agent"
     },
     "RunStepDeepResearchToolCall": {
       "type": "object",
@@ -6568,6 +6739,26 @@
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
+    },
+    "RunStepDeltaConnectedAgentToolCall": {
+      "type": "object",
+      "description": "Represents the invocation of connected agent as a part of a streaming run step.",
+      "properties": {
+        "connected_agent": {
+          "$ref": "#/definitions/RunStepConnectedAgent",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "x-ms-client-name": "connectedAgent"
+        }
+      },
+      "required": [
+        "connected_agent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "connected_agent"
     },
     "RunStepDeltaDeepResearchToolCall": {
       "type": "object",
