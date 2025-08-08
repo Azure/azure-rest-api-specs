@@ -87,7 +87,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
@@ -234,7 +234,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DiagnosticResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -364,7 +365,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SimplifiedSolutionsResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -494,7 +496,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SolutionResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -568,7 +571,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SolutionResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -912,7 +916,7 @@
           {
             "name": "discoverSolutionRequest",
             "in": "body",
-            "description": "Request body for discovering solutions using NLP.",
+            "description": "The request body",
             "required": false,
             "schema": {
               "$ref": "#/definitions/DiscoveryNlpRequest"
@@ -921,7 +925,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DiscoveryNlpResponse"
             }
@@ -1079,7 +1083,7 @@
           {
             "name": "discoverSolutionRequest",
             "in": "body",
-            "description": "Request body for discovering solutions using NLP.",
+            "description": "The request body",
             "required": false,
             "schema": {
               "$ref": "#/definitions/DiscoveryNlpRequest"
@@ -1088,7 +1092,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DiscoveryNlpResponse"
             }

@@ -24,7 +24,7 @@ interface CheckNameAvailabilityOperationGroup {
   checkNameAvailability is ArmProviderActionSync<
     CommonTypes.CheckNameAvailabilityRequest,
     CheckNameAvailabilityResponse,
-    ExtensionResourceActionScope,
+    ExtensionActionScope,
     OptionalRequestBody = true
   >;
 }
@@ -37,6 +37,7 @@ interface DiscoverySolutionOperationGroup {
   @autoRoute
   @get
   @action("discoverySolutions")
+  @list
   list is ArmProviderActionSync<
     Response = DiscoveryResponse,
     Parameters = {
