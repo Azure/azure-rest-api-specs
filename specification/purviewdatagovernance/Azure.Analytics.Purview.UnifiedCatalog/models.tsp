@@ -513,7 +513,7 @@ model FacetsResponse {
 @pagedResult
 model CriticalDataColumnsResponse {
   @doc("The list of critical data columns.")
-  @items
+  @pageItems
   value: CriticalDataColumn[];
 
   @doc("The link to the next page of results.")
@@ -525,7 +525,7 @@ model CriticalDataColumnsResponse {
 @pagedResult
 model CriticalDataElementsResponse {
   @doc("The list of critical data elements.")
-  @items
+  @pageItems
   value: CriticalDataElement[];
 
   @doc("The link to the next page of results.")
@@ -537,7 +537,7 @@ model CriticalDataElementsResponse {
 @pagedResult
 model DataAssetsResponse {
   @doc("The list of data assets.")
-  @items
+  @pageItems
   value: DataAsset[];
 
   @doc("The link to the next page of results.")
@@ -549,7 +549,7 @@ model DataAssetsResponse {
 @pagedResult
 model RelationshipWrappersResponse {
   @doc("The list of relationships.")
-  @items
+  @pageItems
   value: RelationshipWrapper[];
 
   @doc("The link to the next page of results.")
@@ -741,7 +741,7 @@ model CatalogModelDataProductAllOfAdditionalProperties {
 @pagedResult
 model DataProductResponse {
   @doc("The list of data products.")
-  @items
+  @pageItems
   value: DataProduct[];
 
   @doc("The link to the next page of results.")
@@ -928,7 +928,7 @@ union RelatedCollectionParentCollectionTypeEnum {
 @pagedResult
 model DomainResponse {
   @doc("The list of domains.")
-  @items
+  @pageItems
   value: Domain[];
 
   @doc("The link to the next page of results.")
@@ -997,7 +997,7 @@ model CatalogModelTermResource {
 @pagedResult
 model TermResponse {
   @doc("The list of terms.")
-  @items
+  @pageItems
   value: Term[];
 
   @doc("The link to the next page of results.")
@@ -1091,7 +1091,7 @@ model TermRelationship {
 @pagedResult
 model TermRelationshipResponse {
   @doc("The list of term relationships.")
-  @items
+  @pageItems
   value: TermRelationship[];
 
   @doc("The link to the next page of results.")
@@ -1217,7 +1217,7 @@ union OverallStatusEnum {
 @pagedResult
 model ObjectiveWithAdditionalPropertiesResponse {
   @doc("The list of objectives with additional properties.")
-  @items
+  @pageItems
   value: ObjectiveWithAdditionalProperties[];
 
   @doc("The link to the next page of results.")
@@ -1347,7 +1347,7 @@ model KeyResult {
 @pagedResult
 model ModelKeyResultResponse {
   @doc("The list of key results.")
-  @items
+  @pageItems
   value: KeyResult[];
 
   @doc("The link to the next page of results.")
@@ -1386,7 +1386,7 @@ model CatalogModelKeyResult {
 @pagedResult
 model CatalogModelKeyResultResponse {
   @doc("The list of key results.")
-  @items
+  @pageItems
   value: CatalogModelKeyResult[];
 
   @doc("The link to the next page of results.")
