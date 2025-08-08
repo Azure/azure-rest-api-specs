@@ -509,20 +509,19 @@ model FacetsResponse {
   facets: Record<FacetValue[]>;
 }
 
-@doc("Response containing a list of critical data columns.")
-@pagedResult
-model CriticalDataColumnsResponse {
-  @doc("The list of critical data columns.")
-  @pageItems
-  value: CriticalDataColumn[];
+// @doc("Response containing a list of critical data columns.")
+// @pagedResult
+// model CriticalDataColumnsResponse {
+//   @doc("The list of critical data columns.")
+//   @pageItems
+//   value: CriticalDataColumn[];
 
-  @doc("The link to the next page of results.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("The link to the next page of results.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 @doc("Response containing a list of critical data elements.")
-@pagedResult
 model CriticalDataElementsResponse {
   @doc("The list of critical data elements.")
   @pageItems
@@ -534,7 +533,6 @@ model CriticalDataElementsResponse {
 }
 
 @doc("Response containing a list of data assets.")
-@pagedResult
 model DataAssetsResponse {
   @doc("The list of data assets.")
   @pageItems
@@ -545,17 +543,17 @@ model DataAssetsResponse {
   nextLink?: string;
 }
 
-@doc("Response containing a list of relationship wrappers.")
-@pagedResult
-model RelationshipWrappersResponse {
-  @doc("The list of relationships.")
-  @pageItems
-  value: RelationshipWrapper[];
+// @doc("Response containing a list of relationship wrappers.")
+// @pagedResult
+// model RelationshipWrappersResponse {
+//   @doc("The list of relationships.")
+//   @pageItems
+//   value: RelationshipWrapper[];
 
-  @doc("The link to the next page of results.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("The link to the next page of results.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 @doc("CatalogModelDataProductTypeEnum")
 union CatalogModelDataProductTypeEnum {
@@ -738,7 +736,6 @@ model CatalogModelDataProductAllOfAdditionalProperties {
 }
 
 @doc("Response containing a list of data products.")
-@pagedResult
 model DataProductResponse {
   @doc("The list of data products.")
   @pageItems
@@ -924,17 +921,17 @@ union RelatedCollectionParentCollectionTypeEnum {
   string,
 }
 
-@doc("Response containing a list of domains.")
-@pagedResult
-model DomainResponse {
-  @doc("The list of domains.")
-  @pageItems
-  value: Domain[];
+// @doc("Response containing a list of domains.")
+// @pagedResult
+// model DomainResponse {
+//   @doc("The list of domains.")
+//   @pageItems
+//   value: Domain[];
 
-  @doc("The link to the next page of results.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("The link to the next page of results.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 @doc("ControllersModelsPolicyAddAdminRequest.")
 model ControllersModelsPolicyAddAdminRequest {
@@ -994,7 +991,6 @@ model CatalogModelTermResource {
 }
 
 @doc("Response containing a list of terms.")
-@pagedResult
 model TermResponse {
   @doc("The list of terms.")
   @pageItems
@@ -1087,17 +1083,17 @@ model TermRelationship {
   relationshipType?: TermRelationshipType;
 }
 
-@doc("Response containing a list of term relationships.")
-@pagedResult
-model TermRelationshipResponse {
-  @doc("The list of term relationships.")
-  @pageItems
-  value: TermRelationship[];
+// @doc("Response containing a list of term relationships.")
+// @pagedResult
+// model TermRelationshipResponse {
+//   @doc("The list of term relationships.")
+//   @pageItems
+//   value: TermRelationship[];
 
-  @doc("The link to the next page of results.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("The link to the next page of results.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 @doc("TermRelationshipType")
 union TermRelationshipType {
@@ -1214,7 +1210,6 @@ union OverallStatusEnum {
 }
 
 @doc("Response containing a list of objectives with additional properties.")
-@pagedResult
 model ObjectiveWithAdditionalPropertiesResponse {
   @doc("The list of objectives with additional properties.")
   @pageItems
@@ -1343,17 +1338,17 @@ model KeyResult {
   max?: float64;
 }
 
-@doc("Response containing a list of key results.")
-@pagedResult
-model ModelKeyResultResponse {
-  @doc("The list of key results.")
-  @pageItems
-  value: KeyResult[];
+// @doc("Response containing a list of key results.")
+// @pagedResult
+// model ModelKeyResultResponse {
+//   @doc("The list of key results.")
+//   @pageItems
+//   value: KeyResult[];
 
-  @doc("The link to the next page of results.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("The link to the next page of results.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 @doc("Catalog model key result.")
 model CatalogModelKeyResult {
@@ -1383,7 +1378,6 @@ model CatalogModelKeyResult {
 }
 
 @doc("Response containing a list of key results.")
-@pagedResult
 model CatalogModelKeyResultResponse {
   @doc("The list of key results.")
   @pageItems

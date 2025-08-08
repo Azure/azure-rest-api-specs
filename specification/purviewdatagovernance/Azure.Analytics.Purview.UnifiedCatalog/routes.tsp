@@ -127,6 +127,7 @@ op DeleteCriticalDataElementRelationshipAsync is RpcOperation<
 @tag("CriticalDataElements")
 @doc("Queries critical data elements based on various criteria.")
 @route("/criticalDataElements/query")
+@list
 @post
 op QueryCriticalDataElementsAsync is RpcOperation<
   {
@@ -268,6 +269,7 @@ op CreateDataAssetAsync is RpcOperation<DataAsset, CreateDataAssetResponse>;
 @tag("DataAsset")
 @doc("Creates a new data asset with fileted query inputs.")
 @route("/dataAssets/query")
+@list
 @post
 op QueryDataAssetsAsync is RpcOperation<
   DataAssetQueryRequest,
@@ -387,6 +389,7 @@ op CreateDataProductAsync is RpcOperation<
 @tag("DataProduct")
 @doc("Queries data products based on specified criteria.")
 @route("/dataProducts/query")
+@list
 @post
 op QueryDataProductsAsync is RpcOperation<
   {
@@ -622,6 +625,7 @@ op DeleteTermAsync is UnifiedCatalogOperations.ResourceDelete<Term>;
 @tag("Term")
 @doc("Retrieves terms based on specified criteria.")
 @route("/terms/query")
+@list
 @post
 op QueryTermsAsync is RpcOperation<
   {
@@ -748,6 +752,7 @@ op CreateObjectiveAsync is RpcOperation<
 @tag("OKR")
 @doc("Queries objectives (OKRs) based on specified criteria.")
 @route("/objectives/query")
+@list
 @post
 op QueryObjectivesAsync is RpcOperation<
   {
@@ -837,6 +842,7 @@ op GetKeyResultByIdAsync is RpcOperation<GetKeyResultParameter, KeyResult>;
 @tag("OKR")
 @doc("Updates an existing key result (OKR) by its ID.")
 @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
+@list
 @put
 op UpdateKeyResultAsync is RpcOperation<
   GetKeyResultParameter & {
