@@ -20,7 +20,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_11_01_Preview: "2022-11-01-preview",
 
-  @doc("The 2022-12-01 version.") 
+  @doc("The 2022-12-01 version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_12_01: "2022-12-01",
 }
@@ -44,7 +44,7 @@ interface Widgets {
   @doc("Fetch a Widget by name.")
   getWidget is ResourceRead<WidgetSuite>;
 
-  @doc("Gets status of a Widget operation.")
+  @doc("Gets status of a Widget operations.")
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
 
   @doc("Creates or updates a Widget asynchronously.")
