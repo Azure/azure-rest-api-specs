@@ -196,6 +196,7 @@
 |------|------------|-------|
 | `definitions.ObjectRecommendationProperties.properties.analyzedWorkload.type__deleted` | deleted | `object` |
 | `definitions.ObjectRecommendationProperties.properties.implementationDetails.type__deleted` | deleted | `object` |
+| `definitions.Operation.properties.properties.additionalProperties.type__deleted` | deleted | `object` |
 | `definitions.UserAssignedIdentity.properties.userAssignedIdentities.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/capabilities'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/checkNameAvailability'].post.parameters[0].type__added` | added | `string` |
@@ -353,48 +354,19 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations'].get.parameters[0].maxLength__added` | added | `63` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints'].get.parameters[0].maxLength__added` | added | `63` |
 
-### Changes for `x-ms-long-running-operation-options`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}'].patch['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings/{threatProtectionName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}'].patch['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/databases/{databaseName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}'].put['x-ms-long-running-operation-options__deleted']` | deleted | `{"final-state-via":"azure-async-operation"}` |
-
-### Changes for `200`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}'].patch.responses.200__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/Server"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}'].patch.responses.200__added` | added | `{"description":"ignore","schema":{"$ref":"#/definitions/Configuration"}}` |
-
 ### Changes for `headers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup'].post.responses.200.headers__deleted` | deleted | `{"x-ms-request-id":{"type":"string","description":"A unique ID for the current operation, service ge...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup'].post.responses.default.headers__deleted` | deleted | `{"x-ms-error-code":{"type":"string","description":"ErrorCode string in the event of a failure."},"x-...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup'].post.responses.200.headers__deleted` | deleted | `{"x-ms-request-id":{"type":"string","description":"A unique ID for the current operation, service ge...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup'].post.responses.202.headers__deleted` | deleted | `{"x-ms-request-id":{"type":"string","description":"A unique ID for the current operation, service ge...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup'].post.responses.default.headers__deleted` | deleted | `{"x-ms-error-code":{"type":"string","description":"ErrorCode string in the event of a failure."},"x-...` |
 
-### Changes for `AdministratorMicrosoftEntraAdd`
+### Changes for `final-state-schema`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AdministratorMicrosoftEntraAdd__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/AdministratorMicrosoftEntraProper...` |
-
-### Changes for `AdministratorMicrosoftEntraPropertiesForAdd`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AdministratorMicrosoftEntraPropertiesForAdd__deleted` | deleted | `{"type":"object","properties":{"principalType":{"type":"string","enum":["Unknown","User","Group","Se...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E` |
 
 ### Changes for `UserAssignedIdentityMap`
 
@@ -407,12 +379,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: string, retryAfter: int32 }>__added']` | added | `{"type":"object"}` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<BackupsLongTermRetentionResponse>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<BackupsLongTermRetentionResponse>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/BackupsLongTermRetentionResponse"}},"re...` |
 
 ### Changes for `CapabilityBase`
 
@@ -455,46 +421,23 @@
 | `definitions.MigrationSecretParameters.properties.adminCredentials['x-ms-external__deleted']` | deleted | `true` |
 | `definitions.MigrationSecretParametersForPatch.properties.adminCredentials['x-ms-external__deleted']` | deleted | `true` |
 
-### Changes for `x-ms-secret`
+### Changes for `format`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AdminCredentials.properties.sourceServerPassword['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.AdminCredentials.properties.targetServerPassword['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.AdminCredentialsForPatch.properties.sourceServerPassword['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.AdminCredentialsForPatch.properties.targetServerPassword['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.BackupStoreDetails.properties.sasUriList.items['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.MigrationSecretParameters.properties.adminCredentials['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.MigrationSecretParametersForPatch.properties.adminCredentials['x-ms-secret__deleted']` | deleted | `true` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AdvancedThreatProtectionSettingsList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.CapabilityList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.DataEncryption.properties.geoBackupEncryptionKeyStatus.readOnly__added` | added | `true` |
-| `definitions.DataEncryption.properties.primaryEncryptionKeyStatus.readOnly__added` | added | `true` |
-| `definitions.MigrationList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ObjectRecommendation.properties.properties.readOnly__added` | added | `true` |
-| `definitions.ObjectRecommendationDetails.readOnly__deleted` | deleted | `true` |
-| `definitions.ObjectRecommendationProperties.properties.details.readOnly__added` | added | `true` |
-| `definitions.ObjectRecommendationProperties.readOnly__deleted` | deleted | `true` |
-| `definitions.PrivateEndpointConnectionList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.PrivateLinkResourceList.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.QuotaUsageList.properties.value.readOnly__deleted` | deleted | `true` |
+| `definitions.AdminCredentials.properties.sourceServerPassword.format__added` | added | `password` |
+| `definitions.AdminCredentials.properties.targetServerPassword.format__added` | added | `password` |
+| `definitions.AdminCredentialsForPatch.properties.sourceServerPassword.format__added` | added | `password` |
+| `definitions.AdminCredentialsForPatch.properties.targetServerPassword.format__added` | added | `password` |
+| `definitions.Network.properties.delegatedSubnetResourceId.format__added` | added | `arm-id` |
+| `definitions.Network.properties.privateDnsZoneArmResourceId.format__added` | added | `arm-id` |
+| `definitions.ServerProperties.properties.sourceServerResourceId.format__added` | added | `arm-id` |
 
 ### Changes for `default`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AuthConfig.properties.passwordAuth.default__deleted` | deleted | `Enabled` |
 | `definitions.Backup.properties.geoRedundantBackup.default__deleted` | deleted | `Disabled` |
-| `definitions.Cluster.properties.clusterSize.default__deleted` | deleted | `0` |
-| `definitions.HighAvailability.properties.mode.default__deleted` | deleted | `Disabled` |
-| `definitions.MaintenanceWindow.properties.dayOfWeek.default__deleted` | deleted | `0` |
-| `definitions.MaintenanceWindow.properties.startHour.default__deleted` | deleted | `0` |
-| `definitions.MaintenanceWindow.properties.startMinute.default__deleted` | deleted | `0` |
 | `definitions.ServerProperties.properties.authConfig.default__deleted` | deleted | `null` |
 | `definitions.ServerProperties.properties.backup.default__deleted` | deleted | `null` |
 | `definitions.ServerProperties.properties.cluster.default__deleted` | deleted | `null` |
@@ -512,15 +455,13 @@
 | `definitions.ServerPropertiesForPatch.properties.network.default__deleted` | deleted | `null` |
 | `definitions.ServerPropertiesForPatch.properties.storage.default__deleted` | deleted | `null` |
 
-### Changes for `x-ms-identifiers`
+### Changes for `x-ms-secret`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
-| `definitions.ObjectRecommendationList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
-| `definitions.OperationList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
-| `definitions.QuotaUsageList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
-| `definitions.TuningOptionsList.properties.value['x-ms-identifiers__deleted']` | deleted | `["name"]` |
+| `definitions.BackupStoreDetails.properties.sasUriList.items['x-ms-secret__deleted']` | deleted | `true` |
+| `definitions.MigrationSecretParameters.properties.adminCredentials['x-ms-secret__deleted']` | deleted | `true` |
+| `definitions.MigrationSecretParametersForPatch.properties.adminCredentials['x-ms-secret__deleted']` | deleted | `true` |
 
 ### Changes for `x-ms-mutability`
 
@@ -530,26 +471,15 @@
 | `definitions.DataEncryption.properties.primaryEncryptionKeyStatus['x-ms-mutability__deleted']` | deleted | `["read"]` |
 | `definitions.DbServerMetadata.properties.location['x-ms-mutability__deleted']` | deleted | `["read"]` |
 
-### Changes for `minimum`
+### Changes for `readOnly`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LtrBackupOperationResponseProperties.properties.percentComplete.minimum__deleted` | deleted | `0` |
-
-### Changes for `maxItems`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.MigrationProperties.properties.dbsToMigrate.maxItems__deleted` | deleted | `50` |
-| `definitions.MigrationPropertiesForPatch.properties.dbsToMigrate.maxItems__deleted` | deleted | `50` |
-
-### Changes for `format`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Network.properties.delegatedSubnetResourceId.format__added` | added | `arm-id` |
-| `definitions.Network.properties.privateDnsZoneArmResourceId.format__added` | added | `arm-id` |
-| `definitions.ServerProperties.properties.sourceServerResourceId.format__added` | added | `arm-id` |
+| `definitions.DataEncryption.properties.geoBackupEncryptionKeyStatus.readOnly__added` | added | `true` |
+| `definitions.DataEncryption.properties.primaryEncryptionKeyStatus.readOnly__added` | added | `true` |
+| `definitions.ObjectRecommendationDetails.readOnly__deleted` | deleted | `true` |
+| `definitions.ObjectRecommendationProperties.properties.details.readOnly__added` | added | `true` |
+| `definitions.ObjectRecommendationProperties.readOnly__deleted` | deleted | `true` |
 
 ### Changes for `x-ms-visibility`
 
@@ -565,7 +495,7 @@
 | `definitions.ObjectRecommendationProperties.properties.implementationDetails.properties__deleted` | deleted | `{"method":{"type":"string","description":"Method of implementation for recommended action."},"script...` |
 | `definitions.PrivateDnsZoneSuffix.properties__added` | added | `{"value":{"type":"string","readOnly":true}}` |
 | `definitions.TuningOptions.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
-| `definitions.VirtualEndpoint.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
+| `definitions.VirtualEndpoint.properties__added` | added | `{"properties":{"$ref":"#/definitions/VirtualEndpointResourceForPatch","x-ms-client-flatten":true}}` |
 
 ### Changes for `x-ms-client-flatten`
 
@@ -577,7 +507,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Operation.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
 | `definitions.UserAssignedIdentity.properties.userAssignedIdentities.additionalProperties__added` | added | `{"$ref":"#/definitions/UserIdentity"}` |
 
 ## Modified Values
@@ -597,15 +526,8 @@
 | `definitions.StorageMbCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.StorageTierCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.VirtualEndpoint.allOf[0].$ref` | `#/definitions/VirtualEndpointResourceForPatch` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}'].put.parameters[3].schema.$ref` | `#/definitions/AdministratorMicrosoftEntraAdd` | `#/definitions/AdministratorMicrosoftEntra` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}'].put.parameters[3].schema.$ref` | `#/definitions/ConfigurationForUpdate` | `#/definitions/Configuration` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}'].get.parameters[1].maxLength` | `128` | `63` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}'].get.parameters[1].minLength` | `1` | `3` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}'].get.parameters[1].name` | `backupName` | `serverName` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}'].get.parameters[1].pattern` | `^[-\\w\\._]+$` | `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.parameters[2].schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateLinkResources/{groupName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource` | `#/definitions/PrivateLinkResource` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/replicas'].get.responses.200.schema.$ref` | `./Servers.json#/definitions/ServerList` | `#/definitions/ServerList` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}'].patch['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
 

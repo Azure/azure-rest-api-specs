@@ -117,9 +117,6 @@
         ]
       },
       "patch": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "~",
@@ -137,15 +134,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "200__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          }
-        }
+        ]
       },
       "delete": {
         "parameters": [
@@ -211,9 +200,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -237,15 +223,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/AdministratorMicrosoftEntraAdd",
-                  "__new": "#/definitions/AdministratorMicrosoftEntra"
-                }
-              }
-            }
+            " "
           ]
         ]
       },
@@ -324,9 +302,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -404,9 +379,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -428,17 +400,6 @@
           ],
           [
             " "
-          ],
-          [
-            "+",
-            {
-              "name": "resource",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/BackupAutomaticAndOnDemand"
-              }
-            }
           ]
         ]
       },
@@ -555,9 +516,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -581,22 +539,11 @@
             " "
           ],
           [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/ConfigurationForUpdate",
-                  "__new": "#/definitions/Configuration"
-                }
-              }
-            }
+            " "
           ]
         ]
       },
       "patch": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -622,15 +569,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "200__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Configuration"
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/databases": {
@@ -679,9 +618,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -781,9 +717,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -885,35 +818,19 @@
             }
           ],
           [
-            "~",
-            {
-              "name": {
-                "__old": "backupName",
-                "__new": "serverName"
-              },
-              "minLength": {
-                "__old": 1,
-                "__new": 3
-              },
-              "maxLength": {
-                "__old": 128,
-                "__new": 63
-              },
-              "pattern": {
-                "__old": "^[-\\w\\._]+$",
-                "__new": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
-              }
-            }
-          ],
-          [
             "+",
             {
-              "name": "backupName",
+              "name": "serverName",
               "in": "path",
               "required": true,
               "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
               "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
             }
+          ],
+          [
+            " "
           ]
         ]
       }
@@ -1365,22 +1282,6 @@
           ]
         ],
         "responses": {
-          "200": {
-            "headers__deleted": {
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
-              }
-            }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
-              }
-            }
-          },
           "default": {
             "headers__deleted": {
               "x-ms-error-code": {
@@ -1544,9 +1445,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "-",
@@ -1602,10 +1500,7 @@
           ]
         ],
         "x-ms-long-running-operation-options": {
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         }
       },
       "delete": {
@@ -1636,53 +1531,6 @@
     }
   },
   "definitions": {
-    "AdministratorMicrosoftEntraAdd__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AdministratorMicrosoftEntraPropertiesForAdd",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AdministratorMicrosoftEntraPropertiesForAdd__deleted": {
-      "type": "object",
-      "properties": {
-        "principalType": {
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "name": "PrincipalType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
-        "principalName": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
-        "tenantId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
-        }
-      }
-    },
     "UserAssignedIdentityMap__deleted": {
       "type": "object",
       "additionalProperties": {
@@ -1691,17 +1539,6 @@
     },
     "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>__added": {
       "type": "object"
-    },
-    "Azure.ResourceManager.ArmResponse<BackupsLongTermRetentionResponse>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BackupsLongTermRetentionResponse"
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "CapabilityBase__added": {
       "type": "object",
@@ -1786,11 +1623,11 @@
       "properties": {
         "sourceServerPassword": {
           "x-ms-external__deleted": true,
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "targetServerPassword": {
           "x-ms-external__deleted": true,
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -1798,11 +1635,11 @@
       "properties": {
         "sourceServerPassword": {
           "x-ms-external__deleted": true,
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "targetServerPassword": {
           "x-ms-external__deleted": true,
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -1814,19 +1651,7 @@
     "AdvancedThreatProtectionSettingsList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
-    "AuthConfig": {
-      "properties": {
-        "passwordAuth": {
-          "default__deleted": "Enabled"
-        }
-      }
+      ]
     },
     "Backup": {
       "properties": {
@@ -1871,27 +1696,12 @@
     "CapabilityList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true,
-          "x-ms-identifiers__deleted": [
-            "name"
-          ]
-        }
-      }
+      ]
     },
     "CapturedLogList": {
       "required__added": [
         "value"
       ]
-    },
-    "Cluster": {
-      "properties": {
-        "clusterSize": {
-          "default__deleted": 0
-        }
-      }
     },
     "ConfigurationList": {
       "required__added": [
@@ -1946,109 +1756,15 @@
         "value"
       ]
     },
-    "HighAvailability": {
-      "properties": {
-        "mode": {
-          "default__deleted": "Disabled",
-          "enum": [
-            [
-              "+",
-              "SameZone"
-            ],
-            [
-              "+",
-              "ZoneRedundant"
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "ZoneRedundant"
-            ],
-            [
-              "-",
-              "SameZone"
-            ]
-          ]
-        }
-      }
-    },
-    "HighAvailabilityForPatch": {
-      "properties": {
-        "mode": {
-          "enum": [
-            [
-              "+",
-              "SameZone"
-            ],
-            [
-              "+",
-              "ZoneRedundant"
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "ZoneRedundant"
-            ],
-            [
-              "-",
-              "SameZone"
-            ]
-          ]
-        }
-      }
-    },
-    "LtrBackupOperationResponseProperties": {
-      "properties": {
-        "percentComplete": {
-          "minimum__deleted": 0
-        }
-      }
-    },
     "LtrServerBackupOperationList": {
       "required__added": [
         "value"
       ]
     },
-    "MaintenanceWindow": {
-      "properties": {
-        "startHour": {
-          "default__deleted": 0
-        },
-        "startMinute": {
-          "default__deleted": 0
-        },
-        "dayOfWeek": {
-          "default__deleted": 0
-        }
-      }
-    },
     "MigrationList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
-    },
-    "MigrationProperties": {
-      "properties": {
-        "dbsToMigrate": {
-          "maxItems__deleted": 50
-        }
-      }
-    },
-    "MigrationPropertiesForPatch": {
-      "properties": {
-        "dbsToMigrate": {
-          "maxItems__deleted": 50
-        }
-      }
+      ]
     },
     "MigrationSecretParameters": {
       "properties": {
@@ -2080,9 +1796,6 @@
       "properties": {
         "kind": {
           "x-ms-visibility__deleted": "internal"
-        },
-        "properties": {
-          "readOnly__added": true
         }
       }
     },
@@ -2092,14 +1805,7 @@
     "ObjectRecommendationList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "x-ms-identifiers__deleted": [
-            "name"
-          ]
-        }
-      }
+      ]
     },
     "ObjectRecommendationProperties": {
       "readOnly__deleted": true,
@@ -2149,7 +1855,7 @@
         "properties": {
           "x-ms-client-flatten__deleted": false,
           "additionalProperties": {
-            "additionalProperties__added": {}
+            "type__deleted": "object"
           }
         }
       }
@@ -2157,14 +1863,7 @@
     "OperationList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "x-ms-identifiers__deleted": [
-            "name"
-          ]
-        }
-      }
+      ]
     },
     "PrivateDnsZoneSuffix": {
       "properties__added": {
@@ -2184,7 +1883,6 @@
       ],
       "properties": {
         "value": {
-          "readOnly__deleted": true,
           "items": {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection",
@@ -2200,7 +1898,6 @@
       ],
       "properties": {
         "value": {
-          "readOnly__deleted": true,
           "items": {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource",
@@ -2213,15 +1910,7 @@
     "QuotaUsageList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true,
-          "x-ms-identifiers__deleted": [
-            "name"
-          ]
-        }
-      }
+      ]
     },
     "ServerEditionCapability": {
       "allOf": [
@@ -2314,14 +2003,19 @@
           "items": {
             "enum": [
               [
-                " "
-              ],
-              [
-                " "
+                "+",
+                "Disabled"
               ],
               [
                 "+",
-                "Disabled"
+                "ZoneRedundant"
+              ],
+              [
+                " "
+              ],
+              [
+                "-",
+                "ZoneRedundant"
               ]
             ]
           }
@@ -2402,14 +2096,7 @@
     "TuningOptionsList": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "x-ms-identifiers__deleted": [
-            "name"
-          ]
-        }
-      }
+      ]
     },
     "UserAssignedIdentity": {
       "properties": {
@@ -2425,7 +2112,7 @@
     "VirtualEndpoint": {
       "properties__added": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/VirtualEndpointResourceForPatch",
           "x-ms-client-flatten": true
         }
       },

@@ -76,11 +76,11 @@ union BackupType {
 union HighAvailabilityMode {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  SameZone: "SameZone",
+  Disabled: "Disabled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ZoneRedundant: "ZoneRedundant",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Disabled: "Disabled",
+  SameZone: "SameZone",
 }
 
 /**
@@ -1710,6 +1710,7 @@ model LtrBackupOperationResponseProperties {
   /**
    * PercentageCompleted
    */
+  @minValue(0)
   @maxValue(100)
   percentComplete?: float64;
 
@@ -1814,6 +1815,7 @@ model MigrationProperties {
    * Names of databases to migrate.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @maxItems(50)
   dbsToMigrate?: string[];
 
   /**
@@ -2172,12 +2174,14 @@ model AdminCredentials {
    * Password for the user of the source server.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   sourceServerPassword: string;
 
   /**
    * Password for the user of the target server.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   targetServerPassword: string;
 }
 
@@ -2225,6 +2229,7 @@ model MigrationPropertiesForPatch {
    * Names of databases to migrate.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @maxItems(50)
   dbsToMigrate?: string[];
 
   /**
@@ -2311,12 +2316,14 @@ model AdminCredentialsForPatch {
    * Password for the user of the source server.
    */
   @visibility(Lifecycle.Update)
+  @secret
   sourceServerPassword?: string;
 
   /**
    * Password for the user of the target server.
    */
   @visibility(Lifecycle.Update)
+  @secret
   targetServerPassword?: string;
 }
 
@@ -2409,7 +2416,7 @@ model Operation {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  properties?: Record<Record<unknown>>;
+  properties?: Record<unknown>;
 }
 
 /**
@@ -2747,7 +2754,7 @@ model AuthConfig {
   /**
    * Indicates if the server supports password based authentication.
    */
-  passwordAuth?: PasswordBasedAuth;
+  passwordAuth?: PasswordBasedAuth = PasswordBasedAuth.Enabled;
 
   /**
    * Identifier of the tenant of the delegated resource.
@@ -2855,7 +2862,7 @@ model HighAvailability {
   /**
    * High availability mode for a server.
    */
-  mode?: HighAvailabilityMode;
+  mode?: HighAvailabilityMode = HighAvailabilityMode.Disabled;
 
   /**
    * Possible states of the standby server created when high availability is set to SameZone or ZoneRedundant.
@@ -2881,17 +2888,17 @@ model MaintenanceWindow {
   /**
    * Start hour to be used for maintenance window.
    */
-  startHour?: int32;
+  startHour?: int32 = 0;
 
   /**
    * Start minute to be used for maintenance window.
    */
-  startMinute?: int32;
+  startMinute?: int32 = 0;
 
   /**
    * Day of the week to be used for maintenance window.
    */
-  dayOfWeek?: int32;
+  dayOfWeek?: int32 = 0;
 }
 
 /**
@@ -2935,7 +2942,7 @@ model Cluster {
   /**
    * Number of nodes assigned to the elastic cluster.
    */
-  clusterSize?: int32;
+  clusterSize?: int32 = 0;
 
   /**
    * Default database name for the elastic cluster.
@@ -3192,7 +3199,6 @@ model ObjectRecommendation
    * Properties of an object recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ObjectRecommendationProperties;
 }
@@ -3457,7 +3463,7 @@ model DelegatedSubnetUsage {
 }
 
 /**
- * Represents the private DNS zone suffix information
+ * Private DNS suffix.
  */
 model PrivateDnsZoneSuffix {
   /**
@@ -3468,3 +3474,17 @@ model PrivateDnsZoneSuffix {
 }
 
 model OperationList is Azure.Core.Page<Operation>;
+@@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
+@@visibility(CapabilityList.value, Lifecycle.Read);
+@@visibility(MigrationList.value, Lifecycle.Read);
+@@visibility(PrivateEndpointConnectionList.value, Lifecycle.Read);
+@@visibility(PrivateLinkResourceList.value, Lifecycle.Read);
+@@visibility(QuotaUsageList.value, Lifecycle.Read);
+@@OpenAPI.extension(CapabilityList.value, "x-ms-identifiers", #["name"]);
+@@OpenAPI.extension(ObjectRecommendationList.value,
+  "x-ms-identifiers",
+  #["name"]
+);
+@@OpenAPI.extension(OperationList.value, "x-ms-identifiers", #["name"]);
+@@OpenAPI.extension(QuotaUsageList.value, "x-ms-identifiers", #["name"]);
+@@OpenAPI.extension(TuningOptionsList.value, "x-ms-identifiers", #["name"]);

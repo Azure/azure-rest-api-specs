@@ -21,7 +21,7 @@ model BackupsLongTermRetentionOperation
     Resource = BackupsLongTermRetentionOperation,
     KeyName = "backupName",
     SegmentName = "ltrBackupOperations",
-    NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+    NamePattern = "^[-\\w\\._]+$"
   >;
 }
 
@@ -49,3 +49,5 @@ interface BackupsLongTermRetentionOperations {
 @@doc(BackupsLongTermRetentionOperation.properties,
   "Long Term Retention Backup Operation Resource Properties"
 );
+@@minLength(BackupsLongTermRetentionOperation.name, 1);
+@@maxLength(BackupsLongTermRetentionOperation.name, 128);

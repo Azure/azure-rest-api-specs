@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;
 // FIXME: VirtualEndpoint has no properties property
@@ -16,7 +17,8 @@ namespace Microsoft.DBforPostgreSQL;
  * Pair of virtual endpoints for a server.
  */
 @parentResource(Server)
-model VirtualEndpoint is Azure.ResourceManager.ProxyResource<{}> {
+model VirtualEndpoint
+  is Azure.ResourceManager.ProxyResource<VirtualEndpointResourceForPatch> {
   ...ResourceNameParameter<
     Resource = VirtualEndpoint,
     KeyName = "virtualEndpointName",
@@ -36,15 +38,19 @@ interface VirtualEndpoints {
    * Creates a pair of virtual endpoints for a server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     VirtualEndpoint,
-    Response = ArmAcceptedLroResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Updates a pair of virtual endpoints for a server.
    */
   @patch(#{ implicitOptionality: false })
+  @useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     VirtualEndpoint,
     PatchModel = VirtualEndpointResourceForPatch,

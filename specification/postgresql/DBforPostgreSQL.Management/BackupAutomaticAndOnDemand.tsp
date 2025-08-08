@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Server.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -40,10 +41,13 @@ interface BackupAutomaticAndOnDemands {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("BackupsAutomaticAndOnDemand_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is CustomArmResourceCreateOrReplaceAsync<
     BackupAutomaticAndOnDemand,
-    Response = ArmAcceptedLroResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

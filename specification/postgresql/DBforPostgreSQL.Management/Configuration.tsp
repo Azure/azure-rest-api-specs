@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;
 /**
@@ -36,18 +37,31 @@ interface Configurations {
    * Updates, using Put verb, the value assigned to a specific modifiable configuration (also known as server parameter) of a server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  put is ArmResourceCreateOrReplaceAsync<
-    Configuration,
-    Response = ArmAcceptedLroResponse
+  @useFinalStateVia("azure-async-operation")
+  @put
+  put is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      Configuration,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<Configuration>
+    >,
+    ConfigurationForUpdate,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = ErrorResponse
   >;
 
   /**
    * Updates the value assigned to a specific modifiable configuration (also known as server parameter) of a server.
    */
   @patch(#{ implicitOptionality: false })
+  @useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     Configuration,
-    PatchModel = ConfigurationForUpdate
+    PatchModel = ConfigurationForUpdate,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

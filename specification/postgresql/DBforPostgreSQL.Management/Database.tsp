@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;
 /**
@@ -35,9 +36,12 @@ interface Databases {
    * Creates a new database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Database,
-    Response = ArmAcceptedLroResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

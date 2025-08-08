@@ -48,7 +48,9 @@ interface Servers {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
-    Response = ArmAcceptedLroResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -125,10 +127,20 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupsLongTermRetention_Start")
   @action("startLtrBackup")
-  start is ArmResourceActionAsync<
+  start is ArmResourceActionSync<
     Server,
     BackupsLongTermRetentionRequest,
-    ArmResponse<BackupsLongTermRetentionResponse>
+    (BackupsLongTermRetentionResponse & {
+      @header("x-ms-request-id")
+      @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupsLongTermRetentionResponse> &
+      ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-request-id")
+      @doc("A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.")
+      requestId?: string;
+    })
   >;
 
   /**

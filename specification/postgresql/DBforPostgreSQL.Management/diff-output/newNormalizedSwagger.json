@@ -447,12 +447,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
           "202": {
             "description": "ignore"
           },
@@ -494,6 +488,9 @@
           "Update an existing server.": {
             "$ref": "./examples/ServersUpdate.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -633,7 +630,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AdministratorMicrosoftEntra"
+              "$ref": "#/definitions/AdministratorMicrosoftEntraAdd"
             }
           }
         ],
@@ -652,6 +649,9 @@
           "Add a server administrator associated to a Microsoft Entra principal.": {
             "$ref": "./examples/AdministratorsMicrosoftEntraAdd.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -831,6 +831,9 @@
             "$ref": "./examples/AdvancedThreatProtectionSettingsCreateOrUpdate.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -935,14 +938,6 @@
             "minLength": 1,
             "maxLength": 128,
             "pattern": "^[-\\w\\._]+$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupAutomaticAndOnDemand"
-            }
           }
         ],
         "responses": {
@@ -960,6 +955,9 @@
           "Create an on demand backup of a server.": {
             "$ref": "./examples/BackupsAutomaticAndOnDemandCreate.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1195,7 +1193,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Configuration"
+              "$ref": "#/definitions/ConfigurationForUpdate"
             }
           }
         ],
@@ -1214,6 +1212,9 @@
           "Update, using Put verb, the value assigned to a specific modifiable configuration (also known as server parameter) of a server.": {
             "$ref": "./examples/ConfigurationsUpdateUsingPut.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1248,12 +1249,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Configuration"
-            }
-          },
           "202": {
             "description": "ignore"
           },
@@ -1268,6 +1263,9 @@
           "Update the value assigned to a specific modifiable configuration (also known as server parameter) of a server.": {
             "$ref": "./examples/ConfigurationsUpdate.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1398,6 +1396,9 @@
           "Create a database.": {
             "$ref": "./examples/DatabasesCreate.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1572,6 +1573,9 @@
             "$ref": "./examples/FirewallRulesCreateOrUpdate.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1712,7 +1716,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
@@ -2438,10 +2444,22 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/BackupsLongTermRetentionResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -2781,6 +2799,9 @@
             "$ref": "./examples/VirtualEndpointCreate.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -2830,7 +2851,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         },
         "x-ms-long-running-operation": true
       },
@@ -2885,17 +2907,21 @@
       "properties": {
         "sourceServerPassword": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "targetServerPassword": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -2908,15 +2934,19 @@
       "properties": {
         "sourceServerPassword": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "targetServerPassword": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -2936,6 +2966,15 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "AdministratorMicrosoftEntraAdd": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorMicrosoftEntraPropertiesForAdd",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "AdministratorMicrosoftEntraList": {
       "type": "object",
@@ -3005,6 +3044,44 @@
         }
       }
     },
+    "AdministratorMicrosoftEntraPropertiesForAdd": {
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "principalName": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
     "AdvancedThreatProtectionSettingsList": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -3014,7 +3091,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -3080,6 +3158,7 @@
         },
         "passwordAuth": {
           "type": "string",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -3127,17 +3206,6 @@
     },
     "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>": {
       "type": "object"
-    },
-    "Azure.ResourceManager.ArmResponse<BackupsLongTermRetentionResponse>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BackupsLongTermRetentionResponse"
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "Backup": {
       "type": "object",
@@ -3512,7 +3580,11 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Capability"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3587,7 +3659,8 @@
       "properties": {
         "clusterSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "defaultDatabaseName": {
           "type": "string"
@@ -4021,10 +4094,11 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "Disabled",
           "enum": [
-            "SameZone",
+            "Disabled",
             "ZoneRedundant",
-            "Disabled"
+            "SameZone"
           ],
           "x-ms-enum": {
             "name": "HighAvailabilityMode",
@@ -4059,9 +4133,9 @@
         "mode": {
           "type": "string",
           "enum": [
-            "SameZone",
+            "Disabled",
             "ZoneRedundant",
-            "Disabled"
+            "SameZone"
           ],
           "x-ms-enum": {
             "name": "HighAvailabilityMode",
@@ -4150,6 +4224,7 @@
         "percentComplete": {
           "type": "number",
           "format": "double",
+          "minimum": 0,
           "maximum": 100
         },
         "errorCode": {
@@ -4216,15 +4291,18 @@
         },
         "startHour": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "startMinute": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "dayOfWeek": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         }
       }
     },
@@ -4271,7 +4349,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Migration"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -4428,6 +4507,7 @@
         },
         "dbsToMigrate": {
           "type": "array",
+          "maxItems": 50,
           "items": {
             "type": "string"
           }
@@ -4537,6 +4617,7 @@
         },
         "dbsToMigrate": {
           "type": "array",
+          "maxItems": 50,
           "items": {
             "type": "string"
           }
@@ -4837,7 +4918,6 @@
         },
         "properties": {
           "$ref": "#/definitions/ObjectRecommendationProperties",
-          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -4888,7 +4968,10 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ObjectRecommendation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -5020,10 +5103,7 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
-          },
+          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -5058,7 +5138,10 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -5102,7 +5185,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5137,7 +5221,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5181,7 +5266,11 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/QuotaUsage"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -5717,9 +5806,9 @@
           "items": {
             "type": "string",
             "enum": [
-              "SameZone",
+              "Disabled",
               "ZoneRedundant",
-              "Disabled"
+              "SameZone"
             ],
             "x-ms-enum": {
               "name": "HighAvailabilityMode",
@@ -6033,7 +6122,10 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/TuningOptions"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -6180,7 +6272,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/VirtualEndpointResourceForPatch",
           "x-ms-client-flatten": true
         }
       },

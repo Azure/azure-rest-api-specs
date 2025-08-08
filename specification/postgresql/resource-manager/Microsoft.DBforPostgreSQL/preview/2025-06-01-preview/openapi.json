@@ -558,6 +558,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1214,6 +1218,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1238,7 +1246,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1388,21 +1396,16 @@
             "minLength": 1,
             "maxLength": 128,
             "pattern": "^[-\\w\\._]+$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupAutomaticAndOnDemand"
-            }
           }
         ],
         "responses": {
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1427,7 +1430,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1766,7 +1769,7 @@
             "description": "Parameters required to update the value of a specific modifiable configuration (also known as server parameter).",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Configuration"
+              "$ref": "#/definitions/ConfigurationForUpdate"
             }
           }
         ],
@@ -1774,6 +1777,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1798,7 +1805,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1849,15 +1856,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Configuration"
-            }
-          },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1882,7 +1887,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2047,6 +2052,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2071,7 +2080,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -2308,6 +2317,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2332,7 +2345,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -2546,7 +2559,9 @@
             "description": "The name of the backup.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
@@ -3576,11 +3591,21 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BackupsLongTermRetentionResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Azure operation completed successfully.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3589,6 +3614,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
               }
             }
           },
@@ -3605,7 +3634,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BackupsLongTermRetentionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -4078,6 +4108,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4102,7 +4136,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -4180,7 +4214,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         },
         "x-ms-long-running-operation": true
       },
@@ -4265,19 +4300,23 @@
       "properties": {
         "sourceServerPassword": {
           "type": "string",
+          "format": "password",
           "description": "Password for the user of the source server.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "targetServerPassword": {
           "type": "string",
+          "format": "password",
           "description": "Password for the user of the target server.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4291,17 +4330,21 @@
       "properties": {
         "sourceServerPassword": {
           "type": "string",
+          "format": "password",
           "description": "Password for the user of the source server.",
           "x-ms-mutability": [
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "targetServerPassword": {
           "type": "string",
+          "format": "password",
           "description": "Password for the user of the target server.",
           "x-ms-mutability": [
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -4439,7 +4482,8 @@
           "description": "The AdvancedThreatProtectionSettingsModel items on this page",
           "items": {
             "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -4495,8 +4539,27 @@
           "description": "Indicates if the server supports Microsoft Entra authentication."
         },
         "passwordAuth": {
-          "$ref": "#/definitions/PasswordBasedAuth",
-          "description": "Indicates if the server supports password based authentication."
+          "type": "string",
+          "description": "Indicates if the server supports password based authentication.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PasswordBasedAuth",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "tenantId": {
           "type": "string",
@@ -4526,19 +4589,6 @@
     "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: string, retryAfter: int32 }>": {
       "type": "object",
       "description": "Resource operation accepted."
-    },
-    "Azure.ResourceManager.ArmResponse<BackupsLongTermRetentionResponse>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/BackupsLongTermRetentionResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "AzureManagedDiskPerformanceTier": {
       "type": "string",
@@ -4993,7 +5043,11 @@
           "description": "The Capability items on this page",
           "items": {
             "$ref": "#/definitions/Capability"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -5092,7 +5146,8 @@
         "clusterSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of nodes assigned to the elastic cluster."
+          "description": "Number of nodes assigned to the elastic cluster.",
+          "default": 0
         },
         "defaultDatabaseName": {
           "type": "string",
@@ -5857,8 +5912,32 @@
       "description": "High availability properties of a server.",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/HighAvailabilityMode",
-          "description": "High availability mode for a server."
+          "type": "string",
+          "description": "High availability mode for a server.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "ZoneRedundant",
+            "SameZone"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "ZoneRedundant",
+                "value": "ZoneRedundant"
+              },
+              {
+                "name": "SameZone",
+                "value": "SameZone"
+              }
+            ]
+          }
         },
         "state": {
           "$ref": "#/definitions/HighAvailabilityState",
@@ -5896,25 +5975,25 @@
       "type": "string",
       "description": "Modes of high availability supported for this compute.",
       "enum": [
-        "SameZone",
+        "Disabled",
         "ZoneRedundant",
-        "Disabled"
+        "SameZone"
       ],
       "x-ms-enum": {
         "name": "HighAvailabilityMode",
         "modelAsString": true,
         "values": [
           {
-            "name": "SameZone",
-            "value": "SameZone"
+            "name": "Disabled",
+            "value": "Disabled"
           },
           {
             "name": "ZoneRedundant",
             "value": "ZoneRedundant"
           },
           {
-            "name": "Disabled",
-            "value": "Disabled"
+            "name": "SameZone",
+            "value": "SameZone"
           }
         ]
       }
@@ -6101,6 +6180,7 @@
           "type": "number",
           "format": "double",
           "description": "PercentageCompleted",
+          "minimum": 0,
           "maximum": 100
         },
         "errorCode": {
@@ -6175,17 +6255,20 @@
         "startHour": {
           "type": "integer",
           "format": "int32",
-          "description": "Start hour to be used for maintenance window."
+          "description": "Start hour to be used for maintenance window.",
+          "default": 0
         },
         "startMinute": {
           "type": "integer",
           "format": "int32",
-          "description": "Start minute to be used for maintenance window."
+          "description": "Start minute to be used for maintenance window.",
+          "default": 0
         },
         "dayOfWeek": {
           "type": "integer",
           "format": "int32",
-          "description": "Day of the week to be used for maintenance window."
+          "description": "Day of the week to be used for maintenance window.",
+          "default": 0
         }
       }
     },
@@ -6325,7 +6408,8 @@
           "description": "The Migration items on this page",
           "items": {
             "$ref": "#/definitions/Migration"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -6510,6 +6594,7 @@
         "dbsToMigrate": {
           "type": "array",
           "description": "Names of databases to migrate.",
+          "maxItems": 50,
           "items": {
             "type": "string"
           },
@@ -6590,6 +6675,7 @@
         "dbsToMigrate": {
           "type": "array",
           "description": "Names of databases to migrate.",
+          "maxItems": 50,
           "items": {
             "type": "string"
           },
@@ -6959,7 +7045,6 @@
         "properties": {
           "$ref": "#/definitions/ObjectRecommendationProperties",
           "description": "Properties of an object recommendation.",
-          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -7018,7 +7103,10 @@
           "description": "The ObjectRecommendation items on this page",
           "items": {
             "$ref": "#/definitions/ObjectRecommendation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -7178,10 +7266,7 @@
         "properties": {
           "type": "object",
           "description": "Additional descriptions for the operation.",
-          "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
-          },
+          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -7221,7 +7306,10 @@
           "description": "The Operation items on this page",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -7389,7 +7477,7 @@
     },
     "PrivateDnsZoneSuffix": {
       "type": "object",
-      "description": "Represents the private DNS zone suffix information",
+      "description": "Private DNS suffix.",
       "properties": {
         "value": {
           "type": "string",
@@ -7423,7 +7511,8 @@
           "description": "The PrivateEndpointConnection items on this page",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7460,7 +7549,8 @@
           "description": "The PrivateLinkResource items on this page",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7510,7 +7600,11 @@
           "description": "The QuotaUsage items on this page",
           "items": {
             "$ref": "#/definitions/QuotaUsage"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -8823,7 +8917,10 @@
           "description": "The TuningOptions items on this page",
           "items": {
             "$ref": "#/definitions/TuningOptions"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -8984,7 +9081,7 @@
       "description": "Pair of virtual endpoints for a server.",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/VirtualEndpointResourceForPatch",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
