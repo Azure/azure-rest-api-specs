@@ -13,7 +13,7 @@ using PurviewUnifiedCatalog;
     name: "UnifiedCatalogClient",
     service: PurviewUnifiedCatalog,
   },
-  "csharp"
+  "python"
 )
 namespace Customizations;
 
