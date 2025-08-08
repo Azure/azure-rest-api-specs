@@ -412,7 +412,7 @@ model SavingsPlanOrderAliasProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 }
 
 /**
@@ -493,7 +493,7 @@ model SavingsPlanOrderModelProperties {
   @visibility(Lifecycle.Read)
   billingProfileId?: Azure.Core.armResourceIdentifier<[
     {
-      scoped: ["Tenant"];
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts";
     }
   ]>;
@@ -714,6 +714,7 @@ model SavingsPlanModelProperties {
   billingProfileId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Billing/billingAccounts";
+      scopes: ["Tenant"];
     }
   ]>;
 
@@ -1050,7 +1051,7 @@ model SavingsPlanUpdateRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewProperties?: RenewProperties;
@@ -1167,7 +1168,7 @@ model ReservationOrderAliasRequestProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * The type of the resource that is being reserved.
@@ -1250,7 +1251,7 @@ model ReservationOrderAliasResponseProperties {
   /**
    * Setting this to true will automatically purchase a new benefit on the expiration date time.
    */
-  renew?: boolean;
+  renew?: boolean = false;
 
   /**
    * The type of the resource that is being reserved.
@@ -1318,6 +1319,7 @@ model DiscountProperties {
   billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Billing/billingAccounts";
+      scopes: ["Tenant"];
     }
   ]>;
 
@@ -1596,6 +1598,7 @@ model DiscountTypeProperties {
    * Discount percentage provided for the customer. Validation: Required unless this is a price rule.
    */
   @maxValue(100)
+  @minValue(0)
   discountPercentage?: float64;
 
   /**

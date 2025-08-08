@@ -1702,7 +1702,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts"
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "Tenant"
+                ]
               }
             ]
           }
@@ -2019,6 +2022,7 @@
           "type": "number",
           "format": "double",
           "description": "Discount percentage provided for the customer. Validation: Required unless this is a price rule.",
+          "minimum": 0,
           "maximum": 100
         },
         "discountCombinationRule": {
@@ -2592,7 +2596,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "reservedResourceType": {
           "$ref": "#/definitions/ReservedResourceType",
@@ -2691,7 +2696,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "reservedResourceType": {
           "$ref": "#/definitions/ReservedResourceType",
@@ -3006,7 +3012,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts"
+                "type": "Microsoft.Billing/billingAccounts",
+                "scopes": [
+                  "Tenant"
+                ]
               }
             ]
           }
@@ -3182,7 +3191,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         }
       }
     },
@@ -3255,7 +3265,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "scoped": [
+                "scopes": [
                   "Tenant"
                 ],
                 "type": "Microsoft.Billing/billingAccounts"
@@ -3438,7 +3448,8 @@
         },
         "renew": {
           "type": "boolean",
-          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
+          "description": "Setting this to true will automatically purchase a new benefit on the expiration date time.",
+          "default": false
         },
         "renewProperties": {
           "$ref": "#/definitions/RenewProperties"
