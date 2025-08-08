@@ -316,7 +316,7 @@ model XmlFilterRuleset {
   /**
    * Defines the method for referencing the xml schema.
    */
-  reference?: XmlReferenceType = XmlReferenceType.Inline;
+  reference?: XmlReferenceType;
 
   /**
    * The inline XSD schema to be used for validation.

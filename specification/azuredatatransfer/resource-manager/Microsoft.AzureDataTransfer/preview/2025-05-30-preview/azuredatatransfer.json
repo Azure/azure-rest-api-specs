@@ -5351,28 +5351,31 @@
           "description": "The default XML namespace used for schema validation."
         },
         "reference": {
-          "type": "string",
-          "description": "Defines the method for referencing the xml schema.",
-          "default": "Inline",
-          "enum": [
-            "Inline"
-          ],
-          "x-ms-enum": {
-            "name": "XmlReferenceType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Inline",
-                "value": "Inline",
-                "description": "Defines a referencing procedure where the xml schema will be provided inline."
-              }
-            ]
-          }
+          "$ref": "#/definitions/XmlReferenceType",
+          "description": "Defines the method for referencing the xml schema."
         },
         "schema": {
           "type": "string",
           "description": "The inline XSD schema to be used for validation."
         }
+      }
+    },
+    "XmlReferenceType": {
+      "type": "string",
+      "description": "Specifies how to reference the XML for processing.",
+      "enum": [
+        "Inline"
+      ],
+      "x-ms-enum": {
+        "name": "XmlReferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "Inline",
+            "description": "Defines a referencing procedure where the xml schema will be provided inline."
+          }
+        ]
       }
     }
   },
