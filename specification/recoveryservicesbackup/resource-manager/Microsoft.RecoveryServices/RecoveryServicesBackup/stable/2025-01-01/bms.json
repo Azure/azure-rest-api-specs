@@ -1446,7 +1446,22 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the final result of the long running operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1455,6 +1470,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Enable Protection on Azure IaasVm": {
             "$ref": "./examples/AzureIaasVm/ConfigureProtection.json"
