@@ -2714,7 +2714,7 @@
       "properties": {
         "remoteEndpoint": {
           "type": "string",
-          "description": "Remote host to which communication needs to be made"
+          "description": "Remote host to which communication needs to be made. Deprecated starting 2025-05-30-preview."
         },
         "cname": {
           "type": "string",
@@ -2726,19 +2726,19 @@
         },
         "identityTranslation": {
           "$ref": "#/definitions/IdentityTranslation",
-          "description": "Flag for if Azure Data Transfer API Flow should extract the user token"
+          "description": "Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. Deprecated starting 2025-05-30-preview."
         },
         "senderClientId": {
           "type": "string",
-          "description": "Sender's app user assigned Manage Identity client ID"
+          "description": "Sender's app user assigned Manage Identity client ID. Deprecated starting 2025-05-30-preview."
         },
         "remoteCallingModeClientId": {
           "type": "string",
-          "description": "Remote stub app registration Client ID"
+          "description": "Remote stub app registration Client ID. Deprecated starting 2025-05-30-preview."
         },
         "audienceOverride": {
           "type": "string",
-          "description": "Optional field to override the audience of the remote endpoint"
+          "description": "Optional field to override the audience of the remote endpoint. Deprecated starting 2025-05-30-preview."
         }
       }
     },
@@ -2908,7 +2908,7 @@
         },
         "flowTypes": {
           "type": "array",
-          "description": "The flow types being requested for this connection",
+          "description": "The flow types being requested for this connection. This FlowType property is deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.",
           "items": {
             "$ref": "#/definitions/FlowType"
           }
@@ -3346,7 +3346,7 @@
     },
     "FlowType": {
       "type": "string",
-      "description": "Flow type for the specified resource",
+      "description": "Flow type for the specified resource. FlowType will be deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.",
       "enum": [
         "Unknown",
         "Complex",
@@ -3390,7 +3390,7 @@
           {
             "name": "Mission",
             "value": "Mission",
-            "description": "This flow sends data that will not be processed by any security system."
+            "description": "This flow sends standard data but is subject to strict cloud owner approval."
           },
           {
             "name": "MicrosoftInternal",
@@ -3420,12 +3420,12 @@
           {
             "name": "Opaque",
             "value": "Opaque",
-            "description": "This flow sends blobs that will not be processed by any security system."
+            "description": "This flow sends blobs but is subject to cloud owner approval."
           },
           {
             "name": "MissionOpaqueXML",
             "value": "MissionOpaqueXML",
-            "description": "This flow sends Extensible Markup Language that will not be processed by any security system."
+            "description": "This flow sends Extensible Markup Language that is subject to strict cloud owner approval"
           },
           {
             "name": "DiskImages",
@@ -3459,7 +3459,7 @@
     },
     "ForceDisabledStatus": {
       "type": "string",
-      "description": "Status of force disablement",
+      "description": "Defines different disablement statuses and the circumstances in why they were disabled.",
       "enum": [
         "ConnectionForceDisabled",
         "FlowTypeForceDisabled"
@@ -3471,12 +3471,12 @@
           {
             "name": "ConnectionForceDisabled",
             "value": "ConnectionForceDisabled",
-            "description": "This Flow has been disabled as the connection has been disabled."
+            "description": "Defines disablement of a Flow due to the parent connection being disabled."
           },
           {
             "name": "FlowTypeForceDisabled",
             "value": "FlowTypeForceDisabled",
-            "description": "This Flow has been disabled as the flow type this flow uses has been disabled."
+            "description": "Defines disablement of a Flow due to the linked flow type being disabled."
           }
         ]
       }
@@ -3532,7 +3532,7 @@
           {
             "name": "UserIdentity",
             "value": "UserIdentity",
-            "description": "The API flow will make use of the user identity that called this API flow, and pass that token\nthrough the boundary."
+            "description": "The API flow will make use of the user identity that called this API flow, and pass that token through the boundary."
           },
           {
             "name": "ServiceIdentity",
@@ -3573,19 +3573,19 @@
           {
             "name": "Linked",
             "value": "Linked",
-            "description": "The pipeline, connection, or flow is currently linked with another corresponding pipeline,\nconnection, or flow, and can be used."
+            "description": "The pipeline, connection, or flow is currently linked with another corresponding pipeline, connection, or flow, and can be used."
           },
           {
             "name": "Unlinked",
             "value": "Unlinked",
-            "description": "The pipeline, connection, or flow is not linked with another corresponding pipeline,\nconnection, or flow, and cannot be used."
+            "description": "The pipeline, connection, or flow is not linked with another corresponding pipeline, connection, or flow, and cannot be used."
           }
         ]
       }
     },
     "ListApprovedSchemasRequest": {
       "type": "object",
-      "description": "The request used to list approved schemas within the resource provider.",
+      "description": "The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest will be deprecated after from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "pipeline": {
           "type": "string",
@@ -3737,7 +3737,7 @@
         },
         "flowTypes": {
           "type": "array",
-          "description": "The flow types being requested for this connection",
+          "description": "The flow types being requested for this connection. This FlowType property is deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.",
           "items": {
             "$ref": "#/definitions/FlowType"
           }
@@ -4197,7 +4197,7 @@
         },
         "flowTypes": {
           "type": "array",
-          "description": "The flow types allowed for this pipeline",
+          "description": "The flow type for this flow",
           "items": {
             "$ref": "#/definitions/FlowType"
           }
@@ -4323,7 +4323,7 @@
     },
     "ReadPipelineConnection": {
       "type": "object",
-      "description": "",
+      "description": "The ReadPipelineconnection.",
       "properties": {
         "id": {
           "type": "string",
@@ -4378,7 +4378,7 @@
     },
     "Schema": {
       "type": "object",
-      "description": "The schema object.",
+      "description": "The schema object. Schemas will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "id": {
           "type": "string",
@@ -4465,7 +4465,7 @@
     },
     "SchemasListResult": {
       "type": "object",
-      "description": "The schemas list result.",
+      "description": "The schemas list result. SchemaListResults will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "value": {
           "type": "array",
@@ -4645,7 +4645,7 @@
     },
     "ValidateSchemaResult": {
       "type": "object",
-      "description": "Result of the schema validation.",
+      "description": "Result of the schema validation. ValidateSchemaResult will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "status": {
           "$ref": "#/definitions/ValidateSchemaStatus",
