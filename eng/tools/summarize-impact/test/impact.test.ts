@@ -107,7 +107,6 @@ describe("Impact Detection - default fixture", () => {
       changedFileDetails: {
         additions: [
           "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2024-12-01/widgets.json",
-          "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2024-12-01/examples/Widgets_CreateOrUpdateWidgetSample.json",
         ],
         modifications: [],
         deletions: [],
