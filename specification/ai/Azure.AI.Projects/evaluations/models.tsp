@@ -271,6 +271,9 @@ model EvaluatorStatusResult {
   @doc("State of the evaluation for this evaluator.")
   state: OperationState;
 
+  @doc("Error message if the evaluator failed to process the data rows.")
+  error?: string;
+
   @doc("Usage statistics for the evaluation")
   usage: Usage;
 }
