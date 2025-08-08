@@ -23,20 +23,6 @@ model TroubleshooterResource
   >;
 }
 
-@armResourceOperations
-interface TroubleshooterResourcesOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...Extension.ScopeParameter,
-      },
-      {},
-      {
-        ...Extension.ExtensionProviderNamespace<TroubleshooterResource>,
-        ...KeysOf<TroubleshooterResource>,
-      }
-    > {}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface TroubleshooterResources {
@@ -48,7 +34,8 @@ interface TroubleshooterResources {
   /**
    * Creates the specific troubleshooter action under a resource or subscription using the ‘solutionId’ and  ‘properties.parameters’ as the trigger. <br/> Azure Troubleshooters help with hard to classify issues, reducing the gap between customer observed problems and solutions by guiding the user effortlessly through the troubleshooting process. Each Troubleshooter flow represents a problem area within Azure and has a complex tree-like structure that addresses many root causes. These flows are prepared with the help of Subject Matter experts and customer support engineers by carefully considering previous support requests raised by customers. Troubleshooters terminate at a well curated solution based off of resource backend signals and customer manual selections.
    */
-  create is TroubleshooterResourcesOps.CreateOrUpdateSync<
+  create is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
     TroubleshooterResource,
     OptionalRequestBody = true
   >;

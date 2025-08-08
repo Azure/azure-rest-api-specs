@@ -23,20 +23,6 @@ model SolutionResource
   >;
 }
 
-@armResourceOperations
-interface SolutionResourcesOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...Extension.ScopeParameter,
-      },
-      {},
-      {
-        ...Extension.ExtensionProviderNamespace<SolutionResource>,
-        ...KeysOf<SolutionResource>,
-      }
-    > {}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SolutionResources {
@@ -48,7 +34,8 @@ interface SolutionResources {
   /**
    * Creates a solution for the specific Azure resource or subscription using the inputs ‘solutionId and requiredInputs’ from discovery solutions. <br/> Azure solutions comprise a comprehensive library of self-help resources that have been thoughtfully curated by Azure engineers to aid customers in resolving typical troubleshooting issues. These solutions encompass: <br/> (1.) Dynamic and context-aware diagnostics, guided troubleshooting wizards, and data visualizations. <br/> (2.) Rich instructional video tutorials and illustrative diagrams and images. <br/> (3.) Thoughtfully assembled textual troubleshooting instructions. <br/> All these components are seamlessly converged into unified solutions tailored to address a specific support problem area.
    */
-  create is SolutionResourcesOps.CreateOrUpdateAsync<
+  create is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ScopeParameter,
     SolutionResource,
     OptionalRequestBody = true
   >;
@@ -59,7 +46,8 @@ interface SolutionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is SolutionResourcesOps.CustomPatchAsync<
+  update is Azure.ResourceManager.Legacy.Extension.CustomPatchAsync<
+    Extension.ScopeParameter,
     SolutionResource,
     PatchModel = SolutionPatchRequestBody,
     Response = ArmResourceUpdatedResponse<SolutionResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SolutionResource>> & {
@@ -73,7 +61,8 @@ interface SolutionResources {
    * Warm up the solution resource by preloading asynchronous diagnostics results into cache
    */
   @action("warmup")
-  warmUp is SolutionResourcesOps.ActionSync<
+  warmUp is Azure.ResourceManager.Extension.ActionSync<
+    Extension.ScopeParameter,
     SolutionResource,
     SolutionWarmUpRequestBody,
     NoContentResponse,
