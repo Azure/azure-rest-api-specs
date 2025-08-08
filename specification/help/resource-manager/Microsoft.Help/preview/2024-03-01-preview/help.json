@@ -68,7 +68,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "CheckNameAvailabilityRequest",
@@ -76,7 +81,7 @@
             "description": "The required parameters for availability check.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -1212,20 +1217,6 @@
             "value": "Information"
           }
         ]
-      }
-    },
-    "CheckNameAvailabilityRequest": {
-      "type": "object",
-      "description": "The check availability request body.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource for which availability needs to be checked."
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type."
-        }
       }
     },
     "CheckNameAvailabilityResponse": {
@@ -2915,15 +2906,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "scope",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }
