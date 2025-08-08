@@ -568,7 +568,37 @@
       ],
       "x-ms-enum": {
         "name": "PostgresMajorVersion",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "17",
+            "description": "PostgreSQL 17."
+          },
+          {
+            "value": "16",
+            "description": "PostgreSQL 16."
+          },
+          {
+            "value": "15",
+            "description": "PostgreSQL 15."
+          },
+          {
+            "value": "14",
+            "description": "PostgreSQL 14."
+          },
+          {
+            "value": "13",
+            "description": "PostgreSQL 13."
+          },
+          {
+            "value": "12",
+            "description": "PostgreSQL 12."
+          },
+          {
+            "value": "11",
+            "description": "PostgreSQL 11."
+          }
+        ]
       }
     },
     "Replica": {
@@ -601,19 +631,19 @@
             "values": [
               {
                 "value": "Active",
-                "description": "The read replica server is fully synchronized and actively replicating data from the primary server."
+                "description": "Read replica is fully synchronized and actively replicating data from the primary server."
               },
               {
                 "value": "Catchup",
-                "description": "The read replica server is behind the primary server and is currently catching up with pending changes."
+                "description": "Read replica is behind the primary server and is currently catching up with pending changes."
               },
               {
                 "value": "Provisioning",
-                "description": "The read replica server is being created and is in process of getting initialized."
+                "description": "Read replica is being created and is in process of getting initialized."
               },
               {
                 "value": "Updating",
-                "description": "The read replica server is undergoing some changes it can be changing compute size of promoting it to primary server."
+                "description": "Read replica is undergoing some changes it can be changing compute size of promoting it to primary server."
               },
               {
                 "value": "Broken",
@@ -621,7 +651,7 @@
               },
               {
                 "value": "Reconfiguring",
-                "description": "The read replica server is being reconfigured, possibly due to changes in source or settings."
+                "description": "Read replica is being reconfigured, possibly due to changes in source or settings."
               }
             ]
           },
@@ -728,7 +758,49 @@
           ],
           "x-ms-enum": {
             "name": "ServerState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Ready",
+                "description": "Server is healthy and not undergoing any operations at the management or control plane level. This doesn't mean that the server is fully operational at the data plane level."
+              },
+              {
+                "value": "Dropping",
+                "description": "Server is being deleted."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server is disabled. Typical reasons include: the subscription on which the server is deployed is explicitly disabled or canceled by the administrator, the spending limit has been reached, or the bill is past due. May also happen when the server is being moved to another resource group or subscription."
+              },
+              {
+                "value": "Starting",
+                "description": "PostgreSQL database engine is being restarted."
+              },
+              {
+                "value": "Stopping",
+                "description": "Compute resources associated with the server are being stopped and deallocated. If the server has high availability enabled, the compute resources of the standby server are also stopped and deallocated."
+              },
+              {
+                "value": "Stopped",
+                "description": "Compute resources associated with the server are being stopped and deallocated."
+              },
+              {
+                "value": "Updating",
+                "description": "Server is undergoing some changes which may or may not impact the availability of the PostgreSQL database engine. For example, the compute resources of the server are being scaled up or down, which may cause temporary unavailability of the database engine. Or, for example, a firewall rule is being added or removed, which doesn't cause any unavailability of the database engine."
+              },
+              {
+                "value": "Restarting",
+                "description": "PostgreSQL database engine is being restarted."
+              },
+              {
+                "value": "Inaccessible",
+                "description": "Server isn't accessible, because the key provided to encrypt and decrypt the data is in invalid state."
+              },
+              {
+                "value": "Provisioning",
+                "description": "Server is in the process of being created."
+              }
+            ]
           }
         },
         "fullyQualifiedDomainName": {
@@ -839,7 +911,37 @@
           ],
           "x-ms-enum": {
             "name": "CreateMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "If the operation is triggered on a non-existing server, it's equivalent to 'Create'. If the operation is triggered on an existing server, it's equivalent to 'Update'."
+              },
+              {
+                "value": "Create",
+                "description": "Operation creates a new server."
+              },
+              {
+                "value": "Update",
+                "description": "Operation updates an existing server."
+              },
+              {
+                "value": "PointInTimeRestore",
+                "description": "Operation restores an existing backup of an existing server. This operation creates a new server, and then restores on it the backup of an existing server at a specific point in time."
+              },
+              {
+                "value": "GeoRestore",
+                "description": "Operation restores an existing backup of an existing server, on the paired region of the existing server. This operation creates a new server on the paired region of the existing server, and then restores on it the backup of an existing server at a specific point in time, in a different region. This operation is only supported on existing servers that were created with geographically redundant backups enabled."
+              },
+              {
+                "value": "Replica",
+                "description": "Operation creates a replica of an existing server. This operation creates a new server, restores a base backup of the existing server (referred to as primary), and configures physical replication to asynchronously stream all changes which are recorded in the transaction log of the primary."
+              },
+              {
+                "value": "ReviveDropped",
+                "description": "Operation creates a new server, initialized with the backup of a server that was recently deleted."
+              }
+            ]
           },
           "x-ms-mutability": [
             "create",
@@ -898,7 +1000,6 @@
           "type": "string",
           "description": "Name of the login designated as the first password based administrator assigned to your instance of PostgreSQL. Must be specified the first time that you enable password based authentication on a server. Once set to a given value, it cannot be changed for the rest of the life of a server. If you disable password based authentication on a server which had it enabled, this password based role isn't deleted.",
           "x-ms-mutability": [
-            "update",
             "read"
           ]
         },
@@ -958,7 +1059,17 @@
           ],
           "x-ms-enum": {
             "name": "CreateModeForPatch",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "It's equivalent to 'Update'."
+              },
+              {
+                "value": "Update",
+                "description": "Operation updates an existing server."
+              }
+            ]
           },
           "x-ms-mutability": [
             "update"
@@ -1054,7 +1165,21 @@
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Burstable",
+                "description": "Cost-effective tier for infrequent CPU usage, ideal for development and testing workloads with low performance requirements."
+              },
+              {
+                "value": "GeneralPurpose",
+                "description": "Balanced compute and memory for most workloads, offering scalable performance and I/O throughput."
+              },
+              {
+                "value": "MemoryOptimized",
+                "description": "High memory-to-core ratio for demanding workloads needing fast in-memory processing and high concurrency."
+              }
+            ]
           }
         }
       },
@@ -1081,7 +1206,21 @@
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Burstable",
+                "description": "Cost-effective tier for infrequent CPU usage, ideal for development and testing workloads with low performance requirements."
+              },
+              {
+                "value": "GeneralPurpose",
+                "description": "Balanced compute and memory for most workloads, offering scalable performance and I/O throughput."
+              },
+              {
+                "value": "MemoryOptimized",
+                "description": "High memory-to-core ratio for demanding workloads needing fast in-memory processing and high concurrency."
+              }
+            ]
           }
         }
       },
@@ -1104,7 +1243,17 @@
           ],
           "x-ms-enum": {
             "name": "StorageAutoGrow",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Server should automatically grow storage size when available space is nearing zero and conditions allow for automatically growing storage size."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server should not automatically grow storage size when available space is nearing zero."
+              }
+            ]
           }
         },
         "tier": {
@@ -1128,7 +1277,65 @@
           ],
           "x-ms-enum": {
             "name": "AzureManagedDiskPerformanceTier",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "P1",
+                "description": "Entry-level SSD for minimal IOPS, ideal for light development or testing workloads."
+              },
+              {
+                "value": "P2",
+                "description": "Slightly higher IOPS for small-scale applications needing consistent low latency."
+              },
+              {
+                "value": "P3",
+                "description": "Balanced performance for basic production workloads with moderate throughput."
+              },
+              {
+                "value": "P4",
+                "description": "Enhanced IOPS for growing apps with predictable performance needs."
+              },
+              {
+                "value": "P6",
+                "description": "Mid-tier SSD for steady workloads requiring reliable throughput and latency."
+              },
+              {
+                "value": "P10",
+                "description": "Popular choice for general-purpose production workloads with scalable performance."
+              },
+              {
+                "value": "P15",
+                "description": "High IOPS tier for demanding apps with frequent read/write operations."
+              },
+              {
+                "value": "P20",
+                "description": "Entry point for high-performance Solid State Disks (SSDs), suitable for small-scale I/O-intensive workloads."
+              },
+              {
+                "value": "P30",
+                "description": "Balanced tier for moderate throughput and latency-sensitive applications."
+              },
+              {
+                "value": "P40",
+                "description": "Enhanced performance for growing production workloads with consistent IOPS demands."
+              },
+              {
+                "value": "P50",
+                "description": "Optimized for enterprise-grade applications needing sustained high throughput."
+              },
+              {
+                "value": "P60",
+                "description": "High-capacity tier for large databases and analytics workloads with elevated IOPS."
+              },
+              {
+                "value": "P70",
+                "description": "Designed for mission-critical systems requiring ultra-low latency and high concurrency."
+              },
+              {
+                "value": "P80",
+                "description": "Top-tier SSD for maximum IOPS and throughput, ideal for the most demanding workloads."
+              }
+            ]
           }
         },
         "iops": {
@@ -1150,7 +1357,21 @@
           ],
           "x-ms-enum": {
             "name": "StorageType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Premium_LRS",
+                "description": "Standard Solid State Disk (SSD) backed storage offering consistent performance for general purpose workloads."
+              },
+              {
+                "value": "PremiumV2_LRS",
+                "description": "Next generation Solid State Disk (SSD) storage with improved scalability and performance for demanding enterprise workloads."
+              },
+              {
+                "value": "UltraSSD_LRS",
+                "description": "High-end Solid State Disk (SSD) storage designed for extreme IOPS and latency-sensitive applications."
+              }
+            ]
           },
           "description": "Type of storage assigned to a server. Allowed values are Premium_LRS, PremiumV2_LRS, or UltraSSD_LRS. If not specified, it defaults to Premium_LRS."
         }
@@ -1169,7 +1390,17 @@
           ],
           "x-ms-enum": {
             "name": "MicrosoftEntraAuth",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Server supports Microsoft Entra authentication."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server doesn't support Microsoft Entra authentication."
+              }
+            ]
           }
         },
         "passwordAuth": {
@@ -1182,7 +1413,17 @@
           ],
           "x-ms-enum": {
             "name": "PasswordBasedAuth",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Server supports password based authentication."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server doesn't support password based authentication."
+              }
+            ]
           }
         },
         "tenantId": {
@@ -1205,7 +1446,17 @@
           ],
           "x-ms-enum": {
             "name": "MicrosoftEntraAuth",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Server supports Microsoft Entra authentication."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server doesn't support Microsoft Entra authentication."
+              }
+            ]
           }
         },
         "passwordAuth": {
@@ -1217,7 +1468,17 @@
           ],
           "x-ms-enum": {
             "name": "PasswordBasedAuth",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Server supports password based authentication."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server doesn't support password based authentication."
+              }
+            ]
           }
         },
         "tenantId": {
@@ -1255,7 +1516,17 @@
           ],
           "x-ms-enum": {
             "name": "DataEncryptionType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SystemManaged",
+                "description": "Encryption managed by Azure using platform managed keys for simplicity and compliance."
+              },
+              {
+                "value": "AzureKeyVault",
+                "description": "Encryption using customer managed keys stored in Azure Key Vault for enhanced control and security."
+              }
+            ]
           }
         },
         "primaryEncryptionKeyStatus": {
@@ -1270,7 +1541,17 @@
           ],
           "x-ms-enum": {
             "name": "EncryptionKeyStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Key is valid and can be used for encryption."
+              },
+              {
+                "value": "Invalid",
+                "description": "Key is invalid and cannot be used for encryption. Possible causes include key deletion, permission changes, key being disabled, key type not supported, or current date being outside of validity period associated to the key."
+              }
+            ]
           }
         },
         "geoBackupEncryptionKeyStatus": {
@@ -1285,7 +1566,17 @@
           ],
           "x-ms-enum": {
             "name": "EncryptionKeyStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Key is valid and can be used for encryption."
+              },
+              {
+                "value": "Invalid",
+                "description": "Key is invalid and cannot be used for encryption. Possible causes include key deletion, permission changes, key being disabled, key type not supported, or current date being outside of validity period associated to the key."
+              }
+            ]
           }
         }
       },
@@ -1334,7 +1625,25 @@
           ],
           "x-ms-enum": {
             "name": "IdentityType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No managed identity is assigned to the server."
+              },
+              {
+                "value": "UserAssigned",
+                "description": "One or more managed identities provided by the user are assigned to the server."
+              },
+              {
+                "value": "SystemAssigned",
+                "description": "Azure automatically creates and manages the identity associated to the lifecycle of the server."
+              },
+              {
+                "value": "SystemAssigned,UserAssigned",
+                "description": "Both system-assigned and user-assigned identities are assigned to the server."
+              }
+            ]
           }
         },
         "tenantId": {
@@ -1359,7 +1668,25 @@
       ],
       "x-ms-enum": {
         "name": "ReplicationRole",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No replication role assigned; the server operates independently."
+          },
+          {
+            "value": "Primary",
+            "description": "Acts as the source server for replication to one or more replicas."
+          },
+          {
+            "value": "AsyncReplica",
+            "description": "Receives data asynchronously from a primary server within the same region."
+          },
+          {
+            "value": "GeoAsyncReplica",
+            "description": "Receives data asynchronously from a primary server in a different region for geographical redundancy."
+          }
+        ]
       }
     },
     "Backup": {
@@ -1381,7 +1708,17 @@
           ],
           "x-ms-enum": {
             "name": "GeographicallyRedundantBackup",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Server is configured to create geographically redundant backups."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server is not configured to create geographically redundant backups."
+              }
+            ]
           },
           "x-ms-mutability": [
             "create",
@@ -1414,10 +1751,19 @@
           ],
           "x-ms-enum": {
             "name": "GeographicallyRedundantBackup",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Server is configured to create geographically redundant backups."
+              },
+              {
+                "value": "Disabled",
+                "description": "Server is not configured to create geographically redundant backups."
+              }
+            ]
           },
           "x-ms-mutability": [
-            "update",
             "read"
           ]
         },
@@ -1435,14 +1781,24 @@
       "properties": {
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Indicates if public network access is enabled or not.",
+          "description": "Indicates if public network access is enabled or not. This is only supported for servers that are not integrated into a virtual network which is owned and provided by customer when server is deployed.",
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
             "name": "ServerPublicNetworkAccessState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Public network access is enabled. This allows the server to be accessed from the public internet, provided the necessary firewall rule that allows incoming traffic originating from the connecting client is in place. This is compatible with the use of private endpoints to connect to this server."
+              },
+              {
+                "value": "Disabled",
+                "description": "Public network access is disabled. This means the server cannot be accessed from the public internet, but only via private endpoints."
+              }
+            ]
           }
         },
         "delegatedSubnetResourceId": {
@@ -1484,7 +1840,21 @@
           ],
           "x-ms-enum": {
             "name": "HighAvailabilityMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "High availability is disabled for the server."
+              },
+              {
+                "value": "ZoneRedundant",
+                "description": "High availability is enabled for the server, with standby server in a different availability zone than that of the primary."
+              },
+              {
+                "value": "SameZone",
+                "description": "High availability is enabled for the server, with standby server in the same availability zone as the primary."
+              }
+            ]
           }
         },
         "state": {
@@ -1500,7 +1870,33 @@
           ],
           "x-ms-enum": {
             "name": "HighAvailabilityState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotEnabled",
+                "description": "High availability is not enabled for the server."
+              },
+              {
+                "value": "CreatingStandby",
+                "description": "Standby server is being created."
+              },
+              {
+                "value": "ReplicatingData",
+                "description": "Data is being replicated to the standby server."
+              },
+              {
+                "value": "FailingOver",
+                "description": "Failover operation to the standby server is in progress."
+              },
+              {
+                "value": "Healthy",
+                "description": "Standby server is healthy and ready to take over in case of a failover."
+              },
+              {
+                "value": "RemovingStandby",
+                "description": "Standby server is being removed."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -1525,7 +1921,21 @@
           ],
           "x-ms-enum": {
             "name": "HighAvailabilityMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "High availability is disabled for the server."
+              },
+              {
+                "value": "ZoneRedundant",
+                "description": "High availability is enabled for the server, with standby server in a different availability zone than that of the primary."
+              },
+              {
+                "value": "SameZone",
+                "description": "High availability is enabled for the server, with standby server in the same availability zone as the primary."
+              }
+            ]
           }
         },
         "state": {
@@ -1541,7 +1951,33 @@
           ],
           "x-ms-enum": {
             "name": "HighAvailabilityState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotEnabled",
+                "description": "High availability is not enabled for the server."
+              },
+              {
+                "value": "CreatingStandby",
+                "description": "Standby server is being created."
+              },
+              {
+                "value": "ReplicatingData",
+                "description": "Data is being replicated to the standby server."
+              },
+              {
+                "value": "FailingOver",
+                "description": "Failover operation to the standby server is in progress."
+              },
+              {
+                "value": "Healthy",
+                "description": "Standby server is healthy and ready to take over in case of a failover."
+              },
+              {
+                "value": "RemovingStandby",
+                "description": "Standby server is being removed."
+              }
+            ]
           },
           "readOnly": true
         },
@@ -1641,7 +2077,25 @@
           ],
           "x-ms-enum": {
             "name": "FailoverMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PlannedFailover",
+                "description": "Triggers a failover from primary to standby without killing the primary database process first. This is a graceful failover that attempts to preserve data consistency."
+              },
+              {
+                "value": "ForcedFailover",
+                "description": "Kills the primary database process first, then triggers the failover. This is more aggressive and used when the primary is unresponsive or in an unhealthy state."
+              },
+              {
+                "value": "PlannedSwitchover",
+                "description": "Similar to 'PlannedFailover' but prefers a switch over operation where roles are swapped between primary and standby."
+              },
+              {
+                "value": "ForcedSwitchover",
+                "description": "Kills the primary database process and then triggers a switch over with role swapping."
+              }
+            ]
           }
         }
       },
