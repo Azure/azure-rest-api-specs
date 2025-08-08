@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2025-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-08-01'
 input-file:
-  - stable/2025-08-01/configurations.json
+  - stable/2025-08-01/configurationmanager.json
 ```
 
 ### Tag: package-2025-06-01
