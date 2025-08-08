@@ -550,7 +550,9 @@ model SavingsPlanOrderModelProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   savingsPlans?: string[];
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   extendedStatusInfo?: ExtendedStatusInfo;
 }
 
@@ -799,6 +801,7 @@ model SavingsPlanModelProperties {
   benefitStartTime?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   extendedStatusInfo?: ExtendedStatusInfo;
 
   /**
@@ -809,6 +812,7 @@ model SavingsPlanModelProperties {
   /**
    * Savings plan utilization
    */
+  @visibility(Lifecycle.Read)
   utilization?: Utilization;
 
   /**
