@@ -43,10 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "Connections"
+      "name": "Pipelines"
     },
     {
-      "name": "Pipelines"
+      "name": "Connections"
     },
     {
       "name": "Flows"
@@ -56,7 +56,7 @@
     "/providers/Microsoft.AzureDataTransfer/listApprovedSchemas": {
       "post": {
         "operationId": "AzureDataTransfer_listApprovedSchemas",
-        "description": "Lists approved schemas for Azure Data Transfer.",
+        "description": "Retrieves the list of approved schemas available for Azure Data Transfer. This operation is deprecated as of version v2025_05_30_preview.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -64,7 +64,7 @@
           {
             "name": "pipeline",
             "in": "body",
-            "description": "The request to list approved schemas.",
+            "description": "The request payload for listing approved schemas.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ListApprovedSchemasRequest"
@@ -131,7 +131,7 @@
     "/providers/Microsoft.AzureDataTransfer/validateSchema": {
       "post": {
         "operationId": "AzureDataTransfer_validateSchema",
-        "description": "Validates a schema for Azure Data Transfer.",
+        "description": "Validates the structure and content of a schema for use in Azure Data Transfer. This operation is deprecated as of version v2025_05_30_preview.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -212,7 +212,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Gets pipelines in a subscription.",
+        "description": "Lists all Pipeline resources within the current subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2003,7 +2003,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Gets pipelines in a resource group.",
+        "description": "Lists all Pipeline resources within the specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2045,7 +2045,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Gets pipeline resource.",
+        "description": "Retrieves the specified Pipeline resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2059,7 +2059,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2092,7 +2092,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Creates or updates the pipeline resource.",
+        "description": "Creates a new Pipeline resource or updates an existing one. This operation is asynchronous and returns the resulting Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2106,7 +2106,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2116,7 +2116,7 @@
           {
             "name": "pipeline",
             "in": "body",
-            "description": "Pipeline body",
+            "description": "The request body containing the Pipeline definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Pipeline"
@@ -2170,7 +2170,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Updates the pipeline resource.",
+        "description": "Applies partial updates to an existing Pipeline resource. This operation supports patch semantics and returns the updated Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2184,7 +2184,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2194,7 +2194,7 @@
           {
             "name": "pipeline",
             "in": "body",
-            "description": "Pipeline body",
+            "description": "The request body containing the updated Pipeline properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PipelinesPatch"
@@ -2247,7 +2247,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Deletes the pipeline resource.",
+        "description": "Deletes the specified Pipeline resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2261,7 +2261,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2311,7 +2311,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Approves the specified connection request in a pipeline.",
+        "description": "Approves a pending connection request associated with the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2325,7 +2325,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2335,7 +2335,7 @@
           {
             "name": "connection",
             "in": "body",
-            "description": "Connection body",
+            "description": "The request body containing the connection to approve.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceBody"
@@ -2388,7 +2388,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Executes a privileged action for a pipeline.",
+        "description": "Executes a privileged or administrative action on the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2402,7 +2402,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2412,7 +2412,7 @@
           {
             "name": "action",
             "in": "body",
-            "description": "Action to execute",
+            "description": "The action to be executed on the Pipeline.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Action"
@@ -2465,7 +2465,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Lists the flows in a pipeline.",
+        "description": "Lists all Flows associated with the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2479,7 +2479,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2489,7 +2489,7 @@
           {
             "name": "connections",
             "in": "body",
-            "description": "Connection(s) to retrieve flows of",
+            "description": "A list of connection identifiers used to filter the Flows to be retrieved.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ConnectionIdList"
@@ -2523,7 +2523,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Lists the schemas for the specified connection in a pipeline.",
+        "description": "Lists the schemas associated with a specific connection in the Pipeline. This operation is deprecated in version v2025_05_30_preview.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2537,7 +2537,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2547,7 +2547,7 @@
           {
             "name": "schema",
             "in": "body",
-            "description": "Schema(s) to retrieve",
+            "description": "The schema(s) to retrieve for the specified connection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Schema"
@@ -2581,7 +2581,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Rejects the specified connection request in a pipeline.",
+        "description": "Rejects a pending connection request associated with the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2595,7 +2595,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2605,7 +2605,7 @@
           {
             "name": "connection",
             "in": "body",
-            "description": "Connection body",
+            "description": "The request body containing the connection to reject.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceBody"
@@ -4102,11 +4102,11 @@
     },
     "Pipeline": {
       "type": "object",
-      "description": "The pipeline resource definition.",
+      "description": "The pipeline resource definition. A Pipeline defines the scope and identity under which data replication scenarios are managed.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PipelineProperties",
-          "description": "Properties of pipeline"
+          "description": "The set of configurable properties for the Pipeline resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
