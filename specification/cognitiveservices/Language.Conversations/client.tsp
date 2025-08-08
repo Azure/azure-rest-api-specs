@@ -70,6 +70,7 @@ namespace Language.ConversationsClientCustomizations;
 );
 
 @@clientName(Tasks, "ConversationActions");
+@@clientName(Tasks.items, "taskResults", "python");
 @@clientName(State, "ConversationActionState");
 @@clientName(role, "ParticipantRole");
 
