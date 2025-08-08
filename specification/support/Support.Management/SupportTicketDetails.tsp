@@ -77,7 +77,7 @@ interface SupportTickets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is SupportTicketOps.CreateOrUpdateAsync<
     SupportTicketDetails,
-    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SupportTicketDetails> & Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -151,7 +151,7 @@ interface SupportTicketsNoSubscription {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is SupportTicketsNoSubscriptionOps.CreateOrUpdateAsync<
     SupportTicketDetails,
-    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SupportTicketDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SupportTicketDetails> & Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
