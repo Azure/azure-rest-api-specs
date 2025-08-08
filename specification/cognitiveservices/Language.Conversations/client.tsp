@@ -73,6 +73,7 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(Tasks.items, "taskResults", "python");
 @@clientName(State, "ConversationActionState");
 @@clientName(role, "ParticipantRole");
+@@clientName(NoneLinkedTargetIntentResult, "NonLinkedTargetIntentResult", "python");
 
 @@clientName(Entity, "NamedEntity");
 
