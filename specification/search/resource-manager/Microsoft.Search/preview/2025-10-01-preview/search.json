@@ -1915,6 +1915,10 @@
               }
             ]
           }
+        },
+        "serviceLevelEncryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "The encryption key used for service-level encryption."
         }
       },
       "description": "Describes a policy that determines how resources within the search service are to be encrypted with customer managed keys."
@@ -1983,6 +1987,93 @@
         }
       },
       "description": "The IP restriction rule of the Azure AI Search service."
+    },
+    "SearchResourceEncryptionKey": {
+      "type": "object",
+      "properties": {
+        "keyVaultKeyName": {
+          "x-ms-client-name": "keyName",
+          "type": "string",
+          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
+        },
+        "keyVaultKeyVersion": {
+          "x-ms-client-name": "keyVersion",
+          "type": "string",
+          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
+        },
+        "keyVaultUri": {
+          "x-ms-client-name": "vaultUri",
+          "type": "string",
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`."
+        },
+        "accessCredentials": {
+          "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
+          "description": "Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-msi"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
+        }
+      },
+      "required": [
+        "keyVaultKeyName",
+        "keyVaultUri"
+      ],
+      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps."
+    },
+    "SearchIndexerDataIdentity": {
+      "type": "object",
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "A URI fragment specifying the type of identity."
+        }
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Abstract base type for data identities."
+    },
+    "SearchIndexerDataUserAssignedIdentity": {
+      "type": "object",
+      "description": "Specifies the identity for a datasource to use.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerDataIdentity"
+        }
+      ],
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service."
+        }
+      },
+      "required": [
+        "userAssignedIdentity"
+      ]
+    },
+    "AzureActiveDirectoryApplicationCredentials": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application."
+        },
+        "applicationSecret": {
+          "type": "string",
+          "description": "The authentication key of the specified AAD application."
+        }
+      },
+      "required": [
+        "applicationId"
+      ],
+      "description": "Credentials of a registered application created for your search service, used for authenticated access to the encryption keys stored in Azure Key Vault."
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
