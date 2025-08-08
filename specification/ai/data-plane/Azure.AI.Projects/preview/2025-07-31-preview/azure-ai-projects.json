@@ -3368,39 +3368,6 @@
       ],
       "x-ms-discriminator-value": "evaluationMessagesFormat"
     },
-    "EvaluatorMessagesUpdate": {
-      "type": "object",
-      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
-      "properties": {
-        "query": {
-          "type": "array",
-          "description": "Array of messages representing representing queries",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "response": {
-          "type": "array",
-          "description": "Array of messages representing responses",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "toolDefinitions": {
-          "type": "array",
-          "description": "Array of tool definitions that are used in the conversation",
-          "items": {
-            "$ref": "#/definitions/AgentToolDefinition"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InlineDataUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "evaluationMessagesFormat"
-    },
     "EvaluatorStatusResult": {
       "type": "object",
       "description": "Status of evaluator across all data rows.",
@@ -3843,7 +3810,15 @@
         },
         "data": {
           "$ref": "#/definitions/InlineData",
-          "description": "Inline data structured according to the specified format"
+          "description": "Inline data structured according to the specified format",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "inlineDatasetId": {
+          "$ref": "#/definitions/DatasetId",
+          "description": "Dataset id for the uploaded inline data.",
+          "readOnly": true
         }
       },
       "required": [
@@ -3863,10 +3838,6 @@
         "id": {
           "type": "string",
           "description": "Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources."
-        },
-        "data": {
-          "$ref": "#/definitions/InlineDataUpdate",
-          "description": "Inline data structured according to the specified format"
         }
       },
       "allOf": [
@@ -3875,20 +3846,6 @@
         }
       ],
       "x-ms-discriminator-value": "inlineData"
-    },
-    "InlineDataUpdate": {
-      "type": "object",
-      "description": "Base class for inline evaluation data with format discrimination.",
-      "properties": {
-        "dataFormat": {
-          "$ref": "#/definitions/InlineDataFormat",
-          "description": "Format of the inline data structure"
-        }
-      },
-      "discriminator": "dataFormat",
-      "required": [
-        "dataFormat"
-      ]
     },
     "InlineJson": {
       "type": "object",
@@ -3908,25 +3865,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/InlineData"
-        }
-      ],
-      "x-ms-discriminator-value": "inlineJsonFormat"
-    },
-    "InlineJsonUpdate": {
-      "type": "object",
-      "description": "Custom JSON format for complex evaluation scenarios requiring flexible data structures.",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "description": "Array of JSON strings with custom fields and metadata",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InlineDataUpdate"
         }
       ],
       "x-ms-discriminator-value": "inlineJsonFormat"
@@ -4409,25 +4347,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/InlineData"
-        }
-      ],
-      "x-ms-discriminator-value": "queryResponseMessageFormat"
-    },
-    "QueryResponseInlineMessagesUpdate": {
-      "type": "object",
-      "description": "Query-response pairs for evaluating Q&A systems and response accuracy.",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "description": "Array of query-response pairs with optional context and ground truth",
-          "items": {
-            "$ref": "#/definitions/QueryResponseMessage"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InlineDataUpdate"
         }
       ],
       "x-ms-discriminator-value": "queryResponseMessageFormat"
