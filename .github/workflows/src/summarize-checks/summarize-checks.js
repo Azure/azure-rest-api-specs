@@ -442,7 +442,6 @@ export async function summarizeChecksImpl(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
 
-  core.summary.addHeading("Next Steps to Merge");
   core.summary.addRaw(commentBody);
 
   // this will remain commented until we're comfortable with the change.
@@ -462,7 +461,7 @@ export async function summarizeChecksImpl(
     `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
 
-  core.summary.addHeading("Automated Checks Met");
+  core.summary.addHeading("Automated Checks Met", 2);
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
 
   core.summary.write();
