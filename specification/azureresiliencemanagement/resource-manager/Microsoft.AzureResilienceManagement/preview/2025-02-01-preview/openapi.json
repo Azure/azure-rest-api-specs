@@ -7201,6 +7201,17 @@
           "description": "Reason for exclusion from disaster recovery goals.",
           "readOnly": true
         },
+        "serviceGroupMemberships": {
+          "type": "array",
+          "description": "List of service groups of which this resource is memberof.",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMembership"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "serviceGroupId"
+          ]
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -8146,6 +8157,36 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "MembershipType": {
+      "type": "string",
+      "description": "Membership type of the service group to resource.",
+      "enum": [
+        "Direct",
+        "ThroughSubscription",
+        "ThroughResourceGroup"
+      ],
+      "x-ms-enum": {
+        "name": "MembershipType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Direct",
+            "value": "Direct",
+            "description": "Resource is direct member of service group."
+          },
+          {
+            "name": "ThroughSubscription",
+            "value": "ThroughSubscription",
+            "description": "Resource is member of service group through subscription."
+          },
+          {
+            "name": "ThroughResourceGroup",
+            "value": "ThroughResourceGroup",
+            "description": "Resource is member of service group through resource group."
+          }
+        ]
       }
     },
     "MetricsProperties": {
@@ -9954,6 +9995,25 @@
       "required": [
         "serviceGroupName",
         "apiVersion"
+      ]
+    },
+    "ServiceGroupMembership": {
+      "type": "object",
+      "description": "Model for service group membership.",
+      "properties": {
+        "serviceGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm Id of the service group."
+        },
+        "membershipType": {
+          "$ref": "#/definitions/MembershipType",
+          "description": "Membership type of the service group to resource."
+        }
+      },
+      "required": [
+        "serviceGroupId",
+        "membershipType"
       ]
     },
     "ServiceGroupParameters": {
