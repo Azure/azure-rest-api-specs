@@ -613,8 +613,7 @@ union MethodTrainingType {
   mistralClassifier: "mistralClassifier",
 }
 
-@doc("The method used for fine-tuning. Abstract base class")
-@discriminator("type")
+@doc("The method used for fine-tuning.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model Method {
