@@ -16,11 +16,17 @@ on:
     types: [completed]
 
 permissions:
+  # actions.listWorkflowRunsForRepo
+  # actions.listWorkflowRunArtifacts
   actions: read
-  checks: read
+  # default
   contents: read
+  # issues.listLabelsOnIssue
   issues: read
+  # issues.listLabelsOnIssue
   pull-requests: read
+  # repos.listCommitStatusesForRef
+  statuses: read
 
 jobs:
   arm-auto-signoff:
