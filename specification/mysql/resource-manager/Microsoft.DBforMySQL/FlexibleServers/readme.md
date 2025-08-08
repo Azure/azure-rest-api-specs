@@ -134,7 +134,20 @@ input-file:
 - stable/2023-06-30/FlexibleServers.json
 - stable/2023-06-30/LogFiles.json
 - stable/2023-06-30/ServiceOperations.json
+<<<<<<< Updated upstream
 - preview/2023-10-01-preview/Maintenances.json
+=======
+- stable/2023-06-30/PrivateEndpointConnections.json
+- stable/2023-06-30/PrivateLinkResources.json
+- common-types/v1/common-types.json
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    from: FlexibleServers.json
+    reason: This check is optional.
+  - code: PropertiesTypeObjectNoDefinition
+    from: common-types.json
+    reason: This will be fixed in new versions.
+>>>>>>> Stashed changes
 ```
 
 ### Tag: package-flexibleserver-2023-10-01-preview
@@ -175,11 +188,11 @@ input-file:
 - preview/2023-10-01-preview/Maintenances.json
 ```
 
-### Tag: package-flexibleserver-2023-12-30
+### Tag: package-flexibleserver-2023-12-30-preview
 
-These settings apply only when `--tag=package-flexibleserver-2023-12-30` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2023-12-30-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2023-12-30'
+``` yaml $(tag) == 'package-flexibleserver-2023-12-30-preview'
 input-file:
 - preview/2023-06-01-preview/AzureADAdministrator.json
 - preview/2023-10-01-preview/Backups.json
@@ -195,11 +208,11 @@ input-file:
 - preview/2023-10-01-preview/Maintenances.json
 ```
 
-### Tag: package-flexibleserver-2024-01-01
+### Tag: package-flexibleserver-2023-12-30
 
-These settings apply only when `--tag=package-flexibleserver-2024-01-01` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2023-12-30` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2024-01-01'
+``` yaml $(tag) == 'package-flexibleserver-2023-12-30'
 input-file:
 - stable/2023-12-30/AzureADAdministrator.json
 - stable/2023-12-30/Backups.json
@@ -275,6 +288,7 @@ input-file:
 - stable/2023-12-30/Maintenances.json
 ```
 
+<<<<<<< Updated upstream
 ### Tag: package-flexibleserver-2023-06-30-privatelink
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
@@ -285,6 +299,8 @@ input-file:
 - stable/2023-06-30/PrivateLinkResources.json
 ```
 
+=======
+>>>>>>> Stashed changes
 ### Tag: package-flexibleserver-2022-01-01
 
 These settings apply only when `--tag=package-flexibleserver-2022-01-01` is specified on the command line.
