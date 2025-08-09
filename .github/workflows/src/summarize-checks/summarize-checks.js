@@ -367,6 +367,8 @@ export async function summarizeChecksImpl(
   const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
   core.summary.addRaw("PR: ");
   core.summary.addLink(prUrl, prUrl);
+  core.summary.write();
+  core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
@@ -447,6 +449,7 @@ export async function summarizeChecksImpl(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
   core.summary.addRaw(`\n${commentBody}\n\n`);
+  core.summary.write();
 
   // this will remain commented until we're comfortable with the change.
   await commentOrUpdate(
@@ -467,9 +470,7 @@ export async function summarizeChecksImpl(
   );
   core.summary.addHeading("Automated Checks Met", 2);
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
-
   core.summary.write();
-  core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 }
 
 /**
