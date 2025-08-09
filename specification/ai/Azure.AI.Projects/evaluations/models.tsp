@@ -172,11 +172,11 @@ model InlineDataSource extends EvaluationDataSource {
 
   @doc("Inline data structured according to the specified format")
   @visibility(Lifecycle.Create)
-  data: InlineData;
+  data?: InlineData;
 
   @doc("Dataset id for the uploaded inline data.")
   @visibility(Lifecycle.Read)
-  inlineDatasetId?: DatasetId;
+  inlineDatasetId: DatasetId;
 }
 
 @doc("Data source that uses a dataset registered and stored in AI Foundry workspace. This is the recommended approach for large datasets or reusable evaluation data.")
