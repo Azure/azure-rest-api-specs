@@ -103,6 +103,22 @@ model FleetProperties {
   @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
   @visibility(Lifecycle.Read)
   uniqueId?: string;
+
+  /** Mode of the Fleet. */
+  @added(Versions.v2025_07_01_preview)
+  mode?: FleetMode;
+
+  /**
+   * Specifies capacity type for Fleet Regular and Spot priority profiles.
+   * capacityType is an immutable property. Once set during Fleet creation, it cannot be updated.
+   * Specifying different capacity type for Fleet Regular and Spot priority profiles is not allowed.
+   */
+  @added(Versions.v2025_07_01_preview)
+  capacityType?: CapacityType;
+
+  /** Zone Allocation Policy for Fleet. */
+  @added(Versions.v2025_07_01_preview)
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
 @doc("Compute Profile to use for running user's workloads.")
@@ -518,20 +534,98 @@ model AdditionalLocationsProfile {
   locationProfiles: Array<LocationProfile>;
 }
 
+/** Modes for Compute Fleet. */
+@added(Versions.v2025_07_01_preview)
+union FleetMode {
+  string,
+
+  /** Default. Managed is the default mode for Compute Fleet where VMs are provisioned via VMSS. */
+  managed: "Managed",
+
+  /** Instance mode for Compute Fleet will directly provision VM instances. */
+  instance: "Instance",
+}
+
+/** Capacity types for Compute Fleet. */
+@added(Versions.v2025_07_01_preview)
+union CapacityType {
+  string,
+
+  /** Default. VM is the default capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VMs. */
+  VM: "VM",
+
+  /**
+   * VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus.
+   * If VCpu capacity is not exactly divisible by VCpu count in VMSizes, Fleet capacity in VCpus will be overprovisioned by default.
+   */
+  VCpu: "VCpu",
+}
+
+/** ZoneAllocationPolicy for Compute Fleet. */
+@added(Versions.v2025_07_01_preview)
+model ZoneAllocationPolicy {
+  /** Distribution strategy used for zone allocation policy. */
+  distributionStrategy: ZoneDistributionStrategy;
+
+  /** Zone preferences, required when zone distribution strategy is Prioritized. */
+  @identifiers(#[])
+  zonePreferences?: Array<ZonePreference>;
+}
+
+/** Distribution strategies for Compute Fleet zone allocation policy. */
+@added(Versions.v2025_07_01_preview)
+union ZoneDistributionStrategy {
+  string,
+
+  /**
+   * Default. Compute Fleet allocates all Fleet capacity within a single zone based on best effort.
+   * If capacity is not available, Compute Fleet can allocate capacity in different zones.
+   */
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  /**
+   * Compute Fleet allocates capacity based on zone preferences.
+   * Higher priority zones are filled first before allocating to lower priority zones.
+   */
+  Prioritized: "Prioritized",
+}
+
+/** Zone preferences for Compute Fleet zone allocation policy. */
+@added(Versions.v2025_07_01_preview)
+model ZonePreference {
+  /** Name of the zone. */
+  zone: string;
+
+  /**
+   * The rank of the zone. This is used with 'Prioritized' ZoneDistributionStrategy.
+   * The lower the number, the higher the priority, starting with 0.
+   * 0 is the highest rank. If not specified, defaults to lowest rank.
+   */
+  @minValue(0)
+  @maxValue(65535)
+  rank?: int32;
+}
+
 @armResourceOperations
 interface Fleets {
   get is ArmResourceRead<Fleet>;
+
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     Fleet,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
+
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
+
   listByResourceGroup is ArmResourceListByParent<Fleet>;
+
   listBySubscription is ArmListBySubscription<Fleet>;
+
   @autoRoute
   @listsResource(VirtualMachineScaleSet)
   @armResourceList(VirtualMachineScaleSet)
@@ -548,4 +642,34 @@ interface Fleets {
       NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
     >,
   ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
+
+  /** List VirtualMachine resources of an instance Fleet. */
+  @added(Versions.v2025_07_01_preview)
+  @autoRoute
+  @listsResource(VirtualMachine)
+  @armResourceList(VirtualMachine)
+  @get
+  listVirtualMachines(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...ProviderNamespace<Fleet>,
+    ...ResourceNameParameter<
+      Fleet,
+      NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+    >,
+
+    /** Filter expression to filter the virtual machines. */
+    @query
+    $filter?: string,
+
+    /** Skip token for pagination. Uses the token from a previous response to fetch the next page of results. */
+    @query
+    $skiptoken?: string,
+  ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
+
+  /** Cancels an instance Fleet creation that is in progress. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @added(Versions.v2025_07_01_preview)
+  cancel is ArmResourceActionNoResponseContentAsync<Fleet, void>;
 }
