@@ -19,12 +19,12 @@
 */
 
 // #region imports/constants
-import { extractInputs } from "../context.js";
-// import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { intersect } from "../../../shared/src/set.js";
 import { byDate, invert } from "../../../shared/src/sort.js";
+import { commentOrUpdate } from "../comment.js";
+import { extractInputs } from "../context.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
@@ -141,7 +141,8 @@ const FYI_CHECK_NAMES = [
   "Swagger BreakingChange",
   "Swagger PrettierCheck",
 ];
-const AUTOMATED_CHECK_NAME = "[TEST-IGNORE] Automated merging requirements met";
+const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
+const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 
 /** @type {CheckMetadata[]} */
@@ -404,24 +405,24 @@ export async function summarizeChecksImpl(
 
   for (const label of labelContext.toRemove) {
     core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-    // await github.rest.issues.removeLabel({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   name: label,
-    // });
+    await github.rest.issues.removeLabel({
+      owner: owner,
+      repo: repo,
+      issue_number: issue_number,
+      name: label,
+    });
   }
 
   if (labelContext.toAdd.size > 0) {
     core.info(
       `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
     );
-    // await github.rest.issues.addLabels({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   labels: Array.from(labelContext.toAdd),
-    // });
+    await github.rest.issues.addLabels({
+      owner: owner,
+      repo: repo,
+      issue_number: issue_number,
+      labels: Array.from(labelContext.toAdd),
+    });
   }
 
   // adjust labelNames based on labelsToAdd/labelsToRemove
@@ -451,20 +452,21 @@ export async function summarizeChecksImpl(
   core.summary.write();
 
   // this will remain commented until we're comfortable with the change.
-  // await commentOrUpdate(
-  //   { github, context, core },
-  //   owner,
-  //   repo,
-  //   issue_number,
-  //   commentName,
-  //   commentBody
-  // )
+  await commentOrUpdate(
+    github,
+    core,
+    owner,
+    repo,
+    issue_number,
+    commentBody,
+    NEXT_STEPS_COMMENT_ID,
+  );
 
   // finally, update the "Automated merging requirements met" commit status
   await updateCommitStatus(github, core, owner, repo, head_sha, automatedChecksMet);
 
   core.info(
-    `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
+    `Summarize checks has identified that status of "${AUTOMATED_CHECK_NAME}" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
   core.summary.addHeading("Automated Checks Met", 2);
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
@@ -734,7 +736,7 @@ export async function getCheckRunTuple(
     // just handling both names for ease of integration testing
     if (
       (latestCheck.name === "[TEST-IGNORE] Summarize PR Impact" ||
-        latestCheck.name === "Summarize PR Impact") &&
+        latestCheck.name === IMPACT_CHECK_NAME) &&
       latestCheck.status === "completed" &&
       latestCheck.conclusion === "success"
     ) {
@@ -805,7 +807,7 @@ export async function getCheckRunTuple(
       );
     }
   } else {
-    requiredCheckNames = ["Summarize PR Impact", "[TEST-IGNORE] Summarize PR Impact"];
+    requiredCheckNames = [IMPACT_CHECK_NAME, "[TEST-IGNORE] Summarize PR Impact"];
   }
 
   const filteredReqCheckRuns = unifiedCheckRuns.filter(

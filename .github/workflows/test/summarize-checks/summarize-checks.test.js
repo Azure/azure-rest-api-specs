@@ -127,7 +127,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -154,7 +154,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -261,7 +261,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -332,7 +332,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -387,7 +387,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         `<h2>Next Steps to Merge</h2>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>license/cla</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>If you still want to proceed merging this PR without addressing the above failures, refer to step 4 in the <a href="https://aka.ms/azsdk/pr-diagram">PR workflow diagram</a>.`,
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "SUCCESS",
           summary: `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, but soon these requirements will be blocking.<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.<br/>If you want to proceed with merging this PR without fixing them, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`,
         },
@@ -431,7 +431,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -479,7 +479,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -527,7 +527,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -635,7 +635,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -720,7 +720,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         expectedComment,
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "FAILURE",
           summary:
             "❌ This PR cannot be merged because some requirements are not met. See the details.",
@@ -826,7 +826,7 @@ describe("Summarize Checks Unit Tests", () => {
       const targetBranch = "main";
       const labelNames = [];
       const expectedCheckOutput = {
-        name: "[TEST-IGNORE] Automated merging requirements met",
+        name: "Automated merging requirements met",
         result: "FAILURE",
         summary:
           "❌ This PR cannot be merged because some requirements are not met. See the details.",
@@ -870,7 +870,7 @@ describe("Summarize Checks Unit Tests", () => {
       const targetBranch = "main";
       const labelNames = [];
       const expectedCheckOutput = {
-        name: "[TEST-IGNORE] Automated merging requirements met",
+        name: "Automated merging requirements met",
         result: "FAILURE",
         summary:
           "❌ This PR cannot be merged because some requirements are not met. See the details.",
@@ -913,7 +913,7 @@ describe("Summarize Checks Unit Tests", () => {
       const labelNames = [];
       const fyiCheckRuns = [];
       const expectedCheckOutput = {
-        name: "[TEST-IGNORE] Automated merging requirements met",
+        name: "Automated merging requirements met",
         result: "FAILURE",
         summary:
           "❌ This PR cannot be merged because some requirements are not met. See the details.",
