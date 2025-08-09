@@ -2809,6 +2809,10 @@
       "type": "string",
       "description": "Represents an Azure Resource Type."
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "Connection": {
       "type": "object",
       "description": "The connection resource definition.",
@@ -3811,7 +3815,7 @@
           }
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
@@ -4047,7 +4051,7 @@
           }
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
