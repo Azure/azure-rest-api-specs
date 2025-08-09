@@ -32,6 +32,7 @@ export async function extractInputs(github, context, core) {
     ["payload.workflow_run.event", context.payload.workflow_run?.event || "undefined"],
   ]);
   core.summary.write();
+  core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run
   // with debug enabled to replay the previous context.
