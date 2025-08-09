@@ -363,6 +363,10 @@ export async function summarizeChecksImpl(
 ) {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
+  const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.summary.addRaw("PR: ");
+  core.summary.addLink(prUrl, prUrl);
+
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
@@ -441,6 +445,8 @@ export async function summarizeChecksImpl(
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
+  core.summary.addRaw(`\n${commentBody}\n\n`);
+
   // this will remain commented until we're comfortable with the change.
   // await commentOrUpdate(
   //   { github, context, core },
@@ -457,6 +463,11 @@ export async function summarizeChecksImpl(
   core.info(
     `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
+  core.summary.addHeading("Automated Checks Met", 2);
+  core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
+
+  core.summary.write();
+  core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 }
 
 /**
