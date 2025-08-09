@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-02-02-preview
+tag: package-2025-07-01
 ```
 
 ### Suppression
@@ -41,6 +41,36 @@ directive:
     from: ManagedEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+```
+
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - Microsoft.App/stable/2025-07-01/AuthConfigs.json
+  - Microsoft.App/stable/2025-07-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2025-07-01/BillingMeters.json
+  - Microsoft.App/stable/2025-07-01/CommonDefinitions.json
+  - Microsoft.App/stable/2025-07-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2025-07-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2025-07-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2025-07-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2025-07-01/ContainerApps.json
+  - Microsoft.App/stable/2025-07-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2025-07-01/Diagnostics.json
+  - Microsoft.App/stable/2025-07-01/Global.json
+  - Microsoft.App/stable/2025-07-01/JavaComponents.json
+  - Microsoft.App/stable/2025-07-01/Jobs.json
+  - Microsoft.App/stable/2025-07-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2025-07-01/SessionPools.json
+  - Microsoft.App/stable/2025-07-01/SourceControls.json
+  - Microsoft.App/stable/2025-07-01/Subscriptions.json
+  - Microsoft.App/stable/2025-07-01/Usages.json
+  - Microsoft.App/stable/2025-07-01/LogicAppsExtension.json
 ```
 
 ### Tag: package-2025-01-01
