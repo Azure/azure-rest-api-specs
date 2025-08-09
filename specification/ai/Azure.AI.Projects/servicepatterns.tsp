@@ -42,7 +42,7 @@ interface VersionedOperations<
   @Rest.action("versions")
   @Rest.actionSeparator("/")
   @Http.get
-  @list
+  //@list
   listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
     TEntityType,
     TListVersionsParameters,

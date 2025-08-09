@@ -1,0 +1,37 @@
+{
+  "title": "List the checkpoints from a FineTuning jobs",
+  "operationId": "FineTuningJobs_ListFineTuningJobCheckpoints",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
+    "fine_tuning_job_id": "ftjob-1",
+    "limit": "2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "list",
+        "data": [
+          {
+            "object": "fine_tuning.job.checkpoint",
+            "id": "ftckpt_qtZ5Gyk4BLq1SfLFWp3RtO3P",
+            "created_at": "2025-01-01T10:00:00.00Z",
+            "fine_tuned_model_checkpoint": "ft:gpt-4o-mini-2024-07-18:my-org:custom_suffix:9ABel2dg:ckpt-step-88",
+            "fine_tuning_job_id": "ftjob-1",
+            "metrics": {
+              "step": 88,
+              "train_loss": 0.478,
+              "train_mean_token_accuracy": 0.924,
+              "valid_loss": 10.112,
+              "valid_mean_token_accuracy": 0.145,
+              "full_valid_loss": 0.567,
+              "full_valid_mean_token_accuracy": 0.944
+            },
+            "step_number": 88
+          }
+        ],
+        "has_more": false
+      }
+    }
+  }
+}
