@@ -22,6 +22,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job.")
       @path
+      //@maxLength(???)
       fine_tuning_job_id: string;
     },
     FineTuningJob
@@ -31,7 +32,7 @@ interface FineTuningJobs {
   @doc("Returns a list of finetune jobs")
   @get
   @list
-  listFineTuningJobs is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("Identifier for the last job from the previous pagination request.")
       @query
@@ -116,7 +117,7 @@ interface FineTuningJobs {
   @doc("Get status updates for a fine-tuning job.")
   @get
   @route("/{fine_tuning_job_id}/events")
-  listFineTuningJobEvents is Azure.Core.Foundations.Operation<
+  listEvents is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the fine-tuning job to get events for.")
       @path
@@ -137,7 +138,7 @@ interface FineTuningJobs {
   @doc("List checkpoints for a fine-tuning job.")
   @get
   @route("/{fine_tuning_job_id}/checkpoints")
-  listFineTuningJobCheckpoints is Azure.Core.Foundations.Operation<
+  listCheckpoints is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the fine-tuning job to get events for.")
       @path
