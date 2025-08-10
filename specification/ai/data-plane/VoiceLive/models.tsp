@@ -1380,5 +1380,8 @@ model ServerEventResponseFunctionCallArgumentsDone
 
   /** The final arguments as a JSON string. */
   arguments: string;
+
+  /** The name of the function call. */
+  name: string;
 }
 
