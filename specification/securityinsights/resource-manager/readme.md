@@ -27,10 +27,35 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-07-01
+tag: package-2025-09-01
 ```
 
 ---
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.SecurityInsights/stable/2025-09-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/operations.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Watchlists.json
+```
 
 ### Tag: package-preview-2025-07-01
 
