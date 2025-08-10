@@ -431,7 +431,7 @@ model WmtsCapabilitiesXmlResponse {
   /**
    * body for WMTSCapabilitiesXmlResponse
    */
-  @body body: string;
+  @body body: bytes;
 
   /**
    * content type for WMTSCapabilitiesXmlResponse
