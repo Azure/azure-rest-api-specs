@@ -67,6 +67,9 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -95,7 +98,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Suceeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityOperator"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SecurityOperator"
             }
@@ -198,6 +207,11 @@
           "items": {
             "$ref": "#/definitions/SecurityOperator"
           }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
         }
       }
     },
