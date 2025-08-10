@@ -106,7 +106,7 @@ namespace Customizations;
 @@clientName(Polygon, "GeoJsonPolygon", "csharp");
 @@clientName(Provider, "StacProvider", "csharp");
 @@clientName(Resampling, "ResamplingMethod", "csharp");
-@@clientName(Tilematrixsetid, "TileMatrixSetId", "csharp");
+@@clientName(TileMatrixSetId, "TileMatrixSetId", "csharp");
 
 // Additional model renames for C#
 @@clientName(RenderOption, "RenderOptionModel", "csharp");

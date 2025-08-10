@@ -666,7 +666,7 @@
               "WorldMercatorWGS84Quad"
             ],
             "x-ms-enum": {
-              "name": "Tilematrixsetid",
+              "name": "TileMatrixSetId",
               "modelAsString": true,
               "values": [
                 {
@@ -3093,7 +3093,7 @@
               "WorldMercatorWGS84Quad"
             ],
             "x-ms-enum": {
-              "name": "Tilematrixsetid",
+              "name": "TileMatrixSetId",
               "modelAsString": true,
               "values": [
                 {
@@ -3394,7 +3394,7 @@
               "WorldMercatorWGS84Quad"
             ],
             "x-ms-enum": {
-              "name": "Tilematrixsetid",
+              "name": "TileMatrixSetId",
               "modelAsString": true,
               "values": [
                 {
@@ -4127,10 +4127,10 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.exitwhenfull"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.skipcovered"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
             "name": "lon",
@@ -4159,10 +4159,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Return list of assets",
+            "description": "The request has succeeded.",
             "schema": {
               "type": "array",
-              "items": {}
+              "items": {
+                "$ref": "#/definitions/Asset"
+              }
             }
           },
           "204": {
@@ -4237,10 +4239,10 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.exitwhenfull"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.skipcovered"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
             "$ref": "#/parameters/AlgorithmQueryParameters.algorithm"
@@ -4461,7 +4463,7 @@
               "WorldMercatorWGS84Quad"
             ],
             "x-ms-enum": {
-              "name": "Tilematrixsetid",
+              "name": "TileMatrixSetId",
               "modelAsString": true,
               "values": [
                 {
@@ -4753,10 +4755,10 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.exitwhenfull"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.skipcovered"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
             "name": "tileMatrixSetId",
@@ -4779,7 +4781,7 @@
               "WorldMercatorWGS84Quad"
             ],
             "x-ms-enum": {
-              "name": "Tilematrixsetid",
+              "name": "TileMatrixSetId",
               "modelAsString": true,
               "values": [
                 {
@@ -6556,10 +6558,10 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.exitwhenfull"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.skipcovered"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
             "$ref": "#/parameters/AlgorithmQueryParameters.algorithm"
@@ -6597,7 +6599,7 @@
               "WorldMercatorWGS84Quad"
             ],
             "x-ms-enum": {
-              "name": "Tilematrixsetid",
+              "name": "TileMatrixSetId",
               "modelAsString": true,
               "values": [
                 {
@@ -6792,10 +6794,10 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.exitwhenfull"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.skipcovered"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
             "$ref": "#/parameters/AlgorithmQueryParameters.algorithm"
@@ -6927,10 +6929,10 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.exitwhenfull"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.skipcovered"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
             "name": "tileMatrixSetId",
@@ -7013,10 +7015,10 @@
             "$ref": "#/parameters/MosaicSearchQueryParameters.timeLimit"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.exitwhenfull"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.exitWhenFull"
           },
           {
-            "$ref": "#/parameters/MosaicSearchQueryParameters.skipcovered"
+            "$ref": "#/parameters/MosaicSearchQueryParameters.skipCovered"
           },
           {
             "$ref": "#/parameters/ZxyPathParameters.z"
@@ -7048,7 +7050,7 @@
               "WorldMercatorWGS84Quad"
             ],
             "x-ms-enum": {
-              "name": "Tilematrixsetid",
+              "name": "TileMatrixSetId",
               "modelAsString": true,
               "values": [
                 {
@@ -14614,12 +14616,14 @@
         "minzoom": {
           "type": "integer",
           "format": "int32",
-          "description": "Minimum zoom level supported"
+          "description": "Minimum zoom level supported",
+          "x-ms-client-name": "minZoom"
         },
         "maxzoom": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum zoom level supported"
+          "description": "Maximum zoom level supported",
+          "x-ms-client-name": "maxZoom"
         },
         "name": {
           "type": "string",
@@ -15117,17 +15121,20 @@
         },
         "orderby": {
           "type": "string",
-          "description": "SQL ORDER BY clause for sorting results"
+          "description": "SQL ORDER BY clause for sorting results",
+          "x-ms-client-name": "orderBy"
         },
         "lastused": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the search was last accessed"
+          "description": "Timestamp when the search was last accessed",
+          "x-ms-client-name": "lastUsed"
         },
         "usecount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of times the search has been accessed"
+          "description": "Number of times the search has been accessed",
+          "x-ms-client-name": "useCount"
         },
         "metadata": {
           "$ref": "#/definitions/Metadata",
@@ -16697,32 +16704,7 @@
         "upperRight"
       ]
     },
-    "TileSettings": {
-      "type": "object",
-      "description": "Configuration for map tile visualization.",
-      "properties": {
-        "minZoom": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum zoom level that can be requested for this collection. Provides a\nhard limit for the tile servers to ensure they don't get requests for low zoom\nlevels, which would cause many files to be fetched and the tile servers to\nhang.",
-          "maximum": 24
-        },
-        "maxItemsPerTile": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of items to include in a single tile."
-        },
-        "defaultLocation": {
-          "$ref": "#/definitions/DefaultLocation",
-          "description": "Default map location when displaying this collection."
-        }
-      },
-      "required": [
-        "minZoom",
-        "maxItemsPerTile"
-      ]
-    },
-    "Tilematrixsetid": {
+    "TileMatrixSetId": {
       "type": "string",
       "description": "Identifier selecting one of the TileMatrixSetId supported (default:\n'WebMercatorQuad')Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles",
       "enum": [
@@ -16739,7 +16721,7 @@
         "WorldMercatorWGS84Quad"
       ],
       "x-ms-enum": {
-        "name": "Tilematrixsetid",
+        "name": "TileMatrixSetId",
         "modelAsString": true,
         "values": [
           {
@@ -16799,6 +16781,31 @@
           }
         ]
       }
+    },
+    "TileSettings": {
+      "type": "object",
+      "description": "Configuration for map tile visualization.",
+      "properties": {
+        "minZoom": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum zoom level that can be requested for this collection. Provides a\nhard limit for the tile servers to ensure they don't get requests for low zoom\nlevels, which would cause many files to be fetched and the tile servers to\nhang.",
+          "maximum": 24
+        },
+        "maxItemsPerTile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of items to include in a single tile."
+        },
+        "defaultLocation": {
+          "$ref": "#/definitions/DefaultLocation",
+          "description": "Default map location when displaying this collection."
+        }
+      },
+      "required": [
+        "minZoom",
+        "maxItemsPerTile"
+      ]
     },
     "TilerInfo": {
       "type": "object",
@@ -18713,13 +18720,14 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "returnMask"
     },
-    "MosaicSearchQueryParameters.exitwhenfull": {
+    "MosaicSearchQueryParameters.exitWhenFull": {
       "name": "exitwhenfull",
       "in": "query",
       "description": "Return as soon as the geometry is fully covered (defaults to True in PgSTAC).",
       "required": false,
       "type": "boolean",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "exitWhenFull"
     },
     "MosaicSearchQueryParameters.itemsLimit": {
       "name": "items_limit",
@@ -18741,13 +18749,14 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "scanLimit"
     },
-    "MosaicSearchQueryParameters.skipcovered": {
+    "MosaicSearchQueryParameters.skipCovered": {
       "name": "skipcovered",
       "in": "query",
       "description": "Skip any items that would show up completely under the previous items (defaults\nto True in PgSTAC).",
       "required": false,
       "type": "boolean",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skipCovered"
     },
     "MosaicSearchQueryParameters.timeLimit": {
       "name": "time_limit",

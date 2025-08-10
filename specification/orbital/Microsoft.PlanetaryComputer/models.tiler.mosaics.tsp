@@ -4,6 +4,7 @@ import "@typespec/rest";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "./models.stac.spec.tsp";
 
 using TypeSpec.Http;
 
@@ -154,12 +155,14 @@ model Metadata {
   /**
    * Minimum zoom level supported
    */
-  minzoom?: int32;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int32;
 
   /**
    * Maximum zoom level supported
    */
-  maxzoom?: int32;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int32;
 
   /**
    * Human-readable name for the resource
@@ -240,17 +243,20 @@ model PgStacSearch {
   /**
    * SQL ORDER BY clause for sorting results
    */
-  orderby: string;
+  @encodedName("application/json", "orderby")
+  orderBy: string;
 
   /**
    * Timestamp when the search was last accessed
    */
-  lastused: utcDateTime;
+  @encodedName("application/json", "lastused")
+  lastUsed: utcDateTime;
 
   /**
    * Number of times the search has been accessed
    */
-  usecount: int32;
+  @encodedName("application/json", "usecount")
+  useCount: int32;
 
   /**
    * Additional metadata associated with the search
@@ -302,12 +308,12 @@ model MosaicSearchQueryParameters {
    * Return as soon as the geometry is fully covered (defaults to True in PgSTAC).
    */
   @query("exitwhenfull")
-  exitwhenfull?: boolean;
+  exitWhenFull?: boolean;
 
   /**
    * Skip any items that would show up completely under the previous items (defaults
    * to True in PgSTAC).
    */
   @query("skipcovered")
-  skipcovered?: boolean;
+  skipCovered?: boolean;
 }

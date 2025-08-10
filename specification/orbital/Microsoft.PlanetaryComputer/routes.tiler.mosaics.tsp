@@ -37,7 +37,7 @@ interface MosaicsTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
@@ -140,7 +140,7 @@ interface MosaicsTileJsonOperations {
        * Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad').
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
@@ -314,7 +314,7 @@ interface MosaicsWmtsMosaics {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Output image type. Default is png.
@@ -453,7 +453,7 @@ interface MosaicsAssetsForTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
     ApplicationJsonResponse | NoContentResponse
   >;
@@ -533,6 +533,6 @@ interface MosaicsAssetsForPoints {
       @query("coord-crs")
       coordCrs?: string;
     },
-    ApplicationJsonResponse | NoContentResponse
+    Asset[] | NoContentResponse
   >;
 }

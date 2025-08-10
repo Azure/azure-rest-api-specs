@@ -125,7 +125,7 @@ union ImageType {
 /**
  * Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles
  */
-union Tilematrixsetid {
+union TileMatrixSetId {
   string,
 
   /**
