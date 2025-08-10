@@ -56,16 +56,16 @@ using Azure.ClientGenerator.Core;
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ClientEvent, Access.public, "csharp");
+@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "csharp");
+@@access(VoiceLive.Point2D, Access.internal, "csharp");
+@@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
+@@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
+
 @@clientName(VoiceLive.Modality, "InputModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
 @@clientName(VoiceLive.Tool, "ToolCall", "csharp");
 @@clientName(VoiceLive.AzureCustomVoice.custom_lexicon_url, "CustomLexiconUri", "csharp");
 @@clientName(VoiceLive.IceServer.urls, "Uris", "csharp");
-@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "csharp");
-@@access(VoiceLive.Point2D, Access.internal, "csharp");
-
 @@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "csharp");
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "csharp");
-
-@@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
-@@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
+@@clientName(VoiceLive.Response, "VoiceLiveResponse", "csharp");
