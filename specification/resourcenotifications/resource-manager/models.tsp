@@ -79,7 +79,8 @@ union NotificationStatus {
 
 /** A Resource Notification resource. */
 @parentResource(SubscriptionLocationResource)
-model ResourceNotification is Azure.ResourceManager.TrackedResource<ResourceNotificationProperties> {
+model ResourceNotification
+  is Azure.ResourceManager.TrackedResource<ResourceNotificationProperties> {
   /** The name of the Resource Notification. */
   @pattern("^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$")
   @key("resourceNotificationName")
@@ -97,7 +98,10 @@ interface ResourceNotifications {
   createOrUpdate is ArmResourceCreateOrReplaceSync<ResourceNotification>;
 
   /** Update a Resource Notification. */
-  update is ArmResourcePatchSync<ResourceNotification, ResourceNotificationProperties>;
+  update is ArmResourcePatchSync<
+    ResourceNotification,
+    ResourceNotificationProperties
+  >;
 
   /** Delete a Resource Notification. */
   delete is ArmResourceDeleteSync<ResourceNotification>;
@@ -153,7 +157,8 @@ union ProvisioningState {
 
 /** A Notification Session resource. */
 @parentResource(LocationResource)
-model NotificationSession is Azure.ResourceManager.TrackedResource<NotificationSessionProperties> {
+model NotificationSession
+  is Azure.ResourceManager.TrackedResource<NotificationSessionProperties> {
   /** The name of the Notification Session. */
   @pattern("^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$")
   @key("notificationSessionName")
@@ -171,7 +176,10 @@ interface NotificationSessions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NotificationSession>;
 
   /** Update a Notification Session. */
-  update is ArmResourcePatchSync<NotificationSession, NotificationSessionProperties>;
+  update is ArmResourcePatchSync<
+    NotificationSession,
+    NotificationSessionProperties
+  >;
 
   /** Delete a Notification Session. */
   delete is ArmResourceDeleteSync<NotificationSession>;
