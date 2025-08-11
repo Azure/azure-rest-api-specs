@@ -16,7 +16,7 @@ namespace Ingestions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
   @doc("Get ingestions of a catalog")
-  op listAll(
+  op list(
     ...CollectionParameters,
     ...OdataQuery,
   ): IngestionDefinitionsPagedResponse | ErrorResponse;
@@ -160,7 +160,7 @@ namespace Ingestions {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
     @doc("Get the runs of an ingestion")
-    op listAll(
+    op list(
       ...IngestionParameters,
       ...OdataQuery,
     ): IngestionRunsPagedResponse | ErrorResponse;
@@ -497,7 +497,7 @@ namespace IngestionSources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
   @doc("Get ingestion sources in a geo-catalog")
-  op listAll(
+  op list(
     ...ApiVersionParameter,
     ...OdataQuery,
   ): IngestionSourcesPagedResponse | ErrorResponse;
@@ -697,7 +697,7 @@ namespace IngestionOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
   @doc("Get operations of a geo-catalog collection")
-  op listAll(
+  op list(
     ...ApiVersionParameter,
     ...OdataQuery,
 

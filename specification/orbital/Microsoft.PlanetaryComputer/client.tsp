@@ -125,19 +125,19 @@ namespace Customizations;
 @clientName("IngestionManagementClientImpl", "csharp")
 interface IngestionManagementClient {
   // Ingestion operations
-  getIngestions is Ingestions.listAll;
+  getIngestions is Ingestions.list;
   createIngestion is Ingestions.create;
   getIngestion is Ingestions.get;
   updateIngestion is Ingestions.update;
   deleteIngestion is Ingestions.delete;
 
   // Ingestion runs operations
-  getIngestionRuns is Ingestions.IngestionRuns.listAll;
+  getIngestionRuns is Ingestions.IngestionRuns.list;
   createIngestionRun is Ingestions.IngestionRuns.create;
   getIngestionRun is Ingestions.IngestionRuns.get;
 
   // Ingestion operations management
-  getIngestionOperations is IngestionOperations.listAll;
+  getIngestionOperations is IngestionOperations.list;
   deleteAllIngestionOperations is IngestionOperations.deleteAll;
   getIngestionOperation is IngestionOperations.get;
   deleteIngestionOperation is IngestionOperations.delete;
@@ -153,7 +153,7 @@ interface IngestionManagementClient {
 )
 @clientName("IngestionSourcesClientImpl", "csharp")
 interface IngestionSourcesClient {
-  getIngestionSources is IngestionSources.listAll;
+  getIngestionSources is IngestionSources.list;
   createIngestionSource is IngestionSources.create;
   getIngestionSource is IngestionSources.get;
   createOrReplaceIngestionSource is IngestionSources.createOrReplace;
