@@ -1,28 +1,14 @@
-#!/usr/bin/env node
-
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { setOutput } from "@azure-tools/specs-shared/error-reporting";
 import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
-import fs from "fs";
+import { writeFile } from "fs/promises";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { join } from "path";
+import { resolve } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
-
-export async function getRoot(inputPath: string): Promise<string> {
-  try {
-    return await getRootFolder(inputPath);
-  } catch (error) {
-    console.error(
-      `Error: Unable to determine the root folder of the git repository.`,
-      `Please ensure you are running this command within a git repository OR providing a targeted directory that is within a git repo.`,
-    );
-    process.exit(1);
-  }
-}
 
 export async function main() {
   const config: ParseArgsConfig = {
@@ -75,6 +61,7 @@ export async function main() {
       isDraft: {
         type: "boolean",
         multiple: false,
+        default: false,
       },
     },
     allowPositionals: true,
@@ -85,8 +72,8 @@ export async function main() {
   // todo: refactor these opts
   const sourceDirectory = opts.sourceDirectory as string;
   const targetDirectory = opts.targetDirectory as string;
-  const sourceGitRoot = await getRoot(sourceDirectory);
-  const targetGitRoot = await getRoot(targetDirectory);
+  const sourceGitRoot = await getRootFolder(sourceDirectory);
+  const targetGitRoot = await getRootFolder(targetDirectory);
   const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot, paths: ["specification"] });
   const sha = opts.sha as string;
   const sourceBranch = opts.sourceBranch as string;
@@ -135,7 +122,8 @@ export async function main() {
   console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));
 
   // Write to a temp file that can get picked up later.
-  const summaryFile = join(process.cwd(), "summary.json");
-  fs.writeFileSync(summaryFile, JSON.stringify(impact, null, 2));
+  // Intentionally doesn't use GITHUB_STEP_SUMMARY, since it's not a markdown summary for GH UI
+  const summaryFile = resolve("summary.json");
+  await writeFile(summaryFile, JSON.stringify(impact, null, 2));
   setOutput("summary", summaryFile);
 }
