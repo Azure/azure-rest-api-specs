@@ -16,7 +16,6 @@ model SiteInsight
   ...ResourceNameParameter<SiteInsight, NamePattern = "^default$">;
 }
 
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
 @doc("Site Insight properties")
 model SiteInsightProperties {
@@ -36,4 +35,3 @@ interface SiteInsights {
   @doc("List all SiteInsight resources")
   list is ArmResourceListByParent<SiteInsight>;
 }
-
