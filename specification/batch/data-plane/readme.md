@@ -30,7 +30,7 @@ openapi-type: data-plane
 tag: package-2025-06
 ```
 
-### Tag: package-2025-06
+### Tag: package-2025-06.21.0
 
 These settings apply only when `--tag=package-2025-06` is specified on the command line.
 
@@ -46,15 +46,6 @@ These settings apply only when `--tag=package-2024-07.20.0` is specified on the 
 ```yaml $(tag) == 'package-2024-07.20.0-preview'
 input-file:
   - Azure.Batch/preview/2024-07-01.20.0/BatchService.json
-```
-
-### Tag: package-2025-06.21.0
-
-These settings apply only when `--tag=package-2025-06.21.0` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-06.21.0'
-input-file:
-  - Microsoft.Batch/stable/2025-06-01/BatchService.json
 ```
 
 ### Tag: package-2024-07
