@@ -1,0 +1,5324 @@
+openapi: 3.0.0
+info:
+  title: Azure AI Foundry Models Service
+  version: v1
+tags:
+  - name: Evals
+  - name: Files
+  - name: Fine-tuning
+  - name: Models
+paths:
+  /evals:
+    get:
+      operationId: listEvals
+      summary: List evaluations for a project.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last eval from the previous pagination request.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of evals to be returned in a single pagination response.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order for evals by timestamp. Use `asc` for ascending order or
+            `desc` for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+          explode: false
+        - name: order_by
+          in: query
+          required: false
+          description: |-
+            Evals can be ordered by creation time or last updated time. Use
+            `created_at` for creation time or `updated_at` for last updated
+            time.
+          schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
+            default: created_at
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.EvalList'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+    post:
+      operationId: createEval
+      description: |-
+        Create the structure of an evaluation that can be used to test a model's
+        performance.
+
+        An evaluation is a set of testing criteria and a datasource. After
+        creating an evaluation, you can run it on different models and model
+        parameters. We support several types of graders and datasources.
+
+        For more information, see the [Evals guide](/docs/guides/evals).
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.Eval'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusCode:
+                  type: number
+                  enum:
+                    - 201
+                name:
+                  type: string
+                  description: The name of the evaluation.
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: |-
+                    Set of 16 key-value pairs that can be attached to an object. This can be
+                    useful for storing additional information about the object in a structured
+                    format, and querying for objects via API or the dashboard.
+
+                    Keys are strings with a maximum length of 64 characters. Values are strings
+                    with a maximum length of 512 characters.
+                  x-oaiTypeLabel: map
+                data_source_config:
+                  allOf:
+                    - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigParams'
+                  description: The configuration for the data source used for the evaluation runs. Dictates the schema of the data used in the evaluation.
+                testing_criteria:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpenAI.EvalGraderParams'
+                  description: A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
+              required:
+                - statusCode
+                - data_source_config
+                - testing_criteria
+  /evals/{eval_id}:
+    get:
+      operationId: getEval
+      summary: Retrieve an evaluation by its ID.
+      description: |-
+        Retrieves an evaluation by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.Eval'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+    post:
+      operationId: updateEval
+      description: |-
+        Update select, mutable properties of a specified evaluation.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.Eval'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                metadata:
+                  $ref: '#/components/schemas/OpenAI.MetadataPropertyForRequest'
+    delete:
+      operationId: deleteEval
+      description: |-
+        Delete a specified evaluation.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - deleted
+                  - eval_id
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - eval.deleted
+                  deleted:
+                    type: boolean
+                  eval_id:
+                    type: string
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+  /evals/{eval_id}/runs:
+    get:
+      operationId: getEvalRuns
+      summary: ''
+      description: |-
+        Retrieve a list of runs for a specified evaluation.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+          explode: false
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - queued
+              - in_progress
+              - completed
+              - canceled
+              - failed
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.EvalRunList'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+    post:
+      operationId: createEvalRun
+      description: |-
+        Create a new evaluation run, beginning the grading process.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.EvalRun'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateEvalRunRequest'
+  /evals/{eval_id}/runs/{run_id}:
+    get:
+      operationId: getEvalRun
+      description: |-
+        Retrieve a specific evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.EvalRun'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+    post:
+      operationId: cancelEvalRun
+      description: |-
+        Cancel a specific evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.EvalRun'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+    delete:
+      operationId: deleteEvalRun
+      description: |-
+        Delete a specific evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - deleted
+                  - eval_run_id
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - eval_run.deleted
+                  deleted:
+                    type: boolean
+                  eval_run_id:
+                    type: string
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+  /evals/{eval_id}/runs/{run_id}/output_items:
+    get:
+      operationId: getEvalRunOutputItems
+      description: |-
+        Get a list of output items for a specified evaluation run.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - fail
+              - pass
+          explode: false
+        - name: order
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.EvalRunOutputItemList'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+  /evals/{eval_id}/runs/{run_id}/output_items/{output_item_id}:
+    get:
+      operationId: getEvalRunOutputItem
+      description: |-
+        Retrieve a specific output item from an evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-evals
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Evals, a preview feature.
+            This feature requires the 'aoai-evals' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: eval_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: run_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: output_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.EvalRunOutputItem'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Evals
+  /files:
+    post:
+      operationId: createFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureOpenAIFile'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Files
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AzureCreateFileRequestMultiPart'
+      x-ms-examples:
+        Create a file request:
+          $ref: ./examples/files.yaml
+    get:
+      operationId: listFiles
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: purpose
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureListFilesResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Files
+  /files/{file_id}:
+    get:
+      operationId: retrieveFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: file_id
+          in: path
+          required: true
+          description: The ID of the file to use for this request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureOpenAIFile'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Files
+    delete:
+      operationId: deleteFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: file_id
+          in: path
+          required: true
+          description: The ID of the file to use for this request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.DeleteFileResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Files
+  /files/{file_id}/content:
+    get:
+      operationId: downloadFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: file_id
+          in: path
+          required: true
+          description: The ID of the file to use for this request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Files
+  /fine_tuning/alpha/graders/run:
+    post:
+      operationId: runGrader
+      summary: Run a grader.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.RunGraderResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.RunGraderRequest'
+  /fine_tuning/alpha/graders/validate:
+    post:
+      operationId: validateGrader
+      summary: Validate a grader.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ValidateGraderResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.ValidateGraderRequest'
+  /fine_tuning/jobs:
+    post:
+      operationId: createFineTuningJob
+      summary: |-
+        Creates a fine-tuning job which begins the process of creating a new model from a given dataset.
+
+        Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+
+        [Learn more about fine-tuning](/docs/guides/fine-tuning)
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequest'
+    get:
+      operationId: listPaginatedFineTuningJobs
+      summary: List your organization's fine-tuning jobs
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last job from the previous pagination request.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Number of fine-tuning jobs to retrieve.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListPaginatedFineTuningJobsResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}:
+    get:
+      operationId: retrieveFineTuningJob
+      summary: |-
+        Get info about a fine-tuning job.
+
+        [Learn more about fine-tuning](/docs/guides/fine-tuning)
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/cancel:
+    post:
+      operationId: cancelFineTuningJob
+      summary: Immediately cancel a fine-tune job.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to cancel.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/checkpoints:
+    get:
+      operationId: listFineTuningJobCheckpoints
+      summary: List the checkpoints for a fine-tuning job.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to get checkpoints for.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last checkpoint ID from the previous pagination request.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Number of checkpoints to retrieve.
+          schema:
+            type: integer
+            format: int32
+            default: 10
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListFineTuningJobCheckpointsResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/events:
+    get:
+      operationId: listFineTuningEvents
+      summary: Get status updates for a fine-tuning job.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to get events for.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last event from the previous pagination request.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Number of events to retrieve.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListFineTuningJobEventsResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/pause:
+    post:
+      operationId: pauseFineTuningJob
+      summary: Pause a fine-tune job.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to pause.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/resume:
+    post:
+      operationId: resumeFineTuningJob
+      summary: Resume a paused fine-tune job.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to resume.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+  /models:
+    get:
+      operationId: listModels
+      summary: |-
+        Lists the currently available models, and provides basic information about each one such as the
+        owner and availability.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListModelsResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Models
+  /models/{model}:
+    get:
+      operationId: retrieveModel
+      summary: |-
+        Retrieves a model instance, providing basic information about the model such as the owner and
+        permissioning.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: model
+          in: path
+          required: true
+          description: The ID of the model to use for this request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.Model'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Models
+security:
+  - ApiKeyAuth: []
+  - ApiKeyAuth_: []
+  - OAuth2Auth:
+      - https://cognitiveservices.azure.com/.default
+components:
+  schemas:
+    AzureAIFoundryModelsApiVersion:
+      type: string
+      enum:
+        - v1
+        - preview
+    AzureCreateFileRequestMultiPart:
+      type: object
+      required:
+        - file
+        - expires_after
+        - purpose
+      properties:
+        file:
+          type: string
+          format: binary
+        expires_after:
+          type: object
+          properties:
+            seconds:
+              type: integer
+              format: int32
+            anchor:
+              $ref: '#/components/schemas/AzureFileExpiryAnchor'
+          required:
+            - seconds
+            - anchor
+        purpose:
+          type: string
+          enum:
+            - assistants
+            - batch
+            - fine-tune
+            - evals
+          description: 'The intended purpose of the uploaded file. One of: - `assistants`: Used in the Assistants API - `batch`: Used in the Batch API - `fine-tune`: Used for fine-tuning - `evals`: Used for eval data sets'
+    AzureErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The distinct, machine-generated identifier for the error.
+            message:
+              type: string
+              description: A human-readable message associated with the error.
+            param:
+              type: string
+              description: If applicable, the request input parameter associated with the error
+            type:
+              type: string
+              enum:
+                - error
+              description: The object type, always 'error.'
+            inner_error: {}
+          description: The error details.
+    AzureEvalAPICompletionsSamplingParams:
+      type: object
+      properties:
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTool'
+        parallel_tool_calls:
+          type: boolean
+        response_format:
+          $ref: '#/components/schemas/OpenAI.ResponseTextFormatConfiguration'
+      allOf:
+        - $ref: '#/components/schemas/AzureEvalAPIModelSamplingParams'
+    AzureEvalAPIModelSamplingParams:
+      type: object
+      properties:
+        seed:
+          type: integer
+          format: int32
+          description: A seed value to initialize the randomness during sampling.
+        temperature:
+          type: number
+          format: float
+          description: A higher temperature increases randomness in the outputs.
+        max_tokens:
+          type: integer
+          format: int32
+          description: The maximum number of tokens in the generated output.
+        top_p:
+          type: number
+          format: float
+          description: An alternative to temperature for nucleus sampling; 1.0 includes all tokens.
+        reasoning_effort:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: Controls the level of reasoning effort applied during generation.
+    AzureEvalAPIResponseSamplingParams:
+      type: object
+      properties:
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+        parallel_tool_calls:
+          type: boolean
+        response_format:
+          $ref: '#/components/schemas/OpenAI.ResponseTextFormatConfiguration'
+      allOf:
+        - $ref: '#/components/schemas/AzureEvalAPIModelSamplingParams'
+    AzureFileExpiryAnchor:
+      type: string
+      enum:
+        - created_at
+    AzureFineTuneReinforcementMethod:
+      type: object
+      required:
+        - grader
+      properties:
+        grader:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.GraderStringCheck'
+            - $ref: '#/components/schemas/OpenAI.GraderTextSimilarity'
+            - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
+            - $ref: '#/components/schemas/OpenAI.GraderMulti'
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/ResponseFormatJSONSchemaRequest'
+          description: Response format to be used while sampling during RFT training
+        hyperparameters:
+          $ref: '#/components/schemas/OpenAI.FineTuneReinforcementHyperparameters'
+    AzureListFilesResponse:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzureOpenAIFile'
+        first_id:
+          type: string
+        last_id:
+          type: string
+        has_more:
+          type: boolean
+    AzureOpenAIFile:
+      type: object
+      required:
+        - id
+        - bytes
+        - created_at
+        - filename
+        - object
+        - purpose
+        - status
+      properties:
+        id:
+          type: string
+          description: The file identifier, which can be referenced in the API endpoints.
+        bytes:
+          type: integer
+          format: int64
+          nullable: true
+          description: The size of the file, in bytes.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the file was created.
+        expires_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the file will expire.
+        filename:
+          type: string
+          description: The name of the file.
+        object:
+          type: string
+          enum:
+            - file
+          description: The object type, which is always `file`.
+        status_details:
+          type: string
+          description: Deprecated. For details on why a fine-tuning training file failed validation, see the `error` field on `fine_tuning.job`.
+          deprecated: true
+        purpose:
+          type: string
+          enum:
+            - assistants
+            - assistants_output
+            - batch
+            - batch_output
+            - fine-tune
+            - fine-tune-results
+            - evals
+          description: The intended purpose of the file. Supported values are `assistants`, `assistants_output`, `batch`, `batch_output`, `fine-tune` and `fine-tune-results`.
+        status:
+          type: string
+          enum:
+            - uploaded
+            - pending
+            - running
+            - processed
+            - error
+            - deleting
+            - deleted
+    OpenAI.ApproximateLocation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - approximate
+        country:
+          type: string
+          nullable: true
+        region:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        timezone:
+          type: string
+          nullable: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Location'
+    OpenAI.ChatCompletionTool:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The type of the tool. Currently, only `function` is supported.
+        function:
+          $ref: '#/components/schemas/OpenAI.FunctionObject'
+    OpenAI.CodeInterpreterTool:
+      type: object
+      required:
+        - type
+        - container
+      properties:
+        type:
+          type: string
+          enum:
+            - code_interpreter
+          description: The type of the code interpreter tool. Always `code_interpreter`.
+        container:
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/OpenAI.CodeInterpreterToolAuto'
+          description: |-
+            The code interpreter container. Can be a container ID or an object that
+            specifies uploaded file IDs to make available to your code.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool that runs Python code to help generate a response to a prompt.
+    OpenAI.CodeInterpreterToolAuto:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - auto
+          description: Always `auto`.
+        file_ids:
+          type: array
+          items:
+            type: string
+          description: An optional list of uploaded files to make available to your code.
+      description: |-
+        Configuration for a code interpreter container. Optionally specify the IDs
+        of the files to run the code on.
+    OpenAI.ComparisonFilter:
+      type: object
+      required:
+        - type
+        - key
+        - value
+      properties:
+        type:
+          type: string
+          enum:
+            - eq
+            - ne
+            - gt
+            - gte
+            - lt
+            - lte
+          description: |-
+            Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`.
+            - `eq`: equals
+            - `ne`: not equal
+            - `gt`: greater than
+            - `gte`: greater than or equal
+            - `lt`: less than
+            - `lte`: less than or equal
+          default: eq
+        key:
+          type: string
+          description: The key to compare against the value.
+        value:
+          anyOf:
+            - type: string
+            - type: number
+              format: float
+            - type: boolean
+          description: The value to compare against the attribute key; supports string, number, or boolean types.
+      description: A filter used to compare a specified attribute key to a given value using a defined comparison operation.
+    OpenAI.CompoundFilter:
+      type: object
+      required:
+        - type
+        - filters
+      properties:
+        type:
+          type: string
+          enum:
+            - and
+            - or
+          description: 'Type of operation: `and` or `or`.'
+        filters:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.ComparisonFilter'
+              - $ref: '#/components/schemas/OpenAI.CompoundFilter'
+          description: Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`.
+      description: Combine multiple filters using `and` or `or`.
+    OpenAI.ComputerUsePreviewTool:
+      type: object
+      required:
+        - type
+        - environment
+        - display_width
+        - display_height
+      properties:
+        type:
+          type: string
+          enum:
+            - computer_use_preview
+          description: The type of the computer use tool. Always `computer_use_preview`.
+        environment:
+          type: string
+          enum:
+            - windows
+            - mac
+            - linux
+            - ubuntu
+            - browser
+          description: The type of computer environment to control.
+        display_width:
+          type: integer
+          format: int32
+          description: The width of the computer display.
+        display_height:
+          type: integer
+          format: int32
+          description: The height of the computer display.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
+    OpenAI.CreateEvalItem:
+      anyOf:
+        - type: object
+          properties:
+            role:
+              type: string
+              description: The role of the message (e.g. "system", "assistant", "user").
+            content:
+              type: string
+              description: The content of the message.
+          required:
+            - role
+            - content
+        - $ref: '#/components/schemas/OpenAI.EvalItem'
+      description: A chat message that makes up the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+    OpenAI.CreateEvalRunRequest:
+      type: object
+      required:
+        - data_source
+      properties:
+        name:
+          type: string
+          description: The name of the run.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        data_source:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceParams'
+          description: Details about the run's data source.
+    OpenAI.CreateFineTuningJobRequest:
+      type: object
+      required:
+        - model
+        - training_file
+      properties:
+        model:
+          anyOf:
+            - type: string
+            - type: string
+              enum:
+                - babbage-002
+                - davinci-002
+                - gpt-3.5-turbo
+                - gpt-4o-mini
+          description: |-
+            The name of the model to fine-tune. You can select one of the
+            [supported models](/docs/guides/fine-tuning#which-models-can-be-fine-tuned).
+          x-oaiTypeLabel: string
+        training_file:
+          type: string
+          description: |-
+            The ID of an uploaded file that contains training data.
+
+            See [upload file](/docs/api-reference/files/create) for how to upload a file.
+
+            Your dataset must be formatted as a JSONL file. Additionally, you must upload your file with the purpose `fine-tune`.
+
+            The contents of the file should differ depending on if the model uses the [chat](/docs/api-reference/fine-tuning/chat-input), [completions](/docs/api-reference/fine-tuning/completions-input) format, or if the fine-tuning method uses the [preference](/docs/api-reference/fine-tuning/preference-input) format.
+
+            See the [fine-tuning guide](/docs/guides/model-optimization) for more details.
+        hyperparameters:
+          type: object
+          properties:
+            batch_size:
+              anyOf:
+                - type: string
+                  enum:
+                    - auto
+                - type: integer
+                  format: int32
+              description: |-
+                Number of examples in each batch. A larger batch size means that model parameters
+                are updated less frequently, but with lower variance.
+              default: auto
+            learning_rate_multiplier:
+              anyOf:
+                - type: string
+                  enum:
+                    - auto
+                - type: number
+                  format: float
+              description: |-
+                Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+                overfitting.
+              default: auto
+            n_epochs:
+              anyOf:
+                - type: string
+                  enum:
+                    - auto
+                - type: integer
+                  format: int32
+              description: |-
+                The number of epochs to train the model for. An epoch refers to one full cycle
+                through the training dataset.
+              default: auto
+          description: |-
+            The hyperparameters used for the fine-tuning job.
+            This value is now deprecated in favor of `method`, and should be passed in under the `method` parameter.
+          deprecated: true
+        suffix:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 64
+          description: |-
+            A string of up to 64 characters that will be added to your fine-tuned model name.
+
+            For example, a `suffix` of "custom-model-name" would produce a model name like `ft:gpt-4o-mini:openai:custom-model-name:7p4lURel`.
+          default: null
+        validation_file:
+          type: string
+          nullable: true
+          description: |-
+            The ID of an uploaded file that contains validation data.
+
+            If you provide this file, the data is used to generate validation
+            metrics periodically during fine-tuning. These metrics can be viewed in
+            the fine-tuning results file.
+            The same data should not be present in both train and validation files.
+
+            Your dataset must be formatted as a JSONL file. You must upload your file with the purpose `fine-tune`.
+
+            See the [fine-tuning guide](/docs/guides/model-optimization) for more details.
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestIntegration'
+          nullable: true
+          description: A list of integrations to enable for your fine-tuning job.
+        seed:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 0
+          maximum: 2147483647
+          description: |-
+            The seed controls the reproducibility of the job. Passing in the same seed and job parameters should produce the same results, but may differ in rare cases.
+            If a seed is not specified, one will be generated for you.
+        method:
+          $ref: '#/components/schemas/OpenAI.FineTuneMethod'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+    OpenAI.CreateFineTuningJobRequestIntegration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          anyOf:
+            - type: string
+            - type: string
+              enum:
+                - wandb
+      discriminator:
+        propertyName: type
+        mapping:
+          wandb: '#/components/schemas/OpenAI.CreateFineTuningJobRequestWandbIntegration'
+    OpenAI.CreateFineTuningJobRequestWandbIntegration:
+      type: object
+      required:
+        - type
+        - wandb
+      properties:
+        type:
+          type: string
+          enum:
+            - wandb
+        wandb:
+          type: object
+          properties:
+            project:
+              type: string
+            name:
+              type: string
+              nullable: true
+            entity:
+              type: string
+              nullable: true
+            tags:
+              type: array
+              items:
+                type: string
+          required:
+            - project
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestIntegration'
+    OpenAI.DeleteFileResponse:
+      type: object
+      required:
+        - id
+        - object
+        - deleted
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          enum:
+            - file
+        deleted:
+          type: boolean
+    OpenAI.Eval:
+      type: object
+      required:
+        - object
+        - id
+        - name
+        - data_source_config
+        - testing_criteria
+        - created_at
+        - metadata
+      properties:
+        object:
+          type: string
+          enum:
+            - eval
+          description: The object type.
+          default: eval
+        id:
+          type: string
+          description: Unique identifier for the evaluation.
+        name:
+          type: string
+          description: The name of the evaluation.
+        data_source_config:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigResource'
+          description: Configuration of data sources used in runs of the evaluation.
+        testing_criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalGraderResource'
+          nullable: true
+          description: A list of testing criteria.
+          default: null
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the eval was created.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+      description: |-
+        An Eval object with a data source config and testing criteria.
+        An Eval represents a task to be done for your LLM integration.
+        Like:
+        - Improve the quality of my chatbot
+        - See how well my chatbot handles customer support
+        - Check if o4-mini is better at my usecase than gpt-4o
+    OpenAI.EvalApiError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: The error code.
+        message:
+          type: string
+          description: The error message.
+      description: An object representing an error response from the Eval API.
+    OpenAI.EvalCompletionsRunDataSourceParams:
+      type: object
+      required:
+        - type
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - completions
+          description: The type of run data source. Always `completions`.
+        input_messages:
+          anyOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - template
+                  description: The type of input messages. Always `template`.
+                template:
+                  type: array
+                  items:
+                    anyOf:
+                      - {}
+                      - $ref: '#/components/schemas/OpenAI.EvalItem'
+                  description: A list of chat messages forming the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+              required:
+                - type
+                - template
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - item_reference
+                  description: The type of input messages. Always `item_reference`.
+                item_reference:
+                  type: string
+                  description: A reference to a variable in the `item` namespace. Ie, "item.input_trajectory"
+              required:
+                - type
+                - item_reference
+          description: Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+        sampling_params:
+          $ref: '#/components/schemas/AzureEvalAPICompletionsSamplingParams'
+        model:
+          type: string
+          description: The name of the model to use for generating completions (e.g. "o3-mini").
+        source:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.EvalRunFileContentDataContentSource'
+            - $ref: '#/components/schemas/OpenAI.EvalRunFileIdDataContentSource'
+            - $ref: '#/components/schemas/OpenAI.EvalRunStoredCompletionsDataContentSource'
+          description: Determines what populates the `item` namespace in this run's data source.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceParams'
+      description: A CompletionsRunDataSource object describing a model sampling configuration.
+    OpenAI.EvalCustomDataSourceConfigParams:
+      type: object
+      required:
+        - type
+        - item_schema
+      properties:
+        type:
+          type: string
+          enum:
+            - custom
+          description: The type of data source. Always `custom`.
+        item_schema:
+          type: object
+          additionalProperties: {}
+          description: The json schema for each row in the data source.
+        include_sample_schema:
+          type: boolean
+          description: Whether the eval should expect you to populate the sample namespace (ie, by generating responses off of your data source)
+          default: false
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigParams'
+      description: |-
+        A CustomDataSourceConfig object that defines the schema for the data source used for the evaluation runs.
+        This schema is used to define the shape of the data that will be:
+        - Used to define your testing criteria and
+        - What data is required when creating a run
+    OpenAI.EvalCustomDataSourceConfigResource:
+      type: object
+      required:
+        - type
+        - schema
+      properties:
+        type:
+          type: string
+          enum:
+            - custom
+          description: The type of data source. Always `custom`.
+        schema:
+          type: object
+          additionalProperties: {}
+          description: |-
+            The json schema for the run data source items.
+            Learn how to build JSON schemas [here](https://json-schema.org/).
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigResource'
+      description: |-
+        A CustomDataSourceConfig which specifies the schema of your `item` and optionally `sample` namespaces.
+        The response schema defines the shape of the data that will be:
+        - Used to define your testing criteria and
+        - What data is required when creating a run
+    OpenAI.EvalDataSourceConfigParams:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigType'
+      discriminator:
+        propertyName: type
+        mapping:
+          custom: '#/components/schemas/OpenAI.EvalCustomDataSourceConfigParams'
+          logs: '#/components/schemas/OpenAI.EvalLogsDataSourceConfigParams'
+          stored_completions: '#/components/schemas/OpenAI.EvalStoredCompletionsDataSourceConfigParams'
+    OpenAI.EvalDataSourceConfigResource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigType'
+      discriminator:
+        propertyName: type
+        mapping:
+          custom: '#/components/schemas/OpenAI.EvalCustomDataSourceConfigResource'
+          stored_completions: '#/components/schemas/OpenAI.EvalStoredCompletionsDataSourceConfigResource'
+          logs: '#/components/schemas/OpenAI.EvalLogsDataSourceConfigResource'
+    OpenAI.EvalDataSourceConfigType:
+      type: string
+      enum:
+        - custom
+        - logs
+        - stored_completions
+    OpenAI.EvalGraderLabelModelParams:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+        - labels
+        - passing_labels
+      properties:
+        type:
+          type: string
+          enum:
+            - label_model
+          description: The object type, which is always `label_model`.
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation. Must support structured outputs.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.CreateEvalItem'
+          description: A list of chat messages forming the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+        labels:
+          type: array
+          items:
+            type: string
+          description: The labels to classify to each item in the evaluation.
+        passing_labels:
+          type: array
+          items:
+            type: string
+          description: The labels that indicate a passing result. Must be a subset of labels.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderParams'
+      description: |-
+        A LabelModelGrader object which uses a model to assign labels to each item
+        in the evaluation.
+    OpenAI.EvalGraderLabelModelResource:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+        - labels
+        - passing_labels
+      properties:
+        type:
+          type: string
+          enum:
+            - label_model
+          description: The object type, which is always `label_model`.
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation. Must support structured outputs.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalItem'
+        labels:
+          type: array
+          items:
+            type: string
+          description: The labels to assign to each item in the evaluation.
+        passing_labels:
+          type: array
+          items:
+            type: string
+          description: The labels that indicate a passing result. Must be a subset of labels.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderResource'
+    OpenAI.EvalGraderParams:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.GraderType'
+      discriminator:
+        propertyName: type
+        mapping:
+          label_model: '#/components/schemas/OpenAI.EvalGraderLabelModelParams'
+          string_check: '#/components/schemas/OpenAI.EvalGraderStringCheckParams'
+          text_similarity: '#/components/schemas/OpenAI.EvalGraderTextSimilarityParams'
+          python: '#/components/schemas/OpenAI.EvalGraderPythonParams'
+          score_model: '#/components/schemas/OpenAI.EvalGraderScoreModelParams'
+    OpenAI.EvalGraderPythonParams:
+      type: object
+      required:
+        - type
+        - name
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - python
+          description: The object type, which is always `python`.
+        name:
+          type: string
+          description: The name of the grader.
+        source:
+          type: string
+          description: The source code of the python script.
+        image_tag:
+          type: string
+          description: The image tag to use for the python script.
+        pass_threshold:
+          type: number
+          format: float
+          description: The threshold for the score.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderParams'
+    OpenAI.EvalGraderPythonResource:
+      type: object
+      required:
+        - type
+        - name
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - python
+          description: The object type, which is always `python`.
+        name:
+          type: string
+          description: The name of the grader.
+        source:
+          type: string
+          description: The source code of the python script.
+        image_tag:
+          type: string
+          description: The image tag to use for the python script.
+        pass_threshold:
+          type: number
+          format: float
+          description: The threshold for the score.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderResource'
+    OpenAI.EvalGraderResource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.GraderType'
+      discriminator:
+        propertyName: type
+        mapping:
+          label_model: '#/components/schemas/OpenAI.EvalGraderLabelModelResource'
+          text_similarity: '#/components/schemas/OpenAI.EvalGraderTextSimilarityResource'
+          python: '#/components/schemas/OpenAI.EvalGraderPythonResource'
+          score_model: '#/components/schemas/OpenAI.EvalGraderScoreModelResource'
+    OpenAI.EvalGraderScoreModelParams:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+      properties:
+        type:
+          type: string
+          enum:
+            - score_model
+          description: The object type, which is always `score_model`.
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation.
+        sampling_params:
+          description: The sampling parameters for the model.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalItem'
+          description: The input text. This may include template strings.
+        range:
+          type: array
+          items:
+            type: number
+            format: float
+          description: The range of the score. Defaults to `[0, 1]`.
+        pass_threshold:
+          type: number
+          format: float
+          description: The threshold for the score.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderParams'
+    OpenAI.EvalGraderScoreModelResource:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+      properties:
+        type:
+          type: string
+          enum:
+            - score_model
+          description: The object type, which is always `score_model`.
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation.
+        sampling_params:
+          description: The sampling parameters for the model.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalItem'
+          description: The input text. This may include template strings.
+        range:
+          type: array
+          items:
+            type: number
+            format: float
+          description: The range of the score. Defaults to `[0, 1]`.
+        pass_threshold:
+          type: number
+          format: float
+          description: The threshold for the score.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderResource'
+    OpenAI.EvalGraderStringCheckParams:
+      type: object
+      required:
+        - type
+        - name
+        - input
+        - reference
+        - operation
+      properties:
+        type:
+          type: string
+          enum:
+            - string_check
+          description: The object type, which is always `string_check`.
+        name:
+          type: string
+          description: The name of the grader.
+        input:
+          type: string
+          description: The input text. This may include template strings.
+        reference:
+          type: string
+          description: The reference text. This may include template strings.
+        operation:
+          type: string
+          enum:
+            - eq
+            - ne
+            - like
+            - ilike
+          description: The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderParams'
+    OpenAI.EvalGraderTextSimilarityParams:
+      type: object
+      required:
+        - type
+        - name
+        - input
+        - reference
+        - evaluation_metric
+        - pass_threshold
+      properties:
+        type:
+          type: string
+          enum:
+            - text_similarity
+          description: The type of grader.
+        name:
+          type: string
+          description: The name of the grader.
+        input:
+          type: string
+          description: The text being graded.
+        reference:
+          type: string
+          description: The text being graded against.
+        evaluation_metric:
+          type: string
+          enum:
+            - fuzzy_match
+            - bleu
+            - gleu
+            - meteor
+            - rouge_1
+            - rouge_2
+            - rouge_3
+            - rouge_4
+            - rouge_5
+            - rouge_l
+          description: The evaluation metric to use. One of `fuzzy_match`, `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
+        pass_threshold:
+          type: number
+          format: float
+          description: The threshold for the score.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderParams'
+    OpenAI.EvalGraderTextSimilarityResource:
+      type: object
+      required:
+        - type
+        - name
+        - input
+        - reference
+        - evaluation_metric
+        - pass_threshold
+      properties:
+        type:
+          type: string
+          enum:
+            - text_similarity
+          description: The type of grader.
+        name:
+          type: string
+          description: The name of the grader.
+        input:
+          type: string
+          description: The text being graded.
+        reference:
+          type: string
+          description: The text being graded against.
+        evaluation_metric:
+          type: string
+          enum:
+            - fuzzy_match
+            - bleu
+            - gleu
+            - meteor
+            - rouge_1
+            - rouge_2
+            - rouge_3
+            - rouge_4
+            - rouge_5
+            - rouge_l
+          description: The evaluation metric to use. One of `fuzzy_match`, `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
+        pass_threshold:
+          type: number
+          format: float
+          description: The threshold for the score.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalGraderResource'
+    OpenAI.EvalItem:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          enum:
+            - user
+            - assistant
+            - system
+            - developer
+          description: |-
+            The role of the message input. One of `user`, `assistant`, `system`, or
+            `developer`.
+        content:
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/OpenAI.EvalItemContent'
+          description: Text inputs to the model - can contain template strings.
+        type:
+          type: string
+          enum:
+            - message
+          description: The type of the message input. Always `message`.
+      description: |-
+        A message input to the model with a role indicating instruction following
+        hierarchy. Instructions given with the `developer` or `system` role take
+        precedence over instructions given with the `user` role. Messages with the
+        `assistant` role are presumed to have been generated by the model in previous
+        interactions.
+    OpenAI.EvalItemContent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.EvalItemContentType'
+      discriminator:
+        propertyName: type
+        mapping:
+          input_text: '#/components/schemas/OpenAI.EvalItemContentInputText'
+          output_text: '#/components/schemas/OpenAI.EvalItemContentOutputText'
+    OpenAI.EvalItemContentInputText:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - input_text
+        text:
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalItemContent'
+    OpenAI.EvalItemContentOutputText:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - output_text
+        text:
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalItemContent'
+    OpenAI.EvalItemContentType:
+      type: string
+      enum:
+        - input_text
+        - output_text
+    OpenAI.EvalJsonlRunDataSourceParams:
+      type: object
+      required:
+        - type
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - jsonl
+          description: The type of data source. Always `jsonl`.
+        source:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.EvalRunFileContentDataContentSource'
+            - $ref: '#/components/schemas/OpenAI.EvalRunFileIdDataContentSource'
+          description: Determines what populates the `item` namespace in the data source.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceParams'
+      description: A JsonlRunDataSource object with that specifies a JSONL file that matches the eval
+    OpenAI.EvalList:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of this object. It is always set to "list".
+          default: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Eval'
+          description: An array of eval objects.
+        first_id:
+          type: string
+          description: The identifier of the first eval in the data array.
+        last_id:
+          type: string
+          description: The identifier of the last eval in the data array.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more evals available.
+      description: An object representing a list of evals.
+    OpenAI.EvalLogsDataSourceConfigParams:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - logs
+          description: The type of data source. Always `logs`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigParams'
+      description: |-
+        A data source config which specifies the metadata property of your logs query.
+        This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc.
+    OpenAI.EvalLogsDataSourceConfigResource:
+      type: object
+      required:
+        - type
+        - metadata
+        - schema
+      properties:
+        type:
+          type: string
+          enum:
+            - logs
+          description: The type of data source. Always `logs`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        schema:
+          type: object
+          additionalProperties: {}
+          description: |-
+            The json schema for the run data source items.
+            Learn how to build JSON schemas [here](https://json-schema.org/).
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigResource'
+      description: |-
+        A LogsDataSourceConfig which specifies the metadata property of your logs query.
+        This is usually metadata like `usecase=chatbot` or `prompt-version=v2`, etc.
+        The schema returned by this data source config is used to defined what variables are available in your evals.
+        `item` and `sample` are both defined when using this data source config.
+    OpenAI.EvalResponsesRunDataSourceParams:
+      type: object
+      required:
+        - type
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - responses
+          description: The type of run data source. Always `responses`.
+        input_messages:
+          anyOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - template
+                  description: The type of input messages. Always `template`.
+                template:
+                  type: array
+                  items:
+                    anyOf:
+                      - type: object
+                        properties:
+                          role:
+                            type: string
+                            description: The role of the message (e.g. "system", "assistant", "user").
+                          content:
+                            type: string
+                            description: The content of the message.
+                        required:
+                          - role
+                          - content
+                      - $ref: '#/components/schemas/OpenAI.EvalItem'
+                  description: A list of chat messages forming the prompt or context. May include variable references to the `item` namespace, ie {{item.name}}.
+              required:
+                - type
+                - template
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - item_reference
+                  description: The type of input messages. Always `item_reference`.
+                item_reference:
+                  type: string
+                  description: A reference to a variable in the `item` namespace. Ie, "item.name"
+              required:
+                - type
+                - item_reference
+          description: Used when sampling from a model. Dictates the structure of the messages passed into the model. Can either be a reference to a prebuilt trajectory (ie, `item.input_trajectory`), or a template with variable references to the `item` namespace.
+        sampling_params:
+          $ref: '#/components/schemas/AzureEvalAPIResponseSamplingParams'
+        model:
+          type: string
+          description: The name of the model to use for generating completions (e.g. "o3-mini").
+        source:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.EvalRunFileContentDataContentSource'
+            - $ref: '#/components/schemas/OpenAI.EvalRunFileIdDataContentSource'
+            - $ref: '#/components/schemas/OpenAI.EvalRunResponsesDataContentSource'
+          description: Determines what populates the `item` namespace in this run's data source.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceParams'
+      description: A ResponsesRunDataSource object describing a model sampling configuration.
+    OpenAI.EvalRun:
+      type: object
+      required:
+        - object
+        - id
+        - eval_id
+        - status
+        - model
+        - name
+        - created_at
+        - report_url
+        - result_counts
+        - per_model_usage
+        - per_testing_criteria_results
+        - data_source
+        - metadata
+        - error
+      properties:
+        object:
+          type: string
+          enum:
+            - eval.run
+          description: The type of the object. Always "eval.run".
+          default: eval.run
+        id:
+          type: string
+          description: Unique identifier for the evaluation run.
+        eval_id:
+          type: string
+          description: The identifier of the associated evaluation.
+        status:
+          type: string
+          description: The status of the evaluation run.
+        model:
+          type: string
+          description: The model that is evaluated, if applicable.
+        name:
+          type: string
+          description: The name of the evaluation run.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (in seconds) when the evaluation run was created.
+        report_url:
+          type: string
+          description: The URL to the rendered evaluation run report on the UI dashboard.
+        result_counts:
+          type: object
+          properties:
+            total:
+              type: integer
+              format: int32
+              description: Total number of executed output items.
+            errored:
+              type: integer
+              format: int32
+              description: Number of output items that resulted in an error.
+            failed:
+              type: integer
+              format: int32
+              description: Number of output items that failed to pass the evaluation.
+            passed:
+              type: integer
+              format: int32
+              description: Number of output items that passed the evaluation.
+          required:
+            - total
+            - errored
+            - failed
+            - passed
+          description: Counters summarizing the outcomes of the evaluation run.
+        per_model_usage:
+          type: array
+          items:
+            type: object
+            properties:
+              model_name:
+                type: string
+                description: The name of the model.
+              invocation_count:
+                type: integer
+                format: int32
+                description: The number of invocations.
+              prompt_tokens:
+                type: integer
+                format: int32
+                description: The number of prompt tokens used.
+              completion_tokens:
+                type: integer
+                format: int32
+                description: The number of completion tokens generated.
+              total_tokens:
+                type: integer
+                format: int32
+                description: The total number of tokens used.
+              cached_tokens:
+                type: integer
+                format: int32
+                description: The number of tokens retrieved from cache.
+            required:
+              - model_name
+              - invocation_count
+              - prompt_tokens
+              - completion_tokens
+              - total_tokens
+              - cached_tokens
+          description: Usage statistics for each model during the evaluation run.
+        per_testing_criteria_results:
+          type: array
+          items:
+            type: object
+            properties:
+              testing_criteria:
+                type: string
+                description: A description of the testing criteria.
+              passed:
+                type: integer
+                format: int32
+                description: Number of tests passed for this criteria.
+              failed:
+                type: integer
+                format: int32
+                description: Number of tests failed for this criteria.
+            required:
+              - testing_criteria
+              - passed
+              - failed
+          description: Results per testing criteria applied during the evaluation run.
+        data_source:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceResource'
+          description: Information about the run's data source.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        error:
+          $ref: '#/components/schemas/OpenAI.EvalApiError'
+      description: A schema representing an evaluation run.
+    OpenAI.EvalRunDataContentSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.EvalRunDataContentSourceType'
+      discriminator:
+        propertyName: type
+        mapping:
+          file_id: '#/components/schemas/OpenAI.EvalRunFileIdDataContentSource'
+          stored_completions: '#/components/schemas/OpenAI.EvalRunStoredCompletionsDataContentSource'
+          responses: '#/components/schemas/OpenAI.EvalRunResponsesDataContentSource'
+    OpenAI.EvalRunDataContentSourceType:
+      type: string
+      enum:
+        - file_id
+        - file_content
+        - stored_completions
+        - responses
+    OpenAI.EvalRunDataSourceCompletionsResource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - completions
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceResource'
+    OpenAI.EvalRunDataSourceJsonlResource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - jsonl
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceResource'
+    OpenAI.EvalRunDataSourceParams:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.EvalRunDataSourceType'
+      discriminator:
+        propertyName: type
+        mapping:
+          jsonl: '#/components/schemas/OpenAI.EvalJsonlRunDataSourceParams'
+          completions: '#/components/schemas/OpenAI.EvalCompletionsRunDataSourceParams'
+          responses: '#/components/schemas/OpenAI.EvalResponsesRunDataSourceParams'
+    OpenAI.EvalRunDataSourceResource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.EvalRunDataSourceType'
+    OpenAI.EvalRunDataSourceResponsesResource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - responses
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataSourceResource'
+    OpenAI.EvalRunDataSourceType:
+      type: string
+      enum:
+        - jsonl
+        - completions
+        - responses
+    OpenAI.EvalRunFileContentDataContentSource:
+      type: object
+      required:
+        - type
+        - content
+      properties:
+        type:
+          type: string
+          enum:
+            - file_content
+          description: The type of jsonl source. Always `file_content`.
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              item:
+                type: object
+                additionalProperties: {}
+              sample:
+                type: object
+                additionalProperties: {}
+            required:
+              - item
+          description: The content of the jsonl file.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataContentSource'
+    OpenAI.EvalRunFileIdDataContentSource:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          enum:
+            - file_id
+          description: The type of jsonl source. Always `file_id`.
+        id:
+          type: string
+          description: The identifier of the file.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataContentSource'
+    OpenAI.EvalRunList:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of this object. It is always set to "list".
+          default: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalRun'
+          description: An array of eval run objects.
+        first_id:
+          type: string
+          description: The identifier of the first eval run in the data array.
+        last_id:
+          type: string
+          description: The identifier of the last eval run in the data array.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more evals available.
+      description: An object representing a list of runs for an evaluation.
+    OpenAI.EvalRunOutputItem:
+      type: object
+      required:
+        - object
+        - id
+        - run_id
+        - eval_id
+        - created_at
+        - status
+        - datasource_item_id
+        - datasource_item
+        - results
+        - sample
+      properties:
+        object:
+          type: string
+          enum:
+            - eval.run.output_item
+          description: The type of the object. Always "eval.run.output_item".
+          default: eval.run.output_item
+        id:
+          type: string
+          description: Unique identifier for the evaluation run output item.
+        run_id:
+          type: string
+          description: The identifier of the evaluation run associated with this output item.
+        eval_id:
+          type: string
+          description: The identifier of the evaluation group.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (in seconds) when the evaluation run was created.
+        status:
+          type: string
+          description: The status of the evaluation run.
+        datasource_item_id:
+          type: integer
+          format: int32
+          description: The identifier for the data source item.
+        datasource_item:
+          type: object
+          additionalProperties: {}
+          description: Details of the input data source item.
+        results:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          description: A list of results from the evaluation run.
+        sample:
+          type: object
+          properties:
+            input:
+              type: array
+              items:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    description: The role of the message sender (e.g., system, user, developer).
+                  content:
+                    type: string
+                    description: The content of the message.
+                required:
+                  - role
+                  - content
+              description: An array of input messages.
+            output:
+              type: array
+              items:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    description: The role of the message (e.g. "system", "assistant", "user").
+                  content:
+                    type: string
+                    description: The content of the message.
+              description: An array of output messages.
+            finish_reason:
+              type: string
+              description: The reason why the sample generation was finished.
+            model:
+              type: string
+              description: The model used for generating the sample.
+            usage:
+              type: object
+              properties:
+                total_tokens:
+                  type: integer
+                  format: int32
+                  description: The total number of tokens used.
+                completion_tokens:
+                  type: integer
+                  format: int32
+                  description: The number of completion tokens generated.
+                prompt_tokens:
+                  type: integer
+                  format: int32
+                  description: The number of prompt tokens used.
+                cached_tokens:
+                  type: integer
+                  format: int32
+                  description: The number of tokens retrieved from cache.
+              required:
+                - total_tokens
+                - completion_tokens
+                - prompt_tokens
+                - cached_tokens
+              description: Token usage details for the sample.
+            error:
+              $ref: '#/components/schemas/OpenAI.EvalApiError'
+            temperature:
+              type: number
+              format: float
+              description: The sampling temperature used.
+            max_completion_tokens:
+              type: integer
+              format: int32
+              description: The maximum number of tokens allowed for completion.
+            top_p:
+              type: number
+              format: float
+              description: The top_p value used for sampling.
+            seed:
+              type: integer
+              format: int32
+              description: The seed used for generating the sample.
+          required:
+            - input
+            - output
+            - finish_reason
+            - model
+            - usage
+            - error
+            - temperature
+            - max_completion_tokens
+            - top_p
+            - seed
+          description: A sample containing the input and output of the evaluation run.
+      description: A schema representing an evaluation run output item.
+    OpenAI.EvalRunOutputItemList:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of this object. It is always set to "list".
+          default: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalRunOutputItem'
+          description: An array of eval run output item objects.
+        first_id:
+          type: string
+          description: The identifier of the first eval run output item in the data array.
+        last_id:
+          type: string
+          description: The identifier of the last eval run output item in the data array.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more eval run output items available.
+      description: An object representing a list of output items for an evaluation run.
+    OpenAI.EvalRunResponsesDataContentSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - responses
+          description: The type of run data source. Always `responses`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        model:
+          type: string
+          nullable: true
+          description: The name of the model to find responses for. This is a query parameter used to select responses.
+        instructions_search:
+          type: string
+          nullable: true
+          description: Optional string to search the 'instructions' field. This is a query parameter used to select responses.
+        created_after:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 0
+          description: Only include items created after this timestamp (inclusive). This is a query parameter used to select responses.
+        created_before:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 0
+          description: Only include items created before this timestamp (inclusive). This is a query parameter used to select responses.
+        reasoning_effort:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          nullable: true
+          description: Optional reasoning effort parameter. This is a query parameter used to select responses.
+          default: medium
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          description: Sampling temperature. This is a query parameter used to select responses.
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          description: Nucleus sampling parameter. This is a query parameter used to select responses.
+        users:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: List of user identifiers. This is a query parameter used to select responses.
+        tools:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: List of tool names. This is a query parameter used to select responses.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataContentSource'
+      description: A EvalResponsesSource object describing a run data source configuration.
+    OpenAI.EvalRunStoredCompletionsDataContentSource:
+      type: object
+      required:
+        - type
+        - metadata
+      properties:
+        type:
+          type: string
+          enum:
+            - stored_completions
+          description: The type of source. Always `stored_completions`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        model:
+          type: string
+          nullable: true
+          description: An optional model to filter by (e.g., 'gpt-4o').
+        created_after:
+          type: integer
+          format: int32
+          nullable: true
+          description: An optional Unix timestamp to filter items created after this time.
+        created_before:
+          type: integer
+          format: int32
+          nullable: true
+          description: An optional Unix timestamp to filter items created before this time.
+        limit:
+          type: integer
+          format: int32
+          nullable: true
+          description: An optional maximum number of items to return.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalRunDataContentSource'
+      description: A StoredCompletionsRunDataSource configuration describing a set of filters
+    OpenAI.EvalStoredCompletionsDataSourceConfigParams:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - stored_completions
+          description: The type of data source. Always `stored_completions`.
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: Metadata filters for the stored completions data source.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigParams'
+      description: Deprecated in favor of LogsDataSourceConfig.
+      deprecated: true
+    OpenAI.EvalStoredCompletionsDataSourceConfigResource:
+      type: object
+      required:
+        - type
+        - metadata
+        - schema
+      properties:
+        type:
+          type: string
+          enum:
+            - stored_completions
+          description: The type of data source. Always `stored_completions`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        schema:
+          type: object
+          additionalProperties: {}
+          description: |-
+            The json schema for the run data source items.
+            Learn how to build JSON schemas [here](https://json-schema.org/).
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.EvalDataSourceConfigResource'
+      description: Deprecated in favor of LogsDataSourceConfig.
+      deprecated: true
+    OpenAI.FileSearchTool:
+      type: object
+      required:
+        - type
+        - vector_store_ids
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The type of the file search tool. Always `file_search`.
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          description: The IDs of the vector stores to search.
+        max_num_results:
+          type: integer
+          format: int32
+          description: The maximum number of results to return. This number should be between 1 and 50 inclusive.
+        ranking_options:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.RankingOptions'
+          description: Ranking options for search.
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Filters'
+          nullable: true
+          description: A filter to apply.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
+    OpenAI.Filters:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.ComparisonFilter'
+        - $ref: '#/components/schemas/OpenAI.CompoundFilter'
+    OpenAI.FineTuneDPOHyperparameters:
+      type: object
+      properties:
+        beta:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: number
+              format: float
+          description: The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model.
+          default: auto
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: number
+              format: float
+          description: Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+          default: auto
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+          default: auto
+      description: The hyperparameters used for the DPO fine-tuning job.
+    OpenAI.FineTuneDPOMethod:
+      type: object
+      properties:
+        hyperparameters:
+          $ref: '#/components/schemas/OpenAI.FineTuneDPOHyperparameters'
+      description: Configuration for the DPO fine-tuning method.
+    OpenAI.FineTuneMethod:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - supervised
+            - dpo
+            - reinforcement
+          description: The type of method. Is either `supervised`, `dpo`, or `reinforcement`.
+        supervised:
+          $ref: '#/components/schemas/OpenAI.FineTuneSupervisedMethod'
+        dpo:
+          $ref: '#/components/schemas/OpenAI.FineTuneDPOMethod'
+        reinforcement:
+          $ref: '#/components/schemas/AzureFineTuneReinforcementMethod'
+      description: The method used for fine-tuning.
+    OpenAI.FineTuneReinforcementHyperparameters:
+      type: object
+      properties:
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: number
+              format: float
+          description: Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+          default: auto
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+          default: auto
+        reasoning_effort:
+          type: string
+          enum:
+            - default
+            - low
+            - medium
+            - high
+          description: Level of reasoning effort.
+          default: default
+        compute_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: number
+              format: float
+          description: Multiplier on amount of compute used for exploring search space during training.
+          default: auto
+        eval_interval:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: The number of training steps between evaluation runs.
+          default: auto
+        eval_samples:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: Number of evaluation samples to generate per training step.
+          default: auto
+      description: The hyperparameters used for the reinforcement fine-tuning job.
+    OpenAI.FineTuneSupervisedHyperparameters:
+      type: object
+      properties:
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: number
+              format: float
+          description: Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+          default: auto
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - type: integer
+              format: int32
+          description: The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+          default: auto
+      description: The hyperparameters used for the fine-tuning job.
+    OpenAI.FineTuneSupervisedMethod:
+      type: object
+      properties:
+        hyperparameters:
+          $ref: '#/components/schemas/OpenAI.FineTuneSupervisedHyperparameters'
+      description: Configuration for the supervised fine-tuning method.
+    OpenAI.FineTuningIntegration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          anyOf:
+            - type: string
+            - type: string
+              enum:
+                - wandb
+      discriminator:
+        propertyName: type
+        mapping:
+          wandb: '#/components/schemas/OpenAI.FineTuningIntegrationWandb'
+    OpenAI.FineTuningIntegrationWandb:
+      type: object
+      required:
+        - type
+        - wandb
+      properties:
+        type:
+          type: string
+          enum:
+            - wandb
+          description: The type of the integration being enabled for the fine-tuning job
+        wandb:
+          type: object
+          properties:
+            project:
+              type: string
+              description: The name of the project that the new run will be created under.
+            name:
+              type: string
+              nullable: true
+              description: A display name to set for the run. If not set, we will use the Job ID as the name.
+            entity:
+              type: string
+              nullable: true
+              description: |-
+                The entity to use for the run. This allows you to set the team or username of the WandB user that you would
+                like associated with the run. If not set, the default entity for the registered WandB API key is used.
+            tags:
+              type: array
+              items:
+                type: string
+              description: |-
+                A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some
+                default tags are generated by OpenAI: "openai/finetune", "openai/{base-model}", "openai/{ftjob-abcdef}".
+          required:
+            - project
+          description: |-
+            The settings for your integration with Weights and Biases. This payload specifies the project that
+            metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags
+            to your run, and set a default entity (team, username, etc) to be associated with your run.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.FineTuningIntegration'
+    OpenAI.FineTuningJob:
+      type: object
+      required:
+        - id
+        - created_at
+        - error
+        - fine_tuned_model
+        - finished_at
+        - hyperparameters
+        - model
+        - object
+        - organization_id
+        - result_files
+        - status
+        - trained_tokens
+        - training_file
+        - validation_file
+        - seed
+        - metadata
+      properties:
+        user_provided_suffix:
+          type: string
+          nullable: true
+          description: The descriptive suffix applied to the job, as specified in the job creation request.
+        id:
+          type: string
+          description: The object identifier, which can be referenced in the API endpoints.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the fine-tuning job was created.
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A machine-readable error code.
+            message:
+              type: string
+              description: A human-readable error message.
+            param:
+              type: string
+              nullable: true
+              description: The parameter that was invalid, usually `training_file` or `validation_file`. This field will be null if the failure was not parameter-specific.
+          required:
+            - code
+            - message
+            - param
+          nullable: true
+          description: For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.
+        fine_tuned_model:
+          type: string
+          nullable: true
+          description: The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.
+        finished_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.
+        hyperparameters:
+          type: object
+          properties:
+            batch_size:
+              anyOf:
+                - type: string
+                  enum:
+                    - auto
+                - type: integer
+                  format: int32
+              nullable: true
+              description: |-
+                Number of examples in each batch. A larger batch size means that model parameters
+                are updated less frequently, but with lower variance.
+              default: auto
+            learning_rate_multiplier:
+              anyOf:
+                - type: string
+                  enum:
+                    - auto
+                - type: number
+                  format: float
+              description: |-
+                Scaling factor for the learning rate. A smaller learning rate may be useful to avoid
+                overfitting.
+              default: auto
+            n_epochs:
+              anyOf:
+                - type: string
+                  enum:
+                    - auto
+                - type: integer
+                  format: int32
+              description: |-
+                The number of epochs to train the model for. An epoch refers to one full cycle
+                through the training dataset.
+              default: auto
+          description: The hyperparameters used for the fine-tuning job. This value will only be returned when running `supervised` jobs.
+        model:
+          type: string
+          description: The base model that is being fine-tuned.
+        object:
+          type: string
+          enum:
+            - fine_tuning.job
+          description: The object type, which is always "fine_tuning.job".
+        organization_id:
+          type: string
+          description: The organization that owns the fine-tuning job.
+        result_files:
+          type: array
+          items:
+            type: string
+          description: The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the [Files API](/docs/api-reference/files/retrieve-contents).
+        status:
+          type: string
+          enum:
+            - validating_files
+            - queued
+            - running
+            - succeeded
+            - failed
+            - cancelled
+          description: The current status of the fine-tuning job, which can be either `validating_files`, `queued`, `running`, `succeeded`, `failed`, or `cancelled`.
+        trained_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          description: The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.
+        training_file:
+          type: string
+          description: The file ID used for training. You can retrieve the training data with the [Files API](/docs/api-reference/files/retrieve-contents).
+        validation_file:
+          type: string
+          nullable: true
+          description: The file ID used for validation. You can retrieve the validation results with the [Files API](/docs/api-reference/files/retrieve-contents).
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningIntegration'
+          nullable: true
+          description: A list of integrations to enable for this fine-tuning job.
+        seed:
+          type: integer
+          format: int32
+          description: The seed used for the fine-tuning job.
+        estimated_finish:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.
+        method:
+          $ref: '#/components/schemas/OpenAI.FineTuneMethod'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+      description: The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
+    OpenAI.FineTuningJobCheckpoint:
+      type: object
+      required:
+        - id
+        - created_at
+        - fine_tuned_model_checkpoint
+        - step_number
+        - metrics
+        - fine_tuning_job_id
+        - object
+      properties:
+        id:
+          type: string
+          description: The checkpoint identifier, which can be referenced in the API endpoints.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the checkpoint was created.
+        fine_tuned_model_checkpoint:
+          type: string
+          description: The name of the fine-tuned checkpoint model that is created.
+        step_number:
+          type: integer
+          format: int32
+          description: The step number that the checkpoint was created at.
+        metrics:
+          type: object
+          properties:
+            step:
+              type: number
+              format: float
+            train_loss:
+              type: number
+              format: float
+            train_mean_token_accuracy:
+              type: number
+              format: float
+            valid_loss:
+              type: number
+              format: float
+            valid_mean_token_accuracy:
+              type: number
+              format: float
+            full_valid_loss:
+              type: number
+              format: float
+            full_valid_mean_token_accuracy:
+              type: number
+              format: float
+          description: Metrics at the step number during the fine-tuning job.
+        fine_tuning_job_id:
+          type: string
+          description: The name of the fine-tuning job that this checkpoint was created from.
+        object:
+          type: string
+          enum:
+            - fine_tuning.job.checkpoint
+          description: The object type, which is always "fine_tuning.job.checkpoint".
+      description: The `fine_tuning.job.checkpoint` object represents a model checkpoint for a fine-tuning job that is ready to use.
+    OpenAI.FineTuningJobEvent:
+      type: object
+      required:
+        - object
+        - id
+        - created_at
+        - level
+        - message
+      properties:
+        object:
+          type: string
+          enum:
+            - fine_tuning.job.event
+          description: The object type, which is always "fine_tuning.job.event".
+        id:
+          type: string
+          description: The object identifier.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the fine-tuning job was created.
+        level:
+          type: string
+          enum:
+            - info
+            - warn
+            - error
+          description: The log level of the event.
+        message:
+          type: string
+          description: The message of the event.
+        type:
+          type: string
+          enum:
+            - message
+            - metrics
+          description: The type of event.
+        data:
+          description: The data associated with the event.
+      description: Fine-tuning job event object
+    OpenAI.FunctionObject:
+      type: object
+      required:
+        - name
+      properties:
+        description:
+          type: string
+          description: A description of what the function does, used by the model to choose when and how to call the function.
+        name:
+          type: string
+          description: The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+        parameters:
+          description: |-
+            The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+
+            Omitting `parameters` defines a function with an empty parameter list.
+        strict:
+          type: boolean
+          nullable: true
+          description: Whether to enable strict schema adherence when generating the function call. If set to true, the model will follow the exact schema defined in the `parameters` field. Only a subset of JSON Schema is supported when `strict` is `true`. Learn more about Structured Outputs in the [function calling guide](docs/guides/function-calling).
+          default: false
+    OpenAI.FunctionTool:
+      type: object
+      required:
+        - type
+        - name
+        - parameters
+        - strict
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The type of the function tool. Always `function`.
+        name:
+          type: string
+          description: The name of the function to call.
+        description:
+          type: string
+          nullable: true
+          description: A description of the function. Used by the model to determine whether or not to call the function.
+        parameters:
+          nullable: true
+          description: A JSON schema object describing the parameters of the function.
+        strict:
+          type: boolean
+          nullable: true
+          description: Whether to enforce strict parameter validation. Default `true`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).
+    OpenAI.Grader:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.GraderType'
+      discriminator:
+        propertyName: type
+        mapping:
+          label_model: '#/components/schemas/OpenAI.GraderLabelModel'
+          text_similarity: '#/components/schemas/OpenAI.GraderTextSimilarity'
+          python: '#/components/schemas/OpenAI.GraderPython'
+          score_model: '#/components/schemas/OpenAI.GraderScoreModel'
+          multi: '#/components/schemas/OpenAI.GraderMulti'
+    OpenAI.GraderLabelModel:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+        - labels
+        - passing_labels
+      properties:
+        type:
+          type: string
+          enum:
+            - label_model
+          description: The object type, which is always `label_model`.
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation. Must support structured outputs.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalItem'
+        labels:
+          type: array
+          items:
+            type: string
+          description: The labels to assign to each item in the evaluation.
+        passing_labels:
+          type: array
+          items:
+            type: string
+          description: The labels that indicate a passing result. Must be a subset of labels.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Grader'
+      description: |-
+        A LabelModelGrader object which uses a model to assign labels to each item
+        in the evaluation.
+    OpenAI.GraderMulti:
+      type: object
+      required:
+        - type
+        - name
+        - graders
+        - calculate_output
+      properties:
+        type:
+          type: string
+          enum:
+            - multi
+          description: The object type, which is always `multi`.
+        name:
+          type: string
+          description: The name of the grader.
+        graders:
+          type: object
+          additionalProperties:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.GraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.GraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
+        calculate_output:
+          type: string
+          description: A formula to calculate the output based on grader results.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Grader'
+      description: A MultiGrader object combines the output of multiple graders to produce a single score.
+    OpenAI.GraderPython:
+      type: object
+      required:
+        - type
+        - name
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - python
+          description: The object type, which is always `python`.
+        name:
+          type: string
+          description: The name of the grader.
+        source:
+          type: string
+          description: The source code of the python script.
+        image_tag:
+          type: string
+          description: The image tag to use for the python script.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Grader'
+      description: A PythonGrader object that runs a python script on the input.
+    OpenAI.GraderScoreModel:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+      properties:
+        type:
+          type: string
+          enum:
+            - score_model
+          description: The object type, which is always `score_model`.
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation.
+        sampling_params:
+          description: The sampling parameters for the model.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalItem'
+          description: The input text. This may include template strings.
+        range:
+          type: array
+          items:
+            type: number
+            format: float
+          description: The range of the score. Defaults to `[0, 1]`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Grader'
+      description: A ScoreModelGrader object that uses a model to assign a score to the input.
+    OpenAI.GraderStringCheck:
+      type: object
+      required:
+        - type
+        - name
+        - input
+        - reference
+        - operation
+      properties:
+        type:
+          type: string
+          enum:
+            - string_check
+          description: The object type, which is always `string_check`.
+        name:
+          type: string
+          description: The name of the grader.
+        input:
+          type: string
+          description: The input text. This may include template strings.
+        reference:
+          type: string
+          description: The reference text. This may include template strings.
+        operation:
+          type: string
+          enum:
+            - eq
+            - ne
+            - like
+            - ilike
+          description: The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Grader'
+      description: A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.
+    OpenAI.GraderTextSimilarity:
+      type: object
+      required:
+        - type
+        - name
+        - input
+        - reference
+        - evaluation_metric
+      properties:
+        type:
+          type: string
+          enum:
+            - text_similarity
+          description: The type of grader.
+        name:
+          type: string
+          description: The name of the grader.
+        input:
+          type: string
+          description: The text being graded.
+        reference:
+          type: string
+          description: The text being graded against.
+        evaluation_metric:
+          type: string
+          enum:
+            - fuzzy_match
+            - bleu
+            - gleu
+            - meteor
+            - rouge_1
+            - rouge_2
+            - rouge_3
+            - rouge_4
+            - rouge_5
+            - rouge_l
+          description: The evaluation metric to use. One of `fuzzy_match`, `bleu`, `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`, or `rouge_l`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Grader'
+      description: A TextSimilarityGrader object which grades text based on similarity metrics.
+    OpenAI.GraderType:
+      type: string
+      enum:
+        - string_check
+        - text_similarity
+        - score_model
+        - label_model
+        - python
+        - multi
+    OpenAI.ImageGenTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - image_generation
+          description: The type of the image generation tool. Always `image_generation`.
+        model:
+          type: string
+          enum:
+            - gpt-image-1
+          description: 'The image generation model to use. Default: `gpt-image-1`.'
+          default: gpt-image-1
+        quality:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - auto
+          description: |-
+            The quality of the generated image. One of `low`, `medium`, `high`,
+            or `auto`. Default: `auto`.
+          default: auto
+        size:
+          type: string
+          enum:
+            - 1024x1024
+            - 1024x1536
+            - 1536x1024
+            - auto
+          description: |-
+            The size of the generated image. One of `1024x1024`, `1024x1536`,
+            `1536x1024`, or `auto`. Default: `auto`.
+          default: auto
+        output_format:
+          type: string
+          enum:
+            - png
+            - webp
+            - jpeg
+          description: |-
+            The output format of the generated image. One of `png`, `webp`, or
+            `jpeg`. Default: `png`.
+          default: png
+        output_compression:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: 'Compression level for the output image. Default: 100.'
+          default: 100
+        moderation:
+          type: string
+          enum:
+            - auto
+            - low
+          description: 'Moderation level for the generated image. Default: `auto`.'
+          default: auto
+        background:
+          type: string
+          enum:
+            - transparent
+            - opaque
+            - auto
+          description: |-
+            Background type for the generated image. One of `transparent`,
+            `opaque`, or `auto`. Default: `auto`.
+          default: auto
+        input_image_mask:
+          type: object
+          properties:
+            image_url:
+              type: string
+              description: Base64-encoded mask image.
+            file_id:
+              type: string
+              description: File ID for the mask image.
+          description: |-
+            Optional mask for inpainting. Contains `image_url`
+            (string, optional) and `file_id` (string, optional).
+        partial_images:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 3
+          description: Number of partial images to generate in streaming mode, from 0 (default value) to 3.
+          default: 0
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool that generates images using a model like `gpt-image-1`.
+    OpenAI.ListFineTuningJobCheckpointsResponse:
+      type: object
+      required:
+        - data
+        - object
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningJobCheckpoint'
+        object:
+          type: string
+          enum:
+            - list
+        first_id:
+          type: string
+          nullable: true
+        last_id:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
+    OpenAI.ListFineTuningJobEventsResponse:
+      type: object
+      required:
+        - data
+        - object
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningJobEvent'
+        object:
+          type: string
+          enum:
+            - list
+        has_more:
+          type: boolean
+    OpenAI.ListModelsResponse:
+      type: object
+      required:
+        - object
+        - data
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Model'
+    OpenAI.ListPaginatedFineTuningJobsResponse:
+      type: object
+      required:
+        - data
+        - has_more
+        - object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        has_more:
+          type: boolean
+        object:
+          type: string
+          enum:
+            - list
+    OpenAI.LocalShellTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - local_shell
+          description: The type of the local shell tool. Always `local_shell`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool that allows the model to execute shell commands in a local environment.
+    OpenAI.Location:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.LocationType'
+      discriminator:
+        propertyName: type
+        mapping:
+          approximate: '#/components/schemas/OpenAI.ApproximateLocation'
+    OpenAI.LocationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - approximate
+    OpenAI.MCPTool:
+      type: object
+      required:
+        - type
+        - server_label
+        - server_url
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp
+          description: The type of the MCP tool. Always `mcp`.
+        server_label:
+          type: string
+          description: A label for this MCP server, used to identify it in tool calls.
+        server_url:
+          type: string
+          description: The URL for the MCP server.
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Optional HTTP headers to send to the MCP server. Use for authentication
+            or other purposes.
+        allowed_tools:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: object
+              properties:
+                tool_names:
+                  type: array
+                  items:
+                    type: string
+                  description: List of allowed tool names.
+          nullable: true
+          description: List of allowed tool names or a filter object.
+        require_approval:
+          anyOf:
+            - type: object
+              properties:
+                always:
+                  type: object
+                  properties:
+                    tool_names:
+                      type: array
+                      items:
+                        type: string
+                      description: List of tools that require approval.
+                  description: A list of tools that always require approval.
+                never:
+                  type: object
+                  properties:
+                    tool_names:
+                      type: array
+                      items:
+                        type: string
+                      description: List of tools that do not require approval.
+                  description: A list of tools that never require approval.
+            - type: string
+              enum:
+                - always
+                - never
+          nullable: true
+          description: Specify which of the MCP server's tools require approval.
+          default: always
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: |-
+        Give the model access to additional tools via remote Model Context Protocol
+        (MCP) servers. [Learn more about MCP](/docs/guides/tools-remote-mcp).
+    OpenAI.MetadataPropertyForRequest:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+      description: |-
+        Set of 16 key-value pairs that can be attached to an object. This can be
+        useful for storing additional information about the object in a structured
+        format, and querying for objects via API or the dashboard.
+
+        Keys are strings with a maximum length of 64 characters. Values are strings
+        with a maximum length of 512 characters.
+    OpenAI.Model:
+      type: object
+      required:
+        - id
+        - created
+        - object
+        - owned_by
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        created:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) when the model was created.
+        object:
+          type: string
+          enum:
+            - model
+          description: The object type, which is always "model".
+        owned_by:
+          type: string
+          description: The organization that owns the model.
+      description: Describes an OpenAI model offering that can be used with the API.
+    OpenAI.RankingOptions:
+      type: object
+      properties:
+        ranker:
+          type: string
+          enum:
+            - auto
+            - default-2024-11-15
+          description: The ranker to use for the file search.
+        score_threshold:
+          type: number
+          format: float
+          description: The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results.
+    OpenAI.ReasoningEffort:
+      type: string
+      enum:
+        - low
+        - medium
+        - high
+      description: |-
+        **o-series models only**
+
+        Constrains effort on reasoning for
+        [reasoning models](https://platform.openai.com/docs/guides/reasoning).
+        Currently supported values are `low`, `medium`, and `high`. Reducing
+        reasoning effort can result in faster responses and fewer tokens used
+        on reasoning in a response.
+    OpenAI.ResponseFormatJsonSchemaSchema:
+      type: object
+      additionalProperties: {}
+      description: |-
+        The schema for the response format, described as a JSON Schema object.
+        Learn how to build JSON schemas [here](https://json-schema.org/).
+    OpenAI.ResponseTextFormatConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ResponseTextFormatConfigurationType'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/OpenAI.ResponseTextFormatConfigurationText'
+          json_object: '#/components/schemas/OpenAI.ResponseTextFormatConfigurationJsonObject'
+          json_schema: '#/components/schemas/OpenAI.ResponseTextFormatConfigurationJsonSchema'
+    OpenAI.ResponseTextFormatConfigurationJsonObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - json_object
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseTextFormatConfiguration'
+    OpenAI.ResponseTextFormatConfigurationJsonSchema:
+      type: object
+      required:
+        - type
+        - name
+        - schema
+      properties:
+        type:
+          type: string
+          enum:
+            - json_schema
+          description: The type of response format being defined. Always `json_schema`.
+        description:
+          type: string
+          description: |-
+            A description of what the response format is for, used by the model to
+            determine how to respond in the format.
+        name:
+          type: string
+          description: |-
+            The name of the response format. Must be a-z, A-Z, 0-9, or contain
+            underscores and dashes, with a maximum length of 64.
+        schema:
+          $ref: '#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema'
+        strict:
+          type: boolean
+          nullable: true
+          description: |-
+            Whether to enable strict schema adherence when generating the output.
+            If set to true, the model will always follow the exact schema defined
+            in the `schema` field. Only a subset of JSON Schema is supported when
+            `strict` is `true`. To learn more, read the [Structured Outputs
+            guide](/docs/guides/structured-outputs).
+          default: false
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseTextFormatConfiguration'
+      description: |-
+        JSON Schema response format. Used to generate structured JSON responses.
+        Learn more about [Structured Outputs](/docs/guides/structured-outputs).
+    OpenAI.ResponseTextFormatConfigurationText:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseTextFormatConfiguration'
+    OpenAI.ResponseTextFormatConfigurationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - text
+            - json_schema
+            - json_object
+      description: |-
+        An object specifying the format that the model must output.
+
+        Configuring `{ "type": "json_schema" }` enables Structured Outputs,
+        which ensures the model will match your supplied JSON schema. Learn more in the
+        [Structured Outputs guide](/docs/guides/structured-outputs).
+
+        The default format is `{ "type": "text" }` with no additional options.
+
+        **Not recommended for gpt-4o and newer models:**
+
+        Setting to `{ "type": "json_object" }` enables the older JSON mode, which
+        ensures the message the model generates is valid JSON. Using `json_schema`
+        is preferred for models that support it.
+    OpenAI.RunGraderRequest:
+      type: object
+      required:
+        - grader
+        - model_sample
+      properties:
+        grader:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.GraderStringCheck'
+            - $ref: '#/components/schemas/OpenAI.GraderTextSimilarity'
+            - $ref: '#/components/schemas/OpenAI.GraderPython'
+            - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
+            - $ref: '#/components/schemas/OpenAI.GraderMulti'
+          description: The grader used for the fine-tuning job.
+        item:
+          description: |-
+            The dataset item provided to the grader. This will be used to populate
+            the `item` namespace. See [the guide](/docs/guides/graders) for more details.
+        model_sample:
+          type: string
+          description: |-
+            The model sample to be evaluated. This value will be used to populate
+            the `sample` namespace. See [the guide](/docs/guides/graders) for more details.
+            The `output_json` variable will be populated if the model sample is a
+            valid JSON string.
+    OpenAI.RunGraderResponse:
+      type: object
+      required:
+        - reward
+        - metadata
+        - sub_rewards
+        - model_grader_token_usage_per_model
+      properties:
+        reward:
+          type: number
+          format: float
+        metadata:
+          type: object
+          properties:
+            name:
+              type: string
+            type:
+              type: string
+            errors:
+              type: object
+              properties:
+                formula_parse_error:
+                  type: boolean
+                sample_parse_error:
+                  type: boolean
+                truncated_observation_error:
+                  type: boolean
+                unresponsive_reward_error:
+                  type: boolean
+                invalid_variable_error:
+                  type: boolean
+                other_error:
+                  type: boolean
+                python_grader_server_error:
+                  type: boolean
+                python_grader_server_error_type:
+                  type: string
+                  nullable: true
+                python_grader_runtime_error:
+                  type: boolean
+                python_grader_runtime_error_details:
+                  type: string
+                  nullable: true
+                model_grader_server_error:
+                  type: boolean
+                model_grader_refusal_error:
+                  type: boolean
+                model_grader_parse_error:
+                  type: boolean
+                model_grader_server_error_details:
+                  type: string
+                  nullable: true
+              required:
+                - formula_parse_error
+                - sample_parse_error
+                - truncated_observation_error
+                - unresponsive_reward_error
+                - invalid_variable_error
+                - other_error
+                - python_grader_server_error
+                - python_grader_server_error_type
+                - python_grader_runtime_error
+                - python_grader_runtime_error_details
+                - model_grader_server_error
+                - model_grader_refusal_error
+                - model_grader_parse_error
+                - model_grader_server_error_details
+            execution_time:
+              type: number
+              format: float
+            scores: {}
+            token_usage:
+              type: integer
+              format: int32
+              nullable: true
+            sampled_model_name:
+              type: string
+              nullable: true
+          required:
+            - name
+            - type
+            - errors
+            - execution_time
+            - scores
+            - token_usage
+            - sampled_model_name
+        sub_rewards: {}
+        model_grader_token_usage_per_model: {}
+    OpenAI.Tool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ToolType'
+      discriminator:
+        propertyName: type
+        mapping:
+          function: '#/components/schemas/OpenAI.FunctionTool'
+          file_search: '#/components/schemas/OpenAI.FileSearchTool'
+          computer_use_preview: '#/components/schemas/OpenAI.ComputerUsePreviewTool'
+          web_search_preview: '#/components/schemas/OpenAI.WebSearchPreviewTool'
+          code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
+          image_generation: '#/components/schemas/OpenAI.ImageGenTool'
+          local_shell: '#/components/schemas/OpenAI.LocalShellTool'
+          mcp: '#/components/schemas/OpenAI.MCPTool'
+    OpenAI.ToolType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - file_search
+            - function
+            - computer_use_preview
+            - web_search_preview
+            - mcp
+            - code_interpreter
+            - image_generation
+            - local_shell
+      description: A tool that can be used to generate a response.
+    OpenAI.ValidateGraderRequest:
+      type: object
+      required:
+        - grader
+      properties:
+        grader:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.GraderStringCheck'
+            - $ref: '#/components/schemas/OpenAI.GraderTextSimilarity'
+            - $ref: '#/components/schemas/OpenAI.GraderPython'
+            - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
+            - $ref: '#/components/schemas/OpenAI.GraderMulti'
+          description: The grader used for the fine-tuning job.
+    OpenAI.ValidateGraderResponse:
+      type: object
+      properties:
+        grader:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.GraderStringCheck'
+            - $ref: '#/components/schemas/OpenAI.GraderTextSimilarity'
+            - $ref: '#/components/schemas/OpenAI.GraderPython'
+            - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
+            - $ref: '#/components/schemas/OpenAI.GraderMulti'
+          description: The grader used for the fine-tuning job.
+    OpenAI.WebSearchPreviewTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - web_search_preview
+          description: The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.
+        user_location:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Location'
+          nullable: true
+          description: The user's location.
+        search_context_size:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: 'Note: web_search is not yet available via Azure OpenAI.'
+    ResponseFormatJSONSchemaRequest:
+      type: object
+      required:
+        - type
+        - json_schema
+      properties:
+        type:
+          type: string
+          enum:
+            - json_schema
+          description: Type of response format
+        json_schema:
+          type: object
+          additionalProperties: {}
+          description: JSON Schema for the response format
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
+    ApiKeyAuth_:
+      type: apiKey
+      in: header
+      name: authorization
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          scopes:
+            https://cognitiveservices.azure.com/.default: ''
+servers:
+  - url: '{endpoint}/openai/v1'
+    description: Azure AI Foundry Models APIs
+    variables:
+      endpoint:
+        default: ''
+        description: |-
+          A supported Azure AI Foundry Models APIs endpoint, including protocol and hostname.
+          For example:
+          https://westus.api.cognitive.microsoft.com).

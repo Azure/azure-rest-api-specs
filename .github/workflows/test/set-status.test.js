@@ -1,9 +1,9 @@
 // @ts-check
 
 import { beforeEach, describe, expect, it } from "vitest";
+import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.js";
+import { fullGitSha } from "../../shared/test/examples.js";
 import { setStatusImpl } from "../src/set-status.js";
-
-import { CheckConclusion, CheckStatus, CommitStatusState } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("setStatusImpl", () => {
@@ -16,7 +16,46 @@ describe("setStatusImpl", () => {
   });
 
   it("throws if inputs null", async () => {
-    await expect(setStatusImpl({})).rejects.toThrow();
+    // @ts-expect-error Testing invalid input type
+    await expect(setStatusImpl({})).rejects.toMatchInlineSnapshot(
+      `[Error: head_sha is not a valid full git SHA: 'undefined']`,
+    );
+  });
+
+  it.each([null, undefined, "", "abc123"])("throws when head_sha is %o", async (head_sha) => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        // @ts-expect-error - Testing invalid input
+        head_sha,
+        issue_number: 123,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("head_sha is not a valid full git SHA");
+  });
+
+  it.each([null, undefined, NaN, 0, -1])("throws when issue_number is %o", async (issue_number) => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: fullGitSha,
+        // @ts-expect-error - Testing invalid input
+        issue_number,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
   });
 
   it("sets success if approved by label", async () => {
@@ -28,7 +67,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -42,7 +81,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger Avocado",
       description: "Found label 'Approved-Avocado'",
@@ -59,7 +98,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -74,12 +113,15 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-Benign'",
       target_url: "https://test.com/set_status_url",
     });
+
+    expect(core.setOutput).toBeCalledWith("head_sha", fullGitSha);
+    expect(core.setOutput).toBeCalledWith("issue_number", 123);
   });
 
   it("handles comma-separated labels with whitespace", async () => {
@@ -91,7 +133,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -106,7 +148,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-UserImpact'",
@@ -123,7 +165,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -137,7 +179,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-Security'",
@@ -158,7 +200,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -173,7 +215,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.PENDING,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       target_url: "https://test.com/set_status_url",
@@ -193,7 +235,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -207,7 +249,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.PENDING,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       target_url: "https://test.com/set_status_url",
@@ -286,7 +328,7 @@ describe("setStatusImpl", () => {
         setStatusImpl({
           owner: "test-owner",
           repo: "test-repo",
-          head_sha: "test-head-sha",
+          head_sha: fullGitSha,
           issue_number: 123,
           target_url: "https://test.com/set_status_url",
           github,
@@ -300,7 +342,7 @@ describe("setStatusImpl", () => {
       expect(github.rest.repos.createCommitStatus).toBeCalledWith({
         owner: "test-owner",
         repo: "test-repo",
-        sha: "test-head-sha",
+        sha: fullGitSha,
         state: commitStatusState,
         context: "[TEST-IGNORE] Swagger Avocado",
         target_url: targetUrl,
