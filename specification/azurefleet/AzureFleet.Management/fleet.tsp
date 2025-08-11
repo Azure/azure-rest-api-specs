@@ -648,6 +648,7 @@ interface Fleets {
   @autoRoute
   @listsResource(VirtualMachine)
   @armResourceList(VirtualMachine)
+  @list
   @get
   listVirtualMachines(
     ...ApiVersionParameter,
