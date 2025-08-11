@@ -17543,6 +17543,14 @@
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
@@ -20756,6 +20764,14 @@
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
         "arcScope": {
           "$ref": "#/definitions/ArcScopePropertiesUpdate",
           "description": "Gets or sets the Arc scope properties for the server site."
@@ -21238,6 +21254,18 @@
           "description": "Gets the service endpoint.",
           "readOnly": true
         },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/DiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
@@ -21271,6 +21299,10 @@
         "rawCertData": {
           "type": "string",
           "description": "Gets or sets the raw certificate data for building certificate expiry flows."
+        },
+        "machineResourceId": {
+          "$ref": "#/definitions/MachineResourceId",
+          "description": "Gets or sets the ARM ID of the arc for servers resource."
         }
       }
     },
@@ -21303,6 +21335,18 @@
           "type": "string",
           "description": "Gets the service endpoint.",
           "readOnly": true
+        },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/DiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -24768,6 +24812,14 @@
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
@@ -25804,6 +25856,30 @@
             "name": "Extended",
             "value": "Extended",
             "description": "Extended value."
+          }
+        ]
+      }
+    },
+    "DiscoveryScenario": {
+      "type": "string",
+      "description": "Site properties DiscoveryScenario",
+      "enum": [
+        "Migrate",
+        "DR"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryScenario",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Migrate",
+            "value": "Migrate",
+            "description": "Migrate value."
+          },
+          {
+            "name": "DR",
+            "value": "DR",
+            "description": "DR value."
           }
         ]
       }
