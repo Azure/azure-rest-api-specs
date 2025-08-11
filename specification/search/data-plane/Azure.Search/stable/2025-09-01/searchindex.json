@@ -1249,6 +1249,14 @@
           "x-nullable": true,
           "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'."
         },
+        "@search.rerankerBoostedScore": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "RerankerBoostedScore",
+          "x-nullable": true,
+          "description": "The relevance score computed by boosting the Reranker Score. Search results are sorted by the RerankerScore/RerankerBoostedScore based on useScoringProfileBoostedRanking in the Semantic Config. RerankerBoostedScore is only returned for queries of type 'semantic'"
+        },
         "@search.highlights": {
           "type": "object",
           "additionalProperties": {

@@ -3120,6 +3120,30 @@
       },
       "description": "Represents classes of characters on which a token filter can operate."
     },
+    "RankingOrder": {
+      "type": "string",
+      "enum": [
+        "BoostedRerankerScore",
+        "RerankerScore"
+      ],
+      "x-ms-enum": {
+        "name": "RankingOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "BoostedRerankerScore",
+            "name": "BoostedRerankerScore",
+            "description": "Sets sort order as BoostedRerankerScore"
+          },
+          {
+            "value": "RerankerScore",
+            "name": "ReRankerScore",
+            "description": "Sets sort order as ReRankerScore"
+          }
+        ]
+      },
+      "description": "Represents score to use for sort order of documents."
+    },
     "EdgeNGramTokenizer": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenizer",
@@ -11958,6 +11982,11 @@
           "$ref": "#/definitions/PrioritizedFields",
           "x-nullable": false,
           "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
+        },
+        "rankingOrder": {
+          "$ref": "#/definitions/RankingOrder",
+          "x-nullable": true,
+          "description": "Specifies the score type to be used for the sort order of the search results."
         }
       },
       "required": [
