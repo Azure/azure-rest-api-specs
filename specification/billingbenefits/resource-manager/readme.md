@@ -101,6 +101,9 @@ directive:
   - suppress: PatchIdentityProperty
     from: billingbenefits.json
     reason: False-positive. Identity property is never defined on the model.
+  - suppress: ConsistentPatchProperties
+    from: billingbenefits.json
+    reason: False-positive. Milestones is always present in resource model.
 ```
 
 ### Tag: package-preview-2025-08-01-preview
