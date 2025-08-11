@@ -38,7 +38,10 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmResourceCreatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse
+  >;
 
   /**
    * Deletes a private endpoint connection with a given name.
