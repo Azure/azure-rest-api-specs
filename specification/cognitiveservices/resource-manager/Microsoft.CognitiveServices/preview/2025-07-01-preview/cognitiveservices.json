@@ -8420,6 +8420,41 @@
         }
       ]
     },
+    "RaiModerationlistItemsBulkAddRequest": {
+      "description": "The list of Rai Moderation Terms for batch add.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RaiModerationTermBulkRequest"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
+    },
+    "RaiModerationTermBulkRequest": {
+      "description": "The Rai Moderation term request body.",
+      "type": "object",
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The moderation term name."
+        },
+        "properties": {
+          "$ref": "#/definitions/RaiModerationTermProperties",
+          "description": "Moderation term properties."
+        }
+      }
+    },
+    "RaiModerationlistItemsBulkDeleteRequest": {
+      "description": "The list of Cognitive Services RaiModerationlist Items Names.",
+      "type": "object",
+      "items": {
+        "type": "string"
+      }
+    },
     "RaiModerationlist": {
       "description": "Cognitive Services RaiModerationlist.",
       "type": "object",
