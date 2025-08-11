@@ -15,15 +15,11 @@ alias ServiceTraits = NoRepeatableRequests &
   SupportsClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
-alias OperationsWith409ConflictResponse = Azure.Core.ResourceOperations<
-  ServiceTraits,
-  Azure.Core.Foundations.ErrorResponse | ConflictResponse
->;
 
 interface AccessTokens {
   // AccessToken Operations
   @doc("Creates an access token for the workspace with the specified access token ID and name. The ID and name must be unique among active access tokens for the user within a Playwright workspace. Requires Bearer JWT access token provided by Entra ID.")
-  createOrReplace is OperationsWith409ConflictResponse.ResourceCreateOrReplace<AccessToken>;
+  createOrReplace is Operations.ResourceCreateOrReplace<AccessToken>;
 
   @doc("Gets an access token for the workspace with the specified access token ID. Requires Bearer JWT access token provided by Entra ID.")
   get is Operations.ResourceRead<AccessToken>;
