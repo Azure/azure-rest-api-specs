@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "empowerment": {
+            "name": "High-Value CACO Exception",
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNjNDA3N2E3LTEyYWMtNGE4Ni1hMjZmLWIyZmE3ZmI2ZjhiOCJ9.eyJpc3MiOiJlbXBvd2VybWVudC1zZXJ2aWNlIiwic3ViIjoiY2Fjby12YWxpZGF0aW9uIiwiYXVkIjoiYmlsbGluZ2JlbmVmaXRzLXNlcnZpY2UiLCJleHAiOjE3MzU2ODk2MDAsImlhdCI6MTczNTYwMzIwMCwicnVsZXMiOlsiYWxsb3ctaGlnaC12YWx1ZS1hd2FyZHMiLCJza2lwLXByb2R1Y3QtY29kZS12YWxpZGF0aW9uIl19.empowerment-signature"
+          },
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "Empowered CACO with Relaxed Rules",
+            "systemId": "CACO-SYSTEM-EMPOWERED",
+            "productCode": "SPECIAL:EMPOWERED:SCENARIO",
+            "startAt": "2024-01-01T00:00:00Z",
+            "allowContributors": "Enabled",
+            "milestones": [
+              {
+                "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+                "name": "Special Empowered Milestone",
+                "spendTarget": {
+                  "amount": 1000000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "credit": {
+                    "amount": 200000,
+                    "currencyCode": "USD"
+                  },
+                  "startAt": "2025-01-01T00:00:00Z",
+                  "endAt": "2025-12-31T00:00:00Z"
+                },
+                "endAt": "2025-06-30T00:00:00Z"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true,
+            "resourceId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47/resourceGroups/myRG/providers/Microsoft.BillingBenefits/conditionalCredits/empoweredCACO"
+          }
+        ]
+      }
+    }
+  }
+}
