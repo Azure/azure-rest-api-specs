@@ -127,7 +127,7 @@ model StorageError {
 }
 
 /** Stats for the storage service. */
-model StorageServiceStats {
+model QueueServiceStats {
   /** The geo replication stats. */
   @Xml.name("GeoReplication") geoReplication?: GeoReplication;
 }

@@ -151,7 +151,7 @@ namespace Storage.Queues {
 
       /** Storage service statistics */
       @body
-      storageServiceStats: StorageServiceStats;
+      queueServiceStats: QueueServiceStats;
     }
   >;
 
