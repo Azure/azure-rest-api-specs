@@ -2201,6 +2201,11 @@
         ],
         "operationId": "ModerationLists_List",
         "description": "Gets the moderation lists associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "ListModerationLists": {
+            "$ref": "./examples/ListModerationLists.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2241,6 +2246,11 @@
         ],
         "operationId": "ModerationLists_Get",
         "description": "Gets the specified moderation list associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "GetModerationList": {
+            "$ref": "./examples/GetModerationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2279,6 +2289,11 @@
         ],
         "operationId": "ModerationLists_CreateOrUpdate",
         "description": "Creates or updates a moderation list.",
+        "x-ms-examples": {
+          "PutModerationList": {
+            "$ref": "./examples/PutModerationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2332,6 +2347,11 @@
         ],
         "operationId": "ModerationLists_Delete",
         "description": "Deletes the specified moderation list.",
+        "x-ms-examples": {
+          "DeleteModerationList": {
+            "$ref": "./examples/DeleteModerationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2372,6 +2392,11 @@
         ],
         "operationId": "ModerationListItems_List",
         "description": "Gets the items that belong to the specified moderation list.",
+        "x-ms-examples": {
+          "ListModerationListItems": {
+            "$ref": "./examples/ListModerationListItems.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2415,6 +2440,11 @@
         ],
         "operationId": "ModerationListItems_Get",
         "description": "Gets the specified moderation list item.",
+        "x-ms-examples": {
+          "GetModerationListItem": {
+            "$ref": "./examples/GetModerationListItem.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2456,6 +2486,11 @@
         ],
         "operationId": "ModerationListItems_CreateOrUpdate",
         "description": "Creates or updates a moderation list item.",
+        "x-ms-examples": {
+          "PutModerationListItem": {
+            "$ref": "./examples/PutModerationListItem.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2512,6 +2547,11 @@
         ],
         "operationId": "ModerationListItems_Delete",
         "description": "Deletes the specified moderation terms.",
+        "x-ms-examples": {
+          "DeleteModerationListItem": {
+            "$ref": "./examples/DeleteModerationListItem.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8384,6 +8424,10 @@
       "description": "Cognitive Services RaiModerationlist.",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the moderation list."
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "readOnly": true
@@ -8466,17 +8510,17 @@
       "description": "Cognitive Services RaiModerationList Term properties.",
       "type": "object",
       "properties": {
-        "name": {
+        "term": {
           "type": "string",
           "description": "Text to moderate against."
         },
-        "type": {
+        "moderationType": {
           "type": "string",
           "description": "Type of moderation."
         },
-        "action": {
-          "type": "string",
-          "description": "Moderation action with two possible values - ADD/REMOVE."
+        "isAddition": {
+          "type": "boolean",
+          "description": "Moderation action indicating if the term is an addition or removal."
         }
       }
     },
