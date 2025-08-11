@@ -107,6 +107,7 @@ interface ScheduledActions {
   @autoRoute
   @listsResource(ScheduledActionResource)
   @armResourceList(ScheduledActionResource)
+  @list
   @get
   @doc("List resources attached to Scheduled Actions")
   listResources(
