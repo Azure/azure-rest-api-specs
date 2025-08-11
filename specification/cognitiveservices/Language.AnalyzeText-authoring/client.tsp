@@ -218,6 +218,7 @@ namespace Language.TextAuthingClientCustomizations;
 @@clientName(TextAnalysisAuthoringExportedEntitySublist, "ExportedEntitySublist", "python");
 @@clientName(TextAnalysisAuthoringExportedEntityListSynonym, "TextAuthoringExportedEntityListSynonym");
 @@clientName(TextAnalysisAuthoringExportedEntityListSynonym, "ExportedEntityListSynonym", "python");
+@@clientName(TextAnalysisAuthoringExportedEntityListSynonym.values, "synonyms", "python");
 @@clientName(TextAnalysisAuthoringExportedPrebuiltEntity, "TextAuthoringExportedPrebuiltEntity");
 @@clientName(TextAnalysisAuthoringExportedPrebuiltEntity, "ExportedPrebuiltEntity", "python");
 @@clientName(TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument, "ExportedCustomAbstractiveSummarizationDocument");
