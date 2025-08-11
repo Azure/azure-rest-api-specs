@@ -89,6 +89,18 @@ using Microsoft.EdgeOrder;
 @@clientName(WeightMeasurementUnit.LBS, "Lbs", "csharp");
 @@clientName(WeightMeasurementUnit.KGS, "Kgs", "csharp");
 @@clientName(AvailabilityStage.Signup, "SignUp", "csharp");
+@@clientName(ProductsAndConfigurationsOperationGroup.listConfigurations,
+  "GetConfigurations",
+  "csharp"
+);
+@@clientName(ProductsAndConfigurationsOperationGroup.listProductFamilies,
+  "GetProductFamilies",
+  "csharp"
+);
+@@clientName(ProductsAndConfigurationsOperationGroup.listProductFamiliesMetadata,
+  "GetProductFamiliesMetadata",
+  "csharp"
+);
 @@alternateType(OrderItemProperties.orderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
