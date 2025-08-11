@@ -37,8 +37,14 @@ alias ProductsGetTraits = NoClientRequestId &
     PricingAudienceSingleParameter>;
 
 // Operation definitions
-alias ProductsListingOperation = ResourceOperations<ProductsListingTraits>;
-alias ProductsGetOperation = ResourceOperations<ProductsGetTraits>;
+alias ProductsListingOperation = ResourceOperations<
+  ProductsListingTraits,
+  DiscoveryErrorPayload
+>;
+alias ProductsGetOperation = ResourceOperations<
+  ProductsGetTraits,
+  DiscoveryErrorPayload
+>;
 
 interface ProductOperations {
   @doc("Retrieves a list of products available in the marketplace catalog.")
@@ -63,7 +69,10 @@ alias SkusListingTraits = NoClientRequestId &
     PricingAudienceListingParameter>;
 
 // Operation definitions for Skus
-alias SkusListingOperation = ResourceOperations<SkusListingTraits>;
+alias SkusListingOperation = ResourceOperations<
+  SkusListingTraits,
+  DiscoveryErrorPayload
+>;
 
 interface SkusOperations {
   @doc("Retrieves a list of SKUs available in the marketplace catalog.")

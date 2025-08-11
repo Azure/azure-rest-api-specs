@@ -984,14 +984,15 @@ model DiscoveryApiKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;
 
 // Error payload definitions
 @doc("Error payload returned by Marketplace Discovery APIs")
+@error
 model DiscoveryErrorPayload {
   @doc("The error details object")
   error: DiscoveryErrorDetails;
 }
 
-@doc("Error details returned by Marketplace Discovery APIs")
+@doc("Error details returned in DiscoveryErrorPayload")
 model DiscoveryErrorDetails {
-  @doc("The error code")
+  @doc("The HTTP error code")
   code: string;
 
   @doc("The error message")
