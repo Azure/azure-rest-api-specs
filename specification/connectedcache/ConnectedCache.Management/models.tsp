@@ -682,6 +682,7 @@ model AdditionalCacheNodeProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("Cache node resource drive configurations.")
+  @Azure.ResourceManager.identifiers(#[])
   driveConfiguration?: CacheNodeDriveConfiguration[];
 
   @doc("Cache node resource Bgp configuration.")

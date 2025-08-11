@@ -15,7 +15,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger SemanticValidation"]
+    workflows: ["\\[TEST-IGNORE\\] Swagger SemanticValidation - Analyze Code"]
     types: [completed]
 
 permissions:
@@ -28,8 +28,8 @@ permissions:
 jobs:
   spec-validation-status:
     name: Set SemanticValidation Status
-    uses: ./.github/workflows/_reusable-set-check-status.yml
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Swagger SemanticValidation"
+      monitored_workflow_name: "[TEST-IGNORE] Swagger SemanticValidation - Analyze Code"
       required_check_name: "[TEST-IGNORE] Swagger SemanticValidation"
       overriding_label: "Approved-SemanticValidation"

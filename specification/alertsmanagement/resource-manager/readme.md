@@ -51,6 +51,27 @@ directive:
      - $.definitions.AzureMetricData.properties.dimensions
      - $.definitions.TransactionEdge.properties.metadata
      - $.definitions.TransactionNode.properties.metadata
+  - suppress: AvoidAdditionalProperties
+    reason: The customProperties field is intentionally designed to allow user-defined key-value pairs for alert metadata.
+    from: AlertsManagement.json
+    where:
+     - $.definitions.customProperties
+  - suppress: ParametersInPost
+    reason: The newState parameter is required.
+    from: AlertsManagement.json
+    where:
+     - $.paths['/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate'].post.parameters
+     - $.paths['/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate'].post.parameters
+  - suppress: XmsPageableForListCalls
+    reason: List operations follow existing AlertsManagement pagination patterns.
+    from: AlertsManagement.json
+    where:
+      - $.paths["/providers/Microsoft.AlertsManagement/alerts/{alertId}/history"].get
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    reason: Response models maintain compatibility with existing AlertsManagement response structures.
+    from: AlertsManagement.json
+  - suppress: MULTIPLE_API_VERSION
+    reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
 ```
 
 ``` yaml
@@ -61,6 +82,36 @@ tag: package-2023-03
 ```
 
 =======
+### Tag: package-preview-2025-05-25-preview
+
+These settings apply only when `--tag=package-preview-2025-05-25-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-25-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
+```
+
+#### New Features in 2025-05-25-preview
+
+1. Added customProperties field to Alert type
+   - Optional field that can hold user-defined key-value pairs
+   - Can be null, empty object {}, or contain string key-value pairs
+   - Available in both Alerts_GetById and Alerts_List responses
+
+2. Added tenant-level endpoints for tenant alert management:
+   - GET /providers/Microsoft.AlertsManagement/alerts
+   - GET /providers/Microsoft.AlertsManagement/alerts/{alertId}
+   - GET /providers/Microsoft.AlertsManagement/alerts/{alertId}/history
+   - POST /providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate
+
+3. Added event details on alert history modification record:
+   - New object property named "details"
+   - The object contains details relevent to this specific event
+   - Is  null when the event is 'AlertCreated'
+
+   These endpoints enable tenant-level alert operations without requiring a specific scope parameter.
+   The operations are available through new operationIds: Alerts_GetAllTenant, Alerts_GetByIdTenant, Alerts_GetHistoryTenant, Alerts_ChangeStateTenant.
+
 ### Tag: package-preview-2025-05-01-preview
 
 These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
@@ -68,7 +119,7 @@ These settings apply only when `--tag=package-preview-2025-05-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-05-01-preview'
 input-file:
   - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
-  - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
@@ -83,29 +134,13 @@ These settings apply only when `--tag=package-preview-2025-03-01-preview` is spe
 input-file:
   - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
 ```
-### Tag: package-preview-2024-01
-
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-01'
-input-file:
-  - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json  
-```
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
-```
-### Tag: package-preview-2023-07
-
-These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-07'
-input-file:
-  - Microsoft.AlertsManagement/preview/2023-07-12-preview/AlertsManagement.json  
+  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json 
 ```
 ### Tag: package-preview-2023-04
 
@@ -130,12 +165,19 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 ```yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
-  - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
   - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
 ```
+
+### Important Note
+The following preview versions have been deprecated and their functionality is available in the stable version (Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json):
+- 2023-07-12-preview/AlertsManagement.json
+- 2024-01-01-preview/AlertsManagement.json
+
+Please use the stable version for all Alerts Management operations.
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
@@ -200,7 +242,6 @@ input-file:
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
 ```
-
 
 ### Tag: package-2019-06
 
@@ -283,6 +324,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-
