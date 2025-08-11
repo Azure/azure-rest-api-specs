@@ -5705,10 +5705,6 @@
         "benefitType": {
           "$ref": "#/definitions/BenefitType",
           "description": "Type of benefit to validate. This is used to determine the model type for validation."
-        },
-        "empowerment": {
-          "$ref": "#/definitions/EmpowermentConfiguration",
-          "description": "Empowerment configuration for validation rule relaxation"
         }
       },
       "discriminator": "benefitType"
@@ -6207,20 +6203,6 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results"
-        }
-      }
-    },
-    "EmpowermentConfiguration": {
-      "type": "object",
-      "description": "Empowerment configuration for validation rule relaxation",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "User-readable name of the empowerment"
-        },
-        "token": {
-          "type": "string",
-          "description": "Signed token for empowerment validation"
         }
       }
     },
