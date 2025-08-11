@@ -1,19 +1,21 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "testrg123",
-    "certificateOrderName": "SampleCertificateOrderName",
     "api-version": "2024-11-01",
+    "certificateOrderName": "SampleCertificateOrderName",
     "reissueCertificateOrderRequest": {
       "properties": {
-        "keySize": 2048,
-        "delayExistingRevokeInHours": 2,
         "csr": "CSR1223238Value",
-        "isPrivateKeyExternal": false
+        "delayExistingRevokeInHours": 2,
+        "isPrivateKeyExternal": false,
+        "keySize": 2048
       }
-    }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "204": {}
-  }
+  },
+  "operationId": "AppServiceCertificateOrders_Reissue",
+  "title": "Reissue App Service Certificate Order"
 }

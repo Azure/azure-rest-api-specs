@@ -1,60 +1,55 @@
 {
   "parameters": {
-    "subscriptionId": "5700fc96-77b4-4f8d-afce-c353d8c443bd",
-    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "api-version": "2024-11-01",
     "certificateOrderName": "SampleCertificateOrderName",
     "detectorName": "AutoRenewStatus",
-    "api-version": "2024-11-01"
+    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "subscriptionId": "5700fc96-77b4-4f8d-afce-c353d8c443bd"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/5700fc96-77b4-4f8d-afce-c353d8c443bd/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName/detectors/AutoRenewStatus",
         "name": "AutoRenewStatus",
+        "id": "/subscriptions/5700fc96-77b4-4f8d-afce-c353d8c443bd/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName/detectors/AutoRenewStatus",
         "properties": {
-          "metadata": {
-            "id": "AutoRenewStatus",
-            "name": "AutoRenewStatus",
-            "description": "Check auto renew status",
-            "category": null,
-            "supportTopicList": [],
-            "type": "Detector",
-            "score": 0.0
-          },
           "dataset": [
             {
+              "renderingProperties": {
+                "type": "Insights",
+                "description": null,
+                "title": null
+              },
               "table": {
-                "tableName": "",
                 "columns": [
                   {
                     "columnName": "Status",
-                    "dataType": "String",
-                    "columnType": null
+                    "columnType": null,
+                    "dataType": "String"
                   },
                   {
                     "columnName": "Message",
-                    "dataType": "String",
-                    "columnType": null
+                    "columnType": null,
+                    "dataType": "String"
                   },
                   {
                     "columnName": "Data.Name",
-                    "dataType": "String",
-                    "columnType": null
+                    "columnType": null,
+                    "dataType": "String"
                   },
                   {
                     "columnName": "Data.Value",
-                    "dataType": "String",
-                    "columnType": null
+                    "columnType": null,
+                    "dataType": "String"
                   },
                   {
                     "columnName": "Expanded",
-                    "dataType": "String",
-                    "columnType": null
+                    "columnType": null,
+                    "dataType": "String"
                   },
                   {
                     "columnName": "Solutions",
-                    "dataType": "String",
-                    "columnType": null
+                    "columnType": null,
+                    "dataType": "String"
                   }
                 ],
                 "rows": [
@@ -74,17 +69,24 @@
                     "False",
                     "null"
                   ]
-                ]
-              },
-              "renderingProperties": {
-                "type": "Insights",
-                "title": null,
-                "description": null
+                ],
+                "tableName": ""
               }
             }
-          ]
+          ],
+          "metadata": {
+            "name": "AutoRenewStatus",
+            "type": "Detector",
+            "description": "Check auto renew status",
+            "category": null,
+            "id": "AutoRenewStatus",
+            "score": 0,
+            "supportTopicList": []
+          }
         }
       }
     }
-  }
+  },
+  "operationId": "CertificateOrdersDiagnostics_GetAppServiceCertificateOrderDetectorResponse",
+  "title": "Get app service certificate order detector response"
 }

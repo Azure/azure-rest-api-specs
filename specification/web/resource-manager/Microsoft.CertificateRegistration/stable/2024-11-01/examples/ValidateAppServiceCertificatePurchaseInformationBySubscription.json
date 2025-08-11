@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "api-version": "2024-11-01",
     "appServiceCertificateOrder": {
       "location": "Global",
       "properties": {
+        "autoRenew": true,
         "certificates": {
           "SampleCertName1": {
             "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
@@ -16,14 +16,16 @@
           }
         },
         "distinguishedName": "CN=SampleCustomDomain.com",
-        "validityInYears": 2,
         "keySize": 2048,
         "productType": "StandardDomainValidatedSsl",
-        "autoRenew": true
+        "validityInYears": 2
       }
-    }
+    },
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "204": {}
-  }
+  },
+  "operationId": "AppServiceCertificateOrders_ValidatePurchaseInformation",
+  "title": "Validate App Service Certificate purchase information by subscription"
 }
