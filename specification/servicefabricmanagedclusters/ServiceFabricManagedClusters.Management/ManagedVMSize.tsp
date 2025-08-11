@@ -81,6 +81,7 @@ interface ManagedUnsupportedVMSizes {
   @operationId("managedUnsupportedVMSizes_List")
   @tag("ManagedVMSizes")
   @get
+  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
