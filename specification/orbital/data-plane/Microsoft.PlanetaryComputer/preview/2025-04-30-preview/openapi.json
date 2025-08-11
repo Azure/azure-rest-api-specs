@@ -7431,24 +7431,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of ingestions",
-                  "items": {
-                    "$ref": "#/definitions/Ingestions.IngestionDefinition"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/Ingestions.IngestionDefinitionsPagedResponse"
             }
           },
           "default": {
@@ -7714,24 +7697,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of ingestion runs",
-                  "items": {
-                    "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRun"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRunsPagedResponse"
             }
           },
           "default": {
@@ -7874,24 +7840,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "Ingestion source summary",
-                  "items": {
-                    "$ref": "#/definitions/IngestionSources.IngestionSourceSummary"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/IngestionSources.IngestionSourcesPagedResponse"
             }
           },
           "default": {
@@ -8143,24 +8092,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "Managed identity metadata",
-                  "items": {
-                    "$ref": "#/definitions/IngestionSources.ManagedIdentityMetadata"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/IngestionSources.ManagedIdentitiesPagedResponse"
             }
           },
           "default": {
@@ -8263,24 +8195,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of operations",
-                  "items": {
-                    "$ref": "#/definitions/Operation"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/OperationsPagedResponse"
             }
           },
           "default": {
@@ -13672,6 +13587,48 @@
         ]
       }
     },
+    "IngestionSources.IngestionSourcesPagedResponse": {
+      "type": "object",
+      "description": "Ingestion Sources paged response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Ingestion sources",
+          "items": {
+            "$ref": "#/definitions/IngestionSources.IngestionSourceSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Next page"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IngestionSources.ManagedIdentitiesPagedResponse": {
+      "type": "object",
+      "description": "Managed Identities paged response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Managed Identities",
+          "items": {
+            "$ref": "#/definitions/IngestionSources.ManagedIdentityMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Next page"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "IngestionSources.ManagedIdentityConnection": {
       "type": "object",
       "description": "Managed Identity connection information",
@@ -13851,6 +13808,27 @@
         }
       }
     },
+    "Ingestions.IngestionDefinitionsPagedResponse": {
+      "type": "object",
+      "description": "Ingestions Definitions paged response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Ingestion Definitions",
+          "items": {
+            "$ref": "#/definitions/Ingestions.IngestionDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Next page"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Ingestions.IngestionRuns.IngestionRun": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion run",
@@ -13956,6 +13934,27 @@
         "totalPendingItems",
         "totalSuccessfulItems",
         "totalFailedItems"
+      ]
+    },
+    "Ingestions.IngestionRuns.IngestionRunsPagedResponse": {
+      "type": "object",
+      "description": "Ingestion Runs paged response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Ingestion Runs",
+          "items": {
+            "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Next page"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "Ingestions.IngestionStatus": {
@@ -15013,6 +15012,27 @@
       "required": [
         "timestamp",
         "status"
+      ]
+    },
+    "OperationsPagedResponse": {
+      "type": "object",
+      "description": "Operations paged response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Operations",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Next page"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PartitionType": {

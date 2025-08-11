@@ -45,19 +45,36 @@ namespace Customizations;
 @@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
 @@clientName(BoundsResponse, "BoundsResult", "csharp");
 @@clientName(ClassmapLegendResponse, "ClassmapLegendResult", "csharp");
+@@clientName(OperationsPagedResponse, "OperationsPagedResult", "csharp");
 @@clientName(GeoJsonStatisticsItemCollectionResponse,
   "GeoJsonStatisticsItemCollectionResult",
   "csharp"
 );
 
+@@clientName(IngestionSources.ManagedIdentitiesPagedResponse,
+  "ManagedIdentitiesPagedResult",
+  "csharp"
+);
 @@clientName(GeoJsonStatisticsItemResponse,
   "GeoJsonStatisticsItemResult",
   "csharp"
 );
 @@clientName(InfoOperationResponse, "InfoOperationResult", "csharp");
+@@clientName(Ingestions.IngestionDefinitionsPagedResponse,
+  "IngestionDefinitionsPagedResult",
+  "csharp"
+);
 @@clientName(RegisterResponse, "RegisterResult", "csharp");
+@@clientName(Ingestions.IngestionRuns.IngestionRunsPagedResponse,
+  "IngestionRunsPagedResult",
+  "csharp"
+);
 @@clientName(StatisticsResponse, "StatisticsResult", "csharp");
 @@clientName(TileJsonResponse, "TileJsonResult", "csharp");
+@@clientName(IngestionSources.IngestionSourcesPagedResponse,
+  "IngestionSourcesPagedResult",
+  "csharp"
+);
 
 // Models ending with "Request" - rename to "Content"
 @@clientName(ImageRequest, "ImageContent", "csharp");
