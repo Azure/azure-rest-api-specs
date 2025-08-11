@@ -35,7 +35,11 @@ interface NginxCertificates {
   /**
    * Create or update the NGINX certificates for given NGINX deployment
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NginxCertificate>;
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
+    NginxCertificate,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Deletes a certificate from the NGINX deployment
