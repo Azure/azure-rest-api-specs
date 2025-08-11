@@ -387,6 +387,7 @@ export async function summarizeChecksImpl(
 
   if (impactAssessment) {
     core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+    targetBranch = impactAssessment.targetBranch;
   } else {
     core.info(
       `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
