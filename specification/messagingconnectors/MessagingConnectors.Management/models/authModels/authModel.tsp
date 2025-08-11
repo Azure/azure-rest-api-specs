@@ -30,5 +30,8 @@ union AuthenticationMode {
   @doc("SasToken model.")
   SasToken: "SasToken",
 
+  @doc("Anonymous model.")
+  Anonymous: "Anonymous",
+
   string,
 }

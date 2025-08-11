@@ -194,7 +194,7 @@ model ClusterPage<T extends {}> {
   /**
    * Items on this page
    */
-  @Azure.Core.items
+  @pageItems
   @Azure.ResourceManager.identifiers(#[])
   clusters: T[];
 }

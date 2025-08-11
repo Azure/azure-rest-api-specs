@@ -34,9 +34,24 @@ jobs:
             .github
 
       - name: Update Labels
+        id: update-labels
         uses: actions/github-script@v7
         with:
           script: |
             const { default: updateLabels } =
               await import('${{ github.workspace }}/.github/workflows/src/update-labels.js');
             await updateLabels({ github, context, core });
+
+      - if: ${{ always() && steps.update-labels.outputs.head_sha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.update-labels.outputs.head_sha }}
+
+      - if: ${{ always() && steps.update-labels.outputs.issue_number }}
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.update-labels.outputs.issue_number }}

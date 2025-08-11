@@ -25,11 +25,11 @@ parameters:
       - 'stable'
     default: 'beta'
     displayName: 'SDK release type'
-  - name: SkipPullRequestCreation
+  - name: CreatePullRequest
     type: boolean
     default: false
-    displayName: 'Skip SDK pull request creation'
-    
+    displayName: 'Create SDK pull request'
+
 trigger: none
 
 extends:
@@ -42,4 +42,4 @@ extends:
     ConfigPath: ${{ parameters.ConfigPath }}
     ApiVersion: ${{ parameters.ApiVersion }}
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
-    SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}
+    CreatePullRequest: ${{ parameters.CreatePullRequest }}
