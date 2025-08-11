@@ -630,7 +630,8 @@
     "AutomationRulePropertyArrayConditionSupportedArrayConditionType": {
       "description": "Describes an array condition evaluation type.",
       "enum": [
-        "AnyItem"
+        "AnyItem",
+        "AllItems"
       ],
       "type": "string",
       "example": "AnyItem",
@@ -641,6 +642,10 @@
           {
             "value": "AnyItem",
             "description": "Evaluate the condition as true if any item fulfills it"
+          },
+          {
+            "value": "AllItems",
+            "description": "Evaluate the condition as true if all the items fulfill it"
           }
         ]
       }
