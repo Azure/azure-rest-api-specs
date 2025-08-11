@@ -549,7 +549,7 @@ suppressions:
      - $.definitions.UsageResult
 
   - code: PostResponseCodes
-      reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
     from: netapp.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent"].post
