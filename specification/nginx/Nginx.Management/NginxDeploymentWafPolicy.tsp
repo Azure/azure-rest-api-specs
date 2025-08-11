@@ -30,22 +30,24 @@ interface NginxDeploymentWafPolicies {
   /**
    * Get the Nginx Waf Policy of given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WafPolicy_Get")
   get is ArmResourceRead<NginxDeploymentWafPolicy>;
 
   /**
    * Create or update the Nginx Waf Policy for given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WafPolicy_Create")
-  create is ArmResourceCreateOrReplaceAsync<NginxDeploymentWafPolicy>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
+    NginxDeploymentWafPolicy,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = NginxDeploymentWafPolicy> &
+      ArmLroLocationHeader<FinalResult = NginxDeploymentWafPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Reset the Nginx Waf Policy of given Nginx deployment to default
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WafPolicy_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<NginxDeploymentWafPolicy>;
 }
 

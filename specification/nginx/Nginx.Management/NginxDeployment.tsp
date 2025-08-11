@@ -25,13 +25,13 @@ model NginxDeployment
   /**
    * Identity Properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityProperties;
 
   /**
    * Resource Sku
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ResourceSku;
 }
 
@@ -40,22 +40,21 @@ interface NginxDeployments {
   /**
    * Get the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_Get")
   get is ArmResourceRead<NginxDeployment>;
 
   /**
    * Create or update the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NginxDeployment>;
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
+    NginxDeployment,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Update the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_Update")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     NginxDeployment,
@@ -68,15 +67,11 @@ interface NginxDeployments {
   /**
    * Delete the NGINX deployment resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<NginxDeployment>;
 
   /**
    * List all NGINX deployments under the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     NginxDeployment,
     Response = ArmResponse<NginxDeploymentListResponse>
@@ -85,8 +80,6 @@ interface NginxDeployments {
   /**
    * List the NGINX deployments resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_List")
   list is ArmListBySubscription<
     NginxDeployment,
     Response = ArmResponse<NginxDeploymentListResponse>
@@ -95,9 +88,8 @@ interface NginxDeployments {
   /**
    * List Waf Policies of given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WafPolicy_List")
   @get
+  @list
   @action("wafPolicies")
   wafPolicyList is ArmResourceActionSync<
     NginxDeployment,
@@ -108,8 +100,6 @@ interface NginxDeployments {
   /**
    * Get the Nginx Waf Policy of given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DefaultWafPolicy_List")
   @action("listDefaultWafPolicies")
   defaultWafPolicyList is ArmResourceActionSync<
     NginxDeployment,

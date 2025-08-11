@@ -1,57 +1,47 @@
 {
   "parameters": {
     "api-version": "2025-03-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
     "deploymentName": "myDeployment",
     "requestBody": {
-      "tags": {
-        "Environment": "Dev"
-      },
       "properties": {
         "networkProfile": {
           "networkInterfaceConfiguration": {
             "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet2/subnets/mySubnet"
           }
         }
+      },
+      "tags": {
+        "Environment": "Dev"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment",
         "name": "myDeployment",
         "type": "nginx.nginxplus/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment",
         "location": "westus",
-        "tags": {
-          "Environment": "Dev"
-        },
         "properties": {
-          "provisioningState": "Succeeded",
-          "nginxVersion": "nginx-1.19.6",
+          "autoUpgradeProfile": {
+            "upgradeChannel": "stable"
+          },
+          "dataplaneApiEndpoint": "mynginx-75b3bf22a555.eastus2.nginxaas.net",
           "ipAddress": "1.1.1.1",
           "networkProfile": {
             "frontEndIPConfiguration": {
+              "privateIPAddresses": [],
               "publicIPAddresses": [
                 {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
                 }
-              ],
-              "privateIPAddresses": []
+              ]
             },
             "networkInterfaceConfiguration": {
               "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet2/subnets/mySubnet"
             }
-          },
-          "userProfile": {
-            "preferredEmail": "example@example.email"
-          },
-          "scalingProperties": {
-            "capacity": 10
-          },
-          "autoUpgradeProfile": {
-            "upgradeChannel": "stable"
           },
           "nginxAppProtect": {
             "webApplicationFirewallSettings": {
@@ -59,24 +49,34 @@
             },
             "webApplicationFirewallStatus": {
               "attackSignaturesPackage": {
-                "version": "2024.02.21",
-                "revisionDatetime": "2024-02-21T15:50:53Z"
+                "revisionDatetime": "2024-02-21T15:50:53Z",
+                "version": "2024.02.21"
               },
               "botSignaturesPackage": {
-                "version": "2024.02.22",
-                "revisionDatetime": "2024-02-22T15:50:53Z"
-              },
-              "threatCampaignsPackage": {
-                "version": "2024.02.23",
-                "revisionDatetime": "2024-02-23T15:50:53Z"
+                "revisionDatetime": "2024-02-22T15:50:53Z",
+                "version": "2024.02.22"
               },
               "componentVersions": {
                 "wafEngineVersion": "10.624.0",
                 "wafNginxVersion": "4.815.0"
+              },
+              "threatCampaignsPackage": {
+                "revisionDatetime": "2024-02-23T15:50:53Z",
+                "version": "2024.02.23"
               }
             }
           },
-          "dataplaneApiEndpoint": "mynginx-75b3bf22a555.eastus2.nginxaas.net"
+          "nginxVersion": "nginx-1.19.6",
+          "provisioningState": "Succeeded",
+          "scalingProperties": {
+            "capacity": 10
+          },
+          "userProfile": {
+            "preferredEmail": "example@example.email"
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
         }
       }
     },
@@ -85,5 +85,7 @@
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/locations/westus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2025-03-01-preview"
       }
     }
-  }
+  },
+  "operationId": "Deployments_Update",
+  "title": "Deployments_UpdateSubnet"
 }

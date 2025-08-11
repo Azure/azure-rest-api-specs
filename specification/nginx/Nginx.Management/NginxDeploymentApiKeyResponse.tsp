@@ -30,29 +30,31 @@ interface NginxDeploymentApiKeyResponses {
   /**
    * Get the specified API Key of the given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiKeys_Get")
   get is ArmResourceRead<NginxDeploymentApiKeyResponse>;
 
   /**
    * Create or update an API Key for the Nginx deployment in order to access the dataplane API endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiKeys_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NginxDeploymentApiKeyResponse>;
+  @armResourceCreateOrUpdate(NginxDeploymentApiKeyResponse)
+  createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
+    ResourceInstanceParameters<
+      NginxDeploymentApiKeyResponse,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxDeploymentApiKeyResponse>
+    >,
+    NginxDeploymentApiKeyRequest,
+    NginxDeploymentApiKeyResponse | ArmResourceCreatedResponse<NginxDeploymentApiKeyResponse>,
+    ErrorResponse,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Delete API key for Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiKeys_Delete")
   delete is ArmResourceDeleteSync<NginxDeploymentApiKeyResponse>;
 
   /**
    * List all API Keys of the given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiKeys_List")
   list is ArmResourceListByParent<
     NginxDeploymentApiKeyResponse,
     Response = ArmResponse<NginxDeploymentApiKeyListResponse>
@@ -63,6 +65,6 @@ interface NginxDeploymentApiKeyResponses {
 @@doc(NginxDeploymentApiKeyResponse.properties,
   "Nginx Deployment Api Key Response Properties"
 );
-@@doc(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
+@@doc(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.properties,
   "The API Key object containing fields (e.g. secret text, expiration date) to upsert the key."
 );

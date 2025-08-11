@@ -1,55 +1,57 @@
 {
   "parameters": {
     "api-version": "2025-03-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "deploymentName": "myDeployment",
     "resourceGroupName": "myResourceGroup",
-    "deploymentName": "myDeployment"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/.../wafPolicies?api-version=2025-03-01-preview&$skiptoken=...",
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/wafPolicies/wafPolicy1",
             "name": "wafPolicy1",
             "type": "Nginx.NginxPlus/nginxDeployments/wafPolicies",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/wafPolicies/wafPolicy1",
             "properties": {
-              "provisioningState": "Succeeded",
-              "filepath": "/etc/nginx/waf/policy.conf",
+              "applyingState": {
+                "code": "Succeeded",
+                "displayStatus": "Policy Applied",
+                "time": "2025-03-02T10:05:00.000Z"
+              },
               "compilingState": {
                 "code": "Succeeded",
                 "displayStatus": "Compiled Successfully",
                 "time": "2025-03-02T10:00:00.000Z"
               },
-              "applyingState": {
-                "code": "Succeeded",
-                "displayStatus": "Policy Applied",
-                "time": "2025-03-02T10:05:00.000Z"
-              }
+              "filepath": "/etc/nginx/waf/policy.conf",
+              "provisioningState": "Succeeded"
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/wafPolicies/wafPolicy2",
             "name": "wafPolicy2",
             "type": "Nginx.NginxPlus/nginxDeployments/wafPolicies",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/wafPolicies/wafPolicy2",
             "properties": {
-              "provisioningState": "Succeeded",
-              "filepath": "/etc/nginx/waf/policy.conf",
+              "applyingState": {
+                "code": "Succeeded",
+                "displayStatus": "Policy Applied",
+                "time": "2025-03-02T10:05:00.000Z"
+              },
               "compilingState": {
                 "code": "Succeeded",
                 "displayStatus": "Compiled Successfully",
                 "time": "2025-03-02T10:00:00.000Z"
               },
-              "applyingState": {
-                "code": "Succeeded",
-                "displayStatus": "Policy Applied",
-                "time": "2025-03-02T10:05:00.000Z"
-              }
+              "filepath": "/etc/nginx/waf/policy.conf",
+              "provisioningState": "Succeeded"
             }
           }
-        ],
-        "nextLink": "https://management.azure.com/.../wafPolicies?api-version=2025-03-01-preview&$skiptoken=..."
+        ]
       }
     }
-  }
+  },
+  "operationId": "WafPolicy_List",
+  "title": "WafPolicy_List"
 }

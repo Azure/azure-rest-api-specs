@@ -30,29 +30,21 @@ interface NginxCertificates {
   /**
    * Get a certificate of given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_Get")
   get is ArmResourceRead<NginxCertificate>;
 
   /**
    * Create or update the NGINX certificates for given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NginxCertificate>;
 
   /**
    * Deletes a certificate from the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<NginxCertificate>;
 
   /**
    * List all certificates of given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_List")
   list is ArmResourceListByParent<
     NginxCertificate,
     Response = ArmResponse<NginxCertificateListResponse>

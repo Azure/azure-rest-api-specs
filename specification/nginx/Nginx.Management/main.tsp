@@ -25,11 +25,9 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * // FIXME: (missing-service-description) Add service description
- */
+
 @armProviderNamespace
-@service(#{ title: "NginxManagementClient" })
+@service(#{ title: "Nginx.NginxPlus" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Nginx.NginxPlus;

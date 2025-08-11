@@ -30,29 +30,34 @@ interface NginxConfigurationResponses {
   /**
    * Get the NGINX configuration of given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_Get")
   get is ArmResourceRead<NginxConfigurationResponse>;
 
   /**
    * Create or update the NGINX configuration for given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NginxConfigurationResponse>;
+  @put
+  createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
+    ResourceInstanceParameters<
+      NginxConfigurationResponse,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxConfigurationResponse>
+    >,
+    NginxConfigurationRequest,
+    NginxConfigurationResponse | ArmResourceCreatedResponse<
+      NginxConfigurationResponse,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = NginxConfigurationResponse>
+    >,
+    ErrorResponse,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Reset the NGINX configuration of given NGINX deployment to default
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<NginxConfigurationResponse>;
 
   /**
    * List the NGINX configuration of given NGINX deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_List")
   list is ArmResourceListByParent<
     NginxConfigurationResponse,
     Response = ArmResponse<NginxConfigurationListResponse>
@@ -61,8 +66,6 @@ interface NginxConfigurationResponses {
   /**
    * Analyze an NGINX configuration without applying it to the NGINXaaS deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_Analysis")
   @action("analyze")
   analysis is ArmResourceActionSync<
     NginxConfigurationResponse,
@@ -78,7 +81,7 @@ interface NginxConfigurationResponses {
 @@doc(NginxConfigurationResponse.properties,
   "Nginx Configuration Response Properties"
 );
-@@doc(NginxConfigurationResponses.createOrUpdate::parameters.resource,
+@@doc(NginxConfigurationResponses.createOrUpdate::parameters.properties,
   "The NGINX configuration"
 );
 @@doc(NginxConfigurationResponses.analysis::parameters.body,

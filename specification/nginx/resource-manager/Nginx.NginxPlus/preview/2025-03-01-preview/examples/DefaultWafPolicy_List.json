@@ -1,21 +1,23 @@
 {
   "parameters": {
     "api-version": "2025-03-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "deploymentName": "myDeployment",
     "resourceGroupName": "myResourceGroup",
-    "deploymentName": "myDeployment"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/...&$skiptoken=...",
         "value": [
           {
             "content": "QUJDREVGR0g=",
             "filepath": "/etc/nginx/waf/policy.conf"
           }
-        ],
-        "nextLink": "https://management.azure.com/...&$skiptoken=..."
+        ]
       }
     }
-  }
+  },
+  "operationId": "DefaultWafPolicy_List",
+  "title": "DefaultWafPolicy_List"
 }

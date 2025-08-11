@@ -3,27 +3,27 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Nginx.NginxPlus;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AnalysisCreate.config);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AnalysisResult.data);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentProperties.nginxAppProtect);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentScalingProperties.autoScaleSettings);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ScaleProfile.capacity);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentUpdateProperties.nginxAppProtect);
 
 @@clientLocation(NginxDeploymentApiKeyResponses.get, "ApiKeys");
 @@clientLocation(NginxDeploymentApiKeyResponses.createOrUpdate, "ApiKeys");
-@@clientName(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
+@@clientName(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.properties,
   "body"
 );
 @@clientLocation(NginxDeploymentApiKeyResponses.delete, "ApiKeys");
@@ -37,7 +37,7 @@ using Nginx.NginxPlus;
 
 @@clientLocation(NginxConfigurationResponses.get, "Configurations");
 @@clientLocation(NginxConfigurationResponses.createOrUpdate, "Configurations");
-@@clientName(NginxConfigurationResponses.createOrUpdate::parameters.resource,
+@@clientName(NginxConfigurationResponses.createOrUpdate::parameters.properties,
   "body"
 );
 @@clientLocation(NginxConfigurationResponses.delete, "Configurations");

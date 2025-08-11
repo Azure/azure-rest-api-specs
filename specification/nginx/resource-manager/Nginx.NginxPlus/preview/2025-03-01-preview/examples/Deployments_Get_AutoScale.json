@@ -1,32 +1,33 @@
 {
   "parameters": {
     "api-version": "2025-03-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "deploymentName": "myDeployment",
     "resourceGroupName": "myResourceGroup",
-    "deploymentName": "myDeployment"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment",
         "name": "myDeployment",
         "type": "nginx.nginxplus/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment",
         "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "nginxVersion": "nginx-1.19.6",
+          "autoUpgradeProfile": {
+            "upgradeChannel": "stable"
+          },
           "networkProfile": {
             "frontEndIPConfiguration": {
-              "publicIPAddresses": [
-                {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
-                }
-              ],
               "privateIPAddresses": [
                 {
                   "privateIPAddress": "1.1.1.1",
                   "privateIPAllocationMethod": "Static",
                   "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+                }
+              ],
+              "publicIPAddresses": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
                 }
               ]
             },
@@ -34,27 +35,28 @@
               "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
             }
           },
-          "userProfile": {
-            "preferredEmail": "example@example.email"
-          },
+          "nginxVersion": "nginx-1.19.6",
+          "provisioningState": "Succeeded",
           "scalingProperties": {
             "autoScaleSettings": {
               "profiles": [
                 {
                   "name": "ExampleProfile",
                   "capacity": {
-                    "min": 10,
-                    "max": 50
+                    "max": 50,
+                    "min": 10
                   }
                 }
               ]
             }
           },
-          "autoUpgradeProfile": {
-            "upgradeChannel": "stable"
+          "userProfile": {
+            "preferredEmail": "example@example.email"
           }
         }
       }
     }
-  }
+  },
+  "operationId": "Deployments_Get",
+  "title": "Deployments_Get_AutoScale"
 }
