@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "certificateDistinguishedName": {
+      "properties": {
+        "autoRenew": true,
+        "certificates": {
+          "SampleCertName1": {
+            "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+            "keyVaultSecretName": "SampleSecretName1"
+          },
+          "SampleCertName2": {
+            "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+            "keyVaultSecretName": "SampleSecretName2"
+          }
+        },
+        "distinguishedName": "CN=SampleCustomDomain.com",
+        "keySize": 2048,
+        "productType": "StandardDomainValidatedSsl",
+        "validityInYears": 2
+      }
+    },
+    "certificateOrderName": "SampleCertificateOrderName",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleCertificateOrderName",
+        "type": "Microsoft.CertificateRegistration/certificateOrders",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName",
+        "location": "Global",
+        "properties": {
+          "appServiceCertificateNotRenewableReasons": [
+            "ExpirationNotInRenewalTimeRange"
+          ],
+          "autoRenew": true,
+          "certificates": {
+            "SampleCertName1": {
+              "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+              "keyVaultSecretName": "SampleSecretName1",
+              "provisioningState": "Succeeded"
+            },
+            "SampleCertName2": {
+              "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+              "keyVaultSecretName": "SampleSecretName2",
+              "provisioningState": "KeyVaultSecretDoesNotExist"
+            }
+          },
+          "contact": {
+            "email": "contact@email.com",
+            "nameFirst": "SampleFirstName",
+            "nameLast": "SampleLastName",
+            "phone": "1-224-550-332"
+          },
+          "csr": "xdf!x|",
+          "distinguishedName": "CN=SampleCustomDomain.com",
+          "domainVerificationToken": "awe4163Br6d32r",
+          "expirationTime": "2022-11-12T23:40:25+00:00",
+          "intermediate": {
+            "issuer": "CACert",
+            "notAfter": "2023-11-12T23:40:25+00:00",
+            "notBefore": "2021-05-12T23:40:25+00:00",
+            "serialNumber": "k45kad0024",
+            "signatureAlgorithm": "SHA",
+            "subject": "CN=IntermediateCertSubjectName",
+            "thumbprint": "RF3D7411A44163B6D32B3343559B03E175886EBFE",
+            "version": 5589220
+          },
+          "isPrivateKeyExternal": false,
+          "keySize": 2048,
+          "lastCertificateIssuanceTime": "2021-11-12T23:40:25+00:00",
+          "nextAutoRenewalTimeStamp": "2022-11-12T23:40:25+00:00",
+          "productType": "StandardDomainValidatedSsl",
+          "provisioningState": "Succeeded",
+          "root": {
+            "issuer": "CACert",
+            "notAfter": "2023-11-12T23:40:25+00:00",
+            "notBefore": "2021-05-12T23:40:25+00:00",
+            "serialNumber": "jkskd890ajdd00124",
+            "signatureAlgorithm": "SHA",
+            "subject": "CN=RootCertSubjectName",
+            "thumbprint": "ZD3D7411A44163B6D32B3343559B03E175886EBFE",
+            "version": 3430921
+          },
+          "serialNumber": "12324325325",
+          "signedCertificate": {
+            "issuer": "CACert",
+            "notAfter": "2022-11-12T23:40:25+00:00",
+            "notBefore": "2021-11-12T23:40:25+00:00",
+            "serialNumber": "sds12424k",
+            "signatureAlgorithm": "SHA",
+            "subject": "CN=CertSubjectName",
+            "thumbprint": "FE703D7411A44163B6D32B3AD9B03E175886EBFE",
+            "version": 1232490
+          },
+          "status": "Issued",
+          "validityInYears": 2
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AppServiceCertificateOrders_Update",
+  "title": "Update Certificate order"
+}
