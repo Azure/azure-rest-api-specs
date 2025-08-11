@@ -92,12 +92,6 @@ model SkuSummary {
   @doc("The service type")
   serviceType?: string;
 
-  @doc("Min quantity")
-  minQuantity?: int32;
-
-  @doc("Max quantity")
-  maxQuantity?: int32;
-
   @doc("Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available exclusively to publisher-selected Cloud Solution Provider partners")
   cspState?: string;
 
@@ -467,12 +461,6 @@ model PlanDetails extends PlanSummary {
 
   @doc("A StopSellInfo object providing stop sell related data")
   stopSellInfo?: StopSellInfo;
-
-  @doc("Min quantity")
-  minQuantity?: int32;
-
-  @doc("Max quantity")
-  maxQuantity?: int32;
 
   @doc("A value indicating whether the plan is quantifiable")
   isQuantifiable: boolean;
@@ -993,3 +981,19 @@ model OdataOrderByParameter {
 // API key def
 @doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview)")
 model DiscoveryApiKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;
+
+// Error payload definitions
+@doc("Error payload returned by Marketplace Discovery APIs")
+model DiscoveryErrorPayload {
+  @doc("The error details object")
+  error: DiscoveryErrorDetails;
+}
+
+@doc("Error details returned by Marketplace Discovery APIs")
+model DiscoveryErrorDetails {
+  @doc("The error code")
+  code: string;
+
+  @doc("The error message")
+  message: string;
+}
