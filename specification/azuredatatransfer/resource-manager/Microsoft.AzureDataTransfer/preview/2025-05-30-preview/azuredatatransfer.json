@@ -56,6 +56,40 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.AzureDataTransfer/listApprovedSchemas": {
+      "post": {
+        "operationId": "AzureDataTransfer_listApprovedSchemas",
+        "description": "Retrieves the list of approved schemas available for Azure Data Transfer. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "pipeline",
+            "in": "body",
+            "description": "The request payload for listing approved schemas.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListApprovedSchemasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SchemasListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AzureDataTransfer/listFlowProfiles": {
       "post": {
         "operationId": "AzureDataTransfer_ListFlowProfiles",
@@ -131,6 +165,40 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureDataTransfer/validateSchema": {
+      "post": {
+        "operationId": "AzureDataTransfer_validateSchema",
+        "description": "Validates the structure and content of a schema for use in Azure Data Transfer. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "schema",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateSchemaResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -2840,6 +2908,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/listSchemas": {
+      "post": {
+        "operationId": "ListSchemas_List",
+        "tags": [
+          "Pipelines"
+        ],
+        "description": "Lists the schemas associated with a specific connection in the Pipeline. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineName",
+            "in": "path",
+            "description": "The name of the pipeline on which to operate.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "schema",
+            "in": "body",
+            "description": "The schema(s) to retrieve for the specified connection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemasListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/pipelines/{pipelineName}/rejectConnection": {
       "post": {
         "operationId": "Pipelines_RejectConnection",
@@ -2945,7 +3066,8 @@
       },
       "required": [
         "actionType",
-        "targetType"
+        "targetType",
+        "targets"
       ]
     },
     "ActionType": {
@@ -3013,6 +3135,10 @@
       "type": "object",
       "description": "Properties specific to API Flow Type",
       "properties": {
+        "remoteEndpoint": {
+          "type": "string",
+          "description": "Remote host to which communication needs to be made. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead."
+        },
         "cname": {
           "type": "string",
           "description": "Unique CNAME to represent the Azure Data Transfer API Flow instance"
@@ -3020,6 +3146,22 @@
         "apiMode": {
           "$ref": "#/definitions/ApiMode",
           "description": "Remote Calling Mode in the Azure Data Transfer API Flow, which describes how the API Flow will be invoked"
+        },
+        "identityTranslation": {
+          "$ref": "#/definitions/IdentityTranslation",
+          "description": "Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead."
+        },
+        "senderClientId": {
+          "type": "string",
+          "description": "Sender's app user assigned Manage Identity client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead."
+        },
+        "remoteCallingModeClientId": {
+          "type": "string",
+          "description": "Remote stub app registration Client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead."
+        },
+        "audienceOverride": {
+          "type": "string",
+          "description": "Optional field to override the audience of the remote endpoint. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead."
         },
         "authentication": {
           "type": "array",
@@ -3292,6 +3434,13 @@
           "description": "Resource ID of the linked connection",
           "readOnly": true
         },
+        "flowTypes": {
+          "type": "array",
+          "description": "The flow types being requested for this connection. This FlowType property has reached end of life support starting version 2025-05-30-preview. Please create a FlowProfile resource instead.",
+          "items": {
+            "$ref": "#/definitions/FlowType"
+          }
+        },
         "flowProfileList": {
           "type": "array",
           "description": "Provides a list of FlowProfiles .",
@@ -3337,6 +3486,28 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the connection",
           "readOnly": true
+        },
+        "policies": {
+          "type": "array",
+          "description": "The policies for this connection. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schemas": {
+          "type": "array",
+          "description": "The schemas for this connection. The schemas property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "schemaUris": {
+          "type": "array",
+          "description": "The schema URIs for this connection. The schemaUris property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
         },
         "apiHostname": {
           "type": "string",
@@ -3513,6 +3684,30 @@
           "default": 0,
           "minimum": 0
         }
+      }
+    },
+    "DataType": {
+      "type": "string",
+      "description": "Transfer Storage Blobs or Tables",
+      "enum": [
+        "Blob",
+        "Table"
+      ],
+      "x-ms-enum": {
+        "name": "DataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Blob",
+            "value": "Blob",
+            "description": "The flow uses Azure Storage blobs to send or receive data."
+          },
+          {
+            "name": "Table",
+            "value": "Table",
+            "description": "The flow uses Azure Storage tables to send or receive data."
+          }
+        ]
       }
     },
     "Direction": {
@@ -3935,10 +4130,29 @@
           "description": "The Flow's data class.",
           "readOnly": true
         },
+        "flowType": {
+          "$ref": "#/definitions/FlowType",
+          "description": "The flow type for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType",
+          "description": "Type of data to transfer via the flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the flow",
           "readOnly": true
+        },
+        "policies": {
+          "type": "array",
+          "description": "The policies for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "The selected schema for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "messagingOptions": {
           "$ref": "#/definitions/MessagingOptions",
@@ -4276,6 +4490,20 @@
         ]
       }
     },
+    "ListApprovedSchemasRequest": {
+      "type": "object",
+      "description": "The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
+      "properties": {
+        "pipeline": {
+          "type": "string",
+          "description": "The name of the pipeline to filter approved schemas."
+        },
+        "direction": {
+          "$ref": "#/definitions/Direction",
+          "description": "The direction pipeline to filter approved schemas."
+        }
+      }
+    },
     "ListFlowProfilesRequest": {
       "type": "object",
       "description": "Defines the required request body for retrieving FlowProfile information for a provided pipeline.",
@@ -4481,6 +4709,13 @@
           "description": "Resource ID of the linked connection",
           "readOnly": true
         },
+        "flowTypes": {
+          "type": "array",
+          "description": "The flow types being requested for this connection. This FlowType property has reached end of life support starting version 2025-05-30-preview. Please create a FlowProfile resource instead.",
+          "items": {
+            "$ref": "#/definitions/FlowType"
+          }
+        },
         "flowProfileList": {
           "type": "array",
           "description": "Provides a list of FlowProfiles .",
@@ -4526,6 +4761,28 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the connection",
           "readOnly": true
+        },
+        "policies": {
+          "type": "array",
+          "description": "The policies for this connection. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schemas": {
+          "type": "array",
+          "description": "The schemas for this connection. The schemas property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "schemaUris": {
+          "type": "array",
+          "description": "The schema URIs for this connection. The schemaUris property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
         },
         "apiHostname": {
           "type": "string",
@@ -4688,10 +4945,29 @@
           "description": "The Flow's data class.",
           "readOnly": true
         },
+        "flowType": {
+          "$ref": "#/definitions/FlowType",
+          "description": "The flow type for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType",
+          "description": "Type of data to transfer via the flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the flow",
           "readOnly": true
+        },
+        "policies": {
+          "type": "array",
+          "description": "The policies for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/Schema",
+          "description": "The selected schema for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "messagingOptions": {
           "$ref": "#/definitions/MessagingOptions",
@@ -4907,6 +5183,20 @@
           "description": "Provisioning state of the pipeline",
           "readOnly": true
         },
+        "policies": {
+          "type": "array",
+          "description": "The policies for this pipeline. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flowTypes": {
+          "type": "array",
+          "description": "The flow type for this flow. The flowTypes property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
+          "items": {
+            "$ref": "#/definitions/FlowType"
+          }
+        },
         "disabledFlowTypes": {
           "type": "array",
           "description": "The flow types that are disabled for this pipeline",
@@ -4966,6 +5256,10 @@
       "type": "object",
       "description": "The pipelines resource patch definition.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelinesPatchProperties",
+          "description": "Properties of pipelines patch body."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -4976,6 +5270,19 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "PipelinesPatchProperties": {
+      "type": "object",
+      "description": "Properties of pipelines patch body. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile resource instead.",
+      "properties": {
+        "flowTypes": {
+          "type": "array",
+          "description": "The flow types allowed for this pipeline. FlowTypes has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile property instead.",
+          "items": {
+            "$ref": "#/definitions/FlowType"
+          }
         }
       }
     },
@@ -5091,6 +5398,106 @@
       "required": [
         "id"
       ]
+    },
+    "Schema": {
+      "type": "object",
+      "description": "The schema object. Schemas has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID associated with this schema"
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "Connection ID associated with this schema"
+        },
+        "status": {
+          "$ref": "#/definitions/SchemaStatus",
+          "description": "Status of the schema"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the schema"
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the schema"
+        },
+        "direction": {
+          "$ref": "#/definitions/Direction",
+          "description": "The direction of the schema."
+        },
+        "schemaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Uri containing SAS token for the zipped schema"
+        },
+        "schemaType": {
+          "$ref": "#/definitions/SchemaType",
+          "description": "The Schema Type"
+        }
+      }
+    },
+    "SchemaStatus": {
+      "type": "string",
+      "description": "Status of the schema.",
+      "enum": [
+        "New",
+        "Approved"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "A schema that has not been approved and is awaiting review."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "A schema that has been approved and is ready for use."
+          }
+        ]
+      }
+    },
+    "SchemaType": {
+      "type": "string",
+      "description": "The Schema Type.",
+      "enum": [
+        "Xsd",
+        "Zip"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Xsd",
+            "value": "Xsd",
+            "description": "The schema represents a single XML schema definition file."
+          },
+          {
+            "name": "Zip",
+            "value": "Zip",
+            "description": "The schema represents a ZIP file with multiple XML schema definition files within it."
+          }
+        ]
+      }
+    },
+    "SchemasListResult": {
+      "type": "object",
+      "description": "The schemas list result. SchemaListResults has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Schemas array.",
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        }
+      }
     },
     "SelectedResource": {
       "type": "object",
@@ -5341,6 +5748,45 @@
           ]
         }
       }
+    },
+    "ValidateSchemaResult": {
+      "type": "object",
+      "description": "Result of the schema validation. ValidateSchemaResult has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ValidateSchemaStatus",
+          "description": "Validation status of the schema"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message describing the schema validation"
+        }
+      }
+    },
+    "ValidateSchemaStatus": {
+      "type": "string",
+      "description": "Validation status of the schema",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ValidateSchemaStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Validation of the schema was successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The schema failed validation, whether due to error or an invalid schema."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "XmlFilterRuleset": {
       "type": "object",

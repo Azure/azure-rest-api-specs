@@ -23,10 +23,9 @@ namespace Microsoft.AzureDataTransfer;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface corresponds to our Provider level actions, no decorator exists for that."
 interface AzureDataTransfer {
   /**
-   * Retrieves the list of approved schemas available for Azure Data Transfer. This operation is deprecated as of version v2025_05_30_preview.
+   * Retrieves the list of approved schemas available for Azure Data Transfer. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
-  @removed(Versions.v2025_05_30_preview)
   @operationId("AzureDataTransfer_listApprovedSchemas")
   @autoRoute
   listApprovedSchemas is ArmProviderActionSync<
@@ -52,10 +51,9 @@ interface AzureDataTransfer {
   >;
 
   /**
-   * Validates the structure and content of a schema for use in Azure Data Transfer. This operation is deprecated as of version v2025_05_30_preview.
+   * Validates the structure and content of a schema for use in Azure Data Transfer. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
-  @removed(Versions.v2025_05_30_preview)
   @operationId("AzureDataTransfer_validateSchema")
   @autoRoute
   validateSchema is ArmProviderActionSync<
