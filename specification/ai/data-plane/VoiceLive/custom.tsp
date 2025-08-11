@@ -293,19 +293,17 @@ model VideoParams {
   resolution?: VideoResolution;
 }
 
-@doc("A 2D point with x and y coordinates.")
-model Point2D {
-  x: int32;
-  y: int32;
-}
-
-@doc("Defines a video crop rectangle.")
+@doc("Defines a video crop rectangle using top-left and bottom-right coordinates.")
 model VideoCrop {
-  @doc("Top-left corner of the crop region.")
-  top_left: Point2D;
+  @doc("Top-left corner of the crop region. Array of [x, y], must be non-negative integers.")
+  @minItems(2)
+  @maxItems(2)
+  top_left: int32[];
 
-  @doc("Bottom-right corner of the crop region.")
-  bottom_right: Point2D;
+  @doc("Bottom-right corner of the crop region. Array of [x, y], must be non-negative integers.")
+  @minItems(2)
+  @maxItems(2)
+  bottom_right: int32[];
 }
 
 @doc("Resolution of the video feed in pixels.")

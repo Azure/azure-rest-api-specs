@@ -57,7 +57,6 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ClientEvent, Access.public, "csharp");
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "csharp");
-@@access(VoiceLive.Point2D, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
 

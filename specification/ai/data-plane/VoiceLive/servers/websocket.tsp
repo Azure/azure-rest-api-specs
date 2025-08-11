@@ -77,7 +77,9 @@ alias ForceModelServerEvent =
   ServerEventResponseTextDone |
   ServerEventResponseAudioTranscriptDelta |
   ServerEventResponseAudioTranscriptDone |
-  ServerEventResponseAudioDone;
+  ServerEventResponseAudioDone |
+  ServerEventResponseFunctionCallArgumentsDelta |
+  ServerEventResponseFunctionCallArgumentsDone;
 
 // Operation definition
 op force_models(event: ForceModelClientEvent): ForceModelServerEvent;
