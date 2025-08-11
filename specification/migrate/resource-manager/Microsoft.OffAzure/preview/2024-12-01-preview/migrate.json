@@ -16461,6 +16461,22 @@
         "osArchitecture": {
           "type": "string",
           "description": "Gets or sets the Architecture of the operating system."
+        },
+        "osDistro": {
+          "type": "string",
+          "description": "Gets or sets the Distro of the operating system."
+        },
+        "osMajorVersion": {
+          "type": "string",
+          "description": "Gets or sets the Major Version of the operating system."
+        },
+        "osVariant": {
+          "type": "string",
+          "description": "Gets or sets the Variant of the operating system."
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "Gets or sets the Kernel Version of the operating system."
         }
       }
     },
@@ -16798,6 +16814,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets LUN of the disk."
+        },
+        "isOsDisk": {
+          "type": "string",
+          "description": "Gets or sets a value indicating whether disk is os disk."
         },
         "path": {
           "type": "string",
@@ -19275,6 +19295,18 @@
         "osArchitecture": {
           "type": "string",
           "description": "Gets or sets the Architecture of the operating system."
+        },
+        "osDistro": {
+          "type": "string",
+          "description": "Gets or sets the Distro of the operating system."
+        },
+        "osMajorVersion": {
+          "type": "string",
+          "description": "Gets or sets the Major Version of the operating system."
+        },
+        "osVariant": {
+          "type": "string",
+          "description": "Gets or sets the Variant of the operating system."
         }
       }
     },
@@ -20212,6 +20244,14 @@
           "format": "int32",
           "description": "Gets or sets LUN of the disk."
         },
+        "diskId": {
+          "type": "string",
+          "description": "Gets or sets guid for GPT disks or Signature for MBR disks."
+        },
+        "isOsDisk": {
+          "type": "string",
+          "description": "Gets or sets a value indicating whether disk is os disk."
+        },
         "path": {
           "type": "string",
           "description": "Gets or sets Path of the disk."
@@ -20455,6 +20495,11 @@
         "firmware": {
           "type": "string",
           "description": "Gets or sets the firmware."
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether Secure boot is enabled for the VM.",
+          "readOnly": true
         },
         "guestOsDetails": {
           "$ref": "#/definitions/GuestOsDetails",
@@ -24063,6 +24108,10 @@
           "format": "int32",
           "description": "Gets or sets LUN of the disk."
         },
+        "isOsDisk": {
+          "type": "string",
+          "description": "Gets or sets a value indicating whether disk is os disk."
+        },
         "path": {
           "type": "string",
           "description": "Gets or sets Path of the disk."
@@ -24385,6 +24434,11 @@
         "changeTrackingEnabled": {
           "type": "boolean",
           "description": "Value indicating whether change tracking is enabled.",
+          "readOnly": true
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether Secure boot is enabled for the VM.",
           "readOnly": true
         },
         "maxSnapshots": {
