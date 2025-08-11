@@ -103,7 +103,13 @@ namespace Customizations;
 
 // === GeoCatalog Instance Configuration ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup("csharp,python")
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java,python"
+)
+@clientName("GeocatalogClientImpl", "csharp,python")
 interface GeocatalogClient {
   getAuthConfig is GeoCatalogAuthConfigOperations.get;
   getAzmapsClientId is GeoCatalogAzmapsClient.getId;
@@ -112,7 +118,13 @@ interface GeocatalogClient {
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup("csharp,python")
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java,python"
+)
+@clientName("IngestionManagementClientImpl", "csharp")
 interface IngestionManagementClient {
   // Ingestion operations management
   deleteIngestionOperation is IngestionOperations.delete;
@@ -143,7 +155,13 @@ interface IngestionManagementClient {
 
 // === SpatioTemporal Asset Catalog (STAC) API ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup("csharp,python")
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java,python"
+)
+@clientName("StacClientImpl", "csharp")
 interface StacClient {
   // Collection Assets
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
@@ -215,7 +233,13 @@ interface StacClient {
 
 // === Tiles for STAC Items ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup("csharp,python")
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java,python"
+)
+@clientName("TilerClientImpl", "csharp")
 interface TilerClient {
   // Tile Matrix Sets
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
@@ -300,7 +324,13 @@ interface TilerClient {
 
 // === Shared Access Signature (SAS) ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup("csharp,python")
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java,python"
+)
+@clientName("SharedAccessSignatureClientImpl", "csharp")
 interface SharedAccessSignatureClient {
   // Sign HREF for read access
   getSign is Sas.getSign;
