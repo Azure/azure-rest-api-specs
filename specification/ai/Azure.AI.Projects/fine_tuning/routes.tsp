@@ -22,7 +22,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job.")
       @path
-      //@maxLength(???)
+      @maxLength(1024)
       fine_tuning_job_id: string;
     },
     FineTuningJob
@@ -69,6 +69,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job to cancel.")
       @path
+      @maxLength(1024)
       fine_tuning_job_id: string;
     },
     FineTuningJob
@@ -82,6 +83,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job to pause.")
       @path
+      @maxLength(1024)
       fine_tuning_job_id: string;
     },
     FineTuningJob
@@ -95,6 +97,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job to resume.")
       @path
+      @maxLength(1024)
       fine_tuning_job_id: string;
     },
     FineTuningJob
@@ -108,6 +111,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job to delete.")
       @path
+      @maxLength(1024)
       fine_tuning_job_id: string;
     },
     Http.NoContentResponse
@@ -121,6 +125,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job to get events for.")
       @path
+      @maxLength(1024)
       fine_tuning_job_id: string;
 
       @doc("Identifier for the last event from the previous pagination request.")
@@ -142,6 +147,7 @@ interface FineTuningJobs {
     {
       @doc("The ID of the fine-tuning job to get events for.")
       @path
+      @maxLength(1024)
       fine_tuning_job_id: string;
 
       @doc("Identifier for the last checkpoint from the previous pagination request.")
