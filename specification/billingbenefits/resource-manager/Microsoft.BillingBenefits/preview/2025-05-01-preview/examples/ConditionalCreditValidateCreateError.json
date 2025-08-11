@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "Invalid CACO Test",
+            "systemId": "INVALID-SYSTEM-ID",
+            "productCode": "INVALID:PRODUCT:CODE",
+            "startAt": "2023-01-01T00:00:00Z",
+            "allowContributors": "Enabled",
+            "milestones": [
+              {
+                "milestoneId": "00000000-0000-0000-0000-000000000000",
+                "name": "Invalid Milestone",
+                "spendTarget": {
+                  "amount": -1000,
+                  "currencyCode": "INVALID"
+                },
+                "award": {
+                  "credit": {
+                    "amount": 100000,
+                    "currencyCode": "USD"
+                  },
+                  "startAt": "2022-01-01T00:00:00Z",
+                  "endAt": "2021-12-31T00:00:00Z"
+                },
+                "endAt": "2022-12-31T00:00:00Z"
+              }
+            ]
+          }
+        },
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Contributor",
+            "displayName": "Invalid Contributor CACO",
+            "systemId": "INVALID-CONTRIBUTOR-SYSTEM",
+            "productCode": "INVALID:CONTRIBUTOR:CODE",
+            "startAt": "2023-01-01T00:00:00Z",
+            "primaryResourceId": "/subscriptions/invalid/resourceGroups/invalid/providers/Microsoft.BillingBenefits/conditionalCredits/nonexistent"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": false,
+            "reasonCode": "CACO_VALIDATION_FAILED",
+            "reason": "Multiple validation errors: Invalid product code format, negative spend target amount, invalid currency code, award end date cannot be before start date, milestone end date cannot be in the past"
+          },
+          {
+            "valid": false,
+            "reasonCode": "CONTRIBUTOR_VALIDATION_FAILED",
+            "reason": "Contributor validation failed: Invalid product code format, primary resource does not exist or is not accessible"
+          }
+        ]
+      }
+    }
+  }
+}

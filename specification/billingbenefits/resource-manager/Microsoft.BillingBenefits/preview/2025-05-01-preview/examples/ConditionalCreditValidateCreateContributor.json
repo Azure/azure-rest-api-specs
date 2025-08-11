@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "empowerment": {
+            "name": "Contributor Creation Override",
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNjNDA3N2E3LTEyYWMtNGE4Ni1hMjZmLWIyZmE3ZmI2ZjhiOCJ9.contributor.token"
+          },
+          "properties": {
+            "entityType": "Contributor",
+            "displayName": "Contributor CACO Test",
+            "primaryResourceId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47/resourceGroups/primaryRG/providers/Microsoft.BillingBenefits/conditionalCredits/primaryCACO",
+            "systemId": "CACO-SYSTEM-001",
+            "productCode": "DZH318Z0BPS6:0002:DZH318Z0BQZR",
+            "startAt": "2025-09-01T00:00:00Z"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true,
+            "resourceId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47/resourceGroups/contributorRG/providers/Microsoft.BillingBenefits/conditionalCredits/contributorCACO",
+            "systemId": "CACO-SYSTEM-001"
+          }
+        ]
+      }
+    }
+  }
+}
