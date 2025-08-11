@@ -1832,8 +1832,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NginxCertificateProperties",
-          "description": "Nginx Certificate Properties",
-          "x-ms-client-flatten": true
+          "description": "Nginx Certificate Properties"
         }
       },
       "allOf": [
@@ -1967,7 +1966,9 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file."
+          "format": "password",
+          "description": "The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file.",
+          "x-ms-secret": true
         },
         "virtualPath": {
           "type": "string",
@@ -2058,8 +2059,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NginxConfigurationResponseProperties",
-          "description": "Nginx Configuration Response Properties",
-          "x-ms-client-flatten": true
+          "description": "Nginx Configuration Response Properties"
         }
       },
       "allOf": [
@@ -2106,8 +2106,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NginxDeploymentProperties",
-          "description": "Nginx Deployment Properties",
-          "x-ms-client-flatten": true
+          "description": "Nginx Deployment Properties"
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
@@ -2195,8 +2194,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NginxDeploymentApiKeyResponseProperties",
-          "description": "Nginx Deployment Api Key Response Properties",
-          "x-ms-client-flatten": true
+          "description": "Nginx Deployment Api Key Response Properties"
         }
       },
       "allOf": [
@@ -2469,8 +2467,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NginxDeploymentWafPolicyProperties",
-          "description": "Nginx Deployment Waf Policy Properties",
-          "x-ms-client-flatten": true
+          "description": "Nginx Deployment Waf Policy Properties"
         }
       },
       "allOf": [

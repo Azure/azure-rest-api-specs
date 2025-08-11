@@ -431,6 +431,7 @@ model NginxConfigurationProtectedFileRequest {
   /**
    * The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file.
    */
+  @secret
   content?: string;
 
   /**
