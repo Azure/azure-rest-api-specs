@@ -307,13 +307,15 @@ model TilerInfo {
    * Minzoom
    */
   @summary("Minzoom")
-  minzoom?: int64;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int64;
 
   /**
    * Maxzoom
    */
   @summary("Maxzoom")
-  maxzoom?: int64;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int64;
 }
 /**
  * Union type for band metadata elements

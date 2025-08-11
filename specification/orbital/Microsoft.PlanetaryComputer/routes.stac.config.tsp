@@ -521,7 +521,7 @@ interface StacCollectionTileSettings {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/configurations/tile-settings")
   @get
-  getAll is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.

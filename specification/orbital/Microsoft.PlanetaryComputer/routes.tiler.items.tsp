@@ -273,7 +273,7 @@ interface TilerTiles {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -334,7 +334,7 @@ interface TilerTileMatrixSets {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;

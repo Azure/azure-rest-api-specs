@@ -400,13 +400,15 @@ model TileJsonResponse {
    * Minimum zoom level available in the tile set
    */
   @maxValue(30)
-  minzoom?: int32;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int32;
 
   /**
    * Maximum zoom level available in the tile set
    */
   @maxValue(30)
-  maxzoom?: int32 = 30;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int32 = 30;
 
   /**
    * Bounds
@@ -462,7 +464,7 @@ model AssetQueryParameters {
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
   @query("asset_bidx")
   @query(#{ explode: true })
-  assetBidx?: string[];
+  assetBandIndices?: string[];
 
   /**
    * Asset as Band
@@ -564,13 +566,13 @@ model ZoomQueryParameters {
    * Overwrite default minzoom.
    */
   @query("minzoom")
-  minzoom?: int32;
+  minZoom?: int32;
 
   /**
    * Overwrite default maxzoom.
    */
   @query("maxzoom")
-  maxzoom?: int32;
+  maxZoom?: int32;
 }
 
 alias TileResponse =

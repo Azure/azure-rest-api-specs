@@ -228,7 +228,7 @@ interface StacCollectionConfigurationClient {
   deleteRenderOption is StacCollectionRenderOptions.delete;
 
   // Collection Tile Settings
-  getTileSettings is StacCollectionTileSettings.getAll;
+  getTileSettings is StacCollectionTileSettings.get;
   replaceTileSettings is StacCollectionTileSettings.replace;
 
   // Collection Queryables Configuration
@@ -290,8 +290,8 @@ interface StacItemTilerClient {
   getGeoJsonStatistics is TilerGeoJsonStatistics.getAll;
 
   // Tiles
-  getTile is TilerTiles.getZxyScalexFormat;
-  getTileWithMatrixSet is TilerTileMatrixSets.getZxyScalexFormat;
+  getTile is TilerTiles.getZxyScaleByFormat;
+  getTileWithMatrixSet is TilerTileMatrixSets.getZxyScaleByFormat;
 
   // Tile JSON
   getTileJson is TilerTileJsonOperations.get;
@@ -341,8 +341,8 @@ interface MapLegendsClient {
 @clientName("MosaicTilerClientImpl", "csharp")
 interface MosaicTilerClient {
   // Tiles
-  getTile is MosaicsTiles.getZxyScalexFormat;
-  getTileWithMatrixSet is MosaicsTileMatrixSets.getZxyScalexFormat;
+  getTile is MosaicsTiles.getZxyScaleByFormat;
+  getTileWithMatrixSet is MosaicsTileMatrixSets.getZxyScaleByFormat;
 
   // Tile JSON
   getTileJson is MosaicsTileJsonOperations.get;
