@@ -16,13 +16,14 @@ namespace Microsoft.DBforMySQL;
  */
 @parentResource(Server)
 model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
-  >;
+  is Azure.ResourceManager.CommonTypes.PrivateEndpointConnection {
+  /** The name of the private endpoint connection. */
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("privateEndpointConnections")
+  @key
+  @pattern("^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*")
+  privateEndpointConnectionName: string;
 }
 
 @armResourceOperations
@@ -30,21 +31,14 @@ interface PrivateEndpointConnections {
   /**
    * Gets a private endpoint connection.
    */
-  get is ArmResourceRead<
-    PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
-  >;
+  get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Approve or reject a private endpoint connection with a given name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmResourceCreatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
 
   /**
    * Deletes a private endpoint connection with a given name.
@@ -59,14 +53,8 @@ interface PrivateEndpointConnections {
    * Gets all private endpoint connections on a server.
    */
   #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listByServer is ArmResourceListByParent<
-    PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
-  >;
+  listByServer is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@doc(PrivateEndpointConnection.name,
-  "The name of the private endpoint connection."
-);
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource, "");
