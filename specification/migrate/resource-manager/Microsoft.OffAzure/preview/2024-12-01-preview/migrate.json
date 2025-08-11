@@ -15928,6 +15928,16 @@
             "name": "Appliance",
             "value": "Appliance",
             "description": "Appliance Discovery Source."
+          },
+          {
+            "name": "ImportCsvServer",
+            "value": "ImportCsvServer",
+            "description": "CSV Server Import Discovery Source."
+          },
+          {
+            "name": "ImportRvTools",
+            "value": "ImportRvTools",
+            "description": "RV tools Import Discovery Source."
           }
         ]
       }
@@ -18395,6 +18405,11 @@
         "displayName": {
           "type": "string",
           "description": "Gets the Display name of the machine.",
+          "readOnly": true
+        },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets the discovery state of the server.",
           "readOnly": true
         },
         "isDeleted": {
