@@ -94,5 +94,5 @@ interface CapacityReservations {
   "Parameters supplied to the Create capacity reservation."
 );
 @@doc(CapacityReservations.update::parameters.properties,
-  "Parameters supplied to the Update capacity reservation operation."
+  "Parameters supplied to the Update capacity reservation operations."
 );
