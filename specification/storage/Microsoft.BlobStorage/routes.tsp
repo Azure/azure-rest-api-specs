@@ -1828,7 +1828,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?comp=properties&UpdateSequenceNumber")
-        op setSequenceNumber is StorageOperation<
+        op updateSequenceNumber is StorageOperation<
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
