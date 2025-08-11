@@ -55,3 +55,51 @@ op ArmCreateOperation<
   Response extends {},
   ErrorResponse extends {}
 >(...HttpParameters): Response | ErrorResponse;
+
+/**
+ * A resource list operation, at the scope of the resource's parent
+ * @template Resource the resource being patched
+ * @template BaseParameters Optional. Allows overriding the operation parameters
+ * @template ParentName Optional. The name of the parent resource
+ * @template ParentFriendlyName Optional. The friendly name of the parent resource
+ * @template Parameters Optional. Additional parameters after the path parameters
+ * @template Response Optional. The success response for the list operation
+ * @template Error Optional. The error response, if non-standard.
+ */
+@get
+@autoRoute
+@listsResource(Resource)
+@segmentOf(Resource)
+@Private.armRenameListByOperation(
+  Resource,
+  ParentName,
+  ParentFriendlyName,
+  false
+) // This must come before @armResourceList!
+@armResourceList(Resource)
+@Private.enforceConstraint(Resource, Foundations.Resource)
+op ArmResourceListByParent<
+  Resource extends Foundations.SimpleResource,
+  BaseParameters = DefaultBaseParameters<Resource>,
+  ParentName extends valueof string = "",
+  ParentFriendlyName extends valueof string = "",
+  Parameters extends {} = {},
+  Response extends {} = ArmResponse<ResourceListResult<Resource>>,
+  Error extends {} = ErrorResponse
+> is ArmReadOperation<
+  ResourceParentParameters<Resource, BaseParameters> & Parameters,
+  Response,
+  Error
+>;
+
+/**
+ * @dev The base template for Azure Resource Manager GET and HEAD Operations.
+ * @template Parameters The parameter object for the operation.
+ * @template Response The response or union of responses for success.
+ * @template ErrorResponse The error response.
+ */
+op ArmReadOperation<
+  Parameters extends {},
+  Response extends {},
+  ErrorResponse extends {}
+>(...Parameters): Response | ErrorResponse;
