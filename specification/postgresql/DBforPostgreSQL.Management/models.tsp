@@ -3387,6 +3387,7 @@ model VirtualEndpointResourceForPatch {
 /**
  * Properties of a pair of virtual endpoints.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualEndpointResourceProperties {
   /**
    * Type of endpoint for the virtual endpoints.
