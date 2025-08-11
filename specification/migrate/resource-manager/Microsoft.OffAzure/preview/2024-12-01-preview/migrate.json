@@ -17543,6 +17543,14 @@
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
@@ -20756,6 +20764,14 @@
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
         "arcScope": {
           "$ref": "#/definitions/ArcScopePropertiesUpdate",
           "description": "Gets or sets the Arc scope properties for the server site."
@@ -21238,6 +21254,18 @@
           "description": "Gets the service endpoint.",
           "readOnly": true
         },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/DiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
@@ -21271,6 +21299,10 @@
         "rawCertData": {
           "type": "string",
           "description": "Gets or sets the raw certificate data for building certificate expiry flows."
+        },
+        "machineResourceId": {
+          "$ref": "#/definitions/MachineResourceId",
+          "description": "Gets or sets the ARM ID of the arc for servers resource."
         }
       }
     },
@@ -21303,6 +21335,18 @@
           "type": "string",
           "description": "Gets the service endpoint.",
           "readOnly": true
+        },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/DiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -23849,6 +23893,7 @@
         "2023-06-06",
         "2023-10-01-preview",
         "2024-05-01-preview",
+        "2024-07-01-preview",
         "2024-12-01-preview"
       ],
       "x-ms-enum": {
@@ -23919,6 +23964,11 @@
             "name": "v2024_05_01_preview",
             "value": "2024-05-01-preview",
             "description": "Api version 2024-05-01-preview."
+          },
+          {
+            "name": "v2024_07_01_preview",
+            "value": "2024-07-01-preview",
+            "description": "Api version 2024-07-01-preview."
           },
           {
             "name": "v2024_12_01_preview",
@@ -24767,6 +24817,14 @@
         "discoverySolutionId": {
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -25804,6 +25862,30 @@
             "name": "Extended",
             "value": "Extended",
             "description": "Extended value."
+          }
+        ]
+      }
+    },
+    "DiscoveryScenario": {
+      "type": "string",
+      "description": "Site properties DiscoveryScenario",
+      "enum": [
+        "Migrate",
+        "DR"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryScenario",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Migrate",
+            "value": "Migrate",
+            "description": "Migrate value."
+          },
+          {
+            "name": "DR",
+            "value": "DR",
+            "description": "DR value."
           }
         ]
       }
