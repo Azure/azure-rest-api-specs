@@ -100,7 +100,7 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     migrationParameters: MigrationParameters,
-  ): ArmResponse<MigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = CanMigrateResult>> & {
+  ): ArmResponse<MigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = MigrateResult>> & {
     @bodyRoot _: MigrateResult;
   }) | ErrorResponse;
 }
