@@ -92,6 +92,7 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CapabilitiesByServer_List")
+  @list
   @get
   @action("capabilities")
   list is ArmResourceActionSync<Server, void, ArmResponse<CapabilityList>>;
@@ -102,6 +103,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CapturedLogs_ListByServer")
   @get
+  @list
   @action("logFiles")
   listByServer is ArmResourceActionSync<
     Server,
@@ -169,6 +171,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Replicas_ListByServer")
   @get
+  @list
   @action("replicas")
   replicasListByServer is ArmResourceActionSync<
     Server,

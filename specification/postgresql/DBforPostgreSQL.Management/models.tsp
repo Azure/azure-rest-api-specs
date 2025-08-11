@@ -3462,20 +3462,18 @@ model DelegatedSubnetUsage {
 /**
  * Private DNS suffix.
  */
-model PrivateDnsZoneSuffix {
-  /**
-   * Private DNS zone suffix value
-   */
-  @visibility(Lifecycle.Read)
-  value?: string;
-}
+scalar PrivateDnsZoneSuffix extends string;
 
 /**
  * Custom error response for the service.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model CustomErrorResponse extends Azure.ResourceManager.ErrorResponse {
+@error
+model CustomErrorResponse {
+  @body
+  error: Azure.ResourceManager.ErrorResponse;
+
   @header("x-ms-error-code")
   @doc("ErrorCode string in the event of a failure.")
   errorCode?: string;

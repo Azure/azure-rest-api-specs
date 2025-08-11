@@ -1,17 +1,15 @@
 {
   "paths": {
-    "/providers/microsoft.DBforPostgreSQL/operations": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        }
+    "/providers/microsoft.DBforPostgreSQL/getPrivateDnsZoneSuffix": {
+      "post": {
+        "produces__added": [
+          "text/plain",
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -72,9 +70,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/usages": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -444,9 +439,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/capabilities": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -788,9 +780,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/logFiles": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -873,17 +862,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse",
-                "__new": "#/definitions/CustomErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/migrations": {
@@ -1200,9 +1179,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/replicas": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -1290,17 +1266,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse",
-                "__new": "#/definitions/CustomErrorResponse"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/stop": {
@@ -1365,9 +1331,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -1565,14 +1528,6 @@
           "readOnly": true
         }
       }
-    },
-    "CustomErrorResponse__added": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-        }
-      ]
     },
     "ObjectRecommendationPropertiesAnalyzedWorkload__added": {
       "type": "object",
@@ -1800,6 +1755,9 @@
       "properties": {
         "kind": {
           "x-ms-visibility__deleted": "internal"
+        },
+        "properties": {
+          "readOnly__added": true
         }
       }
     },
@@ -1868,18 +1826,6 @@
       "required__added": [
         "value"
       ]
-    },
-    "PrivateDnsZoneSuffix": {
-      "properties__added": {
-        "value": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "type": {
-        "__old": "string",
-        "__new": "object"
-      }
     },
     "PrivateEndpointConnectionList": {
       "required__added": [
@@ -2088,14 +2034,6 @@
           }
         ]
       ]
-    },
-    "TuningOptions": {
-      "properties__added": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true
-        }
-      }
     },
     "TuningOptionsList": {
       "required__added": [

@@ -1,16 +1,10 @@
 ## Swagger Changes
 
-### Changes for `x-ms-pageable`
+### Changes for `produces`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/providers/microsoft.DBforPostgreSQL/operations'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/capabilities'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/usages'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/capabilities'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/logFiles'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/replicas'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/providers/microsoft.DBforPostgreSQL/getPrivateDnsZoneSuffix'].post.produces__added` | added | `["text/plain","application/json"]` |
 
 ### Changes for `$ref`
 
@@ -378,12 +372,6 @@
 |------|------------|-------|
 | `definitions.CapabilityBase__added` | added | `{"type":"object","properties":{"status":{"type":"string","enum":["Visible","Available","Default","Di...` |
 
-### Changes for `CustomErrorResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CustomErrorResponse__added` | added | `{"type":"object","allOf":[{"$ref":"../../../../../common-types/resource-management/v6/types.json#/de...` |
-
 ### Changes for `ObjectRecommendationPropertiesAnalyzedWorkload`
 
 | Path | Change Type | Value |
@@ -453,6 +441,7 @@
 |------|------------|-------|
 | `definitions.DataEncryption.properties.geoBackupEncryptionKeyStatus.readOnly__added` | added | `true` |
 | `definitions.DataEncryption.properties.primaryEncryptionKeyStatus.readOnly__added` | added | `true` |
+| `definitions.ObjectRecommendation.properties.properties.readOnly__added` | added | `true` |
 | `definitions.ObjectRecommendationDetails.readOnly__deleted` | deleted | `true` |
 | `definitions.ObjectRecommendationProperties.properties.details.readOnly__added` | added | `true` |
 | `definitions.ObjectRecommendationProperties.readOnly__deleted` | deleted | `true` |
@@ -469,8 +458,6 @@
 |------|------------|-------|
 | `definitions.ObjectRecommendationProperties.properties.analyzedWorkload.properties__deleted` | deleted | `{"startTime":{"type":"string","format":"date-time","description":"Start time (UTC) of the workload a...` |
 | `definitions.ObjectRecommendationProperties.properties.implementationDetails.properties__deleted` | deleted | `{"method":{"type":"string","description":"Method of implementation for recommended action."},"script...` |
-| `definitions.PrivateDnsZoneSuffix.properties__added` | added | `{"value":{"type":"string","readOnly":true}}` |
-| `definitions.TuningOptions.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
 | `definitions.VirtualEndpoint.properties__added` | added | `{"properties":{"type":"object","x-ms-client-flatten":true}}` |
 
 ### Changes for `x-ms-client-flatten`
@@ -512,7 +499,6 @@
 |------|-----------|----------|
 | `definitions.Capability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.FastProvisioningEditionCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
-| `definitions.PrivateDnsZoneSuffix.type` | `string` | `object` |
 | `definitions.PrivateEndpointConnectionList.properties.value.items.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `definitions.PrivateLinkResourceList.properties.value.items.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource` | `#/definitions/PrivateLinkResource` |
 | `definitions.ServerEditionCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
@@ -523,10 +509,8 @@
 | `definitions.StorageMbCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.StorageTierCapability.allOf[0].$ref` | `../../../types/common-types.json#/definitions/CapabilityBase` | `#/definitions/CapabilityBase` |
 | `definitions.VirtualEndpoint.allOf[0].$ref` | `#/definitions/VirtualEndpointResourceForPatch` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup'].post.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` | `#/definitions/CustomErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.parameters[2].schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateLinkResources/{groupName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource` | `#/definitions/PrivateLinkResource` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/replicas'].get.responses.200.schema.$ref` | `./Servers.json#/definitions/ServerList` | `#/definitions/ServerList` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup'].post.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` | `#/definitions/CustomErrorResponse` |
 

@@ -68,6 +68,7 @@ interface Operations {
   @autoRoute
   @doc("List the operations for the provider")
   @segment("operations")
+  @list
   @get
   list(
     ...ApiVersionParameter,

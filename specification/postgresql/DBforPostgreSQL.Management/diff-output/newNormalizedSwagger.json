@@ -15,6 +15,10 @@
     "/providers/microsoft.DBforPostgreSQL/getPrivateDnsZoneSuffix": {
       "post": {
         "operationId": "PrivateDnsZoneSuffix_Get",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -59,6 +63,9 @@
           "List all available REST API operations.": {
             "$ref": "./examples/OperationsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -155,6 +162,9 @@
           "List the capabilities available in a given location for a specific subscription.": {
             "$ref": "./examples/CapabilitiesByLocationList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -273,6 +283,9 @@
           "List of quota usages for servers": {
             "$ref": "./examples/QuotaUsagesForFlexibleServers.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1028,6 +1041,9 @@
           "List the capabilities available for a given server.": {
             "$ref": "./examples/CapabilitiesByServerList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1642,6 +1658,9 @@
           "List all captured logs for download in a server.": {
             "$ref": "./examples/CapturedLogsListByServer.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1765,7 +1784,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2336,6 +2355,9 @@
           "List all read replicas of a server.": {
             "$ref": "./examples/ReplicasListByServer.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2462,7 +2484,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2674,6 +2696,9 @@
           "List available table recommendations.": {
             "$ref": "./examples/TuningOptionsListTableRecommendations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3771,14 +3796,6 @@
           "readOnly": true
         }
       }
-    },
-    "CustomErrorResponse": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-        }
-      ]
     },
     "DataEncryption": {
       "type": "object",
@@ -4928,6 +4945,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ObjectRecommendationProperties",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -5164,13 +5182,7 @@
       ]
     },
     "PrivateDnsZoneSuffix": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
+      "type": "string"
     },
     "PrivateEndpointConnection": {
       "type": "object",
@@ -6111,12 +6123,6 @@
     },
     "TuningOptions": {
       "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true
-        }
-      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"

@@ -11,14 +11,16 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
-// FIXME: TuningOptions has no properties property
 /**
  * Impact on some metric if this recommended action is applied.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-model TuningOptions is Azure.ResourceManager.ProxyResource<{}> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model TuningOptions extends Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = TuningOptions,
     KeyName = "tuningOption",
@@ -53,6 +55,7 @@ interface TuningOptionsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TuningOptions_ListRecommendations")
   @get
+  @list
   @action("recommendations")
   listRecommendations is ArmResourceActionSync<
     TuningOptions,

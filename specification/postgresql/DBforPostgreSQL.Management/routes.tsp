@@ -20,6 +20,7 @@ interface CapabilitiesByLocationOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CapabilitiesByLocation_List")
+  @list
   @autoRoute
   @get
   @action("capabilities")
@@ -87,7 +88,10 @@ interface PrivateDnsZoneSuffixOperationGroup {
   @operationId("PrivateDnsZoneSuffix_Get")
   @autoRoute
   @action("getPrivateDnsZoneSuffix")
-  get is ArmProviderActionSync<Response = PrivateDnsZoneSuffix>;
+  get is ArmProviderActionSync<Response = {
+    @body
+    privateDnsZoneSuffix: PrivateDnsZoneSuffix;
+  }>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -99,6 +103,7 @@ interface QuotaUsagesOperationGroup {
   @operationId("QuotaUsages_List")
   @autoRoute
   @get
+  @list
   @action("resourceType/flexibleServers/usages")
   list is ArmProviderActionSync<
     Response = QuotaUsageList,

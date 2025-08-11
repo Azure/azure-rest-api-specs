@@ -87,6 +87,10 @@
       "post": {
         "operationId": "PrivateDnsZoneSuffix_Get",
         "description": "Gets the private DNS zone suffix.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -143,6 +147,9 @@
           "List all available REST API operations.": {
             "$ref": "./examples/OperationsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -266,6 +273,9 @@
           "List the capabilities available in a given location for a specific subscription.": {
             "$ref": "./examples/CapabilitiesByLocationList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -410,6 +420,9 @@
           "List of quota usages for servers": {
             "$ref": "./examples/QuotaUsagesForFlexibleServers.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1544,6 +1557,9 @@
           "List the capabilities available for a given server.": {
             "$ref": "./examples/CapabilitiesByServerList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2456,6 +2472,9 @@
           "List all captured logs for download in a server.": {
             "$ref": "./examples/CapturedLogsListByServer.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2621,9 +2640,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Custom error response for the service.",
             "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3410,6 +3429,9 @@
           "List all read replicas of a server.": {
             "$ref": "./examples/ReplicasListByServer.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3620,9 +3642,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Custom error response for the service.",
             "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3950,6 +3972,9 @@
           "List available table recommendations.": {
             "$ref": "./examples/TuningOptionsListTableRecommendations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5395,15 +5420,6 @@
           }
         ]
       }
-    },
-    "CustomErrorResponse": {
-      "type": "object",
-      "description": "Custom error response for the service.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-        }
-      ]
     },
     "DataEncryption": {
       "type": "object",
@@ -7509,15 +7525,8 @@
       }
     },
     "PrivateDnsZoneSuffix": {
-      "type": "object",
-      "description": "Private DNS suffix.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Private DNS zone suffix value",
-          "readOnly": true
-        }
-      }
+      "type": "string",
+      "description": "Private DNS suffix."
     },
     "PrivateEndpointConnection": {
       "type": "object",
@@ -8928,13 +8937,6 @@
     "TuningOptions": {
       "type": "object",
       "description": "Impact on some metric if this recommended action is applied.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
