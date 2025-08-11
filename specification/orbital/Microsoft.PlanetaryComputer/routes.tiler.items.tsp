@@ -822,7 +822,7 @@ interface TilerParts {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}")
   @get
-  getMinxMinyMaxxMaxyWidthxHeightFormat is Azure.Core.Foundations.Operation<
+  getCroppedToBoundingBoxWidthByHeight is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -907,7 +907,7 @@ interface TilerParts {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}.{format}")
   @get
-  getMinxMinyMaxxMaxyFormat is Azure.Core.Foundations.Operation<
+  getCroppedToBoundingBox is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -984,7 +984,7 @@ interface TilerGeoJsons {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{width}x{height}.{format}")
   @post
-  cropWidthxHeightFormat is Azure.Core.Foundations.Operation<
+  cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;

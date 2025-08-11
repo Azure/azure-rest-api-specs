@@ -533,6 +533,6 @@ interface MosaicsAssetsForPoints {
       @query("coord-crs")
       coordCrs?: string;
     },
-    Asset[] | NoContentResponse
+    Asset[]
   >;
 }

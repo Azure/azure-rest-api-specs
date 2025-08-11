@@ -918,10 +918,10 @@
             "$ref": "#/parameters/StatisticsQueryParameters.categorical"
           },
           {
-            "$ref": "#/parameters/StatisticsQueryParameters.c"
+            "$ref": "#/parameters/StatisticsQueryParameters.categoriesPixels"
           },
           {
-            "$ref": "#/parameters/StatisticsQueryParameters.p"
+            "$ref": "#/parameters/StatisticsQueryParameters.percentiles"
           },
           {
             "$ref": "#/parameters/StatisticsQueryParameters.histogramBins"
@@ -1081,7 +1081,7 @@
     },
     "/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}.{format}": {
       "get": {
-        "operationId": "TilerParts_GetMinxMinyMaxxMaxyFormat",
+        "operationId": "TilerParts_GetCroppedToBoundingBox",
         "tags": [
           "Tiles for STAC Items"
         ],
@@ -1308,7 +1308,7 @@
           }
         },
         "x-ms-examples": {
-          "TilerParts_GetMinxMinyMaxxMaxyFormat": {
+          "TilerParts_GetCroppedToBoundingBox": {
             "$ref": "./examples/TilerParts_GetMinxMinyMaxxMaxyFormat.json"
           }
         }
@@ -1316,7 +1316,7 @@
     },
     "/data/collections/{collectionId}/items/{itemId}/crop/{width}x{height}.{format}": {
       "post": {
-        "operationId": "TilerGeoJsons_CropWidthxHeightFormat",
+        "operationId": "TilerGeoJsons_CropWidthByHeightFormat",
         "tags": [
           "Tiles for STAC Items"
         ],
@@ -1542,15 +1542,15 @@
           }
         },
         "x-ms-examples": {
-          "TilerGeoJsons_CropWidthxHeightFormat": {
-            "$ref": "./examples/TilerGeoJsons_CropWidthxHeightFormat.json"
+          "TilerGeoJsons_CropWidthByHeightFormat": {
+            "$ref": "./examples/TilerGeoJsons_CropWidthByHeightFormat.json"
           }
         }
       }
     },
     "/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}": {
       "get": {
-        "operationId": "TilerParts_GetMinxMinyMaxxMaxyWidthxHeightFormat",
+        "operationId": "TilerParts_GetCroppedToBoundingBoxWidthByHeight",
         "tags": [
           "Tiles for STAC Items"
         ],
@@ -1787,8 +1787,8 @@
           }
         },
         "x-ms-examples": {
-          "TilerParts_GetMinxMinyMaxxMaxyWidthxHeightFormat": {
-            "$ref": "./examples/TilerParts_GetMinxMinyMaxxMaxyWidthxHeightFormat.json"
+          "TilerParts_GetCroppedToBoundingBoxWidthByHeight": {
+            "$ref": "./examples/TilerParts_GetMinxMinyMaxxMaxyWidthByHeightFormat.json"
           }
         }
       }
@@ -2867,10 +2867,10 @@
             "$ref": "#/parameters/StatisticsQueryParameters.categorical"
           },
           {
-            "$ref": "#/parameters/StatisticsQueryParameters.c"
+            "$ref": "#/parameters/StatisticsQueryParameters.categoriesPixels"
           },
           {
-            "$ref": "#/parameters/StatisticsQueryParameters.p"
+            "$ref": "#/parameters/StatisticsQueryParameters.percentiles"
           },
           {
             "$ref": "#/parameters/StatisticsQueryParameters.histogramBins"
@@ -2970,10 +2970,10 @@
             "$ref": "#/parameters/StatisticsQueryParameters.categorical"
           },
           {
-            "$ref": "#/parameters/StatisticsQueryParameters.c"
+            "$ref": "#/parameters/StatisticsQueryParameters.categoriesPixels"
           },
           {
-            "$ref": "#/parameters/StatisticsQueryParameters.p"
+            "$ref": "#/parameters/StatisticsQueryParameters.percentiles"
           },
           {
             "$ref": "#/parameters/StatisticsQueryParameters.histogramBins"
@@ -4166,9 +4166,6 @@
                 "$ref": "#/definitions/Asset"
               }
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7431,7 +7428,25 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionDefinitionsPagedResponse"
+              "type": "object",
+              "description": "Generic paged response model",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The items on the page",
+                  "items": {
+                    "$ref": "#/definitions/Ingestions.IngestionDefinition"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Link to the next page of results"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -7697,7 +7712,25 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRunsPagedResponse"
+              "type": "object",
+              "description": "Generic paged response model",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The items on the page",
+                  "items": {
+                    "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRun"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Link to the next page of results"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -7840,7 +7873,25 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IngestionSources.IngestionSourcesPagedResponse"
+              "type": "object",
+              "description": "Generic paged response model",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The items on the page",
+                  "items": {
+                    "$ref": "#/definitions/IngestionSources.IngestionSourceSummary"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Link to the next page of results"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -8092,7 +8143,25 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IngestionSources.ManagedIdentitiesPagedResponse"
+              "type": "object",
+              "description": "Generic paged response model",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The items on the page",
+                  "items": {
+                    "$ref": "#/definitions/IngestionSources.ManagedIdentityMetadata"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Link to the next page of results"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -8195,7 +8264,25 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationsPagedResponse"
+              "type": "object",
+              "description": "Generic paged response model",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "The items on the page",
+                  "items": {
+                    "$ref": "#/definitions/Operation"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Link to the next page of results"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -13608,27 +13695,6 @@
         "value"
       ]
     },
-    "IngestionSources.ManagedIdentitiesPagedResponse": {
-      "type": "object",
-      "description": "Managed Identities paged response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Managed Identities",
-          "items": {
-            "$ref": "#/definitions/IngestionSources.ManagedIdentityMetadata"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Next page"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "IngestionSources.ManagedIdentityConnection": {
       "type": "object",
       "description": "Managed Identity connection information",
@@ -13808,27 +13874,6 @@
         }
       }
     },
-    "Ingestions.IngestionDefinitionsPagedResponse": {
-      "type": "object",
-      "description": "Ingestions Definitions paged response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Ingestion Definitions",
-          "items": {
-            "$ref": "#/definitions/Ingestions.IngestionDefinition"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Next page"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "Ingestions.IngestionRuns.IngestionRun": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion run",
@@ -13934,27 +13979,6 @@
         "totalPendingItems",
         "totalSuccessfulItems",
         "totalFailedItems"
-      ]
-    },
-    "Ingestions.IngestionRuns.IngestionRunsPagedResponse": {
-      "type": "object",
-      "description": "Ingestion Runs paged response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Ingestion Runs",
-          "items": {
-            "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRun"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Next page"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "Ingestions.IngestionStatus": {
@@ -15012,27 +15036,6 @@
       "required": [
         "timestamp",
         "status"
-      ]
-    },
-    "OperationsPagedResponse": {
-      "type": "object",
-      "description": "Operations paged response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Operations",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Next page"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "PartitionType": {
@@ -18950,18 +18953,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "top"
     },
-    "StatisticsQueryParameters.c": {
-      "name": "c",
-      "in": "query",
-      "description": "List of values for which to report counts.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
-    },
     "StatisticsQueryParameters.categorical": {
       "name": "categorical",
       "in": "query",
@@ -18969,6 +18960,19 @@
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method"
+    },
+    "StatisticsQueryParameters.categoriesPixels": {
+      "name": "c",
+      "in": "query",
+      "description": "List of pixel categorical values for which to report counts.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "categoriesPixels"
     },
     "StatisticsQueryParameters.histogramBins": {
       "name": "histogram_bins",
@@ -18999,7 +19003,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "maxSize"
     },
-    "StatisticsQueryParameters.p": {
+    "StatisticsQueryParameters.percentiles": {
       "name": "p",
       "in": "query",
       "description": "List of percentile values (default to [2, 98]).",
@@ -19009,8 +19013,9 @@
         "type": "integer",
         "format": "int32"
       },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "percentiles"
     },
     "StatisticsQueryParameters.resampling": {
       "name": "resampling",

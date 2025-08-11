@@ -10,6 +10,17 @@ using Azure.Core.Traits;
 @service(#{ title: "MPCPro Ingestion and Management API" })
 namespace Microsoft.PlanetaryComputer;
 
+@doc("Generic paged response model")
+model Page<T> {
+  @doc("The items on the page")
+  @pageItems
+  value: T[];
+
+  @doc("Link to the next page of results")
+  @nextLink
+  nextLink?: url;
+}
+
 @route("/inma/collections/{collectionId}/ingestions")
 @tag("Ingestion Management")
 namespace Ingestions {
@@ -19,7 +30,7 @@ namespace Ingestions {
   op list(
     ...CollectionParameters,
     ...OdataQuery,
-  ): IngestionDefinitionsPagedResponse | ErrorResponse;
+  ): Page<IngestionDefinition> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get the definition of an ingestion")
@@ -86,15 +97,6 @@ namespace Ingestions {
     @body
     _: Operation;
   } | ErrorResponse;
-
-  @doc("Ingestions Definitions paged response")
-  model IngestionDefinitionsPagedResponse {
-    @doc("Ingestion Definitions")
-    value: IngestionDefinition[];
-
-    @doc("Next page")
-    nextLink?: url;
-  }
 
   @doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
   model IngestionDefinition {
@@ -163,7 +165,7 @@ namespace Ingestions {
     op list(
       ...IngestionParameters,
       ...OdataQuery,
-    ): IngestionRunsPagedResponse | ErrorResponse;
+    ): Page<IngestionRun> | ErrorResponse;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
     @doc("Get a run of an ingestion")
@@ -183,15 +185,6 @@ namespace Ingestions {
       @body
       _: IngestionRun;
     } | ErrorResponse;
-
-    @doc("Ingestion Runs paged response")
-    model IngestionRunsPagedResponse {
-      @doc("Ingestion Runs")
-      value: IngestionRun[];
-
-      @doc("Next page")
-      nextLink?: url;
-    }
 
     @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
     model IngestionRun {
@@ -500,7 +493,7 @@ namespace IngestionSources {
   op list(
     ...ApiVersionParameter,
     ...OdataQuery,
-  ): IngestionSourcesPagedResponse | ErrorResponse;
+  ): Page<IngestionSourceSummary> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get an ingestion source in a geo-catalog")
@@ -578,16 +571,7 @@ namespace IngestionSources {
   @doc("Get all managed identities with access to storage accounts configured for a geo-catalog")
   op listManagedIdentities(
     ...ApiVersionParameter,
-  ): ManagedIdentitiesPagedResponse | ErrorResponse;
-
-  @doc("Managed Identities paged response")
-  model ManagedIdentitiesPagedResponse {
-    @doc("Managed Identities")
-    value: ManagedIdentityMetadata[];
-
-    @doc("Next page")
-    nextLink?: url;
-  }
+  ): Page<ManagedIdentityMetadata> | ErrorResponse;
 
   @doc("Ingestion Sources paged response")
   model IngestionSourcesPagedResponse {
@@ -708,7 +692,7 @@ namespace IngestionOperations {
     @doc("Operation status used to filter the results")
     @query("status")
     status?: OperationStatus,
-  ): OperationsPagedResponse | ErrorResponse;
+  ): Page<Operation> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get an operation of a geo-catalog collection")
@@ -741,15 +725,6 @@ namespace IngestionOperations {
   op deleteAll(...ApiVersionParameter): {
     @statusCode statusCode: 204;
   } | ErrorResponse;
-}
-
-@doc("Operations paged response")
-model OperationsPagedResponse {
-  @doc("Operations")
-  value: Operation[];
-
-  @doc("Next page")
-  nextLink?: url;
 }
 
 @doc("Microsoft Planetary Computer Pro geo-catalog operation")

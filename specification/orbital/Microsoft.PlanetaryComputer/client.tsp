@@ -45,30 +45,17 @@ namespace Customizations;
 @@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
 @@clientName(BoundsResponse, "BoundsResult", "csharp");
 @@clientName(ClassmapLegendResponse, "ClassmapLegendResult", "csharp");
-@@clientName(OperationsPagedResponse, "OperationsPagedResult", "csharp");
 @@clientName(GeoJsonStatisticsItemCollectionResponse,
   "GeoJsonStatisticsItemCollectionResult",
   "csharp"
 );
 
-@@clientName(IngestionSources.ManagedIdentitiesPagedResponse,
-  "ManagedIdentitiesPagedResult",
-  "csharp"
-);
 @@clientName(GeoJsonStatisticsItemResponse,
   "GeoJsonStatisticsItemResult",
   "csharp"
 );
 @@clientName(InfoOperationResponse, "InfoOperationResult", "csharp");
-@@clientName(Ingestions.IngestionDefinitionsPagedResponse,
-  "IngestionDefinitionsPagedResult",
-  "csharp"
-);
 @@clientName(RegisterResponse, "RegisterResult", "csharp");
-@@clientName(Ingestions.IngestionRuns.IngestionRunsPagedResponse,
-  "IngestionRunsPagedResult",
-  "csharp"
-);
 @@clientName(StatisticsResponse, "StatisticsResult", "csharp");
 @@clientName(TileJsonResponse, "TileJsonResult", "csharp");
 @@clientName(IngestionSources.IngestionSourcesPagedResponse,
@@ -322,10 +309,10 @@ interface StacItemTilerClient {
   getPreviewWithFormat is TilerPreviews.getFormat;
 
   // Parts/Crops
-  getPart is TilerParts.getMinxMinyMaxxMaxyFormat;
-  getPartWithDimensions is TilerParts.getMinxMinyMaxxMaxyWidthxHeightFormat;
+  getPart is TilerParts.getCroppedToBoundingBox;
+  getPartWithDimensions is TilerParts.getCroppedToBoundingBoxWidthByHeight;
   cropGeoJson is TilerGeoJsons.cropFormat;
-  cropGeoJsonWithDimensions is TilerGeoJsons.cropWidthxHeightFormat;
+  cropGeoJsonWithDimensions is TilerGeoJsons.cropWidthByHeightFormat;
 }
 
 // === Map Legends ===
