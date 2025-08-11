@@ -68,3 +68,13 @@ jobs:
             const { default: summarizeChecks } =
               await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.js');
             return await summarizeChecks({ github, context, core });
+
+      # May be used by downstream workflows
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.summarize-checks.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.summarize-checks.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
