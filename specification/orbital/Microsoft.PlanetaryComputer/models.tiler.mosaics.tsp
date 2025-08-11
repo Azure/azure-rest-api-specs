@@ -187,6 +187,7 @@ model RegisterResponse {
   /**
    * Unique identifier for the registered search
    */
+  @encodedName("application/json", "searchid")
   searchId: string;
 
   /**
