@@ -44,7 +44,7 @@ using Nginx.NginxPlus;
 @@clientLocation(NginxConfigurationResponses.list, "Configurations");
 @@clientLocation(NginxConfigurationResponses.analysis, "Configurations");
 
-@@clientLocation(NginxDeployments.get, "Deployments");
+@@clientLocation(NginxDeployments.get, "Deployments", "!csharp");
 @@clientLocation(NginxDeployments.createOrUpdate, "Deployments");
 @@clientName(NginxDeployments.createOrUpdate::parameters.resource, "body");
 @@clientLocation(NginxDeployments.update, "Deployments");
