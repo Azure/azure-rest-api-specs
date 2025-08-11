@@ -52,8 +52,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private endpoint connections on a server.
    */
-  #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listByServer is ArmResourceListByParent<PrivateEndpointConnection>;
+  listByServer is Azure.ResourceManager.CustomLegacy.ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
