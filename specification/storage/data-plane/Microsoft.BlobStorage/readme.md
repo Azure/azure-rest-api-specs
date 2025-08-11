@@ -139,6 +139,15 @@ input-file:
   - stable/2025-11-05/generated_blob.json
 ```
 
+### Tag: package-2026-02-tsp
+
+These settings apply only when `--tag=package-2026-02-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-tsp'
+input-file:
+  - stable/2026-02-06/generated_blob.json
+```
+
 ### Suppression
 
 ```yaml
