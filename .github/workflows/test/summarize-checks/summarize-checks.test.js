@@ -105,7 +105,7 @@ describe("Summarize Checks Integration Tests", () => {
           requiredCheckRuns,
           fyiCheckRuns,
           impactAssessment !== undefined,
-          WORKFLOW_URL
+          WORKFLOW_URL,
         );
 
         const actualLabels = [...labelContext.toAdd, ...labelContext.present];
@@ -143,7 +143,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -252,7 +252,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -321,7 +321,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -380,7 +380,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -424,7 +424,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -473,7 +473,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -522,7 +522,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -631,7 +631,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         false, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -698,7 +698,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -827,7 +827,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(output).toEqual(expectedOutput);
@@ -871,7 +871,7 @@ describe("Summarize Checks Unit Tests", () => {
         requiredCheckRuns,
         fyiCheckRuns,
         true, // assessmentCompleted
-        WORKFLOW_URL
+        WORKFLOW_URL,
       );
 
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
