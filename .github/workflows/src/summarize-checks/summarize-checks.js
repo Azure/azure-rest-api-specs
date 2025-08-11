@@ -363,6 +363,12 @@ export async function summarizeChecksImpl(
 ) {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
+  const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.summary.addRaw("PR: ");
+  core.summary.addLink(prUrl, prUrl);
+  core.summary.write();
+  core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
+
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
@@ -441,6 +447,9 @@ export async function summarizeChecksImpl(
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
+  core.summary.addRaw(`\n${commentBody}\n\n`);
+  core.summary.write();
+
   // this will remain commented until we're comfortable with the change.
   // await commentOrUpdate(
   //   { github, context, core },
@@ -457,6 +466,9 @@ export async function summarizeChecksImpl(
   core.info(
     `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
+  core.summary.addHeading("Automated Checks Met", 2);
+  core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
+  core.summary.write();
 }
 
 /**
@@ -785,7 +797,12 @@ export async function getCheckRunTuple(
     });
 
     if (branchRules) {
-      requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules);
+      requiredCheckNames = getRequiredChecksFromBranchRuleOutput(branchRules).filter(
+        // "Automated merging requirements met" may be required in repo settings, to ensure PRs cannot be merged unless
+        // it's passing.  However, it must be excluded from our list of requiredCheckNames, since it's status is set
+        // by our own workflow.  If this check isn't excluded, it creates a deadlock where it can never be set.
+        (checkName) => checkName !== AUTOMATED_CHECK_NAME,
+      );
     }
   } else {
     requiredCheckNames = ["Summarize PR Impact", "[TEST-IGNORE] Summarize PR Impact"];
