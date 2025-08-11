@@ -90,8 +90,6 @@ interface Servers {
   /**
    * Lists the capabilities available for a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CapabilitiesByServer_List")
   @list
   @get
   @action("capabilities")
@@ -100,8 +98,6 @@ interface Servers {
   /**
    * Lists all captured logs for download in a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CapturedLogs_ListByServer")
   @get
   @list
   @action("logFiles")
@@ -114,8 +110,6 @@ interface Servers {
   /**
    * Performs all checks required for a long term retention backup operation to succeed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BackupsLongTermRetention_CheckPrerequisites")
   @action("ltrPreBackup")
   checkPrerequisites is ArmResourceActionAsyncBase<
     Server,
@@ -132,8 +126,6 @@ interface Servers {
   /**
    * Initiates a long term retention backup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BackupsLongTermRetention_Start")
   @action("startLtrBackup")
   start is ArmResourceActionAsyncBase<
     Server,
@@ -156,8 +148,6 @@ interface Servers {
   /**
    * Checks if a proposed migration name is valid and available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Migrations_CheckNameAvailability")
   @action("checkMigrationNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     Server,
@@ -168,8 +158,6 @@ interface Servers {
   /**
    * Lists all read replicas of a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Replicas_ListByServer")
   @get
   @list
   @action("replicas")
@@ -193,8 +181,6 @@ interface Servers {
   /**
    * Starts a stopped server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Servers_Start")
   @action("start")
   serversStart is ArmResourceActionAsyncBase<
     Server,

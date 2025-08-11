@@ -32,17 +32,13 @@ interface AdvancedThreatProtectionSettingsModels {
   /**
    * Gets state of advanced threat protection settings for a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AdvancedThreatProtectionSettings_Get")
   get is ArmResourceRead<AdvancedThreatProtectionSettingsModel>;
 
   /**
    * Creates or updates a server's Advanced Threat Protection settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @operationId("ServerThreatProtectionSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AdvancedThreatProtectionSettingsModel,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
@@ -53,8 +49,6 @@ interface AdvancedThreatProtectionSettingsModels {
   /**
    * Lists state of advanced threat protection settings for a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AdvancedThreatProtectionSettings_ListByServer")
   listByServer is ArmResourceListByParent<
     AdvancedThreatProtectionSettingsModel,
     Response = ArmResponse<AdvancedThreatProtectionSettingsList>

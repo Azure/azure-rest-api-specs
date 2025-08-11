@@ -18,8 +18,6 @@ interface CapabilitiesByLocationOperationGroup {
   /**
    * Lists the capabilities available in a given location for a specific subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CapabilitiesByLocation_List")
   @list
   @autoRoute
   @get
@@ -45,8 +43,6 @@ interface NameAvailabilityOperationGroup {
   /**
    * Checks the validity and availability of the given name, to assign it to a new server or to use it as the base name of a new pair of virtual endpoints.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NameAvailability_CheckGlobally")
   @autoRoute
   @action("checkNameAvailability")
   checkGlobally is ArmProviderActionSync<
@@ -58,8 +54,6 @@ interface NameAvailabilityOperationGroup {
   /**
    * Check the availability of name for resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NameAvailability_CheckWithLocation")
   @autoRoute
   @action("checkNameAvailability")
   checkWithLocation is ArmProviderActionSync<
@@ -84,8 +78,6 @@ interface PrivateDnsZoneSuffixOperationGroup {
   /**
    * Gets the private DNS zone suffix.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateDnsZoneSuffix_Get")
   @autoRoute
   @action("getPrivateDnsZoneSuffix")
   get is ArmProviderActionSync<Response = {
@@ -99,8 +91,6 @@ interface QuotaUsagesOperationGroup {
   /**
    * Get quota usages at specified location in a given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("QuotaUsages_List")
   @autoRoute
   @get
   @list
@@ -126,8 +116,6 @@ interface VirtualNetworkSubnetUsageOperationGroup {
   /**
    * Lists the virtual network subnet usage for a given virtual network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualNetworkSubnetUsage_List")
   @autoRoute
   @action("checkVirtualNetworkSubnetUsage")
   list is ArmProviderActionSync<

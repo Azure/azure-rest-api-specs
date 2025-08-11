@@ -30,15 +30,11 @@ interface BackupsLongTermRetentionOperations {
   /**
    * Gets the results of a long retention backup operation for a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BackupsLongTermRetention_Get")
   get is ArmResourceRead<BackupsLongTermRetentionOperation>;
 
   /**
    * Lists the results of the long term retention backup operations for a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BackupsLongTermRetention_ListByServer")
   listByServer is ArmResourceListByParent<
     BackupsLongTermRetentionOperation,
     Response = ArmResponse<LtrServerBackupOperationList>
