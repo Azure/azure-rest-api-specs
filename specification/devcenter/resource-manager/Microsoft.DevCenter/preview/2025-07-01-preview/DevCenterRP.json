@@ -9508,19 +9508,6 @@
         ]
       }
     },
-    "CreatorRoleAssignment": {
-      "type": "object",
-      "description": "The role definition assigned to the environment creator on backing resources.",
-      "properties": {
-        "roles": {
-          "type": "object",
-          "description": "A map of roles to assign to the environment creator.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EnvironmentRole"
-          }
-        }
-      }
-    },
     "CustomizationTask": {
       "type": "object",
       "description": "Represents a Task to be used in customizing a Dev Box.",
@@ -12302,7 +12289,7 @@
           "description": "Defines whether this Environment Type can be used in this Project."
         },
         "creatorRoleAssignment": {
-          "$ref": "#/definitions/CreatorRoleAssignment",
+          "$ref": "#/definitions/ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment",
           "description": "The role definition assigned to the environment creator on backing resources."
         },
         "userRoleAssignments": {
@@ -12310,6 +12297,19 @@
           "description": "Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.",
           "additionalProperties": {
             "$ref": "#/definitions/UserRoleAssignment"
+          }
+        }
+      }
+    },
+    "ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment": {
+      "type": "object",
+      "description": "The role definition assigned to the environment creator on backing resources.",
+      "properties": {
+        "roles": {
+          "type": "object",
+          "description": "A map of roles to assign to the environment creator.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentRole"
           }
         }
       }
