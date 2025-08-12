@@ -473,18 +473,18 @@
       "type": "string",
       "description": "Defines operators used in filter conditions.",
       "enum": [
-        "eq",
-        "ne",
-        "lt",
-        "lte",
-        "gt",
-        "gte",
+        "==",
+        "!=",
+        "<",
+        "<=",
+        ">",
+        ">=",
         "@in",
-        "notin",
+        "!in",
         "startswith",
-        "notstartswith",
+        "!startswith",
         "contains",
-        "notcontains"
+        "!contains"
       ],
       "x-ms-enum": {
         "name": "ConditionOperator",
@@ -492,32 +492,32 @@
         "values": [
           {
             "name": "Equal",
-            "value": "eq",
+            "value": "==",
             "description": "Equal to."
           },
           {
             "name": "NotEqual",
-            "value": "ne",
+            "value": "!=",
             "description": "Not equal to."
           },
           {
             "name": "LessThan",
-            "value": "lt",
+            "value": "<",
             "description": "Less than."
           },
           {
             "name": "LessThanOrEqual",
-            "value": "lte",
+            "value": "<=",
             "description": "Less than or equal to."
           },
           {
             "name": "GreaterThan",
-            "value": "gt",
+            "value": ">",
             "description": "Greater than."
           },
           {
             "name": "GreaterThanOrEqual",
-            "value": "gte",
+            "value": ">=",
             "description": "Greater than or equal to."
           },
           {
@@ -527,7 +527,7 @@
           },
           {
             "name": "NotIn",
-            "value": "notin",
+            "value": "!in",
             "description": "Not in."
           },
           {
@@ -537,7 +537,7 @@
           },
           {
             "name": "NotStartsWith",
-            "value": "notstartswith",
+            "value": "!startswith",
             "description": "Does not start with."
           },
           {
@@ -547,7 +547,7 @@
           },
           {
             "name": "NotContains",
-            "value": "notcontains",
+            "value": "!contains",
             "description": "Does not contain the value."
           }
         ]
