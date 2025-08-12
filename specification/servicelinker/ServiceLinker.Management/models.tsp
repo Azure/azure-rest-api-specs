@@ -264,12 +264,11 @@ union AccessKeyPermissions {
  * Describes a page of resource object.
  * @template Resource The resource type.
  */
-@Azure.Core.pagedResult
 @friendlyName("Paged{name}", Resource)
 @doc("Paged collection of {name} items", Resource)
 model CustomPage<Resource extends TypeSpec.Reflection.Model> {
   @doc("The {name} items on this page", Resource)
-  @Azure.Core.items
+  @pageItems
   value?: Resource[];
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
