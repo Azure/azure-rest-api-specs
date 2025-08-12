@@ -17,10 +17,6 @@ import "./Pipeline.tsp";
 import "./Flow.tsp";
 import "./ProviderActions.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
