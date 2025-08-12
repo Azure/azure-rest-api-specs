@@ -45,7 +45,10 @@ export async function extractInputs(github, context, core) {
         context.payload.action === "synchronize" ||
         context.payload.action === "reopened" ||
         context.payload.action === "labeled" ||
-        context.payload.action === "unlabeled"))
+        context.payload.action === "unlabeled" ||
+        context.payload.action === "edited" ||
+        context.payload.action === "ready_for_review" ||
+        context.payload.action === "converted_to_draft"))
   ) {
     // Most properties on payload should be the same for both pull_request and pull_request_target
 
