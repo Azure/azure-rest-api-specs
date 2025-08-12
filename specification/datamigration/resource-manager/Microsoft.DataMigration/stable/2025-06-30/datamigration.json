@@ -1446,6 +1446,44 @@
         }
       }
     },
+    "/providers/Microsoft.DataMigration/operations": {
+      "get": {
+        "summary": "Get available resource provider actions (operations)",
+        "description": "Lists all available actions exposed by the Database Migration Service resource provider.",
+        "tags": [
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Got action list",
+            "schema": {
+              "$ref": "./definitions/Services.json#/definitions/ServiceOperationList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/files": {
       "get": {
         "summary": "Get files in a project",
