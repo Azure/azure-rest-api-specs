@@ -1,5 +1,5 @@
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
-import { getSha } from "@azure-tools/specs-shared/simple-git";
+import { getBranchName, getSha } from "@azure-tools/specs-shared/simple-git";
 import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -100,10 +100,10 @@ async function runLintDiff(
   outFile: string,
   githubRepoPath: string,
 ) {
-  const baseRef = await getSha(resolve(beforePath));
+  const baseSha = await getSha(resolve(beforePath));
   const changedFiles = await getChangedFiles({
     cwd: resolve(afterPath),
-    baseCommitish: baseRef,
+    baseCommitish: baseSha,
     headCommitish: "",
     paths: ["specification"],
   });
@@ -164,6 +164,7 @@ async function runLintDiff(
 
   const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
   const compareSha = await getSha(resolve(afterPath));
+  const baseRef = (await getBranchName(resolve(beforePath))) || baseSha;
 
   const pass = await generateLintDiffReport(
     runCorrelations,

@@ -13,7 +13,7 @@ debug.enable("simple-git");
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
- * @param {string} [options.headCommitish] Use empty string to include changes not yet committed. Default: "HEAD".
+ * @param {string} [options.headCommitish] Use empty string "" to include changes not yet committed. Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
