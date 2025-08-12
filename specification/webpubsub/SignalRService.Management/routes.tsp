@@ -34,6 +34,7 @@ interface UsagesOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("usages")
   list is ArmProviderActionSync<
     Response = SignalRServiceUsageList,

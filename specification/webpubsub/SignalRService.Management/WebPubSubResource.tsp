@@ -153,6 +153,7 @@ interface WebPubSubResources {
    * Get the private link resources that need to be created for a resource.
    */
   @get
+  @list
   @action("privateLinkResources")
   list is ArmResourceActionSync<
     WebPubSubResource,
