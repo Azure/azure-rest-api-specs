@@ -708,7 +708,7 @@ describe("Summarize Checks Unit Tests", () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = [
-        "RMReview",
+        "ARMReview",
         "ARMAutoSignedOff",
         "resource-manager",
         "TypeSpec",
