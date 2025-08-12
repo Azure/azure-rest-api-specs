@@ -406,12 +406,22 @@ export async function summarizeChecksImpl(
 
   for (const label of labelContext.toRemove) {
     core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-    await github.rest.issues.removeLabel({
-      owner: owner,
-      repo: repo,
-      issue_number: issue_number,
-      name: label,
-    });
+    try {
+      await github.rest.issues.removeLabel({
+        owner: owner,
+        repo: repo,
+        issue_number: issue_number,
+        name: label,
+      });
+    } catch (/** @type {any} */ error) {
+      // If label is not found (already removed), we can ignore it. This may happen
+      // due to users or other bots (like ARMAutoSignoff) messing about with a given PR.
+      if (error.status === 404) {
+        core.info(`Label ${label} not found; skipping removal.`);
+      } else {
+        throw error;
+      }
+    }
   }
 
   if (labelContext.toAdd.size > 0) {
