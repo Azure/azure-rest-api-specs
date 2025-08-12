@@ -151,11 +151,11 @@ model RunStepMessageCreationReference {
 @doc("The detailed information associated with a run step activities.")
 @added(Versions.v2025_05_15_preview)
 model RunStepActivityDetails extends RunStepDetails {
-  @doc("The object type, which is always 'activity'.")
+  @doc("The object type, which is always 'activities'.")
   type: RunStepType.activities;
 
   @encodedName("application/json", "activities")
-  @doc("A list of tool call details for this run step.")
+  @doc("A list of activities for this run step.")
   activities: RunStepDetailsActivity[];
 }
 
@@ -484,7 +484,7 @@ union RunAdditionalFieldList {
 /** Represents the list of activities, associated with the given step.* */
 @added(Versions.v2025_05_15_preview)
 model RunStepDetailsActivity {
-  @doc("The activity type, which is always mcp_list_tools.")
+  @doc("The activity type, which is always 'mcp_list_tools'.")
   type: "mcp_list_tools";
 
   @doc("The activity ID.")
@@ -520,14 +520,14 @@ model ActivityFunctionParameters {
   @doc("The list of the required parameters.")
   required: string[];
 
-  @doc("If true the function have additional parameters.")
+  @doc("If true the function has additional parameters.")
   additionalProperties?: boolean;
 }
 
 @doc("The function argument and description.")
 @added(Versions.v2025_05_15_preview)
 model FunctionArgument {
-  @doc("The type of an argument.")
+  @doc("The type of an argument, for example 'string' or 'number'.")
   type: string;
 
   @doc("The argument description.")
