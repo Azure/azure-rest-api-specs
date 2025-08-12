@@ -64,7 +64,7 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CloudEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
@@ -163,7 +163,8 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmAcceptedLroResponse & {
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PostBackupResponse> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
