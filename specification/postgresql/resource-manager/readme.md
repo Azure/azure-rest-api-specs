@@ -41,27 +41,7 @@ These settings apply only when `--tag=package-flexibleserver-2025-06-01-preview`
 
 ``` yaml $(tag) == 'package-flexibleserver-2025-06-01-preview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdministratorsMicrosoftEntra.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdvancedThreatProtectionSettings.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsAutomaticAndOnDemand.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/CapturedLogs.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Configurations.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsLongTermRetention.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/NameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateDnsZoneSuffix.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateEndpointConnections.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateLinkResources.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/QuotaUsages.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Servers.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/TuningOptions.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualEndpoints.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualNetworkSubnetUsage.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/openapi.json
 suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdministratorsMicrosoftEntra.json
