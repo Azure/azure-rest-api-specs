@@ -66,8 +66,6 @@ input-file:
   - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
   - Microsoft.Insights/stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
   - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
-  - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
-  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
   - Microsoft.Monitor/Accounts/preview/2025-05-03-preview/azuremonitorworkspace.json
   - Microsoft.Monitor/Operations/preview/2025-05-03-preview/operations.json
 ```
