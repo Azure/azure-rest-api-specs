@@ -3,7 +3,7 @@
   "info": {
     "title": "Open Energy Platform Management Service APIs",
     "description": "Open Energy Platform Management Service APIs",
-    "version": "2024-05-21"
+    "version": "2025-08-06"
   },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/checkNameAvailability": {
@@ -1396,6 +1396,9 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "referenceData": {
+          "$ref": "#/definitions/ReferenceDataProperties"
         }
       }
     },
@@ -1823,6 +1826,25 @@
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProxyProvisioningState",
         "modelAsString": true
+      }
+    },
+    "ReferenceDataProperties": {
+      "description": "Defines the properties related to reference data ingestion.",
+      "type": "object",
+      "properties": {
+        "ingestion": {
+          "description": "Ingestion method for reference data",
+          "default": "All",
+          "enum": [
+            "All",
+            "NonLocal"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Ingestion",
+            "modelAsString": true
+          }
+        }
       }
     }
   },
