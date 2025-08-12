@@ -1,0 +1,901 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Managed Operations control plane service",
+    "version": "2025-07-28-preview",
+    "description": "Managed Operations API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ManagedOps"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ManagedOps/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedOps/managedOps": {
+      "get": {
+        "operationId": "ManagedOps_List",
+        "tags": [
+          "ManagedOps"
+        ],
+        "description": "List all ManagedOps instances in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedOpListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedOps_List": {
+            "$ref": "./examples/ManagedOps_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedOps/managedOps/{managedOpsName}": {
+      "get": {
+        "operationId": "ManagedOps_Get",
+        "tags": [
+          "ManagedOps"
+        ],
+        "description": "Gets the information of the ManagedOps instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "managedOpsName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedOp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedOps_Get": {
+            "$ref": "./examples/ManagedOps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedOps_CreateOrUpdate",
+        "tags": [
+          "ManagedOps"
+        ],
+        "description": "Creates or updates the ManagedOps instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "managedOpsName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedOp"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedOp' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedOp"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedOp' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedOp"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedOps_CreateOrUpdate": {
+            "$ref": "./examples/ManagedOps_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedOps_Update",
+        "tags": [
+          "ManagedOps"
+        ],
+        "description": "Updates the ManagedOps instance with the supplied fields.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "managedOpsName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedOpUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedOp"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedOps_Update": {
+            "$ref": "./examples/ManagedOps_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedOps_Delete",
+        "tags": [
+          "ManagedOps"
+        ],
+        "description": "Deletes the ManagedOps instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "managedOpsName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedOps_Delete": {
+            "$ref": "./examples/ManagedOps_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzureMonitorConfiguration": {
+      "type": "object",
+      "description": "Configuration for the Azure Monitor Insights service.",
+      "properties": {
+        "azureMonitorWorkspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure monitor workspace resource ID used by the service.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Monitor/accounts"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "azureMonitorWorkspaceId"
+      ]
+    },
+    "AzureMonitorInformation": {
+      "type": "object",
+      "description": "Azure Monitor Insights service information.",
+      "properties": {
+        "dcrId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ID of Data Collection Rule (DCR) associated with this service.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/dataCollectionRules"
+              }
+            ]
+          }
+        },
+        "enablementStatus": {
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "dcrId",
+        "enablementStatus"
+      ]
+    },
+    "ChangeTrackingConfiguration": {
+      "type": "object",
+      "description": "Configuration for the Change Tracking and Inventory service.",
+      "properties": {
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Log analytics workspace resource ID used by the service.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "logAnalyticsWorkspaceId"
+      ]
+    },
+    "ChangeTrackingInformation": {
+      "type": "object",
+      "description": "Change Tracking and Inventory service information.",
+      "properties": {
+        "dcrId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ID of Data Collection Rule (DCR) associated with this service.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/dataCollectionRules"
+              }
+            ]
+          }
+        },
+        "enablementStatus": {
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "dcrId",
+        "enablementStatus"
+      ]
+    },
+    "DefenderCspmInformation": {
+      "type": "object",
+      "description": "Defender Cloud Security Posture Management (CSPM) service information.",
+      "properties": {
+        "enablementStatus": {
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "enablementStatus"
+      ]
+    },
+    "DefenderForServersInformation": {
+      "type": "object",
+      "description": "Defender for Servers service information.",
+      "properties": {
+        "enablementStatus": {
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "enablementStatus"
+      ]
+    },
+    "DesiredConfiguration": {
+      "type": "object",
+      "description": "Desired configuration input by the user.",
+      "properties": {
+        "changeTrackingAndInventory": {
+          "$ref": "#/definitions/ChangeTrackingConfiguration",
+          "description": "Configuration for the Change Tracking and Inventory service.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "azureMonitorInsights": {
+          "$ref": "#/definitions/AzureMonitorConfiguration",
+          "description": "Configuration for the Azure Monitor Insights service.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "userAssignedManagedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned Managed Identity used to perform operations on machines managed by Ops360.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "defenderForServers": {
+          "type": "string",
+          "description": "Desired enablement state of the Defender For Servers service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "defenderCspm": {
+          "type": "string",
+          "description": "Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "changeTrackingAndInventory",
+        "azureMonitorInsights",
+        "userAssignedManagedIdentityId"
+      ]
+    },
+    "DesiredConfigurationUpdate": {
+      "type": "object",
+      "description": "Desired configuration input by the user.",
+      "properties": {
+        "defenderForServers": {
+          "type": "string",
+          "description": "Desired enablement state of the Defender For Servers service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "defenderCspm": {
+          "type": "string",
+          "description": "Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "GuestConfigurationInformation": {
+      "type": "object",
+      "description": "Azure Policy and Machine Configuration service information.",
+      "properties": {
+        "enablementStatus": {
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "enablementStatus"
+      ]
+    },
+    "ManagedOp": {
+      "type": "object",
+      "description": "The Managed Operations resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedOpsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedOpListResult": {
+      "type": "object",
+      "description": "The response of a ManagedOp list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedOp items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedOp"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedOpUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ManagedOp.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedOpUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ManagedOpUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ManagedOp.",
+      "properties": {
+        "desiredConfiguration": {
+          "$ref": "#/definitions/DesiredConfigurationUpdate",
+          "description": "Desired configuration input by the user.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ManagedOpsProperties": {
+      "type": "object",
+      "description": "Properties of the ManagedOps resource.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Product plan details of this resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "desiredConfiguration": {
+          "$ref": "#/definitions/DesiredConfiguration",
+          "description": "Desired configuration input by the user.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "services": {
+          "$ref": "#/definitions/ServiceInformation",
+          "description": "Services provisioned by this resource.",
+          "readOnly": true
+        },
+        "policyAssignmentProperties": {
+          "$ref": "#/definitions/PolicyAssignmentProperties",
+          "description": "Policy assignments created for managing services.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "desiredConfiguration"
+      ]
+    },
+    "PolicyAssignmentProperties": {
+      "type": "object",
+      "description": "Policy assignments created for managing services.",
+      "properties": {
+        "policyInitiativeAssignmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Policy initiative assignment ID.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Authorization/policyassignments"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "policyInitiativeAssignmentId"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource has begun provisioning."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ServiceInformation": {
+      "type": "object",
+      "description": "Services provisioned by this resource.",
+      "properties": {
+        "changeTrackingAndInventory": {
+          "$ref": "#/definitions/ChangeTrackingInformation",
+          "description": "Change Tracking and Inventory service information.",
+          "readOnly": true
+        },
+        "azureMonitorInsights": {
+          "$ref": "#/definitions/AzureMonitorInformation",
+          "description": "Azure Monitor Insights service information.",
+          "readOnly": true
+        },
+        "azureUpdateManager": {
+          "$ref": "#/definitions/UpdateManagerInformation",
+          "description": "Azure Update Manager service information.",
+          "readOnly": true
+        },
+        "azurePolicyAndMachineConfiguration": {
+          "$ref": "#/definitions/GuestConfigurationInformation",
+          "description": "Azure Policy and Machine Configuration service information.",
+          "readOnly": true
+        },
+        "defenderForServers": {
+          "$ref": "#/definitions/DefenderForServersInformation",
+          "description": "Defender for Servers service information.",
+          "readOnly": true
+        },
+        "defenderCspm": {
+          "$ref": "#/definitions/DefenderCspmInformation",
+          "description": "Defender for Cloud's Cloud security posture management (CSPM) service information.",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Specifies the service plan for this resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the SKU."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Pricing tier of the SKU."
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
+    },
+    "UpdateManagerInformation": {
+      "type": "object",
+      "description": "Azure Update Manager service information.",
+      "properties": {
+        "enablementStatus": {
+          "type": "string",
+          "description": "Indicates whether the service is enabled.",
+          "enum": [
+            "Enabled",
+            "InProgress",
+            "Failed",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "enablementStatus"
+      ]
+    }
+  },
+  "parameters": {}
+}

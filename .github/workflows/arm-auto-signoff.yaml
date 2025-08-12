@@ -1,36 +1,39 @@
 name: ARM Auto SignOff
 
 on:
-  issue_comment:
-    types:
-      - edited
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
   # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
-  # triggers "issue_comment" and "workflow_run" -- they are all privileged# and run in the target
-  # branch and repo -- which simplifies implementation.
+  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
+  # which simplifies implementation.
   pull_request_target:
     types:
       # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["ARM Incremental TypeSpec"]
+    workflows:
+      ["ARM Incremental TypeSpec", "Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
     types: [completed]
 
 permissions:
+  # actions.listWorkflowRunsForRepo
+  # actions.listWorkflowRunArtifacts
   actions: read
-  checks: read
+  # default
   contents: read
+  # issues.listLabelsOnIssue
   issues: read
+  # issues.listLabelsOnIssue
   pull-requests: read
+  # repos.listCommitStatusesForRef
+  statuses: read
 
 jobs:
   arm-auto-signoff:
     name: ARM Auto SignOff
 
+    # workflow_run - already filtered by triggers above
     # pull_request_target:labeled - filter to only the input and output labels
-    # issue_comment:edited - filter to only PR comments containing "next steps to merge",
-    #   a signal that checks like "Swagger LintDiff" or "Swagger Avocado" status may have changed
     if: |
       github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request_target' &&
@@ -41,10 +44,7 @@ jobs:
         github.event.label.name == 'ARMReview' ||
         github.event.label.name == 'ARMSignedOff' ||
         github.event.label.name == 'NotReadyForARMReview' ||
-        github.event.label.name == 'SuppressionReviewRequired')) ||
-      (github.event_name == 'issue_comment' &&
-       github.event.issue.pull_request &&
-       contains(github.event.comment.body, 'next steps to merge'))
+        github.event.label.name == 'SuppressionReviewRequired'))
 
     runs-on: ubuntu-24.04
 
@@ -97,15 +97,28 @@ jobs:
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
 
+      # Required for consumers to identify the head SHA associated with this workflow run.
+      # Output can be trusted, because it was uploaded from a workflow that is trusted,
+      # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
+      # Consumers should verify the "event_name" before attempting to extract from the artifact name.
+      - if: |
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).headSha
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).headSha }}"
+
       # Required for consumers to identify the PR associated with this workflow run.
       # Output can be trusted, because it was uploaded from a workflow that is trusted,
       # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
       # Consumers should verify the "event_name" before attempting to extract from the artifact name.
       - if: |
-          (github.event_name == 'issue_comment' || 
-           github.event_name == 'workflow_run') &&
-          (fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
-           fromJson(steps.get-label-action.outputs.result).labelAction == 'remove')
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:

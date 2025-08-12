@@ -1,8 +1,8 @@
 import "../../models/exadata/dbSystemShapes.tsp";
 
 using Azure.ResourceManager;
-using Autorest;
 using TypeSpec.Versioning;
+using Autorest;
 using TypeSpec.Http;
 
 namespace Oracle.Database;

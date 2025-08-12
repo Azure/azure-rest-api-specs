@@ -46,7 +46,9 @@ interface Catalogs {
   @doc("Deletes specified Catalog.")
   delete is ArmResourceDeleteWithoutOkAsync<Catalog>;
   @doc("Returns a collection of Catalogs within the resource group.")
+  @list
   listByResourceGroup is Azure.ResourceManager.ArmResourceListByParent<Catalog>;
   @doc("Lists Catalogs within an Azure subscription.")
+  @list
   listBySubscription is ArmListBySubscription<Catalog>;
 }
