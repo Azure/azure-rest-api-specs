@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an image.
- */
+
+@doc("Represents an image.")
 @parentResource(Gallery)
 model Image is Azure.ResourceManager.ProxyResource<ImageProperties> {
   ...ResourceNameParameter<
@@ -33,7 +32,7 @@ interface ImageOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -42,7 +41,7 @@ interface ImageOps
         @maxLength(26)
         devCenterName: string,
 
-        /** The name of the gallery. */
+        @doc("The name of the gallery.")
         @path
         @segment("galleries")
         @key
@@ -52,7 +51,7 @@ interface ImageOps
         galleryName: string,
       },
       {
-        /** The name of the image. */
+        @doc("The name of the image.")
         @path
         @segment("images")
         @key
@@ -65,20 +64,14 @@ interface ImageOps
 
 @armResourceOperations
 interface Images {
-  /**
-   * Gets a gallery image.
-   */
+  @doc("Gets a gallery image.")
   get is ImageOps.Read<Image>;
 
-  /**
-   * Lists images for a gallery.
-   */
+  @doc("Lists images for a gallery.")
   listByGallery is ImageOps.List<
     Image,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
@@ -94,7 +87,7 @@ interface ImageOperationGroupOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -104,7 +97,7 @@ interface ImageOperationGroupOps
         projectName: string,
       },
       {
-        /** The name of the image. */
+        @doc("The name of the image.")
         @path
         @segment("images")
         @key
@@ -117,14 +110,10 @@ interface ImageOperationGroupOps
 
 @armResourceOperations
 interface ImageOperationGroup {
-  /**
-   * Gets an image.
-   */
+  @doc("Gets an image.")
   getByProject is ImageOperationGroupOps.Read<Image>;
 
-  /**
-   * Lists images for a project.
-   */
+  @doc("Lists images for a project.")
   listByProject is ImageOperationGroupOps.List<
     Image,
     Response = ImageListResult

@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an environment type.
- */
+
+@doc("Represents an environment type.")
 @parentResource(DevCenter)
 model EnvironmentType
   is Azure.ResourceManager.ProxyResource<EnvironmentTypeProperties> {
@@ -24,9 +23,7 @@ model EnvironmentType
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
   >;
 
-  /**
-   * Resource tags.
-   */
+  @doc("Resource tags.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -35,39 +32,27 @@ model EnvironmentType
 
 @armResourceOperations
 interface EnvironmentTypes {
-  /**
-   * Gets an environment type.
-   */
+  @doc("Gets an environment type.")
   get is ArmResourceRead<EnvironmentType>;
 
-  /**
-   * Creates or updates an environment type.
-   */
+  @doc("Creates or updates an environment type.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<EnvironmentType>;
 
-  /**
-   * Partially updates an environment type.
-   */
+  @doc("Partially updates an environment type.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     EnvironmentType,
     PatchModel = EnvironmentTypeUpdate
   >;
 
-  /**
-   * Deletes an environment type.
-   */
+  @doc("Deletes an environment type.")
   delete is ArmResourceDeleteSync<EnvironmentType>;
 
-  /**
-   * Lists environment types for the devcenter.
-   */
+  @doc("Lists environment types for the devcenter.")
   listByDevCenter is ArmResourceListByParent<
     EnvironmentType,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

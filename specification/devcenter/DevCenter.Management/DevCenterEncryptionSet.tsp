@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a devcenter encryption set resource.
- */
+
+@doc("Represents a devcenter encryption set resource.")
 @parentResource(DevCenter)
 model DevCenterEncryptionSet
   is Azure.ResourceManager.TrackedResource<DevCenterEncryptionSetProperties> {
@@ -24,28 +23,20 @@ model DevCenterEncryptionSet
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
   >;
 
-  /**
-   * Managed identity properties
-   */
+  @doc("Managed identity properties.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @armResourceOperations
 interface DevCenterEncryptionSets {
-  /**
-   * Gets a devcenter encryption set.
-   */
+  @doc("Gets a devcenter encryption set.")
   get is ArmResourceRead<DevCenterEncryptionSet>;
 
-  /**
-   * Creates or updates a devcenter encryption set resource
-   */
+  @doc("Creates or updates a devcenter encryption set resource.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DevCenterEncryptionSet>;
 
-  /**
-   * Partially updates a devcenter encryption set.
-   */
+  @doc("Partially updates a devcenter encryption set.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -59,9 +50,7 @@ interface DevCenterEncryptionSets {
     >
   >;
 
-  /**
-   * Deletes a devcenter encryption set
-   */
+  @doc("Deletes a devcenter encryption set.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DevCenterEncryptionSet,
@@ -69,15 +58,11 @@ interface DevCenterEncryptionSets {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists all encryption sets in the devcenter.
-   */
+  @doc("Lists all encryption sets in the devcenter.")
   list is ArmResourceListByParent<
     DevCenterEncryptionSet,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

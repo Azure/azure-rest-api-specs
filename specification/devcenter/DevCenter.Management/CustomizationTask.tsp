@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a Task to be used in customizing a Dev Box.
- */
+
+@doc("Represents a Task to be used in customizing a Dev Box.")
 @parentResource(Catalog)
 model CustomizationTask
   is Azure.ResourceManager.ProxyResource<CustomizationTaskProperties> {
@@ -34,7 +33,7 @@ interface CustomizationTaskOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -43,7 +42,7 @@ interface CustomizationTaskOps
         @maxLength(26)
         devCenterName: string,
 
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -53,7 +52,7 @@ interface CustomizationTaskOps
         catalogName: string,
       },
       {
-        /** The name of the Customization Task. */
+        @doc("The name of the Customization Task.")
         @path
         @segment("tasks")
         @key
@@ -66,29 +65,21 @@ interface CustomizationTaskOps
 
 @armResourceOperations
 interface CustomizationTasks {
-  /**
-   * Gets a Task from the catalog
-   */
+  @doc("Gets a Task from the catalog.")
   get is CustomizationTaskOps.Read<CustomizationTask>;
 
-  /**
-   * List Tasks in the catalog.
-   */
+  @doc("List Tasks in the catalog.")
   listByCatalog is CustomizationTaskOps.List<
     CustomizationTask,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = CustomizationTaskListResult
   >;
 
-  /**
-   * Gets Customization Task error details
-   */
+  @doc("Gets Customization Task error details.")
   getErrorDetails is CustomizationTaskOps.ActionSync<
     CustomizationTask,
     void,

@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * A pool of Virtual Machines.
- */
+
+@doc("A pool of Virtual Machines.")
 @parentResource(Project)
 model Pool is Azure.ResourceManager.TrackedResource<PoolProperties> {
   ...ResourceNameParameter<
@@ -26,19 +25,13 @@ model Pool is Azure.ResourceManager.TrackedResource<PoolProperties> {
 
 @armResourceOperations
 interface Pools {
-  /**
-   * Gets a machine pool
-   */
+  @doc("Gets a machine pool.")
   get is ArmResourceRead<Pool>;
 
-  /**
-   * Creates or updates a machine pool
-   */
+  @doc("Creates or updates a machine pool.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Pool>;
 
-  /**
-   * Partially updates a machine pool
-   */
+  @doc("Partially updates a machine pool.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -52,9 +45,7 @@ interface Pools {
     >
   >;
 
-  /**
-   * Deletes a machine pool
-   */
+  @doc("Deletes a machine pool.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Pool,
@@ -62,24 +53,18 @@ interface Pools {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists pools for a project
-   */
+  @doc("Lists pools for a project.")
   listByProject is ArmResourceListByParent<
     Pool,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = PoolListResult
   >;
 
-  /**
-   * Triggers a refresh of the pool status.
-   */
+  @doc("Triggers a refresh of the pool status.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runHealthChecks is ArmResourceActionAsyncBase<
     Pool,

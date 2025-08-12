@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a definition for an Image.
- */
+
+@doc("Represents a definition for an Image.")
 @parentResource(Catalog)
 model ImageDefinition
   is Azure.ResourceManager.ProxyResource<ImageDefinitionProperties> {
@@ -34,7 +33,7 @@ interface ImageDefinitionOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -43,7 +42,7 @@ interface ImageDefinitionOps
         @maxLength(26)
         devCenterName: string,
 
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -53,7 +52,7 @@ interface ImageDefinitionOps
         catalogName: string,
       },
       {
-        /** The name of the Image Definition. */
+        @doc("The name of the Image Definition.")
         @path
         @segment("imageDefinitions")
         @key
@@ -66,38 +65,28 @@ interface ImageDefinitionOps
 
 @armResourceOperations
 interface ImageDefinitions {
-  /**
-   * Gets an Image Definition from the catalog
-   */
+  @doc("Gets an Image Definition from the catalog")
   getByDevCenterCatalog is ImageDefinitionOps.Read<ImageDefinition>;
 
-  /**
-   * List Image Definitions in the catalog.
-   */
+  @doc("List Image Definitions in the catalog.")
   listByDevCenterCatalog is ImageDefinitionOps.List<
     ImageDefinition,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = ImageDefinitionListResult
   >;
 
-  /**
-   * Gets Image Definition error details
-   */
+  @doc("Gets Image Definition error details.")
   getErrorDetails is ImageDefinitionOps.ActionSync<
     ImageDefinition,
     void,
     ArmResponse<CatalogResourceValidationErrorDetails>
   >;
 
-  /**
-   * Builds an image for the specified Image Definition.
-   */
+  @doc("Builds an image for the specified Image Definition.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   buildImage is ImageDefinitionOps.ActionAsync<
     ImageDefinition,
@@ -116,7 +105,7 @@ interface ProjectCatalogImageDefinitionOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -125,7 +114,7 @@ interface ProjectCatalogImageDefinitionOps
         @maxLength(63)
         projectName: string,
 
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -135,7 +124,7 @@ interface ProjectCatalogImageDefinitionOps
         catalogName: string,
       },
       {
-        /** The name of the Image Definition. */
+        @doc("The name of the Image Definition.")
         @path
         @segment("imageDefinitions")
         @key
@@ -148,38 +137,28 @@ interface ProjectCatalogImageDefinitionOps
 
 @armResourceOperations
 interface ProjectCatalogImageDefinitions {
-  /**
-   * Gets an Image Definition from the catalog
-   */
+  @doc("Gets an Image Definition from the catalog.")
   getByProjectCatalog is ProjectCatalogImageDefinitionOps.Read<ImageDefinition>;
 
-  /**
-   * List Image Definitions in the catalog.
-   */
+  @doc("List Image Definitions in the catalog.")
   listByProjectCatalog is ProjectCatalogImageDefinitionOps.List<
     ImageDefinition,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = ImageDefinitionListResult
   >;
 
-  /**
-   * Gets Image Definition error details
-   */
+  @doc("Gets Image Definition error details.")
   getErrorDetails is ProjectCatalogImageDefinitionOps.ActionSync<
     ImageDefinition,
     void,
     ArmResponse<CatalogResourceValidationErrorDetails>
   >;
 
-  /**
-   * Builds an image for the specified Image Definition.
-   */
+  @doc("Builds an image for the specified Image Definition.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   buildImage is ProjectCatalogImageDefinitionOps.ActionAsync<
     ImageDefinition,

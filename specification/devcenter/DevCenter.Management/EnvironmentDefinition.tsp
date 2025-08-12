@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an environment definition catalog item.
- */
+
+@doc("Represents an environment definition catalog item.")
 @parentResource(Catalog)
 model EnvironmentDefinition
   is Azure.ResourceManager.ProxyResource<EnvironmentDefinitionProperties> {
@@ -34,7 +33,7 @@ interface EnvironmentDefinitionOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -43,7 +42,7 @@ interface EnvironmentDefinitionOps
         @maxLength(63)
         projectName: string,
 
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -53,7 +52,7 @@ interface EnvironmentDefinitionOps
         catalogName: string,
       },
       {
-        /** The name of the Environment Definition. */
+        @doc("The name of the Environment Definition.")
         @path
         @segment("environmentDefinitions")
         @key
@@ -66,22 +65,16 @@ interface EnvironmentDefinitionOps
 
 @armResourceOperations
 interface EnvironmentDefinitions {
-  /**
-   * Gets an environment definition from the catalog.
-   */
+  @doc("Gets an environment definition from the catalog.")
   getByProjectCatalog is EnvironmentDefinitionOps.Read<EnvironmentDefinition>;
 
-  /**
-   * Lists the environment definitions in this project catalog.
-   */
+  @doc("Lists the environment definitions in this project catalog.")
   listByProjectCatalog is EnvironmentDefinitionOps.List<
     EnvironmentDefinition,
     Response = EnvironmentDefinitionListResult
   >;
 
-  /**
-   * Gets Environment Definition error details
-   */
+  @doc("Gets Environment Definition error details.")
   getErrorDetails is EnvironmentDefinitionOps.ActionSync<
     EnvironmentDefinition,
     void,
@@ -97,7 +90,7 @@ interface EnvironmentDefinitionOperationGroupOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -106,7 +99,7 @@ interface EnvironmentDefinitionOperationGroupOps
         @maxLength(26)
         devCenterName: string,
 
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -116,7 +109,7 @@ interface EnvironmentDefinitionOperationGroupOps
         catalogName: string,
       },
       {
-        /** The name of the Environment Definition. */
+        @doc("The name of the Environment Definition.")
         @path
         @segment("environmentDefinitions")
         @key
@@ -129,29 +122,21 @@ interface EnvironmentDefinitionOperationGroupOps
 
 @armResourceOperations
 interface EnvironmentDefinitionOperationGroup {
-  /**
-   * Gets an environment definition from the catalog.
-   */
+  @doc("Gets an environment definition from the catalog.")
   get is EnvironmentDefinitionOperationGroupOps.Read<EnvironmentDefinition>;
 
-  /**
-   * List environment definitions in the catalog.
-   */
+  @doc("List environment definitions in the catalog.")
   listByCatalog is EnvironmentDefinitionOperationGroupOps.List<
     EnvironmentDefinition,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = EnvironmentDefinitionListResult
   >;
 
-  /**
-   * Gets Environment Definition error details
-   */
+  @doc("Gets Environment Definition error details.")
   getErrorDetails is EnvironmentDefinitionOperationGroupOps.ActionSync<
     EnvironmentDefinition,
     void,

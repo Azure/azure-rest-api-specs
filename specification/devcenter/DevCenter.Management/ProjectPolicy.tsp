@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an project policy resource.
- */
+
+@doc("Represents an project policy resource.")
 @parentResource(DevCenter)
 model ProjectPolicy
   is Azure.ResourceManager.ProxyResource<ProjectPolicyProperties> {
@@ -27,19 +26,13 @@ model ProjectPolicy
 
 @armResourceOperations
 interface ProjectPolicies {
-  /**
-   * Gets a specific project policy.
-   */
+  @doc("Gets a specific project policy.")
   get is ArmResourceRead<ProjectPolicy>;
 
-  /**
-   * Creates or updates an project policy.
-   */
+  @doc("Creates or updates an project policy.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ProjectPolicy>;
 
-  /**
-   * Partially updates an project policy.
-   */
+  @doc("Partially updates an project policy.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -53,9 +46,7 @@ interface ProjectPolicies {
     >
   >;
 
-  /**
-   * Deletes an project policy.
-   */
+  @doc("Deletes an project policy.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ProjectPolicy,
@@ -63,15 +54,11 @@ interface ProjectPolicies {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists all project policies in the dev center
-   */
+  @doc("Lists all project policies in the dev center.")
   listByDevCenter is ArmResourceListByParent<
     ProjectPolicy,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

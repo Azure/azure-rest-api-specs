@@ -10,9 +10,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Network related settings
- */
+
+@doc("Network related settings.")
 model NetworkConnection
   is Azure.ResourceManager.TrackedResource<NetworkProperties> {
   ...ResourceNameParameter<
@@ -25,19 +24,13 @@ model NetworkConnection
 
 @armResourceOperations
 interface NetworkConnections {
-  /**
-   * Gets a network connection resource
-   */
+  @doc("Gets a network connection resource.")
   get is ArmResourceRead<NetworkConnection>;
 
-  /**
-   * Creates or updates a Network Connections resource
-   */
+  @doc("Creates or updates a Network Connections resource.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkConnection>;
 
-  /**
-   * Partially updates a Network Connection
-   */
+  @doc("Partially updates a Network Connection.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -51,9 +44,7 @@ interface NetworkConnections {
     >
   >;
 
-  /**
-   * Deletes a Network Connections resource
-   */
+  @doc("Deletes a Network Connections resource.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkConnection,
@@ -61,39 +52,29 @@ interface NetworkConnections {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists network connections in a resource group
-   */
+  @doc("Lists network connections in a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     NetworkConnection,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = NetworkConnectionListResult
   >;
 
-  /**
-   * Lists network connections in a subscription
-   */
+  @doc("Lists network connections in a subscription.")
   listBySubscription is ArmListBySubscription<
     NetworkConnection,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = NetworkConnectionListResult
   >;
 
-  /**
-   * Triggers a new health check run. The execution and health check result can be tracked via the network Connection health check details
-   */
+  @doc("Triggers a new health check run. The execution and health check result can be tracked via the network Connection health check details.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runHealthChecks is ArmResourceActionAsyncBase<
     NetworkConnection,
@@ -103,9 +84,7 @@ interface NetworkConnections {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkConnection>
   >;
 
-  /**
-   * Lists the endpoints that agents may call as part of Dev Box service administration. These FQDNs should be allowed for outbound access in order for the Dev Box service to function.
-   */
+  @doc("Lists the endpoints that agents may call as part of Dev Box service administration. These FQDNs should be allowed for outbound access in order for the Dev Box service to function.")
   @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
@@ -114,9 +93,7 @@ interface NetworkConnections {
     void,
     ArmResponse<OutboundEnvironmentEndpointCollection>,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     }

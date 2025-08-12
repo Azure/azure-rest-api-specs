@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an allowed environment type.
- */
+
+@doc("Represents an allowed environment type.")
 @parentResource(Project)
 model AllowedEnvironmentType
   is Azure.ResourceManager.ProxyResource<AllowedEnvironmentTypeProperties> {
@@ -27,20 +26,14 @@ model AllowedEnvironmentType
 
 @armResourceOperations
 interface AllowedEnvironmentTypes {
-  /**
-   * Gets an allowed environment type.
-   */
+  @doc("Gets an allowed environment type.")
   get is ArmResourceRead<AllowedEnvironmentType>;
 
-  /**
-   * Lists allowed environment types for a project.
-   */
+  @doc("Lists allowed environment types for a project.")
   list is ArmResourceListByParent<
     AllowedEnvironmentType,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
@@ -51,6 +44,4 @@ interface AllowedEnvironmentTypes {
 @@maxLength(AllowedEnvironmentType.name, 63);
 @@minLength(AllowedEnvironmentType.name, 3);
 @@doc(AllowedEnvironmentType.name, "The name of the environment type.");
-@@doc(AllowedEnvironmentType.properties,
-  "Properties of an allowed environment type."
-);
+@@doc(AllowedEnvironmentType.properties, "Properties of an allowed environment type.");

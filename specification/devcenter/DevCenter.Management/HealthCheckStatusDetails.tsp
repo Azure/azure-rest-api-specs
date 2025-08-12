@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Health Check details.
- */
+
+@doc("Health Check details.")
 @singleton("latest")
 @parentResource(NetworkConnection)
 model HealthCheckStatusDetails
@@ -28,20 +27,14 @@ model HealthCheckStatusDetails
 
 @armResourceOperations
 interface HealthCheckStatusDetailsOperationGroup {
-  /**
-   * Gets health check status details.
-   */
+  @doc("Gets health check status details.")
   getHealthDetails is ArmResourceRead<HealthCheckStatusDetails>;
 
-  /**
-   * Lists health check status details
-   */
+  @doc("Lists health check status details.")
   listHealthDetails is ArmResourceListByParent<
     HealthCheckStatusDetails,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

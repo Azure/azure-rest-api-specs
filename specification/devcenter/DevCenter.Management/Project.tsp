@@ -10,9 +10,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a project resource.
- */
+
+@doc("Represents a project resource.")
 model Project is Azure.ResourceManager.TrackedResource<ProjectProperties> {
   ...ResourceNameParameter<
     Resource = Project,
@@ -21,28 +20,20 @@ model Project is Azure.ResourceManager.TrackedResource<ProjectProperties> {
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
   >;
 
-  /**
-   * Managed identity properties
-   */
+  @doc("Managed identity properties.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @armResourceOperations
 interface Projects {
-  /**
-   * Gets a specific project.
-   */
+  @doc("Gets a specific project.")
   get is ArmResourceRead<Project>;
 
-  /**
-   * Creates or updates a project.
-   */
+  @doc("Creates or updates a project.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
 
-  /**
-   * Partially updates a project.
-   */
+  @doc("Partially updates a project.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -56,9 +47,7 @@ interface Projects {
     >
   >;
 
-  /**
-   * Deletes a project resource.
-   */
+  @doc("Deletes a project resource.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
@@ -66,48 +55,36 @@ interface Projects {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists all projects in the resource group.
-   */
+  @doc("Lists all projects in the resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Project,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = ProjectListResult
   >;
 
-  /**
-   * Lists all projects in the subscription.
-   */
+  @doc("Lists all projects in the subscription.")
   listBySubscription is ArmListBySubscription<
     Project,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = ProjectListResult
   >;
 
-  /**
-   * Gets applicable inherited settings for this project.
-   */
+  @doc("Gets applicable inherited settings for this project.")
   getInheritedSettings is ArmResourceActionSync<
     Project,
     void,
     ArmResponse<InheritedSettingsForProject>
   >;
 
-  /**
-   * Lists SKUs available to the project
-   */
+  @doc("Lists SKUs available to the project.")
   @list
   @action("listSkus")
   listByProject is ArmResourceActionSync<

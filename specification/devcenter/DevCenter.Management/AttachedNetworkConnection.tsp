@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an attached NetworkConnection.
- */
+
+@doc("Represents an attached NetworkConnection.")
 @parentResource(Project)
 model AttachedNetworkConnection
   is Azure.ResourceManager.ProxyResource<AttachedNetworkConnectionProperties> {
@@ -34,7 +33,7 @@ interface AttachedNetworkConnectionOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -44,7 +43,7 @@ interface AttachedNetworkConnectionOps
         projectName: string,
       },
       {
-        /** The name of the attached NetworkConnection. */
+        @doc("The name of the attached NetworkConnection.")
         @path
         @segment("attachednetworks")
         @key
@@ -57,20 +56,14 @@ interface AttachedNetworkConnectionOps
 
 @armResourceOperations
 interface AttachedNetworkConnections {
-  /**
-   * Gets an attached NetworkConnection.
-   */
+  @doc("Gets an attached NetworkConnection.")
   getByProject is AttachedNetworkConnectionOps.Read<AttachedNetworkConnection>;
 
-  /**
-   * Lists the attached NetworkConnections for a Project.
-   */
+  @doc("Lists the attached NetworkConnections for a Project.")
   listByProject is AttachedNetworkConnectionOps.List<
     AttachedNetworkConnection,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
@@ -86,7 +79,7 @@ interface AttachedNetworkOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -96,7 +89,7 @@ interface AttachedNetworkOps
         devCenterName: string,
       },
       {
-        /** The name of the attached NetworkConnection. */
+        @doc("The name of the attached NetworkConnection.")
         @path
         @segment("attachednetworks")
         @key
@@ -109,19 +102,13 @@ interface AttachedNetworkOps
 
 @armResourceOperations
 interface AttachedNetworks {
-  /**
-   * Gets an attached NetworkConnection.
-   */
+  @doc("Gets an attached NetworkConnection.")
   getByDevCenter is AttachedNetworkOps.Read<AttachedNetworkConnection>;
 
-  /**
-   * Creates or updates an attached NetworkConnection.
-   */
+  @doc("Creates or updates an attached NetworkConnection.")
   createOrUpdate is AttachedNetworkOps.CreateOrUpdateAsync<AttachedNetworkConnection>;
 
-  /**
-   * Un-attach a NetworkConnection.
-   */
+  @doc("Un-attach a NetworkConnection.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is AttachedNetworkOps.DeleteWithoutOkAsync<
     AttachedNetworkConnection,
@@ -129,15 +116,11 @@ interface AttachedNetworks {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists the attached NetworkConnections for a DevCenter.
-   */
+  @doc("Lists the attached NetworkConnections for a DevCenter.")
   listByDevCenter is AttachedNetworkOps.List<
     AttachedNetworkConnection,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
@@ -147,12 +130,6 @@ interface AttachedNetworks {
 
 @@maxLength(AttachedNetworkConnection.name, 63);
 @@minLength(AttachedNetworkConnection.name, 3);
-@@doc(AttachedNetworkConnection.name,
-  "The name of the attached NetworkConnection."
-);
-@@doc(AttachedNetworkConnection.properties,
-  "Attached NetworkConnection properties."
-);
-@@doc(AttachedNetworks.createOrUpdate::parameters.resource,
-  "Represents an attached NetworkConnection."
-);
+@@doc(AttachedNetworkConnection.name, "The name of the attached NetworkConnection.");
+@@doc(AttachedNetworkConnection.properties, "Attached NetworkConnection properties.");
+@@doc(AttachedNetworks.createOrUpdate::parameters.resource, "Represents an attached NetworkConnection.");

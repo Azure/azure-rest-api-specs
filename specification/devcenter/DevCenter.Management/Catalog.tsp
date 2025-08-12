@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a catalog.
- */
+
+@doc("Represents a catalog.")
 @parentResource(Project)
 model Catalog is Azure.ResourceManager.ProxyResource<CatalogProperties> {
   ...ResourceNameParameter<
@@ -33,7 +32,7 @@ interface CatalogOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -43,7 +42,7 @@ interface CatalogOps
         projectName: string,
       },
       {
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -56,19 +55,13 @@ interface CatalogOps
 
 @armResourceOperations
 interface Catalogs {
-  /**
-   * Gets an associated project catalog.
-   */
+  @doc("Gets an associated project catalog.")
   get is CatalogOps.Read<Catalog>;
 
-  /**
-   * Creates or updates a project catalog.
-   */
+  @doc("Creates or updates a project catalog.")
   createOrUpdate is CatalogOps.CreateOrUpdateAsync<Catalog>;
 
-  /**
-   * Partially updates a project catalog.
-   */
+  @doc("Partially updates a project catalog.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   patch is CatalogOps.CustomPatchAsync<
@@ -82,9 +75,7 @@ interface Catalogs {
     >
   >;
 
-  /**
-   * Deletes a project catalog resource.
-   */
+  @doc("Deletes a project catalog resource.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is CatalogOps.DeleteWithoutOkAsync<
     Catalog,
@@ -92,33 +83,25 @@ interface Catalogs {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists the catalogs associated with a project.
-   */
+  @doc("Lists the catalogs associated with a project.")
   list is CatalogOps.List<
     Catalog,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = CatalogListResult
   >;
 
-  /**
-   * Gets project catalog synchronization error details
-   */
+  @doc("Gets project catalog synchronization error details")
   getSyncErrorDetails is CatalogOps.ActionSync<
     Catalog,
     void,
     ArmResponse<SyncErrorDetails>
   >;
 
-  /**
-   * Syncs templates for a template source.
-   */
+  @doc("Syncs templates for a template source.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sync is CatalogOps.ActionAsync<
     Catalog,
@@ -128,9 +111,7 @@ interface Catalogs {
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
-  /**
-   * Connects a project catalog to enable syncing.
-   */
+  @doc("Connects a project catalog to enable syncing.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connect is CatalogOps.ActionAsync<
     Catalog,
@@ -149,7 +130,7 @@ interface CatalogOperationGroupOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -159,7 +140,7 @@ interface CatalogOperationGroupOps
         devCenterName: string,
       },
       {
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -172,19 +153,13 @@ interface CatalogOperationGroupOps
 
 @armResourceOperations
 interface CatalogOperationGroup {
-  /**
-   * Gets a catalog
-   */
+  @doc("Gets a catalog.")
   get is CatalogOperationGroupOps.Read<Catalog>;
 
-  /**
-   * Creates or updates a catalog.
-   */
+  @doc("Creates or updates a catalog.")
   createOrUpdate is CatalogOperationGroupOps.CreateOrUpdateAsync<Catalog>;
 
-  /**
-   * Partially updates a catalog.
-   */
+  @doc("Partially updates a catalog.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is CatalogOperationGroupOps.CustomPatchAsync<
@@ -198,9 +173,7 @@ interface CatalogOperationGroup {
     >
   >;
 
-  /**
-   * Deletes a catalog resource.
-   */
+  @doc("Deletes a catalog resource.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is CatalogOperationGroupOps.DeleteWithoutOkAsync<
     Catalog,
@@ -208,33 +181,25 @@ interface CatalogOperationGroup {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists catalogs for a devcenter.
-   */
+  @doc("Lists catalogs for a devcenter.")
   listByDevCenter is CatalogOperationGroupOps.List<
     Catalog,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = CatalogListResult
   >;
 
-  /**
-   * Gets catalog synchronization error details
-   */
+  @doc("Gets catalog synchronization error details.")
   getSyncErrorDetails is CatalogOperationGroupOps.ActionSync<
     Catalog,
     void,
     ArmResponse<SyncErrorDetails>
   >;
 
-  /**
-   * Syncs templates for a template source.
-   */
+  @doc("Syncs templates for a template source.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sync is CatalogOperationGroupOps.ActionAsync<
     Catalog,
@@ -244,9 +209,7 @@ interface CatalogOperationGroup {
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
-  /**
-   * Connects a catalog to enable syncing.
-   */
+  @doc("Connects a catalog to enable syncing.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connect is CatalogOperationGroupOps.ActionAsync<
     Catalog,

@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a specific build of an Image Definition.
- */
+
+@doc("Represents a specific build of an Image Definition.")
 @parentResource(ImageDefinition)
 model ImageDefinitionBuild
   is Azure.ResourceManager.ProxyResource<ImageDefinitionBuildProperties> {
@@ -34,7 +33,7 @@ interface ImageDefinitionBuildOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -43,7 +42,7 @@ interface ImageDefinitionBuildOps
         @maxLength(26)
         devCenterName: string,
 
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -52,7 +51,7 @@ interface ImageDefinitionBuildOps
         @maxLength(63)
         catalogName: string,
 
-        /** The name of the Image Definition. */
+        @doc("The name of the Image Definition.")
         @path
         @segment("imageDefinitions")
         @key
@@ -62,7 +61,7 @@ interface ImageDefinitionBuildOps
         imageDefinitionName: string,
       },
       {
-        /** The ID of the Image Definition Build. */
+        @doc("The ID of the Image Definition Build.")
         @path
         @segment("builds")
         @key
@@ -75,22 +74,16 @@ interface ImageDefinitionBuildOps
 
 @armResourceOperations
 interface ImageDefinitionBuilds {
-  /**
-   * Gets a build for a specified image definition.
-   */
+  @doc("Gets a build for a specified image definition.")
   get is ImageDefinitionBuildOps.Read<ImageDefinitionBuild>;
 
-  /**
-   * Lists builds for a specified image definition.
-   */
+  @doc("Lists builds for a specified image definition.")
   listByImageDefinition is ImageDefinitionBuildOps.List<
     ImageDefinitionBuild,
     Response = ImageDefinitionBuildListResult
   >;
 
-  /**
-   * Cancels the specified build for an image definition.
-   */
+  @doc("Cancels the specified build for an image definition.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cancel is ImageDefinitionBuildOps.ActionAsync<
     ImageDefinitionBuild,
@@ -100,9 +93,7 @@ interface ImageDefinitionBuilds {
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
-  /**
-   * Gets Build details
-   */
+  @doc("Gets Build details.")
   getBuildDetails is ImageDefinitionBuildOps.ActionSync<
     ImageDefinitionBuild,
     void,
@@ -118,7 +109,7 @@ interface ProjectCatalogImageDefinitionBuildOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -127,7 +118,7 @@ interface ProjectCatalogImageDefinitionBuildOps
         @maxLength(63)
         projectName: string,
 
-        /** The name of the Catalog. */
+        @doc("The name of the Catalog.")
         @path
         @segment("catalogs")
         @key
@@ -136,7 +127,7 @@ interface ProjectCatalogImageDefinitionBuildOps
         @maxLength(63)
         catalogName: string,
 
-        /** The name of the Image Definition. */
+        @doc("The name of the Image Definition.")
         @path
         @segment("imageDefinitions")
         @key
@@ -146,7 +137,7 @@ interface ProjectCatalogImageDefinitionBuildOps
         imageDefinitionName: string,
       },
       {
-        /** The ID of the Image Definition Build. */
+        @doc("The ID of the Image Definition Build.")
         @path
         @segment("builds")
         @key
@@ -159,22 +150,16 @@ interface ProjectCatalogImageDefinitionBuildOps
 
 @armResourceOperations
 interface ProjectCatalogImageDefinitionBuild {
-  /**
-   * Gets a build for a specified image definition.
-   */
+  @doc("Gets a build for a specified image definition.")
   get is ProjectCatalogImageDefinitionBuildOps.Read<ImageDefinitionBuild>;
 
-  /**
-   * Lists builds for a specified image definition.
-   */
+  @doc("Lists builds for a specified image definition.")
   listByImageDefinition is ProjectCatalogImageDefinitionBuildOps.List<
     ImageDefinitionBuild,
     Response = ImageDefinitionBuildListResult
   >;
 
-  /**
-   * Cancels the specified build for an image definition.
-   */
+  @doc("Cancels the specified build for an image definition.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cancel is ProjectCatalogImageDefinitionBuildOps.ActionAsync<
     ImageDefinitionBuild,
@@ -184,9 +169,7 @@ interface ProjectCatalogImageDefinitionBuild {
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
-  /**
-   * Gets Build details
-   */
+  @doc("Gets Build details.")
   getBuildDetails is ProjectCatalogImageDefinitionBuildOps.ActionSync<
     ImageDefinitionBuild,
     void,

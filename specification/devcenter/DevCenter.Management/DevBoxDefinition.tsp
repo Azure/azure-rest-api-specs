@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a definition for a Developer Machine.
- */
+
+@doc("Represents a definition for a Developer Machine.")
 @parentResource(DevCenter)
 model DevBoxDefinition
   is Azure.ResourceManager.TrackedResource<DevBoxDefinitionProperties> {
@@ -34,7 +33,7 @@ interface DevBoxDefinitionOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -44,7 +43,7 @@ interface DevBoxDefinitionOps
         devCenterName: string,
       },
       {
-        /** The name of the Dev Box definition. */
+        @doc("The name of the Dev Box definition.")
         @path
         @segment("devboxdefinitions")
         @key
@@ -57,19 +56,13 @@ interface DevBoxDefinitionOps
 
 @armResourceOperations
 interface DevBoxDefinitions {
-  /**
-   * Gets a Dev Box definition
-   */
+  @doc("Gets a Dev Box definition.")
   get is DevBoxDefinitionOps.Read<DevBoxDefinition>;
 
-  /**
-   * Creates or updates a Dev Box definition.
-   */
+  @doc("Creates or updates a Dev Box definition.")
   createOrUpdate is DevBoxDefinitionOps.CreateOrUpdateAsync<DevBoxDefinition>;
 
-  /**
-   * Partially updates a Dev Box definition.
-   */
+  @doc("Partially updates a Dev Box definition.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is DevBoxDefinitionOps.CustomPatchAsync<
@@ -83,9 +76,7 @@ interface DevBoxDefinitions {
     >
   >;
 
-  /**
-   * Deletes a Dev Box definition
-   */
+  @doc("Deletes a Dev Box definition.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is DevBoxDefinitionOps.DeleteWithoutOkAsync<
     DevBoxDefinition,
@@ -93,15 +84,11 @@ interface DevBoxDefinitions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * List Dev Box definitions for a devcenter.
-   */
+  @doc("List Dev Box definitions for a devcenter.")
   listByDevCenter is DevBoxDefinitionOps.List<
     DevBoxDefinition,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
@@ -117,7 +104,7 @@ interface DevBoxDefinitionOperationGroupOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -127,7 +114,7 @@ interface DevBoxDefinitionOperationGroupOps
         projectName: string,
       },
       {
-        /** The name of the Dev Box definition. */
+        @doc("The name of the Dev Box definition.")
         @path
         @segment("devboxdefinitions")
         @key
@@ -140,20 +127,14 @@ interface DevBoxDefinitionOperationGroupOps
 
 @armResourceOperations
 interface DevBoxDefinitionOperationGroup {
-  /**
-   * Gets a Dev Box definition configured for a project
-   */
+  @doc("Gets a Dev Box definition configured for a project.")
   getByProject is DevBoxDefinitionOperationGroupOps.Read<DevBoxDefinition>;
 
-  /**
-   * List Dev Box definitions configured for a project.
-   */
+  @doc("List Dev Box definitions configured for a project.")
   listByProject is DevBoxDefinitionOperationGroupOps.List<
     DevBoxDefinition,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

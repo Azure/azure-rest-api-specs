@@ -15,9 +15,7 @@ namespace Microsoft.DevCenter;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SkusOperationGroup {
-  /**
-   * Lists the Microsoft.DevCenter SKUs available in a subscription
-   */
+  @doc("Lists the Microsoft.DevCenter SKUs available in a subscription.")
   @autoRoute
   @get
   @list
@@ -26,9 +24,7 @@ interface SkusOperationGroup {
     Response = SkuListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     }
@@ -37,9 +33,7 @@ interface SkusOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusesOperationGroup {
-  /**
-   * Gets the current status of an async operation.
-   */
+  @doc("Gets the current status of an async operation.")
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get Operation Status")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/locations/{location}/operationStatuses/{operationId}")
@@ -49,18 +43,14 @@ interface OperationStatusesOperationGroup {
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
 
-    /**
-     * The ID of an ongoing async operation
-     */
+    @doc("The ID of an ongoing async operation.")
     @path
     operationId: string,
   ): ArmResponse<OperationStatus> | (AcceptedResponse & {
     @body
     _: OperationStatus;
 
-    /**
-     * The Location header contains the URL where the status of the long running operation can be checked.
-     */
+    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
     @header
     location?: string;
   }) | ErrorResponse;
@@ -68,9 +58,7 @@ interface OperationStatusesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsagesOperationGroup {
-  /**
-   * Lists the current usages and limits in this location for the provided subscription.
-   */
+  @doc("Lists the current usages and limits in this location for the provided subscription.")
   @autoRoute
   @list
   @get
@@ -84,9 +72,7 @@ interface UsagesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CheckNameAvailabilityOperationGroup {
-  /**
-   * Check the availability of name for resource
-   */
+  @doc("Check the availability of name for resource.")
   @autoRoute
   @action("checkNameAvailability")
   execute is ArmProviderActionSync<
@@ -99,9 +85,7 @@ interface CheckNameAvailabilityOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CheckScopedNameAvailabilityOperationGroup {
-  /**
-   * Check the availability of name for resource
-   */
+  @doc("Check the availability of name for resource.")
   @autoRoute
   @action("checkScopedNameAvailability")
   execute is ArmProviderActionSync<

@@ -10,9 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a devcenter resource.
- */
+@doc("Represents a devcenter resource.")
 model DevCenter is Azure.ResourceManager.TrackedResource<DevCenterProperties> {
   ...ResourceNameParameter<
     Resource = DevCenter,
@@ -21,28 +19,20 @@ model DevCenter is Azure.ResourceManager.TrackedResource<DevCenterProperties> {
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
   >;
 
-  /**
-   * Managed identity properties
-   */
+  @doc("Managed identity properties.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @armResourceOperations
 interface DevCenters {
-  /**
-   * Gets a devcenter.
-   */
+  @doc("Gets a devcenter.")
   get is ArmResourceRead<DevCenter>;
 
-  /**
-   * Creates or updates a devcenter resource
-   */
+  @doc("Creates or updates a devcenter resource.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DevCenter>;
 
-  /**
-   * Partially updates a devcenter.
-   */
+  @doc("Partially updates a devcenter.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -56,9 +46,7 @@ interface DevCenters {
     >
   >;
 
-  /**
-   * Deletes a devcenter
-   */
+  @doc("Deletes a devcenter.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DevCenter,
@@ -66,39 +54,29 @@ interface DevCenters {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists all devcenters in a resource group.
-   */
+  @doc("Lists all devcenters in a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     DevCenter,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = DevCenterListResult
   >;
 
-  /**
-   * Lists all devcenters in a subscription.
-   */
+  @doc("Lists all devcenters in a subscription.")
   listBySubscription is ArmListBySubscription<
     DevCenter,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
     Response = DevCenterListResult
   >;
 
-  /**
-   * Lists images for a devcenter.
-   */
+  @doc("Lists images for a devcenter.")
   @list
   @get
   @action("images")
@@ -107,9 +85,7 @@ interface DevCenters {
     void,
     Response = ImageListResult,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     }

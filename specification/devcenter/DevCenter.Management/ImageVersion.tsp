@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an image version.
- */
+
+@doc("Represents an image version.")
 @parentResource(Image)
 model ImageVersion
   is Azure.ResourceManager.ProxyResource<ImageVersionProperties> {
@@ -34,7 +33,7 @@ interface ImageVersionOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the devcenter. */
+        @doc("The name of the devcenter.")
         @path
         @segment("devcenters")
         @key
@@ -43,7 +42,7 @@ interface ImageVersionOps
         @maxLength(26)
         devCenterName: string,
 
-        /** The name of the gallery. */
+        @doc("The name of the gallery.")
         @path
         @segment("galleries")
         @key
@@ -52,7 +51,7 @@ interface ImageVersionOps
         @maxLength(63)
         galleryName: string,
 
-        /** The name of the image. */
+        @doc("The name of the image.")
         @path
         @segment("images")
         @key
@@ -62,7 +61,7 @@ interface ImageVersionOps
         imageName: string,
       },
       {
-        /** The version of the image. */
+        @doc("The version of the image.")
         @path
         @segment("versions")
         @key
@@ -75,14 +74,10 @@ interface ImageVersionOps
 
 @armResourceOperations
 interface ImageVersions {
-  /**
-   * Gets an image version.
-   */
+  @doc("Gets an image version.")
   get is ImageVersionOps.Read<ImageVersion>;
 
-  /**
-   * Lists versions for an image.
-   */
+  @doc("Lists versions for an image.")
   listByImage is ImageVersionOps.List<
     ImageVersion,
     Response = ImageVersionListResult
@@ -97,7 +92,7 @@ interface ImageVersionOperationGroupOps
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
 
-        /** The name of the project. */
+        @doc("The name of the project.")
         @path
         @segment("projects")
         @key
@@ -106,7 +101,7 @@ interface ImageVersionOperationGroupOps
         @maxLength(63)
         projectName: string,
 
-        /** The name of the image. */
+        @doc("The name of the image.")
         @path
         @segment("images")
         @key
@@ -116,7 +111,7 @@ interface ImageVersionOperationGroupOps
         imageName: string,
       },
       {
-        /** The version of the image. */
+        @doc("The version of the image.")
         @path
         @segment("versions")
         @key
@@ -129,14 +124,10 @@ interface ImageVersionOperationGroupOps
 
 @armResourceOperations
 interface ImageVersionOperationGroup {
-  /**
-   * Gets an image version.
-   */
+  @doc("Gets an image version.")
   getByProject is ImageVersionOperationGroupOps.Read<ImageVersion>;
 
-  /**
-   * Lists versions for an image.
-   */
+  @doc("Lists versions for an image.")
   listByProject is ImageVersionOperationGroupOps.List<
     ImageVersion,
     Response = ImageVersionListResult

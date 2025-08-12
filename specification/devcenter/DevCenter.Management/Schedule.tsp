@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a Schedule to execute a task.
- */
+
+@doc("Represents a Schedule to execute a task.")
 @parentResource(Pool)
 model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
   ...ResourceNameParameter<
@@ -26,46 +25,34 @@ model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
 
 @armResourceOperations
 interface Schedules {
-  /**
-   * Gets a schedule resource.
-   */
+  @doc("Gets a schedule resource.")
   get is ArmResourceRead<
     Schedule,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     }
   >;
 
-  /**
-   * Creates or updates a Schedule.
-   */
+  @doc("Creates or updates a Schedule.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Schedule,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     }
   >;
 
-  /**
-   * Partially updates a Scheduled.
-   */
+  @doc("Partially updates a Schedule.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Schedule,
     PatchModel = ScheduleUpdate,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
@@ -77,16 +64,12 @@ interface Schedules {
     >
   >;
 
-  /**
-   * Deletes a Scheduled.
-   */
+  @doc("Deletes a Schedule.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Schedule,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },
@@ -94,15 +77,11 @@ interface Schedules {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists schedules for a pool
-   */
+  @doc("Lists schedules for a pool.")
   listByPool is ArmResourceListByParent<
     Schedule,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

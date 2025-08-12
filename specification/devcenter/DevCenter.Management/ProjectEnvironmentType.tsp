@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents an environment type.
- */
+
+@doc("Represents an environment type.")
 @parentResource(Project)
 model ProjectEnvironmentType
   is Azure.ResourceManager.TrackedResource<ProjectEnvironmentTypeProperties> {
@@ -24,48 +23,34 @@ model ProjectEnvironmentType
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
   >;
 
-  /**
-   * Managed identity properties
-   */
+  @doc("Managed identity properties.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @armResourceOperations
 interface ProjectEnvironmentTypes {
-  /**
-   * Gets a project environment type.
-   */
+  @doc("Gets a project environment type.")
   get is ArmResourceRead<ProjectEnvironmentType>;
 
-  /**
-   * Creates or updates a project environment type.
-   */
+  @doc("Creates or updates a project environment type.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProjectEnvironmentType>;
 
-  /**
-   * Partially updates a project environment type.
-   */
+  @doc("Partially updates a project environment type.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ProjectEnvironmentType,
     PatchModel = ProjectEnvironmentTypeUpdate
   >;
 
-  /**
-   * Deletes a project environment type.
-   */
+  @doc("Deletes a project environment type.")
   delete is ArmResourceDeleteSync<ProjectEnvironmentType>;
 
-  /**
-   * Lists environment types for a project.
-   */
+  @doc("Lists environment types for a project.")
   list is ArmResourceListByParent<
     ProjectEnvironmentType,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

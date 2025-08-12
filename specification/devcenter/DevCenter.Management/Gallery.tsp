@@ -11,9 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
-/**
- * Represents a gallery.
- */
+
+@doc("Represents a gallery.")
 @parentResource(DevCenter)
 model Gallery is Azure.ResourceManager.ProxyResource<GalleryProperties> {
   ...ResourceNameParameter<
@@ -26,19 +25,13 @@ model Gallery is Azure.ResourceManager.ProxyResource<GalleryProperties> {
 
 @armResourceOperations
 interface Galleries {
-  /**
-   * Gets a gallery
-   */
+  @doc("Gets a gallery.")
   get is ArmResourceRead<Gallery>;
 
-  /**
-   * Creates or updates a gallery.
-   */
+  @doc("Creates or updates a gallery.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Gallery>;
 
-  /**
-   * Deletes a gallery resource.
-   */
+  @doc("Deletes a gallery resource.")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Gallery,
@@ -46,15 +39,11 @@ interface Galleries {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Lists galleries for a devcenter.
-   */
+  @doc("Lists galleries for a devcenter.")
   listByDevCenter is ArmResourceListByParent<
     Gallery,
     Parameters = {
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'.
-       */
+      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
       @query("$top")
       $top?: int32;
     },

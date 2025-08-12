@@ -42,22 +42,17 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * DevCenter Management API
- */
+
+@doc("DevCenter Management API")
 @armProviderNamespace
 @service(#{ title: "DevCenter" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.DevCenter;
 
-/**
- * The available API versions.
- */
+@doc("The available API versions.")
 enum Versions {
-  /**
-   * The 2025-07-01-preview API version.
-   */
+  @doc("The 2025-07-01-preview API version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_07_01_preview: "2025-07-01-preview",
