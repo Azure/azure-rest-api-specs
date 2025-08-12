@@ -1,0 +1,2578 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Industry.Manufacturing.MDS.Copilot",
+    "version": "2025-03-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://mds-{mdsUniqueId}.{location}.cloudapp.azure.com/",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "mdsUniqueId",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "location",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "default": "mds.azure.com"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://azure-mds-service/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://azure-mds-service/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/copilot/aliases": {
+      "get": {
+        "operationId": "Aliases_List",
+        "description": "List all aliases",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAlias"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Aliases_List_MaximumSet": {
+            "$ref": "./examples/Aliases_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Aliases_Create",
+        "description": "Create an alias",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AliasDictionary.Models.Alias"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Alias"
+              },
+              "operation-location": {
+                "type": "string",
+                "description": "The background job location."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Aliases_Create_MaximumSet": {
+            "$ref": "./examples/Aliases_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/copilot/aliases/{id}": {
+      "get": {
+        "operationId": "Aliases_Get",
+        "description": "Get an alias by Id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the alias",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AliasDictionary.Models.Alias"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Aliases_Get_MaximumSet": {
+            "$ref": "./examples/Aliases_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Aliases_CreateOrReplace",
+        "description": "Update an alias",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the alias",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AliasDictionary.Models.Alias"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AliasDictionary.Models.Alias"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AliasDictionary.Models.Alias"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Aliases_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/Aliases_CreateOrReplace_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Aliases_Delete",
+        "description": "Delete an alias",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the alias",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Aliases_Delete_MaximumSet": {
+            "$ref": "./examples/Aliases_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/aliases/{id}:updateState": {
+      "post": {
+        "operationId": "Aliases_UpdateState",
+        "description": "Deactivate an alias",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the alias",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AliasDictionary.Models.ActivateAlias"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AliasDictionary.Models.ActivateAlias"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Aliases_UpdateState_MaximumSet": {
+            "$ref": "./examples/Aliases_UpdateState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/exampleQuery": {
+      "get": {
+        "operationId": "ExampleQueryOperations_ListAllExamples",
+        "description": "get all example queries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instructionId",
+            "in": "query",
+            "description": "Instruction id.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedExampleQueryRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExampleQueryOperations_ListAllExamples_MaximumSet": {
+            "$ref": "./examples/ExampleQueryOperations_ListAllExamples_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/copilot/exampleQuery/{exampleId}": {
+      "get": {
+        "operationId": "ExampleQueryOperations_GetExample",
+        "description": "get the example query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "exampleId",
+            "in": "path",
+            "description": "The ID of the example query.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExampleQueryOperations_GetExample_MaximumSet": {
+            "$ref": "./examples/ExampleQueryOperations_GetExample_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExampleQueryOperations_CreateOrReplace",
+        "description": "update the example query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "exampleId",
+            "in": "path",
+            "description": "The ID of the example query.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequest"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExampleQueryOperations_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/ExampleQueryOperations_CreateOrReplace_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ExampleQueryOperations_DeleteExample",
+        "description": "delete the example query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "exampleId",
+            "in": "path",
+            "description": "The ID of the example query.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExampleQueryOperations_DeleteExample_MaximumSet": {
+            "$ref": "./examples/ExampleQueryOperations_DeleteExample_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/exampleQuery/{exampleId}:linkInstruction": {
+      "post": {
+        "operationId": "ExampleQueryOperations_LinkInstruction",
+        "description": "Update instruction status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "exampleId",
+            "in": "path",
+            "description": "The ID of the example query.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExampleQuery.Models.LinkInstructionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExampleQuery.Models.LinkInstructionRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExampleQueryOperations_LinkInstruction_MaximumSet": {
+            "$ref": "./examples/ExampleQueryOperations_LinkInstruction_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/feedback": {
+      "post": {
+        "operationId": "Feedback_Submit",
+        "description": "Send feedback for a query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feedback.Models.FeedbackRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of FeedbackRequest"
+              },
+              "conversation-id": {
+                "type": "string",
+                "description": "conversation Id."
+              },
+              "operation-id": {
+                "type": "string",
+                "description": "operation Id."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Feedback_Submit_MaximumSet": {
+            "$ref": "./examples/Feedback_Submit_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/health": {
+      "get": {
+        "operationId": "HealthService_GetHealthStatus",
+        "description": "Get the health status of the service.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Represents a generic response.",
+            "schema": {
+              "$ref": "#/definitions/Health.Models.CopilotHealth"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthService_GetHealthStatus_MaximumSet": {
+            "$ref": "./examples/HealthService_GetHealthStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/instructions": {
+      "get": {
+        "operationId": "Instructions_List",
+        "description": "List Instruction resources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "showActive",
+            "in": "query",
+            "description": "Get all active instructions",
+            "required": true,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedInstruction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instructions_List_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/Instructions_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Instructions_Create",
+        "description": "Create an instruction.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instructions.Models.Instruction"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Instruction"
+              },
+              "operation-location": {
+                "type": "string",
+                "description": "The background job location."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instructions_Create_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/Instructions_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/copilot/instructions/{id}": {
+      "get": {
+        "operationId": "Instructions_Get",
+        "description": "Gets single instruction.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the instruction",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Instructions.Models.Instruction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instructions_Get_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/Instructions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Instructions_CreateOrReplace",
+        "description": "update instructions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the instruction",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instructions.Models.Instruction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Instructions.Models.Instruction"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Instructions.Models.Instruction"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instructions_CreateOrReplace_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/Instructions_CreateOrReplace_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Instructions_Delete",
+        "description": "Delete instructions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the instruction",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instructions_Delete_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/Instructions_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/copilot/instructions/{id}:updateStatus": {
+      "post": {
+        "operationId": "Instructions_UpdateStatus",
+        "description": "Update instruction status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id for the instruction",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instructions.Models.UpdateStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/Instructions.Models.UpdateStatusRequest",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instructions_UpdateStatus_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/Instructions_UpdateStatus_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/copilot/operation/{operationId}": {
+      "get": {
+        "operationId": "OperationProgress_GetOperationResult",
+        "description": "Get operation progress",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Operation.Models.OperationResultQuery"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationProgress_GetOperationResult_MaximumSet": {
+            "$ref": "./examples/OperationProgress_GetOperationResult_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/query": {
+      "post": {
+        "operationId": "QueryService_QueryExecute",
+        "description": "execute the query",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "api-version to use",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "conversationId",
+            "in": "header",
+            "description": "conversation id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Accept-Language header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptLanguage"
+          },
+          {
+            "name": "maxRetry",
+            "in": "query",
+            "description": "maximum number of retries",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 2
+          },
+          {
+            "name": "includeSummary",
+            "in": "query",
+            "description": "Include summary in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryService.QueryModels.QueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryService.QueryModels.QueryResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryService_QueryExecute_MaximumSet": {
+            "$ref": "./examples/QueryService_QueryExecute_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/validationJob/{testId}": {
+      "get": {
+        "operationId": "ValidateQueryApi_GetQueryValidationJobDetails",
+        "description": "Get the details of a validation job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testId",
+            "in": "path",
+            "description": "Test Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateQueryApi_GetQueryValidationJobDetails_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_GetQueryValidationJobDetails_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/validationJob/runs": {
+      "get": {
+        "operationId": "ValidateQueryApi_ListQueryValidationJobHistory",
+        "description": "List validate test requests",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "testRunId",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQueryValidationJobRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateQueryApi_ListQueryValidationJobHistory_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_ListQueryValidationJobHistory_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/copilot/validationJob:run": {
+      "post": {
+        "operationId": "ValidateQueryApi_Run",
+        "description": "Validate a query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobScheduleConfirmation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateQueryApi_Run_MaximumSet": {
+            "$ref": "./examples/ValidateQueryApi_Run_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AliasDictionary.Models.ActivateAlias": {
+      "type": "object",
+      "description": "This is the patch request to update the status of Alias",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "status of the alias"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "AliasDictionary.Models.Alias": {
+      "type": "object",
+      "description": "This is the request model for Alias",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id for the alias",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Key for the alias"
+        },
+        "aliases": {
+          "type": "array",
+          "description": "List of aliases",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isCustom": {
+          "type": "boolean",
+          "description": "Indicates if the alias is enabled",
+          "default": true,
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the alias is enabled",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "aliases",
+        "isCustom",
+        "enabled"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Common.Models.OperationStatusValue": {
+      "type": "string",
+      "description": "Operation Status",
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "TransientFailure",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Canceled",
+        "Unknown",
+        "Skipped"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatusValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation is Accepted."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is InProgress."
+          },
+          {
+            "name": "TransientFailure",
+            "value": "TransientFailure",
+            "description": "The operation is in a transient failure state."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation is Succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation is Failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The operation is Canceling."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation is Canceled."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The operation is in a permanent failure state."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The operation is Skipped."
+          }
+        ]
+      }
+    },
+    "ExampleQuery.Models.ExampleQueryRequest": {
+      "type": "object",
+      "description": "The example query resource.",
+      "properties": {
+        "exampleId": {
+          "type": "string",
+          "description": "The ID of the example query.",
+          "readOnly": true
+        },
+        "userQuestion": {
+          "type": "string",
+          "description": "The user question associated with the example."
+        },
+        "linkedInstructions": {
+          "type": "array",
+          "description": "The linked instructions for the example query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sampleQuery": {
+          "$ref": "#/definitions/ExampleQuery.Models.SampleQuery",
+          "description": "The sample query for the example."
+        }
+      },
+      "required": [
+        "exampleId",
+        "userQuestion",
+        "linkedInstructions",
+        "sampleQuery"
+      ]
+    },
+    "ExampleQuery.Models.LinkInstructionRequest": {
+      "type": "object",
+      "description": "The patch request for the example query.",
+      "properties": {
+        "linkedInstructions": {
+          "type": "array",
+          "description": "The linked instructions for the example query.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExampleQuery.Models.SampleQuery": {
+      "type": "object",
+      "description": "The sample query resource.",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "The query language.",
+          "default": "KQL"
+        },
+        "query": {
+          "type": "string",
+          "description": "The query string."
+        }
+      },
+      "required": [
+        "language",
+        "query"
+      ]
+    },
+    "Feedback.Models.FeedbackCategory": {
+      "type": "string",
+      "description": "Feedback category",
+      "enum": [
+        "Neutral",
+        "ThumbUp",
+        "ThumbDown"
+      ],
+      "x-ms-enum": {
+        "name": "FeedbackCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Neutral",
+            "value": "Neutral",
+            "description": "Neutral feedback."
+          },
+          {
+            "name": "ThumbUp",
+            "value": "ThumbUp",
+            "description": "Positive feedback."
+          },
+          {
+            "name": "ThumbDown",
+            "value": "ThumbDown",
+            "description": "Negative feedback."
+          }
+        ]
+      }
+    },
+    "Feedback.Models.FeedbackRequest": {
+      "type": "object",
+      "description": "feedbackRequest",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The query id"
+        },
+        "conversationId": {
+          "type": "string",
+          "description": "conversation id"
+        },
+        "feedback": {
+          "$ref": "#/definitions/Feedback.Models.FeedbackCategory",
+          "description": "The feedback",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "queryEndpoint": {
+          "$ref": "#/definitions/Feedback.Models.QueryEndpoint",
+          "description": "QueryEndpoint"
+        }
+      },
+      "required": [
+        "operationId",
+        "conversationId",
+        "feedback",
+        "queryEndpoint"
+      ]
+    },
+    "Feedback.Models.QueryEndpoint": {
+      "type": "string",
+      "description": "Query endpoint",
+      "enum": [
+        "V3",
+        "Assistant"
+      ],
+      "x-ms-enum": {
+        "name": "QueryEndpoint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V3",
+            "value": "V3",
+            "description": "V3 endpoint"
+          },
+          {
+            "name": "Assistant",
+            "value": "Assistant",
+            "description": "Assistant endpoint"
+          }
+        ]
+      }
+    },
+    "Health.Models.CopilotHealth": {
+      "type": "object",
+      "description": "Copilot Health Response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The message."
+        },
+        "operationStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "The operation status."
+        },
+        "copilotSetupInfo": {
+          "$ref": "#/definitions/Health.Models.CopilotSetupInfo",
+          "description": "copilot setup info"
+        },
+        "errorMessage": {
+          "type": "array",
+          "description": "The error message.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "message",
+        "operationStatus",
+        "copilotSetupInfo",
+        "errorMessage"
+      ]
+    },
+    "Health.Models.CopilotSetupInfo": {
+      "type": "object",
+      "description": "Copilot Setup Info",
+      "properties": {
+        "createAzureDataExplorerFunctionJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "create ADX function job status"
+        },
+        "registerInBuiltInstructionJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built instruction job status"
+        },
+        "registerInbuiltExampleQueryJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built example query job status"
+        },
+        "registerInBuiltAliasJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built example query job status"
+        },
+        "registerAssistantViewJobStatus": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "register in built example query job status"
+        }
+      },
+      "required": [
+        "createAzureDataExplorerFunctionJobStatus",
+        "registerInBuiltInstructionJobStatus",
+        "registerInbuiltExampleQueryJobStatus",
+        "registerInBuiltAliasJobStatus",
+        "registerAssistantViewJobStatus"
+      ]
+    },
+    "Instructions.Models.AdministrativeDetails": {
+      "type": "object",
+      "description": "The administrative details of the instruction.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The source of the instruction."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The comment for the instruction."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The comment for the instruction."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation date of the instruction."
+        },
+        "comment": {
+          "type": "string",
+          "description": "any closing comments"
+        }
+      },
+      "required": [
+        "source",
+        "createdBy",
+        "lastModifiedBy",
+        "createdAt",
+        "comment"
+      ]
+    },
+    "Instructions.Models.ContentProperties": {
+      "type": "object",
+      "description": "The content properties of the instruction.",
+      "properties": {
+        "semanticContent": {
+          "$ref": "#/definitions/Instructions.Models.SemanticContent",
+          "description": "The semantic content of the instruction."
+        }
+      },
+      "required": [
+        "semanticContent"
+      ]
+    },
+    "Instructions.Models.Instruction": {
+      "type": "object",
+      "description": "This is the request model for Instruction",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id for the instruction",
+          "readOnly": true
+        },
+        "instructionId": {
+          "type": "string",
+          "description": "intruction Id for the instruction",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "instructionVersion": {
+          "type": "string",
+          "description": "Version for the instruction",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/Instructions.Models.InstructionStatusEnum",
+          "description": "Status for the instruction",
+          "readOnly": true
+        },
+        "domain": {
+          "$ref": "#/definitions/Instructions.Models.InstrustionDomainEnum",
+          "description": "Domain for the instruction",
+          "readOnly": true
+        },
+        "subDomain": {
+          "$ref": "#/definitions/Instructions.Models.InstructionSubDomainEnum",
+          "description": "Sub-domain for the instruction",
+          "readOnly": true
+        },
+        "category": {
+          "$ref": "#/definitions/Instructions.Models.InstructionCategoryEnum",
+          "description": "Category for the instruction",
+          "readOnly": true
+        },
+        "language": {
+          "$ref": "#/definitions/Instructions.Models.InstructionLanguageEnum",
+          "description": "The language of the instruction."
+        },
+        "retrieval": {
+          "$ref": "#/definitions/Instructions.Models.RetrievalProperties",
+          "description": "The retrieval properties of the instruction."
+        },
+        "content": {
+          "$ref": "#/definitions/Instructions.Models.ContentProperties",
+          "description": "The content properties of the instruction."
+        },
+        "relationships": {
+          "$ref": "#/definitions/Instructions.Models.Relationships",
+          "description": "The relationships of the instruction."
+        },
+        "administrativeDetails": {
+          "$ref": "#/definitions/Instructions.Models.AdministrativeDetails",
+          "description": "audit record for the instruction"
+        }
+      },
+      "required": [
+        "id",
+        "instructionId",
+        "instructionVersion",
+        "status",
+        "domain",
+        "subDomain",
+        "category",
+        "language",
+        "retrieval",
+        "content",
+        "relationships",
+        "administrativeDetails"
+      ]
+    },
+    "Instructions.Models.InstructionCategoryEnum": {
+      "type": "string",
+      "description": "Instruction Category Enums",
+      "enum": [
+        "Transactional",
+        "Analytical",
+        "Trend",
+        "KPI"
+      ],
+      "x-ms-enum": {
+        "name": "InstructionCategoryEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Transactional",
+            "value": "Transactional",
+            "description": "Transactional instruction category"
+          },
+          {
+            "name": "Analytical",
+            "value": "Analytical",
+            "description": "Analytical instruction category"
+          },
+          {
+            "name": "Trend",
+            "value": "Trend",
+            "description": "Trend instruction category"
+          },
+          {
+            "name": "KPI",
+            "value": "KPI",
+            "description": "KPI instruction category"
+          }
+        ]
+      }
+    },
+    "Instructions.Models.InstructionLanguageEnum": {
+      "type": "string",
+      "description": "Instruction Language Enums",
+      "enum": [
+        "EN"
+      ],
+      "x-ms-enum": {
+        "name": "InstructionLanguageEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EN",
+            "value": "EN",
+            "description": "English"
+          }
+        ]
+      }
+    },
+    "Instructions.Models.InstructionStatusEnum": {
+      "type": "string",
+      "description": "Instruction Status Enums",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "InstructionStatusEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Instruction is active"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Instruction is inactive"
+          }
+        ]
+      }
+    },
+    "Instructions.Models.InstructionSubDomainEnum": {
+      "type": "string",
+      "description": "Instruction Sub Domain Enums",
+      "enum": [
+        "Production",
+        "Quality",
+        "Maintenance",
+        "Inventory",
+        "Downtime",
+        "Scrap",
+        "Mixed"
+      ],
+      "x-ms-enum": {
+        "name": "InstructionSubDomainEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production sub-domain"
+          },
+          {
+            "name": "Quality",
+            "value": "Quality",
+            "description": "Quality sub-domain"
+          },
+          {
+            "name": "Maintenance",
+            "value": "Maintenance",
+            "description": "Maintenance sub-domain"
+          },
+          {
+            "name": "Inventory",
+            "value": "Inventory",
+            "description": "Inventory sub-domain"
+          },
+          {
+            "name": "Downtime",
+            "value": "Downtime",
+            "description": "Downtime sub-domain"
+          },
+          {
+            "name": "Scrap",
+            "value": "Scrap",
+            "description": "Scrap sub-domain"
+          },
+          {
+            "name": "Mixed",
+            "value": "Mixed",
+            "description": "Mixed sub-domain"
+          }
+        ]
+      }
+    },
+    "Instructions.Models.InstrustionDomainEnum": {
+      "type": "string",
+      "description": "Instruction Sub Domain Enums",
+      "enum": [
+        "MOM",
+        "SCM",
+        "DE"
+      ],
+      "x-ms-enum": {
+        "name": "InstrustionDomainEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MOM",
+            "value": "MOM",
+            "description": "Manufacturing Operations Management"
+          },
+          {
+            "name": "SCM",
+            "value": "SCM",
+            "description": "Supply Chain Management"
+          },
+          {
+            "name": "DE",
+            "value": "DE",
+            "description": "Digital Engineering"
+          }
+        ]
+      }
+    },
+    "Instructions.Models.Relationships": {
+      "type": "object",
+      "description": "Relationships",
+      "properties": {
+        "dependencies": {
+          "type": "array",
+          "description": "List of dependent instructions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclusions": {
+          "type": "array",
+          "description": "List of InstructionIds to be excluded",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "dependencies",
+        "exclusions"
+      ]
+    },
+    "Instructions.Models.RetrievalProperties": {
+      "type": "object",
+      "description": "The retrieval properties of the instruction.",
+      "properties": {
+        "subTopics": {
+          "type": "array",
+          "description": "The sub-topics related to the instruction.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "description": "The keywords associated with the instruction.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sampleQuestions": {
+          "type": "array",
+          "description": "The sample questions for the instruction.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "subTopics",
+        "keywords",
+        "sampleQuestions"
+      ]
+    },
+    "Instructions.Models.SemanticContent": {
+      "type": "object",
+      "description": "The semantic content of the instruction.",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "The content of the instruction."
+        },
+        "steps": {
+          "type": "string",
+          "description": "The source of the instruction."
+        }
+      },
+      "required": [
+        "context",
+        "steps"
+      ]
+    },
+    "Instructions.Models.UpdateStatusRequest": {
+      "type": "object",
+      "description": "This is the patch request to update the status of instruction",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Instructions.Models.InstructionStatusEnum",
+          "description": "status of the instruction"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "Operation.Models.OperationResultQuery": {
+      "type": "object",
+      "description": "Operation Response Model",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Common.Models.OperationStatusValue",
+          "description": "The operation status.",
+          "readOnly": true
+        },
+        "operationId": {
+          "type": "string",
+          "description": "The operation id.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "array",
+          "description": "The error message.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "operationId",
+        "errorMessage"
+      ]
+    },
+    "PagedAlias": {
+      "type": "object",
+      "description": "Paged collection of Alias items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Alias items on this page",
+          "items": {
+            "$ref": "#/definitions/AliasDictionary.Models.Alias"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedExampleQueryRequest": {
+      "type": "object",
+      "description": "Paged collection of ExampleQueryRequest items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExampleQueryRequest items on this page",
+          "items": {
+            "$ref": "#/definitions/ExampleQuery.Models.ExampleQueryRequest"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedInstruction": {
+      "type": "object",
+      "description": "Paged collection of Instruction items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Instruction items on this page",
+          "items": {
+            "$ref": "#/definitions/Instructions.Models.Instruction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedQueryValidationJobRun": {
+      "type": "object",
+      "description": "Paged collection of QueryValidationJobRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QueryValidationJobRun items on this page",
+          "items": {
+            "$ref": "#/definitions/ValidateQuery.Models.QueryValidationJobRun"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryService.QueryModels.QueryRequest": {
+      "type": "object",
+      "description": "query request",
+      "properties": {
+        "ask": {
+          "type": "string",
+          "description": "User query in natural language",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "ask"
+      ]
+    },
+    "QueryService.QueryModels.QueryResponse": {
+      "type": "object",
+      "description": "Query Response Result",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Resultant Query Query or Query query execution response (JArray string)"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary of the Resultant Query Query or Query query execution response (JArray string)"
+        }
+      }
+    },
+    "ValidateQuery.Models.OperationStatus": {
+      "type": "string",
+      "description": "Operation Status",
+      "enum": [
+        "Accepted",
+        "InProgress",
+        "TransientFailure",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Canceled",
+        "Unknown",
+        "Skipped"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation is Accepted."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "TransientFailure",
+            "value": "TransientFailure",
+            "description": "The operation encountered a transient failure."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The operation is being deleted."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The status of the operation is unknown."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The operation was skipped."
+          }
+        ]
+      }
+    },
+    "ValidateQuery.Models.QueryValidationJobDetails": {
+      "type": "object",
+      "description": "Test Details Response",
+      "properties": {
+        "testId": {
+          "type": "string",
+          "description": "Test Id",
+          "readOnly": true
+        },
+        "testRunStatus": {
+          "$ref": "#/definitions/ValidateQuery.Models.OperationStatus",
+          "description": "Test Run Status"
+        },
+        "testResults": {
+          "type": "array",
+          "description": "Test Results",
+          "items": {
+            "$ref": "#/definitions/ValidateQuery.Models.QueryValidationTestCaseResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "testId",
+        "testRunStatus",
+        "testResults"
+      ]
+    },
+    "ValidateQuery.Models.QueryValidationJobRequest": {
+      "type": "object",
+      "description": "Validate job Request",
+      "properties": {
+        "testName": {
+          "type": "string",
+          "description": "The unique identifier of the test.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "testCases": {
+          "type": "array",
+          "description": "The test cases for validation.",
+          "items": {
+            "$ref": "#/definitions/ValidateQuery.Models.QueryValidationTestCase"
+          },
+          "x-ms-identifiers": []
+        },
+        "runInConversationContext": {
+          "type": "boolean",
+          "description": "run in the conversation context",
+          "default": false
+        }
+      },
+      "required": [
+        "testName",
+        "testCases",
+        "runInConversationContext"
+      ]
+    },
+    "ValidateQuery.Models.QueryValidationJobRun": {
+      "type": "object",
+      "description": "Validate Test Response",
+      "properties": {
+        "testId": {
+          "type": "string",
+          "description": "The unique identifier of the test.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date of test run"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Test owner"
+        }
+      },
+      "required": [
+        "testId",
+        "createdAt",
+        "createdBy"
+      ]
+    },
+    "ValidateQuery.Models.QueryValidationJobScheduleConfirmation": {
+      "type": "object",
+      "description": "Validate Response",
+      "properties": {
+        "testRunId": {
+          "type": "string",
+          "description": "Test Run Id"
+        },
+        "status": {
+          "$ref": "#/definitions/ValidateQuery.Models.OperationStatus",
+          "description": "Test Run Status"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "creation date"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "created by"
+        }
+      },
+      "required": [
+        "testRunId",
+        "status",
+        "createdAt",
+        "createdBy"
+      ]
+    },
+    "ValidateQuery.Models.QueryValidationTestCase": {
+      "type": "object",
+      "description": "Test Case for Test run",
+      "properties": {
+        "ask": {
+          "type": "string",
+          "description": "The natural language input for the test case."
+        },
+        "expectedKqlQuery": {
+          "type": "string",
+          "description": "The expected query for the test case."
+        },
+        "skipTestRun": {
+          "type": "boolean",
+          "description": "The expected entities for the test case.",
+          "default": false
+        }
+      },
+      "required": [
+        "skipTestRun"
+      ]
+    },
+    "ValidateQuery.Models.QueryValidationTestCaseResult": {
+      "type": "object",
+      "description": "Test Case Result",
+      "properties": {
+        "ask": {
+          "type": "string",
+          "description": "The query to be asked."
+        },
+        "expectedKqlQuery": {
+          "type": "string",
+          "description": "The expected KQL query."
+        },
+        "consolidatedScore": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The consolidated score of the test case.",
+          "default": 0
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation.",
+          "default": "InProgress",
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "TransientFailure",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled",
+            "Unknown",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The operation is Accepted."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The operation is in progress."
+              },
+              {
+                "name": "TransientFailure",
+                "value": "TransientFailure",
+                "description": "The operation encountered a transient failure."
+              },
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The operation succeeded."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The operation failed."
+              },
+              {
+                "name": "Deleting",
+                "value": "Deleting",
+                "description": "The operation is being deleted."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "The operation was canceled."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "The status of the operation is unknown."
+              },
+              {
+                "name": "Skipped",
+                "value": "Skipped",
+                "description": "The operation was skipped."
+              }
+            ]
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message, if any."
+        }
+      },
+      "required": [
+        "ask",
+        "expectedKqlQuery",
+        "consolidatedScore",
+        "status"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
