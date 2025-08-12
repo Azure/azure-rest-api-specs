@@ -302,7 +302,7 @@ namespace Storage.Blob {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
         ...LeaseIdOptionalParameter;
-        ...MetadataHeaders;
+        ...MetadataHeadersParameter;
         ...IfModifiedSinceParameter;
       },
       {
