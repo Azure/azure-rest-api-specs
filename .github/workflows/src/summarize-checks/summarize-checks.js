@@ -1011,7 +1011,7 @@ function getCommentBody(
 
     if (anyFyiPresent) {
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
-      if (!anyBlockerPresent) {
+      if (!anyBlockerPresent && requirementsMet) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
         summaryData =
           `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
