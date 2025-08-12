@@ -19,6 +19,7 @@ interface LinkersOperationGroup {
    */
   @route("/{+resourceUri}/providers/Microsoft.ServiceLinker/daprConfigurations")
   @get
+  @list
   listDaprConfigurations(
     ...ApiVersionParameter,
 
@@ -37,6 +38,7 @@ interface ConfigurationNamesOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("configurationNames")
   list is ArmProviderActionSync<
     Response = ConfigurationNameResult,
