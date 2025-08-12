@@ -5585,6 +5585,9 @@
           "Create a scale set with zonalPlatformFaultDomainAlignMode as Aligned": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithZonalPlatformFaultDomainAlignMode.json"
           },
+          "Create a virtual machine scale set with high-speed interconnect placement.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithHighSpeedInterconnectPlacement.json"
+          },
           "Create or update a scale set with capacity reservation.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithCapacityReservation.json"
           }
@@ -14125,6 +14128,30 @@
         }
       }
     },
+    "HighSpeedInterconnectPlacement": {
+      "type": "string",
+      "description": "Specifies the high speed interconnect placement for the virtual machine scale set.",
+      "enum": [
+        "None",
+        "Trunk"
+      ],
+      "x-ms-enum": {
+        "name": "HighSpeedInterconnectPlacement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No high speed interconnect placement"
+          },
+          {
+            "name": "Trunk",
+            "value": "Trunk",
+            "description": "Trunk high speed interconnect placement"
+          }
+        ]
+      }
+    },
     "HostEndpointSettings": {
       "type": "object",
       "description": "Specifies particular host endpoint settings.",
@@ -20613,6 +20640,10 @@
         "skuProfile": {
           "$ref": "#/definitions/SkuProfile",
           "description": "Specifies the sku profile for the virtual machine scale set."
+        },
+        "highSpeedInterconnectPlacement": {
+          "$ref": "#/definitions/HighSpeedInterconnectPlacement",
+          "description": "Specifies the high speed interconnect placement for the virtual machine scale set."
         }
       }
     },
