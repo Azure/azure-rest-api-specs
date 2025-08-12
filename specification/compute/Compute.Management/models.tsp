@@ -2569,6 +2569,13 @@ model VirtualMachineScaleSetNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -2724,6 +2731,13 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -3712,6 +3726,13 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -3852,6 +3873,13 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5219,6 +5247,13 @@ model VirtualMachineNetworkInterfaceConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5372,6 +5407,13 @@ model VirtualMachinePublicIPAddressConfiguration {
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
