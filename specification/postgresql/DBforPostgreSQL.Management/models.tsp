@@ -3463,6 +3463,7 @@ model DelegatedSubnetUsage {
 /**
  * Private DNS suffix.
  */
+@mediaTypeHint("application/json")
 scalar PrivateDnsZoneSuffix extends string;
 
 /**
