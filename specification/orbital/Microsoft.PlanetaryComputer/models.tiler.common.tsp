@@ -125,7 +125,7 @@ union ImageType {
 /**
  * Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles
  */
-union Tilematrixsetid {
+union TileMatrixSetId {
   string,
 
   /**
@@ -304,16 +304,16 @@ model BoundsResponse {
 /**
  * GeoJSON Feature object containing rio-tiler model information
  */
-model FeaturePolygonDictStrRioTilerModelsInfo {
+model TilerInfoGeoJsonFeature {
   /**
    * GeoJSON type identifier
    */
-  type: FeaturePolygonDictStrRioTilerModelsInfoType;
+  type: FeatureType;
 
   /**
    * Geometry object defining the feature's shape
    */
-  geometry: GeoJson;
+  geometry: Geometry;
 
   /**
    * Properties
@@ -400,13 +400,15 @@ model TileJsonResponse {
    * Minimum zoom level available in the tile set
    */
   @maxValue(30)
-  minzoom?: int32;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int32;
 
   /**
    * Maximum zoom level available in the tile set
    */
   @maxValue(30)
-  maxzoom?: int32 = 30;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int32 = 30;
 
   /**
    * Bounds
@@ -431,7 +433,7 @@ model WmtsCapabilitiesXmlResponse {
   /**
    * body for WMTSCapabilitiesXmlResponse
    */
-  @bodyRoot body: string;
+  @body body: bytes;
 
   /**
    * content type for WMTSCapabilitiesXmlResponse
@@ -460,9 +462,9 @@ model AssetQueryParameters {
    * Per asset band indexes (coma separated indexes)
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
-  @query(#{ explode: true })
   @query("asset_bidx")
-  assetBidx?: string[];
+  @query(#{ explode: true })
+  assetBandIndices?: string[];
 
   /**
    * Asset as Band
@@ -564,13 +566,13 @@ model ZoomQueryParameters {
    * Overwrite default minzoom.
    */
   @query("minzoom")
-  minzoom?: int32;
+  minZoom?: int32;
 
   /**
    * Overwrite default maxzoom.
    */
   @query("maxzoom")
-  maxzoom?: int32;
+  maxZoom?: int32;
 }
 
 alias TileResponse =

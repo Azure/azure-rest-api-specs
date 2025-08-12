@@ -17,7 +17,7 @@ interface MosaicsTiles {
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       /**
        * Search Id (pgSTAC Search Hash)
@@ -37,7 +37,7 @@ interface MosaicsTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
@@ -69,7 +69,7 @@ interface MosaicsTileMatrixSets {
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       /**
        * Search Id (pgSTAC Search Hash)
@@ -140,7 +140,7 @@ interface MosaicsTileJsonOperations {
        * Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad').
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
@@ -298,6 +298,9 @@ interface MosaicsWmtsMosaics {
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
+      ...AssetQueryParameters;
+      ...AlgorithmQueryParameters;
+
       /**
        * Search Id (pgSTAC Search Hash)
        */
@@ -311,7 +314,7 @@ interface MosaicsWmtsMosaics {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Output image type. Default is png.
@@ -327,6 +330,8 @@ interface MosaicsWmtsMosaics {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
     WmtsCapabilitiesXmlResponse | NoContentResponse
   >;
@@ -343,6 +348,9 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
+      ...AssetQueryParameters;
+      ...AlgorithmQueryParameters;
+
       /**
        * Search Id (pgSTAC Search Hash)
        */
@@ -373,6 +381,8 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
     WmtsCapabilitiesXmlResponse | NoContentResponse
   >;
@@ -443,7 +453,7 @@ interface MosaicsAssetsForTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
     ApplicationJsonResponse | NoContentResponse
   >;
@@ -523,6 +533,6 @@ interface MosaicsAssetsForPoints {
       @query("coord-crs")
       coordCrs?: string;
     },
-    ApplicationJsonResponse | NoContentResponse
+    Asset[]
   >;
 }
