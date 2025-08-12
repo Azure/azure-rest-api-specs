@@ -2803,6 +2803,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "additionalProperties": {
+          "type": "boolean",
+          "description": "If true the function have additional parameters."
         }
       },
       "required": [
@@ -6315,24 +6319,23 @@
       "type": "object",
       "description": "The detailed information associated with a run step activities.",
       "properties": {
-        "tool_calls": {
+        "activities": {
           "type": "array",
           "description": "A list of tool call details for this run step.",
           "items": {
             "$ref": "#/definitions/RunStepDetailsActivity"
-          },
-          "x-ms-client-name": "activities"
+          }
         }
       },
       "required": [
-        "tool_calls"
+        "activities"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/RunStepDetails"
         }
       ],
-      "x-ms-discriminator-value": "activity"
+      "x-ms-discriminator-value": "activities"
     },
     "RunStepAzureAISearchToolCall": {
       "type": "object",
@@ -7117,6 +7120,16 @@
       "type": "object",
       "description": "Represents the list of activities, associated with the given step.*",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The activity type, which is always mcp_list_tools.",
+          "enum": [
+            "mcp_list_tools"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "id": {
           "type": "string",
           "description": "The activity ID."
@@ -7135,6 +7148,7 @@
         }
       },
       "required": [
+        "type",
         "id",
         "server_label",
         "tools"
@@ -7581,7 +7595,7 @@
       "enum": [
         "message_creation",
         "tool_calls",
-        "activity"
+        "activities"
       ],
       "x-ms-enum": {
         "name": "RunStepType",
@@ -7598,9 +7612,9 @@
             "description": "Represents a run step that calls tools."
           },
           {
-            "name": "activity",
-            "value": "activity",
-            "description": "Represents a run step with activity information."
+            "name": "activities",
+            "value": "activities",
+            "description": "Represents a run step with activities information."
           }
         ]
       }
