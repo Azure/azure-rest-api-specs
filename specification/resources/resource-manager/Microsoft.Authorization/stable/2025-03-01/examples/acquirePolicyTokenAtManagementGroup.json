@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "managementGroupName": "MyManagementGroup",
     "api-version": "2025-03-01",
     "parameters": {
       "operation": {
-        "uri": "https://management.azure.com/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testVM?api-version=2024-01-01",
+        "uri": "https://management.azure.com/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/roleAssignments/00000000-0000-0000-0000-000000000000?api-version=2022-04-01",
         "httpMethod": "delete"
       }
     }
@@ -16,8 +16,8 @@
         "results": [
           {
             "policyInfo": {
-              "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/5ed64d02",
-              "policyAssignmentId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/3f2def86"
+              "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/5ed64d02",
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyAssignments/3f2def86"
             },
             "result": "Succeeded",
             "message": "Coin flip successful (success probability: '1').",
@@ -60,7 +60,7 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/acquirePolicyTokenOperationResults/h723ksf8?api-version=2025-03-01"
+        "Location": "https://management.azure.com/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/acquirePolicyTokenOperationResults/h723ksf8"
       }
     }
   }
