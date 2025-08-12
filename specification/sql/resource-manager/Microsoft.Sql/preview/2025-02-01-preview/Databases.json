@@ -31,8 +31,32 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "$skipToken",
+            "name": "$top",
             "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "How the results should be ordered.",
             "required": false,
             "type": "string"
           },
@@ -57,10 +81,14 @@
             }
           }
         },
+        "x-ms-odata": "#/definitions/Database",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
+          "Gets a list of databases with OData filtering.": {
+            "$ref": "./examples/ListVCoreDatabasesByServerWithOdata.json"
+          },
           "Gets a list of databases.": {
             "$ref": "./examples/ListVCoreDatabasesByServer.json"
           },
@@ -88,20 +116,6 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "description": "The child resources to include in the response.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -122,7 +136,6 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/Database",
         "x-ms-examples": {
           "Gets a database configured with Default enclave type.": {
             "$ref": "./examples/GetVCoreDatabaseDefaultEnclave.json"
@@ -133,14 +146,14 @@
           "Gets a database.": {
             "$ref": "./examples/GetVCoreDatabase.json"
           },
-          "Gets a database with database level keys expanded.": {
-            "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeys.json"
-          },
           "Gets a database with Availability zone specified.": {
             "$ref": "./examples/GetDatabaseWithAvailabilityZone.json"
           },
           "Gets a database with database level keys expanded using versionless keys.": {
             "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeysWithVersionlessKeys.json"
+          },
+          "Gets a database with confidential environment status specified.": {
+            "$ref": "./examples/GetDatabaseWithConfidentialEnvironment.json"
           }
         }
       },
@@ -277,6 +290,9 @@
           },
           "Creates a database with database-level versionless customer managed keys.": {
             "$ref": "./examples/CreateDatabaseDefaultModeWithVersionlessKeysAndVersionlessEncryptionProtector.json"
+          },
+          "Creates a database in confidential environment.": {
+            "$ref": "./examples/CreateDatabaseWithConfidentialEnvironment.json"
           }
         }
       },
@@ -411,6 +427,51 @@
           },
           "Patch a database with database-level customer managed keys.": {
             "$ref": "./examples/PatchVCoreDatabaseWithKeysAndEncryptionProtector.json"
+          },
+          "Updates a database with confidential environment status update.": {
+            "$ref": "./examples/PatchDatabaseWithConfidentialEnvironment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/currentAvailabilityZone": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Get the current availability zone of a database.",
+        "operationId": "Databases_CurrentAvailabilityZone",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the current availability zone of the database."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets current availability zone of a database.": {
+            "$ref": "./examples/GetDatabaseCurrentAvailabilityZone.json"
           }
         }
       }
@@ -1296,6 +1357,10 @@
           "description": "Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.",
           "type": "boolean"
         },
+        "confidentialEnvironment": {
+          "description": "Whether or not this database is placed in confidential environment, which means this datababase is placed on confidential virtual machine and the replicas of this database will be spread across multiple availability zones.",
+          "type": "boolean"
+        },
         "licenseType": {
           "description": "The license type to apply for this database. `LicenseIncluded` if you need a license, or `BasePrice` if you have a license and are eligible for the Azure Hybrid Benefit.",
           "enum": [
@@ -1500,6 +1565,11 @@
         "encryptionProtectorAutoRotation": {
           "description": "The flag to enable or disable auto rotation of database encryption protector AKV key.",
           "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "Specifies the provisioning state for this resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1747,6 +1817,10 @@
           "description": "Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.",
           "type": "boolean"
         },
+        "confidentialEnvironment": {
+          "description": "Whether or not this database is placed in confidential environment, which means this datababase is placed on confidential virtual machine and the replicas of this database will be spread across multiple availability zones.",
+          "type": "boolean"
+        },
         "licenseType": {
           "description": "The license type to apply for this database. `LicenseIncluded` if you need a license, or `BasePrice` if you have a license and are eligible for the Azure Hybrid Benefit.",
           "enum": [
@@ -1929,6 +2003,11 @@
         "encryptionProtectorAutoRotation": {
           "description": "The flag to enable or disable auto rotation of database encryption protector AKV key.",
           "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "Specifies the provisioning state for this resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
