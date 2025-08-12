@@ -1922,6 +1922,10 @@
         "enableLoopbackAudio": {
           "description": "Enables loopback audio functionality for the call.",
           "type": "boolean"
+        },
+        "dtmfOptions": {
+          "$ref": "#/definitions/DtmfConfigurationOptions",
+          "description": "DTMF (Dual-Tone Multi-Frequency) configuration for the call."
         }
       }
     },
@@ -2100,11 +2104,28 @@
         },
         "audioFormat": {
           "$ref": "#/definitions/AudioFormat"
+        },
+        "enableDtmfTones": {
+          "description": "A value that indicates whether to stream the DTMF tones.",
+          "type": "boolean"
         }
       }
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
+    },
+    "DtmfConfigurationOptions": {
+      "description": "Represents the configuration for DTMF functionality in calls.",
+      "required": [
+        "enableDtmfBroadcastInGroupCalls"
+      ],
+      "type": "object",
+      "properties": {
+        "enableDtmfBroadcastInGroupCalls": {
+          "description": "Enabling DTMF broadcast allows DTMF tones to be transmitted during group calls.",
+          "type": "boolean"
+        }
+      }
     },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2025-06-30/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
@@ -2188,6 +2209,10 @@
         "mediaStreamingSubscription": {
           "$ref": "#/definitions/MediaStreamingSubscription",
           "description": "The state of media streaming subscription for the call"
+        },
+        "dtmfConfigurationOptions": {
+          "$ref": "#/definitions/DtmfConfigurationOptions",
+          "description": "The state of DTMF configuration for the call"
         }
       }
     },
@@ -2267,6 +2292,10 @@
         "enableLoopbackAudio": {
           "description": "Enables loopback audio functionality for the call.",
           "type": "boolean"
+        },
+        "dtmfOptions": {
+          "$ref": "#/definitions/DtmfConfigurationOptions",
+          "description": "DTMF (Dual-Tone Multi-Frequency) configuration for the call."
         }
       }
     },
@@ -3462,6 +3491,28 @@
         },
         "message": {
           "description": "Detail message that describes the current result.",
+          "type": "string"
+        },
+        "sipDetails": {
+          "$ref": "#/definitions/SipDiagnosticInfo",
+          "description": "Sip response from SBC. This can be helpful to troubleshoot PSTN call if this result was unexpected.\r\nThis is only applicable for PSTN calls and will be null if SBC/Carrier does not provide this information.\r\nDo not solely rely on this information for troubleshooting, as it may not always be available."
+        },
+        "q850Details": {
+          "$ref": "#/definitions/SipDiagnosticInfo",
+          "description": "Q850 cause from SBC. This can be helpful to troubleshoot call issues if this result was unexpected.\r\nThis is only applicable for PSTN calls and will be null if SBC/Carrier does not provide this information.\r\nDo not solely rely on this information for troubleshooting, as it may not always be available."
+        }
+      }
+    },
+    "SipDiagnosticInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "description": "Represents the diagnostic code returned by the SIP service, used for identifying specific issues or statuses.",
+          "type": "integer"
+        },
+        "message": {
+          "description": "Message associated with the code for diagnosing.",
           "type": "string"
         }
       }
@@ -4956,6 +5007,7 @@
         "transcriptionResumed",
         "transcriptionUpdated",
         "transcriptionStopped",
+        "callSummaryUpdated",
         "unspecifiedError"
       ],
       "type": "string",
@@ -4980,7 +5032,9 @@
         "tooManyRequests",
         "forbidden",
         "serviceTimeout",
-        "transcriptionLocaleUpdated"
+        "transcriptionLocaleUpdated",
+        "callSummarySuccess",
+        "callSummaryFailure"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4996,6 +5050,10 @@
         },
         "transcriptionStatusDetails": {
           "$ref": "#/definitions/TranscriptionStatusDetails"
+        },
+        "transcriptionMessage": {
+          "description": "Optional message providing additional context about the transcription update.",
+          "type": "string"
         }
       }
     },
