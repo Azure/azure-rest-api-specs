@@ -15,6 +15,13 @@ openapi-type: data-plane
 
 # Releases
 
+### Release 2025-09-01
+These settings apply only when `--tag=2024-11-30` is specified on the command line.
+``` yaml $(tag) == '2025-09-01'
+input-file:
+  - stable/2025-09-01/DocumentIntelligence.json
+```
+
 ### Release 2024-11-30
 These settings apply only when `--tag=2024-11-30` is specified on the command line.
 ``` yaml $(tag) == '2024-11-30'
