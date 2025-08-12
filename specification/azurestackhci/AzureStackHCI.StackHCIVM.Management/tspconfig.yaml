@@ -29,6 +29,18 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/azurestackhci"
+    package-dir: "azure-resourcemanager-azurestackhci-vm"
+    namespace: "com.azure.resourcemanager.azurestackhci.vm"
+    service-name: "Azure Stack Hci Vm"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-azurestackhcivm"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-azurestackhcivm"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
