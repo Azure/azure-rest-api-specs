@@ -190,7 +190,11 @@ model IpAccessRule {
   /** Name of the Ip Access Rule */
   name: string;
 
-  /** The priority of the rule. The value can be between 1 and 500. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule. */
+  /**
+   * The priority of the rule. The value can be between 1 and 500.
+   * The priority number must be unique for each rule in the collection.
+   * The lower the priority number, the higher the priority of the rule.
+   */
   @minValue(1)
   @maxValue(500)
   priority: int32;

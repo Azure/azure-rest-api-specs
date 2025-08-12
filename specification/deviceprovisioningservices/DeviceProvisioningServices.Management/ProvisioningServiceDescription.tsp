@@ -111,7 +111,10 @@ interface ProvisioningServiceDescriptions {
   get is ArmResourceRead<ProvisioningServiceDescription, Error = ErrorDetails>;
 
   /**
-   * Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.
+   * Create or update the metadata of the provisioning service.
+   * The usual pattern to modify a property is to retrieve the provisioning service
+   * metadata and security metadata, and then combine them with the modified values
+   * in a new body to update the provisioning service.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ProvisioningServiceDescription,
