@@ -26,6 +26,8 @@ using Microsoft.StorageActions;
   "csharp"
 );
 @@clientName(StorageTasks.list, "GetStorageTasksReports", "csharp");
+// TODO -- we should not need this when https://github.com/Azure/azure-sdk-for-net/issues/51925 is resolved.
+@@clientName(StorageTasks.listBySubscription, "GetStorageTasks", "csharp");
 @@clientName(StorageTasksOperationGroup.previewActions,
   "PreviewActions",
   "csharp"
