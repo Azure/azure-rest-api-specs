@@ -42,6 +42,20 @@ input-file:
   - Microsoft.Communication/stable/2025-05-01/SenderUsernames.json
 ```
 
+### Tag: package-preview-2025-08-31-preview
+
+These settings apply only when `--tag=package-preview-2025-08-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-31-preview'
+input-file:
+  - Microsoft.Communication/preview/2025-08-31-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2025-08-31-preview/Domains.json
+  - Microsoft.Communication/preview/2025-08-31-preview/EmailServices.json
+  - Microsoft.Communication/preview/2025-08-31-preview/Usernames.json
+  - Microsoft.Communication/preview/2025-08-31-preview/SmtpUsernames.json
+  - Microsoft.Communication/preview/2025-08-31-preview/SuppressionLists.json
+```
+
 ### Tag: package-preview-2025-05-01-preview
 
 These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
