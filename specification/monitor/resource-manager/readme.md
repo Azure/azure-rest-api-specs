@@ -47,7 +47,7 @@ input-file:
   - Microsoft.Insights/stable/2024-03-11/dataCollectionEndpoints_API.json
   - Microsoft.Insights/stable/2024-03-11/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/stable/2024-03-11/dataCollectionRules_API.json
-  - Microsoft.Insights/PrivateLinkScopes/stable/2021-09-01/privateLinkScopes_API.json
+  - Microsoft.Insights/PrivateLinkScopes/preview/2023-06-01-preview/privateLinkScopes_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
@@ -57,7 +57,7 @@ input-file:
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/stable/2024-02-01/metrics_API.json
-  - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+  - Microsoft.Insights/preview/2023-01-01-preview/activityLogAlerts_API.json
   - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
   - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
   - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
@@ -68,12 +68,8 @@ input-file:
   - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
-  - Microsoft.Insights/stable/2021-05-01/operations_API.json
-
-suppressions:
-  - code: RequiredPropertiesMissingInResourceModel
-    from: metrics_API.json
-    reason: Metrics query result is not an ARM resource; id/name/type are data fields.
+  - Microsoft.Monitor/Accounts/preview/2025-05-03-preview/azuremonitorworkspace.json
+  - Microsoft.Monitor/Operations/preview/2025-05-03-preview/operations.json
 ```
 
 ### Tag: package-2025-01-01-preview
@@ -1568,10 +1564,6 @@ directive:
     from: metrics_API.json
     where: $.definitions.LocalizableString
     reason: "LocalizableString exists in other swaggers my team can not modify"
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: metrics_API.json
-    where: $.definitions.Metric
-    reason: "Both the request body and response are not ARM level resources"
   - suppress: MissingTypeObject
     from: metricDefinitions_API.json
     where: $.definitions.LocalizableString
