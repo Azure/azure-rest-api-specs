@@ -357,7 +357,10 @@ model AgentProperties {
   timeZone?: string;
 
   /**
-   * The WAN-link upload limit schedule that applies to any Job Run the agent executes. Data plane operations (migrating files) are affected. Control plane operations ensure seamless migration functionality and are not limited by this schedule. The schedule is interpreted with the agent's local time.
+   * The WAN-link upload limit schedule that applies to any Job Run the agent executes.
+   * Data plane operations (migrating files) are affected. Control plane operations
+   * ensure seamless migration functionality and are not limited by this schedule.
+   * The schedule is interpreted with the agent's local time.
    */
   uploadLimitSchedule?: UploadLimitSchedule;
 
@@ -476,7 +479,10 @@ model AgentUpdateProperties {
   description?: string;
 
   /**
-   * The WAN-link upload limit schedule that applies to any Job Run the agent executes. Data plane operations (migrating files) are affected. Control plane operations ensure seamless migration functionality and are not limited by this schedule. The schedule is interpreted with the agent's local time.
+   * The WAN-link upload limit schedule that applies to any Job Run the agent executes.
+   * Data plane operations (migrating files) are affected. Control plane operations
+   * ensure seamless migration functionality and are not limited by this schedule.
+   * The schedule is interpreted with the agent's local time.
    */
   uploadLimitSchedule?: UploadLimitSchedule;
 }

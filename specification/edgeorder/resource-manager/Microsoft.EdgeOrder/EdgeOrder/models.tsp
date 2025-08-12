@@ -882,7 +882,8 @@ model ContactDetails {
  */
 model Resource {
   /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+   * Fully qualified resource ID for the resource.
+   * E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
   @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
