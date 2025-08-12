@@ -7920,6 +7920,11 @@ model CapacityReservationGroupProperties {
    * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. Pls. keep in mind the capacity reservation group resource generally can be shared across subscriptions belonging to a single azure AAD tenant or cross AAD tenant if there is a trust relationship established between the AAD tenants. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
+
+  /**
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+   */
+  reservationType?: ReservationType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7969,6 +7974,21 @@ model CapacityReservationInstanceView {
 }
 
 /**
+ * Defines the schedule for Block-type capacity reservations.
+ */
+model ScheduleProfile {
+  /**
+   * The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27.
+   */
+  start: utcDateTime;
+
+  /**
+   * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
+   */
+  end: utcDateTime;
+}
+
+/**
  * Represents the capacity reservation utilization in terms of resources allocated.
  */
 model CapacityReservationUtilization {
@@ -7991,6 +8011,26 @@ model ResourceSharingProfile {
    * Specifies an array of subscription resource IDs that capacity reservation group is shared with. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   subscriptionIds?: SubResource[];
+}
+
+/**
+ * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+ */
+union ReservationType {
+  /**
+   * Custom reservation type value.
+   */
+  string,
+
+  /**
+   * Reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided.
+   */
+  Targeted: "Targeted",
+
+  /**
+   * Block capacity reservations.
+   */
+  Block: "Block",
 }
 
 /**
@@ -8064,6 +8104,11 @@ model CapacityReservationProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+   */
+  scheduleProfile?: ScheduleProfile;
 }
 
 /**
