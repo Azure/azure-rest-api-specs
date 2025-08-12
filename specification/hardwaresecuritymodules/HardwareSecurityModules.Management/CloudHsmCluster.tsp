@@ -155,6 +155,7 @@ interface CloudHsmClusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
+  @list
   listByCloudHsmCluster is ArmResourceActionSync<
     CloudHsmCluster,
     void,
