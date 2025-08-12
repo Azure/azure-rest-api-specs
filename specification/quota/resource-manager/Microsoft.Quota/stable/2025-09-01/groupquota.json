@@ -1409,6 +1409,7 @@
         "Created",
         "Invalid",
         "Succeeded",
+        "Escalated",
         "Failed",
         "InProgress",
         "Canceled"
@@ -2216,6 +2217,11 @@
             "enforcementEnabled": {
               "$ref": "#/definitions/EnforcementState",
               "description": "Is the GroupQuota Enforcement enabled for the Azure region."
+            },
+            "enforcedGroupName": {
+              "type": "string",
+              "description": "The name of the group that is enforced.",
+              "readOnly": true
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
