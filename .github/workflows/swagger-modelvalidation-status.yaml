@@ -15,7 +15,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger ModelValidation"]
+    workflows: ["\\[TEST-IGNORE\\] Swagger ModelValidation - Analyze Code"]
     types: [completed]
 
 permissions:
@@ -28,8 +28,8 @@ permissions:
 jobs:
   model-validation-status:
     name: Set ModelValidation Status
-    uses: ./.github/workflows/_reusable-set-check-status.yml
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Swagger ModelValidation"
+      monitored_workflow_name: "[TEST-IGNORE] Swagger ModelValidation - Analyze Code"
       required_check_name: "[TEST-IGNORE] Swagger ModelValidation"
       overriding_label: "Approved-ModelValidation"

@@ -1,0 +1,43 @@
+parameters:
+  "service-dir":
+    default: "sdk/workloadorchestration"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/configurationmanager/{version-status}/{version}/configurationmanager.json"
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/workloadorchestration"
+    package-dir: "armworkloadorchestration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-workloadorchestration"
+    namespace: "azure.mgmt.workloadorchestration"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/workloadorchestration"
+    flavor: azure
+    package-dir: azure-resourcemanager-workloadorchestration
+    namespace: com.azure.resourcemanager.workloadorchestration
+    service-name: Workload Orchestration
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-workloadorchestration"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-workloadorchestration"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

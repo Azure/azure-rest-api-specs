@@ -2,8 +2,8 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Versioning;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 @versioned(KeyVault.Versions)
 namespace Customizations;
@@ -13,6 +13,71 @@ namespace Customizations;
 @@clientName(KeyVault, "Certificate", "rust");
 
 using KeyVault;
+
+// Make optional path parameter required for all languages
+
+/**
+ * The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@summary("Updates the specified attributes associated with the given certificate.")
+@route("/certificates/{certificate-name}/{certificate-version}")
+@patch(#{ implicitOptionality: true })
+op updateCertificate is KeyVaultOperation<
+  {
+    /**
+     * The name of the certificate in the given key vault.
+     */
+    @path("certificate-name")
+    @clientName("name", "go")
+    certificateName: string;
+
+    /**
+     * The version of the certificate.
+     */
+    @path("certificate-version")
+    @clientName("version", "go")
+    certificateVersion: string;
+
+    /**
+     * The parameters for certificate update.
+     */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: CertificateUpdateParameters;
+  },
+  CertificateBundle
+>;
+
+/**
+ * Gets information about a specific certificate. This operation requires the certificates/get permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@summary("Gets information about a certificate.")
+@route("/certificates/{certificate-name}/{certificate-version}")
+@get
+op getCertificate is KeyVaultOperation<
+  {
+    /**
+     * The name of the certificate in the given vault.
+     */
+    @path("certificate-name")
+    @clientName("name", "go")
+    certificateName: string;
+
+    /**
+     * The version of the certificate. This URI fragment is optional. If not specified, the latest version of the certificate is returned.
+     */
+    @path("certificate-version")
+    @clientName("version", "go")
+    certificateVersion: string;
+  },
+  CertificateBundle
+>;
+
+@@override(KeyVault.updateCertificate, updateCertificate);
+@@override(KeyVault.getCertificate, getCertificate);
 
 // Java configuration
 @@usage(CertificateIssuerItem, Usage.input, "java");
@@ -39,6 +104,7 @@ using KeyVault;
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
+@list
 op listCertificateProperties is KeyVaultOperation<
   {
     /**
@@ -58,6 +124,7 @@ op listCertificateProperties is KeyVaultOperation<
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
+@list
 op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 
 /**
@@ -68,6 +135,7 @@ op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
+@list
 op listCertificatePropertiesVersions is KeyVaultOperation<
   {
     /**
@@ -88,6 +156,7 @@ op listCertificatePropertiesVersions is KeyVaultOperation<
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
+@list
 op listDeletedCertificateProperties is KeyVaultOperation<
   {
     /**

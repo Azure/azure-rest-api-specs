@@ -1,6 +1,8 @@
 parameters:
   service-dir:
     default: "sdk/loadtesting"
+  "service-name":
+    default: "loadtesting"
 emit:
   - "@azure-tools/typespec-autorest"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
@@ -37,7 +39,9 @@ options:
     package-dir: "load-testing-rest"
     title: Azure Load Testing
     description: Azure Load Testing Client
-    generate-metadata: false
+    generate-metadata: true
+    is-modular-library: false
+    generate-test: false
     package-details:
       name: "@azure-rest/load-testing"
       description: "This package contains Microsoft Azure LoadTestingClient client library."
