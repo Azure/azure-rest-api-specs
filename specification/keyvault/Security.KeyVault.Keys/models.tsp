@@ -794,12 +794,11 @@ model KeyUpdateParameters {
 /**
  * The key list result.
  */
-@pagedResult
 model KeyListResult {
   /**
    * A response message containing a list of keys in the key vault along with a link to the next page of keys.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: KeyItem[];
 
@@ -1051,12 +1050,11 @@ model KeyReleaseResult {
 /**
  * A list of keys that have been deleted in this vault.
  */
-@pagedResult
 model DeletedKeyListResult {
   /**
    * A response message containing a list of deleted keys in the key vault along with a link to the next page of deleted keys.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: DeletedKeyItem[];
 
