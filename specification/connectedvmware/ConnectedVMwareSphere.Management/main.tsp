@@ -66,6 +66,7 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
