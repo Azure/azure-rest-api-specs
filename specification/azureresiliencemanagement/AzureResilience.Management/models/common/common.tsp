@@ -237,3 +237,26 @@ union ResourceProtectionSolutionType {
 
   string,
 }
+
+@doc("Model for service group membership.")
+model ServiceGroupMembership {
+  @doc("Arm Id of the service group.")
+  serviceGroupId: armResourceIdentifier;
+
+  @doc("Membership type of the service group to resource.")
+  membershipType: MembershipType;
+}
+
+@doc("Membership type of the service group to resource.")
+union MembershipType {
+  @doc("Resource is direct member of service group.")
+  Direct: "Direct",
+
+  @doc("Resource is member of service group through subscription.")
+  ThroughSubscription: "ThroughSubscription",
+
+  @doc("Resource is member of service group through resource group.")
+  ThroughResourceGroup: "ThroughResourceGroup",
+
+  string,
+}
