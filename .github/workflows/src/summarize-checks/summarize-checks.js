@@ -735,7 +735,6 @@ export async function getCheckRunTuple(
 
     const latestCheck = sortedChecks[0];
 
-    // just handling both names for ease of integration testing
     if (
       latestCheck.name === IMPACT_CHECK_NAME &&
       latestCheck.status === "completed" &&
