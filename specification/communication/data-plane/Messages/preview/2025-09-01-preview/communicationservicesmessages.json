@@ -2573,11 +2573,11 @@
     },
     "ReadReceiptContent": {
       "type": "object",
-      "description": "A request to send a status update.",
+      "description": "A request to send a read receipt update from Business to User.",
       "properties": {
         "messageId": {
           "type": "string",
-          "description": "The id of the message this status refers to."
+          "description": "The id of the message this read receipt refers to."
         },
         "channelRegistrationId": {
           "type": "string",
@@ -2585,7 +2585,7 @@
         },
         "typingIndicator": {
           "type": "boolean",
-          "description": "Whether this status update includes a typing indicator."
+          "description": "Whether this status update includes a typing indicator. This field defaults to false when not provided."
         }
       },
       "required": [
