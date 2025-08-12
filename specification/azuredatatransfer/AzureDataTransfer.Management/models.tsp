@@ -1161,7 +1161,7 @@ model MessagingOptions {
  */
 model ApiFlowOptions {
   /**
-   * Remote host to which communication needs to be made. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead.
+   * Remote host to which communication needs to be made. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings.endpoint property instead.
    */
   remoteEndpoint?: string;
 
@@ -1176,22 +1176,22 @@ model ApiFlowOptions {
   apiMode?: ApiMode;
 
   /**
-   * Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead.
+   * Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   identityTranslation?: IdentityTranslation;
 
   /**
-   * Sender's app user assigned Manage Identity client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead.
+   * Sender's app user assigned Manage Identity client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   senderClientId?: string;
 
   /**
-   * Remote stub app registration Client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead.
+   * Remote stub app registration Client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   remoteCallingModeClientId?: string;
 
   /**
-   * Optional field to override the audience of the remote endpoint. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings property instead.
+   * Optional field to override the audience of the remote endpoint. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead.
    */
   audienceOverride?: string;
 
