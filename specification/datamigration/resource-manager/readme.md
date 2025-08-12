@@ -107,6 +107,26 @@ directive:
     from: Microsoft.DataMigration/stable/2025-06-30/sqlmigration.json
     where: $.definitions.DatabaseMigrationSqlDb
     reason: DatabaseMigration does not support list by resource group. DatabaseMigration is an extension resource type. To get the DatabaseMigration, we should have a subscription as well as a resource group and a migration target SQL Database.
+  - suppress: PostResponseCodes
+    code: PostResponseCodes
+    from: sqlmigration.json
+    reason: Service requires returning a schema for POST long-running operations for client SDK generation.
+  - suppress: LroLocationHeader
+    code: LroLocationHeader
+    from: sqlmigration.json
+    reason: Location header not applicable for these long-running operations due to service design.
+  - suppress: DefaultErrorResponseSchema
+    code: DefaultErrorResponseSchema
+    from: sqlmigration.json
+    reason: Service uses a custom error schema for backward compatibility with existing clients.
+  - suppress: DeleteResponseCodes
+    code: DeleteResponseCodes
+    from: sqlmigration.json
+    reason: Service-specific delete response codes are required for compatibility with legacy workflows.
+  - suppress: DeleteResponseBodyEmpty
+    code: DeleteResponseBodyEmpty
+    from: sqlmigration.json
+    reason: Minimal payload is returned for delete confirmation per current backend behavior.
 ```
 
 ### Tag: package-preview-2025-03
