@@ -2370,11 +2370,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deleted successfully."
-          },
           "204": {
-            "description": "List not found."
+            "description": "No content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2393,8 +2390,8 @@
         "operationId": "ModerationListItems_List",
         "description": "Gets the items that belong to the specified moderation list.",
         "x-ms-examples": {
-          "ListModerationListItems": {
-            "$ref": "./examples/ListModerationListItems.json"
+          "ListModerationTerms": {
+            "$ref": "./examples/ListModerationTerms.json"
           }
         },
         "parameters": [
@@ -2439,10 +2436,10 @@
           "RaiModerationLists"
         ],
         "operationId": "ModerationListItems_Get",
-        "description": "Gets the specified moderation list item.",
+        "description": "Gets the specified moderation term.",
         "x-ms-examples": {
-          "GetModerationListItem": {
-            "$ref": "./examples/GetModerationListItem.json"
+          "GetModerationTerm": {
+            "$ref": "./examples/GetModerationTerm.json"
           }
         },
         "parameters": [
@@ -2488,7 +2485,7 @@
         "description": "Creates or updates a moderation list item.",
         "x-ms-examples": {
           "PutModerationListItem": {
-            "$ref": "./examples/PutModerationListItem.json"
+            "$ref": "./examples/PutModerationTerm.json"
           }
         },
         "parameters": [
@@ -2549,7 +2546,7 @@
         "description": "Deletes the specified moderation terms.",
         "x-ms-examples": {
           "DeleteModerationListItem": {
-            "$ref": "./examples/DeleteModerationListItem.json"
+            "$ref": "./examples/DeleteModerationTerm.json"
           }
         },
         "parameters": [
@@ -2573,11 +2570,113 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deleted successfully."
-          },
           "204": {
-            "description": "Item not found."
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiModerationLists/{moderationListName}/addRaiModerationTerms": {
+      "post": {
+        "tags": [
+          "RaiModerationLists"
+        ],
+        "operationId": "RaiModerationListTerms_BatchAdd",
+        "description": "Batch operation to add moderation list terms.",
+        "x-ms-examples": {
+          "AddRaiModerationTerms": {
+            "$ref": "./examples/AddRaiModerationTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiModerationlistNameParameter"
+          },
+          {
+            "name": "raiModerationTerms",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiModerationlistItemsBulkAddRequest"
+            },
+            "description": "Properties describing the moderation terms."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Added the moderation terms successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiModerationlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiModerationLists/{moderationListName}/deleteRaiModerationTerms": {
+      "post": {
+        "tags": [
+          "RaiModerationLists"
+        ],
+        "operationId": "RaiModerationTerms_BatchDelete",
+        "description": "Batch operation to delete moderation terms.",
+        "x-ms-examples": {
+          "DeleteRaiModerationTerms": {
+            "$ref": "./examples/DeleteRaiModerationTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiModerationlistNameParameter"
+          },
+          {
+            "name": "raiModerationTerms",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiModerationlistItemsBulkDeleteRequest"
+            },
+            "description": "List of RAI Moderation Term Names."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the blocklist Items successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -8502,6 +8601,10 @@
         "description": {
           "type": "string",
           "description": "Description of the moderation list."
+        },
+        "moderationType": {
+          "type": "string",
+          "description": "Type of moderation."
         }
       }
     },
@@ -8548,10 +8651,6 @@
         "term": {
           "type": "string",
           "description": "Text to moderate against."
-        },
-        "moderationType": {
-          "type": "string",
-          "description": "Type of moderation."
         },
         "isAddition": {
           "type": "boolean",
