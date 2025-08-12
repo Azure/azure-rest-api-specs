@@ -67,7 +67,7 @@ namespace Storage.Blob {
 
       /** The storage service properties to set. */
       @body
-      storageServiceProperties: StorageServiceProperties;
+      blobServiceProperties: BlobServiceProperties;
     },
     {
       @statusCode statusCode: 202;
@@ -78,10 +78,7 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("?restype=service&comp=properties")
-  op getProperties is StorageOperation<
-    TimeoutParameter,
-    StorageServiceProperties
-  >;
+  op getProperties is StorageOperation<TimeoutParameter, BlobServiceProperties>;
 
   /** Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -302,7 +299,7 @@ namespace Storage.Blob {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
         ...LeaseIdOptionalParameter;
-        ...MetadataHeaders;
+        ...MetadataHeadersParameter;
         ...IfModifiedSinceParameter;
       },
       {
