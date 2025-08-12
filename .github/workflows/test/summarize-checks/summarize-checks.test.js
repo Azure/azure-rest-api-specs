@@ -763,6 +763,153 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
+    it("Should generate error summary for a PR scenario where NotReadyForARMReview is present", async () => {
+      const repo = "azure-rest-api-specs-pr";
+      const targetBranch = "RPSaaSMaster";
+      const labelNames = [
+        "ARMReview",
+        "NotReadyForARMReview",
+        "PipelineBotTrigger",
+        "PublishToCustomers",
+        "resource-manager",
+        "RPaaS",
+        "TypeSpec",
+        "VersioningReviewRequired",
+      ];
+      const fyiCheckRuns = [];
+      const expectedComment =
+        `<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ ` +
+        `This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label ` +
+        `from an ARM reviewer.<br/>This PR is not ready for ARM review (label: <code>NotReadyForARMReview</code>). This PR will not ` +
+        `be reviewed by ARM until relevant problems are fixed. Consult the rest of this <code>Next Steps to Merge</code> comment ` +
+        `for details.<br/>Once the blocking problems are addressed, add to the PR a comment with contents <code>/azp run</code>. ` +
+        `Automation will re-evaluate this PR and if everything looks good, it will add <code>WaitForARMFeedback</code> label which ` +
+        `will put this PR on the ARM review queue.<br/>For details of the ARM review, see <a href="https://aka.ms/azsdk/pr-arm-review">` +
+        `aka.ms/azsdk/pr-arm-review</a><br/></li><li>❌ This PR is <code>NotReadyForARMReview</code> because it has the <code>VersioningReviewRequired</code> ` +
+        `label.<br/></li><li>❌ This PR has at least one change violating Azure versioning policy ` +
+        `(label: <code>VersioningReviewRequired</code>).<br/>To unblock this PR, either a) introduce a new API version with these ` +
+        `changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.</li>`;
+
+      const expectedOutput = [
+        expectedComment,
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "FAILURE",
+          summary:
+            "❌ This PR cannot be merged because some requirements are not met. See the details.",
+        },
+      ];
+
+      const requiredCheckRuns = [
+        // "license/cla" with status "queued" and conclusion "null"
+        // "Swagger PrettierCheck" with status "completed" and conclusion "success"
+        // "Automated merging requirements met" with status "completed" and conclusion "failure"
+        // "TypeSpec Validation" with status "completed" and conclusion "success"
+        // "Swagger SemanticValidation" with status "completed" and conclusion "success"
+        // "TypeSpec Requirement" with status "completed" and conclusion "success"
+        // "Protected Files" with status "completed" and conclusion "success"
+        // "SpellCheck" with status "completed" and conclusion "success"
+        // "Swagger ModelValidation" with status "completed" and conclusion "success"
+        // "SDK Validation Status" with status "completed" and conclusion "success"
+        // "Breaking Change(Cross-Version)" with status "completed" and conclusion "success"
+        // "Swagger BreakingChange" with status "completed" and conclusion "failure"
+        // "Swagger Avocado" with status "completed" and conclusion "success"
+        // "Swagger LintDiff" with status "completed" and conclusion "success"
+
+        {
+          name: "SpellCheck",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("SpellCheck"),
+        },
+        {
+          name: "TypeSpec Requirement",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("TypeSpec Requirement"),
+        },
+        {
+          name: "Protected Files",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Protected Files"),
+        },
+        {
+          name: "TypeSpec Validation",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+        {
+          name: "Swagger BreakingChange",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
+        },
+        {
+          name: "Breaking Change(Cross-Version)",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
+        },
+        {
+          name: "Swagger Avocado",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger Avocado"),
+        },
+        {
+          name: "Swagger ModelValidation",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Swagger ModelValidation"),
+        },
+        {
+          name: "Swagger SemanticValidation",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger SemanticValidation"),
+        },
+        {
+          name: "Swagger Lint(RPaaS)",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
+        },
+        {
+          name: "Automated merging requirements met",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Automated merging requirements met"),
+        },
+        {
+          name: "license/cla",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("license/cla"),
+        },
+        {
+          name: "Swagger PrettierCheck",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger PrettierCheck"),
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+        WORKFLOW_URL,
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
     it("Should generate error summary for a PR scenario with labeling issues", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
