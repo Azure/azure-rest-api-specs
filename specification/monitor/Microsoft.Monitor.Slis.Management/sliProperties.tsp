@@ -117,40 +117,40 @@ union SamplingType {
 @doc("Defines operators used in filter conditions.")
 union ConditionOperator {
   @doc("Equal to.")
-  `==`: "eq",
+  Equal: "eq",
 
   @doc("Not equal to.")
-  `!=`: "ne",
+  NotEqual: "ne",
 
   @doc("Less than.")
-  `<`: "lt",
+  LessThan: "lt",
 
   @doc("Less than or equal to.")
-  `<=`: "lte",
+  LessThanOrEqual: "lte",
 
   @doc("Greater than.")
-  `>`: "gt",
+  GreaterThan: "gt",
 
   @doc("Greater than or equal to.")
-  `>=`: "gte",
+  GreaterThanOrEqual: "gte",
 
   @doc("In operator.")
-  in: "@in",
+  In: "@in",
 
   @doc("Not in.")
-  `!in`: "notin",
+  NotIn: "notin",
 
   @doc("Starts with.")
-  "startswith",
+  StartsWith: "startswith",
 
   @doc("Does not start with.")
-  `!startswith`: "notstartswith",
+  NotStartsWith: "notstartswith",
 
   @doc("Contains the value.")
-  "contains",
+  Contains: "contains",
 
   @doc("Does not contain the value.")
-  `!contains`: "notcontains",
+  NotContains: "notcontains",
 
   string,
 }
