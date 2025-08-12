@@ -114,6 +114,7 @@ interface NewRelicMonitorResources {
   /**
    * Lists the app service resources currently being monitored by the New Relic resource, helping you understand which app services are under monitoring
    */
+  @list
   listAppServices is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     AppServicesGetRequest,
@@ -134,6 +135,7 @@ interface NewRelicMonitorResources {
   /**
    * Lists all VM resources currently being monitored by the New Relic monitor resource, helping you manage observability
    */
+  @list
   listHosts is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     HostsGetRequest,
@@ -152,6 +154,7 @@ interface NewRelicMonitorResources {
   /**
    * Lists all Azure resources that are currently being monitored by the specified New Relic monitor resource, providing insight into the coverage of your observability setup
    */
+  @list
   @action("monitoredResources")
   listMonitoredResources is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
@@ -162,6 +165,7 @@ interface NewRelicMonitorResources {
   /**
    * Lists all Azure resources that are linked to the same New Relic organization as the specified monitor resource, helping you understand the scope of integration
    */
+  @list
   listLinkedResources is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
@@ -225,6 +229,7 @@ interface NewRelicMonitorResources {
   /**
    * List of all active deployments that are associated with the marketplace subscription linked to the given monitor.
    */
+  @list
   @action("listConnectedPartnerResources")
   list is ArmResourceActionSync<
     NewRelicMonitorResource,

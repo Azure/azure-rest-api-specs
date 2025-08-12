@@ -18,6 +18,7 @@ interface AccountsOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("accounts")
   list is ArmProviderActionSync<
     Response = AccountsListResponse,
@@ -45,6 +46,7 @@ interface OrganizationsOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("organizations")
   list is ArmProviderActionSync<
     Response = OrganizationsListResponse,
@@ -72,6 +74,7 @@ interface PlansOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("plans")
   list is ArmProviderActionSync<
     Response = PlanDataListResponse,
