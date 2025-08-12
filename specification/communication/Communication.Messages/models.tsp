@@ -292,15 +292,15 @@ model InteractiveNotificationContent extends NotificationContent {
 }
 
 @added(Versions.c2025_09_01_Preview)
-@doc("A request to send a status update.")
+@doc("A request to send a read receipt update from Business to User.")
 model ReadReceiptContent {
-  @doc("The id of the message this status refers to.")
+  @doc("The id of the message this read receipt refers to.")
   messageId: string;
 
   @doc("The Channel Registration ID for the Business Identifier.")
   channelRegistrationId: string;
 
-  @doc("Whether this status update includes a typing indicator.")
+  @doc("Whether this status update includes a typing indicator. This field defaults to false when not provided.")
   typingIndicator?: boolean;
 }
 
