@@ -73,6 +73,7 @@ interface MonitorResources {
   /**
    * List the resources currently being monitored by the Dynatrace monitor resource.
    */
+  @list
   listMonitoredResources is ArmResourceActionSync<
     MonitorResource,
     LogStatusRequest,
@@ -102,6 +103,7 @@ interface MonitorResources {
   /**
    * List the VM/VMSS resources currently being monitored by the Dynatrace resource.
    */
+  @list
   listHosts is ArmResourceActionSync<
     MonitorResource,
     void,
@@ -121,6 +123,7 @@ interface MonitorResources {
   /**
    * Gets list of App Services with Dynatrace PaaS OneAgent enabled
    */
+  @list
   listAppServices is ArmResourceActionSync<
     MonitorResource,
     void,
@@ -151,6 +154,7 @@ interface MonitorResources {
   /**
    * Gets all the Dynatrace environments that a user can link a azure resource to
    */
+  @list
   listLinkableEnvironments is ArmResourceActionSync<
     MonitorResource,
     LinkableEnvironmentRequest,
