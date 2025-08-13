@@ -50,6 +50,15 @@ input-file:
   - Microsoft.AzureTerraform/preview/2025-06-01-preview/export.json
 ```
 
+### Tag: package-2025-09-01-preview
+
+These settings apply only when `--tag=package-2025-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01-preview'
+input-file:
+  - Microsoft.AzureTerraform/preview/2025-09-01-preview/export.json
+```
+
 ---
 
 # Code Generation
