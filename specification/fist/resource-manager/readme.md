@@ -27,13 +27,23 @@ These are the global settings for the fist.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2025-04-01-preview
+tag: package-2025-08-02
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
 ```
+
+### Tag: package-2025-08-02
+
+These settings apply only when `--tag=package-2025-08-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-02'
+input-file:
+  - Microsoft.IoTFirmwareDefense/stable/2025-08-02/iotfirmwaredefense.json
+```
+
 ### Tag: package-2025-04-01-preview
 
 These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
@@ -74,6 +84,28 @@ input-file:
   - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/operations.json
 ```
 
+### Tag: package-2022-09-15-privatepreview
+
+These settings apply only when `--tag=package-2022-09-15-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09-15-privatepreview'
+input-file:
+  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/firmwareGroups.json
+  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/firmwares.json
+  - Microsoft.IoTFirmwareDefense/preview/2022-09-15-privatepreview/operations.json
+```
+
+### Tag: package-2021-11-10-privatepreview
+
+These settings apply only when `--tag=package-2021-11-10-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11-10-privatepreview'
+input-file:
+  - Microsoft.IoTFirmwareDefense/preview/2021-11-10-privatepreview/firmwareGroups.json
+  - Microsoft.IoTFirmwareDefense/preview/2021-11-10-privatepreview/firmwares.json
+  - Microsoft.IoTFirmwareDefense/preview/2021-11-10-privatepreview/operations.json
+```
+
 ---
 
 # Code Generation
@@ -85,7 +117,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
