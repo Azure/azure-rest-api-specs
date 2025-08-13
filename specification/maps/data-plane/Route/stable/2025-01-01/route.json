@@ -740,15 +740,20 @@
           "type": "string",
           "default": "fastestWithoutTraffic",
           "enum": [
+            "short",
             "shortest",
             "fastestWithoutTraffic",
-            "fastestAvoidClosureWithoutTraffic",
             "fastestWithTraffic"
           ],
           "x-ms-enum": {
             "name": "RouteDirectionOptimizeRouteEnum",
             "modelAsString": true,
             "values": [
+              {
+                "value": "short",
+                "name": "Short",
+                "description": "The route is calculated to balance fast travel time and short distance, rather than prioritizing just one. It's optimized for both speed and efficiency. Traffic information is not used."
+              },
               {
                 "value": "shortest",
                 "name": "Shortest",
@@ -2869,11 +2874,6 @@
                 "value": "shortest",
                 "name": "Shortest",
                 "description": "The route is calculated to minimize the distance. Traffic information is not used."
-              },
-              {
-                "value": "short",
-                "name": "Short",
-                "description": "The route is calculated to balance fast travel time and short distance, rather than prioritizing just one. It's optimized for both speed and efficiency. Traffic information is not used."
               },
               {
                 "value": "fastestWithoutTraffic",
