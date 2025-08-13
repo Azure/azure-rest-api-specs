@@ -31,7 +31,7 @@ title: ComputeRecommenderResourceProviderClient
 ``` yaml
 description: The Compute Recommender Resource Provider Client
 openapi-type: arm
-tag: package-2025-06-05
+tag: package-2025-06-05-preview
 
 suppressions:
   - code: OperationsAPIImplementation
