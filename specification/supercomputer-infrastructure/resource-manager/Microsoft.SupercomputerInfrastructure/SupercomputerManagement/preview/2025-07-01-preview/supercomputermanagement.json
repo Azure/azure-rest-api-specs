@@ -1801,6 +1801,90 @@
         }
       ]
     },
+    "MaintenanceRequestImpactCategory": {
+      "type": "string",
+      "description": "The types of impact covered by maintenance requests.",
+      "enum": [
+        "LinkMiswire",
+        "LinkUnhealthy",
+        "NicIncorrectFirmware",
+        "NicUnhealthy",
+        "PortDown",
+        "PortFlap",
+        "PortRxLowPower",
+        "PortTxLowPower",
+        "PortUnhealthy",
+        "SwitchDown",
+        "SwitchMisconfigured",
+        "SwitchUnhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceRequestImpactCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LinkMiswire",
+            "value": "LinkMiswire",
+            "description": "The link is miswired between two devices."
+          },
+          {
+            "name": "LinkUnhealthy",
+            "value": "LinkUnhealthy",
+            "description": "The referenced link has unspecified performance issues."
+          },
+          {
+            "name": "NicIncorrectFirmware",
+            "value": "NicIncorrectFirmware",
+            "description": "The referenced NIC has incorrect firmware."
+          },
+          {
+            "name": "NicUnhealthy",
+            "value": "NicUnhealthy",
+            "description": "The referenced NIC has unspecified issues."
+          },
+          {
+            "name": "PortDown",
+            "value": "PortDown",
+            "description": "The referenced port is completely down."
+          },
+          {
+            "name": "PortFlap",
+            "value": "PortFlap",
+            "description": "The referenced port is flapping."
+          },
+          {
+            "name": "PortRxLowPower",
+            "value": "PortRxLowPower",
+            "description": "The referenced port is receiving low Rx power."
+          },
+          {
+            "name": "PortTxLowPower",
+            "value": "PortTxLowPower",
+            "description": "The referenced port is receiving low Tx power."
+          },
+          {
+            "name": "PortUnhealthy",
+            "value": "PortUnhealthy",
+            "description": "The referenced port has unspecified performance issues, such as packet drops."
+          },
+          {
+            "name": "SwitchDown",
+            "value": "SwitchDown",
+            "description": "The referenced switch is completely down."
+          },
+          {
+            "name": "SwitchMisconfigured",
+            "value": "SwitchMisconfigured",
+            "description": "The referenced switch is misconfigured."
+          },
+          {
+            "name": "SwitchUnhealthy",
+            "value": "SwitchUnhealthy",
+            "description": "The referenced switch has unspecified issues, such as a low buffer."
+          }
+        ]
+      }
+    },
     "MaintenanceRequestListResult": {
       "type": "object",
       "description": "The response of a MaintenanceRequest list operation.",
@@ -1858,6 +1942,14 @@
             "create"
           ]
         },
+        "impactCategory": {
+          "$ref": "#/definitions/MaintenanceRequestImpactCategory",
+          "description": "The impact seen to cause this maintenance request.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "impactedResources": {
           "type": "array",
           "description": "The ARM resource IDs of the entities impacted by this maintenance request.",
@@ -1882,6 +1974,7 @@
         "maintenanceRequestType",
         "state",
         "unhealthyResources",
+        "impactCategory",
         "impactedResources"
       ]
     },

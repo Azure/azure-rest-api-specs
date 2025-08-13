@@ -44,6 +44,10 @@ model MaintenanceRequestProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   unhealthyResources: string[];
 
+  /** The impact seen to cause this maintenance request. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  impactCategory: MaintenanceRequestImpactCategory;
+
   /** The ARM resource IDs of the entities impacted by this maintenance request. */
   @visibility(Lifecycle.Read)
   impactedResources: string[];
