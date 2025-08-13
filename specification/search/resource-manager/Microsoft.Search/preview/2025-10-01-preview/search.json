@@ -321,7 +321,7 @@
         ],
         "responses": {
           "200": {
-            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform read-only operations on your search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
             }
@@ -447,7 +447,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure AI Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
+            "description": "The name of the Azure AI Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
           },
           {
             "name": "service",
@@ -470,13 +470,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property returned in the response for a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
           },
           "201": {
-            "description": "If you requested creation of a free search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
+            "description": "If you requested creation of a free search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can check the status of a scale operation through the provisioningState property returned in the response for a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
@@ -566,7 +566,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property returned in the response for a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
@@ -1435,7 +1435,7 @@
           "200": {
             "description": "Successfully retrieved the list of configurations.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
             }
           },
           "default": {
@@ -1467,14 +1467,7 @@
             "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
-            "name": "nspConfigName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
-            "minLength": 38,
-            "maxLength": 100,
-            "description": "The network security configuration name."
+            "$ref": "#/parameters/NspConfigNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1487,7 +1480,7 @@
           "200": {
             "description": "Successfully retrieved the configuration.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
             }
           },
           "default": {
@@ -1514,14 +1507,7 @@
             "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
-            "name": "nspConfigName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
-            "minLength": 38,
-            "maxLength": 100,
-            "description": "The network security configuration name."
+            "$ref": "#/parameters/NspConfigNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1591,7 +1577,7 @@
             }
           },
           "202": {
-            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
+            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property returned in the response for a Get Service request.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -1843,18 +1829,18 @@
       },
       "description": "Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication."
     },
-    "DisabledDataExfiltrationOption": {
+    "DataExfiltrationProtection": {
       "type": "string",
       "enum": [
-        "All"
+        "BlockAll"
       ],
       "x-ms-enum": {
-        "name": "SearchDisabledDataExfiltrationOption",
+        "name": "SearchDataExfiltrationProtection",
         "modelAsString": true,
         "values": [
           {
-            "value": "All",
-            "name": "All",
+            "value": "BlockAll",
+            "name": "BlockAll",
             "description": "Indicates that all data exfiltration scenarios are disabled."
           }
         ]
@@ -1931,7 +1917,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an existing private endpoint connection to the Azure AI Search service."
@@ -2162,7 +2148,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a shared private link resource managed by the Azure AI Search service."
@@ -2312,7 +2298,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a supported private link resource for the Azure AI Search service."
@@ -2407,12 +2393,12 @@
         "systemData": {
           "readOnly": true,
           "description": "Azure Resource Manager metadata of the search service containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure AI Search service and its current state."
@@ -2456,12 +2442,12 @@
         "systemData": {
           "readOnly": true,
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "description": "The parameters used to update an Azure AI Search service."
@@ -2516,7 +2502,7 @@
         },
         "computeType": {
           "type": "string",
-          "description": "Configure this property to support the search service using either the default compute or Azure Confidential Compute.",
+          "description": "Configure this property to support the search service using either the Default Compute or Azure Confidential Compute.",
           "enum": [
             "default",
             "confidential"
@@ -2528,7 +2514,7 @@
               {
                 "value": "default",
                 "name": "Default",
-                "description": "Create the service with the default compute."
+                "description": "Create the service with the Default Compute."
               },
               {
                 "value": "confidential",
@@ -2559,6 +2545,11 @@
                 "value": "disabled",
                 "name": "Disabled",
                 "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
+              },
+              {
+                "value": "securedByPerimeter",
+                "name": "SecuredByPerimeter",
+                "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
               }
             ]
           }
@@ -2628,26 +2619,26 @@
           "type": "string",
           "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
           "enum": [
-            "Succeeded",
-            "Provisioning",
-            "Failed"
+            "succeeded",
+            "provisioning",
+            "failed"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": false,
             "values": [
               {
-                "value": "Succeeded",
+                "value": "succeeded",
                 "name": "Succeeded",
                 "description": "The last provisioning operation has completed successfully."
               },
               {
-                "value": "Provisioning",
+                "value": "provisioning",
                 "name": "Provisioning",
                 "description": "The search service is being provisioned or scaled up or down."
               },
               {
-                "value": "Failed",
+                "value": "failed",
                 "name": "Failed",
                 "description": "The last provisioning operation has failed."
               }
@@ -2658,10 +2649,10 @@
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure AI Search service may be reached."
         },
-        "disabledDataExfiltrationOptions": {
+        "dataExfiltrationProtections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DisabledDataExfiltrationOption"
+            "$ref": "#/definitions/DataExfiltrationProtection"
           },
           "description": "A list of data exfiltration scenarios that are explicitly disallowed for the search service. Currently, the only supported value is 'All' to disable all possible data export scenarios with more fine grained controls planned for the future."
         },
@@ -2705,11 +2696,30 @@
           "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
         },
         "upgradeAvailable": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Indicates whether or not the search service has an upgrade available."
+          "type": "string",
+          "description": "Indicates if the search service has an upgrade available.",
+          "enum": [
+            "notAvailable",
+            "available"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeAvailable",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "notAvailable",
+                "name": "NotAvailable",
+                "description": "An upgrade is currently not available for the service."
+              },
+              {
+                "value": "available",
+                "name": "Available",
+                "description": "There is an upgrade available for the service."
+              }
+            ]
+          }
         },
-        "serviceUpgradeDate": {
+        "serviceUpgradedAt": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
@@ -2833,203 +2843,13 @@
       },
       "x-ms-external": true
     },
-    "Operation": {
-      "description": "Describes a REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the operation. This name is of the form {provider}/{resource}/{operation}.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that describes the operation.",
-          "readOnly": true,
-          "properties": {
-            "provider": {
-              "description": "The friendly name of the resource provider.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "operation": {
-              "description": "The operation type: read, write, delete, listKeys/action, etc.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "resource": {
-              "description": "The resource type on which the operation is performed.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "description": {
-              "description": "The friendly name of the operation.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "x-nullable": true,
-          "readOnly": true,
-          "description": "Describes if the specified operation is a data plane API operation. Operations where this value is not true are supported directly by the resource provider."
-        },
-        "origin": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Describes which originating entities are allowed to invoke this operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Describes additional properties for this operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationProperties": {
-      "type": "object",
-      "description": "Describes additional properties for this operation.",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/OperationServiceSpecification",
-          "description": "Specifications of the service for this operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationServiceSpecification": {
-      "type": "object",
-      "description": "Specifications of the service for this operation.",
-      "properties": {
-        "metricSpecifications": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationMetricsSpecification"
-          },
-          "description": "Specifications of metrics for this operation."
-        },
-        "logSpecifications": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationLogsSpecification"
-          },
-          "description": "Specifications of logs for this operation."
-        }
-      }
-    },
-    "OperationMetricsSpecification": {
-      "type": "object",
-      "description": "Specifications of one type of metric for this operation.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the metric specification."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the metric specification."
-        },
-        "displayDescription": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display description of the metric specification."
-        },
-        "unit": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The unit for the metric specification."
-        },
-        "aggregationType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of aggregation for the metric specification."
-        },
-        "dimensions": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationMetricDimension"
-          },
-          "description": "Dimensions for the metric specification."
-        },
-        "availabilities": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationAvailability"
-          },
-          "description": "Availabilities for the metric specification."
-        }
-      }
-    },
-    "OperationMetricDimension": {
-      "type": "object",
-      "description": "Describes a particular dimension for the metric specification.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the dimension."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the dimension."
-        }
-      }
-    },
-    "OperationAvailability": {
-      "type": "object",
-      "description": "Describes a particular availability for the metric specification.",
-      "readOnly": true,
-      "properties": {
-        "timeGrain": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The time grain for the dimension."
-        },
-        "blobDuration": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The blob duration for the dimension."
-        }
-      }
-    },
-    "OperationLogsSpecification": {
-      "type": "object",
-      "description": "Specifications of one type of log for this operation.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the log specification."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the log specification."
-        },
-        "blobDuration": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The blob duration for the log specification."
-        }
-      }
-    },
     "OperationListResult": {
       "description": "The result of the request to list REST API operations. It contains a list of operations and a URL to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Operation"
           },
           "readOnly": true,
           "description": "The list of operations by Azure AI Search, some supported by the resource provider and others by data plane APIs."
@@ -3103,24 +2923,8 @@
       "type": "object",
       "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
       "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedManagedIdentity"
+        "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
       }
-    },
-    "UserAssignedManagedIdentity": {
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of user assigned identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client ID of user assigned identity."
-        }
-      },
-      "type": "object",
-      "description": "The details of the user assigned managed identity assigned to the search service."
     },
     "QuotaUsagesListResult": {
       "type": "object",
@@ -3180,320 +2984,6 @@
         }
       },
       "description": "Describes the quota usage for a particular SKU."
-    },
-    "NetworkSecurityPerimeterConfiguration": {
-      "description": "Network security perimeter configuration for a server.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationListResult": {
-      "description": "A list of network security perimeter configurations for a server.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationProperties": {
-      "description": "The properties of a network security perimeter configuration.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "networkSecurityPerimeter": {
-          "$ref": "#/definitions/NSPConfigPerimeter"
-        },
-        "resourceAssociation": {
-          "$ref": "#/definitions/NSPConfigAssociation"
-        },
-        "profile": {
-          "$ref": "#/definitions/NSPConfigProfile"
-        },
-        "provisioningIssues": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NSPProvisioningIssue"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "NSPConfigAccessRule": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/NSPConfigAccessRuleProperties"
-        }
-      },
-      "description": "An access rule for a network security perimeter configuration."
-    },
-    "NSPConfigAccessRuleProperties": {
-      "type": "object",
-      "properties": {
-        "direction": {
-          "type": "string"
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "fullyQualifiedDomainNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "subscriptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "networkSecurityPerimeters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
-          }
-        }
-      },
-      "description": "The properties for the access rules in a network security perimeter configuration."
-    },
-    "NSPConfigAssociation": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "accessMode": {
-          "type": "string"
-        }
-      },
-      "description": "The resource association for the network security perimeter."
-    },
-    "NSPConfigNetworkSecurityPerimeterRule": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "perimeterGuid": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "description": "The network security perimeter properties present in a configuration rule."
-    },
-    "NSPConfigPerimeter": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "perimeterGuid": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "description": "The perimeter for a network security perimeter configuration."
-    },
-    "NSPConfigProfile": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "accessRulesVersion": {
-          "type": "string"
-        },
-        "accessRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NSPConfigAccessRule"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "description": "The profile for a network security perimeter configuration."
-    },
-    "NSPProvisioningIssue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/NSPProvisioningIssueProperties"
-        }
-      },
-      "description": "An object to describe any issues with provisioning network security perimeters to a search service."
-    },
-    "NSPProvisioningIssueProperties": {
-      "type": "object",
-      "properties": {
-        "issueType": {
-          "type": "string"
-        },
-        "severity": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "suggestedResourceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "suggestedAccessRules": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
-    },
-    "OfferingsListResult": {
-      "type": "object",
-      "description": "The response containing a list of features and SKUs offered in various regions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OfferingsByRegion"
-          },
-          "description": "The list of regions with their respective features and SKUs offered."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The URL to get the next set of offerings, if any."
-        }
-      }
-    },
-    "OfferingsByRegion": {
-      "type": "object",
-      "properties": {
-        "regionName": {
-          "type": "string",
-          "description": "The name of the region."
-        },
-        "features": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeatureOffering"
-          },
-          "description": "The list of features offered in this region.",
-          "x-ms-identifiers": []
-        },
-        "skus": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuOffering"
-          },
-          "description": "The list of SKUs offered in this region."
-        }
-      }
-    },
-    "FeatureOffering": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the feature offered in this region."
-        }
-      }
-    },
-    "SkuOffering": {
-      "type": "object",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "limits": {
-          "type": "object",
-          "properties": {
-            "indexes": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of indexes available for this SKU."
-            },
-            "indexers": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of indexers available for this SKU."
-            },
-            "partitionStorageInGigabytes": {
-              "type": "number",
-              "format": "float",
-              "description": "The maximum storage size in Gigabytes available for this SKU per partition."
-            },
-            "partitionVectorStorageInGigabytes": {
-              "type": "number",
-              "format": "float",
-              "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
-            },
-            "searchUnits": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of search units available for this SKU."
-            },
-            "replicas": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of replicas available for this SKU."
-            },
-            "partitions": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The maximum number of partitions available for this SKU."
-            }
-          },
-          "description": "The limits associated with this SKU offered in this region."
-        }
-      }
     }
   },
   "parameters": {
@@ -3580,6 +3070,17 @@
       "required": true,
       "type": "string",
       "description": "The unique SKU name that identifies a billable tier.",
+      "x-ms-parameter-location": "method"
+    },
+    "NspConfigNameParameter": {
+      "name": "nspConfigName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
+      "minLength": 38,
+      "maxLength": 100,
+      "description": "The network security perimeter configuration name.",
       "x-ms-parameter-location": "method"
     }
   }
