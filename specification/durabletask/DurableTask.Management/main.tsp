@@ -244,7 +244,7 @@ model SchedulerUpdate {
   identity?: Foundations.ManagedServiceIdentity;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-  ...CommonTypes.Resource;
+  ...UpdateableProperties<CommonTypes.Resource>;
 }
 
 @doc("The Scheduler resource properties to be updated")
