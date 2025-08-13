@@ -241,6 +241,7 @@ model SchedulerUpdate {
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...CommonTypes.Resource;
 }
 @@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
 
