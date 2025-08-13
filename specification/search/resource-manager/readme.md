@@ -35,7 +35,7 @@ These settings apply only when `--package-preview-2025-10-01` is specified on th
 
 ```yaml $(tag) == 'package-preview-2025-10-01'
 input-file:
-  - Microsoft.Search/stable/2025-10-01-preview/search.json
+  - Microsoft.Search/preview/2025-10-01-preview/search.json
 ```
 
 ### Tag: package-2025-05-01
