@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2025-02-01-preview"
+    "version": "2025-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -105,7 +105,7 @@
             }
           },
           "201": {
-            "description": "Request to  create or update Defender for Storage settings partially succeeded.",
+            "description": "Request to create or update Defender for Storage settings partially succeeded.",
             "schema": {
               "$ref": "#/definitions/DefenderForStorageSetting"
             }
@@ -296,22 +296,46 @@
         },
         "blobScanResultsOptions": {
           "type": "string",
-          "description": "Optional. Write scan result on blobIndexTags by default.",
+          "description": "Optional. Write scan result on BlobIndexTags by default.",
           "enum": [
-            "blobIndexTags",
+            "BlobIndexTags",
             "None"
           ],
+          "default": "BlobIndexTags",
           "x-ms-enum": {
             "name": "blobScanResultsOptions",
             "modelAsString": true,
             "values": [
               {
-                "value": "blobIndexTags",
+                "value": "BlobIndexTags",
                 "description": "Write scan results on the blobs index tags."
               },
               {
                 "value": "None",
                 "description": "Do not write scan results on the blobs index tags."
+              }
+            ]
+          }
+        },
+        "automatedResponse": {
+          "type": "string",
+          "description": "Optional. Specifies the automated response action to take when malware is detected.",
+          "enum": [
+            "None",
+            "BlobSoftDelete"
+          ],
+          "default": "None",
+          "x-ms-enum": {
+            "name": "AutomatedResponseType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No automated response will be taken when malware is detected."
+              },
+              {
+                "value": "BlobSoftDelete",
+                "description": "The blob will be soft deleted when malware is detected."
               }
             ]
           }

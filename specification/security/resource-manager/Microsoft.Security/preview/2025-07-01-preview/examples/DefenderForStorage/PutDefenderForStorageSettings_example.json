@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-02-01-preview",
+    "api-version": "2025-07-01-preview",
     "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount",
     "settingName": "current",
     "defenderForStorageSetting": {
@@ -9,7 +9,7 @@
         "malwareScanning": {
           "onUpload": {
             "isEnabled": true,
-            "capGBPerMonth": -1,
+            "capGBPerMonth": 10000,
             "filters": {
               "excludeBlobsWithPrefix": [
                 "unscanned-container",
@@ -22,7 +22,9 @@
               "excludeBlobsLargerThan": 1024
             }
           },
-          "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
+          "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
+          "blobScanResultsOptions": "BlobIndexTags",
+          "automatedResponse": "BlobSoftDelete"
         },
         "sensitiveDataDiscovery": {
           "isEnabled": true
@@ -42,7 +44,7 @@
           "malwareScanning": {
             "onUpload": {
               "isEnabled": true,
-              "capGBPerMonth": -1,
+              "capGBPerMonth": 10000,
               "filters": {
                 "excludeBlobsWithPrefix": [
                   "sample-container/logs",
@@ -57,7 +59,8 @@
               }
             },
             "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic",
-            "blobScanResultsOptions": "blobIndexTags",
+            "blobScanResultsOptions": "BlobIndexTags",
+            "automatedResponse": "BlobSoftDelete",
             "operationStatus": {
               "code": "Succeeded"
             }
@@ -84,15 +87,17 @@
               "isEnabled": false,
               "capGBPerMonth": -1
             },
+            "blobScanResultsOptions": "BlobIndexTags",
+            "automatedResponse": "None",
             "operationStatus": {
-              "code": "UnknownError",
+              "code": "PartialSuccess",
               "message": "Failed to setup data scanner."
             }
           },
           "sensitiveDataDiscovery": {
             "isEnabled": false,
             "operationStatus": {
-              "code": "UnknownError",
+              "code": "PartialSuccess",
               "message": "Failed to setup data scanner."
             }
           },
