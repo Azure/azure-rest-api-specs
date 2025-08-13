@@ -24,7 +24,7 @@ interface TargetTypes {
   /**
    * Get a list of Target Type resources for given location.
    */
-  list is ArmResourceListByParent<
+  getAll is ArmResourceListByParent<
     TargetType,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {

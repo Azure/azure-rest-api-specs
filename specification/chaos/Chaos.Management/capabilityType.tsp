@@ -21,7 +21,7 @@ interface CapabilityTypes {
   /**
    * Get a list of Capability Type resources for given Target Type and location.
    */
-  list is ArmResourceListByParent<
+  getAll is ArmResourceListByParent<
     CapabilityType,
     Parameters = {
       /**

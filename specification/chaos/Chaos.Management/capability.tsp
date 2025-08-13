@@ -39,7 +39,7 @@ interface Capabilities {
   /**
    * Get a list of Capability resources that extend a Target resource.
    */
-  list is ArmResourceListByParent<
+  getAll is ArmResourceListByParent<
     Capability,
     {
       ...CapabilityParentResourceParameters;
