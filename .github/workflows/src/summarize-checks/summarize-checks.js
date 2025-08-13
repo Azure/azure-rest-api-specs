@@ -1140,13 +1140,11 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
  */
 export async function getImpactAssessment(github, core, owner, repo, runId) {
   // List artifacts for provided workflow run
-  const jobSummaryArtifactName = "job-summary";
-
   const jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
     owner: owner,
     repo: repo,
     run_id: runId,
-    name: jobSummaryArtifactName,
+    name: "job-summary",
     per_page: PER_PAGE_MAX,
   });
 
