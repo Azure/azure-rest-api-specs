@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2025-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
   - Microsoft.ApplicationMigration/preview/2025-02-01-preview/WorkloadsDiscovery.json
-  - Microsoft.ApplicationMigration/preview/2025-02-01-preview/MongoWorkloadsDiscovery.json
+  - Microsoft.ApplicationMigration/Mongo/preview/2025-02-01-preview/MongoWorkloadsDiscovery.json
 suppressions:
   - code: PathResourceTypeNameCamelCase
     from: WorkloadsDiscovery.json
