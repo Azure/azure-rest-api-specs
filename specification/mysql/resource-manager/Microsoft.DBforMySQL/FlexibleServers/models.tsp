@@ -971,7 +971,7 @@ model ServerProperties {
    * PrivateEndpointConnections related properties of a server.
    */
   @visibility(Lifecycle.Read)
-  privateEndpointConnections?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnection;
+  privateEndpointConnections?: PrivateEndpointConnection;
 
   /**
    * Maintenance policy of a server.

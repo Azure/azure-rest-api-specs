@@ -31,7 +31,7 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is PrivateEndpointOperations.CreateOrUpdateAsync<
     Server,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmResourceCreatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmAcceptedLroResponse
   >;
 
   /**
