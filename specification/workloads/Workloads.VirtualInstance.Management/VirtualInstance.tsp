@@ -46,11 +46,13 @@ interface VirtualInstances {
   /**
    * Gets all Virtual Instance resources in a Resource Group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<VirtualInstance>;
 
   /**
    * Gets all Virtual Instance resources in a Subscription.
    */
+  @list
   listBySubscription is ArmListBySubscription<VirtualInstance>;
 }
 

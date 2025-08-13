@@ -67,6 +67,7 @@ interface Deployments {
   /**
    * Calculates the list of devices in a deployment along with their state. Useful for getting a list of failed devices.
    */
+  @list
   calculateDeviceStates is ArmResourceActionSync<
     Deployment,
     void,

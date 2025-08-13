@@ -53,5 +53,6 @@ interface WssServerInstances {
   /**
    * Lists the Epic WSS server Instance resource for the given Virtual Instance for Epic solutions resource.
    */
+  @list
   listByEpicVirtualInstance is ArmResourceListByParent<WssServerInstance>;
 }
