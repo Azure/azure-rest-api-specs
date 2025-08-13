@@ -1,9 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "WebSiteManagementClient",
+    "title": "CertificateRegistrationProvider API Client",
     "version": "2024-11-01",
-    "description": "WebSite Management Client",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -55,7 +54,7 @@
   "paths": {
     "/providers/Microsoft.CertificateRegistration/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "CertificateRegistrationProvider_ListOperations",
         "tags": [
           "Operations"
         ],
@@ -79,6 +78,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -90,6 +94,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "List all certificate orders in a subscription.",
         "description": "Description for List all certificate orders in a subscription.",
         "parameters": [
           {
@@ -136,7 +141,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "appServiceCertificateOrder",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -169,6 +174,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Get certificate orders in a resource group.",
         "description": "Description for Get certificate orders in a resource group.",
         "parameters": [
           {
@@ -211,6 +217,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Get a certificate order.",
         "description": "Description for Get a certificate order.",
         "parameters": [
           {
@@ -255,6 +262,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Create or update a certificate purchase order.",
         "description": "Description for Create or update a certificate purchase order.",
         "parameters": [
           {
@@ -329,6 +337,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Create or update a certificate purchase order.",
         "description": "Description for Create or update a certificate purchase order.",
         "parameters": [
           {
@@ -382,6 +391,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Delete an existing certificate order.",
         "description": "Description for Delete an existing certificate order.",
         "parameters": [
           {
@@ -418,118 +428,6 @@
         "x-ms-examples": {
           "Delete App Service Certificate Order": {
             "$ref": "./examples/DeleteAppServiceCertificateOrder.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/{name}/retrieveCertificateActions": {
-      "post": {
-        "operationId": "AppServiceCertificateOrders_RetrieveCertificateActions",
-        "tags": [
-          "AppServiceCertificateOrders"
-        ],
-        "description": "Description for Retrieve the list of certificate actions.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "certificateOrderName",
-            "in": "path",
-            "description": "Name of the certificate order..",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the certificate order.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CertificateOrderAction"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve Certificate Order Actions": {
-            "$ref": "./examples/RetrieveCertificateOrderActions.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/{name}/retrieveEmailHistory": {
-      "post": {
-        "operationId": "AppServiceCertificateOrders_RetrieveCertificateEmailHistory",
-        "tags": [
-          "AppServiceCertificateOrders"
-        ],
-        "description": "Description for Retrieve email history.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "certificateOrderName",
-            "in": "path",
-            "description": "Name of the certificate order..",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the certificate order.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CertificateEmail"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve Certificate Email History": {
-            "$ref": "./examples/RetrieveCertificateEmailHistory.json"
           }
         }
       }
@@ -1149,6 +1047,104 @@
         "x-ms-examples": {
           "Resend Domain Ownership verification email": {
             "$ref": "./examples/ResendDomainOwnershipVerificationEmail.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_RetrieveCertificateActions",
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "description": "Description for Retrieve the list of certificate actions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the AppServiceCertificateOrder",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateOrderAction"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Certificate Order Actions": {
+            "$ref": "./examples/RetrieveCertificateOrderActions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_RetrieveCertificateEmailHistory",
+        "tags": [
+          "AppServiceCertificateOrders"
+        ],
+        "description": "Description for Retrieve email history.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the AppServiceCertificateOrder",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateEmail"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Certificate Email History": {
+            "$ref": "./examples/RetrieveCertificateEmailHistory.json"
           }
         }
       }

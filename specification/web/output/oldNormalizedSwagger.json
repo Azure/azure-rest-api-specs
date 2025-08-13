@@ -1,0 +1,1529 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CertificateRegistrationProvider API Client",
+    "version": "2024-11-01"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/microsoft.CertificateRegistration/operations": {
+      "get": {
+        "operationId": "CertificateRegistrationProvider_ListOperations",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/CsmOperationCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.CertificateRegistration/certificateOrders": {
+      "get": {
+        "operationId": "AppServiceCertificateOrders_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrderCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Service Certificate orders by subscription": {
+            "$ref": "./examples/ListAppServiceCertificateOrdersBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.CertificateRegistration/validateCertificateRegistrationInformation": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_ValidatePurchaseInformation",
+        "parameters": [
+          {
+            "name": "appServiceCertificateOrder",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate App Service Certificate purchase information by subscription": {
+            "$ref": "./examples/ValidateAppServiceCertificatePurchaseInformationBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders": {
+      "get": {
+        "operationId": "AppServiceCertificateOrders_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrderCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List App Service Certificate orders by resource group": {
+            "$ref": "./examples/ListAppServiceCertificateOrdersByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}": {
+      "get": {
+        "operationId": "AppServiceCertificateOrders_Get",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Service Certificate Order": {
+            "$ref": "./examples/GetAppServiceCertificateOrder.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AppServiceCertificateOrders_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateDistinguishedName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Certificate order": {
+            "$ref": "./examples/CreateAppServiceCertificateOrder.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AppServiceCertificateOrders_Update",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateDistinguishedName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrderPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateOrder"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Certificate order": {
+            "$ref": "./examples/UpdateAppServiceCertificateOrder.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AppServiceCertificateOrders_Delete",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete App Service Certificate Order": {
+            "$ref": "./examples/DeleteAppServiceCertificateOrder.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates": {
+      "get": {
+        "operationId": "AppServiceCertificateOrders_ListCertificates",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List certificates by App Service Certificate": {
+            "$ref": "./examples/ListCertificatesByAppServiceCertificateOrder.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}": {
+      "get": {
+        "operationId": "AppServiceCertificateOrders_GetCertificate",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get App Service Certificate": {
+            "$ref": "./examples/GetAppServiceCertificate.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AppServiceCertificateOrders_CreateOrUpdateCertificate",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyVaultCertificate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Certificate": {
+            "$ref": "./examples/CreateAppServiceCertificate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AppServiceCertificateOrders_UpdateCertificate",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyVaultCertificate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificatePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AppServiceCertificateResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Certificate": {
+            "$ref": "./examples/UpdateAppServiceCertificate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AppServiceCertificateOrders_DeleteCertificate",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete App Service Certificate": {
+            "$ref": "./examples/DeleteAppServiceCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/detectors": {
+      "get": {
+        "operationId": "CertificateOrdersDiagnostics_ListAppServiceCertificateOrderDetectorResponse",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DetectorResponseCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List app service certificate detector response": {
+            "$ref": "./examples/Diagnostics_ListAppServiceCertificateOrderDetectorResponse.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/detectors/{detectorName}": {
+      "get": {
+        "operationId": "CertificateOrdersDiagnostics_GetAppServiceCertificateOrderDetectorResponse",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "timeGrain",
+            "in": "query",
+            "type": "string",
+            "pattern": "PT[1-9][0-9]+[SMH]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DetectorResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get app service certificate order detector response": {
+            "$ref": "./examples/Diagnostics_GetAppServiceCertificateOrderDetectorResponse.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/reissue": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_Reissue",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reissueCertificateOrderRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReissueCertificateOrderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reissue App Service Certificate Order": {
+            "$ref": "./examples/ReissueAppServiceCertificateOrder.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/renew": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_Renew",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "renewCertificateOrderRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenewCertificateOrderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Renew App Service Certificate Order": {
+            "$ref": "./examples/RenewAppServiceCertificateOrder.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/resendEmail": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_ResendEmail",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resend App Service Certificate Order email": {
+            "$ref": "./examples/ResendAppServiceCertificateOrderEmail.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/resendRequestEmails": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_ResendRequestEmails",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nameIdentifier",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/NameIdentifier"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resend Domain Ownership verification email": {
+            "$ref": "./examples/ResendDomainOwnershipVerificationEmail.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_RetrieveCertificateActions",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateOrderAction"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Certificate Order Actions": {
+            "$ref": "./examples/RetrieveCertificateOrderActions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_RetrieveCertificateEmailHistory",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateEmail"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Certificate Email History": {
+            "$ref": "./examples/RetrieveCertificateEmailHistory.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveSiteSeal": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_RetrieveSiteSeal",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteSealRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteSealRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SiteSeal"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Site Seal": {
+            "$ref": "./examples/RetrieveSiteSeal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/verifyDomainOwnership": {
+      "post": {
+        "operationId": "AppServiceCertificateOrders_VerifyDomainOwnership",
+        "parameters": [
+          {
+            "name": "certificateOrderName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Verify Domain Ownership": {
+            "$ref": "./examples/VerifyDomainOwnership.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppServiceCertificate": {
+      "type": "object",
+      "properties": {
+        "keyVaultId": {
+          "type": "string"
+        },
+        "keyVaultSecretName": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Initialized",
+            "WaitingOnCertificateOrder",
+            "Succeeded",
+            "CertificateOrderFailed",
+            "OperationNotPermittedOnKeyVault",
+            "AzureServiceUnauthorizedToAccessKeyVault",
+            "KeyVaultDoesNotExist",
+            "KeyVaultSecretDoesNotExist",
+            "UnknownError",
+            "ExternalPrivateKey",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "KeyVaultSecretStatus",
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AppServiceCertificateCollection": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AppServiceCertificateResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AppServiceCertificateOrder": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "certificates": {
+              "type": "object",
+              "description": "State of the Key Vault secret.",
+              "additionalProperties": {
+                "$ref": "#/definitions/AppServiceCertificate"
+              }
+            },
+            "distinguishedName": {
+              "type": "string",
+              "description": "Certificate distinguished name.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "domainVerificationToken": {
+              "type": "string",
+              "description": "Domain verification token.",
+              "readOnly": true
+            },
+            "validityInYears": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Duration in years (must be 1).",
+              "default": 1,
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "keySize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Certificate key size.",
+              "default": 2048,
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "productType": {
+              "type": "string",
+              "description": "Certificate product type.",
+              "enum": [
+                "StandardDomainValidatedSsl",
+                "StandardDomainValidatedWildCardSsl"
+              ],
+              "x-ms-enum": {
+                "name": "CertificateProductType",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "autoRenew": {
+              "type": "boolean",
+              "description": "<code>true</code> if the certificate should be automatically renewed when it expires; otherwise, <code>false</code>.",
+              "default": true
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "Status of certificate order.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              },
+              "readOnly": true
+            },
+            "status": {
+              "type": "string",
+              "description": "Current order status.",
+              "enum": [
+                "Pendingissuance",
+                "Issued",
+                "Revoked",
+                "Canceled",
+                "Denied",
+                "Pendingrevocation",
+                "PendingRekey",
+                "Unused",
+                "Expired",
+                "NotSubmitted"
+              ],
+              "x-ms-enum": {
+                "name": "CertificateOrderStatus",
+                "modelAsString": false
+              },
+              "readOnly": true
+            },
+            "signedCertificate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Signed certificate.",
+              "readOnly": true
+            },
+            "csr": {
+              "type": "string",
+              "description": "Last CSR that was created for this order.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "intermediate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Intermediate certificate.",
+              "readOnly": true
+            },
+            "root": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Root certificate.",
+              "readOnly": true
+            },
+            "serialNumber": {
+              "type": "string",
+              "description": "Current serial number of the certificate.",
+              "readOnly": true
+            },
+            "lastCertificateIssuanceTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Certificate last issuance time.",
+              "readOnly": true
+            },
+            "expirationTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Certificate expiration time.",
+              "readOnly": true
+            },
+            "isPrivateKeyExternal": {
+              "type": "boolean",
+              "description": "<code>true</code> if private key is external; otherwise, <code>false</code>.",
+              "readOnly": true
+            },
+            "appServiceCertificateNotRenewableReasons": {
+              "type": "array",
+              "description": "Reasons why App Service Certificate is not renewable at the current moment.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "x-ms-enum": {
+                  "name": "ResourceNotRenewableReason",
+                  "modelAsString": true
+                }
+              },
+              "readOnly": true
+            },
+            "nextAutoRenewalTimeStamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Time stamp when the certificate would be auto renewed next",
+              "readOnly": true
+            },
+            "contact": {
+              "$ref": "#/definitions/CertificateOrderContact",
+              "description": "Contact info",
+              "readOnly": true
+            }
+          },
+          "required": [
+            "productType"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AppServiceCertificateOrderCollection": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AppServiceCertificateOrder"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AppServiceCertificateOrderPatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "certificates": {
+              "type": "object",
+              "description": "State of the Key Vault secret.",
+              "additionalProperties": {
+                "$ref": "#/definitions/AppServiceCertificate"
+              }
+            },
+            "distinguishedName": {
+              "type": "string",
+              "description": "Certificate distinguished name.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "domainVerificationToken": {
+              "type": "string",
+              "description": "Domain verification token.",
+              "readOnly": true
+            },
+            "validityInYears": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Duration in years (must be 1).",
+              "default": 1,
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "keySize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Certificate key size.",
+              "default": 2048,
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "productType": {
+              "type": "string",
+              "description": "Certificate product type.",
+              "enum": [
+                "StandardDomainValidatedSsl",
+                "StandardDomainValidatedWildCardSsl"
+              ],
+              "x-ms-enum": {
+                "name": "CertificateProductType",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "autoRenew": {
+              "type": "boolean",
+              "description": "<code>true</code> if the certificate should be automatically renewed when it expires; otherwise, <code>false</code>.",
+              "default": true
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "Status of certificate order.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              },
+              "readOnly": true
+            },
+            "status": {
+              "type": "string",
+              "description": "Current order status.",
+              "enum": [
+                "Pendingissuance",
+                "Issued",
+                "Revoked",
+                "Canceled",
+                "Denied",
+                "Pendingrevocation",
+                "PendingRekey",
+                "Unused",
+                "Expired",
+                "NotSubmitted"
+              ],
+              "x-ms-enum": {
+                "name": "CertificateOrderStatus",
+                "modelAsString": false
+              },
+              "readOnly": true
+            },
+            "signedCertificate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Signed certificate.",
+              "readOnly": true
+            },
+            "csr": {
+              "type": "string",
+              "description": "Last CSR that was created for this order.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "intermediate": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Intermediate certificate.",
+              "readOnly": true
+            },
+            "root": {
+              "$ref": "#/definitions/CertificateDetails",
+              "description": "Root certificate.",
+              "readOnly": true
+            },
+            "serialNumber": {
+              "type": "string",
+              "description": "Current serial number of the certificate.",
+              "readOnly": true
+            },
+            "lastCertificateIssuanceTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Certificate last issuance time.",
+              "readOnly": true
+            },
+            "expirationTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Certificate expiration time.",
+              "readOnly": true
+            },
+            "isPrivateKeyExternal": {
+              "type": "boolean",
+              "description": "<code>true</code> if private key is external; otherwise, <code>false</code>.",
+              "readOnly": true
+            },
+            "appServiceCertificateNotRenewableReasons": {
+              "type": "array",
+              "description": "Reasons why App Service Certificate is not renewable at the current moment.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "x-ms-enum": {
+                  "name": "ResourceNotRenewableReason",
+                  "modelAsString": true
+                }
+              },
+              "readOnly": true
+            },
+            "nextAutoRenewalTimeStamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Time stamp when the certificate would be auto renewed next",
+              "readOnly": true
+            },
+            "contact": {
+              "$ref": "#/definitions/CertificateOrderContact",
+              "description": "Contact info",
+              "readOnly": true
+            }
+          },
+          "required": [
+            "productType"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ]
+    },
+    "AppServiceCertificatePatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppServiceCertificate",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ]
+    },
+    "AppServiceCertificateResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppServiceCertificate",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CertificateDetails": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "readOnly": true
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "signatureAlgorithm": {
+          "type": "string",
+          "readOnly": true
+        },
+        "issuer": {
+          "type": "string",
+          "readOnly": true
+        },
+        "rawData": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificateEmail": {
+      "type": "object",
+      "properties": {
+        "emailId": {
+          "type": "string"
+        },
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CertificateOrderAction": {
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "CertificateIssued",
+            "CertificateOrderCanceled",
+            "CertificateOrderCreated",
+            "CertificateRevoked",
+            "DomainValidationComplete",
+            "FraudDetected",
+            "OrgNameChange",
+            "OrgValidationComplete",
+            "SanDrop",
+            "FraudCleared",
+            "CertificateExpired",
+            "CertificateExpirationWarning",
+            "FraudDocumentationRequired",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateOrderActionType",
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificateOrderContact": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "nameFirst": {
+          "type": "string"
+        },
+        "nameLast": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "ReissueCertificateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "keySize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Certificate Key Size."
+            },
+            "delayExistingRevokeInHours": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Delay in hours to revoke existing certificate after the new certificate is issued."
+            },
+            "csr": {
+              "type": "string",
+              "description": "Csr to be used for re-key operation."
+            },
+            "isPrivateKeyExternal": {
+              "type": "boolean",
+              "description": "Should we change the ASC type (from managed private key to external private key and vice versa)."
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ]
+    },
+    "RenewCertificateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "keySize": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Certificate Key Size."
+            },
+            "csr": {
+              "type": "string",
+              "description": "Csr to be used for re-key operation."
+            },
+            "isPrivateKeyExternal": {
+              "type": "boolean",
+              "description": "Should we change the ASC type (from managed private key to external private key and vice versa)."
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2024-11-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ]
+    },
+    "SiteSeal": {
+      "type": "object",
+      "properties": {
+        "html": {
+          "type": "string",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "html"
+      ]
+    },
+    "SiteSealRequest": {
+      "type": "object",
+      "properties": {
+        "lightTheme": {
+          "type": "boolean"
+        },
+        "locale": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

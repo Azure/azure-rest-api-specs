@@ -24,11 +24,9 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * WebSite Management Client
- */
+
 @armProviderNamespace
-@service(#{ title: "WebSiteManagementClient" })
+@service(#{ title: "CertificateRegistrationProvider API Client" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

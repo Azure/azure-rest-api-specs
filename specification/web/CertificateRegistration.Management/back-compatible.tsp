@@ -75,3 +75,24 @@ using Microsoft.CertificateRegistration;
 @@clientLocation(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation,
   "AppServiceCertificateOrders"
 );
+@@clientLocation(Operations.list, "CertificateRegistrationProvider");
+@@clientName(Operations.list, "ListOperations");
+@@clientName(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation::parameters.body,
+  "appServiceCertificateOrder"
+);
+@@summary(AppServiceCertificateOrders.list,
+  "List all certificate orders in a subscription."
+);
+@@summary(AppServiceCertificateOrders.listByResourceGroup,
+  "Get certificate orders in a resource group."
+);
+@@summary(AppServiceCertificateOrders.get, "Get a certificate order.");
+@@summary(AppServiceCertificateOrders.createOrUpdate,
+  "Create or update a certificate purchase order."
+);
+@@summary(AppServiceCertificateOrders.delete,
+  "Delete an existing certificate order."
+);
+@@summary(AppServiceCertificateOrders.update,
+  "Create or update a certificate purchase order."
+);
