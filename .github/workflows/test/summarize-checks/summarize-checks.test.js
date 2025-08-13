@@ -795,7 +795,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         expectedComment,
         {
-          name: "[TEST-IGNORE] Automated merging requirements met",
+          name: "Automated merging requirements met",
           result: "FAILURE",
           summary:
             "❌ This PR cannot be merged because some requirements are not met. See the details.",
