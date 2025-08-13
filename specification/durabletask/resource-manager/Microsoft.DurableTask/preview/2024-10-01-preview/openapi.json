@@ -909,14 +909,20 @@
       "description": "The update request model for the Scheduler resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SchedulerPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        },
-        "tags": {
           "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
+          "description": "The resource-specific properties for this resource.",
+          "properties": {
+            "ipAllowlist": {
+              "type": "array",
+              "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
+              "items": {
+                "type": "string"
+              }
+            },
+            "sku": {
+              "$ref": "#/definitions/SchedulerSkuUpdate",
+              "description": "SKU of the durable task scheduler"
+            }
           }
         }
       },
