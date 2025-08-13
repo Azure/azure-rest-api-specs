@@ -1,11 +1,8 @@
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Azure.Core;
 using TypeSpec.Http;
-using TypeSpec.Rest;
 
 namespace Microsoft.App.DynamicSessions;
-using OpenAPI;
 
 @doc("The optional execution id header.")
 model ExecutionOperationIdHeader {
