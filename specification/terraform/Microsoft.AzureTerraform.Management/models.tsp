@@ -57,8 +57,7 @@ model BaseExportModel {
   @doc("The target Azure Terraform provider. Defaults to `azurerm`.")
   targetProvider?: targetProvider = targetProvider.azurerm;
 
-  // What does this do when it's false?
-  @doc("Whether to output all non-computed properties in the generated Terraform configuration. Defaults to `true`.")
+  @doc("Whether to output all non-computed properties in the generated Terraform configuration. If set to `false` empty-valued properties will be omitted from the configuration. Defaults to `true`.")
   fullProperties?: boolean = true;
 
   @doc("Mask sensitive attributes in the Terraform configuration. Defaults to `true`.")
@@ -72,20 +71,18 @@ model BaseExportModel {
   @doc("Whether to include internal resources managed by Azure in the exported configuration. Defaults to `false`.")
   includeManagedResource?: boolean = false;
 
-  // TODO is this and and or or?
   @added(Versions.v2025_06_01_preview)
-  @doc("Exclude resources from being exported based on the Azure resource ID pattern (case-insensitive regexp)")
+  @doc("Excludes specified Azure Resource Ids. Case-insensitive Azure Resource ID regular expression. Example: `[\"/subscriptions/[0-9a-f-]+/resourceGroups/my-rg.*\"]`.")
   excludeAzureResource?: string[];
 
-  // TODO what are example values, is this and and or or?
   @added(Versions.v2025_06_01_preview)
-  @doc("Exclude resources from being exported based on the Terraform resource type")
+  @doc("Excludes specified Terraform resource types. Example: `[\"azurerm_virtual_network\"]`.")
   excludeTerraformResource?: string[];
 }
 
 @doc("Uses ARG (Azure Resource Graph) query to choose resources to be exported.")
 model ExportQuery extends BaseExportModel {
-  @doc("The ARG where predicate. Multiple conditions can be combined in one `where` predicate, for example: `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`.")
+  @doc("The ARG where predicate. Multiple predicates can be combined using `and` operator. Example: `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`. The default ARG table is `Resources`, use 'table' property to query a different table.")
   query: string;
 
   @doc("The id prefix for the exported Terraform resources. Defaults to `res-`.")
@@ -97,7 +94,6 @@ model ExportQuery extends BaseExportModel {
   @doc("Has to be `ExportQuery` to distinguish from other types.")
   type: Type.ExportQuery;
 
-  // What if resource are spread across multiple RGs?
   @added(Versions.v2025_09_01_preview)
   @doc("Includes the resource group in the exported Terraform resources. Defaults to `false`.")
   includeResourceGroup?: boolean = false;
@@ -105,22 +101,19 @@ model ExportQuery extends BaseExportModel {
   @doc("The ARG table name. Defaults to 'Resources'.")
   table?: string = "Resources";
 
-  // What is the default?
-  @doc("The ARG Scope Filter parameter.")
+  @doc("The ARG Scope Filter parameter. Defaults to ``")
   authorizationScopeFilter?: authorizationScopeFilter;
 }
 
 @doc("Specified resources to be exported by their ids.")
 model ExportResource extends BaseExportModel {
-  // Add Maximum number of resource
   @doc("The id(s) of the resource to be exported. Example: `[\"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/my-rg\"].")
   resourceIds: armResourceIdentifier[];
 
   @doc("The Terraform id of the exported resource. Only effective when `resourceIds` contains only one item. Defaults to `res-0`.")
   resourceName?: string = "res-0";
 
-  // Does this work like an override?
-  @doc("The Terraform resource type. Only works when `resourceIds` contains only one item.")
+  @doc("The Terraform resource type to map to. Only effective when `resourceIds` has one item. Example: `azurerm_virtual_network`. Automatic type mapping will be performed if not provided.")
   resourceType?: string;
 
   @doc("The id prefix for the exported Terraform resources. Defaults to `res-`.")
