@@ -235,20 +235,20 @@ union ProvisioningState {
 
 @doc("The update request model for the Scheduler resource")
 @added(Versions.v2024_10_01_Preview)
-model SchedulerUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    Scheduler,
-    SchedulerPropertiesUpdate
-  >;
+model SchedulerUpdate is TrackedResource<SchedulerPropertiesUpdate> {
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...Azure.ResourceManager.ResourceNameParameter<Scheduler>;
+}
 
-//@@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
+@@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
 
 @doc("The Scheduler resource properties to be updated")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerPropertiesUpdate {
-  // @visibility(Lifecycle.Read)
-  // @doc("The status of the last operation")
-  // provisioningState?: ProvisioningState;
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation")
+  provisioningState?: ProvisioningState;
 
   // @doc("URL of the durable task scheduler")
   // @visibility(Lifecycle.Read)
