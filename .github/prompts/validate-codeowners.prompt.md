@@ -29,8 +29,8 @@ Valid code owners must be:
 
 ### Fix Options:
 1. **Fix invalid owners** - provide guidance:
-   - Microsoft org: [Join here](https://repos.opensource.microsoft.com/orgs/Microsoft), set public visibility
-   - Azure org: [Join here](https://repos.opensource.microsoft.com/orgs/Azure), set public visibility  
+   - Microsoft org: [Join here](https://repos.opensource.microsoft.com/orgs/Microsoft), set public visibility at [Microsoft Org Visibility](https://github.com/orgs/Microsoft/people)
+   - Azure org: [Join here](https://repos.opensource.microsoft.com/orgs/Azure), set public visibility at [Azure Org Visibility](https://github.com/orgs/Azure/people)
    - Write access: [Request here](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
 2. **Add new owners** using `UpdateCodeowners` with `isAdding: true`
 3. **Remove invalid + add valid** owners using `UpdateCodeowners`
