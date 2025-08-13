@@ -197,16 +197,16 @@ model WindowUptimeCriteria {
 @doc("Defines comparison operators for window uptime criteria.")
 union WindowUptimeCriteriaComparator {
   @doc("Less than the target value.")
-  `<`: "lt",
+  LessThan: "<",
 
   @doc("Greater than the target value.")
-  `>`: "gt",
+  GreaterThan: ">",
 
   @doc("Less than or equal to the target value.")
-  `<=`: "lte",
+  LessThanOrEqual: "<=",
 
   @doc("Greater than or equal to the target value.")
-  `>=`: "gte",
+  GreaterThanOrEqual: ">=",
 
   string,
 }
