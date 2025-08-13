@@ -93,3 +93,93 @@ union Complexity {
 
   string,
 }
+
+@doc("Model representing the result of the fetch SAS URI operation.")
+model FetchSasUriResult {
+  @doc("The SAS URI to upload the import applications csv.")
+  importApplicationsSasUri: string;
+
+  @doc("The expiration time of the SAS uri.")
+  expirationTime: utcDateTime;
+}
+
+@doc("Model representing the request to import applications.")
+model ImportApplicationsRequest {
+  @doc("The name of the CSV file to be imported.")
+  importApplicationsSasUri: string;
+}
+
+@doc("Model representing the status of the import applications operation.")
+model ImportApplicationsOperationStatusResult {
+  @doc("The status url of the import applications operation.")
+  id?: armResourceIdentifier;
+
+  @doc("The resource name of the operation status")
+  name?: string;
+
+  @doc("The overall arm status of the operation. Has to have one of the following terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("Additional properties applicable for SAP Discovery import entities operation status result")
+  properties?: ImportOperationStatusProperties;
+}
+
+@doc("Model representing the properties of the import operation status.")
+model ImportOperationStatusProperties {
+  @doc("Status of the import application request.")
+  status?: ImportApplicationOperationStatus;
+
+  @doc("The operation type of the import applications operation.")
+  operationType: AppOperationType;
+
+  @doc("The SAS URI of the Excel file containing the error data.")
+  errorExcelSasUri?: url;
+
+  @doc("The number of rows processed successfully.")
+  @minValue(0)
+  noOfRowsProcessed?: int32;
+
+  @doc("The number of applications created successfully.")
+  @minValue(0)
+  noOfApplicationsCreated?: int32;
+}
+
+@doc("The operation type for import applications.")
+union AppOperationType {
+  string,
+
+  @doc("The import applications operation type.")
+  ImportApplications: "ImportApplications",
+}
+
+@doc("The status of the import operation.")
+union ImportApplicationOperationStatus {
+  string,
+
+  @doc("The import operation status - Accepted.")
+  Accepted: "Accepted",
+
+  @doc("The import operation status - InProgress.")
+  InProgress: "InProgress",
+
+  @doc("The import operation status - Succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The import operation status - PartiallySucceeded.")
+  PartiallySucceeded: "PartiallySucceeded",
+
+  @doc("The import operation status - Failed.")
+  Failed: "Failed",
+
+  @doc("The import operation status - Canceled.")
+  Canceled: "Canceled",
+}

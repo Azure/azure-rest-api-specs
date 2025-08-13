@@ -13,12 +13,11 @@ namespace Microsoft.Bing;
 /**
  * Available operations of the service
  */
-@Azure.Core.pagedResult
 model AvailableOperations {
   /**
    * Collection of available operation details
    */
-  @Azure.Core.items
+  @pageItems
   value: OperationDetail[];
 
   /**

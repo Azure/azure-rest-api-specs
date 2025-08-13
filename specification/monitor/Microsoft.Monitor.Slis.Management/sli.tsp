@@ -51,8 +51,16 @@ model SliResource {
   @OpenAPI.extension("x-ms-identifiers", #["metricNamespace", "metricName"])
   destinationMetrics: Metric[];
 
-  @doc("Defines the SLO properties associated with the SLI.")
-  sloProperties: SloProperties;
+  @doc("Defines the SLO baseline associated with the SLI.")
+  baselineProperties: BaselineProperties;
+
+  @visibility(Lifecycle.Read)
+  @doc("The streaming rule Id associated with the Sli resource.")
+  streamingRuleId: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The streaming rule last updated timestamp associated with the Sli resource.")
+  streamingRuleLastUpdatedTimestamp: string;
 
   @doc("Defines the SLI properties associated with the SLI.")
   sliProperties: SliProperties;
@@ -64,7 +72,7 @@ model ExecutionState {
   state: string;
 
   @doc("A descriptive message related to the execution state.")
-  message: string;
+  message?: string;
 }
 
 @doc("Represents an Azure Monitor Workspace (AMW) account used for emitting metrics.")
