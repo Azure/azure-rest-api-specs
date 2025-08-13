@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.Web;
 
@@ -4865,7 +4866,13 @@ model HybridConnectionKeyProperties {
 /**
  * Collection of resources.
  */
-model ResourceCollection is Azure.Core.Page<string>;
+model ResourceCollection {
+  @TypeSpec.pageItems
+  value: string[];
+
+  @TypeSpec.nextLink
+  nextLink?: string;
+}
 
 /**
  * HybridConnectionLimits resource specific properties
@@ -14083,12 +14090,7 @@ model RetryHistory {
 /**
  * The expression traces.
  */
-model ExpressionTraces is Azure.Core.Page<unknown> {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @items
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
-  inputs?: ExpressionRoot[];
-}
+model ExpressionTraces is Azure.Core.Page<ExpressionRoot>;
 
 /**
  * The expression root.

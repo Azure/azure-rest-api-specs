@@ -177,7 +177,7 @@ interface AppServicePlans {
   getServerFarmSkus is ArmResourceActionSync<
     AppServicePlan,
     void,
-    ArmResponse<AnyObject>
+    ArmResponse<unknown>
   >;
 
   /**

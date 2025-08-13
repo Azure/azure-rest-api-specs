@@ -1,28 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
     "name": "testStaticSite0",
+    "api-version": "2024-11-01",
     "authprovider": "all",
-    "api-version": "2024-11-01"
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0/authproviders/all/users/1234",
             "properties": {
-              "provider": "aad",
-              "userId": "1234",
               "displayName": "username",
-              "roles": "admin,anonymous,authenticated"
+              "provider": "aad",
+              "roles": "admin,anonymous,authenticated",
+              "userId": "1234"
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "StaticSites_ListStaticSiteUsers",
+  "title": "List users for a static site"
 }

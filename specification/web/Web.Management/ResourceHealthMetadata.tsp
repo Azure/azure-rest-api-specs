@@ -70,7 +70,7 @@ interface ResourceHealthMetadataOperationGroup {
   >;
 }
 @armResourceOperations
-interface ResourceHealthMetadataOperationGroupOps
+interface ResourceHealthMetadataOperationGroupOps_2
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -100,20 +100,21 @@ interface ResourceHealthMetadataOperationGroupOps
     > {}
 
 @armResourceOperations
-interface ResourceHealthMetadataOperationGroup {
+interface ResourceHealthMetadataOperationGroup_2 {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceHealthMetadata_GetBySiteSlot")
-  getBySiteSlot is ResourceHealthMetadataOperationGroupOps.Read<ResourceHealthMetadata>;
+  getBySiteSlot is ResourceHealthMetadataOperationGroupOps_2.Read<ResourceHealthMetadata>;
 
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceHealthMetadata_ListBySiteSlot")
-  listBySiteSlot is ResourceHealthMetadataOperationGroupOps.List<
+  @segment("resourceHealthMetadata")
+  listBySiteSlot is ResourceHealthMetadataOperationGroupOps_2.List<
     ResourceHealthMetadata,
     Response = ArmResponse<ResourceHealthMetadataCollection>
   >;

@@ -53,7 +53,7 @@ interface CustomDnsSuffixConfigurations {
   @operationId("AppServiceEnvironments_DeleteAseCustomDnsSuffixConfiguration")
   deleteAseCustomDnsSuffixConfiguration is ArmResourceDeleteSync<
     CustomDnsSuffixConfiguration,
-    Response = ArmResponse<AnyObject> | ArmDeletedNoContentResponse
+    Response = ArmResponse<unknown> | ArmDeletedNoContentResponse
   >;
 }
 

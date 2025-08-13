@@ -83,9 +83,9 @@ interface RemotePrivateEndpointConnectionARMResources {
   @operationId("AppServiceEnvironments_DeletePrivateEndpointConnection")
   deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<AnyObject> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
       @bodyRoot
-      _: AnyObject;
+      _: unknown;
     }) | ArmDeletedNoContentResponse
   >;
 
@@ -151,9 +151,9 @@ interface StaticSites {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   deletePrivateEndpointConnection is StaticSiteOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<AnyObject> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
       @bodyRoot
-      _: AnyObject;
+      _: unknown;
     }) | ArmDeletedNoContentResponse
   >;
 
@@ -166,7 +166,7 @@ interface StaticSites {
   >;
 }
 @armResourceOperations
-interface RemotePrivateEndpointConnectionARMResourceOperationGroupOps
+interface RemotePrivateEndpointConnectionARMResourceOperationGroupOps_2
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -196,7 +196,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPrivateEndpointConnection")
-  getPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOperationGroupOps.Read<RemotePrivateEndpointConnectionARMResource>;
+  getPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOperationGroupOps_2.Read<RemotePrivateEndpointConnectionARMResource>;
 
   /**
    * Description for Approves or rejects a private endpoint connection
@@ -205,7 +205,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("WebApps_ApproveOrRejectPrivateEndpointConnection")
-  approveOrRejectPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOperationGroupOps.CreateOrUpdateAsync<
+  approveOrRejectPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOperationGroupOps_2.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
       @bodyRoot
@@ -221,11 +221,11 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("WebApps_DeletePrivateEndpointConnection")
-  deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOperationGroupOps.DeleteWithoutOkAsync<
+  deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOperationGroupOps_2.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<AnyObject> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
       @bodyRoot
-      _: AnyObject;
+      _: unknown;
     }) | ArmDeletedNoContentResponse
   >;
 
@@ -234,7 +234,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPrivateEndpointConnectionList")
-  getPrivateEndpointConnectionList is RemotePrivateEndpointConnectionARMResourceOperationGroupOps.List<
+  getPrivateEndpointConnectionList is RemotePrivateEndpointConnectionARMResourceOperationGroupOps_2.List<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<PrivateEndpointConnectionCollection>
   >;
@@ -270,7 +270,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
+interface RemotePrivateEndpointConnectionARMResourceOperationGroup_2 {
   /**
    * Description for Gets a private endpoint connection
    */
@@ -303,9 +303,9 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   @operationId("WebApps_DeletePrivateEndpointConnectionSlot")
   deletePrivateEndpointConnectionSlot is RemotePrivateEndpointConnectionARMResourceOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<AnyObject> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
       @bodyRoot
-      _: AnyObject;
+      _: unknown;
     }) | ArmDeletedNoContentResponse
   >;
 
@@ -314,6 +314,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetPrivateEndpointConnectionListSlot")
+  @segment("privateEndpointConnections")
   getPrivateEndpointConnectionListSlot is RemotePrivateEndpointConnectionARMResourceOperationGroupOps.List<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<PrivateEndpointConnectionCollection>
@@ -335,6 +336,6 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
 @@doc(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnection::parameters.resource,
   ""
 );
-@@doc(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
-  ""
-);
+// @@doc(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
+//   ""
+// );

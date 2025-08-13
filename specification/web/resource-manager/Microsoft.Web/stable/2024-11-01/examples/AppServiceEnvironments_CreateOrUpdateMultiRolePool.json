@@ -1,24 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "test-rg",
     "name": "test-ase",
+    "api-version": "2024-11-01",
     "multiRolePoolEnvelope": {
       "properties": {
-        "workerSize": "Medium",
-        "workerCount": 3
+        "workerCount": 3,
+        "workerSize": "Medium"
       }
     },
-    "api-version": "2024-11-01"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
-    "202": {
-      "headers": {},
-      "body": {}
-    },
     "200": {
-      "headers": {},
-      "body": {}
+      "body": {},
+      "headers": {}
+    },
+    "202": {
+      "body": {},
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AppServiceEnvironments_UpdateMultiRolePool",
+  "title": "Create or update a multi-role pool."
 }

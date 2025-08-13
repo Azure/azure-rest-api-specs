@@ -1,38 +1,40 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "test-rg",
     "name": "test-ase",
-    "api-version": "2024-11-01"
+    "api-version": "2024-11-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/multiRolePools/default",
             "name": "default",
             "type": "Microsoft.Web/hostingEnvironments/multiRolePools",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/multiRolePools/default",
             "properties": {
-              "workerSize": "Standard_D1_V2",
-              "workerCount": 2,
               "instanceNames": [
                 "10.7.1.8",
                 "10.7.1.9"
-              ]
+              ],
+              "workerCount": 2,
+              "workerSize": "Standard_D1_V2"
             },
             "sku": {
               "name": "Q1",
-              "tier": "Quantum",
-              "size": "Q1",
+              "capacity": 2,
               "family": "Q",
-              "capacity": 2
+              "size": "Q1",
+              "tier": "Quantum"
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AppServiceEnvironments_ListMultiRolePools",
+  "title": "Get all multi-role pools."
 }

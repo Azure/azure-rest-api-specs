@@ -1,22 +1,22 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "testrg123",
     "name": "testsite2",
+    "api-version": "2024-11-01",
+    "resourceGroupName": "testrg123",
     "slot": "staging",
-    "api-version": "2024-11-01"
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite2/workflows/a1",
             "name": "testsite2/a1",
             "type": "Microsoft.Web/sites/workflows",
-            "location": "USAAnywhere",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite2/workflows/a1",
             "kind": "Stateful",
+            "location": "USAAnywhere",
             "properties": {
               "flowState": "Enabled",
               "health": {
@@ -25,25 +25,27 @@
             }
           },
           {
-            "id": "/subscriptions/testsub/resourceGroups/testrg/providers/Microsoft.Web/sites/testsite2/workflows/stateful2",
             "name": "testsite2/stateful2",
             "type": "Microsoft.Web/sites/workflows",
-            "location": "USAAnywhere",
+            "id": "/subscriptions/testsub/resourceGroups/testrg/providers/Microsoft.Web/sites/testsite2/workflows/stateful2",
             "kind": "Stateful",
+            "location": "USAAnywhere",
             "properties": {
               "flowState": "Enabled",
               "health": {
-                "state": "Unhealthy",
                 "error": {
                   "code": "InvalidWorkflowJson",
                   "message": "Invalid character after parsing property name. Expected ':' but got: \". Path '', line 2, position 2."
-                }
+                },
+                "state": "Unhealthy"
               }
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "WebApps_ListWorkflows",
+  "title": "List the workflows"
 }

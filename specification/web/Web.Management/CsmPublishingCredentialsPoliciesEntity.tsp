@@ -75,6 +75,7 @@ interface CsmPublishingCredentialsPoliciesEntities {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListBasicPublishingCredentialsPolicies")
+  @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPolicies is CsmPublishingCredentialsPoliciesEntityOps.List<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResponse<PublishingCredentialsPoliciesCollection>
@@ -125,7 +126,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   >;
 }
 @armResourceOperations
-interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps
+interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps_2
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -155,13 +156,14 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps
     > {}
 
 @armResourceOperations
-interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
+interface CsmPublishingCredentialsPoliciesEntityOperationGroup_2 {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetFtpAllowedSlot")
-  getFtpAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.Read<CsmPublishingCredentialsPoliciesEntity>;
+  @segment("basicPublishingCredentialsPolicies")
+  getFtpAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps_2.Read<CsmPublishingCredentialsPoliciesEntity>;
 
   /**
    * Description for Updates whether FTP is allowed on the site or not.
@@ -169,7 +171,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_UpdateFtpAllowedSlot")
-  updateFtpAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.CreateOrUpdateSync<
+  updateFtpAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps_2.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>
   >;
@@ -179,13 +181,14 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListBasicPublishingCredentialsPoliciesSlot")
-  listBasicPublishingCredentialsPoliciesSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.List<
+  @segment("basicPublishingCredentialsPolicies")
+  listBasicPublishingCredentialsPoliciesSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps_2.List<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResponse<PublishingCredentialsPoliciesCollection>
   >;
 }
 @armResourceOperations
-interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps
+interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps_3
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -215,13 +218,13 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps
     > {}
 
 @armResourceOperations
-interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
+interface CsmPublishingCredentialsPoliciesEntityOperationGroup_3 {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetScmAllowedSlot")
-  getScmAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.Read<CsmPublishingCredentialsPoliciesEntity>;
+  getScmAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps_3.Read<CsmPublishingCredentialsPoliciesEntity>;
 
   /**
    * Description for Updates whether user publishing credentials are allowed on the site or not.
@@ -229,7 +232,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_UpdateScmAllowedSlot")
-  updateScmAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.CreateOrUpdateSync<
+  updateScmAllowedSlot is CsmPublishingCredentialsPoliciesEntityOperationGroupOps_3.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>
   >;
@@ -245,9 +248,9 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
 @@doc(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
   ""
 );
-@@doc(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateFtpAllowedSlot::parameters.resource,
-  ""
-);
-@@doc(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowedSlot::parameters.resource,
-  ""
-);
+// @@doc(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateFtpAllowedSlot::parameters.resource,
+//   ""
+// );
+// @@doc(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowedSlot::parameters.resource,
+//   ""
+// );

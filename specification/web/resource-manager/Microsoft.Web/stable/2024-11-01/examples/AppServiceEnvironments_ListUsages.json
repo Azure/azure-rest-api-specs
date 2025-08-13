@@ -1,28 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "test-rg",
     "name": "test-ase",
-    "api-version": "2024-11-01"
+    "api-version": "2024-11-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "unit": "Bytes",
-            "nextResetTime": "9999-12-31T23:59:59.9999999Z",
+            "name": {
+              "localizedValue": "File System Storage",
+              "value": "FileSystemStorage"
+            },
             "currentValue": 37888,
             "limit": 1099511627776,
-            "name": {
-              "value": "FileSystemStorage",
-              "localizedValue": "File System Storage"
-            }
+            "nextResetTime": "9999-12-31T23:59:59.9999999Z",
+            "unit": "Bytes"
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AppServiceEnvironments_ListUsages",
+  "title": "Get global usage metrics of an App Service Environment."
 }

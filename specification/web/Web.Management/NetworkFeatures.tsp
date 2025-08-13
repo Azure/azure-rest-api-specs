@@ -50,16 +50,7 @@ interface NetworkFeaturesOperationGroupOps
     > {}
 
 @armResourceOperations
-interface NetworkFeaturesOperationGroup {
-  /**
-   * Description for Gets all network features used by the app (or deployment slot, if specified).
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WebApps_ListNetworkFeatures")
-  listNetworkFeatures is NetworkFeaturesOperationGroupOps.Read<NetworkFeatures>;
-}
-@armResourceOperations
-interface NetworkFeaturesOperationGroupOps
+interface NetworkFeaturesOperationGroupOpsSlot
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -94,15 +85,46 @@ interface NetworkFeaturesOperationGroup {
    * Description for Gets all network features used by the app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WebApps_ListNetworkFeaturesSlot")
-  listNetworkFeaturesSlot is NetworkFeaturesOperationGroupOps.Read<NetworkFeatures>;
-}
+  @operationId("WebApps_ListNetworkFeatures")
+  listNetworkFeatures is NetworkFeaturesOperationGroupOps.Read<NetworkFeatures>;
 
-@@doc(NetworkFeatures.name,
-  "The type of view. Only ",
-  summary,
-  " is supported at this time."
-);
+  /**
+   * Description for Gets all network features used by the app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListNetworkFeaturesSlot")
+  listNetworkFeaturesSlot is NetworkFeaturesOperationGroupOpsSlot.Read<NetworkFeatures>;
+}
+// @armResourceOperations
+// interface NetworkFeaturesOperationGroupOps
+//   extends Azure.ResourceManager.Legacy.LegacyOperations<
+//       {
+//         ...ApiVersionParameter,
+//         ...SubscriptionIdParameter,
+//         ...ResourceGroupParameter,
+//         ...Azure.ResourceManager.Legacy.Provider,
+
+//         /** Name of the app. */
+//         @path
+//         @segment("sites")
+//         @key
+//         name: string,
+
+//         /** Name of the deployment slot. If a slot is not specified, the API will get network features for the production slot. */
+//         @path
+//         @segment("slots")
+//         @key
+//         slot: string,
+//       },
+//       {
+//         /** The type of view. Only "summary" is supported at this time. */
+//         @path
+//         @segment("networkFeatures")
+//         @key
+//         view: string,
+//       }
+//     > {}
+
 @@doc(NetworkFeatures.properties,
   "NetworkFeatures resource specific properties"
 );

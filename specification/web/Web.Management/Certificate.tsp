@@ -82,7 +82,8 @@ interface Certificates {
   /**
    * Description for Get all certificates for a subscription.
    */
-  list is CertificateOps.ListBySubscription<
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Extension.Subscription,
     Certificate,
     Parameters = {
       /**

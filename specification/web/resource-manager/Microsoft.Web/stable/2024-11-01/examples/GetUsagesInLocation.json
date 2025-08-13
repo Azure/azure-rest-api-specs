@@ -1,27 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2024-11-01",
     "location": "West US",
     "quotaType": "regional",
-    "api-version": "2024-11-01"
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "unit": "Core Count",
+            "name": {
+              "localizedValue": "Cores usage in West US",
+              "value": "Cores usage in West US"
+            },
             "currentValue": 55,
             "limit": 250,
-            "name": {
-              "value": "Cores usage in West US",
-              "localizedValue": "Cores usage in West US"
-            }
+            "unit": "Core Count"
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "GetUsagesInLocation_list",
+  "title": "Get usages in location for subscription"
 }

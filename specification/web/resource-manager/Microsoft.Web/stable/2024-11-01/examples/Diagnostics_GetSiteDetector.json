@@ -1,25 +1,27 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2024-11-01",
+    "detectorName": "sitecrashes",
+    "diagnosticCategory": "availability",
     "resourceGroupName": "Sample-WestUSResourceGroup",
     "siteName": "SampleApp",
     "slot": "Production",
-    "diagnosticCategory": "availability",
-    "detectorName": "sitecrashes",
-    "api-version": "2024-11-01"
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/diagnostics/availability/detectors/sitecrashes",
         "name": "sitecrashes",
+        "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/diagnostics/availability/detectors/sitecrashes",
         "properties": {
-          "displayName": "Site Crash Events",
           "description": null,
-          "rank": 9,
-          "isEnabled": true
+          "displayName": "Site Crash Events",
+          "isEnabled": true,
+          "rank": 9
         }
       }
     }
-  }
+  },
+  "operationId": "Diagnostics_GetSiteDetectorSlot",
+  "title": "Get App Detector"
 }

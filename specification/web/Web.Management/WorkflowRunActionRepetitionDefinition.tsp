@@ -101,6 +101,7 @@ interface WorkflowRunActionRepetitionDefinitions {
    * Get all of a workflow run action repetitions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("scopeRepetitions")
   @operationId("WorkflowRunActionRepetitions_List")
   list is WorkflowRunActionRepetitionDefinitionOps.List<
     WorkflowRunActionRepetitionDefinition,

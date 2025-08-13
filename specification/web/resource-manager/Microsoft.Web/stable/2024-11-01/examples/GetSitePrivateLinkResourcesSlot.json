@@ -1,20 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
     "name": "testSite",
+    "api-version": "2024-11-01",
+    "resourceGroupName": "rg",
     "slot": "stage",
-    "api-version": "2024-11-01"
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/privateLinkResources/site",
             "name": "site",
             "type": "Microsoft.Web/sites/privateLinkResources",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/privateLinkResources/site",
             "properties": {
               "groupId": "sites",
               "requiredMembers": [
@@ -26,7 +25,10 @@
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "WebApps_GetPrivateLinkResourcesSlot",
+  "title": "Get private link resources of a site"
 }

@@ -118,13 +118,14 @@ interface ApiKVReferenceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteConnectionStringKeyVaultReferences")
+  @segment("connectionstrings")
   getSiteConnectionStringKeyVaultReferences is ApiKVReferenceOperationGroupOps.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>
   >;
 }
 @armResourceOperations
-interface ApiKVReferenceOperationGroupOps
+interface ApiKVReferenceOperationGroupOps_2
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -160,26 +161,26 @@ interface ApiKVReferenceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface ApiKVReferenceOperationGroup {
+interface ApiKVReferenceOperationGroup_2 {
   /**
    * Description for Gets the config reference and status of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAppSettingKeyVaultReferenceSlot")
-  getAppSettingKeyVaultReferenceSlot is ApiKVReferenceOperationGroupOps.Read<ApiKVReference>;
+  getAppSettingKeyVaultReferenceSlot is ApiKVReferenceOperationGroupOps_2.Read<ApiKVReference>;
 
   /**
    * Description for Gets the config reference app settings and status of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAppSettingsKeyVaultReferencesSlot")
-  getAppSettingsKeyVaultReferencesSlot is ApiKVReferenceOperationGroupOps.List<
+  getAppSettingsKeyVaultReferencesSlot is ApiKVReferenceOperationGroupOps_2.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>
   >;
 }
 @armResourceOperations
-interface ApiKVReferenceOperationGroupOps
+interface ApiKVReferenceOperationGroupOps_3
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -215,20 +216,21 @@ interface ApiKVReferenceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface ApiKVReferenceOperationGroup {
+interface ApiKVReferenceOperationGroup_3 {
   /**
    * Description for Gets the config reference and status of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteConnectionStringKeyVaultReferenceSlot")
-  getSiteConnectionStringKeyVaultReferenceSlot is ApiKVReferenceOperationGroupOps.Read<ApiKVReference>;
+  getSiteConnectionStringKeyVaultReferenceSlot is ApiKVReferenceOperationGroupOps_3.Read<ApiKVReference>;
 
   /**
    * Description for Gets the config reference app settings and status of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteConnectionStringKeyVaultReferencesSlot")
-  getSiteConnectionStringKeyVaultReferencesSlot is ApiKVReferenceOperationGroupOps.List<
+  @segment("connectionstrings")
+  getSiteConnectionStringKeyVaultReferencesSlot is ApiKVReferenceOperationGroupOps_3.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>
   >;

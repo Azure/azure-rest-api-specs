@@ -143,7 +143,7 @@ interface VnetGatewayOperationGroup {
   >;
 }
 @armResourceOperations
-interface VnetGatewayOperationGroupOps
+interface VnetGatewayOperationGroupOps_2
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -173,13 +173,13 @@ interface VnetGatewayOperationGroupOps
     > {}
 
 @armResourceOperations
-interface VnetGatewayOperationGroup {
+interface VnetGatewayOperationGroup_2 {
   /**
    * Description for Gets an app's Virtual Network gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetVnetConnectionGateway")
-  getVnetConnectionGateway is VnetGatewayOperationGroupOps.Read<VnetGateway>;
+  getVnetConnectionGateway is VnetGatewayOperationGroupOps_2.Read<VnetGateway>;
 
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
@@ -187,7 +187,7 @@ interface VnetGatewayOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_CreateOrUpdateVnetConnectionGateway")
-  createOrUpdateVnetConnectionGateway is VnetGatewayOperationGroupOps.CreateOrUpdateSync<
+  createOrUpdateVnetConnectionGateway is VnetGatewayOperationGroupOps_2.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>
   >;
@@ -198,7 +198,8 @@ interface VnetGatewayOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateVnetConnectionGateway")
   @patch(#{ implicitOptionality: false })
-  updateVnetConnectionGateway is VnetGatewayOperationGroupOps.CustomPatchSync<
+  @segment("gateways")
+  updateVnetConnectionGateway is VnetGatewayOperationGroupOps_2.CustomPatchSync<
     VnetGateway,
     PatchModel = VnetGateway
   >;
@@ -217,9 +218,9 @@ interface VnetGatewayOperationGroup {
 @@doc(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
   "The properties to update this gateway with."
 );
-@@doc(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
-  "The properties to update this gateway with."
-);
-@@doc(VnetGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
-  "The properties to update this gateway with."
-);
+// @@doc(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
+//   "The properties to update this gateway with."
+// );
+// @@doc(VnetGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
+//   "The properties to update this gateway with."
+// );

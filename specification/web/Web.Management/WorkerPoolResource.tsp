@@ -102,6 +102,7 @@ interface WorkerPoolResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_ListMultiRolePools")
+  @segment("multiRolePools")
   listMultiRolePools is WorkerPoolResourceOps.List<
     WorkerPoolResource,
     Response = ArmResponse<WorkerPoolCollection>
@@ -229,6 +230,7 @@ interface AppServiceEnvironments {
   /**
    * Description for Get all worker pools of an App Service Environment.
    */
+  @segment("workerPools")
   listWorkerPools is AppServiceEnvironmentOps.List<
     WorkerPoolResource,
     Response = ArmResponse<WorkerPoolCollection>

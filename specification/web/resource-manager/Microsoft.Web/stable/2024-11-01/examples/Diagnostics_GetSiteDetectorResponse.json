@@ -1,51 +1,50 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2024-11-01",
+    "detectorName": "runtimeavailability",
     "resourceGroupName": "Sample-WestUSResourceGroup",
     "siteName": "SampleApp",
     "slot": "staging",
-    "detectorName": "runtimeavailability",
-    "api-version": "2024-11-01"
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/detectors/runtimeavailability",
         "name": "runtimeavailability",
+        "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/detectors/runtimeavailability",
         "properties": {
-          "metadata": {
-            "description": "This detector analyzes the requests to your application.",
-            "category": "Availability and Performance"
-          },
           "dataset": [
             {
+              "renderingProperties": {
+                "description": "This detector breaks down the number of requests that your app received for each status code.",
+                "title": "Requests by Status Code"
+              },
               "table": {
-                "tableName": "Table_0",
                 "columns": [
                   {
                     "columnName": "PreciseTimeStamp",
-                    "dataType": "DateTime",
-                    "columnType": "datetime"
+                    "columnType": "datetime",
+                    "dataType": "DateTime"
                   },
                   {
                     "columnName": "count_Http2xx",
-                    "dataType": "Int64",
-                    "columnType": "long"
+                    "columnType": "long",
+                    "dataType": "Int64"
                   },
                   {
                     "columnName": "count_Http3xx",
-                    "dataType": "Int64",
-                    "columnType": "long"
+                    "columnType": "long",
+                    "dataType": "Int64"
                   },
                   {
                     "columnName": "count_Http4xx",
-                    "dataType": "Int64",
-                    "columnType": "long"
+                    "columnType": "long",
+                    "dataType": "Int64"
                   },
                   {
                     "columnName": "count_Http5xx",
-                    "dataType": "Int64",
-                    "columnType": "long"
+                    "columnType": "long",
+                    "dataType": "Int64"
                   }
                 ],
                 "rows": [
@@ -119,16 +118,19 @@
                     "0",
                     "0"
                   ]
-                ]
-              },
-              "renderingProperties": {
-                "title": "Requests by Status Code",
-                "description": "This detector breaks down the number of requests that your app received for each status code."
+                ],
+                "tableName": "Table_0"
               }
             }
-          ]
+          ],
+          "metadata": {
+            "description": "This detector analyzes the requests to your application.",
+            "category": "Availability and Performance"
+          }
         }
       }
     }
-  }
+  },
+  "operationId": "Diagnostics_GetSiteDetectorResponseSlot",
+  "title": "Get App Detector Response"
 }

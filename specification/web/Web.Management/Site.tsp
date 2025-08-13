@@ -4,1619 +4,2200 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-
 namespace Microsoft.Web;
 /**
-* A web app, a mobile app backend, or an API app.
-*/
+ * A web app, a mobile app backend, or an API app.
+ */
 model Site is Azure.ResourceManager.TrackedResource<SiteProperties> {
-...ResourceNameParameter<Resource = Site,KeyName = "name",SegmentName = "sites",NamePattern = "">
-/**
-* Managed service identity.
-*/
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-"identity"?: ManagedServiceIdentity;
-/**
-* Extended Location.
-*/
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-"extendedLocation"?: ExtendedLocation;
+  ...ResourceNameParameter<
+    Resource = Site,
+    KeyName = "name",
+    SegmentName = "sites",
+    NamePattern = ""
+  >;
+
+  /**
+   * Managed service identity.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: ManagedServiceIdentity;
+
+  /**
+   * Extended Location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  extendedLocation?: ExtendedLocation;
 }
 
-
-
 @armResourceOperations
-interface SiteOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider}, {/** Name of the app. */
-@path @segment("sites") @key  name: string}> {}
-
+interface SiteOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+      }
+    > {}
 
 @armResourceOperations
 interface Sites {
-/**
-* Description for Gets the details of a web, mobile, or API app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_Get")
-get is SiteOps.Read<Site
-        >;
-
-
-/**
-* Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_CreateOrUpdate")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-createOrUpdate is SiteOps.CreateOrUpdateAsync<Site, Response = ArmResourceUpdatedResponse<Site> | ArmAcceptedLroResponse & { @bodyRoot
-"_": Site; }, LroHeaders = ArmLroLocationHeader<FinalResult = Site> & Azure.Core.Foundations.RetryAfterHeader
-        >;
-
-
-/**
-* Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_Update")
-@patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-update is SiteOps.CustomPatchSync<Site, PatchModel = SitePatchResource, Response = ArmResponse<Site> | AcceptedResponse & { @bodyRoot
-"_": Site; }
-        >;
-
-
-/**
-* Description for Deletes a web, mobile, or API app, or one of the deployment slots.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_Delete")
-delete is SiteOps.DeleteSync<Site, Parameters = { /**
-* If true, web app metrics are also deleted.
-*/
-@query("deleteMetrics")
-"deleteMetrics"?: boolean,
-/**
-* Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
-*/
-@query("deleteEmptyServerFarm")
-"deleteEmptyServerFarm"?: boolean }
-        >;
-
-
-/**
-* Description for Get all apps for a subscription.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_List")
-list is SiteOps.ListBySubscription<Site, Response = ArmResponse<WebAppCollection>
-        >;
-
-
-/**
-* Description for Get past recommendations for an app, optionally specified by the time range.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Recommendations_ListHistoryForWebApp")
-@get
-@action("recommendationHistory")
-listHistoryForWebApp is SiteOps.ActionSync<Site, void, ArmResponse<RecommendationCollection>, Parameters = { /**
-* Name of the app.
-*/
-@path
-"siteName": string,
-/**
-* Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
-*/
-@query("expiredOnly")
-"expiredOnly"?: boolean,
-/**
-* Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]
-*/
-@query("$filter")
-"$filter"?: string }>;
-
-
-/**
-* Description for Get all recommendations for an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Recommendations_ListRecommendedRulesForWebApp")
-@get
-@action("recommendations")
-listRecommendedRulesForWebApp is SiteOps.ActionSync<Site, void, ArmResponse<RecommendationCollection>, Parameters = { /**
-* Name of the app.
-*/
-@path
-"siteName": string,
-/**
-* Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
-*/
-@query("featured")
-"featured"?: boolean,
-/**
-* Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'
-*/
-@query("$filter")
-"$filter"?: string }>;
-
-
-/**
-* Description for Disable all recommendations for an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Recommendations_DisableAllForWebApp")
-@action("disable")
-disableAllForWebApp is SiteOps.ActionSync<Site, void, NoContentResponse, Parameters = { /**
-* Name of the app.
-*/
-@path
-"siteName": string }>;
-
-
-/**
-* Description for Reset all recommendation opt-out settings for an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Recommendations_ResetAllFiltersForWebApp")
-@action("reset")
-resetAllFiltersForWebApp is SiteOps.ActionSync<Site, void, NoContentResponse, Parameters = { /**
-* Name of the app.
-*/
-@path
-"siteName": string }>;
-
-
-/**
-* Description for Analyze a custom hostname.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_AnalyzeCustomHostname")
-@get
-analyzeCustomHostname is SiteOps.ActionSync<Site, void, ArmResponse<CustomHostnameAnalysisResult>, Parameters = { /**
-* Custom hostname.
-*/
-@query("hostName")
-"hostName"?: string }>;
-
-
-/**
-* Description for Applies the configuration settings from the target slot onto the current slot.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ApplySlotConfigToProduction")
-@action("applySlotConfig")
-applySlotConfigToProduction is SiteOps.ActionSync<Site, CsmSlotEntity, OkResponse>;
-
-
-/**
-* Description for Creates a backup of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_Backup")
-backup is SiteOps.ActionSync<Site, BackupRequest, ArmResponse<BackupItem>>;
-
-
-/**
-* Description for Replaces the application settings of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateApplicationSettings")
-@put
-@action("appsettings")
-updateApplicationSettings is SiteOps.ActionSync<Site, StringDictionary, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Gets the application settings of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListApplicationSettings")
-@action("list")
-listApplicationSettings is SiteOps.ActionSync<Site, void, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Updates the Authentication / Authorization settings associated with web app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateAuthSettings")
-@put
-@action("authsettings")
-updateAuthSettings is SiteOps.ActionSync<Site, SiteAuthSettings, ArmResponse<SiteAuthSettings>>;
-
-
-/**
-* Description for Gets the Authentication/Authorization settings of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetAuthSettings")
-@action("list")
-getAuthSettings is SiteOps.ActionSync<Site, void, ArmResponse<SiteAuthSettings>>;
-
-
-/**
-* Description for Updates the Azure storage account configurations of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateAzureStorageAccounts")
-@put
-@action("azurestorageaccounts")
-updateAzureStorageAccounts is SiteOps.ActionSync<Site, AzureStoragePropertyDictionaryResource, ArmResponse<AzureStoragePropertyDictionaryResource>>;
-
-
-/**
-* Description for Gets the Azure storage account configurations of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListAzureStorageAccounts")
-@action("list")
-listAzureStorageAccounts is SiteOps.ActionSync<Site, void, ArmResponse<AzureStoragePropertyDictionaryResource>>;
-
-
-/**
-* Description for Updates the backup configuration of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateBackupConfiguration")
-@put
-@action("backup")
-updateBackupConfiguration is SiteOps.ActionSync<Site, BackupRequest, ArmResponse<BackupRequest>>;
-
-
-/**
-* Description for Deletes the backup configuration of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_DeleteBackupConfiguration")
-@delete
-@action("backup")
-deleteBackupConfiguration is SiteOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Gets the backup configuration of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetBackupConfiguration")
-@action("list")
-getBackupConfiguration is SiteOps.ActionSync<Site, void, ArmResponse<BackupRequest>>;
-
-
-/**
-* Description for Replaces the connection strings of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateConnectionStrings")
-@put
-@action("connectionstrings")
-updateConnectionStrings is SiteOps.ActionSync<Site, ConnectionStringDictionary, ArmResponse<ConnectionStringDictionary>>;
-
-
-/**
-* Description for Gets the connection strings of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListConnectionStrings")
-@action("list")
-listConnectionStrings is SiteOps.ActionSync<Site, void, ArmResponse<ConnectionStringDictionary>>;
-
-
-/**
-* Description for Replaces the metadata of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateMetadata")
-@put
-@action("metadata")
-updateMetadata is SiteOps.ActionSync<Site, StringDictionary, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Gets the metadata of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListMetadata")
-@action("list")
-listMetadata is SiteOps.ActionSync<Site, void, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Gets the Git/FTP publishing credentials of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListPublishingCredentials")
-@action("list")
-listPublishingCredentials is SiteOps.ActionAsyncBase<Site, void, ArmResponse<User>, BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>>;
-
-
-/**
-* Description for Updates the Push settings associated with web app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateSitePushSettings")
-@put
-@action("pushsettings")
-updateSitePushSettings is SiteOps.ActionSync<Site, PushSettings, ArmResponse<PushSettings>>;
-
-
-/**
-* Description for Gets the Push settings associated with web app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListSitePushSettings")
-@action("list")
-listSitePushSettings is SiteOps.ActionSync<Site, void, ArmResponse<PushSettings>>;
-
-
-/**
-* Description for Gets the last lines of docker logs for the given site
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetWebSiteContainerLogs")
-@action("containerlogs")
-getWebSiteContainerLogs is SiteOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Gets the ZIP archived docker log files for the given site
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetContainerLogsZip")
-@action("download")
-getContainerLogsZip is SiteOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_DiscoverBackup")
-@action("discoverbackup")
-discoverBackup is SiteOps.ActionSync<Site, RestoreRequest, ArmResponse<RestoreRequest>>;
-
-
-/**
-* Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetOneDeployStatus")
-@get
-@action("onedeploy")
-getOneDeployStatus is SiteOps.ActionSync<Site, void, ArmResponse<AnyObject>>;
-
-
-/**
-* Description for Invoke the OneDeploy publish web app extension.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_CreateOneDeployOperation")
-@put
-@action("onedeploy")
-createOneDeployOperation is SiteOps.ActionSync<Site, void, ArmResponse<AnyObject>>;
-
-
-/**
-* Description for Fetch a short lived token that can be exchanged for a master key.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetFunctionsAdminToken")
-@get
-@action("token")
-getFunctionsAdminToken is SiteOps.ActionSync<Site, void, ArmResponse<string>>;
-
-
-/**
-* Description for Get host secrets for a function app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListHostKeys")
-@action("listkeys")
-listHostKeys is SiteOps.ActionSync<Site, void, ArmResponse<HostKeys>>;
-
-
-/**
-* Description for This is to allow calling via powershell and ARM template.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListSyncStatus")
-@action("listsyncstatus")
-listSyncStatus is SiteOps.ActionSync<Site, void, NoContentResponse>;
-
-
-/**
-* Description for Syncs function trigger metadata to the management database
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_SyncFunctions")
-@action("sync")
-syncFunctions is SiteOps.ActionSync<Site, void, NoContentResponse>;
-
-
-/**
-* Description for Add or update a host level secret.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_CreateOrUpdateHostSecret")
-@put
-@action("{keyName}")
-createOrUpdateHostSecret is SiteOps.ActionSync<Site, KeyInfo, ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>, Parameters = { /**
-* The type of host key.
-*/
-@path
-"keyType": string,
-/**
-* The name of the key.
-*/
-@path
-"keyName": string }>;
-
-
-/**
-* Description for Delete a host level secret.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_DeleteHostSecret")
-@delete
-@action("{keyName}")
-deleteHostSecret is SiteOps.ActionSync<Site, void, NoContentResponse, Parameters = { /**
-* The type of host key.
-*/
-@path
-"keyType": string,
-/**
-* The name of the key.
-*/
-@path
-"keyName": string }>;
-
-
-/**
-* Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListHybridConnections")
-@get
-@action("hybridConnectionRelays")
-listHybridConnections is SiteOps.ActionSync<Site, void, ArmResponse<HybridConnection>>;
-
-
-/**
-* Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListRelayServiceConnections")
-@get
-@action("hybridconnection")
-listRelayServiceConnections is SiteOps.ActionSync<Site, void, ArmResponse<RelayServiceConnectionEntity>>;
-
-
-/**
-* Description for Shows whether an app can be cloned to another resource group or subscription.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_IsCloneable")
-@action("iscloneable")
-isCloneable is SiteOps.ActionSync<Site, void, ArmResponse<SiteCloneability>>;
-
-
-/**
-* Description for Gets existing backups of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListSiteBackups")
-@action("listbackups")
-listSiteBackups is SiteOps.ActionSync<Site, void, ArmResponse<BackupItemCollection>>;
-
-
-/**
-* Description for This is to allow calling via powershell and ARM template.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListSyncFunctionTriggers")
-@action("listsyncfunctiontriggerstatus")
-listSyncFunctionTriggers is SiteOps.ActionSync<Site, void, ArmResponse<FunctionSecrets>>;
-
-
-/**
-* Updates the machine key of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_UpdateMachineKey")
-@action("updatemachinekey")
-updateMachineKey is SiteOps.ActionSync<Site, void, ArmResponse<AnyObject>>;
-
-
-/**
-* Description for Restores a web app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_MigrateStorage")
-@put
-@action("migrate")
-migrateStorage is SiteOps.ActionAsyncBase<Site, StorageMigrationOptions, ArmResponse<StorageMigrationResponse>, BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>, Parameters = { /**
-* Azure subscription.
-*/
-@query("subscriptionName")
-"subscriptionName": string }>;
-
-
-/**
-* Description for Migrates a local (in-app) MySql database to a remote MySql database.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_MigrateMySql")
-@action("migratemysql")
-migrateMySql is SiteOps.ActionAsyncBase<Site, MigrateMySqlRequest, ArmResponse<Operation>, BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetNetworkTraceOperation")
-@get
-@action("{operationId}")
-getNetworkTraceOperation is SiteOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]> | AcceptedResponse & { @bodyRoot
-"_": paths·vfwt7g·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-networktrace-operationresults-operationid·get·responses·202·content·application-json·schema; }, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Start capturing network packets for the site (To be deprecated).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_StartWebSiteNetworkTrace")
-@action("start")
-startWebSiteNetworkTrace is SiteOps.ActionSync<Site, void, ArmResponse<string>, Parameters = { /**
-* The duration to keep capturing in seconds.
-*/
-@query("durationInSeconds")
-"durationInSeconds"?: int32,
-/**
-* The maximum frame length in bytes (Optional).
-*/
-@query("maxFrameLength")
-"maxFrameLength"?: int32,
-/**
-* The Blob URL to store capture file.
-*/
-@query("sasUrl")
-"sasUrl"?: string }>;
-
-
-/**
-* Description for Start capturing network packets for the site.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_StartWebSiteNetworkTraceOperation")
-@action("startOperation")
-startWebSiteNetworkTraceOperation is SiteOps.ActionAsync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* The duration to keep capturing in seconds.
-*/
-@query("durationInSeconds")
-"durationInSeconds"?: int32,
-/**
-* The maximum frame length in bytes (Optional).
-*/
-@query("maxFrameLength")
-"maxFrameLength"?: int32,
-/**
-* The Blob URL to store capture file.
-*/
-@query("sasUrl")
-"sasUrl"?: string }>;
-
-
-/**
-* Description for Stop ongoing capturing network packets for the site.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_StopWebSiteNetworkTrace")
-@action("stop")
-stopWebSiteNetworkTrace is SiteOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetNetworkTraces")
-@get
-@action("{operationId}")
-getNetworkTraces is SiteOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetNetworkTraceOperationV2")
-@get
-@action("{operationId}")
-getNetworkTraceOperationV2 is SiteOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]> | AcceptedResponse & { @bodyRoot
-"_": paths·chvwy·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-networktraces-current-operationresults-operationid·get·responses·202·content·application-json·schema; }, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetNetworkTracesV2")
-@get
-@action("{operationId}")
-getNetworkTracesV2 is SiteOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Generates a new publishing password for an app (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GenerateNewSitePublishingPassword")
-@action("newpassword")
-generateNewSitePublishingPassword is SiteOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Gets perfmon counters for web app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListPerfMonCounters")
-@get
-@action("perfcounters")
-listPerfMonCounters is SiteOps.ActionSync<Site, void, ArmResponse<PerfMonCounterCollection>, Parameters = { /**
-* Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
-*/
-@query("$filter")
-"$filter"?: string }>;
-
-
-/**
-* Description for Gets web app's event logs.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetSitePhpErrorLogFlag")
-@get
-@action("phplogging")
-getSitePhpErrorLogFlag is SiteOps.ActionSync<Site, void, ArmResponse<SitePhpErrorLogFlag>>;
-
-
-/**
-* Description for Gets the premier add-ons of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListPremierAddOns")
-@get
-@action("premieraddons")
-listPremierAddOns is SiteOps.ActionSync<Site, void, ArmResponse<PremierAddOn>>;
-
-
-/**
-* Description for Gets the private link resources
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_GetPrivateLinkResources")
-@get
-@action("privateLinkResources")
-getPrivateLinkResources is SiteOps.ActionSync<Site, void, ArmResponse<PrivateLinkResourcesWrapper>>;
-
-
-/**
-* Description for Gets the publishing profile for an app (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListPublishingProfileXmlWithSecrets")
-@action("publishxml")
-listPublishingProfileXmlWithSecrets is SiteOps.ActionSync<Site, CsmPublishingProfileOptions, OkResponse>;
-
-
-/**
-* Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ResetProductionSlotConfig")
-@action("resetSlotConfig")
-resetProductionSlotConfig is SiteOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Restarts an app (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_Restart")
-restart is SiteOps.ActionSync<Site, void, OkResponse, Parameters = { /**
-* Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
-*/
-@query("softRestart")
-"softRestart"?: boolean,
-/**
-* Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
-*/
-@query("synchronous")
-"synchronous"?: boolean }>;
-
-
-/**
-* Description for Restores an app from a backup blob in Azure Storage.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_RestoreFromBackupBlob")
-restoreFromBackupBlob is SiteOps.ActionAsync<Site, RestoreRequest, OkResponse>;
-
-
-/**
-* Description for Restores a deleted web app to this web app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_RestoreFromDeletedApp")
-restoreFromDeletedApp is SiteOps.ActionAsync<Site, DeletedAppRestoreRequest, OkResponse>;
-
-
-/**
-* Description for Restores a web app from a snapshot.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_RestoreSnapshot")
-restoreSnapshot is SiteOps.ActionAsync<Site, SnapshotRestoreRequest, OkResponse>;
-
-
-/**
-* Description for Get the difference in configuration settings between two web app slots.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListSlotDifferencesFromProduction")
-@action("slotsdiffs")
-listSlotDifferencesFromProduction is SiteOps.ActionSync<Site, CsmSlotEntity, ArmResponse<SlotDifferenceCollection>>;
-
-
-/**
-* Description for Swaps two deployment slots of an app.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_SwapSlotWithProduction")
-@action("slotsswap")
-swapSlotWithProduction is SiteOps.ActionAsync<Site, CsmSlotEntity, OkResponse>;
-
-
-/**
-* Description for Returns all Snapshots to the user.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListSnapshots")
-@get
-@action("snapshots")
-listSnapshots is SiteOps.ActionSync<Site, void, ArmResponse<SnapshotCollection>>;
-
-
-/**
-* Description for Returns all Snapshots to the user from DRSecondary endpoint.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListSnapshotsFromDRSecondary")
-@get
-@action("snapshotsdr")
-listSnapshotsFromDRSecondary is SiteOps.ActionSync<Site, void, ArmResponse<SnapshotCollection>>;
-
-
-/**
-* Description for Starts an app (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_Start")
-start is SiteOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Start capturing network packets for the site.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_StartNetworkTrace")
-startNetworkTrace is SiteOps.ActionAsync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* The duration to keep capturing in seconds.
-*/
-@query("durationInSeconds")
-"durationInSeconds"?: int32,
-/**
-* The maximum frame length in bytes (Optional).
-*/
-@query("maxFrameLength")
-"maxFrameLength"?: int32,
-/**
-* The Blob URL to store capture file.
-*/
-@query("sasUrl")
-"sasUrl"?: string }>;
-
-
-/**
-* Description for Stops an app (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_Stop")
-stop is SiteOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Stop ongoing capturing network packets for the site.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_StopNetworkTrace")
-stopNetworkTrace is SiteOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Sync web app repository.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_SyncRepository")
-@action("sync")
-syncRepository is SiteOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Syncs function trigger metadata to the management database
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_SyncFunctionTriggers")
-@action("syncfunctiontriggers")
-syncFunctionTriggers is SiteOps.ActionSync<Site, void, NoContentResponse>;
-
-
-/**
-* Description for Gets the quota usage information of an app (or deployment slot, if specified).
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListUsages")
-@get
-@action("usages")
-listUsages is SiteOps.ActionSync<Site, void, ArmResponse<CsmUsageQuotaCollection>, Parameters = { /**
-* Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
-*/
-@query("$filter")
-"$filter"?: string }>;
-
-
-/**
-* Description for Creates the artifacts for web site, or a deployment slot.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_DeployWorkflowArtifacts")
-deployWorkflowArtifacts is SiteOps.ActionSync<Site, WorkflowArtifacts, OkResponse, OptionalRequestBody = true>;
-
-
-/**
-* Lists logic app's connections for web site, or a deployment slot.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("WebApps_ListWorkflowsConnections")
-listWorkflowsConnections is SiteOps.ActionSync<Site, void, ArmResponse<WorkflowEnvelope>>;
-
-
-/**
-* Regenerates the callback URL access key for request triggers.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Workflows_RegenerateAccessKey")
-regenerateAccessKey is SiteOps.ActionSync<Site, RegenerateActionParameter, OkResponse, Parameters = { /**
-* The workflow name.
-*/
-@path
-"workflowName": string }>;
-
-
-/**
-* Validates the workflow definition.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Workflows_Validate")
-validate is SiteOps.ActionSync<Site, Workflow, OkResponse, Parameters = { /**
-* The workflow name.
-*/
-@path
-"workflowName": string }>;
-
-
+  /**
+   * Description for Gets the details of a web, mobile, or API app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_Get")
+  get is SiteOps.Read<Site>;
+
+  /**
+   * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("WebApps_CreateOrUpdate")
+  createOrUpdate is SiteOps.CreateOrUpdateAsync<
+    Site,
+    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Site;
+    }),
+    LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("WebApps_Update")
+  @patch(#{ implicitOptionality: false })
+  update is SiteOps.CustomPatchSync<
+    Site,
+    PatchModel = SitePatchResource,
+    Response = ArmResponse<Site> | (AcceptedResponse & {
+      @bodyRoot
+      _: Site;
+    })
+  >;
+
+  /**
+   * Description for Deletes a web, mobile, or API app, or one of the deployment slots.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_Delete")
+  delete is SiteOps.DeleteSync<
+    Site,
+    Parameters = {
+      /**
+       * If true, web app metrics are also deleted.
+       */
+      @query("deleteMetrics")
+      deleteMetrics?: boolean;
+
+      /**
+       * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
+       */
+      @query("deleteEmptyServerFarm")
+      deleteEmptyServerFarm?: boolean;
+    }
+  >;
+
+  /**
+   * Description for Get all apps for a subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_List")
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Extension.Subscription,
+    Site,
+    Response = ArmResponse<WebAppCollection>
+  >;
+
+  /**
+   * Description for Get past recommendations for an app, optionally specified by the time range.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_ListHistoryForWebApp")
+  @get
+  @action("recommendationHistory")
+  listHistoryForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @path
+      siteName: string;
+
+      /**
+       * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
+       */
+      @query("expiredOnly")
+      expiredOnly?: boolean;
+
+      /**
+       * Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Get all recommendations for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_ListRecommendedRulesForWebApp")
+  @get
+  @action("recommendations")
+  listRecommendedRulesForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @path
+      siteName: string;
+
+      /**
+       * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
+       */
+      @query("featured")
+      featured?: boolean;
+
+      /**
+       * Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Disable all recommendations for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_DisableAllForWebApp")
+  @action("disable")
+  disableAllForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @path
+      siteName: string;
+    }
+  >;
+
+  /**
+   * Description for Reset all recommendation opt-out settings for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Recommendations_ResetAllFiltersForWebApp")
+  @action("reset")
+  resetAllFiltersForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * Name of the app.
+       */
+      @path
+      siteName: string;
+    }
+  >;
+
+  /**
+   * Description for Analyze a custom hostname.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_AnalyzeCustomHostname")
+  @get
+  analyzeCustomHostname is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<CustomHostnameAnalysisResult>,
+    Parameters = {
+      /**
+       * Custom hostname.
+       */
+      @query("hostName")
+      hostName?: string;
+    }
+  >;
+
+  /**
+   * Description for Applies the configuration settings from the target slot onto the current slot.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ApplySlotConfigToProduction")
+  @action("applySlotConfig")
+  applySlotConfigToProduction is SiteOps.ActionSync<
+    Site,
+    CsmSlotEntity,
+    OkResponse
+  >;
+
+  /**
+   * Description for Creates a backup of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_Backup")
+  backup is SiteOps.ActionSync<Site, BackupRequest, ArmResponse<BackupItem>>;
+
+  /**
+   * Description for Replaces the application settings of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateApplicationSettings")
+  @put
+  @action("appsettings")
+  updateApplicationSettings is SiteOps.ActionSync<
+    Site,
+    StringDictionary,
+    ArmResponse<StringDictionary>
+  >;
+
+  /**
+   * Description for Gets the application settings of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListApplicationSettings")
+  @action("config/appsettings/list")
+  listApplicationSettings is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<StringDictionary>
+  >;
+
+  /**
+   * Description for Updates the Authentication / Authorization settings associated with web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateAuthSettings")
+  @put
+  @action("authsettings")
+  updateAuthSettings is SiteOps.ActionSync<
+    Site,
+    SiteAuthSettings,
+    ArmResponse<SiteAuthSettings>
+  >;
+
+  /**
+   * Description for Gets the Authentication/Authorization settings of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetAuthSettings")
+  @action("config/authsettings/list")
+  getAuthSettings is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SiteAuthSettings>
+  >;
+
+  /**
+   * Description for Updates the Azure storage account configurations of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateAzureStorageAccounts")
+  @put
+  @action("azurestorageaccounts")
+  updateAzureStorageAccounts is SiteOps.ActionSync<
+    Site,
+    AzureStoragePropertyDictionaryResource,
+    ArmResponse<AzureStoragePropertyDictionaryResource>
+  >;
+
+  /**
+   * Description for Gets the Azure storage account configurations of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListAzureStorageAccounts")
+  @action("config/azurestorageaccounts/list")
+  listAzureStorageAccounts is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<AzureStoragePropertyDictionaryResource>
+  >;
+
+  /**
+   * Description for Updates the backup configuration of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateBackupConfiguration")
+  @put
+  @action("backup")
+  updateBackupConfiguration is SiteOps.ActionSync<
+    Site,
+    BackupRequest,
+    ArmResponse<BackupRequest>
+  >;
+
+  /**
+   * Description for Deletes the backup configuration of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_DeleteBackupConfiguration")
+  @delete
+  @action("backup")
+  deleteBackupConfiguration is SiteOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Gets the backup configuration of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetBackupConfiguration")
+  @action("config/backup/list")
+  getBackupConfiguration is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<BackupRequest>
+  >;
+
+  /**
+   * Description for Replaces the connection strings of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateConnectionStrings")
+  @put
+  @action("connectionstrings")
+  updateConnectionStrings is SiteOps.ActionSync<
+    Site,
+    ConnectionStringDictionary,
+    ArmResponse<ConnectionStringDictionary>
+  >;
+
+  /**
+   * Description for Gets the connection strings of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListConnectionStrings")
+  @action("config/connectionstrings/list")
+  listConnectionStrings is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<ConnectionStringDictionary>
+  >;
+
+  /**
+   * Description for Replaces the metadata of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateMetadata")
+  @put
+  @action("metadata")
+  updateMetadata is SiteOps.ActionSync<
+    Site,
+    StringDictionary,
+    ArmResponse<StringDictionary>
+  >;
+
+  /**
+   * Description for Gets the metadata of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListMetadata")
+  @action("config/metadata/list")
+  listMetadata is SiteOps.ActionSync<Site, void, ArmResponse<StringDictionary>>;
+
+  /**
+   * Description for Gets the Git/FTP publishing credentials of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListPublishingCredentials")
+  @action("config/publishingcredentials/list")
+  listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    Site,
+    void,
+    ArmResponse<User>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>
+  >;
+
+  /**
+   * Description for Updates the Push settings associated with web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateSitePushSettings")
+  @put
+  @action("pushsettings")
+  updateSitePushSettings is SiteOps.ActionSync<
+    Site,
+    PushSettings,
+    ArmResponse<PushSettings>
+  >;
+
+  /**
+   * Description for Gets the Push settings associated with web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSitePushSettings")
+  @action("config/pushsettings/list")
+  listSitePushSettings is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PushSettings>
+  >;
+
+  /**
+   * Description for Gets the last lines of docker logs for the given site
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetWebSiteContainerLogs")
+  @action("containerlogs")
+  getWebSiteContainerLogs is SiteOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Gets the ZIP archived docker log files for the given site
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetContainerLogsZip")
+  @action("download")
+  getContainerLogsZip is SiteOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_DiscoverBackup")
+  @action("discoverbackup")
+  discoverBackup is SiteOps.ActionSync<
+    Site,
+    RestoreRequest,
+    ArmResponse<RestoreRequest>
+  >;
+
+  /**
+   * Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetOneDeployStatus")
+  @get
+  @action("onedeploy")
+  getOneDeployStatus is SiteOps.ActionSync<Site, void, ArmResponse<unknown>>;
+
+  /**
+   * Description for Invoke the OneDeploy publish web app extension.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_CreateOneDeployOperation")
+  @put
+  @action("onedeploy")
+  createOneDeployOperation is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<unknown>
+  >;
+
+  /**
+   * Description for Fetch a short lived token that can be exchanged for a master key.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetFunctionsAdminToken")
+  @get
+  @action("token")
+  getFunctionsAdminToken is SiteOps.ActionSync<Site, void, ArmResponse<string>>;
+
+  /**
+   * Description for Get host secrets for a function app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListHostKeys")
+  @action("listkeys")
+  listHostKeys is SiteOps.ActionSync<Site, void, ArmResponse<HostKeys>>;
+
+  /**
+   * Description for This is to allow calling via powershell and ARM template.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSyncStatus")
+  @action("listsyncstatus")
+  listSyncStatus is SiteOps.ActionSync<Site, void, NoContentResponse>;
+
+  /**
+   * Description for Syncs function trigger metadata to the management database
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_SyncFunctions")
+  @action("host/default/sync")
+  syncFunctions is SiteOps.ActionSync<Site, void, NoContentResponse>;
+
+  /**
+   * Description for Add or update a host level secret.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_CreateOrUpdateHostSecret")
+  @put
+  @action("{keyName}")
+  createOrUpdateHostSecret is SiteOps.ActionSync<
+    Site,
+    KeyInfo,
+    ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
+    Parameters = {
+      /**
+       * The type of host key.
+       */
+      @path
+      keyType: string;
+
+      /**
+       * The name of the key.
+       */
+      @path
+      keyName: string;
+    }
+  >;
+
+  /**
+   * Description for Delete a host level secret.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_DeleteHostSecret")
+  @delete
+  @action("{keyName}")
+  deleteHostSecret is SiteOps.ActionSync<
+    Site,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * The type of host key.
+       */
+      @path
+      keyType: string;
+
+      /**
+       * The name of the key.
+       */
+      @path
+      keyName: string;
+    }
+  >;
+
+  /**
+   * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListHybridConnections")
+  @get
+  @action("hybridConnectionRelays")
+  listHybridConnections is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<HybridConnection>
+  >;
+
+  /**
+   * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListRelayServiceConnections")
+  @get
+  @action("hybridconnection")
+  listRelayServiceConnections is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RelayServiceConnectionEntity>
+  >;
+
+  /**
+   * Description for Shows whether an app can be cloned to another resource group or subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_IsCloneable")
+  @action("iscloneable")
+  isCloneable is SiteOps.ActionSync<Site, void, ArmResponse<SiteCloneability>>;
+
+  /**
+   * Description for Gets existing backups of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSiteBackups")
+  @action("listbackups")
+  listSiteBackups is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<BackupItemCollection>
+  >;
+
+  /**
+   * Description for This is to allow calling via powershell and ARM template.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSyncFunctionTriggers")
+  @action("listsyncfunctiontriggerstatus")
+  listSyncFunctionTriggers is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<FunctionSecrets>
+  >;
+
+  /**
+   * Updates the machine key of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateMachineKey")
+  @action("updatemachinekey")
+  updateMachineKey is SiteOps.ActionSync<Site, void, ArmResponse<unknown>>;
+
+  /**
+   * Description for Restores a web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_MigrateStorage")
+  @put
+  @action("migrate")
+  migrateStorage is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    Site,
+    StorageMigrationOptions,
+    ArmResponse<StorageMigrationResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
+    Parameters = {
+      /**
+       * Azure subscription
+       */
+      @query("subscriptionName")
+      subscriptionName: string;
+    }
+  >;
+
+  /**
+   * Description for Migrates a local (in-app) MySql database to a remote MySql database.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_MigrateMySql")
+  @action("migratemysql")
+  migrateMySql is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    Site,
+    MigrateMySqlRequest,
+    ArmResponse<Operation>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetNetworkTraceOperation")
+  @get
+  @action("networkTrace/operationresults/{operationId}")
+  getNetworkTraceOperation is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+      @bodyRoot
+      _: "paths·vfwt7g·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-networktrace-operationresults-operationid·get·responses·202·content·application-json·schema";
+    }),
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Start capturing network packets for the site (To be deprecated).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_StartWebSiteNetworkTrace")
+  @action("networkTrace/start")
+  startWebSiteNetworkTrace is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<string>,
+    Parameters = {
+      /**
+       * The duration to keep capturing in seconds.
+       */
+      @query("durationInSeconds")
+      durationInSeconds?: int32;
+
+      /**
+       * The maximum frame length in bytes (Optional).
+       */
+      @query("maxFrameLength")
+      maxFrameLength?: int32;
+
+      /**
+       * The Blob URL to store capture file.
+       */
+      @query("sasUrl")
+      sasUrl?: string;
+    }
+  >;
+
+  /**
+   * Description for Start capturing network packets for the site.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_StartWebSiteNetworkTraceOperation")
+  @action("startOperation")
+  startWebSiteNetworkTraceOperation is SiteOps.ActionAsync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * The duration to keep capturing in seconds.
+       */
+      @query("durationInSeconds")
+      durationInSeconds?: int32;
+
+      /**
+       * The maximum frame length in bytes (Optional).
+       */
+      @query("maxFrameLength")
+      maxFrameLength?: int32;
+
+      /**
+       * The Blob URL to store capture file.
+       */
+      @query("sasUrl")
+      sasUrl?: string;
+    }
+  >;
+
+  /**
+   * Description for Stop ongoing capturing network packets for the site.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_StopWebSiteNetworkTrace")
+  @action("networkTrace/stop")
+  stopWebSiteNetworkTrace is SiteOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetNetworkTraces")
+  @get
+  @action("networkTrace/{operationId}")
+  getNetworkTraces is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetNetworkTraceOperationV2")
+  @get
+  @action("networkTraces/current/operationresults/{operationId}")
+  getNetworkTraceOperationV2 is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+      @bodyRoot
+      _: "paths·chvwy·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-networktraces-current-operationresults-operationid·get·responses·202·content·application-json·schema";
+    }),
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetNetworkTracesV2")
+  @get
+  @action("networkTraces/{operationId}")
+  getNetworkTracesV2 is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Generates a new publishing password for an app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GenerateNewSitePublishingPassword")
+  @action("newpassword")
+  generateNewSitePublishingPassword is SiteOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Gets perfmon counters for web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListPerfMonCounters")
+  @get
+  @action("perfcounters")
+  listPerfMonCounters is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PerfMonCounterCollection>,
+    Parameters = {
+      /**
+       * Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Gets web app's event logs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetSitePhpErrorLogFlag")
+  @get
+  @action("phplogging")
+  getSitePhpErrorLogFlag is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SitePhpErrorLogFlag>
+  >;
+
+  /**
+   * Description for Gets the premier add-ons of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListPremierAddOns")
+  @get
+  @action("premieraddons")
+  listPremierAddOns is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PremierAddOn>
+  >;
+
+  /**
+   * Description for Gets the private link resources
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetPrivateLinkResources")
+  @get
+  @action("privateLinkResources")
+  getPrivateLinkResources is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PrivateLinkResourcesWrapper>
+  >;
+
+  /**
+   * Description for Gets the publishing profile for an app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListPublishingProfileXmlWithSecrets")
+  @action("publishxml")
+  listPublishingProfileXmlWithSecrets is SiteOps.ActionSync<
+    Site,
+    CsmPublishingProfileOptions,
+    OkResponse
+  >;
+
+  /**
+   * Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ResetProductionSlotConfig")
+  @action("resetSlotConfig")
+  resetProductionSlotConfig is SiteOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Restarts an app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_Restart")
+  restart is SiteOps.ActionSync<
+    Site,
+    void,
+    OkResponse,
+    Parameters = {
+      /**
+       * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
+       */
+      @query("softRestart")
+      softRestart?: boolean;
+
+      /**
+       * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
+       */
+      @query("synchronous")
+      synchronous?: boolean;
+    }
+  >;
+
+  /**
+   * Description for Restores an app from a backup blob in Azure Storage.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_RestoreFromBackupBlob")
+  restoreFromBackupBlob is SiteOps.ActionAsync<
+    Site,
+    RestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Description for Restores a deleted web app to this web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_RestoreFromDeletedApp")
+  restoreFromDeletedApp is SiteOps.ActionAsync<
+    Site,
+    DeletedAppRestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Description for Restores a web app from a snapshot.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_RestoreSnapshot")
+  restoreSnapshot is SiteOps.ActionAsync<
+    Site,
+    SnapshotRestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Description for Get the difference in configuration settings between two web app slots.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSlotDifferencesFromProduction")
+  @action("slotsdiffs")
+  listSlotDifferencesFromProduction is SiteOps.ActionSync<
+    Site,
+    CsmSlotEntity,
+    ArmResponse<SlotDifferenceCollection>
+  >;
+
+  /**
+   * Description for Swaps two deployment slots of an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_SwapSlotWithProduction")
+  @action("slotsswap")
+  swapSlotWithProduction is SiteOps.ActionAsync<
+    Site,
+    CsmSlotEntity,
+    OkResponse
+  >;
+
+  /**
+   * Description for Returns all Snapshots to the user.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSnapshots")
+  @get
+  @action("snapshots")
+  listSnapshots is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SnapshotCollection>
+  >;
+
+  /**
+   * Description for Returns all Snapshots to the user from DRSecondary endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListSnapshotsFromDRSecondary")
+  @get
+  @action("snapshotsdr")
+  listSnapshotsFromDRSecondary is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SnapshotCollection>
+  >;
+
+  /**
+   * Description for Starts an app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_Start")
+  @action("networkTrace/startOperation")
+  start is WebAppOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Start capturing network packets for the site.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_StartNetworkTrace")
+  startNetworkTrace is SiteOps.ActionAsync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * The duration to keep capturing in seconds.
+       */
+      @query("durationInSeconds")
+      durationInSeconds?: int32;
+
+      /**
+       * The maximum frame length in bytes (Optional).
+       */
+      @query("maxFrameLength")
+      maxFrameLength?: int32;
+
+      /**
+       * The Blob URL to store capture file.
+       */
+      @query("sasUrl")
+      sasUrl?: string;
+    }
+  >;
+
+  /**
+   * Description for Stops an app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_Stop")
+  @action("stop")
+  stop is SiteOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Stop ongoing capturing network packets for the site.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_StopNetworkTrace")
+  stopNetworkTrace is SiteOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Sync web app repository.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_SyncRepository")
+  @action("sync")
+  syncRepository is SiteOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Syncs function trigger metadata to the management database
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_SyncFunctionTriggers")
+  @action("syncfunctiontriggers")
+  syncFunctionTriggers is SiteOps.ActionSync<Site, void, NoContentResponse>;
+
+  /**
+   * Description for Gets the quota usage information of an app (or deployment slot, if specified).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListUsages")
+  @get
+  @action("usages")
+  listUsages is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<CsmUsageQuotaCollection>,
+    Parameters = {
+      /**
+       * Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Creates the artifacts for web site, or a deployment slot.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_DeployWorkflowArtifacts")
+  deployWorkflowArtifacts is SiteOps.ActionSync<
+    Site,
+    WorkflowArtifacts,
+    OkResponse,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * Lists logic app's connections for web site, or a deployment slot.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListWorkflowsConnections")
+  listWorkflowsConnections is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<WorkflowEnvelope>
+  >;
+
+  /**
+   * Regenerates the callback URL access key for request triggers.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workflows_RegenerateAccessKey")
+  regenerateAccessKey is SiteOps.ActionSync<
+    Site,
+    RegenerateActionParameter,
+    OkResponse,
+    Parameters = {
+      /**
+       * The workflow name.
+       */
+      @path
+      workflowName: string;
+    }
+  >;
+
+  /**
+   * Validates the workflow definition.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Workflows_Validate")
+  validate is SiteOps.ActionSync<
+    Site,
+    Workflow,
+    OkResponse,
+    Parameters = {
+      /**
+       * The workflow name.
+       */
+      @path
+      workflowName: string;
+    }
+  >;
 }
 @armResourceOperations
-interface WebAppOps extends Azure.ResourceManager.Legacy.LegacyOperations<{...ApiVersionParameter;...SubscriptionIdParameter;...ResourceGroupParameter;...Azure.ResourceManager.Legacy.Provider;/** Name of the app. */
-@path @segment("sites") @key  name: string}, {/** Name of the deployment slot. By default, this API returns the production slot. */
-@path @segment("slots") @key  slot: string}> {}
+interface WebAppOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+      },
+      {
+        /** Name of the deployment slot. By default, this API returns the production slot. */
+        @path
+        @segment("slots")
+        @key
+        slot: string,
+      }
+    > {}
 
 @armResourceOperations
 interface WebApps {
-/**
-* Description for Gets the details of a web, mobile, or API app.
-*/
-getSlot is WebAppOps.Read<Site
-        >;
-
-
-/**
-* Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
-*/
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<Site, Response = ArmResourceUpdatedResponse<Site> | ArmAcceptedLroResponse & { @bodyRoot
-"_": Site; }, LroHeaders = ArmLroLocationHeader<FinalResult = Site> & Azure.Core.Foundations.RetryAfterHeader
-        >;
-
-
-/**
-* Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
-*/
-@patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-updateSlot is WebAppOps.CustomPatchSync<Site, PatchModel = SitePatchResource, Response = ArmResponse<Site> | AcceptedResponse & { @bodyRoot
-"_": Site; }
-        >;
-
-
-/**
-* Description for Deletes a web, mobile, or API app, or one of the deployment slots.
-*/
-deleteSlot is WebAppOps.DeleteSync<Site, Parameters = { /**
-* If true, web app metrics are also deleted.
-*/
-@query("deleteMetrics")
-"deleteMetrics"?: boolean,
-/**
-* Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
-*/
-@query("deleteEmptyServerFarm")
-"deleteEmptyServerFarm"?: boolean }
-        >;
-
-
-/**
-* Description for Gets all web, mobile, and API apps in the specified resource group.
-*/
-listByResourceGroup is WebAppOps.List<Site, Parameters = { /**
-* Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.
-*/
-@query("includeSlots")
-"includeSlots"?: boolean }, Response = ArmResponse<WebAppCollection>
-        >;
-
-
-/**
-* Description for Analyze a custom hostname.
-*/
-@get
-@action("analyzeCustomHostname")
-analyzeCustomHostnameSlot is WebAppOps.ActionSync<Site, void, ArmResponse<CustomHostnameAnalysisResult>, Parameters = { /**
-* Custom hostname.
-*/
-@query("hostName")
-"hostName"?: string }>;
-
-
-/**
-* Description for Applies the configuration settings from the target slot onto the current slot.
-*/
-@action("applySlotConfig")
-applySlotConfigurationSlot is WebAppOps.ActionSync<Site, CsmSlotEntity, OkResponse>;
-
-
-/**
-* Description for Creates a backup of an app.
-*/
-@action("backup")
-backupSlot is WebAppOps.ActionSync<Site, BackupRequest, ArmResponse<BackupItem>>;
-
-
-/**
-* Description for Replaces the application settings of an app.
-*/
-@put
-@action("appsettings")
-updateApplicationSettingsSlot is WebAppOps.ActionSync<Site, StringDictionary, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Gets the application settings of an app.
-*/
-@action("list")
-listApplicationSettingsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Updates the Authentication / Authorization settings associated with web app.
-*/
-@put
-@action("authsettings")
-updateAuthSettingsSlot is WebAppOps.ActionSync<Site, SiteAuthSettings, ArmResponse<SiteAuthSettings>>;
-
-
-/**
-* Description for Gets the Authentication/Authorization settings of an app.
-*/
-@action("list")
-getAuthSettingsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<SiteAuthSettings>>;
-
-
-/**
-* Description for Updates the Azure storage account configurations of an app.
-*/
-@put
-@action("azurestorageaccounts")
-updateAzureStorageAccountsSlot is WebAppOps.ActionSync<Site, AzureStoragePropertyDictionaryResource, ArmResponse<AzureStoragePropertyDictionaryResource>>;
-
-
-/**
-* Description for Gets the Azure storage account configurations of an app.
-*/
-@action("list")
-listAzureStorageAccountsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<AzureStoragePropertyDictionaryResource>>;
-
-
-/**
-* Description for Updates the backup configuration of an app.
-*/
-@put
-@action("backup")
-updateBackupConfigurationSlot is WebAppOps.ActionSync<Site, BackupRequest, ArmResponse<BackupRequest>>;
-
-
-/**
-* Description for Deletes the backup configuration of an app.
-*/
-@delete
-@action("backup")
-deleteBackupConfigurationSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Gets the backup configuration of an app.
-*/
-@action("list")
-getBackupConfigurationSlot is WebAppOps.ActionSync<Site, void, ArmResponse<BackupRequest>>;
-
-
-/**
-* Description for Replaces the connection strings of an app.
-*/
-@put
-@action("connectionstrings")
-updateConnectionStringsSlot is WebAppOps.ActionSync<Site, ConnectionStringDictionary, ArmResponse<ConnectionStringDictionary>>;
-
-
-/**
-* Description for Gets the connection strings of an app.
-*/
-@action("list")
-listConnectionStringsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<ConnectionStringDictionary>>;
-
-
-/**
-* Description for Replaces the metadata of an app.
-*/
-@put
-@action("metadata")
-updateMetadataSlot is WebAppOps.ActionSync<Site, StringDictionary, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Gets the metadata of an app.
-*/
-@action("list")
-listMetadataSlot is WebAppOps.ActionSync<Site, void, ArmResponse<StringDictionary>>;
-
-
-/**
-* Description for Gets the Git/FTP publishing credentials of an app.
-*/
-@action("list")
-listPublishingCredentialsSlot is WebAppOps.ActionAsyncBase<Site, void, ArmResponse<User>, BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>>;
-
-
-/**
-* Description for Updates the Push settings associated with web app.
-*/
-@put
-@action("pushsettings")
-updateSitePushSettingsSlot is WebAppOps.ActionSync<Site, PushSettings, ArmResponse<PushSettings>>;
-
-
-/**
-* Description for Gets the Push settings associated with web app.
-*/
-@action("list")
-listSitePushSettingsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<PushSettings>>;
-
-
-/**
-* Description for Gets the last lines of docker logs for the given site
-*/
-@action("containerlogs")
-getWebSiteContainerLogsSlot is WebAppOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Gets the ZIP archived docker log files for the given site
-*/
-@action("download")
-getContainerLogsZipSlot is WebAppOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.
-*/
-@action("discoverbackup")
-discoverBackupSlot is WebAppOps.ActionSync<Site, RestoreRequest, ArmResponse<RestoreRequest>>;
-
-
-/**
-* Description for Fetch a short lived token that can be exchanged for a master key.
-*/
-@get
-@action("token")
-getFunctionsAdminTokenSlot is WebAppOps.ActionSync<Site, void, ArmResponse<string>>;
-
-
-/**
-* Description for Get host secrets for a function app.
-*/
-@action("listkeys")
-listHostKeysSlot is WebAppOps.ActionSync<Site, void, ArmResponse<HostKeys>>;
-
-
-/**
-* Description for This is to allow calling via powershell and ARM template.
-*/
-@action("listsyncstatus")
-listSyncStatusSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
-
-
-/**
-* Description for Syncs function trigger metadata to the management database
-*/
-@action("sync")
-syncFunctionsSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
-
-
-/**
-* Description for Add or update a host level secret.
-*/
-@put
-@action("{keyName}")
-createOrUpdateHostSecretSlot is WebAppOps.ActionSync<Site, KeyInfo, ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>, Parameters = { /**
-* The type of host key.
-*/
-@path
-"keyType": string,
-/**
-* The name of the key.
-*/
-@path
-"keyName": string }>;
-
-
-/**
-* Description for Delete a host level secret.
-*/
-@delete
-@action("{keyName}")
-deleteHostSecretSlot is WebAppOps.ActionSync<Site, void, NoContentResponse, Parameters = { /**
-* The type of host key.
-*/
-@path
-"keyType": string,
-/**
-* The name of the key.
-*/
-@path
-"keyName": string }>;
-
-
-/**
-* Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
-*/
-@get
-@action("hybridConnectionRelays")
-listHybridConnectionsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<HybridConnection>>;
-
-
-/**
-* Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
-*/
-@get
-@action("hybridconnection")
-listRelayServiceConnectionsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<RelayServiceConnectionEntity>>;
-
-
-/**
-* Description for Shows whether an app can be cloned to another resource group or subscription.
-*/
-@action("iscloneable")
-isCloneableSlot is WebAppOps.ActionSync<Site, void, ArmResponse<SiteCloneability>>;
-
-
-/**
-* Description for Gets existing backups of an app.
-*/
-@action("listbackups")
-listSiteBackupsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<BackupItemCollection>>;
-
-
-/**
-* Description for This is to allow calling via powershell and ARM template.
-*/
-@action("listsyncfunctiontriggerstatus")
-listSyncFunctionTriggersSlot is WebAppOps.ActionSync<Site, void, ArmResponse<FunctionSecrets>>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-@get
-@action("{operationId}")
-getNetworkTraceOperationSlot is WebAppOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]> | AcceptedResponse & { @bodyRoot
-"_": paths·fho602·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktrace-operationresults-operationid·get·responses·202·content·application-json·schema; }, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Start capturing network packets for the site (To be deprecated).
-*/
-@action("start")
-startWebSiteNetworkTraceSlot is WebAppOps.ActionSync<Site, void, ArmResponse<string>, Parameters = { /**
-* The duration to keep capturing in seconds.
-*/
-@query("durationInSeconds")
-"durationInSeconds"?: int32,
-/**
-* The maximum frame length in bytes (Optional).
-*/
-@query("maxFrameLength")
-"maxFrameLength"?: int32,
-/**
-* The Blob URL to store capture file.
-*/
-@query("sasUrl")
-"sasUrl"?: string }>;
-
-
-/**
-* Description for Start capturing network packets for the site.
-*/
-@action("startOperation")
-startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionAsync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* The duration to keep capturing in seconds.
-*/
-@query("durationInSeconds")
-"durationInSeconds"?: int32,
-/**
-* The maximum frame length in bytes (Optional).
-*/
-@query("maxFrameLength")
-"maxFrameLength"?: int32,
-/**
-* The Blob URL to store capture file.
-*/
-@query("sasUrl")
-"sasUrl"?: string }>;
-
-
-/**
-* Description for Stop ongoing capturing network packets for the site.
-*/
-@action("stop")
-stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-@get
-@action("{operationId}")
-getNetworkTracesSlot is WebAppOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-@get
-@action("{operationId}")
-getNetworkTraceOperationSlotV2 is WebAppOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]> | AcceptedResponse & { @bodyRoot
-"_": paths·nokhyf·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktraces-current-operationresults-operationid·get·responses·202·content·application-json·schema; }, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
-*/
-@get
-@action("{operationId}")
-getNetworkTracesSlotV2 is WebAppOps.ActionSync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* GUID of the operation.
-*/
-@path
-"operationId": string }>;
-
-
-/**
-* Description for Generates a new publishing password for an app (or deployment slot, if specified).
-*/
-@action("newpassword")
-generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Gets perfmon counters for web app.
-*/
-@get
-@action("perfcounters")
-listPerfMonCountersSlot is WebAppOps.ActionSync<Site, void, ArmResponse<PerfMonCounterCollection>, Parameters = { /**
-* Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
-*/
-@query("$filter")
-"$filter"?: string }>;
-
-
-/**
-* Description for Gets web app's event logs.
-*/
-@get
-@action("phplogging")
-getSitePhpErrorLogFlagSlot is WebAppOps.ActionSync<Site, void, ArmResponse<SitePhpErrorLogFlag>>;
-
-
-/**
-* Description for Gets the premier add-ons of an app.
-*/
-@get
-@action("premieraddons")
-listPremierAddOnsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<PremierAddOn>>;
-
-
-/**
-* Description for Gets the private link resources
-*/
-@get
-@action("privateLinkResources")
-getPrivateLinkResourcesSlot is WebAppOps.ActionSync<Site, void, ArmResponse<PrivateLinkResourcesWrapper>>;
-
-
-/**
-* Description for Gets the publishing profile for an app (or deployment slot, if specified).
-*/
-@action("publishxml")
-listPublishingProfileXmlWithSecretsSlot is WebAppOps.ActionSync<Site, CsmPublishingProfileOptions, OkResponse>;
-
-
-/**
-* Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
-*/
-@action("resetSlotConfig")
-resetSlotConfigurationSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Restarts an app (or deployment slot, if specified).
-*/
-@action("restart")
-restartSlot is WebAppOps.ActionSync<Site, void, OkResponse, Parameters = { /**
-* Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
-*/
-@query("softRestart")
-"softRestart"?: boolean,
-/**
-* Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
-*/
-@query("synchronous")
-"synchronous"?: boolean }>;
-
-
-/**
-* Description for Restores an app from a backup blob in Azure Storage.
-*/
-@action("restoreFromBackupBlob")
-restoreFromBackupBlobSlot is WebAppOps.ActionAsync<Site, RestoreRequest, OkResponse>;
-
-
-/**
-* Description for Restores a deleted web app to this web app.
-*/
-@action("restoreFromDeletedApp")
-restoreFromDeletedAppSlot is WebAppOps.ActionAsync<Site, DeletedAppRestoreRequest, OkResponse>;
-
-
-/**
-* Description for Restores a web app from a snapshot.
-*/
-@action("restoreSnapshot")
-restoreSnapshotSlot is WebAppOps.ActionAsync<Site, SnapshotRestoreRequest, OkResponse>;
-
-
-/**
-* Description for Get the difference in configuration settings between two web app slots.
-*/
-@action("slotsdiffs")
-listSlotDifferencesSlot is WebAppOps.ActionSync<Site, CsmSlotEntity, ArmResponse<SlotDifferenceCollection>>;
-
-
-/**
-* Description for Swaps two deployment slots of an app.
-*/
-@action("slotsswap")
-swapSlotSlot is WebAppOps.ActionAsync<Site, CsmSlotEntity, OkResponse>;
-
-
-/**
-* Description for Returns all Snapshots to the user.
-*/
-@get
-@action("snapshots")
-listSnapshotsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<SnapshotCollection>>;
-
-
-/**
-* Description for Returns all Snapshots to the user from DRSecondary endpoint.
-*/
-@get
-@action("snapshotsdr")
-listSnapshotsFromDRSecondarySlot is WebAppOps.ActionSync<Site, void, ArmResponse<SnapshotCollection>>;
-
-
-/**
-* Description for Starts an app (or deployment slot, if specified).
-*/
-@action("start")
-startSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Start capturing network packets for the site.
-*/
-@action("startNetworkTrace")
-startNetworkTraceSlot is WebAppOps.ActionAsync<Site, void, ArmResponse<NetworkTrace[]>, Parameters = { /**
-* The duration to keep capturing in seconds.
-*/
-@query("durationInSeconds")
-"durationInSeconds"?: int32,
-/**
-* The maximum frame length in bytes (Optional).
-*/
-@query("maxFrameLength")
-"maxFrameLength"?: int32,
-/**
-* The Blob URL to store capture file.
-*/
-@query("sasUrl")
-"sasUrl"?: string }>;
-
-
-/**
-* Description for Stops an app (or deployment slot, if specified).
-*/
-@action("stop")
-stopSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Stop ongoing capturing network packets for the site.
-*/
-@action("stopNetworkTrace")
-stopNetworkTraceSlot is WebAppOps.ActionSync<Site, void, OkResponse | NoContentResponse>;
-
-
-/**
-* Description for Sync web app repository.
-*/
-@action("sync")
-syncRepositorySlot is WebAppOps.ActionSync<Site, void, OkResponse>;
-
-
-/**
-* Description for Syncs function trigger metadata to the management database
-*/
-@action("syncfunctiontriggers")
-syncFunctionTriggersSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
-
-
-/**
-* Description for Gets the quota usage information of an app (or deployment slot, if specified).
-*/
-@get
-@action("usages")
-listUsagesSlot is WebAppOps.ActionSync<Site, void, ArmResponse<CsmUsageQuotaCollection>, Parameters = { /**
-* Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
-*/
-@query("$filter")
-"$filter"?: string }>;
-
-
-/**
-* Description for Creates the artifacts for web site, or a deployment slot.
-*/
-@action("deployWorkflowArtifacts")
-deployWorkflowArtifactsSlot is WebAppOps.ActionSync<Site, WorkflowArtifacts, OkResponse, OptionalRequestBody = true>;
-
-
-/**
-* Lists logic app's connections for web site, or a deployment slot.
-*/
-@action("listWorkflowsConnections")
-listWorkflowsConnectionsSlot is WebAppOps.ActionSync<Site, void, ArmResponse<WorkflowEnvelope>>;
-
-
+  /**
+   * Description for Gets the details of a web, mobile, or API app.
+   */
+  getSlot is WebAppOps.Read<Site>;
+
+  /**
+   * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<
+    Site,
+    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Site;
+    }),
+    LroHeaders = ArmLroLocationHeader<FinalResult = Site> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @patch(#{ implicitOptionality: false })
+  updateSlot is WebAppOps.CustomPatchSync<
+    Site,
+    PatchModel = SitePatchResource,
+    Response = ArmResponse<Site> | (AcceptedResponse & {
+      @bodyRoot
+      _: Site;
+    })
+  >;
+
+  /**
+   * Description for Deletes a web, mobile, or API app, or one of the deployment slots.
+   */
+  deleteSlot is WebAppOps.DeleteSync<
+    Site,
+    Parameters = {
+      /**
+       * If true, web app metrics are also deleted.
+       */
+      @query("deleteMetrics")
+      deleteMetrics?: boolean;
+
+      /**
+       * Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
+       */
+      @query("deleteEmptyServerFarm")
+      deleteEmptyServerFarm?: boolean;
+    }
+  >;
+
+  /**
+   * Description for Gets all web, mobile, and API apps in the specified resource group.
+   */
+  listByResourceGroup is WebAppOps.List<
+    Site,
+    Parameters = {
+      /**
+       * Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.
+       */
+      @query("includeSlots")
+      includeSlots?: boolean;
+    },
+    Response = ArmResponse<WebAppCollection>
+  >;
+
+  /**
+   * Description for Analyze a custom hostname.
+   */
+  @get
+  @action("analyzeCustomHostname")
+  analyzeCustomHostnameSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<CustomHostnameAnalysisResult>,
+    Parameters = {
+      /**
+       * Custom hostname.
+       */
+      @query("hostName")
+      hostName?: string;
+    }
+  >;
+
+  /**
+   * Description for Applies the configuration settings from the target slot onto the current slot.
+   */
+  @action("applySlotConfig")
+  applySlotConfigurationSlot is WebAppOps.ActionSync<
+    Site,
+    CsmSlotEntity,
+    OkResponse
+  >;
+
+  /**
+   * Description for Creates a backup of an app.
+   */
+  @action("backup")
+  backupSlot is WebAppOps.ActionSync<
+    Site,
+    BackupRequest,
+    ArmResponse<BackupItem>
+  >;
+
+  /**
+   * Description for Replaces the application settings of an app.
+   */
+  @put
+  @action("appsettings")
+  updateApplicationSettingsSlot is WebAppOps.ActionSync<
+    Site,
+    StringDictionary,
+    ArmResponse<StringDictionary>
+  >;
+
+  /**
+   * Description for Gets the application settings of an app.
+   */
+  @action("config/appsettings/list")
+  listApplicationSettingsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<StringDictionary>
+  >;
+
+  /**
+   * Description for Updates the Authentication / Authorization settings associated with web app.
+   */
+  @put
+  @action("authsettings")
+  updateAuthSettingsSlot is WebAppOps.ActionSync<
+    Site,
+    SiteAuthSettings,
+    ArmResponse<SiteAuthSettings>
+  >;
+
+  /**
+   * Description for Gets the Authentication/Authorization settings of an app.
+   */
+  @action("config/authsettings/list")
+  getAuthSettingsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SiteAuthSettings>
+  >;
+
+  /**
+   * Description for Updates the Azure storage account configurations of an app.
+   */
+  @put
+  @action("azurestorageaccounts")
+  updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
+    Site,
+    AzureStoragePropertyDictionaryResource,
+    ArmResponse<AzureStoragePropertyDictionaryResource>
+  >;
+
+  /**
+   * Description for Gets the Azure storage account configurations of an app.
+   */
+  @action("config/azurestorageaccounts/list")
+  listAzureStorageAccountsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<AzureStoragePropertyDictionaryResource>
+  >;
+
+  /**
+   * Description for Updates the backup configuration of an app.
+   */
+  @put
+  @action("backup")
+  updateBackupConfigurationSlot is WebAppOps.ActionSync<
+    Site,
+    BackupRequest,
+    ArmResponse<BackupRequest>
+  >;
+
+  /**
+   * Description for Deletes the backup configuration of an app.
+   */
+  @delete
+  @action("backup")
+  deleteBackupConfigurationSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Gets the backup configuration of an app.
+   */
+  @action("config/backup/list")
+  getBackupConfigurationSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<BackupRequest>
+  >;
+
+  /**
+   * Description for Replaces the connection strings of an app.
+   */
+  @put
+  @action("connectionstrings")
+  updateConnectionStringsSlot is WebAppOps.ActionSync<
+    Site,
+    ConnectionStringDictionary,
+    ArmResponse<ConnectionStringDictionary>
+  >;
+
+  /**
+   * Description for Gets the connection strings of an app.
+   */
+  @action("config/connectionstrings/list")
+  listConnectionStringsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<ConnectionStringDictionary>
+  >;
+
+  /**
+   * Description for Replaces the metadata of an app.
+   */
+  @put
+  @action("metadata")
+  updateMetadataSlot is WebAppOps.ActionSync<
+    Site,
+    StringDictionary,
+    ArmResponse<StringDictionary>
+  >;
+
+  /**
+   * Description for Gets the metadata of an app.
+   */
+  @action("config/metadata/list")
+  listMetadataSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<StringDictionary>
+  >;
+
+  /**
+   * Description for Gets the Git/FTP publishing credentials of an app.
+   */
+  @action("list")
+  listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    Site,
+    void,
+    ArmResponse<User>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>
+  >;
+
+  /**
+   * Description for Updates the Push settings associated with web app.
+   */
+  @put
+  @action("pushsettings")
+  updateSitePushSettingsSlot is WebAppOps.ActionSync<
+    Site,
+    PushSettings,
+    ArmResponse<PushSettings>
+  >;
+
+  /**
+   * Description for Gets the Push settings associated with web app.
+   */
+  @action("config/pushsettings/list")
+  listSitePushSettingsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PushSettings>
+  >;
+
+  /**
+   * Description for Gets the last lines of docker logs for the given site
+   */
+  @action("containerlogs")
+  getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Gets the ZIP archived docker log files for the given site
+   */
+  @action("download")
+  getContainerLogsZipSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.
+   */
+  @action("discoverbackup")
+  discoverBackupSlot is WebAppOps.ActionSync<
+    Site,
+    RestoreRequest,
+    ArmResponse<RestoreRequest>
+  >;
+
+  /**
+   * Description for Fetch a short lived token that can be exchanged for a master key.
+   */
+  @get
+  @action("token")
+  getFunctionsAdminTokenSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<string>
+  >;
+
+  /**
+   * Description for Get host secrets for a function app.
+   */
+  @action("listkeys")
+  listHostKeysSlot is WebAppOps.ActionSync<Site, void, ArmResponse<HostKeys>>;
+
+  /**
+   * Description for This is to allow calling via powershell and ARM template.
+   */
+  @action("listsyncstatus")
+  listSyncStatusSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
+
+  /**
+   * Description for Syncs function trigger metadata to the management database
+   */
+  @action("host/default/sync")
+  syncFunctionsSlot is WebAppOps.ActionSync<Site, void, NoContentResponse>;
+
+  /**
+   * Description for Add or update a host level secret.
+   */
+  @put
+  @action("{keyName}")
+  createOrUpdateHostSecretSlot is WebAppOps.ActionSync<
+    Site,
+    KeyInfo,
+    ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
+    Parameters = {
+      /**
+       * The type of host key.
+       */
+      @path
+      keyType: string;
+
+      /**
+       * The name of the key.
+       */
+      @path
+      keyName: string;
+    }
+  >;
+
+  /**
+   * Description for Delete a host level secret.
+   */
+  @delete
+  @action("{keyName}")
+  deleteHostSecretSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    NoContentResponse,
+    Parameters = {
+      /**
+       * The type of host key.
+       */
+      @path
+      keyType: string;
+
+      /**
+       * The name of the key.
+       */
+      @path
+      keyName: string;
+    }
+  >;
+
+  /**
+   * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
+   */
+  @get
+  @action("hybridConnectionRelays")
+  listHybridConnectionsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<HybridConnection>
+  >;
+
+  /**
+   * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
+   */
+  @get
+  @action("hybridconnection")
+  listRelayServiceConnectionsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RelayServiceConnectionEntity>
+  >;
+
+  /**
+   * Description for Shows whether an app can be cloned to another resource group or subscription.
+   */
+  @action("iscloneable")
+  isCloneableSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SiteCloneability>
+  >;
+
+  /**
+   * Description for Gets existing backups of an app.
+   */
+  @action("listbackups")
+  listSiteBackupsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<BackupItemCollection>
+  >;
+
+  /**
+   * Description for This is to allow calling via powershell and ARM template.
+   */
+  @action("listsyncfunctiontriggerstatus")
+  listSyncFunctionTriggersSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<FunctionSecrets>
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  @get
+  @action("networkTrace/operationresults/{operationId}")
+  getNetworkTraceOperationSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+      @bodyRoot
+      _: "paths·fho602·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktrace-operationresults-operationid·get·responses·202·content·application-json·schema";
+    }),
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Start capturing network packets for the site (To be deprecated).
+   */
+  @action("networkTrace/start")
+  startWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<string>,
+    Parameters = {
+      /**
+       * The duration to keep capturing in seconds.
+       */
+      @query("durationInSeconds")
+      durationInSeconds?: int32;
+
+      /**
+       * The maximum frame length in bytes (Optional).
+       */
+      @query("maxFrameLength")
+      maxFrameLength?: int32;
+
+      /**
+       * The Blob URL to store capture file.
+       */
+      @query("sasUrl")
+      sasUrl?: string;
+    }
+  >;
+
+  /**
+   * Description for Start capturing network packets for the site.
+   */
+  @action("startOperation")
+  startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionAsync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * The duration to keep capturing in seconds.
+       */
+      @query("durationInSeconds")
+      durationInSeconds?: int32;
+
+      /**
+       * The maximum frame length in bytes (Optional).
+       */
+      @query("maxFrameLength")
+      maxFrameLength?: int32;
+
+      /**
+       * The Blob URL to store capture file.
+       */
+      @query("sasUrl")
+      sasUrl?: string;
+    }
+  >;
+
+  /**
+   * Description for Stop ongoing capturing network packets for the site.
+   */
+  @action("networkTrace/stop")
+  stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  @get
+  @action("networkTrace/{operationId}")
+  getNetworkTracesSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  @get
+  @action("networkTraces/current/operationresults/{operationId}")
+  getNetworkTraceOperationSlotV2 is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+      @bodyRoot
+      _: "paths·nokhyf·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktraces-current-operationresults-operationid·get·responses·202·content·application-json·schema";
+    }),
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
+   */
+  @get
+  @action("networkTraces/{operationId}")
+  getNetworkTracesSlotV2 is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * GUID of the operation.
+       */
+      @path
+      operationId: string;
+    }
+  >;
+
+  /**
+   * Description for Generates a new publishing password for an app (or deployment slot, if specified).
+   */
+  @action("newpassword")
+  generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Gets perfmon counters for web app.
+   */
+  @get
+  @action("perfcounters")
+  listPerfMonCountersSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PerfMonCounterCollection>,
+    Parameters = {
+      /**
+       * Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Gets web app's event logs.
+   */
+  @get
+  @action("phplogging")
+  getSitePhpErrorLogFlagSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SitePhpErrorLogFlag>
+  >;
+
+  /**
+   * Description for Gets the premier add-ons of an app.
+   */
+  @get
+  @action("premieraddons")
+  listPremierAddOnsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PremierAddOn>
+  >;
+
+  /**
+   * Description for Gets the private link resources
+   */
+  @get
+  @action("privateLinkResources")
+  getPrivateLinkResourcesSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<PrivateLinkResourcesWrapper>
+  >;
+
+  /**
+   * Description for Gets the publishing profile for an app (or deployment slot, if specified).
+   */
+  @action("publishxml")
+  listPublishingProfileXmlWithSecretsSlot is WebAppOps.ActionSync<
+    Site,
+    CsmPublishingProfileOptions,
+    OkResponse
+  >;
+
+  /**
+   * Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
+   */
+  @action("resetSlotConfig")
+  resetSlotConfigurationSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Restarts an app (or deployment slot, if specified).
+   */
+  @action("restart")
+  restartSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    OkResponse,
+    Parameters = {
+      /**
+       * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
+       */
+      @query("softRestart")
+      softRestart?: boolean;
+
+      /**
+       * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
+       */
+      @query("synchronous")
+      synchronous?: boolean;
+    }
+  >;
+
+  /**
+   * Description for Restores an app from a backup blob in Azure Storage.
+   */
+  @action("restoreFromBackupBlob")
+  restoreFromBackupBlobSlot is WebAppOps.ActionAsync<
+    Site,
+    RestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Description for Restores a deleted web app to this web app.
+   */
+  @action("restoreFromDeletedApp")
+  restoreFromDeletedAppSlot is WebAppOps.ActionAsync<
+    Site,
+    DeletedAppRestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Description for Restores a web app from a snapshot.
+   */
+  @action("restoreSnapshot")
+  restoreSnapshotSlot is WebAppOps.ActionAsync<
+    Site,
+    SnapshotRestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Description for Get the difference in configuration settings between two web app slots.
+   */
+  @action("slotsdiffs")
+  listSlotDifferencesSlot is WebAppOps.ActionSync<
+    Site,
+    CsmSlotEntity,
+    ArmResponse<SlotDifferenceCollection>
+  >;
+
+  /**
+   * Description for Swaps two deployment slots of an app.
+   */
+  @action("slotsswap")
+  swapSlotSlot is WebAppOps.ActionAsync<Site, CsmSlotEntity, OkResponse>;
+
+  /**
+   * Description for Returns all Snapshots to the user.
+   */
+  @get
+  @action("snapshots")
+  listSnapshotsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SnapshotCollection>
+  >;
+
+  /**
+   * Description for Returns all Snapshots to the user from DRSecondary endpoint.
+   */
+  @get
+  @action("snapshotsdr")
+  listSnapshotsFromDRSecondarySlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<SnapshotCollection>
+  >;
+
+  /**
+   * Description for Starts an app (or deployment slot, if specified).
+   */
+  @action("start")
+  startSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Start capturing network packets for the site.
+   */
+  @action("startNetworkTrace")
+  startNetworkTraceSlot is WebAppOps.ActionAsync<
+    Site,
+    void,
+    ArmResponse<NetworkTrace[]>,
+    Parameters = {
+      /**
+       * The duration to keep capturing in seconds.
+       */
+      @query("durationInSeconds")
+      durationInSeconds?: int32;
+
+      /**
+       * The maximum frame length in bytes (Optional).
+       */
+      @query("maxFrameLength")
+      maxFrameLength?: int32;
+
+      /**
+       * The Blob URL to store capture file.
+       */
+      @query("sasUrl")
+      sasUrl?: string;
+    }
+  >;
+
+  /**
+   * Description for Stops an app (or deployment slot, if specified).
+   */
+  @action("stop")
+  stopSlot is WebAppOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Stop ongoing capturing network packets for the site.
+   */
+  @action("stopNetworkTrace")
+  stopNetworkTraceSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    OkResponse | NoContentResponse
+  >;
+
+  /**
+   * Description for Sync web app repository.
+   */
+  @action("sync")
+  syncRepositorySlot is WebAppOps.ActionSync<Site, void, OkResponse>;
+
+  /**
+   * Description for Syncs function trigger metadata to the management database
+   */
+  @action("syncfunctiontriggers")
+  syncFunctionTriggersSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    NoContentResponse
+  >;
+
+  /**
+   * Description for Gets the quota usage information of an app (or deployment slot, if specified).
+   */
+  @get
+  @action("usages")
+  listUsagesSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<CsmUsageQuotaCollection>,
+    Parameters = {
+      /**
+       * Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Description for Creates the artifacts for web site, or a deployment slot.
+   */
+  @action("deployWorkflowArtifacts")
+  deployWorkflowArtifactsSlot is WebAppOps.ActionSync<
+    Site,
+    WorkflowArtifacts,
+    OkResponse,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * Lists logic app's connections for web site, or a deployment slot.
+   */
+  @action("listWorkflowsConnections")
+  listWorkflowsConnectionsSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<WorkflowEnvelope>
+  >;
 }
 
-
-@@doc(Site.name, "Name of the app.")
-@@doc(Site.properties, "Site resource specific properties")
-@@doc(Sites.`createOrUpdate`::parameters.resource, "A JSON representation of the app properties. See example.");
-@@doc(Sites.`update`::parameters.properties, "A JSON representation of the app properties. See example.");
-@@doc(Sites.`applySlotConfigToProduction`::parameters.body, "JSON object that contains the target slot name. See example.");
-@@doc(Sites.`backup`::parameters.body, "Backup configuration. You can use the JSON response from the POST action as input here.");
-@@doc(Sites.`updateApplicationSettings`::parameters.body, "Application settings of the app.");
-@@doc(Sites.`updateAuthSettings`::parameters.body, "Auth settings associated with web app.");
-@@doc(Sites.`updateAzureStorageAccounts`::parameters.body, "Azure storage accounts of the app.");
-@@doc(Sites.`updateBackupConfiguration`::parameters.body, "Edited backup configuration.");
-@@doc(Sites.`updateConnectionStrings`::parameters.body, "Connection strings of the app or deployment slot. See example.");
-@@doc(Sites.`updateMetadata`::parameters.body, "Edited metadata of the app or deployment slot. See example.");
-@@doc(Sites.`updateSitePushSettings`::parameters.body, "Push settings associated with web app.");
-@@doc(Sites.`discoverBackup`::parameters.body, "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.");
-@@doc(Sites.`createOrUpdateHostSecret`::parameters.body, "The key to create or update");
-@@doc(Sites.`migrateStorage`::parameters.body, "Migration migrationOptions.");
-@@doc(Sites.`migrateMySql`::parameters.body, "MySql migration options.");
-@@doc(Sites.`listPublishingProfileXmlWithSecrets`::parameters.body, "Specifies publishingProfileOptions for publishing profile. For example, use {"format": "FileZilla3"} to get a FileZilla publishing profile.");
-@@doc(Sites.`restoreFromBackupBlob`::parameters.body, "Information on restore request .");
-@@doc(Sites.`restoreFromDeletedApp`::parameters.body, "Deleted web app restore information.");
-@@doc(Sites.`restoreSnapshot`::parameters.body, "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.");
-@@doc(Sites.`listSlotDifferencesFromProduction`::parameters.body, "JSON object that contains the target slot name. See example.");
-@@doc(Sites.`swapSlotWithProduction`::parameters.body, "JSON object that contains the target slot name. See example.");
-@@doc(Sites.`deployWorkflowArtifacts`::parameters.body, "Application settings and files of the workflow.");
-@@doc(Sites.`regenerateAccessKey`::parameters.body, "The access key type.");
-@@doc(Sites.`validate`::parameters.body, "The workflow.");
-@@doc(WebApps.`createOrUpdateSlot`::parameters.resource, "A JSON representation of the app properties. See example.");
-@@doc(WebApps.`updateSlot`::parameters.properties, "A JSON representation of the app properties. See example.");
-@@doc(WebApps.`applySlotConfigurationSlot`::parameters.body, "JSON object that contains the target slot name. See example.");
-@@doc(WebApps.`backupSlot`::parameters.body, "Backup configuration. You can use the JSON response from the POST action as input here.");
-@@doc(WebApps.`updateApplicationSettingsSlot`::parameters.body, "Application settings of the app.");
-@@doc(WebApps.`updateAuthSettingsSlot`::parameters.body, "Auth settings associated with web app.");
-@@doc(WebApps.`updateAzureStorageAccountsSlot`::parameters.body, "Azure storage accounts of the app.");
-@@doc(WebApps.`updateBackupConfigurationSlot`::parameters.body, "Edited backup configuration.");
-@@doc(WebApps.`updateConnectionStringsSlot`::parameters.body, "Connection strings of the app or deployment slot. See example.");
-@@doc(WebApps.`updateMetadataSlot`::parameters.body, "Edited metadata of the app or deployment slot. See example.");
-@@doc(WebApps.`updateSitePushSettingsSlot`::parameters.body, "Push settings associated with web app.");
-@@doc(WebApps.`discoverBackupSlot`::parameters.body, "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.");
-@@doc(WebApps.`createOrUpdateHostSecretSlot`::parameters.body, "The key to create or update");
-@@doc(WebApps.`listPublishingProfileXmlWithSecretsSlot`::parameters.body, "Specifies publishingProfileOptions for publishing profile. For example, use {"format": "FileZilla3"} to get a FileZilla publishing profile.");
-@@doc(WebApps.`restoreFromBackupBlobSlot`::parameters.body, "Information on restore request .");
-@@doc(WebApps.`restoreFromDeletedAppSlot`::parameters.body, "Deleted web app restore information.");
-@@doc(WebApps.`restoreSnapshotSlot`::parameters.body, "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.");
-@@doc(WebApps.`listSlotDifferencesSlot`::parameters.body, "JSON object that contains the target slot name. See example.");
-@@doc(WebApps.`swapSlotSlot`::parameters.body, "JSON object that contains the target slot name. See example.");
-@@doc(WebApps.`deployWorkflowArtifactsSlot`::parameters.body, "Application settings and files of the workflow.");
+@@doc(Site.name, "Name of the app.");
+@@doc(Site.properties, "Site resource specific properties");
+@@doc(Sites.createOrUpdate::parameters.resource,
+  "A JSON representation of the app properties. See example."
+);
+@@doc(Sites.update::parameters.properties,
+  "A JSON representation of the app properties. See example."
+);
+@@doc(Sites.applySlotConfigToProduction::parameters.body,
+  "JSON object that contains the target slot name. See example."
+);
+@@doc(Sites.backup::parameters.body,
+  "Backup configuration. You can use the JSON response from the POST action as input here."
+);
+@@doc(Sites.updateApplicationSettings::parameters.body,
+  "Application settings of the app."
+);
+@@doc(Sites.updateAuthSettings::parameters.body,
+  "Auth settings associated with web app."
+);
+@@doc(Sites.updateAzureStorageAccounts::parameters.body,
+  "Azure storage accounts of the app."
+);
+@@doc(Sites.updateBackupConfiguration::parameters.body,
+  "Edited backup configuration."
+);
+@@doc(Sites.updateConnectionStrings::parameters.body,
+  "Connection strings of the app or deployment slot. See example."
+);
+@@doc(Sites.updateMetadata::parameters.body,
+  "Edited metadata of the app or deployment slot. See example."
+);
+@@doc(Sites.updateSitePushSettings::parameters.body,
+  "Push settings associated with web app."
+);
+@@doc(Sites.discoverBackup::parameters.body,
+  "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup."
+);
+@@doc(Sites.createOrUpdateHostSecret::parameters.body,
+  "The key to create or update"
+);
+// @@doc(Sites.`migrateStorage`::parameters.body, "Migration migrationOptions.");
+// @@doc(Sites.`migrateMySql`::parameters.body, "MySql migration options.");
+// @@doc(Sites.`listPublishingProfileXmlWithSecrets`::parameters.body, "Specifies publishingProfileOptions for publishing profile. For example, use {"format": "FileZilla3"} to get a FileZilla publishing profile.");
+// @@doc(Sites.`restoreFromBackupBlob`::parameters.body, "Information on restore request .");
+// @@doc(Sites.`restoreFromDeletedApp`::parameters.body, "Deleted web app restore information.");
+// @@doc(Sites.`restoreSnapshot`::parameters.body, "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.");
+// @@doc(Sites.`listSlotDifferencesFromProduction`::parameters.body, "JSON object that contains the target slot name. See example.");
+// @@doc(Sites.`swapSlotWithProduction`::parameters.body, "JSON object that contains the target slot name. See example.");
+// @@doc(Sites.`deployWorkflowArtifacts`::parameters.body, "Application settings and files of the workflow.");
+// @@doc(Sites.`regenerateAccessKey`::parameters.body, "The access key type.");
+// @@doc(Sites.`validate`::parameters.body, "The workflow.");
+@@doc(WebApps.createOrUpdateSlot::parameters.resource,
+  "A JSON representation of the app properties. See example."
+);
+@@doc(WebApps.updateSlot::parameters.properties,
+  "A JSON representation of the app properties. See example."
+);
+@@doc(WebApps.applySlotConfigurationSlot::parameters.body,
+  "JSON object that contains the target slot name. See example."
+);
+@@doc(WebApps.backupSlot::parameters.body,
+  "Backup configuration. You can use the JSON response from the POST action as input here."
+);
+@@doc(WebApps.updateApplicationSettingsSlot::parameters.body,
+  "Application settings of the app."
+);
+@@doc(WebApps.updateAuthSettingsSlot::parameters.body,
+  "Auth settings associated with web app."
+);
+@@doc(WebApps.updateAzureStorageAccountsSlot::parameters.body,
+  "Azure storage accounts of the app."
+);
+@@doc(WebApps.updateBackupConfigurationSlot::parameters.body,
+  "Edited backup configuration."
+);
+@@doc(WebApps.updateConnectionStringsSlot::parameters.body,
+  "Connection strings of the app or deployment slot. See example."
+);
+@@doc(WebApps.updateMetadataSlot::parameters.body,
+  "Edited metadata of the app or deployment slot. See example."
+);
+@@doc(WebApps.updateSitePushSettingsSlot::parameters.body,
+  "Push settings associated with web app."
+);
+@@doc(WebApps.discoverBackupSlot::parameters.body,
+  "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup."
+);
+@@doc(WebApps.createOrUpdateHostSecretSlot::parameters.body,
+  "The key to create or update"
+);
+// @@doc(WebApps.`listPublishingProfileXmlWithSecretsSlot`::parameters.body, "Specifies publishingProfileOptions for publishing profile. For example, use {"format": "FileZilla3"} to get a FileZilla publishing profile.");
+@@doc(WebApps.restoreFromBackupBlobSlot::parameters.body,
+  "Information on restore request ."
+);
+@@doc(WebApps.restoreFromDeletedAppSlot::parameters.body,
+  "Deleted web app restore information."
+);
+@@doc(WebApps.restoreSnapshotSlot::parameters.body,
+  "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API."
+);
+@@doc(WebApps.listSlotDifferencesSlot::parameters.body,
+  "JSON object that contains the target slot name. See example."
+);
+@@doc(WebApps.swapSlotSlot::parameters.body,
+  "JSON object that contains the target slot name. See example."
+);
+@@doc(WebApps.deployWorkflowArtifactsSlot::parameters.body,
+  "Application settings and files of the workflow."
+);

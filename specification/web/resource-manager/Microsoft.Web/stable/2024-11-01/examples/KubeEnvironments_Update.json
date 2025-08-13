@@ -1,67 +1,69 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "examplerg",
     "name": "testkubeenv",
     "api-version": "2024-11-01",
-    "kind": "kubernetes",
-    "location": "East US",
     "extendedLocation": {
       "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
       "type": "customLocation"
     },
+    "kind": "kubernetes",
     "kubeEnvironmentEnvelope": {
       "properties": {
         "staticIp": "1.2.3.4"
       }
-    }
+    },
+    "location": "East US",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
         "name": "testkubeenv",
         "type": "Microsoft.Web/kubeEnvironments",
-        "location": "East US",
         "extendedLocation": {
           "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
           "type": "customLocation"
         },
-        "tags": {},
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
+        "location": "East US",
         "properties": {
-          "provisioningState": "Succeeded",
+          "aksResourceID": "test",
+          "appLogsConfiguration": null,
+          "arcConfiguration": null,
+          "defaultDomain": "testkubeenv.k4apps.io",
           "deploymentErrors": null,
           "internalLoadBalancerEnabled": false,
-          "defaultDomain": "testkubeenv.k4apps.io",
-          "staticIp": "1.2.3.4",
-          "arcConfiguration": null,
-          "appLogsConfiguration": null,
-          "aksResourceID": "test"
-        }
+          "provisioningState": "Succeeded",
+          "staticIp": "1.2.3.4"
+        },
+        "tags": {}
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
         "name": "testkubeenv",
         "type": "Microsoft.Web/kubeEnvironments",
-        "location": "East US",
         "extendedLocation": {
           "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
           "type": "customLocation"
         },
-        "tags": {},
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.Web/kubeEnvironments/testkubeenv",
+        "location": "East US",
         "properties": {
-          "provisioningState": "InitializationInProgress",
+          "aksResourceID": "test",
+          "appLogsConfiguration": null,
+          "arcConfiguration": null,
+          "defaultDomain": "testkubeenv.k4apps.io",
           "deploymentErrors": null,
           "internalLoadBalancerEnabled": false,
-          "defaultDomain": "testkubeenv.k4apps.io",
-          "staticIp": "1.2.3.4",
-          "arcConfiguration": null,
-          "appLogsConfiguration": null,
-          "aksResourceID": "test"
-        }
+          "provisioningState": "InitializationInProgress",
+          "staticIp": "1.2.3.4"
+        },
+        "tags": {}
       }
     }
-  }
+  },
+  "operationId": "KubeEnvironments_Update",
+  "title": "Update kube environments"
 }

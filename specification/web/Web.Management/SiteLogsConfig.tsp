@@ -123,13 +123,13 @@ interface SiteLogsConfigOperationGroup {
 
 @@doc(SiteLogsConfig.name, "");
 @@doc(SiteLogsConfig.properties, "SiteLogsConfig resource specific properties");
-@@doc(SiteLogsConfigs.updateDiagnosticLogsConfig::parameters.resource,
-  "A SiteLogsConfig JSON object that contains the logging configuration to change in the ",
-  properties,
-  " property."
-);
-@@doc(SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot::parameters.resource,
-  "A SiteLogsConfig JSON object that contains the logging configuration to change in the ",
-  properties,
-  " property."
-);
+// @@doc(SiteLogsConfigs.updateDiagnosticLogsConfig::parameters.resource,
+//   "A SiteLogsConfig JSON object that contains the logging configuration to change in the ",
+//   properties,
+//   " property."
+// );
+// @@doc(SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot::parameters.resource,
+//   "A SiteLogsConfig JSON object that contains the logging configuration to change in the ",
+//   properties,
+//   " property."
+// );

@@ -150,7 +150,7 @@ interface VnetInfoResourceOperationGroup {
   >;
 }
 @armResourceOperations
-interface VnetInfoResourceOperationGroupOps
+interface VnetInfoResourceOperationGroupOps_2
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -174,13 +174,13 @@ interface VnetInfoResourceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface VnetInfoResourceOperationGroup {
+interface VnetInfoResourceOperationGroup_2 {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetVnetConnection")
-  getVnetConnection is VnetInfoResourceOperationGroupOps.Read<VnetInfoResource>;
+  getVnetConnection is VnetInfoResourceOperationGroupOps_2.Read<VnetInfoResource>;
 
   /**
    * Description for Adds a Virtual Network connection to an app or slot (PUT) or updates the connection properties (PATCH).
@@ -188,7 +188,7 @@ interface VnetInfoResourceOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_CreateOrUpdateVnetConnection")
-  createOrUpdateVnetConnection is VnetInfoResourceOperationGroupOps.CreateOrUpdateSync<
+  createOrUpdateVnetConnection is VnetInfoResourceOperationGroupOps_2.CreateOrUpdateSync<
     VnetInfoResource,
     Response = ArmResourceUpdatedResponse<VnetInfoResource>
   >;
@@ -199,7 +199,7 @@ interface VnetInfoResourceOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateVnetConnection")
   @patch(#{ implicitOptionality: false })
-  updateVnetConnection is VnetInfoResourceOperationGroupOps.CustomPatchSync<
+  updateVnetConnection is VnetInfoResourceOperationGroupOps_2.CustomPatchSync<
     VnetInfoResource,
     PatchModel = VnetInfoResource
   >;
@@ -210,7 +210,7 @@ interface VnetInfoResourceOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_DeleteVnetConnection")
-  deleteVnetConnection is VnetInfoResourceOperationGroupOps.DeleteSync<
+  deleteVnetConnection is VnetInfoResourceOperationGroupOps_2.DeleteSync<
     VnetInfoResource,
     Response = ArmDeletedResponse
   >;
@@ -220,7 +220,8 @@ interface VnetInfoResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListVnetConnections")
-  listVnetConnections is VnetInfoResourceOperationGroupOps.List<
+  @segment("virtualNetworkConnections")
+  listVnetConnections is VnetInfoResourceOperationGroupOps_2.List<
     VnetInfoResource,
     Response = ArmResponse<VnetInfoResource[]>
   >;
@@ -234,9 +235,9 @@ interface VnetInfoResourceOperationGroup {
 @@doc(VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(VnetInfoResourceOperationGroup.createOrUpdateVnetConnection::parameters.resource,
-  "Properties of the Virtual Network connection. See example."
-);
-@@doc(VnetInfoResourceOperationGroup.updateVnetConnection::parameters.properties,
-  "Properties of the Virtual Network connection. See example."
-);
+// @@doc(VnetInfoResourceOperationGroup.createOrUpdateVnetConnection::parameters.resource,
+//   "Properties of the Virtual Network connection. See example."
+// );
+// @@doc(VnetInfoResourceOperationGroup.updateVnetConnection::parameters.properties,
+//   "Properties of the Virtual Network connection. See example."
+// );

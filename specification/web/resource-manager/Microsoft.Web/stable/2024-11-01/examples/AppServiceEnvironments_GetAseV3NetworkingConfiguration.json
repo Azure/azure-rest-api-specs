@@ -1,36 +1,38 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "test-rg",
     "name": "test-ase",
-    "api-version": "2024-11-01"
+    "api-version": "2024-11-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/configurations/networking",
         "name": "networking",
         "type": "Microsoft.Web/hostingEnvironments/configurations/networking",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/configurations/networking",
         "properties": {
-          "windowsOutboundIpAddresses": [
-            "20.88.241.56",
-            "20.88.241.9"
+          "allowNewPrivateEndpointConnections": false,
+          "externalInboundIpAddresses": [
+            "52.153.248.36"
           ],
+          "ftpEnabled": false,
+          "inboundIpAddressOverride": null,
+          "internalInboundIpAddresses": [],
           "linuxOutboundIpAddresses": [
             "20.88.241.56",
             "20.88.241.9"
           ],
-          "externalInboundIpAddresses": [
-            "52.153.248.36"
-          ],
-          "internalInboundIpAddresses": [],
-          "allowNewPrivateEndpointConnections": false,
-          "ftpEnabled": false,
           "remoteDebugEnabled": false,
-          "inboundIpAddressOverride": null
+          "windowsOutboundIpAddresses": [
+            "20.88.241.56",
+            "20.88.241.9"
+          ]
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AppServiceEnvironments_GetAseV3NetworkingConfiguration",
+  "title": "Get networking configuration of an App Service Environment."
 }

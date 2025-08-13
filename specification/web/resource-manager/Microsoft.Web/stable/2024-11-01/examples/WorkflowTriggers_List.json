@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "test-resource-group",
     "name": "test-name",
+    "api-version": "2024-11-01",
+    "resourceGroupName": "test-resource-group",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "workflowName": "test-workflow"
   },
   "responses": {
@@ -11,23 +11,25 @@
       "body": {
         "value": [
           {
+            "name": "manual",
+            "type": "/workflows/triggers",
+            "id": "/workflows/test-workflow/triggers/manual",
             "properties": {
-              "provisioningState": "Succeeded",
-              "createdTime": "2018-08-10T17:32:30.2496336Z",
               "changedTime": "2018-08-10T18:47:49.5288666Z",
+              "createdTime": "2018-08-10T17:32:30.2496336Z",
+              "provisioningState": "Succeeded",
               "state": "Enabled",
               "workflow": {
-                "id": "/workflows/test-workflow/versions/08586676800160476478",
                 "name": "08586676800160476478",
-                "type": "/workflows/versions"
+                "type": "/workflows/versions",
+                "id": "/workflows/test-workflow/versions/08586676800160476478"
               }
-            },
-            "id": "/workflows/test-workflow/triggers/manual",
-            "name": "manual",
-            "type": "/workflows/triggers"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "WorkflowTriggers_List",
+  "title": "List workflow triggers"
 }

@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "test-resource-group",
     "name": "test-name",
+    "api-version": "2024-11-01",
+    "resourceGroupName": "test-resource-group",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "workflowName": "test-workflow"
   },
   "responses": {
@@ -11,35 +11,37 @@
       "body": {
         "value": [
           {
+            "name": "test-workflow",
+            "type": "/workflows/versions",
+            "id": "/workflows/test-workflow",
             "properties": {
-              "createdTime": "2018-04-25T01:39:21.4365247Z",
               "changedTime": "2018-08-09T22:54:54.3533634Z",
-              "version": "08586677515911718341",
+              "createdTime": "2018-04-25T01:39:21.4365247Z",
               "definition": {
                 "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-                "contentVersion": "1.0.0.0",
-                "parameters": {},
-                "triggers": {},
                 "actions": {},
-                "outputs": {}
+                "contentVersion": "1.0.0.0",
+                "outputs": {},
+                "parameters": {},
+                "triggers": {}
               },
-              "parameters": {},
               "endpointsConfiguration": {
-                "workflow": {
-                  "outgoingIpAddresses": [],
-                  "accessEndpointIpAddresses": []
-                },
                 "connector": {
                   "outgoingIpAddresses": []
+                },
+                "workflow": {
+                  "accessEndpointIpAddresses": [],
+                  "outgoingIpAddresses": []
                 }
-              }
-            },
-            "id": "/workflows/test-workflow",
-            "name": "test-workflow",
-            "type": "/workflows/versions"
+              },
+              "parameters": {},
+              "version": "08586677515911718341"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "WorkflowVersions_List",
+  "title": "List a workflows versions"
 }

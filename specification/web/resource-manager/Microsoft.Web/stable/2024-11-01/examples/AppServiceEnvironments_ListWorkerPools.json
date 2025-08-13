@@ -1,54 +1,56 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "test-rg",
     "name": "test-ase",
-    "api-version": "2024-11-01"
+    "api-version": "2024-11-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/workerPools/workerPool1",
             "name": "workerPool1",
             "type": "Microsoft.Web/hostingEnvironments/workerPools",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/workerPools/workerPool1",
             "kind": "ASEV1",
             "properties": {
-              "workerSizeId": 0,
-              "workerSize": "Small",
+              "instanceNames": [],
               "workerCount": 2,
-              "instanceNames": []
+              "workerSize": "Small",
+              "workerSizeId": 0
             }
           },
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/workerPools/workerPool2",
             "name": "workerPool2",
             "type": "Microsoft.Web/hostingEnvironments/workerPools",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/workerPools/workerPool2",
             "kind": "ASEV1",
             "properties": {
-              "workerSizeId": 1,
-              "workerSize": "Small",
+              "instanceNames": [],
               "workerCount": 0,
-              "instanceNames": []
+              "workerSize": "Small",
+              "workerSizeId": 1
             }
           },
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/workerPools/workerPool3",
             "name": "workerPool3",
             "type": "Microsoft.Web/hostingEnvironments/workerPools",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/workerPools/workerPool3",
             "kind": "ASEV1",
             "properties": {
-              "workerSizeId": 2,
-              "workerSize": "Small",
+              "instanceNames": [],
               "workerCount": 0,
-              "instanceNames": []
+              "workerSize": "Small",
+              "workerSizeId": 2
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AppServiceEnvironments_ListWorkerPools",
+  "title": "Get all worker pools of an App Service Environment."
 }
