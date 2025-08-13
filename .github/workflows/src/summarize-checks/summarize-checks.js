@@ -295,8 +295,6 @@ export default async function summarizeChecks({ github, context, core }) {
     return;
   }
 
-  // TODO: This is triggered by pull_request_target AND workflow_run.  If workflow_run, targetBranch will be undefined.
-  //       Is this OK? If not, we should be able to get the base ref by calling a GH API to fetch the PR metadata.
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 

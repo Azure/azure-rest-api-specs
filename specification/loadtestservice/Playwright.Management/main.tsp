@@ -7,14 +7,19 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.LoadTestService")
 @service(#{ title: "Playwright Service Management API" })
-@doc("Playwright service provides access to Playwright workspace resource and it's operations.")
+@doc("Playwright Service Management API provides access to Playwright workspace resources and their operations through Azure Resource Manager.")
 @versioned(Versions)
 namespace Playwright.Management;
 
-@doc("Playwright service Management API Versions.")
+@doc("Available versions of the Playwright Service Management API.")
 enum Versions {
-  /** 2025-07-01-preview version */
+  @doc("Preview version 2025-07-01-preview with experimental features for Playwright workspace management.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_07_01_preview: "2025-07-01-preview",
+
+  @doc("Stable version 2025-09-01 with general availability features for Playwright workspace management.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2025_09_01: "2025-09-01",
 }
