@@ -3368,12 +3368,7 @@
             "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -3423,20 +3418,15 @@
             "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionCreateOrUpdate"
+              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -3518,12 +3508,7 @@
             "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -6142,22 +6127,6 @@
         ]
       }
     },
-    "PrivateEndpointConnectionCreateOrUpdate": {
-      "type": "object",
-      "description": "The private endpoint connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
       "description": "The response of a PrivateEndpointConnection list operation.",
@@ -6167,11 +6136,7 @@
           "description": "The PrivateEndpointConnection items on this page",
           "items": {
             "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": [
-            "privateEndpointConnectionName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",

@@ -9,55 +9,44 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager.Legacy;
 
 namespace Microsoft.DBforMySQL;
-/**
- * The private endpoint connection resource.
- */
-@parentResource(Server)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.CommonTypes.PrivateEndpointConnection {
-  /** The name of the private endpoint connection. */
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("privateEndpointConnections")
-  @key
-  @pattern("^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*")
-  privateEndpointConnectionName: string;
-}
+
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets a private endpoint connection.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is PrivateEndpointOperations.Read<Server>;
 
   /**
    * Approve or reject a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    PrivateEndpointConnection,
+  createOrUpdate is PrivateEndpointOperations.CreateOrUpdateAsync<
+    Server,
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmResourceCreatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse
   >;
 
   /**
    * Deletes a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PrivateEndpointConnection,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is PrivateEndpointOperations.DeleteAsync<
+    Server,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
    * Gets all private endpoint connections on a server.
    */
-  listByServer is Azure.ResourceManager.CustomLegacy.ArmResourceListByParent<PrivateEndpointConnection>;
+  listByServer is ListSinglePageByParent<Server, PrivateEndpointConnection>;
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource, "");

@@ -74,6 +74,8 @@ interface LocationBasedCapabilitySet {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("capabilitySets")
   @operationId("LocationBasedCapabilitySet_List")
+  @get
+  @list
   list is LocationBasedCapabilityOps.Read<
     Capability,
     Response = ArmResponse<CapabilitySetsList>

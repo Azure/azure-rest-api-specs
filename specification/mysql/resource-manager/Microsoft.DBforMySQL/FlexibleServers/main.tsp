@@ -26,7 +26,6 @@ import "./Maintenance.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -64,7 +63,7 @@ interface Operations {
   @Azure.ResourceManager.Private.armUpdateProviderNamespace
   @doc("List the operations for the provider")
   @segment("operations")
-  @get
+  @list
   list(
     ...ApiVersionParameter,
 

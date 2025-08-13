@@ -42,8 +42,9 @@ interface Backups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Backups_Put")
-  put is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodyAsync<
+  put is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServerBackup,
+    void,
     Response = ArmResourceUpdatedResponse<ServerBackup>
   >;
 

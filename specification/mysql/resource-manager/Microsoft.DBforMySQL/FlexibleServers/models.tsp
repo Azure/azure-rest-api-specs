@@ -1439,7 +1439,6 @@ model LogFileProperties {
 /**
  * location capability
  */
-@pagedResult
 model CapabilitiesListResult {
   /**
    * Array of Capability settings
@@ -1447,7 +1446,7 @@ model CapabilitiesListResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The CapabilityProperties items on this page")
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: CapabilityProperties[];
 
   /**
@@ -1612,14 +1611,13 @@ model SkuCapability {
 /**
  * location capability set
  */
-@pagedResult
 model CapabilitySetsList {
   /**
    * Array of CapabilitySets settings
    */
   @doc("The CapabilitySetsList items on this page")
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: Capability[];
 
   /**
@@ -2133,12 +2131,11 @@ model LocationNameParameter {
 /**
  * A List of azure ad administrators.
  */
-@pagedResult
 model AdministratorListResult {
   /**
    * The list of azure ad administrator of a server.
    */
-  @items
+  @pageItems
   value?: AzureADAdministrator[];
 
   /**
@@ -2151,14 +2148,13 @@ model AdministratorListResult {
 /**
  * The response of a AdvancedThreatProtection list operation.
  */
-@pagedResult
 model AdvancedThreatProtectionListResult {
   /**
    * Array of Advanced Threat Protection settings
    */
   @doc("The AdvancedThreatProtection items on this page")
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: AdvancedThreatProtection[];
 
   /**
@@ -2177,7 +2173,7 @@ model ConfigurationListResult {
    * Array of Configuration
    */
   @doc("The Configuration items on this page")
-  @items
+  @pageItems
   @TypeSpec.pageItems
   value?: Configuration[];
 
@@ -2192,13 +2188,12 @@ model ConfigurationListResult {
 /**
  * The response of a Database list operation.
  */
-@pagedResult
 model DatabaseListResult {
   /**
    * Array of Database
    */
   @doc("The Database items on this page")
-  @items
+  @pageItems
   value?: Database[];
 
   /**
@@ -2212,13 +2207,12 @@ model DatabaseListResult {
 /**
  * The response of a FirewallRule list operation.
  */
-@pagedResult
 model FirewallRuleListResult {
   /**
    * Array of FirewallRule
    */
   @doc("The FirewallRule items on this page")
-  @items
+  @pageItems
   value?: FirewallRule[];
 
   /**
@@ -2232,13 +2226,12 @@ model FirewallRuleListResult {
 /**
  * The response of a LogFile list operation.
  */
-@pagedResult
 model LogFileListResult {
   /**
    * Array of LogFile
    */
   @doc("The LogFile items on this page")
-  @items
+  @pageItems
   value?: LogFile[];
 
   /**
@@ -2252,13 +2245,12 @@ model LogFileListResult {
 /**
  * The response of a Maintenance list operation.
  */
-@pagedResult
 model MaintenanceListResult {
   /**
    * Array of Maintenance
    */
   @doc("The Maintenance items on this page")
-  @items
+  @pageItems
   value?: Maintenance[];
 
   /**
@@ -2272,13 +2264,12 @@ model MaintenanceListResult {
 /**
  * The response of a ServerBackup list operation.
  */
-@pagedResult
 model ServerBackupListResult {
   /**
    * Array of ServerBackup
    */
   @doc("The ServerBackup items on this page")
-  @items
+  @pageItems
   value?: ServerBackup[];
 
   /**
@@ -2292,13 +2283,12 @@ model ServerBackupListResult {
 /**
  * The response of a ServerBackupV2 list operation.
  */
-@pagedResult
 model ServerBackupV2ListResult {
   /**
    * Array of ServerBackupV2
    */
   @doc("The ServerBackupV2 items on this page")
-  @items
+  @pageItems
   value?: ServerBackupV2[];
 
   /**
@@ -2312,13 +2302,12 @@ model ServerBackupV2ListResult {
 /**
  * The response of a Server list operation.
  */
-@pagedResult
 model ServerListResult {
   /**
    * Array of Server
    */
   @doc("The Server items on this page")
-  @items
+  @pageItems
   value?: Server[];
 
   /**
@@ -2347,13 +2336,12 @@ model SubscriptionBaseParameters {
 /**
  * The static parameters for a resource group based resource
  */
-@pagedResult
 model OperationListResult {
   /**
    * The list of operations supported by the Microsoft.DBforMySQL FlexibleServers resource provider.
    */
   @doc("The Operation items on this page")
-  @items
+  @pageItems
   value?: Operation[];
 
   /**

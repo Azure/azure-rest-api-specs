@@ -21,6 +21,7 @@ interface LocationBasedCapabilities {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocationBasedCapabilities_List")
   @autoRoute
+  @list
   @get
   @action("capabilities")
   list is ArmProviderActionSync<
@@ -135,6 +136,7 @@ interface Replicas {
    * List all the replicas for a given server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @list
   @get
   @action("replicas")
   @operationId("Replicas_ListByServer")
