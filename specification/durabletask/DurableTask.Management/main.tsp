@@ -236,12 +236,12 @@ union ProvisioningState {
 @doc("The update request model for the Scheduler resource")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerUpdate
-  is Azure.ResourceManager.TrackedResource<UpdateableProperties<SchedulerPropertiesUpdate>> {
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.ResourceNameParameter<Scheduler>;
-}
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    Scheduler,
+    SchedulerPropertiesUpdate
+  >;
 
-@@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
+//@@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
 
 @doc("The Scheduler resource properties to be updated")
 @added(Versions.v2024_10_01_Preview)
