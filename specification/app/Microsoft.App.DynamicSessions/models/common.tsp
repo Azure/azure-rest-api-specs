@@ -17,8 +17,6 @@ model SessionIdentifier {
   @query
   @minLength(1)
   @maxLength(256)
-  // @pattern("^[A-Za-z0-9-_]{1,256}$")
-  // @pattern("^[a-zA-Z0-9_|}{\[\]\\:"";'<>?/.,@#$%\^&*()_\-+=!~`]{4,128}$")
   @pattern("^[a-zA-Z0-9_|}{\\[\\]\\:\"\";'<>?\\/.,@#$%\\^&*()_\\-+=!~`]{4,128}$")
   identifier: string;
 }
