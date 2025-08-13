@@ -295,8 +295,6 @@ export default async function summarizeChecks({ github, context, core }) {
     return;
   }
 
-  // TODO: This is triggered by pull_request_target AND workflow_run.  If workflow_run, targetBranch will be undefined.
-  //       Is this OK? If not, we should be able to get the base ref by calling a GH API to fetch the PR metadata.
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
@@ -1011,7 +1009,7 @@ function getCommentBody(
 
     if (anyFyiPresent) {
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
-      if (!anyBlockerPresent) {
+      if (!anyBlockerPresent && requirementsMet) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
         summaryData =
           `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
