@@ -346,7 +346,7 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
   codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
 }
 
-/** Represents the function data in a streaming run step MCP call.* */
+/** Represents the function data in a streaming run step MCP call. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "mcp". */
@@ -481,7 +481,7 @@ union RunAdditionalFieldList {
   FileSearchContents: "step_details.tool_calls[*].file_search.results[*].content",
 }
 
-/** Represents the list of activities, associated with the given step.* */
+/** Represents the list of activities, associated with the given step. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDetailsActivity {
   @doc("The activity type, which is always 'mcp_list_tools'.")
