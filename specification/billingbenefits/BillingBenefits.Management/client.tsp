@@ -12,4 +12,3 @@ using Azure.ClientGenerator.Core;
   "ResourceProviders",
   "java"
 );
-@@clientName(Microsoft.BillingBenefits.ResourceSku, "Sku", "java");
