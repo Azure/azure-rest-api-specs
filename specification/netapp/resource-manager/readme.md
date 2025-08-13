@@ -28,7 +28,16 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-preview-2025-03-01-preview
+tag: package-2025-06-01
+```
+
+### Tag: package-2025-06-01
+
+These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-01'
+input-file:
+  - Microsoft.NetApp/stable/2025-06-01/netapp.json
 ```
 
 ### Tag: package-preview-2025-03-01-preview
@@ -538,4 +547,10 @@ suppressions:
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema
      - $.definitions.UsagesListResult
      - $.definitions.UsageResult
+
+  - code: PostResponseCodes
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent"].post
 ```
