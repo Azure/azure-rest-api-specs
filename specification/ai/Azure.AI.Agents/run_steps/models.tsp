@@ -106,6 +106,7 @@ union RunStepType {
   toolCalls: "tool_calls",
 
   @doc("Represents a run step with activities information.")
+  @added(Versions.v2025_05_15_preview)
   activities: "activities",
 }
 
@@ -148,6 +149,7 @@ model RunStepMessageCreationReference {
 }
 
 @doc("The detailed information associated with a run step activities.")
+@added(Versions.v2025_05_15_preview)
 model RunStepActivityDetails extends RunStepDetails {
   @doc("The object type, which is always 'activities'.")
   type: RunStepType.activities;
@@ -479,7 +481,8 @@ union RunAdditionalFieldList {
   FileSearchContents: "step_details.tool_calls[*].file_search.results[*].content",
 }
 
-/** Represents the list of activities, associated with the given step. */
+/** Represents the list of activities, associated with the given step.* */
+@added(Versions.v2025_05_15_preview)
 model RunStepDetailsActivity {
   @doc("The activity type, which is always 'mcp_list_tools'.")
   type: "mcp_list_tools";
@@ -496,6 +499,7 @@ model RunStepDetailsActivity {
 }
 
 @doc("The activity definition information for a function.")
+@added(Versions.v2025_05_15_preview)
 model ActivityFunctionDefinition {
   @doc("A description of what the function does, used by the model to choose when and how to call the function.")
   description?: string;
@@ -505,6 +509,7 @@ model ActivityFunctionDefinition {
 }
 
 @doc("The parameters used for activity function definition.")
+@added(Versions.v2025_05_15_preview)
 model ActivityFunctionParameters {
   @doc("The parameter type, it is always object.")
   type: "object";
@@ -520,6 +525,7 @@ model ActivityFunctionParameters {
 }
 
 @doc("The function argument and description.")
+@added(Versions.v2025_05_15_preview)
 model FunctionArgument {
   @doc("The type of an argument, for example 'string' or 'number'.")
   type: string;
