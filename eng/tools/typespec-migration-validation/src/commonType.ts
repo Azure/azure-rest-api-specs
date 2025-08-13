@@ -1,7 +1,12 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import { readFileContent } from './helper.js';
 import { OpenAPI2Document, OpenAPI2Schema } from '@azure-tools/typespec-autorest';
 import { isRef } from './compare.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export function getCommonTypeDefinition(refPath: string): [OpenAPI2Schema, OpenAPI2Document] | undefined {
   const commonTypeInfo = getCommonTypeInfo(refPath);
@@ -41,7 +46,7 @@ function getCommonTypeInfo(refPath: string): [string, string] | undefined {
     return undefined;
   }
   const [, version, fileName, definitionName] = matchResult;
-  return [path.join(process.cwd(), '..', '..', '..', 'specification', 'common-types', 'resource-management', version, fileName), definitionName];
+  return [path.join(__dirname, '..', '..', '..', '..', '..', 'specification', 'common-types', 'resource-management', version, fileName), definitionName];
 }
 
 const commonTypeFileCache: Record<string, OpenAPI2Document> = {};
