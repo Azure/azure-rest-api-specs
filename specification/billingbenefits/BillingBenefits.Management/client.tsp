@@ -3,5 +3,13 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientLocation(Microsoft.BillingBenefits.validatePurchase, "RP");
+// go
+@@clientLocation(Microsoft.BillingBenefits.validatePurchase, "RP", "go");
 @@clientName(Microsoft.BillingBenefits.ResourceSku, "SKU", "go");
+
+// java
+@@clientLocation(Microsoft.BillingBenefits.validatePurchase,
+  "ResourceProviders",
+  "java"
+);
+@@clientName(Microsoft.BillingBenefits.ResourceSku, "Sku", "java");
