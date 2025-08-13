@@ -99,6 +99,7 @@ interface DevCenters {
   /**
    * Lists images for a devcenter.
    */
+  @list
   @get
   @action("images")
   listByDevCenter is ArmResourceActionSync<

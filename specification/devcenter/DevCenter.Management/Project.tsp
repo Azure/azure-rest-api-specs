@@ -108,6 +108,7 @@ interface Projects {
   /**
    * Lists SKUs available to the project
    */
+  @list
   @action("listSkus")
   listByProject is ArmResourceActionSync<
     Project,

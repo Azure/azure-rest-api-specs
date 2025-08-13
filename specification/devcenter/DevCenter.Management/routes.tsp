@@ -20,6 +20,7 @@ interface SkusOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("skus")
   listBySubscription is ArmProviderActionSync<
     Response = SkuListResult,
@@ -71,6 +72,7 @@ interface UsagesOperationGroup {
    * Lists the current usages and limits in this location for the provided subscription.
    */
   @autoRoute
+  @list
   @get
   @action("usages")
   listByLocation is ArmProviderActionSync<
