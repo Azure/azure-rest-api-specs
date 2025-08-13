@@ -2140,7 +2140,7 @@
     },
     "HostMachineProperties": {
       "type": "object",
-      "description": "Represents a Collation in PostgreSQL.",
+      "description": "Represents the properties of the machine where the PostgreSQL instance is running.",
       "properties": {
         "vCores": {
           "type": "integer",
@@ -2151,6 +2151,16 @@
           "type": "integer",
           "format": "int64",
           "description": "The allocated RAM in Machine."
+        },
+        "totalStorageInGb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The machine storage size in GB."
+        },
+        "pgInstanceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of PostgreSQL instances on the machine."
         }
       }
     },
@@ -2812,6 +2822,10 @@
           "$ref": "#/definitions/BoolValue",
           "description": "Indicates whether the system supports IPv4 connections."
         },
+        "deepDiscoveryPerformed": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether Deep Discovery has been performed on the instance."
+        },
         "computeIopsCollected": {
           "type": "integer",
           "format": "int32",
@@ -2990,6 +3004,10 @@
         "supportsIpv4Connections": {
           "$ref": "#/definitions/BoolValue",
           "description": "Indicates whether the system supports IPv4 connections."
+        },
+        "deepDiscoveryPerformed": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether Deep Discovery has been performed on the instance."
         },
         "computeIopsCollected": {
           "type": "integer",
