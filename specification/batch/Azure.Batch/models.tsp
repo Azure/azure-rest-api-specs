@@ -309,20 +309,6 @@ union LoginMode {
   Interactive: "interactive",
 }
 
-@doc("BatchNodeCommunicationMode enums")
-union BatchNodeCommunicationMode {
-  string,
-
-  @doc("The node communication mode is automatically set by the Batch service.")
-  Default: "default",
-
-  @doc("Nodes using the classic communication mode require inbound TCP communication on ports 29876 and 29877 from the \"BatchNodeManagement.{region}\" service tag and outbound TCP communication on port 443 to the \"Storage.region\" and \"BatchNodeManagement.{region}\" service tags.")
-  Classic: "classic",
-
-  @doc("Nodes using the simplified communication mode require outbound TCP communication on port 443 to the \"BatchNodeManagement.{region}\" service tag. No open inbound ports are required.")
-  Simplified: "simplified",
-}
-
 @doc("BatchJobState enums")
 union BatchJobState {
   string,
@@ -1885,9 +1871,6 @@ model BatchPoolSpecification {
   @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
   mountConfiguration?: MountConfiguration[];
 
-  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
-
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
   upgradePolicy?: UpgradePolicy;
 }
@@ -2180,6 +2163,18 @@ model BatchPublicIpAddressConfiguration {
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
   ipAddressIds?: Azure.Core.armResourceIdentifier[];
+
+  @doc("A list of IP tags associated with the public IP addresses of the Pool. IP tags are used to categorize and filter public IP addresses for billing and management purposes.")
+  ipTags?: IPTag[];
+}
+
+@doc("Contains the IP tag associated with the public IP address.")
+model IPTag {
+  @doc("The IP Tag type. Example: FirstPartyUsage.")
+  ipTagType?: string;
+
+  @doc("The value of the IP tag associated with the public IP. Example: SQL.")
+  tag?: string;
 }
 
 @doc("""
@@ -3041,13 +3036,6 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   identity?: BatchPoolIdentity;
 
-  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
-
-  @doc("The current state of the pool communication mode.")
-  @visibility(Lifecycle.Read)
-  currentNodeCommunicationMode?: BatchNodeCommunicationMode;
-
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
   upgradePolicy?: UpgradePolicy;
 }
@@ -3111,9 +3099,6 @@ model BatchPoolCreateOptions {
   @doc("Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.")
   mountConfiguration?: MountConfiguration[];
 
-  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
-
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
   upgradePolicy?: UpgradePolicy;
 }
@@ -3128,9 +3113,6 @@ model BatchPoolReplaceOptions {
 
   @doc("A list of name-value pairs associated with the Pool as metadata. This list replaces any existing metadata configured on the Pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the Pool.")
   metadata: BatchMetadataItem[];
-
-  @doc("The desired node communication mode for the pool. This setting replaces any existing targetNodeCommunication setting on the Pool. If omitted, the existing setting is default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
 }
 
 @doc("Parameters for updating an Azure Batch Pool.")
@@ -3155,9 +3137,6 @@ model BatchPoolUpdateOptions {
 
   @doc("The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
-
-  @doc("The desired node communication mode for the pool. If this element is present, it replaces the existing targetNodeCommunicationMode configured on the Pool. If omitted, any existing metadata is left unchanged.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
   taskSlotsPerNode?: int32;

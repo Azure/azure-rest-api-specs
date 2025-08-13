@@ -5181,6 +5181,15 @@
           "Creates a pool with accelerated networking": {
             "$ref": "./examples/Pools_CreatePool_AcceleratedNetworking.json"
           },
+          "Creates a pool with confidential disk encryption set for user subscription accounts": {
+            "$ref": "./examples/Pools_CreatePool_ConfidentialDiskEncryptionSet_ForUserSubscriptionAccounts.json"
+          },
+          "Creates a pool with disk encryption set for user subscription accounts": {
+            "$ref": "./examples/Pools_CreatePool_DiskEncryptionSet_ForUserSubscriptionAccounts.json"
+          },
+          "Creates a pool with dual stack networking": {
+            "$ref": "./examples/Pools_CreatePool_DualStackNetworking.json"
+          },
           "Creates a pool with mount drive specified": {
             "$ref": "./examples/Pools_CreatePool_MountConfiguration.json"
           }
@@ -5347,6 +5356,15 @@
           },
           "Pool get": {
             "$ref": "./examples/Pools_GetPool_Basic.json"
+          },
+          "Pool get with confidential disk encryption set for user subscription accounts": {
+            "$ref": "./examples/Pools_GetPool_ConfidentialDiskEncryptionSet.json"
+          },
+          "Pool get with customer managed key": {
+            "$ref": "./examples/Pools_GetPool_CustomerManagedKey.json"
+          },
+          "Pool get with disk encryption set for user subscription accounts": {
+            "$ref": "./examples/Pools_GetPool_DiskEncryptionSet.json"
           }
         }
       },
@@ -5486,6 +5504,9 @@
         "x-ms-examples": {
           "Patch the Pool": {
             "$ref": "./examples/Pools_UpdatePool.json"
+          },
+          "Patch the customer managed key for a pool": {
+            "$ref": "./examples/Pools_Update_CustomerManagedKey_ForBatchManagedAccounts.json"
           }
         }
       },
@@ -6307,6 +6328,9 @@
           }
         },
         "x-ms-examples": {
+          "Node enable scheduling": {
+            "$ref": "./examples/Nodes_Get_DualStackNetworking.json"
+          },
           "Node get": {
             "$ref": "./examples/Nodes_GetNode.json"
           }
@@ -7741,6 +7765,9 @@
           }
         },
         "x-ms-examples": {
+          "Get batch node Dual Stack Networking Remote": {
+            "$ref": "./examples/Nodes_GetNodeRemoteLoginSettings_DualStackNetworking.json"
+          },
           "Node get remote login settings": {
             "$ref": "./examples/Nodes_GetNodeRemoteLoginSettings.json"
           }
@@ -9313,6 +9340,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -9393,6 +9421,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -10023,6 +10052,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -10271,6 +10301,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -10821,6 +10852,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -11540,36 +11572,6 @@
         "lastUpdateTime"
       ]
     },
-    "BatchNodeCommunicationMode": {
-      "type": "string",
-      "description": "BatchNodeCommunicationMode enums",
-      "enum": [
-        "default",
-        "classic",
-        "simplified"
-      ],
-      "x-ms-enum": {
-        "name": "BatchNodeCommunicationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Default",
-            "value": "default",
-            "description": "The node communication mode is automatically set by the Batch service."
-          },
-          {
-            "name": "Classic",
-            "value": "classic",
-            "description": "Nodes using the classic communication mode require inbound TCP communication on ports 29876 and 29877 from the \"BatchNodeManagement.{region}\" service tag and outbound TCP communication on port 443 to the \"Storage.region\" and \"BatchNodeManagement.{region}\" service tags."
-          },
-          {
-            "name": "Simplified",
-            "value": "simplified",
-            "description": "Nodes using the simplified communication mode require outbound TCP communication on port 443 to the \"BatchNodeManagement.{region}\" service tag. No open inbound ports are required."
-          }
-        ]
-      }
-    },
     "BatchNodeCounts": {
       "type": "object",
       "description": "The number of Compute Nodes in each Compute Node state.",
@@ -11879,6 +11881,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -11963,6 +11966,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -12343,6 +12347,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -12575,15 +12580,6 @@
           "description": "The identity of the Batch pool, if configured. The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "readOnly": true
         },
-        "targetNodeCommunicationMode": {
-          "$ref": "#/definitions/BatchNodeCommunicationMode",
-          "description": "The desired node communication mode for the pool. If omitted, the default value is Default."
-        },
-        "currentNodeCommunicationMode": {
-          "$ref": "#/definitions/BatchNodeCommunicationMode",
-          "description": "The current state of the pool communication mode.",
-          "readOnly": true
-        },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling."
@@ -12690,10 +12686,6 @@
             "$ref": "#/definitions/MountConfiguration"
           },
           "x-ms-identifiers": []
-        },
-        "targetNodeCommunicationMode": {
-          "$ref": "#/definitions/BatchNodeCommunicationMode",
-          "description": "The desired node communication mode for the pool. If omitted, the default value is Default."
         },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
@@ -12887,6 +12879,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -12905,6 +12898,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -12944,6 +12938,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -12971,10 +12966,6 @@
             "$ref": "#/definitions/BatchMetadataItem"
           },
           "x-ms-identifiers": []
-        },
-        "targetNodeCommunicationMode": {
-          "$ref": "#/definitions/BatchNodeCommunicationMode",
-          "description": "The desired node communication mode for the pool. This setting replaces any existing targetNodeCommunication setting on the Pool. If omitted, the existing setting is default."
         }
       },
       "required": [
@@ -13193,10 +13184,6 @@
           },
           "x-ms-identifiers": []
         },
-        "targetNodeCommunicationMode": {
-          "$ref": "#/definitions/BatchNodeCommunicationMode",
-          "description": "The desired node communication mode for the pool. If omitted, the default value is Default."
-        },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling."
@@ -13303,10 +13290,6 @@
           },
           "x-ms-identifiers": []
         },
-        "targetNodeCommunicationMode": {
-          "$ref": "#/definitions/BatchNodeCommunicationMode",
-          "description": "The desired node communication mode for the pool. If omitted, the default value is Default."
-        },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicyUpdate",
           "description": "The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling."
@@ -13412,10 +13395,6 @@
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
           "description": "The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty."
-        },
-        "targetNodeCommunicationMode": {
-          "$ref": "#/definitions/BatchNodeCommunicationMode",
-          "description": "The desired node communication mode for the pool. If this element is present, it replaces the existing targetNodeCommunicationMode configured on the Pool. If omitted, any existing metadata is left unchanged."
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -13538,6 +13517,14 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
+        },
+        "ipTags": {
+          "type": "array",
+          "description": "A list of IP tags associated with the public IP addresses of the Pool. IP tags are used to categorize and filter public IP addresses for billing and management purposes.",
+          "items": {
+            "$ref": "#/definitions/IPTag"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -14554,6 +14541,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -14571,6 +14559,7 @@
         },
         "odata.nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
@@ -15516,6 +15505,20 @@
             "description": "IPv6 is available to the pool."
           }
         ]
+      }
+    },
+    "IPTag": {
+      "type": "object",
+      "description": "Contains the IP tag associated with the public IP address.",
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "The IP Tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The value of the IP tag associated with the public IP. Example: SQL."
+        }
       }
     },
     "ImageVerificationType": {

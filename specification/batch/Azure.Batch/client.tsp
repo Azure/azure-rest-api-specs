@@ -47,12 +47,6 @@ interface BatchClient {
   listJobPreparationAndReleaseTaskStatus is Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus;
   getJobTaskCounts is Azure.Batch.Jobs.getJobTaskCounts;
 
-  createCertificate is Azure.Batch.Certificates.createCertificate;
-  listCertificates is Azure.Batch.Certificates.listCertificates;
-  cancelCertificateDeletion is Azure.Batch.Certificates.cancelCertificateDeletion;
-  deleteCertificate is Azure.Batch.Certificates.deleteCertificate;
-  getCertificate is Azure.Batch.Certificates.getCertificate;
-
   jobScheduleExists is Azure.Batch.JobSchedules.jobScheduleExists;
   deleteJobSchedule is Azure.Batch.JobSchedules.deleteJobSchedule;
   getJobSchedule is Azure.Batch.JobSchedules.getJobSchedule;
@@ -127,11 +121,7 @@ interface BatchClient {
 );
 @@access(Azure.Batch.Pools.deletePool, Access.internal, "csharp");
 @@clientName(BatchClient.deletePool, "deletePoolInternal", "csharp");
-@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "csharp");
-@@clientName(BatchClient.deleteCertificate,
-  "deleteCertificateInternal",
-  "csharp"
-);
+
 @@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "csharp");
 @@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "csharp");
 @@access(Azure.Batch.Nodes.startNode, Access.internal, "csharp");
@@ -231,10 +221,6 @@ interface BatchClient {
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchCertificateListResult.`odata.nextLink`,
-  "NextLink",
-  "go"
-);
 @@clientName(Azure.Batch.BatchJobListResult.`odata.nextLink`, "NextLink", "go");
 @@clientName(Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult.`odata.nextLink`,
   "NextLink",
@@ -285,9 +271,6 @@ interface BatchClient {
   "SASKey",
   "go"
 );
-@@clientName(Azure.Batch.BatchCertificate.certificateFormat, "Format", "go");
-@@clientName(Azure.Batch.BatchCertificateFormat.Cer, "CER", "go");
-@@clientName(Azure.Batch.BatchCertificateFormat.Pfx, "PFX", "go");
 @@clientName(Azure.Batch.BatchJobScheduleStatistics.readIOps, "ReadIOPS", "go");
 @@clientName(Azure.Batch.BatchJobScheduleStatistics.writeIOps,
   "WriteIOPS",
@@ -376,10 +359,6 @@ interface BatchClient {
 );
 @@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
   "UpdateNodeUserOptions",
-  "go"
-);
-@@clientName(Azure.Batch.BatchCertificateDeleteError,
-  "DeleteCertificateError",
   "go"
 );
 @@clientName(Azure.Batch.UploadBatchServiceLogsOptions,

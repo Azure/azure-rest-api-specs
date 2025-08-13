@@ -711,126 +711,6 @@ op getJobTaskCountsCustomization is Azure.Batch.ReadOperation<
   "java"
 );
 
-// Create Certificate Operation
-@doc("Optional parameters for Create Certificate operation.")
-model BatchCertificateCreateOptions {
-  ...Azure.Batch.CommonJsonParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Create Certificate operation.")
-@route("/certificates")
-op createCertificateCustomization is Azure.Batch.CreateOperation<
-  {
-    ...Azure.Batch.CreateCertificateRequiredParameters;
-
-    @doc("Optional parameters for Create Certificate operation.")
-    options?: BatchCertificateCreateOptions;
-  },
-  void
->;
-
-@@override(Azure.Batch.Certificates.createCertificate,
-  createCertificateCustomization,
-  "java"
-);
-
-// List Certificates Operation
-@doc("Optional parameters for List Certificates operation.")
-model BatchCertificatesListOptions {
-  ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListCertificatesOptionalParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for List Certificates operation.")
-@route("/certificates")
-op listCertificatesCustomization is Azure.Batch.ListOperation<
-  {
-    @doc("Optional parameters for List Certificates operation.")
-    options?: BatchCertificatesListOptions;
-  },
-  Azure.Batch.BatchCertificateListResult
->;
-
-@@override(Azure.Batch.Certificates.listCertificates,
-  listCertificatesCustomization,
-  "java"
-);
-
-// Cancel Certificate Deletion Operation
-@doc("Optional parameters for Cancel Certificate Deletion operation.")
-model BatchCertificateCancelDeletionOptions {
-  ...Azure.Batch.CommonParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Cancel Certificate Deletion operation.")
-@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
-op cancelCertificateDeletionCustomization is Azure.Batch.PostOperation<
-  {
-    ...Azure.Batch.CancelCertificateDeletionRequiredParameters;
-
-    @doc("Optional parameters for Cancel Certificate Deletion operation.")
-    options?: BatchCertificateCancelDeletionOptions;
-  },
-  Azure.Batch.NoContentSuccessResponseHeaders
->;
-
-@@override(Azure.Batch.Certificates.cancelCertificateDeletion,
-  cancelCertificateDeletionCustomization,
-  "java"
-);
-
-// Delete Certificate Operation
-@doc("Optional parameters for Delete Certificate operation.")
-model BatchCertificateDeleteOptions {
-  ...Azure.Batch.CommonParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Delete Certificate operation.")
-@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-op deleteCertificateCustomization is Azure.Batch.DeleteOperation<
-  {
-    ...Azure.Batch.DeleteCertificateRequiredParameters;
-
-    @doc("Optional parameters for Delete Certificate operation.")
-    options?: BatchCertificateDeleteOptions;
-  },
-  Azure.Batch.DeleteCertificateResponse
->;
-
-@@override(Azure.Batch.Certificates.deleteCertificate,
-  deleteCertificateCustomization,
-  "java"
-);
-
-// Get Certificate Operation
-@doc("Optional parameters for Get Certificate operation.")
-model BatchCertificateGetOptions {
-  ...Azure.Batch.CommonParameters;
-  ...Azure.Batch.GetCertificateOptionalParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Get Certificate operation.")
-@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-op getCertificateCustomization is Azure.Batch.ReadOperation<
-  {
-    ...Azure.Batch.GetCertificateRequiredParameters;
-
-    @doc("Optional parameters for Get Certificate operation.")
-    options?: BatchCertificateGetOptions;
-  },
-  Azure.Batch.BatchCertificate
->;
-
-@@override(Azure.Batch.Certificates.getCertificate,
-  getCertificateCustomization,
-  "java"
-);
-
 // Job Schedule Exists Operation
 @doc("Optional parameters for Job Schedule Exists operation.")
 model BatchJobScheduleExistsOptions {
@@ -1984,9 +1864,6 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 // Updating original operations that have been converted to LRO methods to have internal access
 @@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "java");
 @@access(BatchNodeDeallocateOptions, Access.public, "java");
-
-@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "java");
-@@access(BatchCertificateDeleteOptions, Access.public, "java");
 
 @@access(Azure.Batch.Jobs.deleteJob, Access.internal, "java");
 @@access(BatchJobDeleteOptions, Access.public, "java");

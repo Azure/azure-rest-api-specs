@@ -1,0 +1,61 @@
+{
+  "operationId": "Pools_CreatePool",
+  "title": "Creates a pool with dual stack networking",
+  "parameters": {
+    "batchUrl": "account.region.batch.azure.com",
+    "api-version": "2025-06-01",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 27 Jun 2025 08:22:42 GMT",
+    "pool": {
+      "id": "dualstackpool",
+      "vmSize": "standard_d2s_v3",
+      "virtualMachineConfiguration": {
+        "imageReference": {
+          "publisher": "Canonical",
+          "offer": "0001-com-ubuntu-server-focal",
+          "sku": "20_04-lts"
+        },
+        "nodeAgentSKUId": "batch.node.ubuntu 20.04"
+      },
+      "networkConfiguration": {
+        "publicIPAddressConfiguration": {
+          "ipFamilies": [
+            "IPv4",
+            "IPv6"
+          ]
+        },
+        "endpointConfiguration": {
+          "inboundNATPools": [
+            {
+              "backendPort": 22,
+              "frontendPortRangeStart": 40000,
+              "frontendPortRangeEnd": 40500,
+              "name": "sshpool",
+              "protocol": "tcp",
+              "networkSecurityGroupRules": [
+                {
+                  "access": "Allow",
+                  "priority": 1000,
+                  "sourceAddressPrefix": "*",
+                  "sourcePortRanges": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "resizeTimeout": "PT15M",
+      "targetDedicatedNodes": 1,
+      "targetLowPriorityNodes": 0
+    }
+  },
+  "responses": {
+    "201": {
+      "request-id": "00000000-0000-0000-0000-000000000000",
+      "ETag": "0x8DDB553CB8DD80B",
+      "Last-Modified": "Fri, 27 Jun 2025 08:22:45 GMT"
+    }
+  }
+}
