@@ -1353,52 +1353,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings": {
-      "get": {
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "tags": [
-          "GroupQuotaLocationSettings"
-        ],
-        "summary": "Returns a list of the Azure regions settings, where the GroupQuotas enforcement is enabled.",
-        "description": "Returns only the list of the Azure regions settings, where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.",
-        "operationId": "GroupQuotaLocationSettings_List",
-        "x-ms-examples": {
-          "GroupQuotaEnforcement_List": {
-            "$ref": "./examples/GroupQuotasEnforcement/ListGroupQuotaEnforcement.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaName"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementListResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
