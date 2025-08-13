@@ -83,4 +83,10 @@ suppressions:
   - code: OperationsAPIImplementation
     reason: Operations API is defined in a separate swagger spec for Microsoft.Monitor namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Monitor/Operations)
     from: issues.json
+  - suppress: GuidUsage
+    reason: The IDs of investigation entities are GUIDs.
+    from: Issues.json
+    where:
+     - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
+     - $.definitions.InvestigationMetadata.properties.id.format
 ```
