@@ -37,7 +37,7 @@ using Nginx.NginxPlus;
 
 @@clientLocation(NginxConfigurationResponses.get, "Configurations");
 @@clientLocation(NginxConfigurationResponses.createOrUpdate, "Configurations");
-@@clientName(NginxConfigurationResponses.createOrUpdate::parameters.properties,
+@@clientName(NginxConfigurationResponses.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(NginxConfigurationResponses.delete, "Configurations");

@@ -1075,7 +1075,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Resource 'NginxConfigurationResponse' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/NginxConfigurationResponse"
             }
@@ -1089,6 +1089,11 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },

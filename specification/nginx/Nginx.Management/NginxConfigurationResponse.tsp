@@ -35,18 +35,10 @@ interface NginxConfigurationResponses {
   /**
    * Create or update the NGINX configuration for given NGINX deployment
    */
-  @put
-  createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
-    ResourceInstanceParameters<
-      NginxConfigurationResponse,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxConfigurationResponse>
-    >,
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
+    NginxConfigurationResponse,
     NginxConfigurationRequest,
-    NginxConfigurationResponse | ArmResourceCreatedResponse<
-      NginxConfigurationResponse,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = NginxConfigurationResponse>
-    >,
-    ErrorResponse,
     OptionalRequestBody = true
   >;
 
@@ -81,7 +73,7 @@ interface NginxConfigurationResponses {
 @@doc(NginxConfigurationResponse.properties,
   "Nginx Configuration Response Properties"
 );
-@@doc(NginxConfigurationResponses.createOrUpdate::parameters.properties,
+@@doc(NginxConfigurationResponses.createOrUpdate::parameters.resource,
   "The NGINX configuration"
 );
 @@doc(NginxConfigurationResponses.analysis::parameters.body,
