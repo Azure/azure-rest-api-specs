@@ -67,6 +67,31 @@ union Category {
 }
 
 /**
+ * Control type for recommendation.
+ */
+union Control {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  HighAvailability: "HighAvailability",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  BusinessContinuity: "BusinessContinuity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  DisasterRecovery: "DisasterRecovery",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Scalability: "Scalability",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  MonitoringAndAlerting: "MonitoringAndAlerting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ServiceUpgradeAndRetirement: "ServiceUpgradeAndRetirement",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Other: "Other",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  PrioritizedRecommendations: "PrioritizedRecommendations",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Personalized: "Personalized",
+}
+
+/**
  * State of digest configuration.
  */
 union DigestConfigState {
@@ -480,6 +505,11 @@ model RecommendationProperties {
   category?: Category;
 
   /**
+   * The control type for the recommendation.
+   */
+  control?: Control;
+
+  /**
    * The business impact of the recommendation.
    */
   impact?: Impact;
@@ -870,6 +900,7 @@ model AdvisorScoreResponse {
   /**
    * The list of operations.
    */
+  @pageItems
   value?: AdvisorScoreEntity[];
 }
 

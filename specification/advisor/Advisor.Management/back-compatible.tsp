@@ -103,3 +103,11 @@ using Microsoft.Advisor;
 @@clientLocation(AssessmentTypesOperationGroup.list, "AssessmentTypes");
 
 @@clientLocation(WorkloadsOperationGroup.list, "Workloads");
+
+@@clientName(AdvisorScoreEntity, "advisorScoreEntity");
+@@clientName(ResiliencyReviewCollection, "resiliencyReviewCollection");
+@@clientName(TriageRecommendationCollection, "triageRecommendationCollection");
+@@clientName(ResiliencyReview, "resiliencyReview");
+@@clientName(TriageResource, "triageResource");
+@@clientName(TriageResourceCollection, "triageResourceCollection");
+@@clientName(TriageRecommendation, "triageRecommendation");

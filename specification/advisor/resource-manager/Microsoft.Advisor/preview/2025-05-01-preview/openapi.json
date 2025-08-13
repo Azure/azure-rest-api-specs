@@ -566,7 +566,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AdvisorScoreEntity"
+              "$ref": "#/definitions/advisorScoreEntity"
             }
           },
           "default": {
@@ -1153,7 +1153,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ResiliencyReviewCollection"
+              "$ref": "#/definitions/resiliencyReviewCollection"
             }
           },
           "default": {
@@ -1199,7 +1199,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ResiliencyReview"
+              "$ref": "#/definitions/resiliencyReview"
             }
           },
           "default": {
@@ -1255,7 +1255,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TriageRecommendationCollection"
+              "$ref": "#/definitions/triageRecommendationCollection"
             }
           },
           "default": {
@@ -1305,7 +1305,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TriageRecommendation"
+              "$ref": "#/definitions/triageRecommendation"
             }
           },
           "default": {
@@ -1395,7 +1395,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TriageResourceCollection"
+              "$ref": "#/definitions/triageResourceCollection"
             }
           },
           "default": {
@@ -1451,7 +1451,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TriageResource"
+              "$ref": "#/definitions/triageResource"
             }
           },
           "default": {
@@ -1783,22 +1783,6 @@
         }
       }
     },
-    "AdvisorScoreEntity": {
-      "type": "object",
-      "description": "The details of Advisor score for a single category.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AdvisorScoreEntityProperties",
-          "description": "The Advisor score data.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "AdvisorScoreEntityProperties": {
       "type": "object",
       "description": "The Advisor score data.",
@@ -1824,7 +1808,7 @@
           "type": "array",
           "description": "The list of operations.",
           "items": {
-            "$ref": "#/definitions/AdvisorScoreEntity"
+            "$ref": "#/definitions/advisorScoreEntity"
           }
         }
       }
@@ -2108,6 +2092,63 @@
       "required": [
         "value"
       ]
+    },
+    "Control": {
+      "type": "string",
+      "description": "Control type for recommendation.",
+      "enum": [
+        "HighAvailability",
+        "BusinessContinuity",
+        "DisasterRecovery",
+        "Scalability",
+        "MonitoringAndAlerting",
+        "ServiceUpgradeAndRetirement",
+        "Other",
+        "PrioritizedRecommendations",
+        "Personalized"
+      ],
+      "x-ms-enum": {
+        "name": "Control",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HighAvailability",
+            "value": "HighAvailability"
+          },
+          {
+            "name": "BusinessContinuity",
+            "value": "BusinessContinuity"
+          },
+          {
+            "name": "DisasterRecovery",
+            "value": "DisasterRecovery"
+          },
+          {
+            "name": "Scalability",
+            "value": "Scalability"
+          },
+          {
+            "name": "MonitoringAndAlerting",
+            "value": "MonitoringAndAlerting"
+          },
+          {
+            "name": "ServiceUpgradeAndRetirement",
+            "value": "ServiceUpgradeAndRetirement"
+          },
+          {
+            "name": "Other",
+            "value": "Other"
+          },
+          {
+            "name": "PrioritizedRecommendations",
+            "value": "PrioritizedRecommendations"
+          },
+          {
+            "name": "Personalized",
+            "value": "Personalized"
+          }
+        ]
+      }
     },
     "CpuThreshold": {
       "type": "string",
@@ -2639,6 +2680,10 @@
           "$ref": "#/definitions/Category",
           "description": "The category of the recommendation."
         },
+        "control": {
+          "$ref": "#/definitions/Control",
+          "description": "The control type for the recommendation."
+        },
         "impact": {
           "$ref": "#/definitions/Impact",
           "description": "The business impact of the recommendation."
@@ -2819,43 +2864,6 @@
           }
         ]
       }
-    },
-    "ResiliencyReview": {
-      "type": "object",
-      "description": "The Advisor resiliency review data structure.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ResiliencyReviewProperties",
-          "description": "Advisor resiliency review properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ResiliencyReviewCollection": {
-      "type": "object",
-      "description": "Collection of Resiliency Reviews.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ResiliencyReview items on this page",
-          "items": {
-            "$ref": "#/definitions/ResiliencyReview"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ResiliencyReviewProperties": {
       "type": "object",
@@ -3249,43 +3257,6 @@
         }
       }
     },
-    "TriageRecommendation": {
-      "type": "object",
-      "description": "Triage recommendation data structure.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TriageRecommendationProperties",
-          "description": "Advisor resiliency review properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "TriageRecommendationCollection": {
-      "type": "object",
-      "description": "Collection of Advisor triage recommendations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/TriageRecommendation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TriageRecommendationProperties": {
       "type": "object",
       "description": "Triage recommendation properties.",
@@ -3344,43 +3315,6 @@
           "readOnly": true
         }
       }
-    },
-    "TriageResource": {
-      "type": "object",
-      "description": "Triage resource data structure.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TriageResourceProperties",
-          "description": "Triage resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "TriageResourceCollection": {
-      "type": "object",
-      "description": "Collection of Advisor triage resources.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TriageResource items on this page",
-          "items": {
-            "$ref": "#/definitions/TriageResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "TriageResourceProperties": {
       "type": "object",
@@ -3466,6 +3400,133 @@
           "description": "Subscription Name"
         }
       }
+    },
+    "advisorScoreEntity": {
+      "type": "object",
+      "description": "The details of Advisor score for a single category.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdvisorScoreEntityProperties",
+          "description": "The Advisor score data.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "resiliencyReview": {
+      "type": "object",
+      "description": "The Advisor resiliency review data structure.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResiliencyReviewProperties",
+          "description": "Advisor resiliency review properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "resiliencyReviewCollection": {
+      "type": "object",
+      "description": "Collection of Resiliency Reviews.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResiliencyReview items on this page",
+          "items": {
+            "$ref": "#/definitions/resiliencyReview"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "triageRecommendation": {
+      "type": "object",
+      "description": "Triage recommendation data structure.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TriageRecommendationProperties",
+          "description": "Advisor resiliency review properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "triageRecommendationCollection": {
+      "type": "object",
+      "description": "Collection of Advisor triage recommendations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/triageRecommendation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "triageResource": {
+      "type": "object",
+      "description": "Triage resource data structure.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TriageResourceProperties",
+          "description": "Triage resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "triageResourceCollection": {
+      "type": "object",
+      "description": "Collection of Advisor triage resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TriageResource items on this page",
+          "items": {
+            "$ref": "#/definitions/triageResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {

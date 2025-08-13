@@ -19,6 +19,7 @@ interface ConfigurationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve Azure Advisor configurations.")
   @autoRoute
+  @list
   @get
   @action("configurations")
   listBySubscription is ArmProviderActionSync<
@@ -57,6 +58,7 @@ interface ConfigurationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations")
+  @list
   @get
   listByResourceGroup(
     ...ApiVersionParameter,
@@ -150,6 +152,7 @@ interface SuppressionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
+  @list
   @get
   @action("suppressions")
   list is ArmProviderActionSync<
@@ -194,6 +197,7 @@ interface AssessmentTypesOperationGroup {
    */
   @summary("Get assessment types list.")
   @autoRoute
+  @list
   @get
   @action("assessmentTypes")
   list is ArmProviderActionSync<
@@ -210,6 +214,7 @@ interface WorkloadsOperationGroup {
    */
   @summary("Get Workloads list.")
   @autoRoute
+  @list
   @get
   @action("workloads")
   list is ArmProviderActionSync<
