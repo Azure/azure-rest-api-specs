@@ -54,15 +54,6 @@ union PostgreSqlSkippedOperationsMode {
   string,
 }
 
-@doc("SnapshotSelectStatementOverride Item")
-model PostgreSqlSnapshotSelectStatementOverrideItem {
-  @doc("Table name")
-  tableName: string;
-
-  @doc("select statement")
-  selectStatement: string;
-}
-
 @doc("Specifies the criteria for running a snapshot when the connector starts")
 union PostgreSqlSnapshotMode {
   @doc("The connector performs a snapshot only when no offsets have been recorded for the logical server name.")
@@ -137,6 +128,15 @@ union PostgreSqlFieldNameAdjustmentMode {
   AvroUnicode: "AvroUnicode",
 
   string,
+}
+
+@doc("SnapshotSelectStatementOverride Item")
+model PostgreSqlSnapshotSelectStatementOverrideItem {
+  @doc("Table name")
+  tableName: string;
+
+  @doc("select statement")
+  selectStatement: string;
 }
 
 @doc("Configuration for PostgreSqlSourceConnector")
