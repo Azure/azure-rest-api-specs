@@ -56,12 +56,12 @@
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": [],
           "encryptionWithCmk": {
-            "enforcement": "Unspecified",
-            "encryptionComplianceStatus": "Compliant"
+            "enforcement": "Unspecified"
           },
-          "disableLocalAuth": false,
           "authOptions": {
-            "apiKeyOnly": {}
+            "aadOrApiKey": {
+              "aadAuthFailureMode": "http401WithBearerChallenge"
+            }
           },
           "disabledDataExfiltrationOptions": [],
           "upgradeAvailable": false,
