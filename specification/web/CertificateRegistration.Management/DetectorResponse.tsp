@@ -26,7 +26,7 @@ model DetectorResponse
 }
 
 @armResourceOperations
-interface DetectorResponses {
+interface CertificateOrdersDiagnostics {
   /**
    * Description for Microsoft.CertificateRegistration call to get a detector response from App Lens.
    */

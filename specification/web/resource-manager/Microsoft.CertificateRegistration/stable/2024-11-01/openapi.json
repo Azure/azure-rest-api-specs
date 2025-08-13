@@ -45,10 +45,7 @@
       "name": "AppServiceCertificateOrders"
     },
     {
-      "name": "AppServiceCertificateResources"
-    },
-    {
-      "name": "DetectorResponses"
+      "name": "CertificateOrdersDiagnostics"
     }
   ],
   "paths": {
@@ -112,7 +109,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -195,7 +192,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -245,7 +242,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -316,7 +313,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -374,7 +371,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -419,7 +416,7 @@
             "description": "Resource does not exist."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -436,8 +433,9 @@
       "get": {
         "operationId": "AppServiceCertificateOrders_ListCertificates",
         "tags": [
-          "AppServiceCertificateResources"
+          "AppServiceCertificateOrders"
         ],
+        "summary": "List all certificates associated with a certificate order.",
         "description": "Description for List all certificates associated with a certificate order.",
         "parameters": [
           {
@@ -465,7 +463,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -485,8 +483,9 @@
       "get": {
         "operationId": "AppServiceCertificateOrders_GetCertificate",
         "tags": [
-          "AppServiceCertificateResources"
+          "AppServiceCertificateOrders"
         ],
+        "summary": "Get the certificate associated with a certificate order.",
         "description": "Description for Get the certificate associated with a certificate order.",
         "parameters": [
           {
@@ -521,7 +520,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -536,8 +535,9 @@
       "put": {
         "operationId": "AppServiceCertificateOrders_CreateOrUpdateCertificate",
         "tags": [
-          "AppServiceCertificateResources"
+          "AppServiceCertificateOrders"
         ],
+        "summary": "Creates or updates a certificate and associates with key vault secret.",
         "description": "Description for Creates or updates a certificate and associates with key vault secret.",
         "parameters": [
           {
@@ -598,7 +598,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -617,8 +617,9 @@
       "patch": {
         "operationId": "AppServiceCertificateOrders_UpdateCertificate",
         "tags": [
-          "AppServiceCertificateResources"
+          "AppServiceCertificateOrders"
         ],
+        "summary": "Creates or updates a certificate and associates with key vault secret.",
         "description": "Description for Creates or updates a certificate and associates with key vault secret.",
         "parameters": [
           {
@@ -662,7 +663,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -677,8 +678,9 @@
       "delete": {
         "operationId": "AppServiceCertificateOrders_DeleteCertificate",
         "tags": [
-          "AppServiceCertificateResources"
+          "AppServiceCertificateOrders"
         ],
+        "summary": "Delete the certificate associated with a certificate order.",
         "description": "Description for Delete the certificate associated with a certificate order.",
         "parameters": [
           {
@@ -713,7 +715,7 @@
             "description": "Resource does not exist."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -730,8 +732,9 @@
       "get": {
         "operationId": "CertificateOrdersDiagnostics_ListAppServiceCertificateOrderDetectorResponse",
         "tags": [
-          "DetectorResponses"
+          "CertificateOrdersDiagnostics"
         ],
+        "summary": "Microsoft.CertificateRegistration to get the list of detectors for this RP.",
         "description": "Description for Microsoft.CertificateRegistration to get the list of detectors for this RP.",
         "parameters": [
           {
@@ -759,7 +762,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -779,8 +782,9 @@
       "get": {
         "operationId": "CertificateOrdersDiagnostics_GetAppServiceCertificateOrderDetectorResponse",
         "tags": [
-          "DetectorResponses"
+          "CertificateOrdersDiagnostics"
         ],
+        "summary": "Microsoft.CertificateRegistration call to get a detector response from App Lens.",
         "description": "Description for Microsoft.CertificateRegistration call to get a detector response from App Lens.",
         "parameters": [
           {
@@ -839,7 +843,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -858,6 +862,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Reissue an existing certificate order.",
         "description": "Description for Reissue an existing certificate order.",
         "parameters": [
           {
@@ -891,7 +896,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -910,6 +915,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Renew an existing certificate order.",
         "description": "Description for Renew an existing certificate order.",
         "parameters": [
           {
@@ -943,7 +949,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -962,6 +968,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Resend certificate email.",
         "description": "Description for Resend certificate email.",
         "parameters": [
           {
@@ -986,7 +993,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1005,6 +1012,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Resend domain verification email to customer for this certificate order",
         "description": "Resend domain verification ownership email containing steps on how to verify a domain for a given certificate order",
         "parameters": [
           {
@@ -1038,7 +1046,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1057,6 +1065,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Retrieve the list of certificate actions.",
         "description": "Description for Retrieve the list of certificate actions.",
         "parameters": [
           {
@@ -1087,7 +1096,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1106,6 +1115,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Retrieve email history.",
         "description": "Description for Retrieve email history.",
         "parameters": [
           {
@@ -1136,7 +1146,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1155,6 +1165,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "This method is used to obtain the site seal information for an issued certificate. ",
         "description": "This method is used to obtain the site seal information for an issued certificate. A site seal is a graphic that the certificate purchaser can embed on their web site to show their visitors information about their SSL certificate. If a web site visitor clicks on the site seal image, a pop-up page is displayed that contains detailed information about the SSL certificate. The site seal token is used to link the site seal graphic image to the appropriate certificate details pop-up page display when a user clicks on the site seal. The site seal images are expected to be static images and hosted by the reseller, to minimize delays for customer page load times.",
         "parameters": [
           {
@@ -1191,7 +1202,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -1210,6 +1221,7 @@
         "tags": [
           "AppServiceCertificateOrders"
         ],
+        "summary": "Verify domain ownership for this certificate order.",
         "description": "Description for Verify domain ownership for this certificate order.",
         "parameters": [
           {
@@ -1234,7 +1246,7 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "App Service error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
