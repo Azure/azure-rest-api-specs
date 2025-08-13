@@ -2416,7 +2416,7 @@
         },
         "x-ms-examples": {
           "List capacity reservation groups in resource group.": {
-            "$ref": "./examples/capacityReservationExamples/.json"
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2484,13 +2484,13 @@
           }
         },
         "x-ms-examples": {
-          "Get a capacity reservation Group.": {
-            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Get.json"
-          },
           "Get a block capacity reservation Group.": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservationGroup_Get.json"
           },
-          "Get a targeted capacity reservation Group.": {
+          "Get a capacity reservation Group.": {
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Get.json"
+          },
+          "Get a targeted capacity reservation group.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservationGroup_Get.json"
           }
         }
@@ -2549,11 +2549,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a capacity reservation group.": {
-            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_CreateOrUpdate.json"
-          },
           "Create or update a block capacity reservation group.": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservationGroup_CreateOrUpdate.json"
+          },
+          "Create or update a capacity reservation group.": {
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_CreateOrUpdate.json"
           },
           "Create or update a targeted capacity reservation group.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservationGroup_CreateOrUpdate.json"
@@ -2704,11 +2704,11 @@
           }
         },
         "x-ms-examples": {
+          "List block capacity reservations in reservation group.": {
+            "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_ListByReservationGroup.json"
+          },
           "List capacity reservations in reservation group.": {
             "$ref": "./examples/capacityReservationExamples/CapacityReservation_ListByReservationGroup.json"
-          },
-          "List capacity reservations in block reservation group.": {
-            "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_ListByReservationGroup.json"
           },
           "List capacity reservations in targeted reservation group.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_ListByReservationGroup.json"
@@ -2786,11 +2786,11 @@
           }
         },
         "x-ms-examples": {
-          "Get a capacity reservation.": {
-            "$ref": "./examples/capacityReservationExamples/CapacityReservation_Get.json"
-          },
           "Get a block capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_Get.json"
+          },
+          "Get a capacity reservation.": {
+            "$ref": "./examples/capacityReservationExamples/CapacityReservation_Get.json"
           },
           "Get a targeted capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_Get.json"
@@ -2869,13 +2869,13 @@
           }
         },
         "x-ms-examples": {
+          "Create or update a block capacity reservation.": {
+            "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_CreateOrUpdate.json"
+          },
           "Create or update a capacity reservation .": {
             "$ref": "./examples/capacityReservationExamples/CapacityReservation_CreateOrUpdate.json"
           },
-          "Create or update a block capacity reservation .": {
-            "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_CreateOrUpdate.json"
-          },
-          "Create or update a targeted capacity reservation .": {
+          "Create or update a targeted capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_CreateOrUpdate.json"
           }
         },
@@ -2970,7 +2970,7 @@
         "tags": [
           "CapacityReservations"
         ],
-        "description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details. Note: Block capacity reservations cannot be deleted during their scheduled active period (between schedule start and end times). ",
+        "description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details. Note: Block capacity reservations cannot be deleted during their scheduled active period (between schedule start and end times).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -12871,16 +12871,8 @@
           "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
         },
         "reservationType": {
-          "type": "string",
-          "enum": [
-            "Targeted",
-            "Block"
-          ],
-          "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
-          "x-ms-enum": {
-            "name": "ReservationType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ReservationType",
+          "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned."
         }
       }
     },
@@ -13027,24 +13019,8 @@
           "readOnly": true
         },
         "scheduleProfile": {
-          "type": "object",
-          "required": [
-            "start",
-            "end"
-          ],
-          "properties": {
-            "start": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27."
-            },
-            "end": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."
-            }
-          },
-          "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details."
+          "$ref": "#/definitions/ScheduleProfile",
+          "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The schedule Profile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details."
         }
       }
     },
@@ -13059,7 +13035,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
+          "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. **Note:** The SKU name and capacity cannot be updated for Block capacity reservations."
         }
       },
       "allOf": [
@@ -16151,6 +16127,30 @@
         }
       ]
     },
+    "ReservationType": {
+      "type": "string",
+      "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
+      "enum": [
+        "Targeted",
+        "Block"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Targeted",
+            "value": "Targeted",
+            "description": "Reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided."
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "Block capacity reservations."
+          }
+        ]
+      }
+    },
     "ResiliencyPolicy": {
       "type": "object",
       "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.",
@@ -17139,6 +17139,26 @@
           "description": "This property allows you to prioritize the deletion of unhealthy and inactive VMs when a virtual machine scale set is being scaled-in.(Feature in Preview)"
         }
       }
+    },
+    "ScheduleProfile": {
+      "type": "object",
+      "description": "Defines the schedule for Block-type capacity reservations.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
     },
     "ScheduledEventsAdditionalPublishingTargets": {
       "type": "object",
