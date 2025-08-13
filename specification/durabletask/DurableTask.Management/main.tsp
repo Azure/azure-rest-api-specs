@@ -246,13 +246,13 @@ model SchedulerUpdate
 @doc("The Scheduler resource properties to be updated")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerPropertiesUpdate {
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation")
-  provisioningState?: ProvisioningState;
+  // @visibility(Lifecycle.Read)
+  // @doc("The status of the last operation")
+  // provisioningState?: ProvisioningState;
 
-  @doc("URL of the durable task scheduler")
-  @visibility(Lifecycle.Read)
-  endpoint?: string;
+  // @doc("URL of the durable task scheduler")
+  // @visibility(Lifecycle.Read)
+  // endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
   ipAllowlist?: string[];
@@ -274,9 +274,9 @@ model SchedulerSkuUpdate {
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;
 
-  @doc("Indicates whether the current SKU configuration is zone redundant")
-  @visibility(Lifecycle.Read)
-  redundancyState?: RedundancyState;
+  // @doc("Indicates whether the current SKU configuration is zone redundant")
+  // @visibility(Lifecycle.Read)
+  // redundancyState?: RedundancyState;
 }
 
 @added(Versions.v2024_10_01_Preview)

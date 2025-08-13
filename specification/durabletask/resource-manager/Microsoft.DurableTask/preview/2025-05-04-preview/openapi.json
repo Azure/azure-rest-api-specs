@@ -1659,16 +1659,6 @@
       "type": "object",
       "description": "The Scheduler resource properties to be updated",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation",
-          "readOnly": true
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "URL of the durable task scheduler",
-          "readOnly": true
-        },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
@@ -1722,11 +1712,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
-        },
-        "redundancyState": {
-          "$ref": "#/definitions/RedundancyState",
-          "description": "Indicates whether the current SKU configuration is zone redundant",
-          "readOnly": true
         }
       }
     },
