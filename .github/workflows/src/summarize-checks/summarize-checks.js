@@ -1150,7 +1150,7 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
     per_page: PER_PAGE_MAX,
   });
 
-  // In case multiple artifacts with same name, select latest updated
+  // If multiple artifacts with same name, select latest updated
   const jobSummaryArtifact = jobSummaryArtifacts.sort(
     invert(byDate((a) => a.updated_at || "1970")),
   )[0];
