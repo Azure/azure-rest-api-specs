@@ -2984,6 +2984,168 @@
         }
       },
       "description": "Describes the quota usage for a particular SKU."
+    },
+    "OfferingsListResult": {
+      "type": "object",
+      "description": "The response containing a list of features and SKUs offered in various regions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OfferingsByRegion"
+          },
+          "description": "The list of regions with their respective features and SKUs offered."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of offerings, if any."
+        }
+      }
+    },
+    "OfferingsByRegion": {
+      "type": "object",
+      "properties": {
+        "regionName": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureOffering"
+          },
+          "description": "The list of features offered in this region.",
+          "x-ms-identifiers": []
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuOffering"
+          },
+          "description": "The list of SKUs offered in this region."
+        }
+      }
+    },
+    "FeatureOffering": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the feature offered in this region.",
+          "enum": [
+            "Grok",
+            "ImageVectorization",
+            "DocumentIntelligence",
+            "QueryRewrite",
+            "S3",
+            "StorageOptimized",
+            "SemanticSearch",
+            "MegaStore",
+            "AvailabilityZones"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Grok",
+                "name": "Grok",
+                "description": "Supports Grok feature."
+              },
+              {
+                "value": "ImageVectorization",
+                "name": "ImageVectorization",
+                "description": "Supports Image Vectorization feature."
+              },
+              {
+                "value": "DocumentIntelligence",
+                "name": "DocumentIntelligence",
+                "description": "Supports Document Intelligence feature."
+              },
+              {
+                "value": "QueryRewrite",
+                "name": "QueryRewrite",
+                "description": "Supports Query Rewrite feature."
+              },
+              {
+                "value": "S3",
+                "name": "S3",
+                "description": "Supports S3 feature."
+              },
+              {
+                "value": "StorageOptimized",
+                "name": "StorageOptimized",
+                "description": "Supports Storage Optimized feature."
+              },
+              {
+                "value": "SemanticSearch",
+                "name": "SemanticSearch",
+                "description": "Supports Semantic Search feature."
+              },
+              {
+                "value": "MegaStore",
+                "name": "MegaStore",
+                "description": "Supports Mega Store feature."
+              },
+              {
+                "value": "AvailabilityZones",
+                "name": "AvailabilityZones",
+                "description": "Supports Availability Zones feature."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SkuOffering": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "indexes": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of indexes available for this SKU."
+            },
+            "indexers": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of indexers available for this SKU."
+            },
+            "partitionStorageInGigabytes": {
+              "type": "number",
+              "format": "float",
+              "description": "The maximum storage size in Gigabytes available for this SKU per partition."
+            },
+            "partitionVectorStorageInGigabytes": {
+              "type": "number",
+              "format": "float",
+              "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
+            },
+            "searchUnits": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of search units available for this SKU."
+            },
+            "replicas": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of replicas available for this SKU."
+            },
+            "partitions": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of partitions available for this SKU."
+            }
+          },
+          "description": "The limits associated with this SKU offered in this region."
+        }
+      }
     }
   },
   "parameters": {
