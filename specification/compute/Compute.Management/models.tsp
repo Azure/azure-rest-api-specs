@@ -1532,12 +1532,11 @@ model UsageName {
 /**
  * The List Virtual Machine operation response.
  */
-@pagedResult
 model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes.
    */
-  @items
+  @pageItems
   @identifiers(#["name"])
   value?: VirtualMachineSize[];
 
@@ -5732,6 +5731,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
    * The list of VMSS VM extensions
    */
   @identifiers(#["name", "id"])
+  @pageItems
   value?: VirtualMachineScaleSetVMExtension[];
 }
 
@@ -6526,6 +6526,7 @@ model VirtualMachineExtensionsListResult {
   /**
    * The list of extensions
    */
+  @pageItems
   value?: VirtualMachineExtension[];
 }
 
@@ -7441,12 +7442,11 @@ model DedicatedHostUpdate extends UpdateResource {
 /**
  * The List Dedicated Host sizes operation response.
  */
-@pagedResult
 model DedicatedHostSizeListResult {
   /**
    * The list of dedicated host sizes.
    */
-  @items
+  @pageItems
   value?: string[];
 
   /**

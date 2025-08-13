@@ -289,6 +289,7 @@ interface VirtualMachineScaleSets {
   @get
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @action("osUpgradeHistory")
+  @list
   getOSUpgradeHistory is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -412,6 +413,7 @@ interface VirtualMachineScaleSets {
    */
   @get
   @action("skus")
+  @list
   listSkus is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
