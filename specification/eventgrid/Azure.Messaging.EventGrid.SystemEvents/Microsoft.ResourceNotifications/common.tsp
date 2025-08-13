@@ -24,10 +24,12 @@ model ResourceNotificationsResourceUpdatedDetails {
   location?: string;
 
   /** the tags on the resource for which the event is being emitted */
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 
   /** properties in the payload of the resource for which the event is being emitted */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties object"
+  @visibility(Lifecycle.Read)
   properties?: Record<unknown>;
 }
 

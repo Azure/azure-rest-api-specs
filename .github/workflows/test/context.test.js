@@ -88,6 +88,15 @@ describe("extractInputs", () => {
     context.payload.action = "reopened";
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
 
+    context.payload.action = "ready_for_review";
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
+
+    context.payload.action = "edited";
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
+
+    context.payload.action = "converted_to_draft";
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
+
     // Action not yet supported
     context.payload.action = "assigned";
     await expect(extractInputs(github, context, createMockCore())).rejects.toThrow();

@@ -642,13 +642,15 @@ async function processARMReviewWorkflowLabels(
 
   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
 
+  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(labelContext);
+
   const blockedOnRpaas = getBlockedOnRpaas(
     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasExceptionLabelShouldBePresent,
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnRpaas;
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -708,6 +710,23 @@ async function processARMReviewWorkflowLabels(
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
   return;
+}
+
+/**
+ * @param {LabelContext} labelContext
+ * @returns {boolean}
+ */
+function getBlockedOnVersioningPolicy(labelContext) {
+  const pendingVersioningReview =
+    labelContext.present.has("VersioningReviewRequired") &&
+    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
+
+  const pendingBreakingChangeReview =
+    labelContext.present.has("BreakingChangeReviewRequired") &&
+    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
+
+  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
+  return blockedOnVersioningPolicy;
 }
 
 /**
