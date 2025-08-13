@@ -37,7 +37,7 @@ function ReplaceValueByKey($obj, $key, $value, $replacementsUsage)
 }
 
 $specFolder = "C:\Dev\azure-rest-api-specs\specification\monitor\Microsoft.Monitor.Issues.Management"
-$swaggerFolder = "C:\Dev\azure-rest-api-specs\specification\monitor\resource-manager\Microsoft.Monitor\Accounts\preview\2025-05-03-preview"
+$swaggerFolder = "C:\Dev\azure-rest-api-specs\specification\monitor\resource-manager\Microsoft.Monitor\Issues\preview\2025-05-03-preview"
 $swaggerPath = "$swaggerFolder\issues.json"
 
 # Generate examples
@@ -103,6 +103,10 @@ Get-ChildItem -Path "$swaggerFolder\examples" -Recurse -Filter "Issue_*.json" | 
 
     if ($file.Contains("StartInvestigation")) {
         $content.parameters.body.investigationScopes[0].id = $targetResourceId
+        $content.responses."200".body.runParameters.alerts[0].id = $alertId
+        $content.responses."200".body.runParameters.resources[0].id = $targetResourceId
+    }
+    elseif ($file.Contains("FetchInvestigation")) {
         $content.responses."200".body.runParameters.alerts[0].id = $alertId
         $content.responses."200".body.runParameters.resources[0].id = $targetResourceId
     }
