@@ -16,7 +16,7 @@ model SessionCodeExecutionRequest {
   code: string;
 
   @doc("Code execution timeout in seconds.")
-  timeoutInSeconds: int64;
+  timeoutInSeconds: int32;
 }
 
 @doc("The result of the code execution.")
