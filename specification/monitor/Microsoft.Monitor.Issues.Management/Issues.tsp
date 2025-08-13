@@ -5,7 +5,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@typespec/openapi";
 import "./models.tsp";
-import "../Microsoft.Monitor.Accounts.Management/typespec/AzureMonitorWorkspace.tsp";
+import "../Microsoft.Monitor.Accounts.Management/typespec/models.tsp";
+import "../Microsoft.Monitor.Accounts.Management/typespec/service.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
