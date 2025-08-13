@@ -208,6 +208,31 @@ model AzureFunctionToolDefinition extends ToolDefinition {
   azureFunction: AzureFunctionDefinition;
 }
 
+@doc("The input definition information for a Browser Automation Tool, as used to configure an Agent.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("The Browser Automation Tool parameters.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationToolParameters;
+}
+
+@doc("Definition of input parameters for the Browser Automation Tool.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolParameters {
+  @doc("The connection parameters associated with the Browser Automation Tool.")
+  connection: BrowserAutomationToolConnectionParameters;
+}
+
+@doc("Definition of input parameters for the connection used by the Browser Automation Tool.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolConnectionParameters {
+  @doc("The ID of the connection to your Azure Playwright resource.")
+  id: string;
+}
+
 /**
  * Ranking options for file search.
  */
@@ -514,6 +539,52 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
+  A record of a call to a Browser Automation tool issued by the Agent.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("Details of the browser automation tool call.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationToolCallDetails;
+}
+
+@doc("""
+  Details of a Browser Automation tool call.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallDetails {
+  @doc("The input provided to the Browser Automation tool.")
+  input: string;
+
+  @doc("The output returned by the Browser Automation tool.")
+  output: string;
+
+  @doc("The steps the Browser Automation tool executed.")
+  steps: BrowserAutomationToolCallStep[];
+}
+
+@doc("""
+  Describes a single step of a Browser Automation tool execution.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallStep {
+  @doc("The result of the last step executed with the Browser.")
+  @encodedName("application/json", "last_step_result")
+  lastStepResult: string;
+
+  @doc("The current state of execution with the Browser.")
+  @encodedName("application/json", "current_state")
+  currentState: string;
+
+  @doc("The next step to execute with the Browser.")
+  @encodedName("application/json", "next_step")
+  nextStep: string;
+}
+
+@doc("""
   A record of a call to a MCP tool, issued by the model in evaluation of a defined tool, that represents
   executed MCP actions.
   """)
@@ -619,6 +690,17 @@ model RunStepDeepResearchToolCall extends RunStepToolCall {
   deepResearch: RunStepDeepResearchToolCallDetails;
 }
 
+/** A record of a call to the connected agent. */
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgentToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'connected_agent'.")
+  type: "connected_agent";
+
+  @doc("The connected agent step information.")
+  @encodedName("application/json", "connected_agent")
+  connectedAgent: RunStepConnectedAgent;
+}
+
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
@@ -712,6 +794,33 @@ model RunStepDeepResearchToolCallDetails {
 
   @doc("The final output for the deep research tool.")
   output?: string;
+}
+
+// Call details: ConnectedAgent
+
+@doc("The detailed information about connected agent tool call.")
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgent {
+  @doc("The name of connected agent.")
+  name?: string;
+
+  @doc("The JSON serialized query to the connected agent.")
+  arguments?: string;
+
+  @doc("The tool output.")
+  output?: string;
+
+  @doc("The run ID used by the connected agent.")
+  @encodedName("application/json", "run_id")
+  runId?: string;
+
+  @doc("The thread ID used by the connected agent.")
+  @encodedName("application/json", "thread_id")
+  threadId?: string;
+
+  @doc("The ID of a connected agent.")
+  @encodedName("application/json", "assistant_id")
+  agentId?: string;
 }
 
 //
