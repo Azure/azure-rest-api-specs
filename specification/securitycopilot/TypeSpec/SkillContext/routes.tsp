@@ -321,6 +321,13 @@ op yieldForChildren(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 ): boolean;
 
+@get
+@route("/skillContext/skillFilters")
+@doc("Returns skill filters")
+op skillFilters(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+): Record<string>;
+
 
 //TODO: move this to a different file
 // Dynamic Prompts API
