@@ -519,9 +519,6 @@ export async function updateCommitStatus(github, core, owner, repo, head_sha, ch
  * @param {string} owner
  * @param {string} repo
  * @param {number} issue_number
- * @param {*} owner
- * @param {*} repo
- * @param {*} issue_number
  * @return {Promise<string[]>}
  */
 export async function getExistingLabels(github, owner, repo, issue_number) {
