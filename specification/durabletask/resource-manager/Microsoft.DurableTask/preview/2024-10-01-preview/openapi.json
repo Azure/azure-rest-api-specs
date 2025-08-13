@@ -678,9 +678,24 @@
     }
   },
   "definitions": {
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -830,7 +845,7 @@
     },
     "SchedulerPropertiesUpdate": {
       "type": "object",
-      "description": "The Scheduler resource properties to be updated",
+      "description": "Details of the Scheduler",
       "properties": {
         "ipAllowlist": {
           "type": "array",
@@ -871,7 +886,7 @@
     },
     "SchedulerSkuUpdate": {
       "type": "object",
-      "description": "The SKU (Stock Keeping Unit) properties to be updated",
+      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
       "properties": {
         "name": {
           "type": "string",
@@ -886,41 +901,18 @@
     },
     "SchedulerUpdate": {
       "type": "object",
-      "description": "The update request model for the Scheduler resource",
+      "description": "A Durable Task Scheduler resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchedulerPropertiesUpdate",
-          "description": "The Scheduler properties to be updated"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "TaskHub": {
       "type": "object",
