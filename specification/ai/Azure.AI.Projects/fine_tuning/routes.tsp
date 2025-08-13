@@ -120,6 +120,7 @@ interface FineTuningJobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get status updates for a fine-tuning job.")
   @get
+  @list
   @route("/{fine_tuning_job_id}/events")
   listEvents is Azure.Core.Foundations.Operation<
     {
@@ -142,6 +143,7 @@ interface FineTuningJobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List checkpoints for a fine-tuning job.")
   @get
+  @list
   @route("/{fine_tuning_job_id}/checkpoints")
   listCheckpoints is Azure.Core.Foundations.Operation<
     {
