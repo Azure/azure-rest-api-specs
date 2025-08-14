@@ -8,6 +8,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using PurviewUnifiedCatalog;
 
+namespace Customizations;
+
 @@clientName(ListCriticalDataElementAsync, "ListCriticalDataElement");
 @@clientName(CreateCriticalDataElementAsync, "CreateCriticalDataElement");
 @@clientName(GetCriticalDataElementByIdAsync, "GetCriticalDataElementById");
