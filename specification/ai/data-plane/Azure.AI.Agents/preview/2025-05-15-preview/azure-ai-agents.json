@@ -6855,6 +6855,29 @@
       ],
       "x-ms-discriminator-value": "connected_agent"
     },
+    "RunStepDeltaCustomBingGroundingToolCall": {
+      "type": "object",
+      "description": "Represents the custom bing grounding tool call in a streaming run step.",
+      "properties": {
+        "bing_custom_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
+    },
     "RunStepDeltaDeepResearchToolCall": {
       "type": "object",
       "description": "Represents the Deep research in a streaming run step.",

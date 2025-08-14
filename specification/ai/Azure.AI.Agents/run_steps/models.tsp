@@ -381,6 +381,17 @@ model RunStepDeltaBingGroundingToolCall extends RunStepDeltaToolCall {
   bingGrounding: Record<string>;
 }
 
+@doc("Represents the custom bing grounding tool call in a streaming run step.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaCustomBingGroundingToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'bing_custom_search'.")
+  type: "bing_custom_search";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "bing_custom_search")
+  bingCustomSearch: Record<string>;
+}
+
 /** Represents the Deep research in a streaming run step. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaDeepResearchToolCall extends RunStepDeltaToolCall {
