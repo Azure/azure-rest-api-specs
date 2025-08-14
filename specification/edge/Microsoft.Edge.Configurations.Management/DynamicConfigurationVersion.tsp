@@ -36,9 +36,14 @@ model DynamicConfigurationVersionProperties {
   ]>;
 
   @added(Versions.v2025_08_01)
-  @doc("Current Stage of dynamic config")
+  @doc("Display state")
   @visibility(Lifecycle.Read)
-  currentStage?: StageMap;
+  displayState?: string;
+
+  @added(Versions.v2025_08_01)
+  @doc("Configuration state")
+  @visibility(Lifecycle.Read)
+  state?: ConfigurationState;
 
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)

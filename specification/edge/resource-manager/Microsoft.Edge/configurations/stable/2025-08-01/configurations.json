@@ -1271,60 +1271,6 @@
       },
       "readOnly": true
     },
-    "CMStages": {
-      "type": "string",
-      "description": "Stages for Solution Version",
-      "enum": [
-        "Configuration",
-        "Publish",
-        "Deployment",
-        "Uninstallation",
-        "ExternalValidation",
-        "Staging",
-        "Unstaging"
-      ],
-      "x-ms-enum": {
-        "name": "CMStages",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Configuration",
-            "value": "Configuration",
-            "description": "Configuration stage"
-          },
-          {
-            "name": "Publish",
-            "value": "Publish",
-            "description": "Publish stage"
-          },
-          {
-            "name": "Deployment",
-            "value": "Deployment",
-            "description": "Deployment stage"
-          },
-          {
-            "name": "Uninstallation",
-            "value": "Uninstallation",
-            "description": "Uninstallation stage"
-          },
-          {
-            "name": "ExternalValidation",
-            "value": "ExternalValidation",
-            "description": "External Validation stage"
-          },
-          {
-            "name": "Staging",
-            "value": "Staging",
-            "description": "Staging stage"
-          },
-          {
-            "name": "Unstaging",
-            "value": "Unstaging",
-            "description": "Unstaging stage"
-          }
-        ]
-      }
-    },
     "Configuration": {
       "type": "object",
       "description": "Configuration Resource",
@@ -1469,6 +1415,30 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "ConfigurationState": {
+      "type": "string",
+      "description": "Configuration State Enums",
+      "enum": [
+        "ConfigurationCompleted",
+        "ConfigurationPending"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConfigurationCompleted",
+            "value": "ConfigurationCompleted",
+            "description": "Configuration Completed"
+          },
+          {
+            "name": "ConfigurationPending",
+            "value": "ConfigurationPending",
+            "description": "Configuration Completed"
+          }
+        ]
+      }
     },
     "ConfigurationType": {
       "type": "string",
@@ -1665,9 +1635,14 @@
             ]
           }
         },
-        "currentStage": {
-          "$ref": "#/definitions/StageMap",
-          "description": "Current Stage of dynamic config",
+        "displayState": {
+          "type": "string",
+          "description": "Display state",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ConfigurationState",
+          "description": "Configuration state",
           "readOnly": true
         },
         "provisioningState": {
@@ -1753,95 +1728,6 @@
         ]
       },
       "readOnly": true
-    },
-    "StageMap": {
-      "type": "object",
-      "description": "Stage Map for Solution Version",
-      "properties": {
-        "displayState": {
-          "type": "string",
-          "description": "Display State",
-          "readOnly": true
-        },
-        "stage": {
-          "$ref": "#/definitions/CMStages",
-          "description": "Stage name",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/StateCategory",
-          "description": "Stage status",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Stage start time",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Stage end time",
-          "readOnly": true
-        },
-        "childStages": {
-          "type": "array",
-          "description": "Child stages which represents more granular level stage status if any",
-          "items": {
-            "$ref": "#/definitions/StageMap"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "displayState",
-        "stage",
-        "status"
-      ]
-    },
-    "StateCategory": {
-      "type": "string",
-      "description": "State Category for Solution Version",
-      "enum": [
-        "Pending",
-        "InProgress",
-        "Completed",
-        "Failed",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "StateCategory",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Pending state [Non-Terminal]"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress state [Non-Terminal]"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed state [Terminal]"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed state [Terminal]"
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None state [Terminal]"
-          }
-        ]
-      }
     }
   },
   "parameters": {
