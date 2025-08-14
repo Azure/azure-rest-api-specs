@@ -411,8 +411,8 @@ export const breakingChangesCheckType = {
  * @returns {void}
  */
 export function processArmReviewLabels(context, existingLabels) {
-  // only kick this off if the ARMReview label is present
-  if (existingLabels.includes("ARMReview")) {
+  // only kick this off if the ARMReview label is present and NotReadyForARMReview is not present
+  if (existingLabels.includes("ARMReview") && !existingLabels.includes("NotReadyForARMReview")) {
     // the important part about how this will work depends how the users use it
     // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
     // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
@@ -642,13 +642,15 @@ async function processARMReviewWorkflowLabels(
 
   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
 
+  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(labelContext);
+
   const blockedOnRpaas = getBlockedOnRpaas(
     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasExceptionLabelShouldBePresent,
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnRpaas;
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -708,6 +710,23 @@ async function processARMReviewWorkflowLabels(
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
   return;
+}
+
+/**
+ * @param {LabelContext} labelContext
+ * @returns {boolean}
+ */
+function getBlockedOnVersioningPolicy(labelContext) {
+  const pendingVersioningReview =
+    labelContext.present.has("VersioningReviewRequired") &&
+    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
+
+  const pendingBreakingChangeReview =
+    labelContext.present.has("BreakingChangeReviewRequired") &&
+    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
+
+  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
+  return blockedOnVersioningPolicy;
 }
 
 /**

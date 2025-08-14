@@ -79,6 +79,7 @@ describe("spec-gen-sdk-status", () => {
       target_url: "https://example.com",
       github: mockGithub,
       core: mockCore,
+      issue_number: 123,
     });
 
     // Verify the right status was set
@@ -90,6 +91,9 @@ describe("spec-gen-sdk-status", () => {
         state: "pending",
       }),
     );
+
+    expect(mockCore.setOutput).toBeCalledWith("head_sha", "testSha");
+    expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
   });
 
   it("should set success status when all checks are completed successfully", async () => {

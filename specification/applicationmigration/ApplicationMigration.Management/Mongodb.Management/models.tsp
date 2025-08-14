@@ -713,7 +713,7 @@ model MongoCollectionProperties is AzureResourceProperties {
 }
 
 /**
- * MongoError, Warning or informationa
+ * MongoError, Warning or information
  */
 model CollectionExceptionInfo {
   /**

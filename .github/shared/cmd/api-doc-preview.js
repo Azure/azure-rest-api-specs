@@ -117,6 +117,11 @@ if (swaggerPaths.length === 0) {
 
 const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(swaggerPaths);
 
+if (swaggersToProcess.length === 0) {
+  console.log("No swagger files to process. No documentation artifacts will be written.");
+  process.exit(0);
+}
+
 const repoName = specRepoName;
 const prNumber = specRepoPrNumber;
 

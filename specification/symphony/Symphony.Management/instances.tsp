@@ -82,7 +82,9 @@ interface Instances {
   @doc("Deletes specified Instance resource.")
   delete is ArmResourceDeleteWithoutOkAsync<Instance>;
   @doc("Returns a collection of Instances resources within the resource group.")
+  @list
   listByResourceGroup is Azure.ResourceManager.ArmResourceListByParent<Instance>;
   @doc("Lists Instances resources within an Azure subscription.")
+  @list
   listBySubscription is ArmListBySubscription<Instance>;
 }

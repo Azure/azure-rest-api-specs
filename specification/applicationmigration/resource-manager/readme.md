@@ -34,9 +34,13 @@ These settings apply only when `--tag=package-2025-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
   - Microsoft.ApplicationMigration/preview/2025-02-01-preview/WorkloadsDiscovery.json
+  - Microsoft.ApplicationMigration/Mongo/preview/2025-02-01-preview/MongoWorkloadsDiscovery.json
 suppressions:
   - code: PathResourceTypeNameCamelCase
     from: WorkloadsDiscovery.json
+    reason: ApplicationMigration is a technical term and cannot follow camel case rule.
+  - code: PathResourceTypeNameCamelCase
+    from: MongoWorkloadsDiscovery.json
     reason: ApplicationMigration is a technical term and cannot follow camel case rule.
 ```
 

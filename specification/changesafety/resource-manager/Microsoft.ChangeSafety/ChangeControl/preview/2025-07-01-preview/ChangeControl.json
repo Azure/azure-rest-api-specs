@@ -724,6 +724,63 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/stageProgressions/{stageProgressionName}": {
+      "get": {
+        "operationId": "StageProgressions_GetAtSubscriptionLevel",
+        "tags": [
+          "StageProgressions"
+        ],
+        "description": "Get a StageProgression",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeStateName",
+            "in": "path",
+            "description": "The name of the ChangeState resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "stageProgressionName",
+            "in": "path",
+            "description": "name of the stageProgression",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageProgression"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageProgressions_GetAtSubscriptionLevel": {
+            "$ref": "./examples/StageProgressions_GetAtSubscriptionLevel.json"
+          },
+          "StageProgressions_GetAtSubscriptionLevel_MaximumSet": {
+            "$ref": "./examples/StageProgressions_GetAtSubscriptionLevel_MaximumSet_Gen.json"
+          }
+        }
+      },
       "put": {
         "operationId": "StageProgressions_CreateOrUpdateAtSubscriptionLevel",
         "tags": [

@@ -27,6 +27,7 @@ interface AutoActions {
   listByResourceGroup is ArmResourceListByParent<AutoAction>;
   listBySubscription is ArmListBySubscription<AutoAction>;
 
+  @list
   listResources is ArmResourceActionSync<
     AutoAction,
     void,

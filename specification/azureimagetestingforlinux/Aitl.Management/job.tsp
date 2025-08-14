@@ -4,7 +4,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Autorest;
 using Azure.Core;
 using Azure.Core.Foundations;
@@ -43,6 +42,7 @@ model JobResourceProperties is ResourceProperties {
 
   @doc("Test results once job is completed.")
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   results?: TestResultProperties[];
 
   @doc("Test duration in format 5h 10m 2s")
@@ -55,24 +55,28 @@ model JobResourceProperties is ResourceProperties {
 }
 
 @doc("Image type to use for testing")
-enum ImageType {
+union ImageType {
   @doc("VHD image")
-  vhd,
+  vhd: "vhd",
 
   @doc("Marketplace image")
-  marketplace,
+  marketplace: "marketplace",
 
   @doc("Shared image gallery")
-  shared_gallery,
+  shared_gallery: "shared_gallery",
+
+  string,
 }
 
 @doc("CPU Architecture")
-enum Architecture {
+union Architecture {
   @doc("x64 architecture")
-  x64,
+  x64: "x64",
 
   @doc("arm64 architecture")
-  arm64,
+  arm64: "arm64",
+
+  string,
 }
 
 @minValue(1)
@@ -82,6 +86,9 @@ scalar VhdGeneration extends int32;
 @doc("This object collects the image information used for testing. The associated properties of each image type must be populated.s")
 @discriminator("type")
 model Image {
+  @doc("The type of image")
+  type: ImageType;
+
   @doc("Options are 1 or 2. Defaults to 1")
   vhdGeneration?: VhdGeneration = 1;
 
@@ -127,7 +134,7 @@ model SharedImageGallery extends Image {
   @doc("Resource group name - Optional")
   resourceGroup?: string = "";
 
-  @doc("Shared image gallery")
+  @doc("Gallery Name")
   gallery: string;
 
   @doc("Image definition")
@@ -143,7 +150,15 @@ interface Jobs {
   listByResourceGroup is ArmResourceListByParent<Job>;
   listbySubscription is ArmListBySubscription<Job>;
   get is ArmResourceRead<Job>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsyncCompliant<Job>;
-  update is ArmResourcePatchSync<Job, JobResourceProperties>;
-  delete is ArmResourceDeleteAsync<Job>;
+
+  @sharedRoute
+  @renamedFrom(Versions.v2025_04_01_preview, "createOrUpdate")
+  @removed(Versions.v2025_04_01_preview)
+  createOrUpdateOld is ArmResourceCreateOrUpdateAsyncCompliant<Job>;
+  @sharedRoute
+  @added(Versions.v2025_04_01_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Job>;
+
+  update is ArmTagsPatchSync<Job>;
+  delete is ArmResourceDeleteWithoutOkAsync<Job>;
 }
