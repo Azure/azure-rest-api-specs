@@ -518,7 +518,7 @@ model MongoInstanceProperties is AzureResourceProperties {
 /**
  * Mongo Instance resource patch properties
  */
-model MongoInstanceResourcePatchProperties {
+model MongoInstanceResourcePatchProperties is AzureResourceProperties {
   /**
    * The Server IP/host name.
    */
@@ -548,6 +548,7 @@ model MongoDatabaseProperties is AzureResourceProperties {
    * The database name.
    */
   databaseName: string;
+  
 
   /**
    * The size of the database in MB.
