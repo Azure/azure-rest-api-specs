@@ -2770,12 +2770,12 @@
           "type": "boolean",
           "description": "Indicates whether the device is enabled."
         },
-        "updateGroupId": {
+        "updateGroupResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of the associated Update Group resource."
         },
-        "networkId": {
+        "networkResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of the associated Network resource."
@@ -2802,8 +2802,8 @@
         "mac",
         "serial",
         "enabled",
-        "updateGroupId",
-        "networkId",
+        "updateGroupResourceId",
+        "networkResourceId",
         "ipAddress",
         "label"
       ]
@@ -2816,12 +2816,12 @@
           "type": "boolean",
           "description": "Indicates whether the device is enabled."
         },
-        "updateGroupId": {
+        "updateGroupResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of the associated Update Group resource."
         },
-        "networkId": {
+        "networkResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of the associated Network resource."
@@ -2880,7 +2880,7 @@
       "type": "object",
       "description": "Device Service Link properties",
       "properties": {
-        "deviceId": {
+        "deviceResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of the associated Device resource.",
@@ -2889,7 +2889,7 @@
             "create"
           ]
         },
-        "serviceId": {
+        "serviceResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of the associated Virtual Desktop Infrastructure service resource."
@@ -2901,15 +2901,15 @@
         }
       },
       "required": [
-        "deviceId",
-        "serviceId"
+        "deviceResourceId",
+        "serviceResourceId"
       ]
     },
     "DeviceServiceLinkPropertiesUpdate": {
       "type": "object",
       "description": "Device Service Link properties",
       "properties": {
-        "serviceId": {
+        "serviceResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource ID of the associated Virtual Desktop Infrastructure service resource."

@@ -48,10 +48,10 @@ model DeviceProperties {
   enabled: boolean;
 
   @doc("The Azure Resource ID of the associated Update Group resource.")
-  updateGroupId: armResourceIdentifier;
+  updateGroupResourceId: armResourceIdentifier;
 
   @doc("The Azure Resource ID of the associated Network resource.")
-  networkId: armResourceIdentifier;
+  networkResourceId: armResourceIdentifier;
 
   @doc("The IP address of the device that belongs to the attached network.")
   ipAddress: ipV4Address;

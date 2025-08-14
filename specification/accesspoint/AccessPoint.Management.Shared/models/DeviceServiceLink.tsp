@@ -32,10 +32,10 @@ model DeviceServiceLinkProperties {
   @doc("The Azure Resource ID of the associated Device resource.")
   // Do not allow updating this field, since it would imply a PATCH on 2 separate devices
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  deviceId: armResourceIdentifier;
+  deviceResourceId: armResourceIdentifier;
 
   @doc("The Azure Resource ID of the associated Virtual Desktop Infrastructure service resource.")
-  serviceId: armResourceIdentifier;
+  serviceResourceId: armResourceIdentifier;
 
   ...BaseResourceProperties;
 }
