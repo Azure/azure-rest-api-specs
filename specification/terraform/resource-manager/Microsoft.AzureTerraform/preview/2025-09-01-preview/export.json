@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AzureTerraformResourceProviderClient",
-    "version": "2023-07-01-preview",
+    "version": "2025-09-01-preview",
     "description": "The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.",
     "x-typespec-generated": [
       {
@@ -112,6 +112,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TerraformOperationStatus"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -224,6 +230,30 @@
           "type": "boolean",
           "description": "Mask sensitive attributes in the Terraform configuration. Defaults to `true`.",
           "default": true
+        },
+        "includeRoleAssignment": {
+          "type": "boolean",
+          "description": "Whether to include RBAC role assignments assigned to the resources exported. Only resource-scoped role assignments are supported. Defaults to `false`.",
+          "default": false
+        },
+        "includeManagedResource": {
+          "type": "boolean",
+          "description": "Whether to include internal resources managed by Azure in the exported configuration. Defaults to `false`.",
+          "default": false
+        },
+        "excludeAzureResource": {
+          "type": "array",
+          "description": "Excludes specified Azure Resource Ids. Case-insensitive Azure Resource ID regular expression. Example: `[\"/subscriptions/[0-9a-f-]+/resourceGroups/my-rg.*\"]`.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeTerraformResource": {
+          "type": "array",
+          "description": "Excludes specified Terraform resource types. Example: `[\"azurerm_virtual_network\"]`.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "discriminator": "type",
@@ -247,6 +277,11 @@
         "recursive": {
           "type": "boolean",
           "description": "Recursively includes child resources. Defaults to `false`.",
+          "default": false
+        },
+        "includeResourceGroup": {
+          "type": "boolean",
+          "description": "Includes the resource group in the exported Terraform resources. Defaults to `false`.",
           "default": false
         },
         "table": {
@@ -295,6 +330,16 @@
           "type": "string",
           "description": "The id prefix for the exported Terraform resources. Defaults to `res-`.",
           "default": "res-"
+        },
+        "recursive": {
+          "type": "boolean",
+          "description": "Recursively includes child resources. Defaults to `false`.",
+          "default": false
+        },
+        "includeResourceGroup": {
+          "type": "boolean",
+          "description": "Includes the resource group in the exported Terraform resources. Defaults to `false`.",
+          "default": false
         }
       },
       "required": [
