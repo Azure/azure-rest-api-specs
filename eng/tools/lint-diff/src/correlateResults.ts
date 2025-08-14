@@ -1,8 +1,8 @@
+import { Readme } from "@azure-tools/specs-shared/readme";
 import { basename, join, relative } from "path";
-import { relativizePath, pathExists, isFailure, isWarning } from "./util.js";
 import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
-import { Readme } from "@azure-tools/specs-shared/readme";
+import { isFailure, isWarning, pathExists, relativizePath } from "./util.js";
 
 export async function correlateRuns(
   beforePath: string,

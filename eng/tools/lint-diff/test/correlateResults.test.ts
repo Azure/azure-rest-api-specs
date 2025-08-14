@@ -1,23 +1,23 @@
-import { test, describe, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 
-import {
-  AutorestRunResult,
-  LintDiffViolation,
-  Source,
-  BeforeAfter,
-} from "../src/lintdiff-types.js";
-import {
-  correlateRuns,
-  getViolations,
-  getLintDiffViolations,
-  arrayIsEqual,
-  getNewItems,
-  isSameSources,
-} from "../src/correlateResults.js";
-import { relativizePath } from "../src/util.js";
-import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { resolve } from "path";
+import {
+  arrayIsEqual,
+  correlateRuns,
+  getLintDiffViolations,
+  getNewItems,
+  getViolations,
+  isSameSources,
+} from "../src/correlateResults.js";
+import {
+  AutorestRunResult,
+  BeforeAfter,
+  LintDiffViolation,
+  Source,
+} from "../src/lintdiff-types.js";
+import { relativizePath } from "../src/util.js";
+import { isWindows } from "./test-util.js";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 

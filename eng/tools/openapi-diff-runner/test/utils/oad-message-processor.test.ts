@@ -1,21 +1,21 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
-import {
-  convertOadMessagesToResultMessageRecords,
-  createOadMessageProcessor,
-  createMessageKey,
-  appendToLogFile,
-  appendMarkdownToLog,
-  processAndAppendOadMessages,
-  clearMessageCache,
-  getMessageCacheSize,
-  OadMessageProcessorContext,
-} from "../../src/utils/oad-message-processor.js";
-import { OadMessage } from "../../src/types/oad-types.js";
-import { MessageLevel } from "../../src/types/message.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { logMessage, logMessageSafe } from "../../src/log.js";
 import { ApiVersionLifecycleStage, Context } from "../../src/types/breaking-change.js";
+import { MessageLevel } from "../../src/types/message.js";
+import { OadMessage } from "../../src/types/oad-types.js";
+import {
+  appendMarkdownToLog,
+  appendToLogFile,
+  clearMessageCache,
+  convertOadMessagesToResultMessageRecords,
+  createMessageKey,
+  createOadMessageProcessor,
+  getMessageCacheSize,
+  OadMessageProcessorContext,
+  processAndAppendOadMessages,
+} from "../../src/utils/oad-message-processor.js";
 
 // Test constants
 const TEST_CONSTANTS = {

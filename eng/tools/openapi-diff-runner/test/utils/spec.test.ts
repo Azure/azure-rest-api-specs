@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import {
-  getPrecedingSwaggers,
-  getExistedVersionOperations,
-  type Swagger,
-  getBaseNameForSwagger,
-} from "../../src/utils/spec.js";
 import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
+import {
+  deduplicateSwaggers,
+  getBaseNameForSwagger,
+  getExistedVersionOperations,
+  getPrecedingSwaggers,
+  type Swagger,
+} from "../../src/utils/spec.js";
 
 // Type definitions for tests (extending the base interfaces if needed)
 interface MockSwagger extends Swagger {
@@ -102,11 +103,9 @@ describe("Helper functions for version analysis", () => {
         createMockSwagger(TEST_PATHS.stable2020_07_02, ApiVersionLifecycleStage.STABLE),
       ];
 
-      const result = await getPrecedingSwaggers(TEST_PATHS.nonexistent, mockSwaggers);
-
-      expectResultStructure(result);
-      expect(result.stable).toBeUndefined();
-      expect(result.preview).toBeUndefined();
+      await expect(getPrecedingSwaggers(TEST_PATHS.nonexistent, mockSwaggers)).rejects.toThrow(
+        `Failed to read version from file:${TEST_PATHS.nonexistent}`,
+      );
     });
 
     it("should handle null or undefined availableSwaggers array", async () => {
@@ -264,6 +263,83 @@ describe("Helper functions for version analysis", () => {
     it("should handle paths without version segments", () => {
       const result = getBaseNameForSwagger("specification/network/test.json");
       expect(result).toBe("test.json");
+    });
+  });
+
+  describe("deduplicateSwaggers", () => {
+    it("should return empty array for empty input", () => {
+      const result = deduplicateSwaggers([]);
+      expect(result).toEqual([]);
+    });
+
+    it("should return the same array when no duplicates exist", () => {
+      const mockSwaggers: MockSwagger[] = [
+        createMockSwagger(TEST_PATHS.stable2020_07_02),
+        createMockSwagger(TEST_PATHS.stable2020_08_04),
+        createMockSwagger(TEST_PATHS.preview2020_07_02),
+      ];
+
+      const result = deduplicateSwaggers(mockSwaggers);
+
+      expect(result).toHaveLength(3);
+      expect(result[0].path).toBe(TEST_PATHS.stable2020_07_02);
+      expect(result[1].path).toBe(TEST_PATHS.stable2020_08_04);
+      expect(result[2].path).toBe(TEST_PATHS.preview2020_07_02);
+    });
+
+    it("should remove duplicate swaggers with same path", () => {
+      const mockSwaggers: MockSwagger[] = [
+        createMockSwagger(TEST_PATHS.stable2020_07_02),
+        createMockSwagger(TEST_PATHS.stable2020_08_04),
+        createMockSwagger(TEST_PATHS.stable2020_07_02), // duplicate
+        createMockSwagger(TEST_PATHS.preview2020_07_02),
+        createMockSwagger(TEST_PATHS.stable2020_08_04), // duplicate
+      ];
+
+      const result = deduplicateSwaggers(mockSwaggers);
+
+      expect(result).toHaveLength(3);
+      expect(result.map((s) => s.path)).toEqual([
+        TEST_PATHS.stable2020_07_02,
+        TEST_PATHS.stable2020_08_04,
+        TEST_PATHS.preview2020_07_02,
+      ]);
+    });
+
+    it("should handle single swagger", () => {
+      const mockSwaggers: MockSwagger[] = [createMockSwagger(TEST_PATHS.stable2020_07_02)];
+
+      const result = deduplicateSwaggers(mockSwaggers);
+
+      expect(result).toHaveLength(1);
+      expect(result[0].path).toBe(TEST_PATHS.stable2020_07_02);
+    });
+
+    it("should handle all duplicates scenario", () => {
+      const mockSwaggers: MockSwagger[] = [
+        createMockSwagger(TEST_PATHS.stable2020_07_02),
+        createMockSwagger(TEST_PATHS.stable2020_07_02),
+        createMockSwagger(TEST_PATHS.stable2020_07_02),
+      ];
+
+      const result = deduplicateSwaggers(mockSwaggers);
+
+      expect(result).toHaveLength(1);
+      expect(result[0].path).toBe(TEST_PATHS.stable2020_07_02);
+    });
+
+    it("should not mutate the original array", () => {
+      const mockSwaggers: MockSwagger[] = [
+        createMockSwagger(TEST_PATHS.stable2020_07_02),
+        createMockSwagger(TEST_PATHS.stable2020_07_02),
+      ];
+      const originalLength = mockSwaggers.length;
+
+      const result = deduplicateSwaggers(mockSwaggers);
+
+      expect(mockSwaggers).toHaveLength(originalLength); // Original unchanged
+      expect(result).not.toBe(mockSwaggers); // Different array instance
+      expect(result).toHaveLength(1);
     });
   });
 });

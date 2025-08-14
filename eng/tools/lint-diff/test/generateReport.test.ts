@@ -1,8 +1,9 @@
-import { beforeEach, test, describe, expect, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   compareLintDiffViolations,
   generateAutoRestErrorReport,
   generateLintDiffReport,
+  getAutoRestFailedMessage,
   getDocUrl,
   getFile,
   getFileLink,
@@ -11,11 +12,11 @@ import {
   iconFor,
 } from "../src/generateReport.js";
 import {
-  Source,
-  LintDiffViolation,
-  BeforeAfter,
-  AutorestRunResult,
   AutoRestMessage,
+  AutorestRunResult,
+  BeforeAfter,
+  LintDiffViolation,
+  Source,
 } from "../src/lintdiff-types.js";
 import { isWindows } from "./test-util.js";
 
@@ -28,8 +29,8 @@ vi.mock("node:fs/promises", async () => {
   };
 });
 
-import { readFile } from "fs/promises";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { readFile } from "fs/promises";
 
 vi.mock("../src/util.js", async () => {
   const original = await vi.importActual("../src/util.js");
@@ -48,6 +49,36 @@ describe("iconFor", () => {
     { input: "info", expected: ":warning:" },
   ])(`iconFor($input) returns $expected`, ({ input, expected }) => {
     expect(iconFor(input)).toEqual(expected);
+  });
+});
+
+describe("getAutoRestFailedMessage", () => {
+  test("returns empty string when result is null", () => {
+    expect(getAutoRestFailedMessage(null)).toEqual("");
+  });
+
+  test("returns empty string when result has no error", () => {
+    const result: AutorestRunResult = {
+      error: null,
+      rootPath: "",
+      readme: new Readme("file.md"),
+      tag: "default",
+      stdout: "",
+      stderr: "",
+    };
+    expect(getAutoRestFailedMessage(result)).toEqual("");
+  });
+
+  test("returns 'Autorest Failed' when result has an error", () => {
+    const result: AutorestRunResult = {
+      error: new Error("Autorest failed"),
+      rootPath: "",
+      readme: new Readme("file.md"),
+      tag: "default",
+      stdout: "",
+      stderr: "",
+    };
+    expect(getAutoRestFailedMessage(result)).toEqual("Autorest Failed");
   });
 });
 
@@ -464,6 +495,65 @@ describe("generateLintDiffReport", () => {
       "
     `);
   });
+
+  test.skipIf(isWindows())(
+    "passes and displays warning if before has errors",
+    async ({ expect }) => {
+      const afterViolation = {
+        extensionName: "@microsoft.azure/openapi-validator",
+        level: "warning",
+        code: "SomeCode",
+        message: "A warning occurred",
+        source: [],
+        details: {},
+      };
+
+      const beforeResult = {
+        error: new Error("Autorest failed"),
+        stdout: "",
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
+      const afterResult = {
+        error: null,
+        stdout: JSON.stringify(afterViolation),
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
+
+      const runCorrelations = new Map<string, BeforeAfter>([
+        ["file1.md", { before: beforeResult, after: afterResult }],
+      ]);
+
+      const outFile = "test-output-fatal.md";
+      const actual = await generateLintDiffReport(
+        runCorrelations,
+        new Set<string>([
+          "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+        ]),
+        outFile,
+        "baseBranch",
+        "compareSha",
+        "repo/path",
+      );
+      expect(actual).toBe(true);
+      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+      | --- | --- | --- |
+      | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) Autorest Failed|
+
+
+      > [!WARNING]
+      > Autorest failed checking before state of file1.md 
+
+      "
+    `);
+    },
+  );
 
   test.skipIf(isWindows())(
     "passes if new violations do not include an error (warnings only)",

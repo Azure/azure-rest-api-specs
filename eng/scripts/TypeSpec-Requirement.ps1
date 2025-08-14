@@ -169,7 +169,7 @@ else {
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
 
-      $notice = "Brownfield services will soon be required to convert from OpenAPI to TypeSpec. See https://aka.ms/azsdk/typespec."
+      $notice = "Your service description will soon be required to convert from OpenAPI to TypeSpec. See https://aka.ms/azsdk/typespec."
       LogNoticeForFile $file $notice
 
       if ($env:GITHUB_OUTPUT) {

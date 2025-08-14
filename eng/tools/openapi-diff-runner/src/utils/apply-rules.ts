@@ -4,6 +4,7 @@
  * In the "breakingChanges directory invocation depth" this file has depth 3
  * i.e. it is invoked by files with depth 2.
  */
+import { BreakingChangeLabelsToBeAdded } from "../command-helpers.js";
 import {
   ApiVersionLifecycleStage,
   BreakingChangesCheckType,
@@ -11,16 +12,15 @@ import {
   VersioningReviewRequiredLabel,
 } from "../types/breaking-change.js";
 import { OadMessage } from "../types/oad-types.js";
-import { BreakingChangeLabelsToBeAdded } from "../command-helpers.js";
 
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { logMessage, logWarning } from "../log.js";
 import {
   OadMessageRule,
   fallbackLabel,
   fallbackRule as fallbackOadMessageRule,
   oadMessagesRuleMap,
 } from "./oad-rule-map.js";
-import { logMessage, logWarning } from "../log.js";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 /**
  * The function applyRules() applies oadMessagesRuleMap to OAD messages returned by runOad().

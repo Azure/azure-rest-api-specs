@@ -1,15 +1,15 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { generateBreakingChangeResultSummary } from "../src/generate-report.js";
+import { addToSummary, logMessage } from "../src/log.js";
 import { Context } from "../src/types/breaking-change.js";
 import { RawMessageRecord, ResultMessageRecord } from "../src/types/message.js";
-import { addToSummary, logMessage } from "../src/log.js";
 import {
   BreakingChangeMdReport,
   createBreakingChangeMdReport,
   reportToString,
   sortBreakingChangeMdReports,
 } from "../src/utils/markdown-report.js";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 // Mock dependencies
 vi.mock("../src/log.js");

@@ -1,6 +1,6 @@
 param(
   [string]$swaggerPath,
-  [string]$callValidation = $false
+  [string]$reportFile = $null
 )
 
 . $PSScriptRoot/../../../scripts/ChangedFiles-Functions.ps1
@@ -95,11 +95,11 @@ if ($swaggerPath.StartsWith("specification")) {
   $swaggerPath = Join-Path $repoRoot $swaggerPath
 }
 
-if ($callValidation -eq $true) {
-  Write-Host "Executing TypeSpec migration validation..."
-  npx tsmv $swaggerInMain $swaggerPath
+if ([string]::IsNullOrEmpty($reportFile)) {
+  Write-Host "Your next command: npx tsmv $swaggerInMain $swaggerPath --outputFolder {outputFolder}"
 }
-else {
-  Write-Host "Your next command: npx tsmv $swaggerInMain $swaggerPath {outputFolder}"
+else {  
+  Write-Host "Executing TypeSpec migration validation..."
+  npx tsmv $swaggerInMain $swaggerPath --reportFile $reportFile
 }
 
