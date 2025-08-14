@@ -1,9 +1,9 @@
-function ReplaceValueByKey($obj, $key, $value, $replacementsUsage)
+function ReplaceValueByKey($obj, $key, $value, $replacementsUsage, $skipTopLevel = $false)
 {
     # Set all values with the specified key to the
     # specified value in the provided json object (recursively)
     foreach ($p in $obj.PSObject.Properties) {
-        if ($p.Name -eq $key) {
+        if ($false -eq $skipTopLevel -and $p.Name -eq $key) {
             # Update the value
             if ($null -eq $value) {
                 # Remove the value if it should be replaced by null
@@ -36,16 +36,20 @@ function ReplaceValueByKey($obj, $key, $value, $replacementsUsage)
     }
 }
 
+$apiType = "preview"
+$apiVersion = "2025-05-03-preview"
 $specFolder = "C:\Dev\azure-rest-api-specs\specification\monitor\Microsoft.Monitor.Issues.Management"
-$swaggerFolder = "C:\Dev\azure-rest-api-specs\specification\monitor\resource-manager\Microsoft.Monitor\Issues\preview\2025-05-03-preview"
+$swaggerFolder = "C:\Dev\azure-rest-api-specs\specification\monitor\resource-manager\Microsoft.Monitor\Issues\$apiType\$apiVersion"
+$examplesPathInSpec = "$specFolder\examples\$apiVersion"
+$examplesPathInSwagger = "$swaggerFolder\examples"
 $swaggerPath = "$swaggerFolder\issues.json"
 
 # Generate examples
 Write-Output "Generating examples..."
-if (-not (Test-Path "$swaggerFolder\examples")) {
-    New-Item -Path "$swaggerFolder\examples" -ItemType Directory -Force | Out-Null
+if (-not (Test-Path $examplesPathInSwagger)) {
+    New-Item -Path $examplesPathInSwagger -ItemType Directory -Force | Out-Null
 }
-Remove-Item "$swaggerFolder\examples\Issue_*" -Recurse -Force
+Remove-Item "$examplesPathInSwagger\Issue_*" -Recurse -Force
 oav generate-examples $swaggerPath --logLevel off
 
 # Perform replacements in all example files
@@ -98,7 +102,7 @@ Get-ChildItem -Path "$swaggerFolder\examples" -Recurse -Filter "Issue_*.json" | 
         else {
             $value = $_.Value
         }
-        ReplaceValueByKey $content $_.Key $value $replacementsUsage        
+        ReplaceValueByKey $content $_.Key $value $replacementsUsage $true
     }
 
     if ($file.Contains("StartInvestigation")) {
@@ -126,8 +130,8 @@ foreach ($key in $replacements.Keys) {
 
 # Copy all examples from the swagger folder to the spec folder
 Write-Output "Copying to spec folder..."
-Get-ChildItem -Path "$swaggerFolder\examples\Issue_*" | ForEach-Object {
-    $dest = Join-Path -Path "$specFolder\examples" -ChildPath $_.Name
+Get-ChildItem -Path "$examplesPathInSwagger\Issue_*" | ForEach-Object {
+    $dest = Join-Path -Path $examplesPathInSpec -ChildPath $_.Name
     Copy-Item -Path $_.FullName -Destination $dest -Force
 }
 
