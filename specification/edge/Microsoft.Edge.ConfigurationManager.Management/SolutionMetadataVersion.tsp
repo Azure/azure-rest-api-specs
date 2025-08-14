@@ -17,7 +17,6 @@ using Azure.ResourceManager.CommonTypes;
 namespace Microsoft.Edge;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
-
 @added(Versions.v2025_08_15_preview)
 @doc("Solution Metadata Version Properties")
 model SolutionMetadataVersionProperties {
