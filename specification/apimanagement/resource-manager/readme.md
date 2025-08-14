@@ -28,7 +28,7 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2024-10-01
+tag: package-preview-2024-10-01-preview
 ```
 
 ### Tag: package-preview-2024-10-01-preview
@@ -230,7 +230,6 @@ input-file:
   - Microsoft.ApiManagement/stable/2024-05-01/apimworkspaces.json
   - Microsoft.ApiManagement/stable/2024-05-01/definitions.json
   - Microsoft.ApiManagement/stable/2024-05-01/operationStatuses.json
-tag: package-preview-2024-10-01
 ```
 ### Tag: package-preview-2023-09
 
