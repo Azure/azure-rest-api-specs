@@ -22,9 +22,19 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Security.Attestation"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-security-attestation"
+    namespace: "com.azure.security.attestation"
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    package-dir: "attestation"
+    generate-metadata: true
+    package-details:
+      name: "@azure/attestation"
+      description: "Azure Attestation"
