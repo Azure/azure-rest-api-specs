@@ -82,7 +82,7 @@ model SpotPlacementScoresResponse {
   availabilityZones?: boolean;
 
   /**
-   * A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.
+   * A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation. // TODO: Remove comment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "PlacementScore is a non-resource data model used for telemetry and scoring; items are not uniquely addressable and do not require x-ms-identifiers."
   placementScores?: PlacementScore[];
@@ -108,7 +108,7 @@ model PlacementScore {
   availabilityZone?: string;
 
   /**
-   * A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.
+   * A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation. // TODO: Remove comment
    */
   score?: string;
 
