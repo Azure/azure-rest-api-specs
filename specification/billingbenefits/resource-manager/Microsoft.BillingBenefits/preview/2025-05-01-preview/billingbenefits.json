@@ -1962,6 +1962,9 @@
           "PromotionalCreditCreate": {
             "$ref": "./examples/PromotionalCreditCreate.json"
           },
+          "ECIFCreditCreate": {
+            "$ref": "./examples/PromotionalCreditCreate.json"
+          },
           "CreditCreate": {
             "$ref": "./examples/CreditCreate.json"
           }
@@ -3086,10 +3089,10 @@
       "description": "Credit breakdown item representing a milestone, line-item, or no-charge service",
       "properties": {
         "redemption": {
-          "$ref": "#/definitions/CreditRedemptionPolicies"
+          "$ref": "#/definitions/CreditRedemptionPolicy"
         },
         "expiration": {
-          "$ref": "#/definitions/CreditExpirationPolicies"
+          "$ref": "#/definitions/CreditExpirationPolicy"
         }
       }
     },
@@ -3134,7 +3137,7 @@
         "value"
       ]
     },
-    "CreditExpirationPolicies": {
+    "CreditExpirationPolicy": {
       "type": "string",
       "description": "Expiration policy of the Credit",
       "enum": [
@@ -3142,7 +3145,7 @@
         "SuspendBillingProfile"
       ],
       "x-ms-enum": {
-        "name": "CreditExpirationPolicies",
+        "name": "CreditExpirationPolicy",
         "modelAsString": true,
         "values": [
           {
@@ -3156,7 +3159,7 @@
         ]
       }
     },
-    "CreditRedemptionPolicies": {
+    "CreditRedemptionPolicy": {
       "type": "string",
       "description": "Redemption policy of the Credit",
       "enum": [
@@ -3165,7 +3168,7 @@
         "ManualRedeem"
       ],
       "x-ms-enum": {
-        "name": "CreditRedemptionPolicies",
+        "name": "CreditRedemptionPolicy",
         "modelAsString": true,
         "values": [
           {
@@ -3235,7 +3238,7 @@
           },
           {
             "value": "NotStarted",
-            "description": "Credit fulfillment has not started yet"
+            "description": "Credit application has not started yet"
           }
         ]
       }
