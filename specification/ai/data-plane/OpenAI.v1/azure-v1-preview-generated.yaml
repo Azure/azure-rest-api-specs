@@ -3026,7 +3026,8 @@ paths:
         - Vector Stores
   /video/generations/jobs:
     post:
-      operationId: VideoGenerationJobs_Create
+      operationId: VideoGenerationJobs
+      description: Creates a new video
       parameters:
         - name: api-version
           in: query
@@ -3037,7 +3038,6 @@ paths:
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
-      description: Creates a new video generation job.
       responses:
         '200':
           description: The request has succeeded.
@@ -3057,9 +3057,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AzureOpenAIVideoGenerationErrorResponse'
-      x-ms-examples:
-        Create a simple video generation job request:
-          $ref: ./examples/create_video_generation_job_simple.json
       tags:
         - Video
       requestBody:
@@ -3068,9 +3065,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateVideoGenerationRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CreateVideoGenerationWithMediaRequestMultiPart'
+      x-ms-examples:
+        Create a simple video generation job request:
+          $ref: ./examples/create_video_generation_job_simple.json
     get:
       operationId: VideoGenerationJobs_List
       description: Lists video generation jobs.
@@ -3139,7 +3136,7 @@ paths:
   /video/generations/jobs/{job-id}:
     get:
       operationId: VideoGenerationJobs_Get
-      description: Retrieves properties of a video generation job.
+      description: generation job.Retrieves properties of a video generation job.
       parameters:
         - name: api-version
           in: query
@@ -6004,52 +6001,6 @@ components:
         model:
           type: string
           description: The name of the deployment to use for this request.
-    CreateVideoGenerationWithMediaRequestMultiPart:
-      type: object
-      required:
-        - prompt
-        - height
-        - width
-        - model
-        - files
-      properties:
-        prompt:
-          type: string
-          description: The prompt for this video generation job.
-        height:
-          type: integer
-          format: int32
-          description: 'The height of the video. The following dimensions are supported: 480x480, 854x480, 720x720, 1280x720, 1080x1080 and 1920x1080 in both landscape and portrait orientations.'
-        width:
-          type: integer
-          format: int32
-          description: 'The width of the video. The following dimensions are supported: 480x480, 854x480, 720x720, 1280x720, 1080x1080 and 1920x1080 in both landscape and portrait orientations.'
-        n_seconds:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The duration of the video generation job. Must be between 1 and 20 seconds.
-          default: 5
-        n_variants:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The number of videos to create as variants for this job. Must be between 1 and 5. Smaller dimensions allow more variants.
-          default: 1
-        model:
-          type: string
-          description: The name of the deployment to use for this request.
-        inpaint_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/InpaintItem'
-          description: Optional inpainting items for this video generation job.
-        files:
-          type: array
-          items:
-            type: string
-            format: binary
-      description: The properties of a video generation job request with media files.
     CropBounds:
       type: object
       properties:
