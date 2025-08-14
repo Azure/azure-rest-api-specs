@@ -4,6 +4,8 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.Core;
+
 @doc("The type of entity that added data to the issue")
 union AddedByType {
   @doc("The data was added manually by a user")
@@ -69,10 +71,8 @@ model InvestigationExecution {
 
 @doc("A single scope of the investigation")
 model InvestigationScope {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Investigation scope ID should be an ARM resource ID"
   @doc("The ID of the scope of the investigation - either an Azure alert ID or an Azure resource ID")
-  @format("arm-id")
-  id: string;
+  id: armResourceIdentifier;
 
   @doc("The origin of the scope")
   origin: Origin;
@@ -128,10 +128,8 @@ model RunParameters {
 
 @doc("Properties of the current investigation")
 model InvestigationMetadata {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Investigation ID should be a GUID"
   @doc("The unique identifier of the investigation")
-  @format("uuid")
-  id: string;
+  id: uuid;
 
   @doc("The execution details of the investigation")
   execution: InvestigationExecution;
@@ -145,10 +143,8 @@ model InvestigationMetadata {
 
 @doc("Parameters provided to get the investigation result")
 model FetchInvestigationResultParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Investigation ID should be a GUID"
   @doc("The unique identifier of the investigation")
-  @format("uuid")
-  investigationId: string;
+  investigationId: uuid;
 }
 
 @doc("The issue status")
@@ -196,10 +192,8 @@ model IssuePayload {
 
 @doc("Properties of an alert which is related to the issue")
 model RelatedAlert {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Alert ID should be an ARM resource ID"
   @doc("The alert ID")
-  @format("arm-id")
-  id: string;
+  id: armResourceIdentifier;
 
   @doc("The alerts's relevance status")
   relevance: Relevance;
@@ -225,10 +219,8 @@ model RelatedAlerts {
 
 @doc("Properties of a resource which is related to the issue")
 model RelatedResource {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Related resource ID should be an ARM resource ID"
   @doc("The resource ID")
-  @format("arm-id")
-  id: string;
+  id: armResourceIdentifier;
 
   @doc("The resource's relevance status")
   relevance: Relevance;

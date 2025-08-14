@@ -741,6 +741,11 @@
         ]
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -777,8 +782,7 @@
       "description": "Parameters provided to get the investigation result",
       "properties": {
         "investigationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The unique identifier of the investigation"
         }
       },
@@ -852,8 +856,7 @@
       "description": "Properties of the current investigation",
       "properties": {
         "id": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The unique identifier of the investigation"
         },
         "execution": {
