@@ -6,8 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
-
-
 namespace AttestationClient;
 
 /**
@@ -684,7 +682,6 @@ model PolicyCertificatesModificationResult {
 /**
  * StoredAttestationPolicy
  */
-
 @usage(Usage.output)
 model StoredAttestationPolicy {
   /**
