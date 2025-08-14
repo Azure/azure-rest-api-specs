@@ -3011,6 +3011,9 @@
         "endAt": {
           "$ref": "#/definitions/EndAt"
         },
+        "policies": {
+          "$ref": "#/definitions/CreditPolicies"
+        },
         "billingAccountResourceId": {
           "$ref": "#/definitions/BillingAccountResourceId"
         },
@@ -3078,6 +3081,18 @@
         }
       }
     },
+    "CreditPolicies": {
+      "type": "object",
+      "description": "Credit breakdown item representing a milestone, line-item, or no-charge service",
+      "properties": {
+        "redemption": {
+          "$ref": "#/definitions/CreditRedemptionPolicies"
+        },
+        "expiration": {
+          "$ref": "#/definitions/CreditExpirationPolicies"
+        }
+      }
+    },
     "CreditBreakdownItem": {
       "type": "object",
       "description": "Credit breakdown item representing a milestone, line-item, or no-charge service",
@@ -3119,6 +3134,55 @@
         "value"
       ]
     },
+    "CreditExpirationPolicies": {
+      "type": "string",
+      "description": "Expiration policy of the Credit",
+      "enum": [
+        "None",
+        "SuspendBillingProfile"
+      ],
+      "x-ms-enum": {
+        "name": "CreditExpirationPolicies",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No policy applied to the expiration of this credit"
+          },
+          {
+            "value": "SuspendBillingProfile",
+            "description": "Billing profile is suspended when the credit expires"
+          }
+        ]
+      }
+    },
+    "CreditRedemptionPolicies": {
+      "type": "string",
+      "description": "Redemption policy of the Credit",
+      "enum": [
+        "NotApplicable",
+        "AutoRedeem",
+        "ManualRedeem"
+      ],
+      "x-ms-enum": {
+        "name": "CreditRedemptionPolicies",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotApplicable",
+            "description": "Redemption policy is not applicable for this credit"
+          },
+          {
+            "value": "AutoRedeem",
+            "description": "Credit is automatically redeemed"
+          },
+          {
+            "value": "ManualRedeem",
+            "description": "Credit is manually redeemed"
+          }
+        ]
+      }
+    },
     "CreditStatus": {
       "type": "string",
       "description": "Status of the credit",
@@ -3130,7 +3194,8 @@
         "Canceled",
         "Failed",
         "Expired",
-        "Exhausted"
+        "Exhausted",
+        "NotStarted"
       ],
       "x-ms-enum": {
         "name": "CreditStatus",
@@ -3167,6 +3232,10 @@
           {
             "value": "Exhausted",
             "description": "Credit has been fully consumed"
+          },
+          {
+            "value": "NotStarted",
+            "description": "Credit fulfillment has not started yet"
           }
         ]
       }
