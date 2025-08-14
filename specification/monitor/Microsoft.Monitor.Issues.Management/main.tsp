@@ -1,1 +1,1 @@
-import "./issues.tsp";
+import "./typespec/issues.tsp";
