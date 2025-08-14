@@ -47,7 +47,8 @@ interface AzureADAdministrators {
     AzureADAdministrator,
     Response = ArmResourceUpdatedResponse<AzureADAdministrator> | ArmResourceCreatedResponse<
       AzureADAdministrator,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = AzureADAdministrator> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

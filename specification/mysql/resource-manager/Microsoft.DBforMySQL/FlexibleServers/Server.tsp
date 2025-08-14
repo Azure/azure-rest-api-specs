@@ -53,7 +53,8 @@ interface Servers {
     Server,
     Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
       Server,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Server> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 
@@ -164,7 +165,8 @@ interface Servers {
     Server,
     ServerDetachVNetParameter,
     ArmResponse<Server>,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Server> &
+      ArmLroLocationHeader
   >;
 }
 
@@ -223,7 +225,8 @@ interface ServersMigration {
     Server,
     void,
     ArmResponse<Server>,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Server> &
+      ArmLroLocationHeader
   >;
 }
 

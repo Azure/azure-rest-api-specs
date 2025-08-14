@@ -46,7 +46,8 @@ interface AdvancedThreatProtectionSettings {
     AdvancedThreatProtection,
     Response = ArmResourceUpdatedResponse<AdvancedThreatProtection> | ArmResourceCreatedResponse<
       AdvancedThreatProtection,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = AdvancedThreatProtection> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

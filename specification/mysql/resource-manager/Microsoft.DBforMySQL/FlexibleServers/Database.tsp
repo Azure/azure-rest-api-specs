@@ -39,7 +39,8 @@ interface Databases {
     Database,
     Response = ArmResourceUpdatedResponse<Database> | ArmResourceCreatedResponse<
       Database,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Database> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 

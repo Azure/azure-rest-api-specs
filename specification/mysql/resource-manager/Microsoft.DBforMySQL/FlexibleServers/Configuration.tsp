@@ -40,7 +40,8 @@ interface Configurations {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Configuration,
     Response = ArmResourceUpdatedResponse<Configuration> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -94,7 +95,8 @@ interface Configurations {
     Server,
     ConfigurationListForBatchUpdate,
     ArmResponse<ConfigurationListResult>,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Configuration> &
+      ArmLroLocationHeader
   >;
 }
 

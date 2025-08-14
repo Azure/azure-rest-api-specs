@@ -40,7 +40,8 @@ interface FirewallRules {
     FirewallRule,
     Response = ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<
       FirewallRule,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = FirewallRule> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 
