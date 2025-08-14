@@ -13,7 +13,7 @@ namespace Microsoft.AzureCis;
 @doc("dsmsManagedKeySecret properties")
 model DsmsManagedKeySecretResourceProperties {
   @doc("ARM resource id.")
-  armResourceId: string; // Camel case for the parameter names.
+  armResourceId: armResourceIdentifier; // Camel case for the parameter names.
 
   @doc("Managed Key subtype. Used to determine which way to store the secret in dSMS. Acceptable values (case sensitive): 'Password', 'ConnectionString'. Optional, 'Password' by default.")
   managedKeySubType: "Password" | "ConnectionString" | string;
