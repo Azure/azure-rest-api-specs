@@ -1,0 +1,313 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.StorageInventory management service",
+    "version": "2025-05-01-preview",
+    "description": "Microsoft.StorageInventory Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Tenants"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.StorageInventory/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.StorageInventory/tenants": {
+      "get": {
+        "operationId": "Tenants_List",
+        "tags": [
+          "Tenants"
+        ],
+        "description": "List Tenant resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tenants_List": {
+            "$ref": "./examples/Tenants_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.StorageInventory/tenants/{tenantName}": {
+      "get": {
+        "operationId": "Tenants_Get",
+        "tags": [
+          "Tenants"
+        ],
+        "description": "Get a Tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tenantName",
+            "in": "path",
+            "description": "The name of the Tenant",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Tenant"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tenants_Get": {
+            "$ref": "./examples/Tenants_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Tenant": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TenantProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TenantListResult": {
+      "type": "object",
+      "description": "The response of a Tenant list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Tenant items on this page",
+          "items": {
+            "$ref": "#/definitions/Tenant"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TenantProperties": {
+      "type": "object",
+      "description": "Tenant properties for storage inventory",
+      "properties": {
+        "tenant": {
+          "type": "string",
+          "description": "Name of tenant"
+        },
+        "environment": {
+          "type": "string",
+          "description": "Specifies the operational environment of the tenant"
+        },
+        "geoDomain": {
+          "type": "string",
+          "description": "Specifies the geographic domain associated with the tenant"
+        },
+        "geoPairName": {
+          "type": "string",
+          "description": "Specifies the name of the tenant's paired geographic region used for disaster recovery and geo-replication"
+        },
+        "geoRegion": {
+          "type": "string",
+          "description": "Specifies the geographic region where the tenant's resources are physically hosted"
+        },
+        "hardwareSetup": {
+          "type": "string",
+          "description": "Describes the physical hardware configuration of the tenant"
+        },
+        "inBuildOut": {
+          "type": "boolean",
+          "description": "Indicates whether the tenant is currently in the buildout phase and not yet fully provisioned"
+        },
+        "inDecom": {
+          "type": "boolean",
+          "description": "Indicates whether the tenant has entered the decommissioning workflow"
+        },
+        "dataCenter": {
+          "type": "string",
+          "description": "Specifies the physical data center location where the tenant's resources are deployed"
+        },
+        "intent": {
+          "type": "string",
+          "description": "Specifies the intended purpose or role of the tenant"
+        },
+        "isReadyForCustomer": {
+          "type": "boolean",
+          "description": "Indicates whether the tenant is fully provisioned and ready to serve customer workloads"
+        },
+        "zrsSetup": {
+          "type": "string",
+          "description": "Indicates the Zone Redundant Storage (ZRS) configuration type for this tenant"
+        },
+        "isLimitless": {
+          "type": "boolean",
+          "description": "Indicates whether the tenant has Limitless capabilities enabled"
+        },
+        "isRdma": {
+          "type": "boolean",
+          "description": "Indicates whether RDMA (Remote Direct Memory Access) is enabled for this tenant"
+        },
+        "rsrpName": {
+          "type": "string",
+          "description": "Name of the RSRP (Regional Storage Resource Provider) tenant responsible for control-plane operations of this tenant"
+        },
+        "stg": {
+          "type": "string",
+          "description": "Indicates the current storage system version (STG) deployed for this tenant"
+        },
+        "armRegion": {
+          "type": "string",
+          "description": "Specifies the Azure Resource Manager (ARM) region where the tenant's resources are physically deployed"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
