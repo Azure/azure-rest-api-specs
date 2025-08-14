@@ -193,6 +193,7 @@ interface TestRunOperations {
   @clientName("get_metric_namespaces", "python")
   @clientName("getMetricNamespaces", "java")
   listMetricNamespaces is LoadTestRun.listMetricNamespaces;
+  @list
   listMetrics is LoadTestRun.listMetrics;
   listTestRuns is LoadTestRun.listTestRuns;
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
