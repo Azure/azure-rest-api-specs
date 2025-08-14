@@ -55,6 +55,5 @@ suppressions:
     reason: The IDs of investigation entities are GUIDs.
     from: issues.json
     where:
-     - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
-     - $.definitions.InvestigationMetadata.properties.id.format
+     - $.definitions["Azure.Core.uuid"].format
 ```
