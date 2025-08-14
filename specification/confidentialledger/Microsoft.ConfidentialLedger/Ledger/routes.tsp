@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/common.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 
