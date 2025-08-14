@@ -67,14 +67,6 @@ model DeviceProperties {
   provisioningState?: ProvisioningState;
 }
 
-// Suppress because we have no custom properties for the response,
-// but the ArmResourceActionNoResponseContentAsync requires a response model to generate the correct response types.
-// #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
-// OAV validation in pipelines will fail with INVALID_TYPE if we have an empty model with a description
-// https://github.com/Azure/oav/issues/1065
-// #suppress "@azure-tools/typespec-azure-core/documentation-required"
-// model DeviceActionResponse {}
-
 @doc("The request body for the displayMessage device action.")
 model DisplayMessageRequest {
   @doc("The message to be displayed on the device.")
