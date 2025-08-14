@@ -1353,9 +1353,17 @@
           "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
         },
         "clusterAuthType": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "HDInsight cluster authentication type. Type: string (or Expression with resultType string)."
+          "description": "HDInsight cluster authentication type.",
+          "type": "string",
+          "enum": [
+            "BasicAuth",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "HDInsightClusterAuthenticationType",
+            "modelAsString": true
+          }
         },
         "userName": {
           "type": "object",
