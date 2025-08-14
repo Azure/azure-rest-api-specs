@@ -38,6 +38,7 @@ interface ProviderInstances {
   /**
    * Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.
    */
+  @list
   listByMonitor is ArmResourceListByParent<ProviderInstance>;
 }
 

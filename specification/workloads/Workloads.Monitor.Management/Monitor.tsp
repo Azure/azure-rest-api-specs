@@ -43,11 +43,13 @@ interface Monitors {
   /**
    * Gets a list of SAP monitors in the specified resource group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<Monitor>;
 
   /**
    * Gets a list of SAP monitors in the specified subscription. The operations returns various properties of each SAP monitor.
    */
+  @list
   list is ArmListBySubscription<Monitor>;
 }
 
