@@ -117,40 +117,40 @@ union SamplingType {
 @doc("Defines operators used in filter conditions.")
 union ConditionOperator {
   @doc("Equal to.")
-  `==`: "eq",
+  Equal: "==",
 
   @doc("Not equal to.")
-  `!=`: "ne",
+  NotEqual: "!=",
 
   @doc("Less than.")
-  `<`: "lt",
+  LessThan: "<",
 
   @doc("Less than or equal to.")
-  `<=`: "lte",
+  LessThanOrEqual: "<=",
 
   @doc("Greater than.")
-  `>`: "gt",
+  GreaterThan: ">",
 
   @doc("Greater than or equal to.")
-  `>=`: "gte",
+  GreaterThanOrEqual: ">=",
 
   @doc("In operator.")
-  in: "@in",
+  In: "@in",
 
   @doc("Not in.")
-  `!in`: "notin",
+  NotIn: "!in",
 
   @doc("Starts with.")
-  "startswith",
+  StartsWith: "startswith",
 
   @doc("Does not start with.")
-  `!startswith`: "notstartswith",
+  NotStartsWith: "!startswith",
 
   @doc("Contains the value.")
-  "contains",
+  Contains: "contains",
 
   @doc("Does not contain the value.")
-  `!contains`: "notcontains",
+  NotContains: "!contains",
 
   string,
 }
@@ -197,16 +197,16 @@ model WindowUptimeCriteria {
 @doc("Defines comparison operators for window uptime criteria.")
 union WindowUptimeCriteriaComparator {
   @doc("Less than the target value.")
-  `<`: "lt",
+  LessThan: "<",
 
   @doc("Greater than the target value.")
-  `>`: "gt",
+  GreaterThan: ">",
 
   @doc("Less than or equal to the target value.")
-  `<=`: "lte",
+  LessThanOrEqual: "<=",
 
   @doc("Greater than or equal to the target value.")
-  `>=`: "gte",
+  GreaterThanOrEqual: ">=",
 
   string,
 }

@@ -56,14 +56,8 @@ model ProviderAccountProperties {
   @maxLength(50)
   companyName: string;
 
-  /** Deprecated. List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount. */
-  allowedSubscriptions?: SubscriptionId[];
-
   /** List of Azure Subscriptions that are allowed to view/access resources from this ProviderAccount. */
   subscriptions?: ProviderAccountSubscription[];
-
-  /** Deprecated. List of Targets available in this ProviderAccount. */
-  targets?: ProviderAccountTarget[];
 
   /** List of Queues available in this ProviderAccount. */
   @visibility(Lifecycle.Read)
@@ -82,11 +76,8 @@ scalar SubscriptionId extends string;
 
 /** A subscription that is allowed to access resources from a ProviderAccount. */
 model ProviderAccountSubscription {
-  /** The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000). */
-  @minLength(36)
-  @maxLength(36)
-  @pattern("^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$")
-  id: string;
+  /** The Azure subscription ID. */
+  id: SubscriptionId;
 
   /** The display name of the Azure subscription. */
   @maxLength(50)
