@@ -5,8 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./SolutionMetadata.tsp";
-import "./ProvisioningState.tsp";
-import "./AvailableSolutionTemplateVersion.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -18,31 +16,53 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
-@added(Versions.v2025_08_01)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
+
+@added(Versions.v2025_08_15_preview)
 @doc("Solution Metadata Version Properties")
 model SolutionMetadataVersionProperties {
   @doc("Solution template version Id")
   @visibility(Lifecycle.Read)
-  solutionTemplateVersionId: string;
+  solutionTemplateVersionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/SolutionTemplates/Versions";
+    }
+  ]>;
 
   @doc("Dynamic Schema Id for the solution template version")
   @visibility(Lifecycle.Read)
-  dynamicSchemaId?: string;
+  dynamicSchemaVersionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Schemas/DynamicSchemas/Versions";
+    }
+  ]>;
 
   @doc("Dynamic Configuration Id for the solution template version")
   @visibility(Lifecycle.Read)
-  dynamicConfigurationId?: string;
+  dynamicConfigurationVersionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Configurations/DynamicConfigurations/Versions";
+    }
+  ]>;
 
   @doc("Configuration status of the solution template version")
   @visibility(Lifecycle.Read)
-  configurationStatus?: string;
-
-  @doc("Provisioning state of resource")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  configurationStatus?: ConfigurationState;
 }
 
-@added(Versions.v2025_08_01)
+@added(Versions.v2025_08_15_preview)
+@doc("Configuration State Enums")
+union ConfigurationState {
+  @doc("Configuration Completed")
+  ConfigurationCompleted: "ConfigurationCompleted",
+
+  @doc("Configuration Completed")
+  ConfigurationPending: "ConfigurationPending",
+
+  string,
+}
+
+@added(Versions.v2025_08_15_preview)
 @doc("Solution Metadata Version Resource")
 @parentResource(SolutionMetadata)
 @resource("versions")
@@ -56,26 +76,14 @@ model SolutionMetadataVersion
   @key("solutionMetadataVersionName")
   @segment("SolutionMetadataVersions")
   name: string;
-
-  ...ExtendedLocationProperty;
-  ...EntityTagProperty;
 }
 
-@added(Versions.v2025_08_01)
+@added(Versions.v2025_08_15_preview)
 @armResourceOperations
 interface SolutionMetadataVersions {
   @doc("Get a Solution resource")
   get is ArmResourceRead<SolutionMetadataVersion>;
 
-  @doc("Create or update a Solution Resource")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SolutionMetadataVersion>;
-
-  @doc("Update a Solution Resource")
-  update is ArmResourcePatchAsync<SolutionMetadataVersion, SolutionMetadataVersionProperties>;
-
-  @doc("Delete a Solution Resource")
-  delete is ArmResourceDeleteWithoutOkAsync<SolutionMetadataVersion>;
-
   @doc("List Solution resources")
-  listByTarget is ArmResourceListByParent<SolutionMetadataVersion>;
+  listByParent is ArmResourceListByParent<SolutionMetadataVersion>;
 }

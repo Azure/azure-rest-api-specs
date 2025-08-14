@@ -5,8 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./Target.tsp";
-import "./ProvisioningState.tsp";
-import "./AvailableSolutionTemplateVersion.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -18,19 +16,20 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
-@added(Versions.v2025_08_01)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
+@added(Versions.v2025_08_15_preview)
 @doc("Solution Metadata Properties")
 model SolutionMetadataProperties {
   @doc("Solution template Id")
   @visibility(Lifecycle.Read)
-  solutionTemplateId?: string;
-
-  @doc("Provisioning state of resource")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  solutionTemplateId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/SolutionTemplates";
+    }
+  ]>;
 }
 
-@added(Versions.v2025_08_01)
+@added(Versions.v2025_08_15_preview)
 @doc("Solution Metadata Resource attached to a Target or Site")
 model SolutionMetadata
   is Azure.ResourceManager.ExtensionResource<SolutionMetadataProperties> {
@@ -42,26 +41,14 @@ model SolutionMetadata
   @key("solutionMetadataName")
   @segment("solutionMetadatas")
   name: string;
-
-  ...ExtendedLocationProperty;
-  ...EntityTagProperty;
 }
 
-@added(Versions.v2025_08_01)
+@added(Versions.v2025_08_15_preview)
 @armResourceOperations
 interface SolutionMetadatas {
   @doc("Get a Solution resource")
   get is ArmResourceRead<SolutionMetadata>;
 
-  @doc("Create or update a Solution Resource")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SolutionMetadata>;
-
-  @doc("Update a Solution Resource")
-  update is ArmResourcePatchAsync<SolutionMetadata, SolutionMetadataProperties>;
-
-  @doc("Delete a Solution Resource")
-  delete is ArmResourceDeleteWithoutOkAsync<SolutionMetadata>;
-
   @doc("List Solution resources")
-  listByTarget is ArmResourceListByParent<SolutionMetadata>;
+  listByParent is ArmResourceListByParent<SolutionMetadata>;
 }
