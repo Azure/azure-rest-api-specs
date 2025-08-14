@@ -30,8 +30,6 @@ interface SubmittedResourceRequestStatuses {
   /**
    * Get API to check the status of a GroupQuota request by requestId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaLimitsRequest_Get")
   get is Extension.Read<
     Extension.ManagementGroup<"managementGroupId">,
     SubmittedResourceRequestStatus

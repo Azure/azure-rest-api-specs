@@ -30,8 +30,6 @@ interface CurrentUsagesBases {
   /**
    * Get the current usage of a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Usages_Get")
   get is Extension.Read<
     Extension.ScopeParameter,
     CurrentUsagesBase,
@@ -48,8 +46,6 @@ interface CurrentUsagesBases {
   /**
    * Get a list of current usage for all resources for the scope specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Usages_List")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentUsagesBase,

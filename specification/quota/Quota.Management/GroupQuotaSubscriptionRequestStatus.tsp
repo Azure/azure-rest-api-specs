@@ -30,8 +30,6 @@ interface GroupQuotaSubscriptionRequestStatuses {
   /**
    * Get API to check the status of a subscriptionIds request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaSubscriptionRequests_Get")
   get is Extension.Read<
     Extension.ManagementGroup<"managementGroupId">,
     GroupQuotaSubscriptionRequestStatus
@@ -40,8 +38,6 @@ interface GroupQuotaSubscriptionRequestStatuses {
   /**
    * List API to check the status of a subscriptionId requests by requestId. Request history is maintained for 1 year.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaSubscriptionRequests_List")
   list is Extension.ListByTarget<
     Extension.ManagementGroup<"managementGroupId">,
     GroupQuotaSubscriptionRequestStatus,

@@ -80,8 +80,6 @@ interface QuotaAllocationRequestStatuses {
   /**
    * Get the quota allocation request status for the subscriptionId by allocationId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaSubscriptionAllocationRequest_Get")
   get is QuotaAllocationRequestStatusesOps.Read<
     QuotaAllocationRequestStatus,
     Parameters = {
@@ -97,8 +95,6 @@ interface QuotaAllocationRequestStatuses {
   /**
    * Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaSubscriptionAllocationRequest_List")
   list is QuotaAllocationRequestStatusesOps.List<
     QuotaAllocationRequestStatus,
     Parameters = {

@@ -87,8 +87,6 @@ interface GroupQuotasEnforcementStatuses {
   /**
    * Gets the GroupQuotas enforcement settings for the ResourceProvider/location. The locations, where GroupQuota enforcement is not enabled will return Not Found.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaLocationSettings_Get")
   get is GroupQuotasEnforcementStatusesOps.Read<GroupQuotasEnforcementStatus>;
 
   /**
@@ -98,9 +96,7 @@ interface GroupQuotasEnforcementStatuses {
    *  1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).
    *  2. Then delete the GroupQuota (Check the example - GroupQuotas_Delete).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaLocationSettings_CreateOrUpdate")
   createOrUpdate is GroupQuotasEnforcementStatusesOps.CreateOrUpdateAsync<
     GroupQuotasEnforcementStatus,
     Response = ArmResourceUpdatedResponse<GroupQuotasEnforcementStatus> | ArmResourceCreatedResponse<
@@ -117,9 +113,7 @@ interface GroupQuotasEnforcementStatuses {
    *  1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).
    *  2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("GroupQuotaLocationSettings_Update")
   update is GroupQuotasEnforcementStatusesOps.CustomPatchAsync<
     GroupQuotasEnforcementStatus,
     PatchModel = GroupQuotasEnforcementStatus,
@@ -129,8 +123,6 @@ interface GroupQuotasEnforcementStatuses {
   /**
    * Returns only the list of the Azure regions settings, where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GroupQuotaLocationSettings_List")
   list is GroupQuotasEnforcementStatusesOps.List<
     GroupQuotasEnforcementStatus,
     Parameters = {

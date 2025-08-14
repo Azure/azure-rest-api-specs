@@ -1368,12 +1368,11 @@ model QuotaRequestStatusDetails {
 /**
  * The paginated list of connected cluster API operations.
  */
-@Azure.Core.pagedResult
 model OperationList {
   /**
    * The list of connected cluster API operations.
    */
-  @Azure.Core.items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: OperationResponse[];
 
