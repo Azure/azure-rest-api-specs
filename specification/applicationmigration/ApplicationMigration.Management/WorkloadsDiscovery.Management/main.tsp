@@ -16,10 +16,6 @@ import "./PgsqlSite.tsp";
 import "./PgsqlInstance.tsp";
 import "./PgsqlDatabase.tsp";
 import "./Agent.tsp";
-import "./MongoSite.tsp";
-import "./MongoInstance.tsp";
-import "./MongoDatabase.tsp";
-import "./MongoAgent.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
