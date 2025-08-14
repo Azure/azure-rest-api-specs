@@ -1092,6 +1092,518 @@
         }
       }
     },
+    "/fine_tuning/jobs": {
+      "get": {
+        "operationId": "FineTuningJobs_List",
+        "description": "Returns a list of finetune jobs",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last job from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of fine-tuning jobs to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "description": "Optional metadata filter. To filter, use the syntax metadata[k]=v. Alternatively, set metadata=null to indicate no metadata.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "Response type",
+                  "default": "list"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Items list.",
+                  "items": {
+                    "$ref": "#/definitions/FineTuningJob"
+                  }
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available."
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List FineTuning jobs": {
+            "$ref": "./examples/FineTuningJobs_ListJobs.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "FineTuningJobs_Create",
+        "description": "Creates a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fineTuningJob",
+            "in": "body",
+            "description": "fine-tuning job",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobCreateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FineTuning job": {
+            "$ref": "./examples/FineTuningJobs_Create.json"
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}": {
+      "get": {
+        "operationId": "FineTuningJobs_Get",
+        "description": "Get info about a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a failed FineTuning job": {
+            "$ref": "./examples/FineTuningJobs_Get_FailedJob.json"
+          },
+          "Retrieve a successful FineTuning job": {
+            "$ref": "./examples/FineTuningJobs_Get_SuccessfulJob.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FineTuningJobs_Delete",
+        "description": "Delete a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to delete.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete FineTuning job": {
+            "$ref": "./examples/FineTuningJobs_Delete.json"
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/cancel": {
+      "post": {
+        "operationId": "FineTuningJobs_Cancel",
+        "description": "Cancel a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to cancel.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a FineTuning job": {
+            "$ref": "./examples/FineTuningJobs_Cancel.json"
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/checkpoints": {
+      "get": {
+        "operationId": "FineTuningJobs_ListCheckpoints",
+        "description": "List checkpoints for a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to get events for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last checkpoint from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of checkpoints to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "Response type",
+                  "default": "list"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Items list.",
+                  "items": {
+                    "$ref": "#/definitions/FineTuningJobCheckpoint"
+                  }
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available."
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the checkpoints from a FineTuning jobs": {
+            "$ref": "./examples/FineTuningJobs_ListCheckpoints.json"
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/events": {
+      "get": {
+        "operationId": "FineTuningJobs_ListEvents",
+        "description": "Get status updates for a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to get events for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last event from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of events to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "Response type",
+                  "default": "list"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Items list.",
+                  "items": {
+                    "$ref": "#/definitions/FineTuningJobEvent"
+                  }
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available."
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the events from a FineTuning jobs": {
+            "$ref": "./examples/FineTuningJobs_ListEvents.json"
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/pause": {
+      "post": {
+        "operationId": "FineTuningJobs_Pause",
+        "description": "Pause a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to pause.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pause a FineTuning job": {
+            "$ref": "./examples/FineTuningJobs_Pause.json"
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/resume": {
+      "post": {
+        "operationId": "FineTuningJobs_Resume",
+        "description": "Resume a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to resume.",
+            "required": true,
+            "type": "string",
+            "maxLength": 1024
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resume a FineTuning job": {
+            "$ref": "./examples/FineTuningJobs_Resume.json"
+          }
+        }
+      }
+    },
     "/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
@@ -2416,6 +2928,42 @@
       ],
       "x-ms-discriminator-value": "developer"
     },
+    "DpoHyperparametersParam": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Direct Preference Optimization fine-tuning method.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "beta": {
+          "type": "number",
+          "format": "double",
+          "description": "The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model."
+        },
+        "learning_rate_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
+    },
+    "DpoMethodParam": {
+      "type": "object",
+      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/DpoHyperparametersParam",
+          "description": "The hyperparameters used for the DPO fine-tuning job."
+        }
+      }
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -2636,6 +3184,598 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
+    "FineTuningEvaluationMetric": {
+      "type": "string",
+      "description": "The evaluation metric to use in RFT text similarity grader",
+      "enum": [
+        "bleu",
+        "fuzzy_match",
+        "gleu",
+        "meteor",
+        "rouge_1",
+        "rouge_2",
+        "rouge_3",
+        "rouge_4",
+        "rouge_5",
+        "rouge_l",
+        "cosine"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningEvaluationMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "bleu",
+            "value": "bleu",
+            "description": "bleu"
+          },
+          {
+            "name": "fuzzy_match",
+            "value": "fuzzy_match",
+            "description": "fuzzy_match"
+          },
+          {
+            "name": "gleu",
+            "value": "gleu",
+            "description": "gleu"
+          },
+          {
+            "name": "meteor",
+            "value": "meteor",
+            "description": "meteor"
+          },
+          {
+            "name": "rouge_1",
+            "value": "rouge_1",
+            "description": "rouge_1"
+          },
+          {
+            "name": "rouge_2",
+            "value": "rouge_2",
+            "description": "rouge_2"
+          },
+          {
+            "name": "rouge_3",
+            "value": "rouge_3",
+            "description": "rouge_3"
+          },
+          {
+            "name": "rouge_4",
+            "value": "rouge_4",
+            "description": "rouge_4"
+          },
+          {
+            "name": "rouge_5",
+            "value": "rouge_5",
+            "description": "rouge_5"
+          },
+          {
+            "name": "rouge_l",
+            "value": "rouge_l",
+            "description": "rouge_l"
+          },
+          {
+            "name": "cosine",
+            "value": "cosine",
+            "description": "cosine"
+          }
+        ]
+      }
+    },
+    "FineTuningGrader": {
+      "type": "object",
+      "description": "The grader used for RFT fine-tuning. Abstract base class",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The grader type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FineTuningJob": {
+      "type": "object",
+      "description": "Fine-Tuning Job",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The job identifier."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'fine_tuning.job'.",
+          "default": "fine_tuning.job"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the fine-tuning job was created."
+        },
+        "error": {
+          "$ref": "#/definitions/FineTuningJobError",
+          "description": "For fine-tuning jobs that have failed, this will contain more information on the cause of the failure."
+        },
+        "estimated_finish": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running."
+        },
+        "fine_tuned_model": {
+          "type": "string",
+          "description": "The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running."
+        },
+        "finished_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/Hyperparameters",
+          "description": "The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs"
+        },
+        "integrations": {
+          "type": "array",
+          "description": "A list of integrations to enable for this fine-tuning job.",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobWandbIntegrationObject"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "$ref": "#/definitions/Method",
+          "description": "The method used for fine-tuning."
+        },
+        "model": {
+          "type": "string",
+          "description": "The base model that is being fine-tuned."
+        },
+        "organization_id": {
+          "type": "string",
+          "description": "The organization that owns the fine-tuning job."
+        },
+        "result_files": {
+          "type": "array",
+          "description": "The compiled results file ID(s) for the fine-tuning job. The file is only available for successfully completed fine-tune runs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seed used for the fine-tuning job."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled."
+        },
+        "trained_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running."
+        },
+        "training_file": {
+          "type": "string",
+          "description": "The file ID used for training. You can retrieve the training data with the Files API."
+        },
+        "validation_file": {
+          "type": "string",
+          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
+        },
+        "additional_Parameters": {
+          "type": "object",
+          "description": "The additional 1P parameters used to train the fine-tuned model. This is Azure AI specific parameter.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "suffix": {
+          "type": "string",
+          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
+        },
+        "TrainingType": {
+          "$ref": "#/definitions/TrainingType",
+          "description": "The SKU used for training. This is Azure AI specific parameter"
+        },
+        "inference_configs": {
+          "$ref": "#/definitions/InferenceConfigs",
+          "description": "Inference configurations. This is Azure AI specific parameter"
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created_at",
+        "method",
+        "model",
+        "organization_id",
+        "seed",
+        "status",
+        "training_file"
+      ]
+    },
+    "FineTuningJobCheckpoint": {
+      "type": "object",
+      "description": "The fine_tuning.job.checkpoint object represents a model checkpoint for a fine-tuning job that is ready to use.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always fine_tuning.job.checkpoint",
+          "default": "fine_tuning.job.checkpoint"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the fine-tuning checkpoint was created."
+        },
+        "fine_tuned_model_checkpoint": {
+          "type": "string",
+          "description": "The name of the fine-tuned checkpoint model that is created."
+        },
+        "fine_tuning_job_id": {
+          "type": "string",
+          "description": "The name of the fine-tuning job that this checkpoint was created from."
+        },
+        "id": {
+          "type": "string",
+          "description": "The checkpoint identifier, which can be referenced in the API endpoints."
+        },
+        "metrics": {
+          "$ref": "#/definitions/FineTuningJobCheckpointMetric",
+          "description": "Metrics at the step number during the fine-tuning job."
+        },
+        "step_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The step number that the checkpoint was created at."
+        }
+      },
+      "required": [
+        "object",
+        "created_at",
+        "fine_tuned_model_checkpoint",
+        "fine_tuning_job_id",
+        "id",
+        "metrics",
+        "step_number"
+      ]
+    },
+    "FineTuningJobCheckpointMetric": {
+      "type": "object",
+      "description": "Metrics at the step number during the fine-tuning job.",
+      "properties": {
+        "full_valid_loss": {
+          "type": "number",
+          "format": "double",
+          "description": "metric full validation loss"
+        },
+        "full_valid_mean_token_accuracy": {
+          "type": "number",
+          "format": "double",
+          "description": "metric full valid mean token accuracy"
+        },
+        "step": {
+          "type": "number",
+          "format": "double",
+          "description": "metric step"
+        },
+        "train_loss": {
+          "type": "number",
+          "format": "double",
+          "description": "metric train loss"
+        },
+        "train_mean_token_accuracy": {
+          "type": "number",
+          "format": "double",
+          "description": "metric train mean token accuracy"
+        },
+        "valid_loss": {
+          "type": "number",
+          "format": "double",
+          "description": "metric valid loss"
+        },
+        "valid_mean_token_accuracy": {
+          "type": "number",
+          "format": "double",
+          "description": "metric valid mean token accuracy"
+        }
+      }
+    },
+    "FineTuningJobError": {
+      "type": "object",
+      "description": "For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine-readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable error message."
+        },
+        "param": {
+          "type": "string",
+          "description": "The parameter that was invalid, usually training_file or validation_file. This field will be null if the failure was not parameter-specific."
+        }
+      }
+    },
+    "FineTuningJobEvent": {
+      "type": "object",
+      "description": "Fine-tuning job event object.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always fine_tuning.job.event",
+          "default": "fine_tuning.job.event"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the fine-tuning event was created."
+        },
+        "data": {
+          "description": "The data associated with the event."
+        },
+        "id": {
+          "type": "string",
+          "description": "The object identifier."
+        },
+        "level": {
+          "type": "string",
+          "description": "The log level of the event."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message of the event."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of event."
+        }
+      },
+      "required": [
+        "object",
+        "created_at",
+        "id",
+        "level",
+        "message"
+      ]
+    },
+    "FineTuningJobGraderMessageRole": {
+      "type": "string",
+      "description": "Training RFT message role options.",
+      "enum": [
+        "user",
+        "system",
+        "developer",
+        "assistant"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningJobGraderMessageRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user",
+            "description": "doc message role"
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "system message role"
+          },
+          {
+            "name": "developer",
+            "value": "developer",
+            "description": "developer message role"
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "assistant message role"
+          }
+        ]
+      }
+    },
+    "FineTuningJobGraderModelSamplingParam": {
+      "type": "object",
+      "description": "The sampling parameters for the model.",
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seed parameter"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double",
+          "description": "Temperature parameter"
+        },
+        "max_completions_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max completions tokens parameter"
+        },
+        "top_p": {
+          "type": "number",
+          "format": "double",
+          "description": "Top parameter"
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/FineTuningJobGraderReasoningEffort",
+          "description": "Reasoning effort parameter"
+        }
+      }
+    },
+    "FineTuningJobGraderReasoningEffort": {
+      "type": "string",
+      "description": "The sampling parameters for the model.",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningJobGraderReasoningEffort",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Low reasoning effort"
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Medium reasoning effort"
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "High reasoning effort"
+          }
+        ]
+      }
+    },
+    "FineTuningJobWandbIntegration": {
+      "type": "object",
+      "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.",
+      "properties": {
+        "project": {
+          "type": "string",
+          "description": "The name of the project that the new run will be created under."
+        },
+        "entity": {
+          "type": "string",
+          "description": "The entity to use for the run. This allows you to set the team or username of the WandB user that you would like associated with the run. If not set, the default entity for the registered WandB API key is used."
+        },
+        "name": {
+          "type": "string",
+          "description": "A display name to set for the run. If not set, we will use the Job ID as the name."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some default tags are generated by OpenAI: 'openai/finetune', 'openai/{base-model}', 'openai/{ftjob}.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "project"
+      ]
+    },
+    "FineTuningJobWandbIntegrationObject": {
+      "type": "object",
+      "description": "Integration to enable for fine-tuning job.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of integration to enable. Currently, only 'wandb' (Weights and Biases) is supported."
+        },
+        "wandb": {
+          "$ref": "#/definitions/FineTuningJobWandbIntegration",
+          "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run."
+        }
+      },
+      "required": [
+        "type",
+        "wandb"
+      ]
+    },
+    "FineTuningLabelModelGrader": {
+      "type": "object",
+      "description": "A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "input labels",
+          "items": {
+            "$ref": "#/definitions/Input"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "description": "The labels to assign to each item in the evaluation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for the evaluation. Must support structured outputs."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "passing_labels": {
+          "type": "array",
+          "description": "The labels that indicate a passing result. Must be a subset of labels.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "input",
+        "labels",
+        "model",
+        "name",
+        "passing_labels"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "label_model"
+    },
+    "FineTuningStringOperation": {
+      "type": "string",
+      "description": "String operations used in RFT string check grader",
+      "enum": [
+        "eq",
+        "ne",
+        "like",
+        "ilike"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningStringOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "eq",
+            "value": "eq",
+            "description": "Equal operator"
+          },
+          {
+            "name": "ne",
+            "value": "ne",
+            "description": "Not equal operator"
+          },
+          {
+            "name": "like",
+            "value": "like",
+            "description": "Like operator"
+          },
+          {
+            "name": "ilike",
+            "value": "ilike",
+            "description": "Not like operator"
+          }
+        ]
+      }
+    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
@@ -2645,6 +3785,27 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
+    },
+    "Hyperparameters": {
+      "type": "object",
+      "description": "The hyperparameters used for the fine-tuning job. This value is now deprecated sin favor of `method`, and should be passed in under the `method` parameter.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "learning_rate_multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
     },
     "Index": {
       "type": "object",
@@ -2725,6 +3886,113 @@
         ]
       }
     },
+    "InferenceConfigs": {
+      "type": "object",
+      "description": "Inference configurations",
+      "properties": {
+        "auto_inference_enabled": {
+          "type": "boolean",
+          "description": "Is model deployed after tuning completes"
+        },
+        "inference_sku": {
+          "$ref": "#/definitions/InferenceSku",
+          "description": "SKU used for inference"
+        },
+        "auto_deployment_id": {
+          "type": "string",
+          "description": "Deployment identifier"
+        },
+        "auto_deployment_status": {
+          "type": "string",
+          "description": "Deployment status"
+        },
+        "auto_deployment_error_message": {
+          "type": "string",
+          "description": "Deployment error information"
+        }
+      }
+    },
+    "InferenceSku": {
+      "type": "string",
+      "description": "SKU available for training",
+      "enum": [
+        "DeveloperTier",
+        "Standard",
+        "GlobalStandard"
+      ],
+      "x-ms-enum": {
+        "name": "InferenceSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DeveloperTier",
+            "value": "DeveloperTier",
+            "description": "DeveloperTier refers to a cross-region developer inference sku."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard refers to regional pay-go inference sku."
+          },
+          {
+            "name": "GlobalStandard",
+            "value": "GlobalStandard",
+            "description": "Global Standard refers to a cross-region pay-go inference sku."
+          }
+        ]
+      }
+    },
+    "Input": {
+      "type": "object",
+      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Message type"
+        },
+        "role": {
+          "$ref": "#/definitions/FineTuningJobGraderMessageRole",
+          "description": "Message role"
+        },
+        "content": {
+          "$ref": "#/definitions/InputContent",
+          "description": "Message content"
+        }
+      },
+      "required": [
+        "type",
+        "role",
+        "content"
+      ]
+    },
+    "InputContent": {
+      "type": "object",
+      "description": "Base for inputs to the model."
+    },
+    "InputContentOutputText": {
+      "type": "object",
+      "description": "Inputs to the model - can contain template strings.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the output text. Always `output_text`.",
+          "enum": [
+            "output_text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "The text output from the model."
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ]
+    },
     "InputData": {
       "type": "object",
       "description": "Abstract data class.",
@@ -2757,6 +4025,128 @@
         }
       ],
       "x-ms-discriminator-value": "dataset"
+    },
+    "InputSimpleContent": {
+      "type": "object",
+      "description": "Inputs to the model - can contain template strings.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "content field"
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "Integration": {
+      "type": "object",
+      "description": "Integration to enable for fine-tuning job.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of integration to enable. Currently, only 'wandb' (Weights and Biases) is supported."
+        },
+        "wandb": {
+          "$ref": "#/definitions/IntegrationWandb",
+          "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run."
+        }
+      },
+      "required": [
+        "type",
+        "wandb"
+      ]
+    },
+    "IntegrationWandb": {
+      "type": "object",
+      "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.",
+      "properties": {
+        "project": {
+          "type": "string",
+          "description": "The name of the project that the new run will be created under."
+        },
+        "entity": {
+          "type": "string",
+          "description": "The entity to use for the run. This allows you to set the team or username of the WandB user that you would like associated with the run. If not set, the default entity for the registered WandB API key is used."
+        },
+        "name": {
+          "type": "string",
+          "description": "A display name to set for the run. If not set, we will use the Job ID as the name."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some default tags are generated by OpenAI: 'openai/finetune', 'openai/{base-model}', 'openai/{ftjob}.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "project"
+      ]
+    },
+    "JobCreateParams": {
+      "type": "object",
+      "description": "Fine-Tuning Job",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The base model that is being fine-tuned."
+        },
+        "training_file": {
+          "type": "string",
+          "description": "The file ID used for training. You can retrieve the training data with the Files API."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/Hyperparameters",
+          "description": "The hyperparameters used for the SFT fine-tuning job. This value is now deprecated in favor of method, and should be passed in under the method parameter."
+        },
+        "integrations": {
+          "type": "array",
+          "description": "A list of integrations to enable for this fine-tuning job.",
+          "items": {
+            "$ref": "#/definitions/Integration"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "$ref": "#/definitions/Method",
+          "description": "The method used for fine-tuning."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seed used for the fine-tuning job."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
+        },
+        "validation_file": {
+          "type": "string",
+          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
+        },
+        "TrainingType": {
+          "$ref": "#/definitions/TrainingType",
+          "description": "The SKU used for training. This is Azure AI specific parameter"
+        },
+        "inference_configs": {
+          "$ref": "#/definitions/InferenceConfigs",
+          "description": "Inference configurations. This is Azure AI specific parameter"
+        }
+      },
+      "required": [
+        "model",
+        "training_file",
+        "method",
+        "seed"
+      ]
     },
     "ManagedAzureAISearchIndex": {
       "type": "object",
@@ -2801,6 +4191,210 @@
       "discriminator": "role",
       "required": [
         "role"
+      ]
+    },
+    "Method": {
+      "type": "object",
+      "description": "The method used for fine-tuning.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/MethodTrainingType",
+          "description": "The type of training method."
+        },
+        "supervised": {
+          "$ref": "#/definitions/SupervisedMethodParam",
+          "description": "Configuration for the supervised fine-tuning method."
+        },
+        "dpo": {
+          "$ref": "#/definitions/DpoMethodParam",
+          "description": "Configuration for the DPO fine-tuning method."
+        },
+        "reinforcement": {
+          "$ref": "#/definitions/ReinforcementMethodParam",
+          "description": "Configuration for the reinforcement fine-tuning method."
+        },
+        "mistralClassifier": {
+          "$ref": "#/definitions/MistralClassifierMethodParam",
+          "description": "Configuration for the Mistral Classifier fine-tuning method."
+        },
+        "mistralCompletion": {
+          "$ref": "#/definitions/MistralCompletionParam",
+          "description": "Configuration for the Mistral Completion fine-tuning method."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "MethodTrainingType": {
+      "type": "string",
+      "description": "Training method types",
+      "enum": [
+        "supervised",
+        "dpo",
+        "reinforcement",
+        "mistralCompletion",
+        "mistralClassifier"
+      ],
+      "x-ms-enum": {
+        "name": "MethodTrainingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "supervised",
+            "value": "supervised",
+            "description": "Supervised fine-tuning type"
+          },
+          {
+            "name": "dpo",
+            "value": "dpo",
+            "description": "DPO fine-tuning type"
+          },
+          {
+            "name": "reinforcement",
+            "value": "reinforcement",
+            "description": "Reinforcement fine-tuning type"
+          },
+          {
+            "name": "mistralCompletion",
+            "value": "mistralCompletion",
+            "description": "Mistral Completion fine-tuning type"
+          },
+          {
+            "name": "mistralClassifier",
+            "value": "mistralClassifier",
+            "description": "Mistral Classifier fine-tuning type"
+          }
+        ]
+      }
+    },
+    "MistralClassifierHyperparametersParam": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Mistral Classifier Fine-Tuning job.",
+      "properties": {
+        "training_steps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
+        },
+        "learning_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
+          "default": 0.0001
+        },
+        "weight_decay": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
+          "default": 0.1
+        },
+        "warmup_fraction": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
+          "default": 0.05
+        },
+        "epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "seq_len": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seq len parameter"
+        }
+      }
+    },
+    "MistralClassifierMethodParam": {
+      "type": "object",
+      "description": "Mistral Classifier Fine-Tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Mistral Classifier fine-tuning type",
+          "enum": [
+            "mistralClassifier"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/MistralClassifierHyperparametersParam",
+          "description": "The hyperparameters used for the Mistral Classifier fine-tuning job."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "MistralCompletionHyperParameters": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Mistral Completion Fine-Tuning job.",
+      "properties": {
+        "training_steps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
+        },
+        "learning_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
+          "default": 0.0001
+        },
+        "weight_decay": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
+          "default": 0.1
+        },
+        "warmup_fraction": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
+          "default": 0.05
+        },
+        "epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "seq_len": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seq len parameter"
+        },
+        "fim_ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Fim ratio parameter"
+        }
+      }
+    },
+    "MistralCompletionParam": {
+      "type": "object",
+      "description": "Mistral Completion Fine-Tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Mistral Completion fine-tuning type",
+          "enum": [
+            "mistralCompletion"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/MistralCompletionHyperParameters",
+          "description": "The hyperparameters used for the Mistral Completion fine-tuning job."
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "ModelDeployment": {
@@ -2854,6 +4448,38 @@
         }
       ],
       "x-ms-discriminator-value": "ModelDeployment"
+    },
+    "MultiGraderParam": {
+      "type": "object",
+      "description": "A MultiGrader object combines the output of multiple graders to produce a single score.",
+      "properties": {
+        "calculate_output": {
+          "type": "string",
+          "description": "A formula to calculate the output based on grader results."
+        },
+        "graders": {
+          "type": "object",
+          "description": "Graders to be combined",
+          "additionalProperties": {
+            "$ref": "#/definitions/FineTuningGrader"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        }
+      },
+      "required": [
+        "calculate_output",
+        "graders",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "multi"
     },
     "NoAuthenticationCredentials": {
       "type": "object",
@@ -3093,6 +4719,34 @@
         ]
       }
     },
+    "PythonGraderParam": {
+      "type": "object",
+      "description": "A PythonGrader object that runs a python script on the input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "source": {
+          "type": "string",
+          "description": "The source code of the python script."
+        },
+        "image_tag": {
+          "type": "string",
+          "description": "The image tag to use for the python script."
+        }
+      },
+      "required": [
+        "name",
+        "source"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "python"
+    },
     "RedTeam": {
       "type": "object",
       "description": "Red team details.",
@@ -3162,6 +4816,125 @@
       "required": [
         "id",
         "target"
+      ]
+    },
+    "ReinforcementHyperparametersParam": {
+      "type": "object",
+      "description": "Configuration for the Reinforcement fine-tuning method.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "compute_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Multiplier on amount of compute used for exploring search space during training."
+        },
+        "eval_interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps between evaluation runs."
+        },
+        "eval_samples": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of evaluation samples to generate per training step."
+        },
+        "learning_rate_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "reasoning_effort": {
+          "type": "string",
+          "description": "Level of reasoning effort."
+        }
+      }
+    },
+    "ReinforcementMethodParam": {
+      "type": "object",
+      "description": "Configuration for the Reinforcement fine-tuning method.",
+      "properties": {
+        "grader": {
+          "$ref": "#/definitions/FineTuningGrader",
+          "description": "The grader used for the fine-tuning job."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/ReinforcementHyperparametersParam",
+          "description": "The hyperparameters used for the reinforcement fine-tuning job."
+        },
+        "response_format": {
+          "$ref": "#/definitions/ReinforcementResponseFormat",
+          "description": "Gets the response format for the Reinforcement fine-tuning job."
+        }
+      },
+      "required": [
+        "grader"
+      ]
+    },
+    "ReinforcementResponseFormat": {
+      "type": "object",
+      "description": "Gets the response format for the Reinforcement fine-tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Response format request - Currently only JSON schema is supported"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ReinforcementResponseJsonSchema": {
+      "type": "object",
+      "description": "Gets the response format for the Reinforcement fine-tuning method.",
+      "properties": {
+        "json_schema": {
+          "type": "object",
+          "description": "JSON schema response for RFT",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "json_schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReinforcementResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_schema"
+    },
+    "ResponseInputTextParam": {
+      "type": "object",
+      "description": "Inputs to the model - can contain template strings.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the input item. Always `input_text`",
+          "enum": [
+            "input_text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "The text input to the model."
+        }
+      },
+      "required": [
+        "type",
+        "text"
       ]
     },
     "RiskCategory": {
@@ -3244,6 +5017,55 @@
         "type"
       ]
     },
+    "ScoreModelGraderParam": {
+      "type": "object",
+      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "The input text. This may include template strings.",
+          "items": {
+            "$ref": "#/definitions/Input"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for the evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "range": {
+          "type": "array",
+          "description": "The model to use for the evaluation.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "sampling_params": {
+          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
+          "description": "The sampling parameters for the model."
+        },
+        "pass_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "TBD"
+        }
+      },
+      "required": [
+        "input",
+        "model",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "score_model"
+    },
     "Sku": {
       "type": "object",
       "description": "Sku information",
@@ -3278,6 +5100,71 @@
         "tier"
       ]
     },
+    "StringCheckGraderParam": {
+      "type": "object",
+      "description": "A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input text. This may include template strings."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "operation": {
+          "$ref": "#/definitions/FineTuningStringOperation",
+          "description": "The string check operation to perform. One of eq, ne, like, or ilike."
+        },
+        "reference": {
+          "type": "string",
+          "description": "The reference text. This may include template strings."
+        }
+      },
+      "required": [
+        "input",
+        "name",
+        "operation",
+        "reference"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "string_check"
+    },
+    "SupervisedHyperparametersParam": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Supervised Fine-Tuning job.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "learning_rate_multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
+    },
+    "SupervisedMethodParam": {
+      "type": "object",
+      "description": "Supervised Fine-Tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/SupervisedHyperparametersParam",
+          "description": "The hyperparameters used for the SFT fine-tuning job."
+        }
+      }
+    },
     "SystemMessage": {
       "type": "object",
       "description": "A message authored by the system to guide model behavior.",
@@ -3310,6 +5197,75 @@
       "required": [
         "type"
       ]
+    },
+    "TextSimilarityGraderParam": {
+      "type": "object",
+      "description": "ScoreModelGrader uses a model to assign a score to the input.",
+      "properties": {
+        "evaluation_metric": {
+          "$ref": "#/definitions/FineTuningEvaluationMetric",
+          "description": "The evaluation metric to use"
+        },
+        "input": {
+          "type": "string",
+          "description": "The text being graded."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "reference": {
+          "type": "string",
+          "description": "The text being graded against."
+        },
+        "pass_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "TBD"
+        }
+      },
+      "required": [
+        "evaluation_metric",
+        "input",
+        "name",
+        "reference"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "text_similarity"
+    },
+    "TrainingType": {
+      "type": "string",
+      "description": "SKU available for training",
+      "enum": [
+        "Standard",
+        "GlobalStandard",
+        "DeveloperTier"
+      ],
+      "x-ms-enum": {
+        "name": "TrainingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard training job uses dedicated training capacity in a region"
+          },
+          {
+            "name": "GlobalStandard",
+            "value": "GlobalStandard",
+            "description": "GlobalStandard training job uses dedicated capacity from a different region"
+          },
+          {
+            "name": "DeveloperTier",
+            "value": "DeveloperTier",
+            "description": "DeveloperTier training job uses inference capacity when available"
+          }
+        ]
+      }
     },
     "UserMessage": {
       "type": "object",
