@@ -7,15 +7,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 title: AzureMonitorIssuesClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-monitor.issues
-namespace: azure.mgmt.monitor.issues
+package-name: azure-mgmt-monitorissues
+namespace: azure.mgmt.monitorissues
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/monitor.issues/azure-mgmt-monitor.issues/azure/mgmt/monitor.issues
+output-folder: $(python-sdks-folder)/monitorissues/azure-mgmt-monitorissues/azure/mgmt/monitorissues
 ```
 
 ``` yaml $(python)
