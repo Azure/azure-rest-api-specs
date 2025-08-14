@@ -645,7 +645,7 @@ union ScheduleEnableStatus {
 }
 
 @doc("The days of the week.")
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Days of week will never change."
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Days of week will never change."
 union DayOfWeek {
   @doc("Monday")
   Monday: "Monday",
