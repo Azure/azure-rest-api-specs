@@ -224,8 +224,7 @@ model InputContent {}
 @doc("Inputs to the model - can contain template strings.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model ResponseInputTextParam
-  is InputContent {
+model ResponseInputTextParam is InputContent {
   @doc("The type of the input item. Always `input_text`")
   type: "input_text";
 
@@ -236,8 +235,7 @@ model ResponseInputTextParam
 @doc("Inputs to the model - can contain template strings.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model InputSimpleContent
-  is InputContent {
+model InputSimpleContent is InputContent {
   @doc("content field")
   content: string;
 }
@@ -245,8 +243,7 @@ model InputSimpleContent
 @doc("Inputs to the model - can contain template strings.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model InputContentOutputText
-  is InputContent {
+model InputContentOutputText is InputContent {
   @doc("The type of the output text. Always `output_text`.")
   type: "output_text";
 
