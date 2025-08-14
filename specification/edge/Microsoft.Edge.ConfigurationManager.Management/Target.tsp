@@ -285,4 +285,12 @@ interface Targets {
     UpdateExternalValidationStatusParameter,
     SolutionVersion
   >;
+
+  @added(Versions.v2025_08_01)
+  @doc("Post request to unstage solution version")
+  unstageSolutionVersion is ArmResourceActionAsync<
+    Target,
+    SolutionVersionParameter,
+    SolutionVersion
+  >;
 }
