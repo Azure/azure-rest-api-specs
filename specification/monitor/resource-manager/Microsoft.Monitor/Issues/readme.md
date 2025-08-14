@@ -1,4 +1,4 @@
-# AzureMonitorAccountsClient
+# AzureMonitorIssuesClient
 
 > see https://aka.ms/autorest
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the AzureMonitorAccountsClient API.
+These are the global settings for the AzureMonitorIssuesClient API.
 
 ``` yaml !$(python) || !$(track2)
 title: AzureMonitorIssuesClient
@@ -83,9 +83,9 @@ suppressions:
   - code: OperationsAPIImplementation
     reason: Operations API is defined in a separate swagger spec for Microsoft.Monitor namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Monitor/Operations)
     from: issues.json
-  - suppress: GuidUsage
+  - code: GuidUsage
     reason: The IDs of investigation entities are GUIDs.
-    from: Issues.json
+    from: issues.json
     where:
      - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
      - $.definitions.InvestigationMetadata.properties.id.format
