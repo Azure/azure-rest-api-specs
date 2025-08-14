@@ -104,6 +104,10 @@ union RunStepType {
 
   @doc("Represents a run step that calls tools.")
   toolCalls: "tool_calls",
+
+  @doc("Represents a run step with activities information.")
+  @added(Versions.v2025_05_15_preview)
+  activities: "activities",
 }
 
 @discriminator("type")
@@ -142,6 +146,17 @@ model RunStepMessageCreationReference {
   @encodedName("application/json", "message_id")
   @doc("The ID of the message created by this run step.")
   messageId: string;
+}
+
+@doc("The detailed information associated with a run step activities.")
+@added(Versions.v2025_05_15_preview)
+model RunStepActivityDetails extends RunStepDetails {
+  @doc("The object type, which is always 'activities'.")
+  type: RunStepType.activities;
+
+  @encodedName("application/json", "activities")
+  @doc("A list of activities for this run step.")
+  activities: RunStepDetailsActivity[];
 }
 
 @doc("Possible values for the status of a run step.")
@@ -331,7 +346,7 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
   codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
 }
 
-/** Represents the function data in a streaming run step MCP call.* */
+/** Represents the function data in a streaming run step MCP call. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "mcp". */
@@ -464,4 +479,57 @@ union RunAdditionalFieldList {
 
   /** File search result content. */
   FileSearchContents: "step_details.tool_calls[*].file_search.results[*].content",
+}
+
+/** Represents the list of activities, associated with the given step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDetailsActivity {
+  @doc("The activity type, which is always 'mcp_list_tools'.")
+  type: "mcp_list_tools";
+
+  @doc("The activity ID.")
+  id: string;
+
+  @doc("Server label.")
+  @encodedName("application/json", "server_label")
+  serverLabel: string;
+
+  @doc("The supported function list.")
+  tools: Record<ActivityFunctionDefinition>;
+}
+
+@doc("The activity definition information for a function.")
+@added(Versions.v2025_05_15_preview)
+model ActivityFunctionDefinition {
+  @doc("A description of what the function does, used by the model to choose when and how to call the function.")
+  description?: string;
+
+  @doc("The parameters the functions accepts, described as a JSON Schema object.")
+  parameters: ActivityFunctionParameters;
+}
+
+@doc("The parameters used for activity function definition.")
+@added(Versions.v2025_05_15_preview)
+model ActivityFunctionParameters {
+  @doc("The parameter type, it is always object.")
+  type: "object";
+
+  @doc("The dictionary of function arguments.")
+  properties: Record<FunctionArgument>;
+
+  @doc("The list of the required parameters.")
+  required: string[];
+
+  @doc("If true the function has additional parameters.")
+  additionalProperties?: boolean;
+}
+
+@doc("The function argument and description.")
+@added(Versions.v2025_05_15_preview)
+model FunctionArgument {
+  @doc("The type of an argument, for example 'string' or 'number'.")
+  type: string;
+
+  @doc("The argument description.")
+  description?: string;
 }
