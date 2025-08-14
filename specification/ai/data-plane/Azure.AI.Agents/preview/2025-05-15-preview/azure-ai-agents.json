@@ -6366,7 +6366,7 @@
       "properties": {
         "bing_custom_search": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Custom Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6389,7 +6389,7 @@
       "properties": {
         "bing_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6692,7 +6692,7 @@
       "properties": {
         "bing_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6854,6 +6854,29 @@
         }
       ],
       "x-ms-discriminator-value": "connected_agent"
+    },
+    "RunStepDeltaCustomBingGroundingToolCall": {
+      "type": "object",
+      "description": "Represents the Custom Bing Grounding tool call in a streaming run step.",
+      "properties": {
+        "bing_custom_search": {
+          "type": "object",
+          "description": "The dictionary with request and response from Custom Bing Grounding search tool.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
     },
     "RunStepDeltaDeepResearchToolCall": {
       "type": "object",
