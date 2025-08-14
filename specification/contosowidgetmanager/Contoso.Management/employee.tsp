@@ -21,7 +21,7 @@ model EmployeeProperties {
   age?: int32;
 
   /** City of employee */
-  city?: string;
+  city?: string = "Shanghai";
 
   /** Profile of employee */
   @encode("base64url")
