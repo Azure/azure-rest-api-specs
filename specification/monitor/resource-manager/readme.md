@@ -79,7 +79,6 @@ suppressions:
   - code: PostResponseCodes
     from: actionGroups_API.json
     reason: Existing service design behavior. Fixing this causes breaking changes.
-  - code: 
 ```
 
 ### Tag: package-2024-03-01-preview
