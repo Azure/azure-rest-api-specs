@@ -1409,7 +1409,7 @@
           {
             "name": "commandId",
             "in": "path",
-            "description": "The command id.",
+            "description": "Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.",
             "required": true,
             "type": "string"
           },
@@ -16941,7 +16941,7 @@
       "properties": {
         "commandId": {
           "type": "string",
-          "description": "The run command id."
+          "description": "Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands."
         },
         "script": {
           "type": "array",
@@ -19566,7 +19566,7 @@
     },
     "VirtualMachineRunCommandScriptSource": {
       "type": "object",
-      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId.",
+      "description": "Describes the script sources for run command. Use only one of these script sources: script, scriptUri, commandId, galleryScriptReferenceId.",
       "properties": {
         "script": {
           "type": "string",
@@ -19578,7 +19578,7 @@
         },
         "commandId": {
           "type": "string",
-          "description": "Specifies a commandId of predefined built-in script."
+          "description": "Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands."
         },
         "scriptUriManagedIdentity": {
           "$ref": "#/definitions/RunCommandManagedIdentity",
@@ -22928,7 +22928,7 @@
     },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.",
+      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
       "enum": [
         "Any"
       ],

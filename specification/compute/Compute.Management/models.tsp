@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -927,12 +929,18 @@ union PatchOperationStatus {
 }
 
 /**
- * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+ * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
  */
 union ZonePlacementPolicyType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
+  @added(Versions.v2025_04_01)
+  Auto: "Auto",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1067,6 +1075,20 @@ union HyperVGenerationTypes {
   V1: "V1",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V2: "V2",
+}
+
+/**
+ * Specifies the high speed interconnect placement for the virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+union HighSpeedInterconnectPlacement {
+  string,
+
+  /** No high speed interconnect placement */
+  None: "None",
+
+  /** Trunk high speed interconnect placement */
+  Trunk: "Trunk",
 }
 
 /**
@@ -1252,6 +1274,24 @@ union ExecutionState {
   TimedOut: "TimedOut",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
+}
+
+/**
+ * Script shell types.
+ */
+@added(Versions.v2025_04_01)
+union ScriptShellTypes {
+  string,
+
+  /**
+   * Default script shell type.
+   */
+  Default: "Default",
+
+  /**
+   * Powershell7 script shell type.
+   */
+  Powershell7: "Powershell7",
 }
 
 /**
@@ -1677,6 +1717,12 @@ model VirtualMachineScaleSetProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the high speed interconnect placement for the virtual machine scale set.
+   */
+  @added(Versions.v2025_04_01)
+  highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
 }
 
 /**
@@ -1792,6 +1838,12 @@ model ScheduledEventsPolicy {
    * The configuration parameters used while publishing scheduledEventsAdditionalPublishingTargets.
    */
   scheduledEventsAdditionalPublishingTargets?: ScheduledEventsAdditionalPublishingTargets;
+
+  /**
+   * The configuration parameters used while creating AllInstancesDown scheduled event setting creation.
+   */
+  @added(Versions.v2025_04_01)
+  allInstancesDown?: AllInstancesDown;
 }
 
 /**
@@ -1830,6 +1882,25 @@ model EventGridAndResourceGraph {
    * Specifies if event grid and resource graph is enabled for Scheduled event related configurations.
    */
   enable?: boolean;
+
+  /**
+   * Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered.
+   */
+  @added(Versions.v2025_04_01)
+  scheduledEventsApiVersion?: string;
+}
+
+/**
+ * Specifies if Scheduled Events should be auto-approved when all instances are down.
+ */
+@added(Versions.v2025_04_01)
+model AllInstancesDown {
+  /**
+   * Specifies if Scheduled Events should be auto-approved when all instances are down.
+   * its default value is true
+   */
+  @added(Versions.v2025_04_01)
+  automaticallyApprove?: boolean;
 }
 
 /**
@@ -2566,6 +2637,13 @@ model VirtualMachineScaleSetNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -2721,6 +2799,13 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -2887,6 +2972,12 @@ model ProxyAgentSettings {
    * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
    */
   imds?: HostEndpointSettings;
+
+  /**
+   * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
+   */
+  @added(Versions.v2025_04_01)
+  addProxyAgentExtension?: boolean;
 }
 
 /**
@@ -3274,6 +3365,12 @@ model ResiliencyPolicy {
    * The configuration parameters used while performing automatic AZ balancing.
    */
   automaticZoneRebalancingPolicy?: AutomaticZoneRebalancingPolicy;
+
+  /**
+   * The configuration parameters used while performing zone allocation.
+   */
+  @added(Versions.v2025_04_01)
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
 /**
@@ -3297,6 +3394,22 @@ model ResilientVMDeletionPolicy {
 }
 
 /**
+ * The configuration parameters for zone allocation of a virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+model ZoneAllocationPolicy {
+  /**
+   * The maximum number of availability zones to use if the ZonePlacementPolicy is 'Auto'. If not specified, all availability zones will be used.
+   */
+  maxZoneCount?: int32;
+
+  /**
+   * The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.
+   */
+  maxInstancePercentPerZonePolicy?: MaxInstancePercentPerZonePolicy;
+}
+
+/**
  * The configuration parameters used while performing automatic AZ balancing.
  */
 model AutomaticZoneRebalancingPolicy {
@@ -3314,6 +3427,23 @@ model AutomaticZoneRebalancingPolicy {
    * Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete.
    */
   rebalanceBehavior?: RebalanceBehavior;
+}
+
+/**
+ * The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+model MaxInstancePercentPerZonePolicy {
+  /**
+   * Specifies whether maxInstancePercentPerZonePolicy should be enabled on the virtual machine scale set.
+   */
+  enabled?: boolean;
+
+  /**
+   * Limit on the number of instances in each zone as a percentage of the total capacity of the virtual machine scale set.
+   */
+  @maxValue(100)
+  value?: int32;
 }
 
 /**
@@ -3709,6 +3839,13 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -3849,6 +3986,13 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5216,6 +5360,13 @@ model VirtualMachineNetworkInterfaceConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5369,6 +5520,13 @@ model VirtualMachinePublicIPAddressConfiguration {
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -8342,7 +8500,7 @@ model VirtualMachineRunCommandProperties {
 }
 
 /**
- * Describes the script sources for run command. Use only one of script, scriptUri, commandId.
+ * Describes the script sources for run command. Use only one of these script sources: script, scriptUri, commandId, galleryScriptReferenceId.
  */
 model VirtualMachineRunCommandScriptSource {
   /**
@@ -8356,7 +8514,7 @@ model VirtualMachineRunCommandScriptSource {
   scriptUri?: string;
 
   /**
-   * Specifies a commandId of predefined built-in script.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId?: string;
 
@@ -8364,6 +8522,18 @@ model VirtualMachineRunCommandScriptSource {
    * User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.
    */
   scriptUriManagedIdentity?: RunCommandManagedIdentity;
+
+  /**
+   * Optional. Specify which shell to use for running the script. These values must match those expected by the extension. Currently supported only for Windows VMs, script uses Powershell 7 when specified. Powershell 7 must be already installed on the machine to use Powershell7 parameter value.
+   */
+  @added(Versions.v2025_04_01)
+  scriptShell?: ScriptShellTypes;
+
+  /**
+   * The resource ID of a Gallery Script version that needs to be executed. Example ID looks like /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{scriptName}/versions/{version}.
+   */
+  @added(Versions.v2025_04_01)
+  galleryScriptReferenceId?: string;
 }
 
 /**
@@ -8460,7 +8630,7 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
  */
 model RunCommandInput {
   /**
-   * The run command id.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId: string;
 
@@ -8483,4 +8653,31 @@ model RunCommandResult {
    */
   @identifiers(#[])
   value?: InstanceViewStatus[];
+}
+
+/**
+ * The input for ScaleOut
+ */
+@added(Versions.v2025_04_01)
+model VMScaleSetScaleOutInput {
+  /**
+   * Specifies the number of virtual machines in the scale set.
+   */
+  capacity: int64;
+
+  /**
+   * The input properties for ScaleOut
+   */
+  properties?: VMScaleSetScaleOutInputProperties;
+}
+
+/**
+ * The input properties for ScaleOut
+ */
+@added(Versions.v2025_04_01)
+model VMScaleSetScaleOutInputProperties {
+  /**
+   * The zone in which the scale out is requested for the virtual machine scale set.
+   */
+  zone?: string;
 }
