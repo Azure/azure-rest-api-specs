@@ -12,6 +12,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
 namespace Microsoft.Monitor;
 
 @doc("The issue properties")
