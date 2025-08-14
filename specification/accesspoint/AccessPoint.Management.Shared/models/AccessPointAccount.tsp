@@ -37,10 +37,6 @@ model AccessPointAccountProperties {
   @doc("The classification of the access point account")
   classification: Classification;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "accountTags requires a Record<string>"
-  @doc("Tags present on the access point account")
-  accountTags: Record<string>;
-
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
