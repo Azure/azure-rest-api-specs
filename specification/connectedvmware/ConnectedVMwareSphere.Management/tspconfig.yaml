@@ -12,6 +12,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/connectedvmware.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ConnectedVMwarevSphere"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-connectedvmware"
     namespace: "azure.mgmt.connectedvmware"

@@ -61,8 +61,8 @@ using Microsoft.ConnectedVMwarevSphere;
 @@flattenProperty(VmInstanceHybridIdentityMetadata.properties);
 
 @@clientName(GuestAgents.create::parameters.resource, "body");
-@@clientLocation(GuestAgents.get, "VMInstanceGuestAgents");
-@@clientLocation(GuestAgents.create, "VMInstanceGuestAgents");
+@@clientLocation(GuestAgents.get, "VMInstanceGuestAgents", "!csharp");
+@@clientLocation(GuestAgents.create, "VMInstanceGuestAgents", "!csharp");
 @@clientName(GuestAgents.create::parameters.resource, "body");
-@@clientLocation(GuestAgents.delete, "VMInstanceGuestAgents");
-@@clientLocation(GuestAgents.list, "VMInstanceGuestAgents");
+@@clientLocation(GuestAgents.delete, "VMInstanceGuestAgents", "!csharp");
+@@clientLocation(GuestAgents.list, "VMInstanceGuestAgents", "!csharp");
