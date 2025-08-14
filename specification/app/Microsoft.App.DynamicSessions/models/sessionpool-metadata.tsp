@@ -1,7 +1,4 @@
 import "./common.tsp";
-using Azure.Core;
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
