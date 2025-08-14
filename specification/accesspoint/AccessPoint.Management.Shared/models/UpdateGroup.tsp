@@ -33,7 +33,7 @@ model UpdateGroup is ProxyResource<UpdateGroupProperties> {
 
 @doc("Update Group Properties.")
 model UpdateGroupProperties {
-  @doc("The image mod name to associate.")
+  @doc("The image modification name to associate.")
   imageMod: string;
 
   @doc("Additional details.")

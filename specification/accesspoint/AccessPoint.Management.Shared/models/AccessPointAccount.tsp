@@ -31,7 +31,7 @@ model AccessPointAccount is TrackedResource<AccessPointAccountProperties> {
 
 @doc("Access Point Account Properties.")
 model AccessPointAccountProperties {
-  @doc("The image mod for the access point account")
+  @doc("The image modification for the access point account")
   imageMod: string;
 
   @doc("The classification of the access point account")

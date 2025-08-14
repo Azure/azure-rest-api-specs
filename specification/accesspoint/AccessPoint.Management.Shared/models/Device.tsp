@@ -47,10 +47,10 @@ model DeviceProperties {
   @doc("Indicates whether the device is enabled.")
   enabled: boolean;
 
-  @doc("The fully qualified ARM URI of the associated Update Group resource.")
+  @doc("The Azure Resource ID of the associated Update Group resource.")
   updateGroupId: armResourceIdentifier;
 
-  @doc("The fully qualified ARM URI of the associated Network resource.")
+  @doc("The Azure Resource ID of the associated Network resource.")
   networkId: armResourceIdentifier;
 
   @doc("The IP address of the device that belongs to the attached network.")

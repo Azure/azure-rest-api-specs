@@ -41,7 +41,7 @@ model AzureVirtualDesktopProperties is VirtualDesktopInfrastructureProperties {
   @doc("Indicates whether the camera is enabled.")
   cameraEnabled?: boolean;
 
-  @doc("The application id for the service.")
+  @doc("The Entra Application (client) ID to associate with this service instance.")
   applicationId: string;
 
   @doc("The redirect URL for the service.")
