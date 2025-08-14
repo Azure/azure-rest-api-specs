@@ -1,5 +1,5 @@
-import "../../Common/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
-import "../../Common/Enums/Enums.tsp";
+import "../Normalized Contract/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
+import "../Normalized Contract/Enums/Enums.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
