@@ -68,12 +68,12 @@ model DeviceProperties {
 }
 
 // Suppress because we have no custom properties for the response,
-// but the ArmResourceActionAsync requires a response model to generate the correct response types.
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+// but the ArmResourceActionNoResponseContentAsync requires a response model to generate the correct response types.
+// #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 // OAV validation in pipelines will fail with INVALID_TYPE if we have an empty model with a description
 // https://github.com/Azure/oav/issues/1065
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-model DeviceActionResponse {}
+// #suppress "@azure-tools/typespec-azure-core/documentation-required"
+// model DeviceActionResponse {}
 
 @doc("The request body for the displayMessage device action.")
 model DisplayMessageRequest {
@@ -91,44 +91,23 @@ interface DeviceOperations {
 
   // Device actions
   @doc("Displays a provided messages on a device.")
-  displayMessage is ArmResourceActionAsync<
+  displayMessage is ArmResourceActionNoResponseContentAsync<
     Device,
-    DisplayMessageRequest,
-    ArmResponse<DeviceActionResponse>
+    DisplayMessageRequest
   >;
 
   @doc("Refreshes the connection of a device.")
-  refreshConnection is ArmResourceActionAsync<
-    Device,
-    void,
-    ArmResponse<DeviceActionResponse>
-  >;
+  refreshConnection is ArmResourceActionNoResponseContentAsync<Device, void>;
 
   @doc("Revokes device certificates.")
-  revokeCertificates is ArmResourceActionAsync<
-    Device,
-    void,
-    ArmResponse<DeviceActionResponse>
-  >;
+  revokeCertificates is ArmResourceActionNoResponseContentAsync<Device, void>;
 
   @doc("Sends a restart command to a device.")
-  reboot is ArmResourceActionAsync<
-    Device,
-    void,
-    ArmResponse<DeviceActionResponse>
-  >;
+  reboot is ArmResourceActionNoResponseContentAsync<Device, void>;
 
   @doc("Sends a shutdown command to a device.")
-  shutdown is ArmResourceActionAsync<
-    Device,
-    void,
-    ArmResponse<DeviceActionResponse>
-  >;
+  shutdown is ArmResourceActionNoResponseContentAsync<Device, void>;
 
   @doc("Sends a user log off command to a device.")
-  logOffUser is ArmResourceActionAsync<
-    Device,
-    void,
-    ArmResponse<DeviceActionResponse>
-  >;
+  logOffUser is ArmResourceActionNoResponseContentAsync<Device, void>;
 }
