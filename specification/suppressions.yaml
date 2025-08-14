@@ -2230,3 +2230,10 @@
   sub-rules:
     - options.@azure-tools/typespec-ts.*
   paths: [zerotrustsegmentation/Microsoft.ZeroTrustSegmentation.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths: [applicationmigration/ApplicationMigration.Management/Mongodb.Management/tspconfig.yaml]
+  
