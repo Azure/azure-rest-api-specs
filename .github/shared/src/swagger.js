@@ -4,6 +4,7 @@ import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
+import { example } from "./changed-files.js";
 import { includesFolder } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 
@@ -139,36 +140,38 @@ export class Swagger {
       // Process regular paths
       if (swagger.paths) {
         for (const [path, pathItem] of Object.entries(swagger.paths)) {
-          for (const [method, operation] of Object.entries(pathItem)) {
-            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
-              const operationObj = {
-                id: operation.operationId,
-                httpMethod: method.toUpperCase(),
-                path: path,
-              };
-              this.#operations.set(operation.operationId, operationObj);
-            }
-          }
+          this.addOperations(this.#operations, path, pathItem);
         }
       }
 
       // Process x-ms-paths (Azure extension)
       if (swagger["x-ms-paths"]) {
         for (const [path, pathItem] of Object.entries(swagger["x-ms-paths"])) {
-          for (const [method, operation] of Object.entries(pathItem)) {
-            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
-              const operationObj = {
-                id: operation.operationId,
-                httpMethod: method.toUpperCase(),
-                path: path,
-              };
-              this.#operations.set(operation.operationId, operationObj);
-            }
-          }
+          this.addOperations(this.#operations, path, pathItem);
         }
       }
     }
     return this.#operations;
+  }
+
+  /**
+   *
+   * @param {Map<string, Operation>} operations
+   * @param {string} path
+   * @param {any} pathItem
+   * @returns {void}
+   */
+  addOperations(operations, path, pathItem) {
+    for (const [method, operation] of Object.entries(pathItem)) {
+      if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+        const operationObj = {
+          id: operation.operationId,
+          httpMethod: method.toUpperCase(),
+          path: path,
+        };
+        operations.set(operation.operationId, operationObj);
+      }
+    }
   }
 
   /**
@@ -189,7 +192,7 @@ export class Swagger {
    * @returns {string} version kind (stable or preview)
    */
   get versionKind() {
-    return dirname(this.#path).includes("/preview/")
+    return includesFolder(this.#path, "preview")
       ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
       : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }
@@ -218,26 +221,6 @@ export class Swagger {
   toString() {
     return `Swagger(${this.#path}, {logger: ${this.#logger}})`;
   }
-}
-
-// TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-function example(file) {
-  // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && includesFolder(file, "examples");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-function json(file) {
-  // Extension "json" with any case is a valid JSON file
-  return typeof file === "string" && file.toLowerCase().endsWith(".json");
 }
 
 // API version lifecycle stages
