@@ -6622,8 +6622,11 @@
           ]
         },
         "privateEndpointConnections": {
-          "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection",
+          "type": "array",
           "description": "PrivateEndpointConnections related properties of a server.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
           "readOnly": true
         },
         "maintenancePolicy": {
