@@ -46,6 +46,7 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 input-file:
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
   - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
+  - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 ```
 
 ### Tag: package-preview-2024-10
@@ -79,6 +80,20 @@ suppressions:
   - code: PostResponseCodes
     from: actionGroups_API.json
     reason: Existing service design behavior. Fixing this causes breaking changes.
+```
+
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
+
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: metricAlert_API.json
+    reason: Service design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
 ```
 
 ### Tag: package-preview-2024-01
