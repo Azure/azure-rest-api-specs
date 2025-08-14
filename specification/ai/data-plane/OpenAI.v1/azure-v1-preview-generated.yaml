@@ -3,6 +3,7 @@ info:
   title: Azure AI Foundry Models Service
   version: preview
 tags:
+  - name: Audio
   - name: Chat
   - name: Embeddings
   - name: Evals
@@ -14,6 +15,57 @@ tags:
   - name: Vector Stores
   - name: Video
 paths:
+  /audio/speech:
+    post:
+      operationId: createSpeech
+      summary: Generates text-to-speech audio from the input text.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureCreateSpeechRequest'
+      x-ms-examples:
+        Create a speech request:
+          $ref: ./examples/audio_speech.yaml
   /chat/completions:
     post:
       operationId: createChatCompletion
@@ -5283,6 +5335,47 @@ components:
         model:
           type: string
           description: The model deployment to use for the creation of this response.
+    AzureCreateSpeechRequest:
+      type: object
+      required:
+        - input
+        - voice
+        - model
+      properties:
+        input:
+          type: string
+          maxLength: 4096
+          description: The text to generate audio for. The maximum length is 4096 characters.
+        instructions:
+          type: string
+          maxLength: 4096
+          description: Control the voice of your generated audio with additional instructions. Does not work with `tts-1` or `tts-1-hd`.
+        voice:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.VoiceIdsShared'
+          description: The voice to use when generating the audio. Supported voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`, and `verse`. Previews of the voices are available in the [Text to speech guide](/docs/guides/text-to-speech#voice-options).
+        stream_format:
+          type: string
+          enum:
+            - sse
+            - audio
+          description: The format to stream the audio in. Supported formats are `sse` and `audio`. `sse` is not supported for `tts-1` or `tts-1-hd`.
+          default: audio
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/SpeechGenerationResponseFormat'
+          description: The audio output format for the spoken text. By default, the MP3 format will be used.
+        speed:
+          type: number
+          format: float
+          minimum: 0.25
+          maximum: 4
+          description: The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.
+          default: 1
+        model:
+          type: string
+          description: The model to use for this text-to-speech request.
+      description: A representation of the request options that control the behavior of a text-to-speech operation.
     AzureErrorResponse:
       type: object
       properties:
@@ -15072,6 +15165,18 @@ components:
         both text and audio responses, you can use:
 
         `["text", "audio"]`
+    SpeechGenerationResponseFormat:
+      oneOf:
+        - type: string
+        - type: string
+          enum:
+            - mp3
+            - opus
+            - aac
+            - flac
+            - wav
+            - pcm
+      description: The supported audio output formats for text-to-speech.
     VideoGeneration:
       type: object
       required:
