@@ -324,7 +324,7 @@ op yieldForChildren(
 @get
 @route("/skillContext/skillFilters")
 @doc("Returns skill filters")
-op skillFilters(
+op getSkillFilters(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 ): Record<string>;
 
