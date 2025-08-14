@@ -1,0 +1,106 @@
+{
+  "operationId": "LoadTestRun_StopTestRun",
+  "title": "Stop test run by name.",
+  "parameters": {
+    "testRunId": "12316678-1234-1234-1234-122451189012",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "testRunId": "12316678-1234-1234-1234-122451189012",
+        "displayName": "Performance_LoadTest_Run1",
+        "testId": "12345678-1234-1234-1234-123456789012",
+        "description": "sample description",
+        "status": "CANCELLING",
+        "startDateTime": "2021-12-05T16:43:48.125Z",
+        "endDateTime": "2021-12-05T16:43:48.125Z",
+        "loadTestConfiguration": {
+          "engineInstances": 6,
+          "splitAllCSVs": true
+        },
+        "testResult": "NOT_APPLICABLE",
+        "passFailCriteria": {
+          "passFailMetrics": {
+            "pfmetric1": {
+              "clientMetric": "response_time_ms",
+              "aggregate": "percentage",
+              "condition": ">",
+              "value": 20,
+              "action": "continue",
+              "actualValue": 0,
+              "result": null
+            }
+          },
+          "passFailServerMetrics": {
+            "fefd759d-7fe8-4f83-8b6d-aeebe0f491fe": {
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVM",
+              "metricNamespace": "Microsoft.Compute/virtualMachines",
+              "metricName": "Percentage CPU",
+              "aggregation": "Average",
+              "condition": ">",
+              "value": 20,
+              "action": "continue"
+            }
+          }
+        },
+        "testArtifacts": {
+          "inputArtifacts": {
+            "configFileInfo": {
+              "url": "https://somestorageaccount.blob.core.windows.net/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000.yaml?sv=2019-12-12&st=2021-01-26T18%3A30%3A20Z&se=2021-02-05T18%3A30%3A00Z&sr=c&sp=rl&sig=d7PZKyQsIeE6xb%2B1M4Yb56I%2FEEKoNIF65D%2Fs0IFsYcE%3D",
+              "fileName": "config.yaml",
+              "fileType": "ADDITIONAL_ARTIFACTS",
+              "expireDateTime": "2021-12-05T16:43:46.072Z",
+              "validationStatus": ""
+            },
+            "testScriptFileInfo": {
+              "url": "https://somestorageaccount.blob.core.windows.net/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000.jmx?sv=2019-12-12&st=2021-01-26T18%3A30%3A20Z&se=2021-02-05T18%3A30%3A00Z&sr=c&sp=rl&sig=d7PZKyQsIeE6xb%2B1M4Yb56I%2FEEKoNIF65D%2Fs0IFsYcE%3D",
+              "fileName": "sample.jmx",
+              "fileType": "JMX_FILE",
+              "expireDateTime": "2021-12-05T16:43:46.072Z",
+              "validationStatus": "VALIDATION_SUCCESS"
+            },
+            "userPropFileInfo": {
+              "url": "https://somestorageaccount.blob.core.windows.net/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000.properties?sv=2019-12-12&st=2021-01-26T18%3A30%3A20Z&se=2021-02-05T18%3A30%3A00Z&sr=c&sp=rl&sig=d7PZKyQsIeE6xb%2B1M4Yb56I%2FEEKoNIF65D%2Fs0IFsYcE%3D",
+              "fileName": "user.properties",
+              "fileType": "USER_PROPERTIES",
+              "expireDateTime": "2021-12-05T16:43:46.072Z",
+              "validationStatus": ""
+            },
+            "inputArtifactsZipFileInfo": {
+              "url": "https://somestorageaccount.blob.core.windows.net/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000.zip?sv=2019-12-12&st=2021-01-26T18%3A30%3A20Z&se=2021-02-05T18%3A30%3A00Z&sr=c&sp=rl&sig=d7PZKyQsIeE6xb%2B1M4Yb56I%2FEEKoNIF65D%2Fs0IFsYcE%3D",
+              "fileName": "inputartifacts.zip",
+              "fileType": "ADDITIONAL_ARTIFACTS",
+              "expireDateTime": "2021-12-05T16:43:46.072Z",
+              "validationStatus": ""
+            },
+            "additionalFileInfo": []
+          },
+          "outputArtifacts": {
+            "resultFileInfo": null,
+            "logsFileInfo": null
+          }
+        },
+        "executedDateTime": "2021-12-05T16:43:48.125Z",
+        "virtualUsers": null,
+        "testRunStatistics": null,
+        "createdDateTime": "2021-12-05T16:43:46.072Z",
+        "createdBy": "user@contoso.com",
+        "lastModifiedDateTime": "2021-12-05T16:43:46.072Z",
+        "lastModifiedBy": "user@contoso.com",
+        "portalUrl": "https://portal.azure.com/dummyresource",
+        "secrets": {
+          "secret1": {
+            "value": "https://samplevault.vault.azure.net/secrets/samplesecret/f113f91fd4c44a368049849c164db827",
+            "type": "AKV_SECRET_URI"
+          }
+        },
+        "environmentVariables": {
+          "envvar1": "sampletext"
+        },
+        "duration": null,
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.Network/virtualNetworks/samplenetworkresource/subnets/AAAAA0A0A0"
+      }
+    }
+  }
+}
