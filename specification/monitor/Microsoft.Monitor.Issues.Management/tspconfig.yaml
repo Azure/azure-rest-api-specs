@@ -1,9 +1,6 @@
 parameters:
   service-dir:
     default: "sdk/monitor"
-dependencies:
-  additionalDirectories:
-    - "../Microsoft.Monitor.Accounts.Management/typespec/"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -51,3 +48,6 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "../Microsoft.Monitor.Accounts.Management/typespec/"
