@@ -185,8 +185,18 @@ model Quota {
   limit: int64;
 }
 
-@@identifiers(PagedQuota.value, #[]);
-model PagedQuota is Page<Quota>;
+@doc("A list of quotas")
+model PagedQuota {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  @doc("The list of quotas")
+  @pageItems
+  @identifiers(#[])
+  value: Array<Quota>;
+
+  @doc("Url for the next page. Null if no more pages available")
+  @TypeSpec.nextLink
+  nextLink?: string;
+}
 
 @doc("The Quota Names")
 model QuotaName {
