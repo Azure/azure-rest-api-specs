@@ -6,7 +6,7 @@
     "api-version": "2025-06-01",
     "poolId": "pool",
     "client-request-id": "00000000-0000-0000-0000-000000000000",
-    "ocp-date": "Fri, 17 Feb 2017 00:00:00 GMT"
+    "ocp-date": "Fri, 17 Feb 2025 00:00:00 GMT"
   },
   "responses": {
     "200": {
@@ -20,7 +20,7 @@
         "stateTransitionTime": "2025-06-30T08:55:44.4305839Z",
         "allocationState": "steady",
         "allocationStateTransitionTime": "2025-06-30T08:58:17.3869385Z",
-        "vmSize": "standard_d2s_v3",
+        "vmSize": "Standard_D2ds_v5",
         "resizeTimeout": "PT15M",
         "currentDedicatedNodes": 1,
         "targetDedicatedNodes": 1,
@@ -30,21 +30,21 @@
         "enableInterNodeCommunication": false,
         "taskSlotsPerNode": 1,
         "taskSchedulingPolicy": {
-          "nodeFillType": "Spread",
+          "nodeFillType": "spread",
           "jobDefaultOrder": "none"
         },
         "virtualMachineConfiguration": {
           "imageReference": {
             "publisher": "Canonical",
-            "offer": "0001-com-ubuntu-server-focal",
-            "sku": "20_04-lts",
+            "offer": "ubuntu-24_04-lts",
+            "sku": "server",
             "version": "latest"
           },
           "nodeAgentSKUId": "batch.node.ubuntu 20.04",
           "diskEncryptionConfiguration": {
             "targets": [
-              "OsDisk",
-              "TemporaryDisk"
+              "osdisk",
+              "temporarydisk"
             ],
             "customerManagedKey": {
               "keyUrl": "https://<vaultEndpoint>/keys/<keyName>/<keyVersion>",

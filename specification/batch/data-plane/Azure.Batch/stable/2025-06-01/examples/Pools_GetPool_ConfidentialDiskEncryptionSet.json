@@ -6,7 +6,7 @@
     "api-version": "2025-06-01",
     "poolId": "pool",
     "client-request-id": "00000000-0000-0000-0000-000000000000",
-    "ocp-date": "Fri, 17 Feb 2017 00:00:00 GMT"
+    "ocp-date": "Fri, 17 Feb 2025 00:00:00 GMT"
   },
   "responses": {
     "200": {
@@ -30,7 +30,7 @@
         "enableInterNodeCommunication": false,
         "taskSlotsPerNode": 1,
         "taskSchedulingPolicy": {
-          "nodeFillType": "Spread",
+          "nodeFillType": "spread",
           "jobDefaultOrder": "none"
         },
         "virtualMachineConfiguration": {
@@ -45,16 +45,14 @@
             "managedDisk": {
               "storageAccountType": "standard_lrs",
               "securityProfile": {
-                "securityEncryptionType": "DiskWithVMGuestState",
-                "diskEncryptionSet": {
-                  "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/ConfidentialDiskEncryptionSetId"
+                "securityEncryptionType": "DiskWithVMGuestState"
                 }
               },
               "diskEncryptionSet": {
                 "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
               }
             },
-            "caching": "None"
+            "caching": "none"
           },
           "nodeAgentSKUId": "batch.node.windows amd64",
           "dataDisks": [
@@ -71,7 +69,7 @@
             }
           ],
           "securityProfile": {
-            "securityType": "confidentialvm",
+            "securityType": "confidentialVM",
             "uefiSettings": {
               "secureBootEnabled": true,
               "vTpmEnabled": true

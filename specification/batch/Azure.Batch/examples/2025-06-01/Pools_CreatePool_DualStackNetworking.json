@@ -8,12 +8,12 @@
     "ocp-date": "Fri, 27 Jun 2025 08:22:42 GMT",
     "pool": {
       "id": "dualstackpool",
-      "vmSize": "standard_d2s_v3",
+      "vmSize": "Standard_D2ds_v5",
       "virtualMachineConfiguration": {
         "imageReference": {
           "publisher": "Canonical",
-          "offer": "0001-com-ubuntu-server-focal",
-          "sku": "20_04-lts"
+          "offer": "ubuntu-24_04-lts",
+          "sku": "server"
         },
         "nodeAgentSKUId": "batch.node.ubuntu 20.04"
       },
@@ -34,7 +34,7 @@
               "protocol": "tcp",
               "networkSecurityGroupRules": [
                 {
-                  "access": "Allow",
+                  "access": "allow",
                   "priority": 1000,
                   "sourceAddressPrefix": "*",
                   "sourcePortRanges": [
