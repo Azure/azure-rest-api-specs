@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 
-namespace WebPubSubService;
+namespace WebPubSub;
 
 /**
  * Details about the client.
@@ -95,6 +95,7 @@ union MessageContentType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
 union ResponseContentType {
+  
   /**
    * Content Type 'application/json'
    */
@@ -154,5 +155,5 @@ union WebPubSubClientType {
   Default: "Default",
 
   /** MQTT client. */
-  MQTT: "mqtt",
+  MQTT: "MQTT",
 }
