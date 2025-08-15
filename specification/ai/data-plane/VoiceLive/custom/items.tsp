@@ -60,7 +60,7 @@ model RequestMessageReferenceItem { // extends ConversationRequestItem {
 model ConversationResponseItem {
   ...ConversationItemBase;
   object?: "realtime.item";
-  type?: ItemType;
+  type: ItemType;
   id?: string;
 }
 
