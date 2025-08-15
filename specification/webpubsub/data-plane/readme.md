@@ -47,8 +47,6 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
   - WebPubSub/stable/2024-12-01/webpubsub.json
-  - Azure.Messaging.WebPubSub/stable/2024-12-01/openapi.json
-  - WebPubSubService/stable/2024-12-01/openapi.json
 ```
 
 ### Tag: package-2024-01
