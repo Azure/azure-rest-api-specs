@@ -362,7 +362,7 @@ union DataClassType {
   "Files",
 
   /**
-   * This is an invalid ENUM please use SoftwareArtifacts instead.
+   * This is a deprecated value please use SoftwareArtifacts instead.
    */
   "DevSecOps",
 
