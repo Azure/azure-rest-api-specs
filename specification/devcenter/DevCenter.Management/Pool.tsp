@@ -32,25 +32,21 @@ interface Pools {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Pool>;
 
   @doc("Partially updates a machine pool.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Pool,
     PatchModel = PoolUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = Pool | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = Pool>
+      ArmLroLocationHeader<FinalResult = Pool>
     >
   >;
 
   @doc("Deletes a machine pool.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Pool,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists pools for a project.")
@@ -65,12 +61,10 @@ interface Pools {
   >;
 
   @doc("Triggers a refresh of the pool status.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runHealthChecks is ArmResourceActionAsyncBase<
     Pool,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
   >;
 }

@@ -109,11 +109,9 @@ interface AttachedNetworks {
   createOrUpdate is AttachedNetworkOps.CreateOrUpdateAsync<AttachedNetworkConnection>;
 
   @doc("Un-attach a NetworkConnection.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is AttachedNetworkOps.DeleteWithoutOkAsync<
     AttachedNetworkConnection,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists the attached NetworkConnections for a DevCenter.")

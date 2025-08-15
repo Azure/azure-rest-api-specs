@@ -87,13 +87,11 @@ interface ImageDefinitions {
   >;
 
   @doc("Builds an image for the specified Image Definition.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   buildImage is ImageDefinitionOps.ActionAsync<
     ImageDefinition,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 }
 @armResourceOperations
@@ -159,13 +157,11 @@ interface ProjectCatalogImageDefinitions {
   >;
 
   @doc("Builds an image for the specified Image Definition.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   buildImage is ProjectCatalogImageDefinitionOps.ActionAsync<
     ImageDefinition,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 }
 

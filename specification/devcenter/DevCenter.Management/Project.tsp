@@ -34,25 +34,21 @@ interface Projects {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
 
   @doc("Partially updates a project.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Project,
     PatchModel = ProjectUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = Project | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = Project>
+      ArmLroLocationHeader<FinalResult = Project>
     >
   >;
 
   @doc("Deletes a project resource.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists all projects in the resource group.")

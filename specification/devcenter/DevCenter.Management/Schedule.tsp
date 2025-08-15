@@ -46,7 +46,6 @@ interface Schedules {
   >;
 
   @doc("Partially updates a Schedule.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Schedule,
@@ -56,16 +55,14 @@ interface Schedules {
       @query("$top")
       $top?: int32;
     },
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = Schedule | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = Schedule>
+      ArmLroLocationHeader<FinalResult = Schedule>
     >
   >;
 
   @doc("Deletes a Schedule.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Schedule,
     Parameters = {
@@ -73,8 +70,7 @@ interface Schedules {
       @query("$top")
       $top?: int32;
     },
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists schedules for a pool.")

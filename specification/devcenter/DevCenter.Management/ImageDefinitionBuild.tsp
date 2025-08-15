@@ -84,13 +84,11 @@ interface ImageDefinitionBuilds {
   >;
 
   @doc("Cancels the specified build for an image definition.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cancel is ImageDefinitionBuildOps.ActionAsync<
     ImageDefinitionBuild,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 
   @doc("Gets Build details.")
@@ -160,13 +158,11 @@ interface ProjectCatalogImageDefinitionBuild {
   >;
 
   @doc("Cancels the specified build for an image definition.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cancel is ProjectCatalogImageDefinitionBuildOps.ActionAsync<
     ImageDefinitionBuild,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 
   @doc("Gets Build details.")

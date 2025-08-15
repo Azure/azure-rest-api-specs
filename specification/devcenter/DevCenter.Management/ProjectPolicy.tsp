@@ -33,25 +33,21 @@ interface ProjectPolicies {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ProjectPolicy>;
 
   @doc("Partially updates an project policy.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ProjectPolicy,
     PatchModel = ProjectPolicyUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = ProjectPolicy | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = ProjectPolicy>
+      ArmLroLocationHeader<FinalResult = ProjectPolicy>
     >
   >;
 
   @doc("Deletes an project policy.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ProjectPolicy,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists all project policies in the dev center.")

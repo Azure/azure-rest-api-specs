@@ -33,25 +33,21 @@ interface DevCenters {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DevCenter>;
 
   @doc("Partially updates a devcenter.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DevCenter,
     PatchModel = DevCenterUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = DevCenter | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = DevCenter>
+      ArmLroLocationHeader<FinalResult = DevCenter>
     >
   >;
 
   @doc("Deletes a devcenter.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DevCenter,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists all devcenters in a resource group.")

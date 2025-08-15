@@ -62,25 +62,21 @@ interface Catalogs {
   createOrUpdate is CatalogOps.CreateOrUpdateAsync<Catalog>;
 
   @doc("Partially updates a project catalog.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   patch is CatalogOps.CustomPatchAsync<
     Catalog,
     PatchModel = CatalogUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = Catalog | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = Catalog>
+      ArmLroLocationHeader<FinalResult = Catalog>
     >
   >;
 
   @doc("Deletes a project catalog resource.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is CatalogOps.DeleteWithoutOkAsync<
     Catalog,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists the catalogs associated with a project.")
@@ -102,23 +98,19 @@ interface Catalogs {
   >;
 
   @doc("Syncs templates for a template source.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sync is CatalogOps.ActionAsync<
     Catalog,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 
   @doc("Connects a project catalog to enable syncing.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connect is CatalogOps.ActionAsync<
     Catalog,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 }
 @armResourceOperations
@@ -160,25 +152,21 @@ interface CatalogOperationGroup {
   createOrUpdate is CatalogOperationGroupOps.CreateOrUpdateAsync<Catalog>;
 
   @doc("Partially updates a catalog.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is CatalogOperationGroupOps.CustomPatchAsync<
     Catalog,
     PatchModel = CatalogUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = Catalog | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = Catalog>
+      ArmLroLocationHeader<FinalResult = Catalog>
     >
   >;
 
   @doc("Deletes a catalog resource.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is CatalogOperationGroupOps.DeleteWithoutOkAsync<
     Catalog,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists catalogs for a devcenter.")
@@ -200,23 +188,19 @@ interface CatalogOperationGroup {
   >;
 
   @doc("Syncs templates for a template source.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sync is CatalogOperationGroupOps.ActionAsync<
     Catalog,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 
   @doc("Connects a catalog to enable syncing.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connect is CatalogOperationGroupOps.ActionAsync<
     Catalog,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
   >;
 }
 

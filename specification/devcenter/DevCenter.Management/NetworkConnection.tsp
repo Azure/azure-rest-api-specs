@@ -31,25 +31,21 @@ interface NetworkConnections {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkConnection>;
 
   @doc("Partially updates a Network Connection.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NetworkConnection,
     PatchModel = NetworkConnectionUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = NetworkConnection | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = NetworkConnection>
+      ArmLroLocationHeader<FinalResult = NetworkConnection>
     >
   >;
 
   @doc("Deletes a Network Connections resource.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkConnection,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists network connections in a resource group.")
@@ -75,12 +71,10 @@ interface NetworkConnections {
   >;
 
   @doc("Triggers a new health check run. The execution and health check result can be tracked via the network Connection health check details.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runHealthChecks is ArmResourceActionAsyncBase<
     NetworkConnection,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkConnection>
   >;
 

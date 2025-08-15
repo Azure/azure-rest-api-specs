@@ -37,25 +37,21 @@ interface DevCenterEncryptionSets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DevCenterEncryptionSet>;
 
   @doc("Partially updates a devcenter encryption set.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DevCenterEncryptionSet,
     PatchModel = EncryptionSetUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = DevCenterEncryptionSet | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = DevCenterEncryptionSet>
+      ArmLroLocationHeader<FinalResult = DevCenterEncryptionSet>
     >
   >;
 
   @doc("Deletes a devcenter encryption set.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DevCenterEncryptionSet,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists all encryption sets in the devcenter.")

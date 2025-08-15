@@ -63,26 +63,21 @@ interface DevBoxDefinitions {
   createOrUpdate is DevBoxDefinitionOps.CreateOrUpdateAsync<DevBoxDefinition>;
 
   @doc("Partially updates a Dev Box definition.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is DevBoxDefinitionOps.CustomPatchAsync<
     DevBoxDefinition,
     PatchModel = DevBoxDefinitionUpdate,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader,
     Response = DevBoxDefinition | ArmAcceptedLroResponse<
       "Resource update request accepted.",
-      ArmAsyncOperationHeader<FinalResult = DevBoxDefinition>
+      ArmLroLocationHeader<FinalResult = DevBoxDefinition>
     >
   >;
 
   @doc("Deletes a Dev Box definition.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is DevBoxDefinitionOps.DeleteWithoutOkAsync<
     DevBoxDefinition,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+    LroHeaders = ArmLroLocationHeader>;
 
   @doc("List Dev Box definitions for a devcenter.")
   listByDevCenter is DevBoxDefinitionOps.List<

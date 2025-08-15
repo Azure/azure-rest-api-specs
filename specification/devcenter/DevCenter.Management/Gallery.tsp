@@ -32,11 +32,9 @@ interface Galleries {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Gallery>;
 
   @doc("Deletes a gallery resource.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Gallery,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader
   >;
 
   @doc("Lists galleries for a devcenter.")
