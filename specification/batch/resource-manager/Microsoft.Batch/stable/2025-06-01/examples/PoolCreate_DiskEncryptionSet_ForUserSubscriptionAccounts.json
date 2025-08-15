@@ -8,21 +8,27 @@
     "parameters": {
       "properties": {
         "vmSize": "Standard_D4ds_v5",
+        "taskSchedulingPolicy": {
+          "nodeFillType": "Pack"
+        },
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
-              "publisher": "canonical",
-              "offer": "ubuntu-24_04-lts",
-              "sku": "server",
-              "version": "latest"
+              "sku": "2022-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
             },
-            "nodeAgentSkuId": "batch.node.ubuntu 24.04",
+            "nodeAgentSkuId": "batch.node.windows amd64",
             "securityProfile": {
-              "securityType": "trustedLaunch",
-              "encryptionAtHost": true,
-              "uefiSettings": {
-                "secureBootEnabled": null,
-                "vTpmEnabled": false
+              "encryptionAtHost": false
+            },
+            "osDisk": {
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS",
+                "diskEncryptionSet": {
+                  "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                }
               }
             }
           }
@@ -30,7 +36,7 @@
         "scaleSettings": {
           "fixedScale": {
             "targetDedicatedNodes": 1,
-            "targetLowPriorityNodes": 0
+            "resizeTimeout": "PT15M"
           }
         }
       }
@@ -39,41 +45,47 @@
   "responses": {
     "200": {
       "headers": {
-        "ETag": "W/\"0x8DB554F8E08BCF4\""
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
       },
       "body": {
         "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "name": "testpool",
         "type": "Microsoft.Batch/batchAccounts/pools",
-        "etag": "W/\"0x8DB554F8E08BCF4\"",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
         "properties": {
-          "lastModified": "2024-08-28T07:03:58.3231917Z",
-          "creationTime": "2024-08-28T07:03:58.3231917Z",
+          "lastModified": "2025-06-30T07:45:46.1580726Z",
+          "creationTime": "2025-06-30T07:35:44.5579791Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2024-08-28T07:03:58.3231917Z",
+          "provisioningStateTransitionTime": "2025-06-30T07:35:44.5579791Z",
           "allocationState": "Resizing",
-          "allocationStateTransitionTime": "2024-08-28T07:03:58.3231917Z",
+          "allocationStateTransitionTime": "2025-06-30T07:45:46.1580727Z",
           "vmSize": "Standard_D4ds_v5",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
           "taskSchedulingPolicy": {
-            "nodeFillType": "Spread"
+            "nodeFillType": "Pack",
+            "jobDefaultOrder": "None"
           },
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "canonical",
-                "offer": "ubuntu-24_04-lts",
-                "sku": "server",
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2022-Datacenter",
                 "version": "latest"
               },
-              "nodeAgentSkuId": "batch.node.ubuntu 24.04",
-              "securityProfile": {
-                "securityType": "trustedLaunch",
-                "encryptionAtHost": true,
-                "uefiSettings": {
-                  "vTpmEnabled": false
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "osDisk": {
+                "caching": "None",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS",
+                  "diskEncryptionSet": {
+                    "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                  }
                 }
+              },
+              "securityProfile": {
+                "encryptionAtHost": false
               }
             }
           },
@@ -88,7 +100,7 @@
             "targetDedicatedNodes": 1,
             "nodeDeallocationOption": "Requeue",
             "resizeTimeout": "PT15M",
-            "startTime": "2024-08-28T07:03:58.3231917Z"
+            "startTime": "2025-06-30T07:45:46.1580724Z"
           },
           "currentDedicatedNodes": 0,
           "currentLowPriorityNodes": 0

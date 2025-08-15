@@ -3573,17 +3573,6 @@
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
         },
-        "targetNodeCommunicationMode": {
-          "title": "The desired node communication mode for the pool.",
-          "description": "If omitted, the default value is Default.",
-          "$ref": "#/definitions/NodeCommunicationMode"
-        },
-        "currentNodeCommunicationMode": {
-          "title": "The current state of the pool communication mode.",
-          "$ref": "#/definitions/NodeCommunicationMode",
-          "x-nullable": true,
-          "readOnly": true
-        },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
           "title": "The upgrade policy for the pool."
@@ -3841,33 +3830,6 @@
         "evaluationTime"
       ],
       "title": "The results and errors from an execution of a pool autoscale formula."
-    },
-    "NodeCommunicationMode": {
-      "type": "string",
-      "title": "Determines how a pool communicates with the Batch service.",
-      "enum": [
-        "Default",
-        "Classic",
-        "Simplified"
-      ],
-      "x-ms-enum": {
-        "name": "NodeCommunicationMode",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "Default",
-            "description": "The node communication mode is automatically set by the Batch service."
-          },
-          {
-            "value": "Classic",
-            "description": "Nodes using the Classic communication mode require inbound TCP communication on ports 29876 and 29877 from the \"BatchNodeManagement.{region}\" service tag and outbound TCP communication on port 443 to the \"Storage.region\" and \"BatchNodeManagement.{region}\" service tags."
-          },
-          {
-            "value": "Simplified",
-            "description": "Nodes using the Simplified communication mode require outbound TCP communication on port 443 to the \"BatchNodeManagement.{region}\" service tag. No open inbound ports are required."
-          }
-        ]
-      }
     },
     "ServiceArtifactReference": {
       "type": "object",
@@ -4892,8 +4854,7 @@
           "title": "The value of the IP tag associated with the public IP.",
           "description": "Example: SQL."
         }
-      },
-      "description": "IP Tags that will applied to new Public IPs that Batch creates. The IP tags are used to identify the purpose of the public IPs created by Batch. For example, the IP tag type can be FirstPartyUsage and the display name can be SQL."
+      }
     },
     "PublicIPAddressConfiguration": {
       "type": "object",

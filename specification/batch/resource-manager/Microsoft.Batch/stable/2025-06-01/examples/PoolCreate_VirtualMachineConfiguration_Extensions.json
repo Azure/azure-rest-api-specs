@@ -7,7 +7,7 @@
     "api-version": "2025-06-01",
     "parameters": {
       "properties": {
-        "vmSize": "STANDARD_D4",
+        "vmSize": "Standard_D4d_v5",
         "scaleSettings": {
           "autoScale": {
             "formula": "$TargetDedicatedNodes=1",
@@ -18,10 +18,10 @@
           "virtualMachineConfiguration": {
             "imageReference": {
               "publisher": "Canonical",
-              "offer": "0001-com-ubuntu-server-focal",
-              "sku": "20_04-lts"
+              "offer": "ubuntu-24_04-lts",
+              "sku": "server"
             },
-            "nodeAgentSkuId": "batch.node.ubuntu 20.04",
+            "nodeAgentSkuId": "batch.node.ubuntu 24.04",
             "extensions": [
               {
                 "name": "batchextension1",
@@ -37,8 +37,7 @@
               }
             ]
           }
-        },
-        "targetNodeCommunicationMode": "Default"
+        }
       }
     }
   },
@@ -53,13 +52,13 @@
         "type": "Microsoft.Batch/batchAccounts/pools",
         "etag": "W/\"0x8D4EDFEBFADF4AB\"",
         "properties": {
-          "lastModified": "2017-08-28T10:22:55.9407275Z",
-          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "lastModified": "2025-07-28T10:22:55.9407275Z",
+          "creationTime": "2025-07-28T10:22:55.9407275Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "provisioningStateTransitionTime": "2025-07-28T10:22:55.9407275Z",
           "allocationState": "Resizing",
-          "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
-          "vmSize": "STANDARD_D4",
+          "allocationStateTransitionTime": "2025-07-28T10:22:55.9407275Z",
+          "vmSize": "Standard_D4d_v5",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
           "taskSchedulingPolicy": {
@@ -77,10 +76,10 @@
             "virtualMachineConfiguration": {
               "imageReference": {
                 "publisher": "Canonical",
-                "offer": "0001-com-ubuntu-server-focal",
-                "sku": "20_04-lts"
+                "offer": "ubuntu-24_04-lts",
+                "sku": "server"
               },
-              "nodeAgentSkuId": "batch.node.ubuntu 20.04",
+              "nodeAgentSkuId": "batch.node.ubuntu 24.04",
               "extensions": [
                 {
                   "name": "batchextension1",
@@ -96,8 +95,7 @@
                 }
               ]
             }
-          },
-          "targetNodeCommunicationMode": "Default"
+          }
         }
       }
     }
