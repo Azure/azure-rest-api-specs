@@ -25,7 +25,7 @@ export function parseExistingComments(comments, commentGroupName) {
   let commentBody = undefined;
 
   if (comments) {
-    comments.map((comment) => {
+    for (const comment of comments) {
       // When we create or update this comment, we will always leave behind
       // <!-- commentGroupName --> in the body of the comment.
       // This allows us to identify the comment later on. We need to return the body
@@ -34,11 +34,34 @@ export function parseExistingComments(comments, commentGroupName) {
       if (comment.body?.includes(commentGroupName)) {
         commentId = comment.id;
         commentBody = comment.body;
+        break; // Return the first match, not the last
+      }
+    }
+  }
+
+  return [commentId, commentBody];
+}
+
+/**
+ * Find all comments with the specified comment group name and return them sorted by ID (oldest first).
+ *
+ * @param {IssueComment[]} comments - The list of comments to search through.
+ * @param {string} commentGroupName - The name of the comment group to search for.
+ * @returns {IssueComment[]} Array of matching comments sorted by ID (oldest first).
+ */
+export function findAllMatchingComments(comments, commentGroupName) {
+  const matchingComments = [];
+  
+  if (comments) {
+    comments.forEach((comment) => {
+      if (comment.body?.includes(commentGroupName)) {
+        matchingComments.push(comment);
       }
     });
   }
 
-  return [commentId, commentBody];
+  // Sort by ID to ensure deterministic order (oldest comment has lowest ID)
+  return matchingComments.sort((a, b) => a.id - b.id);
 }
 
 /**
@@ -96,5 +119,41 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Created new comment #${newComment.id}`);
+
+    // RACE CONDITION FIX: Check for duplicates after creating the comment
+    // If two instances run simultaneously, both might create comments
+    // In that case, we need to clean up the duplicate
+    const afterComments = await github.paginate(github.rest.issues.listComments, {
+      owner,
+      repo,
+      issue_number,
+      per_page: PER_PAGE_MAX,
+    });
+
+    const allMatchingComments = findAllMatchingComments(afterComments, commentIdentifier);
+    
+    if (allMatchingComments.length > 1) {
+      core.warning(
+        `Race condition detected: Found ${allMatchingComments.length} comments with identifier '${commentIdentifier}'. ` +
+        `Cleaning up duplicate comment ${newComment.id} and updating comment ${allMatchingComments[0].id}.`
+      );
+
+      // Delete the comment we just created (it will be one of the newer ones)
+      await github.rest.issues.deleteComment({
+        owner,
+        repo,
+        comment_id: newComment.id,
+      });
+      core.info(`Deleted duplicate comment ${newComment.id} due to race condition.`);
+
+      // Update the oldest existing comment instead
+      await github.rest.issues.updateComment({
+        owner,
+        repo,
+        comment_id: allMatchingComments[0].id,
+        body: computedBody,
+      });
+      core.info(`Updated oldest existing comment ${allMatchingComments[0].id} after race condition cleanup.`);
+    }
   }
 }
