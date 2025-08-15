@@ -1,15 +1,15 @@
 parameters:
-  "service-dir":
-    default: "sdk/microsoft.app"
-  "dependencies":
-    default: ""
+  service-dir:
+    default: '{output-dir}/sdk/microsoft.app'
+  dependencies:
+    default: ''
 emit:
-  - "@azure-tools/typespec-autorest"
+- '@azure-tools/typespec-autorest'
 options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
-    emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DynamicSessions.json"
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: data-plane
+    emitter-output-dir: '{project-root}/..'
+    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DynamicSessions.json'
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - '@azure-tools/typespec-azure-rulesets/data-plane'

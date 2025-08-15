@@ -1,38 +1,37 @@
 parameters:
-  "service-dir":
-    default: "sdk/sphere"
+  service-dir:
+    default: '{output-dir}/sdk/sphere'
 emit:
-  - "@azure-tools/typespec-autorest"
+- '@azure-tools/typespec-autorest'
 options:
-  "@azure-tools/typespec-autorest":
+  '@azure-tools/typespec-autorest':
     omit-unreachable-types: true
-    emitter-output-dir: "{project-root}/.."
-    azure-resource-provider-folder: "resource-manager"
-    emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
+    emitter-output-dir: '{project-root}/..'
+    azure-resource-provider-folder: resource-manager
+    emit-common-types-schema: never
     arm-resource-flattening: true
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuresphere.json"
-  "@azure-tools/cadl-python":
-    "basic-setup-py": true
-    "package-version": 3.0.0b6
-    "package-name": azure-sphere
-  "@azure-tools/cadl-csharp":
+    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuresphere.json'
+  '@azure-tools/cadl-python':
+    basic-setup-py: true
+    package-version: 3.0.0b6
+    package-name: azure-sphere
+  '@azure-tools/cadl-csharp':
     save-inputs: false
     clear-output-folder: true
     namespace: Azure.Sphere
     model-namespace: false
-  "@azure-tools/typespec-ts":
+  '@azure-tools/typespec-ts':
     experimental-extensible-enums: true
-    package-dir: "arm-sphere"
+    package-dir: arm-sphere
     flavor: azure
     package-details:
-      name: "@azure/arm-sphere"
-  "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-sphere"
-    namespace: "azure.mgmt.sphere"
-    flavor: "azure"
+      name: '@azure/arm-sphere'
+  '@azure-tools/typespec-python':
+    package-dir: azure-mgmt-sphere
+    namespace: azure.mgmt.sphere
+    flavor: azure
     generate-test: true
     generate-sample: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - '@azure-tools/typespec-azure-rulesets/resource-manager'
