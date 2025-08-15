@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - WebPubSub/stable/2024-01-01/webpubsub.json
+  - WebPubSub/stable/2024-01-01/openapi.json
 ```
 ### Tag: package-2023-07-01
 
