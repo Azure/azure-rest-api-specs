@@ -594,6 +594,7 @@ namespace Storage.Blob {
         ...MaxResultsParameter;
         ...ListBlobsIncludeParameter;
         ...TimeoutParameter;
+        ...ListBlobsStartFrom;
       },
       {
         ...DateResponseHeader;
@@ -622,6 +623,7 @@ namespace Storage.Blob {
         ...MaxResultsParameter;
         ...ListBlobsIncludeParameter;
         ...TimeoutParameter;
+        ...ListBlobsStartFrom;
       },
       {
         ...DateResponseHeader;

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.Blob;
@@ -2320,4 +2321,11 @@ alias PageWriteParameter<TPageWrite extends string> = {
   /** Required. You may specify one of the following options:\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size. */
   @header("x-ms-page-write")
   pageWrite: TPageWrite;
+};
+
+alias ListBlobsStartFrom = {
+  /** Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive) */
+  @added(Versions.v2026_02_06)
+  @query
+  startFrom?: string;
 };
