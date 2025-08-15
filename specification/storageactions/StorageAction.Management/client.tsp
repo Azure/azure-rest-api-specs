@@ -33,8 +33,13 @@ using Microsoft.StorageActions;
   "csharp"
 );
 
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
-  model SubResource {}
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: armResourceIdentifier;
+  }
 }
 
 @@alternateType(Microsoft.StorageActions.StorageTaskAssignmentsListResult.value,
