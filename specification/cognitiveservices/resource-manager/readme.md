@@ -30,7 +30,62 @@ These are the global settings for the CognitiveServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-06-01
+tag: package-2025-07-01-preview
+```
+
+### Tag: package-2025-07-01-preview
+
+These settings apply only when `--tag=package-2025-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01-preview'
+input-file:
+  - Microsoft.CognitiveServices/preview/2025-07-01-preview/cognitiveservices.json
+suppressions:
+  - code: PutResponseCodes
+    reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+  - code: PatchResponseCodes
+    reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch
+  - code: PatchBodyParametersSchema
+    reason: this is a required field for in a optional property this experience exist in other stable schemas as well.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
+  - code: GuidUsage
+    reason: Approved to be suppressed in AML swagger.
+    where:
+      - $.definitions.ConnectionOAuth2.properties.clientId.format
+  - code: DeleteResponseCodes
+    reason: Behavior is align with other existing API for this RP
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
+
+  - code: AvoidAdditionalProperties
+    reason: Approved to be suppressed in AML swagger
+    where:
+      - $.definitions.ConnectionPropertiesV2.properties.metadata
+      - $.definitions.CustomKeys.properties.keys
+  - code: NestedResourcesMustHaveListOperation
+    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
+    where:
+      - $.definitions["CapabilityHostResource"]
+  - code: LroLocationHeader
+    reason: Align with existing API behavior in other APIs
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put.responses.202
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
+  - code: AvoidAdditionalProperties
+    reason: Same as existing account resource, trying to have the same behavior
+    where:
+      - $.definitions.ProjectProperties.properties.endpoints
 ```
 
 ### Tag: package-2025-06-01
