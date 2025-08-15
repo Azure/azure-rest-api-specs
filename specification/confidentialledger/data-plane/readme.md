@@ -188,6 +188,30 @@ directive:
     reason: Existing API, change would potentially be breaking.
 ```
 
+### Tag: package-2024-12-09-preview-ledger-tsp
+
+These settings apply only when `--tag=package-2024-12-09-preview-ledger-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-09-preview-ledger-tsp'
+input-file:
+  - ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
+### Tag: package-2024-12-09-preview-identity-tsp
+
+These settings apply only when `--tag=package-2024-12-09-preview-identity-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-09-preview-identity-tsp'
+input-file:
+  - ConfidentialLedgerIdentity/preview/2024-12-09-preview/identityservice.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
 ### Tag: package-2025-01-31-preview-codetransparency
 
 These settings apply only when `--tag=package-2025-01-31-preview-codetransparency` is specified on the command line.
