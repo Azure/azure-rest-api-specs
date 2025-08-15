@@ -2,43 +2,44 @@ parameters:
   "service-dir":
     default: "{output-dir}/sdk/vision"
 emit:
-- '@azure-tools/typespec-autorest'
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
-  - '@azure-tools/typespec-azure-rulesets/data-plane'
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
-  '@azure-tools/typespec-autorest':
+  "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/ImageAnalysis/{version-status}/{version}/generated.json"
-    azure-resource-provider-folder: data-plane
-    emit-lro-options: none
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     omit-unreachable-types: true
-  '@azure-tools/typespec-python':
-    package-dir: azure-ai-vision-imageanalysis
-    namespace: azure.ai.vision.imageanalysis
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-vision-imageanalysis"
+    namespace: "azure.ai.vision.imageanalysis"
     flavor: azure
     generate-test: true
     generate-sample: true
-  '@azure-tools/typespec-csharp':
-    package-dir: Azure.AI.Vision.ImageAnalysis
-    namespace: Azure.AI.Vision.ImageAnalysis
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.Vision.ImageAnalysis"
+    namespace: "Azure.AI.Vision.ImageAnalysis"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
-  '@azure-typespec/http-client-csharp':
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/Azure.AI.Vision.ImageAnalysis"
     namespace: Azure.AI.Vision.ImageAnalysis
     model-namespace: false
-    emitter-output-dir: "{service-dir}/{namespace}"
-  '@azure-tools/typespec-java':
-    package-dir: azure-ai-vision-imageanalysis
-    namespace: com.azure.ai.vision.imageanalysis
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-vision-imageanalysis"
+    namespace: "com.azure.ai.vision.imageanalysis"
+    # We switched two public methods to private. Make sure this is not overridden next time the SDK is emitted.
     partial-update: true
     customization-class: customization/src/main/java/ImageAnalysisCustomization.java
     use-eclipse-language-server: false
     flavor: azure
-  '@azure-tools/typespec-ts':
-    package-dir: ai-vision-image-analysis-rest
+  "@azure-tools/typespec-ts":
+    package-dir: "ai-vision-image-analysis-rest"
     is-modular-library: false
     package-details:
-      name: '@azure-rest/ai-vision-image-analysis'
+      name: "@azure-rest/ai-vision-image-analysis"
     flavor: azure

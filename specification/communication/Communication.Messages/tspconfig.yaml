@@ -1,64 +1,66 @@
 parameters:
-  python-sdk-folder:
+  "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
-  java-sdk-folder:
+  "java-sdk-folder":
     default: "{project-root}/azure-sdk-for-java/"
-  js-sdk-folder:
+  "js-sdk-folder":
     default: "{project-root}/azure-sdk-for-js/"
-  csharp-sdk-folder:
+  "csharp-sdk-folder":
     default: "{project-root}/azure-sdk-for-net/"
-  service-directory-name:
-    default: communication
+  "service-directory-name":
+    default: "communication"
   "service-dir":
     default: "{output-dir}/sdk/communication"
-  python-output-dir:
-    default: azure/communication/messages/_generated
+  "python-output-dir":
+    default: "azure/communication/messages/_generated"
 emit:
-- '@azure-tools/typespec-autorest'
+  - "@azure-tools/typespec-autorest"
+
 linter:
   extends:
-  - '@azure-tools/typespec-azure-rulesets/data-plane'
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
 options:
-  '@azure-tools/typespec-autorest':
-    azure-resource-provider-folder: data-plane
-    emit-lro-options: none
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     output-file: "{azure-resource-provider-folder}/Messages/{version-status}/{version}/communicationservicesmessages.json"
     emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
-  '@azure-tools/typespec-csharp':
+  "@azure-tools/typespec-csharp":
     clear-output-folder: true
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     namespace: Azure.Communication.Messages
-    package-dir: Azure.Communication.Messages
+    package-dir: "Azure.Communication.Messages"
     save-inputs: true
     flavor: azure
-  '@azure-typespec/http-client-csharp':
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/Azure.Communication.Messages"
     namespace: Azure.Communication.Messages
     model-namespace: false
-    emitter-output-dir: "{service-dir}/{namespace}"
-  '@azure-tools/typespec-python':
+  "@azure-tools/typespec-python":
     package-pprint-name: '"Communication Messages"'
-    package-dir: azure-communication-messages
-    namespace: azure.communication.messages
+    package-dir: "azure-communication-messages"
+    namespace: "azure.communication.messages"
     package-version: 1.0.0
     flavor: azure
     generate-test: true
     generate-sample: true
-  '@azure-tools/typespec-java':
-    package-dir: azure-communication-messages
+  "@azure-tools/typespec-java":
+    package-dir: "azure-communication-messages"
     namespace: com.azure.communication.messages
     partial-update: true
     service-name: Messages
-    custom-types-subpackage: models.channels
-    custom-types: WhatsAppButtonActionBindings,WhatsAppListActionBindings,WhatsAppUrlActionBindings,WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem
+    custom-types-subpackage: "models.channels"
+    custom-types: "WhatsAppButtonActionBindings,WhatsAppListActionBindings,WhatsAppUrlActionBindings,WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
     customization-class: customization/src/main/java/MessagesSdkCustomization.java
     use-eclipse-language-server: false
     flavor: azure
-  '@azure-tools/typespec-ts':
-    package-dir: communication-messages-rest
+  "@azure-tools/typespec-ts":
+    package-dir: "communication-messages-rest"
     is-modular-library: false
     package-details:
-      name: '@azure-rest/communication-messages'
-      description: Azure client library for Azure Communication Messages services
+      name: "@azure-rest/communication-messages"
+      description: "Azure client library for Azure Communication Messages services"
     flavor: azure

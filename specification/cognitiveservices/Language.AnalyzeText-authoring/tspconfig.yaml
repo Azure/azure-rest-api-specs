@@ -2,31 +2,31 @@ parameters:
   "service-dir":
     default: "{output-dir}/sdk/cognitivelanguage"
 emit:
-- '@azure-tools/typespec-autorest'
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
-  - '@azure-tools/typespec-azure-rulesets/data-plane'
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
-  '@azure-tools/typespec-autorest':
+  "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
-    azure-resource-provider-folder: data-plane
-    emit-lro-options: none
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzetext-authoring.json"
-  '@azure-tools/typespec-csharp':
-    package-dir: Azure.AI.Language.Text.Authoring
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.Language.Text.Authoring"
     clear-output-folder: true
     model-namespace: false
-    namespace: Azure.AI.Language.Text.Authoring
+    namespace: "Azure.AI.Language.Text.Authoring"
     flavor: azure
     generate-sample-project: false
-  '@azure-tools/typespec-python':
-    package-dir: azure-ai-language-text-authoring
-    namespace: azure.ai.language.text.authoring
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-language-text-authoring"
+    namespace: "azure.ai.language.text.authoring"
     generate-test: true
     generate-sample: true
-    flavor: azure
-  '@azure-typespec/http-client-csharp':
+    flavor: "azure"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/Azure.AI.Language.Text.Authoring"
     namespace: Azure.AI.Language.Text.Authoring
     model-namespace: false
-    emitter-output-dir: "{service-dir}/{namespace}"
