@@ -1276,19 +1276,14 @@
             "pattern": "^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the cluster.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1331,20 +1326,15 @@
             "pattern": "^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the cluster.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "The required parameters for approving a private endpoint connection.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -1352,13 +1342,13 @@
           "200": {
             "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
             "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1415,12 +1405,7 @@
             "pattern": "^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the cluster.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -3106,22 +3091,6 @@
         ]
       }
     },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
       "description": "The response of a PrivateEndpointConnection list operation.",
@@ -3130,7 +3099,7 @@
           "type": "array",
           "description": "The PrivateEndpointConnection items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "nextLink": {
