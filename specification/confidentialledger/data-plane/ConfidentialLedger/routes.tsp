@@ -22,9 +22,10 @@ interface Operations {
    * Consortium members can manage the Confidential Ledger.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Lists the consortium members.")
   @route("/app/governance/members")
-  @get
+  @list
   listConsortiumMembers is Common.LedgerOperation<{}, Consortium>;
 
   /**
@@ -41,9 +42,10 @@ interface Operations {
    * Collection ids are user-created collections of ledger entries
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Retrieves a list of collection ids present in the Confidential Ledger")
   @route("/app/collections")
-  @get
+  @list
   listCollections is Common.LedgerOperation<{}, PagedCollections>;
 
   /**
@@ -51,9 +53,10 @@ interface Operations {
    * default) collection will be returned.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @route("/app/transactions")
-  @get
+  @list
   listLedgerEntries is Common.LedgerOperation<
     {
       /**
@@ -202,18 +205,20 @@ interface Operations {
    * All users' object IDs and single role per user will be returned.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Gets details on a list of users.")
   @route("/app/users")
-  @get
+  @list
   listUsers is Common.LedgerOperation<{}, PagedUsers>;
 
   /**
    * All users' object IDs and multiple roles will be returned.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Gets details on a list of users.")
   @route("/app/ledgerUsers")
-  @get
+  @list
   listLedgerUsers is Common.LedgerOperation<{}, PagedLedgerUsers>;
 
   /**
@@ -424,9 +429,10 @@ interface Operations {
    * User defined functions stored in the Confidential Ledger
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Retrieves a list of user defined functions present in the Confidential Ledger")
   @route("/app/userDefinedFunctions")
-  @get
+  @list
   listUserDefinedFunctions is Common.LedgerOperation<
     {},
     PagedUserDefinedFunctions

@@ -152,12 +152,11 @@ model Constitution {
 /**
  * List of members in the consortium.
  */
-@pagedResult
 model Consortium {
   /**
    * Members in the consortium.
    */
-  @items
+  @pageItems
   members: ConsortiumMember[];
 
   /**
@@ -225,12 +224,11 @@ model EnclaveQuote {
 /**
  * Paginated collections returned in response to a query.
  */
-@pagedResult
 model PagedCollections {
   /**
    * Collection identifiers.
    */
-  @items
+  @pageItems
   collections: Collection[];
 
   /**
@@ -253,7 +251,6 @@ model Collection {
 /**
  * Paginated ledger entries returned in response to a query.
  */
-@pagedResult
 model PagedLedgerEntries {
   /**
    * State of a ledger query.
@@ -269,7 +266,7 @@ model PagedLedgerEntries {
   /**
    * Array of ledger entries.
    */
-  @items
+  @pageItems
   entries: LedgerEntry[];
 }
 
@@ -614,12 +611,11 @@ model TransactionStatus {
 /**
  * Paginated users returned in response to a query.
  */
-@pagedResult
 model PagedUsers {
   /**
    * Ledger users.
    */
-  @items
+  @pageItems
   ledgerUsers?: LedgerUser[];
 
   /**
@@ -649,12 +645,11 @@ model LedgerUser {
 /**
  * Paginated users returned in response to a query.
  */
-@pagedResult
 model PagedLedgerUsers {
   /**
    * Ledger users with details.
    */
-  @items
+  @pageItems
   ledgerUsers?: LedgerUserMultipleRoles[];
 
   /**
@@ -817,12 +812,11 @@ model ModuleDef {
 /**
  * Paginated user defined functions returned in response to a query.
  */
-@pagedResult
 model PagedUserDefinedFunctions {
   /**
    * User-defined functions.
    */
-  @items
+  @pageItems
   functions: UserDefinedFunction[];
 
   /**
