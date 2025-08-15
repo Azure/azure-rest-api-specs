@@ -80,13 +80,13 @@ alias ForceModelServerEvent =
   ServerEventResponseAudioDone |
   ServerEventResponseFunctionCallArgumentsDelta |
   ServerEventResponseFunctionCallArgumentsDone |
-  ResponseAnimationBlendshapeDeltaEvent |
-  ResponseAnimationBlendshapeDoneEvent |
-  ResponseEmotionHypothesis |
-  ResponseAudioTimestampDeltaEvent |
-  ResponseAudioTimestampDoneEvent |
-  ResponseAnimationVisemeDeltaEvent |
-  ResponseAnimationVisemeDoneEvent;
+  ServerEventResponseAnimationBlendshapeDelta |
+  ServerEventResponseAnimationBlendshapeDone |
+  ServerEventResponseEmotionHypothesis |
+  ServerEventResponseAudioTimestampDelta |
+  ServerEventResponseAudioTimestampDone |
+  ServerEventResponseAnimationVisemeDelta |
+  ServerEventResponseAnimationVisemeDone;
 
 
 // Operation definition

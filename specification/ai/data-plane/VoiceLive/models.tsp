@@ -11,7 +11,6 @@ using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
 
-
 // Tool customization: Adjust union to be a discriminated type base
 /** A voicelive client event. */
 @discriminator("type")
@@ -434,7 +433,7 @@ model ClientEventResponseCreate extends ClientEvent {
   @doc("""
     additional instructions (system prompt) appended to the default instructions of the session. Only affects this response only.
     """)
-  additional_instructions?: string
+  additional_instructions?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
@@ -586,8 +585,7 @@ model ServerEventInputAudioBufferCleared extends ServerEvent {
   `input_audio_buffer.speech_stopped` event (unless the client manually commits
   the audio buffer during VAD activation).
   """)
-model ServerEventInputAudioBufferSpeechStarted
-  extends ServerEvent {
+model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
   @doc("""
     The event type, must be `input_audio_buffer.speech_started`.
     """)
@@ -611,8 +609,7 @@ model ServerEventInputAudioBufferSpeechStarted
   the audio buffer. The server will also send an `conversation.item.created`
   event with the user message item that is created from the audio buffer.
   """)
-model ServerEventInputAudioBufferSpeechStopped
-  extends ServerEvent {
+model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
   @doc("""
     The event type, must be `input_audio_buffer.speech_stopped`.
     """)
@@ -934,8 +931,7 @@ model ServerEventResponseTextDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated transcription of audio output is updated. */
-model ServerEventResponseAudioTranscriptDelta
-  extends ServerEvent {
+model ServerEventResponseAudioTranscriptDelta extends ServerEvent {
   @doc("""
     The event type, must be `response.audio_transcript.delta`.
     """)
@@ -963,8 +959,7 @@ model ServerEventResponseAudioTranscriptDelta
  * streaming. Also emitted when a Response is interrupted, incomplete, or
  * cancelled.
  */
-model ServerEventResponseAudioTranscriptDone
-  extends ServerEvent {
+model ServerEventResponseAudioTranscriptDone extends ServerEvent {
   @doc("""
     The event type, must be `response.audio_transcript.done`.
     """)
@@ -1041,7 +1036,7 @@ model ServerEventResponseAudioDone extends ServerEvent {
 @doc("""
 Represents a delta update of blendshape animation frames for a specific output of a response.
 """)
-model ResponseAnimationBlendshapeDeltaEvent extends ServerEvent {
+model ServerEventAnimationBlendshapeDelta extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_delta;
   response_id: string;
   item_id: string;
@@ -1054,7 +1049,7 @@ model ResponseAnimationBlendshapeDeltaEvent extends ServerEvent {
 @doc("""
 Indicates the completion of blendshape animation processing for a specific output of a response.
 """)
-model ResponseAnimationBlendshapeDoneEvent extends ServerEvent {
+model ServerEventAnimationBlendshapeDone extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_done;
   response_id: string;
   item_id: string;
@@ -1064,10 +1059,10 @@ model ResponseAnimationBlendshapeDoneEvent extends ServerEvent {
 @doc("""
 Represents an emotion hypothesis detected from response audio with multiple candidates.
 """)
-model ResponseEmotionHypothesis extends ServerEvent {
+model ServerEventEmotionHypothesis extends ServerEvent {
   type: ServerEventType.response_emotion_hypothesis;
   emotion: string;
-  candidates: EmotionCandidate[],
+  candidates: EmotionCandidate[];
   audio_offset_ms: int32;
   audio_duration_ms: int32;
   response_id?: string;
@@ -1077,7 +1072,7 @@ model ResponseEmotionHypothesis extends ServerEvent {
 @doc("""
 Represents a word-level audio timestamp delta for a response.
 """)
-model ResponseAudioTimestampDeltaEvent extends ServerEvent {
+model ServerEventAudioTimestampDelta extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_delta;
   response_id: string;
   item_id: string;
@@ -1092,7 +1087,7 @@ model ResponseAudioTimestampDeltaEvent extends ServerEvent {
 @doc("""
 Indicates completion of audio timestamp delivery for a response.
 """)
-model ResponseAudioTimestampDoneEvent extends ServerEvent {
+model ServerEventAudioTimestampDone extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_done;
   response_id: string;
   item_id: string;
@@ -1103,7 +1098,7 @@ model ResponseAudioTimestampDoneEvent extends ServerEvent {
 @doc("""
 Represents a viseme ID delta update for animation based on audio.
 """)
-model ResponseAnimationVisemeDeltaEvent extends ServerEvent {
+model ServerEventAnimationVisemeDelta extends ServerEvent {
   type: ServerEventType.response_animation_viseme_delta;
   response_id: string;
   item_id: string;
@@ -1116,7 +1111,7 @@ model ResponseAnimationVisemeDeltaEvent extends ServerEvent {
 @doc("""
 Indicates completion of viseme animation delivery for a response.
 """)
-model ResponseAnimationVisemeDoneEvent extends ServerEvent {
+model ServerEventAnimationVisemeDone extends ServerEvent {
   type: ServerEventType.response_animation_viseme_done;
   response_id: string;
   item_id: string;
@@ -1320,6 +1315,7 @@ model ServerEventConversationItemRetrieved extends ServerEvent {
     The event type, must be `conversation.item.retrieved`.
     """)
   type: ServerEventType.conversation_item_retrieved;
+
   item_id?: string;
   event_id?: string;
 }
@@ -1331,8 +1327,7 @@ model EmotionCandidate {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated function call arguments are updated. */
-model ServerEventResponseFunctionCallArgumentsDelta
-  extends ServerEvent {
+model ServerEventResponseFunctionCallArgumentsDelta extends ServerEvent {
   @doc("""
     The event type, must be `response.function_call_arguments.delta`.
     """)
@@ -1359,8 +1354,7 @@ model ServerEventResponseFunctionCallArgumentsDelta
  * Returned when the model-generated function call arguments are done streaming.
  * Also emitted when a Response is interrupted, incomplete, or cancelled.
  */
-model ServerEventResponseFunctionCallArgumentsDone
-  extends ServerEvent {
+model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
   @doc("""
     The event type, must be `response.function_call_arguments.done`.
     """)
@@ -1384,4 +1378,3 @@ model ServerEventResponseFunctionCallArgumentsDone
   /** The name of the function call. */
   name: string;
 }
-
