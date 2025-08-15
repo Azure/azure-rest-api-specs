@@ -39,6 +39,7 @@ model SolutionProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Solution Resource attached to a Target")
 @parentResource(Target)
 model Solution is Azure.ResourceManager.ProxyResource<SolutionProperties> {
@@ -64,7 +65,13 @@ interface Solutions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Solution>;
 
   @doc("Update a Solution Resource")
-  update is ArmResourcePatchAsync<Solution, SolutionProperties>;
+  update is ArmCustomPatchAsync<
+    Solution,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Solution,
+      SolutionProperties
+    >
+  >;
 
   @doc("Delete a Solution Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Solution>;
