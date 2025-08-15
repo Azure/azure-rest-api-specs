@@ -1,0 +1,49 @@
+parameters:
+  service-dir:
+    default: "sdk/confidentialledger"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/confidentialledger.json"
+  "@azure-tools/typespec-python":
+    "package-version": "1.2.0b2"
+    "package-name": "azure-confidentialledger"
+    "package-dir": "azure-confidentialledger"
+    "namespace": "azure.confidentialledger"
+    "flavor": "azure"
+    "generate-test": false
+    "generate-sample": false
+    "package-pprint-name": "Confidential Ledger"
+  "@azure-tools/typespec-csharp":
+    "namespace": "Azure.ConfidentialLedger"
+    "package-dir": "Azure.ConfidentialLedger"
+    "flavor": "azure"
+    clear-output-folder: true
+  "@azure-tools/typespec-java":
+    "package-dir": "azure-confidentialledger"
+    "namespace": "com.azure.confidentialledger"
+    "flavor": "azure"
+  "@azure-tools/typespec-ts":
+    "package-dir": "confidentialledger-rest"
+    "package-details":
+      "name": "@azure-rest/azure-confidentialledger"
+      description: "Microsoft Confidential Ledger"
+    "flavor": "azure"
+    generate-metadata: true
+    generate-sample-project: false
+  "@azure-tools/typespec-go":
+    "module": "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    "service-dir": "sdk/confidentialledger"
+    "package-dir": "azconfidentialledger"
+    module-version: "0.0.1"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
