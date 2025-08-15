@@ -658,8 +658,7 @@ model RunStepAzureFunctionToolCall extends RunStepToolCall {
   type: "azure_function";
 
   @doc("The description of an Azure function call.")
-  @encodedName("application/json", "azure_function")
-  azureFunction: AzureFunctionToolCallDetails;
+  azure_function: AzureFunctionToolCallDetails;
 }
 
 @doc("""

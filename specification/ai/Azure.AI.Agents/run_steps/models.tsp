@@ -399,8 +399,7 @@ model RunStepDeltaAzureFunctionToolCall extends RunStepDeltaToolCall {
   type: "azure_function";
 
   @doc("Partial description of an Azure function call.")
-  @encodedName("application/json", "azure_function")
-  azureFunction: AzureFunctionToolCallDetails;
+  azure_function: AzureFunctionToolCallDetails;
 }
 
 /** Represents the Deep research in a streaming run step. */
