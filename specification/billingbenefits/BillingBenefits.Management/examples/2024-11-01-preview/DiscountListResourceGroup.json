@@ -1,21 +1,24 @@
 {
   "parameters": {
     "api-version": "2024-11-01-preview",
-    "scope": "providers/Microsoft.Billing/billingAccounts/{acctId}"
+    "discountName": "testprimarydiscount",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "30000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "13810867107109237",
-            "type": "Microsoft.BillingBenefits/applicableDiscounts",
-            "id": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingBenefits/applicableDiscounts/13810867107109237",
+            "name": "testprimarydiscount",
+            "type": "Microsoft.BillingBenefits/discounts",
+            "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
             "location": "global",
             "properties": {
               "appliedScopeType": "BillingAccount",
-              "benefitResourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
               "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
+              "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+              "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/customers/40000000-0000-0000-0000-000000000000",
               "discountTypeProperties": {
                 "applyDiscountOn": "Purchase",
                 "conditions": [
@@ -48,14 +51,14 @@
             }
           },
           {
-            "name": "63810867107109237",
-            "type": "Microsoft.BillingBenefits/applicableDiscounts",
-            "id": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingBenefits/applicableDiscounts/63810867107109237",
+            "name": "testprimarydiscount",
+            "type": "Microsoft.BillingBenefits/discounts",
+            "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
             "location": "global",
             "properties": {
-              "benefitResourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/discounts/testprimarydiscount",
               "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
               "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+              "customerResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/customers/40000000-0000-0000-0000-000000000000",
               "displayName": "Virtual Machines D Series",
               "endAt": "2024-07-01T23:59:59Z",
               "entityType": "Affiliate",
@@ -64,7 +67,7 @@
               "provisioningState": "Succeeded",
               "startAt": "2023-07-01T00:00:00Z",
               "status": "Active",
-              "systemId": "63810867107109237"
+              "systemId": "13810867107109237"
             },
             "tags": {
               "key1": "value1",
@@ -75,6 +78,6 @@
       }
     }
   },
-  "operationId": "Discounts_ScopeList",
-  "title": "DiscountScopeList"
+  "operationId": "Discounts_ResourceGroupList",
+  "title": "DiscountsResourceGroupList"
 }
