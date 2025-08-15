@@ -1036,7 +1036,7 @@ model ServerEventResponseAudioDone extends ServerEvent {
 @doc("""
 Represents a delta update of blendshape animation frames for a specific output of a response.
 """)
-model ServerEventAnimationBlendshapeDelta extends ServerEvent {
+model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_delta;
   response_id: string;
   item_id: string;
@@ -1049,7 +1049,7 @@ model ServerEventAnimationBlendshapeDelta extends ServerEvent {
 @doc("""
 Indicates the completion of blendshape animation processing for a specific output of a response.
 """)
-model ServerEventAnimationBlendshapeDone extends ServerEvent {
+model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_done;
   response_id: string;
   item_id: string;
@@ -1059,7 +1059,7 @@ model ServerEventAnimationBlendshapeDone extends ServerEvent {
 @doc("""
 Represents an emotion hypothesis detected from response audio with multiple candidates.
 """)
-model ServerEventEmotionHypothesis extends ServerEvent {
+model ServerEventResponseEmotionHypothesis extends ServerEvent {
   type: ServerEventType.response_emotion_hypothesis;
   emotion: string;
   candidates: EmotionCandidate[];
@@ -1072,7 +1072,7 @@ model ServerEventEmotionHypothesis extends ServerEvent {
 @doc("""
 Represents a word-level audio timestamp delta for a response.
 """)
-model ServerEventAudioTimestampDelta extends ServerEvent {
+model ServerEventResponseAudioTimestampDelta extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_delta;
   response_id: string;
   item_id: string;
@@ -1087,7 +1087,7 @@ model ServerEventAudioTimestampDelta extends ServerEvent {
 @doc("""
 Indicates completion of audio timestamp delivery for a response.
 """)
-model ServerEventAudioTimestampDone extends ServerEvent {
+model ServerEventResponseAudioTimestampDone extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_done;
   response_id: string;
   item_id: string;
@@ -1098,7 +1098,7 @@ model ServerEventAudioTimestampDone extends ServerEvent {
 @doc("""
 Represents a viseme ID delta update for animation based on audio.
 """)
-model ServerEventAnimationVisemeDelta extends ServerEvent {
+model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
   type: ServerEventType.response_animation_viseme_delta;
   response_id: string;
   item_id: string;
@@ -1111,7 +1111,7 @@ model ServerEventAnimationVisemeDelta extends ServerEvent {
 @doc("""
 Indicates completion of viseme animation delivery for a response.
 """)
-model ServerEventAnimationVisemeDone extends ServerEvent {
+model ServerEventResponseAnimationVisemeDone extends ServerEvent {
   type: ServerEventType.response_animation_viseme_done;
   response_id: string;
   item_id: string;
