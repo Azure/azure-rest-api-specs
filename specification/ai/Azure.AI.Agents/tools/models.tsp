@@ -519,7 +519,7 @@ model RunStepBingGroundingToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
 
-  @doc("Reserved for future use.")
+  @doc("The dictionary with request and response from Bing Grounding search tool.")
   @encodedName("application/json", "bing_grounding")
   bingGrounding: Record<string>;
 }
@@ -644,7 +644,7 @@ model RunStepBingCustomSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
 
-  @doc("Reserved for future use.")
+  @doc("The dictionary with request and response from Custom Bing Grounding search tool.")
   @encodedName("application/json", "bing_custom_search")
   bingCustomSearch: Record<string>;
 }
