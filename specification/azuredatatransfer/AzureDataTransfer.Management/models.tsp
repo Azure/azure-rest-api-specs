@@ -362,11 +362,6 @@ union DataClassType {
   "Files",
 
   /**
-   * This is a deprecated value please use SoftwareArtifacts instead.
-   */
-  "DevSecOps",
-
-  /**
    * Represents data related to development, security, and operations workflows such as build artifacts subject to an NCDSMO policy.
    */
   "SoftwareArtifacts",
