@@ -53,7 +53,7 @@ union CommunicationMessageKind {
 
   @added(Versions.c2025_01_15_Preview)
   @doc("Interactive Actionable message type.")
-  interactive: "interactive",
+  interactive: "interactive"
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -289,6 +289,19 @@ model InteractiveNotificationContent extends NotificationContent {
 
   @doc("The interactive message content.")
   interactiveMessage: InteractiveMessage;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("A request to send a read receipt update from Business to User.")
+model ReadReceiptContent {
+  @doc("The id of the message this read receipt refers to.")
+  messageId: string;
+
+  @doc("The Channel Registration ID for the Business Identifier.")
+  channelRegistrationId: string;
+
+  @doc("Whether this status update includes a typing indicator. This field defaults to false when not provided.")
+  typingIndicator?: boolean;
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -651,6 +664,16 @@ model Notifications {
   id: string;
 }
 
+@resource("messages/readreceipts")
+@doc("A notification.")
+model ReadReceipts {
+  @key
+  @visibility(Lifecycle.Read) 
+  @invisible(Lifecycle) // The ID is only used as a key parameter.
+  @doc("The ID is only used as a key parameter.")
+  id: string;
+}
+
 @resource("messages/channels")
 @doc("A communication channel.")
 model CommunicationChannel {
@@ -735,6 +758,14 @@ model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("Read Receipt send request body.")
+model ReadReceiptSendRequestBody {
+  @doc("Details of the read receipt update to send.")
+  @bodyRoot
+  body: ReadReceiptContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
@@ -1082,4 +1113,8 @@ enum Versions {
   @doc("Azure Communication Messages 2025-04-01-preview api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_04_01_Preview: "2025-04-01-preview",
+
+  @doc("Azure Communication Messages 2025-09-01-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2025_09_01_Preview: "2025-09-01-preview",
 }
