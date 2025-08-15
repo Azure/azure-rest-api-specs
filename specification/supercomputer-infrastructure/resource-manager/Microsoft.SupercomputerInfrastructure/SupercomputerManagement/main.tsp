@@ -9,7 +9,6 @@ import "./nic.tsp";
 import "./node.tsp";
 import "./port.tsp";
 import "./rack.tsp";
-import "./maintenance-request.tsp";
 import "./supercomputer.tsp";
 import "./switch.tsp";
 
