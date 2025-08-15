@@ -66,7 +66,7 @@ interface Schemas {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Schema>;
 
   @doc("update a Schema Resource")
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     Schema,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       Schema,
