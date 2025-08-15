@@ -2533,6 +2533,10 @@ configuration:
       description: 
     - if:
       - payloadType: Pull_Request
+      # Workaround bug in includesModifiedFiles: if a PR changes no files, it incorrectly returns "true" instead of "false"
+      - filesMatchPattern:
+          pattern: ".*"
+          matchAny: true
       then:
       - if:
         - includesModifiedFiles:
