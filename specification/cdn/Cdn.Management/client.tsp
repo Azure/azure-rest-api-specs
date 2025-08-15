@@ -96,3 +96,24 @@ using Microsoft.Cdn;
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
 @@clientName(AFDStateProperties, "AfdStateProperties", "java");
 @@clientName(HostNameOperator, "HostnameOperator", "java");
+@@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
+@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
+  "FourHundredFive",
+  "javascript"
+);
+@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`406`,
+  "FourHundredSix",
+  "javascript"
+);
+@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`403`,
+  "FourHundredThree",
+  "javascript"
+);
+@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`429`,
+  "FourHundredTwentyNine",
+  "javascript"
+);
+@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
+  "TwoHundred",
+  "javascript"
+);
