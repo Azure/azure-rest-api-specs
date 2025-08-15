@@ -1070,62 +1070,6 @@
         }
       }
     },
-    "/evaluations/runs/{id}/results": {
-      "get": {
-        "operationId": "Evaluations_GetEvaluationResults",
-        "description": "Retrieves detailed row-by-row evaluation results with pagination support. This endpoint provides access to individual evaluation outcomes, scores, and reasoning for each data row processed.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Unique identifier of the evaluation whose results are being retrieved",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "API version specifier for this operation",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "Maximum number of result items to return in a single response. Must be a multiple of 10 (e.g., 10, 20, 100, 1000). Defaults to 10 if not specified.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of result items to skip before returning results, enabling pagination through large result sets. Must be a multiple of 10. Defaults to 0.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedEvaluationResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_GetEvaluationResults": {
-            "$ref": "./examples/Evaluations_GetEvaluationResults_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/evaluations/runs:runBatch": {
       "post": {
         "operationId": "Evaluations_CreateBatchEvaluation",
@@ -4072,27 +4016,6 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEvaluationResult": {
-      "type": "object",
-      "description": "Paged collection of EvaluationResult items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EvaluationResult items on this page",
-          "items": {
-            "$ref": "#/definitions/EvaluationResult"
           }
         },
         "nextLink": {

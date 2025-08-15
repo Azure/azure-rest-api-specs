@@ -119,31 +119,6 @@ interface Evaluations {
   update is EvaluationsOperations.ResourceUpdate<Evaluation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Retrieves detailed row-by-row evaluation results with pagination support. This endpoint provides access to individual evaluation outcomes, scores, and reasoning for each data row processed.")
-  @route("runs/{id}/results")
-  @get
-  @added(Versions.v2025_07_31_preview)
-  getEvaluationResults(
-    @doc("Unique identifier of the evaluation whose results are being retrieved")
-    @path
-    id: string,
-
-    @doc("API version specifier for this operation")
-    @query("api-version")
-    apiVersion: string,
-
-    @query
-    @doc("Maximum number of result items to return in a single response. Must be a multiple of 10 (e.g., 10, 20, 100, 1000). Defaults to 10 if not specified.")
-    top?: int32,
-
-    @query
-    @doc("Number of result items to skip before returning results, enabling pagination through large result sets. Must be a multiple of 10. Defaults to 0.")
-    skip?: int32 = 0,
-
-    ...ClientRequestIdHeader,
-  ): Azure.Core.Page<EvaluationResult>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Cancel an evaluation run by name")
   @post
   cancel is EvaluationsOperations.ResourceAction<
