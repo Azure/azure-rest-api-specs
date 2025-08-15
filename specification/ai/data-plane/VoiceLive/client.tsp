@@ -68,3 +68,4 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "csharp");
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "csharp");
 @@clientName(VoiceLive.Response, "VoiceLiveResponse", "csharp");
+@@clientName(VoiceLive.AgentConfig, "RespondingAgentConfig", "csharp");
