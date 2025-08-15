@@ -8,7 +8,9 @@ using Microsoft.Compute;
 @@clientName(ComputeDiagnosticBases.post::parameters.body,
   "spotPlacementScoresInput"
 );
-@@clientName(SpotPlacementScoresResponse,
-  "SpotPlacementScoresResult",
-  "csharp"
+
+@@clientLocation(CapacityBlocksOperationGroup.get, "CapacityBlocks");
+
+@@clientLocation(RegionalCapacityBlocksOperationGroup.get,
+  "RegionalCapacityBlocks"
 );
