@@ -47,7 +47,8 @@ interface PrivateEndpointConnectionResources {
    */
   put is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnectionResource,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionResource> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

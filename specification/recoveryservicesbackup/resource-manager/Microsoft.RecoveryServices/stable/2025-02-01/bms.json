@@ -372,8 +372,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -532,8 +531,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -905,8 +903,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1050,7 +1047,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ProtectionContainerResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -1253,8 +1251,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1862,8 +1859,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2381,8 +2377,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2512,8 +2507,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2964,8 +2958,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3360,8 +3353,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3421,8 +3413,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3475,8 +3466,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3536,8 +3526,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3586,8 +3575,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3952,7 +3940,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TieringCostInfo"
         },
         "x-ms-long-running-operation": true
       }
@@ -4184,8 +4173,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4841,7 +4829,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -4911,7 +4900,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -5045,7 +5035,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnectionResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -5216,47 +5207,9 @@
     "AzureBackupServerContainer": {
       "type": "object",
       "description": "AzureBackupServer (DPMVenus) workload-specific protection container.",
-      "properties": {
-        "canReRegister": {
-          "type": "boolean",
-          "description": "Specifies whether the container is re-registrable."
-        },
-        "containerId": {
-          "type": "string",
-          "description": "ID of container."
-        },
-        "protectedItemCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of protected items in the BackupEngine"
-        },
-        "dpmAgentVersion": {
-          "type": "string",
-          "description": "Backup engine Agent version"
-        },
-        "dpmServers": {
-          "type": "array",
-          "description": "List of BackupEngines protecting the container",
-          "items": {
-            "type": "string"
-          }
-        },
-        "upgradeAvailable": {
-          "type": "boolean",
-          "description": "To check if upgrade available"
-        },
-        "protectionStatus": {
-          "type": "string",
-          "description": "Protection status of the container."
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/DPMContainerExtendedInfo",
-          "description": "Extended Info of the container."
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/DpmContainer"
         }
       ],
       "x-ms-discriminator-value": "AzureBackupServerContainer"
@@ -5551,23 +5504,9 @@
     "AzureIaaSClassicComputeVMContainer": {
       "type": "object",
       "description": "IaaS VM workload-specific backup item representing a classic virtual machine.",
-      "properties": {
-        "virtualMachineId": {
-          "type": "string",
-          "description": "Fully qualified ARM url of the virtual machine represented by this Azure IaaS VM container."
-        },
-        "virtualMachineVersion": {
-          "type": "string",
-          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM."
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "Resource group name of Recovery Services Vault."
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/IaaSVMContainer"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
@@ -5575,23 +5514,9 @@
     "AzureIaaSClassicComputeVMProtectableItem": {
       "type": "object",
       "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
-      "properties": {
-        "virtualMachineId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the virtual machine."
-        },
-        "virtualMachineVersion": {
-          "type": "string",
-          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM."
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "Resource group name of Recovery Services Vault."
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/IaaSVMProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
@@ -5599,79 +5524,9 @@
     "AzureIaaSClassicComputeVMProtectedItem": {
       "type": "object",
       "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
-      "properties": {
-        "friendlyName": {
-          "type": "string",
-          "description": "Friendly name of the VM represented by this backup item.",
-          "readOnly": true
-        },
-        "virtualMachineId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the virtual machine represented by this item.",
-          "readOnly": true
-        },
-        "protectionStatus": {
-          "type": "string",
-          "description": "Backup status of this backup item."
-        },
-        "protectionState": {
-          "$ref": "#/definitions/ProtectionState",
-          "description": "Backup state of this backup item."
-        },
-        "healthStatus": {
-          "$ref": "#/definitions/HealthStatus",
-          "description": "Health status of protected item.",
-          "readOnly": true
-        },
-        "healthDetails": {
-          "type": "array",
-          "description": "Health details on this backup item.",
-          "items": {
-            "$ref": "#/definitions/AzureIaaSVMHealthDetails"
-          },
-          "x-ms-identifiers": [
-            "code"
-          ]
-        },
-        "kpisHealths": {
-          "type": "object",
-          "description": "Health details of different KPIs",
-          "additionalProperties": {
-            "$ref": "#/definitions/KPIResourceHealthDetails"
-          }
-        },
-        "lastBackupStatus": {
-          "type": "string",
-          "description": "Last backup operation status."
-        },
-        "lastBackupTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the last backup operation on this backup item.",
-          "readOnly": true
-        },
-        "protectedItemDataId": {
-          "type": "string",
-          "description": "Data ID of the protected item.",
-          "readOnly": true
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureIaaSVMProtectedItemExtendedInfo",
-          "description": "Additional information for this backup item."
-        },
-        "extendedProperties": {
-          "$ref": "#/definitions/ExtendedProperties",
-          "description": "Extended Properties for Azure IaasVM Backup."
-        },
-        "policyType": {
-          "type": "string",
-          "description": "Type of the policy used for protection",
-          "readOnly": true
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectedItem"
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
@@ -5679,23 +5534,9 @@
     "AzureIaaSComputeVMContainer": {
       "type": "object",
       "description": "IaaS VM workload-specific backup item representing an Azure Resource Manager virtual machine.",
-      "properties": {
-        "virtualMachineId": {
-          "type": "string",
-          "description": "Fully qualified ARM url of the virtual machine represented by this Azure IaaS VM container."
-        },
-        "virtualMachineVersion": {
-          "type": "string",
-          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM."
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "Resource group name of Recovery Services Vault."
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/IaaSVMContainer"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
@@ -5703,23 +5544,9 @@
     "AzureIaaSComputeVMProtectableItem": {
       "type": "object",
       "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
-      "properties": {
-        "virtualMachineId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the virtual machine."
-        },
-        "virtualMachineVersion": {
-          "type": "string",
-          "description": "Specifies whether the container represents a Classic or an Azure Resource Manager VM."
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "Resource group name of Recovery Services Vault."
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/IaaSVMProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
@@ -5727,79 +5554,9 @@
     "AzureIaaSComputeVMProtectedItem": {
       "type": "object",
       "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
-      "properties": {
-        "friendlyName": {
-          "type": "string",
-          "description": "Friendly name of the VM represented by this backup item.",
-          "readOnly": true
-        },
-        "virtualMachineId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the virtual machine represented by this item.",
-          "readOnly": true
-        },
-        "protectionStatus": {
-          "type": "string",
-          "description": "Backup status of this backup item."
-        },
-        "protectionState": {
-          "$ref": "#/definitions/ProtectionState",
-          "description": "Backup state of this backup item."
-        },
-        "healthStatus": {
-          "$ref": "#/definitions/HealthStatus",
-          "description": "Health status of protected item.",
-          "readOnly": true
-        },
-        "healthDetails": {
-          "type": "array",
-          "description": "Health details on this backup item.",
-          "items": {
-            "$ref": "#/definitions/AzureIaaSVMHealthDetails"
-          },
-          "x-ms-identifiers": [
-            "code"
-          ]
-        },
-        "kpisHealths": {
-          "type": "object",
-          "description": "Health details of different KPIs",
-          "additionalProperties": {
-            "$ref": "#/definitions/KPIResourceHealthDetails"
-          }
-        },
-        "lastBackupStatus": {
-          "type": "string",
-          "description": "Last backup operation status."
-        },
-        "lastBackupTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the last backup operation on this backup item.",
-          "readOnly": true
-        },
-        "protectedItemDataId": {
-          "type": "string",
-          "description": "Data ID of the protected item.",
-          "readOnly": true
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureIaaSVMProtectedItemExtendedInfo",
-          "description": "Additional information for this backup item."
-        },
-        "extendedProperties": {
-          "$ref": "#/definitions/ExtendedProperties",
-          "description": "Extended Properties for Azure IaasVM Backup."
-        },
-        "policyType": {
-          "type": "string",
-          "description": "Type of the policy used for protection",
-          "readOnly": true
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectedItem"
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
         }
       ],
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
@@ -6213,32 +5970,9 @@
     "AzureSQLAGWorkloadContainerProtectionContainer": {
       "type": "object",
       "description": "Container for SQL workloads under SQL Availability Group.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "ARM ID of the virtual machine represented by this Azure Workload Container"
-        },
-        "lastUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time stamp when this container was updated."
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureWorkloadContainerExtendedInfo",
-          "description": "Additional details of a workload container."
-        },
-        "workloadType": {
-          "$ref": "#/definitions/WorkloadType",
-          "description": "Workload type for which registration was sent."
-        },
-        "operationType": {
-          "$ref": "#/definitions/OperationType",
-          "description": "Re-Do Operation"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/AzureWorkloadContainer"
         }
       ],
       "x-ms-discriminator-value": "SQLAGWorkLoadContainer"
@@ -6486,32 +6220,9 @@
     "AzureVMAppContainerProtectionContainer": {
       "type": "object",
       "description": "Container for SQL workloads under Azure Virtual Machines.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "ARM ID of the virtual machine represented by this Azure Workload Container"
-        },
-        "lastUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time stamp when this container was updated."
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureWorkloadContainerExtendedInfo",
-          "description": "Additional details of a workload container."
-        },
-        "workloadType": {
-          "$ref": "#/definitions/WorkloadType",
-          "description": "Workload type for which registration was sent."
-        },
-        "operationType": {
-          "$ref": "#/definitions/OperationType",
-          "description": "Re-Do Operation"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionContainer"
+          "$ref": "#/definitions/AzureWorkloadContainer"
         }
       ],
       "x-ms-discriminator-value": "VMAppContainer"
@@ -6782,49 +6493,9 @@
     "AzureVmWorkloadSAPAseDatabaseProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SAP ASE Database.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SAPAseDatabase"
@@ -6832,39 +6503,9 @@
     "AzureVmWorkloadSAPAseDatabaseProtectedItem": {
       "type": "object",
       "description": "Azure VM workload-specific protected item representing SAP ASE Database.",
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
         }
       ],
       "x-ms-discriminator-value": "AzureVmWorkloadSAPAseDatabase"
@@ -6872,33 +6513,9 @@
     "AzureVmWorkloadSAPAseDatabaseWorkloadItem": {
       "type": "object",
       "description": "Azure VM workload-specific workload item representing SAP ASE Database.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if workload item is auto-protectable"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subWorkloadItemCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadItem"
+          "$ref": "#/definitions/AzureVmWorkloadItem"
         }
       ],
       "x-ms-discriminator-value": "SAPAseDatabase"
@@ -6906,49 +6523,9 @@
     "AzureVmWorkloadSAPAseSystemProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SAP ASE System.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SAPAseSystem"
@@ -6956,33 +6533,9 @@
     "AzureVmWorkloadSAPAseSystemWorkloadItem": {
       "type": "object",
       "description": "Azure VM workload-specific workload item representing SAP ASE System.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if workload item is auto-protectable"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subWorkloadItemCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadItem"
+          "$ref": "#/definitions/AzureVmWorkloadItem"
         }
       ],
       "x-ms-discriminator-value": "SAPAseSystem"
@@ -6990,49 +6543,9 @@
     "AzureVmWorkloadSAPHanaDBInstance": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SAP HANA Dbinstance.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SAPHanaDBInstance"
@@ -7040,39 +6553,9 @@
     "AzureVmWorkloadSAPHanaDBInstanceProtectedItem": {
       "type": "object",
       "description": "Azure VM workload-specific protected item representing SAP HANA DBInstance.",
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
         }
       ],
       "x-ms-discriminator-value": "AzureVmWorkloadSAPHanaDBInstance"
@@ -7080,49 +6563,9 @@
     "AzureVmWorkloadSAPHanaDatabaseProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SAP HANA Database.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SAPHanaDatabase"
@@ -7130,39 +6573,9 @@
     "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
       "type": "object",
       "description": "Azure VM workload-specific protected item representing SAP HANA Database.",
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
         }
       ],
       "x-ms-discriminator-value": "AzureVmWorkloadSAPHanaDatabase"
@@ -7170,33 +6583,9 @@
     "AzureVmWorkloadSAPHanaDatabaseWorkloadItem": {
       "type": "object",
       "description": "Azure VM workload-specific workload item representing SAP HANA Database.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if workload item is auto-protectable"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subWorkloadItemCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadItem"
+          "$ref": "#/definitions/AzureVmWorkloadItem"
         }
       ],
       "x-ms-discriminator-value": "SAPHanaDatabase"
@@ -7204,49 +6593,9 @@
     "AzureVmWorkloadSAPHanaHSRProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing HANA HSR.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "HanaHSRContainer"
@@ -7254,49 +6603,9 @@
     "AzureVmWorkloadSAPHanaSystemProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SAP HANA System.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SAPHanaSystem"
@@ -7304,33 +6613,9 @@
     "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
       "type": "object",
       "description": "Azure VM workload-specific workload item representing SAP HANA System.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if workload item is auto-protectable"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subWorkloadItemCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadItem"
+          "$ref": "#/definitions/AzureVmWorkloadItem"
         }
       ],
       "x-ms-discriminator-value": "SAPHanaSystem"
@@ -7346,49 +6631,11 @@
             "$ref": "#/definitions/DistributedNodesInfo"
           },
           "x-ms-identifiers": []
-        },
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SQLAvailabilityGroupContainer"
@@ -7396,49 +6643,9 @@
     "AzureVmWorkloadSQLDatabaseProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SQL Database.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SQLDataBase"
@@ -7446,39 +6653,9 @@
     "AzureVmWorkloadSQLDatabaseProtectedItem": {
       "type": "object",
       "description": "Azure VM workload-specific protected item representing SQL Database.",
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
         }
       ],
       "x-ms-discriminator-value": "AzureVmWorkloadSQLDatabase"
@@ -7486,33 +6663,9 @@
     "AzureVmWorkloadSQLDatabaseWorkloadItem": {
       "type": "object",
       "description": "Azure VM workload-specific workload item representing SQL Database.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if workload item is auto-protectable"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subWorkloadItemCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadItem"
+          "$ref": "#/definitions/AzureVmWorkloadItem"
         }
       ],
       "x-ms-discriminator-value": "SQLDataBase"
@@ -7520,49 +6673,9 @@
     "AzureVmWorkloadSQLInstanceProtectableItem": {
       "type": "object",
       "description": "Azure VM workload-specific protectable item representing SQL Instance.",
-      "properties": {
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "parentUniqueName": {
-          "type": "string",
-          "description": "Parent Unique Name is added to provide the service formatted URI Name of the Parent\nOnly Applicable for data bases where the parent would be either Instance or a SQL AG."
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protectable"
-        },
-        "isAutoProtected": {
-          "type": "boolean",
-          "description": "Indicates if protectable item is auto-protected"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subprotectableitemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
-        },
-        "prebackupvalidation": {
-          "$ref": "#/definitions/PreBackupValidation",
-          "description": "Pre-backup validation for protectable objects"
-        },
-        "isProtectable": {
-          "type": "boolean",
-          "description": "Indicates if item is protectable"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadProtectableItem"
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
       "x-ms-discriminator-value": "SQLInstance"
@@ -7578,33 +6691,11 @@
             "$ref": "#/definitions/SQLDataDirectory"
           },
           "x-ms-identifiers": []
-        },
-        "parentName": {
-          "type": "string",
-          "description": "Name for instance or AG"
-        },
-        "serverName": {
-          "type": "string",
-          "description": "Host/Cluster Name for instance or AG"
-        },
-        "isAutoProtectable": {
-          "type": "boolean",
-          "description": "Indicates if workload item is auto-protectable"
-        },
-        "subinquireditemcount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's present"
-        },
-        "subWorkloadItemCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "For instance or AG, indicates number of DB's to be protected"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadItem"
+          "$ref": "#/definitions/AzureVmWorkloadItem"
         }
       ],
       "x-ms-discriminator-value": "SQLInstance"
@@ -7614,7 +6705,7 @@
       "description": "Azure Recovery Services Vault specific protection intent item.",
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionIntent"
+          "$ref": "#/definitions/AzureRecoveryServiceVaultProtectionIntent"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadAutoProtectionIntent"
@@ -7837,7 +6928,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadPointInTimeRecoveryPoint"
@@ -7850,50 +6941,11 @@
           "type": "string",
           "format": "date-time",
           "description": "PointInTime value"
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadPointInTimeRestoreRequest"
@@ -7992,19 +7044,9 @@
     "AzureWorkloadSAPAsePointInTimeRecoveryPoint": {
       "type": "object",
       "description": "Recovery point specific to PointInTime in SAPAse",
-      "properties": {
-        "timeRanges": {
-          "type": "array",
-          "description": "List of log ranges",
-          "items": {
-            "$ref": "#/definitions/PointInTimeRange"
-          },
-          "x-ms-identifiers": []
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPAsePointInTimeRecoveryPoint"
@@ -8017,50 +7059,11 @@
           "type": "string",
           "format": "date-time",
           "description": "PointInTime value"
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadSAPAseRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPAsePointInTimeRestoreRequest"
@@ -8068,39 +7071,9 @@
     "AzureWorkloadSAPAseRecoveryPoint": {
       "type": "object",
       "description": "SAPAse specific recoverypoint, specifically encapsulates full/diff recoverypoints",
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPAseRecoveryPoint"
@@ -8108,50 +7081,9 @@
     "AzureWorkloadSAPAseRestoreRequest": {
       "type": "object",
       "description": "AzureWorkload SAP Ase-specific restore.",
-      "properties": {
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPAseRestoreRequest"
@@ -8159,19 +7091,9 @@
     "AzureWorkloadSAPHanaPointInTimeRecoveryPoint": {
       "type": "object",
       "description": "Recovery point specific to PointInTime in SAPHana",
-      "properties": {
-        "timeRanges": {
-          "type": "array",
-          "description": "List of log ranges",
-          "items": {
-            "$ref": "#/definitions/PointInTimeRange"
-          },
-          "x-ms-identifiers": []
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
@@ -8184,50 +7106,11 @@
           "type": "string",
           "format": "date-time",
           "description": "PointInTime value"
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadSAPHanaRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
@@ -8239,55 +7122,11 @@
         "recoveryPointRehydrationInfo": {
           "$ref": "#/definitions/RecoveryPointRehydrationInfo",
           "description": "RP Rehydration Info"
-        },
-        "pointInTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "PointInTime value"
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadSAPHanaPointInTimeRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest"
@@ -8295,39 +7134,9 @@
     "AzureWorkloadSAPHanaRecoveryPoint": {
       "type": "object",
       "description": "SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints",
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRecoveryPoint"
@@ -8335,50 +7144,9 @@
     "AzureWorkloadSAPHanaRestoreRequest": {
       "type": "object",
       "description": "AzureWorkload SAP Hana-specific restore.",
-      "properties": {
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
@@ -8390,50 +7158,11 @@
         "recoveryPointRehydrationInfo": {
           "$ref": "#/definitions/RecoveryPointRehydrationInfo",
           "description": "RP Rehydration Info"
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadSAPHanaRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreWithRehydrateRequest"
@@ -8449,7 +7178,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProtectionIntent"
+          "$ref": "#/definitions/AzureWorkloadAutoProtectionIntent"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSQLAutoProtectionIntent"
@@ -8465,43 +7194,11 @@
             "$ref": "#/definitions/PointInTimeRange"
           },
           "x-ms-identifiers": []
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureWorkloadSQLRecoveryPointExtendedInfo",
-          "description": "Extended Info that provides data directory details. Will be populated in two cases:\nWhen a specific recovery point is accessed using GetRecoveryPoint\nOr when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter"
-        },
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadSQLRecoveryPoint"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRecoveryPoint"
@@ -8514,66 +7211,11 @@
           "type": "string",
           "format": "date-time",
           "description": "PointInTime value"
-        },
-        "shouldUseAlternateTargetLocation": {
-          "type": "boolean",
-          "description": "Default option set to true. If this is set to false, alternate data directory must be provided"
-        },
-        "isNonRecoverable": {
-          "type": "boolean",
-          "description": "SQL specific property where user can chose to set no-recovery when restore operation is tried"
-        },
-        "alternateDirectoryPaths": {
-          "type": "array",
-          "description": "Data directory details",
-          "items": {
-            "$ref": "#/definitions/SQLDataDirectoryMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadSQLRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
@@ -8585,71 +7227,11 @@
         "recoveryPointRehydrationInfo": {
           "$ref": "#/definitions/RecoveryPointRehydrationInfo",
           "description": "RP Rehydration Info"
-        },
-        "pointInTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "PointInTime value"
-        },
-        "shouldUseAlternateTargetLocation": {
-          "type": "boolean",
-          "description": "Default option set to true. If this is set to false, alternate data directory must be provided"
-        },
-        "isNonRecoverable": {
-          "type": "boolean",
-          "description": "SQL specific property where user can chose to set no-recovery when restore operation is tried"
-        },
-        "alternateDirectoryPaths": {
-          "type": "array",
-          "description": "Data directory details",
-          "items": {
-            "$ref": "#/definitions/SQLDataDirectoryMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadSQLPointInTimeRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest"
@@ -8661,39 +7243,11 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureWorkloadSQLRecoveryPointExtendedInfo",
           "description": "Extended Info that provides data directory details. Will be populated in two cases:\nWhen a specific recovery point is accessed using GetRecoveryPoint\nOr when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter"
-        },
-        "recoveryPointTimeInUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created"
-        },
-        "type": {
-          "$ref": "#/definitions/RestorePointType",
-          "description": "Type of restore point"
-        },
-        "recoveryPointTierDetails": {
-          "type": "array",
-          "description": "Recovery point tier information.",
-          "items": {
-            "$ref": "#/definitions/RecoveryPointTierInformationV2"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryPointMoveReadinessInfo": {
-          "type": "object",
-          "description": "Eligibility of RP to be moved to another tier",
-          "additionalProperties": {
-            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
-          }
-        },
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/RecoveryPointProperties",
-          "description": "Properties of Recovery Point"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPoint"
+          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSQLRecoveryPoint"
@@ -8736,50 +7290,11 @@
             "$ref": "#/definitions/SQLDataDirectoryMapping"
           },
           "x-ms-identifiers": []
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSQLRestoreRequest"
@@ -8791,66 +7306,11 @@
         "recoveryPointRehydrationInfo": {
           "$ref": "#/definitions/RecoveryPointRehydrationInfo",
           "description": "RP Rehydration Info"
-        },
-        "shouldUseAlternateTargetLocation": {
-          "type": "boolean",
-          "description": "Default option set to true. If this is set to false, alternate data directory must be provided"
-        },
-        "isNonRecoverable": {
-          "type": "boolean",
-          "description": "SQL specific property where user can chose to set no-recovery when restore operation is tried"
-        },
-        "alternateDirectoryPaths": {
-          "type": "array",
-          "description": "Data directory details",
-          "items": {
-            "$ref": "#/definitions/SQLDataDirectoryMapping"
-          },
-          "x-ms-identifiers": []
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered."
-        },
-        "propertyBag": {
-          "type": "object",
-          "description": "Workload specific property bag.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "$ref": "#/definitions/RecoveryMode",
-          "description": "Defines whether the current recovery mode is file restore or database restore"
-        },
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "Defines the Resource group of the Target VM"
-        },
-        "userAssignedManagedIdentityDetails": {
-          "$ref": "#/definitions/UserAssignedManagedIdentityDetails",
-          "description": "User Assigned managed identity details\nCurrently used for snapshot."
-        },
-        "snapshotRestoreParameters": {
-          "$ref": "#/definitions/SnapshotRestoreParameters",
-          "description": "Additional details for snapshot recovery\nCurrently used for snapshot for SAP Hana."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the target VM\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/AzureWorkloadSQLRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSQLRestoreWithRehydrateRequest"
@@ -11379,6 +9839,34 @@
       ],
       "x-ms-discriminator-value": "IaasVMBackupRequest"
     },
+    "IaasVMILRRegistrationRequest": {
+      "type": "object",
+      "description": "Restore files/folders from a backup copy of IaaS VM.",
+      "properties": {
+        "recoveryPointId": {
+          "type": "string",
+          "description": "ID of the IaaS VM backup copy from where the files/folders have to be restored."
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "Fully qualified ARM ID of the virtual machine whose the files / folders have to be restored."
+        },
+        "initiatorName": {
+          "type": "string",
+          "description": "iSCSI initiator name."
+        },
+        "renewExistingRegistration": {
+          "type": "boolean",
+          "description": "Whether to renew existing registration with the iSCSI server."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ILRRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "IaasVMILRRegistrationRequest"
+    },
     "IaasVMRecoveryPoint": {
       "type": "object",
       "description": "IaaS VM workload specific backup copy.",
@@ -11596,110 +10084,11 @@
         "recoveryPointRehydrationInfo": {
           "$ref": "#/definitions/RecoveryPointRehydrationInfo",
           "description": "RP Rehydration Info"
-        },
-        "recoveryPointId": {
-          "type": "string",
-          "description": "ID of the backup copy to be recovered."
-        },
-        "recoveryType": {
-          "$ref": "#/definitions/RecoveryType",
-          "description": "Type of this recovery."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the VM which is being recovered."
-        },
-        "targetVirtualMachineId": {
-          "type": "string",
-          "description": "This is the complete ARM Id of the VM that will be created.\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}"
-        },
-        "targetResourceGroupId": {
-          "type": "string",
-          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}"
-        },
-        "storageAccountId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the storage account to which the VM has to be restored."
-        },
-        "virtualNetworkId": {
-          "type": "string",
-          "description": "This is the virtual network Id of the vnet that will be attached to the virtual machine.\nUser will be validated for join action permissions in the linked access."
-        },
-        "subnetId": {
-          "type": "string",
-          "description": "Subnet ID, is the subnet ID associated with the to be restored VM. For Classic VMs it would be\n{VnetID}/Subnet/{SubnetName} and, for the Azure Resource Manager VMs it would be ARM resource ID used to represent\nthe subnet."
-        },
-        "targetDomainNameId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the domain name to be associated to the VM being restored. This applies only to Classic\nVirtual Machines."
-        },
-        "region": {
-          "type": "string",
-          "description": "Region in which the virtual machine is restored."
-        },
-        "affinityGroup": {
-          "type": "string",
-          "description": "Affinity group associated to VM to be restored. Used only for Classic Compute Virtual Machines."
-        },
-        "createNewCloudService": {
-          "type": "boolean",
-          "description": "Should a new cloud service be created while restoring the VM. If this is false, VM will be restored to the same\ncloud service as it was at the time of backup."
-        },
-        "originalStorageAccountOption": {
-          "type": "boolean",
-          "description": "Original Storage Account Option"
-        },
-        "encryptionDetails": {
-          "$ref": "#/definitions/EncryptionDetails",
-          "description": "Details needed if the VM was encrypted at the time of backup."
-        },
-        "restoreDiskLunList": {
-          "type": "array",
-          "description": "List of Disk LUNs for partial restore",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "restoreWithManagedDisks": {
-          "type": "boolean",
-          "description": "Flag to denote of an Unmanaged disk VM should be restored with Managed disks."
-        },
-        "diskEncryptionSetId": {
-          "type": "string",
-          "description": "DiskEncryptionSet's ID - needed if the VM needs to be encrypted at rest during restore with customer managed key."
-        },
-        "zones": {
-          "type": "array",
-          "description": "Target zone where the VM and its disks should be restored.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identityInfo": {
-          "$ref": "#/definitions/IdentityInfo",
-          "description": "Managed Identity information required to access customer storage account."
-        },
-        "identityBasedRestoreDetails": {
-          "$ref": "#/definitions/IdentityBasedRestoreDetails",
-          "description": "IaaS VM workload specific restore details for restores using managed identity."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Target extended location where the VM should be restored,\nshould be null if restore is to be done in public cloud"
-        },
-        "securedVMDetails": {
-          "$ref": "#/definitions/SecuredVMDetails",
-          "description": "Stores Secured VM Details"
-        },
-        "targetDiskNetworkAccessSettings": {
-          "$ref": "#/definitions/TargetDiskNetworkAccessSettings",
-          "description": "Specifies target network access settings for disks of VM to be restored,"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreRequest"
+          "$ref": "#/definitions/IaasVMRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "IaasVMRestoreWithRehydrationRequest"
@@ -11719,34 +10108,6 @@
           }
         ]
       }
-    },
-    "IaasVmilrRegistrationRequest": {
-      "type": "object",
-      "description": "Restore files/folders from a backup copy of IaaS VM.",
-      "properties": {
-        "recoveryPointId": {
-          "type": "string",
-          "description": "ID of the IaaS VM backup copy from where the files/folders have to be restored."
-        },
-        "virtualMachineId": {
-          "type": "string",
-          "description": "Fully qualified ARM ID of the virtual machine whose the files / folders have to be restored."
-        },
-        "initiatorName": {
-          "type": "string",
-          "description": "iSCSI initiator name."
-        },
-        "renewExistingRegistration": {
-          "type": "boolean",
-          "description": "Whether to renew existing registration with the iSCSI server."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ILRRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "IaasVMILRRegistrationRequest"
     },
     "IdentityBasedRestoreDetails": {
       "type": "object",
@@ -15803,15 +14164,9 @@
     "ValidateIaasVMRestoreOperationRequest": {
       "type": "object",
       "description": "AzureRestoreValidation request.",
-      "properties": {
-        "restoreRequest": {
-          "$ref": "#/definitions/RestoreRequest",
-          "description": "Sets restore request to be validated"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/ValidateOperationRequest"
+          "$ref": "#/definitions/ValidateRestoreOperationRequest"
         }
       ],
       "x-ms-discriminator-value": "ValidateIaasVMRestoreOperationRequest"

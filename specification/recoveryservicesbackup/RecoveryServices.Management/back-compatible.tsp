@@ -121,18 +121,13 @@ using Microsoft.RecoveryServices;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@hierarchyBuilding(AzureWorkloadPointInTimeRecoveryPoint,
-  AzureWorkloadRecoveryPoint
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@hierarchyBuilding(AzureWorkloadSAPHanaRecoveryPoint,
   AzureWorkloadRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@hierarchyBuilding(AzureWorkloadSAPHanaPointInTimeRecoveryPoint,
-  AzureWorkloadRecoveryPoint
+  AzureWorkloadPointInTimeRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
@@ -142,7 +137,7 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@hierarchyBuilding(AzureWorkloadSAPAsePointInTimeRecoveryPoint,
-  AzureWorkloadRecoveryPoint
+  AzureWorkloadPointInTimeRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
@@ -165,7 +160,7 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@hierarchyBuilding(AzureWorkloadSAPHanaPointInTimeRestoreRequest,
-  AzureWorkloadRestoreRequest
+  AzureWorkloadSAPHanaRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
@@ -186,4 +181,164 @@ using Microsoft.RecoveryServices;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@hierarchyBuilding(AzureWorkloadSQLPointInTimeRestoreRequest,
   AzureWorkloadRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureBackupServerContainer, DpmContainer);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureIaaSClassicComputeVMContainer, IaaSVMContainer);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureIaaSComputeVMContainer, IaaSVMContainer);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureIaaSClassicComputeVMProtectableItem,
+  IaaSVMProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureIaaSComputeVMProtectableItem, IaaSVMProtectableItem);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureSQLAGWorkloadContainerProtectionContainer,
+  AzureWorkloadContainer
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVMAppContainerProtectionContainer,
+  AzureWorkloadContainer
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPAseDatabaseProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPAseSystemProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaDBInstance,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaDatabaseProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaHSRProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaSystemProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSQLAvailabilityGroupProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSQLDatabaseProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSQLInstanceProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadAutoProtectionIntent,
+  AzureRecoveryServiceVaultProtectionIntent
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSQLAutoProtectionIntent,
+  AzureWorkloadAutoProtectionIntent
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest,
+  AzureWorkloadSAPHanaPointInTimeRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSAPHanaRestoreWithRehydrateRequest,
+  AzureWorkloadSAPHanaRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRestoreRequest,
+  AzureWorkloadSQLRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest,
+  AzureWorkloadSQLPointInTimeRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSQLRestoreWithRehydrateRequest,
+  AzureWorkloadSQLRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPAseDatabaseWorkloadItem,
+  AzureVmWorkloadItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPAseSystemWorkloadItem,
+  AzureVmWorkloadItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaDatabaseWorkloadItem,
+  AzureVmWorkloadItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaSystemWorkloadItem,
+  AzureVmWorkloadItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSQLDatabaseWorkloadItem,
+  AzureVmWorkloadItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSQLInstanceWorkloadItem,
+  AzureVmWorkloadItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadPointInTimeRecoveryPoint,
+  AzureWorkloadRecoveryPoint
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSAPAsePointInTimeRestoreRequest,
+  AzureWorkloadSAPAseRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRecoveryPoint,
+  AzureWorkloadSQLRecoveryPoint
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(IaasVMRestoreWithRehydrationRequest, IaasVMRestoreRequest);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@hierarchyBuilding(ValidateIaasVMRestoreOperationRequest,
+  ValidateRestoreOperationRequest
 );

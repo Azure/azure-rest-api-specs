@@ -52,8 +52,8 @@ interface ProtectionContainers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   register is ArmResourceCreateOrUpdateAsync<
     ProtectionContainerResource,
-    Response = ArmResourceUpdatedResponse<ProtectionContainerResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ProtectionContainerResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

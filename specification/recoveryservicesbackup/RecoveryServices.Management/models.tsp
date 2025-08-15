@@ -4170,15 +4170,7 @@ model AzureStorageJobTaskDetails {
   status?: string;
 }
 
-/**
- * Azure VM workload-specific protected item.
- */
-model AzureVmWorkloadProtectedItem extends ProtectedItem {
-  /**
-   * backup item type.
-   */
-  protectedItemType: "AzureVmWorkloadProtectedItem";
-
+alias AzureVmWorkloadProtectedItemProperties = {
   /**
    * Friendly name of the DB represented by this backup item.
    */
@@ -4252,6 +4244,17 @@ model AzureVmWorkloadProtectedItem extends ProtectedItem {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   nodesList?: DistributedNodesInfo[];
+};
+/**
+ * Azure VM workload-specific protected item.
+ */
+model AzureVmWorkloadProtectedItem extends ProtectedItem {
+  /**
+   * backup item type.
+   */
+  protectedItemType: "AzureVmWorkloadProtectedItem";
+
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
@@ -4324,52 +4327,52 @@ model DistributedNodesInfo {
  * Azure VM workload-specific protected item representing SAP ASE Database.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-model AzureVmWorkloadSAPAseDatabaseProtectedItem extends RecoveryPoint {
+model AzureVmWorkloadSAPAseDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  objectType: "AzureVmWorkloadSAPAseDatabase";
+  protectedItemType: "AzureVmWorkloadSAPAseDatabase";
 
-  ...AzureWorkloadRecoveryPointProperties;
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
  * Azure VM workload-specific protected item representing SAP HANA Database.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends RecoveryPoint {
+model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  objectType: "AzureVmWorkloadSAPHanaDatabase";
+  protectedItemType: "AzureVmWorkloadSAPHanaDatabase";
 
-  ...AzureWorkloadRecoveryPointProperties;
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
  * Azure VM workload-specific protected item representing SAP HANA DBInstance.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends RecoveryPoint {
+model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  objectType: "AzureVmWorkloadSAPHanaDBInstance";
+  protectedItemType: "AzureVmWorkloadSAPHanaDBInstance";
 
-  ...AzureWorkloadRecoveryPointProperties;
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
  * Azure VM workload-specific protected item representing SQL Database.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-model AzureVmWorkloadSQLDatabaseProtectedItem extends RecoveryPoint {
+model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  objectType: "AzureVmWorkloadSQLDatabase";
+  protectedItemType: "AzureVmWorkloadSQLDatabase";
 
-  ...AzureWorkloadRecoveryPointProperties;
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
@@ -4493,6 +4496,7 @@ model AzureWorkloadPointInTimeRecoveryPoint extends RecoveryPoint {
    */
   objectType: "AzureWorkloadPointInTimeRecoveryPoint";
 
+  ...AzureWorkloadRecoveryPointProperties;
   ...AzureWorkloadPointInTimeRecoveryPointProperties;
 }
 
@@ -4703,6 +4707,7 @@ model AzureWorkloadSAPHanaPointInTimeRecoveryPoint extends RecoveryPoint {
    */
   objectType: "AzureWorkloadSAPHanaPointInTimeRecoveryPoint";
 
+  ...AzureWorkloadRecoveryPointProperties;
   ...AzureWorkloadPointInTimeRecoveryPointProperties;
 }
 
@@ -4763,6 +4768,7 @@ model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
    */
   objectType: "AzureWorkloadSAPAsePointInTimeRecoveryPoint";
 
+  ...AzureWorkloadRecoveryPointProperties;
   ...AzureWorkloadPointInTimeRecoveryPointProperties;
 }
 
@@ -7888,7 +7894,8 @@ model IaasVMBackupRequest extends BackupRequest {
 /**
  * Restore files/folders from a backup copy of IaaS VM.
  */
-model IaasVmilrRegistrationRequest extends ILRRequest {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+model IaasVMILRRegistrationRequest extends ILRRequest {
   /**
    * ID of the IaaS VM backup copy from where the files/folders have to be restored.
    */
