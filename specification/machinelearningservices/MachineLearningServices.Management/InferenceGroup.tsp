@@ -33,22 +33,55 @@ model InferenceGroup
 }
 
 @armResourceOperations
+interface InferenceGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+
+        /** Pool name. */
+        @path
+        @segment("inferencePools")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        poolName: string,
+      },
+      {
+        /** Inference Group name. */
+        @path
+        @segment("groups")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        groupName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface InferenceGroups {
   /**
    * Get InferenceGroup.
    */
-  get is ArmResourceRead<InferenceGroup>;
+  get is InferenceGroupOps.Read<InferenceGroup>;
 
   /**
    * Create or update InferenceGroup (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<InferenceGroup>;
+  createOrUpdate is InferenceGroupOps.CreateOrUpdateAsync<InferenceGroup>;
 
   /**
    * Update InferenceGroup (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is InferenceGroupOps.CustomPatchAsync<
     InferenceGroup,
     PatchModel = PartialMinimalTrackedResourceWithSku
   >;
@@ -57,7 +90,7 @@ interface InferenceGroups {
    * Delete InferenceGroup (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is InferenceGroupOps.DeleteWithoutOkAsync<
     InferenceGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -65,7 +98,7 @@ interface InferenceGroups {
   /**
    * List Inference Groups.
    */
-  list is ArmResourceListByParent<
+  list is InferenceGroupOps.List<
     InferenceGroup,
     Parameters = {
       /**
@@ -104,8 +137,8 @@ interface InferenceGroups {
   /**
    * Retrieve status of delta models associated with the InferenceGroup and the target base model.
    */
-  @action("getDeltaModelsStatus")
-  getDeltaModelsStatusAsync is ArmResourceActionSync<
+  @action("deltaModels/getStatus")
+  getDeltaModelsStatusAsync is InferenceGroupOps.ActionSync<
     InferenceGroup,
     DeltaModelStatusRequest,
     ArmResponse<DeltaModelStatusResponse>
@@ -114,8 +147,8 @@ interface InferenceGroups {
   /**
    * List delta models associated with the InferenceGroup and the target base model.
    */
-  @action("list")
-  listDeltaModelsAsync is ArmResourceActionSync<
+  @action("deltaModels/list")
+  listDeltaModelsAsync is InferenceGroupOps.ActionSync<
     InferenceGroup,
     DeltaModelListRequest,
     ArmResponse<StringArmPaginatedResult>
@@ -124,18 +157,17 @@ interface InferenceGroups {
   /**
    * Modify delta models associated with the InferenceGroup and the target base model.
    */
-  @action("modify")
-  modifyDeltaModelsAsync is ArmResourceActionAsyncBase<
+  @action("deltaModels/modify")
+  modifyDeltaModelsAsync is InferenceGroupOps.ActionSync<
     InferenceGroup,
     DeltaModelModifyRequest,
-    ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<InferenceGroup>
+    ArmAcceptedLroResponse
   >;
 
   /**
    * Retrieve inference group status.
    */
-  getStatus is ArmResourceActionSync<
+  getStatus is InferenceGroupOps.ActionSync<
     InferenceGroup,
     void,
     ArmResponse<GroupStatus>
@@ -146,7 +178,7 @@ interface InferenceGroups {
    */
   @get
   @action("skus")
-  listSkus is ArmResourceActionSync<
+  listSkus is InferenceGroupOps.ActionSync<
     InferenceGroup,
     void,
     ArmResponse<SkuResourceArmPaginatedResult>,

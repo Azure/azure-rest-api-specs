@@ -33,22 +33,55 @@ model InferenceEndpoint
 }
 
 @armResourceOperations
+interface InferenceEndpointOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning workspace. */
+        @path
+        @segment("workspaces")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+        workspaceName: string,
+
+        /** Pool name. */
+        @path
+        @segment("inferencePools")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        poolName: string,
+      },
+      {
+        /** Inference Endpoint name. */
+        @path
+        @segment("endpoints")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        endpointName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface InferenceEndpoints {
   /**
    * Get InferenceEndpoint.
    */
-  get is ArmResourceRead<InferenceEndpoint>;
+  get is InferenceEndpointOps.Read<InferenceEndpoint>;
 
   /**
    * Create or update InferenceEndpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<InferenceEndpoint>;
+  createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<InferenceEndpoint>;
 
   /**
    * Update InferenceEndpoint (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
     PatchModel = InferenceUpdateParamter
   >;
@@ -57,7 +90,7 @@ interface InferenceEndpoints {
    * Delete InferenceEndpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -65,7 +98,7 @@ interface InferenceEndpoints {
   /**
    * List Inference Endpoints.
    */
-  list is ArmResourceListByParent<
+  list is InferenceEndpointOps.List<
     InferenceEndpoint,
     Parameters = {
       /**

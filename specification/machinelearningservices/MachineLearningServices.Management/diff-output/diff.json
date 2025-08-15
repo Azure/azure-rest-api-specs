@@ -1,2075 +1,5 @@
 {
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}__deleted": {
-      "post": {
-        "operationId": "RegistryDataReferences_GetBlobReferenceSAS",
-        "parameters": [
-          {
-            "$ref": "registries.json#/parameters/RegistryNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetBlobReferenceSASRequestDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GetBlobReferenceSASResponseDto"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetBlobReferenceSAS Data Reference.": {
-            "$ref": "./examples/DataReference/getBlobReferenceSAS.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/listKeys__deleted": {
-      "post": {
-        "operationId": "Endpoint_ListKeys",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointKeys"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Endpoint Keys": {
-            "$ref": "./examples/Endpoint/listKeys.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models__deleted": {
-      "get": {
-        "operationId": "Endpoint_GetModels",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointModels"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Endpoint Models": {
-            "$ref": "./examples/Endpoint/getModels.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/regenerateKey__deleted": {
-      "post": {
-        "operationId": "Endpoint_RegenerateKeys",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegenerateServiceAccountKeyContent"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AccountApiKeys"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Regenerate Endpoint Keys": {
-            "$ref": "./examples/Endpoint/regenerateKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features__deleted": {
-      "get": {
-        "operationId": "Features_List",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "featuresetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "featuresetVersion",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "featureName",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "description",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "listViewType",
-            "in": "query",
-            "type": "string",
-            "default": "ActiveOnly",
-            "enum": [
-              "ActiveOnly",
-              "ArchivedOnly",
-              "All"
-            ],
-            "x-ms-enum": {
-              "name": "ListViewType",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "type": "integer",
-            "format": "int32",
-            "default": 1000
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/FeatureResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Feature.": {
-            "$ref": "./examples/Feature/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features/{featureName}__deleted": {
-      "get": {
-        "operationId": "Features_Get",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "featuresetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "featuresetVersion",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "featureName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/FeatureResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Feature.": {
-            "$ref": "./examples/Feature/get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints__deleted": {
-      "get": {
-        "operationId": "InferenceEndpoints_List",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "count",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "CreatedAtDesc",
-              "CreatedAtAsc",
-              "UpdatedAtDesc",
-              "UpdatedAtAsc"
-            ],
-            "x-ms-enum": {
-              "name": "OrderString",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointTrackedResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}__deleted": {
-      "get": {
-        "operationId": "InferenceEndpoints_Get",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointTrackedResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "InferenceEndpoints_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointTrackedResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointTrackedResource"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointTrackedResource"
-            },
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/createOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "InferenceEndpoints_Update",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "description": "Strictly used in update requests."
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpointTrackedResource"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/update.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "InferenceEndpoints_Delete",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups__deleted": {
-      "get": {
-        "operationId": "InferenceGroups_List",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "count",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "CreatedAtDesc",
-              "CreatedAtAsc",
-              "UpdatedAtDesc",
-              "UpdatedAtAsc"
-            ],
-            "x-ms-enum": {
-              "name": "OrderString",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupTrackedResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}__deleted": {
-      "get": {
-        "operationId": "InferenceGroups_Get",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupTrackedResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "InferenceGroups_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupTrackedResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupTrackedResource"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupTrackedResource"
-            },
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/createOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "InferenceGroups_Update",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PartialMinimalTrackedResourceWithSku"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupTrackedResource"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/update.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "InferenceGroups_Delete",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus__deleted": {
-      "post": {
-        "operationId": "InferenceGroups_GetDeltaModelsStatusAsync",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaModelStatusRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DeltaModelStatusResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetDeltaModelsStatusAsync Inference Group.": {
-            "$ref": "./examples/InferenceGroup/getDeltaModelsStatusAsync.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list__deleted": {
-      "post": {
-        "operationId": "InferenceGroups_ListDeltaModelsAsync",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaModelListRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StringArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListDeltaModelsAsync Inference Group.": {
-            "$ref": "./examples/InferenceGroup/listDeltaModelsAsync.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify__deleted": {
-      "post": {
-        "operationId": "InferenceGroups_ModifyDeltaModelsAsync",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaModelModifyRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ModifyDeltaModelsAsync Inference Group.": {
-            "$ref": "./examples/InferenceGroup/modifyDeltaModelsAsync.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/getStatus__deleted": {
-      "post": {
-        "operationId": "InferenceGroups_GetStatus",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GroupStatus"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetStatus Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/getStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus__deleted": {
-      "get": {
-        "operationId": "InferenceGroups_ListSkus",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "count",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SkuResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListSkus Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/listSkus.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/{name}/{version}/{version}__added": {
-      "post": {
-        "operationId": "RegistryDataReferences_GetBlobReferenceSAS",
-        "parameters": [
-          {
-            "name": "registryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetBlobReferenceSASRequestDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GetBlobReferenceSASResponseDto"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetBlobReferenceSAS Data Reference.": {
-            "$ref": "./examples/DataReference/getBlobReferenceSAS.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpointsBasic__added": {
-      "get": {
-        "operationId": "Endpoint_List",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointType",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "Azure.OpenAI",
-              "Azure.Speech",
-              "Azure.ContentSafety",
-              "Azure.Llama",
-              "managedOnlineEndpoint",
-              "serverlessEndpoint"
-            ],
-            "x-ms-enum": {
-              "name": "EndpointType",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "includeOnlineEndpoints",
-            "in": "query",
-            "type": "boolean"
-          },
-          {
-            "name": "includeServerlessEndpoints",
-            "in": "query",
-            "type": "boolean"
-          },
-          {
-            "name": "includeConnections",
-            "in": "query",
-            "type": "boolean"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointResourcePropertiesBasicResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Endpoint": {
-            "$ref": "./examples/Endpoint/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpointsBasic/{endpointName}__added": {
-      "get": {
-        "operationId": "Endpoint_Get",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointResourcePropertiesBasicResource"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Endpoint": {
-            "$ref": "./examples/Endpoint/get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Endpoint_CreateOrUpdate",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EndpointResourcePropertiesBasicResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointResourcePropertiesBasicResource"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create Endpoint": {
-            "$ref": "./examples/Endpoint/create.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpointsBasic/{endpointName}/listKeys__added": {
-      "post": {
-        "operationId": "Endpoint_ListKeys",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointKeys"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Endpoint Keys": {
-            "$ref": "./examples/Endpoint/listKeys.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpointsBasic/{endpointName}/models__added": {
-      "get": {
-        "operationId": "Endpoint_GetModels",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointModels"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Endpoint Models": {
-            "$ref": "./examples/Endpoint/getModels.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpointsBasic/{endpointName}/regenerateKey__added": {
-      "post": {
-        "operationId": "Endpoint_RegenerateKeys",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegenerateServiceAccountKeyContent"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AccountApiKeys"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Regenerate Endpoint Keys": {
-            "$ref": "./examples/Endpoint/regenerateKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features/{featureName}__added": {
-      "get": {
-        "operationId": "Features_Get",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "featureName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Feature"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Feature.": {
-            "$ref": "./examples/Feature/get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/groups__added": {
-      "get": {
-        "operationId": "InferenceGroups_List",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "count",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "CreatedAtDesc",
-              "CreatedAtAsc",
-              "UpdatedAtDesc",
-              "UpdatedAtAsc"
-            ],
-            "x-ms-enum": {
-              "name": "OrderString",
-              "modelAsString": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupTrackedResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/groups/{groupName}__added": {
-      "get": {
-        "operationId": "InferenceGroups_Get",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroup"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "InferenceGroups_CreateOrUpdate",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceGroup"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroup"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroup"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/createOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/InferenceGroup"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "InferenceGroups_Update",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PartialMinimalTrackedResourceWithSku"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroup"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/update.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "InferenceGroups_Delete",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/groups/{groupName}/getDeltaModelsStatus__added": {
-      "post": {
-        "operationId": "InferenceGroups_GetDeltaModelsStatusAsync",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaModelStatusRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/DeltaModelStatusResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetDeltaModelsStatusAsync Inference Group.": {
-            "$ref": "./examples/InferenceGroup/getDeltaModelsStatusAsync.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/groups/{groupName}/getStatus__added": {
-      "post": {
-        "operationId": "InferenceGroups_GetStatus",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/GroupStatus"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetStatus Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/getStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/groups/{groupName}/list__added": {
-      "post": {
-        "operationId": "InferenceGroups_ListDeltaModelsAsync",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaModelListRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/StringArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListDeltaModelsAsync Inference Group.": {
-            "$ref": "./examples/InferenceGroup/listDeltaModelsAsync.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/groups/{groupName}/modify__added": {
-      "post": {
-        "operationId": "InferenceGroups_ModifyDeltaModelsAsync",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaModelModifyRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ModifyDeltaModelsAsync Inference Group.": {
-            "$ref": "./examples/InferenceGroup/modifyDeltaModelsAsync.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/groups/{groupName}/skus__added": {
-      "get": {
-        "operationId": "InferenceGroups_ListSkus",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "count",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SkuResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListSkus Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/listSkus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/list__added": {
-      "get": {
-        "operationId": "WorkspaceFeatures_List",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ListAmlUserFeatureResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Workspace features": {
-            "$ref": "./examples/WorkspaceFeature/list.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota": {
       "get": {
         "x-ms-pageable__deleted": {
@@ -3421,6 +1351,53 @@
             " "
           ]
         ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}": {
+      "post": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "registries.json#/parameters/RegistryNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "registryName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/GetBlobReferenceSASRequestDto"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default__deleted": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments": {
@@ -6427,355 +4404,67 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints": {
       "get": {
-        "operationId": {
-          "__old": "Endpoint_List",
-          "__new": "InferenceEndpoints_List"
-        },
         "parameters": [
           [
             " "
           ],
           [
-            "+",
-            {
-              "name": "count",
-              "in": "query",
-              "type": "integer",
-              "format": "int32"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "$skip",
-              "in": "query",
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "tags",
-              "in": "query",
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "properties",
-              "in": "query",
-              "type": "string"
-            }
-          ],
-          [
             "~",
             {
-              "name": {
-                "__old": "endpointType",
-                "__new": "orderBy"
-              },
               "enum": [
                 [
-                  "-",
-                  "Azure.OpenAI"
+                  " "
                 ],
                 [
-                  "-",
-                  "Azure.Speech"
+                  " "
                 ],
                 [
-                  "-",
-                  "Azure.ContentSafety"
+                  " "
                 ],
                 [
-                  "-",
-                  "Azure.Llama"
+                  " "
                 ],
                 [
-                  "-",
-                  "managedOnlineEndpoint"
+                  " "
                 ],
                 [
                   "+",
-                  "CreatedAtDesc"
-                ],
-                [
-                  "+",
-                  "CreatedAtAsc"
-                ],
-                [
-                  "+",
-                  "UpdatedAtDesc"
-                ],
-                [
-                  "+",
-                  "UpdatedAtAsc"
+                  "serverlessEndpoint"
                 ]
-              ],
-              "x-ms-enum": {
-                "name": {
-                  "__old": "EndpointType",
-                  "__new": "OrderString"
-                }
-              }
+              ]
             }
           ],
           [
-            "-",
+            "~",
             {
-              "name": "includeOnlineEndpoints",
-              "in": "query",
-              "type": "boolean",
-              "default": false
+              "default__deleted": false
             }
           ],
           [
-            "-",
+            "~",
             {
-              "name": "includeServerlessEndpoints",
-              "in": "query",
-              "type": "boolean",
-              "default": false
+              "default__deleted": false
             }
           ],
           [
-            "-",
+            "~",
             {
-              "name": "includeConnections",
-              "in": "query",
-              "type": "boolean",
-              "default": false
+              "default__deleted": false
             }
           ],
           [
-            "-",
-            {
-              "name": "$skip",
-              "in": "query",
-              "type": "string"
-            }
+            " "
           ],
           [
-            "-",
-            {
-              "name": "$expand",
-              "in": "query",
-              "type": "string"
-            }
+            " "
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/EndpointResourcePropertiesBasicResourceArmPaginatedResult",
-                "__new": "#/definitions/InferenceEndpointTrackedResourceArmPaginatedResult"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Endpoint__deleted": {
-            "$ref": "./examples/Endpoint/list.json"
-          },
-          "List Workspace Inference Endpoint.__added": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/list.json"
-          }
-        }
+        ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
-      "patch__added": {
-        "operationId": "InferenceEndpoints_Update",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceUpdateParamter"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpoint"
-            }
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/update.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete__added": {
-        "operationId": "InferenceEndpoints_Delete",
-        "parameters": [
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Workspace Inference Endpoint.": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models": {
       "get": {
-        "operationId": {
-          "__old": "Endpoint_Get",
-          "__new": "InferenceEndpoints_Get"
-        },
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "pattern": {
-                "__old": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$",
-                "__new": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-              }
-            }
-          ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/EndpointResourcePropertiesBasicResource",
-                "__new": "#/definitions/InferenceEndpoint"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Endpoint__deleted": {
-            "$ref": "./examples/Endpoint/get.json"
-          },
-          "Get Workspace Inference Endpoint.__added": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/get.json"
-          }
-        }
-      },
-      "put": {
-        "x-ms-long-running-operation-options__added": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/InferenceEndpoint"
-        },
-        "operationId": {
-          "__old": "Endpoint_CreateOrUpdate",
-          "__new": "InferenceEndpoints_CreateOrUpdate"
-        },
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "pattern": {
-                "__old": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$",
-                "__new": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-              }
-            }
-          ],
-          [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/EndpointResourcePropertiesBasicResource",
-                  "__new": "#/definitions/InferenceEndpoint"
-                }
-              }
-            }
-          ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/EndpointResourcePropertiesBasicResource",
-                "__new": "#/definitions/InferenceEndpoint"
-              }
-            }
-          },
-          "202__deleted": {
-            "description": "ignore"
-          },
-          "201__added": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InferenceEndpoint"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create Endpoint__deleted": {
-            "$ref": "./examples/Endpoint/create.json"
-          },
-          "CreateOrUpdate Workspace Inference Endpoint.__added": {
-            "$ref": "./examples/Workspace/InferenceEndpoint/createOrUpdate.json"
-          }
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7147,9 +4836,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features": {
       "get": {
-        "operationId": {
-          "__old": "WorkspaceFeatures_List",
-          "__new": "Features_List"
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           [
@@ -7162,77 +4850,8 @@
               "type__added": "string",
               "pattern__added": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
             }
-          ],
-          [
-            "+",
-            {
-              "name": "$skip",
-              "in": "query",
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "tags",
-              "in": "query",
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "description",
-              "in": "query",
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "listViewType",
-              "in": "query",
-              "type": "string",
-              "enum": [
-                "ActiveOnly",
-                "ArchivedOnly",
-                "All"
-              ],
-              "x-ms-enum": {
-                "name": "ListViewType",
-                "modelAsString": true
-              }
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "pageSize",
-              "in": "query",
-              "type": "integer",
-              "format": "int32",
-              "default": 1000
-            }
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ListAmlUserFeatureResult",
-                "__new": "#/definitions/FeatureResourceArmPaginatedResult"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Workspace features__deleted": {
-            "$ref": "./examples/WorkspaceFeature/list.json"
-          },
-          "List Feature.__added": {
-            "$ref": "./examples/Feature/list.json"
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets": {
@@ -7694,6 +5313,112 @@
             " "
           ]
         ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skip",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "featureName",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "default__deleted": "ActiveOnly"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features/{featureName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/FeatureResource",
+                "__new": "#/definitions/Feature"
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities": {
@@ -8352,6 +6077,676 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skip",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceEndpointTrackedResource",
+                "__new": "#/definitions/InferenceEndpoint"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/InferenceEndpointTrackedResource",
+                  "__new": "#/definitions/InferenceEndpoint"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceEndpointTrackedResource",
+                "__new": "#/definitions/InferenceEndpoint"
+              }
+            }
+          },
+          "201": {
+            "headers__deleted": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceEndpointTrackedResource",
+                "__new": "#/definitions/InferenceEndpoint"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/InferenceEndpoint",
+          "final-state-via": {
+            "__old": "original-uri",
+            "__new": "azure-async-operation"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "description__deleted": "Strictly used in update requests.",
+                "$ref__added": "#/definitions/InferenceUpdateParamter"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceEndpointTrackedResource",
+                "__new": "#/definitions/InferenceEndpoint"
+              }
+            }
+          },
+          "202": {
+            "headers__deleted": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__deleted": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skip",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceGroupTrackedResource",
+                "__new": "#/definitions/InferenceGroup"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/InferenceGroupTrackedResource",
+                  "__new": "#/definitions/InferenceGroup"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceGroupTrackedResource",
+                "__new": "#/definitions/InferenceGroup"
+              }
+            }
+          },
+          "201": {
+            "headers__deleted": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceGroupTrackedResource",
+                "__new": "#/definitions/InferenceGroup"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/InferenceGroup",
+          "final-state-via": {
+            "__old": "original-uri",
+            "__new": "azure-async-operation"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            "~",
+            {
+              "pattern__added": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+            }
+          ],
+          [
+            "~",
+            {
+              "pattern__added": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/InferenceGroupTrackedResource",
+                "__new": "#/definitions/InferenceGroup"
+              }
+            }
+          },
+          "202": {
+            "headers__deleted": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__deleted": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus": {
+      "post": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list": {
+      "post": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify": {
+      "post": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/getStatus": {
+      "post": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skip",
+              "in": "query",
+              "type": "string"
+            }
+          ]
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs": {
@@ -11968,6 +10363,20 @@
         }
       ],
       "x-ms-client-name": "FeaturestoreEntityVersion"
+    },
+    "GetBlobReferenceSASRequestDto__deleted": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "blobUri": {
+          "type": "string",
+          "format": "uri",
+          "x-nullable": true
+        }
+      }
     },
     "HDInsight__deleted": {
       "allOf": [
@@ -17660,16 +16069,6 @@
           "x-nullable__deleted": true
         },
         "storageAccountArmId": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "GetBlobReferenceSASRequestDto": {
-      "properties": {
-        "assetId": {
-          "x-nullable__deleted": true
-        },
-        "blobUri": {
           "x-nullable__deleted": true
         }
       }

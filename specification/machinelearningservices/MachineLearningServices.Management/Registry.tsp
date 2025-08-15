@@ -81,27 +81,10 @@ interface Registries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataReferences_GetBlobReferenceSAS")
-  getBlobReferenceSAS is ArmResourceActionSync<
-    Registry,
-    GetBlobReferenceSASRequestDto,
-    ArmResponse<GetBlobReferenceSASResponseDto>,
-    Parameters = {
-      /**
-       * Data reference name.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      @segment("dataReferences")
-      name: string;
-
-      /**
-       * Version identifier.
-       */
-      @path
-      @segment("versions")
-      version: string;
-    }
-  >;
+  @post
+  getBlobReferenceSAS(
+    ...ReferenceSASParameters,
+  ): ArmResponse<GetBlobReferenceSASResponseDto>;
 
   /**
    * Remove regions from registry
@@ -123,9 +106,9 @@ interface Registries {
 @@doc(Registries.update::parameters.properties,
   "Details required to create the registry."
 );
-@@doc(Registries.getBlobReferenceSAS::parameters.body,
-  "Asset id and blob uri."
-);
+// @@doc(Registries.getBlobReferenceSAS::parameters.body,
+//   "Asset id and blob uri."
+// );
 @@doc(Registries.removeRegions::parameters.body,
   "Details required to create the registry."
 );

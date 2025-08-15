@@ -15721,3 +15721,22 @@ model InferenceUpdateParameterProperties {
 model InferenceUpdateParamter {
   properties: InferenceUpdateParameterProperties;
 }
+
+alias ReferenceSASParameters = {
+  ...ResourceInstanceParameters<Registry>;
+
+  /**
+   * Data reference name.
+   */
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+  @path
+  @segment("datareferences")
+  name: string;
+
+  /**
+   * Version identifier.
+   */
+  @path
+  @segment("versions")
+  version: string;
+};
