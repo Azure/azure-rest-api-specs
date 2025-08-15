@@ -64,7 +64,13 @@ interface Solutions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Solution>;
 
   @doc("Update a Solution Resource")
-  update is ArmResourcePatchAsync<Solution, SolutionProperties>;
+  update is ArmCustomPatchAsync<
+    Solution,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Solution,
+      SolutionProperties
+    >
+  >;
 
   @doc("Delete a Solution Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Solution>;
