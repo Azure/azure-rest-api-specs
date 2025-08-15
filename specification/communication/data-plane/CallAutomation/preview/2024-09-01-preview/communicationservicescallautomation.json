@@ -914,6 +914,53 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:summarizeCall": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "API to trigger a summary of the call so far.",
+        "description": "API to trigger a summary of the call so far.",
+        "operationId": "CallMedia_SummarizeCall",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "summarizeCallRequest",
+            "in": "body",
+            "description": "The SummarizeCall request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummarizeCallRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the summarize call request and will begin processing it. You will receive TranscriptionCallSummaryUpdated event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_SummarizeCall": {
+            "$ref": "./examples/CallMedia_SummarizeCall.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}:hold": {
       "post": {
         "tags": [
@@ -2086,6 +2133,10 @@
         "transcriptionOptions": {
           "$ref": "#/definitions/TranscriptionOptions",
           "description": "Transcription Options."
+        },
+        "enableLoopbackAudio": {
+          "description": "Enables loopback audio functionality for the call.",
+          "type": "boolean"
         }
       }
     },
@@ -2268,6 +2319,10 @@
         },
         "audioFormat": {
           "$ref": "#/definitions/AudioFormat"
+        },
+        "enableDtmfTones": {
+          "description": "A value that indicates whether to stream the DTMF tones.",
+          "type": "boolean"
         }
       }
     },
@@ -2287,7 +2342,6 @@
       "required": [
         "transportUrl",
         "transportType",
-        "locale",
         "startTranscription"
       ],
       "type": "object",
@@ -2701,6 +2755,10 @@
         "transcriptionOptions": {
           "$ref": "#/definitions/TranscriptionOptions",
           "description": "Transcription Options."
+        },
+        "enableLoopbackAudio": {
+          "description": "Enables loopback audio functionality for the call.",
+          "type": "boolean"
         }
       }
     },
@@ -2786,6 +2844,10 @@
         "transcriptionOptions": {
           "$ref": "#/definitions/TranscriptionOptions",
           "description": "Transcription Options."
+        },
+        "enableLoopbackAudio": {
+          "description": "Enables loopback audio functionality for the call.",
+          "type": "boolean"
         }
       }
     },
@@ -3159,14 +3221,14 @@
           "type": "string"
         },
         "speechLanguages": {
-          "description": "Gets or sets a list of languages for Language Identification.",
+          "description": "Speech languages for language identification and recognition. Example: [\"en-us\", \"fr-fr\", \"hi-in\"] etc.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "enableSentimentAnalysis": {
-          "description": "Gets or sets a value indicating if sentiment analysis should be used.",
+          "description": "Value indicating if sentiment analysis should be used.",
           "type": "boolean"
         },
         "speechRecognitionModelEndpointId": {
@@ -3357,6 +3419,23 @@
         "enableSentimentAnalysis": {
           "description": "Indicating if sentiment analysis should be used.",
           "type": "boolean"
+        },
+        "summarizationOptions": {
+          "$ref": "#/definitions/SummarizationOptions",
+          "description": "Summarization configuration options."
+        }
+      }
+    },
+    "SummarizeCallRequest": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         },
         "summarizationOptions": {
           "$ref": "#/definitions/SummarizationOptions",
@@ -4280,6 +4359,28 @@
         },
         "message": {
           "description": "Detail message that describes the current result.",
+          "type": "string"
+        },
+        "sipDetails": {
+          "$ref": "#/definitions/SipDiagnosticInfo",
+          "description": "Sip response from SBC. This can be helpful to troubleshoot PSTN call if this result was unexpected.\r\nThis is only applicable for PSTN calls and will be null if SBC/Carrier does not provide this information.\r\nDo not solely rely on this information for troubleshooting, as it may not always be available."
+        },
+        "q850Details": {
+          "$ref": "#/definitions/SipDiagnosticInfo",
+          "description": "Q850 cause from SBC. This can be helpful to troubleshoot call issues if this result was unexpected.\r\nThis is only applicable for PSTN calls and will be null if SBC/Carrier does not provide this information.\r\nDo not solely rely on this information for troubleshooting, as it may not always be available."
+        }
+      }
+    },
+    "SipDiagnosticInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "description": "Represents the diagnostic code returned by the SIP service, used for identifying specific issues or statuses.",
+          "type": "integer"
+        },
+        "message": {
+          "description": "Message associated with the code for diagnosing.",
           "type": "string"
         }
       }
@@ -5687,6 +5788,7 @@
         "transcriptionResumed",
         "transcriptionUpdated",
         "transcriptionStopped",
+        "callSummaryUpdated",
         "unspecifiedError"
       ],
       "type": "string",
@@ -5711,7 +5813,9 @@
         "tooManyRequests",
         "forbidden",
         "serviceTimeout",
-        "transcriptionLocaleUpdated"
+        "transcriptionLocaleUpdated",
+        "callSummarySuccess",
+        "callSummaryFailure"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5727,6 +5831,10 @@
         },
         "transcriptionStatusDetails": {
           "$ref": "#/definitions/TranscriptionStatusDetails"
+        },
+        "transcriptionMessage": {
+          "description": "Optional message providing additional context about the transcription update.",
+          "type": "string"
         }
       }
     },
@@ -5791,6 +5899,36 @@
       }
     },
     "TranscriptionUpdated": {
+      "type": "object",
+      "properties": {
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "TranscriptionCallSummaryUpdated": {
       "type": "object",
       "properties": {
         "transcriptionUpdate": {
