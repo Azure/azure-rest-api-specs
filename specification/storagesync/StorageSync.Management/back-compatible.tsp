@@ -77,5 +77,15 @@ using Microsoft.StorageSync;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Workflow.properties);
 
-@@clientLocation(OperationStatusOperationGroup.get, "OperationStatus", "python");
-@@clientLocation(StorageSyncServices.listByStorageSyncService, "PrivateLinkResources", "python");
+@@clientLocation(OperationStatusOperationGroup.get,
+  "OperationStatus",
+  "python"
+);
+@@clientLocation(StorageSyncServices.listByStorageSyncService,
+  "PrivateLinkResources",
+  "python"
+);
+@@clientLocation(StorageSyncServicesOperationGroup.checkNameAvailability,
+  StorageSyncServices,
+  "python"
+);
