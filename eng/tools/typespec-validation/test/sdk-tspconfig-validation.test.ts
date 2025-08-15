@@ -276,6 +276,15 @@ const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   [new TspConfigGoMgmtServiceDirMatchPatternSubRule()],
 );
 
+const goManagementServiceDirWithOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  managementTspconfigFolder,
+  "service-dir",
+  "{output-dir}/sdk/resourcemanager/aaa",
+  "{output-dir}/sdk/manager/aaa",
+  [new TspConfigGoMgmtServiceDirMatchPatternSubRule()],
+);
+
 const goManagementPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
@@ -648,6 +657,7 @@ describe("tspconfig", function () {
     ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
+    ...goManagementServiceDirWithOutputDirTestCases,
     ...goManagementPackageDirTestCases,
     ...goManagementModuleTestCases,
     ...goManagementGenerateExamplesTestCases,

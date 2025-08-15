@@ -358,7 +358,7 @@ export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOpti
 // ----- Go Mgmt plane sub rules -----
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-go", "service-dir", new RegExp(/^sdk\/resourcemanager\/[^\/]*$/));
+    super("@azure-tools/typespec-go", "service-dir", new RegExp(/^(\{output-dir\}\/)?sdk\/resourcemanager\/[^\/]*$/));
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
