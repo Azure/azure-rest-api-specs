@@ -119,7 +119,7 @@ interface CloudServicesNetworks {
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**

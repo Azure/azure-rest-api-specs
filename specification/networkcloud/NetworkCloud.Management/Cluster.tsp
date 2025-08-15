@@ -118,7 +118,7 @@ interface Clusters {
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -143,7 +143,7 @@ interface Clusters {
   continueUpdateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterContinueUpdateVersionParameters,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -153,7 +153,7 @@ interface Clusters {
   deploy is ArmResourceActionAsyncBase<
     Cluster,
     ClusterDeployParameters,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
@@ -164,7 +164,7 @@ interface Clusters {
   scanRuntime is ArmResourceActionAsyncBase<
     Cluster,
     ClusterScanRuntimeParameters,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
@@ -175,7 +175,7 @@ interface Clusters {
   updateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterUpdateVersionParameters,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 }

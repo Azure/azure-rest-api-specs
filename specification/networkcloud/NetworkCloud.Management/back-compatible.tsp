@@ -205,20 +205,31 @@ using Microsoft.NetworkCloud;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BmcKeySet.properties);
 
-@@clientLocation(ClusterMetricsConfigurations.get, "MetricsConfigurations");
+@@clientLocation(ClusterMetricsConfigurations.get,
+  "MetricsConfigurations",
+  "!csharp"
+);
 @@clientLocation(ClusterMetricsConfigurations.createOrUpdate,
-  "MetricsConfigurations"
+  "MetricsConfigurations",
+  "!csharp"
 );
 @@clientName(ClusterMetricsConfigurations.createOrUpdate::parameters.resource,
   "metricsConfigurationParameters"
 );
-@@clientLocation(ClusterMetricsConfigurations.update, "MetricsConfigurations");
+@@clientLocation(ClusterMetricsConfigurations.update,
+  "MetricsConfigurations",
+  "!csharp"
+);
 @@clientName(ClusterMetricsConfigurations.update::parameters.properties,
   "metricsConfigurationUpdateParameters"
 );
-@@clientLocation(ClusterMetricsConfigurations.delete, "MetricsConfigurations");
+@@clientLocation(ClusterMetricsConfigurations.delete,
+  "MetricsConfigurations",
+  "!csharp"
+);
 @@clientLocation(ClusterMetricsConfigurations.listByCluster,
-  "MetricsConfigurations"
+  "MetricsConfigurations",
+  "!csharp"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ClusterMetricsConfiguration.properties);

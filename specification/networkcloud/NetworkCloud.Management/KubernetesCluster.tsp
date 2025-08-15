@@ -116,7 +116,7 @@ interface KubernetesClusters {
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -141,7 +141,7 @@ interface KubernetesClusters {
   restartNode is ArmResourceActionAsyncBase<
     KubernetesCluster,
     KubernetesClusterRestartNodeParameters,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<KubernetesCluster>
   >;
 }

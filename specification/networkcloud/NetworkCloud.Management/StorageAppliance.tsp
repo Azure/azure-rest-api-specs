@@ -118,7 +118,7 @@ interface StorageAppliances {
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -143,7 +143,7 @@ interface StorageAppliances {
   disableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     void,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>
   >;
 
@@ -153,7 +153,7 @@ interface StorageAppliances {
   enableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     StorageApplianceEnableRemoteVendorManagementParameters,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>,
     OptionalRequestBody = true
   >;

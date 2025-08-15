@@ -116,7 +116,7 @@ interface VirtualMachines {
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -141,7 +141,7 @@ interface VirtualMachines {
   powerOff is ArmResourceActionAsyncBase<
     VirtualMachine,
     VirtualMachinePowerOffParameters,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
     OptionalRequestBody = true
   >;
@@ -152,7 +152,7 @@ interface VirtualMachines {
   reimage is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 
@@ -162,7 +162,7 @@ interface VirtualMachines {
   restart is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 
@@ -172,7 +172,7 @@ interface VirtualMachines {
   start is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 }
