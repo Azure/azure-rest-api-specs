@@ -189,15 +189,13 @@ model FoundryDatasetDataSource extends EvaluationDataSource {
   datasetId: DatasetId;
 }
 
-@doc("Common properties shared across model deployment configurations used in evaluations.")
-@added(Versions.v2025_07_31_preview)
-model EvaluationModelSourceCommon {
+alias EvaluationModelSourceCommon = {
   @doc("Configuration for the model deployment used in evaluation.")
   modelTarget: TargetConfig;
 
   @doc("A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.")
   baseMessages: Message[];
-}
+};
 
 @doc("Data source that uses a model deployment with inline queries. The specified model processes each query to generate responses, which are then evaluated against the configured evaluators.")
 @added(Versions.v2025_07_31_preview)
@@ -240,7 +238,7 @@ model ConfidenceInterval {
 @doc("Statistical summary of evaluation results including aggregated scores and pass/fail rates.")
 model EvaluationSummaryStatistics {
   @doc("Total number of rows that were evaluated.")
-  sampleCount: int64;
+  sampleCount: safeint;
 
   @doc("Proportion of evaluation results that passed the specified criteria or threshold, expressed as a value between 0 and 1.")
   passRate?: float32;
@@ -261,7 +259,7 @@ model EvaluationSummaryStatistics {
   confidenceInterval95th?: ConfidenceInterval;
 
   @doc("Label frequency distribution, showing how often each label appears in the evaluation results. This can help identify common themes or issues across evaluated data rows.")
-  labelFrequency?: Record<int64>;
+  labelFrequency?: Record<safeint>;
 }
 
 @doc("Status of evaluator across all data rows.")
@@ -596,15 +594,6 @@ union EvaluationResultOutcome {
   @doc("The evaluation completed but did not meet the specified criteria or threshold")
   fail: "fail",
 
-  @doc("The evaluation has not been processed yet or is still in progress")
-  notEvaluated: "notEvaluated",
-
-  @doc("The evaluation criteria do not apply to this particular data row or context")
-  notApplicable: "notApplicable",
-
-  @doc("The evaluation is skipped for this particular data row")
-  skipped: "skipped",
-
   @doc("The evaluation resulted in an error for this particular data row")
   error: "error",
 
@@ -630,10 +619,10 @@ union EvaluatorDesirableDirection {
 @doc("Usage statistics for the evaluation")
 model Usage {
   @doc("Total number of input tokens consumed during the evaluation process")
-  inputTokens: int64;
+  inputTokens: safeint;
 
   @doc("Total number of output tokens generated during the evaluation process")
-  outputTokens: int64;
+  outputTokens: safeint;
 }
 
 @added(Versions.v2025_07_31_preview)

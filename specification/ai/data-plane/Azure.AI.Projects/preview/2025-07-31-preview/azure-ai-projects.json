@@ -3016,27 +3016,6 @@
         "metadata"
       ]
     },
-    "EvaluationModelSourceCommon": {
-      "type": "object",
-      "description": "Common properties shared across model deployment configurations used in evaluations.",
-      "properties": {
-        "modelTarget": {
-          "$ref": "#/definitions/TargetConfig",
-          "description": "Configuration for the model deployment used in evaluation."
-        },
-        "baseMessages": {
-          "type": "array",
-          "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        }
-      },
-      "required": [
-        "modelTarget",
-        "baseMessages"
-      ]
-    },
     "EvaluationResult": {
       "type": "object",
       "description": "Comprehensive evaluation results for a single data row, including the input data, processing state, and results from all configured evaluators.",
@@ -3099,9 +3078,6 @@
       "enum": [
         "pass",
         "fail",
-        "notEvaluated",
-        "notApplicable",
-        "skipped",
         "error"
       ],
       "x-ms-enum": {
@@ -3117,21 +3093,6 @@
             "name": "fail",
             "value": "fail",
             "description": "The evaluation completed but did not meet the specified criteria or threshold"
-          },
-          {
-            "name": "notEvaluated",
-            "value": "notEvaluated",
-            "description": "The evaluation has not been processed yet or is still in progress"
-          },
-          {
-            "name": "notApplicable",
-            "value": "notApplicable",
-            "description": "The evaluation criteria do not apply to this particular data row or context"
-          },
-          {
-            "name": "skipped",
-            "value": "skipped",
-            "description": "The evaluation is skipped for this particular data row"
           },
           {
             "name": "error",
