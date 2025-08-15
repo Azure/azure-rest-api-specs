@@ -1190,19 +1190,19 @@
     },
     "/evaluations/runs:runSingle": {
       "post": {
-        "operationId": "Evaluations_CreateOneEvaluation",
+        "operationId": "Evaluations_CreateSingleEvaluation",
         "description": "Independent API operation to perform a single evaluation and immediately get a result.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "oneEvaluation",
+            "name": "singleEvaluation",
             "in": "body",
             "description": "Complete evaluation configuration including data source, evaluators, and result settings",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OneEvaluation"
+              "$ref": "#/definitions/SingleEvaluation"
             }
           }
         ],
@@ -1210,7 +1210,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OneEvaluationResult"
+              "$ref": "#/definitions/SingleEvaluationResult"
             }
           },
           "default": {
@@ -1227,8 +1227,8 @@
           }
         },
         "x-ms-examples": {
-          "Evaluations_CreateOneEvaluation": {
-            "$ref": "./examples/Evaluations_CreateOneEvaluation_MaximumSet_Gen.json"
+          "Evaluations_CreateSingleEvaluation": {
+            "$ref": "./examples/Evaluations_CreateSingleEvaluation_MaximumSet_Gen.json"
           }
         }
       }
@@ -4000,47 +4000,6 @@
       ],
       "x-ms-discriminator-value": "None"
     },
-    "OneEvaluation": {
-      "type": "object",
-      "description": "One Evaluation Definition",
-      "properties": {
-        "dataSource": {
-          "$ref": "#/definitions/InlineDataSource",
-          "description": "Input data to evaluate. Single row support only."
-        },
-        "evaluators": {
-          "type": "array",
-          "description": "Evaluators to be used for the evaluation.",
-          "items": {
-            "$ref": "#/definitions/EvaluatorConfiguration"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "dataSource",
-        "evaluators"
-      ]
-    },
-    "OneEvaluationResult": {
-      "type": "object",
-      "description": "One Evaluation Result",
-      "properties": {
-        "metrics": {
-          "type": "array",
-          "description": "Evaluation results from all the configured evaluators.",
-          "items": {
-            "$ref": "#/definitions/EvaluationMetric"
-          }
-        }
-      }
-    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -4487,6 +4446,47 @@
         "sasUri",
         "type"
       ]
+    },
+    "SingleEvaluation": {
+      "type": "object",
+      "description": "cccc Evaluation Definition",
+      "properties": {
+        "dataSource": {
+          "$ref": "#/definitions/InlineDataSource",
+          "description": "Input data to evaluate. Single row support only."
+        },
+        "evaluators": {
+          "type": "array",
+          "description": "Evaluators to be used for the evaluation.",
+          "items": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "dataSource",
+        "evaluators"
+      ]
+    },
+    "SingleEvaluationResult": {
+      "type": "object",
+      "description": "Single Evaluation Result",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "description": "Evaluation results from all the configured evaluators.",
+          "items": {
+            "$ref": "#/definitions/EvaluationMetric"
+          }
+        }
+      }
     },
     "Sku": {
       "type": "object",

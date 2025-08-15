@@ -335,9 +335,9 @@ model EvaluationResultSettings {
   additionalDestinations?: Array<EvaluationDestinationConfiguration>;
 }
 
-@doc("One Evaluation Definition")
+@doc("cccc Evaluation Definition")
 @added(Versions.v2025_07_31_preview)
-model OneEvaluation {
+model SingleEvaluation {
   @doc("Input data to evaluate. Single row support only.")
   dataSource: InlineDataSource;
 
@@ -348,9 +348,9 @@ model OneEvaluation {
   properties?: Record<string>;
 }
 
-@doc("One Evaluation Result")
+@doc("Single Evaluation Result")
 @added(Versions.v2025_07_31_preview)
-model OneEvaluationResult {
+model SingleEvaluationResult {
   @doc("Evaluation results from all the configured evaluators.")
   metrics?: EvaluationMetric[];
 }

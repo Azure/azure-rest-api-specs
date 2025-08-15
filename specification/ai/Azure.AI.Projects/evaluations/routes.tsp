@@ -105,13 +105,13 @@ interface Evaluations {
   @added(Versions.v2025_07_31_preview)
   @route("runs:runSingle")
   @post
-  createOneEvaluation is Azure.Core.Foundations.Operation<
+  createSingleEvaluation is Azure.Core.Foundations.Operation<
     {
       @doc("Complete evaluation configuration including data source, evaluators, and result settings")
       @body
-      oneEvaluation: OneEvaluation;
+      singleEvaluation: SingleEvaluation;
     },
-    OkResponse<OneEvaluationResult>
+    OkResponse<SingleEvaluationResult>
   >;
 
   @doc("Updates specific properties of an existing evaluation. Supports modification of metadata fields including description, display name, and tags. Note: Core evaluation configuration such as data sources and evaluators cannot be modified after creation.")
