@@ -852,11 +852,11 @@
     },
     "PagedQuota": {
       "type": "object",
-      "description": "Paged collection of Quota items",
+      "description": "A list of quotas",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Quota items on this page",
+          "description": "The list of quotas",
           "items": {
             "$ref": "#/definitions/Quota"
           },
@@ -864,8 +864,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Url for the next page. Null if no more pages available"
         }
       },
       "required": [
