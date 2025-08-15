@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { commentOrUpdate, parseExistingComments, findAllMatchingComments } from "../src/comment.js";
+import { commentOrUpdate, findAllMatchingComments, parseExistingComments } from "../src/comment.js";
 
 describe("comment.js", () => {
   describe("parseExistingComments", () => {
@@ -94,15 +94,7 @@ describe("comment.js", () => {
         info: vi.fn(),
       };
 
-      await commentOrUpdate(
-        mockGithub,
-        mockCore,
-        "owner",
-        "repo",
-        1,
-        "Test body",
-        "TestId"
-      );
+      await commentOrUpdate(mockGithub, mockCore, "owner", "repo", 1, "Test body", "TestId");
 
       expect(mockGithub.rest.issues.createComment).toHaveBeenCalledWith({
         owner: "owner",
@@ -113,9 +105,7 @@ describe("comment.js", () => {
     });
 
     it("should update existing comment when it exists", async () => {
-      const existingComments = [
-        { id: 456, body: "Existing comment\n<!-- TestId -->" },
-      ];
+      const existingComments = [{ id: 456, body: "Existing comment\n<!-- TestId -->" }];
 
       const mockGithub = {
         paginate: vi.fn().mockResolvedValue(existingComments),
@@ -129,15 +119,7 @@ describe("comment.js", () => {
         info: vi.fn(),
       };
 
-      await commentOrUpdate(
-        mockGithub,
-        mockCore,
-        "owner",
-        "repo",
-        1,
-        "Updated body",
-        "TestId"
-      );
+      await commentOrUpdate(mockGithub, mockCore, "owner", "repo", 1, "Updated body", "TestId");
 
       expect(mockGithub.rest.issues.updateComment).toHaveBeenCalledWith({
         owner: "owner",
@@ -148,9 +130,7 @@ describe("comment.js", () => {
     });
 
     it("should not update when body is the same", async () => {
-      const existingComments = [
-        { id: 456, body: "Same body\n<!-- TestId -->" },
-      ];
+      const existingComments = [{ id: 456, body: "Same body\n<!-- TestId -->" }];
 
       const mockGithub = {
         paginate: vi.fn().mockResolvedValue(existingComments),
@@ -164,15 +144,7 @@ describe("comment.js", () => {
         info: vi.fn(),
       };
 
-      await commentOrUpdate(
-        mockGithub,
-        mockCore,
-        "owner",
-        "repo",
-        1,
-        "Same body",
-        "TestId"
-      );
+      await commentOrUpdate(mockGithub, mockCore, "owner", "repo", 1, "Same body", "TestId");
 
       expect(mockGithub.rest.issues.updateComment).not.toHaveBeenCalled();
     });
@@ -207,15 +179,7 @@ describe("comment.js", () => {
         warning: vi.fn(),
       };
 
-      await commentOrUpdate(
-        mockGithub,
-        mockCore,
-        "owner",
-        "repo",
-        1,
-        "New body",
-        "TestId"
-      );
+      await commentOrUpdate(mockGithub, mockCore, "owner", "repo", 1, "New body", "TestId");
 
       // Should create new comment first
       expect(mockGithub.rest.issues.createComment).toHaveBeenCalledWith({
@@ -241,7 +205,7 @@ describe("comment.js", () => {
       });
 
       expect(mockCore.warning).toHaveBeenCalledWith(
-        "Race condition detected: Found 2 comments with identifier 'TestId'. Cleaning up duplicate comment 200 and updating comment 100."
+        "Race condition detected: Found 2 comments with identifier 'TestId'. Cleaning up duplicate comment 200 and updating comment 100.",
       );
     });
 
@@ -275,15 +239,7 @@ describe("comment.js", () => {
         warning: vi.fn(),
       };
 
-      await commentOrUpdate(
-        mockGithub,
-        mockCore,
-        "owner",
-        "repo",
-        1,
-        "New body",
-        "TestId"
-      );
+      await commentOrUpdate(mockGithub, mockCore, "owner", "repo", 1, "New body", "TestId");
 
       // Should delete the newest comment (id: 300) that we just created
       expect(mockGithub.rest.issues.deleteComment).toHaveBeenCalledWith({
@@ -301,7 +257,7 @@ describe("comment.js", () => {
       });
 
       expect(mockCore.warning).toHaveBeenCalledWith(
-        "Race condition detected: Found 3 comments with identifier 'TestId'. Cleaning up duplicate comment 300 and updating comment 100."
+        "Race condition detected: Found 3 comments with identifier 'TestId'. Cleaning up duplicate comment 300 and updating comment 100.",
       );
     });
   });

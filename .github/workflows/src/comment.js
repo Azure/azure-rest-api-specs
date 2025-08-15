@@ -50,8 +50,9 @@ export function parseExistingComments(comments, commentGroupName) {
  * @returns {IssueComment[]} Array of matching comments sorted by ID (oldest first).
  */
 export function findAllMatchingComments(comments, commentGroupName) {
+  /** @type {IssueComment[]} */
   const matchingComments = [];
-  
+
   if (comments) {
     comments.forEach((comment) => {
       if (comment.body?.includes(commentGroupName)) {
@@ -131,11 +132,11 @@ export async function commentOrUpdate(
     });
 
     const allMatchingComments = findAllMatchingComments(afterComments, commentIdentifier);
-    
+
     if (allMatchingComments.length > 1) {
       core.warning(
         `Race condition detected: Found ${allMatchingComments.length} comments with identifier '${commentIdentifier}'. ` +
-        `Cleaning up duplicate comment ${newComment.id} and updating comment ${allMatchingComments[0].id}.`
+          `Cleaning up duplicate comment ${newComment.id} and updating comment ${allMatchingComments[0].id}.`,
       );
 
       // Delete the comment we just created (it will be one of the newer ones)
@@ -153,7 +154,9 @@ export async function commentOrUpdate(
         comment_id: allMatchingComments[0].id,
         body: computedBody,
       });
-      core.info(`Updated oldest existing comment ${allMatchingComments[0].id} after race condition cleanup.`);
+      core.info(
+        `Updated oldest existing comment ${allMatchingComments[0].id} after race condition cleanup.`,
+      );
     }
   }
 }
