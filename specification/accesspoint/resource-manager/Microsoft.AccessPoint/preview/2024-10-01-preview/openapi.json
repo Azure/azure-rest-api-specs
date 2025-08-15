@@ -2484,7 +2484,7 @@
           "description": "The image modification for the access point account"
         },
         "classification": {
-          "$ref": "#/definitions/Classification",
+          "type": "string",
           "description": "The classification of the access point account"
         },
         "provisioningState": {
@@ -2674,30 +2674,6 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      }
-    },
-    "Classification": {
-      "type": "string",
-      "description": "The classification of the Access Point Account",
-      "enum": [
-        "sap",
-        "sci_sar"
-      ],
-      "x-ms-enum": {
-        "name": "Classification",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SAP",
-            "value": "sap",
-            "description": "SAP Classification"
-          },
-          {
-            "name": "SCI_SAP",
-            "value": "sci_sar",
-            "description": "SCI_SAP Classification"
-          }
-        ]
       }
     },
     "Device": {
