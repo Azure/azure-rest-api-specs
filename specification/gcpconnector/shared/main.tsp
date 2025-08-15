@@ -11,6 +11,9 @@ alias GcpCommonProperties = {
   @doc("GCP Project Number")
   gcpProjectNumber?: string;
 
+  @doc("GCP Project Id")
+  gcpProjectId?: string;
+
   @doc("Fully qualified resource name of the GCP resource")
   resourceName?: string;
 
