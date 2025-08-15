@@ -25,11 +25,11 @@ To see additional help and options, run:
 These are the global settings for the AzureComputeRecommenderClient API.
 
 ``` yaml !$(python) || !$(track2)
-title: AzureComputeRecommenderManagementClient
+title: ComputeRecommenderResourceProviderClient
 ```
 
 ``` yaml
-description: Azure Compute Recommender Client
+description: The Compute Recommender Resource Provider Client
 openapi-type: arm
 tag: package-2025-06-05
 
