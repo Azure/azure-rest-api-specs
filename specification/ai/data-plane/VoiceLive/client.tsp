@@ -55,8 +55,24 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
-@@access(VoiceLive.ClientEvent, Access.public, "csharp");
-@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "csharp");
+@@access(VoiceLive.ClientEvent, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventConversationItemCreate, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventConversationItemDelete, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventConversationItemRetrieve, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventConversationItemTruncate, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioBufferClear, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioClear, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioTurnAppend, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioTurnEnd, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventInputAudioTurnStart, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventResponseCancel, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventResponseCreate, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventSessionAvatarConnect, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventSessionUpdate, Access.internal, "csharp");
+@@access(VoiceLive.UnknownClientEvent, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
 
