@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: '{output-dir}/sdk/devcenter'
+    default: "{output-dir}/sdk/devcenter"
 emit:
 - '@azure-tools/typespec-autorest'
 linter:
@@ -10,19 +10,19 @@ options:
   '@azure-tools/typespec-autorest':
     azure-resource-provider-folder: data-plane
     emit-lro-options: none
-    emitter-output-dir: '{project-root}/..'
-    output-file: '{azure-resource-provider-folder}/Microsoft.DevCenter/{version-status}/{version}/devcenter.json'
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.DevCenter/{version-status}/{version}/devcenter.json"
     omit-unreachable-types: true
   '@azure-tools/typespec-csharp':
     package-dir: Azure.Developer.DevCenter
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     clear-output-folder: true
     flavor: azure
     api-version: '2023-04-01'
   '@azure-typespec/http-client-csharp':
     namespace: Azure.Developer.DevCenter
     api-version: '2023-04-01'
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-python':
     package-dir: azure-developer-devcenter
     namespace: azure.developer.devcenter

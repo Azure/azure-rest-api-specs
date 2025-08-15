@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/openai'
+  "service-dir":
+    default: "{output-dir}/sdk/openai"
   dependencies:
     default: ''
   output-folder-base:
@@ -13,14 +13,14 @@ linter:
   - '@azure-tools/typespec-azure-rulesets/data-plane'
 options:
   '@azure-tools/typespec-autorest':
-    emitter-output-dir: '{project-root}/../'
+    emitter-output-dir: "{project-root}/../"
     azure-resource-provider-folder: data-plane
-    output-file: '{output-folder-base}/OpenApiV2/{version-status}/{version}/assistants_generated.json'
+    output-file: "{output-folder-base}/OpenApiV2/{version-status}/{version}/assistants_generated.json"
     omit-unreachable-types: true
     emit-lro-options: none
   '@typespec/openapi3':
-    emitter-output-dir: '{project-root}/../'
-    output-file: '{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml'
+    emitter-output-dir: "{project-root}/../"
+    output-file: "{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml"
   '@azure-tools/typespec-csharp':
     package-dir: Azure.AI.OpenAI.Assistants
     namespace: Azure.AI.OpenAI.Assistants
@@ -32,7 +32,7 @@ options:
     namespace: Azure.AI.OpenAI.Assistants
     model-namespace: false
     generate-protocol-methods: false
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-java':
     package-dir: azure-ai-openai-assistants
     namespace: com.azure.ai.openai.assistants

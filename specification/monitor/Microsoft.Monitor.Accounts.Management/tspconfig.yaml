@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: '{output-dir}/sdk/monitor'
+    default: "{output-dir}/sdk/monitor"
 emit:
 - '@azure-tools/typespec-autorest'
 linter:
@@ -9,10 +9,10 @@ linter:
 options:
   '@azure-tools/typespec-autorest':
     use-read-only-status-schema: true
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
-    arm-types-dir: '{project-root}/../../common-types/resource-management'
-    output-file: '{azure-resource-provider-folder}/{service-name}/Accounts/{version-status}/{version}/azuremonitorworkspace.json'
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    output-file: "{azure-resource-provider-folder}/{service-name}/Accounts/{version-status}/{version}/azuremonitorworkspace.json"
     new-line: lf
     omit-unreachable-types: true
   '@azure-tools/typespec-csharp':
@@ -20,7 +20,7 @@ options:
     package-dir: Azure.ResourceManager.MonitorAccounts
     clear-output-folder: true
     model-namespace: true
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
   '@azure-tools/typespec-python':
     package-dir: azure-mgmt-monitoraccounts
     namespace: azure.mgmt.monitoraccounts

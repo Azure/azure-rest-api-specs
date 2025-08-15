@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/monitor'
+  "service-dir":
+    default: "{output-dir}/sdk/monitor"
   dependencies:
     default: ''
 emit:
@@ -11,11 +11,11 @@ linter:
 options:
   '@azure-tools/typespec-autorest':
     azure-resource-provider-folder: data-plane
-    emitter-output-dir: '{project-root}/..'
-    output-file: '{azure-resource-provider-folder}/ingestion/{version-status}/{version}/DataCollectionRules.json'
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/ingestion/{version-status}/{version}/DataCollectionRules.json"
   '@azure-tools/typespec-python':
     package-dir: azure-monitor-ingestion
-    package-name: '{package-dir}'
+    package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
     namespace: azure.monitor.ingestion
@@ -38,7 +38,7 @@ options:
     generate-fakes: true
   '@azure-tools/typespec-csharp':
     package-dir: Azure.Monitor.Ingestion
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure

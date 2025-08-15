@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/developer'
+  "service-dir":
+    default: "{output-dir}/sdk/developer"
 emit:
 - '@azure-tools/typespec-autorest'
 linter:
@@ -10,9 +10,9 @@ options:
   '@azure-tools/typespec-autorest':
     azure-resource-provider-folder: data-plane
     emit-lro-options: none
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
-    output-file: '{azure-resource-provider-folder}/Azure.Developer.TrustedSigning/{version-status}/{version}/azure.developer.trustedsigning.json'
+    output-file: "{azure-resource-provider-folder}/Azure.Developer.TrustedSigning/{version-status}/{version}/azure.developer.trustedsigning.json"
   '@azure-tools/typespec-python':
     package-dir: azure-developer-trustedsigning
     namespace: azure.developer.trustedsigning
@@ -23,12 +23,12 @@ options:
     clear-output-folder: true
     package-dir: Azure.Developer.TrustedSigning
     model-namespace: false
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     flavor: azure
   '@azure-typespec/http-client-csharp':
     namespace: Azure.Developer.TrustedSigning
     model-namespace: false
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-ts':
     package-dir: developer-trustedsigning-rest
     generate-metadata: true

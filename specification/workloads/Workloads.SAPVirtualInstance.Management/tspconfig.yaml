@@ -1,24 +1,24 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/workloads'
+  "service-dir":
+    default: "{output-dir}/sdk/workloads"
 emit:
 - '@azure-tools/typespec-autorest'
 options:
   '@azure-tools/typespec-autorest':
     use-read-only-status-schema: true
     omit-unreachable-types: true
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
     emit-common-types-schema: never
     arm-resource-flattening: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/SAPVirtualInstance/{version-status}/{version}/SAPVirtualInstance.json'
+    output-file: "{azure-resource-provider-folder}/{service-name}/SAPVirtualInstance/{version-status}/{version}/SAPVirtualInstance.json"
   '@azure-tools/typespec-csharp':
     service-dir: sdk/workloadssapvirtualinstance
     flavor: azure
     package-dir: Azure.ResourceManager.WorkloadsSapVirtualInstance
     clear-output-folder: true
     model-namespace: false
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
   '@azure-tools/typespec-ts':
     experimental-extensible-enums: true
     package-dir: arm-workloadssapvirtualinstance

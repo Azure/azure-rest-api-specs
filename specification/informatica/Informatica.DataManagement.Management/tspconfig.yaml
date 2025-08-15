@@ -1,15 +1,15 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/informaticadatamanagement'
+  "service-dir":
+    default: "{output-dir}/sdk/informaticadatamanagement"
 emit:
 - '@azure-tools/typespec-autorest'
 options:
   '@azure-tools/typespec-autorest':
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
     emit-common-types-schema: never
     arm-resource-flattening: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json'
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   '@azure-tools/typespec-python':
     package-dir: azure-mgmt-informaticadatamanagement
     namespace: azure.mgmt.informaticadatamanagement
@@ -26,7 +26,7 @@ options:
     package-dir: Azure.ResourceManager.InformaticaDataManagement
     clear-output-folder: true
     model-namespace: true
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     service-dir: sdk/informaticadatamanagement
   '@azure-tools/typespec-ts':
     service-dir: sdk/informatica

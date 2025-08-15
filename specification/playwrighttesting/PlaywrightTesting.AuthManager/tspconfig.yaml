@@ -4,15 +4,15 @@ linter:
   extends:
   - '@azure-tools/typespec-azure-rulesets/data-plane'
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/playwrighttesting'
+  "service-dir":
+    default: "{output-dir}/sdk/playwrighttesting"
   dependencies:
     default: ''
 options:
   '@azure-tools/typespec-autorest':
     azure-resource-provider-folder: data-plane
-    emitter-output-dir: '{project-root}/..'
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json'
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
     omit-unreachable-types: true
   '@azure-tools/typespec-python':
     package-dir: azure-developer-microsoftplaywrighttesting
@@ -34,12 +34,12 @@ options:
     package-dir: Azure.Developer.MicrosoftPlaywrightTesting
     clear-output-folder: true
     model-namespace: false
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     flavor: azure
   '@azure-typespec/http-client-csharp':
     namespace: Azure.Developer.MicrosoftPlaywrightTesting
     model-namespace: false
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-java':
     package-dir: azure-developer-microsoftplaywrighttesting
     namespace: com.azure.developer.microsoftplaywrighttesting

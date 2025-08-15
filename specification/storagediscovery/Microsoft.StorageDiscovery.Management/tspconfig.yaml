@@ -1,22 +1,22 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/storagediscovery'
+  "service-dir":
+    default: "{output-dir}/sdk/storagediscovery"
 emit:
 - '@azure-tools/typespec-autorest'
 options:
   '@azure-tools/typespec-autorest':
     use-read-only-status-schema: true
     omit-unreachable-types: true
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageDiscoveryWorkspace.json'
-    arm-types-dir: '{project-root}/../../common-types/resource-management'
-    examples-dir: '{project-root}/examples'
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageDiscoveryWorkspace.json"
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
   '@azure-tools/typespec-csharp':
     package-dir: Azure.ResourceManager.StorageDiscovery
     flavor: azure
     clear-output-folder: true
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
   '@azure-tools/typespec-java':
     package-dir: azure-resourcemanager-storagediscovery
     namespace: com.azure.resourcemanager.storagediscovery
@@ -53,8 +53,8 @@ options:
     prefix: Az
     subject-prefix: StorageDiscovery
     service-name: StorageDiscovery
-    module-name: '{prefix}.{service-name}'
-    output-folder: '{output-dir}'
+    module-name: "{prefix}.{service-name}"
+    output-folder: "{output-dir}"
     exclude-tableview-properties:
     - Id
     - Type

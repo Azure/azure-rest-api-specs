@@ -1,26 +1,26 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/migrate'
+  "service-dir":
+    default: "{output-dir}/sdk/migrate"
 emit:
 - '@azure-tools/typespec-autorest'
-output-dir: '{project-root}/../../'
+output-dir: "{project-root}/../../"
 linter:
   extends:
   - '@azure-tools/typespec-azure-rulesets/resource-manager'
 options:
   '@azure-tools/typespec-autorest':
-    emitter-output-dir: '{output-dir}'
-    output-file: '{azure-resource-provider-folder}/{service-name}/AssessmentProjects/{version-status}/{version}/sqlAssessments.json'
+    emitter-output-dir: "{output-dir}"
+    output-file: "{azure-resource-provider-folder}/{service-name}/AssessmentProjects/{version-status}/{version}/sqlAssessments.json"
     azure-resource-provider-folder: ./resource-manager
     use-read-only-status-schema: true
-    arm-types-dir: '{project-root}/../../../common-types/resource-management'
-    examples-dir: '{project-root}/examples'
+    arm-types-dir: "{project-root}/../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
   '@azure-tools/typespec-csharp':
     flavor: azure
     package-dir: Azure.ResourceManager.Migrate
     clear-output-folder: true
     model-namespace: true
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
   '@azure-tools/typespec-python':
     package-dir: azure-mgmt-migrate
     namespace: azure.mgmt.migrate

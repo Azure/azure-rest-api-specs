@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: '{output-dir}/sdk/onlineexperimentation'
+    default: "{output-dir}/sdk/onlineexperimentation"
 emit:
 - '@azure-tools/typespec-autorest'
 linter:
@@ -8,15 +8,15 @@ linter:
   - '@azure-tools/typespec-azure-rulesets/data-plane'
 options:
   '@azure-tools/typespec-autorest':
-    output-file: '{azure-resource-provider-folder}/Microsoft.OnlineExperimentation/{version-status}/{version}/onlineexperimentation.json'
-    emitter-output-dir: '{project-root}/../'
+    output-file: "{azure-resource-provider-folder}/Microsoft.OnlineExperimentation/{version-status}/{version}/onlineexperimentation.json"
+    emitter-output-dir: "{project-root}/../"
     azure-resource-provider-folder: data-plane
-    examples-dir: '{project-root}/examples'
+    examples-dir: "{project-root}/examples"
     omit-unreachable-types: true
     emit-lro-options: none
   '@typespec/openapi3':
-    emitter-output-dir: '{project-root}/../'
-    output-file: '{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json'
+    emitter-output-dir: "{project-root}/../"
+    output-file: "{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json"
   '@azure-tools/typespec-go':
     module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
     service-dir: sdk/analytics
@@ -28,7 +28,7 @@ options:
     slice-elements-byval: true
   '@azure-tools/typespec-python':
     package-dir: azure-onlineexperimentation
-    package-name: '{package-dir}'
+    package-name: "{package-dir}"
     namespace: azure.onlineexperimentation
     generate-test: false
     generate-sample: false
@@ -36,7 +36,7 @@ options:
     flavor: azure
   '@azure-tools/typespec-csharp':
     package-dir: Azure.Analytics.OnlineExperimentation
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     generate-convenience-methods: true
     generate-protocol-methods: true
     clear-output-folder: true
@@ -45,7 +45,7 @@ options:
   '@azure-typespec/http-client-csharp':
     namespace: Azure.Analytics.OnlineExperimentation
     model-namespace: false
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-ts':
     package-dir: onlineexperimentation-rest
     is-modular-library: false

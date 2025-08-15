@@ -1,12 +1,12 @@
 parameters:
   java-sdk-folder:
-    default: '{project-root}/azure-sdk-for-java/'
+    default: "{project-root}/azure-sdk-for-java/"
   js-sdk-folder:
-    default: '{project-root}/azure-sdk-for-js/'
+    default: "{project-root}/azure-sdk-for-js/"
   csharp-sdk-folder:
-    default: '{project-root}/azure-sdk-for-net/'
-  service-dir:
-    default: '{output-dir}/sdk/anomalydetector'
+    default: "{project-root}/azure-sdk-for-net/"
+  "service-dir":
+    default: "{output-dir}/sdk/anomalydetector"
 emit:
 - '@azure-tools/typespec-autorest'
 linter:
@@ -20,18 +20,18 @@ options:
     azure-resource-provider-folder: data-plane
     emit-lro-options: none
     omit-unreachable-types: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json'
-    emitter-output-dir: '{project-root}/../'
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    emitter-output-dir: "{project-root}/../"
   '@azure-tools/typespec-java':
     package-dir: azure-ai-anomalydetector
     namespace: com.azure.ai.anomalydetector
     partial-update: true
-    emitter-output-dir: '{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector'
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector"
     flavor: azure
   '@azure-typespec/http-client-csharp':
     namespace: Azure.AI.AnomalyDetector
     model-namespace: false
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-csharp':
     save-inputs: false
     clear-output-folder: true
@@ -39,7 +39,7 @@ options:
     model-namespace: false
     flavor: azure
   '@azure-tools/typespec-ts':
-    emitter-output-dir: '{js-sdk-folder}/sdk/{service-directory-name}/ai-anomaly-detector-rest'
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-anomaly-detector-rest"
     generate-metadata: true
     is-modular-library: false
     package-dir: ai-anomaly-detector-rest

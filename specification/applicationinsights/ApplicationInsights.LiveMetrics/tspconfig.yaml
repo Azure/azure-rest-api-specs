@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/applicationinsights'
+  "service-dir":
+    default: "{output-dir}/sdk/applicationinsights"
   dependencies:
     default: ''
 emit:
@@ -9,9 +9,9 @@ options:
   '@azure-tools/typespec-autorest':
     azure-resource-provider-folder: data-plane
     emit-lro-options: none
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
-    output-file: '{azure-resource-provider-folder}/LiveMetrics/{version-status}/{version}/livemetrics.json'
+    output-file: "{azure-resource-provider-folder}/LiveMetrics/{version-status}/{version}/livemetrics.json"
   '@azure-tools/typespec-python':
     package-dir: azure-applicationinsights-livemetrics
     namespace: azure.applicationinsights.livemetrics
@@ -20,7 +20,7 @@ options:
     generate-sample: true
   '@azure-tools/typespec-csharp':
     package-dir: LiveMetrics
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure

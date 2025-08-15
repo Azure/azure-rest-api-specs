@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/cognitivelanguage'
+  "service-dir":
+    default: "{output-dir}/sdk/cognitivelanguage"
 emit:
 - '@azure-tools/typespec-autorest'
 linter:
@@ -11,8 +11,8 @@ options:
     omit-unreachable-types: true
     azure-resource-provider-folder: data-plane
     emit-lro-options: none
-    emitter-output-dir: '{project-root}/..'
-    output-file: '{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzedocuments.json'
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzedocuments.json"
   '@azure-tools/typespec-csharp':
     package-dir: Azure.AI.Language.Documents
     clear-output-folder: true
@@ -22,4 +22,4 @@ options:
   '@azure-typespec/http-client-csharp':
     namespace: Azure.AI.Language.Documents
     model-namespace: false
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"

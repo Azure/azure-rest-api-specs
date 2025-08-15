@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/keyvault'
+  "service-dir":
+    default: "{output-dir}/sdk/keyvault"
   dependencies:
     default: ''
 emit:
@@ -11,8 +11,8 @@ linter:
 options:
   '@azure-tools/typespec-autorest':
     azure-resource-provider-folder: data-plane
-    emitter-output-dir: '{project-root}/..'
-    output-file: '{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/administration.json'
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/administration.json"
   '@azure-tools/typespec-python':
     flavor: azure
     basic-setup-py: true
@@ -36,7 +36,7 @@ options:
   '@azure-typespec/http-client-csharp':
     namespace: Azure.Security.KeyVault.Administration
     model-namespace: true
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-csharp':
     package-dir: Azure.Security.KeyVault.Administration
     namespace: Azure.Security.KeyVault.Administration

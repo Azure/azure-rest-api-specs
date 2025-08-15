@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/purview'
+  "service-dir":
+    default: "{output-dir}/sdk/purview"
   dependencies:
     default: ''
 emit:
@@ -9,8 +9,8 @@ options:
   '@azure-tools/typespec-autorest':
     azure-resource-provider-folder: data-plane
     emit-lro-options: none
-    emitter-output-dir: '{project-root}/..'
-    output-file: '{azure-resource-provider-folder}/Azure.Analytics.Purview.DataMap/{version-status}/{version}/purviewdatamap.json'
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Azure.Analytics.Purview.DataMap/{version-status}/{version}/purviewdatamap.json"
     omit-unreachable-types: true
   '@azure-tools/typespec-python':
     package-dir: azure-purview-datamap
@@ -21,14 +21,14 @@ options:
     generate-sample: true
   '@azure-tools/typespec-csharp':
     package-dir: Azure.Analytics.Purview.DataMap
-    namespace: '{package-dir}'
+    namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   '@azure-typespec/http-client-csharp':
     namespace: Azure.Analytics.Purview.DataMap
     model-namespace: false
-    emitter-output-dir: '{service-dir}/{namespace}'
+    emitter-output-dir: "{service-dir}/{namespace}"
   '@azure-tools/typespec-ts':
     package-dir: purview-datamap-rest
     generate-metadata: true

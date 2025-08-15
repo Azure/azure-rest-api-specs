@@ -1,16 +1,16 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/trustedsigning'
+  "service-dir":
+    default: "{output-dir}/sdk/trustedsigning"
 emit:
 - '@azure-tools/typespec-autorest'
 options:
   '@azure-tools/typespec-autorest':
     use-read-only-status-schema: true
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
     emit-common-types-schema: never
     arm-resource-flattening: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json'
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json"
   '@azure-tools/typespec-java':
     package-dir: azure-resourcemanager-trustedsigning
     flavor: azure

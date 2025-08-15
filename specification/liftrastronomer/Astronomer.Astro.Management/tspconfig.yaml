@@ -1,7 +1,7 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/astro'
-output-dir: '{project-root}/'
+  "service-dir":
+    default: "{output-dir}/sdk/astro"
+output-dir: "{project-root}/"
 emit:
 - '@azure-tools/typespec-autorest'
 linter:
@@ -11,11 +11,11 @@ linter:
     '@azure-tools/typespec-azure-resource-manager/arm-common-types-version': New rule
 options:
   '@azure-tools/typespec-autorest':
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
     emit-common-types-schema: never
     arm-resource-flattening: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/astronomer.json'
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/astronomer.json"
   '@azure-tools/typespec-ts':
     experimental-extensible-enums: true
     package-dir: arm-astro

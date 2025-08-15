@@ -1,6 +1,6 @@
 parameters:
-  service-dir:
-    default: '{output-dir}/sdk/eventgrid'
+  "service-dir":
+    default: "{output-dir}/sdk/eventgrid"
   service-directory-name:
     default: eventgrid
 emit:
@@ -10,9 +10,9 @@ linter:
   - '@azure-tools/typespec-azure-rulesets/data-plane'
 options:
   '@azure-tools/typespec-autorest':
-    emitter-output-dir: '{project-root}/..'
+    emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
-    output-file: '{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/EventGrid.json'
+    output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/EventGrid.json"
     azure-resource-provider-folder: data-plane
     emit-lro-options: none
   '@azure-tools/typespec-python':
@@ -33,7 +33,7 @@ options:
     package-name: Azure.Messaging.EventGrid.Namespaces
     namespace: Azure.Messaging.EventGrid.Namespaces
     model-namespace: false
-    emitter-output-dir: '{service-dir}/{package-name}'
+    emitter-output-dir: "{service-dir}/{package-name}"
   '@azure-tools/typespec-java':
     namespace: com.azure.messaging.eventgrid.namespaces
     package-dir: azure-messaging-eventgrid-namespaces
@@ -59,6 +59,6 @@ options:
     service-dir: sdk/messaging/eventgrid
     package-dir: aznamespaces
     module-version: 0.0.1
-    emitter-output-dir: '{project-root}'
+    emitter-output-dir: "{project-root}"
     slice-elements-byval: true
     flavor: azure
