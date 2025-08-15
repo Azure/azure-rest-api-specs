@@ -9,8 +9,6 @@ using TypeSpec.Rest;
 alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
 interface PrivateClouds {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("PrivateClouds_List")
   list is ArmResourceListByParent<
     PrivateCloud,
     Response = ArmResponse<PrivateCloudList>
