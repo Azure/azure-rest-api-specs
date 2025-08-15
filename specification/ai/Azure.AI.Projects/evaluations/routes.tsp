@@ -63,4 +63,25 @@ interface Evaluations {
 
   @doc("Delete an evaluation run by name")
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
+
+  @doc("Get an evaluation group by name.")
+  getgroup is EvaluationsOperations.ResourceRead<EvaluationGroup>;
+
+  @doc("List evaluation groups")
+  listgroup is EvaluationsOperations.ResourceList<EvaluationGroup>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an evaluation group.")
+  @post
+  creategroup is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation group to be created")
+      @body
+      evaluationGroup: EvaluationGroup;
+    },
+    ResourceCreatedResponse<EvaluationGroup>
+  >;
+
+  @doc("Delete an evaluation group by name")
+  deletegroup is EvaluationsOperations.ResourceDelete<EvaluationGroup>;
 }
