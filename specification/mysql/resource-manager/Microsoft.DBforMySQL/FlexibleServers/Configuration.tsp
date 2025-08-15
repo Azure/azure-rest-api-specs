@@ -39,9 +39,8 @@ interface Configurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Configuration,
-    Response = ArmResourceUpdatedResponse<Configuration> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<Configuration> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -87,16 +86,17 @@ interface Configurations {
   /**
    * Update a list of configurations in a given server.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("updateConfigurations")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("Configurations_BatchUpdate")
-  batchUpdate is ArmResourceActionAsync<
+  batchUpdate is ArmResourceActionAsyncBase<
     Server,
     ConfigurationListForBatchUpdate,
-    ArmResponse<ConfigurationListResult>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Configuration> &
-      ArmLroLocationHeader
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
+    Response = ArmResponse<ConfigurationListResult> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigurationListResult> &
+      ArmLroLocationHeader>
   >;
 }
 
