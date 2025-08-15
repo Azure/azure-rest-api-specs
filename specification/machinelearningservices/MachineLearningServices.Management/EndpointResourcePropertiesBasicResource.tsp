@@ -18,7 +18,7 @@ model EndpointResourcePropertiesBasicResource
   ...ResourceNameParameter<
     Resource = EndpointResourcePropertiesBasicResource,
     KeyName = "endpointName",
-    SegmentName = "endpoints",
+    SegmentName = "endpointsBasic",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
   >;
 }

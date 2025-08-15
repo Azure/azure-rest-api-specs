@@ -4405,13 +4405,12 @@ model JupyterKernelConfig {
 /**
  * Result of AmlCompute Nodes
  */
-@pagedResult
 model AmlComputeNodesInformation {
   /**
    * The collection of returned AmlCompute nodes details.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["nodeId"])
   nodes?: AmlComputeNodeInformation[];
 
@@ -6582,7 +6581,12 @@ model DeltaModelListRequest {
 /**
  * A paginated list of String entities.
  */
-model StringArmPaginatedResult is Azure.Core.Page<string>;
+model StringArmPaginatedResult is Azure.Core.Page<Stringforlist>;
+
+//Fix Me: Compile Error
+model Stringforlist {
+  string: string;
+}
 
 /**
  * Contract base for DeltaModelChangeRequest. Used for adding or removing.
@@ -9168,22 +9172,20 @@ model FqdnEndpointDetail {
 /**
  * List of private endpoint connection associated with the specified workspace
  */
-@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * Array of private endpoint connections
    */
-  @items
+  @pageItems
   value?: PrivateEndpointConnection[];
 }
 
 /**
  * A list of private link resources
  */
-@pagedResult
 model PrivateLinkResourceListResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @items
+  @pageItems
   value?: PrivateLinkResource[];
 }
 
@@ -15709,4 +15711,13 @@ model WorkspaceConnectionUsernamePassword {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   username?: string;
+}
+
+//Fix Me: Compile Error
+model InferenceUpdateParameterProperties {
+  description?: string;
+}
+//Fix Me: Compile Error
+model InferenceUpdateParamter {
+  properties: InferenceUpdateParameterProperties;
 }

@@ -124,7 +124,6 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceFeatures_List")
   @get
-  @action("features")
   list is ArmResourceActionSync<
     Workspace,
     void,

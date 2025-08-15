@@ -48,7 +48,10 @@ interface InferenceEndpoints {
    * Update InferenceEndpoint (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<InferenceEndpoint, PatchModel = any>;
+  update is ArmCustomPatchAsync<
+    InferenceEndpoint,
+    PatchModel = InferenceUpdateParamter
+  >;
 
   /**
    * Delete InferenceEndpoint (asynchronous).

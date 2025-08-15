@@ -81,7 +81,6 @@ interface Registries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataReferences_GetBlobReferenceSAS")
-  @action("{version}")
   getBlobReferenceSAS is ArmResourceActionSync<
     Registry,
     GetBlobReferenceSASRequestDto,
@@ -92,12 +91,14 @@ interface Registries {
        */
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
       @path
+      @segment("dataReferences")
       name: string;
 
       /**
        * Version identifier.
        */
       @path
+      @segment("versions")
       version: string;
     }
   >;
