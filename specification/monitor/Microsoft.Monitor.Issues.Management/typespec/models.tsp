@@ -3,8 +3,10 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
 namespace Microsoft.Monitor;
@@ -117,6 +119,7 @@ model InvestigationResult {
   result: string;
 }
 
+@@clientName(RunParameters, "RunParametersContent", "csharp");
 @doc("The parameters used to run the investigation")
 model RunParameters {
   @doc("The impact time to investigate (in UTC)")
@@ -247,6 +250,7 @@ model RelatedResources {
   value: RelatedResource[];
 }
 
+@@clientName(ListParameter, "ListParameterContent", "csharp");
 @doc("Parameters for listing related entities")
 model ListParameter {
   @doc("The filter to apply on the operation. For example, to filter by relevance, use \"$filter=relevance eq 'Relevant'\". Note: this property is currently a placeholder and is not in use.")
