@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
-- Microsoft.DevTestLab/stable/2018-09-15/DTL.json
+- stable/2018-09-15/DTL.json
 suppressions:
   - code: ResourceNameRestriction
     from: DTL.json
@@ -67,7 +67,7 @@ These settings apply only when `--tag=package-2016-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-05'
 input-file:
-- Microsoft.DevTestLab/stable/2016-05-15/DTL.json
+- stable/2016-05-15/DTL.json
 ```
 
 ### Tag: package-2015-05-preview
@@ -76,7 +76,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
+- preview/2015-05-21-preview/DTL.json
 ```
 
 
