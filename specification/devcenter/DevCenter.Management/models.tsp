@@ -63,20 +63,6 @@ union ProvisioningState {
   StorageProvisioningFailed: "StorageProvisioningFailed",
 }
 
-@doc("Values can be systemAssignedIdentity or userAssignedIdentity.")
-union IdentityType {
-  string,
-
-  @doc("System assigned identity type.")
-  systemAssignedIdentity: "systemAssignedIdentity",
-
-  @doc("User assigned identity type.")
-  userAssignedIdentity: "userAssignedIdentity",
-
-  @doc("Delegated resource identity type.")
-  delegatedResourceIdentity: "delegatedResourceIdentity",
-}
-
 @doc("Catalog item sync types enable or disable status. Indicates whether project catalogs are allowed to sync catalog items under projects associated to this dev center.")
 union CatalogItemSyncEnableStatus {
   string,
@@ -108,19 +94,6 @@ union InstallAzureMonitorAgentEnableStatus {
 
   @doc("Azure Monitor Agent service is disabled.")
   Disabled: "Disabled",
-}
-
-@doc("The type of identity that created the resource.")
-union CreatedByType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Key: "Key",
 }
 
 @doc("Devbox disk encryption enable or disable status. Indicates if Devbox disks encryption is enabled or not.")
@@ -408,38 +381,12 @@ union ImageValidationStatus {
   TimedOut: "TimedOut",
 }
 
-@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is 'user,system'")
-union Origin {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  `user,system`: "user,system",
-}
-
-@doc("Enum. Indicates the action type. 'Internal' refers to actions that are for internal only APIs.")
-union ActionType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Internal: "Internal",
-}
-
 @doc("The unit details.")
 union UsageUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  
+  @doc("Count.")
   Count: "Count",
-}
-
-@doc("The reason why the given name is not available.")
-union CheckNameAvailabilityReason {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  AlreadyExists: "AlreadyExists",
 }
 
 @doc("Type of the input.")
