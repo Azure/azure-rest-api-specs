@@ -6,6 +6,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
+namespace Microsoft.Monitor;
+
 @doc("The type of entity that added data to the issue")
 union AddedByType {
   @doc("The data was added manually by a user")
