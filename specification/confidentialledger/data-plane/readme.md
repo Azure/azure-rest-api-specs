@@ -182,7 +182,7 @@ These settings apply only when `--tag=package-2024-12-09-preview-identity` is sp
 
 ```yaml $(tag) == 'package-2024-12-09-preview-identity'
 input-file:
-  - Microsoft.ConfidentialLedger.Certificate/preview/2024-12-09-preview/identityservice.json
+  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/identityservice.json
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
