@@ -1,7 +1,9 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { setStatusImpl } from "../src/set-status.js";
+// @ts-check
 
-import { CheckConclusion, CheckStatus, CommitStatusState } from "../src/github.js";
+import { beforeEach, describe, expect, it } from "vitest";
+import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.js";
+import { fullGitSha } from "../../shared/test/examples.js";
+import { setStatusImpl } from "../src/set-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("setStatusImpl", () => {
@@ -14,7 +16,46 @@ describe("setStatusImpl", () => {
   });
 
   it("throws if inputs null", async () => {
-    await expect(setStatusImpl({})).rejects.toThrow();
+    // @ts-expect-error Testing invalid input type
+    await expect(setStatusImpl({})).rejects.toMatchInlineSnapshot(
+      `[Error: head_sha is not a valid full git SHA: 'undefined']`,
+    );
+  });
+
+  it.each([null, undefined, "", "abc123"])("throws when head_sha is %o", async (head_sha) => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        // @ts-expect-error - Testing invalid input
+        head_sha,
+        issue_number: 123,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("head_sha is not a valid full git SHA");
+  });
+
+  it.each([null, undefined, NaN, 0, -1])("throws when issue_number is %o", async (issue_number) => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: fullGitSha,
+        // @ts-expect-error - Testing invalid input
+        issue_number,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
   });
 
   it("sets success if approved by label", async () => {
@@ -26,7 +67,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -40,7 +81,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger Avocado",
       description: "Found label 'Approved-Avocado'",
@@ -57,7 +98,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -72,12 +113,15 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-Benign'",
       target_url: "https://test.com/set_status_url",
     });
+
+    expect(core.setOutput).toBeCalledWith("head_sha", fullGitSha);
+    expect(core.setOutput).toBeCalledWith("issue_number", 123);
   });
 
   it("handles comma-separated labels with whitespace", async () => {
@@ -89,7 +133,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -104,7 +148,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-UserImpact'",
@@ -121,7 +165,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -135,7 +179,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.SUCCESS,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       description: "Found label 'BreakingChange-Approved-Security'",
@@ -156,7 +200,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -171,7 +215,7 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.PENDING,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       target_url: "https://test.com/set_status_url",
@@ -191,7 +235,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
+        head_sha: fullGitSha,
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -205,84 +249,104 @@ describe("setStatusImpl", () => {
     expect(github.rest.repos.createCommitStatus).toBeCalledWith({
       owner: "test-owner",
       repo: "test-repo",
-      sha: "test-head-sha",
+      sha: fullGitSha,
       state: CommitStatusState.PENDING,
       context: "[TEST-IGNORE] Swagger BreakingChange",
       target_url: "https://test.com/set_status_url",
     });
   });
 
+  // TODO: Add tests for "job-summary" artifact
   it.each([
     [
       CheckStatus.COMPLETED,
       CheckConclusion.SUCCESS,
       CommitStatusState.SUCCESS,
+      [],
       "https://test.com/workflow_run_html_url",
     ],
     [
       CheckStatus.COMPLETED,
       CheckConclusion.FAILURE,
       CommitStatusState.FAILURE,
+      [],
       "https://test.com/job_html_url?pr=123",
+    ],
+    [
+      CheckStatus.COMPLETED,
+      CheckConclusion.FAILURE,
+      CommitStatusState.FAILURE,
+      ["job-status"],
+      "https://test.com/workflow_run_html_url",
     ],
     [
       CheckStatus.IN_PROGRESS,
       null,
       CommitStatusState.PENDING,
+      [],
       "https://test.com/workflow_run_html_url",
     ],
-    [null, null, CommitStatusState.PENDING, "https://test.com/set_status_url"],
-  ])("(%s, %s, %s) => %s", async (checkStatus, checkConclusion, commitStatusState, targetUrl) => {
-    if (checkStatus) {
-      github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
-        data: [
-          {
-            name: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-            status: checkStatus,
-            conclusion: checkConclusion,
-            updated_at: "2025-01-01",
-            html_url: "https://test.com/workflow_run_html_url",
-          },
-        ],
-      });
-
-      if (
-        checkConclusion === CheckConclusion.SUCCESS ||
-        checkConclusion === CheckConclusion.FAILURE
-      ) {
-        github.rest.actions.listJobsForWorkflowRun.mockResolvedValue({
+    [null, null, CommitStatusState.PENDING, [], "https://test.com/set_status_url"],
+  ])(
+    "(%s, %s, %s, %o) => %s",
+    async (checkStatus, checkConclusion, commitStatusState, artifactNames, targetUrl) => {
+      if (checkStatus) {
+        github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
           data: [
             {
+              name: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+              status: checkStatus,
               conclusion: checkConclusion,
-              html_url: "https://test.com/job_html_url",
+              updated_at: "2025-01-01",
+              html_url: "https://test.com/workflow_run_html_url",
             },
           ],
         });
-      }
-    }
 
-    await expect(
-      setStatusImpl({
+        github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+          data: artifactNames.map((n) => ({
+            name: n,
+          })),
+        });
+
+        if (
+          checkConclusion === CheckConclusion.SUCCESS ||
+          checkConclusion === CheckConclusion.FAILURE
+        ) {
+          github.rest.actions.listJobsForWorkflowRun.mockResolvedValue({
+            data: [
+              {
+                conclusion: checkConclusion,
+                html_url: "https://test.com/job_html_url",
+              },
+            ],
+          });
+        }
+      }
+
+      await expect(
+        setStatusImpl({
+          owner: "test-owner",
+          repo: "test-repo",
+          head_sha: fullGitSha,
+          issue_number: 123,
+          target_url: "https://test.com/set_status_url",
+          github,
+          core,
+          monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+          requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+          overridingLabel: "Approved-Avocado",
+        }),
+      ).resolves.toBeUndefined();
+
+      expect(github.rest.repos.createCommitStatus).toBeCalledWith({
         owner: "test-owner",
         repo: "test-repo",
-        head_sha: "test-head-sha",
-        issue_number: 123,
-        target_url: "https://test.com/set_status_url",
-        github,
-        core,
-        monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-        requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
-        overridingLabel: "Approved-Avocado",
-      }),
-    ).resolves.toBeUndefined();
-
-    expect(github.rest.repos.createCommitStatus).toBeCalledWith({
-      owner: "test-owner",
-      repo: "test-repo",
-      sha: "test-head-sha",
-      state: commitStatusState,
-      context: "[TEST-IGNORE] Swagger Avocado",
-      target_url: targetUrl,
-    });
-  });
+        sha: fullGitSha,
+        state: commitStatusState,
+        context: "[TEST-IGNORE] Swagger Avocado",
+        target_url: targetUrl,
+      });
+    },
+  );
 });

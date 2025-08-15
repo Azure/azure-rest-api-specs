@@ -730,12 +730,11 @@ model StorageSyncServiceUpdateProperties {
 /**
  * Array of StorageSyncServices
  */
-@pagedResult
 model StorageSyncServiceArray {
   /**
    * Collection of StorageSyncServices.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: StorageSyncService[];
 
@@ -749,12 +748,11 @@ model StorageSyncServiceArray {
 /**
  * Array of SyncGroup
  */
-@pagedResult
 model SyncGroupArray {
   /**
    * Collection of SyncGroup.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: SyncGroup[];
 
@@ -1062,12 +1060,11 @@ model CloudEndpointChangeEnumerationActivity {
 /**
  * Array of CloudEndpoint
  */
-@pagedResult
 model CloudEndpointArray {
   /**
    * Collection of CloudEndpoint.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: CloudEndpoint[];
 
@@ -2160,12 +2157,11 @@ model ServerEndpointUpdateProperties {
 /**
  * Array of ServerEndpoint
  */
-@pagedResult
 model ServerEndpointArray {
   /**
    * Collection of ServerEndpoint.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: ServerEndpoint[];
 
@@ -2194,12 +2190,11 @@ model RecallActionParameters {
 /**
  * Array of RegisteredServer
  */
-@pagedResult
 model RegisteredServerArray {
   /**
    * Collection of Registered Server.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: RegisteredServer[];
 
@@ -2473,12 +2468,11 @@ model TriggerRolloverRequest {
 /**
  * Array of Workflow
  */
-@pagedResult
 model WorkflowArray {
   /**
    * Collection of workflow items.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: Workflow[];
 
@@ -2716,11 +2710,11 @@ model CustomOkResponse {
 /**
  * List of private endpoint connections associated with the specified resource.
  */
-@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * List of private endpoint connections associated with the specified resource.
    */
+  @pageItems
   value?: PrivateEndpointConnection[];
 
   /**
