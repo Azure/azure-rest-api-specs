@@ -146,7 +146,7 @@ namespace Storage.Blob {
   op getAccountInfo is StorageOperation<
     TimeoutParameter,
     {
-      ...DateResponseHeader;
+      ...DateResponseHeaderPrivate;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
 
@@ -643,7 +643,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
       },
       {
-        ...DateResponseHeader;
+        ...DateResponseHeaderPrivate;
         ...SkuNameResponseHeader;
         ...AccountKindResponseHeader;
         ...IsHierarchicalNamespaceEnabled;
@@ -1436,7 +1436,7 @@ namespace Storage.Blob {
           ...TimeoutParameter;
         },
         {
-          ...DateResponseHeader;
+          ...DateResponseHeaderPrivate;
           ...AccountKindResponseHeader;
           ...SkuNameResponseHeader;
           ...IsHierarchicalNamespaceEnabled;
@@ -1488,7 +1488,7 @@ namespace Storage.Blob {
         },
         {
           @statusCode statusCode: 204;
-          ...DateResponseHeader;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
