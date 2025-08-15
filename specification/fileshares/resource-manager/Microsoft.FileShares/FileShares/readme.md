@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2025-06-01-preview` is specified o
 
 input-file:
 
-  - Microsoft.FileShares/preview/2025-06-01-preview/fileshares.json
+  - preview/2025-06-01-preview/fileshares.json
 
 ```
 
