@@ -43,6 +43,7 @@
     "format:check": "prettier . --check",
     "format:check:ci": "prettier . --check --log-level debug",
     "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "validate": "npm run lint && npm run format:check && npm run test:ci"
   }
 }

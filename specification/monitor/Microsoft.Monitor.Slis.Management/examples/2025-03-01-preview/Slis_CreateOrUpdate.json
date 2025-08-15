@@ -16,12 +16,12 @@
             "identity": "/subscriptions/<subId>/resourcegroups/<rgId>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<idName>"
           }
         ],
-        "sloProperties": {
-          "target": {
+        "baselineProperties": {
+          "baseline": {
             "value": 99,
-            "comparator": ">=",
-            "compliancePeriodDays": 30,
-            "complianceCalculationType": "CalendarDays"
+            "evaluationPeriodDays": 30,
+            "evaluationCalculationType": "CalendarDays",
+            "enableAlert": true
           }
         },
         "sliProperties": {
@@ -99,6 +99,8 @@
           "category": "Latency",
           "evaluationType": "WindowBased",
           "provisioningState": "Succeeded",
+          "streamingRuleId": "123",
+          "streamingRuleLastUpdatedTimestamp": "2025-03-01T00:00:00Z",
           "executionState": {
             "message": "",
             "state": "Succeeded"
@@ -123,12 +125,12 @@
               "metricName": "Get API Latency:Value"
             }
           ],
-          "sloProperties": {
-            "target": {
+          "baselineProperties": {
+            "baseline": {
               "value": 99,
-              "comparator": ">=",
-              "compliancePeriodDays": 30,
-              "complianceCalculationType": "CalendarDays"
+              "evaluationPeriodDays": 30,
+              "evaluationCalculationType": "CalendarDays",
+              "enableAlert": true
             }
           },
           "sliProperties": {
@@ -205,6 +207,8 @@
           "category": "Latency",
           "evaluationType": "WindowBased",
           "provisioningState": "Succeeded",
+          "streamingRuleId": "123",
+          "streamingRuleLastUpdatedTimestamp": "2025-03-01T00:00:00Z",
           "executionState": {
             "message": "",
             "state": "Succeeded"
@@ -229,12 +233,12 @@
               "metricName": "Get API Latency:Value"
             }
           ],
-          "sloProperties": {
-            "target": {
+          "baselineProperties": {
+            "baseline": {
               "value": 99,
-              "comparator": ">=",
-              "compliancePeriodDays": 30,
-              "complianceCalculationType": "CalendarDays"
+              "evaluationPeriodDays": 30,
+              "evaluationCalculationType": "CalendarDays",
+              "enableAlert": true
             }
           },
           "sliProperties": {
