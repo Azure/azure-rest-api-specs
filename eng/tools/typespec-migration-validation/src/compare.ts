@@ -212,24 +212,29 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
 
   const pathDiffs: PathDiff[] = [];
   for (const operationId in oldOperations) {
-    if (!newOperations[operationId]) {
+    const oldOperation = oldOperations[operationId];
+    const newOperation = newOperations[operationId];
+    
+    if (!newOperation) {
       pathDiffs.push({
-        before: oldOperations[operationId][0],
+        before: oldOperation?.[0],
         after: null,
         operationId,
         type: "path",
         level: "error"
       });
     }
-    else {
-      pathDiffs.push(...compareOperation(oldOperations[operationId][1], newOperations[operationId][1], operationId));
+    else if (oldOperation?.[1] && newOperation?.[1]) {
+      pathDiffs.push(...compareOperation(oldOperation[1], newOperation[1], operationId));
     }
   }
   for (const operationId in newOperations) {
+    const newOperation = newOperations[operationId];
+    
     if (!oldOperations[operationId]) {
       pathDiffs.push({
         before: null,
-        after: newOperations[operationId][0],
+        after: newOperation?.[0],
         operationId,
         type: "path",
         level: "error"
@@ -242,10 +247,13 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
 function compareOperation(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
-  if (oldOperation.parameters.length !== newOperation.parameters.length) {
+  const oldParametersLength = oldOperation.parameters?.length ?? 0;
+  const newParametersLength = newOperation.parameters?.length ?? 0;
+  
+  if (oldParametersLength !== newParametersLength) {
     pathDiffs.push({
-      before: oldOperation.parameters.length,
-      after: newOperation.parameters.length,
+      before: oldParametersLength,
+      after: newParametersLength,
       operationId: operationId,
       type: "parameters",
       level: "error"
