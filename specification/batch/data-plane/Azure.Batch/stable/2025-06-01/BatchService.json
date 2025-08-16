@@ -9152,8 +9152,7 @@
           "description": "A list of additional error details related to the autoscale error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -9335,8 +9334,7 @@
           "description": "The list of supported Virtual Machine Images.",
           "items": {
             "$ref": "#/definitions/BatchSupportedImage"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "odata.nextLink": {
           "type": "string",
@@ -9510,8 +9508,7 @@
           "description": "Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
           "items": {
             "$ref": "#/definitions/ContainerRegistryReference"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -9538,8 +9535,7 @@
           "description": "Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
           "items": {
             "$ref": "#/definitions/ContainerRegistryReference"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -9553,8 +9549,7 @@
           "items": {
             "$ref": "#/definitions/BatchTaskCreateResult"
           },
-          "x-ms-client-name": "values",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "values"
         }
       }
     },
@@ -9585,8 +9580,7 @@
           "description": "A collection of key-value pairs containing additional details about the error.",
           "items": {
             "$ref": "#/definitions/BatchErrorDetail"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -9674,8 +9668,7 @@
           "description": "A list of network security group rules that will be applied to the endpoint. The maximum number of rules that can be specified across all the endpoints on a Batch Pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroupRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -9790,8 +9783,7 @@
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfo",
@@ -9818,8 +9810,7 @@
           "description": "A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "executionInfo": {
           "$ref": "#/definitions/BatchJobExecutionInfo",
@@ -9935,8 +9926,7 @@
           "description": "The list of common environment variable settings. These environment variables are set for all Tasks in the Job (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfo",
@@ -9961,8 +9951,7 @@
           "description": "A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -10082,24 +10071,21 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "outputFiles": {
           "type": "array",
           "description": "A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.",
           "items": {
             "$ref": "#/definitions/OutputFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Manager Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -10127,8 +10113,7 @@
           "description": "A list of Application Packages that the Batch service will deploy to the\nCompute Node before running the command line.Application Packages are\ndownloaded and deployed to a shared directory, not the Task working\ndirectory. Therefore, if a referenced Application Package is already\non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -10169,24 +10154,21 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "outputFiles": {
           "type": "array",
           "description": "A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.",
           "items": {
             "$ref": "#/definitions/OutputFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Manager Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -10214,8 +10196,7 @@
           "description": "A list of Application Packages that the Batch service will deploy to the\nCompute Node before running the command line.Application Packages are\ndownloaded and deployed to a shared directory, not the Task working\ndirectory. Therefore, if a referenced Application Package is already\non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -10296,8 +10277,7 @@
           "description": "A list of Job Preparation and Job Release Task execution information.",
           "items": {
             "$ref": "#/definitions/BatchJobPreparationAndReleaseTaskStatus"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "odata.nextLink": {
           "type": "string",
@@ -10327,16 +10307,14 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Preparation Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -10465,16 +10443,14 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Preparation Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -10515,16 +10491,14 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Release Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "maxWallClockTime": {
           "type": "string",
@@ -10640,16 +10614,14 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Release Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "maxWallClockTime": {
           "type": "string",
@@ -10744,8 +10716,7 @@
           "description": "A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "stats": {
           "$ref": "#/definitions/BatchJobScheduleStatistics",
@@ -10809,8 +10780,7 @@
           "description": "A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -11017,8 +10987,7 @@
           "description": "A list of name-value pairs associated with the Job Schedule as metadata. If you do not specify this element, existing metadata is left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -11043,8 +11012,7 @@
           "description": "A list of additional error details related to the scheduling error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -11112,8 +11080,7 @@
           "description": "A list of common environment variable settings. These environment variables are set for all Tasks in Jobs created under this schedule (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfo",
@@ -11124,8 +11091,7 @@
           "description": "A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -11193,8 +11159,7 @@
           "description": "A list of common environment variable settings. These environment variables are set for all Tasks in Jobs created under this schedule (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfoUpdate",
@@ -11205,8 +11170,7 @@
           "description": "A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -11412,8 +11376,7 @@
           "description": "A list of name-value pairs associated with the Job as metadata. If omitted, the existing Job metadata is left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "networkConfiguration": {
           "$ref": "#/definitions/BatchJobNetworkConfigurationUpdate",
@@ -11516,8 +11479,7 @@
           "description": "A list of Tasks whose state has recently changed. This property is present only if at least one Task has run on this Compute Node since it was assigned to the Pool.",
           "items": {
             "$ref": "#/definitions/BatchTaskInfo"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "startTask": {
           "$ref": "#/definitions/BatchStartTask",
@@ -11532,8 +11494,7 @@
           "description": "The list of errors that are currently being encountered by the Compute Node.",
           "items": {
             "$ref": "#/definitions/BatchNodeError"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "isDedicated": {
           "type": "boolean",
@@ -11814,8 +11775,7 @@
           "description": "The list of inbound endpoints that are accessible on the Compute Node.",
           "items": {
             "$ref": "#/definitions/InboundEndpoint"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -11839,8 +11799,7 @@
           "description": "The list of additional error details related to the Compute Node error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -11876,8 +11835,7 @@
           "description": "The list of files.",
           "items": {
             "$ref": "#/definitions/BatchNodeFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "odata.nextLink": {
           "type": "string",
@@ -12342,8 +12300,7 @@
           "description": "The list of Compute Node extensions.",
           "items": {
             "$ref": "#/definitions/BatchNodeVMExtension"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "odata.nextLink": {
           "type": "string",
@@ -12460,8 +12417,7 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "currentDedicatedNodes": {
           "type": "integer",
@@ -12528,8 +12484,7 @@
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -12548,8 +12503,7 @@
           "items": {
             "$ref": "#/definitions/UserAccount"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "metadata": {
           "type": "array",
@@ -12557,8 +12511,7 @@
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "stats": {
           "$ref": "#/definitions/BatchPoolStatistics",
@@ -12572,8 +12525,7 @@
           "items": {
             "$ref": "#/definitions/MountConfiguration"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "identity": {
           "$ref": "#/definitions/BatchPoolIdentity",
@@ -12651,8 +12603,7 @@
           "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -12668,24 +12619,21 @@
           "description": "The list of user Accounts to be created on each Compute Node in the Pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "mountConfiguration": {
           "type": "array",
           "description": "Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
@@ -12722,8 +12670,7 @@
           "items": {
             "$ref": "#/definitions/BatchInboundNatPool"
           },
-          "x-ms-client-name": "inboundNatPools",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "inboundNatPools"
         }
       },
       "required": [
@@ -12740,8 +12687,7 @@
           "items": {
             "$ref": "#/definitions/BatchInboundNatPool"
           },
-          "x-ms-client-name": "inboundNatPools",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "inboundNatPools"
         }
       }
     },
@@ -12771,8 +12717,7 @@
           "description": "The list of user identities associated with the Batch account. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "items": {
             "$ref": "#/definitions/BatchUserAssignedIdentity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -12893,8 +12838,7 @@
           "description": "The Pool usage metrics data.",
           "items": {
             "$ref": "#/definitions/BatchPoolUsageMetrics"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "odata.nextLink": {
           "type": "string",
@@ -12933,8 +12877,7 @@
           "description": "A list of Compute Node counts by Pool.",
           "items": {
             "$ref": "#/definitions/BatchPoolNodeCounts"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "odata.nextLink": {
           "type": "string",
@@ -12956,16 +12899,14 @@
           "description": "The list of Application Packages to be installed on each Compute Node in the Pool. The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. This list replaces any existing metadata configured on the Pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the Pool.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -13157,32 +13098,28 @@
           "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "userAccounts": {
           "type": "array",
           "description": "The list of user Accounts to be created on each Compute Node in the Pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "mountConfiguration": {
           "type": "array",
           "description": "A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
@@ -13263,32 +13200,28 @@
           "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "userAccounts": {
           "type": "array",
           "description": "The list of user Accounts to be created on each Compute Node in the Pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "mountConfiguration": {
           "type": "array",
           "description": "A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicyUpdate",
@@ -13381,16 +13314,14 @@
           "description": "A list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. If this element is present, it replaces any existing Package references. If you specify an empty collection, then all Package references are removed from the Pool. If omitted, any existing Package references are left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. If this element is present, it replaces any existing metadata configured on the Pool. If you specify an empty collection, any metadata is removed from the Pool. If omitted, any existing metadata is left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
@@ -13414,16 +13345,14 @@
           "description": "The list of user Accounts to be created on each Compute Node in the Pool. This field can be updated only when the pool is empty.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "mountConfiguration": {
           "type": "array",
           "description": "Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.<br /><br />This field can be updated only when the pool is empty.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicyUpdate",
@@ -13523,8 +13452,7 @@
           "description": "A list of IP tags associated with the public IP addresses of the Pool. IP tags are used to categorize and filter public IP addresses for billing and management purposes.",
           "items": {
             "$ref": "#/definitions/IPTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -13545,16 +13473,14 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the StartTask.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
@@ -13667,16 +13593,14 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the StartTask.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
@@ -13904,8 +13828,7 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "outputFiles": {
           "type": "array",
@@ -13913,8 +13836,7 @@
           "items": {
             "$ref": "#/definitions/OutputFile"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "environmentSettings": {
           "type": "array",
@@ -13922,8 +13844,7 @@
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "affinityInfo": {
           "$ref": "#/definitions/BatchAffinityInfo",
@@ -13977,8 +13898,7 @@
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -14081,8 +14001,7 @@
           "description": "The paths you want to mounted to container task. If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.",
           "items": {
             "$ref": "#/definitions/ContainerHostBatchBindMountEntry"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -14114,8 +14033,7 @@
           "description": "The paths you want to mounted to container task. If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.",
           "items": {
             "$ref": "#/definitions/ContainerHostBatchBindMountEntry"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -14204,24 +14122,21 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. For multi-instance Tasks, the resource files will only be downloaded to the Compute Node on which the primary Task is executed. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "outputFiles": {
           "type": "array",
           "description": "A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.",
           "items": {
             "$ref": "#/definitions/OutputFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "affinityInfo": {
           "$ref": "#/definitions/BatchAffinityInfo",
@@ -14253,8 +14168,7 @@
           "description": "A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -14317,8 +14231,7 @@
           "description": "The list of Task ID ranges that this Task depends on. All Tasks in all ranges must complete successfully before the dependent Task can be scheduled.",
           "items": {
             "$ref": "#/definitions/BatchTaskIdRange"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -14424,8 +14337,7 @@
           "description": "A list of additional details related to the error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -15372,16 +15284,14 @@
           "description": "A list of individual Task exit codes and how the Batch service should respond to them.",
           "items": {
             "$ref": "#/definitions/ExitCodeMapping"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "exitCodeRanges": {
           "type": "array",
           "description": "A list of Task exit code ranges and how the Batch service should respond to them.",
           "items": {
             "$ref": "#/definitions/ExitCodeRangeMapping"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "preProcessingError": {
           "$ref": "#/definitions/ExitOptions",
@@ -15771,8 +15681,7 @@
           "description": "A list of files that the Batch service will download before running the coordination command line. The difference between common resource files and Task resource files is that common resource files are downloaded for all subtasks including the primary, whereas Task resource files are downloaded only for the primary. Also note that these resource files are not downloaded to the Task working directory, but instead are downloaded to the Task root directory (one directory above the working directory).  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -15995,8 +15904,7 @@
           "description": "A list of name-value pairs for headers to be used in uploading output files. These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://learn.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types.",
           "items": {
             "$ref": "#/definitions/OutputFileUploadHeader"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -16123,8 +16031,7 @@
           "description": "A list of additional error details related to the Pool resize error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -16619,16 +16526,14 @@
           "description": "The resource status information.",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "subStatuses": {
           "type": "array",
           "description": "The resource status information.",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -16654,8 +16559,7 @@
           "description": "The configuration for data disks attached to the Compute Nodes in the Pool. This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://learn.microsoft.com/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://learn.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.",
           "items": {
             "$ref": "#/definitions/DataDisk"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "licenseType": {
           "type": "string",
@@ -16678,8 +16582,7 @@
           "description": "The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.",
           "items": {
             "$ref": "#/definitions/VMExtension"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "osDisk": {
           "$ref": "#/definitions/BatchOsDisk",
@@ -16722,8 +16625,7 @@
           "description": "The configuration for data disks attached to the Compute Nodes in the Pool. This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://learn.microsoft.com/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://learn.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.",
           "items": {
             "$ref": "#/definitions/DataDisk"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "licenseType": {
           "type": "string",
@@ -16746,8 +16648,7 @@
           "description": "The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.",
           "items": {
             "$ref": "#/definitions/VMExtension"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "osDisk": {
           "$ref": "#/definitions/BatchOsDisk",
