@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: "sdk/devcenter"
+    default: "{output-dir}/sdk/devcenter"
 emit: ["@azure-tools/typespec-autorest"]
 linter:
   extends:
@@ -19,6 +19,7 @@ options:
     flavor: azure
     api-version: "2023-04-01"
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Developer.DevCenter
     api-version: "2023-04-01"
   "@azure-tools/typespec-python":

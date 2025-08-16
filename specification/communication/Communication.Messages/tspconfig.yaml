@@ -10,7 +10,7 @@ parameters:
   "service-directory-name":
     default: "communication"
   "service-dir":
-    default: "sdk/communication"
+    default: "{output-dir}/sdk/communication"
   "python-output-dir":
     default: "azure/communication/messages/_generated"
 emit:
@@ -36,6 +36,7 @@ options:
     save-inputs: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Communication.Messages
     model-namespace: false
   "@azure-tools/typespec-python":

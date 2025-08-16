@@ -203,6 +203,14 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
   [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
 );
 
+const commonAzureServiceDirWithOutputDirTestCases = createParameterTestCases(
+  "",
+  "service-dir",
+  "{output-dir}/sdk/aaa",
+  "{output-dir}/sdka/aaa",
+  [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+);
+
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
@@ -265,6 +273,15 @@ const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "service-dir",
   "sdk/resourcemanager/aaa",
   "sdk/manager/aaa",
+  [new TspConfigGoMgmtServiceDirMatchPatternSubRule()],
+);
+
+const goManagementServiceDirWithOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  managementTspconfigFolder,
+  "service-dir",
+  "{output-dir}/sdk/resourcemanager/aaa",
+  "{output-dir}/sdk/manager/aaa",
   [new TspConfigGoMgmtServiceDirMatchPatternSubRule()],
 );
 
@@ -630,6 +647,7 @@ describe("tspconfig", function () {
   it.each([
     // common
     ...commonAzureServiceDirTestCases,
+    ...commonAzureServiceDirWithOutputDirTestCases,
     // ts
     ...tsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementPackageDirTestCases,
@@ -639,6 +657,7 @@ describe("tspconfig", function () {
     ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
+    ...goManagementServiceDirWithOutputDirTestCases,
     ...goManagementPackageDirTestCases,
     ...goManagementModuleTestCases,
     ...goManagementGenerateExamplesTestCases,

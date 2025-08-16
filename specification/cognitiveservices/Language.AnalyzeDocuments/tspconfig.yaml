@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/cognitivelanguage"
+    default: "{output-dir}/sdk/cognitivelanguage"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -20,5 +20,6 @@ options:
     namespace: "Azure.AI.Language.Documents"
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.AI.Language.Documents
     model-namespace: false

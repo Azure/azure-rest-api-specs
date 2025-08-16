@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/translation"
+    default: "{output-dir}/sdk/translation"
   "dependencies":
     default: ""
 emit:
@@ -23,6 +23,7 @@ options:
     namespace: Azure.AI.Translation.Text
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.AI.Translation.Text
     model-namespace: false
   "@azure-tools/typespec-python":

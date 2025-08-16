@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: "sdk/loadtesting"
+    default: "{output-dir}/sdk/loadtesting"
   "service-name":
     default: "loadtesting"
 emit:
@@ -20,6 +20,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Developer.LoadTesting
     model-namespace: false
   "@azure-tools/typespec-autorest":

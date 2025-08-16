@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/ai"
+    default: "{output-dir}/sdk/ai"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -31,6 +31,7 @@ options:
     generate-sample-project: false
     clear-output-folder: true
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.AI.Projects
     model-namespace: false
     api-version: "v1"
