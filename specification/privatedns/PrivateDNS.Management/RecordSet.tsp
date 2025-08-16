@@ -163,6 +163,7 @@ interface RecordSets {
   /**
    * Lists the record sets of a specified type in a Private DNS zone.
    */
+  @list
   listByType is RecordSetOperationOps.Read<
     RecordSet,
     Parameters = {
