@@ -80,6 +80,44 @@ union RegistrationStatus {
   string,
 }
 
+/**
+ * Auto renew status
+ */
+union AutoRenew {
+  /**
+   * Auto renew is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Auto renew is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+}
+
+/**
+ * Pricing model
+ */
+union PricingModel {
+  /**
+   * Trial pricing model.
+   */
+  Trial: "Trial",
+
+  string,
+
+  /**
+   * Annual pricing model.
+   */
+  Annual: "Annual",
+
+  string,
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
@@ -108,6 +146,10 @@ model DisconnectedOperationProperties {
   @doc("The device version")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   deviceVersion?: string;
+
+  @doc("Auto renew setting")
+  @added(Microsoft.Edge.Versions.v2025_08_01)
+  autoRenew?: AutoRenew;
 }
 
 @doc("The disconnected operation manifest")
@@ -268,4 +310,60 @@ model ArtifactDownloadResult {
   @visibility(Lifecycle.Read)
   @doc("The download link expiry time")
   linkExpiry: utcDateTime;
+}
+
+@doc("The hardware settings properties")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model HardwareSettingsProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The resource provisioning state")
+  provisioningState?: ResourceProvisioningState;
+
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @doc("Total number of cores")
+  totalCores: int32;
+
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @doc("Disk space in MB")
+  diskSpace: int64;
+
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @doc("Memory in MB")
+  memory: int64;
+}
+
+@doc("Billing information")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model BillingInfo {
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @doc("Number of cores")
+  cores: int32;
+
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @doc("Pricing model")
+  pricingModel: PricingModel;
+
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @doc("Billing start date")
+  billingStartDate: plainDate;
+
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @doc("Billing end date")
+  billingEndDate: plainDate;
+}
+
+@doc("The billing configuration properties")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model BillingConfigurationProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The resource provisioning state")
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("Current billing configuration")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  currentBilling: BillingInfo;
+
+  @doc("Next billing configuration")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  nextBilling: BillingInfo;
 }
