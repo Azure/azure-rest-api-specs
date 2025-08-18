@@ -124,6 +124,9 @@ interface UserSessions {
   sendMessage is ArmResourceActionSync<
     UserSession,
     Request = {
+      /**
+       * Represents message sent to a UserSession.
+       */
       @bodyRoot sendMessage?: SendMessage;
     },
     Response = OkResponse
