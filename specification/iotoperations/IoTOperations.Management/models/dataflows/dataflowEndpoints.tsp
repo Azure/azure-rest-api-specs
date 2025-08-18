@@ -458,7 +458,6 @@ model ManagedIdentity {
   @doc("User-assigned managed identity authentication.")
   userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
 }
-
 @doc("DataflowEndpoint Authentication SystemAssignedManagedIdentity properties")
 model DataflowEndpointAuthenticationSystemAssignedManagedIdentity {
   ...BaseSystemAssignedManagedIdentity;
