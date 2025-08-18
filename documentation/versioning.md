@@ -73,6 +73,9 @@ The following diagram summarizes how Azure internal teams and customers should t
     - Public preview versions do have corresponding beta SDK package versions
     - GA/stable versions do have corresponding stable SDK package versions. Beta SDK package versions may also exist if the SDK package has rich functionality requiring customer testing/feedback before releasing the stable SDK package version.
  
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/7b079665-2328-4524-8784-476e52e57343" />
+
+ 
  
 ## WHAT IF YOUR AZURE TEAM CURRENTLY VIOLATES THE ABOVE RULES?
 
