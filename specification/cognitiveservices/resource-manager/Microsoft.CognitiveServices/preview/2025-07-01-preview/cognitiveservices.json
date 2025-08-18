@@ -2615,7 +2615,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RaiModerationlistItemsBulkAddRequest"
+              "$ref": "#/definitions/RaiModerationlistItemsBulkAddRequest",
+              "type": "object"
             },
             "description": "Properties describing the moderation terms."
           }
@@ -8560,7 +8561,19 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the moderation list."
+          "description": "The name of the moderation list.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Full resource identifier of the moderation list.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource, Microsoft.CognitiveServices/accounts/moderationlists.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
@@ -8648,6 +8661,22 @@
       "description": "Cognitive Services RaiModerationList Term properties.",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the moderation term.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Full resource identifier of the moderation term.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource, Microsoft.CognitiveServices/accounts/moderationlists/terms.",
+          "readOnly": true
+        },
         "term": {
           "type": "string",
           "description": "Text to moderate against."
