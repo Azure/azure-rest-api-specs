@@ -31,13 +31,7 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
   validateStack is ArmResourceActionAsync<
     DeploymentStack,
     DeploymentStack,
-    Response = ArmResponse<DeploymentStackValidateResult>,
-    LroHeaders = ArmLroLocationHeader<
-      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-      DeploymentStackValidateResult,
-      string
-    > &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = DeploymentStackValidateResult,
     BaseParameters = TBaseParams,
     Error = ErrorResponse | ValidationBadRequestResponse<DeploymentStackValidateResult>
   >;
