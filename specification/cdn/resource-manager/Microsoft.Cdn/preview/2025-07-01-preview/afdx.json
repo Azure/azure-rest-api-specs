@@ -3204,7 +3204,10 @@
         "operationId": "Secrets_Create",
         "x-ms-examples": {
           "Secrets_Create": {
-            "$ref": "./examples/Secrets_Create.json"
+            "$ref": "./examples/Secrets_CreateCustomerCertificateType.json"
+          },
+          "Secrets_CreateMtlsCertificateChainType": {
+            "$ref": "./examples/Secrets_CreateMtlsCertificateChainType.json"
           }
         },
         "parameters": [
@@ -4293,6 +4296,11 @@
           "type": "object",
           "$ref": "#/definitions/AFDDomainHttpsParameters"
         },
+        "mtlsSettings": {
+          "description": "The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDN and which server certificate(s) to use.",
+          "type": "object",
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        },
         "azureDnsZone": {
           "description": "Resource reference to the Azure DNS zone",
           "type": "object",
@@ -4377,6 +4385,105 @@
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
+        }
+      }
+    },
+    "AFDDomainMtlsParameters": {
+      "description": "Contains the properties to configure mutual TLS for a custom domain with FQDN. Mutual TLS cannot be configured for custom domains with wildcard host names.",
+      "discriminator": "scenario",
+      "required": [
+        "scenario"
+      ],
+      "type": "object",
+      "properties": {
+        "scenario": {
+          "$ref": "#/definitions/MtlsScenarioType"
+        }
+      }
+    },
+    "MtlsScenarioType": {
+      "description": "Supported mTLS handshake scenarios. Should we define each enum here or link to documentation?",
+      "enum": [
+        "ClientCertificateRequiredAndValidated",
+        "ClientCertificateRequiredAndOriginValidates",
+        "ClientCertificateValidatedIfPresented",
+        "CompleteMtlsPassthroughToOrigin"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "scenario",
+        "modelAsString": true
+      }
+    },
+    "ClientCertificateRequiredAndValidated": {
+      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS handshake on behalf of customer.",
+      "x-ms-discriminator-value": "ClientCertificateRequiredAndValidated",
+      "type": "object",
+      "required": [
+        "secrets"
+      ],
+      "properties": {
+        "secrets": {
+          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake.",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          }
+        },
+        "otherAllowedFqdns": {
+          "description": "List of FQDN that will be accepted for mutual TLS validation in addition to custom domain's hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "certificateRevocationCheck": {
+          "description": "Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CertificateRevocationCheckEnabledState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ClientCertificateValidatedIfPresented": {
+      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS handshake on behalf of customer if certificates are presented. If certificates are not presented, AFD will not terminate the connection, and instead ...",
+      "x-ms-discriminator-value": "ClientCertificateValidatedIfPresented",
+      "type": "object",
+      "required": [
+        "secrets"
+      ],
+      "properties": {
+        "secrets": {
+          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake.",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          }
+        },
+        "otherAllowedFqdns": {
+          "description": "List of FQDN that will be accepted for mutual TLS validation in addition to custom domain's hostname.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "certificateRevocationCheck": {
+          "description": "Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CertificateRevocationCheckEnabledState",
+            "modelAsString": true
+          }
         }
       }
     },
