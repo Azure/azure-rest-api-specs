@@ -1,3 +1,4 @@
+import { mapAsync } from "@azure-tools/specs-shared/array";
 import { basename } from "node:path";
 import { logError } from "../log.js";
 import { ApiVersionLifecycleStage } from "../types/breaking-change.js";
@@ -28,18 +29,22 @@ async function getPrecedingSwaggerByType(
     return undefined;
   }
 
-  const currentVersion = getVersionFromInputFile(targetSwaggerPath);
+  const currentVersion = await getVersionFromInputFile(targetSwaggerPath);
   const fileName = getBaseNameForSwagger(targetSwaggerPath, currentVersion);
 
   // Load version info for all swaggers to enable filtering
-  const swaggersWithVersions = availableSwaggers.map((swagger) => ({
-    swagger,
-    version: getVersionFromInputFile(swagger.path),
-    fileName: getBaseNameForSwagger(swagger.path, getVersionFromInputFile(swagger.path)),
-    versionKind: getVersionFromInputFile(swagger.path, true).includes("preview")
-      ? ApiVersionLifecycleStage.PREVIEW
-      : ApiVersionLifecycleStage.STABLE,
-  }));
+  const swaggersWithVersions = await mapAsync(availableSwaggers, async (swagger) => {
+    const version = await getVersionFromInputFile(swagger.path);
+    const versionWithPreview = await getVersionFromInputFile(swagger.path, true);
+    return {
+      swagger,
+      version,
+      fileName: getBaseNameForSwagger(swagger.path, version),
+      versionKind: versionWithPreview.includes("preview")
+        ? ApiVersionLifecycleStage.PREVIEW
+        : ApiVersionLifecycleStage.STABLE,
+    };
+  });
 
   const versionsOfType = swaggersWithVersions.filter(
     (item) =>
@@ -72,15 +77,20 @@ export async function getExistedVersionOperations(
     return result;
   }
 
-  const currentVersion = getVersionFromInputFile(targetSwaggerPath);
+  const currentVersion = await getVersionFromInputFile(targetSwaggerPath);
   const fileName = getBaseNameForSwagger(targetSwaggerPath, currentVersion);
 
   // Load version info for all swaggers to enable filtering
-  const swaggersWithVersions = availableSwaggers.map((swagger) => ({
-    swagger,
-    version: getVersionFromInputFile(swagger.path),
-    fileName: getBaseNameForSwagger(swagger.path, getVersionFromInputFile(swagger.path)),
-  }));
+  const swaggersWithVersions = await Promise.all(
+    availableSwaggers.map(async (swagger) => {
+      const version = await getVersionFromInputFile(swagger.path);
+      return {
+        swagger,
+        version,
+        fileName: getBaseNameForSwagger(swagger.path, version),
+      };
+    }),
+  );
 
   // Get all current and previous versions of the swaggers with different fileNames
   const previousVersionSwaggers = swaggersWithVersions
@@ -165,12 +175,5 @@ export function getBaseNameForSwagger(filePath: string, version: string = ""): s
  */
 export function deduplicateSwaggers(swaggers: Swagger[]): Swagger[] {
   // Deduplicate by path
-  const seen = new Set();
-  return swaggers.filter((swagger) => {
-    if (seen.has(swagger.path)) {
-      return false;
-    }
-    seen.add(swagger.path);
-    return true;
-  });
+  return [...new Map(swaggers.map((s) => [s.path, s])).values()];
 }
