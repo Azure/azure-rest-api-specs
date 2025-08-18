@@ -686,7 +686,7 @@ model DevCenterUpdate is TrackedResourceUpdate {
 @doc("Base tracked resource type for PATCH updates.")
 model TrackedResourceUpdate {
   @doc("Resource tags.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -1016,7 +1016,7 @@ model CatalogUpdateProperties {
   syncType?: CatalogSyncType;
 
   @doc("Resource tags.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1291,7 +1291,7 @@ model EnvironmentTypeUpdate {
   properties?: EnvironmentTypeUpdateProperties;
 
   @doc("Resource tags.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1338,14 +1338,14 @@ model ProjectEnvironmentTypeUpdateProperties {
   @doc("The role definition assigned to the environment creator on backing resources.")
   creatorRoleAssignment?: ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.")
   userRoleAssignments?: Record<UserRoleAssignment>;
 }
 
 @doc("The role definition assigned to the environment creator on backing resources.")
 model ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("A map of roles to assign to the environment creator.")
   roles?: Record<EnvironmentRole>;
 }
@@ -1363,7 +1363,7 @@ model EnvironmentRole {
 
 @doc("Mapping of user object ID to role assignments.")
 model UserRoleAssignment {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("A map of roles to assign to the parent user.")
   roles?: Record<EnvironmentRole>;
 }
@@ -1376,7 +1376,7 @@ model ProjectEnvironmentTypeUpdate {
   properties?: ProjectEnvironmentTypeUpdateProperties;
 
   @doc("Resource tags.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -1533,7 +1533,7 @@ model CustomizationTaskListResult is Azure.Core.Page<CustomizationTask>;
 @doc("Properties of a Task.")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CustomizationTaskProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("Inputs to the task.")
   @visibility(Lifecycle.Read)
   inputs?: Record<CustomizationTaskInput>;
