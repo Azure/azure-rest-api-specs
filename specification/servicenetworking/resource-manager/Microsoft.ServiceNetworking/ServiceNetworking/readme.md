@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
-  - Microsoft.ServiceNetworking/preview/2025-03-01-preview/TrafficController.json
+  - preview/2025-03-01-preview/TrafficController.json
 openapi-type: arm
 tag: package-2025-03-01-preview
 ```
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2025-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-01-01'
 input-file:
-  - Microsoft.ServiceNetworking/stable/2025-01-01/TrafficController.json
+  - stable/2025-01-01/TrafficController.json
 openapi-type: arm
 tag: package-2025-01-01
 ```
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 
 ```yaml $(tag) == '2024-05-01-preview'
 input-file:
-  - Microsoft.ServiceNetworking/preview/2024-05-01-preview/TrafficController.json
+  - preview/2024-05-01-preview/TrafficController.json
 ```
 
 ### Tag: package-2023-11-01
@@ -67,7 +67,7 @@ These settings apply only when `--tag=package-2023-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-11-01'
 input-file:
-  - Microsoft.ServiceNetworking/stable/2023-11-01/TrafficController.json
+  - stable/2023-11-01/TrafficController.json
 openapi-type: arm
 tag: package-2023-11-01
 ```
@@ -78,7 +78,7 @@ These settings apply only when `--tag=package-2023-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-05-01-preview'
 input-file:
-  - Microsoft.ServiceNetworking/preview/2023-05-01-preview/TrafficController.json
+  - preview/2023-05-01-preview/TrafficController.json
 openapi-type: arm
 tag: package-2023-05-01-preview
 ```
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-2022-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-10-01-preview'
 input-file:
-  - Microsoft.ServiceNetworking/preview/2022-10-01-preview/TrafficController.json
+  - preview/2022-10-01-preview/TrafficController.json
 ```
 
 # Code Generation
