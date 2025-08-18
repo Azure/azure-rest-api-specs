@@ -121,7 +121,6 @@ model GroupMember {
 /**
  * Paged response for group members
  */
-@pagedResult
 model GroupMemberPagedValues {
   /** The group members */
   @pageItems
