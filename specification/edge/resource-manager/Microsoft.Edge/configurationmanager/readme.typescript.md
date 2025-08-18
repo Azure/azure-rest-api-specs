@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-configurationmanager"
-  output-folder: "$(typescript-sdks-folder)/sdk/configurationmanager/arm-configurationmanager"
+  package-name: "@azure/arm-workloadorchestration"
+  output-folder: "$(typescript-sdks-folder)/sdk/workloadorchestration/arm-workloadorchestration"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
