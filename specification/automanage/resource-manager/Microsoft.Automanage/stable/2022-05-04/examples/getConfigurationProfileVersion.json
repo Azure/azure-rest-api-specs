@@ -1,44 +1,46 @@
 {
   "parameters": {
-    "subscriptionId": "mySubscriptionId",
-    "resourceGroupName": "myResourceGroupName",
+    "api-version": "2022-05-04",
     "configurationProfileName": "customConfigurationProfile",
-    "versionName": "version1",
-    "api-version": "2022-05-04"
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId",
+    "versionName": "version1"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
         "name": "customConfigurationProfile/version1",
         "type": "Microsoft.Automanage/ConfigurationProfiles/versions",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
         "location": "East US",
-        "tags": {
-          "Organization": "Administration"
-        },
         "properties": {
           "configuration": {
             "Antimalware/Enable": false,
-            "Backup/Enable": false,
-            "VMInsights/Enable": true,
             "AzureSecurityCenter/Enable": true,
-            "UpdateManagement/Enable": true,
+            "Backup/Enable": false,
+            "BootDiagnostics/Enable": true,
             "ChangeTrackingAndInventory/Enable": true,
             "GuestConfiguration/Enable": true,
             "LogAnalytics/Enable": true,
-            "BootDiagnostics/Enable": true
+            "UpdateManagement/Enable": true,
+            "VMInsights/Enable": true
           }
         },
         "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
           "createdBy": "user1@outlook.com",
           "createdByType": "User",
-          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
           "lastModifiedBy": "user2@outlook.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Organization": "Administration"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ConfigurationProfilesVersions_Get",
+  "title": "Get a configuration profile version"
 }

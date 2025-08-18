@@ -67,13 +67,13 @@ interface ConfigurationProfiles {
    */
   delete is ConfigurationProfileOps.DeleteSync<ConfigurationProfile>;
 
-  /**
-   * Retrieve a list of configuration profile within a subscription
-   */
-  listBySubscription is ConfigurationProfileOps.ListBySubscription<
-    ConfigurationProfile,
-    Response = ArmResponse<ConfigurationProfileList>
-  >;
+  // /**
+  //  * Retrieve a list of configuration profile within a subscription
+  //  */
+  // listBySubscription is ConfigurationProfileOps.List<
+  //   ConfigurationProfile,
+  //   Response = ArmResponse<ConfigurationProfileList>
+  // >;
 }
 @armResourceOperations
 interface ConfigurationProfilesVersionOps
