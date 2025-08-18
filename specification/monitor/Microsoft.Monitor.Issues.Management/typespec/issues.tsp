@@ -8,6 +8,7 @@ import "./models.tsp";
 import "../../Microsoft.Monitor.Accounts.Management/typespec/models.tsp";
 import "../../Microsoft.Monitor.Accounts.Management/typespec/service.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
@@ -36,7 +37,18 @@ model IssueResource is ProxyResource<IssueProperties> {
 @armResourceOperations(IssueResource)
 interface Issue {
   @doc("Create a new issue or updates an existing one")
-  create is ArmResourceCreateOrReplaceSync<IssueResource>;
+  create is ArmResourceCreateOrReplaceSync<
+    Resource = IssueResource,
+    Parameters = {
+      @doc("Related resource or alert that is to be added to the issue (default: empty - the issue will be created without any related resources or alerts)")
+      @path
+      related: string;
+
+      @doc("Whether to automatically start an investigation once the issue is created (default: false)")
+      @path
+      startInvestigation: boolean;
+    }
+  >;
 
   @doc("Update an issue")
   update is ArmResourcePatchSync<IssueResource, IssueProperties>;

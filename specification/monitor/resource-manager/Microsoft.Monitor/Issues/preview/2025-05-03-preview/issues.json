@@ -147,74 +147,6 @@
           }
         }
       },
-      "put": {
-        "operationId": "Issue_Create",
-        "tags": [
-          "Issue"
-        ],
-        "description": "Create a new issue or updates an existing one",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "azureMonitorWorkspaceName",
-            "in": "path",
-            "description": "The name of the AzureMonitorWorkspaceResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
-          },
-          {
-            "name": "issueName",
-            "in": "path",
-            "description": "The name of the IssueResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IssueResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'IssueResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/IssueResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'IssueResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/IssueResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Issue_Create_MaximumSet": {
-            "$ref": "./examples/Issue_Create_MaximumSet_Gen.json"
-          }
-        }
-      },
       "patch": {
         "operationId": "Issue_Update",
         "tags": [
@@ -327,6 +259,90 @@
         "x-ms-examples": {
           "Issue_Delete_MaximumSet": {
             "$ref": "./examples/Issue_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/issues/{issueName}/{related}/{startInvestigation}": {
+      "put": {
+        "operationId": "Issue_Create",
+        "tags": [
+          "Issue"
+        ],
+        "description": "Create a new issue or updates an existing one",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the AzureMonitorWorkspaceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "issueName",
+            "in": "path",
+            "description": "The name of the IssueResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "related",
+            "in": "path",
+            "description": "Related resource or alert that is to be added to the issue (default: empty - the issue will be created without any related resources or alerts)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startInvestigation",
+            "in": "path",
+            "description": "Whether to automatically start an investigation once the issue is created (default: false)",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IssueResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'IssueResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IssueResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue_Create_MaximumSet": {
+            "$ref": "./examples/Issue_Create_MaximumSet_Gen.json"
           }
         }
       }
