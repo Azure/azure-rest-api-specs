@@ -43,6 +43,10 @@ using Microsoft.DesktopVirtualization;
   "hostPoolUpdateControlParameter"
 );
 
+@@clientName(ControlSessionHostProvisioning.post::parameters.body,
+  "hostPoolProvisioningControlParameter"
+);
+
 @@clientName(SessionHostManagements.createOrUpdate::parameters.resource,
   "sessionHostManagement"
 );
