@@ -81,7 +81,8 @@ interface GroupQuotasEntities {
     GroupQuotasEntity,
     Response = ArmResourceUpdatedResponse<GroupQuotasEntity> | ArmResourceCreatedResponse<
       LROResponse,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GroupQuotasEntity> &
+        Azure.Core.Foundations.RetryAfterHeader
     >,
     OptionalRequestBody = true
   >;
@@ -164,7 +165,7 @@ interface GroupQuotasEntities {
       @path
       @segment("locationUsages")
       @minLength(1)
-      location: string;
+      location: Azure.Core.azureLocation;
     },
     Response = ArmResponse<ResourceUsageList>
   >;

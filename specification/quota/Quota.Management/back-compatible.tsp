@@ -30,33 +30,43 @@ using Microsoft.Quota;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QuotaRequestSubmitResponse202.properties);
 
-@@clientLocation(CurrentUsagesBases.get, "Usages");
-@@clientLocation(CurrentUsagesBases.list, "Usages");
+@@clientLocation(CurrentUsagesBases.get, "Usages", "!csharp");
+@@clientLocation(CurrentUsagesBases.list, "Usages", "!csharp");
 
-@@clientLocation(GroupQuotasEntities.get, "GroupQuotas");
-@@clientLocation(GroupQuotasEntities.createOrUpdate, "GroupQuotas");
+@@clientLocation(GroupQuotasEntities.get, "GroupQuotas", "!csharp");
+@@clientLocation(GroupQuotasEntities.createOrUpdate, "GroupQuotas", "!csharp");
 @@clientName(GroupQuotasEntities.createOrUpdate::parameters.resource,
   "GroupQuotaPutRequestBody"
 );
-@@clientLocation(GroupQuotasEntities.update, "GroupQuotas");
+@@clientLocation(GroupQuotasEntities.update, "GroupQuotas", "!csharp");
 @@clientName(GroupQuotasEntities.update::parameters.properties,
   " GroupQuotasPatchRequestBody"
 );
-@@clientLocation(GroupQuotasEntities.delete, "GroupQuotas");
-@@clientLocation(GroupQuotasEntities.list, "GroupQuotas");
+@@clientLocation(GroupQuotasEntities.delete, "GroupQuotas", "!csharp");
+@@clientLocation(GroupQuotasEntities.list, "GroupQuotas", "!csharp");
 @@clientLocation(GroupQuotasEntities.groupQuotaLimitsRequestList,
-  "GroupQuotaLimitsRequest"
+  "GroupQuotaLimitsRequest",
+  "!csharp"
 );
-@@clientName(GroupQuotasEntities.groupQuotaLimitsRequestList, "List");
-@@clientLocation(GroupQuotasEntities.groupQuotaUsagesList, "GroupQuotaUsages");
-@@clientName(GroupQuotasEntities.groupQuotaUsagesList, "List");
+@@clientName(GroupQuotasEntities.groupQuotaLimitsRequestList,
+  "ListLimitsRequests"
+);
+@@clientLocation(GroupQuotasEntities.groupQuotaUsagesList,
+  "GroupQuotaUsages",
+  "!csharp"
+);
+@@clientName(GroupQuotasEntities.groupQuotaUsagesList, "ListUsages");
 
 @@clientLocation(SubmittedResourceRequestStatuses.get,
-  "GroupQuotaLimitsRequest"
+  "GroupQuotaLimitsRequest",
+  "!csharp"
 );
 
-@@clientLocation(GroupQuotaLimitLists.list, "GroupQuotaLimits");
-@@clientLocation(GroupQuotaLimitLists.update, "GroupQuotaLimitsRequest");
+@@clientLocation(GroupQuotaLimitLists.list, "GroupQuotaLimits", "!csharp");
+@@clientLocation(GroupQuotaLimitLists.update,
+  "GroupQuotaLimitsRequest",
+  "!csharp"
+);
 @@clientName(GroupQuotaLimitLists.update::parameters.properties,
   "groupQuotaRequest"
 );
@@ -69,61 +79,84 @@ using Microsoft.Quota;
 @@flattenProperty(QuotaAllocationRequestStatus.properties);
 
 @@clientLocation(GroupQuotasEnforcementStatuses.get,
-  "GroupQuotaLocationSettings"
+  "GroupQuotaLocationSettings",
+  "!csharp"
 );
 @@clientLocation(GroupQuotasEnforcementStatuses.createOrUpdate,
-  "GroupQuotaLocationSettings"
+  "GroupQuotaLocationSettings",
+  "!csharp"
 );
 @@clientName(GroupQuotasEnforcementStatuses.createOrUpdate::parameters.resource,
   "LocationSettings"
 );
 @@clientLocation(GroupQuotasEnforcementStatuses.update,
-  "GroupQuotaLocationSettings"
+  "GroupQuotaLocationSettings",
+  "!csharp"
 );
 @@clientName(GroupQuotasEnforcementStatuses.update::parameters.properties,
   "LocationSettings"
 );
 @@clientLocation(GroupQuotasEnforcementStatuses.list,
-  "GroupQuotaLocationSettings"
+  "GroupQuotaLocationSettings",
+  "!csharp"
 );
 
 @@clientLocation(GroupQuotaSubscriptionRequestStatuses.get,
-  "GroupQuotaSubscriptionRequests"
+  "GroupQuotaSubscriptionRequests",
+  "!csharp"
 );
 @@clientLocation(GroupQuotaSubscriptionRequestStatuses.list,
-  "GroupQuotaSubscriptionRequests"
+  "GroupQuotaSubscriptionRequests",
+  "!csharp"
 );
-@@clientLocation(CurrentQuotaLimitBases.get, "Quota");
-@@clientLocation(CurrentQuotaLimitBases.createOrUpdate, "Quota");
+@@clientLocation(CurrentQuotaLimitBases.get, "Quota", "!csharp");
+@@clientLocation(CurrentQuotaLimitBases.createOrUpdate, "Quota", "!csharp");
 @@clientName(CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
   "createQuotaRequest"
 );
-@@clientLocation(CurrentQuotaLimitBases.update, "Quota");
+@@clientLocation(CurrentQuotaLimitBases.update, "Quota", "!csharp");
 @@clientName(CurrentQuotaLimitBases.update::parameters.properties,
   "createQuotaRequest"
 );
-@@clientLocation(CurrentQuotaLimitBases.list, "Quota");
+@@clientLocation(CurrentQuotaLimitBases.list, "Quota", "!csharp");
 
-@@clientLocation(GroupQuotaSubscriptionIds.get, "GroupQuotaSubscriptions");
-@@clientLocation(GroupQuotaSubscriptionIds.createOrUpdate,
-  "GroupQuotaSubscriptions"
+@@clientLocation(GroupQuotaSubscriptionIds.get,
+  "GroupQuotaSubscriptions",
+  "!csharp"
 );
-@@clientLocation(GroupQuotaSubscriptionIds.update, "GroupQuotaSubscriptions");
-@@clientLocation(GroupQuotaSubscriptionIds.delete, "GroupQuotaSubscriptions");
-@@clientLocation(GroupQuotaSubscriptionIds.list, "GroupQuotaSubscriptions");
+@@clientLocation(GroupQuotaSubscriptionIds.createOrUpdate,
+  "GroupQuotaSubscriptions",
+  "!csharp"
+);
+@@clientLocation(GroupQuotaSubscriptionIds.update,
+  "GroupQuotaSubscriptions",
+  "!csharp"
+);
+@@clientLocation(GroupQuotaSubscriptionIds.delete,
+  "GroupQuotaSubscriptions",
+  "!csharp"
+);
+@@clientLocation(GroupQuotaSubscriptionIds.list,
+  "GroupQuotaSubscriptions",
+  "!csharp"
+);
 
 @@clientLocation(QuotaAllocationRequestStatuses.get,
-  "GroupQuotaSubscriptionAllocationRequest"
+  "GroupQuotaSubscriptionAllocationRequest",
+  "!csharp"
 );
 @@clientLocation(QuotaAllocationRequestStatuses.list,
-  "GroupQuotaSubscriptionAllocationRequest"
+  "GroupQuotaSubscriptionAllocationRequest",
+  "!csharp"
 );
 
 @@clientLocation(SubscriptionQuotaAllocationsLists.list,
-  "GroupQuotaSubscriptionAllocation"
+  "GroupQuotaSubscriptionAllocation",
+  "!csharp"
 );
 @@clientLocation(SubscriptionQuotaAllocationsLists.update,
-  "GroupQuotaSubscriptionAllocationRequest"
+  "GroupQuotaSubscriptionAllocationRequest",
+  "!csharp"
 );
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

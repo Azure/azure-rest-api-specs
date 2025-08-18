@@ -75,7 +75,7 @@ alias SubscriptionQuotaAllocationsListsOps = Azure.ResourceManager.Legacy.Extens
     @path
     @segment("quotaAllocations")
     @minLength(1)
-    location: string;
+    location: Azure.Core.azureLocation;
   }
 >;
 

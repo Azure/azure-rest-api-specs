@@ -94,7 +94,7 @@ alias GroupQuotaLimitListsOps = Azure.ResourceManager.Legacy.ExtensionOperations
     @path
     @minLength(1)
     @segment("groupQuotaLimits")
-    location: string;
+    location: Azure.Core.azureLocation;
   }
 >;
 

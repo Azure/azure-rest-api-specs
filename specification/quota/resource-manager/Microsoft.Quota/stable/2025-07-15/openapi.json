@@ -1121,7 +1121,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests": {
       "get": {
-        "operationId": "GroupQuotaLimitsRequest_List",
+        "operationId": "GroupQuotaLimitsRequest_ListLimitsRequests",
         "tags": [
           "GroupQuotasEntities"
         ],
@@ -1180,10 +1180,8 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GroupQuotaLimitsRequest_List": {
-            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_List.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1512,7 +1510,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationUsages/{location}": {
       "get": {
-        "operationId": "GroupQuotaUsages_List",
+        "operationId": "GroupQuotaUsages_ListUsages",
         "tags": [
           "GroupQuotasEntities"
         ],
@@ -1571,10 +1569,8 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GroupQuotasUsages_List": {
-            "$ref": "./examples/GroupQuotaUsages/GetGroupQuotaUsages.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2377,9 +2373,6 @@
           "GetOperations": {
             "$ref": "./examples/GetOperations.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }

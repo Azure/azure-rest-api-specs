@@ -77,7 +77,7 @@ alias GroupQuotasEnforcementStatusesOps = Azure.ResourceManager.Legacy.Extension
     @path
     @minLength(1)
     @segment("locationSettings")
-    location: string;
+    location: Azure.Core.azureLocation;
   }
 >;
 
