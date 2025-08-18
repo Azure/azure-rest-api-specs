@@ -30,78 +30,115 @@ namespace Microsoft.Resources.DeploymentStacks;
   "deploymentStack"
 );
 
-// Operation IDs. These overwrites are to preserve the operation IDs before TypeSpec migration.
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.get,
-  "DeploymentStacks_GetAtResourceGroup"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.list,
-  "DeploymentStacks_ListAtResourceGroup"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.validateStack,
-  "DeploymentStacks_ValidateStackAtResourceGroup"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.createOrUpdate,
-  "DeploymentStacks_CreateOrUpdateAtResourceGroup"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.delete,
-  "DeploymentStacks_DeleteAtResourceGroup"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.exportTemplate,
-  "DeploymentStacks_ExportTemplateAtResourceGroup"
+// Client names and locations for ResourceGroup operations
+@@clientName(DeploymentStacksAtResourceGroup.get, "getAtResourceGroup");
+
+@@clientLocation(DeploymentStacksAtResourceGroup.get, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtResourceGroup.list, "listAtResourceGroup");
+
+@@clientLocation(DeploymentStacksAtResourceGroup.list, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtResourceGroup.validateStack,
+  "validateStackAtResourceGroup"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.get,
-  "DeploymentStacks_GetAtSubscription"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.list,
-  "DeploymentStacks_ListAtSubscription"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.validateStack,
-  "DeploymentStacks_ValidateStackAtSubscription"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.createOrUpdate,
-  "DeploymentStacks_CreateOrUpdateAtSubscription"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.delete,
-  "DeploymentStacks_DeleteAtSubscription"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.exportTemplate,
-  "DeploymentStacks_ExportTemplateAtSubscription"
+@@clientLocation(DeploymentStacksAtResourceGroup.validateStack,
+  "DeploymentStacks"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.get,
-  "DeploymentStacks_GetAtManagementGroup"
+@@clientName(DeploymentStacksAtResourceGroup.createOrUpdate,
+  "createOrUpdateAtResourceGroup"
 );
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.list,
-  "DeploymentStacks_ListAtManagementGroup"
+
+@@clientLocation(DeploymentStacksAtResourceGroup.createOrUpdate,
+  "DeploymentStacks"
 );
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.validateStack,
-  "DeploymentStacks_ValidateStackAtManagementGroup"
+
+@@clientName(DeploymentStacksAtResourceGroup.delete, "deleteAtResourceGroup");
+
+@@clientLocation(DeploymentStacksAtResourceGroup.delete, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtResourceGroup.exportTemplate,
+  "exportTemplateAtResourceGroup"
 );
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.createOrUpdate,
-  "DeploymentStacks_CreateOrUpdateAtManagementGroup"
+
+@@clientLocation(DeploymentStacksAtResourceGroup.exportTemplate,
+  "DeploymentStacks"
 );
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.delete,
-  "DeploymentStacks_DeleteAtManagementGroup"
+
+// Client names and locations for Subscription operations
+@@clientName(DeploymentStacksAtSubscription.get, "getAtSubscription");
+
+@@clientLocation(DeploymentStacksAtSubscription.get, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtSubscription.list, "listAtSubscription");
+
+@@clientLocation(DeploymentStacksAtSubscription.list, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtSubscription.validateStack,
+  "validateStackAtSubscription"
 );
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.exportTemplate,
-  "DeploymentStacks_ExportTemplateAtManagementGroup"
+
+@@clientLocation(DeploymentStacksAtSubscription.validateStack,
+  "DeploymentStacks"
+);
+
+@@clientName(DeploymentStacksAtSubscription.createOrUpdate,
+  "createOrUpdateAtSubscription"
+);
+
+@@clientLocation(DeploymentStacksAtSubscription.createOrUpdate,
+  "DeploymentStacks"
+);
+
+@@clientName(DeploymentStacksAtSubscription.delete, "deleteAtSubscription");
+
+@@clientLocation(DeploymentStacksAtSubscription.delete, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtSubscription.exportTemplate,
+  "exportTemplateAtSubscription"
+);
+
+@@clientLocation(DeploymentStacksAtSubscription.exportTemplate,
+  "DeploymentStacks"
+);
+
+// Client names and locations for ManagementGroup operations
+@@clientName(DeploymentStacksAtManagementGroup.get, "getAtManagementGroup");
+
+@@clientLocation(DeploymentStacksAtManagementGroup.get, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtManagementGroup.list, "listAtManagementGroup");
+
+@@clientLocation(DeploymentStacksAtManagementGroup.list, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtManagementGroup.validateStack,
+  "validateStackAtManagementGroup"
+);
+
+@@clientLocation(DeploymentStacksAtManagementGroup.validateStack,
+  "DeploymentStacks"
+);
+
+@@clientName(DeploymentStacksAtManagementGroup.createOrUpdate,
+  "createOrUpdateAtManagementGroup"
+);
+
+@@clientLocation(DeploymentStacksAtManagementGroup.createOrUpdate,
+  "DeploymentStacks"
+);
+
+@@clientName(DeploymentStacksAtManagementGroup.delete,
+  "deleteAtManagementGroup"
+);
+
+@@clientLocation(DeploymentStacksAtManagementGroup.delete, "DeploymentStacks");
+
+@@clientName(DeploymentStacksAtManagementGroup.exportTemplate,
+  "exportTemplateAtManagementGroup"
+);
+
+@@clientLocation(DeploymentStacksAtManagementGroup.exportTemplate,
+  "DeploymentStacks"
 );

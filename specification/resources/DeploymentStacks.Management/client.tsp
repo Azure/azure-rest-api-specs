@@ -9,3 +9,7 @@ using Microsoft.Resources.DeploymentStacks;
   "DeploymentStackTemplateExportResult",
   "csharp"
 ); // .NET SDK validation: cannot end in "Definition"
+
+@@alternateType(DeploymentStackProperties.template, unknown, "go");
+@@alternateType(DeploymentStackProperties.outputs, unknown, "go");
+@@alternateType(DeploymentStackTemplateDefinition.template, unknown, "go");
