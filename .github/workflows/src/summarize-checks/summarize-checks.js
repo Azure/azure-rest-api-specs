@@ -644,6 +644,25 @@ export async function getCheckRunTuple(
     per_page: PER_PAGE_MAX,
   });
 
+  // Get all check suites for this SHA
+  const allCheckSuites = await github.paginate(github.rest.checks.listSuitesForRef, {
+    owner: owner,
+    repo: repo,
+    ref: head_sha,
+    per_page: PER_PAGE_MAX,
+  });
+
+  // Filter check suites to only those associated with this PR
+  const prCheckSuiteIds = new Set(
+    allCheckSuites
+      .filter(
+        (suite) =>
+          Array.isArray(suite.pull_requests) &&
+          suite.pull_requests.some((pr) => pr.number === prNumber),
+      )
+      .map((suite) => suite.id),
+  );
+
   // Process allCheckRuns and allCommitStatuses into unified CheckRunData array
   // all checks will be considered as "FYI" until we have an impact assessment, so we can
   // determine the target branch, and from there pull branch protect rulesets to ensure we
@@ -652,15 +671,18 @@ export async function getCheckRunTuple(
   const allChecks = [];
 
   allCheckRuns.forEach((checkRun) => {
-    allChecks.push({
-      name: checkRun.name,
-      status: checkRun.status,
-      conclusion: checkRun.conclusion || null,
-      checkInfo: getCheckInfo(checkRun.name),
-      // Store original object for date sorting
-      _originalData: checkRun,
-      _source: "checkRun",
-    });
+    // Only include check runs whose check_suite.id is in prCheckSuiteIds
+    if (checkRun.check_suite && prCheckSuiteIds.has(checkRun.check_suite.id)) {
+      allChecks.push({
+        name: checkRun.name,
+        status: checkRun.status,
+        conclusion: checkRun.conclusion || null,
+        checkInfo: getCheckInfo(checkRun.name),
+        // Store original object for date sorting
+        _originalData: checkRun,
+        _source: "checkRun",
+      });
+    }
   });
 
   allCommitStatuses.forEach((status) => {
@@ -743,20 +765,40 @@ export async function getCheckRunTuple(
         per_page: PER_PAGE_MAX,
       });
 
-      if (workflowRuns.length === 0) {
+      // Dump workflowRun IDs and their associated pull_requests for debugging
+      core.info(
+        `All workflow runs for check suite ID: ${latestCheck._originalData.check_suite.id} (raw):`,
+      );
+      workflowRuns.forEach((run) => {
+        core.info(`Run ID: ${run.id}, pull_requests: ${JSON.stringify(run.pull_requests)}`);
+      });
+
+      // Filter workflow runs to only those associated with this PR
+      const filteredRuns = workflowRuns.filter(
+        (run) =>
+          Array.isArray(run.pull_requests) &&
+          run.pull_requests.some((pr) => pr.number === prNumber),
+      );
+
+      core.info(`Filtered workflow runs for PR #${prNumber}:`);
+      filteredRuns.forEach((run) => {
+        core.info(`Run ID: ${run.id}, pull_requests: ${JSON.stringify(run.pull_requests)}`);
+      });
+
+      if (filteredRuns.length === 0) {
         core.warning(
-          `No workflow runs found for check suite ID: ${latestCheck._originalData.check_suite.id}`,
+          `No workflow runs found for check suite ID: ${latestCheck._originalData.check_suite.id} associated with PR #${prNumber}`,
         );
       } else {
         // Sort by updated_at to get the most recent run
-        const sortedRuns = workflowRuns.sort(
+        const sortedRuns = filteredRuns.sort(
           (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
         );
         impactAssessmentWorkflowRun = sortedRuns[0].id;
 
-        if (workflowRuns.length > 1) {
+        if (filteredRuns.length > 1) {
           core.info(
-            `Found ${workflowRuns.length} workflow runs for check suite ID: ${latestCheck._originalData.check_suite.id}, using most recent: ${sortedRuns[0].id}`,
+            `Found ${filteredRuns.length} workflow runs for check suite ID: ${latestCheck._originalData.check_suite.id} associated with PR #${prNumber}, using most recent: ${sortedRuns[0].id}`,
           );
         }
       }
@@ -1024,7 +1066,7 @@ function getCommentBody(
     summaryData =
       `✅ All automated merging requirements have been met.` +
       `<br/>To merge this PR, refer to ` +
-      `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
+      `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>` +
       "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
     status = "SUCCESS";
   } else {
