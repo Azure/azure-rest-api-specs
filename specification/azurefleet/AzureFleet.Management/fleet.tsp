@@ -104,7 +104,7 @@ model FleetProperties {
   @visibility(Lifecycle.Read)
   uniqueId?: string;
 
-  @doc("Specifies the display name a Compute Fleet.")
+  @doc("Specifies the display name a Compute Fleet test v2.")
   @added(Versions.v2025_08_01)
   displayName?: string;
 
