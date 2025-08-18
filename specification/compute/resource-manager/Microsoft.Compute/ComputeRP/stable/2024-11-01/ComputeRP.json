@@ -13126,12 +13126,14 @@
         "diskIOPSReadWrite": {
           "type": "integer",
           "format": "int64",
-          "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS."
+          "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.",
+          "readOnly": true
         },
         "diskMBpsReadWrite": {
           "type": "integer",
           "format": "int64",
-          "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS."
+          "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.",
+          "readOnly": true
         },
         "detachOption": {
           "$ref": "#/definitions/DiskDetachOptionTypes",
