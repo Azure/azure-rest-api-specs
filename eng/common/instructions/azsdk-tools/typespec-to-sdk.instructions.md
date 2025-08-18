@@ -3,6 +3,11 @@ description: 'Generate SDKs from TypeSpec'
 ---
 Your goal is to guide user through the process of generating SDKs from TypeSpec projects. Show all the high level steps to the user to ensure they understand the flow. Use the provided tools to perform actions and gather information as needed.
 
+## Pre-Flight Check
+- Verify ${workspaceFolder} is not on main branch
+- If on main branch, prompt user: "You are currently on the main branch. Please create a new branch using `git checkout -b <branch-name>` before proceeding."
+- Wait for user confirmation before continuing
+
 ## Step 1: Identify TypeSpec Project
 **Goal**: Locate the TypeSpec project root path
 **Actions**:
