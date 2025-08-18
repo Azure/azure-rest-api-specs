@@ -1,9 +1,11 @@
 openapi: 3.0.0
 info:
   title: Azure AI Foundry Models Service
+  license:
+    name: MIT
+    url: https://github.com/openai/openai-openapi/blob/master/LICENSE
   version: preview
 tags:
-  - name: Audio
   - name: Chat
   - name: Embeddings
   - name: Evals
@@ -15,57 +17,6 @@ tags:
   - name: Vector Stores
   - name: Video
 paths:
-  /audio/speech:
-    post:
-      operationId: createSpeech
-      summary: Generates text-to-speech audio from the input text.
-      parameters:
-        - name: api-version
-          in: query
-          required: false
-          description: |-
-            The explicit Azure AI Foundry Models API version to use for this request.
-            `v1` if not otherwise specified.
-          schema:
-            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
-            default: v1
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-        default:
-          description: An unexpected error response.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureErrorResponse'
-      tags:
-        - Audio
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AzureCreateSpeechRequest'
-      x-ms-examples:
-        Create a speech request:
-          $ref: ./examples/audio_speech.yaml
   /chat/completions:
     post:
       operationId: createChatCompletion
@@ -1673,6 +1624,153 @@ paths:
                 $ref: '#/components/schemas/AzureErrorResponse'
       tags:
         - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/checkpoints/{fine_tuning_checkpoint_id}/copy:
+    post:
+      operationId: FineTuning_CopyCheckpoint
+      description: |-
+        Creates a copy of a fine-tuning checkpoint at the given destination account and region.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copy-ft-checkpoints
+          in: header
+          required: true
+          description: |-
+            Enables access to checkpoint copy operations for models, an AOAI preview feature.
+            This feature requires the 'aoai-copy-ft-checkpoints' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyModelRequest'
+    get:
+      operationId: FineTuning_GetCheckpoint
+      description: |-
+        Gets the status of a fine-tuning checkpoint copy.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copy-ft-checkpoints
+          in: header
+          required: true
+          description: |-
+            Enables access to checkpoint copy operations for models, an AOAI preview feature.
+            This feature requires the 'aoai-copy-ft-checkpoints' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
   /fine_tuning/jobs/{fine_tuning_job_id}/events:
     get:
       operationId: listFineTuningEvents
@@ -3078,8 +3176,7 @@ paths:
         - Vector Stores
   /video/generations/jobs:
     post:
-      operationId: VideoGenerationJobs
-      description: Creates a new video
+      operationId: VideoGenerationJobs_Create
       parameters:
         - name: api-version
           in: query
@@ -3090,6 +3187,7 @@ paths:
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
+      description: Creates a new video generation job.
       responses:
         '200':
           description: The request has succeeded.
@@ -3117,9 +3215,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateVideoGenerationRequest'
-      x-ms-examples:
-        Create a simple video generation job request:
-          $ref: ./examples/create_video_generation_job_simple.json
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateVideoGenerationWithMediaRequestMultiPart'
     get:
       operationId: VideoGenerationJobs_List
       description: Lists video generation jobs.
@@ -3188,7 +3286,7 @@ paths:
   /video/generations/jobs/{job-id}:
     get:
       operationId: VideoGenerationJobs_Get
-      description: generation job.Retrieves properties of a video generation job.
+      description: Retrieves properties of a video generation job.
       parameters:
         - name: api-version
           in: query
@@ -3221,9 +3319,6 @@ paths:
                 $ref: '#/components/schemas/AzureOpenAIVideoGenerationErrorResponse'
       tags:
         - Video
-      x-ms-examples:
-        Retrieve properties of a video generation job:
-          $ref: ./examples/get_video_generation_job.json
     delete:
       operationId: VideoGenerationJobs_Delete
       description: Deletes a video generation job.
@@ -5335,47 +5430,6 @@ components:
         model:
           type: string
           description: The model deployment to use for the creation of this response.
-    AzureCreateSpeechRequest:
-      type: object
-      required:
-        - input
-        - voice
-        - model
-      properties:
-        input:
-          type: string
-          maxLength: 4096
-          description: The text to generate audio for. The maximum length is 4096 characters.
-        instructions:
-          type: string
-          maxLength: 4096
-          description: Control the voice of your generated audio with additional instructions. Does not work with `tts-1` or `tts-1-hd`.
-        voice:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.VoiceIdsShared'
-          description: The voice to use when generating the audio. Supported voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`, and `verse`. Previews of the voices are available in the [Text to speech guide](/docs/guides/text-to-speech#voice-options).
-        stream_format:
-          type: string
-          enum:
-            - sse
-            - audio
-          description: The format to stream the audio in. Supported formats are `sse` and `audio`. `sse` is not supported for `tts-1` or `tts-1-hd`.
-          default: audio
-        response_format:
-          allOf:
-            - $ref: '#/components/schemas/SpeechGenerationResponseFormat'
-          description: The audio output format for the spoken text. By default, the MP3 format will be used.
-        speed:
-          type: number
-          format: float
-          minimum: 0.25
-          maximum: 4
-          description: The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.
-          default: 1
-        model:
-          type: string
-          description: The model to use for this text-to-speech request.
-      description: A representation of the request options that control the behavior of a text-to-speech operation.
     AzureErrorResponse:
       type: object
       properties:
@@ -6060,6 +6114,56 @@ components:
       items:
         $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCall'
       description: The tool calls generated by the model, such as function calls.
+    CopiedAccountDetails:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+        - status
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination resource where the model was copied to.
+        region:
+          type: string
+          description: The region where the model was copied to.
+        status:
+          type: string
+          enum:
+            - Completed
+            - Failed
+            - InProgress
+          description: The status of the copy operation.
+    CopyModelRequest:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination Resource to copy.
+        region:
+          type: string
+          description: The region to copy the model to.
+    CopyModelResponse:
+      type: object
+      required:
+        - checkpointedModelName
+        - fineTuningJobId
+        - copiedAccountDetails
+      properties:
+        checkpointedModelName:
+          type: string
+          description: The ID of the copied model.
+        fineTuningJobId:
+          type: string
+          description: The ID of the fine-tuning job that the checkpoint was copied from.
+        copiedAccountDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CopiedAccountDetails'
+          description: The ID of the destination resource id where it was copied
     CreateVideoGenerationRequest:
       type: object
       required:
@@ -6094,6 +6198,52 @@ components:
         model:
           type: string
           description: The name of the deployment to use for this request.
+    CreateVideoGenerationWithMediaRequestMultiPart:
+      type: object
+      required:
+        - prompt
+        - height
+        - width
+        - model
+        - files
+      properties:
+        prompt:
+          type: string
+          description: The prompt for this video generation job.
+        height:
+          type: integer
+          format: int32
+          description: 'The height of the video. The following dimensions are supported: 480x480, 854x480, 720x720, 1280x720, 1080x1080 and 1920x1080 in both landscape and portrait orientations.'
+        width:
+          type: integer
+          format: int32
+          description: 'The width of the video. The following dimensions are supported: 480x480, 854x480, 720x720, 1280x720, 1080x1080 and 1920x1080 in both landscape and portrait orientations.'
+        n_seconds:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The duration of the video generation job. Must be between 1 and 20 seconds.
+          default: 5
+        n_variants:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of videos to create as variants for this job. Must be between 1 and 5. Smaller dimensions allow more variants.
+          default: 1
+        model:
+          type: string
+          description: The name of the deployment to use for this request.
+        inpaint_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InpaintItem'
+          description: Optional inpainting items for this video generation job.
+        files:
+          type: array
+          items:
+            type: string
+            format: binary
+      description: The properties of a video generation job request with media files.
     CropBounds:
       type: object
       properties:
@@ -15165,18 +15315,6 @@ components:
         both text and audio responses, you can use:
 
         `["text", "audio"]`
-    SpeechGenerationResponseFormat:
-      oneOf:
-        - type: string
-        - type: string
-          enum:
-            - mp3
-            - opus
-            - aac
-            - flac
-            - wav
-            - pcm
-      description: The supported audio output formats for text-to-speech.
     VideoGeneration:
       type: object
       required:
