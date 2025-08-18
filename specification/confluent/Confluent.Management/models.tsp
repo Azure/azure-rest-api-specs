@@ -2161,6 +2161,11 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
+   * Kafka Service Account Name
+   */
+  serviceAccountName?: string;
+
+  /**
    * Kafka topics list
    */
   topics?: string[];
@@ -2227,6 +2232,11 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
+   * Kafka Service Account Name
+   */
+  serviceAccountName?: string;
+
+  /**
    * Kafka topics Regex pattern
    */
   topicRegex?: string;
@@ -2281,6 +2291,11 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  serviceAccountName?: string;
 
   /**
    * Kafka topics list
@@ -2350,6 +2365,11 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
+   * Kafka Service Account Name
+   */
+  serviceAccountName?: string;
+
+  /**
    * Kafka topics Regex pattern
    */
   topicRegex?: string;
@@ -2403,6 +2423,11 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
+
+  /**
+   * Kafka Service Account Name
+   */
+  serviceAccountName?: string;
 
   /**
    * Kafka topics list

@@ -31,6 +31,15 @@ openapi-subtype: rpaas
 tag: package-2025-07-17-preview
 ```
 
+### Tag: package-2025-08-18-preview
+
+These settings apply only when `--tag=package-2025-08-18-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-18-preview'
+input-file:
+  - Microsoft.Confluent/preview/2025-08-18-preview/confluent.json
+```
+
 ### Tag: package-2025-07-17-preview
 
 These settings apply only when `--tag=package-2025-07-17-preview` is specified on the command line.
