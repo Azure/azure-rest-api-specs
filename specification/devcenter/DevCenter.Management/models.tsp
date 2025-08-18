@@ -673,8 +673,7 @@ model DevBoxProvisioningSettings {
 }
 
 @doc("The devcenter resource for partial updates. Properties not provided in the update request will not be changed.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DevCenterUpdate extends TrackedResourceUpdate {
+model DevCenterUpdate is TrackedResourceUpdate {
   @doc("Managed identity properties.")
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
@@ -729,8 +728,7 @@ model KeyEncryptionKeyIdentity {
 }
 
 @doc("The devcenter encryption set resource for partial updates. Properties not provided in the update request will not be changed.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model EncryptionSetUpdate extends TrackedResourceUpdate {
+model EncryptionSetUpdate is TrackedResourceUpdate {
   @doc("Properties of a Dev Center encryption set to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
@@ -887,8 +885,7 @@ model WorkspaceStorageSettings {
 }
 
 @doc("The project properties for partial update. Properties not provided in the update request will not be changed.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProjectUpdate extends TrackedResourceUpdate {
+model ProjectUpdate is TrackedResourceUpdate {
   @doc("Properties of a project to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
@@ -1454,8 +1451,7 @@ model DevBoxDefinitionUpdateProperties {
 }
 
 @doc("Partial update of a Dev Box definition resource.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DevBoxDefinitionUpdate extends TrackedResourceUpdate {
+model DevBoxDefinitionUpdate is TrackedResourceUpdate {
   @doc("Properties of a Dev Box definition to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
@@ -1946,8 +1942,7 @@ model ActiveHoursConfiguration {
 }
 
 @doc("The pool properties for partial update. Properties not provided in the update request will not be changed.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PoolUpdate extends TrackedResourceUpdate {
+model PoolUpdate is TrackedResourceUpdate {
   @doc("Properties of a pool to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
@@ -1976,8 +1971,7 @@ model ScheduleProperties extends ScheduleUpdateProperties {
 }
 
 @doc("Updatable properties of a Schedule.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ScheduleUpdateProperties extends TrackedResourceUpdate {
+model ScheduleUpdateProperties is TrackedResourceUpdate {
   @doc("Supported type this scheduled task represents.")
   type?: ScheduledType;
 
@@ -2045,8 +2039,7 @@ model NetworkConnectionUpdateProperties {
 }
 
 @doc("The network connection properties for partial update. Properties not provided in the update request will not be changed.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model NetworkConnectionUpdate extends TrackedResourceUpdate {
+model NetworkConnectionUpdate is TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Properties of a network connection resource to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten

@@ -9747,17 +9747,32 @@
       "type": "object",
       "description": "Partial update of a Dev Box definition resource.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/DevBoxDefinitionUpdateProperties",
           "description": "Properties of a Dev Box definition to be updated.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "DevBoxDefinitionUpdateProperties": {
       "type": "object",
@@ -10044,6 +10059,26 @@
       "type": "object",
       "description": "The devcenter resource for partial updates. Properties not provided in the update request will not be changed.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed identity properties."
@@ -10053,12 +10088,7 @@
           "description": "Properties of a Dev Center to be updated.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "DevCenterUpdateProperties": {
       "type": "object",
@@ -10176,6 +10206,26 @@
       "type": "object",
       "description": "The devcenter encryption set resource for partial updates. Properties not provided in the update request will not be changed.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/DevCenterEncryptionSetUpdateProperties",
           "description": "Properties of a Dev Center encryption set to be updated.",
@@ -10185,12 +10235,7 @@
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed identity properties"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "EndpointDependency": {
       "type": "object",
@@ -11655,17 +11700,32 @@
       "type": "object",
       "description": "The network connection properties for partial update. Properties not provided in the update request will not be changed.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/NetworkConnectionUpdateProperties",
           "description": "Properties of a network connection resource to be updated.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "NetworkConnectionUpdateProperties": {
       "type": "object",
@@ -12019,17 +12079,32 @@
       "type": "object",
       "description": "The pool properties for partial update. Properties not provided in the update request will not be changed.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/PoolUpdateProperties",
           "description": "Properties of a pool to be updated.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "PoolUpdateProperties": {
       "type": "object",
@@ -12462,6 +12537,26 @@
       "type": "object",
       "description": "The project properties for partial update. Properties not provided in the update request will not be changed.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/ProjectUpdateProperties",
           "description": "Properties of a project to be updated.",
@@ -12471,12 +12566,7 @@
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed identity properties."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "ProjectUpdateProperties": {
       "type": "object",
@@ -12805,6 +12895,26 @@
       "type": "object",
       "description": "Updatable properties of a Schedule.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "type": {
           "$ref": "#/definitions/ScheduledType",
           "description": "Supported type this scheduled task represents."
@@ -12825,12 +12935,7 @@
           "$ref": "#/definitions/ScheduleEnableStatus",
           "description": "Indicates whether or not this scheduled task is enabled."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "ScheduledFrequency": {
       "type": "string",
@@ -13113,32 +13218,6 @@
           "items": {
             "$ref": "#/definitions/CatalogItemType"
           }
-        }
-      }
-    },
-    "TrackedResourceUpdate": {
-      "type": "object",
-      "description": "Base tracked resource type for PATCH updates.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       }
     },
