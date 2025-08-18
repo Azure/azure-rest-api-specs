@@ -4,39 +4,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ClientGenerator.Core;
 using Microsoft.DevCenter;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DevCenterUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(EncryptionSetUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ProjectPolicyUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ProjectUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(CatalogUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(EnvironmentTypeUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ProjectEnvironmentTypeUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DevBoxDefinitionUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PoolUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ScheduleUpdate.properties);
-
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NetworkConnectionUpdate.properties);
-
 @@clientName(DevCenters.createOrUpdate::parameters.resource, "body");
 @@clientName(DevCenters.update::parameters.properties, "body");
 @@clientLocation(DevCenters.listByDevCenter, Images);
