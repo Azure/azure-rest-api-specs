@@ -8,6 +8,8 @@ namespace Playwright.Management;
 @doc("Operations for Playwright service management.")
 interface Operations extends Azure.ResourceManager.Operations {}
 
+// Tracked Resource PlaywrightWorkspace Operations ////////////////////
+
 @doc("Operations for managing Playwright workspace resources.")
 @armResourceOperations
 interface PlaywrightWorkspaces
@@ -29,24 +31,4 @@ interface PlaywrightWorkspaces
   >;
   @doc("Checks if a Playwright workspace name is available globally.")
   checkNameAvailability is checkGlobalNameAvailability;
-}
-
-@doc("Operations for managing Playwright quota resources at the subscription level.")
-@armResourceOperations
-interface PlaywrightQuotas {
-  @doc("Gets a subscription-level location-based Playwright quota resource by name.")
-  get is ArmResourceRead<PlaywrightQuota>;
-
-  @doc("Lists Playwright quota resources for a given subscription ID.")
-  listBySubscription is ArmListBySubscription<PlaywrightQuota>;
-}
-
-@doc("Operations for managing Playwright workspace quota resources.")
-@armResourceOperations
-interface PlaywrightWorkspaceQuotas {
-  @doc("Gets a Playwright workspace quota resource by name.")
-  get is ArmResourceRead<PlaywrightWorkspaceQuota>;
-
-  @doc("Lists quota resources for a given Playwright workspace.")
-  listByPlaywrightWorkspace is ArmResourceListByParent<PlaywrightWorkspaceQuota>;
 }
