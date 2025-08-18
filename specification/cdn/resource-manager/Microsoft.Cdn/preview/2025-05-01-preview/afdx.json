@@ -3204,10 +3204,7 @@
         "operationId": "Secrets_Create",
         "x-ms-examples": {
           "Secrets_Create": {
-            "$ref": "./examples/Secrets_CreateCustomerCertificateType.json"
-          },
-          "Secrets_CreateMtlsCertificateChainType": {
-            "$ref": "./examples/Secrets_CreateMtlsCertificateChainType.json"
+            "$ref": "./examples/Secrets_Create.json"
           }
         },
         "parameters": [
@@ -4549,11 +4546,6 @@
           "type": "object",
           "$ref": "#/definitions/AFDDomainHttpsParameters"
         },
-        "mtlsSettings": {
-          "description": "The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDN and which server certificate(s) to use.",
-          "type": "object",
-          "$ref": "#/definitions/AFDDomainMtlsParameters"
-        },
         "azureDnsZone": {
           "description": "Resource reference to the Azure DNS zone",
           "type": "object",
@@ -4692,74 +4684,6 @@
               "name": "AfdCustomizedCipherSuiteForTls13",
               "modelAsString": true
             }
-          }
-        }
-      }
-    },
-    "AFDDomainMtlsParameters": {
-      "description": "Contains the properties to configure mutual TLS for a custom domain with FQDN. Mutual TLS cannot be configured for custom domains with wildcard host names.",
-      "type": "object",
-      "properties": {
-        "secrets": {
-          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake.",
-          "type": "array",
-          "items": {
-            "$ref": "./cdn.json#/definitions/ResourceReference"
-          }
-        },
-        "otherAllowedFqdn": {
-          "description": "List of FQDN that will be accepted for mutual TLS validation in addition to custom domain's hostname.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "certificateValidation": {
-          "description": "Set to Enabled by default. If set to Disabled, validation of client certificate chain for mutual TLS handshake will be skipped.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CertificateValidationEnabledState",
-            "modelAsString": true
-          }
-        },
-        "certificatePassthrough": {
-          "description": "Set to Disabled by default. If set to Enabled, then selected client certificate chain(s) are sent directly to origin using reserved headers, such as X-Azure-ClientCertificate.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CertificatePassthroughEnabledState",
-            "modelAsString": true
-          }
-        },
-        "ocsp": {
-          "description": "Set to Enabled by default. If set to Disabled, revocation status of client certificate chain will be checked before establishing mutual TLS connection.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OcspEnabledState",
-            "modelAsString": true
-          }
-        },
-        "allowWithoutClientCertificate": {
-          "description": "Set to Disabled by default. If set to Enabled, mutual TLS connection can be established without client certificate.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "allowWithoutClientCertificateEnabledState",
-            "modelAsString": true
           }
         }
       }
@@ -5039,18 +4963,6 @@
             "name": "EnabledState",
             "modelAsString": true
           }
-        },
-        "enforceMtls": {
-          "description": "Set to Disabled by default. If set to Enabled, only custom domains with mTLS enabled can be added to child Route resources.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnforceMtlsEnabledState",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -5155,8 +5067,7 @@
         "UrlSigningKey",
         "CustomerCertificate",
         "ManagedCertificate",
-        "AzureFirstPartyManagedCertificate",
-        "MtlsCertificateChain"
+        "AzureFirstPartyManagedCertificate"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5314,37 +5225,6 @@
         "thumbprint": {
           "description": "Certificate thumbprint.",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "AfdSecretMtlsCertificateChain": {
-      "description": "Server-side certificate used for mTLS validation",
-      "x-ms-discriminator-value": "MtlsCertificateChain",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecretParameters"
-        }
-      ],
-      "required": [
-        "secretSource",
-        "secretVersion"
-      ],
-      "properties": {
-        "secretSource": {
-          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}",
-          "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
-        },
-        "secretVersion": {
-          "description": "Version of the secret to be used",
-          "type": "string"
-        },
-        "expirationDate": {
-          "description": "Soonest expiration date among certificates in customer's certificate chain in ISO 8601 compliant format yyyy-MM-ddTHH:mm:ss.fffffffK in UTC",
-          "type": "string",
-          "format": "date-time",
           "readOnly": true
         }
       }
