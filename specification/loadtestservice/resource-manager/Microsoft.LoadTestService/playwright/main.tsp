@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./routes.tsp";
+import "./typespec/routes.tsp";
+import "./typespec/quotas.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
