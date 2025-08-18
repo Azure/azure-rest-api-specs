@@ -13,11 +13,8 @@ namespace Microsoft.Dashboard;
 /**
  * The grafana resource type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(ManagedGrafanaProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model ManagedGrafana extends Azure.ResourceManager.Foundations.TrackedResource {
+model ManagedGrafana
+  is Azure.ResourceManager.ProxyResource<ManagedGrafanaProperties, true> {
   ...ResourceNameParameter<
     Resource = ManagedGrafana,
     KeyName = "workspaceName",
@@ -31,11 +28,15 @@ model ManagedGrafana extends Azure.ResourceManager.Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ResourceSku;
 
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: ManagedGrafanaProperties;
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
@@ -45,14 +46,14 @@ interface ManagedGrafanas {
   /**
    * Get the properties of a specific workspace for Grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Grafana_Get")
   get is ArmResourceRead<ManagedGrafana>;
 
   /**
    * Create or update a workspace for Grafana resource. This API is idempotent, so user can either create a new grafana or update an existing grafana.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Grafana_Create")
   create is ArmResourceCreateOrReplaceAsync<ManagedGrafana>;
 
@@ -60,14 +61,15 @@ interface ManagedGrafanas {
    * Update a workspace for Grafana resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Grafana_Update")
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     ManagedGrafana,
     PatchModel = ManagedGrafanaUpdateParameters,
-    Response = ArmResponse<ManagedGrafana> | (AcceptedResponse & {
+    Response = ArmResponse<ManagedGrafana> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedGrafana> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ManagedGrafana;
     })
@@ -76,7 +78,7 @@ interface ManagedGrafanas {
   /**
    * Delete a workspace for Grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Grafana_Delete")
@@ -89,7 +91,7 @@ interface ManagedGrafanas {
   /**
    * List all resources of workspaces for Grafana under the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Grafana_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ManagedGrafana,
@@ -99,7 +101,7 @@ interface ManagedGrafanas {
   /**
    * List all resources of workspaces for Grafana under the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Grafana_List")
   list is ArmListBySubscription<
     ManagedGrafana,
@@ -109,7 +111,7 @@ interface ManagedGrafanas {
   /**
    * Retrieve enterprise add-on details information
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Grafana_CheckEnterpriseDetails")
   checkEnterpriseDetails is ArmResourceActionSync<
     ManagedGrafana,
@@ -117,7 +119,7 @@ interface ManagedGrafanas {
     ArmResponse<EnterpriseDetails>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Grafana_FetchAvailablePlugins")
   fetchAvailablePlugins is ArmResourceActionSync<
     ManagedGrafana,
@@ -129,7 +131,7 @@ interface ManagedGrafanas {
    * Refresh and sync managed private endpoints of a grafana resource to latest state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("refreshManagedPrivateEndpoints")
   @operationId("ManagedPrivateEndpoints_Refresh")
   refresh is ArmResourceActionAsync<

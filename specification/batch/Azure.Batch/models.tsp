@@ -760,16 +760,15 @@ union SecurityTypes {
 }
 
 @doc("The result of listing the applications available in an Account.")
-@pagedResult
 model BatchApplicationListResult {
   @doc("The list of applications available in the Account.")
-  @items
+  @pageItems
   value?: BatchApplication[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
@@ -816,16 +815,15 @@ model BatchErrorDetail {
 }
 
 @doc("The result of a listing the usage metrics for an Account.")
-@pagedResult
 model BatchPoolListUsageMetricsResult {
   @doc("The Pool usage metrics data.")
-  @items
+  @pageItems
   value?: BatchPoolUsageMetrics[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
@@ -847,16 +845,15 @@ model BatchPoolUsageMetrics {
 }
 
 @doc("The result of listing the supported Virtual Machine Images.")
-@pagedResult
 model BatchAccountListSupportedImagesResult {
   @doc("The list of supported Virtual Machine Images.")
-  @items
+  @pageItems
   value?: BatchSupportedImage[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("""
@@ -918,16 +915,15 @@ model BatchVmImageReference {
 }
 
 @doc("The result of listing the Compute Node counts in the Account.")
-@pagedResult
 model BatchPoolNodeCountsListResult {
   @doc("A list of Compute Node counts by Pool.")
-  @items
+  @pageItems
   value?: BatchPoolNodeCounts[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("The number of Compute Nodes in each state for a Pool.")
@@ -1215,32 +1211,30 @@ model NameValuePair {
 }
 
 @doc("The result of listing the Certificates in the Account.")
-@pagedResult
 model BatchCertificateListResult {
   @doc("The list of Certificates.")
-  @items
+  @pageItems
   value?: BatchCertificate[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("""
   The result of listing the files on a Compute Node, or the files associated with
   a Task on a Compute Node.
   """)
-@pagedResult
 model BatchNodeFileListResult {
   @doc("The list of files.")
-  @items
+  @pageItems
   value?: BatchNodeFile[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Information about a file or directory on a Compute Node.")
@@ -2527,16 +2521,15 @@ model BatchJobScheduleStatistics {
 }
 
 @doc("The result of listing the Job Schedules in an Account.")
-@pagedResult
 model BatchJobScheduleListResult {
   @doc("The list of Job Schedules.")
-  @items
+  @pageItems
   value?: BatchJobSchedule[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("An Azure Batch Job.")
@@ -2772,32 +2765,30 @@ model BatchJobTerminateOptions {
 }
 
 @doc("The result of listing the Jobs in an Account.")
-@pagedResult
 model BatchJobListResult {
   @doc("The list of Jobs.")
-  @items
+  @pageItems
   value?: BatchJob[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("""
   The result of listing the status of the Job Preparation and Job Release Tasks
   for a Job.
   """)
-@pagedResult
 model BatchJobPreparationAndReleaseTaskStatusListResult {
   @doc("A list of Job Preparation and Job Release Task execution information.")
-  @items
+  @pageItems
   value?: BatchJobPreparationAndReleaseTaskStatus[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("The status of the Job Preparation and Job Release Tasks on a Compute Node.")
@@ -3344,16 +3335,15 @@ model BatchUserAssignedIdentity {
 }
 
 @doc("The result of listing the Pools in an Account.")
-@pagedResult
 model BatchPoolListResult {
   @doc("The list of Pools.")
-  @items
+  @pageItems
   value?: BatchPool[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
@@ -3795,16 +3785,15 @@ model BatchTaskIdRange {
 }
 
 @doc("The result of listing the Tasks in a Job.")
-@pagedResult
 model BatchTaskListResult {
   @doc("The list of Tasks.")
-  @items
+  @pageItems
   value?: BatchTask[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("A collection of Azure Batch Tasks to add.")
@@ -3843,16 +3832,15 @@ model BatchTaskCreateResult {
 }
 
 @doc("The result of listing the subtasks of a Task.")
-@pagedResult
 model BatchTaskListSubtasksResult {
   @doc("The list of subtasks.")
-  @items
+  @pageItems
   value?: BatchSubtask[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Information about an Azure Batch subtask.")
@@ -4229,16 +4217,15 @@ model UploadBatchServiceLogsResult {
 }
 
 @doc("The result of listing the Compute Nodes in a Pool.")
-@pagedResult
 model BatchNodeListResult {
   @doc("The list of Compute Nodes.")
-  @items
+  @pageItems
   value?: BatchNode[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -4287,13 +4274,12 @@ model InstanceViewStatus {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The result of listing the Compute Node extensions in a Node.")
-@pagedResult
 model BatchNodeVMExtensionListResult {
   @doc("The list of Compute Node extensions.")
-  @items
+  @pageItems
   value?: BatchNodeVMExtension[];
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }

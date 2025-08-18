@@ -20,10 +20,11 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     "basic-setup-py": true
-    "package-version": "4.5.0b1"
+    "package-name": "azure-keyvault-administration"
+    "package-pprint-name": "Key Vault Administration"
+    "package-version": "4.5.0"
+    "namespace": "azure.keyvault.administration._generated"
     "package-dir": "azure-keyvault-administration"
-    "namespace": "azure.keyvault.administration"
-    "output-path": "./azure/keyvault/administration/_generated"
   "@azure-tools/typespec-java":
     flavor: azure
     package-dir: "azure-security-keyvault-administration"
@@ -32,11 +33,13 @@ options:
     custom-types: "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
     custom-types-subpackage: "models"
     customization-class: "customizations/src/main/java/AdministrationCustomizations.java"
+    use-eclipse-language-server: false
     generate-tests: false
     generate-samples: false
     include-api-view-properties: false
   "@azure-typespec/http-client-csharp":
     namespace: Azure.Security.KeyVault.Administration
+    model-namespace: true
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Security.KeyVault.Administration"
     namespace: "Azure.Security.KeyVault.Administration"

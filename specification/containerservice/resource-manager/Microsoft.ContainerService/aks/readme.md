@@ -34,7 +34,34 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-04
+tag: package-2025-05
+```
+
+### Tag: package-preview-2025-06
+
+These settings apply only when `--tag=package-preview-2025-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-06'
+input-file:
+  - preview/2025-06-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05'
+input-file:
+  - stable/2025-05-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-05
+
+These settings apply only when `--tag=package-preview-2025-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-05'
+input-file:
+  - preview/2025-05-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2025-04
@@ -1338,5 +1365,9 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: managedClusters.json
     where: $.definitions.MachineKubernetesProfile.properties.nodeLabels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.LocalDNSOverrides
     reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
 ```

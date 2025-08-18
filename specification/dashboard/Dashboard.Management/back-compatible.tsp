@@ -11,10 +11,10 @@ using Azure.Core;
   "requestBodyParameters"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(ManagedPrivateEndpointModels.create::parameters.resource,
@@ -23,7 +23,7 @@ using Azure.Core;
 @@clientName(ManagedPrivateEndpointModels.update::parameters.properties,
   "requestBodyParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ManagedPrivateEndpointModel.properties);
 
 @@clientName(IntegrationFabrics.create::parameters.resource,
@@ -40,45 +40,44 @@ using Azure.Core;
   "requestBodyParameters"
 );
 @@clientName(PrivateEndpointConnections.approve::parameters.resource, "body");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ManagedDashboard.properties);
-@@clientName(ManagedGrafanaPropertiesUpdateParameters,
-  "ManagedGrafanaPatchProperties",
-  "csharp"
-);
 @@alternateType(ManagedPrivateEndpointModelProperties.privateLinkResourceId,
   armResourceIdentifier
 );
 @@alternateType(ManagedPrivateEndpointModelProperties.privateLinkServiceUrl,
   url
 );
-
-@@clientName(ProvisioningState, "GrafanaProvisioningState", "csharp");
-@@clientName(PublicNetworkAccess, "GrafanaPublicNetworkAccess", "csharp");
-@@clientName(ZoneRedundancy, "GrafanaZoneRedundancy", "csharp");
-@@clientName(ApiKey, "GrafanaApiKey", "csharp");
-@@clientName(GrafanaIntegrations.azureMonitorWorkspaceIntegrations,
-  "MonitorWorkspaceIntegrations",
-  "csharp"
-);
-@@clientName(AzureMonitorWorkspaceIntegration,
-  "MonitorWorkspaceIntegration",
-  "csharp"
-);
-@@clientName(AzureMonitorWorkspaceIntegration.azureMonitorWorkspaceResourceId,
-  "MonitorWorkspaceResourceId",
-  "csharp"
-);
 @@alternateType(AzureMonitorWorkspaceIntegration.azureMonitorWorkspaceResourceId,
   armResourceIdentifier
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
-  "ConnectionState",
-  "csharp"
+
+@@clientLocation(ManagedGrafanas.get, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.create, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.update, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.delete, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.listByResourceGroup, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.list, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints", "!csharp");
+@@clientLocation(ManagedPrivateEndpointModels.get,
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
-@@clientName(ManagedGrafanas.refresh,
-  "RefreshManagedPrivateEndpoint",
-  "csharp"
+@@clientLocation(ManagedPrivateEndpointModels.create,
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
-@@clientName(PrivateLinkResource, "GrafanaPrivateLinkResource", "csharp");
-@@clientName(ResourceSku, "ManagedGrafanaSku", "csharp");
+@@clientLocation(ManagedPrivateEndpointModels.update,
+  "ManagedPrivateEndpoints",
+  "!csharp"
+);
+@@clientLocation(ManagedPrivateEndpointModels.delete,
+  "ManagedPrivateEndpoints",
+  "!csharp"
+);
+@@clientLocation(ManagedPrivateEndpointModels.list,
+  "ManagedPrivateEndpoints",
+  "!csharp"
+);
