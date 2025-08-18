@@ -108,6 +108,10 @@ model FleetProperties {
   @added(Versions.v2025_08_01)
   displayName?: string;
 
+  @doc("Specifies the updated by a Compute Fleet test.")
+  @added(Versions.v2025_08_01)
+  updatedBy?: string;
+
   /** Mode of the Fleet. */
   @added(Versions.v2025_07_01_preview)
   mode?: FleetMode;
