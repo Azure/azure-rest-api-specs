@@ -5,8 +5,6 @@
 
 ## Getting Started
 
-test change
-
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
