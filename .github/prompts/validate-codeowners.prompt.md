@@ -1,6 +1,6 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel', 'ValidateCodeOwnerEntryForService', 'UpdateCodeowners'] 
+tools: ['CheckServiceLabel', 'ValidateCodeownersEntryForService', 'UpdateCodeowners'] 
 ---
 
 ## Goal: 
@@ -12,9 +12,16 @@ Use `CheckServiceLabel` to verify the service label exists:
 - **Exists/InReview**: Proceed to Step 2
 
 ## Step 2: Validate Code Owners  
-Ask user to specify SDK repository they want to validate codeowners for (dotnet, python, java, javascript, etc.) or detect from context.
+Ask user to specify SDK repository they want to validate codeowners for or detect from context.
 
-Use `ValidateCodeOwnerEntryForService` with either `serviceLabel` OR `repoPath` (or both, but at least one must be used).
+Repository name mapping:
+- .NET/dotnet: use "azure-sdk-for-net"
+- Python: use "azure-sdk-for-python" 
+- Java: use "azure-sdk-for-java"
+- JavaScript: use "azure-sdk-for-js"
+- Go: use "azure-sdk-for-go"
+
+Use `ValidateCodeownersEntryForService` with either `serviceLabel` OR `repoPath` or both, but at least one must be used. If one isn't provided, leave the parameter field empty.
 
 **If entry exists**: Go to Step 3
 **If no entry exists**: Go to Step 4
@@ -24,24 +31,37 @@ Valid code owners must be:
 - PUBLIC members of Microsoft and Azure GitHub organizations  
 - Have write access to the SDK repository
 
-**If at least 2 valid owners**: Success - optionally manage additional owners
+**If at least 2 valid owners**: Success - optionally add or delete additional owners
 **If less than 2 valid owners**: CRITICAL - must fix before proceeding:
 
-### Fix Options:
-1. **Fix invalid owners** - provide guidance:
-   - Microsoft org: [Join here](https://repos.opensource.microsoft.com/orgs/Microsoft), set public visibility at [Microsoft Org Visibility](https://github.com/orgs/Microsoft/people)
-   - Azure org: [Join here](https://repos.opensource.microsoft.com/orgs/Azure), set public visibility at [Azure Org Visibility](https://github.com/orgs/Azure/people)
-   - Write access: [Request here](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
-2. **Add new owners** using `UpdateCodeowners` with `isAdding: true`
-3. **Remove invalid + add valid** owners using `UpdateCodeowners`
-
-After any changes, re-validate with `ValidateCodeOwnerEntryForService` until at least 2 valid owners exist.
+After any changes, re-validate with `ValidateCodeownersEntryForService`.
 
 ## Step 4: Create New Code Owner Entry
 When no CODEOWNERS entry exists yet:
+1. Ensure that you have information about
+   - repo - **Required** - Repository name mapping:
+      - .NET/dotnet: use "azure-sdk-for-net"
+      - Python: use "azure-sdk-for-python" 
+      - Java: use "azure-sdk-for-java"
+      - JavaScript: use "azure-sdk-for-js"
+      - Go: use "azure-sdk-for-go"
+   - typeSpecProjectRoot - **Optional** This should be acquired only if the information is present in the previous chat history, if not, ignore and input `""`.
+   - path - **Optional** only if there is a service label and we're not making a new entry - This should be acquired when creating a new code owner entry, if no information is present ask the user. Typically looks like `/sdk/projectpath`
+   - serviceLabel - **Optional** only if there is a path and we're not making a new entry - This should be acquired from the previous step of Check or Create Service Label.
+   - serviceOwners - **Optional** if no ServiceLabel is present. Can be either owners to add or delete, depending on isAdding.
+   - sourceOwners - **Optional** if no path or PRLabel are present. Can be either owners to add or delete, depending on isAdding.
+   - isAdding - **Required** Should be true if adding owners to an existing entry, false if deleting owners from an existing entry. Should also be false when adding a brand new entry.
 1. Collect service owners and source owners (GitHub usernames)
 2. Use `UpdateCodeowners` with required parameters
 3. Must have at least 2 valid owners from the start
+
+### Fix Options:
+1. **Fix invalid owners** - If there are invalid owners after modifing the CODEOWNERS file ALWAYS provide guidance:
+   - Microsoft org: [Join here](https://repos.opensource.microsoft.com/orgs/Microsoft), set public visibility at [Microsoft Org Visibility](https://github.com/orgs/Microsoft/people?query={github_username})
+   - Azure org: [Join here](https://repos.opensource.microsoft.com/orgs/Azure), set public visibility at [Azure Org Visibility](https://github.com/orgs/Azure/people?query={github_username})
+   - Write access: [Request here](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
+2. **Add new owners** using `UpdateCodeowners` with `isAdding: true`
+3. **Remove invalid + add valid** owners using `UpdateCodeowners`
 
 ## Requirements
 - **MINIMUM**: At least 2 valid code owners at all times

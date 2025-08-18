@@ -99,7 +99,10 @@ This step should not check package readiness to verify namespace approval for ma
 **Actions**:
 1. To validate a service label refer to #file:./validate-service-label.prompt.md
 2. After service label is validated or created refer to #file:./validate-codeowners.prompt.md
-3. If both were already valid, continue, if you had to create a label or codeowner entry, display the PR(s) created.
+3. Handle post-validation actions based on results:
+   - **If both label and codeowners were already valid**: Prompt user "Your service label and codeowners are already properly configured. Would you like to modify the existing codeowners entry for your service?"
+   - **If new label or codeowner entries were created**: Display details of all created PRs, then prompt user "The following PRs have been created for your service configuration: [list PRs]. Would you like to make any additional modifications to these entries?"
+**Success Criteria**: Service label exists and codeowners are properly configured with at least 2 valid owners. For created entries, showcase all PR's.
 
 ## Step 10: Create release plan
 **Goal**: Create a release plan for the generated SDKs
