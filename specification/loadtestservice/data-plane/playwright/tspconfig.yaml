@@ -5,7 +5,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/playwright"
+    default: "sdk/playwright"
   "service-name":
     default: "playwright"
   "dependencies":
@@ -36,6 +36,7 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/playwright"
     package-dir: "Azure.Developer.Playwright"
     clear-output-folder: true
     model-namespace: false

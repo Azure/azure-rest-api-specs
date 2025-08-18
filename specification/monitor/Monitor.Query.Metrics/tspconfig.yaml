@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/monitor"
+    default: "sdk/monitor"
   "dependencies":
     default: ""
 
@@ -24,6 +24,7 @@ options:
     flavor: azure
     namespace: azure.monitor.querymetrics
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/monitor"
     package-dir: "Azure.Monitor.Query.Metrics"
     namespace: "{package-dir}"
     clear-output-folder: true

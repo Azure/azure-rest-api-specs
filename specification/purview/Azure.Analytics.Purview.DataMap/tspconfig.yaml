@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/purview"
+    default: "sdk/purview"
   "dependencies":
     default: ""
 emit:
@@ -20,12 +20,14 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/purview"
     package-dir: "Azure.Analytics.Purview.DataMap"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/purview"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Analytics.Purview.DataMap
     model-namespace: false

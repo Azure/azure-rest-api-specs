@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/face"
+    default: "sdk/face"
   "dependencies":
     default: ""
 emit:
@@ -21,12 +21,14 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/face"
     package-dir: "Azure.AI.Vision.Face"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/face"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.AI.Vision.Face
     model-namespace: false

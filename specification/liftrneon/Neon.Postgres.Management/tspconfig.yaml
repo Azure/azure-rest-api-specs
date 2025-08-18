@@ -1,7 +1,7 @@
 output-dir: "{project-root}/"
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/neonpostgres"
+    default: "sdk/neonpostgres"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -15,6 +15,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/neon.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/neonpostgres"
     flavor: azure
     clear-output-folder: true
     package-dir: "Azure.ResourceManager.NeonPostgres"

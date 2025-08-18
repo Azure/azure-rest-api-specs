@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/applicationinsights"
+    default: "sdk/applicationinsights"
   "dependencies":
     default: ""
 emit:
@@ -20,6 +20,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/applicationinsights"
     package-dir: "LiveMetrics"
     namespace: "{package-dir}"
     clear-output-folder: true

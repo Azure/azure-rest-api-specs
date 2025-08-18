@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/healthdataaiservices"
+    default: "sdk/healthdataaiservices"
   "dependencies":
     default: ""
 emit:
@@ -19,12 +19,14 @@ options:
     generate-test: false
     generate-sample: false
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/healthdataaiservices"
     package-dir: "Azure.Health.Deidentification"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/healthdataaiservices"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Health.Deidentification
     model-namespace: false

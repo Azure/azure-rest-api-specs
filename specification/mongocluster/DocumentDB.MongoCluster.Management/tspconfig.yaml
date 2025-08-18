@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/mongocluster"
+    default: "sdk/mongocluster"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -31,6 +31,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/mongocluster"
     package-dir: "Azure.ResourceManager.MongoCluster"
     flavor: azure
     clear-output-folder: true

@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/containerorchestratorruntime"
+    default: "sdk/containerorchestratorruntime"
   swagger-repo-dir:
     default: "{project-root}/swagger"
 
@@ -15,6 +15,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/kubernetesruntime.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/containerorchestratorruntime"
     package-dir: "Azure.ResourceManager.ContainerOrchestratorRuntime"
     flavor: azure
     clear-output-folder: true

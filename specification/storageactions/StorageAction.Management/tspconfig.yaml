@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/storageactions"
+    default: "sdk/storageactions"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,6 +12,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageactions.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/storageactions"
     flavor: azure
     package-dir: "Azure.ResourceManager.StorageActions"
     clear-output-folder: true

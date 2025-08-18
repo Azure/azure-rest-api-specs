@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/storagediscovery"
+    default: "sdk/storagediscovery"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,6 +13,7 @@ options:
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/storagediscovery"
     package-dir: "Azure.ResourceManager.StorageDiscovery"
     flavor: azure
     clear-output-folder: true

@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/schemaregistry"
+    default: "sdk/schemaregistry"
   "dependencies":
     default: ""
 emit:
@@ -35,12 +35,14 @@ options:
       name: "@azure/schema-registry"
     flavor: azure
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/schemaregistry"
     package-dir: "Azure.Data.SchemaRegistry"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/schemaregistry"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Data.SchemaRegistry
     model-namespace: true

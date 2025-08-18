@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: "{output-dir}/sdk/monitor"
+    default: "sdk/monitor"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -16,6 +16,7 @@ options:
     new-line: lf
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/monitor"
     flavor: azure
     package-dir: "Azure.ResourceManager.MonitorAccounts"
     clear-output-folder: true

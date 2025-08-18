@@ -5,7 +5,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/loadtesting"
+    default: "sdk/loadtesting"
   "service-directory-name":
     default: "loadtestservice"
   "provider-name":
@@ -36,6 +36,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/loadtesting"
     package-dir: "Azure.ResourceManager.LoadTesting"
     flavor: azure
     clear-output-folder: true

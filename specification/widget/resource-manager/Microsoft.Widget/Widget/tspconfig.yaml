@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/widget"
+    default: "sdk/widget"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,6 +12,7 @@ options:
     output-file: "{version-status}/{version}/widget.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/widget"
     flavor: azure
     package-dir: "Azure.ResourceManager.Widget"
     clear-output-folder: true

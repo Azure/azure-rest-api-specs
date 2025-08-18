@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/hybridkubernetes"
+    default: "sdk/hybridkubernetes"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -11,6 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/connectedClusters.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/hybridkubernetes"
     flavor: azure
     package-dir: "Azure.ResourceManager.Kubernetes"
     clear-output-folder: true

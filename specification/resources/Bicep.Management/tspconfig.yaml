@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/resources"
+    default: "sdk/resources"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -11,6 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.Resources/bicep/{version-status}/{version}/bicepClient.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/resources"
     flavor: azure
     package-dir: "Azure.ResourceManager.Resources.Bicep"
     clear-output-folder: true

@@ -5,7 +5,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/playwrighttesting"
+    default: "sdk/playwrighttesting"
   "dependencies":
     default: ""
 options:
@@ -31,12 +31,14 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/playwrighttesting"
     package-dir: "Azure.Developer.MicrosoftPlaywrightTesting"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/playwrighttesting"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Developer.MicrosoftPlaywrightTesting
     model-namespace: false

@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/portalservices"
+    default: "sdk/portalservices"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,6 +14,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/copilotSettings/{version-status}/{version}/copilotSettings.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/portalservices"
     flavor: azure
     package-dir: "Azure.ResourceManager.PortalServicesCopilot"
     clear-output-folder: true

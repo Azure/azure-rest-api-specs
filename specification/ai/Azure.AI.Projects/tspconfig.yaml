@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/ai"
+    default: "sdk/ai"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -19,6 +19,7 @@ options:
     generate-test: true
     generate-sample: false
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/ai"
     package-mode: "dataplane"
     package-dir: "Azure.AI.Projects"
     namespace: "{package-dir}"
@@ -31,6 +32,7 @@ options:
     generate-sample-project: false
     clear-output-folder: true
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/ai"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.AI.Projects
     model-namespace: false

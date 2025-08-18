@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/planetarycomputer"
+    default: "sdk/planetarycomputer"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -10,6 +10,7 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.Orbital/{version-status}/{version}/planetarycomputer.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/planetarycomputer"
     flavor: azure
     package-dir: "Azure.ResourceManager.PlanetaryComputer"
     clear-output-folder: true

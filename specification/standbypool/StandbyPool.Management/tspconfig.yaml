@@ -3,7 +3,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/standbypool"
+    default: "sdk/standbypool"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -24,6 +24,7 @@ options:
     flavor: "azure"
     service-name: "Standby Pool"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/standbypool"
     package-dir: "Azure.ResourceManager.StandbyPool"
     flavor: azure
     clear-output-folder: true

@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: "{output-dir}/sdk/onlineexperimentation"
+    default: "sdk/onlineexperimentation"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -35,6 +35,7 @@ options:
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/onlineexperimentation"
     package-dir: "Azure.Analytics.OnlineExperimentation"
     namespace: "{package-dir}"
     generate-convenience-methods: true
@@ -43,6 +44,7 @@ options:
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/onlineexperimentation"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Analytics.OnlineExperimentation
     model-namespace: false

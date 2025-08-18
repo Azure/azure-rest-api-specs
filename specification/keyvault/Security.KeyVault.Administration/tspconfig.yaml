@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/keyvault"
+    default: "sdk/keyvault"
   "dependencies":
     default: ""
 
@@ -38,10 +38,12 @@ options:
     generate-samples: false
     include-api-view-properties: false
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/keyvault"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.Security.KeyVault.Administration
     model-namespace: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/keyvault"
     package-dir: "Azure.Security.KeyVault.Administration"
     namespace: "Azure.Security.KeyVault.Administration"
     "output-path": "./src/Generated"

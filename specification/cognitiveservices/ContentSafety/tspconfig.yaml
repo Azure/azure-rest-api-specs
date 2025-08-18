@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: "{output-dir}/sdk/contentsafety"
+    default: "sdk/contentsafety"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -22,12 +22,14 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/contentsafety"
     package-dir: "Azure.AI.ContentSafety"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    service-dir: "{output-dir}/sdk/contentsafety"
     emitter-output-dir: "{service-dir}/{namespace}"
     namespace: Azure.AI.ContentSafety
     model-namespace: false

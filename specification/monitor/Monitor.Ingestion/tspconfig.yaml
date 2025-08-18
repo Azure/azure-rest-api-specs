@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "{output-dir}/sdk/monitor"
+    default: "sdk/monitor"
   "dependencies":
     default: ""
 
@@ -40,6 +40,7 @@ options:
     inject-spans: true
     generate-fakes: true
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/monitor"
     package-dir: "Azure.Monitor.Ingestion"
     namespace: "{package-dir}"
     clear-output-folder: true
