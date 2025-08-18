@@ -104,6 +104,10 @@ model FleetProperties {
   @visibility(Lifecycle.Read)
   uniqueId?: string;
 
+  @doc("Specifies the display name a Compute Fleet.")
+  @added(Versions.v2025_08_01)
+  displayName?: string;
+
   /** Mode of the Fleet. */
   @added(Versions.v2025_07_01_preview)
   mode?: FleetMode;
