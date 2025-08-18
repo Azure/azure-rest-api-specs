@@ -25,6 +25,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-client-generator-core/client-location-duplicate" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "CertificateRegistrationProvider API Client" })
 @versioned(Versions)

@@ -941,6 +941,12 @@
         "properties": {
           "$ref": "#/definitions/AppServiceCertificateOrderPatchResourceProperties",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -1273,6 +1279,12 @@
         "properties": {
           "$ref": "#/definitions/AppServiceCertificate",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -1601,7 +1613,9 @@
         },
         "value": {
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         }
       }

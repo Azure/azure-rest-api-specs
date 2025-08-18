@@ -162,6 +162,13 @@
 | `definitions.ReissueCertificateOrderRequest.properties.properties.$ref__added` | added | `#/definitions/ReissueCertificateOrderRequestProperties` |
 | `definitions.RenewCertificateOrderRequest.properties.properties.$ref__added` | added | `#/definitions/RenewCertificateOrderRequestProperties` |
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AppServiceCertificateOrderPatchResource.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |
+| `definitions.AppServiceCertificatePatchResource.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |

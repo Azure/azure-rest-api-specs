@@ -869,7 +869,9 @@
         },
         "value": {
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         }
       }
@@ -1256,6 +1258,12 @@
     },
     "AppServiceCertificateOrderPatchResource": {
       "properties": {
+        "tags__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "type__deleted": "object",
           "properties__deleted": {
@@ -1451,6 +1459,12 @@
     },
     "AppServiceCertificatePatchResource": {
       "properties": {
+        "tags__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "type__deleted": "object"
         }

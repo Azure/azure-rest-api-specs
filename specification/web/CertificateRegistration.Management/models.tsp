@@ -498,6 +498,12 @@ model AppServiceCertificateOrderPatchResource extends ProxyOnlyResource {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServiceCertificateOrderPatchResourceProperties;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
 }
 
 /**
@@ -672,6 +678,12 @@ model AppServiceCertificatePatchResource extends ProxyOnlyResource {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServiceCertificate;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
 }
 
 /**
@@ -963,6 +975,7 @@ model DataTableResponseObject {
   /**
    * Raw row values
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   rows?: string[][];
 }
 
@@ -1045,8 +1058,9 @@ model KeyValuePairStringObject {
   /**
    * Any object
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  value?: Record<unknown>;
+  value?: Record<string>;
 }
 
 /**
