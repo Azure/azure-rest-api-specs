@@ -20,7 +20,13 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
   @visibility(Lifecycle.Read)
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
+
+@@added(MongoCluster.identity,
+  Microsoft.DocumentDB.Versions.v2025_07_01_preview
+);
 
 @armResourceOperations
 interface MongoClusters {
@@ -78,15 +84,36 @@ scalar MongoClusterResourceId
 model MongoClusterProperties {
   /** The mode to create a mongo cluster. */
   @visibility(Lifecycle.Create)
-  createMode?: CreateMode;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "createMode")
+  oldCreateMode?: CreateMode;
 
   /** The parameters to create a point-in-time restore mongo cluster. */
   @visibility(Lifecycle.Create)
-  restoreParameters?: MongoClusterRestoreParameters;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "restoreParameters")
+  oldRestoreParameters?: MongoClusterRestoreParameters;
 
   /** The parameters to create a replica mongo cluster. */
   @visibility(Lifecycle.Create)
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "replicaParameters")
+  oldReplicaParameters?: MongoClusterReplicaParameters;
+
+  /** The mode to create a mongo cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
+  createMode?: CreateMode;
+
+  /** The parameters to create a point-in-time restore mongo cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
+  restoreParameters?: MongoClusterRestoreParameters;
+
+  /** The parameters to create a replica mongo cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
   replicaParameters?: MongoClusterReplicaParameters;
 
   /** The administrator's login for the mongo cluster. */
@@ -173,6 +200,15 @@ model MongoClusterProperties {
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   @visibility(Lifecycle.Read)
   infrastructureVersion?: string;
+
+  /** The authentication configuration for the cluster. */
+  @added(Versions.v2025_04_01_preview)
+  authConfig?: AuthConfigProperties;
+
+  /** The encryption configuration for the cluster. Depends on identity being configured. */
+  @added(Versions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  encryption?: EncryptionProperties;
 }
 
 /** The mode that the Mongo Cluster is created with. */
@@ -197,7 +233,7 @@ union CreateMode {
 /** Parameters used for restore operations */
 model MongoClusterRestoreParameters {
   /** UTC point in time to restore a mongo cluster */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitalized acronym in the property name."
   pointInTimeUTC?: utcDateTime;
 
   /** Resource ID to locate the source cluster to restore */
@@ -217,6 +253,30 @@ model ComputeProperties {
 model StorageProperties {
   /** The size of the data disk assigned to each server. */
   sizeGb?: int64;
+
+  /** The type of storage to provision the cluster servers with. */
+  @added(Versions.v2025_04_01_preview)
+  type?: StorageType;
+
+  /** The IOPs of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */
+  @added(Versions.v2025_04_01_preview)
+  iops?: int64;
+
+  /** The throughput of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */
+  @added(Versions.v2025_04_01_preview)
+  throughput?: int64;
+}
+
+/** The type of storage that a mongo cluster can be provisioned with. */
+@added(Versions.v2025_04_01_preview)
+union StorageType {
+  string,
+
+  /** Premium SSD for high performance workloads. */
+  "PremiumSSD",
+
+  /** Premium SSD v2 for very IO-intensive workloads. This is a preview option and has additional limitations. */
+  "PremiumSSDv2",
 }
 
 /** The sharding properties of the cluster. This includes the shard count and scaling options for the cluster. */
@@ -431,7 +491,7 @@ model NodeGroupProperties {
   sku?: string;
 
   /** The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitalized acronym in the property name."
   diskSizeGB?: int64;
 
   /** Whether high availability is enabled on the node group. */
@@ -484,4 +544,59 @@ union DataApiMode {
 
   /** Mongo Data API is disabled for the cluster. */
   "Disabled",
+}
+
+/** The authentication configuration for the Mongo cluster. */
+@added(Versions.v2025_04_01_preview)
+model AuthConfigProperties {
+  /** Allowed authentication modes for data access on the cluster. */
+  allowedModes?: AuthenticationMode[];
+}
+
+/** The authentication modes supporting on the Mongo cluster. */
+@added(Versions.v2025_04_01_preview)
+union AuthenticationMode {
+  string,
+
+  /** Native mongo authentication mode using username and password with auth mechanism 'SCRAM-SHA-256'. */
+  "NativeAuth",
+
+  /** Microsoft Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'. */
+  "MicrosoftEntraID",
+}
+
+/** The type of identity for key encryption key. */
+@added(Versions.v2025_07_01_preview)
+union KeyEncryptionKeyIdentityType {
+  string,
+
+  /** User assigned identity. */
+  UserAssignedIdentity: "UserAssignedIdentity",
+}
+
+/** The encryption configuration for the mongo cluster. */
+@added(Versions.v2025_07_01_preview)
+model EncryptionProperties {
+  /** Customer managed key encryption settings. */
+  customerManagedKeyEncryption?: CustomerManagedKeyEncryptionProperties;
+}
+
+/** Customer managed key encryption settings. */
+@added(Versions.v2025_07_01_preview)
+model CustomerManagedKeyEncryptionProperties {
+  /** The identity used to access the key encryption key. */
+  keyEncryptionKeyIdentity: KeyEncryptionKeyIdentity;
+
+  /** The URI of the key vault key used for encryption. */
+  keyEncryptionKeyUrl: string;
+}
+
+/** The identity used for key encryption key. */
+@added(Versions.v2025_07_01_preview)
+model KeyEncryptionKeyIdentity {
+  /** The type of identity. Only 'UserAssignedIdentity' is supported. */
+  identityType: KeyEncryptionKeyIdentityType;
+
+  /** The user assigned identity resource id. */
+  userAssignedIdentityResourceId: string;
 }

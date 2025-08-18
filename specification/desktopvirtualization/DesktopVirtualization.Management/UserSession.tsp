@@ -74,6 +74,7 @@ interface UserSessions {
 
   @get
   @action("userSessions")
+  @list
   listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,
@@ -119,9 +120,13 @@ interface UserSessions {
   /**
    * Send a message to a user.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   sendMessage is ArmResourceActionSync<
     UserSession,
     Request = {
+      /**
+       * Represents message sent to a UserSession.
+       */
       @bodyRoot sendMessage?: SendMessage;
     },
     Response = OkResponse

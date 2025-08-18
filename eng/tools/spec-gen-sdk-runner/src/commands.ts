@@ -1,9 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { runSpecGenSdkCommand, resetGitRepo, SpecConfigs } from "./utils.js";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
-import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
 import {
   generateArtifact,
   getBreakingChangeInfo,
@@ -15,6 +11,10 @@ import {
   prepareSpecGenSdkCommand,
   setPipelineVariables,
 } from "./command-helpers.js";
+import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
+import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
+import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
  * Generate SDK for a single spec.
@@ -84,16 +84,22 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
   let statusCode = 0;
   let pushedSpecConfigCount;
-  let breakingChangeLabel = "";
   let executionReport;
   let changedSpecPathText = "";
   let hasManagementPlaneSpecs = false;
+  let hasTypeSpecProjects = false;
   let overallRunHasBreakingChange = false;
   let currentRunHasBreakingChange = false;
+  let sdkGenerationExecuted = true;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+
+  if (changedSpecs.length === 0) {
+    sdkGenerationExecuted = false;
+    overallExecutionResult = "succeeded";
+  }
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -142,6 +148,9 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
+      if (executionReport.generateFromTypeSpec) {
+        hasTypeSpecProjects = true;
+      }
 
       if (executionReport.stagedArtifactsFolder) {
         stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
@@ -158,7 +167,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       if (overallExecutionResult !== "failed") {
         overallExecutionResult = currentExecutionResult;
       }
-      [currentRunHasBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
+      currentRunHasBreakingChange = getBreakingChangeInfo(executionReport);
       overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
       logMessage(`Runner command execution result:${currentExecutionResult}`);
     } catch (error) {
@@ -174,11 +183,12 @@ export async function generateSdkForSpecPr(): Promise<number> {
     generateArtifact(
       commandInput,
       overallExecutionResult,
-      breakingChangeLabel,
       overallRunHasBreakingChange,
       hasManagementPlaneSpecs,
+      hasTypeSpecProjects,
       stagedArtifactsFolder,
       apiViewRequestData,
+      sdkGenerationExecuted,
     ) || statusCode;
   return statusCode;
 }

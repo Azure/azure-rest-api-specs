@@ -8,8 +8,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface ScriptExecutions {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("ScriptExecutions_List")
   list is ArmResourceListByParent<
     ScriptExecution,
     Response = ArmResponse<ResourceList<ScriptExecution, "{name}sList">>
@@ -102,6 +100,7 @@ model ScriptExecutionProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Parameters the script will accept")
+  @identifiers(#[])
   parameters?: ScriptExecutionParameter[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
@@ -109,6 +108,7 @@ model ScriptExecutionProperties {
     Parameters that will be hidden/not visible to ARM, such as passwords and
     credentials
     """)
+  @identifiers(#[])
   hiddenParameters?: ScriptExecutionParameter[];
 
   @doc("""

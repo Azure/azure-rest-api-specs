@@ -1,8 +1,8 @@
+import { Readme } from "@azure-tools/specs-shared/readme";
 import { basename, join, relative } from "path";
-import { relativizePath, pathExists, isFailure, isWarning } from "./util.js";
 import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
-import { Readme } from "@azure-tools/specs-shared/readme";
+import { isFailure, isWarning, pathExists, relativizePath } from "./util.js";
 
 export async function correlateRuns(
   beforePath: string,
@@ -21,7 +21,9 @@ export async function correlateRuns(
     }
 
     // Look for candidates matching readme and tag
-    const beforeCandidates = beforeChecks.filter((r) => r.readme === readme && r.tag === tag);
+    const beforeCandidates = beforeChecks.filter((r) => {
+      return relative(beforePath, r.readme.path) === readmePathRelative && r.tag === tag;
+    });
     if (beforeCandidates.length === 1) {
       runCorrelations.set(key, {
         before: beforeCandidates[0],
@@ -35,13 +37,13 @@ export async function correlateRuns(
     // Look for candidates with a matching default tag from the baseline
     const beforeReadmePath = join(beforePath, readmePathRelative);
     if (await pathExists(beforeReadmePath)) {
-      const beforeReadme = new Readme(beforeReadmePath); 
+      const beforeReadme = new Readme(beforeReadmePath);
       const defaultTag = await getDefaultTag(beforeReadme);
       if (!defaultTag) {
         throw new Error(`No default tag found for readme ${readme} in before state`);
       }
       const beforeDefaultTagCandidates = beforeChecks.filter(
-        (r) => r.readme === readme && r.tag === defaultTag,
+        (r) => relative(beforePath, r.readme.path) === readmePathRelative && r.tag === defaultTag,
       );
 
       if (beforeDefaultTagCandidates.length === 1) {
@@ -57,7 +59,9 @@ export async function correlateRuns(
       }
 
       // Look for candidates matching just the readme file
-      const beforeReadmeCandidate = beforeChecks.filter((r) => r.readme === readme);
+      const beforeReadmeCandidate = beforeChecks.filter(
+        (r) => relative(beforePath, r.readme.path) === readmePathRelative,
+      );
       if (beforeReadmeCandidate.length === 1) {
         runCorrelations.set(key, {
           before: beforeReadmeCandidate[0],
@@ -146,7 +150,7 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
 
     const result = JSON.parse(line.trim());
     if (result.code == undefined) {
-      // Results without a code can be assumed to be fatal errors. Set the code 
+      // Results without a code can be assumed to be fatal errors. Set the code
       // to "FATAL"
       result.code = "FATAL";
     }
