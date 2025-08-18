@@ -409,6 +409,12 @@ union ExternalStorageType {
   @doc("ANF external storage with Ultra SKU.")
   AnfUltra: "AnfUltra",
 
+  @doc("Azure Elastic SAN with Base SKU.")
+  AzureElasticSanBase: "AzureElasticSanBase",
+
+  @doc("Azure Elastic SAN with Capacity SKU.")
+  AzureElasticSanCapacity: "AzureElasticSanCapacity",
+
   string,
 }
 
@@ -422,6 +428,15 @@ union NetworkSkuType {
 
   @doc("Express Route network type with Ultra SKU.")
   ExpressRouteUltra: "ExpressRouteUltra",
+
+  @doc("Azure Private Link End Point network type.")
+  AzurePrivateLinkEndPoint: "AzurePrivateLinkEndPoint",
+
+  @doc("Azure Private Link Egress network type.")
+  AzurePrivateLinkEgress: "AzurePrivateLinkEgress",
+
+  @doc("Azure Private Link Ingress network type.")
+  AzurePrivateLinkIngress: "AzurePrivateLinkIngress",
 
   string,
 }
