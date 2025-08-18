@@ -83,6 +83,7 @@ union RegistrationStatus {
 /**
  * Auto renew status
  */
+@added(Microsoft.Edge.Versions.v2025_08_01)
 union AutoRenew {
   /**
    * Auto renew is enabled.
@@ -102,6 +103,7 @@ union AutoRenew {
 /**
  * Pricing model
  */
+@added(Microsoft.Edge.Versions.v2025_08_01)
 union PricingModel {
   /**
    * Trial pricing model.
