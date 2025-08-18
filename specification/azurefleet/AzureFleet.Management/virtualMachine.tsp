@@ -65,10 +65,9 @@ union VMOperationStatus {
 
 /** The response of a virtual machine list operation. */
 @added(Versions.v2025_07_01_preview)
-@pagedResult
 model VirtualMachineListResult {
   /** The Virtual Machine items on this page. */
-  @items
+  @pageItems
   value: Array<VirtualMachine>;
 
   /** The link to the next page of items. */
