@@ -5,7 +5,7 @@ parameters:
     type: string
   - name: SdkRepoCommit
     type: string
-    default: 'HEAD'
+    default: 'main'
   - name: ConfigType
     type: string
     default: ''
@@ -93,6 +93,16 @@ stages:
             }
 
             $sdkRepoOwner = $Matches['organization']
+            # set repo owner to 'azure-sdk' when customized branch is provided
+            $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
+            $commitShaPattern = '^[a-fA-F0-9]{7,40}$'
+            if ($sdkRepoCommitish.contains(":")) {
+              Write-Host "##vso[task.logissue type=error]'SDK repository commit' must be a commit SHA or branch name without ':'"
+              Exit 1
+            }
+            if (($sdkRepoCommitish -ne 'main') -and ($sdkRepoCommitish -notmatch $commitShaPattern)) {
+              $sdkRepoOwner = 'azure-sdk'
+            }
             Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
             Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
 
@@ -109,7 +119,6 @@ stages:
             Write-Host "##vso[task.logissue type=error]One or more required variables is empty or invalid. Ensure that SpecRepoUrl and SdkRepoUrl are set to valid GitHub repository URLs."
             Exit 1
           }
-
         displayName: "Create Run Time Variables"
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
@@ -205,10 +214,28 @@ stages:
           ArtifactPath: $(StagedArtifactsFolder)
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
+      - pwsh: |
+          $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
+          $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
+          if (($sdkRepoCommitish -ne 'HEAD') -and ($sdkRepoCommitish -ne 'main')) {
+            # Query remote branches
+            $result = git ls-remote --heads origin $sdkRepoCommitish
+            if ([string]::IsNullOrEmpty($result)) {
+              Write-Host "'$sdkRepoCommitish' is NOT a branch."
+            } else {
+              Write-Host "'$sdkRepoCommitish' IS a branch."
+              $sdkPrBranchName = $sdkRepoCommitish
+            }
+          }
+          Write-Host "Branch name is set to: $sdkPrBranchName"
+          Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
+        workingDirectory: $(SdkRepoDirectory)
+        displayName: "Set SDK PR branch variable"
+
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
-            BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
+            BaseRepoBranch: $(SdkPullRequestSourceBranch)
             BaseRepoOwner: azure-sdk
             CommitMsg: $(GeneratedSDKInformation)
             TargetRepoOwner: $(SdkRepoOwner)
@@ -229,7 +256,7 @@ stages:
               -RepoName "$(SdkRepoName)"
               -BaseBranch "main"
               -PROwner "azure-sdk"
-              -PRBranch "$(PrBranch)-$(Build.BuildId)"
+              -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)"
