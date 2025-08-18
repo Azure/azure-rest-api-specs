@@ -14,15 +14,15 @@ scenarios:
         operationId: Profiles_Create
         parameters:
           profileName: $(afdprofileName)
-          profile: 
+          profile:
             location: "global"
             sku:
               name: Standard_AzureFrontDoor
-            identity: 
+            identity:
               type: "SystemAssigned"
       - step: AFDProfiles_Upgrade
         operationId: AFDProfiles_Upgrade
         parameters:
           profileName: $(afdprofileName)
-          profileUpgradeParameters: 
+          profileUpgradeParameters:
             wafMappingList: []

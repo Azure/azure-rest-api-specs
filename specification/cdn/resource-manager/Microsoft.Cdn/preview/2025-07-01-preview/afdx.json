@@ -4402,7 +4402,7 @@
       }
     },
     "MtlsScenarioType": {
-      "description": "Supported mTLS handshake scenarios. Should we define each enum here or link to documentation?",
+      "description": "Supported scenarios for establishing mTLS connection.",
       "enum": [
         "ClientCertificateRequiredAndValidated",
         "ClientCertificateRequiredAndOriginValidates",
@@ -4415,10 +4415,15 @@
         "modelAsString": true
       }
     },
-    "ClientCertificateRequiredAndValidated": {
-      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS handshake on behalf of customer.",
+    "ClientCertificateRequiredAndValidatedAdvancedSettings": {
+      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS connection on behalf of customer.",
       "x-ms-discriminator-value": "ClientCertificateRequiredAndValidated",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
       "required": [
         "secrets"
       ],
@@ -4451,10 +4456,26 @@
         }
       }
     },
-    "ClientCertificateValidatedIfPresented": {
-      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS handshake on behalf of customer if certificates are presented. If certificates are not presented, AFD will not terminate the connection, and instead ...",
+    "ClientCertificateRequiredAndOriginValidatesAdvancedSettings": {
+      "description": "AFD checks for the existence of a certificate and then forwards all relevant information for the origin to establish mTLS connection.",
+      "x-ms-discriminator-value": "ClientCertificateRequiredAndOriginValidates",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
+      "properties": {}
+    },
+    "ClientCertificateValidatedIfPresentedAdvancedSettings": {
+      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS handshake on behalf of customer if certificates are presented. If certificates are not presented, AFD will not terminate the connection. AFD will work as a request proxy only and assume client is using alternative way to establish mTLS on the origin.",
       "x-ms-discriminator-value": "ClientCertificateValidatedIfPresented",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
       "required": [
         "secrets"
       ],
@@ -4486,6 +4507,17 @@
           }
         }
       }
+    },
+    "CompleteMtlsPassthroughToOriginAdvancedSettings": {
+      "description": "AFD will work as a request proxy only and assume client is using alternative way to do the mTLS authentications on the origin.",
+      "x-ms-discriminator-value": "CompleteMtlsPassthroughToOrigin",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDDomainMtlsParameters"
+        }
+      ],
+      "properties": {}
     },
     "SecurityPolicy": {
       "description": "SecurityPolicy association for AzureFrontDoor profile",
@@ -4774,6 +4806,18 @@
             "name": "EnabledState",
             "modelAsString": true
           }
+        },
+        "enforceMtls": {
+          "description": "Set to Disabled by default. If set to Enabled, only custom domains with mTLS enabled can be added to child Route resources.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnforceMtlsEnabledState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4878,7 +4922,8 @@
         "UrlSigningKey",
         "CustomerCertificate",
         "ManagedCertificate",
-        "AzureFirstPartyManagedCertificate"
+        "AzureFirstPartyManagedCertificate",
+        "MtlsCertificateChain"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5036,6 +5081,37 @@
         "thumbprint": {
           "description": "Certificate thumbprint.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AfdSecretMtlsCertificateChain": {
+      "description": "Server-side certificate used for mTLS validation",
+      "x-ms-discriminator-value": "MtlsCertificateChain",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretParameters"
+        }
+      ],
+      "required": [
+        "secretSource",
+        "secretVersion"
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Version of the secret to be used",
+          "type": "string"
+        },
+        "expirationDate": {
+          "description": "Soonest expiration date among certificates in customer's certificate chain in ISO 8601 compliant format yyyy-MM-ddTHH:mm:ss.fffffffK in UTC",
+          "type": "string",
+          "format": "date-time",
           "readOnly": true
         }
       }
