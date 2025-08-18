@@ -55,7 +55,7 @@
   "paths": {
     "/api/health": {
       "head": {
-        "operationId": "HealthApi_GetServiceStatus",
+        "operationId": "GetServiceStatus",
         "summary": "Get service health status.",
         "description": "Get service health status.",
         "parameters": [
@@ -81,7 +81,7 @@
           }
         },
         "x-ms-examples": {
-          "HealthApi_GetServiceStatus": {
+          "GetServiceStatus": {
             "$ref": "./examples/HealthApi_GetServiceStatus.json"
           }
         }
@@ -89,7 +89,7 @@
     },
     "/api/hubs/{hub}/:addToGroups": {
       "post": {
-        "operationId": "WebPubSub_AddConnectionsToGroups",
+        "operationId": "AddConnectionsToGroups",
         "summary": "Add filtered connections to multiple groups.",
         "description": "Add filtered connections to multiple groups.",
         "parameters": [
@@ -132,7 +132,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_AddConnectionsToGroups": {
+          "AddConnectionsToGroups": {
             "$ref": "./examples/WebPubSub_AddConnectionsToGroups.json"
           }
         }
@@ -140,7 +140,7 @@
     },
     "/api/hubs/{hub}/:closeConnections": {
       "post": {
-        "operationId": "WebPubSub_CloseAllConnections",
+        "operationId": "CloseAllConnections",
         "summary": "Close the connections in the hub.",
         "description": "Close the connections in the hub.",
         "parameters": [
@@ -192,7 +192,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_CloseAllConnections": {
+          "CloseAllConnections": {
             "$ref": "./examples/WebPubSub_CloseAllConnections.json"
           }
         }
@@ -200,7 +200,7 @@
     },
     "/api/hubs/{hub}/:generateToken": {
       "post": {
-        "operationId": "WebPubSub_GenerateClientToken",
+        "operationId": "GenerateClientToken",
         "summary": "Generate token for the client to connect Azure Web PubSub service.",
         "description": "Generate token for the client to connect Azure Web PubSub service.",
         "produces": [
@@ -308,7 +308,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_GenerateClientToken": {
+          "GenerateClientToken": {
             "$ref": "./examples/WebPubSub_GenerateClientToken.json"
           }
         }
@@ -316,7 +316,7 @@
     },
     "/api/hubs/{hub}/:removeFromGroups": {
       "post": {
-        "operationId": "WebPubSub_RemoveConnectionsFromGroups",
+        "operationId": "RemoveConnectionsFromGroups",
         "summary": "Remove filtered connections from multiple groups.",
         "description": "Remove filtered connections from multiple groups.",
         "parameters": [
@@ -359,7 +359,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_RemoveConnectionsFromGroups": {
+          "RemoveConnectionsFromGroups": {
             "$ref": "./examples/WebPubSub_RemoveConnectionsFromGroups.json"
           }
         }
@@ -367,7 +367,7 @@
     },
     "/api/hubs/{hub}/:send": {
       "post": {
-        "operationId": "WebPubSub_SendToAll",
+        "operationId": "SendToAll",
         "summary": "Broadcast content inside request body to all the connected client connections.",
         "description": "Broadcast content inside request body to all the connected client connections.",
         "consumes": [
@@ -443,7 +443,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_SendToAll": {
+          "SendToAll": {
             "$ref": "./examples/WebPubSub_SendToAll.json"
           }
         }
@@ -451,7 +451,7 @@
     },
     "/api/hubs/{hub}/connections/{connectionId}": {
       "delete": {
-        "operationId": "WebPubSub_CloseConnection",
+        "operationId": "CloseConnection",
         "summary": "Close the client connection.",
         "description": "Close the client connection.",
         "parameters": [
@@ -500,13 +500,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_CloseConnection": {
+          "CloseConnection": {
             "$ref": "./examples/WebPubSub_CloseConnection.json"
           }
         }
       },
       "head": {
-        "operationId": "WebPubSub_ConnectionExists",
+        "operationId": "ConnectionExists",
         "summary": "Check if the connection with the given connectionId exists.",
         "description": "Check if the connection with the given connectionId exists.",
         "parameters": [
@@ -551,7 +551,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_ConnectionExists": {
+          "ConnectionExists": {
             "$ref": "./examples/WebPubSub_ConnectionExists.json"
           }
         }
@@ -559,7 +559,7 @@
     },
     "/api/hubs/{hub}/connections/{connectionId}/:send": {
       "post": {
-        "operationId": "WebPubSub_SendToConnection",
+        "operationId": "SendToConnection",
         "summary": "Send content inside request body to the specific connection.",
         "description": "Send content inside request body to the specific connection.",
         "consumes": [
@@ -625,7 +625,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_SendToConnection": {
+          "SendToConnection": {
             "$ref": "./examples/WebPubSub_SendToConnection.json"
           }
         }
@@ -633,7 +633,7 @@
     },
     "/api/hubs/{hub}/connections/{connectionId}/groups": {
       "delete": {
-        "operationId": "WebPubSub_RemoveConnectionFromAllGroups",
+        "operationId": "RemoveConnectionFromAllGroups",
         "summary": "Remove a connection from all groups.",
         "description": "Remove a connection from all groups.",
         "parameters": [
@@ -675,7 +675,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_RemoveConnectionFromAllGroups": {
+          "RemoveConnectionFromAllGroups": {
             "$ref": "./examples/WebPubSub_RemoveConnectionFromAllGroups.json"
           }
         }
@@ -683,7 +683,7 @@
     },
     "/api/hubs/{hub}/groups/{group}": {
       "head": {
-        "operationId": "WebPubSub_GroupExists",
+        "operationId": "GroupExists",
         "summary": "Check if there are any client connections inside the given group",
         "description": "Check if there are any client connections inside the given group",
         "parameters": [
@@ -730,7 +730,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_GroupExists": {
+          "GroupExists": {
             "$ref": "./examples/WebPubSub_GroupExists.json"
           }
         }
@@ -738,7 +738,7 @@
     },
     "/api/hubs/{hub}/groups/{group}/:closeConnections": {
       "post": {
-        "operationId": "WebPubSub_CloseGroupConnections",
+        "operationId": "CloseGroupConnections",
         "summary": "Close connections in the specific group.",
         "description": "Close connections in the specific group.",
         "parameters": [
@@ -800,7 +800,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_CloseGroupConnections": {
+          "CloseGroupConnections": {
             "$ref": "./examples/WebPubSub_CloseGroupConnections.json"
           }
         }
@@ -808,7 +808,7 @@
     },
     "/api/hubs/{hub}/groups/{group}/:send": {
       "post": {
-        "operationId": "WebPubSub_SendToGroup",
+        "operationId": "SendToGroup",
         "summary": "Send content inside request body to a group of connections.",
         "description": "Send content inside request body to a group of connections.",
         "consumes": [
@@ -894,7 +894,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_SendToGroup": {
+          "SendToGroup": {
             "$ref": "./examples/WebPubSub_SendToGroup.json"
           }
         }
@@ -902,7 +902,7 @@
     },
     "/api/hubs/{hub}/groups/{group}/connections": {
       "get": {
-        "operationId": "WebPubSub_ListConnectionsInGroup",
+        "operationId": "ListConnectionsInGroup",
         "summary": "List connections in a group.",
         "description": "List connections in a group.",
         "parameters": [
@@ -976,7 +976,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_ListConnectionsInGroup": {
+          "ListConnectionsInGroup": {
             "$ref": "./examples/WebPubSub_ListConnectionsInGroup.json"
           }
         },
@@ -987,7 +987,7 @@
     },
     "/api/hubs/{hub}/groups/{group}/connections/{connectionId}": {
       "put": {
-        "operationId": "WebPubSub_AddConnectionToGroup",
+        "operationId": "AddConnectionToGroup",
         "summary": "Add a connection to the target group.",
         "description": "Add a connection to the target group.",
         "parameters": [
@@ -1039,13 +1039,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_AddConnectionToGroup": {
+          "AddConnectionToGroup": {
             "$ref": "./examples/WebPubSub_AddConnectionToGroup.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSub_RemoveConnectionFromGroup",
+        "operationId": "RemoveConnectionFromGroup",
         "summary": "Remove a connection from the target group.",
         "description": "Remove a connection from the target group.",
         "parameters": [
@@ -1097,7 +1097,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_RemoveConnectionFromGroup": {
+          "RemoveConnectionFromGroup": {
             "$ref": "./examples/WebPubSub_RemoveConnectionFromGroup.json"
           }
         }
@@ -1105,7 +1105,7 @@
     },
     "/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}": {
       "put": {
-        "operationId": "WebPubSub_GrantPermission",
+        "operationId": "GrantPermission",
         "summary": "Grant permission to the connection.",
         "description": "Grant permission to the connection.",
         "parameters": [
@@ -1181,13 +1181,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_GrantPermission": {
+          "GrantPermission": {
             "$ref": "./examples/WebPubSub_GrantPermission.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSub_RevokePermission",
+        "operationId": "RevokePermission",
         "summary": "Revoke permission for the connection.",
         "description": "Revoke permission for the connection.",
         "parameters": [
@@ -1263,13 +1263,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_RevokePermission": {
+          "RevokePermission": {
             "$ref": "./examples/WebPubSub_RevokePermission.json"
           }
         }
       },
       "head": {
-        "operationId": "WebPubSub_CheckPermission",
+        "operationId": "CheckPermission",
         "summary": "Check if a connection has permission to the specified action.",
         "description": "Check if a connection has permission to the specified action.",
         "parameters": [
@@ -1348,7 +1348,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_CheckPermission": {
+          "CheckPermission": {
             "$ref": "./examples/WebPubSub_CheckPermission.json"
           }
         }
@@ -1356,7 +1356,7 @@
     },
     "/api/hubs/{hub}/users/{userId}": {
       "head": {
-        "operationId": "WebPubSub_UserExists",
+        "operationId": "UserExists",
         "summary": "Check if there are any client connections connected for the given user.",
         "description": "Check if there are any client connections connected for the given user.",
         "parameters": [
@@ -1401,7 +1401,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_UserExists": {
+          "UserExists": {
             "$ref": "./examples/WebPubSub_UserExists.json"
           }
         }
@@ -1409,7 +1409,7 @@
     },
     "/api/hubs/{hub}/users/{userId}/:closeConnections": {
       "post": {
-        "operationId": "WebPubSub_CloseUserConnections",
+        "operationId": "CloseUserConnections",
         "summary": "Close connections for the specific user.",
         "description": "Close connections for the specific user.",
         "parameters": [
@@ -1469,7 +1469,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_CloseUserConnections": {
+          "CloseUserConnections": {
             "$ref": "./examples/WebPubSub_CloseUserConnections.json"
           }
         }
@@ -1477,7 +1477,7 @@
     },
     "/api/hubs/{hub}/users/{userId}/:send": {
       "post": {
-        "operationId": "WebPubSub_SendToUser",
+        "operationId": "SendToUser",
         "summary": "Send content inside request body to the specific user.",
         "description": "Send content inside request body to the specific user.",
         "consumes": [
@@ -1550,7 +1550,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_SendToUser": {
+          "SendToUser": {
             "$ref": "./examples/WebPubSub_SendToUser.json"
           }
         }
@@ -1558,7 +1558,7 @@
     },
     "/api/hubs/{hub}/users/{userId}/groups": {
       "delete": {
-        "operationId": "WebPubSub_RemoveUserFromAllGroups",
+        "operationId": "RemoveUserFromAllGroups",
         "summary": "Remove a user from all groups.",
         "description": "Remove a user from all groups.",
         "parameters": [
@@ -1600,7 +1600,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_RemoveUserFromAllGroups": {
+          "RemoveUserFromAllGroups": {
             "$ref": "./examples/WebPubSub_RemoveUserFromAllGroups.json"
           }
         }
@@ -1608,7 +1608,7 @@
     },
     "/api/hubs/{hub}/users/{userId}/groups/{group}": {
       "put": {
-        "operationId": "WebPubSub_AddUserToGroup",
+        "operationId": "AddUserToGroup",
         "summary": "Add a user to the target group.",
         "description": "Add a user to the target group.",
         "parameters": [
@@ -1660,13 +1660,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_AddUserToGroup": {
+          "AddUserToGroup": {
             "$ref": "./examples/WebPubSub_AddUserToGroup.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSub_RemoveUserFromGroup",
+        "operationId": "RemoveUserFromGroup",
         "summary": "Remove a user from the target group.",
         "description": "Remove a user from the target group.",
         "parameters": [
@@ -1718,7 +1718,7 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_RemoveUserFromGroup": {
+          "RemoveUserFromGroup": {
             "$ref": "./examples/WebPubSub_RemoveUserFromGroup.json"
           }
         }

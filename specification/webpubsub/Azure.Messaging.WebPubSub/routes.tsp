@@ -11,21 +11,19 @@ namespace WebPubSub {
    * Get service health status.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Get service health status.")
   @route("/api/health")
   @head
-  op HealthApi_GetServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
+  op getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
 
   /**
    * Add filtered connections to multiple groups.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Add filtered connections to multiple groups.")
   @route("/api/hubs/{hub}/:addToGroups")
   @post
-  op WebPubSub_AddConnectionsToGroups is Azure.Core.Foundations.Operation<
+  op addConnectionsToGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -48,11 +46,10 @@ namespace WebPubSub {
    * Close the connections in the hub.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
   @post
-  op WebPubSub_CloseAllConnections is Azure.Core.Foundations.Operation<
+  op closeAllConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -81,11 +78,10 @@ namespace WebPubSub {
    * Generate token for the client to connect Azure Web PubSub service.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
   @post
-  op WebPubSub_GenerateClientToken is Azure.Core.Foundations.Operation<
+  op generateClientToken is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -141,11 +137,10 @@ namespace WebPubSub {
    * Remove filtered connections from multiple groups.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Remove filtered connections from multiple groups.")
   @route("/api/hubs/{hub}/:removeFromGroups")
   @post
-  op WebPubSub_RemoveConnectionsFromGroups is Azure.Core.Foundations.Operation<
+  op removeConnectionsFromGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -169,11 +164,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
   @post
-  op WebPubSub_SendToAll is Azure.Core.Foundations.Operation<
+  op sendToAll is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -227,11 +221,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Close the client connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @delete
-  op WebPubSub_CloseConnection is Azure.Core.Foundations.Operation<
+  op closeConnection is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -261,11 +254,10 @@ namespace WebPubSub {
    * Check if the connection with the given connectionId exists.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Check if the connection with the given connectionId exists.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @head
-  op WebPubSub_ConnectionExists is Azure.Core.Foundations.Operation<
+  op connectionExists is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -296,11 +288,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Send content inside request body to the specific connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
   @post
-  op WebPubSub_SendToConnection is Azure.Core.Foundations.Operation<
+  op sendToConnection is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -348,11 +339,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Remove a connection from all groups.")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
   @delete
-  op WebPubSub_RemoveConnectionFromAllGroups is Azure.Core.Foundations.Operation<
+  op removeConnectionFromAllGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -376,11 +366,10 @@ namespace WebPubSub {
    * Check if there are any client connections inside the given group
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Check if there are any client connections inside the given group")
   @route("/api/hubs/{hub}/groups/{group}")
   @head
-  op WebPubSub_GroupExists is Azure.Core.Foundations.Operation<
+  op groupExists is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -412,11 +401,10 @@ namespace WebPubSub {
    * Close connections in the specific group.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Close connections in the specific group.")
   @route("/api/hubs/{hub}/groups/{group}/:closeConnections")
   @post
-  op WebPubSub_CloseGroupConnections is Azure.Core.Foundations.Operation<
+  op closeGroupConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -455,11 +443,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Send content inside request body to a group of connections.")
   @route("/api/hubs/{hub}/groups/{group}/:send")
   @post
-  op WebPubSub_SendToGroup is Azure.Core.Foundations.Operation<
+  op sendToGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -522,12 +509,11 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("List connections in a group.")
   @route("/api/hubs/{hub}/groups/{group}/connections")
   @get
   @list
-  op WebPubSub_ListConnectionsInGroup is Azure.Core.Foundations.Operation<
+  op listConnectionsInGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -583,11 +569,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Remove a connection from the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @delete
-  op WebPubSub_RemoveConnectionFromGroup is Azure.Core.Foundations.Operation<
+  op removeConnectionFromGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -621,11 +606,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Add a connection to the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @put
-  op WebPubSub_AddConnectionToGroup is Azure.Core.Foundations.Operation<
+  op addConnectionToGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -662,11 +646,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Revoke permission for the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @delete
-  op WebPubSub_RevokePermission is Azure.Core.Foundations.Operation<
+  op revokePermission is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -705,11 +688,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Check if a connection has permission to the specified action.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
-  op WebPubSub_CheckPermission is Azure.Core.Foundations.Operation<
+  op checkPermission is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -754,11 +736,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Grant permission to the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @put
-  op WebPubSub_GrantPermission is Azure.Core.Foundations.Operation<
+  op grantPermission is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -799,11 +780,10 @@ namespace WebPubSub {
    * Check if there are any client connections connected for the given user.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Check if there are any client connections connected for the given user.")
   @route("/api/hubs/{hub}/users/{userId}")
   @head
-  op WebPubSub_UserExists is Azure.Core.Foundations.Operation<
+  op userExists is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -834,11 +814,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Close connections for the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:closeConnections")
   @post
-  op WebPubSub_CloseUserConnections is Azure.Core.Foundations.Operation<
+  op closeUserConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -875,11 +854,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Send content inside request body to the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:send")
   @post
-  op WebPubSub_SendToUser is Azure.Core.Foundations.Operation<
+  op sendToUser is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -934,11 +912,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Remove a user from all groups.")
   @route("/api/hubs/{hub}/users/{userId}/groups")
   @delete
-  op WebPubSub_RemoveUserFromAllGroups is Azure.Core.Foundations.Operation<
+  op removeUserFromAllGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -963,11 +940,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Remove a user from the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @delete
-  op WebPubSub_RemoveUserFromGroup is Azure.Core.Foundations.Operation<
+  op removeUserFromGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -1001,11 +977,10 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing Operation"
   @summary("Add a user to the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @put
-  op WebPubSub_AddUserToGroup is Azure.Core.Foundations.Operation<
+  op addUserToGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
