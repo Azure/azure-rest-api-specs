@@ -83,7 +83,7 @@ interface Evaluations {
   @added(Versions.v2025_07_31_preview)
   @route("runs:runBatch")
   @post
-  createBatchEvaluation is Azure.Core.Foundations.Operation<
+  createBatch is Azure.Core.Foundations.Operation<
     {
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
@@ -105,7 +105,7 @@ interface Evaluations {
   @added(Versions.v2025_07_31_preview)
   @route("runs:runSingle")
   @post
-  createSingleEvaluation is Azure.Core.Foundations.Operation<
+  createSingle is Azure.Core.Foundations.Operation<
     {
       @doc("Complete evaluation configuration including data source, evaluators, and result settings")
       @body
