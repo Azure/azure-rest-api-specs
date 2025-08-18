@@ -208,16 +208,17 @@ stages:
       - pwsh: |
           $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
           $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
-          if (($sdkRepoCommitish -ne 'HEAD') -and ($sdkRepoCommitish -ne 'main')) {
-            $sdkPrBranchName = $sdkRepoCommitish
+          if (($sdkRepoCommitish -ne 'HEAD') -and ($sdkRepoCommitish -ne 'main')) {            
             # Query remote branches
             $result = git ls-remote --heads origin $sdkRepoCommitish
             if ([string]::IsNullOrEmpty($result)) {
               Write-Host "'$sdkRepoCommitish' is NOT a branch."
             } else {
               Write-Host "'$sdkRepoCommitish' IS a branch."
+              $sdkPrBranchName = $sdkRepoCommitish
             }
           }
+          Write-Host "Branch name is set to: $sdkPrBranchName"
           Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
         workingDirectory: $(SdkRepoDirectory)
         displayName: "Set SDK PR branch variable"
@@ -225,7 +226,7 @@ stages:
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
-            BaseRepoBranch: $SdkPullRequestSourceBranch
+            BaseRepoBranch: $(SdkPullRequestSourceBranch)
             BaseRepoOwner: azure-sdk
             CommitMsg: $(GeneratedSDKInformation)
             TargetRepoOwner: $(SdkRepoOwner)
@@ -246,7 +247,7 @@ stages:
               -RepoName "$(SdkRepoName)"
               -BaseBranch "main"
               -PROwner "azure-sdk"
-              -PRBranch "$SdkPullRequestSourceBranch"
+              -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)"
