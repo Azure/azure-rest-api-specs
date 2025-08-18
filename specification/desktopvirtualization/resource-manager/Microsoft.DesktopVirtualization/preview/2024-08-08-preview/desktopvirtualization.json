@@ -1981,6 +1981,7 @@
           {
             "name": "msixImageURI",
             "in": "body",
+            "description": "Represents URI referring to MSIX Image",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MSIXImageURI"
@@ -2041,6 +2042,7 @@
           {
             "name": "importPackageInfoRequest",
             "in": "body",
+            "description": "Information to import app attach package",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImportPackageInfoRequest"
@@ -2077,7 +2079,7 @@
         "tags": [
           "HostPools"
         ],
-        "description": "Operation to list the RegistrationTokens associated with the HostPool",
+        "description": "Operation to list the RegistrationTokens associated with the HostPool.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2455,7 +2457,7 @@
         "tags": [
           "CustomPrivateEndpointConnection"
         ],
-        "description": "List a PrivateEndpointConnectionWithSystemData",
+        "description": "List private endpoint connections associated with hostpool.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2584,7 +2586,7 @@
         "tags": [
           "CustomPrivateEndpointConnection"
         ],
-        "description": "Create a PrivateEndpointConnectionWithSystemData",
+        "description": "Approve or reject a private endpoint connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2625,12 +2627,6 @@
         "responses": {
           "200": {
             "description": "Resource 'PrivateEndpointConnectionWithSystemData' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnectionWithSystemData' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
             }
@@ -3834,7 +3830,7 @@
         "tags": [
           "SessionHosts"
         ],
-        "description": "A synchronous resource action that returns no content.",
+        "description": "Retry provisioning on a SessionHost.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3867,8 +3863,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4224,6 +4220,7 @@
           {
             "name": "sendMessage",
             "in": "body",
+            "description": "Represents message sent to a UserSession.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/SendMessage"
@@ -5552,7 +5549,7 @@
         "tags": [
           "CustomPrivateEndpointConnection"
         ],
-        "description": "List a PrivateEndpointConnectionWithSystemData",
+        "description": "List private endpoint connections associated with Workspace.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -5658,7 +5655,7 @@
         "tags": [
           "CustomPrivateEndpointConnection"
         ],
-        "description": "Create a PrivateEndpointConnectionWithSystemData",
+        "description": "Approve or reject a private endpoint connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -5699,12 +5696,6 @@
         "responses": {
           "200": {
             "description": "Resource 'PrivateEndpointConnectionWithSystemData' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnectionWithSystemData' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
             }
@@ -7794,7 +7785,8 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/type",
-          "description": "The type of image session hosts use in the hostpool."
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-ms-client-name": "imageType"
         },
         "marketplaceInfo": {
           "$ref": "#/definitions/MarketplaceInfoPatchProperties",
@@ -7812,7 +7804,8 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/type",
-          "description": "The type of image session hosts use in the hostpool."
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-ms-client-name": "imageType"
         },
         "marketplaceInfo": {
           "$ref": "#/definitions/MarketplaceInfoProperties",
@@ -9602,14 +9595,7 @@
           "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.",
           "minimum": 0
         }
-      },
-      "required": [
-        "daysOfWeek",
-        "rampUpStartTime",
-        "peakStartTime",
-        "rampDownStartTime",
-        "offPeakStartTime"
-      ]
+      }
     },
     "ScalingPlanPooledSchedule": {
       "type": "object",
@@ -9672,7 +9658,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the ScalingPlanPooledSchedule"
+          "description": "Name of the ScalingPlanPooledSchedule",
+          "readOnly": true
         },
         "daysOfWeek": {
           "type": "array",
@@ -9766,7 +9753,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the ScalingPlanPooledSchedule"
+          "description": "Name of the ScalingPlanPooledSchedule",
+          "readOnly": true
         },
         "daysOfWeek": {
           "type": "array",
@@ -9852,16 +9840,7 @@
           "$ref": "#/definitions/SessionHostLoadBalancingAlgorithm",
           "description": "Load balancing algorithm for off-peak period."
         }
-      },
-      "required": [
-        "daysOfWeek",
-        "rampUpStartTime",
-        "rampUpCapacityThresholdPct",
-        "peakStartTime",
-        "rampDownStartTime",
-        "rampDownCapacityThresholdPct",
-        "offPeakStartTime"
-      ]
+      }
     },
     "ScalingPlanProperties": {
       "type": "object",
@@ -10732,7 +10711,7 @@
         },
         "properties": {
           "$ref": "#/definitions/SessionHostManagementUpdateStatusProperties",
-          "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses."
+          "description": "Properties bag for sessionHostManagement Update Statuses."
         }
       },
       "required": [
@@ -10745,7 +10724,7 @@
       "properties": {
         "correlationId": {
           "type": "string",
-          "description": "The Log Analytics."
+          "description": "The correlation Id for Log Analytics.."
         },
         "progress": {
           "$ref": "#/definitions/SessionHostManagementOperationProgress",
