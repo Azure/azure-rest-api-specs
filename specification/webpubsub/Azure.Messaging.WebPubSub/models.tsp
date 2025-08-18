@@ -95,7 +95,6 @@ union MessageContentType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
 union ResponseContentType {
-  
   /**
    * Content Type 'application/json'
    */

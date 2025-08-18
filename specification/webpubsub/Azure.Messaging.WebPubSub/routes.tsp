@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace WebPubSub {
-  
   /**
    * Get service health status.
    */
