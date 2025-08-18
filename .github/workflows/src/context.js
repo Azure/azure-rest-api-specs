@@ -1,5 +1,6 @@
 // @ts-check
 
+import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { rateLimitHook } from "./github.js";
 import { getIssueNumber } from "./issues.js";
@@ -44,7 +45,10 @@ export async function extractInputs(github, context, core) {
         context.payload.action === "synchronize" ||
         context.payload.action === "reopened" ||
         context.payload.action === "labeled" ||
-        context.payload.action === "unlabeled"))
+        context.payload.action === "unlabeled" ||
+        context.payload.action === "edited" ||
+        context.payload.action === "ready_for_review" ||
+        context.payload.action === "converted_to_draft"))
   ) {
     // Most properties on payload should be the same for both pull_request and pull_request_target
 
@@ -98,11 +102,14 @@ export async function extractInputs(github, context, core) {
     );
 
     let issue_number = NaN;
+    let head_sha = "";
 
     if (
       payload.workflow_run.event === "pull_request" ||
       payload.workflow_run.event == "pull_request_target"
     ) {
+      head_sha = payload.workflow_run.head_sha;
+
       // Other properties on payload.workflow_run should be the same for both pull_request and pull_request_target.
 
       // Extract the issue number from the payload itself, or by passing the head_sha to an API.
@@ -126,7 +133,6 @@ export async function extractInputs(github, context, core) {
         // Owner and repo for the PR head (at least one should differ from base for fork PRs)
         const head_owner = payload.workflow_run.head_repository.owner.login;
         const head_repo = payload.workflow_run.head_repository.name;
-        const head_sha = payload.workflow_run.head_sha;
 
         /** @type {PullRequest[]} */
         let pullRequests = [];
@@ -203,25 +209,43 @@ export async function extractInputs(github, context, core) {
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
       for (const artifactName of artifactNames) {
-        // If artifactName has format "issue-number=positive-integer", set issue_number=value
-        // Else, if artifactName has format "issue-number=other-string", warn and set issue_number=NaN
-        // - Workflows should probably only set "issue-number" to positive integers, but sometimes set it to "null"
-        // Else, if artifactName does not start with "issue-number=", ignore it
+        // If artifactName has format "head-sha=valid-full-sha", set head_sha=value
+        //   Else, if artifactName has format "head-sha=other-string", warn and set head_sha=""
+        // Else, if artifactName has format "issue-number=positive-integer", set issue_number=value
+        //   Else, if artifactName has format "issue-number=other-string", warn and set issue_number=NaN
+        //   - Workflows should probably only set "issue-number" to positive integers, but sometimes set it to "null"
+        // Else, if artifactName does not start with "head-sha=" or "issue-number=", ignore it
         const firstEquals = artifactName.indexOf("=");
         if (firstEquals !== -1) {
           const key = artifactName.substring(0, firstEquals);
-          if (key === "issue-number") {
+          if (key === "head-sha") {
+            const value = artifactName.substring(firstEquals + 1);
+            if (isFullGitSha(value)) {
+              head_sha = value;
+            } else {
+              // Producers must ensure they only set head-sha to valid full git SHA
+              throw new Error(`head-sha is not a valid full git SHA: '${value}'`);
+            }
+            continue;
+          } else if (key === "issue-number") {
             const value = artifactName.substring(firstEquals + 1);
             const parsedValue = Number.parseInt(value);
             if (parsedValue > 0) {
               issue_number = parsedValue;
             } else {
+              // TODO: Consider throwing instead of warning.  May need to handle `issue-number=null|undefined`,
+              // but invalid integers should throw.
               core.info(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
               issue_number = NaN;
             }
             continue;
           }
         }
+      }
+      if (!head_sha) {
+        core.info(
+          `Could not find 'head-sha' artifact, which is required to associate the triggering workflow run with the head SHA of a PR`,
+        );
       }
       if (!issue_number) {
         core.info(
@@ -237,8 +261,8 @@ export async function extractInputs(github, context, core) {
     inputs = {
       owner: payload.workflow_run.repository.owner.login,
       repo: payload.workflow_run.repository.name,
-      head_sha: payload.workflow_run.head_sha,
-      issue_number: issue_number,
+      head_sha,
+      issue_number,
       run_id: payload.workflow_run.id,
     };
   } else if (context.eventName === "check_run") {
