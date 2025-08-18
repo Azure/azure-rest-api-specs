@@ -1216,7 +1216,7 @@ model ResourceRange {
 @doc("Properties of an image version.")
 model ImageVersionProperties {
   @doc("The semantic version string.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Safe to suppress for an existing API during TypeSpec conversion."
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -1953,7 +1953,7 @@ model PoolUpdate is TrackedResourceUpdate {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScheduleProperties extends ScheduleUpdateProperties {
   @doc("Supported type this scheduled task represents.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Safe to suppress for an existing API during TypeSpec conversion."
   type: ScheduledType;
 
   @doc("The frequency of this scheduled task.")
