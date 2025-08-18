@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "bd794837-4d29-4647-9105-6339bfdb4e6a",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "tiType": "main",
+    "Query": {
+      "condition": {
+        "clauses": [
+          {
+            "field": "lastUpdatedTimeUtc",
+            "operator": "OnOrBeforeAbsolute",
+            "values": [
+              "2024-02-09T23:59:59.999Z"
+            ]
+          }
+        ],
+        "conditionConnective": null
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3
+      }
+    }
+  }
+}

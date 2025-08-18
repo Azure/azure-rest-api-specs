@@ -1,0 +1,83 @@
+{
+  "title": "RegistryEndpoint_CreateOrUpdate_MaximumSet",
+  "operationId": "RegistryEndpoint_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-123",
+    "registryEndpointName": "resource-123",
+    "resource": {
+      "properties": {
+        "host": "contoso.azurecr.io",
+        "authentication": {
+          "method": "Anonymous",
+          "anonymousSettings": {}
+        }
+      },
+      "extendedLocation": {
+        "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "host": "contoso.azurecr.io",
+          "authentication": {
+            "method": "Anonymous",
+            "anonymousSettings": {}
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/registryEndpoints/resource-name123",
+        "name": "resource-name123",
+        "type": "Microsoft.IoTOperations/registryEndpoints",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "host": "contoso.azurecr.io",
+          "authentication": {
+            "method": "Anonymous",
+            "anonymousSettings": {}
+          },
+          "provisioningState": "Accepted"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/registryEndpoints/resource-name123",
+        "name": "resource-name123",
+        "type": "Microsoft.IoTOperations/registryEndpoints",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}
