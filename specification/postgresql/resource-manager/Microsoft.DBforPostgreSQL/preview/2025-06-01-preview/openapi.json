@@ -3095,19 +3095,14 @@
             "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*\\.[a-fA-F0-9\\-]+$"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -3150,12 +3145,7 @@
             "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*\\.[a-fA-F0-9\\-]+$"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "parameters",
@@ -3163,7 +3153,7 @@
             "description": "Parameters required to update a private endpoint connection.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -3226,12 +3216,7 @@
             "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*\\.[a-fA-F0-9\\-]+$"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -7524,22 +7509,6 @@
       "type": "string",
       "description": "Private DNS suffix."
     },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "PrivateEndpointConnectionList": {
       "type": "object",
       "description": "List of private endpoint connections.",
@@ -7548,7 +7517,7 @@
           "type": "array",
           "description": "The PrivateEndpointConnection items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },
@@ -8113,7 +8082,7 @@
           "type": "array",
           "description": "List of private endpoint connections associated with the specified server.",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },

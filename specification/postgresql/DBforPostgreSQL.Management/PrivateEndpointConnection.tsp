@@ -9,35 +9,28 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager.Legacy;
 
 namespace Microsoft.DBforPostgreSQL;
 /**
  * The private endpoint connection resource.
  */
-@parentResource(Server)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = "^[a-zA-Z][a-zA-Z0-9-]*\\.[a-fA-F0-9\\-]+$"
-  >;
-}
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets a private endpoint connection.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is PrivateEndpointOperations.Read<Server>;
 
   /**
    * Approves or rejects a private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  update is ArmResourceCreateOrReplaceAsync<
-    PrivateEndpointConnection,
+  update is PrivateEndpointOperations.CreateOrUpdateAsync<
+    Server,
     Response = ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -46,8 +39,8 @@ interface PrivateEndpointConnections {
    * Deletes a private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PrivateEndpointConnection,
+  delete is PrivateEndpointOperations.DeleteAsync<
+    Server,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -55,15 +48,14 @@ interface PrivateEndpointConnections {
   /**
    * Lists all private endpoint connections on a server.
    */
-  listByServer is ArmResourceListByParent<
+  @list
+  listByServer is ListSinglePageByParent<
+    Server,
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionList>
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
-  "The name of the private endpoint connection."
-);
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.update::parameters.resource,
   "Parameters required to update a private endpoint connection."
