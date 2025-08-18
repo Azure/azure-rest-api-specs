@@ -3831,32 +3831,6 @@
       ],
       "x-ms-discriminator-value": "Bucketized"
     },
-    "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs": {
-      "type": "object",
-      "description": "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties.",
-      "properties": {
-        "defaultDatasetConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for datasets."
-        },
-        "defaultEventsConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for events."
-        },
-        "defaultProcessControlConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for process control."
-        },
-        "defaultStreamsConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for streams."
-        },
-        "additionalConfigSchemaRef": {
-          "type": "string",
-          "description": "The additional configuration schema reference."
-        }
-      }
-    },
     "AkriConnectorTemplateDeviceInboundEndpointType": {
       "type": "object",
       "description": "AkriConnectorTemplateDeviceInboundEndpointType properties.",
@@ -3872,10 +3846,6 @@
         "version": {
           "$ref": "#/definitions/NonEmptyString",
           "description": "The version of the device inbound endpoint."
-        },
-        "configurationSchemaRefs": {
-          "$ref": "#/definitions/AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs",
-          "description": "The configuration schema references for the device inbound endpoint."
         }
       },
       "required": [
@@ -3894,277 +3864,6 @@
       "required": [
         "logs"
       ]
-    },
-    "AkriConnectorTemplateHelmAdvancedConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmAdvancedConfiguration properties.",
-      "properties": {
-        "delete": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmDeleteConfiguration",
-          "description": "Delete operation configuration for the Helm chart."
-        },
-        "install": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmInstallConfiguration",
-          "description": "Install operation configuration for the Helm chart."
-        },
-        "upgrade": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmUpgradeConfiguration",
-          "description": "Upgrade operation configuration for the Helm chart."
-        }
-      }
-    },
-    "AkriConnectorTemplateHelmAuthSecretRef": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmAuthSecretRef properties.",
-      "properties": {
-        "secretRef": {
-          "type": "string",
-          "description": "The name of the secret."
-        },
-        "passwordKey": {
-          "type": "string",
-          "description": "The key of the password in the secret."
-        },
-        "usernameKey": {
-          "type": "string",
-          "description": "The key of the username in the secret."
-        }
-      },
-      "required": [
-        "secretRef",
-        "passwordKey",
-        "usernameKey"
-      ]
-    },
-    "AkriConnectorTemplateHelmConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmConfiguration properties.",
-      "properties": {
-        "helmConfigurationSettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmConfigurationSettings",
-          "description": "The Helm configuration settings."
-        }
-      },
-      "required": [
-        "helmConfigurationSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateRuntimeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "HelmConfiguration"
-    },
-    "AkriConnectorTemplateHelmConfigurationSettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmConfiguration properties.",
-      "properties": {
-        "registrySettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings",
-          "description": "The registry settings for the helm chart to be used."
-        },
-        "releaseName": {
-          "type": "string",
-          "description": "The release name of the Helm chart."
-        },
-        "repositoryName": {
-          "type": "string",
-          "description": "The name of the repository"
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the Helm chart."
-        },
-        "advancedConfiguration": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmAdvancedConfiguration",
-          "description": "Advanced configuration for the Helm chart.\nInstall, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`."
-        },
-        "values": {
-          "type": "object",
-          "description": "A map of values to pass to the helm chart.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "releaseName",
-        "repositoryName",
-        "version"
-      ]
-    },
-    "AkriConnectorTemplateHelmContainerRegistry": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmContainerRegistry properties.",
-      "properties": {
-        "containerRegistrySettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmContainerRegistrySettings",
-          "description": "The registry settings for the container registry."
-        }
-      },
-      "required": [
-        "containerRegistrySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "ContainerRegistry"
-    },
-    "AkriConnectorTemplateHelmContainerRegistrySettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmContainerRegistrySettings properties.",
-      "properties": {
-        "registry": {
-          "type": "string",
-          "description": "The registry to use for the Helm chart."
-        },
-        "authSecretRef": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmAuthSecretRef",
-          "description": "Optional reference to a secret in the same namespace to use for pulling the Helm chart."
-        }
-      },
-      "required": [
-        "registry"
-      ]
-    },
-    "AkriConnectorTemplateHelmDeleteConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmDeleteConfiguration properties.",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable pre/post upgrade hooks for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
-        }
-      }
-    },
-    "AkriConnectorTemplateHelmInstallConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmInstallConfiguration properties.",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable pre/post upgrade hooks for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
-        }
-      }
-    },
-    "AkriConnectorTemplateHelmRegistryEndpointRef": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmRegistryEndpointRef properties.",
-      "properties": {
-        "registryEndpointRef": {
-          "type": "string",
-          "description": "The name of the registry endpoint."
-        }
-      },
-      "required": [
-        "registryEndpointRef"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "RegistryEndpointRef"
-    },
-    "AkriConnectorTemplateHelmRegistrySettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmRegistrySettings properties.",
-      "properties": {
-        "registrySettingsType": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettingsType"
-        }
-      },
-      "discriminator": "registrySettingsType",
-      "required": [
-        "registrySettingsType"
-      ]
-    },
-    "AkriConnectorTemplateHelmRegistrySettingsType": {
-      "type": "string",
-      "description": "AkriConnectorTemplateHelmRegistrySettingsType values.",
-      "enum": [
-        "RegistryEndpointRef",
-        "ContainerRegistry"
-      ],
-      "x-ms-enum": {
-        "name": "AkriConnectorTemplateHelmRegistrySettingsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RegistryEndpointRef",
-            "value": "RegistryEndpointRef",
-            "description": "A Registry Endpoint reference."
-          },
-          {
-            "name": "ContainerRegistry",
-            "value": "ContainerRegistry",
-            "description": "A Container Registry reference."
-          }
-        ]
-      }
-    },
-    "AkriConnectorTemplateHelmUpgradeConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmUpgradeConfiguration properties.",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable pre/post upgrade hooks for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
-        }
-      }
     },
     "AkriConnectorTemplateManagedConfiguration": {
       "type": "object",
@@ -4321,6 +4020,10 @@
         "mqttConnectionConfiguration": {
           "$ref": "#/definitions/AkriConnectorsMqttConnectionConfiguration",
           "description": "Mqtt connection configuration settings."
+        },
+        "connectorMetadataRef": {
+          "type": "string",
+          "description": "A reference to a connector metadata document reference in a container registry."
         }
       },
       "required": [
@@ -4390,18 +4093,12 @@
       "type": "string",
       "description": "Runtime configuration types.",
       "enum": [
-        "HelmConfiguration",
         "ManagedConfiguration"
       ],
       "x-ms-enum": {
         "name": "AkriConnectorTemplateRuntimeConfigurationType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "HelmConfiguration",
-            "value": "HelmConfiguration",
-            "description": "Helm Configuration Type."
-          },
           {
             "name": "ManagedConfiguration",
             "value": "ManagedConfiguration",
