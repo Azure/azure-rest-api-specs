@@ -451,9 +451,6 @@ model RequiredComputerUseToolCallDetails {
   @doc("Safety checks that are pending acknowledgment by the developer.")
   @encodedName("application/json", "pending_safety_checks")
   pendingSafetyChecks: SafetyCheck[];
-
-  @doc("The type of the computer call. Always 'computer_call'.")
-  type: "computer_call";
 }
 
 //
@@ -655,13 +652,6 @@ model RunStepComputerUseToolCall extends RunStepToolCall {
   @doc("The detailed information about the computer use tool call.")
   @encodedName("application/json", "computer_use_preview")
   computerUsePreview: RunStepComputerUseToolCallDetails;
-
-  @doc("The output from the computer use tool.")
-  output: ComputerScreenshot;
-
-  @doc("Safety checks that have been acknowledged by the developer.")
-  @encodedName("application/json", "acknowledged_safety_checks")
-  acknowledgedSafetyChecks?: SafetyCheck[];
 }
 
 @doc("The detailed information about a computer use tool call.")
@@ -674,8 +664,12 @@ model RunStepComputerUseToolCallDetails {
   @encodedName("application/json", "pending_safety_checks")
   pendingSafetyChecks: SafetyCheck[];
 
-  @doc("The type of the computer call. Always 'computer_call'.")
-  type: "computer_call";
+  @doc("The output from the computer use tool.")
+  output: ComputerScreenshot;
+
+  @doc("Safety checks that have been acknowledged by the developer.")
+  @encodedName("application/json", "acknowledged_safety_checks")
+  acknowledgedSafetyChecks?: SafetyCheck[];
 }
 
 @doc("""
