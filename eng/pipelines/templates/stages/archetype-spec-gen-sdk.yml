@@ -96,6 +96,10 @@ stages:
             # set repo owner to 'azure-sdk' when customized branch is provided
             $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
             $commitShaPattern = '^[a-fA-F0-9]{7,40}$'
+            if ($sdkRepoCommitish.contains(":")) {
+              Write-Host "##vso[task.logissue type=error]'SDK repository commit' must be a commit SHA or branch name without ':'"
+              Exit 1
+            }
             if (($sdkRepoCommitish -ne 'main') -and ($sdkRepoCommitish -notmatch $commitShaPattern)) {
               $sdkRepoOwner = 'azure-sdk'
             }
@@ -210,25 +214,25 @@ stages:
           ArtifactPath: $(StagedArtifactsFolder)
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
-      - pwsh: |
-          $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
-          $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
-          if (($sdkRepoCommitish -ne 'HEAD') -and ($sdkRepoCommitish -ne 'main')) {            
-            # Query remote branches
-            $result = git ls-remote --heads origin $sdkRepoCommitish
-            if ([string]::IsNullOrEmpty($result)) {
-              Write-Host "'$sdkRepoCommitish' is NOT a branch."
-            } else {
-              Write-Host "'$sdkRepoCommitish' IS a branch."
-              $sdkPrBranchName = $sdkRepoCommitish
-            }
-          }
-          Write-Host "Branch name is set to: $sdkPrBranchName"
-          Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
-        workingDirectory: $(SdkRepoDirectory)
-        displayName: "Set SDK PR branch variable"
-
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - pwsh: |
+            $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
+            $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
+            if ($sdkRepoCommitish -ne 'main') {
+              # Query remote branches
+              $result = git ls-remote --heads origin $sdkRepoCommitish
+              if ([string]::IsNullOrEmpty($result)) {
+                Write-Host "'$sdkRepoCommitish' is NOT a branch."
+              } else {
+                Write-Host "'$sdkRepoCommitish' IS a branch."
+                $sdkPrBranchName = $sdkRepoCommitish
+              }
+            }
+            Write-Host "Branch name is set to: $sdkPrBranchName"
+            Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
+          workingDirectory: $(SdkRepoDirectory)
+          displayName: "Set SDK PR branch variable"
+
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
