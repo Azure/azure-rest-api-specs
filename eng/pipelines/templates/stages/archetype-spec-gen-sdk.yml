@@ -206,7 +206,7 @@ stages:
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
       - pwsh: |
-          $sdkPrBranchName = $(PrBranch)-$(Build.BuildId)
+          $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
           $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
           if (($sdkRepoCommitish -ne 'HEAD') -and ($sdkRepoCommitish -ne 'main')) {
             $sdkPrBranchName = $sdkRepoCommitish
