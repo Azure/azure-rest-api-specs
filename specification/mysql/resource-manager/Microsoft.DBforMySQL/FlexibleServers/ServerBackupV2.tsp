@@ -62,14 +62,12 @@ interface LongRunningBackups {
    * Get backup for a given server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LongRunningBackups_Get")
   get is ArmResourceRead<ServerBackupV2>;
 
   /**
    * List all the backups for a given server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LongRunningBackups_List")
   list is ArmResourceListByParent<
     ServerBackupV2,
     Response = ArmResponse<ServerBackupV2ListResult>
@@ -86,7 +84,6 @@ interface LongRunningBackup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @operationId("LongRunningBackup_Create")
   create is ServerBackupV2sOps.CreateOrUpdateAsync<
     ServerBackupV2,
     Response = ArmResourceUpdatedResponse<ServerBackupV2> | ArmResourceCreatedResponse<ServerBackupV2> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBackupV2> &

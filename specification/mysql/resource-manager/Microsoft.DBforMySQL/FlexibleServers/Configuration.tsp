@@ -90,7 +90,6 @@ interface Configurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("updateConfigurations")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @operationId("Configurations_BatchUpdate")
   batchUpdate is ArmResourceActionAsyncBase<
     Server,
     ConfigurationListForBatchUpdate,

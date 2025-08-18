@@ -34,7 +34,6 @@ interface AzureADAdministrators {
    * Gets information about an azure ad administrator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AzureADAdministrators_Get")
   get is ArmResourceRead<AzureADAdministrator>;
 
   /**
@@ -42,7 +41,6 @@ interface AzureADAdministrators {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AzureADAdministrators_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AzureADAdministrator,
     Response = ArmResourceUpdatedResponse<AzureADAdministrator> | ArmResourceCreatedResponse<
@@ -57,7 +55,6 @@ interface AzureADAdministrators {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AzureADAdministrators_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureADAdministrator,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -67,7 +64,6 @@ interface AzureADAdministrators {
    * List all the AAD administrators in a given server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AzureADAdministrators_ListByServer")
   listByServer is ArmResourceListByParent<
     AzureADAdministrator,
     Response = ArmResponse<AdministratorListResult>

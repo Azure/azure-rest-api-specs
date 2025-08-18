@@ -19,7 +19,6 @@ interface LocationBasedCapabilities {
    * Get capabilities at specified location in a given subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LocationBasedCapabilities_List")
   @autoRoute
   @list
   @get
@@ -37,7 +36,6 @@ interface CheckVirtualNetworkSubnetUsage {
    * Get virtual network subnet usage for a given vNet resource id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CheckVirtualNetworkSubnetUsage_Execute")
   @autoRoute
   @action("checkVirtualNetworkSubnetUsage")
   execute is ArmProviderActionSync<
@@ -54,7 +52,6 @@ interface CheckNameAvailability {
    * Check the availability of name for server
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CheckNameAvailability_Execute")
   @autoRoute
   @action("checkNameAvailability")
   execute is ArmProviderActionSync<
@@ -71,7 +68,6 @@ interface CheckNameAvailabilityWithoutLocation {
    * Check the availability of name for server
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CheckNameAvailabilityWithoutLocation_Execute")
   @autoRoute
   @action("checkNameAvailability")
   execute is ArmProviderActionSync<
@@ -89,7 +85,6 @@ interface OperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get the operation result for a long running operation.")
-  @operationId("OperationResults_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/operationResults/{operationId}")
   @get
   get(
@@ -124,7 +119,6 @@ interface GetPrivateDnsZoneSuffix {
    * Get private DNS zone suffix in the cloud.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GetPrivateDnsZoneSuffix_Execute")
   @autoRoute
   @action("getPrivateDnsZoneSuffix")
   execute is ArmProviderActionSync<Response = GetPrivateDnsZoneSuffixResponse>;
@@ -139,7 +133,6 @@ interface Replicas {
   @list
   @get
   @action("replicas")
-  @operationId("Replicas_ListByServer")
   listByServer is ArmResourceActionSync<
     Server,
     void,

@@ -171,14 +171,13 @@ interface Servers {
 }
 
 @armResourceOperations
-interface BackupAndExportImpl {
+interface BackupAndExport {
   /**
    * Exports the backup of the given server by creating a backup if not existing.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("backupAndExport")
-  @operationId("BackupAndExport_Create")
-  backupAndExportCreate is ArmResourceActionAsync<
+  create is ArmResourceActionAsync<
     Server,
     BackupAndExportRequest,
     BackupAndExportResponse
@@ -188,7 +187,6 @@ interface BackupAndExportImpl {
    * Validates if backup can be performed for given server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BackupAndExport_ValidateBackup")
   validateBackup is ArmResourceActionSync<
     Server,
     void,
@@ -205,8 +203,7 @@ interface LogFiles {
   @list
   @get
   @action("logFiles")
-  @operationId("LogFiles_ListByServer")
-  logFilesListByServer is ArmResourceActionSync<
+  listByServer is ArmResourceActionSync<
     Server,
     void,
     Response = ArmResponse<LogFileListResult>
@@ -219,7 +216,6 @@ interface ServersMigration {
    * Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ServersMigration_CutoverMigration")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   cutoverMigration is ArmResourceActionAsync<
     Server,
@@ -238,7 +234,7 @@ interface ServersMigration {
 @@doc(Servers.update::parameters.properties,
   "The required parameters for updating a server."
 );
-@@doc(BackupAndExportImpl.backupAndExportCreate::parameters.body,
+@@doc(BackupAndExport.create::parameters.body,
   "The required parameters for creating and exporting backup of the given server."
 );
 @@doc(Servers.validateEstimateHighAvailability::parameters.body,

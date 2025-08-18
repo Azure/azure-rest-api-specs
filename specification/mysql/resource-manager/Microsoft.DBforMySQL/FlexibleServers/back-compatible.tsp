@@ -55,9 +55,7 @@ using Microsoft.DBforMySQL;
 
 @@clientName(Servers.create::parameters.resource, "parameters");
 @@clientName(Servers.update::parameters.properties, "parameters");
-@@clientName(BackupAndExportImpl.backupAndExportCreate::parameters.body,
-  "parameters"
-);
+@@clientName(BackupAndExport.create::parameters.body, "parameters");
 @@clientName(Configurations.batchUpdate::parameters.body, "parameters");
 @@clientName(Servers.validateEstimateHighAvailability::parameters.body,
   "parameters"
