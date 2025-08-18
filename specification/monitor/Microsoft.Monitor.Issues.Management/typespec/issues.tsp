@@ -41,12 +41,12 @@ interface Issue {
     Resource = IssueResource,
     Parameters = {
       @doc("Related resource or alert that is to be added to the issue (default: empty - the issue will be created without any related resources or alerts)")
-      @path
-      related: string;
+      @query
+      related?: string;
 
       @doc("Whether to automatically start an investigation once the issue is created (default: false)")
-      @path
-      startInvestigation: boolean;
+      @query
+      startInvestigation?: boolean;
     }
   >;
 
