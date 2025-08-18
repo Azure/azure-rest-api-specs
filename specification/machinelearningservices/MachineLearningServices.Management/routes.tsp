@@ -68,6 +68,7 @@ interface QuotasOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Quotas_List")
   @autoRoute
+  @list
   @get
   @action("quotas")
   list is ArmProviderActionSync<
@@ -86,6 +87,7 @@ interface PTUQuotaOperationGroup {
   @summary("List available MaaS PTU quota.")
   @operationId("PTUQuota_ListAvailable")
   @autoRoute
+  @list
   @get
   @action("availableQuota")
   listAvailable is ArmProviderActionSync<
@@ -122,6 +124,7 @@ interface PTUQuotaOperationGroup {
   @summary("List MaaS PTU usage and quota.")
   @operationId("PTUQuota_List")
   @autoRoute
+  @list
   @get
   @action("quotaAndUsage")
   list is ArmProviderActionSync<

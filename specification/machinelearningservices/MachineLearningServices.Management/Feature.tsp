@@ -25,7 +25,8 @@ model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties, false> {
 }
 
 @armResourceOperations
-interface FeatureOps extends Azure.ResourceManager.Legacy.LegacyOperations<
+interface FeatureOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -53,7 +54,7 @@ interface FeatureOps extends Azure.ResourceManager.Legacy.LegacyOperations<
         featuresetVersion: string,
       },
       {
-        /** Inference Endpoint name. */
+        /** Inference FeatureName name. */
         @path
         @segment("features")
         @key

@@ -280,6 +280,9 @@
           "List available MaaS PTU quota.": {
             "$ref": "./examples/PTUQuota/listAvailable.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -361,6 +364,9 @@
           "List MaaS PTU usage and quota.": {
             "$ref": "./examples/PTUQuota/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13821,7 +13827,7 @@
           {
             "name": "featureName",
             "in": "path",
-            "description": "Inference Endpoint name.",
+            "description": "Inference FeatureName name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
