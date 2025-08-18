@@ -9,28 +9,35 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.ResourceManager.Legacy;
 
 namespace Microsoft.SignalRService;
 /**
  * A private endpoint connection to an azure resource
  */
-model PrivateEndpointConnection is PrivateEndpointConnectionResource;
-alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+@parentResource(WebPubSubResource)
+model PrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = ""
+  >;
+}
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Get the specified private endpoint connection
    */
-  get is PrivateEndpointOperations.Read<WebPubSubResource>;
+  get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Update the state of specified private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  update is PrivateEndpointOperations.CreateOrUpdateAsync<
-    WebPubSubResource,
+  update is ArmResourceCreateOrReplaceSync<
+    PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
   >;
 
@@ -38,8 +45,8 @@ interface PrivateEndpointConnections {
    * Delete the specified private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is PrivateEndpointOperations.DeleteAsync<
-    WebPubSubResource,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    PrivateEndpointConnection,
     Response =
       | OkResponse
       | ArmDeletedResponse
@@ -50,14 +57,15 @@ interface PrivateEndpointConnections {
   /**
    * List private endpoint connections
    */
-  @list
-  list is ListSinglePageByParent<
-    WebPubSubResource,
+  list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionList>
   >;
 }
 
+@@doc(PrivateEndpointConnection.name,
+  "The name of the private endpoint connection associated with the Azure resource."
+);
 @@doc(PrivateEndpointConnection.properties,
   "Private endpoint connection properties"
 );
