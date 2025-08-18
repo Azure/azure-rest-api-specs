@@ -312,9 +312,9 @@ model ArtifactDownloadResult {
   linkExpiry: utcDateTime;
 }
 
-@doc("The hardware settings properties")
+@doc("The hardware setting properties")
 @added(Microsoft.Edge.Versions.v2025_08_01)
-model HardwareSettingsProperties {
+model HardwareSettingProperties {
   @visibility(Lifecycle.Read)
   @doc("The resource provisioning state")
   provisioningState?: ResourceProvisioningState;

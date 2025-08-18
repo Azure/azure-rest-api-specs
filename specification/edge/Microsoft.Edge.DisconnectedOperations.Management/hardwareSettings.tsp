@@ -8,7 +8,6 @@ import "./disconnectedOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
@@ -16,22 +15,22 @@ namespace Microsoft.Edge;
 @doc("Hardware settings resource.")
 @parentResource(DisconnectedOperation)
 @added(Microsoft.Edge.Versions.v2025_08_01)
-model HardwareSettings is ProxyResource<HardwareSettingsProperties> {
-  ...ResourceNameParameter<HardwareSettings>;
+model HardwareSetting is ProxyResource<HardwareSettingProperties> {
+  ...ResourceNameParameter<HardwareSetting>;
 }
 
 @armResourceOperations
 @added(Microsoft.Edge.Versions.v2025_08_01)
-interface HardwareSettingsOperations {
+interface HardwareSettings {
   @doc("List by parent")
-  listByParent is ArmResourceListByParent<HardwareSettings>;
+  listByParent is ArmResourceListByParent<HardwareSetting>;
 
   @doc("Get the hardware settings resource")
-  get is ArmResourceRead<HardwareSettings>;
+  get is ArmResourceRead<HardwareSetting>;
 
   @doc("Create or update hardware settings")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<HardwareSettings>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<HardwareSetting>;
 
   @doc("Delete hardware settings")
-  delete is ArmResourceDeleteWithoutOkAsync<HardwareSettings>;
+  delete is ArmResourceDeleteWithoutOkAsync<HardwareSetting>;
 }

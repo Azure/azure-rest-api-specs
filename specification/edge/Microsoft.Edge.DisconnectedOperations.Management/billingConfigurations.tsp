@@ -21,7 +21,7 @@ model BillingConfiguration is ProxyResource<BillingConfigurationProperties> {
 
 @armResourceOperations
 @added(Microsoft.Edge.Versions.v2025_08_01)
-interface BillingConfigurationOperations {
+interface BillingConfigurations {
   @doc("List by parent")
   listByParent is ArmResourceListByParent<BillingConfiguration>;
 

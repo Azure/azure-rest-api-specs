@@ -49,10 +49,10 @@
       "name": "Artifacts"
     },
     {
-      "name": "HardwareSettingsOperations"
+      "name": "HardwareSettings"
     },
     {
-      "name": "BillingConfigurationOperations"
+      "name": "BillingConfigurations"
     }
   ],
   "paths": {
@@ -375,9 +375,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/billingConfigurations": {
       "get": {
-        "operationId": "BillingConfigurationOperations_ListByParent",
+        "operationId": "BillingConfigurations_ListByParent",
         "tags": [
-          "BillingConfigurationOperations"
+          "BillingConfigurations"
         ],
         "description": "List by parent",
         "parameters": [
@@ -414,8 +414,8 @@
           }
         },
         "x-ms-examples": {
-          "BillingConfigurationOperations_ListByParent_MaximumSet": {
-            "$ref": "./examples/BillingConfigurationOperations_ListByParent_MaximumSet_Gen.json"
+          "BillingConfigurations_ListByParent_MaximumSet": {
+            "$ref": "./examples/BillingConfigurations_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -425,9 +425,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/billingConfigurations/{billingConfigurationName}": {
       "get": {
-        "operationId": "BillingConfigurationOperations_Get",
+        "operationId": "BillingConfigurations_Get",
         "tags": [
-          "BillingConfigurationOperations"
+          "BillingConfigurations"
         ],
         "description": "Get the billing configuration resource",
         "parameters": [
@@ -472,15 +472,15 @@
           }
         },
         "x-ms-examples": {
-          "BillingConfigurationOperations_Get_MaximumSet": {
-            "$ref": "./examples/BillingConfigurationOperations_Get_MaximumSet_Gen.json"
+          "BillingConfigurations_Get_MaximumSet": {
+            "$ref": "./examples/BillingConfigurations_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "BillingConfigurationOperations_CreateOrUpdate",
+        "operationId": "BillingConfigurations_CreateOrUpdate",
         "tags": [
-          "BillingConfigurationOperations"
+          "BillingConfigurations"
         ],
         "description": "Create or update billing configuration",
         "parameters": [
@@ -551,8 +551,8 @@
           }
         },
         "x-ms-examples": {
-          "BillingConfigurationOperations_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/BillingConfigurationOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          "BillingConfigurations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/BillingConfigurations_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -561,9 +561,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "BillingConfigurationOperations_Delete",
+        "operationId": "BillingConfigurations_Delete",
         "tags": [
-          "BillingConfigurationOperations"
+          "BillingConfigurations"
         ],
         "description": "Delete billing configuration",
         "parameters": [
@@ -619,8 +619,8 @@
           }
         },
         "x-ms-examples": {
-          "BillingConfigurationOperations_Delete_MaximumSet": {
-            "$ref": "./examples/BillingConfigurationOperations_Delete_MaximumSet_Gen.json"
+          "BillingConfigurations_Delete_MaximumSet": {
+            "$ref": "./examples/BillingConfigurations_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -631,9 +631,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/hardwareSettings": {
       "get": {
-        "operationId": "HardwareSettingsOperations_ListByParent",
+        "operationId": "HardwareSettings_ListByParent",
         "tags": [
-          "HardwareSettingsOperations"
+          "HardwareSettings"
         ],
         "description": "List by parent",
         "parameters": [
@@ -659,7 +659,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HardwareSettingsListResult"
+              "$ref": "#/definitions/HardwareSettingListResult"
             }
           },
           "default": {
@@ -670,8 +670,8 @@
           }
         },
         "x-ms-examples": {
-          "HardwareSettingsOperations_ListByParent_MaximumSet": {
-            "$ref": "./examples/HardwareSettingsOperations_ListByParent_MaximumSet_Gen.json"
+          "HardwareSettings_ListByParent_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -679,11 +679,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/hardwareSettings/{hardwareSettingsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/hardwareSettings/{hardwareSettingName}": {
       "get": {
-        "operationId": "HardwareSettingsOperations_Get",
+        "operationId": "HardwareSettings_Get",
         "tags": [
-          "HardwareSettingsOperations"
+          "HardwareSettings"
         ],
         "description": "Get the hardware settings resource",
         "parameters": [
@@ -705,9 +705,9 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
-            "name": "hardwareSettingsName",
+            "name": "hardwareSettingName",
             "in": "path",
-            "description": "The name of the HardwareSettings",
+            "description": "The name of the HardwareSetting",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -717,7 +717,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HardwareSettings"
+              "$ref": "#/definitions/HardwareSetting"
             }
           },
           "default": {
@@ -728,15 +728,15 @@
           }
         },
         "x-ms-examples": {
-          "HardwareSettingsOperations_Get_MaximumSet": {
-            "$ref": "./examples/HardwareSettingsOperations_Get_MaximumSet_Gen.json"
+          "HardwareSettings_Get_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "HardwareSettingsOperations_CreateOrUpdate",
+        "operationId": "HardwareSettings_CreateOrUpdate",
         "tags": [
-          "HardwareSettingsOperations"
+          "HardwareSettings"
         ],
         "description": "Create or update hardware settings",
         "parameters": [
@@ -758,9 +758,9 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
-            "name": "hardwareSettingsName",
+            "name": "hardwareSettingName",
             "in": "path",
-            "description": "The name of the HardwareSettings",
+            "description": "The name of the HardwareSetting",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -771,21 +771,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HardwareSettings"
+              "$ref": "#/definitions/HardwareSetting"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'HardwareSettings' update operation succeeded",
+            "description": "Resource 'HardwareSetting' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HardwareSettings"
+              "$ref": "#/definitions/HardwareSetting"
             }
           },
           "201": {
-            "description": "Resource 'HardwareSettings' create operation succeeded",
+            "description": "Resource 'HardwareSetting' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HardwareSettings"
+              "$ref": "#/definitions/HardwareSetting"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -807,8 +807,8 @@
           }
         },
         "x-ms-examples": {
-          "HardwareSettingsOperations_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/HardwareSettingsOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          "HardwareSettings_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -817,9 +817,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "HardwareSettingsOperations_Delete",
+        "operationId": "HardwareSettings_Delete",
         "tags": [
-          "HardwareSettingsOperations"
+          "HardwareSettings"
         ],
         "description": "Delete hardware settings",
         "parameters": [
@@ -841,9 +841,9 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
-            "name": "hardwareSettingsName",
+            "name": "hardwareSettingName",
             "in": "path",
-            "description": "The name of the HardwareSettings",
+            "description": "The name of the HardwareSetting",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -875,8 +875,8 @@
           }
         },
         "x-ms-examples": {
-          "HardwareSettingsOperations_Delete_MaximumSet": {
-            "$ref": "./examples/HardwareSettingsOperations_Delete_MaximumSet_Gen.json"
+          "HardwareSettings_Delete_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1843,12 +1843,12 @@
         }
       }
     },
-    "HardwareSettings": {
+    "HardwareSetting": {
       "type": "object",
       "description": "Hardware settings resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HardwareSettingsProperties",
+          "$ref": "#/definitions/HardwareSettingProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -1858,15 +1858,15 @@
         }
       ]
     },
-    "HardwareSettingsListResult": {
+    "HardwareSettingListResult": {
       "type": "object",
-      "description": "The response of a HardwareSettings list operation.",
+      "description": "The response of a HardwareSetting list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The HardwareSettings items on this page",
+          "description": "The HardwareSetting items on this page",
           "items": {
-            "$ref": "#/definitions/HardwareSettings"
+            "$ref": "#/definitions/HardwareSetting"
           }
         },
         "nextLink": {
@@ -1879,9 +1879,9 @@
         "value"
       ]
     },
-    "HardwareSettingsProperties": {
+    "HardwareSettingProperties": {
       "type": "object",
-      "description": "The hardware settings properties",
+      "description": "The hardware setting properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
