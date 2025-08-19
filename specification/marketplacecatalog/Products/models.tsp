@@ -993,11 +993,22 @@ model SkusOdataOrderByParameter {
 }
 
 // PageResult
-@doc("Paged response result from discovery API")
-model DiscoveryApiPagedResult<T> {
+@doc("Paged productSummary response result from discovery API")
+model DiscoveryApiPagedProductsResult {
   @pageItems
   @doc("List of items in the current page")
-  value: T[];
+  value: ProductSummary[];
+
+  @nextLink
+  @doc("Link to the next page of results, if available")
+  nextLink?: string;
+}
+
+@doc("Paged skuSummary response result from discovery API")
+model DiscoveryApiPagedSkusResult {
+  @pageItems
+  @doc("List of items in the current page")
+  value: SkuSummary[];
 
   @nextLink
   @doc("Link to the next page of results, if available")

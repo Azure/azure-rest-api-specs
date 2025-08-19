@@ -78,24 +78,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged response result from discovery API",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of items in the current page",
-                  "items": {
-                    "$ref": "#/definitions/ProductSummary"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "description": "Link to the next page of results, if available"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/DiscoveryApiPagedProductsResult"
             }
           },
           "default": {
@@ -222,24 +205,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged response result from discovery API",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of items in the current page",
-                  "items": {
-                    "$ref": "#/definitions/SkuSummary"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "description": "Link to the next page of results, if available"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/DiscoveryApiPagedSkusResult"
             }
           },
           "default": {
@@ -388,6 +354,46 @@
           "description": "Retail price with currency"
         }
       }
+    },
+    "DiscoveryApiPagedProductsResult": {
+      "type": "object",
+      "description": "Paged productSummary response result from discovery API",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of items in the current page",
+          "items": {
+            "$ref": "#/definitions/ProductSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DiscoveryApiPagedSkusResult": {
+      "type": "object",
+      "description": "Paged skuSummary response result from discovery API",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of items in the current page",
+          "items": {
+            "$ref": "#/definitions/SkuSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DiscoveryErrorDetails": {
       "type": "object",
