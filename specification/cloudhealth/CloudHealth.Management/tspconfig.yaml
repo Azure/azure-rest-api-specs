@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/cloudhealth"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/cloudhealth"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -29,6 +31,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.CloudHealth"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cloudhealth"
     package-dir: "armcloudhealth"

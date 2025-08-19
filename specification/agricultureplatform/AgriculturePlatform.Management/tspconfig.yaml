@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/agricultureplatform"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/agricultureplatform"
 output-dir: "{project-root}/../"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -23,6 +25,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.AgriculturePlatform"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-agricultureplatform"
     namespace: "azure.mgmt.agricultureplatform"

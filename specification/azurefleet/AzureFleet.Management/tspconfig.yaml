@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/computefleet"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/computefleet"
   "service-directory-name":
     default: "azurefleet"
 emit:
@@ -24,6 +26,7 @@ options:
     namespace: "Azure.ResourceManager.ComputeFleet"
     # Added to support generic model conversion from compute VM types
     use-model-reader-writer: true
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-computefleet"
     namespace: "azure.mgmt.computefleet"
