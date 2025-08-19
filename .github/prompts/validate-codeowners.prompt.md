@@ -51,18 +51,24 @@ When no CODEOWNERS entry exists yet:
    - serviceOwners - **Optional** if no ServiceLabel is present. Can be either owners to add or delete, depending on isAdding.
    - sourceOwners - **Optional** if no path or PRLabel are present. Can be either owners to add or delete, depending on isAdding.
    - isAdding - **Required** Should be true if adding owners to an existing entry, false if deleting owners from an existing entry. Should also be false when adding a brand new entry.
-1. Collect service owners and source owners (GitHub usernames)
-2. Use `UpdateCodeowners` with required parameters
-3. Must have at least 2 valid owners from the start
+1. Provide guidance to the user about what codeowners is for:
+   - [Learn about CODEOWNERS](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/overview)
+   - Service owners is for getting mentioned on issues.
+   - Source owners is for getting mentioned in PRs.
+2. Collect service owners and source owners (GitHub usernames)
+3. Use `UpdateCodeowners` with required parameters
+4. Must have at least 2 valid owners from the start
 
 ### Fix Options:
 1. **Fix invalid owners** - If there are invalid owners after modifing the CODEOWNERS file ALWAYS provide guidance:
    - Microsoft org: [Join here](https://repos.opensource.microsoft.com/orgs/Microsoft), set public visibility at [Microsoft Org Visibility](https://github.com/orgs/Microsoft/people?query={github_username})
    - Azure org: [Join here](https://repos.opensource.microsoft.com/orgs/Azure), set public visibility at [Azure Org Visibility](https://github.com/orgs/Azure/people?query={github_username})
    - Write access: [Request here](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
+   - Documentation about codeowners: [Read here](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/codeowners)
 2. **Add new owners** using `UpdateCodeowners` with `isAdding: true`
 3. **Remove invalid + add valid** owners using `UpdateCodeowners`
 
 ## Requirements
 - **MINIMUM**: At least 2 valid code owners at all times
 - **NO EXCEPTIONS**: Cannot proceed with insufficient owners
+- **ERROR HANDLING**: If any error occurs during validation or creation, provide documentation link [codeowners documentation](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/codeowners)
