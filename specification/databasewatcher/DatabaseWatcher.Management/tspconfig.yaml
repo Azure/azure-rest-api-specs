@@ -2,7 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/databasewatcher"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -17,7 +17,6 @@ options:
     flavor: azure
     model-namespace: false
     namespace: "{package-dir}"
-    package-dir: "Azure.ResourceManager.DatabaseWatcher"
   "@azure-tools/typespec-python":
     flavor: azure
     generate-sample: true
@@ -48,4 +47,4 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

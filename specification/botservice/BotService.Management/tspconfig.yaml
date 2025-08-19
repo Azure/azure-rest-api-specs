@@ -2,7 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/botservice"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
@@ -12,7 +12,6 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.BotService"
     clear-output-folder: true
     model-namespace: true
     namespace: "{package-dir}"
@@ -47,4 +46,4 @@ options:
     inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

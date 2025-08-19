@@ -1,9 +1,9 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 #  - "@azure-tools/typespec-providerhub-controller"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"
   disable:
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
 parameters:
@@ -40,8 +40,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.ResourceManager.PlaywrightTesting"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"

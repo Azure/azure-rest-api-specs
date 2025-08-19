@@ -4,7 +4,7 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/iotoperations"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -12,9 +12,8 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/iotoperations.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.IotOperations"
     clear-output-folder: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
@@ -46,4 +45,4 @@ options:
     inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

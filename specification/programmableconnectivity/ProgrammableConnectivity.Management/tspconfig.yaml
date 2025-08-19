@@ -4,7 +4,7 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/programmableconnectivity"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -26,9 +26,8 @@ options:
     flavor: "azure"
     service-name: "Programmable Connectivity"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.ProgrammableConnectivity"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
@@ -40,4 +39,4 @@ options:
       name: "@azure/arm-programmableconnectivity"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

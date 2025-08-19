@@ -2,7 +2,7 @@ parameters:
   "service-dir":
     "default": "sdk/servicefabricmanagedclusters"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -13,14 +13,13 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.ResourceManager.ServiceFabricManagedClusters"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
     suppress-abstract-base-class:
-      - "ManagedServiceProperties"
+    - "ManagedServiceProperties"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-servicefabricmanagedclusters"
     namespace: "azure.mgmt.servicefabricmanagedclusters"
@@ -51,4 +50,4 @@ options:
     use-object-for-unknown: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

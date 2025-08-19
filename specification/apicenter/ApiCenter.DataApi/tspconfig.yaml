@@ -6,7 +6,7 @@ parameters:
   "dependencies":
     default: ""
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
@@ -21,8 +21,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "azure.ApiCenter"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: "{package-dir}"
     flavor: azure
     clear-output-folder: true
@@ -41,4 +40,4 @@ options:
     flavor: azure
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"

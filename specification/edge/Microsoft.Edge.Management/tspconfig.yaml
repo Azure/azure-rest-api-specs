@@ -11,7 +11,7 @@ parameters:
   "service-directory-name":
     default: "commonedgesitemanageroperations"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -37,8 +37,7 @@ options:
     package-details:
       name: "@azure/arm-commonedgesitemanageroperations"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
@@ -55,4 +54,4 @@ options:
     inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

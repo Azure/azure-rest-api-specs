@@ -8,11 +8,11 @@ parameters:
   output-folder-base:
     default: "data-plane/OpenAI.Assistants/"
 emit:
-  - "@azure-tools/typespec-autorest"
-  - "@typespec/openapi3"
+- "@azure-tools/typespec-autorest"
+- "@typespec/openapi3"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
@@ -24,8 +24,7 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.AI.OpenAI.Assistants"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: "Azure.AI.OpenAI.Assistants"
     clear-output-folder: true
     model-namespace: false

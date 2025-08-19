@@ -4,7 +4,7 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/grafana"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
@@ -14,11 +14,10 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Grafana"
     clear-output-folder: true
     model-namespace: true
     namespace: "{package-dir}"
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dashboard"
     namespace: "azure.mgmt.dashboard"
@@ -50,4 +49,4 @@ options:
     inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

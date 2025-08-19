@@ -1,8 +1,8 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 parameters:
   "service-dir":
     default: "sdk/playwrighttesting"
@@ -33,8 +33,7 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.Developer.MicrosoftPlaywrightTesting"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
@@ -52,4 +51,4 @@ options:
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-      - "specification/playwrighttesting/PlaywrightTesting.Shared/"
+    - "specification/playwrighttesting/PlaywrightTesting.Shared/"

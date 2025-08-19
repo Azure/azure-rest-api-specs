@@ -4,10 +4,10 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/easm"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
   disable:
     "@azure-tools/typespec-azure-core/composition-over-inheritance": "New rule"
 options:
@@ -17,8 +17,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.Easm/{version-status}/{version}/easm.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.Analytics.Defender.Easm"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false

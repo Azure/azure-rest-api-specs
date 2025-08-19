@@ -1,8 +1,8 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   "service-dir":
     default: "sdk/loadtesting"
@@ -38,8 +38,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.ResourceManager.LoadTesting"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
@@ -49,7 +48,7 @@ options:
     flavor: azure
     service-name: Load Test
     property-include-always:
-      - "EncryptionPropertiesIdentity.resourceId"
+    - "EncryptionPropertiesIdentity.resourceId"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/loadtesting"
     package-dir: "armloadtesting"

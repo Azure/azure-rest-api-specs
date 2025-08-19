@@ -6,7 +6,7 @@ parameters:
   "service-name":
     default: "loadtesting"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   #- "@azure-tools/typespec-python"
   #- "@azure-tools/typespec-ts"
@@ -19,7 +19,7 @@ emit:
   # "@azure-tools/typespec-ts": true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{csharp-service-dir}/{namespace}"
@@ -51,8 +51,7 @@ options:
       version: 1.0.1
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.Developer.LoadTesting"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     clear-output-folder: true
     namespace: "{package-dir}"
     generate-sample-project: false

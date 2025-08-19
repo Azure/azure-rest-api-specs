@@ -16,11 +16,11 @@ parameters:
   "python-output-dir":
     default: "azure/communication/jobrouter/_generated"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -34,7 +34,6 @@ options:
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     namespace: Azure.Communication.JobRouter
-    package-dir: "Azure.Communication.JobRouter"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{csharp-service-dir}/{namespace}"

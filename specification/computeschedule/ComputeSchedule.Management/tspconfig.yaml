@@ -2,7 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/computeschedule"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -22,7 +22,6 @@ options:
     package-details:
       name: "@azure/arm-computeschedule"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ComputeSchedule"
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
@@ -43,4 +42,4 @@ options:
     inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

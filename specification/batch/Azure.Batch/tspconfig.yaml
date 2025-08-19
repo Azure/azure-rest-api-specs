@@ -4,18 +4,17 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/batch"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "./data-plane"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.Compute.Batch"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     head-as-boolean: false
@@ -41,7 +40,7 @@ options:
     package-dir: "azure-compute-batch"
     partial-update: true
     skip-special-headers:
-      - "ocp-date"
+    - "ocp-date"
     flavor: azure
     generate-tests: false
     generate-samples: false

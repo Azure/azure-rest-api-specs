@@ -6,10 +6,10 @@ parameters:
   "service-directory-name":
     default: "eventgrid"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -26,14 +26,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: Azure.Messaging.EventGrid.Namespaces
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.Namespaces
     flavor: azure
     generate-sample-project: false
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-name}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     package-name: Azure.Messaging.EventGrid.Namespaces
     namespace: Azure.Messaging.EventGrid.Namespaces
     model-namespace: false

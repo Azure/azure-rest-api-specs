@@ -18,10 +18,10 @@ parameters:
   "service-directory-name":
     default: "healthinsights"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Health Insights - Radiology Insights"'
@@ -47,10 +47,9 @@ options:
     api-version: 2024-10-01
     service-version-exclude-preview: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     save-inputs: false
     clear-output-folder: true
-    package-dir: "Azure.Health.Insights.RadiologyInsights"
     namespace: "{package-dir}"
     model-namespace: false
     flavor: azure
@@ -68,5 +67,5 @@ options:
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-      - "specification/ai/HealthInsights/HealthInsights.Common/"
-      - "specification/ai/HealthInsights/HealthInsights.OpenAPI/"
+    - "specification/ai/HealthInsights/HealthInsights.Common/"
+    - "specification/ai/HealthInsights/HealthInsights.OpenAPI/"

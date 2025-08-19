@@ -1,5 +1,5 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
     default: "sdk/deviceregistry"
@@ -14,7 +14,6 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.DeviceRegistry"
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
@@ -48,4 +47,4 @@ options:
     inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

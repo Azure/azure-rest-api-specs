@@ -2,7 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/chaos"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
@@ -27,7 +27,6 @@ options:
     generate-sample: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Chaos"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
@@ -48,4 +47,4 @@ options:
     flavor: "azure"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

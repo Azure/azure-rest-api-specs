@@ -1,5 +1,5 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
     default: "sdk/lambdatesthyperexecute"
@@ -13,11 +13,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.LambdaTestHyperExecute"
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-lambdatesthyperexecute"
     namespace: "azure.mgmt.lambdatesthyperexecute"
@@ -48,4 +47,4 @@ options:
       name: "@azure/arm-lambdatesthyperexecute"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - "@azure-tools/typespec-azure-rulesets/resource-manager"

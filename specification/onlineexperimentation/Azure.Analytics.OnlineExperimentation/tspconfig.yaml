@@ -4,10 +4,10 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/onlineexperimentation"
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     output-file: "{azure-resource-provider-folder}/Microsoft.OnlineExperimentation/{version-status}/{version}/onlineexperimentation.json"
@@ -37,8 +37,7 @@ options:
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.Analytics.OnlineExperimentation"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: "{package-dir}"
     generate-convenience-methods: true
     generate-protocol-methods: true

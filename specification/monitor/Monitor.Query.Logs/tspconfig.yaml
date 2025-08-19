@@ -7,11 +7,11 @@ parameters:
     default: ""
 
 emit:
-  - "@azure-tools/typespec-autorest"
+- "@azure-tools/typespec-autorest"
 
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -26,8 +26,7 @@ options:
     flavor: azure
     namespace: azure.monitor.query
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
-    package-dir: "Azure.Monitor.Query.Logs"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
