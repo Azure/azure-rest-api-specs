@@ -8,8 +8,7 @@ import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
-  TspConfigCsharpAzNamespaceEqualStringSubRule,
-  TspConfigCsharpAzPackageDirectorySubRule,
+  TspConfigCsharpAzNamespaceSubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
@@ -503,59 +502,14 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageDirectorySubRule()],
 );
 
-const csharpAzPackageDirTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  "",
-  "package-dir",
-  "Azure.AAA",
-  "AAA",
-  [new TspConfigCsharpAzPackageDirectorySubRule()],
-);
-
 const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   "",
   "namespace",
-  "{package-dir}",
+  "Azure.AAA",
   "AAA",
-  [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
+  [new TspConfigCsharpAzNamespaceSubRule()],
 );
-
-const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
-  {
-    description: `Validate csharp\'s option: namespace is equal to {package-dir} and package-dir exists`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-csharp",
-      { key: "namespace", value: "{package-dir}" },
-      { key: "package-dir", value: "Azure.AAA" },
-    ),
-    success: true,
-    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
-  },
-  {
-    description: `Validate csharp\'s option: namespace is equal to package-dir`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-csharp",
-      { key: "namespace", value: "Azure.AAA" },
-      { key: "package-dir", value: "Azure.AAA" },
-    ),
-    success: true,
-    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
-  },
-  {
-    description: `Validate csharp\'s option: namespace is not equal to package-dir`,
-    folder: "",
-    tspconfigContent: createEmitterOptionExample(
-      "@azure-tools/typespec-csharp",
-      { key: "namespace", value: "namespace" },
-      { key: "package-dir", value: "Azure.AAA" },
-    ),
-    success: shouldBeTrueOnFailSubRuleValidation("@azure-tools/typespec-csharp"),
-    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
-  },
-];
 
 const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
@@ -679,11 +633,10 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
     // csharp
-    ...csharpAzPackageDirTestCases,
+    ...csharpAzNamespaceTestCases,
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
-    ...csharpAzNamespaceWithPackageDirTestCases,
   ])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
