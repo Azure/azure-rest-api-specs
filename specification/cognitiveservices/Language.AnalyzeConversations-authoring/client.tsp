@@ -333,6 +333,7 @@ namespace ConversationAuthoringProjectClient {
     @access(Access.internal, "python")
     getSwapDeploymentsStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getSwapDeploymentsStatus;
 
+    @access(Access.internal, "python")
     getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
 
     @access(Access.internal, "python")
@@ -346,6 +347,7 @@ namespace ConversationAuthoringProjectClient {
     @access(Access.internal, "python")
     getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
 
+    @access(Access.internal, "python")
     copyProjectAuthorization is Language.Conversations.Authoring.ConversationAuthoringProject.copyProjectAuthorization;
 
     copyProject is Language.Conversations.Authoring.ConversationAuthoringProject.copyProject;
@@ -353,6 +355,7 @@ namespace ConversationAuthoringProjectClient {
     @access(Access.internal, "python")
     getCopyProjectStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getCopyProjectStatus;
 
+    @access(Access.internal, "python")
     train is Language.Conversations.Authoring.ConversationAuthoringProject.train;
 
     @access(Access.internal, "python")
@@ -381,6 +384,7 @@ namespace ConversationAuthoringProjectClient {
 
     deleteTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.deleteTrainedModel;
 
+    @access(Access.internal, "python")
     evaluateModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.evaluateModel;
 
     loadSnapshot is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.loadSnapshot;
