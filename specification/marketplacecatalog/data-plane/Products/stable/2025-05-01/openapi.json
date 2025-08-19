@@ -35,20 +35,100 @@
   },
   "tags": [],
   "paths": {
-    "/product/{uniqueProductId}": {
+    "/products": {
       "get": {
-        "operationId": "ProductOperations_Get",
-        "description": "Retrieves a single product by ID from the marketplace catalog.",
+        "operationId": "ListProducts",
+        "description": "Retrieves a list of products available in the marketplace catalog",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
+          {
+            "$ref": "#/parameters/LanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationsListingParameter"
+          },
+          {
+            "$ref": "#/parameters/ListingMarketParameter"
+          },
+          {
+            "$ref": "#/parameters/HideKeysParameter"
+          },
+          {
+            "$ref": "#/parameters/OdataSelectParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductsOdataFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OdataExpandParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductsOdataOrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchParameter"
+          },
+          {
+            "$ref": "#/parameters/PricingAudienceListingParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Paged response result from discovery API",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "List of items in the current page",
+                  "items": {
+                    "$ref": "#/definitions/ProductSummary"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "description": "Link to the next page of results, if available"
+                }
+              },
+              "required": [
+                "value"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryErrorPayload"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists publically available products in the marketplace.": {
+            "$ref": "./examples/PublicProducts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/products/{uniqueProductId}": {
+      "get": {
+        "operationId": "GetProduct",
+        "description": "Retrieves a single product by ID from the marketplace catalog",
+        "parameters": [
           {
             "name": "uniqueProductId",
             "in": "path",
             "description": "Unique product identifier",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SingleMarketParameter"
@@ -102,72 +182,9 @@
         }
       }
     },
-    "/products": {
-      "get": {
-        "operationId": "ProductOperations_List",
-        "description": "Retrieves a list of products available in the marketplace catalog.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/LanguageParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationsListingParameter"
-          },
-          {
-            "$ref": "#/parameters/ListingMarketParameter"
-          },
-          {
-            "$ref": "#/parameters/HideKeysParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataSelectParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataFilterParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataExpandParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataOrderByParameter"
-          },
-          {
-            "$ref": "#/parameters/SearchParameter"
-          },
-          {
-            "$ref": "#/parameters/PricingAudienceListingParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedProductSummary"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DiscoveryErrorPayload"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Lists publically available products in the marketplace.": {
-            "$ref": "./examples/PublicProducts_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/skus": {
       "get": {
-        "operationId": "SkusOperations_List",
+        "operationId": "ListSkus",
         "description": "Retrieves a list of SKUs available in the marketplace catalog.",
         "parameters": [
           {
@@ -192,10 +209,10 @@
             "$ref": "#/parameters/OdataSelectParameter"
           },
           {
-            "$ref": "#/parameters/OdataFilterParameter"
+            "$ref": "#/parameters/SkusOdataFilterParameter"
           },
           {
-            "$ref": "#/parameters/OdataOrderByParameter"
+            "$ref": "#/parameters/SkusOdataOrderByParameter"
           },
           {
             "$ref": "#/parameters/PricingAudienceListingParameter"
@@ -205,7 +222,24 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedSkuSummary"
+              "type": "object",
+              "description": "Paged response result from discovery API",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "List of items in the current page",
+                  "items": {
+                    "$ref": "#/definitions/SkuSummary"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "description": "Link to the next page of results, if available"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -283,7 +317,7 @@
         },
         "pricingAudience": {
           "type": "string",
-          "description": "Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `DirectCommercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `PartnerCommercial` - Available through Cloud Solution Provider partner channel for reseller distribution"
+          "description": "Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `Direct-Commercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `Partner-Commercial` - Available through Cloud Solution Provider partner channel for reseller distribution"
         },
         "terms": {
           "type": "array",
@@ -562,48 +596,6 @@
         }
       }
     },
-    "PagedProductSummary": {
-      "type": "object",
-      "description": "Paged collection of ProductSummary items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProductSummary items on this page",
-          "items": {
-            "$ref": "#/definitions/ProductSummary"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedSkuSummary": {
-      "type": "object",
-      "description": "Paged collection of SkuSummary items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SkuSummary items on this page",
-          "items": {
-            "$ref": "#/definitions/SkuSummary"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PlanDetails": {
       "type": "object",
       "description": "Returns a subset of Plan attributes",
@@ -774,7 +766,7 @@
         },
         "relatedSkus": {
           "type": "array",
-          "description": "Pointing to a planId of plans that are related to this plan",
+          "description": "Other plans that may be related to this plan",
           "items": {
             "$ref": "#/definitions/PlanSkuRelation"
           }
@@ -1132,7 +1124,7 @@
         },
         "badges": {
           "type": "array",
-          "description": "Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality",
+          "description": "Displays certification and qualification badges earned by the product for marketplace visibility",
           "items": {
             "type": "string"
           }
@@ -1282,7 +1274,7 @@
         },
         "hasMarketplaceFootprint": {
           "type": "boolean",
-          "description": "Indication of whether product appears in Azure Marketplace?"
+          "description": "Indication of whether product appears in Azure Marketplace"
         },
         "attributes": {
           "type": "array",
@@ -1698,7 +1690,7 @@
     "LanguageParameter": {
       "name": "language",
       "in": "query",
-      "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+      "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"",
       "required": false,
       "type": "string",
       "default": "en",
@@ -1707,7 +1699,7 @@
     "ListingMarketParameter": {
       "name": "market",
       "in": "query",
-      "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "description": "Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1744,22 +1736,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "OdataFilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "description": "Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Note that not all fields support filtering. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "OdataOrderByParameter": {
-      "name": "$orderBy",
-      "in": "query",
-      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "OdataSelectParameter": {
       "name": "$select",
       "in": "query",
@@ -1780,6 +1756,22 @@
       "name": "pricingAudience",
       "in": "query",
       "description": "Specifies the channel for which product plan availabilities will be returned. Can be 'Direct-Commercial' or 'Partner-Commercial'. By default pricingAudience is set to 'Direct-Commercial'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ProductsOdataFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Note that not all fields support filtering. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ProductsOdataOrderByParameter": {
+      "name": "$orderBy",
+      "in": "query",
+      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1811,7 +1803,7 @@
     "SingleMarketParameter": {
       "name": "market",
       "in": "query",
-      "description": "Product market value. The response will include plans/availabilities that can be sold in the specified market\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "description": "Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1820,6 +1812,22 @@
       "name": "skuId",
       "in": "query",
       "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkusOdataFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Note that not all fields support filtering",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkusOdataOrderByParameter": {
+      "name": "$orderBy",
+      "in": "query",
+      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"

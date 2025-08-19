@@ -177,7 +177,7 @@ model ProductSummary {
   @doc("Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs")
   azureBenefit?: string;
 
-  @doc("Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality")
+  @doc("Displays certification and qualification badges earned by the product for marketplace visibility")
   badges?: string[];
 
   @doc("Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance")
@@ -269,7 +269,7 @@ model ProductSummary {
   @doc("Indication whether the product has plans with reservations")
   hasRiPlans?: boolean;
 
-  @doc("Indication of whether product appears in Azure Marketplace?")
+  @doc("Indication of whether product appears in Azure Marketplace")
   hasMarketplaceFootprint?: boolean;
 
   @doc("Set of products attributes")
@@ -431,7 +431,7 @@ model PlanMetadata {
   @doc("Pointing to a planId which holds the alternative stack reference")
   altStackReference?: string;
 
-  @doc("Pointing to a planId of plans that are related to this plan")
+  @doc("Other plans that may be related to this plan")
   relatedSkus?: PlanSkuRelation[];
 }
 
@@ -762,7 +762,7 @@ model Availability {
   @doc("Applicable billing meter information")
   meter?: Meter;
 
-  @doc("Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `DirectCommercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `PartnerCommercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
+  @doc("Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `Direct-Commercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `Partner-Commercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
   pricingAudience: string;
 
   @doc("List of applicable terms")
@@ -847,21 +847,21 @@ model Image {
 @doc("Marketplace Catalog API")
 model SingleMarketParameter {
   @query
-  @doc("Product market value. The response will include plans/availabilities that can be sold in the specified market\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market: string;
 }
 
 @doc("Marketplace Catalog API")
 model ListingMarketParameter {
   @query
-  @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market?: string;
 }
 
 @doc("Parameters for language selection")
 model LanguageParameter {
   @query
-  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"")
+  @doc("Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,id,zh-hans,zh-hant'. Default is \"en\"")
   language?: string = "en";
 }
 
@@ -943,10 +943,17 @@ model ServiceFamilyParameter {
 }
 
 // OData parameters
-@doc("OData Filter parameter")
-model OdataFilterParameter {
+@doc("Products OData Filter parameter")
+model ProductsOdataFilterParameter {
   @query
   @doc("Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Note that not all fields support filtering. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`")
+  $filter?: string;
+}
+
+@doc("Skus OData Filter parameter")
+model SkusOdataFilterParameter {
+  @query
+  @doc("Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Note that not all fields support filtering")
   $filter?: string;
 }
 
@@ -971,11 +978,30 @@ model OdataExpandParameter {
   $expand?: string;
 }
 
-@doc("OData Expand parameter")
-model OdataOrderByParameter {
+@doc("Products OData Expand parameter")
+model ProductsOdataOrderByParameter {
   @query
   @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`")
   $orderBy?: string;
+}
+
+@doc("Skus OData Expand parameter")
+model SkusOdataOrderByParameter {
+  @query
+  @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy")
+  $orderBy?: string;
+}
+
+// PageResult
+@doc("Paged response result from discovery API")
+model DiscoveryApiPagedResult<T> {
+  @pageItems
+  @doc("List of items in the current page")
+  value: T[];
+
+  @nextLink
+  @doc("Link to the next page of results, if available")
+  nextLink?: string;
 }
 
 // API key def
