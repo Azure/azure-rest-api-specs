@@ -229,6 +229,7 @@ directive:
   - suppress: R2007
     where:
       - $.paths["/jobschedules/{jobScheduleId}"].delete
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete
       - $.paths["/jobschedules/{jobScheduleId}/terminate"].post
       - $.paths["/jobs/{jobId}"].delete
       - $.paths["/jobs/{jobId}/disable"].post
@@ -276,6 +277,9 @@ directive:
 
   - suppress: R2066
     where:
+      - $.paths["/certificates"].post.operationId
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].post.operationId
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete"].post.operationId
       - $.paths["/jobs"].post.operationId
       - $.paths["/jobschedules"].post.operationId
       - $.paths["/jobs/{jobId}/tasks"].post.operationId
@@ -314,6 +318,7 @@ directive:
 
   - suppress: R4011
     where:
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete.response
       - $.paths["/jobs/{jobId}/tasks/{taskId}/files/{filePath}"].delete.responses
       - $.paths["/pools/{poolId}/nodes/{nodeId}/files/{filePath}"].delete.responses
       - $.paths["/jobschedules/{jobScheduleId}"].delete.responses
@@ -332,6 +337,7 @@ suppressions:
    where: 
      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
+     - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].
    reason: Service does not return 200, nor supply location header.
 
 ```
