@@ -270,6 +270,7 @@ namespace ConversationAuthoringClient {
 
   op getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
 
+  @access(Access.internal, "python")
   op deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
 
   @access(Access.internal, "python")
@@ -337,6 +338,7 @@ namespace ConversationAuthoringProjectClient {
     @access(Access.internal, "python")
     getProjectDeletionStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getProjectDeletionStatus;
 
+    @access(Access.internal, "python")
     `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
 
     `export` is Language.Conversations.Authoring.ConversationAuthoringProject.`export`;
