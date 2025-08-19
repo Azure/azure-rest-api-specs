@@ -4390,11 +4390,11 @@
     },
     "AFDDomainMtlsParameters": {
       "description": "Contains the properties to configure mutual TLS for a custom domain with FQDN. Mutual TLS cannot be configured for custom domains with wildcard host names.",
+      "type": "object",
       "discriminator": "scenario",
       "required": [
         "scenario"
       ],
-      "type": "object",
       "properties": {
         "scenario": {
           "$ref": "#/definitions/MtlsScenarioType"
@@ -4403,16 +4403,32 @@
     },
     "MtlsScenarioType": {
       "description": "Supported scenarios for establishing mTLS connection.",
-      "enum": [
-        "ClientCertificateRequiredAndValidated",
-        "ClientCertificateRequiredAndOriginValidates",
-        "ClientCertificateValidatedIfPresented",
-        "CompleteMtlsPassthroughToOrigin"
-      ],
       "type": "string",
       "x-ms-enum": {
         "name": "scenario",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClientCertificateRequiredAndValidated",
+            "value": "ClientCertificateRequiredAndValidated",
+            "description": "AFD establishes mTLS connection using certificates."
+          },
+          {
+            "name": "ClientCertificateRequiredAndOriginValidates",
+            "value": "ClientCertificateRequiredAndOriginValidates",
+            "description": "AFD check for existance of certificate and forwards to origin to establish mTLS connection."
+          },
+          {
+            "name": "ClientCertificateValidatedIfPresented",
+            "value": "ClientCertificateValidatedIfPresented",
+            "description": "If certificates are presented, AFD will establish mTLS connection. If certificates are not presented, AFD will not terminate the connection and forward request to the origin to establish mTLS connection."
+          },
+          {
+            "name": "CompleteMtlsPassthroughToOrigin",
+            "value": "CompleteMtlsPassthroughToOrigin",
+            "description": "Customer's origin is responsible for establishing mTLS connection. AFD will act as a request proxy only"
+          }
+        ]
       }
     },
     "ClientCertificateRequiredAndValidatedAdvancedSettings": {
