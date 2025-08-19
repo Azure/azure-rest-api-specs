@@ -678,7 +678,7 @@ model DevCenterUpdate is TrackedResourceUpdate {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   @doc("Properties of a Dev Center to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DevCenterUpdateProperties;
 }
@@ -730,7 +730,7 @@ model KeyEncryptionKeyIdentity {
 @doc("The devcenter encryption set resource for partial updates. Properties not provided in the update request will not be changed.")
 model EncryptionSetUpdate is TrackedResourceUpdate {
   @doc("Properties of a Dev Center encryption set to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DevCenterEncryptionSetUpdateProperties;
 
@@ -774,7 +774,7 @@ model ResourcePolicy {
 @doc("The project policy properties for partial update. Properties not provided in the update request will not be changed.")
 model ProjectPolicyUpdate {
   @doc("Properties of an project policy to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectPolicyUpdateProperties;
 }
@@ -887,7 +887,7 @@ model WorkspaceStorageSettings {
 @doc("The project properties for partial update. Properties not provided in the update request will not be changed.")
 model ProjectUpdate is TrackedResourceUpdate {
   @doc("Properties of a project to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectUpdateProperties;
 
@@ -1037,7 +1037,7 @@ model GitCatalog {
 @doc("The catalog's properties for partial update. Properties not provided in the update request will not be changed.")
 model CatalogUpdate {
   @doc("Catalog properties for update.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CatalogUpdateProperties;
 }
@@ -1283,7 +1283,7 @@ model EnvironmentTypeUpdateProperties {
 @doc("The environment type for partial update. Properties not provided in the update request will not be changed.")
 model EnvironmentTypeUpdate {
   @doc("Properties of an environment type to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: EnvironmentTypeUpdateProperties;
 
@@ -1368,7 +1368,7 @@ model UserRoleAssignment {
 @doc("The project environment type for partial update. Properties not provided in the update request will not be changed.")
 model ProjectEnvironmentTypeUpdate {
   @doc("Properties to configure an environment type.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectEnvironmentTypeUpdateProperties;
 
@@ -1450,7 +1450,7 @@ model DevBoxDefinitionUpdateProperties {
 @doc("Partial update of a Dev Box definition resource.")
 model DevBoxDefinitionUpdate is TrackedResourceUpdate {
   @doc("Properties of a Dev Box definition to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DevBoxDefinitionUpdateProperties;
 }
@@ -1931,7 +1931,7 @@ model ActiveHoursConfiguration {
 @doc("The pool properties for partial update. Properties not provided in the update request will not be changed.")
 model PoolUpdate is TrackedResourceUpdate {
   @doc("Properties of a pool to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PoolUpdateProperties;
 }
@@ -1978,7 +1978,7 @@ model ScheduleUpdateProperties is TrackedResourceUpdate {
 @doc("The schedule properties for partial update. Properties not provided in the update request will not be changed.")
 model ScheduleUpdate {
   @doc("Properties of a schedule resource to be updated.")
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ScheduleUpdateProperties;
 }
@@ -2027,7 +2027,7 @@ model NetworkConnectionUpdateProperties {
 
 @doc("The network connection properties for partial update. Properties not provided in the update request will not be changed.")
 model NetworkConnectionUpdate is TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
   @doc("Properties of a network connection resource to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NetworkConnectionUpdateProperties;
