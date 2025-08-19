@@ -630,7 +630,7 @@ model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'fabric_dataagent'.")
   type: "fabric_dataagent";
 
-  @doc("Reserved for future use.")
+  @doc("Fabric input and output.")
   @encodedName("application/json", "fabric_dataagent")
   microsoftFabric: Record<string>;
 }
