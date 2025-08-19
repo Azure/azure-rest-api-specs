@@ -35,15 +35,9 @@ interface NginxDeploymentApiKeyResponses {
   /**
    * Create or update an API Key for the Nginx deployment in order to access the dataplane API endpoint
    */
-  @armResourceCreateOrUpdate(NginxDeploymentApiKeyResponse)
-  createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
-    ResourceInstanceParameters<
-      NginxDeploymentApiKeyResponse,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxDeploymentApiKeyResponse>
-    >,
-    NginxDeploymentApiKeyRequest,
-    NginxDeploymentApiKeyResponse | ArmResourceCreatedResponse<NginxDeploymentApiKeyResponse>,
-    ErrorResponse,
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+    NginxDeploymentApiKeyResponse,
+    Request = NginxDeploymentApiKeyRequest,
     OptionalRequestBody = true
   >;
 
@@ -65,6 +59,6 @@ interface NginxDeploymentApiKeyResponses {
 @@doc(NginxDeploymentApiKeyResponse.properties,
   "Nginx Deployment Api Key Response Properties"
 );
-@@doc(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.properties,
+@@doc(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
   "The API Key object containing fields (e.g. secret text, expiration date) to upsert the key."
 );

@@ -23,7 +23,7 @@ using Nginx.NginxPlus;
 
 @@clientLocation(NginxDeploymentApiKeyResponses.get, "ApiKeys");
 @@clientLocation(NginxDeploymentApiKeyResponses.createOrUpdate, "ApiKeys");
-@@clientName(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.properties,
+@@clientName(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(NginxDeploymentApiKeyResponses.delete, "ApiKeys");
