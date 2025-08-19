@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 using Nginx.NginxPlus;
 
 @@clientName(Nginx.NginxPlus, "NginxManagementClient", "javascript");
+@@clientName(Nginx.NginxPlus, "NginxManagementClient", "python");
 
 // CommonTypes
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
