@@ -161,13 +161,6 @@ const CHECK_METADATA = [
   },
   {
     precedence: 0,
-    name: "Duplicate PR Protection",
-    suppressionLabels: [],
-    troubleshootingGuide:
-      "This repo does not currently support submitting two PRs from the same commit SHA. To unblock, find any other open PRs from this source branch and close all but one.",
-  },
-  {
-    precedence: 0,
     name: "TypeSpec Validation",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
@@ -489,11 +482,8 @@ export async function summarizeChecksImpl(
  * @returns {Promise<CheckRunData|undefined>}
  */
 export async function detectDuplicatePR(github, owner, repo, prNumber) {
-  // Fetch the PR to get its head branch
   const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
   const headRef = pr.head.ref;
-  // Assert non-null repo information for head
-  // Ensure head repo info is present
   if (!pr.head || !pr.head.repo) {
     console.warn(
       `Cannot determine head branch repo for PR #${prNumber}, skipping duplicate PR detection.`,
@@ -508,7 +498,6 @@ export async function detectDuplicatePR(github, owner, repo, prNumber) {
     state: "open",
     per_page: PER_PAGE_MAX,
   });
-  // Filter out current PR
   /** @type {Array<{ number: number }>} */
   const otherPRs = relatedPRs.filter(
     /** @param {{ number: number }} other */
@@ -519,7 +508,15 @@ export async function detectDuplicatePR(github, owner, repo, prNumber) {
       name: "Duplicate PR Protection",
       status: "completed",
       conclusion: "failure",
-      checkInfo: getCheckInfo("Duplicate PR Protection"),
+      checkInfo: {
+        precedence: 0,
+        name: "Duplicate PR Protection",
+        suppressionLabels: [],
+        troubleshootingGuide:
+          "This repo does not currently support submitting two PRs from the same commit SHA. " +
+          `To unblock, choose one PR from this list [${relatedPRs.map((pr) => `#${pr.number}`).join(", ")}] that will stay open. Close all but one of these PRS, then ` +
+          `push an empty commit to source branch ${headRef} to unblock this PR.`,
+      },
     };
   }
   return undefined;
