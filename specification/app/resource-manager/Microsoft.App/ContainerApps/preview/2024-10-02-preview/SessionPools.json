@@ -1,0 +1,752 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2024-10-02-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "SessionPoolNameParameter": {
+      "name": "sessionPoolName",
+      "in": "path",
+      "description": "Name of the session pool.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/sessionPools": {
+      "get": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Get the session pools in a given subscription.",
+        "operationId": "ContainerAppsSessionPools_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionPoolCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Session Pools by subscription": {
+            "$ref": "./examples/SessionPools_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools": {
+      "get": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Get the session pools in a given resource group of a subscription.",
+        "operationId": "ContainerAppsSessionPools_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionPoolCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Session Pools by resource group": {
+            "$ref": "./examples/SessionPools_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}": {
+      "get": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Get the properties of a session pool.",
+        "operationId": "ContainerAppsSessionPools_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Session Pool": {
+            "$ref": "./examples/SessionPools_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Create or update a session pool.",
+        "description": "Create or update a session pool with the given properties.",
+        "operationId": "ContainerAppsSessionPools_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionPoolNameParameter"
+          },
+          {
+            "name": "sessionPoolEnvelope",
+            "in": "body",
+            "description": "Properties used to create a session pool",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "201": {
+            "description": "Session pool creation has started.",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Session Pool": {
+            "$ref": "./examples/SessionPools_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Update properties of a session pool",
+        "description": "Patches a session pool using JSON merge patch",
+        "operationId": "ContainerAppsSessionPools_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionPoolNameParameter"
+          },
+          {
+            "name": "sessionPoolEnvelope",
+            "in": "body",
+            "description": "Properties used to create a session pool",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionPoolUpdatableProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded",
+            "schema": {
+              "$ref": "#/definitions/SessionPool"
+            }
+          },
+          "202": {
+            "description": "Session pool update has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update Session Pool": {
+            "$ref": "./examples/SessionPools_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Delete a session pool.",
+        "description": "Delete the session pool with the given name.",
+        "operationId": "ContainerAppsSessionPools_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Session pool delete has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Session pool does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Session Pool": {
+            "$ref": "./examples/SessionPools_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScaleConfiguration": {
+      "description": "Scale configuration.",
+      "type": "object",
+      "properties": {
+        "maxConcurrentSessions": {
+          "description": "The maximum count of sessions at the same time.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "readySessionInstances": {
+          "description": "The minimum count of ready session instances.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SessionPoolSecret": {
+      "description": "Secret definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Secret Name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Secret Value.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "DynamicPoolConfiguration": {
+      "description": "Dynamic pool configuration.",
+      "type": "object",
+      "properties": {
+        "executionType": {
+          "description": "The execution type of the session pool.",
+          "enum": [
+            "Timed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExecutionType",
+            "modelAsString": true
+          }
+        },
+        "cooldownPeriodInSeconds": {
+          "description": "The cooldown period of a session in seconds.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SessionRegistryCredentials": {
+      "description": "Session pool private registry credentials.",
+      "type": "object",
+      "properties": {
+        "server": {
+          "description": "Container registry server.",
+          "type": "string"
+        },
+        "username": {
+          "description": "Container registry username.",
+          "type": "string"
+        },
+        "passwordSecretRef": {
+          "description": "The name of the secret that contains the registry login password",
+          "type": "string"
+        },
+        "identity": {
+          "description": "A Managed Identity to use to authenticate with Azure Container Registry. For user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned identities, use 'system'",
+          "type": "string"
+        }
+      }
+    },
+    "SessionContainerResources": {
+      "description": "Container resource requirements for sessions of the session pool.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "Required CPU in cores, e.g. 0.5",
+          "type": "number"
+        },
+        "memory": {
+          "description": "Required memory, e.g. \"250Mb\"",
+          "type": "string"
+        }
+      }
+    },
+    "SessionContainer": {
+      "description": "Container definitions for the sessions of the session pool.",
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "Container image tag.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Custom container name.",
+          "type": "string"
+        },
+        "command": {
+          "description": "Container start command.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "description": "Container start command arguments.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "description": "Container environment variables.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "resources": {
+          "$ref": "#/definitions/SessionContainerResources",
+          "description": "Container resource requirements."
+        }
+      }
+    },
+    "SessionIngress": {
+      "description": "Session pool ingress configuration.",
+      "type": "object",
+      "properties": {
+        "targetPort": {
+          "format": "int32",
+          "description": "Target port in containers for traffic from ingress",
+          "type": "integer"
+        }
+      }
+    },
+    "CustomContainerTemplate": {
+      "description": "Custom container configuration.",
+      "type": "object",
+      "properties": {
+        "registryCredentials": {
+          "description": "Private container registry credentials for containers used by the sessions of the session pool.",
+          "$ref": "#/definitions/SessionRegistryCredentials"
+        },
+        "containers": {
+          "description": "List of container definitions for the sessions of the session pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "ingress": {
+          "description": "Session pool ingress configuration.",
+          "$ref": "#/definitions/SessionIngress"
+        }
+      }
+    },
+    "SessionNetworkConfiguration": {
+      "description": "Session network configuration.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Network status for the sessions.",
+          "type": "string",
+          "enum": [
+            "EgressEnabled",
+            "EgressDisabled"
+          ],
+          "x-ms-enum": {
+            "name": "SessionNetworkStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SessionPool": {
+      "description": "Container App session pool.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "Container App session pool resource specific properties",
+          "type": "object",
+          "properties": {
+            "environmentId": {
+              "description": "Resource ID of the session pool's environment.",
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.App/managedEnvironments"
+                  }
+                ]
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "containerType": {
+              "description": "The container type of the sessions.",
+              "enum": [
+                "CustomContainer",
+                "PythonLTS"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ContainerType",
+                "modelAsString": true
+              }
+            },
+            "poolManagementType": {
+              "description": "The pool management type of the session pool.",
+              "enum": [
+                "Manual",
+                "Dynamic"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PoolManagementType",
+                "modelAsString": true
+              }
+            },
+            "nodeCount": {
+              "description": "The number of nodes the session pool is using.",
+              "type": "integer",
+              "format": "int32",
+              "readOnly": true
+            },
+            "scaleConfiguration": {
+              "description": "The scale configuration of the session pool.",
+              "$ref": "#/definitions/ScaleConfiguration"
+            },
+            "secrets": {
+              "description": "The secrets of the session pool.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SessionPoolSecret"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "dynamicPoolConfiguration": {
+              "description": "The pool configuration if the poolManagementType is dynamic.",
+              "$ref": "#/definitions/DynamicPoolConfiguration"
+            },
+            "customContainerTemplate": {
+              "description": "The custom container configuration if the containerType is CustomContainer.",
+              "$ref": "#/definitions/CustomContainerTemplate"
+            },
+            "sessionNetworkConfiguration": {
+              "description": "The network configuration of the sessions in the session pool.",
+              "$ref": "#/definitions/SessionNetworkConfiguration"
+            },
+            "poolManagementEndpoint": {
+              "description": "The endpoint to manage the pool.",
+              "type": "string",
+              "format": "uri",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the session pool.",
+              "enum": [
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "SessionPoolProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "managedIdentitySettings": {
+              "description": "Optional settings for a Managed Identity that is assigned to the Session pool.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ManagedIdentitySetting"
+              },
+              "x-ms-identifiers": [
+                "identity"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedIdentitySetting": {
+      "description": "Optional settings for a Managed Identity that is assigned to the Session pool.",
+      "type": "object",
+      "required": [
+        "identity"
+      ],
+      "properties": {
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Session Pool, or 'system' for system-assigned identity.",
+          "type": "string"
+        },
+        "lifecycle": {
+          "description": "Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.",
+          "enum": [
+            "None",
+            "Main"
+          ],
+          "type": "string",
+          "default": "None",
+          "x-ms-enum": {
+            "name": "IdentitySettingsLifeCycle",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SessionPoolUpdatableProperties": {
+      "description": "Container App session pool updatable properties.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "Session pool resource specific updatable properties.",
+          "type": "object",
+          "properties": {
+            "scaleConfiguration": {
+              "description": "The scale configuration of the session pool.",
+              "$ref": "#/definitions/ScaleConfiguration"
+            },
+            "secrets": {
+              "description": "The secrets of the session pool.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SessionPoolSecret"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "dynamicPoolConfiguration": {
+              "description": "The pool configuration if the poolManagementType is dynamic.",
+              "$ref": "#/definitions/DynamicPoolConfiguration"
+            },
+            "customContainerTemplate": {
+              "description": "The custom container configuration if the containerType is CustomContainer.",
+              "$ref": "#/definitions/CustomContainerTemplate"
+            },
+            "sessionNetworkConfiguration": {
+              "description": "The network configuration of the sessions in the session pool.",
+              "$ref": "#/definitions/SessionNetworkConfiguration"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SessionPoolCollection": {
+      "description": "Session pool collection Azure resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionPool"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
