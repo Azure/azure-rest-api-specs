@@ -959,12 +959,10 @@ model CatalogProperties extends CatalogUpdateProperties {
 
   @doc("When the catalog was last connected.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastConnectionTime?: utcDateTime;
 
   @doc("When the catalog was last synced.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSyncTime?: utcDateTime;
 }
 
@@ -1222,7 +1220,6 @@ model ImageVersionProperties {
 
   @doc("The datetime that the backing image version was published.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   publishedDate?: utcDateTime;
 
   @doc("If the version should be excluded from being treated as the latest version.")
@@ -1613,12 +1610,10 @@ model LatestImageBuild {
 
   @doc("Start time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   @doc("End time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   @doc("The state of an Image Definition Build.")
@@ -1675,12 +1670,10 @@ model ImageDefinitionBuildProperties {
 
   @doc("Start time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   @doc("End time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   @doc("Details for image creation error. Populated when the image creation is not successful.")
@@ -1711,12 +1704,10 @@ model ImageDefinitionBuildDetails
 
   @doc("Start time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   @doc("End time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   @doc("Details for image creation error. Populated when the image creation is not successful.")
@@ -1740,12 +1731,10 @@ model ImageDefinitionBuildTaskGroup {
 
   @doc("Start time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   @doc("End time of the task group.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   @doc("The list of tasks executed during the task group.")
@@ -1771,12 +1760,10 @@ model ImageDefinitionBuildTask {
 
   @doc("Start time of the task.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   @doc("End time of the task.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   @doc("The status of the task.")
@@ -2051,12 +2038,10 @@ model NetworkConnectionUpdate is TrackedResourceUpdate {
 model HealthCheckStatusDetailsProperties {
   @doc("Start time of last execution of the health checks.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   @doc("End time of last execution of the health checks.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
   @doc("Details for each health check item.")
@@ -2077,12 +2062,10 @@ model HealthCheck {
 
   @doc("Start time of health check item.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
   @doc("End time of the health check item.")
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
   @doc("The type of error that occurred during this health check.")
