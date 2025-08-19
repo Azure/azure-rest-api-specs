@@ -93,16 +93,6 @@ stages:
             }
 
             $sdkRepoOwner = $Matches['organization']
-            # set repo owner to 'azure-sdk' when customized branch is provided
-            $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
-            $commitShaPattern = '^[a-fA-F0-9]{7,40}$'
-            if ($sdkRepoCommitish.contains(":")) {
-              Write-Host "##vso[task.logissue type=error]'SDK repository commit' must be a commit SHA or branch name without ':'"
-              Exit 1
-            }
-            if (($sdkRepoCommitish -ne 'main') -and ($sdkRepoCommitish -notmatch $commitShaPattern)) {
-              $sdkRepoOwner = 'azure-sdk'
-            }
             Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
             Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
 
@@ -119,7 +109,67 @@ stages:
             Write-Host "##vso[task.logissue type=error]One or more required variables is empty or invalid. Ensure that SpecRepoUrl and SdkRepoUrl are set to valid GitHub repository URLs."
             Exit 1
           }
+
+          $checkoutCommitish = '${{ parameters.SdkRepoCommit }}'
+          Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
+          Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
         displayName: "Create Run Time Variables"
+
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - pwsh: |
+            $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
+            $sdkRepoUrl = '${{ parameters.SdkRepoUrl }}'
+            Write-Host "Validating SDK repo commitish: '$sdkRepoCommitish'"
+            # Check if it's a commit SHA
+            $commitShaPattern = '^[a-fA-F0-9]{7,40}$'
+
+            if ($sdkRepoCommitish.contains(":")) {
+              Write-Host "##vso[task.logissue type=error]'SDK repository commit' must be a commit SHA or branch name without ':'"
+              Exit 1
+            }
+
+            if (($sdkRepoCommitish -ne 'main') -and ($sdkRepoCommitish -notmatch $commitShaPattern)) {
+                # set repo owner to 'azure-sdk' when customized branch is provided
+                $sdkRepoOwner = 'azure-sdk'
+                Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
+                Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
+                $sdkRepoUrl = "https://github.com/azure-sdk/$(SdkRepoName)"
+                # Check if branch exists remotely
+                Write-Host "Checking if branch '$sdkRepoCommitish' exists in remote repository '$sdkRepoUrl'..."
+
+                $branchExists = git ls-remote --heads $sdkRepoUrl "refs/heads/$sdkRepoCommitish"
+                $gitExitCode = $LASTEXITCODE
+
+                if ($gitExitCode -ne 0) {
+                    Write-Host "##vso[task.logissue type=error]Failed to validate branch remotely (git exit code: $gitExitCode)"
+                    Exit $gitExitCode
+                }
+
+                if ([string]::IsNullOrEmpty($branchExists)) {
+                    Write-Host "Branch '$sdkRepoCommitish' does not exist in remote repository"
+                    Write-Host "Will checkout 'main' and create new branch '$sdkRepoCommitish' later"
+
+                    # Set flags for post-checkout processing
+                    Write-Host "##vso[task.setvariable variable=CreateNewBranch]true"
+                    Write-Host "##vso[task.setvariable variable=NewBranchName]$sdkRepoCommitish"
+
+                    # Use 'main' for initial checkout
+                    $checkoutCommitish = 'main'
+                } else {
+                    Write-Host "Branch '$sdkRepoCommitish' exists in remote repository"
+                    Write-Host "##vso[task.setvariable variable=CreateNewBranch]false"
+                    $checkoutCommitish = $sdkRepoCommitish
+                }
+            } else {
+                Write-Host "Using commitish as-is: '$sdkRepoCommitish' (main branch or commit SHA)"
+                Write-Host "##vso[task.setvariable variable=CreateNewBranch]false"
+                $checkoutCommitish = $sdkRepoCommitish
+            }
+
+            Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
+            Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
+          displayName: "Validate and update SDK repository commitish"
+
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
@@ -134,12 +184,45 @@ stages:
               Commitish: $(SpecRepoCommit)
               WorkingDirectory: $(SpecRepoDirectory)
             - Name: $(SdkRepoOwner)/$(SdkRepoName)
-              Commitish: ${{ parameters.SdkRepoCommit }}
+              Commitish: $(CheckoutCommitish)
               WorkingDirectory: $(SdkRepoDirectory)
           SkipCheckoutNone: true
           ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
             TokenToUseForAuth: $(azuresdk-github-pat)
             PreserveAuthToken: true
+
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - pwsh: |
+            if ('$(CreateNewBranch)' -eq 'true') {
+                $newBranchName = '$(NewBranchName)'
+                Write-Host "Creating new branch '$newBranchName' based on current checkout (main)"
+
+                # Verify we're on main branch
+                $currentBranch = git branch --show-current
+                Write-Host "Current branch before creating new branch: $currentBranch"
+
+                # Create and switch to the new branch
+                git checkout -b $newBranchName
+
+                # Verify the branch creation
+                $newCurrentBranch = git branch --show-current
+                Write-Host "Successfully created and switched to branch: $newCurrentBranch"
+
+                if ($newCurrentBranch -eq $newBranchName) {
+                    Write-Host "##vso[task.setvariable variable=ActualSdkBranch]$newBranchName"
+                    Write-Host "Branch creation successful"
+                } else {
+                    Write-Host "##vso[task.logissue type=error]Failed to create or switch to branch '$newBranchName'. Current branch: $newCurrentBranch"
+                    exit 1
+                }
+            } else {
+                # Use the original commitish as the actual branch
+                $actualBranch = '${{ parameters.SdkRepoCommit }}'
+                Write-Host "Using existing commitish: $actualBranch"
+                Write-Host "##vso[task.setvariable variable=ActualSdkBranch]$actualBranch"
+            }
+          workingDirectory: $(SdkRepoDirectory)
+          displayName: "Create new branch for SDK repo if needed"
 
       - task: NodeTool@0
         inputs:
@@ -217,21 +300,15 @@ stages:
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - pwsh: |
             $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
-            $sdkRepoCommitish = '${{ parameters.SdkRepoCommit }}'
-            if (($sdkRepoCommitish -ne 'HEAD') -and ($sdkRepoCommitish -ne 'main')) {
-              # Query remote branches
-              $result = git ls-remote --heads origin $sdkRepoCommitish
-              if ([string]::IsNullOrEmpty($result)) {
-                Write-Host "'$sdkRepoCommitish' is NOT a branch."
-              } else {
-                Write-Host "'$sdkRepoCommitish' IS a branch."
-                $sdkPrBranchName = $sdkRepoCommitish
-              }
+
+            # use the user provided branch name when SdkRepoOwner is set as 'azure-sdk'
+            if ('$(SdkRepoOwner)' -eq 'azure-sdk') {
+              $sdkPrBranchName = '$(ActualSdkBranch)'
             }
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
           workingDirectory: $(SdkRepoDirectory)
-          displayName: "Set SDK PR branch variable"
+          displayName: "Create SDK PR branch variable"
 
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
