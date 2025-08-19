@@ -267,13 +267,12 @@ interface Schedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   execute is ScheduleOperationGroupOps.ActionAsync<Schedule, void, OkResponse>;
 
   /**
    * Lists all applicable schedules
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @list
   listApplicable is ScheduleOperationGroupOps.ActionSync<
     Schedule,
     void,
