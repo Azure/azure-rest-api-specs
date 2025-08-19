@@ -2382,12 +2382,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiModerationLists/{moderationListName}/raiModerationListItems": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiModerationLists/{moderationListName}/raiModerationTerms": {
       "get": {
         "tags": [
           "RaiModerationLists"
         ],
-        "operationId": "ModerationListItems_List",
+        "operationId": "ModerationTerms_List",
         "description": "Gets the items that belong to the specified moderation list.",
         "x-ms-examples": {
           "ListModerationTerms": {
@@ -2430,12 +2430,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiModerationLists/{moderationListName}/raiModerationListItems/{moderationListItemName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiModerationLists/{moderationListName}/raiModerationTerms/{moderationTermName}": {
       "get": {
         "tags": [
           "RaiModerationLists"
         ],
-        "operationId": "ModerationListItems_Get",
+        "operationId": "ModerationTerms_Get",
         "description": "Gets the specified moderation term.",
         "x-ms-examples": {
           "GetModerationTerm": {
@@ -2481,10 +2481,10 @@
         "tags": [
           "RaiModerationLists"
         ],
-        "operationId": "ModerationListItems_CreateOrUpdate",
-        "description": "Creates or updates a moderation list item.",
+        "operationId": "ModerationTerms_CreateOrUpdate",
+        "description": "Creates or updates a moderation term.",
         "x-ms-examples": {
-          "PutModerationListItem": {
+          "PutModerationTerm": {
             "$ref": "./examples/PutModerationTerm.json"
           }
         },
@@ -2542,10 +2542,10 @@
         "tags": [
           "RaiModerationLists"
         ],
-        "operationId": "ModerationListItems_Delete",
+        "operationId": "ModerationTerms_Delete",
         "description": "Deletes the specified moderation terms.",
         "x-ms-examples": {
-          "DeleteModerationListItem": {
+          "DeleteModerationTerm": {
             "$ref": "./examples/DeleteModerationTerm.json"
           }
         },
@@ -2615,7 +2615,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RaiModerationlistItemsBulkAddRequest",
+              "$ref": "#/definitions/RaiModerationTermsBulkAddRequest",
               "type": "object"
             },
             "description": "Properties describing the moderation terms."
@@ -2670,7 +2670,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RaiModerationlistItemsBulkDeleteRequest"
+              "$ref": "#/definitions/RaiModerationTermsBulkDeleteRequest"
             },
             "description": "List of RAI Moderation Term Names."
           }
@@ -8520,7 +8520,7 @@
         }
       ]
     },
-    "RaiModerationlistItemsBulkAddRequest": {
+    "RaiModerationTermsBulkAddRequest": {
       "description": "The list of Rai Moderation Terms for batch add.",
       "type": "array",
       "items": {
@@ -8548,8 +8548,8 @@
         }
       }
     },
-    "RaiModerationlistItemsBulkDeleteRequest": {
-      "description": "The list of Cognitive Services RaiModerationlist Items Names.",
+    "RaiModerationTermsBulkDeleteRequest": {
+      "description": "The list of Cognitive Services RaiModeration Terms Names.",
       "type": "object",
       "items": {
         "type": "string"
@@ -8566,7 +8566,7 @@
         },
         "id": {
           "type": "string",
-          "format": "uuid",
+          "format": "string",
           "description": "Full resource identifier of the moderation list.",
           "readOnly": true
         },
@@ -8661,20 +8661,9 @@
       "description": "Cognitive Services RaiModerationList Term properties.",
       "type": "object",
       "properties": {
-        "name": {
+        "termId": {
           "type": "string",
-          "description": "The name of the moderation term.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "format": "uuid",
-          "description": "Full resource identifier of the moderation term.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource, Microsoft.CognitiveServices/accounts/moderationlists/terms.",
+          "description": "Resource identifier of the moderation term.",
           "readOnly": true
         },
         "term": {
@@ -10435,7 +10424,7 @@
       "x-ms-parameter-location": "method"
     },
     "raiModerationTermParameter": {
-      "name": "moderationListItemName",
+      "name": "moderationTermName",
       "in": "path",
       "required": true,
       "type": "string",
