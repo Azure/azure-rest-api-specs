@@ -161,6 +161,13 @@ const CHECK_METADATA = [
   },
   {
     precedence: 0,
+    name: "Duplicate PR Protection",
+    suppressionLabels: [],
+    troubleshootingGuide:
+      "This repo does not currently support submitting two PRs from the same commit SHA. To unblock, find any other open PRs from this source branch and close all but one.",
+  },
+  {
+    precedence: 0,
     name: "TypeSpec Validation",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
@@ -471,6 +478,51 @@ export async function summarizeChecksImpl(
   core.summary.addHeading("Automated Checks Met", 2);
   core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
   core.summary.write();
+}
+
+/**
+ * Detect if multiple PRs share the same commit SHA and return a failing protection run.
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} prNumber
+ * @returns {Promise<CheckRunData|undefined>}
+ */
+export async function detectDuplicatePR(github, owner, repo, prNumber) {
+  // Fetch the PR to get its head branch
+  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
+  const headRef = pr.head.ref;
+  // Assert non-null repo information for head
+  // Ensure head repo info is present
+  if (!pr.head || !pr.head.repo) {
+    console.warn(
+      `Cannot determine head branch repo for PR #${prNumber}, skipping duplicate PR detection.`,
+    );
+    return undefined;
+  }
+  const headOwner = pr.head.repo.owner.login;
+  const relatedPRs = await github.paginate(github.rest.pulls.list, {
+    owner: owner,
+    repo: repo,
+    head: `${headOwner}:${headRef}`,
+    state: "open",
+    per_page: PER_PAGE_MAX,
+  });
+  // Filter out current PR
+  /** @type {Array<{ number: number }>} */
+  const otherPRs = relatedPRs.filter(
+    /** @param {{ number: number }} other */
+    (other) => other.number !== prNumber,
+  );
+  if (otherPRs.length > 0) {
+    return {
+      name: "Duplicate PR Protection",
+      status: "completed",
+      conclusion: "failure",
+      checkInfo: getCheckInfo("Duplicate PR Protection"),
+    };
+  }
+  return undefined;
 }
 
 /**
