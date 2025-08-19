@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    "default": "{output-dir}/sdk/servicefabricmanagedclusters"
+    "default": "sdk/servicefabricmanagedclusters"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,6 +13,8 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
+    service-dir: "{output-dir}/sdk/servicefabricmanagedclusters"
+    emitter-output-dir: "{service-dir}/{package-dir}"
     package-dir: "Azure.ResourceManager.ServiceFabricManagedClusters"
     clear-output-folder: true
     model-namespace: false
