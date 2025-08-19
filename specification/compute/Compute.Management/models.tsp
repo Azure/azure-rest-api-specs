@@ -1295,6 +1295,24 @@ union ExecutionState {
 }
 
 /**
+ * Script shell types.
+ */
+@added(Versions.v2025_04_01)
+union ScriptShellTypes {
+  string,
+
+  /**
+   * Default script shell type.
+   */
+  Default: "Default",
+
+  /**
+   * Powershell7 script shell type.
+   */
+  Powershell7: "Powershell7",
+}
+
+/**
  * Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
  */
 union AvailabilitySetSkuTypes {
@@ -8469,7 +8487,7 @@ model VirtualMachineRunCommandProperties {
 }
 
 /**
- * Describes the script sources for run command. Use only one of script, scriptUri, commandId.
+ * Describes the script sources for run command. Use only one of these script sources: script, scriptUri, commandId, galleryScriptReferenceId.
  */
 model VirtualMachineRunCommandScriptSource {
   /**
@@ -8483,7 +8501,7 @@ model VirtualMachineRunCommandScriptSource {
   scriptUri?: string;
 
   /**
-   * Specifies a commandId of predefined built-in script.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId?: string;
 
@@ -8491,6 +8509,18 @@ model VirtualMachineRunCommandScriptSource {
    * User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.
    */
   scriptUriManagedIdentity?: RunCommandManagedIdentity;
+
+  /**
+   * Optional. Specify which shell to use for running the script. These values must match those expected by the extension. Currently supported only for Windows VMs, script uses Powershell 7 when specified. Powershell 7 must be already installed on the machine to use Powershell7 parameter value.
+   */
+  @added(Versions.v2025_04_01)
+  scriptShell?: ScriptShellTypes;
+
+  /**
+   * The resource ID of a Gallery Script version that needs to be executed. Example ID looks like /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{scriptName}/versions/{version}.
+   */
+  @added(Versions.v2025_04_01)
+  galleryScriptReferenceId?: string;
 }
 
 /**
@@ -8587,7 +8617,7 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
  */
 model RunCommandInput {
   /**
-   * The run command id.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId: string;
 
