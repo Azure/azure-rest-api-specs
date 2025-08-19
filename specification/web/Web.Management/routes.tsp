@@ -13,6 +13,196 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Web;
 
+/**
+ * Description for get a list of available ASE regions and its supported Skus.
+ */
+@summary("Get a list of available ASE regions and its supported Skus.")
+@autoRoute
+@get
+@action("aseRegions")
+op listAseRegions is ArmProviderActionSync<
+  Response = AseRegionCollection,
+  Scope = SubscriptionActionScope,
+  Parameters = {}
+>;
+
+/**
+ * Description for Gets a list of meters for a given location.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@summary("Gets a list of meters for a given location.")
+@autoRoute
+@get
+@action("billingMeters")
+op listBillingMeters is ArmProviderActionSync<
+  Response = BillingMeterCollection,
+  Scope = SubscriptionActionScope,
+  Parameters = {
+    /**
+     * Azure Location of billable resource
+     */
+    @query("billingLocation")
+    billingLocation?: string;
+
+    /**
+     * App Service OS type meters used for
+     */
+    @query("osType")
+    osType?: string;
+  }
+>;
+
+/**
+ * Description for Check if a resource name is available.
+ */
+@summary("Check if a resource name is available.")
+@autoRoute
+@action("checknameavailability")
+op checkNameAvailability is ArmProviderActionSync<
+  Request = ResourceNameAvailabilityRequest,
+  Response = ResourceNameAvailability,
+  Scope = SubscriptionActionScope,
+  Parameters = {}
+>;
+
+/**
+ * Get custom hostnames under this subscription
+ */
+@summary("Get custom hostnames under this subscription")
+@autoRoute
+@get
+@action("customhostnameSites")
+op listCustomHostNameSites is ArmProviderActionSync<
+  Response = CustomHostnameSitesCollection,
+  Scope = SubscriptionActionScope,
+  Parameters = {
+    /**
+     * Specific hostname
+     */
+    @query("hostname")
+    hostname?: string;
+  }
+>;
+
+/**
+ * Description for Get a list of available geographical regions.
+ */
+@summary("Get a list of available geographical regions.")
+@autoRoute
+@get
+@action("geoRegions")
+op listGeoRegions is ArmProviderActionSync<
+  Response = GeoRegionCollection,
+  Scope = SubscriptionActionScope,
+  Parameters = {
+    /**
+     * Name of SKU used to filter the regions.
+     */
+    @query("sku")
+    sku?: SkuName;
+
+    /**
+     * Specify <code>true</code> if you want to filter to only regions that support Linux workers.
+     */
+    @query("linuxWorkersEnabled")
+    linuxWorkersEnabled?: boolean;
+
+    /**
+     * Specify <code>true</code> if you want to filter to only regions that support Xenon workers.
+     */
+    @query("xenonWorkersEnabled")
+    xenonWorkersEnabled?: boolean;
+
+    /**
+     * Specify <code>true</code> if you want to filter to only regions that support Linux Consumption Workers.
+     */
+    @query("linuxDynamicWorkersEnabled")
+    linuxDynamicWorkersEnabled?: boolean;
+  }
+>;
+
+/**
+ * Description for List all apps that are assigned to a hostname.
+ */
+@summary("List all apps that are assigned to a hostname.")
+@autoRoute
+@action("listSitesAssignedToHostName")
+op listSiteIdentifiersAssignedToHostName is ArmProviderActionSync<
+  Request = NameIdentifier,
+  Response = IdentifierCollection,
+  Scope = SubscriptionActionScope,
+  Parameters = {}
+>;
+
+/**
+ * Check if a resource name is available for DNL sites.
+ */
+@summary("Check if a resource name is available for DNL sites.")
+@autoRoute
+@action("checknameavailability")
+op regionalCheckNameAvailability is ArmProviderActionSync<
+  Request = DnlResourceNameAvailabilityRequest,
+  Response = DnlResourceNameAvailability,
+  Scope = SubscriptionActionScope,
+  Parameters = LocationParameter
+>;
+
+/**
+ * Description for List all premier add-on offers.
+ */
+@summary("List all premier add-on offers.")
+@autoRoute
+@get
+@action("premieraddonoffers")
+op listPremierAddOnOffers is ArmProviderActionSync<
+  Response = PremierAddOnOfferCollection,
+  Scope = SubscriptionActionScope,
+  Parameters = {}
+>;
+
+/**
+ * Description for List all SKUs.
+ */
+@summary("List all SKUs.")
+@autoRoute
+@get
+@action("skus")
+op listSkus is ArmProviderActionSync<
+  Response = SkuInfos,
+  Scope = SubscriptionActionScope,
+  Parameters = {}
+>;
+
+/**
+ * Description for Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.
+ */
+@summary("Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.")
+@autoRoute
+op verifyHostingEnvironmentVnet is ArmProviderActionSync<
+  Request = VnetParameters,
+  Response = VnetValidationFailureDetails,
+  Scope = SubscriptionActionScope,
+  Parameters = {}
+>;
+
+/**
+ * Description for Move resources between resource groups.
+ */
+@summary("Move resources between resource groups.")
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
+@post
+op move(
+  ...ApiVersionParameter,
+  ...ResourceGroupParameter,
+  ...SubscriptionIdParameter,
+
+  /**
+   * Object that represents the resource to move.
+   */
+  @bodyRoot
+  moveResourceEnvelope: CsmMoveResourceEnvelope,
+): NoContentResponse | ErrorResponse;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GlobalOperationGroup {
   /**
@@ -34,7 +224,7 @@ interface GlobalOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): ErrorResponse;
+  ): NoContentResponse | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -205,7 +395,7 @@ interface RecommendationsOperationGroup {
   @autoRoute
   @action("disable")
   disableRecommendationForSubscription is ArmProviderActionSync<
-    Response = void,
+    Response = {@body body:void},
     Scope = SubscriptionActionScope,
     Parameters = {
       /**
@@ -215,6 +405,7 @@ interface RecommendationsOperationGroup {
       @segment("recommendations")
       name: string;
     }
+
   >;
 }
 
@@ -249,61 +440,6 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
   ): ArmResponse<ResourceHealthMetadataCollection> | ErrorResponse;
 
   /**
-   * Description for Gets a list of meters for a given location.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-  @summary("Gets a list of meters for a given location.")
-  @autoRoute
-  @get
-  @action("billingMeters")
-  listBillingMeters is ArmProviderActionSync<
-    Response = BillingMeterCollection,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Azure Location of billable resource
-       */
-      @query("billingLocation")
-      billingLocation?: string;
-
-      /**
-       * App Service OS type meters used for
-       */
-      @query("osType")
-      osType?: string;
-    }
-  >;
-  /**
-   * Description for Check if a resource name is available.
-   */
-  @summary("Check if a resource name is available.")
-  @autoRoute
-  @action("checknameavailability")
-  checkNameAvailability is ArmProviderActionSync<
-    Request = ResourceNameAvailabilityRequest,
-    Response = ResourceNameAvailability,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-  /**
-   * Get custom hostnames under this subscription
-   */
-  @summary("Get custom hostnames under this subscription")
-  @autoRoute
-  @get
-  @action("customhostnameSites")
-  listCustomHostNameSites is ArmProviderActionSync<
-    Response = CustomHostnameSitesCollection,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Specific hostname
-       */
-      @query("hostname")
-      hostname?: string;
-    }
-  >;
-  /**
    * Description for Gets list of available geo regions plus ministamps
    */
   @summary("Gets list of available geo regions plus ministamps")
@@ -315,130 +451,6 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
-  /**
-   * Description for get a list of available ASE regions and its supported Skus.
-   */
-  @summary("Get a list of available ASE regions and its supported Skus.")
-  @autoRoute
-  @get
-  @action("aseRegions")
-  listAseRegions is ArmProviderActionSync<
-    Response = AseRegionCollection,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-  /**
-   * Description for Get a list of available geographical regions.
-   */
-  @summary("Get a list of available geographical regions.")
-  @autoRoute
-  @get
-  @action("geoRegions")
-  listGeoRegions is ArmProviderActionSync<
-    Response = GeoRegionCollection,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Name of SKU used to filter the regions.
-       */
-      @query("sku")
-      sku?: SkuName;
-
-      /**
-       * Specify <code>true</code> if you want to filter to only regions that support Linux workers.
-       */
-      @query("linuxWorkersEnabled")
-      linuxWorkersEnabled?: boolean;
-
-      /**
-       * Specify <code>true</code> if you want to filter to only regions that support Xenon workers.
-       */
-      @query("xenonWorkersEnabled")
-      xenonWorkersEnabled?: boolean;
-
-      /**
-       * Specify <code>true</code> if you want to filter to only regions that support Linux Consumption Workers.
-       */
-      @query("linuxDynamicWorkersEnabled")
-      linuxDynamicWorkersEnabled?: boolean;
-    }
-  >;
-  /**
-   * Description for List all apps that are assigned to a hostname.
-   */
-  @summary("List all apps that are assigned to a hostname.")
-  @autoRoute
-  @action("listSitesAssignedToHostName")
-  listSiteIdentifiersAssignedToHostName is ArmProviderActionSync<
-    Request = NameIdentifier,
-    Response = IdentifierCollection,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-  /**
-   * Check if a resource name is available for DNL sites.
-   */
-  @summary("Check if a resource name is available for DNL sites.")
-  @autoRoute
-  @action("checknameavailability")
-  regionalCheckNameAvailability is ArmProviderActionSync<
-    Request = DnlResourceNameAvailabilityRequest,
-    Response = DnlResourceNameAvailability,
-    Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
-  >;
-  /**
-   * Description for List all premier add-on offers.
-   */
-  @summary("List all premier add-on offers.")
-  @autoRoute
-  @get
-  @action("premieraddonoffers")
-  listPremierAddOnOffers is ArmProviderActionSync<
-    Response = PremierAddOnOfferCollection,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-  /**
-   * Description for List all SKUs.
-   */
-  @summary("List all SKUs.")
-  @autoRoute
-  @get
-  @action("skus")
-  listSkus is ArmProviderActionSync<
-    Response = SkuInfos,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-  /**
-   * Description for Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.
-   */
-  @summary("Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.")
-  @autoRoute
-  verifyHostingEnvironmentVnet is ArmProviderActionSync<
-    Request = VnetParameters,
-    Response = VnetValidationFailureDetails,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-  /**
-   * Description for Move resources between resource groups.
-   */
-  @summary("Move resources between resource groups.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
-  @post
-  move(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Object that represents the resource to move.
-     */
-    @bodyRoot
-    moveResourceEnvelope: CsmMoveResourceEnvelope,
-  ): ErrorResponse;
 
   /**
    * Description for Validate if a resource can be created.

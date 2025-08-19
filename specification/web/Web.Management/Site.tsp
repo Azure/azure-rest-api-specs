@@ -52,6 +52,23 @@ interface SiteOps
       }
     > {}
 
+alias HostSecretParameters= {
+  ...ResourceInstanceParameters<Site>;
+
+  @path
+  @key
+  @segment("host")
+  host: "default";
+
+  @path
+  @key
+  keyType:string;
+
+  @path
+  @key
+  keyName:string;
+};
+
 @armResourceOperations
 interface Sites {
   /**
@@ -196,7 +213,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_DisableAllForWebApp")
-  @action("disable")
+  @action("recommendations/disable")
   disableAllForWebApp is SiteOps.ActionSync<
     Site,
     void,
@@ -215,7 +232,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ResetAllFiltersForWebApp")
-  @action("reset")
+  @action("recommendations/reset")
   resetAllFiltersForWebApp is SiteOps.ActionSync<
     Site,
     void,
@@ -273,7 +290,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateApplicationSettings")
   @put
-  @action("appsettings")
+  @action("config/appsettings")
   updateApplicationSettings is SiteOps.ActionSync<
     Site,
     StringDictionary,
@@ -298,7 +315,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateAuthSettings")
   @put
-  @action("authsettings")
+  @action("config/authsettings")
   updateAuthSettings is SiteOps.ActionSync<
     Site,
     SiteAuthSettings,
@@ -323,7 +340,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateAzureStorageAccounts")
   @put
-  @action("azurestorageaccounts")
+  @action("config/azurestorageaccounts")
   updateAzureStorageAccounts is SiteOps.ActionSync<
     Site,
     AzureStoragePropertyDictionaryResource,
@@ -348,7 +365,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateBackupConfiguration")
   @put
-  @action("backup")
+  @action("config/backup")
   updateBackupConfiguration is SiteOps.ActionSync<
     Site,
     BackupRequest,
@@ -361,7 +378,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteBackupConfiguration")
   @delete
-  @action("backup")
+  @action("config/backup")
   deleteBackupConfiguration is SiteOps.ActionSync<Site, void, OkResponse>;
 
   /**
@@ -382,7 +399,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateConnectionStrings")
   @put
-  @action("connectionstrings")
+  @action("config/connectionstrings")
   updateConnectionStrings is SiteOps.ActionSync<
     Site,
     ConnectionStringDictionary,
@@ -407,7 +424,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateMetadata")
   @put
-  @action("metadata")
+  @action("config/metadata")
   updateMetadata is SiteOps.ActionSync<
     Site,
     StringDictionary,
@@ -441,7 +458,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateSitePushSettings")
   @put
-  @action("pushsettings")
+  @action("config/pushsettings")
   updateSitePushSettings is SiteOps.ActionSync<
     Site,
     PushSettings,
@@ -477,7 +494,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetContainerLogsZip")
-  @action("download")
+  @action("zip/download")
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
@@ -502,14 +519,14 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetOneDeployStatus")
   @get
-  @action("onedeploy")
+  @action("extensions/onedeploy")
   getOneDeployStatus is SiteOps.ActionSync<Site, void, ArmResponse<unknown>>;
 
   /**
    * Description for Invoke the OneDeploy publish web app extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WebApps_CreateOneDeployOperation")
+  @operationId("extensions/WebApps_CreateOneDeployOperation")
   @put
   @action("onedeploy")
   createOneDeployOperation is SiteOps.ActionSync<
@@ -524,7 +541,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetFunctionsAdminToken")
   @get
-  @action("token")
+  @action("functions/admin/token")
   getFunctionsAdminToken is SiteOps.ActionSync<Site, void, ArmResponse<string>>;
 
   /**
@@ -532,7 +549,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListHostKeys")
-  @action("listkeys")
+  @action("host/default/listkeys")
   listHostKeys is SiteOps.ActionSync<Site, void, ArmResponse<HostKeys>>;
 
   /**
@@ -540,7 +557,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListSyncStatus")
-  @action("listsyncstatus")
+  @action("host/default/listsyncstatus")
   listSyncStatus is SiteOps.ActionSync<Site, void, NoContentResponse>;
 
   /**
@@ -557,25 +574,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_CreateOrUpdateHostSecret")
   @put
-  @action("{keyName}")
-  createOrUpdateHostSecret is SiteOps.ActionSync<
-    Site,
-    KeyInfo,
-    ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
-    Parameters = {
-      /**
-       * The type of host key.
-       */
-      @path
-      keyType: string;
-
-      /**
-       * The name of the key.
-       */
-      @path
-      keyName: string;
-    }
-  >;
+  createOrUpdateHostSecret(...HostSecretParameters; @body body: KeyInfo): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
 
   /**
    * Description for Delete a host level secret.
@@ -583,25 +582,8 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteHostSecret")
   @delete
-  @action("{keyName}")
-  deleteHostSecret is SiteOps.ActionSync<
-    Site,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * The type of host key.
-       */
-      @path
-      keyType: string;
+  deleteHostSecret (...HostSecretParameters): NoContentResponse | NotFoundResponse ;
 
-      /**
-       * The name of the key.
-       */
-      @path
-      keyName: string;
-    }
-  >;
 
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
@@ -1213,6 +1195,7 @@ interface Sites {
     }
   >;
 }
+
 @armResourceOperations
 interface WebAppOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -1296,7 +1279,7 @@ interface WebApps {
   /**
    * Description for Gets all web, mobile, and API apps in the specified resource group.
    */
-  listByResourceGroup is WebAppOps.List<
+  listByResourceGroup is ArmResourceListByParent<
     Site,
     Parameters = {
       /**

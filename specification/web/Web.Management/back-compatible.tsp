@@ -1959,3 +1959,12 @@ using Microsoft.Web;
 @@clientName(GetUsagesInLocationOperationGroup.list, "list");
 
 @@clientLocation(StaticSitesOperationGroup.previewWorkflow, StaticSites);
+
+@@clientLocation(Operations.list, "Provider");
+@@clientName(Operations.list, "ListOperations");
+@@clientName(checkNameAvailability::parameters.body, "request");
+@@clientName(listSiteIdentifiersAssignedToHostName::parameters.body,
+  "nameIdentifier"
+);
+@@clientName(regionalCheckNameAvailability::parameters.body, "request");
+@@clientName(verifyHostingEnvironmentVnet::parameters.body, "parameters");

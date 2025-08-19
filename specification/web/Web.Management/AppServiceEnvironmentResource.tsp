@@ -23,6 +23,16 @@ model AppServiceEnvironmentResource
   >;
 }
 
+alias DiagnosticsParameters = {
+  ...ResourceInstanceParameters<AppServiceEnvironmentResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @path
+  @key
+  @segment("diagnostics")
+  diagnosticsName: string;
+};
+
 @armResourceOperations
 interface AppServiceEnvironmentResources {
   /**
@@ -45,10 +55,11 @@ interface AppServiceEnvironmentResources {
       AppServiceEnvironmentResource,
       ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: AppServiceEnvironmentResource;
-    })
+    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource>> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @bodyRoot
+        _: AppServiceEnvironmentResource;
+      })
   >;
 
   /**
@@ -113,7 +124,11 @@ interface AppServiceEnvironmentResources {
   listCapacities is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<StampCapacityCollection>
+    ArmResponse<StampCapacityCollection>,
+    Parameters = {
+      @path("capacities")
+      capacities: "capacities";
+    }
   >;
 
   /**
@@ -147,19 +162,9 @@ interface AppServiceEnvironmentResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_GetDiagnosticsItem")
   @get
-  @action("{diagnosticsName}")
-  getDiagnosticsItem is ArmResourceActionSync<
-    AppServiceEnvironmentResource,
-    void,
-    ArmResponse<HostingEnvironmentDiagnostics>,
-    Parameters = {
-      /**
-       * Name of the diagnostics item.
-       */
-      @path
-      diagnosticsName: string;
-    }
-  >;
+  getDiagnosticsItem(
+    ...DiagnosticsParameters,
+  ): ArmResponse<HostingEnvironmentDiagnostics> | ErrorResponse;
 
   /**
    * Description for Get the network endpoints of all inbound dependencies of an App Service Environment.
@@ -252,10 +257,14 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_Resume")
-  resume is ArmResourceActionAsync<
+  resume is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<WebAppCollection>
+    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+      @bodyRoot
+      _: WebAppCollection;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>
   >;
 
   /**
@@ -296,10 +305,14 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_Suspend")
-  suspend is ArmResourceActionAsync<
+  suspend is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<WebAppCollection>
+    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+      @bodyRoot
+      _: WebAppCollection;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>
   >;
 
   /**
@@ -391,7 +404,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_DisableAllForHostingEnvironment")
-  @action("disable")
+  @action("recommendations/disable")
   disableAllForHostingEnvironment is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -405,6 +418,7 @@ interface AppServiceEnvironmentResources {
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @path
+      @segment("hostingEnvironments")
       hostingEnvironmentName: string;
     }
   >;
@@ -414,7 +428,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Recommendations_ResetAllFiltersForHostingEnvironment")
-  @action("reset")
+  @action("recommendations/reset")
   resetAllFiltersForHostingEnvironment is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -428,6 +442,7 @@ interface AppServiceEnvironmentResources {
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @path
+      @segment("hostingEnvironments")
       hostingEnvironmentName: string;
     }
   >;

@@ -51,7 +51,7 @@ interface WorkerPoolResourceOps
         @path
         @segment("multiRolePools")
         @key
-        default: string,
+        default: "default",
       }
     > {}
 
@@ -124,6 +124,7 @@ interface WorkerPoolResources {
        * Name of the instance in the multi-role pool.
        */
       @path
+      @segment("instances")
       instance: string;
     }
   >;
@@ -250,6 +251,7 @@ interface AppServiceEnvironments {
        * Name of the instance in the worker pool.
        */
       @path
+      @segment("instances")
       instance: string;
     }
   >;

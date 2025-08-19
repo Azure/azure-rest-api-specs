@@ -40,7 +40,7 @@ interface AppServicePlans {
   /**
    * Description for Get an App Service plan.
    */
-  get is ArmResourceRead<AppServicePlan>;
+  get is ArmResourceRead<AppServicePlan,Response = ArmResponse<AppServicePlan> | NotFoundResponse >;
 
   /**
    * Description for Creates or updates an App Service Plan.
@@ -211,6 +211,7 @@ interface AppServicePlans {
        * Name of worker machine, which typically starts with RD.
        */
       @path
+      @segment("workers")
       workerName: string;
     }
   >;

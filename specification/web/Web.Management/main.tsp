@@ -90,11 +90,9 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * WebSite Management Client
- */
+
 @armProviderNamespace
-@service(#{ title: "WebSiteManagementClient" })
+@service(#{ title: "WebApps API Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Web;

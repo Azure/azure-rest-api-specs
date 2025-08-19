@@ -1,9 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "WebSiteManagementClient",
+    "title": "WebApps API Client",
     "version": "2024-11-01",
-    "description": "WebSite Management Client",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -717,7 +716,7 @@
     },
     "/providers/Microsoft.Web/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Provider_ListOperations",
         "tags": [
           "Operations"
         ],
@@ -739,6 +738,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/ListOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -983,7 +987,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/aseRegions": {
       "get": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_ListAseRegions",
+        "operationId": "ListAseRegions",
         "summary": "Get a list of available ASE regions and its supported Skus.",
         "description": "Description for get a list of available ASE regions and its supported Skus.",
         "parameters": [
@@ -1006,6 +1010,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List aseregions": {
+            "$ref": "./examples/ListAseRegions.json"
           }
         },
         "x-ms-pageable": {
@@ -1086,7 +1095,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/billingMeters": {
       "get": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_ListBillingMeters",
+        "operationId": "ListBillingMeters",
         "summary": "Gets a list of meters for a given location.",
         "description": "Description for Gets a list of meters for a given location.",
         "parameters": [
@@ -1178,7 +1187,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/checknameavailability": {
       "post": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_CheckNameAvailability",
+        "operationId": "CheckNameAvailability",
         "summary": "Check if a resource name is available.",
         "description": "Description for Check if a resource name is available.",
         "parameters": [
@@ -1189,7 +1198,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -1216,7 +1225,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnameSites": {
       "get": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_ListCustomHostNameSites",
+        "operationId": "ListCustomHostNameSites",
         "summary": "Get custom hostnames under this subscription",
         "description": "Get custom hostnames under this subscription",
         "parameters": [
@@ -1246,6 +1255,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get custom hostnames under subscription": {
+            "$ref": "./examples/ListCustomHostNameSites.json"
+          },
+          "Get specific custom hostname under subscription": {
+            "$ref": "./examples/ListCustomSpecificHostNameSites.json"
           }
         },
         "x-ms-pageable": {
@@ -1407,7 +1424,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions": {
       "get": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_ListGeoRegions",
+        "operationId": "ListGeoRegions",
         "summary": "Get a list of available geographical regions.",
         "description": "Description for Get a list of available geographical regions.",
         "parameters": [
@@ -1623,7 +1640,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/listSitesAssignedToHostName": {
       "post": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_ListSiteIdentifiersAssignedToHostName",
+        "operationId": "ListSiteIdentifiersAssignedToHostName",
         "summary": "List all apps that are assigned to a hostname.",
         "description": "Description for List all apps that are assigned to a hostname.",
         "parameters": [
@@ -1634,7 +1651,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "nameIdentifier",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -1664,7 +1681,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/checknameavailability": {
       "post": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_RegionalCheckNameAvailability",
+        "operationId": "RegionalCheckNameAvailability",
         "summary": "Check if a resource name is available for DNL sites.",
         "description": "Check if a resource name is available for DNL sites.",
         "parameters": [
@@ -1678,7 +1695,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -1815,6 +1832,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1917,7 +1937,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/premieraddonoffers": {
       "get": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_ListPremierAddOnOffers",
+        "operationId": "ListPremierAddOnOffers",
         "summary": "List all premier add-on offers.",
         "description": "Description for List all premier add-on offers.",
         "parameters": [
@@ -2014,8 +2034,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2176,7 +2196,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/skus": {
       "get": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_ListSkus",
+        "operationId": "ListSkus",
         "summary": "List all SKUs.",
         "description": "Description for List all SKUs.",
         "parameters": [
@@ -2244,7 +2264,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
       "post": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_VerifyHostingEnvironmentVnet",
+        "operationId": "VerifyHostingEnvironmentVnet",
         "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
         "description": "Description for Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
         "parameters": [
@@ -2255,7 +2275,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -2277,12 +2297,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "VerifyHostingEnvironmentVnet": {
+            "$ref": "./examples/VerifyHostingEnvironmentVnet.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
       "post": {
-        "operationId": "ResourceHealthMetadataNonResourceOperationGroup_Move",
+        "operationId": "Move",
         "summary": "Move resources between resource groups.",
         "description": "Description for Move resources between resource groups.",
         "parameters": [
@@ -2306,6 +2331,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2864,110 +2892,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/{diagnosticsName}/{diagnosticsName}": {
-      "get": {
-        "operationId": "AppServiceEnvironments_GetDiagnosticsItem",
-        "tags": [
-          "AppServiceEnvironmentResources"
-        ],
-        "description": "Description for Get a diagnostics item for an App Service Environment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "diagnosticsName",
-            "in": "path",
-            "description": "Name of the diagnostics item.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HostingEnvironmentDiagnostics"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a diagnostics item for an App Service Environment.": {
-            "$ref": "./examples/AppServiceEnvironments_GetDiagnosticsItem.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/{hostingEnvironmentName}/disable": {
-      "post": {
-        "operationId": "Recommendations_DisableAllForHostingEnvironment",
-        "tags": [
-          "AppServiceEnvironmentResources"
-        ],
-        "description": "Description for Disable all recommendations for an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "environmentName",
-            "in": "query",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hostingEnvironmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/{hostingEnvironmentName}/recommendationHistory": {
       "get": {
         "operationId": "Recommendations_ListHistoryForHostingEnvironment",
@@ -3098,13 +3022,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/{hostingEnvironmentName}/reset": {
-      "post": {
-        "operationId": "Recommendations_ResetAllFiltersForHostingEnvironment",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/capacities/compute": {
+      "get": {
+        "operationId": "AppServiceEnvironments_ListCapacities",
         "tags": [
           "AppServiceEnvironmentResources"
         ],
-        "description": "Description for Reset all recommendation opt-out settings for an app.",
+        "description": "Description for Get the used, available, and total worker capacity an App Service Environment.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3121,24 +3045,14 @@
             "description": "Name of the App Service Environment.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "environmentName",
-            "in": "query",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "hostingEnvironmentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StampCapacityCollection"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3146,6 +3060,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the used, available, and total worker capacity an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListCapacities.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3267,55 +3189,6 @@
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CWebAppCollection%3E"
         },
         "x-ms-long-running-operation": true,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/compute": {
-      "get": {
-        "operationId": "AppServiceEnvironments_ListCapacities",
-        "tags": [
-          "AppServiceEnvironmentResources"
-        ],
-        "description": "Description for Get the used, available, and total worker capacity an App Service Environment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StampCapacityCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the used, available, and total worker capacity an App Service Environment.": {
-            "$ref": "./examples/AppServiceEnvironments_ListCapacities.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3739,6 +3612,160 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}": {
+      "get": {
+        "operationId": "AppServiceEnvironments_GetDiagnosticsItem",
+        "tags": [
+          "AppServiceEnvironmentResources"
+        ],
+        "description": "Description for Get a diagnostics item for an App Service Environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticsName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HostingEnvironmentDiagnostics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a diagnostics item for an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetDiagnosticsItem.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/hostingEnvironments/{hostingEnvironmentName}/recommendations/disable": {
+      "post": {
+        "operationId": "Recommendations_DisableAllForHostingEnvironment",
+        "tags": [
+          "AppServiceEnvironmentResources"
+        ],
+        "description": "Description for Disable all recommendations for an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "query",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/hostingEnvironments/{hostingEnvironmentName}/recommendations/reset": {
+      "post": {
+        "operationId": "Recommendations_ResetAllFiltersForHostingEnvironment",
+        "tags": [
+          "AppServiceEnvironmentResources"
+        ],
+        "description": "Description for Reset all recommendation opt-out settings for an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentName",
+            "in": "query",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostingEnvironmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/inboundNetworkDependenciesEndpoints": {
       "get": {
         "operationId": "AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints",
@@ -3837,7 +3864,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default": {
       "get": {
         "operationId": "AppServiceEnvironments_GetMultiRolePool",
         "tags": [
@@ -3858,13 +3885,6 @@
             "name": "name",
             "in": "path",
             "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -3913,13 +3933,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "multiRolePoolEnvelope",
             "in": "body",
             "description": "Properties of the multi-role pool.",
@@ -3960,6 +3973,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a multi-role pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3985,13 +4003,6 @@
             "name": "name",
             "in": "path",
             "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -4027,12 +4038,12 @@
         },
         "x-ms-examples": {
           "Create or update a multi-role pool.": {
-            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool.json"
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool_UpdateMultiRolePool.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/{default}/{instance}/metricdefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions": {
       "get": {
         "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions",
         "tags": [
@@ -4053,13 +4064,6 @@
             "name": "name",
             "in": "path",
             "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -4095,7 +4099,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/{default}/metricdefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/metricdefinitions": {
       "get": {
         "operationId": "AppServiceEnvironments_ListMultiRoleMetricDefinitions",
         "tags": [
@@ -4116,13 +4120,6 @@
             "name": "name",
             "in": "path",
             "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4151,7 +4148,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/{default}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/skus": {
       "get": {
         "operationId": "AppServiceEnvironments_ListMultiRolePoolSkus",
         "tags": [
@@ -4172,13 +4169,6 @@
             "name": "name",
             "in": "path",
             "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4207,7 +4197,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/{default}/usages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/usages": {
       "get": {
         "operationId": "AppServiceEnvironments_ListMultiRoleUsages",
         "tags": [
@@ -4228,13 +4218,6 @@
             "name": "name",
             "in": "path",
             "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4851,16 +4834,14 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollection"
+            },
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4878,7 +4859,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CWebAppCollection%3E"
+          "final-state-schema": "#/definitions/WebAppCollection"
         },
         "x-ms-long-running-operation": true,
         "x-ms-pageable": {
@@ -5024,16 +5005,14 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollection"
+            },
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -5051,7 +5030,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CWebAppCollection%3E"
+          "final-state-schema": "#/definitions/WebAppCollection"
         },
         "x-ms-long-running-operation": true,
         "x-ms-pageable": {
@@ -5388,6 +5367,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get properties of a worker pool.": {
+            "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool_CreateOrUpdateWorkerPool.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -5460,7 +5444,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/{instance}/metricdefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions": {
       "get": {
         "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions",
         "tags": [
@@ -6089,6 +6073,9 @@
               "$ref": "#/definitions/AppServicePlan"
             }
           },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -6276,51 +6263,6 @@
         "x-ms-examples": {
           "Delete App Service plan": {
             "$ref": "./examples/DeleteAppServicePlan.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/{workerName}/reboot": {
-      "post": {
-        "operationId": "AppServicePlans_RebootWorker",
-        "tags": [
-          "AppServicePlans"
-        ],
-        "description": "Description for Reboot a worker machine in an App Service plan.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workerName",
-            "in": "path",
-            "description": "Name of worker machine, which typically starts with RD.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         }
       }
@@ -7364,6 +7306,100 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot": {
+      "post": {
+        "operationId": "AppServicePlans_RebootWorker",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "description": "Description for Reboot a worker machine in an App Service plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "in": "path",
+            "description": "Name of worker machine, which typically starts with RD.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites": {
+      "get": {
+        "operationId": "WebApps_ListByResourceGroup",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Description for Gets all web, mobile, and API apps in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "includeSlots",
+            "in": "query",
+            "description": "Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Web Apps by Resource group": {
+            "$ref": "./examples/ListWebAppsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}": {
       "get": {
         "operationId": "WebApps_Get",
@@ -7606,171 +7642,6 @@
         "x-ms-examples": {
           "Delete Web app": {
             "$ref": "./examples/DeleteWebApp.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/{keyType}/{keyName}/{keyName}": {
-      "put": {
-        "operationId": "WebApps_CreateOrUpdateHostSecret",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Add or update a host level secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyType",
-            "in": "path",
-            "description": "The type of host key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key",
-            "in": "body",
-            "description": "The key to create or update",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "201": {
-            "description": "Resource 'KeyInfo' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "WebApps_DeleteHostSecret",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Delete a host level secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyType",
-            "in": "path",
-            "description": "The type of host key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/{siteName}/disable": {
-      "post": {
-        "operationId": "Recommendations_DisableAllForWebApp",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Disable all recommendations for an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         }
       }
@@ -8141,6 +8012,96 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/{siteName}/recommendations/disable": {
+      "post": {
+        "operationId": "Recommendations_DisableAllForWebApp",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Disable all recommendations for an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/{siteName}/recommendations/reset": {
+      "post": {
+        "operationId": "Recommendations_ResetAllFiltersForWebApp",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Reset all recommendation opt-out settings for an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/{workflowName}/regenerateAccessKey": {
       "post": {
         "operationId": "Workflows_RegenerateAccessKey",
@@ -8196,51 +8157,6 @@
         "x-ms-examples": {
           "Regenerate the callback URL access key for request triggers": {
             "$ref": "./examples/Workflows_RegenerateAccessKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/{siteName}/reset": {
-      "post": {
-        "operationId": "Recommendations_ResetAllFiltersForWebApp",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Reset all recommendation opt-out settings for an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         }
       }
@@ -8409,220 +8325,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/appsettings": {
-      "put": {
-        "operationId": "WebApps_UpdateApplicationSettings",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Replaces the application settings of an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "appSettings",
-            "in": "body",
-            "description": "Application settings of the app.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update App Settings": {
-            "$ref": "./examples/UpdateAppSettings.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/authsettings": {
-      "put": {
-        "operationId": "WebApps_UpdateAuthSettings",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Updates the Authentication / Authorization settings associated with web app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteAuthSettings",
-            "in": "body",
-            "description": "Auth settings associated with web app.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SiteAuthSettings"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SiteAuthSettings"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Auth Settings": {
-            "$ref": "./examples/UpdateAuthSettings.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/azurestorageaccounts": {
-      "put": {
-        "operationId": "WebApps_UpdateAzureStorageAccounts",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Updates the Azure storage account configurations of an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "azureStorageAccounts",
-            "in": "body",
-            "description": "Azure storage accounts of the app.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Azure Storage Accounts": {
-            "$ref": "./examples/UpdateAzureStorageAccounts.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backup": {
-      "put": {
-        "operationId": "WebApps_UpdateBackupConfiguration",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Updates the backup configuration of an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Edited backup configuration.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BackupRequest"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "post": {
         "operationId": "WebApps_Backup",
         "tags": [
@@ -8673,42 +8376,6 @@
         "x-ms-examples": {
           "Backup web app": {
             "$ref": "./examples/BackupWebApp.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "WebApps_DeleteBackupConfiguration",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Deletes the backup configuration of an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         }
       }
@@ -10428,6 +10095,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings": {
+      "put": {
+        "operationId": "WebApps_UpdateApplicationSettings",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Replaces the application settings of an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSettings",
+            "in": "body",
+            "description": "Application settings of the app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update App Settings": {
+            "$ref": "./examples/UpdateAppSettings.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings/list": {
       "post": {
         "operationId": "WebApps_ListApplicationSettings",
@@ -10470,6 +10192,61 @@
         "x-ms-examples": {
           "List App Settings": {
             "$ref": "./examples/ListAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettings": {
+      "put": {
+        "operationId": "WebApps_UpdateAuthSettings",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Updates the Authentication / Authorization settings associated with web app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteAuthSettings",
+            "in": "body",
+            "description": "Auth settings associated with web app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Auth Settings": {
+            "$ref": "./examples/UpdateAuthSettings.json"
           }
         }
       }
@@ -10520,6 +10297,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts": {
+      "put": {
+        "operationId": "WebApps_UpdateAzureStorageAccounts",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Updates the Azure storage account configurations of an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "azureStorageAccounts",
+            "in": "body",
+            "description": "Azure storage accounts of the app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Azure Storage Accounts": {
+            "$ref": "./examples/UpdateAzureStorageAccounts.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts/list": {
       "post": {
         "operationId": "WebApps_ListAzureStorageAccounts",
@@ -10551,6 +10383,92 @@
             "schema": {
               "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/backup": {
+      "put": {
+        "operationId": "WebApps_UpdateBackupConfiguration",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Updates the backup configuration of an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Edited backup configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebApps_DeleteBackupConfiguration",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Deletes the backup configuration of an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -10602,6 +10520,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings": {
+      "put": {
+        "operationId": "WebApps_UpdateConnectionStrings",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Replaces the connection strings of an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionStrings",
+            "in": "body",
+            "description": "Connection strings of the app or deployment slot. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionStringDictionary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionStringDictionary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
       "post": {
         "operationId": "WebApps_ListConnectionStrings",
@@ -10632,6 +10600,56 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ConnectionStringDictionary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/metadata": {
+      "put": {
+        "operationId": "WebApps_UpdateMetadata",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Replaces the metadata of an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metadata",
+            "in": "body",
+            "description": "Edited metadata of the app or deployment slot. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -10714,6 +10732,56 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/pushsettings": {
+      "put": {
+        "operationId": "WebApps_UpdateSitePushSettings",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Updates the Push settings associated with web app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pushSettings",
+            "in": "body",
+            "description": "Push settings associated with web app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PushSettings"
             }
           },
           "default": {
@@ -10844,56 +10912,6 @@
             "description": "Resource 'SlotConfigNamesResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/SlotConfigNamesResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/connectionstrings": {
-      "put": {
-        "operationId": "WebApps_UpdateConnectionStrings",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Replaces the connection strings of an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionStrings",
-            "in": "body",
-            "description": "Connection strings of the app or deployment slot. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectionStringDictionary"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConnectionStringDictionary"
             }
           },
           "default": {
@@ -12454,47 +12472,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/download": {
-      "post": {
-        "operationId": "WebApps_GetContainerLogsZip",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Gets the ZIP archived docker log files for the given site",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/{MSDeploy}": {
       "get": {
         "operationId": "WebApps_GetMSDeployStatus",
@@ -12651,6 +12628,45 @@
             "schema": {
               "$ref": "#/definitions/MSDeployLog"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy": {
+      "get": {
+        "operationId": "WebApps_GetOneDeployStatus",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {}
           },
           "default": {
             "description": "An unexpected error response.",
@@ -13072,6 +13088,237 @@
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/admin/token": {
+      "get": {
+        "operationId": "WebApps_GetFunctionsAdminToken",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Fetch a short lived token that can be exchanged for a master key.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}": {
+      "put": {
+        "operationId": "WebApps_CreateOrUpdateHostSecret",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Add or update a host level secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "201": {
+            "description": "Resource 'KeyInfo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebApps_DeleteHostSecret",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Delete a host level secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listkeys": {
+      "post": {
+        "operationId": "WebApps_ListHostKeys",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Get host secrets for a function app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HostKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listsyncstatus": {
+      "post": {
+        "operationId": "WebApps_ListSyncStatus",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for This is to allow calling via powershell and ARM template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -15126,47 +15373,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listkeys": {
-      "post": {
-        "operationId": "WebApps_ListHostKeys",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Get host secrets for a function app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HostKeys"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listsyncfunctiontriggerstatus": {
       "post": {
         "operationId": "WebApps_ListSyncFunctionTriggers",
@@ -15197,94 +15403,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listsyncstatus": {
-      "post": {
-        "operationId": "WebApps_ListSyncStatus",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for This is to allow calling via powershell and ARM template.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/metadata": {
-      "put": {
-        "operationId": "WebApps_UpdateMetadata",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Replaces the metadata of an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "metadata",
-            "in": "body",
-            "description": "Edited metadata of the app or deployment slot. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -15851,45 +15969,8 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/onedeploy": {
-      "get": {
-        "operationId": "WebApps_GetOneDeployStatus",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {}
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "put": {
-        "operationId": "WebApps_CreateOneDeployOperation",
+        "operationId": "extensions/WebApps_CreateOneDeployOperation",
         "tags": [
           "Sites"
         ],
@@ -17271,56 +17352,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/pushsettings": {
-      "put": {
-        "operationId": "WebApps_UpdateSitePushSettings",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Updates the Push settings associated with web app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pushSettings",
-            "in": "body",
-            "description": "Push settings associated with web app.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PushSettings"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PushSettings"
-            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -18734,62 +18765,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sites": {
-      "get": {
-        "operationId": "WebApps_ListByResourceGroup",
-        "tags": [
-          "WebApps"
-        ],
-        "description": "Description for Gets all web, mobile, and API apps in the specified resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "includeSlots",
-            "in": "query",
-            "description": "Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WebAppCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Web Apps by Resource group": {
-            "$ref": "./examples/ListWebAppsByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -32524,51 +32499,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/token": {
-      "get": {
-        "operationId": "WebApps_GetFunctionsAdminToken",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Description for Fetch a short lived token that can be exchanged for a master key.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/triggeredwebjobs": {
       "get": {
         "operationId": "WebApps_ListTriggeredWebJobs",
@@ -34175,6 +34105,47 @@
         "x-ms-examples": {
           "GET a workflow": {
             "$ref": "./examples/GetWorkflow.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/zip/download": {
+      "post": {
+        "operationId": "WebApps_GetContainerLogsZip",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Description for Gets the ZIP archived docker log files for the given site",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
