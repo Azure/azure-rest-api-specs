@@ -2991,6 +2991,12 @@ model ProxyAgentSettings {
    * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
    */
   imds?: HostEndpointSettings;
+
+  /**
+   * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
+   */
+  @added(Versions.v2025_04_01)
+  addProxyAgentExtension?: boolean;
 }
 
 /**
