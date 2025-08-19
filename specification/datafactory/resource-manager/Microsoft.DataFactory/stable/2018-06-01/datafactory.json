@@ -1776,7 +1776,6 @@
           }
         },
         "description": "Enable interactive authoring of Managed Virtual Network integration runtime.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1822,7 +1821,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/disableInteractiveQuery": {
