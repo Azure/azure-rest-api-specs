@@ -31,6 +31,27 @@ model ConfigurationProfileAssignment
 }
 
 @armResourceOperations
+interface ConfigurationProfileAssignmentBySubscriptionOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>,
+
+        /** The configuration profile assignment name. */
+        @path
+        @segment("configurationProfileAssignments")
+        @key
+        configurationProfileAssignmentName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface ConfigurationProfileAssignmentOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -82,20 +103,22 @@ interface ConfigurationProfileAssignments {
   delete is ConfigurationProfileAssignmentOps.DeleteSync<ConfigurationProfileAssignment>;
 
   /**
-   * Get list of configuration profile assignments
+   * Get list of configuration profile assignments under a given virtual machine
    */
   listByVirtualMachines is ConfigurationProfileAssignmentOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 
-  // /**
-  //  * Get list of configuration profile assignments under a given subscription
-  //  */
-  // listBySubscription is ConfigurationProfileAssignmentOps.ListBySubscription<
-  //   ConfigurationProfileAssignment,
-  //   Response = ArmResponse<ConfigurationProfileAssignmentList>
-  // >;
+  /**
+   * Get list of configuration profile assignments under a given subscription
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConfigurationProfileAssignments_ListBySubscription")
+  listBySubscription is ConfigurationProfileAssignmentBySubscriptionOps.List<
+    ConfigurationProfileAssignment,
+    Response = ArmResponse<ConfigurationProfileAssignmentList>
+  >;
 }
 @armResourceOperations
 interface ConfigurationProfileHCRPAssignmentOps

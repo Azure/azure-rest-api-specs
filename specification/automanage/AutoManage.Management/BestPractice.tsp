@@ -52,6 +52,16 @@ interface BestPractices {
    * Get information about a Automanage best practice
    */
   get is BestPracticeOps.Read<BestPractice>;
+
+  /**
+   * Retrieve a list of Automanage best practices
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BestPractices_ListByTenant")
+  listByTenant is BestPracticeOps.List<
+    BestPractice,
+    Response = ArmResponse<BestPracticeList>
+  >;
 }
 @armResourceOperations
 interface BestPracticesVersionOps
@@ -87,16 +97,6 @@ interface BestPracticesVersions {
    * Get information about a Automanage best practice version
    */
   get is BestPracticesVersionOps.Read<BestPractice>;
-
-  /**
-   * Retrieve a list of Automanage best practices
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BestPractices_ListByTenant")
-  listByTenant is BestPracticesVersionOps.List<
-    BestPractice,
-    Response = ArmResponse<BestPracticeList>
-  >;
 }
 
 @@doc(BestPractice.name, "The Automanage best practice name.");

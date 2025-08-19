@@ -24,6 +24,23 @@ model ConfigurationProfile
 }
 
 @armResourceOperations
+interface ConfigurationProfileBySubScriptionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /** The configuration profile name. */
+        @path
+        @segment("configurationProfiles")
+        @key
+        configurationProfileName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface ConfigurationProfileOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -67,13 +84,25 @@ interface ConfigurationProfiles {
    */
   delete is ConfigurationProfileOps.DeleteSync<ConfigurationProfile>;
 
-  // /**
-  //  * Retrieve a list of configuration profile within a subscription
-  //  */
-  // listBySubscription is ConfigurationProfileOps.ListBySubscription<
-  //   ConfigurationProfile,
-  //   Response = ArmResponse<ConfigurationProfileList>
-  // >;
+  /**
+   * Retrieve a list of configuration profile within a subscription
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConfigurationProfiles_ListBySubscription")
+  listBySubscription is ConfigurationProfileBySubScriptionOps.List<
+    ConfigurationProfile,
+    Response = ArmResponse<ConfigurationProfileList>
+  >;
+
+  /**
+   * Retrieve a list of configuration profile within a resource group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConfigurationProfiles_ListByResourceGroup")
+  listByResourceGroup is ConfigurationProfileOps.List<
+    ConfigurationProfile,
+    Response = ArmResponse<ConfigurationProfileList>
+  >;
 }
 @armResourceOperations
 interface ConfigurationProfilesVersionOps
@@ -120,7 +149,7 @@ interface ConfigurationProfilesVersions {
    * Retrieve a list of configuration profile within a given resource group
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConfigurationProfiles_ListByResourceGroup")
+  @operationId("ConfigurationProfilesVersions_ListChildResources")
   listByResourceGroup is ConfigurationProfilesVersionOps.List<
     ConfigurationProfile,
     Response = ArmResponse<ConfigurationProfileList>

@@ -77,6 +77,42 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.Automanage/bestPractices": {
+      "get": {
+        "operationId": "BestPractices_ListByTenant",
+        "tags": [
+          "BestPractices"
+        ],
+        "description": "Retrieve a list of Automanage best practices",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BestPracticeList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Automanage bestPractices ": {
+            "$ref": "./examples/listBestPracticesByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}": {
       "get": {
         "operationId": "BestPractices_Get",
@@ -113,46 +149,6 @@
         "x-ms-examples": {
           "Get an Automanage best practice ": {
             "$ref": "./examples/getBestPractice.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/bestPractices": {
-      "get": {
-        "operationId": "BestPractices_ListByTenant",
-        "tags": [
-          "BestPracticesVersions"
-        ],
-        "description": "Retrieve a list of Automanage best practices",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "bestPracticeName",
-            "in": "path",
-            "description": "The Automanage best practice name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BestPracticeList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Automanage bestPractices ": {
-            "$ref": "./examples/listBestPracticesByTenant.json"
           }
         }
       }
@@ -240,6 +236,124 @@
         }
       }
     },
+    "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/versions": {
+      "get": {
+        "operationId": "BestPracticesVersions_ListByTenant",
+        "description": "Retrieve a list of Automanage best practices under a given tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "bestPracticeName",
+            "in": "path",
+            "description": "The Automanage best practice name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BestPracticeList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Automanage best practices versions ": {
+            "$ref": "./examples/listBestPracticesVersionsByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListBySubscription",
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "description": "Get list of configuration profile assignments under a given subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by subscription": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfiles": {
+      "get": {
+        "operationId": "ConfigurationProfiles_ListBySubscription",
+        "tags": [
+          "ConfigurationProfiles"
+        ],
+        "description": "Retrieve a list of configuration profile within a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profiles by subscription": {
+            "$ref": "./examples/listConfigurationProfilesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals": {
       "get": {
         "operationId": "ServicePrincipals_ListBySubscription",
@@ -273,6 +387,9 @@
           "List service principal by subscription": {
             "$ref": "./examples/listServicePrincipalBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -312,26 +429,29 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles": {
       "get": {
-        "operationId": "ConfigurationProfileAssignments_List",
-        "description": "Get list of configuration profile assignments",
+        "operationId": "ConfigurationProfiles_ListByResourceGroup",
+        "tags": [
+          "ConfigurationProfiles"
+        ],
+        "description": "Retrieve a list of configuration profile within a resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+              "$ref": "#/definitions/ConfigurationProfileList"
             }
           },
           "default": {
@@ -342,9 +462,12 @@
           }
         },
         "x-ms-examples": {
-          "List configuration profile assignments by resourceGroup": {
-            "$ref": "./examples/listConfigurationProfileAssignmentsByResourceGroup.json"
+          "List configuration profiles by resource group": {
+            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -552,7 +675,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions": {
       "get": {
-        "operationId": "ConfigurationProfiles_ListByResourceGroup",
+        "operationId": "ConfigurationProfilesVersions_ListChildResources",
         "tags": [
           "ConfigurationProfilesVersions"
         ],
@@ -590,9 +713,12 @@
           }
         },
         "x-ms-examples": {
-          "List configuration profiles by resource group": {
-            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
+          "List configuration profile versions by configuration profile": {
+            "$ref": "./examples/listConfigurationProfileVersions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -809,6 +935,9 @@
           "List configuration profile assignments by resourceGroup and cluster": {
             "$ref": "./examples/listConfigurationProfileAssignmentsByClusterName.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1032,6 +1161,9 @@
           "List reports by HCI configuration profiles assignment": {
             "$ref": "./examples/listReportsByconfigurationProfileHCIAssignment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1101,7 +1233,7 @@
         "tags": [
           "ConfigurationProfileAssignments"
         ],
-        "description": "Get list of configuration profile assignments",
+        "description": "Get list of configuration profile assignments under a given virtual machine",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1138,6 +1270,9 @@
           "List configuration profile assignments by resourceGroup and virtual machine": {
             "$ref": "./examples/listConfigurationProfileAssignmentsByVirtualMachines.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1361,6 +1496,9 @@
           "List reports by configuration profiles assignment": {
             "$ref": "./examples/listReportsByconfigurationProfileAssignment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1467,6 +1605,9 @@
           "List configuration profile assignments by resourceGroup and machine": {
             "$ref": "./examples/listConfigurationProfileAssignmentsByMachineName.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1690,6 +1831,9 @@
           "List reports by HCRP configuration profiles assignment": {
             "$ref": "./examples/listReportsByconfigurationProfileHCRPAssignment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1750,6 +1894,45 @@
           "Get a report for a HCRP configuration profile assignment": {
             "$ref": "./examples/getHCRPReport.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_List",
+        "description": "Get list of configuration profile assignments",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1839,6 +2022,9 @@
           "items": {
             "$ref": "#/definitions/BestPractice"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1889,6 +2075,9 @@
           "items": {
             "$ref": "#/definitions/ConfigurationProfileAssignment"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1922,6 +2111,9 @@
           "items": {
             "$ref": "#/definitions/ConfigurationProfile"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1975,6 +2167,9 @@
           "items": {
             "$ref": "#/definitions/Report"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -2035,6 +2230,9 @@
           "items": {
             "$ref": "#/definitions/ServicePrincipal"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },

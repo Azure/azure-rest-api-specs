@@ -13,186 +13,35 @@
     }
   },
   "paths": {
-    "/providers/microsoft.Automanage/bestPractices__deleted": {
+    "/providers/microsoft.Automanage/bestPractices": {
       "get": {
-        "operationId": "BestPractices_ListByTenant",
-        "parameters": [],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BestPracticeList"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List Automanage bestPractices ": {
-            "$ref": "./examples/listBestPracticesByTenant.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/versions__deleted": {
-      "get": {
-        "operationId": "BestPracticesVersions_ListByTenant",
-        "parameters": [
-          {
-            "name": "bestPracticeName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BestPracticeList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Automanage best practices versions ": {
-            "$ref": "./examples/listBestPracticesVersionsByTenant.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/configurationProfileAssignments__deleted": {
-      "get": {
-        "operationId": "ConfigurationProfileAssignments_ListBySubscription",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List configuration profile assignments by subscription": {
-            "$ref": "./examples/listConfigurationProfileAssignmentsBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/configurationProfiles__deleted": {
-      "get": {
-        "operationId": "ConfigurationProfiles_ListBySubscription",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List configuration profiles by subscription": {
-            "$ref": "./examples/listConfigurationProfilesBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfiles__deleted": {
-      "get": {
-        "operationId": "ConfigurationProfiles_ListByResourceGroup",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List configuration profiles by resource group": {
-            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/bestPractices__added": {
-      "get": {
-        "operationId": "BestPractices_ListByTenant",
-        "parameters": [
-          {
-            "name": "bestPracticeName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BestPracticeList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Automanage bestPractices ": {
-            "$ref": "./examples/listBestPracticesByTenant.json"
           }
         }
       }
     },
     "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/versions": {
       "get": {
         "responses": {
           "default": {
@@ -242,11 +91,36 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/configurationProfiles": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/servicePrincipals": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -275,9 +149,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfileAssignments": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfiles": {
+      "get": {
         "responses": {
           "default": {
             "schema": {
@@ -342,13 +227,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
-        "operationId": {
-          "__old": "ConfigurationProfilesVersions_ListChildResources",
-          "__new": "ConfigurationProfiles_ListByResourceGroup"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -357,14 +235,6 @@
                 "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List configuration profile versions by configuration profile__deleted": {
-            "$ref": "./examples/listConfigurationProfileVersions.json"
-          },
-          "List configuration profiles by resource group__added": {
-            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
           }
         }
       }
@@ -409,9 +279,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHci/clusters/{clusterName}/providers/microsoft.Automanage/configurationProfileAssignments": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -494,9 +361,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.AzureStackHci/clusters/{clusterName}/providers/microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -525,9 +389,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachines/{vmName}/providers/microsoft.Automanage/configurationProfileAssignments": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -652,9 +513,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachines/{vmName}/providers/microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "+",
@@ -732,9 +590,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.Automanage/configurationProfileAssignments": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -817,9 +672,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -896,6 +748,19 @@
         }
       }
     },
+    "BestPracticeList": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
     "ConfigurationProfile": {
       "properties": {
         "systemData__deleted": {
@@ -940,6 +805,32 @@
         ]
       ]
     },
+    "ConfigurationProfileAssignmentList": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "ConfigurationProfileList": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
     "ConfigurationProfileProperties": {
       "properties": {
         "configuration": {
@@ -970,6 +861,19 @@
           }
         ]
       ]
+    },
+    "ReportList": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
     },
     "ReportResource": {
       "properties": {
@@ -1003,6 +907,19 @@
           }
         ]
       ]
+    },
+    "ServicePrincipalListResult": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
     }
   }
 }

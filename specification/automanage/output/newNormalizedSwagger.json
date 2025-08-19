@@ -12,6 +12,34 @@
     "application/json"
   ],
   "paths": {
+    "/providers/microsoft.Automanage/bestPractices": {
+      "get": {
+        "operationId": "BestPractices_ListByTenant",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BestPracticeList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Automanage bestPractices ": {
+            "$ref": "./examples/listBestPracticesByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}": {
       "get": {
         "operationId": "BestPractices_Get",
@@ -44,9 +72,9 @@
         }
       }
     },
-    "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/bestPractices": {
+    "/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/versions": {
       "get": {
-        "operationId": "BestPractices_ListByTenant",
+        "operationId": "BestPracticesVersions_ListByTenant",
         "parameters": [
           {
             "name": "bestPracticeName",
@@ -70,9 +98,12 @@
           }
         },
         "x-ms-examples": {
-          "List Automanage bestPractices ": {
-            "$ref": "./examples/listBestPracticesByTenant.json"
+          "List Automanage best practices versions ": {
+            "$ref": "./examples/listBestPracticesVersionsByTenant.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -142,6 +173,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by subscription": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/configurationProfiles": {
+      "get": {
+        "operationId": "ConfigurationProfiles_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profiles by subscription": {
+            "$ref": "./examples/listConfigurationProfilesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/microsoft.Automanage/servicePrincipals": {
       "get": {
         "operationId": "ServicePrincipals_ListBySubscription",
@@ -164,6 +251,9 @@
           "List service principal by subscription": {
             "$ref": "./examples/listServicePrincipalBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -214,6 +304,37 @@
           "List configuration profile assignments by resourceGroup": {
             "$ref": "./examples/listConfigurationProfileAssignmentsByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfiles": {
+      "get": {
+        "operationId": "ConfigurationProfiles_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profiles by resource group": {
+            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -363,7 +484,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions": {
       "get": {
-        "operationId": "ConfigurationProfiles_ListByResourceGroup",
+        "operationId": "ConfigurationProfilesVersions_ListChildResources",
         "parameters": [
           {
             "name": "configurationProfileName",
@@ -387,9 +508,12 @@
           }
         },
         "x-ms-examples": {
-          "List configuration profiles by resource group": {
-            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
+          "List configuration profile versions by configuration profile": {
+            "$ref": "./examples/listConfigurationProfileVersions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -546,6 +670,9 @@
           "List configuration profile assignments by resourceGroup and cluster": {
             "$ref": "./examples/listConfigurationProfileAssignmentsByClusterName.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -708,6 +835,9 @@
           "List reports by HCI configuration profiles assignment": {
             "$ref": "./examples/listReportsByconfigurationProfileHCIAssignment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -784,6 +914,9 @@
           "List configuration profile assignments by resourceGroup and virtual machine": {
             "$ref": "./examples/listConfigurationProfileAssignmentsByVirtualMachines.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -946,6 +1079,9 @@
           "List reports by configuration profiles assignment": {
             "$ref": "./examples/listReportsByconfigurationProfileAssignment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1022,6 +1158,9 @@
           "List configuration profile assignments by resourceGroup and machine": {
             "$ref": "./examples/listConfigurationProfileAssignmentsByMachineName.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1184,6 +1323,9 @@
           "List reports by HCRP configuration profiles assignment": {
             "$ref": "./examples/listReportsByconfigurationProfileHCRPAssignment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1296,12 +1438,19 @@
     },
     "BestPracticeList": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/BestPractice"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -1339,12 +1488,19 @@
     },
     "ConfigurationProfileAssignmentList": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ConfigurationProfileAssignment"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -1366,12 +1522,19 @@
     },
     "ConfigurationProfileList": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ConfigurationProfile"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -1410,12 +1573,19 @@
     },
     "ReportList": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Report"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -1460,12 +1630,19 @@
     },
     "ServicePrincipalListResult": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ServicePrincipal"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
