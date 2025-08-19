@@ -133,7 +133,7 @@ stages:
                 $sdkRepoOwner = 'azure-sdk'
                 Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
                 Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
-                $sdkRepoUrl = "https://github.com/azure-sdk/'$(SdkRepoName)'"
+                $sdkRepoUrl = "https://github.com/azure-sdk/$(SdkRepoName)"
                 # Check if branch exists remotely
                 Write-Host "Checking if branch '$sdkRepoCommitish' exists in remote repository '$sdkRepoUrl'..."
 
