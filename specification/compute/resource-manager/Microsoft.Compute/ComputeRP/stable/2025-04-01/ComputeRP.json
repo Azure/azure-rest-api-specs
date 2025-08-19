@@ -1409,7 +1409,7 @@
           {
             "name": "commandId",
             "in": "path",
-            "description": "The command id.",
+            "description": "Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.",
             "required": true,
             "type": "string"
           },
@@ -5584,6 +5584,9 @@
           },
           "Create a scale set with zonalPlatformFaultDomainAlignMode as Aligned": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithZonalPlatformFaultDomainAlignMode.json"
+          },
+          "Create a virtual machine scale set with high-speed interconnect placement.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithHighSpeedInterconnectPlacement.json"
           },
           "Create or update a scale set with capacity reservation.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithCapacityReservation.json"
@@ -12242,6 +12245,16 @@
         }
       }
     },
+    "AllInstancesDown": {
+      "type": "object",
+      "description": "Specifies if Scheduled Events should be auto-approved when all instances are down.",
+      "properties": {
+        "automaticallyApprove": {
+          "type": "boolean",
+          "description": "Specifies if Scheduled Events should be auto-approved when all instances are down.\nits default value is true"
+        }
+      }
+    },
     "AllocationStrategy": {
       "type": "string",
       "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.",
@@ -13922,6 +13935,10 @@
         "enable": {
           "type": "boolean",
           "description": "Specifies if event grid and resource graph is enabled for Scheduled event related configurations."
+        },
+        "scheduledEventsApiVersion": {
+          "type": "string",
+          "description": "Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered."
         }
       }
     },
@@ -14053,6 +14070,30 @@
           "$ref": "#/definitions/VMSizeProperties",
           "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
         }
+      }
+    },
+    "HighSpeedInterconnectPlacement": {
+      "type": "string",
+      "description": "Specifies the high speed interconnect placement for the virtual machine scale set.",
+      "enum": [
+        "None",
+        "Trunk"
+      ],
+      "x-ms-enum": {
+        "name": "HighSpeedInterconnectPlacement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No high speed interconnect placement"
+          },
+          {
+            "name": "Trunk",
+            "value": "Trunk",
+            "description": "Trunk high speed interconnect placement"
+          }
+        ]
       }
     },
     "HostEndpointSettings": {
@@ -15390,7 +15431,8 @@
       "type": "string",
       "description": "The name of the service.",
       "enum": [
-        "AutomaticRepairs"
+        "AutomaticRepairs",
+        "AutomaticZoneRebalancing"
       ],
       "x-ms-enum": {
         "name": "OrchestrationServiceNames",
@@ -15399,6 +15441,35 @@
           {
             "name": "AutomaticRepairs",
             "value": "AutomaticRepairs"
+          },
+          {
+            "name": "AutomaticZoneRebalancing",
+            "value": "AutomaticZoneRebalancing",
+            "description": "AutomaticZoneRebalancing orchestration service."
+          }
+        ]
+      }
+    },
+    "OrchestrationServiceOperationStatus": {
+      "type": "string",
+      "description": "The latest operation status of the service.",
+      "enum": [
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestrationServiceOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress orchestration service operation status."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed orchestration service operation status."
           }
         ]
       }
@@ -15482,6 +15553,17 @@
         "serviceState": {
           "$ref": "#/definitions/OrchestrationServiceState",
           "description": "The current state of the service.",
+          "readOnly": true
+        },
+        "latestOperationStatus": {
+          "$ref": "#/definitions/OrchestrationServiceOperationStatus",
+          "description": "The latest operation status of the service. Minimum API version for this property is 2025-04-01.",
+          "readOnly": true
+        },
+        "lastStatusChangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time when the operation status changed. Minimum API version for this property is 2025-04-01.",
           "readOnly": true
         }
       }
@@ -15891,6 +15973,10 @@
         "imds": {
           "$ref": "#/definitions/HostEndpointSettings",
           "description": "Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01."
+        },
+        "addProxyAgentExtension": {
+          "type": "boolean",
+          "description": "Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os."
         }
       }
     },
@@ -16945,7 +17031,7 @@
       "properties": {
         "commandId": {
           "type": "string",
-          "description": "The run command id."
+          "description": "Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands."
         },
         "script": {
           "type": "array",
@@ -17106,6 +17192,10 @@
         "scheduledEventsAdditionalPublishingTargets": {
           "$ref": "#/definitions/ScheduledEventsAdditionalPublishingTargets",
           "description": "The configuration parameters used while publishing scheduledEventsAdditionalPublishingTargets."
+        },
+        "allInstancesDown": {
+          "$ref": "#/definitions/AllInstancesDown",
+          "description": "The configuration parameters used while creating AllInstancesDown scheduled event setting creation."
         }
       }
     },
@@ -17120,6 +17210,30 @@
           "$ref": "#/definitions/OSImageNotificationProfile",
           "description": "Specifies OS Image Scheduled Event related configurations."
         }
+      }
+    },
+    "ScriptShellTypes": {
+      "type": "string",
+      "description": "Script shell types.",
+      "enum": [
+        "Default",
+        "Powershell7"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptShellTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default script shell type."
+          },
+          {
+            "name": "Powershell7",
+            "value": "Powershell7",
+            "description": "Powershell7 script shell type."
+          }
+        ]
       }
     },
     "SecurityEncryptionTypes": {
@@ -19022,6 +19136,13 @@
           "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfigurationProperties",
           "description": "Describes a virtual machine network profile's IP configuration.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -19350,6 +19471,13 @@
         "sku": {
           "$ref": "#/definitions/PublicIPAddressSku",
           "description": "Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -19570,7 +19698,7 @@
     },
     "VirtualMachineRunCommandScriptSource": {
       "type": "object",
-      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId.",
+      "description": "Describes the script sources for run command. Use only one of these script sources: script, scriptUri, commandId, galleryScriptReferenceId.",
       "properties": {
         "script": {
           "type": "string",
@@ -19582,11 +19710,19 @@
         },
         "commandId": {
           "type": "string",
-          "description": "Specifies a commandId of predefined built-in script."
+          "description": "Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands."
         },
         "scriptUriManagedIdentity": {
           "$ref": "#/definitions/RunCommandManagedIdentity",
           "description": "User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
+        },
+        "scriptShell": {
+          "$ref": "#/definitions/ScriptShellTypes",
+          "description": "Optional. Specify which shell to use for running the script. These values must match those expected by the extension. Currently supported only for Windows VMs, script uses Powershell 7 when specified. Powershell 7 must be already installed on the machine to use Powershell7 parameter value."
+        },
+        "galleryScriptReferenceId": {
+          "type": "string",
+          "description": "The resource ID of a Gallery Script version that needs to be executed. Example ID looks like /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{scriptName}/versions/{version}."
         }
       }
     },
@@ -20191,6 +20327,13 @@
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties",
           "description": "Describes a virtual machine scale set network profile's IP configuration.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -20498,6 +20641,10 @@
         "skuProfile": {
           "$ref": "#/definitions/SkuProfile",
           "description": "Specifies the sku profile for the virtual machine scale set."
+        },
+        "highSpeedInterconnectPlacement": {
+          "$ref": "#/definitions/HighSpeedInterconnectPlacement",
+          "description": "Specifies the high speed interconnect placement for the virtual machine scale set."
         }
       }
     },
@@ -20517,6 +20664,13 @@
         "sku": {
           "$ref": "#/definitions/PublicIPAddressSku",
           "description": "Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -20822,6 +20976,13 @@
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfigurationProperties",
           "description": "Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -21049,6 +21210,13 @@
           "$ref": "#/definitions/VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties",
           "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
