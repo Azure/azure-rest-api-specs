@@ -318,7 +318,7 @@ directive:
 
   - suppress: R4011
     where:
-      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete.response
+      - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete.responses
       - $.paths["/jobs/{jobId}/tasks/{taskId}/files/{filePath}"].delete.responses
       - $.paths["/pools/{poolId}/nodes/{nodeId}/files/{filePath}"].delete.responses
       - $.paths["/jobschedules/{jobScheduleId}"].delete.responses
@@ -337,7 +337,7 @@ suppressions:
    where: 
      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
-     - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].
+     - $.paths["/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})"].delete
    reason: Service does not return 200, nor supply location header.
 
 ```
