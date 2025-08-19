@@ -1,12 +1,24 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "AutomanageClient",
     "version": "2022-05-04",
-    "title": "Automanage"
+    "description": "Automanage Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
   ],
   "security": [
     {
@@ -18,2195 +30,1871 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "BestPractices"
+    },
+    {
+      "name": "BestPracticesVersions"
+    },
+    {
+      "name": "ConfigurationProfiles"
+    },
+    {
+      "name": "ConfigurationProfilesVersions"
+    },
+    {
+      "name": "ConfigurationProfileAssignments"
+    },
+    {
+      "name": "ConfigurationProfileHCRPAssignments"
+    },
+    {
+      "name": "ConfigurationProfileHCIAssignments"
+    },
+    {
+      "name": "Reports"
+    },
+    {
+      "name": "HCRPReports"
+    },
+    {
+      "name": "HCIReports"
+    },
+    {
+      "name": "ServicePrincipals"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}": {
       "get": {
+        "operationId": "BestPractices_Get",
         "tags": [
           "BestPractices"
         ],
-        "operationId": "BestPractices_Get",
         "description": "Get information about a Automanage best practice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "bestPracticeName",
+            "in": "path",
+            "description": "The Automanage best practice name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BestPractice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
         "x-ms-examples": {
           "Get an Automanage best practice ": {
             "$ref": "./examples/getBestPractice.json"
           }
-        },
+        }
+      }
+    },
+    "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/bestPractices": {
+      "get": {
+        "operationId": "BestPractices_ListByTenant",
+        "tags": [
+          "BestPracticesVersions"
+        ],
+        "description": "Retrieve a list of Automanage best practices",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "name": "bestPracticeName",
             "in": "path",
+            "description": "The Automanage best practice name.",
             "required": true,
-            "type": "string",
-            "description": "The Automanage best practice name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The Automanage best practice was returned successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/BestPractice"
+              "$ref": "#/definitions/BestPracticeList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/providers/Microsoft.Automanage/bestPractices": {
-      "get": {
-        "tags": [
-          "BestPractices"
-        ],
-        "operationId": "BestPractices_ListByTenant",
-        "description": "Retrieve a list of Automanage best practices",
         "x-ms-examples": {
           "List Automanage bestPractices ": {
             "$ref": "./examples/listBestPracticesByTenant.json"
           }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. List of Automanage bestPractices configuration profile.",
-            "schema": {
-              "$ref": "#/definitions/BestPracticeList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     },
     "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/versions/{versionName}": {
       "get": {
+        "operationId": "BestPracticesVersions_Get",
         "tags": [
           "BestPracticesVersions"
         ],
-        "operationId": "BestPracticesVersions_Get",
         "description": "Get information about a Automanage best practice version",
-        "x-ms-examples": {
-          "Get an Automanage best practice version ": {
-            "$ref": "./examples/getBestPracticeVersion.json"
-          }
-        },
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "name": "bestPracticeName",
             "in": "path",
+            "description": "The Automanage best practice name.",
             "required": true,
-            "type": "string",
-            "description": "The Automanage best practice name."
+            "type": "string"
           },
           {
             "name": "versionName",
             "in": "path",
+            "description": "The Automanage best practice version name.",
             "required": true,
-            "type": "string",
-            "description": "The Automanage best practice version name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The Automanage best practice version was returned successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BestPractice"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/versions": {
-      "get": {
-        "tags": [
-          "BestPracticesVersions"
-        ],
-        "operationId": "BestPracticesVersions_ListByTenant",
-        "description": "Retrieve a list of Automanage best practices versions",
         "x-ms-examples": {
-          "List Automanage best practices versions ": {
-            "$ref": "./examples/listBestPracticesVersionsByTenant.json"
+          "Get an Automanage best practice version ": {
+            "$ref": "./examples/getBestPracticeVersion.json"
           }
-        },
-        "parameters": [
-          {
-            "name": "bestPracticeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Automanage best practice name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. List of Automanage bestPractices configuration profile versions.",
-            "schema": {
-              "$ref": "#/definitions/BestPracticeList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}": {
-      "put": {
-        "tags": [
-          "ConfigurationProfiles"
-        ],
-        "operationId": "ConfigurationProfiles_CreateOrUpdate",
-        "description": "Creates a configuration profile",
-        "x-ms-examples": {
-          "Create or update configuration profile": {
-            "$ref": "./examples/createOrUpdateConfigurationProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            },
-            "description": "Parameters supplied to create or update configuration profile."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
-          },
-          "201": {
-            "description": "Created. The configuration profile was created successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "ConfigurationProfiles"
-        ],
-        "operationId": "ConfigurationProfiles_Get",
-        "description": "Get information about a configuration profile",
-        "x-ms-examples": {
-          "Get a configuration profile": {
-            "$ref": "./examples/getConfigurationProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile was returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "ConfigurationProfiles"
-        ],
-        "operationId": "ConfigurationProfiles_Delete",
-        "description": "Delete a configuration profile",
-        "x-ms-examples": {
-          "Delete a configuration profile": {
-            "$ref": "./examples/deleteConfigurationProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "ConfigurationProfiles"
-        ],
-        "operationId": "ConfigurationProfiles_Update",
-        "description": "Updates a configuration profile",
-        "x-ms-examples": {
-          "Update configuration profile": {
-            "$ref": "./examples/updateConfigurationProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileUpdate"
-            },
-            "description": "Parameters supplied to update configuration profile."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles": {
-      "get": {
-        "tags": [
-          "ConfigurationProfiles"
-        ],
-        "operationId": "ConfigurationProfiles_ListByResourceGroup",
-        "description": "Retrieve a list of configuration profile within a given resource group",
-        "x-ms-examples": {
-          "List configuration profiles by resource group": {
-            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. List of configuration profiles.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfiles": {
-      "get": {
-        "tags": [
-          "ConfigurationProfiles"
-        ],
-        "operationId": "ConfigurationProfiles_ListBySubscription",
-        "description": "Retrieve a list of configuration profile within a subscription",
-        "x-ms-examples": {
-          "List configuration profiles by subscription": {
-            "$ref": "./examples/listConfigurationProfilesBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. List of configuration profiles.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions/{versionName}": {
-      "put": {
-        "tags": [
-          "ConfigurationProfilesVersions"
-        ],
-        "operationId": "ConfigurationProfilesVersions_CreateOrUpdate",
-        "description": "Creates a configuration profile version",
-        "x-ms-examples": {
-          "Create or update configuration profile version": {
-            "$ref": "./examples/createOrUpdateConfigurationProfileVersion.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile."
-          },
-          {
-            "name": "versionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile version name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            },
-            "description": "Parameters supplied to create or update configuration profile."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
-          },
-          "201": {
-            "description": "Created. The configuration profile was created successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "ConfigurationProfilesVersions"
-        ],
-        "operationId": "ConfigurationProfilesVersions_Get",
-        "description": "Get information about a configuration profile version",
-        "x-ms-examples": {
-          "Get a configuration profile version": {
-            "$ref": "./examples/getConfigurationProfileVersion.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile name."
-          },
-          {
-            "name": "versionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile version name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile was returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "ConfigurationProfilesVersions"
-        ],
-        "operationId": "ConfigurationProfilesVersions_Delete",
-        "description": "Delete a configuration profile version",
-        "x-ms-examples": {
-          "Delete a configuration profile version": {
-            "$ref": "./examples/deleteConfigurationProfileVersion.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile"
-          },
-          {
-            "name": "versionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile version name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions": {
-      "get": {
-        "tags": [
-          "ConfigurationProfilesVersions"
-        ],
-        "operationId": "ConfigurationProfilesVersions_ListChildResources",
-        "description": "Retrieve a list of configuration profile version for a configuration profile ",
-        "x-ms-examples": {
-          "List configuration profile versions by configuration profile": {
-            "$ref": "./examples/listConfigurationProfileVersions.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. List of configuration profiles.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
-      "put": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
-        "operationId": "ConfigurationProfileAssignments_CreateOrUpdate",
-        "description": "Creates an association between a VM and Automanage configuration profile",
-        "x-ms-examples": {
-          "Create or update configuration profile assignment": {
-            "$ref": "./examples/createOrUpdateConfigurationProfileAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile assignment. Only default is supported."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            },
-            "description": "Parameters supplied to the create or update configuration profile assignment."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VmNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile assignment for the VM was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            }
-          },
-          "201": {
-            "description": "Created. The Automanage configuration profile assignment for the VM was created successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
-        "operationId": "ConfigurationProfileAssignments_Get",
-        "description": "Get information about a configuration profile assignment",
-        "x-ms-examples": {
-          "Get a configuration profile assignment": {
-            "$ref": "./examples/getConfigurationProfileAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/VmNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile assignment was returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
-        "operationId": "ConfigurationProfileAssignments_Delete",
-        "description": "Delete a configuration profile assignment",
-        "x-ms-examples": {
-          "Delete an configuration profile assignment": {
-            "$ref": "./examples/deleteConfigurationProfileAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile assignment"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/VmNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
-      "get": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
-        "operationId": "ConfigurationProfileAssignments_ListByVirtualMachines",
-        "description": "Get list of configuration profile assignments",
-        "x-ms-examples": {
-          "List configuration profile assignments by resourceGroup and virtual machine": {
-            "$ref": "./examples/listConfigurationProfileAssignmentsByVirtualMachines.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VmNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The list of configuration profile assignments were returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
-      "get": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
-        "operationId": "ConfigurationProfileAssignments_List",
-        "description": "Get list of configuration profile assignments",
-        "x-ms-examples": {
-          "List configuration profile assignments by resourceGroup": {
-            "$ref": "./examples/listConfigurationProfileAssignmentsByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The list of configuration profile assignments were returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfileAssignments": {
-      "get": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
-        "operationId": "ConfigurationProfileAssignments_ListBySubscription",
-        "description": "Get list of configuration profile assignments under a given subscription",
-        "x-ms-examples": {
-          "List configuration profile assignments by subscription": {
-            "$ref": "./examples/listConfigurationProfileAssignmentsBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The list of configuration profile assignments were returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     },
     "/providers/Microsoft.Automanage/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available Automanage REST API operations.",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
         "x-ms-examples": {
           "Lists all of the available Automanage REST API operations": {
             "$ref": "./examples/listOperations.json"
           }
         },
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the list of operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
         "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
-      "get": {
-        "tags": [
-          "reports"
-        ],
-        "operationId": "reports_Get",
-        "description": "Get information about a report associated with a configuration profile assignment run",
-        "x-ms-examples": {
-          "Get a report for a configuration profile assignment": {
-            "$ref": "./examples/getReport.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "name": "reportName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The report name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/VmNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The report was returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/Report"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
-      "get": {
-        "tags": [
-          "reports"
-        ],
-        "operationId": "reports_ListByConfigurationProfileAssignments",
-        "description": "Retrieve a list of reports within a given configuration profile assignment",
-        "x-ms-examples": {
-          "List reports by configuration profiles assignment": {
-            "$ref": "./examples/listReportsByconfigurationProfileAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "$ref": "#/parameters/VmNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. List of reports.",
-            "schema": {
-              "$ref": "#/definitions/ReportList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals": {
       "get": {
-        "tags": [
-          "servicePrincipals"
-        ],
         "operationId": "ServicePrincipals_ListBySubscription",
+        "tags": [
+          "ServicePrincipals"
+        ],
         "description": "Get the Automanage AAD first party Application Service Principal details for the subscription id.",
-        "x-ms-examples": {
-          "List service principal by subscription": {
-            "$ref": "./examples/listServicePrincipalBySubscription.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns the Automanage ADD first party Application Service Principal details for the subscription.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServicePrincipalListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "List service principal by subscription": {
+            "$ref": "./examples/listServicePrincipalBySubscription.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals/default": {
       "get": {
-        "tags": [
-          "servicePrincipals"
-        ],
         "operationId": "ServicePrincipals_Get",
+        "tags": [
+          "ServicePrincipals"
+        ],
         "description": "Get the Automanage AAD first party Application Service Principal details for the subscription id.",
-        "x-ms-examples": {
-          "Get service principal": {
-            "$ref": "./examples/getServicePrincipal.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns the Automanage ADD first party Application Service Principal details for the subscription.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServicePrincipal"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Get service principal": {
+            "$ref": "./examples/getServicePrincipal.json"
+          }
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
-      "put": {
-        "tags": [
-          "ConfigurationProfileHCRPAssignments"
-        ],
-        "operationId": "ConfigurationProfileHCRPAssignments_CreateOrUpdate",
-        "description": "Creates an association between a ARC machine and Automanage configuration profile",
-        "x-ms-examples": {
-          "Create or update HCRP configuration profile assignment": {
-            "$ref": "./examples/createOrUpdateConfigurationProfileHCRPAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            },
-            "description": "Parameters supplied to the create or update configuration profile assignment."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MachineNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile assignment. Only default is supported."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile assignment for the ARC machine was updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            }
-          },
-          "201": {
-            "description": "Created. The Automanage configuration profile assignment for the ARC machine was created successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
       "get": {
-        "tags": [
-          "ConfigurationProfileHCRPAssignments"
-        ],
-        "operationId": "ConfigurationProfileHCRPAssignments_Get",
-        "description": "Get information about a configuration profile assignment",
-        "x-ms-examples": {
-          "Get a HCRP configuration profile assignment": {
-            "$ref": "./examples/getConfigurationProfileHCRPAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/MachineNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The configuration profile assignment was returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "ConfigurationProfileHCRPAssignments"
-        ],
-        "operationId": "ConfigurationProfileHCRPAssignments_Delete",
-        "description": "Delete a configuration profile assignment",
-        "x-ms-examples": {
-          "Delete a HCRP configuration profile assignment": {
-            "$ref": "./examples/deleteConfigurationProfileHCRPAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/MachineNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile assignment"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
-      "get": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
-        "operationId": "ConfigurationProfileAssignments_ListByMachineName",
+        "operationId": "ConfigurationProfileAssignments_List",
         "description": "Get list of configuration profile assignments",
-        "x-ms-examples": {
-          "List configuration profile assignments by resourceGroup and machine": {
-            "$ref": "./examples/listConfigurationProfileAssignmentsByMachineName.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/MachineNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The list of configuration profile assignments were returned successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ConfigurationProfileAssignmentList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByResourceGroup.json"
+          }
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}": {
       "get": {
+        "operationId": "ConfigurationProfiles_Get",
         "tags": [
-          "HCRPReports"
+          "ConfigurationProfiles"
         ],
-        "operationId": "HCRPReports_Get",
-        "description": "Get information about a report associated with a configuration profile assignment run",
-        "x-ms-examples": {
-          "Get a report for a HCRP configuration profile assignment": {
-            "$ref": "./examples/getHCRPReport.json"
-          }
-        },
+        "description": "Get information about a configuration profile",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/MachineNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "configurationProfileAssignmentName",
+            "name": "configurationProfileName",
             "in": "path",
+            "description": "The configuration profile name.",
             "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "name": "reportName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The report name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The report was returned successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Report"
+              "$ref": "#/definitions/ConfigurationProfile"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
-      "get": {
-        "tags": [
-          "HCRPReports"
-        ],
-        "operationId": "HCRPReports_ListByConfigurationProfileAssignments",
-        "description": "Retrieve a list of reports within a given configuration profile assignment",
         "x-ms-examples": {
-          "List reports by HCRP configuration profiles assignment": {
-            "$ref": "./examples/listReportsByconfigurationProfileHCRPAssignment.json"
+          "Get a configuration profile": {
+            "$ref": "./examples/getConfigurationProfile.json"
           }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MachineNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. List of reports.",
-            "schema": {
-              "$ref": "#/definitions/ReportList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
+        }
+      },
       "put": {
+        "operationId": "ConfigurationProfiles_CreateOrUpdate",
         "tags": [
-          "ConfigurationProfileHCIAssignments"
+          "ConfigurationProfiles"
         ],
-        "operationId": "ConfigurationProfileHCIAssignments_CreateOrUpdate",
-        "description": "Creates an association between a AzureStackHCI cluster and Automanage configuration profile",
-        "x-ms-examples": {
-          "Create or update a HCI configuration profile assignment": {
-            "$ref": "./examples/createOrUpdateConfigurationProfileHCIAssignment.json"
-          }
-        },
+        "description": "Creates a configuration profile",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileName",
+            "in": "path",
+            "description": "The configuration profile name.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters supplied to create or update configuration profile.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
-            },
-            "description": "Parameters supplied to the create or update configuration profile assignment."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "configurationProfileAssignmentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile assignment. Only default is supported."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+              "$ref": "#/definitions/ConfigurationProfile"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The configuration profile assignment for the AzureStackHCI cluster was updated successfully.",
+            "description": "Resource 'ConfigurationProfile' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
+              "$ref": "#/definitions/ConfigurationProfile"
             }
           },
           "201": {
-            "description": "Created. The Automanage configuration profile assignment for the AzureStackHCI cluster was created successfully.",
+            "description": "Resource 'ConfigurationProfile' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
+              "$ref": "#/definitions/ConfigurationProfile"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "ConfigurationProfileHCIAssignments"
-        ],
-        "operationId": "ConfigurationProfileHCIAssignments_Get",
-        "description": "Get information about a configuration profile assignment",
         "x-ms-examples": {
-          "Get a HCI configuration profile assignment": {
-            "$ref": "./examples/getConfigurationProfileHCIAssignment.json"
+          "Create or update configuration profile": {
+            "$ref": "./examples/createOrUpdateConfigurationProfile.json"
           }
-        },
+        }
+      },
+      "patch": {
+        "operationId": "ConfigurationProfiles_Update",
+        "tags": [
+          "ConfigurationProfiles"
+        ],
+        "description": "Updates a configuration profile",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "configurationProfileAssignmentName",
+            "name": "configurationProfileName",
             "in": "path",
+            "description": "The configuration profile name.",
             "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
+            "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update configuration profile.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileUpdate"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The configuration profile assignment was returned successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationProfileAssignment"
+              "$ref": "#/definitions/ConfigurationProfile"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "Update configuration profile": {
+            "$ref": "./examples/updateConfigurationProfile.json"
+          }
+        }
       },
       "delete": {
+        "operationId": "ConfigurationProfiles_Delete",
         "tags": [
-          "ConfigurationProfileHCIAssignments"
+          "ConfigurationProfiles"
         ],
-        "operationId": "ConfigurationProfileHCIAssignments_Delete",
-        "description": "Delete a configuration profile assignment",
-        "x-ms-examples": {
-          "Delete a HCI configuration profile assignment": {
-            "$ref": "./examples/deleteConfigurationProfileHCIAssignment.json"
-          }
-        },
+        "description": "Delete a configuration profile",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "configurationProfileAssignmentName",
+            "name": "configurationProfileName",
             "in": "path",
+            "description": "The configuration profile name.",
             "required": true,
-            "type": "string",
-            "description": "Name of the configuration profile assignment"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "OK"
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": false,
-        "produces": [
-          "application/json"
+        "x-ms-examples": {
+          "Delete a configuration profile": {
+            "$ref": "./examples/deleteConfigurationProfile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions": {
+      "get": {
+        "operationId": "ConfigurationProfiles_ListByResourceGroup",
+        "tags": [
+          "ConfigurationProfilesVersions"
         ],
-        "consumes": [
-          "application/json"
-        ]
+        "description": "Retrieve a list of configuration profile within a given resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileName",
+            "in": "path",
+            "description": "The configuration profile name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profiles by resource group": {
+            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions/{versionName}": {
+      "get": {
+        "operationId": "ConfigurationProfilesVersions_Get",
+        "tags": [
+          "ConfigurationProfilesVersions"
+        ],
+        "description": "Get information about a configuration profile version",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileName",
+            "in": "path",
+            "description": "The configuration profile name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The configuration profile version name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a configuration profile version": {
+            "$ref": "./examples/getConfigurationProfileVersion.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfilesVersions_CreateOrUpdate",
+        "tags": [
+          "ConfigurationProfilesVersions"
+        ],
+        "description": "Creates a configuration profile version",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileName",
+            "in": "path",
+            "description": "The configuration profile name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The configuration profile version name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to create or update configuration profile.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update configuration profile version": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileVersion.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfilesVersions_Delete",
+        "tags": [
+          "ConfigurationProfilesVersions"
+        ],
+        "description": "Delete a configuration profile version",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileName",
+            "in": "path",
+            "description": "The configuration profile name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The configuration profile version name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a configuration profile version": {
+            "$ref": "./examples/deleteConfigurationProfileVersion.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
       "get": {
-        "tags": [
-          "ConfigurationProfileAssignments"
-        ],
         "operationId": "ConfigurationProfileAssignments_ListByClusterName",
+        "tags": [
+          "ConfigurationProfileHCIAssignments"
+        ],
         "description": "Get list of configuration profile assignments",
-        "x-ms-examples": {
-          "List configuration profile assignments by resourceGroup and cluster": {
-            "$ref": "./examples/listConfigurationProfileAssignmentsByClusterName.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The list of configuration profile assignments were returned successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ConfigurationProfileAssignmentList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and cluster": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByClusterName.json"
+          }
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
       "get": {
+        "operationId": "ConfigurationProfileHCIAssignments_Get",
         "tags": [
-          "HCIReports"
+          "ConfigurationProfileHCIAssignments"
         ],
-        "operationId": "HCIReports_Get",
-        "description": "Get information about a report associated with a configuration profile assignment run",
-        "x-ms-examples": {
-          "Get a report for a HCI configuration profile assignment": {
-            "$ref": "./examples/getHCIReport.json"
-          }
-        },
+        "description": "Get information about a configuration profile assignment",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "configurationProfileAssignmentName",
             "in": "path",
+            "description": "The configuration profile assignment name.",
             "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "name": "reportName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The report name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The report was returned successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Report"
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/json"
+        "x-ms-examples": {
+          "Get a HCI configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileHCIAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileHCIAssignments_CreateOrUpdate",
+        "tags": [
+          "ConfigurationProfileHCIAssignments"
         ],
-        "consumes": [
-          "application/json"
-        ]
+        "description": "Creates an association between a AzureStackHCI cluster and Automanage configuration profile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update configuration profile assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationProfileAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationProfileAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HCI configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileHCIAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileHCIAssignments_Delete",
+        "tags": [
+          "ConfigurationProfileHCIAssignments"
+        ],
+        "description": "Delete a configuration profile assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HCI configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileHCIAssignment.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
       "get": {
+        "operationId": "HCIReports_ListByConfigurationProfileAssignments",
         "tags": [
           "HCIReports"
         ],
-        "operationId": "HCIReports_ListByConfigurationProfileAssignments",
         "description": "Retrieve a list of reports within a given configuration profile assignment",
-        "x-ms-examples": {
-          "List reports by HCI configuration profiles assignment": {
-            "$ref": "./examples/listReportsByconfigurationProfileHCIAssignment.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "configurationProfileAssignmentName",
             "in": "path",
+            "description": "The configuration profile assignment name.",
             "required": true,
-            "type": "string",
-            "description": "The configuration profile assignment name."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. List of reports.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ReportList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
+        "x-ms-examples": {
+          "List reports by HCI configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileHCIAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
+      "get": {
+        "operationId": "HCIReports_Get",
+        "tags": [
+          "HCIReports"
         ],
-        "consumes": [
-          "application/json"
-        ]
+        "description": "Get information about a report associated with a configuration profile assignment run",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "The report name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a HCI configuration profile assignment": {
+            "$ref": "./examples/getHCIReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByVirtualMachines",
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "description": "Get list of configuration profile assignments",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and virtual machine": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByVirtualMachines.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_Get",
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "description": "Get information about a configuration profile assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileAssignments_CreateOrUpdate",
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "description": "Creates an association between a VM and Automanage configuration profile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update configuration profile assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationProfileAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationProfileAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileAssignments_Delete",
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "description": "Delete a configuration profile assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
+      "get": {
+        "operationId": "reports_ListByConfigurationProfileAssignments",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Retrieve a list of reports within a given configuration profile assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
+      "get": {
+        "operationId": "reports_Get",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Get information about a report associated with a configuration profile assignment run",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "The report name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a configuration profile assignment": {
+            "$ref": "./examples/getReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByMachineName",
+        "tags": [
+          "ConfigurationProfileHCRPAssignments"
+        ],
+        "description": "Get list of configuration profile assignments",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and machine": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByMachineName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
+      "get": {
+        "operationId": "ConfigurationProfileHCRPAssignments_Get",
+        "tags": [
+          "ConfigurationProfileHCRPAssignments"
+        ],
+        "description": "Get information about a configuration profile assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HCRP configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileHCRPAssignments_CreateOrUpdate",
+        "tags": [
+          "ConfigurationProfileHCRPAssignments"
+        ],
+        "description": "Creates an association between a ARC machine and Automanage configuration profile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update configuration profile assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigurationProfileAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigurationProfileAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update HCRP configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileHCRPAssignments_Delete",
+        "tags": [
+          "ConfigurationProfileHCRPAssignments"
+        ],
+        "description": "Delete a configuration profile assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HCRP configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports": {
+      "get": {
+        "operationId": "HCRPReports_ListByConfigurationProfileAssignments",
+        "tags": [
+          "HCRPReports"
+        ],
+        "description": "Retrieve a list of reports within a given configuration profile assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by HCRP configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileHCRPAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}": {
+      "get": {
+        "operationId": "HCRPReports_Get",
+        "tags": [
+          "HCRPReports"
+        ],
+        "description": "Get information about a report associated with a configuration profile assignment run",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the Arc machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "description": "The configuration profile assignment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "The report name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a HCRP configuration profile assignment": {
+            "$ref": "./examples/getHCRPReport.json"
+          }
+        }
       }
     }
   },
   "definitions": {
-    "BestPracticeList": {
-      "description": "The response of the list best practice operation.",
+    "AssignmentReportProperties": {
       "type": "object",
+      "description": "Data related to the report detail.",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BestPractice"
-          },
-          "description": "Result of the list best practice operation."
-        }
-      }
-    },
-    "ConfigurationProfileList": {
-      "description": "The response of the list configuration profile operation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationProfile"
-          },
-          "description": "Result of the list ConfigurationProfile operation."
-        }
-      }
-    },
-    "BestPractice": {
-      "description": "Definition of the Automanage best practice.",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "id": {
+        "startTime": {
           "type": "string",
-          "description": "The fully qualified ID for the best practice.  For example, /providers/Microsoft.Automanage/bestPractices/azureBestPracticesProduction",
+          "description": "Start time of the configuration profile assignment processing."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End time of the configuration profile assignment processing."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Last modified time of the configuration profile assignment processing.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration of the configuration profile assignment processing.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "The type of the resource.  For example, Microsoft.Automanage/bestPractices",
+          "description": "Type of the configuration profile assignment processing (Initial/Consistency).",
           "readOnly": true
         },
-        "name": {
+        "status": {
           "type": "string",
-          "description": "The name of the best practice. For example, azureBestPracticesProduction",
+          "description": "The status of the configuration profile assignment.",
           "readOnly": true
         },
-        "properties": {
-          "title": "Properties",
-          "$ref": "#/definitions/ConfigurationProfileProperties",
-          "description": "Properties of the best practice."
+        "configurationProfile": {
+          "type": "string",
+          "description": "The configurationProfile linked to the assignment.",
+          "readOnly": true
         },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
+        "resources": {
+          "type": "array",
+          "description": "List of resources processed by the configuration profile assignment.",
+          "items": {
+            "$ref": "#/definitions/ReportResource"
+          },
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "Error message, if any, returned by the configuration profile assignment processing.",
+          "readOnly": true
+        },
+        "reportFormatVersion": {
+          "type": "string",
+          "description": "Version of the report format",
+          "readOnly": true
+        }
+      }
+    },
+    "BestPractice": {
+      "type": "object",
+      "description": "Definition of the Automanage best practice.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProfileProperties",
+          "description": "Properties of the best practice.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BestPracticeList": {
+      "type": "object",
+      "description": "The response of the list best practice operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Result of the list best practice operation.",
+          "items": {
+            "$ref": "#/definitions/BestPractice"
+          }
         }
       }
     },
     "ConfigurationProfile": {
-      "description": "Definition of the configuration profile.",
       "type": "object",
+      "description": "Definition of the configuration profile.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationProfileProperties",
-          "description": "Properties of the configuration profile."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
+          "description": "Properties of the configuration profile.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "ConfigurationProfileProperties": {
-      "description": "Automanage configuration profile properties.",
+    "ConfigurationProfileAssignment": {
       "type": "object",
-      "properties": {
-        "configuration": {
-          "title": "configuration",
-          "$ref": "#/definitions/ConfigurationDictionary",
-          "description": "configuration dictionary of the configuration profile."
-        }
-      }
-    },
-    "ConfigurationDictionary": {
-      "description": "The custom configuration for configuration profile. Name and value pairs that define the configuration details of the configuration profile.",
-      "type": "object",
-      "example": {
-        "Antimalware/Enable": true
-      }
-    },
-    "ConfigurationProfileUpdate": {
-      "description": "Definition of the configuration profile.",
-      "type": "object",
+      "description": "Configuration profile assignment is an association between a VM and automanage profile configuration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConfigurationProfileProperties",
-          "description": "Properties of the configuration profile."
+          "$ref": "#/definitions/ConfigurationProfileAssignmentProperties",
+          "description": "Properties of the configuration profile assignment.",
+          "x-ms-client-flatten": true
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/UpdateResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
     "ConfigurationProfileAssignmentList": {
-      "description": "The response of the list configuration profile assignment operation.",
       "type": "object",
+      "description": "The response of the list configuration profile assignment operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "Result of the list configuration profile assignment operation.",
           "items": {
             "$ref": "#/definitions/ConfigurationProfileAssignment"
-          },
-          "description": "Result of the list configuration profile assignment operation."
+          }
         }
       }
     },
-    "ConfigurationProfileAssignment": {
-      "description": "Configuration profile assignment is an association between a VM and automanage profile configuration.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConfigurationProfileAssignmentProperties",
-          "description": "Properties of the configuration profile assignment."
-        },
-        "managedBy": {
-          "readOnly": true,
-          "description": "Azure resource id. Indicates if this resource is managed by another Azure resource.",
-          "$ref": "#/definitions/ManagedBy"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ConfigurationProfileAssignmentProperties": {
-      "description": "Automanage configuration profile assignment properties.",
       "type": "object",
+      "description": "Automanage configuration profile assignment properties.",
       "properties": {
         "configurationProfile": {
           "type": "string",
@@ -2219,226 +1907,166 @@
         },
         "status": {
           "type": "string",
-          "readOnly": true,
-          "description": "The status of onboarding, which only appears in the response."
+          "description": "The status of onboarding, which only appears in the response.",
+          "readOnly": true
         }
       }
     },
-    "UpdateResource": {
-      "description": "Represents an update resource",
+    "ConfigurationProfileList": {
       "type": "object",
+      "description": "The response of the list configuration profile operation.",
       "properties": {
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+        "value": {
+          "type": "array",
+          "description": "Result of the list ConfigurationProfile operation.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationProfile"
           }
         }
       }
     },
-    "ReportList": {
-      "description": "The response of the list report operation.",
+    "ConfigurationProfileProperties": {
       "type": "object",
+      "description": "Automanage configuration profile properties.",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Report"
-          },
-          "description": "Result of the list report operation."
+        "configuration": {
+          "description": "configuration dictionary of the configuration profile."
         }
       }
     },
-    "Report": {
-      "description": "Definition of the report.",
+    "ConfigurationProfileUpdate": {
       "type": "object",
+      "description": "Definition of the configuration profile.",
       "properties": {
         "properties": {
-          "title": "Properties",
-          "$ref": "#/definitions/AssignmentReportProperties",
-          "description": "The properties for the report."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
+          "$ref": "#/definitions/ConfigurationProfileProperties",
+          "description": "Properties of the configuration profile."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/UpdateResource"
         }
       ]
     },
-    "AssignmentReportProperties": {
-      "description": "Data related to the report detail.",
+    "Report": {
       "type": "object",
+      "description": "Definition of the report.",
       "properties": {
-        "startTime": {
-          "type": "string",
-          "description": "Start time of the configuration profile assignment processing."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "End time of the configuration profile assignment processing."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Last modified time of the configuration profile assignment processing."
-        },
-        "duration": {
-          "type": "string",
-          "format": "duration",
-          "readOnly": true,
-          "description": "Duration of the configuration profile assignment processing."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of the configuration profile assignment processing (Initial/Consistency)."
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The status of the configuration profile assignment."
-        },
-        "configurationProfile": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The configurationProfile linked to the assignment."
-        },
-        "resources": {
+        "properties": {
+          "$ref": "#/definitions/AssignmentReportProperties",
+          "description": "The properties for the report.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReportList": {
+      "type": "object",
+      "description": "The response of the list report operation.",
+      "properties": {
+        "value": {
           "type": "array",
-          "readOnly": true,
+          "description": "Result of the list report operation.",
           "items": {
-            "$ref": "#/definitions/ReportResource"
-          },
-          "description": "List of resources processed by the configuration profile assignment."
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
-          "readOnly": true,
-          "description": "Error message, if any, returned by the configuration profile assignment processing."
-        },
-        "reportFormatVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Version of the report format"
+            "$ref": "#/definitions/Report"
+          }
         }
       }
     },
     "ReportResource": {
-      "description": "Details about the resource processed by the configuration profile assignment",
       "type": "object",
+      "description": "Details about the resource processed by the configuration profile assignment",
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "Name of the resource."
+          "description": "Name of the resource.",
+          "readOnly": true
         },
         "id": {
           "type": "string",
-          "readOnly": true,
-          "description": "ARM id of the resource."
+          "description": "ARM id of the resource.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "readOnly": true,
-          "description": "Type of the resource."
+          "description": "Type of the resource.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "readOnly": true,
-          "description": "Status of the resource."
+          "description": "Status of the resource.",
+          "readOnly": true
         },
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
-          "readOnly": true,
-          "description": "Error message, if any, returned when deploying the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "Error message, if any, returned when deploying the resource.",
+          "readOnly": true
         }
       }
     },
-    "ServicePrincipalListResult": {
-      "description": "The list of ServicePrincipals.",
+    "ServicePrincipal": {
       "type": "object",
+      "description": "The Service Principal Id for the subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServicePrincipalProperties",
+          "description": "The Service Principal properties for the subscription",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServicePrincipalListResult": {
+      "type": "object",
+      "description": "The list of ServicePrincipals.",
       "properties": {
         "value": {
-          "description": "The list of servicePrincipals.",
           "type": "array",
+          "description": "The list of servicePrincipals.",
           "items": {
             "$ref": "#/definitions/ServicePrincipal"
           }
         }
       }
     },
-    "ServicePrincipal": {
-      "description": "The Service Principal Id for the subscription.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "title": "Properties",
-          "$ref": "#/definitions/ServicePrincipalProperties",
-          "description": "The Service Principal properties for the subscription"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ServicePrincipalProperties": {
-      "description": "The Service Principal properties for the subscription.",
       "type": "object",
+      "description": "The Service Principal properties for the subscription.",
       "properties": {
         "servicePrincipalId": {
           "type": "string",
-          "readOnly": true,
-          "description": "The Service Principal Id for the subscription."
+          "description": "The Service Principal Id for the subscription.",
+          "readOnly": true
         },
         "authorizationSet": {
           "type": "boolean",
-          "readOnly": true,
-          "description": "Returns the contributor RBAC Role exist or not for the Service Principal Id."
+          "description": "Returns the contributor RBAC Role exist or not for the Service Principal Id.",
+          "readOnly": true
         }
       }
     },
-    "ManagedBy": {
-      "type": "string",
-      "description": "Azure resource id. Indicates if this resource is managed by another Azure resource."
+    "UpdateResource": {
+      "type": "object",
+      "description": "Represents an update resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
-  "parameters": {
-    "VmNameParameter": {
-      "name": "vmName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the virtual machine.",
-      "x-ms-parameter-location": "method"
-    },
-    "MachineNameParameter": {
-      "name": "machineName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Arc machine.",
-      "x-ms-parameter-location": "method"
-    },
-    "ClusterNameParameter": {
-      "name": "clusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Arc machine.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

@@ -89,13 +89,13 @@ interface ConfigurationProfileAssignments {
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 
-  /**
-   * Get list of configuration profile assignments under a given subscription
-   */
-  listBySubscription is ConfigurationProfileAssignmentOps.ListBySubscription<
-    ConfigurationProfileAssignment,
-    Response = ArmResponse<ConfigurationProfileAssignmentList>
-  >;
+  // /**
+  //  * Get list of configuration profile assignments under a given subscription
+  //  */
+  // listBySubscription is ConfigurationProfileAssignmentOps.ListBySubscription<
+  //   ConfigurationProfileAssignment,
+  //   Response = ArmResponse<ConfigurationProfileAssignmentList>
+  // >;
 }
 @armResourceOperations
 interface ConfigurationProfileHCRPAssignmentOps
