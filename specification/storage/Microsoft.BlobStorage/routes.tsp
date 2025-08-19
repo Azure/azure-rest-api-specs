@@ -1485,7 +1485,7 @@ namespace Storage.Blob {
         },
         {
           @statusCode statusCode: 204;
-          ...DateResponseHeader;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
