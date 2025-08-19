@@ -4,7 +4,7 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/storagediscovery"
 emit:
-- "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -58,34 +58,34 @@ options:
     module-name: "{prefix}.{service-name}"
     output-folder: "{output-dir}"
     exclude-tableview-properties:
-    - Id
-    - Type
+      - Id
+      - Type
     directive:
-    - where:
-        subject: Operation
-      hide: true
-    - where:
-        parameter-name: SubscriptionId
-      set:
-        default:
-          script: "(Get-AzContext).Subscription.Id"
-    - where:
-        variant: ^(Create|Update)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
-      remove: true
-    - where:
-        variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
-      remove: true
-    - where:
-        verb: Set
-      remove: true
-      # Add model
-    - model-cmdlet:
-      - model-name: StorageDiscoveryScope
-        cmdlet-name: New-AzStorageDiscoveryScopeObject
-      # hide report APIs
-    - where:
-        subject: ^Report$|^ReportStorageDiscoveryWorkspace$
-      remove: true
+      - where:
+          subject: Operation
+        hide: true
+      - where:
+          parameter-name: SubscriptionId
+        set:
+          default:
+            script: "(Get-AzContext).Subscription.Id"
+      - where:
+          variant: ^(Create|Update)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+        remove: true
+      - where:
+          variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
+        remove: true
+      - where:
+          verb: Set
+        remove: true
+        # Add model
+      - model-cmdlet:
+          - model-name: StorageDiscoveryScope
+            cmdlet-name: New-AzStorageDiscoveryScopeObject
+        # hide report APIs
+      - where:
+          subject: ^Report$|^ReportStorageDiscoveryWorkspace$
+        remove: true
 linter:
   extends:
-  - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

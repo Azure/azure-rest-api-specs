@@ -6,7 +6,7 @@ parameters:
   "dependencies":
     default: ""
 emit:
-- "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
@@ -49,6 +49,6 @@ options:
     generate-tests: false
 linter:
   extends:
-  - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
   disable:
     "@azure-tools/typespec-azure-core/casing-style": "Disabling as #suppress not working for namespace"

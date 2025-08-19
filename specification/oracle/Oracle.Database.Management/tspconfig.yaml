@@ -7,7 +7,7 @@ parameters:
     default: ""
 
 emit:
-- "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -27,7 +27,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-    - "specification/oracle/Oracle.Database.Management/models"
+      - "specification/oracle/Oracle.Database.Management/models"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-oracledatabase"
     namespace: "com.azure.resourcemanager.oracledatabase"
@@ -57,4 +57,4 @@ options:
 
 linter:
   extends:
-  - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

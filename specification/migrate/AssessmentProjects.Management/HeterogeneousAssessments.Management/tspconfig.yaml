@@ -4,11 +4,11 @@ parameters:
   "csharp-service-dir":
     default: "{output-dir}/sdk/migrate"
 emit:
-- "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 output-dir: "{project-root}/../../"
 linter:
   extends:
-  - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{output-dir}"
@@ -42,4 +42,4 @@ options:
       name: "@azure/arm-migrate"
   "@azure-tools/typespec-client-generator-cli":
     "additionalDirectories":
-    - "specification/migrate/AssessmentProjects.Management/Common"
+      - "specification/migrate/AssessmentProjects.Management/Common"
