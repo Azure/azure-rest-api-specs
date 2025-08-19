@@ -25,7 +25,7 @@ model PortProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;
 
-  /** The device this port resides on. */
+  /** The device (e.g., NIC or Switch) this port resides on. */
   device: string;
 
   /** The port's name on the device. */
