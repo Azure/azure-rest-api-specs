@@ -1195,7 +1195,7 @@ model RecommendedMachineConfiguration {
   memory?: ResourceRange;
 
   @doc("Recommended vCPU range.")
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy, cannot change existing name."
   @visibility(Lifecycle.Read)
   vCPUs?: ResourceRange;
 }
