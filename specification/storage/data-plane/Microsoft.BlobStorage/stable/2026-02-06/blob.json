@@ -2317,6 +2317,9 @@
             "$ref": "#/parameters/ListBlobsInclude"
           },
           {
+            "$ref": "#/parameters/ListBlobsStartFrom"
+          },
+          {
             "$ref": "#/parameters/Timeout"
           },
           {
@@ -2424,6 +2427,9 @@
           },
           {
             "$ref": "#/parameters/ListBlobsInclude"
+          },
+          {
+            "$ref": "#/parameters/ListBlobsStartFrom"
           },
           {
             "$ref": "#/parameters/Timeout"
@@ -12140,6 +12146,14 @@
       },
       "x-ms-parameter-location": "method",
       "description": "Include this parameter to specify one or more datasets to include in the response."
+    },
+    "ListBlobsStartFrom": {
+      "name": "startFrom",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive)"
     },
     "ListContainersInclude": {
       "name": "include",
