@@ -299,7 +299,7 @@ op unwrapKey is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("securewrapkey")
-@Versioning.added(KeyVault.Versions.`v2026_01_01_preview`)
+@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
 @summary("Creates a new 256 bit AES key within the trusted execution environment and wraps this key using a specified key.")
 @route("/keys/{key-name}/{key-version}/securewrapkey")
 @post
@@ -337,7 +337,7 @@ op secureWrapKey is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("secureunwrapkey")
-@Versioning.added(KeyVault.Versions.`v2026_01_01_preview`)
+@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
 @summary("Creates a new 256 bit AES key within the trusted execution environment and wraps a symmetric key using a specified key.")
 @route("/keys/{key-name}/{key-version}/secureunwrapkey")
 @post

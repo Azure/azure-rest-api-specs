@@ -142,7 +142,7 @@ union JsonWebKeyCurveName {
 /**
  * An algorithm used for key wrapping and unwrapping.
  */
-@added(KeyVault.Versions.`v2026_01_01_preview`)
+@added(KeyVault.Versions.v2026_01_01_preview)
 union JsonWebKeyWrapAlgorithm {
   string,
 
@@ -468,7 +468,7 @@ model KeyAttestation {
 /**
  * The Secure Key wrap operation result.
  */
-@added(KeyVault.Versions.`v2026_01_01_preview`)
+@added(KeyVault.Versions.v2026_01_01_preview)
 model SecureKeyOperationCommonParameters {
   /**
    * algorithm identifier
@@ -480,7 +480,7 @@ model SecureKeyOperationCommonParameters {
 /**
  * The Secure Key wrap attributes.
  */
-@added(KeyVault.Versions.`v2026_01_01_preview`)
+@added(KeyVault.Versions.v2026_01_01_preview)
 model SecureKeyWrapOperationParameters {
   ...SecureKeyOperationCommonParameters;
 }
@@ -488,7 +488,7 @@ model SecureKeyWrapOperationParameters {
 /**
  * The Secure Key unwrap attributes.
  */
-@added(KeyVault.Versions.`v2026_01_01_preview`)
+@added(KeyVault.Versions.v2026_01_01_preview)
 model SecureKeyUnWrapOperationParameters {
   ...SecureKeyOperationCommonParameters;
   /**
@@ -890,7 +890,7 @@ model KeyOperationsParameters {
 /**
  * The secure key wrap operation result.
  */
-@added(KeyVault.Versions.`v2026_01_01_preview`)
+@added(KeyVault.Versions.v2026_01_01_preview)
 model SecureKeyOperationResult {
   /**
    * Key identifier
