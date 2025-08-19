@@ -64,10 +64,6 @@ suppressions:
     reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
   - code: NestedResourcesMustHaveListOperation
     reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
-  - code: PostResponseCodes
-    reason: ADF feature is widely adopted and requires PostResponseCodes for most of the swagger properties.
-  - code: LroErrorContent
-    reason: ADF feature is widely adopted and requires LroErrorContent for most of the swagger properties.
 ```
 
 ### Tag: package-2017-09-preview
