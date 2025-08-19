@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Desktop Virtualization API Client",
-    "version": "2024-08-08-preview",
+    "version": "2025-08-01-preview",
     "description": "This Typespec represents the Desktop Virtualization API interfaces.",
     "x-typespec-generated": [
       {
@@ -101,6 +101,9 @@
     },
     {
       "name": "ControlSessionHostUpdate"
+    },
+    {
+      "name": "SessionHostManagement"
     },
     {
       "name": "SessionHostManagements"
@@ -3369,6 +3372,76 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/controlSessionHostProvisioning": {
+      "post": {
+        "operationId": "ControlSessionHostProvisioning_Post",
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "description": "Control provisioning of a hostpool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "hostPoolProvisioningControlParameter",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPoolProvisioningControlParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionHostManagements_ControlSessionHostProvisioning_Post": {
+            "$ref": "./examples/SessionHostManagements_ControlSessionHostProvisioning_Post.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/controlSessionHostUpdate": {
       "post": {
         "operationId": "ControlSessionHostUpdate_Post",
@@ -3490,6 +3563,55 @@
         "x-ms-examples": {
           "SessionHostManagements_UpdateSessionHosts_Post": {
             "$ref": "./examples/SessionHostManagements_UpdateSessionHosts_Post.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostProvisioningStatuses/default": {
+      "get": {
+        "operationId": "SessionHostProvisioningStatuses_Get",
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "description": "Get the session host provisioning status for a given hostpool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementProvisioningStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionHostManagements_SessionHostProvisioningStatuses_Get": {
+            "$ref": "./examples/SessionHostManagements_SessionHostProvisioningStatuses_Get.json"
           }
         }
       }
@@ -5137,6 +5259,9 @@
         "x-ms-examples": {
           "ScalingPlanPooledSchedules_Create": {
             "$ref": "./examples/ScalingPlanPooledSchedules_Create.json"
+          },
+          "ScalingPlanPooledSchedules_CreateUsingCreateDelete": {
+            "$ref": "./examples/ScalingPlanPooledSchedules_CreateUsingCreateDelete.json"
           }
         }
       },
@@ -6506,6 +6631,10 @@
         "deploymentScope": {
           "$ref": "#/definitions/DeploymentScope",
           "description": "The scope of the deployment."
+        },
+        "oboTenantId": {
+          "type": "string",
+          "description": "Tenant that the resource is being requested on behalf of."
         }
       },
       "required": [
@@ -6768,6 +6897,36 @@
         }
       }
     },
+    "CanaryPolicy": {
+      "type": "string",
+      "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.",
+      "enum": [
+        "Auto",
+        "Never",
+        "Always"
+      ],
+      "x-ms-enum": {
+        "name": "CanaryPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Decided by service whether to provision Canary VM."
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never provision Canary VM."
+          },
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always provision Canary VM."
+          }
+        ]
+      }
+    },
     "CommandLineSetting": {
       "type": "string",
       "description": "Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.",
@@ -6797,6 +6956,43 @@
           }
         ]
       }
+    },
+    "CreateDeleteProperties": {
+      "type": "object",
+      "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+      "properties": {
+        "rampUpMaximumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "x-nullable": true
+        },
+        "rampUpMinimumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "maximum": 59,
+          "x-nullable": true
+        },
+        "rampDownMaximumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "x-nullable": true
+        },
+        "rampDownMinimumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "maximum": 59,
+          "x-nullable": true
+        }
+      },
+      "x-nullable": true
     },
     "CustomInfoPatchProperties": {
       "type": "object",
@@ -6955,6 +7151,62 @@
         }
       }
     },
+    "DiffDiskOption": {
+      "type": "string",
+      "description": "Specifies the ephemeral disk settings for operating system disk.",
+      "enum": [
+        "Local"
+      ],
+      "x-ms-enum": {
+        "name": "DiffDiskOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "Operating system disk local setting."
+          }
+        ]
+      }
+    },
+    "DiffDiskPlacement": {
+      "type": "string",
+      "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.",
+      "enum": [
+        "CacheDisk",
+        "ResourceDisk"
+      ],
+      "x-ms-enum": {
+        "name": "DiffDiskPlacement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CacheDisk",
+            "value": "CacheDisk",
+            "description": "Cache disk placement"
+          },
+          {
+            "name": "ResourceDisk",
+            "value": "ResourceDisk",
+            "description": "Resource disk placement"
+          }
+        ]
+      }
+    },
+    "DiffDiskProperties": {
+      "type": "object",
+      "description": "Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.",
+      "properties": {
+        "option": {
+          "$ref": "#/definitions/DiffDiskOption",
+          "description": "Specifies the ephemeral disk settings for operating system disk."
+        },
+        "placement": {
+          "$ref": "#/definitions/DiffDiskPlacement",
+          "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'."
+        }
+      }
+    },
     "DirectUDP": {
       "type": "string",
       "description": "Direct UDP Connection Settings",
@@ -6985,28 +7237,19 @@
         ]
       }
     },
-    "DiskInfoPatchProperties": {
-      "type": "object",
-      "description": "Disk information.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/VirtualMachineDiskType",
-          "description": "The disk type used by virtual machine in hostpool session host."
-        }
-      }
-    },
     "DiskInfoProperties": {
       "type": "object",
       "description": "Disk information.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/VirtualMachineDiskType",
-          "description": "The disk type used by virtual machine in hostpool session host."
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskProperties",
+          "description": "The managed disk parameters."
+        },
+        "diffDiskSettings": {
+          "$ref": "#/definitions/DiffDiskProperties",
+          "description": "Specifies the ephemeral disk settings for the operating system disk used by the virtual machine."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "DomainInfoPatchProperties": {
       "type": "object",
@@ -7177,6 +7420,36 @@
           "format": "date-time",
           "description": "Date certificate expires, found in the appxmanifest.xml."
         }
+      }
+    },
+    "FailedSessionHostCleanupPolicySHC": {
+      "type": "string",
+      "description": "The policy that should be applied when the Session Host provisioning operation fails.",
+      "enum": [
+        "KeepAll",
+        "KeepOne",
+        "KeepNone"
+      ],
+      "x-ms-enum": {
+        "name": "FailedSessionHostCleanupPolicySHC",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KeepAll",
+            "value": "KeepAll",
+            "description": "Keep All."
+          },
+          {
+            "name": "KeepOne",
+            "value": "KeepOne",
+            "description": "Keep One."
+          },
+          {
+            "name": "KeepNone",
+            "value": "KeepNone",
+            "description": "Keep None."
+          }
+        ]
       }
     },
     "HealthCheckName": {
@@ -7377,6 +7650,11 @@
         "properties": {
           "$ref": "#/definitions/HostPoolPatchProperties",
           "description": "HostPool properties that can be patched."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -7616,12 +7894,52 @@
         "managementType": {
           "$ref": "#/definitions/ManagementType",
           "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated."
+        },
+        "oboTenantId": {
+          "type": "string",
+          "description": "Tenant that the resource is being requested on behalf of."
         }
       },
       "required": [
         "hostPoolType",
         "loadBalancerType",
         "preferredAppGroupType"
+      ]
+    },
+    "HostPoolProvisioningAction": {
+      "type": "string",
+      "description": "Action types for controlling hostpool provisioning.",
+      "enum": [
+        "Cancel"
+      ],
+      "x-ms-enum": {
+        "name": "HostPoolProvisioningAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cancel",
+            "value": "Cancel",
+            "description": "Cancel the hostpool provisioning."
+          }
+        ]
+      }
+    },
+    "HostPoolProvisioningControlParameter": {
+      "type": "object",
+      "description": "Object containing control action for hostpool provisioning.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/HostPoolProvisioningAction",
+          "description": "Action types for controlling hostpool update."
+        },
+        "cancelMessage": {
+          "type": "string",
+          "description": "The cancel message sent to the user on the session host.",
+          "maxLength": 260
+        }
+      },
+      "required": [
+        "action"
       ]
     },
     "HostPoolType": {
@@ -8126,6 +8444,16 @@
         "dayOfWeek": {
           "$ref": "#/definitions/DayOfWeek",
           "description": "Day of the week."
+        }
+      }
+    },
+    "ManagedDiskProperties": {
+      "type": "object",
+      "description": "Managed Disk information.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VirtualMachineDiskType",
+          "description": "Managed Disk information."
         }
       }
     },
@@ -9020,6 +9348,30 @@
         }
       }
     },
+    "ScalingMethodType": {
+      "type": "string",
+      "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+      "enum": [
+        "PowerManage",
+        "CreateDeletePowerManage"
+      ],
+      "x-ms-enum": {
+        "name": "ScalingMethodType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PowerManage",
+            "value": "PowerManage",
+            "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+          },
+          {
+            "name": "CreateDeletePowerManage",
+            "value": "CreateDeletePowerManage",
+            "description": "Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property."
+          }
+        ]
+      }
+    },
     "ScalingPlan": {
       "type": "object",
       "description": "Represents a scaling plan definition.",
@@ -9696,6 +10048,14 @@
             "$ref": "#/definitions/DayOfWeek"
           }
         },
+        "scalingMethod": {
+          "$ref": "#/definitions/ScalingMethodType",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool."
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+        },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
@@ -9790,6 +10150,35 @@
           "items": {
             "$ref": "#/definitions/DayOfWeek"
           }
+        },
+        "scalingMethod": {
+          "type": "string",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+          "default": "PowerManage",
+          "enum": [
+            "PowerManage",
+            "CreateDeletePowerManage"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingMethodType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PowerManage",
+                "value": "PowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+              },
+              {
+                "name": "CreateDeletePowerManage",
+                "value": "CreateDeletePowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property."
+              }
+            ]
+          }
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9959,6 +10348,35 @@
           "items": {
             "$ref": "#/definitions/DayOfWeek"
           }
+        },
+        "scalingMethod": {
+          "type": "string",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+          "default": "PowerManage",
+          "enum": [
+            "PowerManage",
+            "CreateDeletePowerManage"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingMethodType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PowerManage",
+                "value": "PowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+              },
+              {
+                "name": "CreateDeletePowerManage",
+                "value": "CreateDeletePowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property."
+              }
+            ]
+          }
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -10298,7 +10716,7 @@
           "description": "The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6"
         },
         "diskInfo": {
-          "$ref": "#/definitions/DiskInfoPatchProperties",
+          "$ref": "#/definitions/DiskInfoProperties",
           "description": "Disk Information"
         },
         "customConfigurationScriptUrl": {
@@ -10619,6 +11037,14 @@
         "update": {
           "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
           "description": "Parameters for a hostpool update."
+        },
+        "provisioning": {
+          "$ref": "#/definitions/SessionHostProvisioningConfigurationProperties",
+          "description": "Parameters that apply when session hosts are provisioned."
+        },
+        "failedSessionHostCleanupPolicy": {
+          "$ref": "#/definitions/FailedSessionHostCleanupPolicySHC",
+          "description": "The policy that should be applied when the Session Host provisioning operation fails."
         }
       },
       "required": [
@@ -10626,59 +11052,72 @@
         "update"
       ]
     },
-    "SessionHostManagementUpdateOperationStatus": {
+    "SessionHostManagementProvisioningOperationProgress": {
+      "type": "object",
+      "description": "SessionHostManagement Provisioning Operation Progress information.",
+      "properties": {
+        "executionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time that the sessionHostManagement operation was created."
+        },
+        "sessionHostsInProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts in progress in the sessionHostManagement provisioning operation"
+        },
+        "sessionHostsCompleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts completed in the sessionHostManagement provisioning operation."
+        },
+        "finalSessionHostsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The final instance count of the host pool for this provisioning operation."
+        },
+        "initialSessionHostsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial instance count of the host pool for this provisioning operation."
+        }
+      }
+    },
+    "SessionHostManagementProvisioningOperationStatus": {
       "type": "string",
       "description": "Operation status for SessionHostManagementUpdate.",
       "enum": [
-        "Error",
         "Scheduled",
-        "UpdatingSessionHosts",
-        "ValidatingSessionHostUpdate",
-        "Paused",
-        "Pausing",
+        "ValidatingSessionHostProvisioning",
         "Cancelling",
+        "ProvisioningSessionHosts",
         "Succeeded",
         "Failed",
-        "Cancelled"
+        "Canceled"
       ],
       "x-ms-enum": {
-        "name": "SessionHostManagementUpdateOperationStatus",
+        "name": "SessionHostManagementProvisioningOperationStatus",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "The operation has an error."
-          },
           {
             "name": "Scheduled",
             "value": "Scheduled",
             "description": "The operation is scheduled."
           },
           {
-            "name": "UpdatingSessionHosts",
-            "value": "UpdatingSessionHosts",
-            "description": "The operation is currently updating Session Hosts."
-          },
-          {
-            "name": "ValidatingSessionHostUpdate",
-            "value": "ValidatingSessionHostUpdate",
-            "description": "The operation is validating the update."
-          },
-          {
-            "name": "Paused",
-            "value": "Paused",
-            "description": "The operation is paused."
-          },
-          {
-            "name": "Pausing",
-            "value": "Pausing",
-            "description": "The operation is pausing."
+            "name": "ValidatingSessionHostProvisioning",
+            "value": "ValidatingSessionHostProvisioning",
+            "description": "The operation is currently validating the provisioning."
           },
           {
             "name": "Cancelling",
             "value": "Cancelling",
             "description": "Canceling the operation."
+          },
+          {
+            "name": "ProvisioningSessionHosts",
+            "value": "ProvisioningSessionHosts",
+            "description": "The operation is currently provisioning session hosts."
           },
           {
             "name": "Succeeded",
@@ -10691,13 +11130,83 @@
             "description": "The operation failed."
           },
           {
-            "name": "Cancelled",
-            "value": "Cancelled",
-            "description": "The operation is canceled"
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation is canceled."
           }
         ]
       },
       "readOnly": true
+    },
+    "SessionHostManagementProvisioningStatus": {
+      "type": "object",
+      "description": "Schema for SessionHostManagementUpdateStatus properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID for the async operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error."
+        },
+        "status": {
+          "$ref": "#/definitions/SessionHostManagementProvisioningOperationStatus",
+          "description": "Operation status."
+        },
+        "properties": {
+          "$ref": "#/definitions/SessionHostManagementProvisioningStatusProperties",
+          "description": "The custom properties of the SessionHost Provisioning Status."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "SessionHostManagementProvisioningStatusProperties": {
+      "type": "object",
+      "description": "Properties bag for sessionHostManagement Provisioning Statuses.",
+      "properties": {
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation Id for Log Analytics."
+        },
+        "progress": {
+          "$ref": "#/definitions/SessionHostManagementProvisioningOperationProgress",
+          "description": "Progress information on the sessionHostManagement operation."
+        },
+        "scheduledDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp that the update is scheduled for."
+        },
+        "sessionHostManagement": {
+          "$ref": "#/definitions/SessionHostManagement",
+          "description": "SessionHostManagement properties used for the operation."
+        }
+      }
     },
     "SessionHostManagementUpdateStatus": {
       "type": "object",
@@ -10734,7 +11243,7 @@
           "description": "If present, details of the operation error."
         },
         "status": {
-          "$ref": "#/definitions/SessionHostManagementUpdateOperationStatus",
+          "$ref": "#/definitions/updateStatus",
           "description": "Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled"
         },
         "properties": {
@@ -10806,6 +11315,21 @@
       "type": "object",
       "description": "Schema for SessionHost properties.",
       "properties": {
+        "activeSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of active sessions on SessionHost."
+        },
+        "disconnectedSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of disconnected sessions on SessionHost."
+        },
+        "pendingSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of pending sessions on SessionHost."
+        },
         "objectId": {
           "type": "string",
           "description": "ObjectId of SessionHost. (internal use)",
@@ -10900,6 +11424,26 @@
           "x-ms-identifiers": [
             "healthCheckName"
           ]
+        }
+      }
+    },
+    "SessionHostProvisioningConfigurationProperties": {
+      "type": "object",
+      "description": "The configuration for session host provisioning operations.",
+      "properties": {
+        "setDrainMode": {
+          "type": "boolean",
+          "description": "Whether the session host should be set in drain mode following provisioning."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of session hosts to exist in the Host Pool.",
+          "minimum": 1
+        },
+        "canaryPolicy": {
+          "$ref": "#/definitions/CanaryPolicy",
+          "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation."
         }
       }
     },
@@ -11516,6 +12060,10 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
+        },
+        "oboTenantId": {
+          "type": "string",
+          "description": "Tenant that the resource is being requested on behalf of."
         }
       }
     },
@@ -11596,6 +12144,79 @@
           }
         ]
       }
+    },
+    "updateStatus": {
+      "type": "string",
+      "description": "Operation status for SessionHostManagementUpdate.",
+      "enum": [
+        "Error",
+        "Scheduled",
+        "UpdatingSessionHosts",
+        "ValidatingSessionHostUpdate",
+        "Paused",
+        "Pausing",
+        "Cancelling",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "updateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The operation has an error."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The operation is scheduled."
+          },
+          {
+            "name": "UpdatingSessionHosts",
+            "value": "UpdatingSessionHosts",
+            "description": "The operation is currently updating Session Hosts."
+          },
+          {
+            "name": "ValidatingSessionHostUpdate",
+            "value": "ValidatingSessionHostUpdate",
+            "description": "The operation is validating the update."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The operation is paused."
+          },
+          {
+            "name": "Pausing",
+            "value": "Pausing",
+            "description": "The operation is pausing."
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "Canceling the operation."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The operation is canceled"
+          }
+        ]
+      },
+      "readOnly": true
     }
   },
   "parameters": {}

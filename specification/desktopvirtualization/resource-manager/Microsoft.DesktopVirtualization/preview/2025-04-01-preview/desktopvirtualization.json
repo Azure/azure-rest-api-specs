@@ -6627,6 +6627,10 @@
         "showInFeed": {
           "type": "boolean",
           "description": "Boolean representing whether the applicationGroup is show in the feed."
+        },
+        "deploymentScope": {
+          "$ref": "#/definitions/DeploymentScope",
+          "description": "The scope of the deployment."
         }
       },
       "required": [
@@ -7026,6 +7030,30 @@
       "x-ms-enum": {
         "name": "DayOfWeek",
         "modelAsString": false
+      }
+    },
+    "DeploymentScope": {
+      "type": "string",
+      "description": "Deployment scope",
+      "enum": [
+        "Geographical",
+        "Regional"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Geographical",
+            "value": "Geographical",
+            "description": "For geographical Broker and ArmProvider talking to Geographical SQL DB"
+          },
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "For regional Broker and ArmProvider talking to regional SQL DB"
+          }
+        ]
       }
     },
     "Desktop": {
