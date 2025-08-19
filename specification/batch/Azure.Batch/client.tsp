@@ -184,11 +184,6 @@ interface BatchClient {
 );
 @@access(Azure.Batch.Pools.deletePool, Access.internal, "python");
 @@clientName(BatchClient.deletePool, "deletePoolInternal", "python");
-@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "python");
-@@clientName(BatchClient.deleteCertificate,
-  "deleteCertificateInternal",
-  "python"
-);
 @@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "python");
 @@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "python");
 @@access(Azure.Batch.Nodes.startNode, Access.internal, "python");
