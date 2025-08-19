@@ -128,66 +128,126 @@ export async function extractInputs(github, context, core) {
         // empty for non-fork PRs.  This should be the same for pull_request and pull_request_target.
         issue_number = pull_requests[0].number;
       } else {
-        // For fork PRs, we must call an API in the head repository to get the PR number in the base repository
+        // For fork PRs, we must use alternative mechanisms
 
-        // Owner and repo for the PR head (at least one should differ from base for fork PRs)
-        const head_owner = payload.workflow_run.head_repository.owner.login;
-        const head_repo = payload.workflow_run.head_repository.name;
+        // Attempt to extract issue number from artifact.
+        // If found, verify the head_sha of the issue matches the head_sha of the workflow_run, to prevent
+        // an attacker from modifying an issue with a different SHA.
+        const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+          owner: payload.workflow_run.repository.owner.login,
+          repo: payload.workflow_run.repository.name,
+          run_id: payload.workflow_run.id,
+          per_page: PER_PAGE_MAX,
+        });
 
-        /** @type {PullRequest[]} */
-        let pullRequests = [];
+        const artifactNames = artifacts.map((a) => a.name);
 
-        try {
-          core.info(
-            `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
-          );
-          pullRequests = (
-            await github.paginate(github.rest.repos.listPullRequestsAssociatedWithCommit, {
-              owner: head_owner,
-              repo: head_repo,
-              commit_sha: head_sha,
-              per_page: PER_PAGE_MAX,
-            })
-          ).filter(
-            // Only include PRs to the same repo as the triggering workflow.
-            //
-            // Other unique keys like "full_name" should also work, but "id" is the safest since it's
-            // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
-            (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
-          );
-        } catch (error) {
-          // Short message always
-          core.info(`Error: ${error instanceof Error ? error.message : "unknown"}`);
+        core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
-          // Long message only in debug
-          core.debug(`Error: ${error}`);
+        for (const artifactName of artifactNames) {
+          // If artifactName has format "issue-number=positive-integer", set issue_number=value
+          //   Else, if artifactName has format "issue-number=other-string", warn and set issue_number=NaN
+          //   - Workflows should probably only set "issue-number" to positive integers, but sometimes set it to "null"
+          // Else, if artifactName does not start with "issue-number=", ignore it
+          const firstEquals = artifactName.indexOf("=");
+          if (firstEquals !== -1) {
+            const key = artifactName.substring(0, firstEquals);
+            if (key === "issue-number") {
+              const value = artifactName.substring(firstEquals + 1);
+              const parsedValue = Number.parseInt(value);
+              if (parsedValue > 0) {
+                issue_number = parsedValue;
+              } else {
+                // TODO: Consider throwing instead of warning.  May need to handle `issue-number=null|undefined`,
+                // but invalid integers should throw.
+                core.info(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
+                issue_number = NaN;
+              }
+              continue;
+            }
+          }
         }
 
-        if (pullRequests.length === 0) {
-          // There are three cases where the "commits" REST API called above can return
-          // empty, even if there is an open PR from the commit:
-          //
-          // 1. If the head branch of a fork PR is the default branch of the fork repo, the
-          //    API always returns empty. (#33315)
-          // 2. If a PR was just merged, the API may return empty for a brief window (#33416).
-          // 3. The API may fail occasionally for no known reason (#33417).
-          //
-          // In any case, the solution is to fall back to the (lower-rate-limit) search API.
-          // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
-          issue_number = (await getIssueNumber({ head_sha, github, core })).issueNumber;
-        } else if (pullRequests.length === 1) {
-          issue_number = pullRequests[0].number;
-        } else {
-          throw new Error(
-            `Unexpected number of pull requests associated with commit '${head_sha}'. ` +
-              `Expected: '1'. Actual: '${pullRequests.length}'. PRs:\n` +
-              pullRequests.map((pr) => pr.html_url).join("\n"),
-          );
+        if (issue_number) {
+          // Verify head_sha of PR matches head_sha or workflow_run
+          const pr = await github.rest.pulls.get({
+            owner: payload.workflow_run.repository.owner.login,
+            repo: payload.workflow_run.repository.name,
+            pull_number: issue_number,
+          });
+
+          if (pr.data.head.sha !== head_sha) {
+            // TODO: Consider throwing instead of warning.  May need to handle `issue-number=null|undefined`,
+            // but invalid integers should throw.
+            core.info(
+              `Invalid issue-number: head SHA ${pr.data.head.sha} of PR ${issue_number} does not match head SHA ${head_sha} of workflow run`,
+            );
+            issue_number = NaN;
+          }
         }
+
         if (!issue_number) {
-          core.info(
-            `Could not find PR for ${head_sha} in ${head_owner}:${head_repo} from either the "commits" or "search" REST APIs`,
-          );
+          // call an API in the head repository to get the PR number in the base repository
+
+          // Owner and repo for the PR head (at least one should differ from base for fork PRs)
+          const head_owner = payload.workflow_run.head_repository.owner.login;
+          const head_repo = payload.workflow_run.head_repository.name;
+
+          /** @type {PullRequest[]} */
+          let pullRequests = [];
+
+          try {
+            core.info(
+              `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
+            );
+            pullRequests = (
+              await github.paginate(github.rest.repos.listPullRequestsAssociatedWithCommit, {
+                owner: head_owner,
+                repo: head_repo,
+                commit_sha: head_sha,
+                per_page: PER_PAGE_MAX,
+              })
+            ).filter(
+              // Only include PRs to the same repo as the triggering workflow.
+              //
+              // Other unique keys like "full_name" should also work, but "id" is the safest since it's
+              // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
+              (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
+            );
+          } catch (error) {
+            // Short message always
+            core.info(`Error: ${error instanceof Error ? error.message : "unknown"}`);
+
+            // Long message only in debug
+            core.debug(`Error: ${error}`);
+          }
+
+          if (pullRequests.length === 0) {
+            // There are three cases where the "commits" REST API called above can return
+            // empty, even if there is an open PR from the commit:
+            //
+            // 1. If the head branch of a fork PR is the default branch of the fork repo, the
+            //    API always returns empty. (#33315)
+            // 2. If a PR was just merged, the API may return empty for a brief window (#33416).
+            // 3. The API may fail occasionally for no known reason (#33417).
+            //
+            // In any case, the solution is to fall back to the (lower-rate-limit) search API.
+            // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
+            issue_number = (await getIssueNumber({ head_sha, github, core })).issueNumber;
+          } else if (pullRequests.length === 1) {
+            issue_number = pullRequests[0].number;
+          } else {
+            throw new Error(
+              `Unexpected number of pull requests associated with commit '${head_sha}'. ` +
+                `Expected: '1'. Actual: '${pullRequests.length}'. PRs:\n` +
+                pullRequests.map((pr) => pr.html_url).join("\n"),
+            );
+          }
+          if (!issue_number) {
+            core.info(
+              `Could not find PR for ${head_sha} in ${head_owner}:${head_repo} from either the "commits" or "search" REST APIs`,
+            );
+          }
         }
       }
     } else if (
