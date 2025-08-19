@@ -4390,18 +4390,27 @@
     },
     "AFDDomainMtlsParameters": {
       "description": "Contains the properties to configure mutual TLS for a custom domain with FQDN. Mutual TLS cannot be configured for custom domains with wildcard host names.",
-      "discriminator": "scenario",
-      "required": [
-        "scenario"
-      ],
       "type": "object",
       "properties": {
         "scenario": {
-          "$ref": "#/definitions/MtlsScenarioType"
+          "$ref": "#/definitions/MtlsScenarioParameters"
         }
       }
     },
-    "MtlsScenarioType": {
+    "MtlsScenarioParameters": {
+      "description": "Parameters for each supported mTLS scenario.",
+      "type": "object",
+      "discriminator": "name",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MtlsScenarioName"
+        }
+      }
+    },
+    "MtlsScenarioName": {
       "description": "Supported scenarios for establishing mTLS connection.",
       "enum": [
         "ClientCertificateRequiredAndValidated",
@@ -4411,7 +4420,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "scenario",
+        "name": "name",
         "modelAsString": true
       }
     },
@@ -4421,7 +4430,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AFDDomainMtlsParameters"
+          "$ref": "#/definitions/MtlsScenarioParameters"
         }
       ],
       "required": [
@@ -4462,7 +4471,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AFDDomainMtlsParameters"
+          "$ref": "#/definitions/MtlsScenarioParameters"
         }
       ],
       "properties": {}
@@ -4473,7 +4482,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AFDDomainMtlsParameters"
+          "$ref": "#/definitions/MtlsScenarioParameters"
         }
       ],
       "required": [
@@ -4514,7 +4523,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AFDDomainMtlsParameters"
+          "$ref": "#/definitions/MtlsScenarioParameters"
         }
       ],
       "properties": {}
