@@ -212,7 +212,8 @@ interface PersonDirectoryOperations {
 
   @doc("Retrieve a person's persistedFaceIds representing the registered person face feature(s).")
   @returnsDoc("A successful call returns an array of persistedFaceIds and and a person ID.")
-  getPersonFaces is Foundations.ResourceList<
+  @listsResource(PersonDirectoryFace)
+  getPersonFaces is Foundations.ResourceCollectionOperation<
     PersonDirectoryFace,
     {},
     ListFaceResult,
