@@ -619,7 +619,6 @@ namespace WebPubSub {
       connectionId: string;
     },
     {}
-
   >;
 
   /**
