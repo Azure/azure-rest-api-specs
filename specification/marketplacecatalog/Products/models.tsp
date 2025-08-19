@@ -978,6 +978,18 @@ model OdataOrderByParameter {
   $orderBy?: string;
 }
 
+// PageResult
+@doc("Paged response result from discovery API")
+model DiscoveryApiPagedResult<T> {
+  @pageItems
+  @doc("List of items in the current page")
+  value: T[];
+
+  @nextLink
+  @doc("Link to the next page of results, if available")
+  nextLink?: string;
+}
+
 // API key def
 @doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview)")
 model DiscoveryApiKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;

@@ -35,20 +35,95 @@
   },
   "tags": [],
   "paths": {
-    "/product/{uniqueProductId}": {
+    "/products": {
       "get": {
-        "operationId": "ProductOperations_Get",
-        "description": "Retrieves a single product by ID from the marketplace catalog.",
+        "operationId": "ListProducts",
+        "description": "Retrieves a list of products available in the marketplace catalog",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
+          {
+            "$ref": "#/parameters/LanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationsListingParameter"
+          },
+          {
+            "$ref": "#/parameters/ListingMarketParameter"
+          },
+          {
+            "$ref": "#/parameters/HideKeysParameter"
+          },
+          {
+            "$ref": "#/parameters/OdataSelectParameter"
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OdataExpandParameter"
+          },
+          {
+            "$ref": "#/parameters/OdataOrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchParameter"
+          },
+          {
+            "$ref": "#/parameters/PricingAudienceListingParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Paged response result from discovery API",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "List of items in the current page",
+                  "items": {
+                    "$ref": "#/definitions/ProductSummary"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "description": "Link to the next page of results, if available"
+                }
+              },
+              "required": [
+                "value"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryErrorPayload"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/products/{uniqueProductId}": {
+      "get": {
+        "operationId": "GetProduct",
+        "description": "Retrieves a single product by ID from the marketplace catalog",
+        "parameters": [
           {
             "name": "uniqueProductId",
             "in": "path",
             "description": "Unique product identifier",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SingleMarketParameter"
@@ -91,83 +166,12 @@
               "$ref": "#/definitions/DiscoveryErrorPayload"
             }
           }
-        },
-        "x-ms-examples": {
-          "Example of request to get single SaaS product details": {
-            "$ref": "./examples/SinglePublicProduct_SaaS_Get.json"
-          },
-          "Example of request to get single VM product details": {
-            "$ref": "./examples/SinglePublicProduct_VM_Get.json"
-          }
-        }
-      }
-    },
-    "/products": {
-      "get": {
-        "operationId": "ProductOperations_List",
-        "description": "Retrieves a list of products available in the marketplace catalog.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/LanguageParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationsListingParameter"
-          },
-          {
-            "$ref": "#/parameters/ListingMarketParameter"
-          },
-          {
-            "$ref": "#/parameters/HideKeysParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataSelectParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataFilterParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataExpandParameter"
-          },
-          {
-            "$ref": "#/parameters/OdataOrderByParameter"
-          },
-          {
-            "$ref": "#/parameters/SearchParameter"
-          },
-          {
-            "$ref": "#/parameters/PricingAudienceListingParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedProductSummary"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DiscoveryErrorPayload"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Lists publically available products in the marketplace.": {
-            "$ref": "./examples/PublicProducts_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/skus": {
       "get": {
-        "operationId": "SkusOperations_List",
+        "operationId": "ListSkus",
         "description": "Retrieves a list of SKUs available in the marketplace catalog.",
         "parameters": [
           {
@@ -205,7 +209,24 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedSkuSummary"
+              "type": "object",
+              "description": "Paged response result from discovery API",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "description": "List of items in the current page",
+                  "items": {
+                    "$ref": "#/definitions/SkuSummary"
+                  }
+                },
+                "nextLink": {
+                  "type": "string",
+                  "description": "Link to the next page of results, if available"
+                }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "default": {
@@ -213,11 +234,6 @@
             "schema": {
               "$ref": "#/definitions/DiscoveryErrorPayload"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists publically available skus in the marketplace.": {
-            "$ref": "./examples/PublicSkus_List.json"
           }
         },
         "x-ms-pageable": {
@@ -561,48 +577,6 @@
           "description": "Entitlement, Consumption or Reservation"
         }
       }
-    },
-    "PagedProductSummary": {
-      "type": "object",
-      "description": "Paged collection of ProductSummary items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProductSummary items on this page",
-          "items": {
-            "$ref": "#/definitions/ProductSummary"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedSkuSummary": {
-      "type": "object",
-      "description": "Paged collection of SkuSummary items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SkuSummary items on this page",
-          "items": {
-            "$ref": "#/definitions/SkuSummary"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "PlanDetails": {
       "type": "object",
