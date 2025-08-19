@@ -15417,7 +15417,8 @@
       "type": "string",
       "description": "The name of the service.",
       "enum": [
-        "AutomaticRepairs"
+        "AutomaticRepairs",
+        "AutomaticZoneRebalancing"
       ],
       "x-ms-enum": {
         "name": "OrchestrationServiceNames",
@@ -15426,6 +15427,35 @@
           {
             "name": "AutomaticRepairs",
             "value": "AutomaticRepairs"
+          },
+          {
+            "name": "AutomaticZoneRebalancing",
+            "value": "AutomaticZoneRebalancing",
+            "description": "AutomaticZoneRebalancing orchestration service."
+          }
+        ]
+      }
+    },
+    "OrchestrationServiceOperationStatus": {
+      "type": "string",
+      "description": "The latest operation status of the service.",
+      "enum": [
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestrationServiceOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress orchestration service operation status."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed orchestration service operation status."
           }
         ]
       }
@@ -15509,6 +15539,17 @@
         "serviceState": {
           "$ref": "#/definitions/OrchestrationServiceState",
           "description": "The current state of the service.",
+          "readOnly": true
+        },
+        "latestOperationStatus": {
+          "$ref": "#/definitions/OrchestrationServiceOperationStatus",
+          "description": "The latest operation status of the service. Minimum API version for this property is 2025-04-01.",
+          "readOnly": true
+        },
+        "lastStatusChangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time when the operation status changed. Minimum API version for this property is 2025-04-01.",
           "readOnly": true
         }
       }
