@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "KeyVaultClient",
-    "version": "2025-06-01-preview",
+    "version": "2026-01-01-preview",
     "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
     "x-typespec-generated": [
       {
@@ -86,13 +86,9 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GetDeletedKeys": {
-            "$ref": "./examples/GetDeletedKeys-example.json"
-          }
-        },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -127,11 +123,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetDeletedKey": {
-            "$ref": "./examples/GetDeletedKey-example.json"
-          }
         }
       },
       "delete": {
@@ -160,11 +151,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PurgeDeletedKey": {
-            "$ref": "./examples/PurgeDeletedKey-example.json"
           }
         }
       }
@@ -199,11 +185,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "RecoverDeletedKey": {
-            "$ref": "./examples/RecoverDeletedKey-example.json"
           }
         }
       }
@@ -242,13 +223,9 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GetKeys": {
-            "$ref": "./examples/GetKeys-example.json"
-          }
-        },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -293,11 +270,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Import key": {
-            "$ref": "./examples/ImportKey-example.json"
-          }
         }
       },
       "delete": {
@@ -329,11 +301,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete key": {
-            "$ref": "./examples/DeleteKey-example.json"
           }
         }
       }
@@ -376,11 +343,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get key": {
-            "$ref": "./examples/GetKey-example.json"
           }
         }
       },
@@ -431,11 +393,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Update key": {
-            "$ref": "./examples/UpdateKey-example.json"
-          }
         }
       }
     },
@@ -477,11 +434,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get key attestation": {
-            "$ref": "./examples/GetKeyAttestation-example.json"
           }
         }
       }
@@ -534,11 +486,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Decrypt example": {
-            "$ref": "./examples/decrypt-example.json"
-          }
         }
       }
     },
@@ -589,11 +536,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Encrypt example": {
-            "$ref": "./examples/encrypt-example.json"
           }
         }
       }
@@ -646,10 +588,107 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Release": {
-            "$ref": "./examples/release-example.json"
+        }
+      }
+    },
+    "/keys/{key-name}/{key-version}/secureunwrapkey": {
+      "post": {
+        "operationId": "secureunwrapkey",
+        "summary": "Creates a new 256 bit AES key within the trusted execution environment and wraps a symmetric key using a specified key.",
+        "description": "The SECURE UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the SECURE WRAP operation. The SECURE UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.\nThe SECURE UNWRAP operation ensures that MAA (Microsoft Azure Attestation Service) is used to attest the TEE (Trusted Execution Environment) before the key is unwrapped.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for unwrap operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecureKeyUnWrapOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SecureKeyOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
+    "/keys/{key-name}/{key-version}/securewrapkey": {
+      "post": {
+        "operationId": "securewrapkey",
+        "summary": "Creates a new 256 bit AES key within the trusted execution environment and wraps this key using a specified key.",
+        "description": "The SECURE WRAP operation creates a new 256 bit AES key within the trusted execution environment(TEE) and encrypts the same with a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "The version of the key.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for wrap operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecureKeyWrapOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SecureKeyOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
           }
         }
       }
@@ -702,11 +741,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Sign": {
-            "$ref": "./examples/sign-example.json"
-          }
         }
       }
     },
@@ -757,11 +791,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Unwrapkey": {
-            "$ref": "./examples/unwrapKey-example.json"
           }
         }
       }
@@ -814,11 +843,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Verify": {
-            "$ref": "./examples/verify-example.json"
-          }
         }
       }
     },
@@ -870,11 +894,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Wrapkey": {
-            "$ref": "./examples/wrapKey-example.json"
-          }
         }
       }
     },
@@ -908,11 +927,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "BackupKey": {
-            "$ref": "./examples/BackupKey-example.json"
           }
         }
       }
@@ -958,11 +972,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create key": {
-            "$ref": "./examples/CreateKey-example.json"
-          }
         }
       }
     },
@@ -998,11 +1007,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Rotate key": {
-            "$ref": "./examples/RotateKey-example.json"
-          }
         }
       }
     },
@@ -1036,11 +1040,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetKeyRotationPolicy": {
-            "$ref": "./examples/GetKeyRotationPolicy-example.json"
           }
         }
       },
@@ -1082,11 +1081,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateKeyRotationPolicy": {
-            "$ref": "./examples/UpdateKeyRotationPolicy-example.json"
           }
         }
       }
@@ -1133,13 +1127,9 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GetKeyVersions": {
-            "$ref": "./examples/GetKeyVersions-example.json"
-          }
-        },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -1175,11 +1165,6 @@
               "$ref": "#/definitions/KeyVaultError"
             }
           }
-        },
-        "x-ms-examples": {
-          "RestoreKey": {
-            "$ref": "./examples/RestoreKey-example.json"
-          }
         }
       }
     },
@@ -1214,11 +1199,6 @@
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetRandomBytes": {
-            "$ref": "./examples/GetRandomBytes-example.json"
           }
         }
       }
@@ -1908,6 +1888,78 @@
             "name": "oct_HSM",
             "value": "oct-HSM",
             "description": "Octet sequence (used to represent symmetric keys) which is stored the HSM."
+          }
+        ]
+      }
+    },
+    "JsonWebKeyWrapAlgorithm": {
+      "type": "string",
+      "description": "An algorithm used for key wrapping and unwrapping.",
+      "enum": [
+        "RSA1_5",
+        "RSA-OAEP",
+        "RSA-OAEP-256",
+        "RSA-RAW",
+        "A128KW",
+        "A192KW",
+        "A256KW",
+        "A256KWPAD",
+        "A128KWPAD",
+        "A192KWPAD"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWebKeyWrapAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RSA1_5",
+            "value": "RSA1_5",
+            "description": "[Not recommended] RSAES-PKCS1-V1_5 key wrap, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption."
+          },
+          {
+            "name": "RSA_OAEP",
+            "value": "RSA-OAEP",
+            "description": "RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_OAEP, which is included solely for backwards compatibility. RSA_OAEP utilizes SHA1, which has known collision problems."
+          },
+          {
+            "name": "RSA_OAEP256",
+            "value": "RSA-OAEP-256",
+            "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256."
+          },
+          {
+            "name": "RSA_RAW",
+            "value": "RSA-RAW",
+            "description": "[Not recommended] algorithm for wrapping keys. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security."
+          },
+          {
+            "name": "A128_KW",
+            "value": "A128KW",
+            "description": "128-bit AES key wrap."
+          },
+          {
+            "name": "A192_KW",
+            "value": "A192KW",
+            "description": "192-bit AES key wrap."
+          },
+          {
+            "name": "A256_KW",
+            "value": "A256KW",
+            "description": "256-bit AES key wrap."
+          },
+          {
+            "name": "A256_KWPAD",
+            "value": "A256KWPAD",
+            "description": "128-bit AES key wrap with padding."
+          },
+          {
+            "name": "A128_KWPAD",
+            "value": "A128KWPAD",
+            "description": "192-bit AES key wrap with padding."
+          },
+          {
+            "name": "A192_KWPAD",
+            "value": "A192KWPAD",
+            "description": "256-bit AES key wrap with padding."
           }
         ]
       }
@@ -2602,6 +2654,86 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "SecureKeyOperationCommonParameters": {
+      "type": "object",
+      "description": "The Secure Key wrap operation result.",
+      "properties": {
+        "alg": {
+          "$ref": "#/definitions/JsonWebKeyWrapAlgorithm",
+          "description": "algorithm identifier",
+          "x-ms-client-name": "algorithm"
+        }
+      },
+      "required": [
+        "alg"
+      ]
+    },
+    "SecureKeyOperationResult": {
+      "type": "object",
+      "description": "The secure key wrap operation result.",
+      "properties": {
+        "kid": {
+          "type": "string",
+          "description": "Key identifier"
+        },
+        "alg": {
+          "$ref": "#/definitions/JsonWebKeyWrapAlgorithm",
+          "description": "The algorithm used for the operation.",
+          "x-ms-client-name": "algorithm"
+        },
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The result of the operation."
+        }
+      },
+      "required": [
+        "kid",
+        "alg",
+        "value"
+      ]
+    },
+    "SecureKeyUnWrapOperationParameters": {
+      "type": "object",
+      "description": "The Secure Key unwrap attributes.",
+      "properties": {
+        "alg": {
+          "$ref": "#/definitions/JsonWebKeyWrapAlgorithm",
+          "description": "algorithm identifier",
+          "x-ms-client-name": "algorithm"
+        },
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The value to operate on."
+        },
+        "target": {
+          "type": "string",
+          "description": "The attestation assertion for the target of the key release.",
+          "minLength": 1,
+          "x-ms-client-name": "targetAttestationToken"
+        }
+      },
+      "required": [
+        "alg",
+        "value",
+        "target"
+      ]
+    },
+    "SecureKeyWrapOperationParameters": {
+      "type": "object",
+      "description": "The Secure Key wrap attributes.",
+      "properties": {
+        "alg": {
+          "$ref": "#/definitions/JsonWebKeyWrapAlgorithm",
+          "description": "algorithm identifier",
+          "x-ms-client-name": "algorithm"
+        }
+      },
+      "required": [
+        "alg"
       ]
     }
   },
