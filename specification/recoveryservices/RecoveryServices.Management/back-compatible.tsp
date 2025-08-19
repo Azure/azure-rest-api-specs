@@ -1,5 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
@@ -36,17 +38,27 @@ using Microsoft.RecoveryServices;
 // These ensure consistent operationId generation in the output
 
 // PrivateLinkResourceOperationGroup operations
-@@clientLocation(PrivateLinkResourceOperationGroup.get, "PrivateLinkResources");
+@@clientLocation(PrivateLinkResourceOperationGroup.get,
+  "PrivateLinkResources",
+  "!csharp"
+);
 @@clientLocation(PrivateLinkResourceOperationGroup.list,
-  "PrivateLinkResources"
+  "PrivateLinkResources",
+  "!csharp"
 );
 
 // RecoveryServicesOperationGroup operations
 @@clientLocation(RecoveryServicesOperationGroup.checkNameAvailability,
-  "RecoveryServices"
+  "RecoveryServices",
+  "!csharp"
 );
 @@clientLocation(RecoveryServicesOperationGroup.capabilities,
-  "RecoveryServices"
+  "RecoveryServices",
+  "!csharp"
+);
+@@alternateType(RecoveryServicesOperationGroup.capabilities::parameters.location,
+  azureLocation,
+  "csharp"
 );
 
 // Vaults operations
@@ -60,8 +72,15 @@ using Microsoft.RecoveryServices;
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
 
 // VaultExtendedInfoResources operations
-@@clientLocation(VaultExtendedInfoResources.get, "VaultExtendedInfo");
-@@clientLocation(VaultExtendedInfoResources.createOrUpdate,
-  "VaultExtendedInfo"
+@@clientLocation(VaultExtendedInfoResources.get,
+  "VaultExtendedInfo",
+  "!csharp"
 );
-@@clientLocation(VaultExtendedInfoResources.update, "VaultExtendedInfo");
+@@clientLocation(VaultExtendedInfoResources.createOrUpdate,
+  "VaultExtendedInfo",
+  "!csharp"
+);
+@@clientLocation(VaultExtendedInfoResources.update,
+  "VaultExtendedInfo",
+  "!csharp"
+);
