@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace WebPubSub {
@@ -126,9 +125,6 @@ namespace WebPubSub {
     ClientTokenResponse & {
       @header("content-type")
       contentType: ResponseContentType;
-
-      @statusCode
-      statusCode: 200;
     }
   >;
 
@@ -273,13 +269,7 @@ namespace WebPubSub {
       @path
       connectionId: string;
     },
-    {
-      @statusCode
-      statusCode: 200;
-    } | {
-      @statusCode
-      statusCode: 404;
-    }
+    OkResponse | NotFoundResponse
   >;
 
   /**
@@ -387,13 +377,7 @@ namespace WebPubSub {
       @path
       group: string;
     },
-    {
-      @statusCode
-      statusCode: 200;
-    } | {
-      @statusCode
-      statusCode: 404;
-    }
+    OkResponse | NotFoundResponse
   >;
 
   /**
@@ -634,10 +618,8 @@ namespace WebPubSub {
       @path
       connectionId: string;
     },
-    {
-      @statusCode
-      statusCode: 200;
-    }
+    {}
+
   >;
 
   /**
@@ -721,13 +703,7 @@ namespace WebPubSub {
       @query
       targetName?: string;
     },
-    {
-      @statusCode
-      statusCode: 200;
-    } | {
-      @statusCode
-      statusCode: 404;
-    }
+    OkResponse | NotFoundResponse
   >;
 
   /**
@@ -769,10 +745,7 @@ namespace WebPubSub {
       @query
       targetName?: string;
     },
-    {
-      @statusCode
-      statusCode: 200;
-    }
+    {}
   >;
 
   /**
@@ -799,13 +772,7 @@ namespace WebPubSub {
       @path
       userId: string;
     },
-    {
-      @statusCode
-      statusCode: 200;
-    } | {
-      @statusCode
-      statusCode: 404;
-    }
+    OkResponse | NotFoundResponse
   >;
 
   /**
@@ -1005,9 +972,6 @@ namespace WebPubSub {
       @path
       userId: string;
     },
-    {
-      @statusCode
-      statusCode: 200;
-    }
+    {}
   >;
 }
