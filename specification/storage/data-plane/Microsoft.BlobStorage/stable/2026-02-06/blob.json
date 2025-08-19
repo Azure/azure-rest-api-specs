@@ -9568,6 +9568,18 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/IfBlobModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/IfBlobUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/IfBlobMatch"
+          },
+          {
+            "$ref": "#/parameters/IfBlobNoneMatch"
           }
         ],
         "responses": {
@@ -9643,6 +9655,18 @@
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/IfBlobModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/IfBlobUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/IfBlobMatch"
+          },
+          {
+            "$ref": "#/parameters/IfBlobNoneMatch"
           },
           {
             "$ref": "#/parameters/BlobTagsBody"
@@ -12081,6 +12105,56 @@
         "name": "modified-access-conditions"
       },
       "description": "Specify a SQL where clause on blob tags to operate only on blobs with a matching value."
+    },
+    "IfBlobMatch": {
+      "name": "x-ms-blob-if-match",
+      "x-ms-client-name": "ifMatch",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "blob-modified-access-conditions"
+      },
+      "description": "Specify an ETag value to operate only on blobs with a matching value."
+    },
+    "IfBlobModifiedSince": {
+      "name": "x-ms-blob-if-modified-since",
+      "x-ms-client-name": "ifModifiedSince",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "date-time-rfc1123",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "blob-modified-access-conditions"
+      },
+      "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+    },
+    "IfBlobNoneMatch": {
+      "name": "x-ms-blob-if-none-match",
+      "x-ms-client-name": "ifNoneMatch",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "blob-modified-access-conditions"
+      },
+      "description": "Specify an ETag value to operate only on blobs without a matching value."
+    },
+    "IfBlobUnmodifiedSince": {
+      "name": "x-ms-blob-if-unmodified-since",
+      "x-ms-client-name": "ifUnmodifiedSince",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "date-time-rfc1123",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "blob-modified-access-conditions"
+      },
+      "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
     },
     "ImmutabilityPolicyExpiry": {
       "name": "x-ms-immutability-policy-until-date",
