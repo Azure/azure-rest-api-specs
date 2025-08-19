@@ -1,9 +1,11 @@
 # AZURE SERVICE VERSIONING GUIDE
+
 This document defines what an Azure service is, the rules that govern the service’s versioning, and all the benefits that flow from this.  
 The end of this document describes the problems that arise from Azure services that do not follow the service versioning rules and why they must now adopt these rules to greatly improve the Azure customer experience as well as the Azure engineering experience.  
 For questions related to Azure Service Versioning, contact azversioning@service.microsoft.com  
 
 ## WHAT IS AN AZURE SERVICE?
+
 An Azure service is a set of operations that version uniformly (in perpetuity).  
 - A customer client app is expected to use only one version of a service at any given point in time.  
 - This means that any public or private preview service version must be a superset of that last stable service version (unless a preview version introduces a breaking change).  
@@ -13,6 +15,7 @@ An Azure service is a set of operations that version uniformly (in perpetuity).
     - It is also important for Azure Stack, government cloud, and other air-gapped/non-public cloud customers which also may not have the same service versions deployed.  
 
 ## An Azure Resource Provider and its 1+ Azure Services
+
 A single Azure Resource Provider (RP) has an RP namespace. This RP namespace can contain 1+ control-plane services and 0+ data-plane service; each service versions as described above . Today, we want the GitHub specs repo to be structured as follows for control-plane & data-plane contracts:
 ```
 specification/
@@ -41,6 +44,7 @@ specification/
 We don’t want internal teams or customers to think about the orgName, we want customers to think that Azure has RPNamespaces that are used to manage services (both with customer-facing names) where each service has versions (some preview and some stable), & each version has its own API contract, documentation, and (beta/GA) SDK package(s).   
 
 To enforce these rules, Here're some tweaks to the repo structure:
+
 1.	Force the folder immediately under specification to be the RPNamespace name (replacing orgName). EngSys should validate that this folder name matches the RPnamespace name currently under the resource-manager folder and that there are no files in this folder and that the only subfolders are resource-manager and data-plane. 
     - Ideally, we’d get rid of the resource-manager folder’s RPNamespace subfolder as this extra level in the hierarchy serves no purpose and is just confusing, but this can be done in a later phase.
 2.	In the resource-manager folder, if it's RPaaS service, there must be just 1 readme.md file, and 1+ service name folders under resource-manager/RPnamespace folder, but the resource types within each services folder must not duplicate except for operations, locations, checkNameAvailability etc. Which is required by RPSaaS for HTTP request schema validation.
@@ -110,25 +114,5 @@ The last service to split-off from the monolithic SDK package may either get its
 
 The Azure Breaking Change and Azure SDK Architecture Boards are aware of this scenario and have agreed to approve these 1-time breaks related to splitting a monolithic SDK package into multiple service-specific packages so that engineering and customers can get on a long-term sustainable future. The Azure API Stewardship and ARM review Boards are also aware of this.  
 
-As of 8/25/24, several Azure service teams have already begun splitting their monolithic SDK package into separate SDK packages: Compute, Networking, Observability, AI Language, AI Speech, and more.  
-
-Some examples (more coming soon):
--	The Microsoft.KubernetesConfiguration RP namespace has 5 services (Source Control Configuration [retiring], Flux Configuration, Configuration Extensions, Private Link Scopes Configuration, & Configuration Operations):
-azure-rest-api-specs/specification/kubernetesconfiguration/resource-manager/Microsoft.KubernetesConfiguration at main · Azure/azure-rest-api-specs
-
--	The Microsoft.Monitor RP namespace has 2 services: Operations & PipelineGroups:
-azure-rest-api-specs/specification/monitor/resource-manager/Microsoft.Monitor at main · Azure/azure-rest-api-specs
-
--	The Cognitive Service’s data plane services: azure-rest-api-specs/specification/cognitiveservices at main · Azure/azure-rest-api-specs
-
- 
-- RP namespace (this never versions)
-    - Control plane service(s); each service’s operations version uniformly
-        - Service1 (which can have preview/stable versions)
-            - Preview versions get a beta SDK
-            - Stable versions get a stable SDK (and perhaps beta SDKs until the GA)
-    - Data-plane service(s); each service’s operations version uniformly
-        - Service2 (which can have preview/stable versions)
-            - Preview versions get a beta SDK
-            - Stable versions get a stable SDK (and perhaps beta SDKs until the GA)
+As of 8/19/25, several Azure service teams have already decided to split their monolithic SDK package into service specific SDK packages: Compute, Monitor, Container Registry, Observability, AI Language, AI Speech, and more.  
 
