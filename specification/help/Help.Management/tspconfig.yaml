@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/help"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/help"
 emit:
 - "@azure-tools/typespec-autorest"
 options:
@@ -12,10 +14,11 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Help"
   "@azure-tools/typespec-python":
     service-dir: "sdk/selfhelp"
     package-dir: "azure-mgmt-selfhelp"
