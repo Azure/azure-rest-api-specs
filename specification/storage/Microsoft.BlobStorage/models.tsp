@@ -783,7 +783,7 @@ model ObjectReplicationMetadata is Record<string>;
 /// Service Properties
 
 /** The service properties. */
-model StorageServiceProperties {
+model BlobServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
 
@@ -2133,6 +2133,14 @@ alias ContainerNamePathParameter = {
   /** The name of the container. */
   @path
   containerName: string;
+};
+
+// NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
+alias MetadataHeadersParameter = {
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata: string;
 };
 
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
