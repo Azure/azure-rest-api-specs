@@ -796,6 +796,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_ListRadiusSecrets",
+        "description": "List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/RadiusAuthServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAllVirtualNetworkGatewayRadiusServerSecrets": {
+            "$ref": "./examples/AllVirtualNetworkGatewayRadiusServerSecretsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes": {
       "post": {
         "tags": [
@@ -4192,6 +4242,31 @@
       },
       "description": "List of virtual network gateway routes."
     },
+    "RadiusAuthServer": {
+      "properties": {
+        "radiusServerAddress": {
+          "type": "string",
+          "description": "Radius server name"
+        },
+        "RadiusServerSecret": {
+          "type": "string",
+          "description": "Radius server secret"
+        }
+      },
+      "description": "Gateway or VpnServerConfiguration Radius server with radius secret details"
+    },	
+    "RadiusAuthServerListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RadiusAuthServer"
+          },
+          "description": "List of Radius servers with respective radius secrets."
+        }
+      },
+      "description": "List of Radius servers with respective radius secrets."
+    },	
     "GatewayResiliencyInformation": {
       "type": "object",
       "properties": {

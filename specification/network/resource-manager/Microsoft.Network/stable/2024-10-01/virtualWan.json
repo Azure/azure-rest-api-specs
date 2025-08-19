@@ -1374,7 +1374,57 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets": {
+      "post": {
+        "tags": [
+          "vpnServerConfigurations"
+        ],
+        "operationId": "vpnServerConfigurations_ListRadiusSecrets",
+        "description": "List all Radius servers with respective radius secrets from VpnServerConfiguration.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all Radius servers with respective radius secrets from VpnServerConfiguration.",
+            "schema": {
+				"$ref": "./virtualNetworkGateway.json#/definitions/RadiusAuthServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAllVpnServerConfigurationRadiusServerSecrets": {
+            "$ref": "./examples/AllVpnServerConfigurationRadiusServerSecretsList.json"
+          }
+        }
       }
+    }, 	  
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
       "get": {
