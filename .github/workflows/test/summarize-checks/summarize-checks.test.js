@@ -6,6 +6,7 @@ import {
   getCheckRunTuple,
   getExistingLabels,
   updateLabels,
+  detectDuplicatePR
 } from "../../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "../mocks.js";
 
@@ -41,9 +42,9 @@ describe("Summarize Checks Integration Tests", () => {
     it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
       "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
       async () => {
-        const issue_number = 24021;
+        const issue_number = 36560;
         const owner = "Azure";
-        const repo = "azure-rest-api-specs-pr";
+        const repo = "azure-rest-api-specs";
 
         const ignorableLabels = [
           "VersioningReviewRequired",
@@ -72,8 +73,9 @@ describe("Summarize Checks Integration Tests", () => {
           issue_number,
         );
 
-        const head_sha = "961faf0dd048e0b846026bc84fdd795f4b46e9e8";
+        const head_sha = "36caa38fa3ef603c534f04c98c6ceac964b95b1e";
         const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
+        const duplicateRun = await detectDuplicatePR(github, owner, repo, head_sha, issue_number);
 
         const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
           github,
@@ -84,6 +86,10 @@ describe("Summarize Checks Integration Tests", () => {
           issue_number,
           [],
         );
+
+        if (duplicateRun) {
+         requiredCheckRuns.unshift(duplicateRun);
+        }
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
         let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);

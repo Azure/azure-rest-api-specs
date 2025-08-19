@@ -161,6 +161,12 @@ const CHECK_METADATA = [
   },
   {
     precedence: 0,
+    name: "Duplicate PR Protection",
+    suppressionLabels: [],
+    troubleshootingGuide: "This repo does not currently support submitting two PRs from the same commit SHA. To unblock, find any other open PRs from this source branch and close all but one.",
+  },
+  {
+    precedence: 0,
     name: "TypeSpec Validation",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
@@ -314,6 +320,46 @@ export default async function summarizeChecks({ github, context, core }) {
     target_url,
   );
 }
+/**
+ * Detect if multiple PRs share the same commit SHA and return a failing protection run.
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} sha
+ * @param {number} prNumber
+ * @returns {Promise<CheckRunData|undefined>}
+ */
+export async function detectDuplicatePR(github, owner, repo, sha, prNumber) {
+  // Fetch the PR to get its head branch
+  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
+  const headRef = pr.head.ref;
+  // Assert non-null repo information for head
+  // Ensure head repo info is present
+  if (!pr.head || !pr.head.repo) {
+    console.warn(`Cannot determine head branch repo for PR #${prNumber}, skipping duplicate PR detection.`);
+    return undefined;
+  }
+  const headOwner = pr.head.repo.owner.login;
+  const relatedPRs = await github.paginate(
+    github.rest.pulls.list,
+    { owner: owner, repo: repo, head: `${headOwner}:${headRef}`, state: 'open', per_page: PER_PAGE_MAX },
+  );
+  // Filter out current PR
+  /** @type {Array<{ number: number }>} */
+  const otherPRs = relatedPRs.filter(
+    /** @param {{ number: number }} other */
+    (other) => other.number !== prNumber,
+  );
+  if (otherPRs.length > 0) {
+    return {
+      name: 'Duplicate PR Protection',
+      status: 'completed',
+      conclusion: 'failure',
+      checkInfo: getCheckInfo('Duplicate PR Protection'),
+    };
+  }
+  return undefined;
+}
 
 /**
  * @param {typeof import("@actions/core")} core
@@ -370,6 +416,9 @@ export async function summarizeChecksImpl(
 
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
+  // add a single call here. we have the pr number (issue_number), and the head_sha.
+  // if we have duplicate PRs with the same head_sha, we should inject a required check run with the failure
+
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,
@@ -380,6 +429,12 @@ export async function summarizeChecksImpl(
     issue_number,
     EXCLUDED_CHECK_NAMES,
   );
+  // Inject duplicate-PR protection check if more than one PR shares this commit
+  const duplicateRun = await detectDuplicatePR(github, owner, repo, head_sha, issue_number);
+  if (duplicateRun) {
+    core.info('Injecting Duplicate PR Protection required check due to multiple PRs on this commit.');
+    requiredCheckRuns.unshift(duplicateRun);
+  }
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
