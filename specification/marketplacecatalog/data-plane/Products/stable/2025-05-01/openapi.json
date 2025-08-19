@@ -36,7 +36,10 @@
   "tags": [],
   "paths": {
     "/products": {
+    "/products": {
       "get": {
+        "operationId": "ListProducts",
+        "description": "Retrieves a list of products available in the marketplace catalog",
         "operationId": "ListProducts",
         "description": "Retrieves a list of products available in the marketplace catalog",
         "parameters": [
@@ -45,14 +48,18 @@
           },
           {
             "$ref": "#/parameters/LanguageParameter"
+            "$ref": "#/parameters/LanguageParameter"
           },
           {
+            "$ref": "#/parameters/LocationsListingParameter"
             "$ref": "#/parameters/LocationsListingParameter"
           },
           {
             "$ref": "#/parameters/ListingMarketParameter"
+            "$ref": "#/parameters/ListingMarketParameter"
           },
           {
+            "$ref": "#/parameters/HideKeysParameter"
             "$ref": "#/parameters/HideKeysParameter"
           },
           {
@@ -247,11 +254,6 @@
             "schema": {
               "$ref": "#/definitions/DiscoveryErrorPayload"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists publically available skus in the marketplace.": {
-            "$ref": "./examples/PublicSkus_List.json"
           }
         },
         "x-ms-pageable": {
