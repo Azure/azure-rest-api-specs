@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Nginx.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Nginx, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,9 +19,8 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Nginx API.
 
 ``` yaml
@@ -58,7 +57,6 @@ input-file:
 - NGINX.NGINXPLUS/preview/2024-06-01-preview/swagger.json
 ```
 
-
 ### Tag: package-2024-01-01-preview
 
 These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
@@ -76,7 +74,6 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 input-file:
 - NGINX.NGINXPLUS/stable/2023-09-01/swagger.json
 ```
-
 
 ### Tag: package-2023-04-01
 
@@ -106,12 +103,14 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: PutRequestResponseSchemeArm
     from: swagger.json
     reason: Temporary suppression needed to avoid delays for business needs and maintain production timelines. It's also approved before in previous PR in private repo.
-```    
+```
+
 ---
 
 # Code Generation

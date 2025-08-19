@@ -647,6 +647,17 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/ManagedGrafana"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -660,7 +671,11 @@
           "Grafana_Update": {
             "$ref": "./examples/Grafana_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Grafana_Delete",
@@ -2203,13 +2218,28 @@
       "type": "object",
       "description": "The grafana resource type.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedGrafanaProperties",
+          "description": "Properties specific to the grafana resource."
+        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The Sku of the grafana resource."
         },
-        "properties": {
-          "$ref": "#/definitions/ManagedGrafanaProperties",
-          "description": "Properties specific to the grafana resource."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -2218,7 +2248,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
