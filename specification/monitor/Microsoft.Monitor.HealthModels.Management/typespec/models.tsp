@@ -349,7 +349,7 @@ model EntityProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
-  labels?: Record<string4096>;
+  tags?: Record<string4096>;
 
   @doc("Signal groups which are assigned to this entity")
   signals?: SignalGroup;
@@ -586,7 +586,7 @@ model RelationshipProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
-  labels?: Record<string4096>;
+  tags?: Record<string4096>;
 
   @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
