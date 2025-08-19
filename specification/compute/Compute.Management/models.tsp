@@ -8026,12 +8026,12 @@ union ReservationType {
   string,
 
   /**
-   * Reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided.
+   * To consume on demand allocated capacity reservation when a capacity reservation group is provided.
    */
   Targeted: "Targeted",
 
   /**
-   * Block capacity reservations.
+   * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
    */
   Block: "Block",
 }
