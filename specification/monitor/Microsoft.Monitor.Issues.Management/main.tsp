@@ -1,1 +1,0 @@
-import "./typespec/issues.tsp";
