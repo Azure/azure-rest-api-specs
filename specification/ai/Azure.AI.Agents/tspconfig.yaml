@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/ai"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/ai"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -19,8 +21,7 @@ options:
     generate-sample: false
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/ai"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     api-version: "2025-05-15-preview"
     package-mode: "dataplane"
     package-dir: "Azure.AI.Agents.Persistent"
@@ -33,8 +34,7 @@ options:
     examples-dir: "{project-dir}/examples"
     clear-output-folder: true
   "@azure-typespec/http-client-csharp":
-    service-dir: "{output-dir}/sdk/ai"
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: Azure.AI.Agents.Persistent
     model-namespace: false
     api-version: "2025-05-15-preview"

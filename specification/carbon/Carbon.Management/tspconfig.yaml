@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/carbonoptimization"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/carbon"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -22,8 +24,7 @@ options:
     namespace: "{package-dir}"
     flavor: azure
     generate-sample-project: false
-    service-dir: "{output-dir}/sdk/carbon"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-carbonoptimization"

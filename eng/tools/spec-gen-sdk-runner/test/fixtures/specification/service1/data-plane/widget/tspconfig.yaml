@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/widget"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/widget"
   "dependencies":
     default: ""
 emit:
@@ -22,8 +24,7 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/widget"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.Widget"
     clear-output-folder: true
     model-namespace: false

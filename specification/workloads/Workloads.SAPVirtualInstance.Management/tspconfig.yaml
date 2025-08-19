@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/workloads"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/workloadssapvirtualinstance"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,8 +16,7 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/SAPVirtualInstance/{version-status}/{version}/SAPVirtualInstance.json"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/workloadssapvirtualinstance"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     flavor: azure
     package-dir: "Azure.ResourceManager.WorkloadsSapVirtualInstance"
     clear-output-folder: true

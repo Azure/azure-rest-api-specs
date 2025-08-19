@@ -3,6 +3,8 @@ emit:
 parameters:
   "service-dir":
     default: "sdk/liftrweightsandbiases"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/weightsandbiases"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -15,8 +17,7 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
-    service-dir: "{output-dir}/sdk/weightsandbiases"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/weightsandbiases"
     package-dir: "azure-mgmt-weightsandbiases"

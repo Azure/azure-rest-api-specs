@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/batch"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/batch"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -12,8 +14,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/batch"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.Compute.Batch"
     clear-output-folder: true
     model-namespace: false
@@ -21,8 +22,7 @@ options:
     namespace: Azure.Compute.Batch
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    service-dir: "{output-dir}/sdk/batch"
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: Azure.Compute.Batch
     model-namespace: false
   "@azure-tools/typespec-go":

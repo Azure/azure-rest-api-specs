@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/contosowidgetmanager"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/contosowidgetmanager"
   "dependencies":
     default: ""
 emit:
@@ -21,16 +23,14 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/contosowidgetmanager"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.Template.Contoso"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    service-dir: "{output-dir}/sdk/contosowidgetmanager"
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: Azure.Template.Contoso
     model-namespace: false
   "@azure-tools/typespec-ts":

@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/migrate"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/migrate"
 emit:
   - "@azure-tools/typespec-autorest"
 output-dir: "{project-root}/../../"
@@ -16,8 +18,7 @@ options:
     arm-types-dir: "{project-root}/../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/migrate"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     flavor: azure
     package-dir: "Azure.ResourceManager.Migrate"
     clear-output-folder: true

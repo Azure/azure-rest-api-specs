@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/databasefleetmanager"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/databasefleetmanager"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -32,8 +34,7 @@ options:
     inject-spans: true
     remove-unreferenced-types: true
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/databasefleetmanager"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.ResourceManager.DatabaseFleetManager"
     flavor: azure
     clear-output-folder: true

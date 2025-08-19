@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/openai"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/openai"
   "dependencies":
     default: ""
   output-folder-base:
@@ -22,8 +24,7 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/openai"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.AI.OpenAI.Assistants"
     namespace: "Azure.AI.OpenAI.Assistants"
     clear-output-folder: true
@@ -31,8 +32,7 @@ options:
     generate-protocol-methods: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    service-dir: "{output-dir}/sdk/openai"
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: Azure.AI.OpenAI.Assistants
     model-namespace: false
     generate-protocol-methods: false

@@ -11,6 +11,8 @@ parameters:
     default: "communication"
   "service-dir":
     default: "sdk/communication"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/communication"
   "python-output-dir":
     default: "azure/communication/messages/_generated"
 emit:
@@ -28,7 +30,6 @@ options:
     emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/communication"
     clear-output-folder: true
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
@@ -37,8 +38,7 @@ options:
     save-inputs: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    service-dir: "{output-dir}/sdk/communication"
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: Azure.Communication.Messages
     model-namespace: false
   "@azure-tools/typespec-python":

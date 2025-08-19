@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/2024-02-29-preview"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/2024-02-29-preview"
   "dependencies":
     default: ""
 emit:
@@ -13,8 +15,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/swagger.json"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/2024-02-29-preview"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Microsoft.VoiceServices.Provisioning"
     namespace: "{package-dir}"
     clear-output-folder: true

@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/oracledatabase"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/oracle"
   "dependencies":
     default: ""
 
@@ -52,8 +54,7 @@ options:
     namespace: "{package-dir}"
     clear-output-folder: true
     flavor: azure
-    service-dir: "{output-dir}/sdk/oracle"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
 
 linter:
   extends:

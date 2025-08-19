@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/programmableconnectivity"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/programmableconnectivity"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -24,8 +26,7 @@ options:
     flavor: "azure"
     service-name: "Programmable Connectivity"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/programmableconnectivity"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     flavor: azure
     package-dir: "Azure.ResourceManager.ProgrammableConnectivity"
     clear-output-folder: true

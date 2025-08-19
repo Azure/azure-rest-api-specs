@@ -9,6 +9,8 @@ linter:
 parameters:
   "service-dir":
     default: "sdk/playwrighttesting"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/playwrighttesting"
   "service-directory-name":
     default: "playwrighttesting"
 options:
@@ -38,8 +40,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/playwrighttesting"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.ResourceManager.PlaywrightTesting"
     flavor: azure
     clear-output-folder: true

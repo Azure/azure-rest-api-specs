@@ -1,6 +1,8 @@
 parameters:
   service-dir:
     default: "sdk/devcenter"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/devcenter"
 emit: ["@azure-tools/typespec-autorest"]
 linter:
   extends:
@@ -13,16 +15,14 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.DevCenter/{version-status}/{version}/devcenter.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/devcenter"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.Developer.DevCenter"
     namespace: "{package-dir}"
     clear-output-folder: true
     flavor: azure
     api-version: "2023-04-01"
   "@azure-typespec/http-client-csharp":
-    service-dir: "{output-dir}/sdk/devcenter"
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: Azure.Developer.DevCenter
     api-version: "2023-04-01"
   "@azure-tools/typespec-python":

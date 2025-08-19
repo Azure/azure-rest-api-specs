@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/recoveryservicesdatareplication"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/recoveryservices-datareplication"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -17,8 +19,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
-    service-dir: "{output-dir}/sdk/recoveryservices-datareplication"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-recoveryservicesdatareplication"
     namespace: "azure.mgmt.recoveryservicesdatareplication"

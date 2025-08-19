@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/edgeorder"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/edgeorder"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,8 +15,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/edgeorder"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     flavor: azure
     package-dir: "Azure.ResourceManager.EdgeOrder"
     clear-output-folder: true

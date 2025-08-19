@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/machinelearning"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/machinelearning"
 emit:
   - "@azure-tools/typespec-autorest"
 #  - "@typespec/openapi3"
@@ -15,16 +17,14 @@ options:
     emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/machinelearning"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.AI.ChatProtocol"
     namespace: "Azure.AI.ChatProtocol"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    service-dir: "{output-dir}/sdk/machinelearning"
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{csharp-service-dir}/{namespace}"
     namespace: Azure.AI.ChatProtocol
     model-namespace: false
   "@azure-tools/typespec-python":

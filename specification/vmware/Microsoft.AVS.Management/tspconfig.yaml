@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/avs"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/avs"
   "service-directory-name":
     default: "vmware"
 emit: ["@azure-tools/typespec-autorest"]
@@ -19,8 +21,7 @@ options:
     use-read-only-status-schema: true
 
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/avs"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     flavor: azure
     package-dir: "Azure.ResourceManager.Avs"
     clear-output-folder: true

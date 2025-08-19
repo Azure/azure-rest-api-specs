@@ -3,6 +3,8 @@ emit:
 parameters:
   "service-dir":
     default: "sdk/pineconevectordb"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/pineconevectordb"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -11,8 +13,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/pineconevectordb"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.ResourceManager.PineconeVectorDB"
     flavor: azure
     clear-output-folder: true

@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/rnr"
+  "csharp-service-dir":
+    default: "{output-dir}/sdk/rnr"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -10,8 +12,7 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/Reviews/{version-status}/{version}/reviews.json"
   "@azure-tools/typespec-csharp":
-    service-dir: "{output-dir}/sdk/rnr"
-    emitter-output-dir: "{service-dir}/{package-dir}"
+    emitter-output-dir: "{csharp-service-dir}/{package-dir}"
     package-dir: "Azure.ResourceManager.Marketplace"
     clear-output-folder: true
     model-namespace: false
