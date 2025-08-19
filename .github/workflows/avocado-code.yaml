@@ -58,6 +58,13 @@ jobs:
           TRAVIS_REPO_SLUG: ${{ github.repository }}
           TRAVIS_PULL_REQUEST_SHA: ${{ github.sha }}
 
+      - name: Upload artifact with issue number
+        if: ${{ always() }}
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ github.event.pull_request.number }}
+
       - name: Setup Node 20 and install deps (under .github)
         if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         uses: ./.github/actions/setup-node-install-deps
