@@ -35,9 +35,13 @@ interface AppAttachPackageInfo {
    */
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("importAppAttachPackageInfo")
+  @list
   `import` is ArmResourceActionSync<
     HostPool,
     Request = {
+      /**
+       * Information to import app attach package
+       */
       @bodyRoot importPackageInfoRequest: ImportPackageInfoRequest;
     },
     Response = AppAttachPackageList
@@ -53,9 +57,13 @@ interface MSIXImages {
    */
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("expandMsixImage")
+  @list
   expand is ArmResourceActionSync<
     HostPool,
     Request = {
+      /**
+       * Represents URI referring to MSIX Image
+       */
       @bodyRoot msixImageURI: MSIXImageURI;
     },
     Response = ExpandMsixImageList
@@ -69,6 +77,7 @@ interface PrivateLinkResources {
    */
   @action("privateLinkResources")
   @get
+  @list
   listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,
@@ -99,6 +108,7 @@ interface PrivateLinkResources {
    */
   @action("privateLinkResources")
   @get
+  @list
   listByWorkspace is Azure.ResourceManager.ArmResourceActionSync<
     Workspace,
     void,
@@ -220,7 +230,7 @@ interface HostPools {
   >;
 
   /**
-   * Operation to list the RegistrationTokens associated with the HostPool
+   * Operation to list the RegistrationTokens associated with the HostPool.
    */
   listRegistrationTokens is ArmResourceActionSync<
     HostPool,
