@@ -9,7 +9,7 @@ import {
   TspConfigCommonAzServiceDirMatchPatternSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
   TspConfigCsharpAzNamespaceSubRule,
-  TspConfigCsharpMgmtPackageDirectorySubRule,
+  TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
@@ -520,13 +520,13 @@ const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
 );
 
-const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
+const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   managementTspconfigFolder,
-  "package-dir",
+  "namespace",
   "Azure.ResourceManager.AAA",
   "Azure.Management.AAA",
-  [new TspConfigCsharpMgmtPackageDirectorySubRule()],
+  [new TspConfigCsharpMgmtNamespaceSubRule()],
 );
 
 const suppressEntireRuleTestCase: Case = {
@@ -636,7 +636,7 @@ describe("tspconfig", function () {
     ...csharpAzNamespaceTestCases,
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
-    ...csharpMgmtPackageDirTestCases,
+    ...csharpMgmtNamespaceTestCases,
   ])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
