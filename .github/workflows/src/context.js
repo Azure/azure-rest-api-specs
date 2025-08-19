@@ -132,7 +132,8 @@ export async function extractInputs(github, context, core) {
 
         // Attempt to extract issue number from artifact.
         // If found, verify the head_sha of the issue matches the head_sha of the workflow_run, to prevent
-        // an attacker from modifying an issue with a different SHA.
+        // an attacker from modifying an issue with a different SHA.  This may also prevent applying stale
+        // results to a PR with a recently updated head_sha.
         const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
           owner: payload.workflow_run.repository.owner.login,
           repo: payload.workflow_run.repository.name,
