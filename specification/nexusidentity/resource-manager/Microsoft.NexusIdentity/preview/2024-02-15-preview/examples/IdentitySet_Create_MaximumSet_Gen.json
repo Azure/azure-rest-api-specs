@@ -20,10 +20,23 @@
           "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
         ],
         "storageAccountName": "dfwjbglbhfgib",
-        "keyVaultId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVaultName"
+        "keyVaultId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVaultName",
+        "storageAccountConfiguration": {
+          "storageAccountId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Storage/storageAccounts/someStorage",
+          "storageAccountIdentity": {
+            "identityType": "UserAssignedIdentity",
+            "userAssignedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-id"
+          }
+        }
       },
       "tags": {},
-      "location": "eastus"
+      "location": "eastus",
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {
+          "key5137": {}
+        }
+      }
     }
   },
   "responses": {
@@ -42,13 +55,31 @@
             "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
           ],
           "storageAccountName": "dfwjbglbhfgib",
-          "keyVaultId": "https://microsoft.com/a",
+          "keyVaultId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVaultName",
           "appId": "69f874fc-1b90-4263-b4f7-9d4e2e26599b",
           "appName": "NNF-RP",
+          "storageAccountConfiguration": {
+            "storageAccountId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Storage/storageAccounts/someStorage",
+            "storageAccountIdentity": {
+              "identityType": "UserAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-id"
+            }
+          },
           "provisioningState": "Succeeded"
         },
         "tags": {},
         "location": "eastus",
+        "identity": {
+          "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "tenantId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key5137": {
+              "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+              "clientId": "0000ABCD-0A0B-0000-0000-000000ABCDEF"
+            }
+          }
+        },
         "id": "/subscriptions/CF73C0E2-97C7-4CC2-9C78-19DFB1996F72/resourceGroups/rgopenapi/providers/Microsoft.NexusIdentity/identitySets/sample",
         "name": "sample",
         "type": "microsoft.nexusidentity/identitySets",
@@ -80,11 +111,29 @@
             "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
           ],
           "storageAccountName": "dfwjbglbhfgib",
-          "keyVaultId": "https://microsoft.com/a",
+          "keyVaultId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVaultName",
+          "storageAccountConfiguration": {
+            "storageAccountId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Storage/storageAccounts/someStorage",
+            "storageAccountIdentity": {
+              "identityType": "UserAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-id"
+            }
+          },
           "provisioningState": "Succeeded"
         },
         "tags": {},
         "location": "eastus",
+        "identity": {
+          "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "tenantId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key5137": {
+              "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+              "clientId": "0000ABCD-0A0B-0000-0000-000000ABCDEF"
+            }
+          }
+        },
         "id": "/subscriptions/CF73C0E2-97C7-4CC2-9C78-19DFB1996F72/resourceGroups/rgopenapi/providers/Microsoft.NexusIdentity/identitySets/sample",
         "name": "sample",
         "type": "microsoft.nexusidentity/identitySets",
