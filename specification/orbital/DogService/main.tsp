@@ -81,7 +81,7 @@ model UploadPictureResponse {
 /** Medical record upload form */
 model MedicalRecordUploadForm {
   /** PDF medical record file to upload */
-  medicalRecord: HttpPart<bytes>;
+  medicalRecord?: HttpPart<bytes>;
 }
 
 /** Medical record upload response */
