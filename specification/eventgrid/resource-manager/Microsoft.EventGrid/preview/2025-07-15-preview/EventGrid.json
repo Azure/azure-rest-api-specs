@@ -18037,7 +18037,7 @@
       "type": "object",
       "properties": {
         "keyEncryptionKeyUrl": {
-          "description": "Key encryption key URL. This URL can be either versioned (e.g., https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78), or unversioned (e.g.,\r\nhttps://contosovault.vault.azure.net/keys/contosokek. When versioned URL is used, this version of the key will be used by Event Grid Runtime even if it is rotated. It is user\r\nresponsibility to update the URL with the new version by updating the namespace resource. When unversion URL is used, Event Grid will query and get latest version and will\r\nbe used automatically.",
+          "description": "Key encryption key URL. This URL can be either versioned (e.g., https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78), or unversioned (e.g.,\r\nhttps://contosovault.vault.azure.net/keys/contosokek. When versioned URL is used, this version of the key will be used by Event Grid Runtime even if it is rotated. It is user\r\nresponsibility to update the URL with the new version by updating the namespace resource. When URL without version is used, Event Grid will query and get latest version and will\r\nbe used automatically.",
           "type": "string"
         },
         "keyEncryptionKeyIdentity": {
@@ -18097,7 +18097,7 @@
           }
         },
         "userAssignedIdentityResourceId": {
-          "description": "ARM fully qualified Id for the user-assigned identity associated with the resource. The resourcre Id takes the following format:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "description": "ARM fully qualified Id for the user-assigned identity associated with the resource. The resource Id takes the following format:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "type": "string"
         }
       }
