@@ -1,28 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "mySubscriptionId",
-    "api-version": "2022-05-04"
+    "api-version": "2022-05-04",
+    "subscriptionId": "mySubscriptionId"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subscriptionId/providers/Microsoft.Automanage/servicePrincipals/default",
         "name": "default",
         "type": "Microsoft.Automanage/ConfigurationProfileAssignments",
+        "id": "/subscriptions/subscriptionId/providers/Microsoft.Automanage/servicePrincipals/default",
         "properties": {
-          "servicePrincipalId": "<servicePrincipalId>",
-          "authorizationSet": true
+          "authorizationSet": true,
+          "servicePrincipalId": "<servicePrincipalId>"
         },
         "systemData": {
+          "createdAt": "0001-01-01T00:00:00.00Z",
           "createdBy": "SYSTEM",
           "createdByType": "User",
-          "createdAt": "0001-01-01T00:00:00.00Z",
+          "lastModifiedAt": "0001-01-01T00:00:00.00Z",
           "lastModifiedBy": "SYSTEM",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "0001-01-01T00:00:00.00Z"
+          "lastModifiedByType": "User"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ServicePrincipals_Get",
+  "title": "Get service principal"
 }

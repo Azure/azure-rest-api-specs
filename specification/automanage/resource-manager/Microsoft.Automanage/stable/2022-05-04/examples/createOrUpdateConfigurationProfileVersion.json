@@ -1,96 +1,98 @@
 {
   "parameters": {
-    "subscriptionId": "mySubscriptionId",
-    "resourceGroupName": "myResourceGroupName",
-    "configurationProfileName": "customConfigurationProfile",
-    "versionName": "version1",
     "api-version": "2022-05-04",
+    "configurationProfileName": "customConfigurationProfile",
     "parameters": {
       "location": "East US",
-      "tags": {
-        "Organization": "Administration"
-      },
       "properties": {
         "configuration": {
           "Antimalware/Enable": false,
-          "Backup/Enable": false,
-          "VMInsights/Enable": true,
           "AzureSecurityCenter/Enable": true,
-          "UpdateManagement/Enable": true,
+          "Backup/Enable": false,
+          "BootDiagnostics/Enable": true,
           "ChangeTrackingAndInventory/Enable": true,
           "GuestConfiguration/Enable": true,
           "LogAnalytics/Enable": true,
-          "BootDiagnostics/Enable": true
+          "UpdateManagement/Enable": true,
+          "VMInsights/Enable": true
         }
-      }
-    }
-  },
-  "responses": {
-    "201": {
-      "headers": {},
-      "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
-        "name": "customConfigurationProfile/version1",
-        "type": "Microsoft.Automanage/configurationProfiles/versions",
-        "location": "East US",
-        "tags": {
-          "Organization": "Administration"
-        },
-        "properties": {
-          "configuration": {
-            "Antimalware/Enable": false,
-            "Backup/Enable": false,
-            "VMInsights/Enable": true,
-            "AzureSecurityCenter/Enable": true,
-            "UpdateManagement/Enable": true,
-            "ChangeTrackingAndInventory/Enable": true,
-            "GuestConfiguration/Enable": true,
-            "LogAnalytics/Enable": true,
-            "BootDiagnostics/Enable": true
-          }
-        },
-        "systemData": {
-          "createdBy": "user1@outlook.com",
-          "createdByType": "User",
-          "createdAt": "2020-02-03T01:01:01.1075056Z",
-          "lastModifiedBy": "user2@outlook.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
-        }
+      },
+      "tags": {
+        "Organization": "Administration"
       }
     },
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId",
+    "versionName": "version1"
+  },
+  "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
         "name": "customConfigurationProfile/version1",
         "type": "Microsoft.Automanage/configurationProfiles/versions",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
         "location": "East US",
-        "tags": {
-          "Organization": "Administration"
-        },
         "properties": {
           "configuration": {
             "Antimalware/Enable": false,
-            "Backup/Enable": false,
-            "VMInsights/Enable": true,
             "AzureSecurityCenter/Enable": true,
-            "UpdateManagement/Enable": true,
+            "Backup/Enable": false,
+            "BootDiagnostics/Enable": true,
             "ChangeTrackingAndInventory/Enable": true,
             "GuestConfiguration/Enable": true,
             "LogAnalytics/Enable": true,
-            "BootDiagnostics/Enable": true
+            "UpdateManagement/Enable": true,
+            "VMInsights/Enable": true
           }
         },
         "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
           "createdBy": "user1@outlook.com",
           "createdByType": "User",
-          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
           "lastModifiedBy": "user2@outlook.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Organization": "Administration"
         }
-      }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "customConfigurationProfile/version1",
+        "type": "Microsoft.Automanage/configurationProfiles/versions",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile/versions/version1",
+        "location": "East US",
+        "properties": {
+          "configuration": {
+            "Antimalware/Enable": false,
+            "AzureSecurityCenter/Enable": true,
+            "Backup/Enable": false,
+            "BootDiagnostics/Enable": true,
+            "ChangeTrackingAndInventory/Enable": true,
+            "GuestConfiguration/Enable": true,
+            "LogAnalytics/Enable": true,
+            "UpdateManagement/Enable": true,
+            "VMInsights/Enable": true
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Organization": "Administration"
+        }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ConfigurationProfilesVersions_CreateOrUpdate",
+  "title": "Create or update configuration profile version"
 }
