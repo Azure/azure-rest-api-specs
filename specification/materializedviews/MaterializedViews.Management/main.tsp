@@ -10,9 +10,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 
 @armProviderNamespace
-@service(#{
-  title: "Microsoft MaterializedViews Management Service",
-})
+@service(#{ title: "Microsoft MaterializedViews Management Service" })
 @doc("Microsoft MaterializedViews Management Service")
 @versioned(Microsoft.MaterializedViews.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -122,7 +120,7 @@ interface MaterializedViews {
   delete is ArmResourceDeleteWithoutOkAsync<MaterializedViewResource>;
   listByResourceGroup is ArmResourceListByParent<MaterializedViewResource>;
   listBySubscription is ArmListBySubscription<MaterializedViewResource>;
-  
+
   @doc("Refresh a materialized view")
   @action("refresh")
   refresh is ArmResourceActionNoResponseContentAsync<
