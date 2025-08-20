@@ -1374,8 +1374,9 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets": {
       "post": {
         "tags": [
           "vpnServerConfigurations"
@@ -1408,7 +1409,7 @@
           "200": {
             "description": "List all Radius servers with respective radius secrets from VpnServerConfiguration.",
             "schema": {
-				"$ref": "./virtualNetworkGateway.json#/definitions/RadiusAuthServerListResult"
+              "$ref": "./virtualNetworkGateway.json#/definitions/RadiusAuthServerListResult"
             }
           },
           "default": {
@@ -1424,7 +1425,6 @@
           }
         }
       }
-    }, 	  
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
       "get": {
