@@ -40,10 +40,11 @@ interface BestPracticesVersionsOperationGroup {
   @list
   listByTenant(
     ...ApiVersionParameter,
+
     /** The Automanage best practice name. */
     @path
     @segment("bestPractices")
     @key
     bestPracticeName: string,
- ): ArmResponse<BestPracticeList> | ErrorResponse;
+  ): ArmResponse<BestPracticeList> | ErrorResponse;
 }

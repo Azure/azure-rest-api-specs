@@ -120,8 +120,8 @@ interface ConfigurationProfileAssignments {
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@armResourceOperations
 interface ConfigurationProfileHCRPAssignmentOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -155,8 +155,8 @@ interface ConfigurationProfileHCRPAssignmentOps
       }
     > {}
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@armResourceOperations
 interface ConfigurationProfileHCRPAssignments {
   /**
    * Get information about a configuration profile assignment
@@ -183,8 +183,8 @@ interface ConfigurationProfileHCRPAssignments {
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@armResourceOperations
 interface ConfigurationProfileHCIAssignmentOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -218,8 +218,8 @@ interface ConfigurationProfileHCIAssignmentOps
       }
     > {}
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@armResourceOperations
 interface ConfigurationProfileHCIAssignments {
   /**
    * Get information about a configuration profile assignment
