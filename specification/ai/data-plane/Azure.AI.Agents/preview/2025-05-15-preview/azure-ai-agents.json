@@ -3534,6 +3534,24 @@
         "queue_name"
       ]
     },
+    "AzureFunctionToolCallDetails": {
+      "type": "object",
+      "description": "The Azure function call description. All the fields are present in the completed run step, however\nonly some fields are present in the RunStepDeltaAzureFunctionToolCall.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure function name"
+        },
+        "arguments": {
+          "type": "string",
+          "description": "JSON serialized function arguments."
+        },
+        "output": {
+          "type": "string",
+          "description": "The function output."
+        }
+      }
+    },
     "AzureFunctionToolDefinition": {
       "type": "object",
       "description": "The input definition information for a azure function tool as used to configure an agent.",
@@ -6360,13 +6378,32 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "RunStepAzureFunctionToolCall": {
+      "type": "object",
+      "description": "A record of a call to an Azure Function tool.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "The description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "RunStepBingCustomSearchToolCall": {
       "type": "object",
-      "description": "A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing custom search.",
+      "description": "A record of a call to a Bing Custom Search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with Bing Custom Search.",
       "properties": {
         "bing_custom_search": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Custom Search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6389,7 +6426,7 @@
       "properties": {
         "bing_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6686,13 +6723,32 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "RunStepDeltaAzureFunctionToolCall": {
+      "type": "object",
+      "description": "Represents the Azure Function tool call in a streaming run step.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "Partial description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "RunStepDeltaBingGroundingToolCall": {
       "type": "object",
       "description": "Represents the bing grounding tool call in a streaming run step.",
       "properties": {
         "bing_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -6855,6 +6911,29 @@
       ],
       "x-ms-discriminator-value": "connected_agent"
     },
+    "RunStepDeltaCustomBingGroundingToolCall": {
+      "type": "object",
+      "description": "Represents the Bing Custom Search tool call in a streaming run step.",
+      "properties": {
+        "bing_custom_search": {
+          "type": "object",
+          "description": "The dictionary with request and response from Bing Custom Search tool.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
+    },
     "RunStepDeltaDeepResearchToolCall": {
       "type": "object",
       "description": "Represents the Deep research in a streaming run step.",
@@ -7013,6 +7092,29 @@
           "x-ms-client-name": "messageId"
         }
       }
+    },
+    "RunStepDeltaMicrosoftFabricToolCall": {
+      "type": "object",
+      "description": "Represents the Microsoft Fabric tool call in a streaming run step.",
+      "properties": {
+        "fabric_dataagent": {
+          "type": "object",
+          "description": "Fabric input and output.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "microsoftFabric"
+        }
+      },
+      "required": [
+        "fabric_dataagent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "fabric_dataagent"
     },
     "RunStepDeltaOpenAPIObject": {
       "type": "object",
@@ -7388,7 +7490,7 @@
       "properties": {
         "fabric_dataagent": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "Fabric input and output.",
           "additionalProperties": {
             "type": "string"
           },
