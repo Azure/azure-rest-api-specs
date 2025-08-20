@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - Microsoft.AzureFleet/preview/2023-11-01-preview/azurefleet.json
+  - preview/2023-11-01-preview/azurefleet.json
 ```
 
 ### Tag: package-preview-2024-05
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - Microsoft.AzureFleet/preview/2024-05-01-preview/azurefleet.json
+  - preview/2024-05-01-preview/azurefleet.json
 ```
 
 ### Tag: package-2024-11-01
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2024-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-11-01'
 input-file:
-  - Microsoft.AzureFleet/stable/2024-11-01/azurefleet.json
+  - stable/2024-11-01/azurefleet.json
 ```
 
 ### Tag: package-preview-2025-07
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-preview-2025-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-07'
 input-file:
-  - Microsoft.AzureFleet/preview/2025-07-01-preview/azurefleet.json
+  - preview/2025-07-01-preview/azurefleet.json
 ```
 
 ---
