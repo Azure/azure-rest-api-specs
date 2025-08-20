@@ -75,6 +75,9 @@ directive:
   - suppress: OperationsAPIImplementation
     reason: Operations API is available in Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json and not needed in preview version
     from: Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
+  - code: ValidFormats
+    where: $.definitions["Azure.Core.eTag"].format
+    reason: eTag should be an allowed format
 ```
 
 ``` yaml
