@@ -91,6 +91,7 @@ interface Reports {
   >;
 }
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 interface HCRPReportOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -137,6 +138,7 @@ interface HCRPReportOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 interface HCRPReports {
   /**
    * Get information about a report associated with a configuration profile assignment run
@@ -152,6 +154,7 @@ interface HCRPReports {
   >;
 }
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 interface HCIReportOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -198,6 +201,7 @@ interface HCIReportOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 interface HCIReports {
   /**
    * Get information about a report associated with a configuration profile assignment run

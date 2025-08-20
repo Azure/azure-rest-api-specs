@@ -56,6 +56,7 @@ model ConfigurationProfileProperties {
   /**
    * configuration dictionary of the configuration profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
   configuration?: unknown;
 }
 
@@ -69,6 +70,9 @@ model BestPracticeList {
   @pageItems
   value?: BestPractice[];
 
+  /**
+   * Url to get the next page.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -105,6 +109,9 @@ model ConfigurationProfileList {
   @pageItems
   value?: ConfigurationProfile[];
 
+  /**
+   * Url to get the next page.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -142,6 +149,9 @@ model ConfigurationProfileAssignmentList {
   @pageItems
   value?: ConfigurationProfileAssignment[];
 
+  /**
+   * Url to get the next page.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -205,6 +215,7 @@ model AssignmentReportProperties {
   /**
    * Type of the configuration profile assignment processing (Initial/Consistency).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
   @visibility(Lifecycle.Read)
   type?: string;
 
@@ -284,6 +295,9 @@ model ReportList {
   @pageItems
   value?: Report[];
 
+  /**
+   * Url to get the next page.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -298,6 +312,9 @@ model ServicePrincipalListResult {
   @pageItems
   value?: ServicePrincipal[];
 
+  /**
+   * Url to get the next page.
+   */
   @nextLink
   nextLink?: string;
 }
