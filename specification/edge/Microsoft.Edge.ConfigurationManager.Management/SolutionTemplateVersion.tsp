@@ -105,7 +105,7 @@ model BulkPublishTargetDetails {
 
   @added(Versions.v2025_08_01)
   @doc("ArmId of Target Solution Version")
-  solutionVersionId: Azure.Core.armResourceIdentifier<[
+  solutionVersionId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Edge/Targets/Solutions/Versions";
     }
