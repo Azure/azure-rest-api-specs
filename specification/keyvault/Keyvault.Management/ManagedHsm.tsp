@@ -66,12 +66,11 @@ interface ManagedHsms {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedHsm,
-    Response = ArmResourceUpdatedResponse<ManagedHsm> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<ManagedHsm> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ManagedHsm;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
-      Azure.Core.Foundations.RetryAfterHeader,
     Error = ManagedHsmError
   >;
 
@@ -83,12 +82,11 @@ interface ManagedHsms {
   update is ArmCustomPatchAsync<
     ManagedHsm,
     PatchModel = ManagedHsm,
-    Response = ArmResponse<ManagedHsm> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<ManagedHsm> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ManagedHsm;
     }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
-      Azure.Core.Foundations.RetryAfterHeader,
     Error = ManagedHsmError
   >;
 
