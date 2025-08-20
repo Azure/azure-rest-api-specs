@@ -1,0 +1,51 @@
+{
+  "title": "Proposal for Provider Level",
+  "operationId": "ProviderLevelActions_Proposal",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "proposalId": "proposal-12345-abcdef"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "response-67890-ghijkl",
+        "status": "Processed",
+        "lineItems": [
+          {
+            "lineItemId": "line-item-001",
+            "productId": "product-microsoft-365-business-standard",
+            "skuId": "sku-m365-business-standard-annual",
+            "availabilityId": "availability-commercial-global",
+            "bigId": "big-id-123456789",
+            "productCode": "CFQ7TTC0LHWK",
+            "error": null,
+            "additionalInfo": {
+              "etag": "W/\"datetime'2025-07-24T10%3A30%3A00.000Z'\"",
+              "systemId": "system-789012345",
+              "trackingId": "tracking-abc-def-123"
+            }
+          },
+          {
+            "lineItemId": "line-item-002",
+            "productId": "product-office-365-e3",
+            "skuId": "sku-o365-e3-monthly",
+            "availabilityId": "availability-commercial-us",
+            "bigId": "big-id-987654321",
+            "productCode": "CFQ7TTC0LCHP",
+            "error": {
+              "errorCode": "VALIDATION_FAILED",
+              "message": "Product not available in the specified region"
+            },
+            "additionalInfo": {
+              "etag": "W/\"datetime'2025-07-24T10%3A30%3A01.000Z'\"",
+              "systemId": "system-567890123",
+              "trackingId": "tracking-xyz-uvw-456"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
