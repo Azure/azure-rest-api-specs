@@ -82,6 +82,7 @@ interface AFDDomains {
   /**
    * Lists existing AzureFrontDoor domains.
    */
+  @list
   listByProfile is ArmResourceListByParent<AFDDomain>;
 
   /**

@@ -75,6 +75,7 @@ interface OriginGroups {
   /**
    * Lists all of the existing origin groups within an endpoint.
    */
+  @list
   listByEndpoint is ArmResourceListByParent<OriginGroup>;
 }
 

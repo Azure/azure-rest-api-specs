@@ -77,6 +77,7 @@ interface AFDOrigins {
   /**
    * Lists all of the existing origins within an origin group.
    */
+  @list
   listByOriginGroup is ArmResourceListByParent<AFDOrigin>;
 }
 

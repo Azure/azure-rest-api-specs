@@ -53,12 +53,14 @@ interface RuleSets {
   /**
    * Lists existing AzureFrontDoor rule sets within a profile.
    */
+  @list
   listByProfile is ArmResourceListByParent<RuleSet>;
 
   /**
-   * Checks the quota and actual usage of endpoints under the given Azure Front Door profile..
+   * Checks the quota and actual usage of endpoints under the given Azure Front Door profile.
    */
   @action("usages")
+  @list
   listResourceUsage is ArmResourceActionSync<
     RuleSet,
     void,

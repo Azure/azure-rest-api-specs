@@ -70,6 +70,7 @@ interface CustomDomains {
   /**
    * Lists all of the existing custom domains within an endpoint.
    */
+  @list
   listByEndpoint is ArmResourceListByParent<CustomDomain>;
 
   /**

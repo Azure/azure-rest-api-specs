@@ -61,6 +61,7 @@ interface Secrets {
   /**
    * Lists existing AzureFrontDoor secrets.
    */
+  @list
   listByProfile is ArmResourceListByParent<Secret>;
 }
 

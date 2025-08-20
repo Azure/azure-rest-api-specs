@@ -79,6 +79,7 @@ interface AFDEndpoints {
   /**
    * Lists existing AzureFrontDoor endpoints.
    */
+  @list
   listByProfile is ArmResourceListByParent<AFDEndpoint>;
 
   /**
@@ -99,6 +100,7 @@ interface AFDEndpoints {
    * Checks the quota and actual usage of endpoints under the given Azure Front Door profile.
    */
   @action("usages")
+  @list
   listResourceUsage is ArmResourceActionSync<
     AFDEndpoint,
     void,

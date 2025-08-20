@@ -70,6 +70,7 @@ interface Endpoints {
   /**
    * Lists existing CDN endpoints.
    */
+  @list
   listByProfile is ArmResourceListByParent<Endpoint>;
 
   /**
@@ -135,6 +136,7 @@ interface Endpoints {
    * Checks the quota and usage of geo filters and custom domains under the given endpoint.
    */
   @action("checkResourceUsage")
+  @list
   listResourceUsage is ArmResourceActionSync<
     Endpoint,
     void,

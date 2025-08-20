@@ -77,6 +77,7 @@ interface Rules {
   /**
    * Lists all of the existing delivery rules within a rule set.
    */
+  @list
   listByRuleSet is ArmResourceListByParent<Rule>;
 }
 

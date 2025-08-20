@@ -83,11 +83,13 @@ interface Profiles {
   /**
    * Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within a resource group.
    */
+  @list
   listByResourceGroup is ArmResourceListByParent<Profile>;
 
   /**
    * Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.
    */
+  @list
   list is ArmListBySubscription<Profile>;
 
   /**
@@ -103,6 +105,7 @@ interface Profiles {
    * Checks the quota and actual usage of endpoints under the given Azure Front Door profile.
    */
   @action("usages")
+  @list
   listResourceUsage is ArmResourceActionSync<
     Profile,
     void,
@@ -370,6 +373,7 @@ interface Profiles {
    * Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.
    */
   @action("checkResourceUsage")
+  @list
   profilesListResourceUsage is ArmResourceActionSync<
     Profile,
     void,

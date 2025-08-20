@@ -77,6 +77,7 @@ interface Routes {
   /**
    * Lists all of the existing origins within a profile.
    */
+  @list
   listByEndpoint is ArmResourceListByParent<Route>;
 }
 

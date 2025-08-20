@@ -112,6 +112,7 @@ interface ResourceUsageOperationGroup {
    */
   @autoRoute
   @action("checkResourceUsage")
+  @list
   list is ArmProviderActionSync<
     Response = ResourceUsageListResult,
     Scope = SubscriptionActionScope,
@@ -127,6 +128,7 @@ interface EdgeNodesOperationGroup {
   @autoRoute
   @get
   @action("edgenodes")
+  @list
   list is ArmProviderActionSync<Response = EdgenodeResult>;
 }
 
@@ -138,6 +140,7 @@ interface ManagedRuleSetsOperationGroup {
   @autoRoute
   @get
   @action("cdnWebApplicationFirewallManagedRuleSets")
+  @list
   list is ArmProviderActionSync<
     Response = ManagedRuleSetDefinitionList,
     Scope = SubscriptionActionScope,

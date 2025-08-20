@@ -77,6 +77,7 @@ interface SecurityPolicies {
   /**
    * Lists security policies associated with the profile
    */
+  @list
   listByProfile is ArmResourceListByParent<SecurityPolicy>;
 }
 

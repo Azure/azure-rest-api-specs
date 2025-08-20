@@ -74,6 +74,7 @@ interface Origins {
   /**
    * Lists all of the existing origins within an endpoint.
    */
+  @list
   listByEndpoint is ArmResourceListByParent<Origin>;
 }
 

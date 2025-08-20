@@ -77,6 +77,7 @@ interface CdnWebApplicationFirewallPolicies {
   /**
    * Lists all of the protection policies within a resource group.
    */
+  @list
   list is ArmResourceListByParent<
     CdnWebApplicationFirewallPolicy,
     Response = ArmResponse<CdnWebApplicationFirewallPolicyList>

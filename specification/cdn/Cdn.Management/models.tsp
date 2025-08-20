@@ -4327,12 +4327,11 @@ model ValidateProbeOutput {
 /**
  * Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.
  */
-@pagedResult
 model OperationsListResult {
   /**
    * List of CDN operations supported by the CDN resource provider.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value: Operation[];
 
