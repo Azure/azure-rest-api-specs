@@ -548,7 +548,7 @@ model BlobItemInternal {
 
   /** The object replication metadata of the blob. */
   #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
-  @Xml.name("ObjectReplicationMetadata")
+  Xml.name("OrMetadata")
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
   /** Whether the blog has versions only. */
