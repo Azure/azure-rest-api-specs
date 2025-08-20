@@ -394,6 +394,7 @@ using Azure.AI.Agents;
   "UriCitation",
   "csharp"
 );
+@@usage(MessageDeltaTextUrlCitationDetails, Usage.json);
 @@clientName(MessageDeltaTextUrlCitationDetails,
   "MessageDeltaTextUriCitationDetails",
   "csharp"

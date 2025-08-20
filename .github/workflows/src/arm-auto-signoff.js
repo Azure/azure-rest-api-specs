@@ -56,6 +56,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   };
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
+  // permissions: { issues: read, pull-requests: read }
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
     repo: repo,
@@ -72,6 +73,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
 
   core.info(`Labels: ${labelNames}`);
 
+  // permissions: { actions: read }
   const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
     owner,
     repo,
@@ -106,6 +108,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
         return removeAction;
       }
 
+      // permissions: { actions: read }
       const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
         owner,
         repo,
@@ -143,6 +146,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return removeAction;
   }
 
+  // permissions: { statuses: read }
   const statuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
     owner: owner,
     repo: repo,
