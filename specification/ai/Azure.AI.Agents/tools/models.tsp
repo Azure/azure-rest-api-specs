@@ -208,6 +208,31 @@ model AzureFunctionToolDefinition extends ToolDefinition {
   azureFunction: AzureFunctionDefinition;
 }
 
+@doc("The input definition information for a Browser Automation Tool, as used to configure an Agent.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("The Browser Automation Tool parameters.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationToolParameters;
+}
+
+@doc("Definition of input parameters for the Browser Automation Tool.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolParameters {
+  @doc("The connection parameters associated with the Browser Automation Tool.")
+  connection: BrowserAutomationToolConnectionParameters;
+}
+
+@doc("Definition of input parameters for the connection used by the Browser Automation Tool.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolConnectionParameters {
+  @doc("The ID of the connection to your Azure Playwright resource.")
+  id: string;
+}
+
 /**
  * Ranking options for file search.
  */
@@ -494,7 +519,7 @@ model RunStepBingGroundingToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
 
-  @doc("Reserved for future use.")
+  @doc("The dictionary with request and response from Bing Grounding search tool.")
   @encodedName("application/json", "bing_grounding")
   bingGrounding: Record<string>;
 }
@@ -511,6 +536,52 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
   @doc("Reserved for future use.")
   @encodedName("application/json", "azure_ai_search")
   azureAISearch: Record<string>;
+}
+
+@doc("""
+  A record of a call to a Browser Automation tool issued by the Agent.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("Details of the browser automation tool call.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationToolCallDetails;
+}
+
+@doc("""
+  Details of a Browser Automation tool call.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallDetails {
+  @doc("The input provided to the Browser Automation tool.")
+  input: string;
+
+  @doc("The output returned by the Browser Automation tool.")
+  output: string;
+
+  @doc("The steps the Browser Automation tool executed.")
+  steps: BrowserAutomationToolCallStep[];
+}
+
+@doc("""
+  Describes a single step of a Browser Automation tool execution.
+  """)
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolCallStep {
+  @doc("The result of the last step executed with the Browser.")
+  @encodedName("application/json", "last_step_result")
+  lastStepResult: string;
+
+  @doc("The current state of execution with the Browser.")
+  @encodedName("application/json", "current_state")
+  currentState: string;
+
+  @doc("The next step to execute with the Browser.")
+  @encodedName("application/json", "next_step")
+  nextStep: string;
 }
 
 @doc("""
@@ -559,23 +630,51 @@ model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'fabric_dataagent'.")
   type: "fabric_dataagent";
 
-  @doc("Reserved for future use.")
+  @doc("Fabric input and output.")
   @encodedName("application/json", "fabric_dataagent")
   microsoftFabric: Record<string>;
 }
 
 @doc("""
-  A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents
-  executed search with bing custom search.
+  A record of a call to a Bing Custom Search tool, issued by the model in evaluation of a defined tool, that represents
+  executed search with Bing Custom Search.
   """)
 @added(Versions.v2025_05_15_preview)
 model RunStepBingCustomSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
 
-  @doc("Reserved for future use.")
+  @doc("The dictionary with request and response from Bing Custom Search tool.")
   @encodedName("application/json", "bing_custom_search")
   bingCustomSearch: Record<string>;
+}
+
+@doc("""
+  A record of a call to an Azure Function tool.
+  """)
+@added(Versions.v1)
+model RunStepAzureFunctionToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'azure_function'.")
+  type: "azure_function";
+
+  @doc("The description of an Azure function call.")
+  azure_function: AzureFunctionToolCallDetails;
+}
+
+@doc("""
+  The Azure function call description. All the fields are present in the completed run step, however
+  only some fields are present in the RunStepDeltaAzureFunctionToolCall.
+  """)
+@added(Versions.v1)
+model AzureFunctionToolCallDetails {
+  @doc("The Azure function name")
+  name?: string;
+
+  @doc("JSON serialized function arguments.")
+  arguments?: string;
+
+  @doc("The function output.")
+  output?: string;
 }
 
 @doc("""
@@ -617,6 +716,17 @@ model RunStepDeepResearchToolCall extends RunStepToolCall {
   @doc("The detailed information about the automated browser tasks performed by the model.")
   @encodedName("application/json", "deep_research")
   deepResearch: RunStepDeepResearchToolCallDetails;
+}
+
+/** A record of a call to the connected agent. */
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgentToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'connected_agent'.")
+  type: "connected_agent";
+
+  @doc("The connected agent step information.")
+  @encodedName("application/json", "connected_agent")
+  connectedAgent: RunStepConnectedAgent;
 }
 
 // Call details: Code Interpreter
@@ -712,6 +822,33 @@ model RunStepDeepResearchToolCallDetails {
 
   @doc("The final output for the deep research tool.")
   output?: string;
+}
+
+// Call details: ConnectedAgent
+
+@doc("The detailed information about connected agent tool call.")
+@added(Versions.v2025_05_15_preview)
+model RunStepConnectedAgent {
+  @doc("The name of connected agent.")
+  name?: string;
+
+  @doc("The JSON serialized query to the connected agent.")
+  arguments?: string;
+
+  @doc("The tool output.")
+  output?: string;
+
+  @doc("The run ID used by the connected agent.")
+  @encodedName("application/json", "run_id")
+  runId?: string;
+
+  @doc("The thread ID used by the connected agent.")
+  @encodedName("application/json", "thread_id")
+  threadId?: string;
+
+  @doc("The ID of a connected agent.")
+  @encodedName("application/json", "assistant_id")
+  agentId?: string;
 }
 
 //
