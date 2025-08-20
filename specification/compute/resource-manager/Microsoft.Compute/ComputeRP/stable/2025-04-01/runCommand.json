@@ -921,6 +921,679 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands/{runCommandName}": {
+      "put": {
+        "tags": [
+          "VirtualMachineDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineDiagnosticRunCommands_CreateOrUpdate",
+        "description": "The operation to create or update the diagnostic run command. Diagnostic Run commands are used to run diagnostics on the virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine where the run command should be created or updated."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "name": "runCommand",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            },
+            "description": "Parameters supplied to the Create Virtual Machine Diagnostic RunCommand operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachineDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineDiagnosticRunCommands_Update",
+        "description": "The operation to update the Diagnostics run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine where the run command should be updated."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "name": "runCommand",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommandUpdate"
+            },
+            "description": "Parameters supplied to the Update Virtual Machine Diagnostic RunCommand operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineDiagnosticRunCommands_Delete",
+        "description": "The operation to delete the Diagnostics run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine where the diagnostic run command should be deleted."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualMachineDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineDiagnosticRunCommands_GetByVirtualMachine",
+        "description": "The operation to get the Diagnostics run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine containing the run command."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands": {
+      "get": {
+        "tags": [
+          "VirtualMachineDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineDiagnosticRunCommands_ListByVirtualMachine",
+        "description": "The operation to get all diagnostic run commands of a Virtual Machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine containing the run command."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommandsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List run commands in a Virtual Machine.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/diagnosticRunCommands/{runCommandName}": {
+      "put": {
+        "tags": [
+          "VirtualMachineScaleSetVMDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_CreateOrUpdate",
+        "description": "The operation to create or update the VMSS VM run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "name": "runCommand",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            },
+            "description": "Parameters supplied to the Create Virtual Machine RunCommand operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create VirtualMachineScaleSet VM run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachineScaleSetVMDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_Update",
+        "description": "The operation to update the VMSS VM diagnostic run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "name": "runCommand",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommandUpdate"
+            },
+            "description": "Parameters supplied to the Update Virtual Machine RunCommand operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update VirtualMachineScaleSet VM run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineScaleSetVMDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_Delete",
+        "description": "The operation to delete the VMSS VM diagnostic run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete VirtualMachineScaleSet VM run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetVMDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_Get",
+        "description": "The operation to get the VMSS VM diagnostic run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine diagnostic run command."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VirtualMachineScaleSet VM run commands.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/diagnosticRunCommands": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetVMDiagnosticRunCommands"
+        ],
+        "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_List",
+        "description": "The operation to get all diagnostic run commands of an instance in Virtual Machine Scaleset.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommandsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List run commands in Vmss instance.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_List.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
