@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - Microsoft.EdgeZones/preview/2024-04-01-preview/edgezones.json
+  - preview/2024-04-01-preview/edgezones.json
 ```
 
 ---
