@@ -25,7 +25,7 @@ model ConfigurationProfileAssignment
   /**
    * Azure resource id. Indicates if this resource is managed by another Azure resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   managedBy?: string;
 }
@@ -113,14 +113,14 @@ interface ConfigurationProfileAssignments {
   /**
    * Get list of configuration profile assignments under a given subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationProfileAssignments_ListBySubscription")
   listBySubscription is ConfigurationProfileAssignmentBySubscriptionOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ConfigurationProfileHCRPAssignmentOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -155,7 +155,7 @@ interface ConfigurationProfileHCRPAssignmentOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ConfigurationProfileHCRPAssignments {
   /**
@@ -176,14 +176,14 @@ interface ConfigurationProfileHCRPAssignments {
   /**
    * Get list of configuration profile assignments
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationProfileAssignments_ListByMachineName")
   listByMachineName is ConfigurationProfileHCRPAssignmentOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ConfigurationProfileHCIAssignmentOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -218,7 +218,7 @@ interface ConfigurationProfileHCIAssignmentOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ConfigurationProfileHCIAssignments {
   /**
@@ -239,7 +239,7 @@ interface ConfigurationProfileHCIAssignments {
   /**
    * Get list of configuration profile assignments
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationProfileAssignments_ListByClusterName")
   listByClusterName is ConfigurationProfileHCIAssignmentOps.List<
     ConfigurationProfileAssignment,

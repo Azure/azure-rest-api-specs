@@ -76,21 +76,21 @@ interface Reports {
   /**
    * Get information about a report associated with a configuration profile assignment run
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("reports_Get")
   get is ReportOps.Read<Report>;
 
   /**
    * Retrieve a list of reports within a given configuration profile assignment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("reports_ListByConfigurationProfileAssignments")
   listByConfigurationProfileAssignments is ReportOps.List<
     Report,
     Response = ArmResponse<ReportList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface HCRPReportOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -137,7 +137,7 @@ interface HCRPReportOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface HCRPReports {
   /**
@@ -153,7 +153,7 @@ interface HCRPReports {
     Response = ArmResponse<ReportList>
   >;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface HCIReportOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -200,7 +200,7 @@ interface HCIReportOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface HCIReports {
   /**

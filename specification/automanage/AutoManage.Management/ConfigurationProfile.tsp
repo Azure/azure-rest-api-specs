@@ -87,7 +87,7 @@ interface ConfigurationProfiles {
   /**
    * Retrieve a list of configuration profile within a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationProfiles_ListBySubscription")
   listBySubscription is ConfigurationProfileBySubScriptionOps.List<
     ConfigurationProfile,
@@ -97,7 +97,7 @@ interface ConfigurationProfiles {
   /**
    * Retrieve a list of configuration profile within a resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationProfiles_ListByResourceGroup")
   listByResourceGroup is ConfigurationProfileOps.List<
     ConfigurationProfile,
@@ -148,7 +148,7 @@ interface ConfigurationProfilesVersions {
   /**
    * Retrieve a list of configuration profile within a given resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationProfilesVersions_ListChildResources")
   listByResourceGroup is ConfigurationProfilesVersionOps.List<
     ConfigurationProfile,
