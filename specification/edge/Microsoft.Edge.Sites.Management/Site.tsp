@@ -67,7 +67,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
     servicegroupName: string,
   ): ArmResponse<ResourceListResult<Site>> | ErrorResponse;
 
@@ -79,7 +79,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
     servicegroupName: string,
 
     @path
@@ -98,7 +98,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
     servicegroupName: string,
 
     @path
@@ -125,7 +125,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
     servicegroupName: string,
 
     @path
@@ -148,7 +148,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
     servicegroupName: string,
 
     @path
