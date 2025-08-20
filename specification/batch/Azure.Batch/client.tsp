@@ -169,6 +169,49 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "python"
 );
+// Python LRO private methods
+@@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
+@@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");
+@@access(Azure.Batch.Pools.resizePool, Access.internal, "python");
+@@clientName(BatchClient.resizePool, "resizePoolInternal", "python");
+@@access(Azure.Batch.Pools.stopPoolResize, Access.internal, "python");
+@@clientName(BatchClient.stopPoolResize, "stopPoolResizeInternal", "python");
+@@access(Azure.Batch.Jobs.deleteJob, Access.internal, "python");
+@@clientName(BatchClient.deleteJob, "deleteJobInternal", "python");
+@@access(Azure.Batch.Jobs.terminateJob, Access.internal, "python");
+@@clientName(BatchClient.terminateJob, "terminateJobInternal", "python");
+@@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "python");
+@@clientName(BatchClient.deleteJobSchedule,
+  "deleteJobScheduleInternal",
+  "python"
+);
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+  Access.internal,
+  "python"
+);
+@@clientName(BatchClient.terminateJobSchedule,
+  "terminateJobScheduleInternal",
+  "python"
+);
+@@access(Azure.Batch.Pools.deletePool, Access.internal, "python");
+@@clientName(BatchClient.deletePool, "deletePoolInternal", "python");
+@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "python");
+@@clientName(BatchClient.deleteCertificate,
+  "deleteCertificateInternal",
+  "python"
+);
+@@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "python");
+@@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "python");
+@@access(Azure.Batch.Nodes.startNode, Access.internal, "python");
+@@clientName(BatchClient.startNode, "startNodeInternal", "python");
+@@access(Azure.Batch.Nodes.rebootNode, Access.internal, "python");
+@@clientName(BatchClient.rebootNode, "rebootNodeInternal", "python");
+@@access(Azure.Batch.Nodes.reimageNode, Access.internal, "python");
+@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "python");
+@@access(Azure.Batch.Jobs.disableJob, Access.internal, "python");
+@@clientName(BatchClient.disableJob, "disableJobInternal", "python");
+@@access(Azure.Batch.Jobs.enableJob, Access.internal, "python");
+@@clientName(BatchClient.enableJob, "enableJobInternal", "python");
 
 /* GO OVERRIDES */
 // don't export API for this operation because it retired before the first Go SDK release
