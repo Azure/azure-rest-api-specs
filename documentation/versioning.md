@@ -1,10 +1,10 @@
-# AZURE SERVICE VERSIONING GUIDE
+# Azure Service Versioning Guide
 
 This document defines what an Azure service is, the rules that govern the service’s versioning, and all the benefits that flow from this.  
 The end of this document describes the problems that arise from Azure services that do not follow the service versioning rules and why they must now adopt these rules to greatly improve the Azure customer experience as well as the Azure engineering experience.  
 For questions related to Azure Service Versioning, contact azversioning@service.microsoft.com  
 
-## WHAT IS AN AZURE SERVICE?
+## What Is aa Azure Service?
 
 An Azure service is a set of operations that version uniformly (in perpetuity).  
 - A customer client app is expected to use only one version of a service at any given point in time.  
@@ -19,7 +19,7 @@ An Azure service is a set of operations that version uniformly (in perpetuity).
 A single Azure Resource Provider (RP) has an RP namespace. This RP namespace can contain 1+ control-plane services and 0+ data-plane service; each service versions as described above . Today, we want the GitHub specs repo to be structured as follows for control-plane & data-plane contracts:
 ```
 specification/
-└── <orgName1>/	ß NOTE: Today this has no clear definition (Org name? Service name?)
+└── <orgName1>/
     ├── cspell.yaml
     └── resource-manager/
         ├── readme.md			ß NOTE: For ARM schema validation; see bullet #2 below
@@ -33,7 +33,7 @@ specification/
                     └── <api-version>/	ß One folder per service version described in TypeSpec
                         └── <example .json files> 
                 └── preview/ and stable/
-                    └── <api-version>/	ß One folder per service version described in Swagger
+                    └── <api-version>/	ß One folder per service version described in Swagger. These folders are created and populated by compiling the TypeSpec folder for the service.
                         ├── <swagger .json files>
                         └── examples/	ß Swagger example folder
                             └── <example .json files>
@@ -41,7 +41,7 @@ specification/
     └── data-plane/
         └── <ServiceName3>/	// CX-facing service name; contents identical to above structure
 ```
-We don’t want internal teams or customers to think about the orgName, we want customers to think that Azure has RPNamespaces that are used to manage services (both with customer-facing names) where each service has versions (some preview and some stable), & each version has its own API contract, documentation, and (beta/GA) SDK package(s).   
+In this structure, Azure services are presented as an RPNamespace that is used to manage services (both with customer-facing names)., each service has versions (some preview and some stable), and each version has its own API contract, documentation, and (beta/GA) SDK package(s).   
 
 To enforce these rules, Here're some tweaks to the repo structure:
 
@@ -56,25 +56,25 @@ To enforce these rules, Here're some tweaks to the repo structure:
 6.	The examples folder should only have a subfolder for each api-version and each api-version folder can contain only example *.json files for this api-version.
 7.	The preview and stable folders must only have subfolders whose name match this format: YYYY-MM-DD-preview in the preview folder and YYYY-MM-DD in the stable folder. All the files in the YYYY-MM-DD(-preview) folders must be json (swagger) files.
 8.	Each YYYY-MM-DD(-preview) folder must have an examples folder containing only example *.json files for this api-version.
-9.	It is illegal for a preview & stable version to share the same date. For example, if there is a 2024-04-01-preview, then there can never be a 2024-04-01 stable. It would be great for the repo tooling to detect this and prevent merging of the PR. 
-10. It is not recommended if different service name folder share the same apiVersion when service adds a new version. 
-11.	Each service name folder must duplicate the special “Operations operation” (see RPC docs, real-life docs and folder example). 
+9.	It is illegal for a preview and stable version to share the same date. For example, if there is a 2024-04-01-preview, then there can never be a 2024-04-01 stable.
+10. Each new control plane api-version is recommended to be unique across all the control plane service folders for an RP Namespace. 
+11.	Each service name folder must duplicate the special "list operations" API. 
     - While this RP (not service) operation requires an api-version query parameter, the response data is not specific to this api-version; the response is api-version neutral. In addition, the response is always the same regardless of tenant/subscription. Whenever any other service in the RP gets a new api-version, the TypeSpec/Swagger for the operations service must also be updated to match this new api-version.
 
 ## POSITIVE CONSEQUENCES OF THE AZURE SERVICE DEFINITION
 
 From the above definition, many processes and assets naturally flow, providing both Azure engineering teams and customers with great experiences:
-- Each service version is documented separately allowing a customer to reference the specific version of the service they are targeting (example).
+- Each service version is documented separately allowing a customer to reference the specific version of the service they are targeting.
 - Each service version gets its own SDK package version allowing a customer to import the SDK package version corresponding to the service version they wish to target.
-    - Also, stable versions of a service get a GA SDK package and preview versions of a service get a beta SDK package. Each SDK package version must clearly document which service version it targets .
-    - When any preview or stable version of a service is retired, the corresponding SDK package version is deprecated (without affecting any other SDK packages). Note that Azure retires preview service versions regularly; stable service versions are retired when breaking changes are introduced or on other rare occasions. See Azure SDK lifecycle and support policy.
+    - Stable versions of a service get a GA SDK package and preview versions of a service get a beta SDK package. Each SDK package version must clearly document which service version it targets .
+    - When any preview or stable version of a service is retired, the corresponding SDK package version is deprecated (without affecting any other SDK packages). Note that Azure retires preview service versions regularly; stable service versions are retired when breaking changes are introduced or on other rare occasions. See [Azure SDK lifecycle and support policy](https://azure.github.io/azure-sdk/policies_support.html#azure-sdk-lifecycle-and-support-policy).
     - When a service is retired in its entirety, all SDK packages for this service are deprecated (without affecting any other services’ SDK packages).
-    - NOTE: A service version introducing a breaking change will likely break that service’s SDK package in the next version causing the new SDK package version to increment its major number as per semantic versioning. This also causes old preview and stable service versions and their corresponding SDK package versions to be retired/deprecated.
-- The above service & SDK package versioning rules simplify the usage and on-going maintenance of downstream consumers such as the Azure Portal, Azure CLI/PowerShell, Azure Developer CLI, ARM templates, Bicep, 3rd party libraries that wrap our Azure REST APIs and SDK packages (such as Terraform/Pulumi), etc.  
+    - A service version introducing a breaking change will likely break that service’s SDK package in the next version causing the new SDK package version to increment its major number as per semantic versioning. This also causes old preview and stable service versions and their corresponding SDK package versions to be retired/deprecated.
+- The above service and SDK package versioning rules simplify the usage and ongoing maintenance of downstream consumers such as the Azure Portal, Azure CLI/PowerShell, Azure Developer CLI, ARM templates, Bicep, 3rd party libraries that wrap our Azure REST APIs and SDK packages (such as Terraform/Pulumi), etc.  
 
 The following diagram summarizes how Azure internal teams and customers should think about Azure service abstractions and their relationship to each other. 
 - The RP namespace identifies the Resource Provider that customers must use to manage some Azure resource(s). The namespace itself has no code and therefore never versions. 
-- Within an RP namespace is 1+ control plane services and 0+ data-plane which do version uniformly over time. 
+- Within an RP namespace is 1+ control plane services and 0+ data-plane services which version uniformly over time. 
     - Private preview versions don’t have corresponding SDK package versions
     - Public preview versions do have corresponding beta SDK package versions
     - GA/stable versions do have corresponding stable SDK package versions. Beta SDK package versions may also exist if the SDK package has rich functionality requiring customer testing/feedback before releasing the stable SDK package version.
@@ -83,7 +83,7 @@ The following diagram summarizes how Azure internal teams and customers should t
 
  
  
-## WHAT IF YOUR AZURE TEAM CURRENTLY VIOLATES THE ABOVE RULES?
+## What If Your Azure Team Currently Violates the Above Rules?
 
 In the past, Azure never had a clear/formal definition for an Azure Service. Therefore, some teams have unconsciously violated the rules above adopting different patterns causing pain for other Azure teams and their customers. The main problem is that some teams version parts of their service independently of other parts. This causes many problems:
 - To complete a customer solution, the customer is required to use multiple versions simultaneously.
@@ -114,5 +114,5 @@ The last service to split-off from the monolithic SDK package may either get its
 
 The Azure Breaking Change and Azure SDK Architecture Boards are aware of this scenario and have agreed to approve these 1-time breaks related to splitting a monolithic SDK package into multiple service-specific packages so that engineering and customers can get on a long-term sustainable future. The Azure API Stewardship and ARM review Boards are also aware of this.  
 
-As of 8/19/25, several Azure service teams have already decided to split their monolithic SDK package into service specific SDK packages: Compute, Monitor, Container Registry, Observability, AI Language, AI Speech, and more.  
+Currently, several Azure service teams have already decided to split their monolithic SDK package into service specific SDK packages: Compute, Monitor, Container Registry, Observability, AI Language, AI Speech, and more.  
 
