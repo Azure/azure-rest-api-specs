@@ -48,6 +48,14 @@
             }
           },
           {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -56,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of server's Advanced Threat Protection states.",
+            "description": "Successfully retrieved the list of Data Masking Rules on the database.",
             "schema": {
               "$ref": "#/definitions/DataMaskingRuleListResult"
             }
@@ -179,16 +187,6 @@
         }
       ],
       "properties": {
-        "location": {
-          "description": "The location of the data masking rule.",
-          "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "The kind of Data Masking Rule. Metadata, used for Azure portal.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DataMaskingRuleProperties",
           "description": "Resource properties.",
@@ -239,7 +237,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DataMaskingRuleState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "schemaName": {
@@ -252,10 +250,6 @@
         },
         "columnName": {
           "description": "The column name on which the data masking rule is applied.",
-          "type": "string"
-        },
-        "aliasName": {
-          "description": "The alias name. This is a legacy parameter and is no longer used.",
           "type": "string"
         },
         "maskingFunction": {
@@ -271,7 +265,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DataMaskingFunction",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "numberFrom": {
