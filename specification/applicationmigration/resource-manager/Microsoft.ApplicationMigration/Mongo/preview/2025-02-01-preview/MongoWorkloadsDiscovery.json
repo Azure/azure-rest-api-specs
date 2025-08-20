@@ -639,9 +639,9 @@
             "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "name": "properties",
             "in": "body",
-            "description": "Clouds patch payload.",
+            "name": "body",
+            "description": "MongoDatabase patch payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MongoDatabaseResourcePatchProperties"
@@ -1904,10 +1904,6 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "databaseName": {
-          "type": "string",
-          "description": "The database name."
-        },
         "sizeInMb": {
           "type": "number",
           "format": "float",
@@ -2004,7 +2000,6 @@
         }
       },
       "required": [
-        "databaseName",
         "criticalErrorCount",
         "warningsCount",
         "informationalMessagesCount"
@@ -2014,10 +2009,6 @@
       "type": "object",
       "description": "Mongo Database resource patch properties",
       "properties": {
-        "databaseName": {
-          "type": "string",
-          "description": "The database name."
-        },
         "sizeInMb": {
           "type": "number",
           "format": "float",
