@@ -48,54 +48,77 @@ using Microsoft.SignalRService;
   "parameters"
 );
 
-@@clientLocation(CustomCertificates.get, "SignalRCustomCertificates");
-@@clientLocation(CustomCertificates.createOrUpdate,
-  "SignalRCustomCertificates"
+@@clientLocation(CustomCertificates.get,
+  "SignalRCustomCertificates",
+  "!csharp"
 );
-@@clientLocation(CustomCertificates.delete, "SignalRCustomCertificates");
-@@clientLocation(CustomCertificates.list, "SignalRCustomCertificates");
-@@clientLocation(CustomDomains.get, "SignalRCustomDomains");
-@@clientLocation(CustomDomains.createOrUpdate, "SignalRCustomDomains");
-@@clientLocation(CustomDomains.delete, "SignalRCustomDomains");
-@@clientLocation(CustomDomains.list, "SignalRCustomDomains");
+@@clientLocation(CustomCertificates.createOrUpdate,
+  "SignalRCustomCertificates",
+  "!csharp"
+);
+@@clientLocation(CustomCertificates.delete,
+  "SignalRCustomCertificates",
+  "!csharp"
+);
+@@clientLocation(CustomCertificates.list,
+  "SignalRCustomCertificates",
+  "!csharp"
+);
+@@clientLocation(CustomDomains.get, "SignalRCustomDomains", "!csharp");
+@@clientLocation(CustomDomains.createOrUpdate,
+  "SignalRCustomDomains",
+  "!csharp"
+);
+@@clientLocation(CustomDomains.delete, "SignalRCustomDomains", "!csharp");
+@@clientLocation(CustomDomains.list, "SignalRCustomDomains", "!csharp");
 @@clientLocation(PrivateEndpointConnections.get,
-  "SignalRPrivateEndpointConnections"
+  "SignalRPrivateEndpointConnections",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.update,
-  "SignalRPrivateEndpointConnections"
+  "SignalRPrivateEndpointConnections",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.delete,
-  "SignalRPrivateEndpointConnections"
+  "SignalRPrivateEndpointConnections",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.list,
-  "SignalRPrivateEndpointConnections"
+  "SignalRPrivateEndpointConnections",
+  "!csharp"
 );
-@@clientLocation(Replicas.get, "SignalRReplicas");
-@@clientLocation(Replicas.createOrUpdate, "SignalRReplicas");
-@@clientLocation(Replicas.update, "SignalRReplicas");
+@@clientLocation(Replicas.get, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.createOrUpdate, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.update, "SignalRReplicas", "!csharp");
 @@clientLocation(Replicas.delete, "SignalRReplicas");
 @@clientLocation(Replicas.list, "SignalRReplicas");
 @@clientLocation(Replicas.restart, "SignalRReplicas");
 @@clientLocation(Replicas.listReplicaSkus, "SignalR");
 @@clientLocation(SharedPrivateLinkResources.get,
-  "SignalRReplicaSharedPrivateLinkResources"
+  "SignalRReplicaSharedPrivateLinkResources",
+  "!csharp"
 );
 @@clientLocation(SharedPrivateLinkResources.createOrUpdate,
-  "SignalRReplicaSharedPrivateLinkResources"
+  "SignalRReplicaSharedPrivateLinkResources",
+  "!csharp"
 );
 @@clientLocation(SharedPrivateLinkResources.list,
-  "SignalRReplicaSharedPrivateLinkResources"
+  "SignalRReplicaSharedPrivateLinkResources",
+  "!csharp"
 );
 @@clientLocation(SignalROperationGroup.checkNameAvailability, "SignalR");
-@@clientLocation(SignalRResources.get, "SignalR");
-@@clientLocation(SignalRResources.createOrUpdate, "SignalR");
-@@clientLocation(SignalRResources.update, "SignalR");
-@@clientLocation(SignalRResources.delete, "SignalR");
-@@clientLocation(SignalRResources.listByResourceGroup, "SignalR");
-@@clientLocation(SignalRResources.listBySubscription, "SignalR");
-@@clientLocation(SignalRResources.listKeys, "SignalR");
-@@clientLocation(SignalRResources.regenerateKey, "SignalR");
-@@clientLocation(SignalRResources.restart, "SignalR");
-@@clientLocation(SignalRResources.listSkus, "SignalR");
-@@clientLocation(SignalRResources.list, "SignalRPrivateLinkResources");
+@@clientLocation(SignalRResources.get, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.createOrUpdate, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.update, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.delete, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.listByResourceGroup, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.listBySubscription, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.listKeys, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.regenerateKey, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.restart, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.listSkus, "SignalR", "!csharp");
+@@clientLocation(SignalRResources.list,
+  "SignalRPrivateLinkResources",
+  "!csharp"
+);
 @@clientLocation(UsagesOperationGroup.list, "Usages");

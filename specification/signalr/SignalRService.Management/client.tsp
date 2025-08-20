@@ -236,3 +236,106 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 // Resolve model naming breaking changes from Swagger directive migration
 @@clientName(SignalRResource, "ResourceInfo", "go");
 @@clientName(SignalRResourceList, "ResourceInfoList", "go");
+
+@@clientName(Operation, "SignalROperationInfo", "csharp");
+@@clientName(SignalRResource, "SignalR", "csharp");
+@@clientName(CustomCertificate, "SignalRCustomCertificate", "csharp");
+@@clientName(CustomDomain, "SignalRCustomDomain", "csharp");
+@@clientName(PrivateEndpointConnection,
+  "SignalRPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResource,
+  "SignalRSharedPrivateLinkResource",
+  "csharp"
+);
+@@clientName(ProvisioningState, "SignalRProvisioningState", "csharp");
+@@clientName(FeatureFlags, "SignalRFeatureFlags", "csharp");
+@@clientName(KeyType, "SignalRKeyType", "csharp");
+@@clientName(LiveTraceCategory, "SignalRLiveTraceCategory", "csharp");
+@@clientName(LiveTraceConfiguration, "SignalRLiveTraceConfiguration", "csharp");
+@@clientName(ResourceLogCategory, "SignalRResourceLogCategory", "csharp");
+@@clientName(ResourceSku, "SignalRResourceSku", "csharp");
+@@clientName(ScaleType, "SignalRScaleType", "csharp");
+@@clientName(ServiceKind, "SignalRServiceKind", "csharp");
+@@clientName(SharedPrivateLinkResourceStatus,
+  "SignalRSharedPrivateLinkResourceStatus",
+  "csharp"
+);
+@@clientName(SkuCapacity, "SignalRSkuCapacity", "csharp");
+@@clientName(UpstreamAuthSettings, "SignalRUpstreamAuthSettings", "csharp");
+@@clientName(UpstreamAuthSettings.type, "AuthType", "csharp");
+@@clientName(UpstreamAuthType, "SignalRUpstreamAuthType", "csharp");
+@@clientName(UpstreamTemplate, "SignalRUpstreamTemplate", "csharp");
+@@clientName(SignalRTlsSettings.clientCertEnabled,
+  "IsClientCertEnabled",
+  "csharp"
+);
+@@clientName(SignalROperationGroup.checkNameAvailability,
+  "CheckSignalRNameAvailability",
+  "csharp"
+);
+@@alternateType(SignalROperationGroup.checkNameAvailability::parameters.location,
+  azureLocation,
+  "csharp"
+);
+@@clientName(NetworkACL, "SignalRNetworkAcl", "csharp");
+@@clientName(CustomCertificateList, "SignalRCustomCertificateList", "csharp");
+@@clientName(CustomDomainList, "SignalRCustomDomainList", "csharp");
+@@clientName(NameAvailability, "SignalRNameAvailabilityResult", "csharp");
+@@clientName(NameAvailabilityParameters,
+  "SignalRNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(NameAvailabilityParameters.type, "resourceType", "csharp");
+@@alternateType(NameAvailabilityParameters.type, armResourceType, "csharp");
+@@clientName(ACLAction, "SignalRNetworkAclAction", "csharp");
+@@clientName(PrivateEndpointACL, "SignalRPrivateEndpointAcl", "csharp");
+@@clientName(PrivateEndpointConnectionList,
+  "SignalRPrivateEndpointConnectionListResult",
+  "csharp"
+);
+@@clientName(PrivateLinkResourceList,
+  "SignalRPrivateLinkResourceListResult",
+  "csharp"
+);
+@@clientName(ResourceLogConfiguration,
+  "SignalRResourceLogConfiguration",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceList,
+  "SignalRSharedPrivateLinkResourceListResult",
+  "csharp"
+);
+@@clientName(SkuList, "SignalRSkuListResult", "csharp");
+@@clientName(NameAvailability.nameAvailable, "IsNameAvailable", "csharp");
+@@clientName(SignalRRequestType.RESTAPI, "RestApi", "csharp");
+@@alternateType(Sku.resourceType, armResourceType, "csharp");
+@@alternateType(CustomCertificateProperties.keyVaultBaseUri, url, "csharp");
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@alternateType(UsagesOperationGroup.list::parameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(SharedPrivateLinkResourceProperties.privateLinkResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(ShareablePrivateLinkResourceProperties.type,
+  "ShareablePrivateLinkResourcePropertiesType",
+  "csharp"
+);
+@@alternateType(SignalRUsage.id, armResourceIdentifier, "csharp");
+@@clientName(SignalRNetworkACLs, "SignalRNetworkAcls", "csharp");
+@@clientName(PrivateLinkResource, "SignalRPrivateLinkResource", "csharp");
+@@clientName(SignalRResources.list, "GetSignalRPrivateLinkResources", "csharp");
+@@clientName(RegenerateKeyParameters, "SignalRRegenerateKeyContent", "csharp");
+
+@@usage(ShareablePrivateLinkResourceProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(ShareablePrivateLinkResourceType, Usage.input | Usage.output, "csharp");
