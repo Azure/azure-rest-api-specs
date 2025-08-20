@@ -68,6 +68,9 @@ model BestPracticeList {
    */
   @pageItems
   value?: BestPractice[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -101,6 +104,9 @@ model ConfigurationProfileList {
    */
   @pageItems
   value?: ConfigurationProfile[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -135,6 +141,9 @@ model ConfigurationProfileAssignmentList {
    */
   @pageItems
   value?: ConfigurationProfileAssignment[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -274,6 +283,9 @@ model ReportList {
    */
   @pageItems
   value?: Report[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -285,6 +297,9 @@ model ServicePrincipalListResult {
    */
   @pageItems
   value?: ServicePrincipal[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
