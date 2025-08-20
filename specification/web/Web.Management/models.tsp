@@ -11,6 +11,11 @@ using Azure.Core;
 
 namespace Microsoft.Web;
 
+@error
+model ArmNotFoundResponse {
+  ...TypeSpec.Http.Response<404>;
+}
+
 /**
  * Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment.
  */

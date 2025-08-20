@@ -40,7 +40,10 @@ interface AppServicePlans {
   /**
    * Description for Get an App Service plan.
    */
-  get is ArmResourceRead<AppServicePlan,Response = ArmResponse<AppServicePlan> | NotFoundResponse >;
+  get is ArmResourceRead<
+    AppServicePlan,
+    Response = ArmResponse<AppServicePlan> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Creates or updates an App Service Plan.
