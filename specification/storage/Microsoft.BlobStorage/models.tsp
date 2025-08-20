@@ -783,6 +783,7 @@ model ObjectReplicationMetadata is Record<string>;
 /// Service Properties
 
 /** The service properties. */
+@Xml.name("StorageServiceProperties")
 model BlobServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
