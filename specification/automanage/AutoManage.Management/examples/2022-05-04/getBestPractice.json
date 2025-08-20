@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2022-05-04",
+    "bestPracticeName": "azureBestPracticesProduction"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azureBestPracticesProduction",
+        "type": "Microsoft.Automanage/bestPractices",
+        "id": "/providers/Microsoft.Automanage/bestPractices/azureBestPracticesProduction",
+        "properties": {
+          "configuration": {
+            "Antimalware/Enable": true,
+            "Antimalware/EnableRealTimeProtection": true,
+            "Antimalware/RunScheduledScan": true,
+            "Antimalware/ScanDay": "7",
+            "Antimalware/ScanTimeInMinutes": "120",
+            "Antimalware/ScanType": "Quick",
+            "AzureSecurityCenter/Enable": true,
+            "Backup/Enable": true,
+            "Backup/InstantRpRetentionRangeInDays": "2",
+            "Backup/PolicyName": "dailyBackupPolicy",
+            "Backup/RetentionPolicy/DailySchedule/RetentionDuration/Count": "180",
+            "Backup/RetentionPolicy/DailySchedule/RetentionDuration/DurationType": "Days",
+            "Backup/RetentionPolicy/DailySchedule/RetentionTimes": "[ 2017-01-26T00:00:00Z ]",
+            "Backup/RetentionPolicy/RetentionPolicyType": "LongTermRetentionPolicy",
+            "Backup/SchedulePolicy/SchedulePolicyType": "SimpleSchedulePolicy",
+            "Backup/SchedulePolicy/ScheduleRunFrequency": "Daily",
+            "Backup/SchedulePolicy/ScheduleRunTimes": "[ 2017-01-26T00:00:00Z ]",
+            "Backup/TimeZone": "UTC",
+            "BootDiagnostics/Enable": true,
+            "ChangeTrackingAndInventory/Enable": true,
+            "GuestConfiguration/Enable": true,
+            "LogAnalytics/Enable": true,
+            "UpdateManagement/Enable": true,
+            "VMInsights/Enable": true
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "BestPractices_Get",
+  "title": "Get an Automanage best practice "
+}
