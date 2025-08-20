@@ -22,7 +22,6 @@ options:
     namespace: Azure.Compute.Batch
     model-namespace: false
   "@azure-tools/typespec-go":
-    emitter-output-dir: "{project-root}"
     fix-const-stuttering: true
     generate-fakes: false
     inject-spans: true
@@ -50,6 +49,7 @@ options:
     generate-sample: false
   "@azure-tools/typespec-ts":
     package-dir: "batch-rest"
+    is-modular-library: false
     package-details:
       name: "@azure-rest/batch"
       description: "Batch Service Rest Level Client"
