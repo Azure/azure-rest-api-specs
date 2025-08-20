@@ -3,7 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Automanage;
 
-@@clientLocation(BestPracticesVersions.listByTenant, BestPractices);
+@@clientLocation(BestPracticesVersionsOperationGroup.listByTenant, BestPracticesVersions);
+@@clientLocation(BestPractices.listByTenant, BestPractices);
 
 @@clientName(ConfigurationProfiles.createOrUpdate::parameters.resource,
   "parameters"
@@ -13,6 +14,9 @@ using Microsoft.Automanage;
   "parameters"
 );
 @@clientLocation(ConfigurationProfilesVersions.listByResourceGroup,
+  ConfigurationProfilesVersions
+);
+@@clientLocation(ConfigurationProfiles.listByResourceGroup,
   ConfigurationProfiles
 );
 

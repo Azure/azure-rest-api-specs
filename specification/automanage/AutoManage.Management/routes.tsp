@@ -20,11 +20,30 @@ interface ConfigurationProfileAssignmentsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationProfileAssignments_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments")
-  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfileAssignments")
+  @list
   list(
     ...ApiVersionParameter,
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
   ): ArmResponse<ConfigurationProfileAssignmentList> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface BestPracticesVersionsOperationGroup {
+  /**
+   * Retrieve a list of Automanage best practices under a given tenant
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BestPracticesVersions_ListByTenant")
+  @route("/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/versions")
+  @list
+  listByTenant(
+    ...ApiVersionParameter,
+    /** The Automanage best practice name. */
+    @path
+    @segment("bestPractices")
+    @key
+    bestPracticeName: string,
+ ): ArmResponse<BestPracticeList> | ErrorResponse;
 }
