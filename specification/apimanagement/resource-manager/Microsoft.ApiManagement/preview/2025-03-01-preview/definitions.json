@@ -2264,6 +2264,23 @@
           "description": "Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for this backend host.",
           "type": "boolean",
           "default": true
+        },
+        "serverCertificateThumbprints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Thumbprints of certificates used by the backend host for TLS communication."
+        },
+        "serverX509Names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/X509CertificateName"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Server X509 Certificate Names of the Backend Host."
         }
       },
       "description": "Properties controlling TLS Certificate Validation."
