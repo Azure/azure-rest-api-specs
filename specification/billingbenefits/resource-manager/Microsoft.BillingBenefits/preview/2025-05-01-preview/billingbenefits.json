@@ -3280,7 +3280,18 @@
     },
     "SourceResourceId": {
       "type": "string",
-      "description": "The uri of the resource impacted which lead to the grant of the credit."
+      "description": "The uri of the resource impacted which lead to the grant of the credit.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "scopes": [
+              "ResourceGroup"
+            ],
+            "type": "Microsoft.BillingBenefits/credits"
+          }
+        ]
+      }
     },
     "ImpactedBillingPeriod": {
       "type": "string",
