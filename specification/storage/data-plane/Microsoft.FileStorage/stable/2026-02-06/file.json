@@ -2259,6 +2259,9 @@
           },
           {
             "$ref": "#/parameters/FileMode"
+          },
+          {
+            "$ref": "#/parameters/FilePropertySemantics"
           }
         ],
         "responses": {
@@ -3445,6 +3448,18 @@
           },
           {
             "$ref": "#/parameters/NfsFileType"
+          },
+          {
+            "$ref": "#/parameters/ContentMD5"
+          },
+          {
+            "$ref": "#/parameters/FilePropertySemantics"
+          },
+          {
+            "$ref": "#/parameters/ContentLengthOptional"
+          },
+          {
+            "$ref": "#/parameters/OptionalBody"
           }
         ],
         "responses": {
@@ -3546,6 +3561,16 @@
                   "name": "NfsFileType",
                   "modelAsString": true
                 }
+              },
+              "Content-MD5": {
+                "type": "string",
+                "format": "byte",
+                "description": "If the file has an MD5 hash and the request is to read the full file, this response header is returned so that the client can check for message content integrity. If the request is to read a specified range and the 'x-ms-range-get-content-md5' is set to true, then the request returns an MD5 hash for the range, as long as the range size is less than or equal to 4 MB. If neither of these sets of conditions is true, then no value is returned for the 'Content-MD5' header."
+              },
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of bytes present in the response body."
               }
             }
           },
@@ -7702,6 +7727,16 @@
       "format": "int64",
       "x-ms-parameter-location": "method"
     },
+    "ContentLengthOptional": {
+      "name": "Content-Length",
+      "x-ms-client-name": "contentLength",
+      "in": "header",
+      "description": "Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero.",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method"
+    },
     "ContentMD5": {
       "name": "Content-MD5",
       "x-ms-client-name": "contentMD5",
@@ -8731,6 +8766,23 @@
       "required": false,
       "description": "SMB only, default is true.  Specifies whether granting of new directory leases for directories present in a share are to be enabled or disabled. An input of true specifies that granting of new directory leases is to be allowed. An input of false specifies that granting of new directory leases is to be blocked.",
       "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "FilePropertySemantics": {
+      "name": "x-ms-file-property-semantics",
+      "x-ms-client-name": "filePropertySemantics",
+      "in": "header",
+      "required": false,
+      "description": "SMB only, default value is New.  New will forcefully add the ARCHIVE attribute flag and alter the permissions specified in x-ms-file-permission to inherit missing permissions from the parent.  Restore will apply changes without further modification.",
+      "type": "string",
+      "enum": [
+        "New",
+        "Restore"
+      ],
+      "x-ms-enum": {
+        "name": "FilePropertySemantics",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     }
   }
