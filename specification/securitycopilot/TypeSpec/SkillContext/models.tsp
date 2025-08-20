@@ -1548,4 +1548,11 @@ namespace SkillContext
 		cachedEntity: T;
 	}
 
+	@doc("Defines the state of debugging through local PluginHost")
+	enum LocalPluginHostDebugState {
+		None: "None",
+		Running: "Running",
+		Completed: "Completed",
+		Error: "Error",
+	}
 }

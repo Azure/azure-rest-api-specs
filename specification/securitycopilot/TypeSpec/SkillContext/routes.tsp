@@ -328,6 +328,13 @@ op getSkillFilters(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 ): Record<string>;
 
+@post
+@route("/skillContext/setLocalPluginHostDebugState")
+@doc("Sets the local PluginHost debug state")
+op setLocalPluginHostDebugState(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body debugState: LocalPluginHostDebugState
+):  NoContentResponse;
 
 //TODO: move this to a different file
 // Dynamic Prompts API
