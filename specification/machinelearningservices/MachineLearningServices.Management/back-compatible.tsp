@@ -456,3 +456,5 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(PTUQuotaOperationGroup.listAvailable, "PTUQuota");
 @@clientLocation(PTUQuotaOperationGroup.getAvailable, "PTUQuota");
 @@clientLocation(PTUQuotaOperationGroup.list, "PTUQuota");
+
+@@clientName(QuotasOperationGroup.update::parameters.body, "parameters");

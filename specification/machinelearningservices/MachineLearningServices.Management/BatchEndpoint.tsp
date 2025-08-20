@@ -42,7 +42,16 @@ interface BatchEndpoints {
   /**
    * Creates a batch inference endpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchEndpoint>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    BatchEndpoint,
+    Response = ArmResourceUpdatedResponse<BatchEndpoint> | (ArmResourceCreatedResponse<BatchEndpoint> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update a batch inference endpoint (asynchronous).
@@ -50,7 +59,14 @@ interface BatchEndpoints {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BatchEndpoint,
-    PatchModel = PartialMinimalTrackedResourceWithIdentity
+    PatchModel = PartialMinimalTrackedResourceWithIdentity,
+    Response = BatchEndpoint | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
@@ -59,7 +75,13 @@ interface BatchEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**

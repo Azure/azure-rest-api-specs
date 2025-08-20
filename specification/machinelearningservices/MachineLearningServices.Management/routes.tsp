@@ -21,12 +21,13 @@ interface UsagesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_List")
   @autoRoute
+  @list
   @get
   @action("usages")
   list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = CustomLocationParameter
   >;
 }
 
@@ -43,7 +44,7 @@ interface VirtualMachineSizesOperationGroup {
   list is ArmProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = CustomLocationParameter
   >;
 }
 
@@ -60,7 +61,7 @@ interface QuotasOperationGroup {
     Request = QuotaUpdateParameters,
     Response = UpdateWorkspaceQuotasResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = CustomLocationParameter
   >;
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
@@ -74,7 +75,7 @@ interface QuotasOperationGroup {
   list is ArmProviderActionSync<
     Response = ListWorkspaceQuotas,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = CustomLocationParameter
   >;
 }
 

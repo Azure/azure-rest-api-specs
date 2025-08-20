@@ -65,7 +65,7 @@ interface Workspaces {
        * Flag to indicate delete is a purge request.
        */
       @query("forceToPurge")
-      forceToPurge?: boolean;
+      forceToPurge?: boolean = false;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;

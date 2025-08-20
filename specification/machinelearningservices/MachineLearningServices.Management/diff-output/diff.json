@@ -36,89 +36,6 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/quotas": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
-        "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "pattern__deleted": "^[-\\w\\._]+$",
-              "$ref__added": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/updateQuotas": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "pattern__deleted": "^[-\\w\\._]+$",
-              "$ref__added": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-            }
-          ],
-          [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "body"
-              }
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/usages": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
-        "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "pattern__deleted": "^[-\\w\\._]+$",
-              "$ref__added": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/vmSizes": {
-      "get": {
-        "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "pattern__deleted": "^[-\\w\\._]+$",
-              "$ref__added": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-            }
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}": {
       "get": {
         "responses": {
@@ -178,19 +95,6 @@
               "$ref": {
                 "__old": "#/definitions/RegistryTrackedResource",
                 "__new": "#/definitions/Registry"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           }
@@ -300,13 +204,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/CodeContainerResource",
@@ -316,11 +213,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/CodeContainer",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/CodeContainer"
         }
       },
       "delete": {
@@ -344,18 +237,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions": {
@@ -486,13 +368,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/CodeVersionResource",
@@ -502,11 +377,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/CodeVersion",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/CodeVersion"
         }
       },
       "delete": {
@@ -533,18 +404,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}/startPendingUpload": {
@@ -681,13 +541,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ComponentContainerResource",
@@ -697,11 +550,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/ComponentContainer",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/ComponentContainer"
         }
       },
       "delete": {
@@ -725,18 +574,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions": {
@@ -867,13 +705,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ComponentVersionResource",
@@ -883,11 +714,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/ComponentVersion",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/ComponentVersion"
         }
       },
       "delete": {
@@ -914,18 +741,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data": {
@@ -957,10 +773,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -1000,6 +813,10 @@
         }
       },
       "put": {
+        "x-ms-long-running-operation-options__deleted": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation__deleted": true,
         "parameters": [
           [
             "-",
@@ -1008,26 +825,17 @@
             }
           ],
           [
-            "~",
+            "+",
             {
-              "name": {
-                "__old": "name",
-                "__new": "registryName"
-              },
-              "pattern": {
-                "__old": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$",
-                "__new": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-              }
+              "name": "registryName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
             }
           ],
           [
-            "+",
-            {
-              "name": "name",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
+            " "
           ],
           [
             "~",
@@ -1051,26 +859,12 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/DataContainerResource",
                 "__new": "#/definitions/DataContainer"
               }
             }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/DataContainer",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
           }
         }
       },
@@ -1095,18 +889,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions": {
@@ -1155,10 +938,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -1201,6 +981,10 @@
         }
       },
       "put": {
+        "x-ms-long-running-operation-options__deleted": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation__deleted": true,
         "parameters": [
           [
             "-",
@@ -1209,26 +993,17 @@
             }
           ],
           [
-            "~",
+            "+",
             {
-              "name": {
-                "__old": "name",
-                "__new": "registryName"
-              },
-              "pattern": {
-                "__old": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$",
-                "__new": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
-              }
+              "name": "registryName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
             }
           ],
           [
-            "+",
-            {
-              "name": "name",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
+            " "
           ],
           [
             " "
@@ -1255,26 +1030,12 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/DataVersionBaseResource",
                 "__new": "#/definitions/DataVersionBase"
               }
             }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/DataVersionBase",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
           }
         }
       },
@@ -1302,18 +1063,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}/startPendingUpload": {
@@ -1373,25 +1123,9 @@
             " "
           ],
           [
-            "-",
-            {
-              "name": "body",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/GetBlobReferenceSASRequestDto"
-              }
-            }
+            " "
           ]
-        ],
-        "responses": {
-          "default__deleted": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments": {
@@ -1423,10 +1157,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -1508,13 +1239,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/EnvironmentContainerResource",
@@ -1552,18 +1276,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions": {
@@ -1609,10 +1322,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -1700,13 +1410,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/EnvironmentVersionResource",
@@ -1716,11 +1419,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/EnvironmentVersion",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/EnvironmentVersion"
         }
       },
       "delete": {
@@ -1747,18 +1446,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models": {
@@ -1790,10 +1478,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -1875,13 +1560,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ModelContainerResource",
@@ -1891,11 +1569,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/ModelContainer",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/ModelContainer"
         }
       },
       "delete": {
@@ -1919,18 +1593,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions": {
@@ -1993,10 +1656,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -2079,32 +1739,21 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ModelVersionResource",
-                "__new": "#/definitions/ModelVersion"
+                "__new": "#/definitions/CodeContainer"
               }
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ModelVersionResource",
-                "__new": "#/definitions/ModelVersion"
+                "__new": "#/definitions/CodeContainer"
               }
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/ModelVersion",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/ModelVersion"
         }
       },
       "delete": {
@@ -2131,18 +1780,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}/startPendingUpload": {
@@ -2202,32 +1840,8 @@
                 "__new": "#/definitions/Registry"
               }
             }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}": {
-      "delete": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "default__deleted": false
-            }
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints": {
@@ -2350,13 +1964,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/BatchEndpointTrackedResource",
@@ -2366,11 +1973,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/BatchEndpoint",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/BatchEndpoint"
         }
       },
       "patch": {
@@ -2415,15 +2018,6 @@
                 "__new": "#/definitions/BatchEndpoint"
               }
             }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
           }
         }
       },
@@ -2448,18 +2042,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
@@ -2602,13 +2185,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/BatchDeploymentTrackedResource",
@@ -2618,11 +2194,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/BatchDeployment",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/BatchDeployment"
         }
       },
       "patch": {
@@ -2673,15 +2245,6 @@
                 "__new": "#/definitions/BatchDeployment"
               }
             }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
           }
         }
       },
@@ -2709,18 +2272,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
@@ -2829,32 +2381,21 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/CapabilityHostResource",
-                "__new": "#/definitions/CapabilityHost"
+                "__new": "#/definitions/CodeContainer"
               }
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/CapabilityHostResource",
-                "__new": "#/definitions/CapabilityHost"
+                "__new": "#/definitions/CodeContainer"
               }
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/CapabilityHost",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/CapabilityHost"
         }
       },
       "delete": {
@@ -2880,14 +2421,8 @@
           ]
         ],
         "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
+          "200__added": {
+            "description": "ignore"
           }
         }
       }
@@ -10358,20 +9893,6 @@
       ],
       "x-ms-client-name": "FeaturestoreEntityVersion"
     },
-    "GetBlobReferenceSASRequestDto__deleted": {
-      "type": "object",
-      "properties": {
-        "assetId": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "blobUri": {
-          "type": "string",
-          "format": "uri",
-          "x-nullable": true
-        }
-      }
-    },
     "HDInsight__deleted": {
       "allOf": [
         {
@@ -11450,17 +10971,6 @@
           "items": {
             "$ref": "#/definitions/RaiBlocklistItemPropertiesBasicResource"
           }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Registry>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Registry"
         }
       },
       "required": [
@@ -16063,6 +15573,16 @@
           "x-nullable__deleted": true
         },
         "storageAccountArmId": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
+    "GetBlobReferenceSASRequestDto": {
+      "properties": {
+        "assetId": {
+          "x-nullable__deleted": true
+        },
+        "blobUri": {
           "x-nullable__deleted": true
         }
       }

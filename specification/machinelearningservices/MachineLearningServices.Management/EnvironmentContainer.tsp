@@ -68,7 +68,20 @@ interface EnvironmentContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
-  createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<EnvironmentContainer>;
+  createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
+    EnvironmentContainer,
+    Response = ArmResourceUpdatedResponse<EnvironmentContainer> | (ArmResourceCreatedResponse<
+      EnvironmentContainer,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete container.
@@ -78,7 +91,13 @@ interface EnvironmentContainers {
   @operationId("RegistryEnvironmentContainers_Delete")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
     EnvironmentContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -99,7 +118,7 @@ interface EnvironmentContainers {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<EnvironmentContainerResourceArmPaginatedResult>
   >;

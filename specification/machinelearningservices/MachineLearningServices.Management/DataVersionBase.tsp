@@ -57,6 +57,38 @@ interface DataVersionBaseOps
     > {}
 
 @armResourceOperations
+interface DataVersionWithNamePatternBaseOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
+
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        name: string,
+      },
+      {
+        /** Version identifier. */
+        @path
+        @segment("versions")
+        @key
+        version: string,
+      }
+    > {}
+
+@armResourceOperations
 interface DataVersionBases {
   /**
    * Get version.
@@ -70,7 +102,16 @@ interface DataVersionBases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataVersions_CreateOrUpdate")
-  createOrUpdate is DataVersionBaseOps.CreateOrUpdateAsync<DataVersionBase>;
+  createOrUpdate is DataVersionWithNamePatternBaseOps.CreateOrUpdateAsync<
+    DataVersionBase,
+    Response = ArmResourceUpdatedResponse<DataVersionBase> | (ArmResourceCreatedResponse<DataVersionBase> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
@@ -80,7 +121,13 @@ interface DataVersionBases {
   @operationId("RegistryDataVersions_Delete")
   delete is DataVersionBaseOps.DeleteWithoutOkAsync<
     DataVersionBase,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -120,7 +167,7 @@ interface DataVersionBases {
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<DataVersionBaseResourceArmPaginatedResult>
   >;

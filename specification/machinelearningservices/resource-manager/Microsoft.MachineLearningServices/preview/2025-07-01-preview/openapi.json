@@ -382,7 +382,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/CustomLocationParameter"
           }
         ],
         "responses": {
@@ -403,6 +403,9 @@
           "List workspace quotas by VMFamily": {
             "$ref": "./examples/Quota/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -418,10 +421,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/CustomLocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -463,7 +466,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/CustomLocationParameter"
           }
         ],
         "responses": {
@@ -484,6 +487,9 @@
           "List Usages": {
             "$ref": "./examples/Usage/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -499,7 +505,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/CustomLocationParameter"
           }
         ],
         "responses": {
@@ -869,7 +875,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -879,6 +885,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -1064,19 +1075,20 @@
             }
           },
           "201": {
-            "description": "Resource 'CodeContainer' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/CodeContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -1093,7 +1105,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CodeContainer"
         },
         "x-ms-long-running-operation": true
@@ -1136,7 +1148,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1146,6 +1158,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -1368,19 +1385,20 @@
             }
           },
           "201": {
-            "description": "Resource 'CodeVersion' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/CodeVersion"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -1397,7 +1415,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CodeVersion"
         },
         "x-ms-long-running-operation": true
@@ -1447,7 +1465,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1457,6 +1475,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -1713,19 +1736,20 @@
             }
           },
           "201": {
-            "description": "Resource 'ComponentContainer' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ComponentContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -1742,7 +1766,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ComponentContainer"
         },
         "x-ms-long-running-operation": true
@@ -1785,7 +1809,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1795,6 +1819,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -2017,19 +2046,20 @@
             }
           },
           "201": {
-            "description": "Resource 'ComponentVersion' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ComponentVersion"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -2046,7 +2076,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ComponentVersion"
         },
         "x-ms-long-running-operation": true
@@ -2096,7 +2126,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -2106,6 +2136,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -2168,6 +2203,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -2299,7 +2335,8 @@
             "in": "path",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "name": "body",
@@ -2319,19 +2356,20 @@
             }
           },
           "201": {
-            "description": "Resource 'DataContainer' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DataContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -2346,12 +2384,7 @@
           "CreateOrUpdate Registry Data Container.": {
             "$ref": "./examples/Registry/DataContainer/createOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/DataContainer"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "RegistryDataContainers_Delete",
@@ -2390,7 +2423,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -2400,6 +2433,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -2491,6 +2529,7 @@
             "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -2629,7 +2668,8 @@
             "in": "path",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "name": "version",
@@ -2656,19 +2696,20 @@
             }
           },
           "201": {
-            "description": "Resource 'DataVersionBase' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DataVersionBase"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -2683,12 +2724,7 @@
           "CreateOrUpdate Registry Data Version Base.": {
             "$ref": "./examples/Registry/DataVersionBase/createOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/DataVersionBase"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "RegistryDataVersions_Delete",
@@ -2734,7 +2770,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -2744,6 +2780,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -2877,6 +2918,15 @@
             "description": "Version identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Asset id and blob uri.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetBlobReferenceSASRequestDto"
+            }
           }
         ],
         "responses": {
@@ -2884,6 +2934,12 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/GetBlobReferenceSASResponseDto"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2932,6 +2988,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -3085,7 +3142,7 @@
             }
           },
           "201": {
-            "description": "Resource 'EnvironmentContainer' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/EnvironmentContainer"
             },
@@ -3098,6 +3155,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -3157,7 +3219,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -3167,6 +3229,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -3252,6 +3319,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -3419,19 +3487,20 @@
             }
           },
           "201": {
-            "description": "Resource 'EnvironmentVersion' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/EnvironmentVersion"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -3448,7 +3517,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/EnvironmentVersion"
         },
         "x-ms-long-running-operation": true
@@ -3498,7 +3567,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -3508,6 +3577,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -3570,6 +3644,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -3723,19 +3798,20 @@
             }
           },
           "201": {
-            "description": "Resource 'ModelContainer' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ModelContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -3752,7 +3828,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ModelContainer"
         },
         "x-ms-long-running-operation": true
@@ -3795,7 +3871,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -3805,6 +3881,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -3911,6 +3992,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -4072,25 +4154,26 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ModelVersion' update operation succeeded",
+            "description": "Resource 'CodeContainer' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/CodeContainer"
             }
           },
           "201": {
-            "description": "Resource 'ModelVersion' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/CodeContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -4107,7 +4190,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ModelVersion"
         },
         "x-ms-long-running-operation": true
@@ -4157,7 +4240,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4167,6 +4250,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -4305,16 +4393,16 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -4331,8 +4419,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRegistry%3E"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4619,7 +4706,8 @@
             "in": "query",
             "description": "Flag to indicate delete is a purge request.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -4828,19 +4916,20 @@
             }
           },
           "201": {
-            "description": "Resource 'BatchEndpoint' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/BatchEndpoint"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -4857,7 +4946,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/BatchEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -4905,13 +4994,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BatchEndpoint"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4921,6 +5010,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -4937,8 +5031,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/BatchEndpoint"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -4979,7 +5072,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4989,6 +5082,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -5208,19 +5306,20 @@
             }
           },
           "201": {
-            "description": "Resource 'BatchDeployment' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/BatchDeployment"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -5237,7 +5336,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/BatchDeployment"
         },
         "x-ms-long-running-operation": true
@@ -5292,13 +5391,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BatchDeployment"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -5308,6 +5407,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -5324,8 +5428,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/BatchDeployment"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -5373,7 +5476,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -5383,6 +5486,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -5557,25 +5665,26 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'CapabilityHost' update operation succeeded",
+            "description": "Resource 'CodeContainer' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CodeContainer"
             }
           },
           "201": {
-            "description": "Resource 'CapabilityHost' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CodeContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -5592,7 +5701,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CapabilityHost"
         },
         "x-ms-long-running-operation": true
@@ -5630,8 +5739,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -5641,6 +5753,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -21925,19 +22042,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<Registry>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Registry",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "AzureBlobDatastore": {
       "type": "object",
       "description": "Azure Blob datastore configuration.",
@@ -29232,6 +29336,21 @@
         "storageAccountArmId": {
           "type": "string",
           "description": "The ARM id of the storage account"
+        }
+      }
+    },
+    "GetBlobReferenceSASRequestDto": {
+      "type": "object",
+      "description": "BlobReferenceSASRequest for getBlobReferenceSAS API",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "Id of the asset to be accessed"
+        },
+        "blobUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Blob uri of the asset to be accessed"
         }
       }
     },
@@ -40760,5 +40879,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "CustomLocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The location name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

@@ -35,12 +35,30 @@ interface CapabilityHosts {
   /**
    * Create or update capabilityHost.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CapabilityHost>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    CapabilityHost,
+    Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<CodeContainer> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete capabilityHost.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<CapabilityHost>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    CapabilityHost,
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
+  >;
 }
 
 @@doc(CapabilityHost.name, "CapabilityHost name.");

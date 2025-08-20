@@ -71,7 +71,13 @@ interface CodeVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_CreateOrUpdate")
-  createOrUpdate is CodeVersionOps.CreateOrUpdateAsync<CodeVersion>;
+  createOrUpdate is CodeVersionOps.CreateOrUpdateAsync<CodeVersion, Response = ArmResourceUpdatedResponse<CodeVersion> | (ArmResourceCreatedResponse<CodeVersion> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })>;
 
   /**
    * Delete version.
@@ -81,7 +87,13 @@ interface CodeVersions {
   @operationId("RegistryCodeVersions_Delete")
   delete is CodeVersionOps.DeleteWithoutOkAsync<
     CodeVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**

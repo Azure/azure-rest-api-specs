@@ -71,7 +71,16 @@ interface EnvironmentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
-  createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<EnvironmentVersion>;
+  createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
+    EnvironmentVersion,
+    Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<EnvironmentVersion> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
@@ -81,7 +90,13 @@ interface EnvironmentVersions {
   @operationId("RegistryEnvironmentVersions_Delete")
   delete is EnvironmentVersionOps.DeleteWithoutOkAsync<
     EnvironmentVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -114,7 +129,7 @@ interface EnvironmentVersions {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<EnvironmentVersionResourceArmPaginatedResult>
   >;

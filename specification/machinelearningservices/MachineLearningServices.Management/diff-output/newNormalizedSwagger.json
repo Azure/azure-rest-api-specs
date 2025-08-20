@@ -148,7 +148,11 @@
         "operationId": "Quotas_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
@@ -169,6 +173,9 @@
           "List workspace quotas by VMFamily": {
             "$ref": "./examples/Quota/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -177,10 +184,14 @@
         "operationId": "Quotas_Update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -214,7 +225,11 @@
         "operationId": "Usages_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
@@ -235,6 +250,9 @@
           "List Usages": {
             "$ref": "./examples/Usage/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -243,7 +261,11 @@
         "operationId": "VirtualMachineSizes_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
@@ -504,7 +526,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -641,6 +670,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/CodeContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -656,7 +692,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CodeContainer"
         },
         "x-ms-long-running-operation": true
@@ -684,7 +720,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -851,6 +894,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/CodeVersion"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -866,7 +916,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CodeVersion"
         },
         "x-ms-long-running-operation": true
@@ -900,7 +950,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -1091,6 +1148,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ComponentContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1106,7 +1170,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ComponentContainer"
         },
         "x-ms-long-running-operation": true
@@ -1134,7 +1198,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -1301,6 +1372,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ComponentVersion"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1316,7 +1394,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ComponentVersion"
         },
         "x-ms-long-running-operation": true
@@ -1350,7 +1428,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -1390,6 +1475,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -1477,7 +1563,8 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "name": "body",
@@ -1499,6 +1586,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/DataContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1512,12 +1606,7 @@
           "CreateOrUpdate Registry Data Container.": {
             "$ref": "./examples/Registry/DataContainer/createOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/DataContainer"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "RegistryDataContainers_Delete",
@@ -1541,7 +1630,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -1603,6 +1699,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -1696,7 +1793,8 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "name": "version",
@@ -1724,6 +1822,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/DataVersionBase"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1737,12 +1842,7 @@
           "CreateOrUpdate Registry Data Version Base.": {
             "$ref": "./examples/Registry/DataVersionBase/createOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/DataVersionBase"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "RegistryDataVersions_Delete",
@@ -1772,7 +1872,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -1868,6 +1975,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetBlobReferenceSASRequestDto"
+            }
           }
         ],
         "responses": {
@@ -1875,6 +1990,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/GetBlobReferenceSASResponseDto"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1905,6 +2026,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -2016,6 +2138,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/EnvironmentContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2059,7 +2188,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -2117,6 +2253,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -2240,6 +2377,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/EnvironmentVersion"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2255,7 +2399,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/EnvironmentVersion"
         },
         "x-ms-long-running-operation": true
@@ -2289,7 +2433,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -2329,6 +2480,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -2440,6 +2592,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ModelContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2455,7 +2614,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ModelContainer"
         },
         "x-ms-long-running-operation": true
@@ -2483,7 +2642,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -2556,6 +2722,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -2672,13 +2839,20 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/CodeContainer"
             }
           },
           "201": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/CodeContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2694,7 +2868,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ModelVersion"
         },
         "x-ms-long-running-operation": true
@@ -2728,7 +2902,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -2830,7 +3011,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -3022,7 +3210,8 @@
           {
             "name": "forceToPurge",
             "in": "query",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -3171,6 +3360,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/BatchEndpoint"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3186,7 +3382,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/BatchEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -3224,7 +3420,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -3262,7 +3465,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -3426,6 +3636,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/BatchDeployment"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3441,7 +3658,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/BatchDeployment"
         },
         "x-ms-long-running-operation": true
@@ -3485,7 +3702,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -3529,7 +3753,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -3655,13 +3886,20 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CodeContainer"
             }
           },
           "201": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CapabilityHost"
+              "$ref": "#/definitions/CodeContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3677,7 +3915,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CapabilityHost"
         },
         "x-ms-long-running-operation": true
@@ -3700,8 +3938,18 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -14898,17 +15146,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<Registry>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Registry"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "AzureBlobDatastore": {
       "type": "object",
       "properties": {
@@ -20029,6 +20266,18 @@
         },
         "storageAccountArmId": {
           "type": "string"
+        }
+      }
+    },
+    "GetBlobReferenceSASRequestDto": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string"
+        },
+        "blobUri": {
+          "type": "string",
+          "format": "uri"
         }
       }
     },

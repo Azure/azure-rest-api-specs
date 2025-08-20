@@ -51,6 +51,32 @@ interface DataContainerOps
     > {}
 
 @armResourceOperations
+interface DataContainerwithNamePatternOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of Azure Machine Learning registry. This is case-insensitive */
+        @path
+        @segment("registries")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
+        registryName: string,
+      },
+      {
+        /** Container name. */
+        @path
+        @segment("data")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+        name: string,
+      }
+    > {}
+
+@armResourceOperations
 interface DataContainers {
   /**
    * Get container.
@@ -64,7 +90,16 @@ interface DataContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_CreateOrUpdate")
-  createOrUpdate is DataContainerOps.CreateOrUpdateAsync<DataContainer>;
+  createOrUpdate is DataContainerwithNamePatternOps.CreateOrUpdateAsync<
+    DataContainer,
+    Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<DataContainer> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete container.
@@ -74,7 +109,13 @@ interface DataContainers {
   @operationId("RegistryDataContainers_Delete")
   delete is DataContainerOps.DeleteWithoutOkAsync<
     DataContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,7 +136,7 @@ interface DataContainers {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<DataContainerResourceArmPaginatedResult>
   >;

@@ -15739,4 +15739,18 @@ alias ReferenceSASParameters = {
   @path
   @segment("versions")
   version: string;
+
+  /**
+   * Asset id and blob uri.
+   */
+  @body
+  body: GetBlobReferenceSASRequestDto;
 };
+
+model CustomLocationParameter {
+  @path
+  @segment("locations")
+  @doc("The location name.")
+  @pattern("^[-\\w\\._]+$")
+  location: string;
+}

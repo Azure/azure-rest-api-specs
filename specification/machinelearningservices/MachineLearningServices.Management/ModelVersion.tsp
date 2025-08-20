@@ -71,7 +71,16 @@ interface ModelVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_CreateOrUpdate")
-  createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<ModelVersion>;
+  createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
+    ModelVersion,
+    Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<CodeContainer> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
@@ -81,7 +90,13 @@ interface ModelVersions {
   @operationId("RegistryModelVersions_Delete")
   delete is ModelVersionOps.DeleteWithoutOkAsync<
     ModelVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -132,7 +147,7 @@ interface ModelVersions {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<ModelVersionResourceArmPaginatedResult>
   >;

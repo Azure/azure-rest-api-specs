@@ -57,7 +57,13 @@ interface Registries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -84,15 +90,23 @@ interface Registries {
   @post
   getBlobReferenceSAS(
     ...ReferenceSASParameters,
-  ): ArmResponse<GetBlobReferenceSASResponseDto>;
+  ): ArmResponse<GetBlobReferenceSASResponseDto> | ErrorResponse;
 
   /**
    * Remove regions from registry
    */
-  removeRegions is ArmResourceActionAsync<
+  removeRegions is ArmResourceActionAsyncBase<
     Registry,
     Registry,
-    ArmResponse<Registry>
+    Response = ArmResponse<Registry> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Registry>,
+    Error = ErrorResponse
   >;
 }
 

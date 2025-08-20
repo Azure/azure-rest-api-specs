@@ -65,7 +65,13 @@ interface ComponentContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentContainers_CreateOrUpdate")
-  createOrUpdate is ComponentContainerOps.CreateOrUpdateAsync<ComponentContainer>;
+  createOrUpdate is ComponentContainerOps.CreateOrUpdateAsync<ComponentContainer, Response = ArmResourceUpdatedResponse<ComponentContainer> | (ArmResourceCreatedResponse<ComponentContainer> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })>;
 
   /**
    * Delete container.
@@ -75,7 +81,13 @@ interface ComponentContainers {
   @operationId("RegistryComponentContainers_Delete")
   delete is ComponentContainerOps.DeleteWithoutOkAsync<
     ComponentContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**

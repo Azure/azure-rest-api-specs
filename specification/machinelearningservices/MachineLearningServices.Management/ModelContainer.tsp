@@ -65,7 +65,16 @@ interface ModelContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_CreateOrUpdate")
-  createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<ModelContainer>;
+  createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<
+    ModelContainer,
+    Response = ArmResourceUpdatedResponse<ModelContainer> | (ArmResourceCreatedResponse<ModelContainer> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete container.
@@ -75,7 +84,13 @@ interface ModelContainers {
   @operationId("RegistryModelContainers_Delete")
   delete is ModelContainerOps.DeleteWithoutOkAsync<
     ModelContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -96,7 +111,7 @@ interface ModelContainers {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<ModelContainerResourceArmPaginatedResult>
   >;
