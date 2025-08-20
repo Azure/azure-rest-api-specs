@@ -45,20 +45,18 @@ In this structure, Azure services are presented as an RPNamespace that is used t
 
 To enforce these rules, Here're some tweaks to the repo structure:
 
-1.	Force the folder immediately under specification to be the RPNamespace name (replacing orgName). EngSys should validate that this folder name matches the RPnamespace name currently under the resource-manager folder and that there are no files in this folder and that the only subfolders are resource-manager and data-plane. 
-    - Ideally, we’d get rid of the resource-manager folder’s RPNamespace subfolder as this extra level in the hierarchy serves no purpose and is just confusing, but this can be done in a later phase.
-2.	In the resource-manager folder, if it's RPaaS service, there must be just 1 readme.md file, and 1+ service name folders under resource-manager/RPnamespace folder, but the resource types within each services folder must not duplicate except for operations, locations, checkNameAvailability etc. Which is required by RPSaaS for HTTP request schema validation.
-3.	In the data-plane folder there must be no files and at least 1 service name folder.
-4.	The ServiceName folder must have only readme.*, tspconfig.yaml and *.tsp files in it. 
+1.	In the resource-manager folder, if it's RPaaS service, there must be just 1 readme.md file, and 1+ service name folders under resource-manager/RPnamespace folder, but the resource types within each services folder must not duplicate except for operations, locations, checkNameAvailability etc. Which is required by RPSaaS for HTTP request schema validation.
+2.	In the data-plane folder there must be no files and at least 1 service name folder.
+3.	The ServiceName folder must have only readme.*, tspconfig.yaml and *.tsp files in it. 
     - In the readme.md file, the latest package tag value (which represents a service version) must refer to swagger files that are all in the exact same folder. Also, if the tag value is suffixed with “-preview” then all the swagger paths must refer to files in the preview subfolder; else all swagger paths must refer to files in the stable subfolder.
     - NOTE: If 2+ services want to “share” some TypeSpec/swagger files, these files must be explicitly copied into a consuming service’s folder on its desired timeline. We do not allow multiple services to reference a single copy of a service contract because it is too dangerous to allow one service to change a shared contract, forcing other services to pick up this shared contract instantly, especially if the shared contract introduces breaking changes. Each service must be in control of its own destiny.
-5.	The ServiceName folder must have examples, preview and stable subfolders. Additional subfolders are allowed to help organize *.tsp files. The rules should ensure that only the tspconfig.yaml  and *.tsp files are in the ServiceName folder.  
-6.	The examples folder should only have a subfolder for each api-version and each api-version folder can contain only example *.json files for this api-version.
-7.	The preview and stable folders must only have subfolders whose name match this format: YYYY-MM-DD-preview in the preview folder and YYYY-MM-DD in the stable folder. All the files in the YYYY-MM-DD(-preview) folders must be json (swagger) files.
-8.	Each YYYY-MM-DD(-preview) folder must have an examples folder containing only example *.json files for this api-version.
-9.	It is illegal for a preview and stable version to share the same date. For example, if there is a 2024-04-01-preview, then there can never be a 2024-04-01 stable.
-10. Each new control plane api-version is recommended to be unique across all the control plane service folders for an RP Namespace. 
-11.	Each service name folder must duplicate the special "list operations" API. 
+4.	The ServiceName folder must have examples, preview and stable subfolders. Additional subfolders are allowed to help organize *.tsp files. The rules should ensure that only the tspconfig.yaml  and *.tsp files are in the ServiceName folder.  
+5.	The examples folder should only have a subfolder for each api-version and each api-version folder can contain only example *.json files for this api-version.
+6.	The preview and stable folders must only have subfolders whose name match this format: YYYY-MM-DD-preview in the preview folder and YYYY-MM-DD in the stable folder. All the files in the YYYY-MM-DD(-preview) folders must be json (swagger) files.
+7.	Each YYYY-MM-DD(-preview) folder must have an examples folder containing only example *.json files for this api-version.
+8.	It is illegal for a preview and stable version to share the same date. For example, if there is a 2024-04-01-preview, then there can never be a 2024-04-01 stable.
+9. Each new control plane api-version is recommended to be unique across all the control plane service folders for an RP Namespace. 
+10.	Each service name folder must duplicate the special "list operations" API. 
     - While this RP (not service) operation requires an api-version query parameter, the response data is not specific to this api-version; the response is api-version neutral. In addition, the response is always the same regardless of tenant/subscription. Whenever any other service in the RP gets a new api-version, the TypeSpec/Swagger for the operations service must also be updated to match this new api-version.
 
 ## POSITIVE CONSEQUENCES OF THE AZURE SERVICE DEFINITION
