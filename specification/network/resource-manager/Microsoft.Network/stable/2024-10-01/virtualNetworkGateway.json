@@ -805,11 +805,7 @@
         "description": "List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkGatewayName",
@@ -4243,6 +4239,7 @@
       "description": "List of virtual network gateway routes."
     },
     "RadiusAuthServer": {
+      "type": "object",		
       "properties": {
         "radiusServerAddress": {
           "type": "string",
@@ -4256,13 +4253,15 @@
       "description": "Gateway or VpnServerConfiguration Radius server with radius secret details"
     },
     "RadiusAuthServerListResult": {
+      "type": "object",		
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RadiusAuthServer"
           },
-          "description": "List of Radius servers with respective radius secrets."
+          "description": "List of Radius servers with respective radius secrets.",
+          "x-ms-identifiers": []		  
         }
       },
       "description": "List of Radius servers with respective radius secrets."
