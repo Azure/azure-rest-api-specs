@@ -131,6 +131,8 @@ using Microsoft.BotService;
 @@usage(PrivateLinkResource, Usage.input, "csharp");
 @@usage(ListChannelWithKeysResponse, Usage.input, "csharp");
 
+@@scope(OperationResultsOperationGroup.get, "!csharp"); 
+
 @@alternateType(DirectLineSpeechChannelProperties.cognitiveServiceResourceId,
   armResourceIdentifier,
   "csharp"
