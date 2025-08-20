@@ -519,7 +519,7 @@ model RunStepBingGroundingToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
 
-  @doc("Reserved for future use.")
+  @doc("The dictionary with request and response from Bing Grounding search tool.")
   @encodedName("application/json", "bing_grounding")
   bingGrounding: Record<string>;
 }
@@ -630,23 +630,51 @@ model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'fabric_dataagent'.")
   type: "fabric_dataagent";
 
-  @doc("Reserved for future use.")
+  @doc("Fabric input and output.")
   @encodedName("application/json", "fabric_dataagent")
   microsoftFabric: Record<string>;
 }
 
 @doc("""
-  A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents
-  executed search with bing custom search.
+  A record of a call to a Bing Custom Search tool, issued by the model in evaluation of a defined tool, that represents
+  executed search with Bing Custom Search.
   """)
 @added(Versions.v2025_05_15_preview)
 model RunStepBingCustomSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
 
-  @doc("Reserved for future use.")
+  @doc("The dictionary with request and response from Bing Custom Search tool.")
   @encodedName("application/json", "bing_custom_search")
   bingCustomSearch: Record<string>;
+}
+
+@doc("""
+  A record of a call to an Azure Function tool.
+  """)
+@added(Versions.v1)
+model RunStepAzureFunctionToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'azure_function'.")
+  type: "azure_function";
+
+  @doc("The description of an Azure function call.")
+  azure_function: AzureFunctionToolCallDetails;
+}
+
+@doc("""
+  The Azure function call description. All the fields are present in the completed run step, however
+  only some fields are present in the RunStepDeltaAzureFunctionToolCall.
+  """)
+@added(Versions.v1)
+model AzureFunctionToolCallDetails {
+  @doc("The Azure function name")
+  name?: string;
+
+  @doc("JSON serialized function arguments.")
+  arguments?: string;
+
+  @doc("The function output.")
+  output?: string;
 }
 
 @doc("""
