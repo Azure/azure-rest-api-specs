@@ -40,7 +40,7 @@ These settings apply only when `--tag=package-2025-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
-  - Microsoft.DatabaseFleetManager/preview/2025-02-01-preview/databasefleetmanager.json
+  - preview/2025-02-01-preview/databasefleetmanager.json
 ```
 
 ---
