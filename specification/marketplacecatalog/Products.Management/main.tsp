@@ -59,10 +59,6 @@ interface ProductList {
     @query
     excludePublicOffersAndPublicPlans?: boolean = false,
 
-    @doc(PricingAudienceParameterDescription)
-    @query
-    pricingAudience?: string = "Direct-Commercial",
-
     @doc(FilterOdataParameterDescription)
     @query
     $filter?: string,
