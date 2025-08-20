@@ -49,6 +49,8 @@ using Microsoft.IoTOperations;
 @@clientName(DataflowProperties, "IotOperationsDataflowProperties", "csharp");
 @@clientName(InstanceResource, "IotOperationsInstance", "csharp");
 @@clientName(InstanceProperties, "IotOperationsInstanceProperties", "csharp");
+@@clientName(InstanceFeature, "IotOperationsInstanceFeature", "csharp");
+@@clientName(InstanceFeatureMode, "IotOperationsInstanceFeatureMode", "csharp");
 @@clientName(AdvancedSettings, "BrokerAdvancedSettings", "csharp");
 @@clientName(AuthorizationConfig, "BrokerAuthorizationConfig", "csharp");
 @@clientName(AuthorizationRule, "BrokerAuthorizationRule", "csharp");
@@ -85,6 +87,33 @@ using Microsoft.IoTOperations;
 @@clientName(TlsCertMethod, "ListenerPortTlsCertMethod", "csharp");
 @@clientName(TlsProperties, "IotOperationsTlsProperties", "csharp");
 @@clientName(Traces, "BrokerDiagnosticTraces", "csharp");
+@@clientName(AkriConnectorResource, "IotOperationsAkriConnector", "csharp");
+@@clientName(AkriConnectorProperties,
+  "IotOperationsAkriConnectorProperties",
+  "csharp"
+);
+@@clientName(AkriConnectorTemplateResource,
+  "IotOperationsAkriConnectorTemplate",
+  "csharp"
+);
+@@clientName(AkriConnectorTemplateProperties,
+  "IotOperationsAkriConnectorTemplateProperties",
+  "csharp"
+);
+@@clientName(DataflowGraphResource, "IotOperationsDataflowGraph", "csharp");
+@@clientName(DataflowGraphProperties,
+  "IotOperationsDataflowGraphProperties",
+  "csharp"
+);
+@@clientName(RegistryEndpointResource,
+  "IotOperationsRegistryEndpoint",
+  "csharp"
+);
+@@clientName(RegistryEndpointProperties,
+  "IotOperationsRegistryEndpointProperties",
+  "csharp"
+);
+
 @@clientName(Versions.`2024-11-01`,
   "$DO_NOT_NORMALIZE$V2024-11-01",
   "javascript"

@@ -157,6 +157,7 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
 ### Pre-requisites
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
 - run `npm ci` to install the dependencies
+- To use MCP tool calls, user must have Powershell installed. Provide [Powershell installation instructions](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.5) if not installed, and recommend restarting VSCode to start the MCP server.
 
 
 ### Basic Rules for SDK Generation from TypeSpec
@@ -202,7 +203,7 @@ By following these rules, the SDK release process will remain clear, structured,
 
 ## Steps to generate SDK from TypeSpec API specification
 Follow [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
-Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps.
+Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps. Before using tools, check if user has Powershell installed.
 
 1. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
 2. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
