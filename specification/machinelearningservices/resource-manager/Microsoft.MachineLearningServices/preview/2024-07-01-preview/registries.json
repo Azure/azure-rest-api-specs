@@ -617,6 +617,10 @@
       "description": "Details of the Registry",
       "type": "object",
       "properties": {
+        "registryId": {
+          "description": "RegistryId for this registry",
+          "type": "string"
+        },
         "discoveryUrl": {
           "description": "Discovery URL for the Registry",
           "type": "string",
@@ -638,7 +642,7 @@
           "x-nullable": true
         },
         "syndicatedRegistries": {
-          "description": "Dictionary of syndicated registries. Key is Guid and value is a SyndicatedRegistry",
+          "description": "Dictionary of syndicated/destination registries for this source registry. For each destination registry, the Key is the RegistryId Guid and the value is a SyndicatedRegistry object",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/SyndicatedRegistry",
@@ -724,11 +728,11 @@
       "additionalProperties": false
     },
     "SyndicatedRegistry": {
-      "description": "A registry that is syndicated",
+      "description": "A destination registry that is syndicated",
       "type": "object",
       "properties": {
         "registryId": {
-          "description": "The Registry Id of the syndicated Registry",
+          "description": "The Registry Id Guid of the syndicated Registry",
           "type": "string",
           "x-nullable": true
         }

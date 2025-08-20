@@ -10,20 +10,17 @@ describe("execFile", () => {
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
 
-  it.each([{}, options])(
-    "exec succeeds with default buffer (options: %o)",
-    async (options) => {
-      await expect(execFile(file, args, options)).resolves.toEqual({
-        stdout: expected,
-        stderr: "",
-      });
-    },
-  );
+  it.each([{}, options])("exec succeeds with default buffer (options: %o)", async (options) => {
+    await expect(execFile(file, args, options)).resolves.toEqual({
+      stdout: expected,
+      stderr: "",
+    });
+  });
 
   it("exec succeeds with exact-sized buffer", async () => {
-    await expect(
-      execFile(file, args, { ...options, maxBuffer: expected.length }),
-    ).resolves.toEqual({ stdout: expected, stderr: "" });
+    await expect(execFile(file, args, { ...options, maxBuffer: expected.length })).resolves.toEqual(
+      { stdout: expected, stderr: "" },
+    );
   });
 
   it("exec fails with too-small buffer", async () => {
@@ -63,9 +60,7 @@ describe("execNpmExec", () => {
   // something referenced in package.json. In this case, js-yaml is present
   // so it is used.
   it("runs js-yaml", async () => {
-    await expect(
-      execNpmExec(["js-yaml", "--version"], options),
-    ).resolves.toEqual({
+    await expect(execNpmExec(["js-yaml", "--version"], options)).resolves.toEqual({
       stdout: expect.toSatisfy((v) => semver.valid(v)),
       stderr: "",
       error: undefined,

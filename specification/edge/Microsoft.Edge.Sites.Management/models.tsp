@@ -23,6 +23,7 @@ model SiteProperties {
   description?: string;
 
   @removed(Versions.v2025_03_01_preview)
+  @removed(Versions.v2025_06_01)
   @doc("AddressResource ArmId of Site resource")
   addressResourceId?: Azure.Core.armResourceIdentifier<[
     {
@@ -31,12 +32,14 @@ model SiteProperties {
   ]>;
 
   @added(Versions.v2025_03_01_preview)
+  @added(Versions.v2025_06_01)
   @doc("Physical address of the site")
   siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Key-value pairs for labeling the site resource.")
   @added(Versions.v2025_03_01_preview)
+  @added(Versions.v2025_06_01)
   labels?: Record<string>;
 
   @doc("Provisioning state of last operation")
@@ -45,6 +48,7 @@ model SiteProperties {
 }
 
 @added(Versions.v2025_03_01_preview)
+@added(Versions.v2025_06_01)
 @doc("Site address properties")
 model SiteAddressProperties {
   @doc("First line of the street address")
@@ -75,6 +79,7 @@ model SiteUpdateProperties {
   description?: string;
 
   @removed(Versions.v2025_03_01_preview)
+  @removed(Versions.v2025_06_01)
   @doc("AddressResource ArmId of Site resource")
   addressResourceId?: Azure.Core.armResourceIdentifier<[
     {
@@ -83,11 +88,13 @@ model SiteUpdateProperties {
   ]>;
 
   @added(Versions.v2025_03_01_preview)
+  @added(Versions.v2025_06_01)
   @doc("Physical address of the site")
   siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @added(Versions.v2025_03_01_preview)
+  @added(Versions.v2025_06_01)
   @doc("Key-value pairs for labeling the site resource.")
   labels?: Record<string>;
 }

@@ -13,11 +13,15 @@ interface Skus {
   @doc("A list of SKUs.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AVS/skus")
   @get
+  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<Page<ResourceSku>> | ErrorResponse;
+  ): ArmResponse<PagedResourceSku> | ErrorResponse;
 }
+
+@@identifiers(PagedResourceSku.value, #[]);
+model PagedResourceSku is Page<ResourceSku>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("A SKU for a resource.")

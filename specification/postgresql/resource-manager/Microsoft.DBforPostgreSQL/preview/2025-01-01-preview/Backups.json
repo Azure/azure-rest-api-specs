@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -41,11 +41,11 @@
         ],
         "operationId": "Backups_Create",
         "x-ms-examples": {
-          "Create a new Backup for a flexible server": {
+          "Create an on demand backup of a flexible server.": {
             "$ref": "./examples/BackupCreate.json"
           }
         },
-        "description": "Create a specific backup for PostgreSQL flexible server.",
+        "description": "Creates an on demand backup of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -102,11 +102,11 @@
         ],
         "operationId": "Backups_Delete",
         "x-ms-examples": {
-          "Delete a specific backup": {
+          "Delete an on demand backup, given its name.": {
             "$ref": "./examples/BackupDelete.json"
           }
         },
-        "description": "Deletes a specific backup.",
+        "description": "Deletes a specific backup, given its name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -154,11 +154,11 @@
         ],
         "operationId": "Backups_Get",
         "x-ms-examples": {
-          "Get a backup for a server": {
+          "Get an on demand backup, given its name.": {
             "$ref": "./examples/BackupGet.json"
           }
         },
-        "description": "Get specific backup for a given server.",
+        "description": "Gets information of an on demand backup, given its name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -199,11 +199,11 @@
         ],
         "operationId": "Backups_ListByServer",
         "x-ms-examples": {
-          "List backups for a server": {
+          "List all available backups of a flexible server.": {
             "$ref": "./examples/BackupListByServer.json"
           }
         },
-        "description": "List all the backups for a given server.",
+        "description": "Lists all available backups of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -244,7 +244,7 @@
       "properties": {
         "backupType": {
           "type": "string",
-          "description": "Backup type.",
+          "description": "Type of backup.",
           "enum": [
             "Full",
             "Customer On-Demand"
@@ -257,14 +257,14 @@
         "completedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Backup completed time (ISO8601 format)."
+          "description": "Time(ISO8601 format) at which the backup was completed."
         },
         "source": {
           "type": "string",
-          "description": "Backup source"
+          "description": "Source of the backup."
         }
       },
-      "description": "The properties of a server backup."
+      "description": "Properties of a backup."
     },
     "ServerBackup": {
       "type": "object",
@@ -272,7 +272,7 @@
         "properties": {
           "$ref": "#/definitions/ServerBackupProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a server backup."
+          "description": "Properties of a backup."
         }
       },
       "allOf": [
@@ -280,7 +280,7 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Server backup properties"
+      "description": "Properties of a backup."
     },
     "ServerBackupListResult": {
       "type": "object",
@@ -290,14 +290,14 @@
           "items": {
             "$ref": "#/definitions/ServerBackup"
           },
-          "description": "The list of backups of a server."
+          "description": "List of available backups."
         },
         "nextLink": {
-          "description": "The link used to get the next page of operations.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       },
-      "description": "A list of server backups."
+      "description": "List of backups."
     }
   },
   "parameters": {
@@ -306,7 +306,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the backup.",
+      "description": "Name of the backup.",
       "minLength": 1,
       "pattern": "^[-\\w\\._]+$",
       "x-ms-parameter-location": "method"

@@ -19,6 +19,13 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/fleet/{version-status}/{version}/fleets.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/containerservice"
+    package-dir: "azure-mgmt-containerservicefleet"
+    namespace: "azure.mgmt.containerservicefleet"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-containerservicefleet"
     namespace: "com.azure.resourcemanager.containerservicefleet"

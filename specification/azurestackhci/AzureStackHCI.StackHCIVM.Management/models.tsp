@@ -72,6 +72,18 @@ union Status {
   string,
 }
 
+@added(Versions.v2025_06_01_preview)
+@doc("Type of Logical Network")
+union LogicalNetworkTypeEnum {
+  @doc("Logical Network of type Workload")
+  Workload: "Workload",
+
+  @doc("Logical Network of type Infrastructure")
+  Infrastructure: "Infrastructure",
+
+  string,
+}
+
 @doc("The type of extendedLocation.")
 union ExtendedLocationTypes {
   @doc("Custom extended location type")
@@ -703,6 +715,11 @@ model LogicalNetworkProperties {
   @doc("The observed state of logical networks")
   @visibility(Lifecycle.Read)
   status?: LogicalNetworkStatus;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Type of the Logical Network")
+  @visibility(Lifecycle.Read)
+  networkType?: LogicalNetworkTypeEnum;
 }
 
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
@@ -1230,6 +1247,10 @@ model VirtualHardDiskProperties {
   @doc("The observed state of virtual hard disks")
   @visibility(Lifecycle.Read)
   status?: VirtualHardDiskStatus;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.")
+  maxShares?: int64;
 }
 
 @doc("The observed state of virtual hard disks")
@@ -1250,6 +1271,14 @@ model VirtualHardDiskStatus {
   @added(Versions.v2024_05_01_preview)
   @doc("The upload status of the virtual hard disk")
   uploadStatus?: VirtualHardDiskUploadStatus;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("ARM IDs of the VMs that are consuming the VHD.")
+  managedBy?: string[];
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Unique Guid identifying the resource.")
+  uniqueId?: string;
 }
 
 @doc("VHD Status provisioning status")
@@ -1405,6 +1434,11 @@ model VirtualMachineInstanceProperties {
   @doc("Name of the host node that the VM is on.")
   @visibility(Lifecycle.Read)
   hostNodeName?: string;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Name of the host node that the VM is on.")
+  @visibility(Lifecycle.Read)
+  hostNodeIpAddress?: string;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
@@ -1709,6 +1743,7 @@ model GuestAgentInstallStatus {
   agentVersion?: string;
 
   @doc("Details about the error state.")
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
