@@ -847,21 +847,21 @@ model Image {
 @doc("Marketplace Catalog API")
 model SingleMarketParameter {
   @query
-  @doc("Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market: string;
 }
 
 @doc("Marketplace Catalog API")
 model ListingMarketParameter {
   @query
-  @doc("Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market?: string;
 }
 
 @doc("Marketplace Catalog API")
 model ListingSkusMarketParameter {
   @query
-  @doc("Market value. The response will include only skus that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Market value. The response will include only skus that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market?: string;
 }
 
@@ -875,21 +875,21 @@ model LanguageParameter {
 @doc("Parameters for location filtering")
 model LocationsSingleParameter {
   @query
-  @doc("Return plans/availabilities for selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/")
+  @doc("Return plans/availabilities for selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/")
   locations?: string[];
 }
 
 @doc("Parameters for location filtering")
 model LocationsListingParameter {
   @query
-  @doc("Return products available in selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/")
+  @doc("Return products available in selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/")
   locations?: string[];
 }
 
 @doc("Parameters for location filtering")
 model SkusLocationsListingParameter {
   @query
-  @doc("Return skus available in selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/")
+  @doc("Return skus available in selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/")
   locations?: string[];
 }
 
@@ -924,7 +924,7 @@ model IncludeFutureAvailabilitiesParameter {
 @doc("SKU ID filter parameter")
 model SkuIdParameter {
   @query
-  @doc("Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID")
+  @doc("Apply SKU Id filter to the result")
   skuId?: string;
 }
 
