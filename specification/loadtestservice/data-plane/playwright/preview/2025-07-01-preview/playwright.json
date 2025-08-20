@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Supported Playwright Service API Endpoints (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.\nYou can also find this value in the Azure Playwright Workspace property, such as `dataplaneUri`.",
+        "description": "Playwright Service API endpoint (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.\nThe region corresponds to your Azure Playwright workspace location. You can find this value in your Azure Playwright workspace properties under `dataplaneUri`.",
         "required": true,
         "type": "string"
       }
@@ -54,7 +54,7 @@
     "/playwrightworkspaces/{workspaceId}/access-tokens": {
       "get": {
         "operationId": "AccessTokens_List",
-        "description": "Lists access-tokens for the given workspace id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Lists access tokens for the specified workspace ID. Supports OData query parameters: $select, $filter, $orderby, $top, and $skip. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -62,7 +62,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id in GUID format.",
+            "description": "The workspace ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -113,7 +113,7 @@
     "/playwrightworkspaces/{workspaceId}/access-tokens/{accessTokenId}": {
       "get": {
         "operationId": "AccessTokens_Get",
-        "description": "Gets an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Gets an access token for the workspace with the specified access token ID. Requires Bearer JWT access token provided by Entra ID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -121,7 +121,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id in GUID format.",
+            "description": "The workspace ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -131,7 +131,7 @@
           {
             "name": "accessTokenId",
             "in": "path",
-            "description": "The access-token id in GUID format.",
+            "description": "The access token ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -177,7 +177,7 @@
       },
       "put": {
         "operationId": "AccessTokens_CreateOrReplace",
-        "description": "Creates an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Creates an access token for the workspace with the specified access token ID and name. The ID and name must be unique among active access tokens for the user within a Playwright workspace. Requires Bearer JWT access token provided by Entra ID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -185,7 +185,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id in GUID format.",
+            "description": "The workspace ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -195,7 +195,7 @@
           {
             "name": "accessTokenId",
             "in": "path",
-            "description": "The access-token id in GUID format.",
+            "description": "The access token ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -263,7 +263,7 @@
       },
       "delete": {
         "operationId": "AccessTokens_Delete",
-        "description": "Deletes an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Deletes an access token for the workspace with the specified access token ID. Requires Bearer JWT access token provided by Entra ID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -271,7 +271,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id in GUID format.",
+            "description": "The workspace ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -281,7 +281,7 @@
           {
             "name": "accessTokenId",
             "in": "path",
-            "description": "The access-token id in GUID format.",
+            "description": "The access token ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -326,7 +326,7 @@
     "/playwrightworkspaces/{workspaceId}/browsers": {
       "get": {
         "operationId": "Workspaces_GetBrowsers",
-        "description": "Gets remote browsers corresponding to given workspace id and redirects the client for executing Playwright scripts. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "description": "Gets remote browsers for the specified workspace ID and redirects the client to execute Playwright scripts. Requires Bearer JWT access token provided by Entra ID or Playwright Service.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -334,7 +334,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id in GUID format.",
+            "description": "The workspace ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -344,7 +344,7 @@
           {
             "name": "os",
             "in": "query",
-            "description": "The os provided by client for remote script runs.",
+            "description": "The operating system for remote script execution.",
             "required": true,
             "type": "string",
             "enum": [
@@ -358,12 +358,12 @@
                 {
                   "name": "Linux",
                   "value": "Linux",
-                  "description": "Linux OS."
+                  "description": "Linux operating system."
                 },
                 {
                   "name": "Windows",
                   "value": "Windows",
-                  "description": "Windows OS."
+                  "description": "Windows operating system."
                 }
               ]
             }
@@ -371,7 +371,7 @@
           {
             "name": "runId",
             "in": "query",
-            "description": "The runId provided by client in GUID format.",
+            "description": "The run ID in GUID format.",
             "required": false,
             "type": "string",
             "minLength": 3,
@@ -389,7 +389,7 @@
               "location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The redirect target URL to run script on remote browsers."
+                "description": "The redirect target URL for executing Playwright scripts on remote browsers."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -421,7 +421,7 @@
     "/playwrightworkspaces/{workspaceId}/test-runs": {
       "get": {
         "operationId": "TestRuns_List",
-        "description": "Lists test-runs for the given workspace id. It can use OData query params like $filter, $top etc. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "description": "Lists test runs for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID or Playwright Service.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -429,7 +429,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id in GUID format.",
+            "description": "The workspace ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -480,7 +480,7 @@
     "/playwrightworkspaces/{workspaceId}/test-runs/{runId}": {
       "patch": {
         "operationId": "TestRuns_CreateOrUpdate",
-        "description": "Creates/Updates a test-run for the workspace with given test-run id. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "description": "Creates or updates a test run for the workspace with the specified test run ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -491,7 +491,7 @@
           {
             "name": "workspaceId",
             "in": "path",
-            "description": "The workspace id in GUID format.",
+            "description": "The workspace ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -501,7 +501,7 @@
           {
             "name": "runId",
             "in": "path",
-            "description": "The test-run id in GUID format.",
+            "description": "The test run ID in GUID format.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -572,11 +572,11 @@
   "definitions": {
     "AccessToken": {
       "type": "object",
-      "description": "Model of an access-token linked to a workspace.",
+      "description": "Model of an access token linked to a workspace.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The access-token id in GUID format.",
+          "description": "The access token ID in GUID format.",
           "minLength": 3,
           "maxLength": 36,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
@@ -584,7 +584,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The access-token name.",
+          "description": "The access token name.",
           "minLength": 3,
           "maxLength": 24,
           "pattern": "^[a-zA-Z0-9-]{3,24}$",
@@ -595,19 +595,19 @@
         },
         "jwtToken": {
           "type": "string",
-          "description": "The access-token value in JWT format.",
+          "description": "The access token value in JWT format.",
           "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The access-token createdAt utcDateTime.",
+          "description": "The access token creation timestamp in UTC.",
           "readOnly": true
         },
         "expiryAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The access-token expiryAt utcDateTime.",
+          "description": "The access token expiration timestamp in UTC.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -615,7 +615,7 @@
         },
         "state": {
           "$ref": "#/definitions/AccessTokenState",
-          "description": "The access-token state - Active | Expired.",
+          "description": "The access token state.",
           "readOnly": true
         }
       },
@@ -629,7 +629,7 @@
     },
     "AccessTokenState": {
       "type": "string",
-      "description": "The access-token state.",
+      "description": "The access token state.",
       "enum": [
         "Active",
         "Expired"
@@ -641,12 +641,12 @@
           {
             "name": "Active",
             "value": "Active",
-            "description": "The access-token is Active."
+            "description": "The access token is active and can be used for authentication."
           },
           {
             "name": "Expired",
             "value": "Expired",
-            "description": "The access-token is Expired."
+            "description": "The access token has expired and cannot be used for authentication."
           }
         ]
       }
@@ -699,7 +699,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -713,7 +713,7 @@
     },
     "CiConfig": {
       "type": "object",
-      "description": "The run CI config.",
+      "description": "The test run CI configuration.",
       "properties": {
         "providerName": {
           "type": "string",
@@ -725,7 +725,7 @@
         },
         "branch": {
           "type": "string",
-          "description": "The CI branch.",
+          "description": "The CI branch name.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -733,7 +733,7 @@
         },
         "author": {
           "type": "string",
-          "description": "The CI author.",
+          "description": "The CI commit author.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -741,7 +741,7 @@
         },
         "commitId": {
           "type": "string",
-          "description": "The CI commit id.",
+          "description": "The CI commit ID.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -801,11 +801,11 @@
     },
     "RunConfig": {
       "type": "object",
-      "description": "The run config.",
+      "description": "The run configuration.",
       "properties": {
         "framework": {
           "$ref": "#/definitions/RunFramework",
-          "description": "The framework used for run.",
+          "description": "The framework used for the test run.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -813,7 +813,7 @@
         },
         "sdkLanguage": {
           "$ref": "#/definitions/SDKLanguage",
-          "description": "The SDK Language used for run.",
+          "description": "The SDK language used for the test run.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -822,7 +822,7 @@
         "maxWorkers": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum number of workers required for the run.",
+          "description": "The maximum number of workers required for the test run.",
           "minimum": 1,
           "maximum": 500,
           "x-ms-mutability": [
@@ -834,7 +834,7 @@
     },
     "RunFramework": {
       "type": "object",
-      "description": "The run framework.",
+      "description": "The test run framework information.",
       "properties": {
         "name": {
           "type": "string",
@@ -864,7 +864,7 @@
     },
     "RunStatus": {
       "type": "string",
-      "description": "The run status.",
+      "description": "The test run status.",
       "enum": [
         "RUNNING",
         "CLIENT_COMPLETE",
@@ -877,69 +877,69 @@
           {
             "name": "RUNNING",
             "value": "RUNNING",
-            "description": "The run status is RUNNING"
+            "description": "The test run is currently running."
           },
           {
             "name": "CLIENT_COMPLETE",
             "value": "CLIENT_COMPLETE",
-            "description": "The run status is CLIENT_COMPLETE"
+            "description": "The test run has completed on the client side."
           },
           {
             "name": "SERVER_COMPLETE",
             "value": "SERVER_COMPLETE",
-            "description": "The run status is SERVER_COMPLETE"
+            "description": "The test run has completed on the server side."
           }
         ]
       }
     },
     "RunSummary": {
       "type": "object",
-      "description": "The run summary.",
+      "description": "The test run summary.",
       "properties": {
         "status": {
           "$ref": "#/definitions/RunStatus",
-          "description": "The run status.",
+          "description": "The test run status.",
           "readOnly": true
         },
         "billableTime": {
           "type": "integer",
           "format": "int64",
-          "description": "The run billable time.",
+          "description": "The test run billable time in milliseconds.",
           "readOnly": true
         },
         "numBrowserSessions": {
           "type": "integer",
           "format": "int64",
-          "description": "The total number of browser sessions allocated to the run.",
+          "description": "The total number of browser sessions allocated to the test run.",
           "readOnly": true
         },
         "maxConcurrentBrowserSessions": {
           "type": "integer",
           "format": "int64",
-          "description": "The highest number of browser sessions that were running at the same time during the run.",
+          "description": "The highest number of browser sessions that were running concurrently during the test run.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The run start time as utcDateTime.",
+          "description": "The test run start time in UTC.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The run end time as utcDateTime.",
+          "description": "The test run end time in UTC.",
           "readOnly": true
         },
         "duration": {
           "type": "integer",
           "format": "int64",
-          "description": "The run duration.",
+          "description": "The test run duration in milliseconds.",
           "readOnly": true
         },
         "errorMessages": {
           "type": "array",
-          "description": "The list of error messages corresponding to the run.",
+          "description": "The list of error messages corresponding to the test run.",
           "items": {
             "type": "string"
           },
@@ -953,7 +953,7 @@
     },
     "SDKLanguage": {
       "type": "string",
-      "description": "The SDK Language used for run.",
+      "description": "The SDK language used for the test run.",
       "enum": [
         "JAVASCRIPT",
         "TYPESCRIPT",
@@ -966,28 +966,28 @@
           {
             "name": "JAVASCRIPT",
             "value": "JAVASCRIPT",
-            "description": "JAVASCRIPT SDK"
+            "description": "JavaScript SDK"
           },
           {
             "name": "TYPESCRIPT",
             "value": "TYPESCRIPT",
-            "description": "TYPESCRIPT SDK"
+            "description": "TypeScript SDK"
           },
           {
             "name": "CSHARP",
             "value": "CSHARP",
-            "description": "CSHARP SDK"
+            "description": "C# SDK"
           }
         ]
       }
     },
     "TestRun": {
       "type": "object",
-      "description": "Model of a test-run used for tracking purpose.",
+      "description": "Model of a test run used for tracking purposes.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The test-run id in GUID format.",
+          "description": "The test run ID in GUID format.",
           "minLength": 3,
           "maxLength": 36,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
@@ -995,7 +995,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "The test-run display name.",
+          "description": "The test run display name.",
           "minLength": 1,
           "maxLength": 200,
           "x-ms-mutability": [
@@ -1006,17 +1006,17 @@
         },
         "creatorId": {
           "type": "string",
-          "description": "The test-run creator's id.",
+          "description": "The test run creator's ID.",
           "readOnly": true
         },
         "creatorName": {
           "type": "string",
-          "description": "The test-run creator's name.",
+          "description": "The test run creator's name.",
           "readOnly": true
         },
         "config": {
           "$ref": "#/definitions/RunConfig",
-          "description": "The test-run config.",
+          "description": "The test run configuration.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1024,7 +1024,7 @@
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
-          "description": "The test-run CI Config.",
+          "description": "The test run CI configuration.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1032,7 +1032,7 @@
         },
         "summary": {
           "$ref": "#/definitions/RunSummary",
-          "description": "The test-run summary.",
+          "description": "The test run summary.",
           "readOnly": true
         }
       },
@@ -1045,11 +1045,11 @@
     },
     "TestRunCreateOrUpdate": {
       "type": "object",
-      "description": "Model of a test-run used for tracking purpose.",
+      "description": "Model of a test run used for tracking purposes.",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "The test-run display name.",
+          "description": "The test run display name.",
           "minLength": 1,
           "maxLength": 200,
           "x-ms-mutability": [
@@ -1060,7 +1060,7 @@
         },
         "config": {
           "$ref": "#/definitions/RunConfig",
-          "description": "The test-run config.",
+          "description": "The test run configuration.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1068,7 +1068,7 @@
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
-          "description": "The test-run CI Config.",
+          "description": "The test run CI configuration.",
           "x-ms-mutability": [
             "read",
             "create"
