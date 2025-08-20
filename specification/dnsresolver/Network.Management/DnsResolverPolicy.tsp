@@ -55,7 +55,8 @@ interface DnsResolverPolicies {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DnsResolverPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

@@ -61,7 +61,8 @@ interface DnsForwardingRulesets {
     },
     Response = ArmResourceUpdatedResponse<DnsForwardingRuleset> | ArmResourceCreatedResponse<
       DnsForwardingRuleset,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = DnsForwardingRuleset> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse,
     Error = CloudError
   >;

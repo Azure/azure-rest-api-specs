@@ -60,7 +60,8 @@ interface DnsResolverPolicyVirtualNetworkLinks {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DnsResolverPolicyVirtualNetworkLink> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

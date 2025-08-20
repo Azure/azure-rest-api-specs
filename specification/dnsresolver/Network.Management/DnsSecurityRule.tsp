@@ -57,7 +57,8 @@ interface DnsSecurityRules {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DnsSecurityRule> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

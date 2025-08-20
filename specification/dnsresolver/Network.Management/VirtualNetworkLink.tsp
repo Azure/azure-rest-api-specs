@@ -60,7 +60,8 @@ interface VirtualNetworkLinks {
     },
     Response = ArmResourceUpdatedResponse<VirtualNetworkLink> | ArmResourceCreatedResponse<
       VirtualNetworkLink,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = VirtualNetworkLink> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse,
     Error = CloudError
   >;

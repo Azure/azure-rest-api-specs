@@ -60,7 +60,8 @@ interface OutboundEndpoints {
     },
     Response = ArmResourceUpdatedResponse<OutboundEndpoint> | ArmResourceCreatedResponse<
       OutboundEndpoint,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = OutboundEndpoint> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse,
     Error = CloudError
   >;

@@ -58,7 +58,8 @@ interface DnsResolvers {
     },
     Response = ArmResourceUpdatedResponse<DnsResolver> | ArmResourceCreatedResponse<
       DnsResolver,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = DnsResolver> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse,
     Error = CloudError
   >;

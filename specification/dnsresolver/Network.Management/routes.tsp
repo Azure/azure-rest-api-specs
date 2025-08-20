@@ -22,6 +22,7 @@ interface DnsResolversOperationGroup {
   @operationId("DnsResolvers_ListByVirtualNetwork")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolvers")
   @post
+  @list
   listByVirtualNetwork(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -50,6 +51,7 @@ interface DnsForwardingRulesetsOperationGroup {
   @operationId("DnsForwardingRulesets_ListByVirtualNetwork")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsForwardingRulesets")
   @post
+  @list
   listByVirtualNetwork(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -78,6 +80,7 @@ interface DnsResolverPoliciesOperationGroup {
   @operationId("DnsResolverPolicies_ListByVirtualNetwork")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolverPolicies")
   @post
+  @list
   listByVirtualNetwork(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

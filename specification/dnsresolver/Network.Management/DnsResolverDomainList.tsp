@@ -55,7 +55,8 @@ interface DnsResolverDomainLists {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DnsResolverDomainList> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
