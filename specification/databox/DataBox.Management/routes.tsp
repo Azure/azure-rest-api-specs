@@ -24,7 +24,7 @@ interface ServiceOperationGroup {
     Request = RegionConfigurationRequest,
     Response = RegionConfigurationResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ApiError
   >;
 
@@ -37,7 +37,7 @@ interface ServiceOperationGroup {
     Request = ValidateAddress,
     Response = AddressValidationOutput,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ApiError
   >;
 
@@ -49,7 +49,7 @@ interface ServiceOperationGroup {
     Request = ValidationRequest,
     Response = ValidationResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ApiError
   >;
 

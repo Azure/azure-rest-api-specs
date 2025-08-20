@@ -757,6 +757,9 @@ enum KekType {
   CustomerManaged,
 }
 
+/**
+ * Resolution code provided by customer.
+ */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CustomerResolutionCode {
@@ -818,6 +821,9 @@ enum JobDeliveryType {
   Scheduled,
 }
 
+/**
+ * SKU names.
+ */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SkuName {
@@ -1028,6 +1034,9 @@ enum ShareDestinationFormatType {
   ManagedDisk,
 }
 
+/**
+ * Access protocols supported on the device.
+ */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AccessProtocol {

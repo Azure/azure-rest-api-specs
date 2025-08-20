@@ -4,7 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DataBox;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AddressValidationOutput.properties);
+@@flattenProperty(AddressValidationOutput.properties, "!csharp");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ValidationResponse.properties);
@@ -15,37 +15,37 @@ using Microsoft.DataBox;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SkuInformation.properties);
 
-@@clientLocation(JobResources.get, "Jobs");
+@@clientLocation(JobResources.get, "Jobs", "!csharp");
 
-@@clientLocation(JobResources.create, "Jobs");
+@@clientLocation(JobResources.create, "Jobs", "!csharp");
 
 @@clientName(JobResources.create::parameters.resource, "jobResource");
 
-@@clientLocation(JobResources.update, "Jobs");
+@@clientLocation(JobResources.update, "Jobs", "!csharp");
 
 @@clientName(JobResources.update::parameters.properties,
   "jobResourceUpdateParameter"
 );
 
-@@clientLocation(JobResources.delete, "Jobs");
+@@clientLocation(JobResources.delete, "Jobs", "!csharp");
 
-@@clientLocation(JobResources.listByResourceGroup, "Jobs");
+@@clientLocation(JobResources.listByResourceGroup, "Jobs", "!csharp");
 
-@@clientLocation(JobResources.list, "Jobs");
+@@clientLocation(JobResources.list, "Jobs", "!csharp");
 
-@@clientLocation(JobResources.bookShipmentPickUp, "Jobs");
+@@clientLocation(JobResources.bookShipmentPickUp, "Jobs", "!csharp");
 
 @@clientName(JobResources.bookShipmentPickUp::parameters.body,
   "shipmentPickUpRequest"
 );
 
-@@clientLocation(JobResources.cancel, "Jobs");
+@@clientLocation(JobResources.cancel, "Jobs", "!csharp");
 
 @@clientName(JobResources.cancel::parameters.body, "cancellationReason");
 
-@@clientLocation(JobResources.listCredentials, "Jobs");
+@@clientLocation(JobResources.listCredentials, "Jobs", "!csharp");
 
-@@clientLocation(JobResources.markDevicesShipped, "Jobs");
+@@clientLocation(JobResources.markDevicesShipped, "Jobs", "!csharp");
 
 @@clientName(JobResources.markDevicesShipped::parameters.body,
   "markDevicesShippedRequest"
@@ -56,22 +56,28 @@ using Microsoft.DataBox;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(JobResource.properties);
 
-@@clientLocation(ServiceOperationGroup.regionConfiguration, "Service");
+@@clientLocation(ServiceOperationGroup.regionConfiguration,
+  "Service",
+  "!csharp"
+);
 
-@@clientLocation(ServiceOperationGroup.validateAddress, "Service");
+@@clientLocation(ServiceOperationGroup.validateAddress, "Service", "!csharp");
 
-@@clientLocation(ServiceOperationGroup.validateInputs, "Service");
+@@clientLocation(ServiceOperationGroup.validateInputs, "Service", "!csharp");
 
 @@clientLocation(ServiceOperationGroup.listAvailableSkusByResourceGroup,
-  "Service"
+  "Service",
+  "!csharp"
 );
 
 @@clientLocation(ServiceOperationGroup.regionConfigurationByResourceGroup,
-  "Service"
+  "Service",
+  "!csharp"
 );
 
 @@clientLocation(ServiceOperationGroup.validateInputsByResourceGroup,
-  "Service"
+  "Service",
+  "!csharp"
 );
 
 @@clientName(ServiceOperationGroup.regionConfiguration::parameters.body,
