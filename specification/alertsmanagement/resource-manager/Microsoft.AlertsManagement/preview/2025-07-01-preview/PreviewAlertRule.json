@@ -27,7 +27,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/Microsoft.AlertsManagement/previewAlertRule": {
+    "/{resourceId}/providers/Microsoft.AlertsManagement/previewAlertRule": {
       "post": {
         "tags": [
           "PreviewAlertRule"
@@ -36,7 +36,7 @@
         "operationId": "PreviewAlertRule",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/ResourceIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -497,11 +497,12 @@
     }
   },
   "parameters": {
-    "ResourceUriParameter": {
-      "name": "resourceUri",
+    "ResourceIdParameter": {
+      "name": "resourceId",
       "in": "path",
       "required": true,
       "type": "string",
+      "format": "arm-id",
       "description": "The identifier of the resource.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
