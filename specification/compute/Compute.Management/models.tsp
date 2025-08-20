@@ -7982,12 +7982,12 @@ model ScheduleProfile {
   /**
    * The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27.
    */
-  start: string;
+  start?: string;
 
   /**
    * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
    */
-  end: string;
+  end?: string;
 }
 
 /**
