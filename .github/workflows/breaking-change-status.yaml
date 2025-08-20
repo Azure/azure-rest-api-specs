@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger BreakingChange - Set Status"
+name: "Swagger BreakingChange - Set Status"
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -15,7 +15,12 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger BreakingChange - Analyze Code"]
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      [
+        "Swagger BreakingChange - Analyze Code",
+        "\\[TEST-IGNORE\\] Swagger BreakingChange - Analyze Code",
+      ]
     types: [completed]
 
 permissions:
@@ -30,6 +35,6 @@ jobs:
     name: Set BreakingChange Status
     uses: ./.github/workflows/_reusable-set-check-status.yaml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
-      required_check_name: "[TEST-IGNORE] Swagger BreakingChange"
-      overriding_label: "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact,BreakingChange-Approved-BranchPolicyException,BreakingChange-Approved-Previously,BreakingChange-Approved-Security,Versioning-Approved-Benign,Versioning-Approved-BugFix,Versioning-Approved-PrivatePreview,Versioning-Approved-BranchPolicyException,Versioning-Approved-Previously,Versioning-Approved-Retired"
+      monitored_workflow_name: "Swagger BreakingChange - Analyze Code"
+      required_check_name: "Swagger BreakingChange"
+      overriding_label: "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact,BreakingChange-Approved-BranchPolicyException,BreakingChange-Approved-Previously,BreakingChange-Approved-Security,BreakingChange-Approved-Retired,Versioning-Approved-Benign,Versioning-Approved-BugFix,Versioning-Approved-PrivatePreview,Versioning-Approved-BranchPolicyException,Versioning-Approved-Previously,Versioning-Approved-Retired,Versioning-Approved-NotReleased"
