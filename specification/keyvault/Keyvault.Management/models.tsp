@@ -12,6 +12,74 @@ using Azure.Core;
 namespace Microsoft.KeyVault;
 
 /**
+ * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
+ */
+union DeletionRecoveryLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Purgeable: "Purgeable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `Recoverable+Purgeable`: "Recoverable+Purgeable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Recoverable: "Recoverable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `Recoverable+ProtectedSubscription`: "Recoverable+ProtectedSubscription",
+}
+
+/**
+ * The type of the key. For valid values, see JsonWebKeyType.
+ */
+union JsonWebKeyType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  EC: "EC",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `EC-HSM`: "EC-HSM",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  RSA: "RSA",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `RSA-HSM`: "RSA-HSM",
+}
+
+/**
+ * The permitted JSON web key operations of the key. For more information, see JsonWebKeyOperation.
+ */
+union JsonWebKeyOperation {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  encrypt: "encrypt",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  decrypt: "decrypt",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sign: "sign",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  verify: "verify",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  wrapKey: "wrapKey",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  unwrapKey: "unwrapKey",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `import`: "import",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  release: "release",
+}
+
+/**
+ * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
+ */
+union JsonWebKeyCurveName {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `P-256`: "P-256",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `P-384`: "P-384",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `P-521`: "P-521",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `P-256K`: "P-256K",
+}
+
+/**
  * SKU family name
  */
 union SkuFamily {
@@ -437,6 +505,15 @@ union ManagedHsmSkuFamily {
 }
 
 /**
+ * The type of action.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum KeyRotationPolicyActionType {
+  rotate,
+  notify,
+}
+
+/**
  * SKU name to specify whether the key vault is a standard vault or a premium vault.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -528,6 +605,394 @@ enum ManagedHsmSkuName {
   Custom_B6,
   Custom_C42,
   Custom_C10,
+}
+
+/**
+ * The parameters used to create a key.
+ */
+model KeyCreateParameters {
+  /**
+   * The tags that will be assigned to the key.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /**
+   * The properties of the key to be created.
+   */
+  properties: KeyProperties;
+}
+
+/**
+ * The properties of the key.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model KeyProperties {
+  /**
+   * The attributes of the key.
+   */
+  attributes?: KeyAttributes;
+
+  /**
+   * The type of the key. For valid values, see JsonWebKeyType.
+   */
+  @minLength(1)
+  kty?: JsonWebKeyType;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  keyOps?: JsonWebKeyOperation[];
+
+  /**
+   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
+   */
+  keySize?: int32;
+
+  /**
+   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
+   */
+  curveName?: JsonWebKeyCurveName;
+
+  /**
+   * The URI to retrieve the current version of the key.
+   */
+  @visibility(Lifecycle.Read)
+  keyUri?: string;
+
+  /**
+   * The URI to retrieve the specific version of the key.
+   */
+  @visibility(Lifecycle.Read)
+  keyUriWithVersion?: string;
+
+  /**
+   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
+   */
+  rotationPolicy?: RotationPolicy;
+
+  /**
+   * Key release policy in response. It will be used for both output and input. Omitted if empty
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  release_policy?: KeyReleasePolicy;
+}
+
+/**
+ * The object attributes managed by the Azure Key Vault service.
+ */
+model KeyAttributes {
+  /**
+   * Determines whether or not the object is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * Not before date in seconds since 1970-01-01T00:00:00Z.
+   */
+  nbf?: int64;
+
+  /**
+   * Expiry date in seconds since 1970-01-01T00:00:00Z.
+   */
+  exp?: int64;
+
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  updated?: int64;
+
+  /**
+   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
+   */
+  @visibility(Lifecycle.Read)
+  recoveryLevel?: DeletionRecoveryLevel;
+
+  /**
+   * Indicates if the private key can be exported.
+   */
+  exportable?: boolean = false;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RotationPolicy {
+  /**
+   * The attributes of key rotation policy.
+   */
+  attributes?: KeyRotationPolicyAttributes;
+
+  /**
+   * The lifetimeActions for key rotation action.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  lifetimeActions?: LifetimeAction[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model KeyRotationPolicyAttributes {
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  updated?: int64;
+
+  /**
+   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
+   */
+  expiryTime?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model LifetimeAction {
+  /**
+   * The trigger of key rotation policy lifetimeAction.
+   */
+  trigger?: Trigger;
+
+  /**
+   * The action of key rotation policy lifetimeAction.
+   */
+  action?: Action;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model Trigger {
+  /**
+   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeAfterCreate?: string;
+
+  /**
+   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeBeforeExpiry?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model Action {
+  /**
+   * The type of action.
+   */
+  type?: KeyRotationPolicyActionType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model KeyReleasePolicy {
+  /**
+   * Content type and version of key release policy
+   */
+  contentType?: string = "application/json; charset=utf-8";
+
+  /**
+   * Blob encoding the policy rules under which the key can be released.
+   */
+  @encode("base64url")
+  data?: bytes;
+}
+
+/**
+ * The parameters used to create a key.
+ */
+model ManagedHsmKeyCreateParameters {
+  /**
+   * The tags that will be assigned to the key.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /**
+   * The properties of the key to be created.
+   */
+  properties: ManagedHsmKeyProperties;
+}
+
+/**
+ * The properties of the key.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ManagedHsmKeyProperties {
+  /**
+   * The attributes of the key.
+   */
+  attributes?: ManagedHsmKeyAttributes;
+
+  /**
+   * The type of the key. For valid values, see JsonWebKeyType.
+   */
+  @minLength(1)
+  kty?: JsonWebKeyType;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  keyOps?: JsonWebKeyOperation[];
+
+  /**
+   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
+   */
+  keySize?: int32;
+
+  /**
+   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
+   */
+  curveName?: JsonWebKeyCurveName;
+
+  /**
+   * The URI to retrieve the current version of the key.
+   */
+  @visibility(Lifecycle.Read)
+  keyUri?: string;
+
+  /**
+   * The URI to retrieve the specific version of the key.
+   */
+  @visibility(Lifecycle.Read)
+  keyUriWithVersion?: string;
+
+  /**
+   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
+   */
+  rotationPolicy?: ManagedHsmRotationPolicy;
+
+  /**
+   * Key release policy in response. It will be used for both output and input. Omitted if empty
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  release_policy?: ManagedHsmKeyReleasePolicy;
+}
+
+/**
+ * The object attributes managed by the Azure Key Vault service.
+ */
+model ManagedHsmKeyAttributes {
+  /**
+   * Determines whether or not the object is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * Not before date in seconds since 1970-01-01T00:00:00Z.
+   */
+  nbf?: int64;
+
+  /**
+   * Expiry date in seconds since 1970-01-01T00:00:00Z.
+   */
+  exp?: int64;
+
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  updated?: int64;
+
+  /**
+   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
+   */
+  @visibility(Lifecycle.Read)
+  recoveryLevel?: DeletionRecoveryLevel;
+
+  /**
+   * Indicates if the private key can be exported.
+   */
+  exportable?: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ManagedHsmRotationPolicy {
+  /**
+   * The attributes of key rotation policy.
+   */
+  attributes?: ManagedHsmKeyRotationPolicyAttributes;
+
+  /**
+   * The lifetimeActions for key rotation action.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  lifetimeActions?: ManagedHsmLifetimeAction[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ManagedHsmKeyRotationPolicyAttributes {
+  /**
+   * Creation time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  created?: int64;
+
+  /**
+   * Last updated time in seconds since 1970-01-01T00:00:00Z.
+   */
+  @visibility(Lifecycle.Read)
+  updated?: int64;
+
+  /**
+   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
+   */
+  expiryTime?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ManagedHsmLifetimeAction {
+  /**
+   * The trigger of key rotation policy lifetimeAction.
+   */
+  trigger?: ManagedHsmTrigger;
+
+  /**
+   * The action of key rotation policy lifetimeAction.
+   */
+  action?: ManagedHsmAction;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ManagedHsmTrigger {
+  /**
+   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeAfterCreate?: string;
+
+  /**
+   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
+   */
+  timeBeforeExpiry?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ManagedHsmAction {
+  /**
+   * The type of action.
+   */
+  type?: KeyRotationPolicyActionType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ManagedHsmKeyReleasePolicy {
+  /**
+   * Content type and version of key release policy
+   */
+  contentType?: string = "application/json; charset=utf-8";
+
+  /**
+   * Blob encoding the policy rules under which the key can be released.
+   */
+  @encode("base64url")
+  data?: bytes;
 }
 
 /**
@@ -863,6 +1328,43 @@ model CloudErrorBody {
    * User friendly error message. The message is typically localized and may vary with service version.
    */
   message?: string;
+}
+
+/**
+ * Metadata pertaining to creation and last modification of the key vault resource.
+ */
+model SystemData {
+  /**
+   * The identity that created the key vault resource.
+   */
+  createdBy?: string;
+
+  /**
+   * The type of identity that created the key vault resource.
+   */
+  createdByType?: IdentityType;
+
+  /**
+   * The timestamp of the key vault resource creation (UTC).
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  /**
+   * The identity that last modified the key vault resource.
+   */
+  lastModifiedBy?: string;
+
+  /**
+   * The type of identity that last modified the key vault resource.
+   */
+  lastModifiedByType?: IdentityType;
+
+  /**
+   * The timestamp of the key vault resource last modification (UTC).
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
 }
 
 /**
@@ -1512,7 +2014,7 @@ model Error {
    */
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "innererror")
-  innerError?: Error;
+  innererror?: Error;
 }
 
 /**
@@ -1839,18 +2341,21 @@ model Attributes {
    * Not before date in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nbf?: utcDateTime;
 
   /**
    * Expiry date in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   exp?: utcDateTime;
 
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @visibility(Lifecycle.Read)
   created?: utcDateTime;
 
@@ -1858,6 +2363,7 @@ model Attributes {
    * Last updated time in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @visibility(Lifecycle.Read)
   updated?: utcDateTime;
 }
@@ -1985,12 +2491,11 @@ model Operation {
 /**
  * Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.
  */
-@Azure.Core.pagedResult
 model OperationListResult {
   /**
    * List of Storage operations supported by the Storage resource provider.
    */
-  @Azure.Core.items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value: Operation[];
 

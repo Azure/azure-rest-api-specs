@@ -32,6 +32,13 @@ model PrivateEndpointConnection
   location?: string;
 
   /**
+   * Tags assigned to the key vault resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -65,7 +72,8 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnection> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = ArmResponse<PrivateEndpointConnection> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

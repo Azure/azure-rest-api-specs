@@ -22,6 +22,7 @@ interface VaultsOperationGroup {
   @autoRoute
   @get
   @action("deletedVaults")
+  @list
   listDeleted is ArmProviderActionSync<
     Response = ResourceListResult<DeletedVault>,
     Scope = SubscriptionActionScope,
@@ -35,6 +36,7 @@ interface VaultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resources")
   @get
+  @list
   list(
     /**
      * The filter to apply on the operation.
@@ -82,6 +84,7 @@ interface ManagedHsmsOperationGroup {
   @autoRoute
   @get
   @action("deletedManagedHSMs")
+  @list
   listDeleted is ArmProviderActionSync<
     Response = ResourceListResult<DeletedManagedHsm>,
     Scope = SubscriptionActionScope,

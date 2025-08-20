@@ -21,6 +21,8 @@ import "./MhsmPrivateEndpointConnection.tsp";
 import "./Secret.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./Key.tsp";
+import "./ManagedHsmKey.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -59,6 +61,7 @@ interface Operations {
   @autoRoute
   @segment("operations")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 

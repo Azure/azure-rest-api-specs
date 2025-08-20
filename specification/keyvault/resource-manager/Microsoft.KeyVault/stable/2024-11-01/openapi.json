@@ -62,6 +62,18 @@
     },
     {
       "name": "Secrets"
+    },
+    {
+      "name": "Keys"
+    },
+    {
+      "name": "KeyOperationGroup"
+    },
+    {
+      "name": "ManagedHsmKeys"
+    },
+    {
+      "name": "ManagedHsmKeyOperationGroup"
     }
   ],
   "paths": {
@@ -871,6 +883,304 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys": {
+      "get": {
+        "operationId": "ManagedHsmKeys_List",
+        "tags": [
+          "ManagedHsmKeys"
+        ],
+        "description": "Lists the keys in the specified managed HSM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Managed HSM Pool within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z]([A-Za-z0-9]|\\-[A-Za-z0-9])+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List keys in the managed HSM": {
+            "$ref": "./examples/managedHsmListKeys.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys/{keyName}": {
+      "get": {
+        "operationId": "ManagedHsmKeys_Get",
+        "tags": [
+          "ManagedHsmKeys"
+        ],
+        "description": "Gets the current version of the specified key from the specified managed HSM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Managed HSM Pool within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z]([A-Za-z0-9]|\\-[A-Za-z0-9])+$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a key": {
+            "$ref": "./examples/managedHsmGetKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedHsmKeys_CreateIfNotExist",
+        "tags": [
+          "ManagedHsmKeys"
+        ],
+        "description": "Creates the first version of a new key if it does not exist. If it already exists, then the existing key is returned without any write operations being performed. This API does not create subsequent versions, and does not update existing keys.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Managed HSM Pool within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z]([A-Za-z0-9]|\\-[A-Za-z0-9])+$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters used to create the specified key.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmKeyCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedHsmKey' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a key": {
+            "$ref": "./examples/managedHsmCreateKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys/{keyName}/versions": {
+      "get": {
+        "operationId": "ManagedHsmKeys_ListVersions",
+        "tags": [
+          "ManagedHsmKeyOperationGroup"
+        ],
+        "description": "Lists the keys in the specified managed HSM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Managed HSM Pool within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z]([A-Za-z0-9]|\\-[A-Za-z0-9])+$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List key versions in the managed HSM": {
+            "$ref": "./examples/managedHsmListKeyVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/keys/{keyName}/versions/{keyVersion}": {
+      "get": {
+        "operationId": "ManagedHsmKeys_GetVersion",
+        "tags": [
+          "ManagedHsmKeyOperationGroup"
+        ],
+        "description": "Gets the specified version of the specified key in the specified managed HSM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Managed HSM Pool within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z]([A-Za-z0-9]|\\-[A-Za-z0-9])+$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          },
+          {
+            "name": "keyVersion",
+            "in": "path",
+            "description": "The version of the key to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a key version": {
+            "$ref": "./examples/managedHsmGetKeyVersion.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections": {
       "get": {
         "operationId": "MHSMPrivateEndpointConnections_ListByResource",
@@ -1554,6 +1864,294 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/keys": {
+      "get": {
+        "operationId": "Keys_List",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Lists the keys in the specified key vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault which contains the key to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List keys in the vault": {
+            "$ref": "./examples/listKeys.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/keys/{keyName}": {
+      "get": {
+        "operationId": "Keys_Get",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Gets the current version of the specified key from the specified key vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault which contains the key to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a key": {
+            "$ref": "./examples/getKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Keys_CreateIfNotExist",
+        "tags": [
+          "Keys"
+        ],
+        "description": "Creates the first version of a new key if it does not exist. If it already exists, then the existing key is returned without any write operations being performed. This API does not create subsequent versions, and does not update existing keys.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the Managed HSM Pool within the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be created. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters used to create the specified key.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Key' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a key": {
+            "$ref": "./examples/createKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/keys/{keyName}/versions": {
+      "get": {
+        "operationId": "Keys_ListVersions",
+        "tags": [
+          "KeyOperationGroup"
+        ],
+        "description": "Lists the keys in the specified key vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault which contains the key version to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key version to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List key versions in the vault": {
+            "$ref": "./examples/listKeyVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/keys/{keyName}/versions/{keyVersion}": {
+      "get": {
+        "operationId": "Keys_GetVersion",
+        "tags": [
+          "KeyOperationGroup"
+        ],
+        "description": "Gets the specified version of the specified key in the specified key vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault which contains the key version to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key version to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,127}$"
+          },
+          {
+            "name": "keyVersion",
+            "in": "path",
+            "description": "The version of the key to be retrieved.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a key version": {
+            "$ref": "./examples/getKeyVersion.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListByResource",
@@ -2183,6 +2781,15 @@
         "permissions"
       ]
     },
+    "Action": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/KeyRotationPolicyActionType",
+          "description": "The type of action."
+        }
+      }
+    },
     "ActionsRequired": {
       "type": "string",
       "description": "A message indicating if changes on the service provider require any updates on the consumer.",
@@ -2618,6 +3225,38 @@
         }
       }
     },
+    "DeletionRecoveryLevel": {
+      "type": "string",
+      "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
+      "enum": [
+        "Purgeable",
+        "Recoverable+Purgeable",
+        "Recoverable",
+        "Recoverable+ProtectedSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "DeletionRecoveryLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Purgeable",
+            "value": "Purgeable"
+          },
+          {
+            "name": "Recoverable+Purgeable",
+            "value": "Recoverable+Purgeable"
+          },
+          {
+            "name": "Recoverable",
+            "value": "Recoverable"
+          },
+          {
+            "name": "Recoverable+ProtectedSubscription",
+            "value": "Recoverable+ProtectedSubscription"
+          }
+        ]
+      }
+    },
     "DimensionProperties": {
       "type": "object",
       "description": "Type of operation: get, read, delete, etc.",
@@ -2708,6 +3347,258 @@
         "value": {
           "type": "string",
           "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of identity.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key"
+          }
+        ]
+      }
+    },
+    "JsonWebKeyCurveName": {
+      "type": "string",
+      "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256",
+      "enum": [
+        "P-256",
+        "P-384",
+        "P-521",
+        "P-256K"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWebKeyCurveName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "P-256",
+            "value": "P-256"
+          },
+          {
+            "name": "P-384",
+            "value": "P-384"
+          },
+          {
+            "name": "P-521",
+            "value": "P-521"
+          },
+          {
+            "name": "P-256K",
+            "value": "P-256K"
+          }
+        ]
+      }
+    },
+    "JsonWebKeyOperation": {
+      "type": "string",
+      "description": "The permitted JSON web key operations of the key. For more information, see JsonWebKeyOperation.",
+      "enum": [
+        "encrypt",
+        "decrypt",
+        "sign",
+        "verify",
+        "wrapKey",
+        "unwrapKey",
+        "import",
+        "release"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWebKeyOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "encrypt",
+            "value": "encrypt"
+          },
+          {
+            "name": "decrypt",
+            "value": "decrypt"
+          },
+          {
+            "name": "sign",
+            "value": "sign"
+          },
+          {
+            "name": "verify",
+            "value": "verify"
+          },
+          {
+            "name": "wrapKey",
+            "value": "wrapKey"
+          },
+          {
+            "name": "unwrapKey",
+            "value": "unwrapKey"
+          },
+          {
+            "name": "import",
+            "value": "import"
+          },
+          {
+            "name": "release",
+            "value": "release"
+          }
+        ]
+      }
+    },
+    "JsonWebKeyType": {
+      "type": "string",
+      "description": "The type of the key. For valid values, see JsonWebKeyType.",
+      "enum": [
+        "EC",
+        "EC-HSM",
+        "RSA",
+        "RSA-HSM"
+      ],
+      "x-ms-enum": {
+        "name": "JsonWebKeyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EC",
+            "value": "EC"
+          },
+          {
+            "name": "EC-HSM",
+            "value": "EC-HSM"
+          },
+          {
+            "name": "RSA",
+            "value": "RSA"
+          },
+          {
+            "name": "RSA-HSM",
+            "value": "RSA-HSM"
+          }
+        ]
+      }
+    },
+    "Key": {
+      "type": "object",
+      "description": "The key resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KeyProperties",
+          "description": "The properties of the key.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "KeyAttributes": {
+      "type": "object",
+      "description": "The object attributes managed by the Azure Key Vault service.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether or not the object is enabled."
+        },
+        "nbf": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Not before date in seconds since 1970-01-01T00:00:00Z.",
+          "x-ms-client-name": "NotBefore"
+        },
+        "exp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z.",
+          "x-ms-client-name": "Expires"
+        },
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "recoveryLevel": {
+          "$ref": "#/definitions/DeletionRecoveryLevel",
+          "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
+          "readOnly": true
+        },
+        "exportable": {
+          "type": "boolean",
+          "description": "Indicates if the private key can be exported.",
+          "default": false
+        }
+      }
+    },
+    "KeyCreateParameters": {
+      "type": "object",
+      "description": "The parameters used to create a key.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The tags that will be assigned to the key.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/KeyProperties",
+          "description": "The properties of the key to be created."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "KeyListResult": {
+      "type": "object",
+      "description": "The response of a Key list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Key items on this page",
+          "items": {
+            "$ref": "#/definitions/Key"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2828,6 +3719,114 @@
             "value": "setrotationpolicy"
           }
         ]
+      }
+    },
+    "KeyProperties": {
+      "type": "object",
+      "description": "The properties of the key.",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/KeyAttributes",
+          "description": "The attributes of the key."
+        },
+        "kty": {
+          "$ref": "#/definitions/JsonWebKeyType",
+          "description": "The type of the key. For valid values, see JsonWebKeyType."
+        },
+        "keyOps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonWebKeyOperation"
+          }
+        },
+        "keySize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096."
+        },
+        "curveName": {
+          "$ref": "#/definitions/JsonWebKeyCurveName",
+          "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256"
+        },
+        "keyUri": {
+          "type": "string",
+          "description": "The URI to retrieve the current version of the key.",
+          "readOnly": true
+        },
+        "keyUriWithVersion": {
+          "type": "string",
+          "description": "The URI to retrieve the specific version of the key.",
+          "readOnly": true
+        },
+        "rotationPolicy": {
+          "$ref": "#/definitions/RotationPolicy",
+          "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
+        },
+        "release_policy": {
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
+        }
+      }
+    },
+    "KeyReleasePolicy": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Content type and version of key release policy",
+          "default": "application/json; charset=utf-8"
+        },
+        "data": {
+          "type": "string",
+          "format": "base64url",
+          "description": "Blob encoding the policy rules under which the key can be released."
+        }
+      }
+    },
+    "KeyRotationPolicyActionType": {
+      "type": "string",
+      "description": "The type of action.",
+      "enum": [
+        "rotate",
+        "notify"
+      ],
+      "x-ms-enum": {
+        "name": "KeyRotationPolicyActionType",
+        "modelAsString": false
+      }
+    },
+    "KeyRotationPolicyAttributes": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "type": "string",
+          "description": "The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
+        }
+      }
+    },
+    "LifetimeAction": {
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "The trigger of key rotation policy lifetimeAction."
+        },
+        "action": {
+          "$ref": "#/definitions/Action",
+          "description": "The action of key rotation policy lifetimeAction."
+        }
       }
     },
     "LogSpecification": {
@@ -3188,6 +4187,15 @@
         }
       ]
     },
+    "ManagedHsmAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/KeyRotationPolicyActionType",
+          "description": "The type of action."
+        }
+      }
+    },
     "ManagedHsmError": {
       "type": "object",
       "description": "The error exception.",
@@ -3196,6 +4204,205 @@
           "$ref": "#/definitions/Error",
           "description": "The server error.",
           "readOnly": true
+        }
+      }
+    },
+    "ManagedHsmKey": {
+      "type": "object",
+      "description": "The key resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedHsmKeyProperties",
+          "description": "The properties of the key.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedHsmKeyAttributes": {
+      "type": "object",
+      "description": "The object attributes managed by the Azure Key Vault service.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether or not the object is enabled."
+        },
+        "nbf": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Not before date in seconds since 1970-01-01T00:00:00Z.",
+          "x-ms-client-name": "NotBefore"
+        },
+        "exp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z.",
+          "x-ms-client-name": "Expires"
+        },
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "recoveryLevel": {
+          "$ref": "#/definitions/DeletionRecoveryLevel",
+          "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
+          "readOnly": true
+        },
+        "exportable": {
+          "type": "boolean",
+          "description": "Indicates if the private key can be exported."
+        }
+      }
+    },
+    "ManagedHsmKeyCreateParameters": {
+      "type": "object",
+      "description": "The parameters used to create a key.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The tags that will be assigned to the key.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedHsmKeyProperties",
+          "description": "The properties of the key to be created."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ManagedHsmKeyListResult": {
+      "type": "object",
+      "description": "The response of a ManagedHsmKey list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedHsmKey items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedHsmKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedHsmKeyProperties": {
+      "type": "object",
+      "description": "The properties of the key.",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/ManagedHsmKeyAttributes",
+          "description": "The attributes of the key."
+        },
+        "kty": {
+          "$ref": "#/definitions/JsonWebKeyType",
+          "description": "The type of the key. For valid values, see JsonWebKeyType."
+        },
+        "keyOps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonWebKeyOperation"
+          }
+        },
+        "keySize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096."
+        },
+        "curveName": {
+          "$ref": "#/definitions/JsonWebKeyCurveName",
+          "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256"
+        },
+        "keyUri": {
+          "type": "string",
+          "description": "The URI to retrieve the current version of the key.",
+          "readOnly": true
+        },
+        "keyUriWithVersion": {
+          "type": "string",
+          "description": "The URI to retrieve the specific version of the key.",
+          "readOnly": true
+        },
+        "rotationPolicy": {
+          "$ref": "#/definitions/ManagedHsmRotationPolicy",
+          "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
+        },
+        "release_policy": {
+          "$ref": "#/definitions/ManagedHsmKeyReleasePolicy",
+          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
+        }
+      }
+    },
+    "ManagedHsmKeyReleasePolicy": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Content type and version of key release policy",
+          "default": "application/json; charset=utf-8"
+        },
+        "data": {
+          "type": "string",
+          "format": "base64url",
+          "description": "Blob encoding the policy rules under which the key can be released."
+        }
+      }
+    },
+    "ManagedHsmKeyRotationPolicyAttributes": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z.",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "type": "string",
+          "description": "The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
+        }
+      }
+    },
+    "ManagedHsmLifetimeAction": {
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/ManagedHsmTrigger",
+          "description": "The trigger of key rotation policy lifetimeAction."
+        },
+        "action": {
+          "$ref": "#/definitions/ManagedHsmAction",
+          "description": "The action of key rotation policy lifetimeAction."
         }
       }
     },
@@ -3371,13 +4578,30 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "#/definitions/SystemData",
           "description": "Metadata pertaining to creation and last modification of the key vault resource.",
           "readOnly": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity (system assigned and/or user assigned identities)"
+        }
+      }
+    },
+    "ManagedHsmRotationPolicy": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/ManagedHsmKeyRotationPolicyAttributes",
+          "description": "The attributes of key rotation policy."
+        },
+        "lifetimeActions": {
+          "type": "array",
+          "description": "The lifetimeActions for key rotation action.",
+          "items": {
+            "$ref": "#/definitions/ManagedHsmLifetimeAction"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3434,6 +4658,19 @@
       "x-ms-enum": {
         "name": "ManagedHsmSkuName",
         "modelAsString": false
+      }
+    },
+    "ManagedHsmTrigger": {
+      "type": "object",
+      "properties": {
+        "timeAfterCreate": {
+          "type": "string",
+          "description": "The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
+        },
+        "timeBeforeExpiry": {
+          "type": "string",
+          "description": "The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
+        }
       }
     },
     "MetricSpecification": {
@@ -3713,6 +4950,13 @@
           "type": "string",
           "description": "Azure location of the key vault resource.",
           "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags assigned to the key vault resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "etag": {
           "type": "string",
@@ -4069,6 +5313,23 @@
       "required": [
         "value"
       ]
+    },
+    "RotationPolicy": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/KeyRotationPolicyAttributes",
+          "description": "The attributes of key rotation policy."
+        },
+        "lifetimeActions": {
+          "type": "array",
+          "description": "The lifetimeActions for key rotation action.",
+          "items": {
+            "$ref": "#/definitions/LifetimeAction"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "Secret": {
       "type": "object",
@@ -4427,6 +5688,51 @@
             "value": "deletesas"
           }
         ]
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the key vault resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the key vault resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the key vault resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the key vault resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the key vault resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the key vault resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the key vault resource last modification (UTC)."
+        }
+      }
+    },
+    "Trigger": {
+      "type": "object",
+      "properties": {
+        "timeAfterCreate": {
+          "type": "string",
+          "description": "The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
+        },
+        "timeBeforeExpiry": {
+          "type": "string",
+          "description": "The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
+        }
       }
     },
     "Vault": {

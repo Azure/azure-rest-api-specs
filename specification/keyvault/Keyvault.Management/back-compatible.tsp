@@ -5,6 +5,12 @@ using Azure.ClientGenerator.Core;
 using Microsoft.KeyVault;
 using Azure.Core;
 
+@@clientName(KeyAttributes.nbf, "NotBefore");
+@@clientName(KeyAttributes.exp, "Expires");
+
+@@clientName(ManagedHsmKeyAttributes.nbf, "NotBefore");
+@@clientName(ManagedHsmKeyAttributes.exp, "Expires");
+
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnectionItem.properties);
 
@@ -14,11 +20,31 @@ using Azure.Core;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MhsmPrivateEndpointConnectionItem.properties);
 
+@@clientName(Error.innererror, "innerError");
+
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MhsmPrivateLinkResource.properties);
 
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(Operation.properties);
+@@clientName(Operation.properties, "operationProperties");
+
 @@clientName(Attributes.nbf, "NotBefore");
 @@clientName(Attributes.exp, "Expires");
+
+@@clientName(Keys.createIfNotExist::parameters.resource, "parameters");
+@@clientLocation(KeyOperationGroup.getVersion, Keys);
+@@clientLocation(KeyOperationGroup.listVersions, Keys);
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(Key.properties);
+
+@@clientName(ManagedHsmKeys.createIfNotExist::parameters.resource,
+  "parameters"
+);
+@@clientLocation(ManagedHsmKeyOperationGroup.getVersion, ManagedHsmKeys);
+@@clientLocation(ManagedHsmKeyOperationGroup.listVersions, ManagedHsmKeys);
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(ManagedHsmKey.properties);
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Vaults.update::parameters.properties, "parameters");

@@ -153,6 +153,7 @@ interface ManagedHsms {
   @get
   @action("regions")
   @operationId("MHSMRegions_ListByResource")
+  @list
   listByResource is ArmResourceActionSync<
     ManagedHsm,
     void,
