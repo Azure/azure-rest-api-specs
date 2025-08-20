@@ -25,46 +25,6 @@
         "enableBgp": false,
         "activeActive": false,
         "disableIPSecReplayProtection": false,
-        "natRules": [
-          {
-            "name": "natRule1",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule1",
-            "properties": {
-              "type": "Static",
-              "mode": "EgressSnat",
-              "ipConfigurationId": "",
-              "internalMappings": [
-                {
-                  "addressSpace": "10.10.0.0/24"
-                }
-              ],
-              "externalMappings": [
-                {
-                  "addressSpace": "50.0.0.0/24"
-                }
-              ]
-            }
-          },
-          {
-            "name": "natRule2",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule2",
-            "properties": {
-              "type": "Static",
-              "mode": "IngressSnat",
-              "ipConfigurationId": "",
-              "internalMappings": [
-                {
-                  "addressSpace": "20.10.0.0/24"
-                }
-              ],
-              "externalMappings": [
-                {
-                  "addressSpace": "30.0.0.0/24"
-                }
-              ]
-            }
-          }
-        ],
         "enableBgpRouteTranslationForNat": false,
         "sku": {
           "name": "ErGwScale",
@@ -79,7 +39,14 @@
         "vpnClientConfiguration": null,
         "bgpSettings": null,
         "allowVirtualWanTraffic": false,
-        "allowRemoteVnetTraffic": false
+        "allowRemoteVnetTraffic": false,
+        "natRules": [],
+        "virtualNetworkGatewayPolicyGroups": [],
+        "natRulesUpdateRequired": [],
+        "isMultiTenantCustomerGateway": false,
+        "isMultiTenantParentGateway": false,
+        "isHoboPublicIP": false,
+        "adminState": "Enabled"
       },
       "location": "centralus"
     }
@@ -112,51 +79,15 @@
               }
             }
           ],
-          "natRules": [
-            {
-              "name": "natRule1",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule1",
-              "properties": {
-                "type": "Static",
-                "mode": "EgressSnat",
-                "ipConfigurationId": "",
-                "internalMappings": [
-                  {
-                    "addressSpace": "10.10.0.0/24"
-                  }
-                ],
-                "externalMappings": [
-                  {
-                    "addressSpace": "50.0.0.0/24"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "natRule2",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule2",
-              "properties": {
-                "type": "Static",
-                "mode": "IngressSnat",
-                "ipConfigurationId": "",
-                "internalMappings": [
-                  {
-                    "addressSpace": "20.10.0.0/24"
-                  }
-                ],
-                "externalMappings": [
-                  {
-                    "addressSpace": "30.0.0.0/24"
-                  }
-                ]
-              }
-            }
-          ],
+          "gatewayType": "ExpressRoute",
+          "vpnType": "PolicyBased",
+          "enableBgp": false,
+          "activeActive": false,
+          "disableIPSecReplayProtection": false,
           "enableBgpRouteTranslationForNat": false,
           "sku": {
             "name": "ErGwScale",
-            "tier": "ErGwScale",
-            "capacity": 0
+            "tier": "ErGwScale"
           },
           "autoScaleConfiguration": {
             "bounds": {
@@ -164,17 +95,17 @@
               "max": 3
             }
           },
-          "gatewayType": "ExpressRoute",
-          "vpnType": "PolicyBased",
-          "vpnGatewayGeneration": "None",
-          "enableBgp": false,
-          "activeActive": false,
-          "disableIPSecReplayProtection": false,
           "vpnClientConfiguration": null,
           "bgpSettings": null,
-          "customRoutes": null,
           "allowVirtualWanTraffic": false,
-          "allowRemoteVnetTraffic": false
+          "allowRemoteVnetTraffic": false,
+          "natRules": [],
+          "virtualNetworkGatewayPolicyGroups": [],
+          "natRulesUpdateRequired": [],
+          "isMultiTenantCustomerGateway": false,
+          "isMultiTenantParentGateway": false,
+          "isHoboPublicIP": false,
+          "adminState": "Enabled"
         }
       }
     },
@@ -205,51 +136,15 @@
               }
             }
           ],
-          "natRules": [
-            {
-              "name": "natRule1",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule1",
-              "properties": {
-                "type": "Static",
-                "mode": "EgressSnat",
-                "ipConfigurationId": "",
-                "internalMappings": [
-                  {
-                    "addressSpace": "10.10.0.0/24"
-                  }
-                ],
-                "externalMappings": [
-                  {
-                    "addressSpace": "50.0.0.0/24"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "natRule2",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/ergw/natRules/natRule2",
-              "properties": {
-                "type": "Static",
-                "mode": "IngressSnat",
-                "ipConfigurationId": "",
-                "internalMappings": [
-                  {
-                    "addressSpace": "20.10.0.0/24"
-                  }
-                ],
-                "externalMappings": [
-                  {
-                    "addressSpace": "30.0.0.0/24"
-                  }
-                ]
-              }
-            }
-          ],
+          "gatewayType": "ExpressRoute",
+          "vpnType": "PolicyBased",
+          "enableBgp": false,
+          "activeActive": false,
+          "disableIPSecReplayProtection": false,
           "enableBgpRouteTranslationForNat": false,
           "sku": {
             "name": "ErGwScale",
-            "tier": "ErGwScale",
-            "capacity": 2
+            "tier": "ErGwScale"
           },
           "autoScaleConfiguration": {
             "bounds": {
@@ -257,17 +152,17 @@
               "max": 3
             }
           },
-          "gatewayType": "ExpressRoute",
-          "vpnType": "PolicyBased",
-          "enableBgp": false,
-          "activeActive": false,
-          "disableIPSecReplayProtection": false,
-          "enablePrivateIpAddress": false,
           "vpnClientConfiguration": null,
           "bgpSettings": null,
-          "customRoutes": null,
           "allowVirtualWanTraffic": false,
-          "allowRemoteVnetTraffic": false
+          "allowRemoteVnetTraffic": false,
+          "natRules": [],
+          "virtualNetworkGatewayPolicyGroups": [],
+          "natRulesUpdateRequired": [],
+          "isMultiTenantCustomerGateway": false,
+          "isMultiTenantParentGateway": false,
+          "isHoboPublicIP": false,
+          "adminState": "Enabled"
         }
       }
     }
