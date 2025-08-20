@@ -177,10 +177,10 @@
             "$ref": "#/parameters/LanguageParameter"
           },
           {
-            "$ref": "#/parameters/LocationsListingParameter"
+            "$ref": "#/parameters/SkusLocationsListingParameter"
           },
           {
-            "$ref": "#/parameters/ListingMarketParameter"
+            "$ref": "#/parameters/ListingSkusMarketParameter"
           },
           {
             "$ref": "#/parameters/OdataSelectParameter"
@@ -1701,10 +1701,18 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "ListingSkusMarketParameter": {
+      "name": "market",
+      "in": "query",
+      "description": "Market value. The response will include only skus that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "LocationsListingParameter": {
       "name": "locations",
       "in": "query",
-      "description": "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+      "description": "Return products available in selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/",
       "required": false,
       "type": "array",
       "items": {
@@ -1716,7 +1724,7 @@
     "LocationsSingleParameter": {
       "name": "locations",
       "in": "query",
-      "description": "Return plans/availabilities for selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+      "description": "Return plans/availabilities for selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/",
       "required": false,
       "type": "array",
       "items": {
@@ -1797,6 +1805,18 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "SkusLocationsListingParameter": {
+      "name": "locations",
+      "in": "query",
+      "description": "Return skus available in selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
     "SkusOdataFilterParameter": {
       "name": "$filter",
       "in": "query",
@@ -1808,7 +1828,7 @@
     "SkusOdataOrderByParameter": {
       "name": "$orderBy",
       "in": "query",
-      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy",
+      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=productDisplayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"

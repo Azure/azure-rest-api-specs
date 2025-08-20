@@ -56,8 +56,8 @@ op listProducts(
 alias SkusListingTraits = ServiceParameter &
   ServiceFamilyParameter &
   LanguageParameter &
-  LocationsListingParameter &
-  ListingMarketParameter &
+  SkusLocationsListingParameter &
+  ListingSkusMarketParameter &
   OdataSelectParameter &
   SkusOdataFilterParameter &
   SkusOdataOrderByParameter;

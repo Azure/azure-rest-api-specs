@@ -858,6 +858,13 @@ model ListingMarketParameter {
   market?: string;
 }
 
+@doc("Marketplace Catalog API")
+model ListingSkusMarketParameter {
+  @query
+  @doc("Market value. The response will include only skus that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  market?: string;
+}
+
 @doc("Parameters for language selection")
 model LanguageParameter {
   @query
@@ -868,14 +875,21 @@ model LanguageParameter {
 @doc("Parameters for location filtering")
 model LocationsSingleParameter {
   @query
-  @doc("Return plans/availabilities for selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
+  @doc("Return plans/availabilities for selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/")
   locations?: string[];
 }
 
 @doc("Parameters for location filtering")
 model LocationsListingParameter {
   @query
-  @doc("Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
+  @doc("Return products available in selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/")
+  locations?: string[];
+}
+
+@doc("Parameters for location filtering")
+model SkusLocationsListingParameter {
+  @query
+  @doc("Return skus available in selected location. For more information on of the Azure datacenter regions see: https://azure.microsoft.com/regions/")
   locations?: string[];
 }
 
@@ -974,7 +988,7 @@ model ProductsOdataOrderByParameter {
 @doc("Skus OData Expand parameter")
 model SkusOdataOrderByParameter {
   @query
-  @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy")
+  @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=productDisplayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy")
   $orderBy?: string;
 }
 
