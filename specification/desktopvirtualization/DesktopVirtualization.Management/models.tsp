@@ -2550,6 +2550,7 @@ model HostPoolProperties {
   /**
    * DeploymentScope type for HostPool.
    */
+  @added(Versions.v2025_08_01_preview)
   deploymentScope?: DeploymentScope;
 
   /**

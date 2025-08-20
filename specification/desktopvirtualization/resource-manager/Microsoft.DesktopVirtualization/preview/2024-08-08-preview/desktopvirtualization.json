@@ -6836,30 +6836,6 @@
         "modelAsString": false
       }
     },
-    "DeploymentScope": {
-      "type": "string",
-      "description": "DeploymentScope type for HostPool.",
-      "enum": [
-        "Geographical",
-        "Regional"
-      ],
-      "x-ms-enum": {
-        "name": "DeploymentScope",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Geographical",
-            "value": "Geographical",
-            "description": "For geographical Broker and ArmProvider talking to Geographical SQL DB"
-          },
-          {
-            "name": "Regional",
-            "value": "Regional",
-            "description": "For regional Broker and ArmProvider talking to regional SQL DB"
-          }
-        ]
-      }
-    },
     "Desktop": {
       "type": "object",
       "description": "Schema for Desktop properties.",
@@ -7612,10 +7588,6 @@
         "managementType": {
           "$ref": "#/definitions/ManagementType",
           "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated."
-        },
-        "deploymentScope": {
-          "$ref": "#/definitions/DeploymentScope",
-          "description": "DeploymentScope type for HostPool."
         }
       },
       "required": [
