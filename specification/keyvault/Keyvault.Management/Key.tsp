@@ -60,7 +60,7 @@ interface Keys {
   /**
    * Creates the first version of a new key if it does not exist. If it already exists, then the existing key is returned without any write operations being performed. This API does not create subsequent versions, and does not update existing keys.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   createIfNotExist is Azure.ResourceManager.Legacy.CreateOperation<
     {
@@ -91,8 +91,6 @@ interface Keys {
   /**
    * Lists the keys in the specified key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Keys_List")
   list is KeyOps.List<Key, OverrideErrorType = CloudError>;
 }
 @armResourceOperations
@@ -133,15 +131,11 @@ interface KeyOperationGroup {
   /**
    * Gets the specified version of the specified key in the specified key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Keys_GetVersion")
   getVersion is KeyOperationGroupOps.Read<Key, OverrideErrorType = CloudError>;
 
   /**
    * Lists the keys in the specified key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Keys_ListVersions")
   listVersions is KeyOperationGroupOps.List<
     Key,
     OverrideErrorType = CloudError

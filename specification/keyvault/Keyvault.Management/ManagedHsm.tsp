@@ -150,7 +150,6 @@ interface ManagedHsms {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("regions")
-  @operationId("MHSMRegions_ListByResource")
   @list
   listByResource is ArmResourceActionSync<
     ManagedHsm,
