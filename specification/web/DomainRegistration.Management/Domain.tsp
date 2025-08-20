@@ -13,6 +13,7 @@ namespace Microsoft.DomainRegistration;
 /**
  * Information about a domain.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 model Domain is Azure.ResourceManager.TrackedResource< Properties={
   /**
    * Administrative contact.
@@ -41,34 +42,38 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
   /**
    * Domain registration status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-enum", #{name:"DomainStatus", modelAsString: false})
   registrationStatus?:
-      "Active" |
-      "Awaiting" |
-      "Cancelled" |
-      "Confiscated" |
-      "Disabled" |
-      "Excluded" |
-      "Expired" |
-      "Failed" |
-      "Held" |
-      "Locked" |
-      "Parked" |
-      "Pending" |
-      "Reserved" |
-      "Reverted" |
-      "Suspended" |
-      "Transferred" |
-      "Unknown" |
-      "Unlocked" |
-      "Unparked" |
-      "Updated" |
-      "JsonConverterFailed";
+    "Active" |
+    "Awaiting" |
+    "Cancelled" |
+    "Confiscated" |
+    "Disabled" |
+    "Excluded" |
+    "Expired" |
+    "Failed" |
+    "Held" |
+    "Locked" |
+    "Parked" |
+    "Pending" |
+    "Reserved" |
+    "Reverted" |
+    "Suspended" |
+    "Transferred" |
+    "Unknown" |
+    "Unlocked" |
+    "Unparked" |
+    "Updated" |
+    "JsonConverterFailed" |
+    string;
 
   /**
    * Domain provisioning state.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-enum", #{name:"ProvisioningState", modelAsString: false})
   provisioningState?:
@@ -76,7 +81,8 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
     "Failed" |
     "Canceled" |
     "InProgress" |
-    "Deleting";
+    "Deleting" |
+    string;
 
   /**
    * Name servers.
@@ -139,6 +145,7 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
    * Reasons why domain is not renewable.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @OpenAPI.extension("x-ms-enum", #{name:"ResourceNotRenewableReason"})
   domainNotRenewableReasons?: (
       | "RegistrationStatusNotSupportedForRenewal"
@@ -149,8 +156,9 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
   /**
    * Current DNS type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
-  dnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
+  dnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
 
   /**
    * Azure DNS Zone to use
@@ -160,8 +168,9 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
   /**
    * Target DNS type (would be used for migration)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
-  targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
+  targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
 
   @visibility(Lifecycle.Read, Lifecycle.Create)
   authCode?: string;
@@ -184,6 +193,7 @@ model DomainUpdate is Azure.ResourceManager.TrackedResource<Domain> {
 }
 
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Domains {
   /**
@@ -194,6 +204,9 @@ interface Domains {
   /**
    * Description for Creates or updates a domain.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DomainUpdate,
     Response = ArmResourceUpdatedResponse<Domain> | (ArmAcceptedLroResponse & {
@@ -206,6 +219,9 @@ interface Domains {
   /**
    * Description for Creates or updates a domain.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     DomainUpdate,
@@ -249,6 +265,8 @@ interface Domains {
   /**
    * Description for Renew a domain.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renew is ArmResourceActionSync<
     Domain,
     void,
@@ -258,6 +276,7 @@ interface Domains {
   /**
    * Transfer out domain to another registrar
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   transferOut is ArmResourceActionSync<Domain, void, ArmResponse<Domain> | BadRequestResponse>;
 }

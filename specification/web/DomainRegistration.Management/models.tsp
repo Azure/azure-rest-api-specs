@@ -10,16 +10,29 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DomainRegistration;
 
+/**
+ * Reasons why domain is not renewable.
+ */
 union ResourceNotRenewableReason {
   string,
+  /**
+   * Registration status is not supported for renewal.
+   */
   RegistrationStatusNotSupportedForRenewal: "RegistrationStatusNotSupportedForRenewal",
+  /**
+   * Domain expiration is not in the renewal time range.
+   */
   ExpirationNotInRenewalTimeRange: "ExpirationNotInRenewalTimeRange",
+  /**
+   * Subscription is not active.
+   */
   SubscriptionNotActive: "SubscriptionNotActive",
 }
 
 /**
  * Valid values are Regular domain: Azure will charge the full price of domain registration, SoftDeleted: Purchasing this domain will simply restore it and this operation will not cost anything.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum DomainType {
   Regular,
   SoftDeleted,
@@ -28,6 +41,7 @@ enum DomainType {
 /**
  * Domain registration status.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum DomainStatus {
   Active,
   Awaiting,
@@ -55,6 +69,7 @@ enum DomainStatus {
 /**
  * Domain provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ProvisioningState {
   Succeeded,
   Failed,
@@ -66,6 +81,7 @@ enum ProvisioningState {
 /**
  * Type of the Azure resource the hostname is assigned to.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AzureResourceType {
   Website,
   TrafficManager,
@@ -74,6 +90,7 @@ enum AzureResourceType {
 /**
  * Type of the DNS record.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum CustomHostNameDnsRecordType {
   CName,
   A,
@@ -82,6 +99,7 @@ enum CustomHostNameDnsRecordType {
 /**
  * Type of the hostname.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum HostNameType {
   Verified,
   Managed,
@@ -90,6 +108,7 @@ enum HostNameType {
 /**
  * Current DNS type
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum DnsType {
   AzureDns,
   DefaultDomainRegistrarDns,
@@ -99,7 +118,13 @@ enum DnsType {
  * Description of an operation available for Microsoft.Web resource provider.
  */
 model CsmOperationDescription {
+  /**
+   * Operation name, e.g. Microsoft.Web/sites/write.
+   */
   name?: string;
+  /** 
+   * Operation display name.
+   */
   isDataAction?: boolean;
 
   /**
@@ -107,6 +132,9 @@ model CsmOperationDescription {
    */
   display?: CsmOperationDisplay;
 
+  /**
+   * Origin of the operation, e.g. "system" or "user".
+   */
   origin?: string;
 
   /**
@@ -119,9 +147,24 @@ model CsmOperationDescription {
  * Meta data about operation used for display in portal.
  */
 model CsmOperationDisplay {
+  /**
+   * Provider name.
+   */
   provider?: string;
+  
+  /**
+   * Resource type.
+   */
   resource?: string;
+  
+  /**
+   * Operation name.
+   */
   operation?: string;
+  
+  /**
+   * Operation description.
+   */
   description?: string;
 }
 
@@ -139,9 +182,15 @@ model CsmOperationDescriptionProperties {
  * Resource metrics service provided by Microsoft.Insights resource provider.
  */
 model ServiceSpecification {
+  /**
+   * Resource metrics service name.
+   */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   metricSpecifications?: MetricSpecification[];
 
+  /**
+   * Resource logs service provided by Microsoft.Insights resource provider.
+   */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   logSpecifications?: LogSpecification[];
 }
@@ -150,28 +199,91 @@ model ServiceSpecification {
  * Definition of a single resource metric.
  */
 model MetricSpecification {
+  /**
+   * Name of the resource metric.
+   */
   name?: string;
+  
+  /**
+   * Display name of the resource metric.
+   */
   displayName?: string;
+  
+  /**
+   * Description of the resource metric.
+   */
   displayDescription?: string;
+  
+  /**
+   * Resource metric unit.
+   */
   unit?: string;
+  
+  /**
+   * Resource metric aggregation type.
+   */
   aggregationType?: string;
+  
+  /**
+   * Resource metric supported aggregation types.
+   */
   supportsInstanceLevelAggregation?: boolean;
+
+  /**
+   * Resource metric supported time grain types.
+   */
   enableRegionalMdmAccount?: boolean;
+  
+  /**
+   * Resource metric source MDM account.
+   */
   sourceMdmAccount?: string;
+  
+  /**
+   * Resource metric source MDM namespace.
+   */
   sourceMdmNamespace?: string;
+
+  /**
+   * Resource metric filter pattern.
+   */
   metricFilterPattern?: string;
+
+  /**
+   * Resource metric fill gap with zero.
+   */
   fillGapWithZero?: boolean;
+  
+  /**
+   * Resource metric is internal.
+   */
   isInternal?: boolean;
 
+  /**
+   * Resource metric dimensions.
+   */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   dimensions?: Dimension[];
 
+  /**
+   * Resource metric category.
+   */
   category?: string;
 
+  /**
+   * Resource metric availability.
+   */
   @OpenAPI.extension("x-ms-identifiers", #[])
   availabilities?: MetricAvailability[];
 
+  /**
+   * Resource metric supported time grain types.
+   */
   supportedTimeGrainTypes?: string[];
+
+  /**
+   * Resource metric supported aggregation types.
+   */
   supportedAggregationTypes?: string[];
 }
 
@@ -180,9 +292,24 @@ model MetricSpecification {
  * where instance name is dimension of the metric HTTP request
  */
 model Dimension {
+  /**
+   * Name of the dimension.
+   */
   name?: string;
+  
+  /**
+   * Display name of the dimension.
+   */
   displayName?: string;
+  
+  /**
+   * Dimension of the internal name.
+   */
   internalName?: string;
+  
+  /**
+   * Dimension to be exported for shoebox.
+   */
   toBeExportedForShoebox?: boolean;
 }
 
@@ -190,7 +317,14 @@ model Dimension {
  * Retention policy of a resource metric.
  */
 model MetricAvailability {
+  /**
+   * Metric availability time grain.
+   */
   timeGrain?: string;
+
+  /**
+   * Metric availability blob duration.
+   */
   blobDuration?: string;
 }
 
@@ -198,9 +332,24 @@ model MetricAvailability {
  * Log Definition of a single resource metric.
  */
 model LogSpecification {
+  /**
+   * Name of the log.
+   */
   name?: string;
+  
+  /**
+   * Display name of the log.
+   */
   displayName?: string;
+  
+  /**
+   * Blob duration of the log.
+   */
   blobDuration?: string;
+  
+  /**
+   * Log filtered pattern of the log.
+   */
   logFilterPattern?: string;
 }
 
@@ -238,6 +387,9 @@ model DefaultErrorResponseError {
   @visibility(Lifecycle.Read)
   target?: string;
 
+  /**
+   * Error details.
+   */
   @OpenAPI.extension("x-ms-identifiers", #[])
   details?: DefaultErrorResponseErrorDetailsItem[];
 
@@ -309,6 +461,7 @@ model DomainCollection is Azure.Core.Page<Domain>;
 /**
  * Domain resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model DomainProperties {}
 
 /**
@@ -488,6 +641,7 @@ model Resource {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -537,6 +691,7 @@ model NameIdentifierCollection is Azure.Core.Page<NameIdentifier>;
 /**
  * ARM resource for a domain.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DomainPatchResource extends ProxyOnlyResource{
   /**
@@ -570,6 +725,7 @@ model DomainPatchResource extends ProxyOnlyResource{
     /**
      * Domain registration status.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
     @OpenAPI.extension("x-ms-enum", #{name:"DomainStatus", modelAsString: false})
     registrationStatus?:
@@ -593,11 +749,13 @@ model DomainPatchResource extends ProxyOnlyResource{
       | "Unlocked"
       | "Unparked"
       | "Updated"
-      | "JsonConverterFailed";
+      | "JsonConverterFailed"
+      | string;
 
     /**
      * Domain provisioning state.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
     @OpenAPI.extension("x-ms-enum", #{name:"ProvisioningState", modelAsString: false})
     provisioningState?:
@@ -605,7 +763,8 @@ model DomainPatchResource extends ProxyOnlyResource{
       | "Failed"
       | "Canceled"
       | "InProgress"
-      | "Deleting";
+      | "Deleting"
+      | string;
 
     /**
      * Name servers.
@@ -667,6 +826,7 @@ model DomainPatchResource extends ProxyOnlyResource{
     /**
      * Reasons why domain is not renewable.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
     @visibility(Lifecycle.Read)
     @OpenAPI.extension("x-ms-enum", #{name:"ResourceNotRenewableReason"})
     domainNotRenewableReasons?: (
@@ -678,8 +838,9 @@ model DomainPatchResource extends ProxyOnlyResource{
     /**
      * Current DNS type
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
     @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
-    dnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
+    dnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
 
     /**
      * Azure DNS Zone to use
@@ -689,8 +850,9 @@ model DomainPatchResource extends ProxyOnlyResource{
     /**
      * Target DNS type (would be used for migration)
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
     @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
-    targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns";
+    targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
 
     @visibility(Lifecycle.Read, Lifecycle.Create)
     authCode?: string;
@@ -700,6 +862,7 @@ model DomainPatchResource extends ProxyOnlyResource{
 /**
  * Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model ProxyOnlyResource {}
 
 /**

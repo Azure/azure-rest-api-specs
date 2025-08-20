@@ -24,6 +24,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+#suppress "@azure-tools/typespec-client-generator-core/client-location-duplicate" ""
 /**
  * 
  */

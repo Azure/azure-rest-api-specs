@@ -14,6 +14,7 @@ namespace Microsoft.DomainRegistration;
 /**
  * Domain ownership Identifier.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @parentResource(Domain)
 model DomainOwnershipIdentifier
   is Azure.ResourceManager.ProxyResource<
@@ -43,6 +44,7 @@ interface DomainOwnershipIdentifiers {
   /**
    * Description for Creates an ownership identifier for a domain or updates identifier details for an existing identifier
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Domains_CreateOrUpdateOwnershipIdentifier")
   createOrUpdateOwnershipIdentifier is ArmResourceCreateOrReplaceSync<
