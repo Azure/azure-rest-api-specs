@@ -20,7 +20,7 @@ interface ConfigurationProfileAssignmentsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationProfileAssignments_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automanage/configurationProfileAssignments")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments")
   @list
   list(
     ...ApiVersionParameter,
@@ -36,7 +36,7 @@ interface BestPracticesVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BestPracticesVersions_ListByTenant")
-  @route("/providers/microsoft.Automanage/bestPractices/{bestPracticeName}/versions")
+  @route("/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/versions")
   @list
   listByTenant(
     ...ApiVersionParameter,
