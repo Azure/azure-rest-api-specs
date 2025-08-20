@@ -27,7 +27,7 @@
     }
   },
   "paths": {
-    "{resourceId}/providers/Microsoft.AlertsManagement/previewAlertRule": {
+    "/{resourceId}/providers/Microsoft.AlertsManagement/previewAlertRule": {
       "post": {
         "tags": [
           "PreviewAlertRule"
@@ -505,7 +505,8 @@
       "format": "arm-id",
       "description": "The identifier of the resource.",
       "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "x-ms-skip-url-encoding": true,
+      "x-ms-trim-slash": true
     }
   }
 }

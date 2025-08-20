@@ -75,11 +75,6 @@ directive:
   - suppress: OperationsAPIImplementation
     reason: Operations API is available in Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json and not needed in preview version
     from: Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
-  - suppress: SemanticValidation
-    reason: The resourceId path parameter contains forward slash which is expected for the path to start with slash
-    from: Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
-    where:
-      - .paths['{resourceId}/providers/Microsoft.AlertsManagement/previewAlertRule']
 ```
 
 ``` yaml
