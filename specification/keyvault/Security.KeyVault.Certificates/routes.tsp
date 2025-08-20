@@ -4,10 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
@@ -20,6 +17,7 @@ namespace KeyVault;
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
+@list
 op getCertificates is KeyVaultOperation<
   {
     /**
@@ -102,6 +100,7 @@ op deleteCertificateContacts is KeyVaultOperation<{}, Contacts>;
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
+@list
 op getCertificateIssuers is KeyVaultOperation<
   {
     /**
@@ -129,6 +128,7 @@ op setCertificateIssuer is KeyVaultOperation<
      * The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -148,13 +148,14 @@ op setCertificateIssuer is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
-@patch
+@patch(#{ implicitOptionality: true })
 op updateCertificateIssuer is KeyVaultOperation<
   {
     /**
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -181,6 +182,7 @@ op getCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
@@ -199,6 +201,7 @@ op deleteCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
@@ -268,6 +271,7 @@ op importCertificate is KeyVaultOperation<
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
+@list
 op getCertificateVersions is KeyVaultOperation<
   {
     /**
@@ -313,7 +317,7 @@ op getCertificatePolicy is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the policy for a certificate.")
 @route("/certificates/{certificate-name}/policy")
-@patch
+@patch(#{ implicitOptionality: true })
 op updateCertificatePolicy is KeyVaultOperation<
   {
     /**
@@ -335,9 +339,10 @@ op updateCertificatePolicy is KeyVaultOperation<
  * The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Updates the specified attributes associated with the given certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
-@patch
+@patch(#{ implicitOptionality: true })
 op updateCertificate is KeyVaultOperation<
   {
     /**
@@ -352,7 +357,7 @@ op updateCertificate is KeyVaultOperation<
      */
     @path("certificate-version")
     @clientName("version", "go")
-    certificateVersion: string;
+    certificateVersion?: string;
 
     /**
      * The parameters for certificate update.
@@ -369,6 +374,7 @@ op updateCertificate is KeyVaultOperation<
  * Gets information about a specific certificate. This operation requires the certificates/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Gets information about a certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
 @get
@@ -386,7 +392,7 @@ op getCertificate is KeyVaultOperation<
      */
     @path("certificate-version")
     @clientName("version", "go")
-    certificateVersion: string;
+    certificateVersion?: string;
   },
   CertificateBundle
 >;
@@ -530,6 +536,7 @@ op restoreCertificate is KeyVaultOperation<
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
+@list
 op getDeletedCertificates is KeyVaultOperation<
   {
     /**

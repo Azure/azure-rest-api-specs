@@ -247,11 +247,6 @@ model CompletionsUsageDetails {
   @visibility(Lifecycle.Read)
   audio_tokens: int32;
 
-  @doc("The number of tokens corresponding to reasoning.")
-  @added(ModelInference.Versions.v2025_04_01)
-  @visibility(Lifecycle.Read)
-  reasoning_tokens: int32;
-
   @doc("The total number of tokens processed for the completions request and response.")
   @visibility(Lifecycle.Read)
   total_tokens: int32;
@@ -439,6 +434,7 @@ model ChatRequestUserMessage extends ChatRequestMessage {
   role: ChatRole.user;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("The contents of the user message, with available input types varying by selected model.")
   content: string | ChatMessageContentItem[];
 }
@@ -497,11 +493,6 @@ model StreamingChatResponseMessageUpdate {
   @visibility(Lifecycle.Read)
   content?: string;
 
-  @doc("The reasoning content the model used for generating the response")
-  @added(ModelInference.Versions.v2025_04_01)
-  @visibility(Lifecycle.Read)
-  reasoning_content?: string;
-
   @encodedName("application/json", "tool_calls")
   @doc("""
     The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
@@ -522,12 +513,6 @@ model ChatResponseMessage {
   @visibility(Lifecycle.Read)
   content: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
-  @doc("The reasoning content the model used for generating the response")
-  @added(ModelInference.Versions.v2025_04_01)
-  @visibility(Lifecycle.Read)
-  reasoning_content?: string;
-
   @encodedName("application/json", "tool_calls")
   @doc("""
     The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
@@ -544,6 +529,7 @@ model ChatResponseMessage {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+#suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
 alias ChatCompletionsToolChoice = ChatCompletionsToolChoicePreset | ChatCompletionsNamedToolChoice;
 
 @doc("Represents a generic policy for how a chat completions tool may be selected.")

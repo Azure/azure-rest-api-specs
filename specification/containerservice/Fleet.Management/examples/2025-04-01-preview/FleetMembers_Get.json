@@ -1,0 +1,43 @@
+{
+  "operationId": "FleetMembers_Get",
+  "title": "Gets a FleetMember resource.",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "fleetMemberName": "member-1"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "kd30rkdfo49="
+      },
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
+        "name": "member-1",
+        "type": "Microsoft.ContainerService/fleets/members",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        },
+        "eTag": "kd30rkdfo49=",
+        "properties": {
+          "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
+          "provisioningState": "Succeeded",
+          "status": {
+            "lastOperationId": "operation-12345",
+            "lastOperationError": {
+              "code": "None",
+              "message": "No error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

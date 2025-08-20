@@ -17,6 +17,10 @@ using Microsoft.ServiceNetworking;
   "com.azure.resourcemanager.servicenetworking",
   "java"
 );
+@@clientName(Microsoft.ServiceNetworking,
+  "ServiceNetworkingMgmtClient",
+  "python"
+);
 
 // csharp
 #suppress "deprecated" "property flatten for SDK backward compatibility"

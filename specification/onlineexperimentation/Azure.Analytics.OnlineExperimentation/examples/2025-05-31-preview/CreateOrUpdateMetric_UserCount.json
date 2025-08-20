@@ -1,0 +1,81 @@
+{
+  "title": "CreateOrUpdateMetric_UserCount",
+  "operationId": "CreateOrUpdateMetric",
+  "parameters": {
+    "experimentMetricId": "users_purchase",
+    "api-version": "2025-05-31-preview",
+    "If-Match": "vxexdn",
+    "If-None-Match": "ijchzdh",
+    "If-Unmodified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "If-Modified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "displayName": "Users with purchase",
+      "description": "The number of users who have made at least one purchase transaction. Refund transactions are excluded from this metric. As the analysis period grows, this metric begins to saturate as users making multiple purchases no longer contribute.",
+      "lifecycle": "Active",
+      "categories": [
+        "Monetization"
+      ],
+      "desiredDirection": "Increase",
+      "definition": {
+        "type": "UserCount",
+        "event": {
+          "eventName": "Transaction",
+          "filter": "Revenue > 0"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "users_purchase",
+        "displayName": "Users with purchase",
+        "description": "The number of users who have made at least one purchase transaction. Refund transactions are excluded from this metric. As the analysis period grows, this metric begins to saturate as users making multiple purchases no longer contribute.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization"
+        ],
+        "desiredDirection": "Increase",
+        "definition": {
+          "type": "UserCount",
+          "event": {
+            "eventName": "Transaction",
+            "filter": "Revenue > 0"
+          }
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "users_purchase",
+        "displayName": "Users with purchase",
+        "description": "The number of users who have made at least one purchase transaction. Refund transactions are excluded from this metric. As the analysis period grows, this metric begins to saturate as users making multiple purchases no longer contribute.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization"
+        ],
+        "desiredDirection": "Increase",
+        "definition": {
+          "type": "UserCount",
+          "event": {
+            "eventName": "Transaction",
+            "filter": "Revenue > 0"
+          }
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    }
+  }
+}

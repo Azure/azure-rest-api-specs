@@ -76,12 +76,4 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   """)
 @get
 @route("/info")
-op getModelInfo is Azure.Core.RpcOperation<
-  {
-    @doc("The model deployment name you want information from.")
-    @query
-    @added(ModelInference.Versions.v2025_04_01)
-    `model`?: string;
-  },
-  ModelInfo
->;
+op getModelInfo is Azure.Core.RpcOperation<{}, ModelInfo>;

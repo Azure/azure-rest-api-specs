@@ -488,11 +488,9 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 }
 
 @doc("List of carbon emission results")
-@Azure.Core.pagedResult
 model CarbonEmissionDataListResult {
   @doc("The CarbonEmissionData items on this page")
   @Azure.ResourceManager.identifiers(#[])
-  @items
   value: CarbonEmissionData[];
 
   @doc("The pagination token to fetch next page data, it's null or empty if it doesn't have next page data")

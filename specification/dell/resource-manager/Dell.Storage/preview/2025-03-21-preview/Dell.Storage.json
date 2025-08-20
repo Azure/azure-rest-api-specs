@@ -571,6 +571,10 @@
         "endDate": {
           "type": "string",
           "description": "End Date of the subscription"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit"
         }
       },
       "required": [
@@ -686,22 +690,22 @@
       "type": "string",
       "description": "Identity type of ManagedIdentity Associated with Dell FileSystem resource",
       "enum": [
-        "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
-        "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY"
+        "Microsoft-managed keys (MMK)",
+        "Customer-managed keys (CMK)"
       ],
       "x-ms-enum": {
         "name": "ResourceEncryptionType",
         "modelAsString": true,
         "values": [
           {
-            "name": "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
-            "value": "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
-            "description": "Microsoft Managed key"
+            "name": "Microsoft-managed keys (MMK)",
+            "value": "Microsoft-managed keys (MMK)",
+            "description": "Microsoft managed keys (Default)"
           },
           {
-            "name": "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY",
-            "value": "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY",
-            "description": "Customer Managed key"
+            "name": "Customer-managed keys (CMK)",
+            "value": "Customer-managed keys (CMK)",
+            "description": "Customer managed keys\n(CMK) - Only UserAssigned identity is supported"
           }
         ]
       }
@@ -785,6 +789,10 @@
           "type": "string",
           "description": "Smart Connect FQDN of the resource"
         },
+        "oneFsUrl": {
+          "type": "string",
+          "description": "OneFS url"
+        },
         "dellReferenceNumber": {
           "type": "string",
           "description": "DellReferenceNumber of the resource"
@@ -854,12 +862,7 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }

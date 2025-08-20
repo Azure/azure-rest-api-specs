@@ -9,8 +9,6 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface Addons {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("Addons_List")
   list is ArmResourceListByParent<
     Addon,
     Response = ArmResponse<ResourceList<Addon>>
@@ -106,6 +104,14 @@ model AddonHcxProperties extends AddonProperties {
 
   @doc("The type of private cloud addon")
   addonType: AddonType.HCX;
+
+  @doc("HCX management network.")
+  @added(Versions.v2024_09_01)
+  managementNetwork?: string;
+
+  @doc("HCX uplink network")
+  @added(Versions.v2024_09_01)
+  uplinkNetwork?: string;
 }
 
 @doc("The properties of an Arc addon")

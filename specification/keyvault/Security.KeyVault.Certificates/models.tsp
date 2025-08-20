@@ -143,12 +143,11 @@ enum CertificatePolicyAction {
 /**
  * The certificate list result.
  */
-@pagedResult
 model CertificateListResult {
   /**
    * A response message containing a list of certificates in the key vault along with a link to the next page of certificates.
    */
-  @items
+  @pageItems
   value?: CertificateItem[];
 
   /**
@@ -315,7 +314,7 @@ model CertificateBundle {
   cer?: bytes;
 
   /**
-   * The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12',
+   * The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12'.
    */
   contentType?: string;
 
@@ -325,7 +324,7 @@ model CertificateBundle {
   attributes?: CertificateAttributes;
 
   /**
-   * Application specific metadata in the form of key-value pairs
+   * Application specific metadata in the form of key-value pairs.
    */
   tags?: Record<string>;
 
@@ -464,7 +463,7 @@ model X509CertificateProperties {
 }
 
 /**
- * The subject alternate names of a X509 object.
+ * The Subject Alternative Names of a X509 object.
  */
 model SubjectAlternativeNames {
   /**
@@ -473,15 +472,27 @@ model SubjectAlternativeNames {
   emails?: string[];
 
   /**
-   * Domain names.
+   * Domain Names.
    */
   @encodedName("application/json", "dns_names")
   dnsNames?: string[];
 
   /**
-   * User principal names.
+   * User Principal Names.
    */
   upns?: string[];
+
+  /**
+   * Uniform Resource Identifiers.
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  uris?: string[];
+
+  /**
+   * IP addresses; supports IPv4 and IPv6.
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  ipAddresses?: string[];
 }
 
 /**
@@ -596,12 +607,11 @@ model Contact {
 /**
  * The certificate issuer list result.
  */
-@pagedResult
 model CertificateIssuerListResult {
   /**
    * A response message containing a list of certificate issuers in the key vault along with a link to the next page of certificate issuers.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: CertificateIssuerItem[];
 
@@ -1011,12 +1021,11 @@ model CertificateRestoreParameters {
 /**
  * A list of certificates that have been deleted in this vault.
  */
-@pagedResult
 model DeletedCertificateListResult {
   /**
    * A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: DeletedCertificateItem[];
 

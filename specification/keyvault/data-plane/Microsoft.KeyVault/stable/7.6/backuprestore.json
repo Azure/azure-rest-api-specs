@@ -1,0 +1,723 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "version": "7.6",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://vault.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://vault.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/backup": {
+      "post": {
+        "operationId": "FullBackup",
+        "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage container.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "azureStorageBlobContainerUri",
+            "in": "body",
+            "description": "Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SASTokenParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a full backup": {
+            "$ref": "./examples/FullBackup-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/backup/{jobId}/pending": {
+      "get": {
+        "operationId": "FullBackupStatus",
+        "description": "Returns the status of full backup operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The id returned as part of the backup request",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a full backup operation": {
+            "$ref": "./examples/FullBackup-pending-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{keyName}/restore": {
+      "put": {
+        "operationId": "SelectiveKeyRestoreOperation",
+        "description": "Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be restored from the user supplied backup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restoreBlobDetails",
+            "in": "body",
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restores all key versions of a given key": {
+            "$ref": "./examples/SelectiveRestore-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/prebackup": {
+      "post": {
+        "operationId": "PreFullBackup",
+        "description": "Pre-backup operation for checking whether the customer can perform a full backup operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "preBackupOperationParameters",
+            "in": "body",
+            "description": "Optional parameters to validate prior to performing a full backup operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreBackupOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check whether the customer can perform a full backup operation": {
+            "$ref": "./examples/PreFullBackup-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/prerestore": {
+      "put": {
+        "operationId": "PreFullRestoreOperation",
+        "description": "Pre-restore operation for checking whether the customer can perform a full restore operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "preRestoreOperationParameters",
+            "in": "body",
+            "description": "Optional pre restore parameters to validate prior to performing a full restore operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreRestoreOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check whether the customer can perform a full restore operation": {
+            "$ref": "./examples/PreFullRestore-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/restore": {
+      "put": {
+        "operationId": "FullRestoreOperation",
+        "description": "Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "restoreBlobDetails",
+            "in": "body",
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restore all key materials from a previously stored Azure Blob Storage backup": {
+            "$ref": "./examples/FullRestore-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/restore/{jobId}/pending": {
+      "get": {
+        "operationId": "RestoreStatus",
+        "description": "Returns the status of restore operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The Job Id returned part of the restore operation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of restore operation": {
+            "$ref": "./examples/Restore-pending-example.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/restore/{jobId}/pending?_overload=selectiveKeyRestoreStatus": {
+      "get": {
+        "operationId": "SelectiveKeyRestoreStatus",
+        "description": "Returns the status of the selective key restore operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The Job Id returned part of the restore operation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a selective restore operation": {
+            "$ref": "./examples/SelectiveRestore-pending-example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true,
+          "x-ms-client-name": "innerError"
+        }
+      },
+      "x-nullable": true
+    },
+    "FullBackupOperation": {
+      "type": "object",
+      "description": "Full backup operation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of the backup operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of backup operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error encountered, if any, during the full backup operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the backup operation in UTC"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the backup operation in UTC",
+          "x-nullable": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the full backup operation."
+        },
+        "azureStorageBlobContainerUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the full backup"
+        }
+      }
+    },
+    "KeyVaultError": {
+      "type": "object",
+      "description": "The key vault error exception.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "The status of a long-running operation.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation successfully completed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          }
+        ]
+      }
+    },
+    "PreBackupOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the backup operation.",
+      "properties": {
+        "storageResourceUri": {
+          "type": "string",
+          "description": "Azure Blob storage container Uri"
+        },
+        "token": {
+          "type": "string",
+          "description": "The SAS token pointing to an Azure Blob storage container"
+        },
+        "useManagedIdentity": {
+          "type": "boolean",
+          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.",
+          "default": false
+        }
+      }
+    },
+    "PreRestoreOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the restore operation.",
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter",
+          "description": "A user-provided SAS token to an Azure blob storage container."
+        },
+        "folderToRestore": {
+          "type": "string",
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
+        }
+      }
+    },
+    "RestoreOperation": {
+      "type": "object",
+      "description": "Restore operation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of the restore operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of restore operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error encountered, if any, during the restore operation."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the restore operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the restore operation"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the restore operation",
+          "x-nullable": true
+        }
+      }
+    },
+    "RestoreOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the restore operation.",
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter",
+          "description": "A user-provided SAS token to an Azure blob storage container."
+        },
+        "folderToRestore": {
+          "type": "string",
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
+        }
+      },
+      "required": [
+        "sasTokenParameters",
+        "folderToRestore"
+      ]
+    },
+    "SASTokenParameter": {
+      "type": "object",
+      "description": "An authentication method and location for the operation.",
+      "properties": {
+        "storageResourceUri": {
+          "type": "string",
+          "description": "Azure Blob storage container Uri"
+        },
+        "token": {
+          "type": "string",
+          "description": "The SAS token pointing to an Azure Blob storage container"
+        },
+        "useManagedIdentity": {
+          "type": "boolean",
+          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.",
+          "default": false
+        }
+      },
+      "required": [
+        "storageResourceUri"
+      ]
+    },
+    "SelectiveKeyRestoreOperation": {
+      "type": "object",
+      "description": "Selective Key Restore operation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of the restore operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of restore operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error encountered, if any, during the selective key restore operation."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the selective key restore operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the restore operation"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the restore operation",
+          "x-nullable": true
+        }
+      }
+    },
+    "SelectiveKeyRestoreOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the selective key restore operation.",
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter",
+          "description": "A user-provided SAS token to an Azure blob storage container."
+        },
+        "folder": {
+          "type": "string",
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
+        }
+      },
+      "required": [
+        "sasTokenParameters",
+        "folder"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

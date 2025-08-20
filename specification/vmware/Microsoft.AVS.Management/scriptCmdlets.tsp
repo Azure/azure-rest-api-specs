@@ -1,16 +1,12 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptCmdlets {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("ScriptCmdlets_List")
   list is ArmResourceListByParent<
     ScriptCmdlet,
     Response = ArmResponse<ResourceList<ScriptCmdlet, "{name}sList">>
@@ -102,6 +98,7 @@ model ScriptCmdletProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Parameters the script will accept")
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   parameters?: ScriptParameter[];
 }
 

@@ -5,12 +5,9 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface HcxEnterpriseSites {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("HcxEnterpriseSites_List")
   list is ArmResourceListByParent<
     HcxEnterpriseSite,
     Response = ArmResponse<ResourceList<HcxEnterpriseSite>>
