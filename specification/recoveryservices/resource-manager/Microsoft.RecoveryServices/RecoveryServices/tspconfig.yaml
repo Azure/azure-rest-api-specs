@@ -6,9 +6,10 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/recoveryservices.json"
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
@@ -25,7 +26,7 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-recoveryservices"
     namespace: "com.azure.resourcemanager.recoveryservices"
-    service-name: "RecoveryServices" # human-readable service name, whitespace allowed
+    service-name: "RecoveryServices"
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "arm-recoveryservices"
