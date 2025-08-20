@@ -7093,6 +7093,29 @@
         }
       }
     },
+    "RunStepDeltaMicrosoftFabricToolCall": {
+      "type": "object",
+      "description": "Represents the Microsoft Fabric tool call in a streaming run step.",
+      "properties": {
+        "fabric_dataagent": {
+          "type": "object",
+          "description": "Fabric input and output.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "microsoftFabric"
+        }
+      },
+      "required": [
+        "fabric_dataagent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "fabric_dataagent"
+    },
     "RunStepDeltaOpenAPIObject": {
       "type": "object",
       "description": "Represents an invocation of openapi as part of a streaming run step.",
@@ -7467,7 +7490,7 @@
       "properties": {
         "fabric_dataagent": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "Fabric input and output.",
           "additionalProperties": {
             "type": "string"
           },
