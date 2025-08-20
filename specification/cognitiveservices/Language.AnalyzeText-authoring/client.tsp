@@ -268,14 +268,13 @@ namespace TextAuthoringClient {
 
   op getProject is Language.Text.Authoring.TextAuthoringProject.getProject;
 
+  @access(Access.internal, "python")
   op deleteProject is Language.Text.Authoring.TextAuthoringProject.deleteProject;
 
-  op `export` is Language.Text.Authoring.TextAuthoringProject.`export`;
-
-  op `import` is Language.Text.Authoring.TextAuthoringProject.`import`;
-
+  @access(Access.internal, "python")
   op getExportStatus is Language.Text.Authoring.TextAuthoringProject.getExportStatus;
 
+  @access(Access.internal, "python")
   op getImportStatus is Language.Text.Authoring.TextAuthoringProject.getImportStatus;
 }
 
@@ -291,14 +290,19 @@ namespace TextAuthoringProjectClient {
   interface DeploymentOperations {
     getDeployment is Language.Text.Authoring.TextAuthoringDeployment.getDeployment;
 
+    @access(Access.internal, "python")
     deployProject is Language.Text.Authoring.TextAuthoringDeployment.deployProject;
 
+    @access(Access.internal, "python")
     deleteDeployment is Language.Text.Authoring.TextAuthoringDeployment.deleteDeployment;
 
+    @access(Access.internal, "python")
     deleteDeploymentFromResources is Language.Text.Authoring.TextAuthoringDeployment.deleteDeploymentFromResources;
 
+    @access(Access.internal, "python")
     getDeploymentDeleteFromResourcesStatus is Language.Text.Authoring.TextAuthoringDeployment.getDeploymentDeleteFromResourcesStatus;
 
+    @access(Access.internal, "python")
     getDeploymentStatus is Language.Text.Authoring.TextAuthoringDeployment.getDeploymentStatus;
   }
 
@@ -315,34 +319,52 @@ namespace TextAuthoringProjectClient {
 
     listExportedModels is Language.Text.Authoring.textAnalysisAuthoringListExportedModels;
 
+    @access(Access.internal, "python")
     assignDeploymentResources is Language.Text.Authoring.TextAuthoringProject.assignDeploymentResources;
 
+    @access(Access.internal, "python")
     unassignDeploymentResources is Language.Text.Authoring.TextAuthoringProject.unassignDeploymentResources;
 
+    @access(Access.internal, "python")
     getAssignDeploymentResourcesStatus is Language.Text.Authoring.TextAuthoringProject.getAssignDeploymentResourcesStatus;
 
+    @access(Access.internal, "python")
     getUnassignDeploymentResourcesStatus is Language.Text.Authoring.TextAuthoringProject.getUnassignDeploymentResourcesStatus;
 
+    @access(Access.internal, "python")
     swapDeployments is Language.Text.Authoring.TextAuthoringProject.swapDeployments;
 
+    @access(Access.internal, "python")
     getSwapDeploymentsStatus is Language.Text.Authoring.TextAuthoringProject.getSwapDeploymentsStatus;
 
+    @access(Access.internal, "python")
     getProject is Language.Text.Authoring.TextAuthoringProject.getProject;
 
+    @access(Access.internal, "python")
     getProjectDeletionStatus is Language.Text.Authoring.TextAuthoringProject.getProjectDeletionStatus;
 
+    @access(Access.internal, "python")
     `export` is Language.Text.Authoring.TextAuthoringProject.`export`;
 
+    @access(Access.internal, "python")
+    `import` is Language.Text.Authoring.TextAuthoringProject.`import`;
+
+    @access(Access.internal, "python")
     getExportStatus is Language.Text.Authoring.TextAuthoringProject.getExportStatus;
 
+    @access(Access.internal, "python")
     copyProjectAuthorization is Language.Text.Authoring.TextAuthoringProject.copyProjectAuthorization;
 
+    @access(Access.internal, "python")
     copyProject is Language.Text.Authoring.TextAuthoringProject.copyProject;
 
+    @access(Access.internal, "python")
     getCopyProjectStatus is Language.Text.Authoring.TextAuthoringProject.getCopyProjectStatus;
 
+    @access(Access.internal, "python")
     train is Language.Text.Authoring.TextAuthoringProject.train;
 
+    @access(Access.internal, "python")
     getTrainingStatus is Language.Text.Authoring.TextAuthoringProject.getTrainingStatus;
 
     cancelTrainingJob is Language.Text.Authoring.TextAuthoringProject.cancelTrainingJob;
@@ -353,10 +375,13 @@ namespace TextAuthoringProjectClient {
   interface ExportedModelOperations {
     getExportedModel is  Language.Text.Authoring.TextAuthoringExportedModel.getExportedModel;
 
+    @access(Access.internal, "python")
     deleteExportedModel is Language.Text.Authoring.TextAuthoringExportedModel.deleteExportedModel;
 
+    @access(Access.internal, "python")
     createOrUpdateExportedModel is Language.Text.Authoring.TextAuthoringExportedModel.createOrUpdateExportedModel;
 
+    @access(Access.internal, "python")
     getExportedModelJobStatus is Language.Text.Authoring.TextAuthoringExportedModel.getExportedModelJobStatus;
 
     getExportedModelManifest is Language.Text.Authoring.TextAuthoringExportedModel.getExportedModelManifest;
@@ -369,16 +394,20 @@ namespace TextAuthoringProjectClient {
 
     deleteTrainedModel is Language.Text.Authoring.TextAuthoringTrainedModel.deleteTrainedModel;
 
+    @access(Access.internal, "python")
     evaluateModel is Language.Text.Authoring.TextAuthoringTrainedModel.evaluateModel;
 
+    @access(Access.internal, "python")
     loadSnapshot is Language.Text.Authoring.TextAuthoringTrainedModel.loadSnapshot;
 
+    @access(Access.internal, "python")
     getEvaluationStatus is Language.Text.Authoring.TextAuthoringTrainedModel.getEvaluationStatus;
 
     getModelEvaluationResults is Language.Text.Authoring.TextAuthoringTrainedModel.getModelEvaluationResults;
 
     getModelEvaluationSummary is Language.Text.Authoring.TextAuthoringTrainedModel.getModelEvaluationSummary;
 
+    @access(Access.internal, "python")
     getLoadSnapshotStatus is Language.Text.Authoring.TextAuthoringTrainedModel.getLoadSnapshotStatus;
   }
 }
