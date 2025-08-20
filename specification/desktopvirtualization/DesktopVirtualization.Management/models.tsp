@@ -1242,7 +1242,7 @@ union DiffDiskPlacement {
 }
 
 /**
- * Deployment scope
+ * DeploymentScope type for HostPool.
  */
 union DeploymentScope {
   string,
@@ -2232,11 +2232,6 @@ model ApplicationGroupProperties {
   showInFeed?: boolean;
 
   /**
-   * The scope of the deployment.
-   */
-  deploymentScope?: DeploymentScope;
-
-  /**
    * Tenant that the resource is being requested on behalf of.
    */
   @added(Versions.v2025_08_01_preview)
@@ -2551,6 +2546,11 @@ model HostPoolProperties {
    * The type of management for this hostpool, Automated or Standard. The default value is Automated.
    */
   managementType?: ManagementType;
+
+  /**
+   * DeploymentScope type for HostPool.
+   */
+  deploymentScope?: DeploymentScope;
 
   /**
    * Tenant that the resource is being requested on behalf of.

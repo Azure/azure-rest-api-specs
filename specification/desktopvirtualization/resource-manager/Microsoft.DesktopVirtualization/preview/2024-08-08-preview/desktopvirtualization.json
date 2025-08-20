@@ -6502,10 +6502,6 @@
         "showInFeed": {
           "type": "boolean",
           "description": "Boolean representing whether the applicationGroup is show in the feed."
-        },
-        "deploymentScope": {
-          "$ref": "#/definitions/DeploymentScope",
-          "description": "The scope of the deployment."
         }
       },
       "required": [
@@ -6842,7 +6838,7 @@
     },
     "DeploymentScope": {
       "type": "string",
-      "description": "Deployment scope",
+      "description": "DeploymentScope type for HostPool.",
       "enum": [
         "Geographical",
         "Regional"
@@ -7616,6 +7612,10 @@
         "managementType": {
           "$ref": "#/definitions/ManagementType",
           "description": "The type of management for this hostpool, Automated or Standard. The default value is Automated."
+        },
+        "deploymentScope": {
+          "$ref": "#/definitions/DeploymentScope",
+          "description": "DeploymentScope type for HostPool."
         }
       },
       "required": [
