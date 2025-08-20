@@ -44,4 +44,24 @@ suppressions:
 - code: GetCollectionResponseSchema
   from: openapi.json
   reason: We returned a more detailed response that can't be aggregated in the listing API
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.BillingComponent.properties.customMeterIds
+  reason: Using records that generate this automatically
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.ProductDetails.properties.additionalProductProperties
+  reason: Using records that generate this automatically
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  where: $.definitions.ProductSummary.properties.linkedAddInsTypes
+  reason: Using records that generate this automatically
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.ProductSummaryListResult
+  reason: false positive on paging
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  where: $.definitions.ProductDetails
+  reason: The detailed response already returning existing API does not have these fields populated 
 ```
