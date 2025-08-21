@@ -19,7 +19,6 @@ model VirtualMachineScaleSet {
   @key("virtualMachineScaleSetName")
   @segment("virtualMachineScaleSets")
   @visibility(Lifecycle.Read)
-  @path
   name: string;
 
   @doc("""
