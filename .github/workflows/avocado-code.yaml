@@ -23,9 +23,11 @@ jobs:
       - name: Run Avocado
         id: run-avocado
         run: |
+          set -x
+
           AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
 
-          echo "output-file=$AVOCADO_OUTPUT_FILE" >> $GITHUB_OUTPUT
+          echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
 
           npm exec --no -- avocado \
             --excludePaths \
@@ -41,13 +43,13 @@ jobs:
               "data-plane" \
               "resource-manager" \
             --file \
-              $AVOCADO_OUTPUT_FILE
+              "$AVOCADO_OUTPUT_FILE"
 
           TIME=$(node -p 'JSON.stringify(new Date())')
 
           # Avocado doesn't write any output if it was successful, so we add some to simplify later processing
           [[ -e $AVOCADO_OUTPUT_FILE ]] || \
-            echo "{\"type\":\"Raw\",\"level\":\"Info\",\"message\":\"success\",\"time\":$TIME}" > $AVOCADO_OUTPUT_FILE
+            echo "{\"type\":\"Raw\",\"level\":\"Info\",\"message\":\"success\",\"time\":$TIME}" > "$AVOCADO_OUTPUT_FILE"
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
