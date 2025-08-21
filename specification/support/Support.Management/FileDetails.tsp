@@ -53,7 +53,7 @@ interface FileOps
           Resource = FileWorkspaceDetails,
           KeyName = "fileWorkspaceName",
           SegmentName = "fileWorkspaces",
-          NamePattern = ""
+          NamePattern = "^[0-9a-zA-Z_\\-. ]+$"
         >>,
       },
       KeysOf<ResourceNameParameter<
@@ -100,7 +100,7 @@ interface FilesNoSubscriptionOps
           Resource = FileWorkspaceDetails,
           KeyName = "fileWorkspaceName",
           SegmentName = "fileWorkspaces",
-          NamePattern = ""
+          NamePattern = "^[0-9a-zA-Z_\\-. ]+$"
         >>,
       },
       KeysOf<ResourceNameParameter<
