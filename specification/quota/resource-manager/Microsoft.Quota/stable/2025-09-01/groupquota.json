@@ -1373,10 +1373,7 @@
       "x-ms-enum": {
         "name": "RequestState",
         "modelAsString": true,
-        "x-ms-enum": {
-          "name": "RequestState",
-          "modelAsString": true,
-          "values": [
+        "values": [
             {
               "value": "Escalated",
               "description": "The quota request has been escalated for further review."
@@ -1410,7 +1407,6 @@
               "description": "The quota request has succeeded."
             }
           ]
-        }
       }
     },
     "QuotaAllocationRequestStatus": {
@@ -2084,8 +2080,22 @@
           "description": "Type of the group.",
           "enum": [
             "AllocationGroup",
-            "EnnforcedGroup"
+            "EnforcedGroup"
           ],
+          "x-ms-enum": {
+            "name": "GroupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AllocationGroup",
+                "description": "The group is used for subscription group quota allocations."
+              },
+              {
+                "value": "EnforcedGroup",
+                "description": "The group is used for the enforced shared limit scenario"
+              }
+            ]
+          },
           "readOnly": true
         },
         "provisioningState": {
