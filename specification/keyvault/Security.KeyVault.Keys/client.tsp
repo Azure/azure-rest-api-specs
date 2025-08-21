@@ -391,6 +391,7 @@ op getKeyAttestation is KeyVaultOperation<
 @summary("Retrieves a list of individual key versions with the same key name.")
 @route("/keys/{key-name}/versions")
 @get
+@list
 op listKeyPropertiesVersions is KeyVaultOperation<
   {
     /**
@@ -411,6 +412,7 @@ op listKeyPropertiesVersions is KeyVaultOperation<
 @summary("List keys in the specified vault.")
 @route("/keys")
 @get
+@list
 op listKeyProperties is KeyVaultOperation<{}, KeyListResult>;
 
 /**
@@ -421,6 +423,7 @@ op listKeyProperties is KeyVaultOperation<{}, KeyListResult>;
 @summary("Lists the deleted keys in the specified vault.")
 @route("/deletedkeys")
 @get
+@list
 op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 
 @@override(getKeyVersions, listKeyPropertiesVersions, "go");

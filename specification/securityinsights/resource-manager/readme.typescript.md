@@ -15,4 +15,8 @@ directive:
     where: $.definitions.CcpResponseConfig.properties.csvEscape
     transform: >
       $["default"] = "\\\""
+  - from: dataConnectors.json
+    where: $.definitions.CcpResponseConfig.properties.csvEscape
+    transform: >
+      $["default"] = "\\\""
 ```

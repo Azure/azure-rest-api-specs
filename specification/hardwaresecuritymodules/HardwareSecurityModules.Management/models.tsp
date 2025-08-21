@@ -11,7 +11,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.HardwareSecurityModules;
 
 @@nextLink(CommonTypes.PrivateLinkResourceListResult.nextLink);
-@@Azure.Core.items(CommonTypes.PrivateLinkResourceListResult.value);
+@@pageItems(CommonTypes.PrivateLinkResourceListResult.value);
 
 /**
  * State of security domain activation

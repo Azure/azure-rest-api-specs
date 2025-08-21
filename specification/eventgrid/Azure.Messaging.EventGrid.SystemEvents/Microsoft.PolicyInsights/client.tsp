@@ -3,19 +3,19 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 //Models
 @@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
   Access.public

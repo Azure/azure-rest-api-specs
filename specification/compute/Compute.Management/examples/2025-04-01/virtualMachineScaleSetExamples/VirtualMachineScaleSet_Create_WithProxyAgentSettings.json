@@ -15,9 +15,9 @@
         "virtualMachineProfile": {
           "storageProfile": {
             "imageReference": {
-              "publisher": "MicrosoftWindowsServer",
-              "offer": "WindowsServer",
-              "sku": "2019-Datacenter",
+              "publisher": "Canonical",
+              "offer": "0001-com-ubuntu-server-jammy",
+              "sku": "22_04-lts-gen2",
               "version": "latest"
             },
             "osDisk": {
@@ -30,13 +30,19 @@
           },
           "securityProfile": {
             "proxyAgentSettings": {
-              "enabled": true
+              "enabled": true,
+              "addProxyAgentExtension": true,
+              "wireServer": {
+                "inVMAccessControlProfileReferenceId": "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery-name}/inVMAccessControlProfiles/{profile-name}/versions/{version}"
+              },
+              "imds": {
+                "inVMAccessControlProfileReferenceId": "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery-name}/inVMAccessControlProfiles/{profile-name}/versions/{version}"
+              }
             }
           },
           "osProfile": {
             "computerNamePrefix": "{vmss-name}",
-            "adminUsername": "{your-username}",
-            "adminPassword": "{your-password}"
+            "adminUsername": "{your-username}"
           },
           "networkProfile": {
             "networkInterfaceConfigurations": [
@@ -85,9 +91,9 @@
           "virtualMachineProfile": {
             "storageProfile": {
               "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
-                "offer": "WindowsServer",
-                "sku": "2019-Datacenter",
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-jammy",
+                "sku": "22_04-lts-gen2",
                 "version": "latest"
               },
               "osDisk": {
@@ -100,17 +106,19 @@
             },
             "securityProfile": {
               "proxyAgentSettings": {
-                "enabled": true
+                "enabled": true,
+                "addProxyAgentExtension": true,
+                "wireServer": {
+                  "inVMAccessControlProfileReferenceId": "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery-name}/inVMAccessControlProfiles/{profile-name}/versions/{version}"
+                },
+                "imds": {
+                  "inVMAccessControlProfileReferenceId": "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery-name}/inVMAccessControlProfiles/{profile-name}/versions/{version}"
+                }
               }
             },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
-              "adminUsername": "{your-username}",
-              "secrets": [],
-              "windowsConfiguration": {
-                "provisionVMAgent": true,
-                "enableAutomaticUpdates": true
-              }
+              "adminUsername": "{your-username}"
             },
             "networkProfile": {
               "networkInterfaceConfigurations": [
@@ -164,9 +172,9 @@
           "virtualMachineProfile": {
             "storageProfile": {
               "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
-                "offer": "WindowsServer",
-                "sku": "2019-Datacenter",
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-jammy",
+                "sku": "22_04-lts-gen2",
                 "version": "latest"
               },
               "osDisk": {
@@ -179,17 +187,19 @@
             },
             "securityProfile": {
               "proxyAgentSettings": {
-                "enabled": true
+                "enabled": true,
+                "addProxyAgentExtension": true,
+                "wireServer": {
+                  "inVMAccessControlProfileReferenceId": "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery-name}/inVMAccessControlProfiles/{profile-name}/versions/{version}"
+                },
+                "imds": {
+                  "inVMAccessControlProfileReferenceId": "/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery-name}/inVMAccessControlProfiles/{profile-name}/versions/{version}"
+                }
               }
             },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
-              "adminUsername": "{your-username}",
-              "secrets": [],
-              "windowsConfiguration": {
-                "provisionVMAgent": true,
-                "enableAutomaticUpdates": true
-              }
+              "adminUsername": "{your-username}"
             },
             "networkProfile": {
               "networkInterfaceConfigurations": [

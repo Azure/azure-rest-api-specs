@@ -467,6 +467,12 @@ union OrchestrationServiceNames {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticRepairs: "AutomaticRepairs",
+
+  /**
+   * AutomaticZoneRebalancing orchestration service.
+   */
+  @added(Versions.v2025_04_01)
+  AutomaticZoneRebalancing: "AutomaticZoneRebalancing",
 }
 
 /**
@@ -491,6 +497,24 @@ union OrchestrationServiceStateAction {
   Resume: "Resume",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspend: "Suspend",
+}
+
+/**
+ * The latest operation status of the service.
+ */
+@added(Versions.v2025_04_01)
+union OrchestrationServiceOperationStatus {
+  string,
+
+  /**
+   * InProgress orchestration service operation status.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Completed orchestration service operation status.
+   */
+  Completed: "Completed",
 }
 
 /**
@@ -1072,6 +1096,20 @@ union HyperVGenerationTypes {
 }
 
 /**
+ * Specifies the high speed interconnect placement for the virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+union HighSpeedInterconnectPlacement {
+  string,
+
+  /** No high speed interconnect placement */
+  None: "None",
+
+  /** Trunk high speed interconnect placement */
+  Trunk: "Trunk",
+}
+
+/**
  * VM disk types which are disallowed.
  */
 union VmDiskTypes {
@@ -1254,6 +1292,24 @@ union ExecutionState {
   TimedOut: "TimedOut",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
+}
+
+/**
+ * Script shell types.
+ */
+@added(Versions.v2025_04_01)
+union ScriptShellTypes {
+  string,
+
+  /**
+   * Default script shell type.
+   */
+  Default: "Default",
+
+  /**
+   * Powershell7 script shell type.
+   */
+  Powershell7: "Powershell7",
 }
 
 /**
@@ -1494,12 +1550,11 @@ model UsageName {
 /**
  * The List Virtual Machine operation response.
  */
-@pagedResult
 model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes.
    */
-  @items
+  @pageItems
   @identifiers(#["name"])
   value?: VirtualMachineSize[];
 
@@ -1680,6 +1735,12 @@ model VirtualMachineScaleSetProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the high speed interconnect placement for the virtual machine scale set.
+   */
+  @added(Versions.v2025_04_01)
+  highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
 }
 
 /**
@@ -1795,6 +1856,12 @@ model ScheduledEventsPolicy {
    * The configuration parameters used while publishing scheduledEventsAdditionalPublishingTargets.
    */
   scheduledEventsAdditionalPublishingTargets?: ScheduledEventsAdditionalPublishingTargets;
+
+  /**
+   * The configuration parameters used while creating AllInstancesDown scheduled event setting creation.
+   */
+  @added(Versions.v2025_04_01)
+  allInstancesDown?: AllInstancesDown;
 }
 
 /**
@@ -1833,6 +1900,25 @@ model EventGridAndResourceGraph {
    * Specifies if event grid and resource graph is enabled for Scheduled event related configurations.
    */
   enable?: boolean;
+
+  /**
+   * Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered.
+   */
+  @added(Versions.v2025_04_01)
+  scheduledEventsApiVersion?: string;
+}
+
+/**
+ * Specifies if Scheduled Events should be auto-approved when all instances are down.
+ */
+@added(Versions.v2025_04_01)
+model AllInstancesDown {
+  /**
+   * Specifies if Scheduled Events should be auto-approved when all instances are down.
+   * its default value is true
+   */
+  @added(Versions.v2025_04_01)
+  automaticallyApprove?: boolean;
 }
 
 /**
@@ -2569,6 +2655,13 @@ model VirtualMachineScaleSetNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -2724,6 +2817,13 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -2890,6 +2990,12 @@ model ProxyAgentSettings {
    * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
    */
   imds?: HostEndpointSettings;
+
+  /**
+   * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
+   */
+  @added(Versions.v2025_04_01)
+  addProxyAgentExtension?: boolean;
 }
 
 /**
@@ -3712,6 +3818,13 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -3852,6 +3965,13 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -4118,6 +4238,20 @@ model OrchestrationServiceSummary {
    */
   @visibility(Lifecycle.Read)
   serviceState?: OrchestrationServiceState;
+
+  /**
+   * The latest operation status of the service. Minimum API version for this property is 2025-04-01.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_04_01)
+  latestOperationStatus?: OrchestrationServiceOperationStatus;
+
+  /**
+   * The last time when the operation status changed. Minimum API version for this property is 2025-04-01.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_04_01)
+  lastStatusChangeTime?: utcDateTime;
 }
 
 @@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
@@ -5219,6 +5353,13 @@ model VirtualMachineNetworkInterfaceConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5372,6 +5513,13 @@ model VirtualMachinePublicIPAddressConfiguration {
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5582,6 +5730,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
    * The list of VMSS VM extensions
    */
   @identifiers(#["name", "id"])
+  @pageItems
   value?: VirtualMachineScaleSetVMExtension[];
 }
 
@@ -6376,6 +6525,7 @@ model VirtualMachineExtensionsListResult {
   /**
    * The list of extensions
    */
+  @pageItems
   value?: VirtualMachineExtension[];
 }
 
@@ -7291,12 +7441,11 @@ model DedicatedHostUpdate extends UpdateResource {
 /**
  * The List Dedicated Host sizes operation response.
  */
-@pagedResult
 model DedicatedHostSizeListResult {
   /**
    * The list of dedicated host sizes.
    */
-  @items
+  @pageItems
   value?: string[];
 
   /**
@@ -7917,9 +8066,15 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 
   /**
-   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. Pls. keep in mind the capacity reservation group resource generally can be shared across subscriptions belonging to a single azure AAD tenant or cross AAD tenant if there is a trust relationship established between the AAD tenants. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
+
+  /**
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+   */
+  @added(Versions.v2025_04_01)
+  reservationType?: ReservationType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7969,6 +8124,22 @@ model CapacityReservationInstanceView {
 }
 
 /**
+ * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+ */
+@added(Versions.v2025_04_01)
+model ScheduleProfile {
+  /**
+   * The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27.
+   */
+  start?: string;
+
+  /**
+   * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
+   */
+  end?: string;
+}
+
+/**
  * Represents the capacity reservation utilization in terms of resources allocated.
  */
 model CapacityReservationUtilization {
@@ -7988,9 +8159,30 @@ model CapacityReservationUtilization {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ResourceSharingProfile {
   /**
-   * Specifies an array of subscription resource IDs that capacity reservation group is shared with. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   subscriptionIds?: SubResource[];
+}
+
+/**
+ * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+ */
+@added(Versions.v2025_04_01)
+union ReservationType {
+  /**
+   * Custom reservation type value.
+   */
+  string,
+
+  /**
+   * To consume on demand allocated capacity reservation when a capacity reservation group is provided.
+   */
+  Targeted: "Targeted",
+
+  /**
+   * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
+   */
+  Block: "Block",
 }
 
 /**
@@ -8064,10 +8256,16 @@ model CapacityReservationProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+   */
+  @added(Versions.v2025_04_01)
+  scheduleProfile?: ScheduleProfile;
 }
 
 /**
- * Specifies information about the capacity reservation. Only tags and sku.capacity can be updated.
+ * Specifies information about the capacity reservation. sku.capacity cannot be updated for Block Capacity Reservation. Tags can be update for all Capacity Reservation Types.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CapacityReservationUpdate extends UpdateResource {
@@ -8079,7 +8277,7 @@ model CapacityReservationUpdate extends UpdateResource {
   properties?: CapacityReservationProperties;
 
   /**
-   * SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values.
+   * SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. **Note:** The SKU name and capacity cannot be updated for Block capacity reservations.
    */
   sku?: Sku;
 }
@@ -8344,7 +8542,7 @@ model VirtualMachineRunCommandProperties {
 }
 
 /**
- * Describes the script sources for run command. Use only one of script, scriptUri, commandId.
+ * Describes the script sources for run command. Use only one of these script sources: script, scriptUri, commandId, galleryScriptReferenceId.
  */
 model VirtualMachineRunCommandScriptSource {
   /**
@@ -8358,7 +8556,7 @@ model VirtualMachineRunCommandScriptSource {
   scriptUri?: string;
 
   /**
-   * Specifies a commandId of predefined built-in script.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId?: string;
 
@@ -8366,6 +8564,18 @@ model VirtualMachineRunCommandScriptSource {
    * User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.
    */
   scriptUriManagedIdentity?: RunCommandManagedIdentity;
+
+  /**
+   * Optional. Specify which shell to use for running the script. These values must match those expected by the extension. Currently supported only for Windows VMs, script uses Powershell 7 when specified. Powershell 7 must be already installed on the machine to use Powershell7 parameter value.
+   */
+  @added(Versions.v2025_04_01)
+  scriptShell?: ScriptShellTypes;
+
+  /**
+   * The resource ID of a Gallery Script version that needs to be executed. Example ID looks like /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{scriptName}/versions/{version}.
+   */
+  @added(Versions.v2025_04_01)
+  galleryScriptReferenceId?: string;
 }
 
 /**
@@ -8462,7 +8672,7 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
  */
 model RunCommandInput {
   /**
-   * The run command id.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId: string;
 
