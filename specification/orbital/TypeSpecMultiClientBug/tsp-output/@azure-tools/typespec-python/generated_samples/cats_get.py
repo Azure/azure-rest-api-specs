@@ -17,7 +17,7 @@ from typespecmulticlientbug import CatClient
 
 
 def main():
-    client = DogClient()
+    client = CatClient()
 
     response = client.get_cat(
         id="cat1",

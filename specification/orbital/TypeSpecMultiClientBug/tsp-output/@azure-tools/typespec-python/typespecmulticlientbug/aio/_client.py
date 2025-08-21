@@ -16,7 +16,7 @@ from azure.core.rest import AsyncHttpResponse, HttpRequest
 
 from .._utils.serialization import Deserializer, Serializer
 from ._configuration import CatClientConfiguration, DogClientConfiguration
-from ._operations._operations import _CatClientOperationsMixin, _DogClientOperationsMixin
+from ._operations import _CatClientOperationsMixin, _DogClientOperationsMixin
 
 
 class DogClient(_DogClientOperationsMixin):
