@@ -139,6 +139,18 @@ union ProjectAbilityAsDeveloper {
   @doc("User can customize their own dev boxes.")
   CustomizeDevBoxes: "CustomizeDevBoxes",
 
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("User can perform connect using DevBox tunnels.")
+  ConnectWithDevBoxTunnels: "ConnectWithDevBoxTunnels",
+
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("User can create DevBox tunnels.")
+  CreateDevBoxTunnels: "CreateDevBoxTunnels",
+
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("User can delete DevBox tunnels.")
+  DeleteDevBoxTunnels: "DeleteDevBoxTunnels",
+
   @doc("User can delete their own dev boxes.")
   DeleteDevBoxes: "DeleteDevBoxes",
 

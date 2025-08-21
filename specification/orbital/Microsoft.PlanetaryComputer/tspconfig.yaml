@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/planetarycomputer"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-planetarycomputer"
+    namespace: "azure.planetarycomputer"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  # "@azure-tools/typespec-csharp":
+  #   package-dir: "Azure.PlanetaryComputer"
+  #   clear-output-folder: true
+  #   model-namespace: false
+  #   namespace: "{package-dir}"
+  #   flavor: azure
+  # "@azure-tools/typespec-ts":
+  #   package-dir: "planetarycomputer-rest"
+  #   is-modular-library: false
+  #   package-details:
+  #     name: "@azure-rest/planetarycomputer-rest"
+  #   flavor: azure
+  # "@azure-tools/typespec-java":
+  #   package-dir: "azure-planetarycomputer"
+  #   namespace: com.azure.planetarycomputer
+  #   flavor: azure
+  # "@azure-tools/typespec-go":
+  #   module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+  #   service-dir: "sdk/planetarycomputer"
+  #   package-dir: "azmanager"
+  #   module-version: "0.0.1"
+  #   generate-fakes: true
+  #   inject-spans: true
+  #   single-client: true
+  #   slice-elements-byval: true
+  # "@typespec/openapi3":
+  #   file-type: json
+  #   emitter-output-dir: "{project-root}/.."
+  #   output-file: "data-plane/{service-name}/preview/{version}/openapi3.json"

@@ -107,11 +107,11 @@ union ResourceState {
 }
 
 @doc("An object that represents enumerating SKUs for new resources.")
-@pagedResult
 model RpSkuEnumerationForNewResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The collection of available SKUs for new resources")
-  @items
+  @identifiers(#[])
+  @pageItems
   value: Array<RpSkuDetailsForNewResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
@@ -137,11 +137,11 @@ model RpSkuProperties {
 }
 
 @doc("An object that represents enumerating SKUs for existing resources")
-@pagedResult
 model RpSkuEnumerationForExistingResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The SKU details")
-  @items
+  @pageItems
+  @identifiers(#[])
   value: Array<RpSkuDetailsForExistingResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
@@ -184,6 +184,9 @@ model Quota {
   @doc("The maximum permitted usage of the resource.")
   limit: int64;
 }
+
+@@identifiers(PagedQuota.value, #[]);
+model PagedQuota is Page<Quota>;
 
 @doc("The Quota Names")
 model QuotaName {

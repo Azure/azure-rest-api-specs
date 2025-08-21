@@ -31,6 +31,7 @@ using Microsoft.Chaos;
   "ExecutionDetails",
   "csharp"
 );
+@@scope(Microsoft.Chaos.OperationStatuses.get, "!csharp");
 
 // typescript
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "javascript");
@@ -40,6 +41,14 @@ using Microsoft.Chaos;
 
 // java
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");
+@@clientName(Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "ResourceIdentity",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.OperationStatusResult,
+  "OperationStatus",
+  "java"
+);
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Experiment.properties);
@@ -53,3 +62,5 @@ using Microsoft.Chaos;
 @@flattenProperty(CapabilityType.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(ExperimentExecutionDetails.properties);
+
+@@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript,python");

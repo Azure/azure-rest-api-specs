@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./HostPool.tsp";
 import "./Workspace.tsp";
-import "./LegacyOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -47,8 +46,21 @@ interface WorkspaceOps
 @armResourceOperations
 interface CustomPrivateEndpointConnection {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnectionWithSystemData>;
-  updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnectionWithSystemData>;
+
+  /**
+   * Approve or reject a private endpoint connection.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing usage of status code"
+  updateByHostPool is HostPoolOps.CreateOrUpdateSync<
+    PrivateEndpointConnectionWithSystemData,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionWithSystemData>
+  >;
+
   deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnectionWithSystemData>;
+
+  /**
+   * List private endpoint connections associated with hostpool.
+   */
   @segment("privateEndpointConnections")
   listByHostPool is HostPoolOps.List<
     PrivateEndpointConnectionWithSystemData,
@@ -73,9 +85,23 @@ interface CustomPrivateEndpointConnection {
     },
     Response = PrivateEndpointConnectionListResultWithSystemData
   >;
+
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnectionWithSystemData>;
-  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnectionWithSystemData>;
+
+  /**
+   * Approve or reject a private endpoint connection.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing usage of status code"
+  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<
+    PrivateEndpointConnectionWithSystemData,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionWithSystemData>
+  >;
+
   deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnectionWithSystemData>;
+
+  /**
+   * List private endpoint connections associated with Workspace.
+   */
   @segment("privateEndpointConnections")
   listByWorkspace is WorkspaceOps.List<
     PrivateEndpointConnectionWithSystemData,

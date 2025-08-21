@@ -1,0 +1,36 @@
+{
+  "name": "@azure-tools/typespec-migration-validation",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/index.js",
+  "bin": {
+    "tsmv": "cmd/tsmv.js"
+  },
+  "dependencies": {
+    "@azure-tools/typespec-autorest": ">=0.44.0 <1.0.0",
+    "json-diff": "^1.0.6",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/json-diff": "^1.0.3",
+    "@types/node": "^18.19.86",
+    "@types/yargs": "^17.0.33",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "eslint": "^9.26.0",
+    "prettier": "~3.6.2",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "watch": "tsc --build --watch"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
