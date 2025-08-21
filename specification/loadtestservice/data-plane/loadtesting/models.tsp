@@ -1479,16 +1479,6 @@ union RequestDataLevel {
   ERRORS: "ERRORS",
 }
 
-// TODO(mitsha): Fix the structure of initial clone test return
-@added(APIVersions.v2025_03_01_preview)
-@doc("Operation Id Path Parameter.")
-model OperationIdPathParameter {
-  @doc("The unique ID of the operation.")
-  @key("operationId")
-  @visibility(Lifecycle.Read)
-  id: string;
-}
-
 @added(APIVersions.v2025_03_01_preview)
 @doc("Kind of the long running operation.")
 union OperationKind {
@@ -1505,6 +1495,12 @@ union OperationKind {
 @doc("Status of a long running operation.")
 @resource("operations")
 model OperationStatus {
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The unique ID of the operation.")
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+
   @doc("The state of the operation.")
   status: Foundations.OperationState;
 
@@ -1513,8 +1509,6 @@ model OperationStatus {
 
   @doc("Error object that describes the error when status is \"Failed\".")
   error?: Foundations.Error;
-
-  ...OperationIdPathParameter;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
