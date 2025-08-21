@@ -166,6 +166,9 @@ model EvaluatorVersion {
   @doc("Configuration specific to the evaluator type")
   evaluator_config: EvaluatorConfig;
 
+  @doc("The Evaluator's provider")
+  provider: string;
+
   ...AssetBase;
 }
 
