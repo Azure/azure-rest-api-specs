@@ -547,8 +547,7 @@ model MongoDatabaseProperties is AzureResourceProperties {
   /**
    * The database name.
    */
-  databaseName: string;
-  
+  databaseDisplayName: string;
 
   /**
    * The size of the database in MB.
@@ -641,13 +640,38 @@ model MongoDatabaseProperties is AzureResourceProperties {
 }
 
 /**
+ * Mongo Database resource patch properties
+ */
+model MongoDatabaseResourcePatchProperties {
+  /**
+   * The database name.
+   */
+  databaseDisplayName?: string;
+
+  /**
+   * The size of the database in MB.
+   */
+  sizeInMb?: float32;
+
+  /**
+   * The number of collections in the database.
+   */
+  numberOfCollections?: int64;
+}
+
+/**
+ * List of MongoCollections.
+ */
+model MongoCollectionList is Azure.Core.Page<MongoCollection>;
+
+/**
  * Mongo Collection Properties
  */
 model MongoCollectionProperties is AzureResourceProperties {
   /**
    * The collection name.
    */
-  collectionName: string;
+  collectionDisplayName: string;
 
   /**
    * The size of the collection in MB.
@@ -714,6 +738,32 @@ model MongoCollectionProperties is AzureResourceProperties {
 }
 
 /**
+ * Properties for PATCH operation on MongoCollection resource.
+ */
+model MongoCollectionResourcePatchProperties {
+  /** The collection name. */
+  collectionDisplayName?: string;
+
+  /** The size of the collection in MB. */
+  sizeInMb?: float32;
+
+  /** The number of indexes in the collection. */
+  numberOfIndexes?: int64;
+
+  /** The number of documents in the collection. */
+  numberOfDocuments?: int64;
+
+  /** The average document size in bytes. */
+  averageDocumentSizeInBytes?: float32;
+
+  /** The collection creation timestamp. */
+  createdAt?: utcDateTime;
+
+  /** The collection last modified timestamp. */
+  lastModifiedAt?: utcDateTime;
+}
+
+/**
  * MongoError, Warning or information
  */
 model CollectionExceptionInfo {
@@ -721,24 +771,4 @@ model CollectionExceptionInfo {
    * Content of the message
    */
   errorMessage: string;
-}
-
-/**
- * Mongo Database resource patch properties
- */
-model MongoDatabaseResourcePatchProperties {
-  /**
-   * The database name.
-   */
-  databaseName?: string;
-
-  /**
-   * The size of the database in MB.
-   */
-  sizeInMb?: float32;
-
-  /**
-   * The number of collections in the database.
-   */
-  numberOfCollections?: int64;
 }

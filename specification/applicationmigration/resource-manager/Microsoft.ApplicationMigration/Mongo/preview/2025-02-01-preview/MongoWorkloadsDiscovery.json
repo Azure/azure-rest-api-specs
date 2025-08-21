@@ -53,6 +53,9 @@
     },
     {
       "name": "MongoAgents"
+    },
+    {
+      "name": "MongoCollections"
     }
   ],
   "paths": {
@@ -722,6 +725,362 @@
         "x-ms-examples": {
           "MongoDatabases_Delete_MaximumSet": {
             "$ref": "./examples/MongoDatabases_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/MongoSites/{siteName}/MongoDatabases/{databaseName}/MongoCollections": {
+      "get": {
+        "operationId": "MongoCollections_ListByDatabase",
+        "tags": [
+          "MongoCollections"
+        ],
+        "description": "Lists the MongoCollection resources in MongoDatabase.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of Database",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoCollectionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MongoCollections_ListByDatabase_MaximumSet": {
+            "$ref": "./examples/MongoCollections_ListByDatabase_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/MongoSites/{siteName}/MongoDatabases/{databaseName}/MongoCollections/{collectionName}": {
+      "get": {
+        "operationId": "MongoCollections_Get",
+        "tags": [
+          "MongoCollections"
+        ],
+        "description": "Gets the MongoCollection resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of Database",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "collectionName",
+            "in": "path",
+            "description": "The name of Collection",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MongoCollections_Get_MaximumSet": {
+            "$ref": "./examples/MongoCollections_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MongoCollections_CreateOrUpdate",
+        "tags": [
+          "MongoCollections"
+        ],
+        "description": "Puts the MongoCollection resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of Database",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "collectionName",
+            "in": "path",
+            "description": "The name of Collection",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The MongoCollection resource to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MongoCollection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MongoCollection"
+            }
+          },
+          "201": {
+            "description": "Resource 'MongoCollection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MongoCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MongoCollections_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/MongoCollections_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "MongoCollections_Update",
+        "tags": [
+          "MongoCollections"
+        ],
+        "description": "Patch the MongoCollection resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of Database",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "collectionName",
+            "in": "path",
+            "description": "The name of Collection",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "MongoCollection patch payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoCollectionResourcePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MongoCollection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MongoCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MongoCollections_Update_MaximumSet": {
+            "$ref": "./examples/MongoCollections_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MongoCollections_Delete",
+        "tags": [
+          "MongoCollections"
+        ],
+        "description": "Deletes the MongoCollection resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of Database",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "collectionName",
+            "in": "path",
+            "description": "The name of Collection",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MongoCollections_Delete_MaximumSet": {
+            "$ref": "./examples/MongoCollections_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -1766,94 +2125,25 @@
         "value"
       ]
     },
-    "MongoCollectionProperties": {
+    "MongoCollectionList": {
       "type": "object",
-      "description": "Mongo Collection Properties",
+      "description": "List of MongoCollections.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "collectionName": {
-          "type": "string",
-          "description": "The collection name."
-        },
-        "sizeInMb": {
-          "type": "number",
-          "format": "float",
-          "description": "The size of the collection in MB."
-        },
-        "numberOfIndexes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of indexes in the collection."
-        },
-        "numberOfDocuments": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of documents in the collection."
-        },
-        "averageDocumentSizeInBytes": {
-          "type": "number",
-          "format": "float",
-          "description": "The average document size in bytes for this collection"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The collection creation timestamp."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The collection last modified timestamp."
-        },
-        "criticalErrors": {
+        "value": {
           "type": "array",
-          "description": "The list of critical errors.",
+          "description": "The MongoCollection items on this page",
           "items": {
-            "$ref": "#/definitions/CollectionExceptionInfo"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/MongoCollection"
+          }
         },
-        "criticalErrorCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of critical errors."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The list of warnings.",
-          "items": {
-            "$ref": "#/definitions/CollectionExceptionInfo"
-          },
-          "x-ms-identifiers": []
-        },
-        "warningsCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of warnings."
-        },
-        "informationalMessages": {
-          "type": "array",
-          "description": "The list of informational messages.",
-          "items": {
-            "$ref": "#/definitions/CollectionExceptionInfo"
-          },
-          "x-ms-identifiers": []
-        },
-        "informationalMessagesCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of informational messages."
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "collectionName",
-        "criticalErrorCount",
-        "warningsCount",
-        "informationalMessagesCount"
+        "value"
       ]
     },
     "MongoDatabase": {
@@ -1904,7 +2194,7 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "databaseName": {
+        "databaseDisplayName": {
           "type": "string",
           "description": "The database name."
         },
@@ -2004,7 +2294,7 @@
         }
       },
       "required": [
-        "databaseName",
+        "databaseDisplayName",
         "criticalErrorCount",
         "warningsCount",
         "informationalMessagesCount"
@@ -2014,19 +2304,21 @@
       "type": "object",
       "description": "Mongo Database resource patch properties",
       "properties": {
-        "databaseName": {
-          "type": "string",
-          "description": "The database name."
-        },
-        "sizeInMb": {
-          "type": "number",
-          "format": "float",
-          "description": "The size of the database in MB."
-        },
-        "numberOfCollections": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of collections in the database."
+        "properties": {
+          "databaseDisplayName": {
+            "type": "string",
+            "description": "The database name."
+          },
+          "sizeInMb": {
+            "type": "number",
+            "format": "float",
+            "description": "The size of the database in MB."
+          },
+          "numberOfCollections": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of collections in the database."
+          }
         }
       }
     },
@@ -2553,6 +2845,169 @@
             "description": "TLS version 1.3."
           }
         ]
+      }
+    },
+    "MongoCollection": {
+      "type": "object",
+      "description": "The MongoCollection resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoCollectionProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MongoCollectionProperties": {
+      "type": "object",
+      "description": "Mongo Collection properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "collectionDisplayName": {
+          "type": "string",
+          "description": "The collection name."
+        },
+        "sizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "The size of the collection in MB."
+        },
+        "numberOfIndexes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of indexes in the collection."
+        },
+        "numberOfDocuments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents in the collection."
+        },
+        "averageDocumentSizeInBytes": {
+          "type": "number",
+          "format": "float",
+          "description": "The average document size in bytes."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The collection creation timestamp."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The collection last modified timestamp."
+        },
+        "usesCapped": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the collection is capped."
+        },
+        "storageEngine": {
+          "type": "string",
+          "description": "The collection storage engine."
+        },
+        "shardingConfig": {
+          "type": "string",
+          "description": "The collection sharding configuration."
+        },
+        "criticalErrors": {
+          "type": "array",
+          "description": "The list of critical errors.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "criticalErrorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of critical errors.",
+          "x-ms-identifiers": []
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The list of warnings.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "warningsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of warnings."
+        },
+        "informationalMessages": {
+          "type": "array",
+          "description": "The list of informational messages.",
+          "items": {
+            "$ref": "#/definitions/CollectionExceptionInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "informationalMessagesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of informational messages."
+        }
+      },
+      "required": [
+        "collectionDisplayName",
+        "criticalErrorCount",
+        "warningsCount",
+        "informationalMessagesCount"
+      ]
+    },
+    "MongoCollectionResourcePatchProperties": {
+      "type": "object",
+      "description": "Properties for PATCH operation on MongoCollection resource.",
+      "properties": {
+        "properties": {
+          "collectionDisplayName": {
+            "type": "string",
+            "description": "The collection name."
+          },
+          "sizeInMb": {
+            "type": "number",
+            "format": "float",
+            "description": "The size of the collection in MB."
+          },
+          "numberOfIndexes": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of indexes in the collection."
+          },
+          "numberOfDocuments": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of documents in the collection."
+          },
+          "averageDocumentSizeInBytes": {
+            "type": "number",
+            "format": "float",
+            "description": "The average document size in bytes."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The collection creation timestamp."
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The collection last modified timestamp."
+          }
+        }
       }
     }
   },
