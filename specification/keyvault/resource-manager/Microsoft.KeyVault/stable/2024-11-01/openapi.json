@@ -5120,7 +5120,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -5264,55 +5264,21 @@
         ]
       }
     },
-    "Resource": {
-      "type": "object",
-      "description": "Key Vault resource",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified identifier of the key vault resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the key vault resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type of the key vault resource.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Azure location of the key vault resource.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags assigned to the key vault resource.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "ResourceListResult": {
       "type": "object",
-      "description": "The response of a Resource list operation.",
+      "description": "The list of vault resources.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Resource items on this page",
+          "description": "The list of vault resources.",
           "items": {
-            "$ref": "#/definitions/Resource"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
           }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to get the next set of vault resources."
         }
       },
       "required": [

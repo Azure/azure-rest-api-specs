@@ -61,7 +61,7 @@ interface VaultsOperationGroup {
     `api-version`: "2015-11-01",
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<Resource>> | CloudError;
+  ): ArmResponse<VaultListResult> | CloudError;
 
   /**
    * Checks that the vault name is valid and is not already in use.

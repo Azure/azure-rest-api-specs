@@ -1551,42 +1551,6 @@ model DeletedVaultProperties {
 }
 
 /**
- * Key Vault resource
- */
-model Resource {
-  /**
-   * Fully qualified identifier of the key vault resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Name of the key vault resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type of the key vault resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure location of the key vault resource.
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * Tags assigned to the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-}
-
-/**
  * The parameters used to check the availability of the vault name.
  */
 model VaultCheckNameAvailabilityParameters {
@@ -1638,7 +1602,8 @@ model PrivateLinkResourceListResult {
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateLinkResource extends Resource {
+model PrivateLinkResource
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * Resource properties.
    */
@@ -2511,3 +2476,13 @@ model OperationListResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MHSMPrivateEndpointConnectionsListResult
   is Azure.Core.Page<MhsmPrivateEndpointConnection>;
+
+/**
+ * The list of vault resources.
+ */
+model VaultListResult
+  is Azure.Core.Page<Azure.ResourceManager.Foundations.TrackedResource>;
+@@doc(VaultListResult.nextLink,
+  "The URL to get the next set of vault resources."
+);
+@@doc(VaultListResult.value, "The list of vault resources.");

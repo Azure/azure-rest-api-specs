@@ -136,3 +136,4 @@ using Azure.Core;
   "ArmResource",
   "python"
 );
+@@clientName(VaultListResult, "ResourceListResult");
