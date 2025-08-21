@@ -27,22 +27,14 @@ union EvaluatorCategory {
 union EvaluatorType {
   string,
 
-  @doc("Custom Evaluator")
-  custom: "Custom",
-
-  @doc("Built-in evaluator provided by the platform")
-  builtin: "Built-In",
-}
-
-@doc("The sub-type of the evaluator")
-union EvaluatorSubType {
-  string,
-
   @doc("LLM-based evaluator")
   llm: "LLM_Based",
 
   @doc("Code-based evaluator")
   code: "Code_Based",
+
+  @doc("Service-based evaluator")
+  service: "Service_Based",
 }
 
 @doc("The type of evaluator configuration")
@@ -158,9 +150,6 @@ model EvaluatorVersion {
 
   @doc("The evaluator type")
   type: EvaluatorType;
-
-  @doc("The evaluator subtype")
-  sub_type: EvaluatorSubType;
 
   @doc("Configuration specific to the evaluator type")
   evaluator_config: EvaluatorConfig;
