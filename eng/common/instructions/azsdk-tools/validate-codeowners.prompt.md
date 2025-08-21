@@ -1,13 +1,13 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel', 'ValidateCodeownersEntryForService', 'UpdateCodeowners'] 
+tools: ['azsdk_check_service_label', 'azsdk_engsys_validate_codeowners_entry_for_service', 'azsdk_engsys_codeowner_update'] 
 ---
 
 ## Goal: 
 Validate service label and ensure at least 2 valid code owners exist for SDK repositories.
 
 ## Step 1: Validate Service Label
-Use `CheckServiceLabel` to verify the service label exists:
+Use `azsdk_check_service_label` to verify the service label exists:
 - **DoesNotExist/NotAServiceLabel**: Direct user to create valid service label first. Stop validation process until service label is created.
 - **Exists/InReview**: Proceed to Step 2
 
@@ -21,7 +21,7 @@ Repository name mapping:
 - JavaScript: use "azure-sdk-for-js"
 - Go: use "azure-sdk-for-go"
 
-Use `ValidateCodeownersEntryForService` with either `serviceLabel` OR `repoPath` or both, but at least one must be used. If one isn't provided, leave the parameter field empty.
+Use `azsdk_engsys_validate_codeowners_entry_for_service` with either `serviceLabel` OR `repoPath` or both, but at least one must be used. If one isn't provided, leave the parameter field empty.
 
 **If entry exists**: Go to Step 3
 **If no entry exists**: Go to Step 4
@@ -34,7 +34,7 @@ Valid code owners must be:
 **If at least 2 valid owners**: Success - optionally add or delete additional owners
 **If less than 2 valid owners**: CRITICAL - must fix before proceeding:
 
-After any changes, re-validate with `ValidateCodeownersEntryForService`.
+After any changes, re-validate with `azsdk_engsys_validate_codeowners_entry_for_service`.
 
 ## Step 4: Create New Code Owner Entry
 When no CODEOWNERS entry exists yet:
@@ -51,18 +51,24 @@ When no CODEOWNERS entry exists yet:
    - serviceOwners - **Optional** if no ServiceLabel is present. Can be either owners to add or delete, depending on isAdding.
    - sourceOwners - **Optional** if no path or PRLabel are present. Can be either owners to add or delete, depending on isAdding.
    - isAdding - **Required** Should be true if adding owners to an existing entry, false if deleting owners from an existing entry. Should also be false when adding a brand new entry.
-1. Collect service owners and source owners (GitHub usernames)
-2. Use `UpdateCodeowners` with required parameters
-3. Must have at least 2 valid owners from the start
+1. Provide information to the user about what codeowners is for:
+   - [Learn about CODEOWNERS](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/overview)
+   - Service owners is for getting mentioned on issues.
+   - Source owners is for getting mentioned in PRs.
+2. Collect service owners and source owners (GitHub usernames)
+3. Use `azsdk_engsys_codeowner_update` with required parameters
+4. Must have at least 2 valid owners from the start
 
 ### Fix Options:
 1. **Fix invalid owners** - If there are invalid owners after modifing the CODEOWNERS file ALWAYS provide guidance:
    - Microsoft org: [Join here](https://repos.opensource.microsoft.com/orgs/Microsoft), set public visibility at [Microsoft Org Visibility](https://github.com/orgs/Microsoft/people?query={github_username})
    - Azure org: [Join here](https://repos.opensource.microsoft.com/orgs/Azure), set public visibility at [Azure Org Visibility](https://github.com/orgs/Azure/people?query={github_username})
    - Write access: [Request here](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
-2. **Add new owners** using `UpdateCodeowners` with `isAdding: true`
-3. **Remove invalid + add valid** owners using `UpdateCodeowners`
+   - Documentation about codeowners: [Read here](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/codeowners)
+2. **Add new owners** using `azsdk_engsys_codeowner_update` with `isAdding: true`
+3. **Remove invalid + add valid** owners using `azsdk_engsys_codeowner_update`
 
 ## Requirements
 - **MINIMUM**: At least 2 valid code owners at all times
 - **NO EXCEPTIONS**: Cannot proceed with insufficient owners
+- **RESPONSE HANDLING**: If any exception occurs during validation or creation, ALWAYS provide documentation link [Codeowners documentation](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/codeowners)
