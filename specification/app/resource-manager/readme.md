@@ -65,6 +65,7 @@ input-file:
   - Microsoft.App/stable/2025-07-01/Jobs.json
   - Microsoft.App/stable/2025-07-01/ManagedEnvironments.json
   - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsHttpRouteConfig.json
   - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsMaintenanceConfigurations.json
   - Microsoft.App/stable/2025-07-01/ManagedEnvironmentsStorages.json
   - Microsoft.App/stable/2025-07-01/SessionPools.json
