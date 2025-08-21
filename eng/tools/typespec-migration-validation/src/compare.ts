@@ -175,7 +175,9 @@ function compareNamedDefinition(oldDefinition: OpenAPI2Schema, oldDocument: Open
   for (const key of oldKeys) {
     const oldProperty = sortedOldProperties[key];
     const newProperty = sortedNewProperties[key];
-    diffs.push(...compareDefinitionProperty(oldProperty, newProperty, oldDocument, newDocument, key, name));
+    if (oldProperty && newProperty) {
+      diffs.push(...compareDefinitionProperty(oldProperty, newProperty, oldDocument, newDocument, key, name));
+    }
   }
 
   return diffs;
