@@ -11397,6 +11397,14 @@
       "type": "object",
       "description": "Solution Metadata Properties",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the solution metadata resource",
+          "minLength": 3,
+          "maxLength": 61,
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$",
+          "readOnly": true
+        },
         "solutionTemplateId": {
           "type": "string",
           "format": "arm-id",
@@ -11452,6 +11460,14 @@
       "type": "object",
       "description": "Solution Metadata Version Properties",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the solution metadata resource",
+          "minLength": 3,
+          "maxLength": 61,
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$",
+          "readOnly": true
+        },
         "solutionTemplateVersionId": {
           "type": "string",
           "format": "arm-id",

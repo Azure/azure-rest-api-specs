@@ -20,6 +20,13 @@ namespace Microsoft.Edge;
 @added(Versions.v2025_08_15_preview)
 @doc("Solution Metadata Version Properties")
 model SolutionMetadataVersionProperties {
+  @doc("Display name of the solution metadata resource")
+  @visibility(Lifecycle.Read)
+  @maxLength(61)
+  @minLength(3)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  displayName?: string;
+
   @doc("Solution template version Id")
   @visibility(Lifecycle.Read)
   solutionTemplateVersionId?: Azure.Core.armResourceIdentifier<[

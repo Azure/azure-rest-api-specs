@@ -20,6 +20,13 @@ namespace Microsoft.Edge;
 @added(Versions.v2025_08_15_preview)
 @doc("Solution Metadata Properties")
 model SolutionMetadataProperties {
+  @doc("Display name of the solution metadata resource")
+  @visibility(Lifecycle.Read)
+  @maxLength(61)
+  @minLength(3)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  displayName?: string;
+
   @doc("Solution template Id")
   @visibility(Lifecycle.Read)
   solutionTemplateId?: Azure.Core.armResourceIdentifier<[
