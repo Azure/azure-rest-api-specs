@@ -66,6 +66,12 @@ model EvaluatorConfig {
   type: EvaluatorConfigType;
 }
 
+/* Allowed parameter types */
+alias ScalarParamType = string | "number" | "string"; // TODO: need to confirm allowed values
+
+/* The evaluator's initialization parameters */
+alias InitializationParameters = Record<ScalarParamType>;
+
 @doc("Resource settings for container deployment")
 model ResourceSettings {
   @doc("CPU allocation")
@@ -119,6 +125,9 @@ model PromptBasedEvaluatorConfig extends EvaluatorConfig {
 
   @doc("Name of the model deployment to use for evaluation")
   model_deployment_name: string;
+
+  @doc("The evaluator's initialization parameters")
+  init_params: InitializationParameters;
 }
 
 @doc("Prompty-based evaluator configuration using prompty files")
@@ -133,6 +142,9 @@ model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
 
   @doc("Connection name")
   connection_name?: string;
+
+  @doc("The evaluator's initialization parameters")
+  init_params: InitializationParameters;
 }
 
 @doc("Evaluator Definition")
