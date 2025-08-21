@@ -51,7 +51,7 @@ When no CODEOWNERS entry exists yet:
    - serviceOwners - **Optional** if no ServiceLabel is present. Can be either owners to add or delete, depending on isAdding.
    - sourceOwners - **Optional** if no path or PRLabel are present. Can be either owners to add or delete, depending on isAdding.
    - isAdding - **Required** Should be true if adding owners to an existing entry, false if deleting owners from an existing entry. Should also be false when adding a brand new entry.
-1. Provide guidance to the user about what codeowners is for:
+1. Provide information to the user about what codeowners is for:
    - [Learn about CODEOWNERS](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/overview)
    - Service owners is for getting mentioned on issues.
    - Source owners is for getting mentioned in PRs.
@@ -71,4 +71,4 @@ When no CODEOWNERS entry exists yet:
 ## Requirements
 - **MINIMUM**: At least 2 valid code owners at all times
 - **NO EXCEPTIONS**: Cannot proceed with insufficient owners
-- **ERROR HANDLING**: If any error occurs during validation or creation, provide documentation link [codeowners documentation](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/codeowners)
+- **RESPONSE HANDLING**: If any exception occurs during validation or creation, ALWAYS provide documentation link [Codeowners documentation](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/codeowners)
