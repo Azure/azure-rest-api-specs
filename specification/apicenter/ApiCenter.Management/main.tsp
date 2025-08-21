@@ -137,6 +137,7 @@ enum Versions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @get
 @autoRoute
+@list
 @listsResource(TResource)
 @segmentOf(TResource)
 @armResourceList(TResource)

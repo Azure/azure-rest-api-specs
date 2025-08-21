@@ -7,12 +7,8 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface WorkloadNetworks {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_Get")
   get is ArmResourceRead<WorkloadNetwork>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_List")
   list is ArmResourceListByParent<
     WorkloadNetwork,
     Response = ArmResponse<ResourceList<WorkloadNetwork>>

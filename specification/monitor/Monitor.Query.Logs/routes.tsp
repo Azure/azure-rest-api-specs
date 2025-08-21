@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 namespace MonitorQueryLogs;
@@ -56,6 +58,7 @@ interface Query {
 
     /** Optional. The prefer header to set server timeout, query statistics and visualization information. */
     @header("Prefer")
+    @clientName("options", "go")
     prefer?: string,
 
     /** Body Parameter content-type */
@@ -78,7 +81,7 @@ interface Query {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query using resource URI")
-  @route("/{resourceId}/query")
+  @route("/{+resourceId}/query")
   @get
   getWithResourceId(
     /** The identifier of the resource. */
@@ -109,7 +112,7 @@ interface Query {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query using resource ID")
-  @route("/{resourceId}/query")
+  @route("/{+resourceId}/query")
   @post
   executeWithResourceId(
     /** The identifier of the resource. */
@@ -121,6 +124,7 @@ interface Query {
      * visualization information.
      */
     @header("Prefer")
+    @clientName("options", "go")
     prefer?: string,
 
     /** Body Parameter content-type */
