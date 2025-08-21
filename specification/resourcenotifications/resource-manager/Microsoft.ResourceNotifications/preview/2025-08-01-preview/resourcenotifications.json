@@ -38,91 +38,15 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Operations"
-    }
-  ],
+  "tags": [],
   "paths": {
-    "/providers/Microsoft.ResourceNotifications/locations/{locationName}/notificationsSessions": {
-      "get": {
-        "operationId": "NotificationsSessions_ListByLocation",
-        "description": "List all notification sessions in a location.",
-        "parameters": [
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NotificationSessionResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.ResourceNotifications/locations/{locationName}/notificationsSessions/{sessionName}": {
-      "get": {
-        "operationId": "NotificationsSessions_Get",
-        "description": "Get a notification session.",
-        "parameters": [
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "sessionName",
-            "in": "path",
-            "description": "Name of the notification session.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NotificationSessionResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
       "put": {
-        "operationId": "NotificationsSessions_CreateOrUpdate",
-        "description": "Create or update a notification session.",
+        "operationId": "NotificationsSessions_CreateNotificationSession",
+        "description": "Create a notification session.",
         "parameters": [
           {
-            "name": "locationName",
+            "name": "location",
             "in": "path",
             "description": "The location name.",
             "required": true,
@@ -130,68 +54,7 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "sessionName",
-            "in": "path",
-            "description": "Name of the notification session.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The notification session resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NotificationSessionResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NotificationSessionResource"
-            }
-          },
-          "201": {
-            "description": "Azure create operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NotificationSessionResource"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "NotificationsSessions_Delete",
-        "description": "Delete a notification session.",
-        "parameters": [
-          {
-            "name": "locationName",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "sessionName",
+            "name": "notificationSessionName",
             "in": "path",
             "description": "Name of the notification session.",
             "required": true,
@@ -204,71 +67,299 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CreateNotificationSessionResponse"
+            }
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "format": "int32"
               }
             }
           },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Access is unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "429": {
+            "description": "Client error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
-    "/providers/Microsoft.ResourceNotifications/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession": {
+      "post": {
+        "operationId": "NotificationsSessions_CloseSession",
+        "description": "Close the session.",
         "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "notificationSessionId",
+            "in": "path",
+            "description": "ID of the notification session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/CloseSessionResponse"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Access is unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails": {
+      "post": {
+        "operationId": "NotificationsSessions_GetSessionDetails",
+        "description": "Get session details.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "notificationSessionId",
+            "in": "path",
+            "description": "ID of the notification session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body containing session details parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetSessionDetailsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetSessionDetailsResponse"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Access is unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "429": {
+            "description": "Client error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
   },
   "definitions": {
+    "CloseSessionResponse": {
+      "type": "object",
+      "description": "Response model for close session operation.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Success message for the close session operation."
+        }
+      }
+    },
+    "CreateNotificationSessionResponse": {
+      "type": "object",
+      "description": "Response model for create notification session operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/CreateNotificationSessionResponseProperties",
+          "description": "The properties of the notification session."
+        }
+      }
+    },
+    "CreateNotificationSessionResponseProperties": {
+      "type": "object",
+      "description": "Properties for create notification session response.",
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the session was created."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the notification session."
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Error detail model.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response model.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "Error details."
+        }
+      }
+    },
+    "GetSessionDetailsRequest": {
+      "type": "object",
+      "description": "Request model for get session details operation.",
+      "properties": {
+        "durationInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration in minutes for which the session details are valid."
+        }
+      },
+      "required": [
+        "durationInMinutes"
+      ]
+    },
+    "GetSessionDetailsResponse": {
+      "type": "object",
+      "description": "Response model for get session details operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID."
+        },
+        "encodedNotificationSession": {
+          "type": "string",
+          "description": "Encoded notification session containing signed session id with content."
+        },
+        "connectionDetails": {
+          "$ref": "#/definitions/NotificationSessionConnectionDetails",
+          "description": "Connection details for the session."
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp until which the session is valid."
+        }
+      }
+    },
+    "NotificationSessionConnectionDetails": {
+      "type": "object",
+      "description": "Connection details for a notification session.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "Connection string for the session."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint to connect to."
+        }
+      }
+    },
     "NotificationSessionProperties": {
       "type": "object",
       "description": "Properties for a notification session.",
@@ -369,7 +460,7 @@
     },
     "NotificationSessionResource": {
       "type": "object",
-      "description": "A notification session resource that operates at tenant scope within a specific location.",
+      "description": "A notification session resource that operates within a specific location at tenant scope.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NotificationSessionProperties",
@@ -380,27 +471,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "NotificationSessionResourceListResult": {
-      "type": "object",
-      "description": "The response of a NotificationSessionResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NotificationSessionResource items on this page",
-          "items": {
-            "$ref": "#/definitions/NotificationSessionResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "NotificationSessionStatistics": {
@@ -523,6 +593,47 @@
         ]
       },
       "readOnly": true
+    },
+    "TenantLocationProperties": {
+      "type": "object",
+      "description": "Properties for a tenant location resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the location.",
+          "readOnly": true
+        },
+        "regionalDisplayName": {
+          "type": "string",
+          "description": "The regional display name of the location.",
+          "readOnly": true
+        },
+        "additionalProperties": {
+          "type": "string",
+          "description": "Additional metadata for the location.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the location.",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantLocationResource": {
+      "type": "object",
+      "description": "Tenant location resource that represents an Azure location at tenant scope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TenantLocationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     }
   },
   "parameters": {}

@@ -1,0 +1,36 @@
+{
+  "title": "Get session details with connection information",
+  "operationId": "NotificationsSessions_GetSessionDetails", 
+  "description": "This example demonstrates getting session details with connection information for a notification session.",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "location": "westus2",
+    "notificationSessionId": "abc123def456ghi789",
+    "body": {
+      "durationInMinutes": 60
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/abc123def456ghi789",
+        "encodedNotificationSession": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJhYmMxMjNkZWY0NTZnaGk3ODkiLCJsb2NhdGlvbiI6Indlc3R1czIiLCJleHAiOjE3MzcxMzQ0MDB9.sampleSignatureHashForEncodedSessionToken",
+        "connectionDetails": {
+          "connectionString": "Endpoint=sb://notifications-westus2.servicebus.windows.net/;EntityPath=notificationsession;SharedAccessKeyName=SessionAccess;SharedAccessKey=dGVzdEtleUZvckV4YW1wbGU=",
+          "endpoint": "https://notifications-westus2.servicebus.windows.net/notificationsession"
+        },
+        "validUntil": "2025-01-27T15:30:00.000Z"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidDuration",
+          "message": "The durationInMinutes value must be between 5 and 1440 minutes."
+        }
+      }
+    }
+  }
+}

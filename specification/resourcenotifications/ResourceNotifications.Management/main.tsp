@@ -66,7 +66,41 @@ union ProvisioningState {
 }
 
 /*
- * Notification Sessions resource definition (Tenant-scoped location-based)
+ * Tenant Location Resource definition
+ */
+
+/** Properties for a tenant location resource. */
+model TenantLocationProperties {
+  /** The display name of the location. */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /** The regional display name of the location. */
+  @visibility(Lifecycle.Read)
+  regionalDisplayName?: string;
+
+  /** Additional metadata for the location. */
+  @visibility(Lifecycle.Read)
+  additionalProperties?: string;
+
+  /** The provisioning state of the location. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** Tenant location resource that represents an Azure location at tenant scope. */
+model TenantLocationResource is ProxyResource<TenantLocationProperties> {
+  /** The name of the location. */
+  @key
+  @path
+  @segment("locations")
+  @pattern("^[a-z0-9]+$")
+  @visibility(Lifecycle.Read)
+  locationName: string;
+}
+
+/*
+ * Notification Sessions resource definition (Location-scoped within tenant)
  */
 
 /** Properties for a notification session. */
@@ -128,89 +162,227 @@ model NotificationSessionStatistics {
   averageProcessingTimeMs?: int32;
 }
 
-/** A notification session resource that operates at tenant scope within a specific location. */
+/** A notification session resource that operates within a specific location at tenant scope. */
+@parentResource(TenantLocationResource)
 model NotificationSessionResource is ProxyResource<NotificationSessionProperties> {
   /** Name of the notification session. */
-  @key("sessionName")
-  @segment("notificationsSessions")
+  @key
   @path
+  @segment("notificationSessions")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
   @visibility(Lifecycle.Read)
-  name: string;
+  notificationSessionName: string;
+}
+
+/*
+ * Create Notification Session specific response models
+ */
+
+/** Properties for create notification session response. */
+model CreateNotificationSessionResponseProperties {
+  /** The time when the session was created. */
+  creationTime?: utcDateTime;
+
+  /** The provisioning state of the notification session. */
+  provisioningState?: string;
+}
+
+/** Response model for create notification session operation. */
+model CreateNotificationSessionResponse {
+  /** The resource ID. */
+  id?: string;
+
+  /** The resource name. */
+  name?: string;
+
+  /** The resource type. */
+  type?: string;
+
+  /** The location of the resource. */
+  location?: string;
+
+  /** The properties of the notification session. */
+  properties?: CreateNotificationSessionResponseProperties;
+}
+
+/** Error response model. */
+model ErrorResponse {
+  /** Error details. */
+  error?: ErrorDetail;
+}
+
+/** Error detail model. */
+model ErrorDetail {
+  /** Error code. */
+  code?: string;
+
+  /** Error message. */
+  message?: string;
 }
 
 /*
  * Microsoft.ResourceNotifications RP interface definitions
  */
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /** Operations for notification sessions at tenant scope with location. */
 interface NotificationsSessions {
-  /** Create or update a notification session. */
+  /** Create a notification session. */
   @put
-  @route("/providers/Microsoft.ResourceNotifications/locations/{locationName}/notificationsSessions/{sessionName}")
-  createOrUpdate(
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
+  createNotificationSession(
     @doc("The location name.")
     @path
     @pattern("^[a-z0-9]+$")
-    locationName: string,
+    location: string,
     
     @doc("Name of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    sessionName: string,
-    
-    @doc("The notification session resource.")
-    @body 
-    resource: NotificationSessionResource,
+    notificationSessionName: string,
     
     ...ApiVersionParameter,
-  ): ArmResponse<NotificationSessionResource> | ArmCreatedResponse<NotificationSessionResource> | ErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | {
+        @statusCode statusCode: 202;
+        @header("Location") location?: string;
+        @header("Retry-After") retryAfter?: int32;
+      }
+    | {
+        @statusCode statusCode: 400;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 401;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 429;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 500;
+        @body body: ErrorResponse;
+      };
   
-  /** Get a notification session. */
-  @get
-  @route("/providers/Microsoft.ResourceNotifications/locations/{locationName}/notificationsSessions/{sessionName}")
-  get(
+  /** Get session details. */
+  @post
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails")
+  getSessionDetails(
     @doc("The location name.")
     @path
     @pattern("^[a-z0-9]+$")
-    locationName: string,
+    location: string,
     
-    @doc("Name of the notification session.")
+    @doc("ID of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    sessionName: string,
+    notificationSessionId: string,
+
+    @doc("Request body containing session details parameters.")
+    @body
+    body: GetSessionDetailsRequest,
     
     ...ApiVersionParameter,
-  ): ArmResponse<NotificationSessionResource> | ErrorResponse;
+  ): 
+    | {
+        @statusCode statusCode: 200;
+        @body body: GetSessionDetailsResponse;
+      }
+    | {
+        @statusCode statusCode: 400;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 401;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 429;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 500;
+        @body body: ErrorResponse;
+      };
   
-  /** Delete a notification session. */
-  @delete
-  @route("/providers/Microsoft.ResourceNotifications/locations/{locationName}/notificationsSessions/{sessionName}")
-  delete(
+  /** Close the session. */
+  @post
+  @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession")
+  closeSession(
     @doc("The location name.")
     @path
     @pattern("^[a-z0-9]+$")
-    locationName: string,
+    location: string,
     
-    @doc("Name of the notification session.")
+    @doc("ID of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
-    sessionName: string,
+    notificationSessionId: string,
     
     ...ApiVersionParameter,
-  ): ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | ErrorResponse;
-  
-  /** List all notification sessions in a location. */
-  @get
-  @route("/providers/Microsoft.ResourceNotifications/locations/{locationName}/notificationsSessions")
-  listByLocation(
-    @doc("The location name.")
-    @path
-    @pattern("^[a-z0-9]+$")
-    locationName: string,
-    
-    ...ApiVersionParameter,
-  ): ArmResponse<ResourceListResult<NotificationSessionResource>> | ErrorResponse;
+  ): 
+    | {
+        @statusCode statusCode: 200;
+        @body body: CloseSessionResponse;
+      }
+    | {
+        @statusCode statusCode: 400;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 401;
+        @body body: ErrorResponse;
+      }
+    | {
+        @statusCode statusCode: 500;
+        @body body: ErrorResponse;
+      };
+}
+
+/*
+ * Get Session Details specific response models
+ */
+
+/** Request model for get session details operation. */
+model GetSessionDetailsRequest {
+  /** Duration in minutes for which the session details are valid. */
+  durationInMinutes: int32;
+}
+
+/** Connection details for a notification session. */
+model NotificationSessionConnectionDetails {
+  /** Connection string for the session. */
+  connectionString?: string;
+
+  /** Endpoint to connect to. */
+  endpoint?: string;
+}
+
+/** Response model for get session details operation. */
+model GetSessionDetailsResponse {
+  /** The resource ID. */
+  id?: string;
+
+  /** Encoded notification session containing signed session id with content. */
+  encodedNotificationSession?: string;
+
+  /** Connection details for the session. */
+  connectionDetails?: NotificationSessionConnectionDetails;
+
+  /** Timestamp until which the session is valid. */
+  validUntil?: utcDateTime;
+}
+
+/*
+ * Close Session specific response models
+ */
+
+/** Response model for close session operation. */
+model CloseSessionResponse {
+  /** Success message for the close session operation. */
+  message?: string;
 }

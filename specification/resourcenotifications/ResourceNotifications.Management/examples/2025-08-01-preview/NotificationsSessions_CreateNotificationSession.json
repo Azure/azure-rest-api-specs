@@ -1,0 +1,31 @@
+{
+  "title": "Create a notification session",
+  "operationId": "NotificationsSessions_CreateNotificationSession",
+  "description": "This example demonstrates creating a new notification session with a user-friendly name.",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "location": "westus2",
+    "notificationSessionName": "MyTestSession"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
+        "name": "MyTestSession", 
+        "type": "Microsoft.ResourceNotifications/notificationSessions",
+        "location": "westus2",
+        "properties": {
+          "creationTime": "2025-01-27T14:30:00.000Z",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
+        "Retry-After": 30
+      }
+    }
+  }
+}

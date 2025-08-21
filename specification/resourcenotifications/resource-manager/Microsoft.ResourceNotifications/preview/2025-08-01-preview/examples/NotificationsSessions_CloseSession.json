@@ -1,0 +1,36 @@
+{
+  "title": "Close a notification session",
+  "operationId": "NotificationsSessions_CloseSession",
+  "description": "This example demonstrates closing an active notification session to stop receiving notifications.",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "location": "westus2", 
+    "notificationSessionId": "abc123def456ghi789"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "message": "Notification session 'abc123def456ghi789' has been successfully closed. No further notifications will be sent to this session."
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "SessionNotFound",
+          "message": "The specified notification session 'abc123def456ghi789' was not found or has already been closed."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Access denied. You do not have permission to close this notification session."
+        }
+      }
+    }
+  }
+}
