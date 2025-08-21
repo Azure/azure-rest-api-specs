@@ -4140,7 +4140,8 @@
       "type": "string",
       "description": "Kind of the long running operation.",
       "enum": [
-        "CloneTest"
+        "CloneTest",
+        "GenerateTestRunInsights"
       ],
       "x-ms-enum": {
         "name": "OperationKind",
@@ -4150,6 +4151,11 @@
             "name": "CloneTest",
             "value": "CloneTest",
             "description": "Operation represents a clone test operation"
+          },
+          {
+            "name": "GenerateTestRunInsights",
+            "value": "GenerateTestRunInsights",
+            "description": "Operation represents a test run insights generation operation"
           }
         ]
       }
@@ -6414,10 +6420,13 @@
       "description": "Represents insights for the test run.",
       "properties": {
         "columns": {
-          "type": "object",
+          "type": "array",
           "description": "The columns of the insights.",
-          "additionalProperties": {
-            "$ref": "#/definitions/TestRunInsightColumn"
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/TestRunInsightColumn"
+            }
           },
           "readOnly": true
         },

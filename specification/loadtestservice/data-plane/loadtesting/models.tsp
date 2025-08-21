@@ -933,7 +933,7 @@ model TestRun {
 model TestRunInsights {
   @doc("The columns of the insights.")
   @visibility(Lifecycle.Read)
-  columns?: Record<TestRunInsightColumn>;
+  columns?: Record<TestRunInsightColumn>[];
 
   @doc("The rows of the insights.")
   @visibility(Lifecycle.Read)
