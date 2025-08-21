@@ -6615,8 +6615,16 @@
           "description": "Database name for connection. Type: string."
         },
         "securityLevel": {
-          "type": "object",
-          "description": "The level of security that the driver uses for the connection to the data store."
+          "description": "The level of security that the driver uses for the connection to the data store.",
+          "type": "string",
+          "enum": [
+            "PreferredUnSecured",
+            "OnlyUnSecured"
+          ],
+          "x-ms-enum": {
+            "name": "NetezzaSecurityLevelType",
+            "modelAsString": true
+          }
         },
         "pwd": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
