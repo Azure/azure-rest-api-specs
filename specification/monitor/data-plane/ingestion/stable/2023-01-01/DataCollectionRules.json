@@ -1,136 +1,214 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Ingestion Using Data Collection Rules",
-    "version": "2023-01-01"
-  },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
+    "title": "Azure Monitor Ingestion",
+    "version": "2023-01-01",
+    "description": "Azure Monitor data collection client.",
+    "x-typespec-generated": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
   "schemes": [
     "https"
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The Data Collection Endpoint for the Data Collection Rule. For example, https://dce-name.eastus-2.ingest.monitor.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
-    }
+    ]
   },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
+      "OAuth2Auth": [
+        "https://monitor.azure.com/.default"
       ]
     }
   ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://monitor.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
   "paths": {
     "/dataCollectionRules/{ruleId}/streams/{stream}": {
       "post": {
-        "tags": [
-          "Data Collection Rules"
-        ],
-        "summary": "Ingestion API used to directly ingest data using Data Collection Rules",
-        "description": "See error response code and error response message for more detail.",
         "operationId": "Upload",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Ingestion API used to directly ingest data using Data Collection Rules.",
+        "description": "Ingestion API used to directly ingest data using Data Collection Rules.",
         "parameters": [
           {
-            "in": "path",
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "ruleId",
-            "description": "The immutable Id of the Data Collection Rule resource.",
+            "in": "path",
+            "description": "The immutable ID of the Data Collection Rule resource.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "stream",
+            "in": "path",
             "description": "The streamDeclaration name as defined in the Data Collection Rule.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
             "type": "string",
-            "description": "The API version to use for this operation."
+            "x-ms-client-name": "streamName"
           },
           {
-            "in": "header",
             "name": "Content-Encoding",
-            "description": "gzip",
-            "type": "string"
-          },
-          {
             "in": "header",
-            "name": "x-ms-client-request-id",
-            "description": "Client request Id",
-            "type": "string"
+            "description": "The content encoding of the request body which is always 'gzip'.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "contentEncoding"
           },
           {
-            "in": "body",
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "body",
-            "description": "An array of objects matching the schema defined by the provided stream.",
+            "in": "body",
+            "description": "The array of objects matching the schema defined by the provided stream.",
             "required": true,
             "schema": {
               "type": "array",
               "items": {
-                "type": "object"
+                "type": "object",
+                "additionalProperties": {}
               }
             }
           }
         ],
-        "x-ms-examples": {
-          "postIngestUsingDataCollectionRule": {
-            "$ref": "./examples/post_IngestUsingDataCollectionRule.json"
-          }
-        },
         "responses": {
           "204": {
-            "description": "Ingestion request accepted"
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "An error response object.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "A value that indicates the ingestion service error code.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Ingest data using a Data Collection Rule": {
+            "$ref": "./examples/post_IngestUsingDataCollectionRule.json"
           }
         }
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    }
+  },
   "parameters": {
-    "Endpoint": {
-      "name": "endpoint",
-      "description": "The Data Collection Endpoint for the Data Collection Rule, for example https://dce-name.eastus-2.ingest.monitor.azure.com.",
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }

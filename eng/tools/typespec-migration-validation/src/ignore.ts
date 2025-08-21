@@ -10,18 +10,20 @@ export function addIgnorePath(path: string): void {
   ignoreList.add(path);
 }
 
-export function processIgnoreList(sortedOldFile: OpenAPI2Document, sortedNewFile: OpenAPI2Document): void {
+export function processIgnoreList(
+  sortedOldFile: OpenAPI2Document,
+  sortedNewFile: OpenAPI2Document,
+): void {
   // Process each path in the ignore list
   for (const path of ignoreList) {
-    if (path.endsWith('__added')) {
-      const realPath = path.replace(/__added$/, '');
+    if (path.endsWith("__added")) {
+      const realPath = path.replace(/__added$/, "");
       // Delete the added element from the new file
       deleteElementByJsonPath(sortedNewFile, realPath);
-    } else if (path.endsWith('__deleted')) {
-      const realPath = path.replace(/__deleted$/, '');
+    } else if (path.endsWith("__deleted")) {
+      const realPath = path.replace(/__deleted$/, "");
       deleteElementByJsonPath(sortedOldFile, realPath);
-    }
-    else {
+    } else {
       const oldValue = getElementByJsonPath(sortedOldFile, path);
       if (oldValue !== undefined) {
         setElementByJsonPath(sortedNewFile, path, oldValue);
@@ -39,26 +41,26 @@ export function processIgnoreList(sortedOldFile: OpenAPI2Document, sortedNewFile
  */
 function parseJsonPath(path: string): string[] {
   const segments: string[] = [];
-  let currentSegment = '';
+  let currentSegment = "";
   let inBracket = false;
   let inArrayNotation = false;
   let bracketDepth = 0;
-  
+
   for (let i = 0; i < path.length; i++) {
     const char = path[i];
-    
+
     // Handle start of bracket notation for property access
-    if (char === '[' && !inBracket && path[i+1] === "'" || path[i+1] === '"') {
+    if ((char === "[" && !inBracket && path[i + 1] === "'") || path[i + 1] === '"') {
       // Start of bracket notation for property with special chars
       if (currentSegment) {
         segments.push(currentSegment);
-        currentSegment = '';
+        currentSegment = "";
       }
       inBracket = true;
       continue;
-    } 
+    }
     // Handle start of array index notation
-    else if (char === '[' && !inBracket) {
+    else if (char === "[" && !inBracket) {
       // This is an array index notation, keep it with the current segment
       inArrayNotation = true;
       bracketDepth++;
@@ -68,17 +70,17 @@ function parseJsonPath(path: string): string[] {
     // Handle quotes in bracket notation
     else if (inBracket && (char === "'" || char === '"')) {
       continue;
-    } 
+    }
     // Handle end of bracket notation for property access
-    else if (char === ']' && inBracket) {
+    else if (char === "]" && inBracket) {
       // End of bracket notation
       segments.push(currentSegment);
-      currentSegment = '';
+      currentSegment = "";
       inBracket = false;
       continue;
-    } 
+    }
     // Handle end of array index notation
-    else if (char === ']' && inArrayNotation) {
+    else if (char === "]" && inArrayNotation) {
       // End of array bracket, keep it as part of the segment
       bracketDepth--;
       if (bracketDepth === 0) {
@@ -86,26 +88,26 @@ function parseJsonPath(path: string): string[] {
       }
       currentSegment += char;
       continue;
-    } 
+    }
     // Handle dot separator
-    else if (char === '.' && !inBracket && !inArrayNotation) {
+    else if (char === "." && !inBracket && !inArrayNotation) {
       // Dot separator (only when not in bracket or array notation)
       if (currentSegment) {
         segments.push(currentSegment);
-        currentSegment = '';
+        currentSegment = "";
       }
       continue;
     }
-    
+
     // Regular character, add to current segment
     currentSegment += char;
   }
-  
+
   // Add the last segment if any
   if (currentSegment) {
     segments.push(currentSegment);
   }
-  
+
   return segments;
 }
 
@@ -116,43 +118,51 @@ function parseJsonPath(path: string): string[] {
  */
 function deleteElementByJsonPath(obj: any, path: string): void {
   const segments = parseJsonPath(path);
-  
+
   let current = obj;
-  
+
   // Navigate to the parent of the element to delete
   for (let i = 0; i < segments.length - 1; i++) {
     const segment = segments[i];
-    
+
     // Handle array index notation [n]
     const arrayMatch = segment.match(/^(.*?)\[(\d+)\]$/);
     if (arrayMatch) {
       const arrayName = arrayMatch[1];
       const arrayIndex = parseInt(arrayMatch[2], 10);
-      
-      if (!current[arrayName] || !Array.isArray(current[arrayName]) || arrayIndex >= current[arrayName].length) {
+
+      if (
+        !current[arrayName] ||
+        !Array.isArray(current[arrayName]) ||
+        arrayIndex >= current[arrayName].length
+      ) {
         // Path doesn't exist, nothing to delete
         return;
       }
       current = current[arrayName][arrayIndex];
     } else {
-      if (!current[segment] || typeof current[segment] !== 'object') {
+      if (!current[segment] || typeof current[segment] !== "object") {
         // Path doesn't exist, nothing to delete
         return;
       }
       current = current[segment];
     }
   }
-  
+
   // Delete the element
   const lastSegment = segments[segments.length - 1];
-  
+
   // Handle array index notation for the last part
   const arrayMatch = lastSegment.match(/^(.*?)\[(\d+)\]$/);
   if (arrayMatch) {
     const arrayName = arrayMatch[1];
     const arrayIndex = parseInt(arrayMatch[2], 10);
-    
-    if (current[arrayName] && Array.isArray(current[arrayName]) && arrayIndex < current[arrayName].length) {
+
+    if (
+      current[arrayName] &&
+      Array.isArray(current[arrayName]) &&
+      arrayIndex < current[arrayName].length
+    ) {
       current[arrayName].splice(arrayIndex, 1);
     }
   } else {
@@ -169,15 +179,19 @@ function deleteElementByJsonPath(obj: any, path: string): void {
 function getElementByJsonPath(obj: any, path: string): any {
   const parts = parseJsonPath(path);
   let current = obj;
-  
+
   for (const part of parts) {
     // Handle array index notation
     const arrayMatch = part.match(/^(.*)\[(\d+)\]$/);
     if (arrayMatch) {
       const arrayName = arrayMatch[1];
       const arrayIndex = parseInt(arrayMatch[2], 10);
-      
-      if (!current[arrayName] || !Array.isArray(current[arrayName]) || arrayIndex >= current[arrayName].length) {
+
+      if (
+        !current[arrayName] ||
+        !Array.isArray(current[arrayName]) ||
+        arrayIndex >= current[arrayName].length
+      ) {
         return undefined;
       }
       current = current[arrayName][arrayIndex];
@@ -188,7 +202,7 @@ function getElementByJsonPath(obj: any, path: string): any {
       current = current[part];
     }
   }
-  
+
   return current;
 }
 
@@ -201,27 +215,27 @@ function getElementByJsonPath(obj: any, path: string): any {
 function setElementByJsonPath(obj: any, path: string, value: any): void {
   const parts = parseJsonPath(path);
   let current = obj;
-  
+
   // Navigate to the parent of where we want to set the value
   for (let i = 0; i < parts.length - 1; i++) {
     const part = parts[i];
-    
+
     // Handle array index notation
     const arrayMatch = part.match(/^(.*)\[(\d+)\]$/);
     if (arrayMatch) {
       const arrayName = arrayMatch[1];
       const arrayIndex = parseInt(arrayMatch[2], 10);
-      
+
       // Ensure the array exists
       if (!current[arrayName]) {
         current[arrayName] = [];
       }
-      
+
       // Ensure the array is long enough
       while (current[arrayName].length <= arrayIndex) {
         current[arrayName].push({});
       }
-      
+
       current = current[arrayName][arrayIndex];
     } else {
       // Ensure the object exists
@@ -231,26 +245,26 @@ function setElementByJsonPath(obj: any, path: string, value: any): void {
       current = current[part];
     }
   }
-  
+
   // Set the value
   const lastPart = parts[parts.length - 1];
-  
+
   // Handle array index notation for the last part
   const arrayMatch = lastPart.match(/^(.*)\[(\d+)\]$/);
   if (arrayMatch) {
     const arrayName = arrayMatch[1];
     const arrayIndex = parseInt(arrayMatch[2], 10);
-    
+
     // Ensure the array exists
     if (!current[arrayName]) {
       current[arrayName] = [];
     }
-    
+
     // Ensure the array is long enough
     while (current[arrayName].length <= arrayIndex) {
       current[arrayName].push(undefined);
     }
-    
+
     current[arrayName][arrayIndex] = value;
   } else {
     current[lastPart] = value;
