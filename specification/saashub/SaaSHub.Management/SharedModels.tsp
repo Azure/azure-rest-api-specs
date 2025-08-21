@@ -1,13 +1,19 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "./versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using TypeSpec.Versioning;
 
+@versioned(SaaSHubVersions)
 namespace Microsoft.SaaSHub;
 
 /**
@@ -25,6 +31,11 @@ union AutoRenew {
    * Auto renew is turned on
    */
   On: "On",
+
+  /**
+   * Auto renew is turned on for the next term only
+   */
+  Once: "Once",
 }
 
 /**
@@ -89,63 +100,6 @@ union ProvisioningState {
   Unknown: "Unknown",
 
   string,
-}
-
-/**
- * The status of the saas resource.
- */
-union SaasResourceStatus {
-  string,
-
-  /**
-   * Saas resource status is unknown
-   */
-  Unknown: "Unknown",
-
-  /**
-   * Saas resource status is active
-   */
-  Active: "Active",
-
-  /**
-   * Saas resource status is disabled
-   */
-  Disabled: "Disabled",
-
-  /**
-   * Saas resource status is deleted
-   */
-  Deleted: "Deleted",
-
-  /**
-   * Saas resource status is past due
-   */
-  PastDue: "PastDue",
-
-  /**
-   * Saas resource status is expiring
-   */
-  Expiring: "Expiring",
-
-  /**
-   * Saas resource status is expired
-   */
-  Expired: "Expired",
-
-  /**
-   * Saas resource status is auto renew
-   */
-  AutoRenew: "AutoRenew",
-
-  /**
-   * Saas resource status is cancelled
-   */
-  Cancelled: "Cancelled",
-
-  /**
-   * Saas resource status is suspended
-   */
-  Suspended: "Suspended",
 }
 
 /**
@@ -222,141 +176,9 @@ union OfferType {
 }
 
 /**
- * The properties of a SaaSHub saas resource.
- */
-model SaasResourceProperties {
-  /**
-   * Indicates whether auto renewal is turned on or off for a SaaSHub saas resource. The default value will be 'On' for products that support autorenew.
-   */
-  autoRenew?: AutoRenew;
-
-  /**
-   * The billing scope to use for purchasing the resource. Needs full billing scope to invoice section level like: providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}
-   */
-  billingScope?: string;
-
-  /**
-   * The billing subscription id linked to this resource, with full format like /providers/Microsoft.Billing/billingAccounts/1111:2222/billingSubscriptions/Id
-   */
-  @visibility(Lifecycle.Read)
-  billingSubscriptionId?: string;
-
-  /**
-   * The end customer billing account in CSP scenario, will full format like /providers/Microsoft.Billing/billingAccounts/1111:2222
-   */
-  endCustomerBillingAccount?: string;
-
-  /**
-   * System imposed policies that regulate behavior of the resource.
-   */
-  systemOverrides?: SaasResourcePropertiesSystemOverrides;
-
-  /**
-   * The name of the saas resource.
-   */
-  displayName?: string;
-
-  /**
-   * Type of the product for which the saas resource is purchased
-   */
-  @visibility(Lifecycle.Read)
-  productType?: string;
-
-  /**
-   * Type of the offer for which the saas resource is purchased
-   */
-  @visibility(Lifecycle.Read)
-  offerType?: OfferType;
-
-  /**
-   * Product Universal Product Number of the product
-   */
-  productCode?: string;
-
-  /**
-   * License data of the product
-   */
-  @visibility(Lifecycle.Read)
-  licenseData?: string;
-
-  /**
-   * Gets the status of the SaaSHub saas resource at the time the operation was called.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * The number of licenses purchased for the saas resource
-   */
-  quantity?: int64;
-
-  /**
-   * Renewal term details of the saas resource.
-   */
-  renewalTerm?: RenewalTermDetails;
-
-  /**
-   * The SKU description of the product for which the saas resource is purchased.
-   */
-  @visibility(Lifecycle.Read)
-  skuDescription?: string;
-
-  /**
-   * The status of the saas resource.
-   */
-  @visibility(Lifecycle.Read)
-  status?: SaasResourceStatus;
-
-  /**
-   * The suspension reason for a saas resource.
-   */
-  @visibility(Lifecycle.Read)
-  suspensionReasons?: string[];
-
-  /**
-   * Term details of the saas resource.
-   */
-  term?: TermDetails;
-
-  /**
-   * The original resource uri, if the new resource will be created by splitting part of the licenses from an existing resource
-   */
-  originalResourceUri?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.SaaSHub/saasResources";
-    }
-  ]>;
-
-  /**
-   * The Id of the tenant where licenses will be provisioned for this resource. It will only be populated if licenses are provisioned in a different tenant.
-   */
-  provisioningTenantId?: string;
-
-  /**
-   * An external Id which could be used to reference other commerce system entity, such as OMS sub id or proposal id. ExternalId value will have "{externalSystem}:{externalId}", e.g. "oms:1111-2222-444-666"
-   */
-  externalId?: string;
-
-  /**
-   * Linked resources for the saas resource
-   */
-  linkedResources?: LinkedResources;
-
-  /**
-   * Billing token for current term transaction.
-   */
-  billingToken?: string;
-
-  /**
-   * Availability token for current term transaction.
-   */
-  availabilityToken?: string;
-}
-
-/**
  * System imposed policies that regulate behavior of the resource.
  */
-model SaasResourcePropertiesSystemOverrides {
+model SystemOverrides {
   /**
    * The policy override for the resource indicates whether the self-serve cancellation or seat reduction is allowed.
    */
@@ -380,6 +202,39 @@ model SaasResourcePropertiesSystemOverrides {
    */
   @visibility(Lifecycle.Read)
   systemVersion?: string;
+
+  /**
+   * The number of times the resource has been renewed.
+   */
+  @visibility(Lifecycle.Read)
+  renewalCount?: int32 = 0;
+
+  /**
+   * The start date in UTC time on the current product code.
+   */
+  @visibility(Lifecycle.Read)
+  startDateOnCurrentProductCode?: utcDateTime;
+
+  /**
+   * Duration of license reassignment period for the current term. Value is an ISO 8601 duration string.
+   * Expected to be P0D (0 days) or greater.
+   */
+  @visibility(Lifecycle.Read)
+  licenseReassignmentDuration?: string;
+
+  /**
+   * ISO 8601 duration string representing the data retention period for the resource.
+   * Read-only property.
+   */
+  @visibility(Lifecycle.Read)
+  dataRetentionDuration?: string;
+
+  /**
+   * URL pointing to the product information in the Catalog endpoint.
+   * Read-only property.
+   */
+  @visibility(Lifecycle.Read)
+  productUrl?: string;
 }
 
 /**
@@ -421,11 +276,13 @@ model RenewalTermDetails {
   /**
    * Billing token for renewal term transaction.
    */
+  @secret
   billingToken?: string;
 
   /**
    * Availability token for renewal term transaction.
    */
+  @secret
   availabilityToken?: string;
 }
 
@@ -461,7 +318,7 @@ model TermDetails {
   termUnit?: string;
 
   /**
-   * Start date of the term in UTC time.
+   * Start date of the term in UTC time. When there is a value passed in for PUT scenario, it is to support future start date scenario. The time part passed in will be ignored
    */
   startDate?: utcDateTime;
 
@@ -469,26 +326,6 @@ model TermDetails {
    * End date of the term in UTC time. When there is a value passed in for PUT scenario, it is to support co-term scenario. When there is a value passed in for PATCH scenario, it is to support extend trial scenario. The time part passed in will be ignored
    */
   endDate?: utcDateTime;
-}
-
-/**
- * Request to check if the resource can be created
- */
-model CanCreateRequest {
-  /**
-   * Resource name of the saas hub resource to be created.
-   */
-  name: string;
-
-  /**
-   * Resource type to be created, currently only supports SaaS resource type.
-   */
-  type: string;
-
-  /**
-   * The properties of the saas hub resource to be created.
-   */
-  properties: SaasResourceProperties;
 }
 
 /**
@@ -534,21 +371,21 @@ model CanCreateResultAdditionalInfo {
    * Additional detail when request payload failed promotion constraints. Null when constraints passed or not applicable.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   promotion?: CanCreateResultPromotionInfo[];
 
   /**
    * Additional evaluation eligibility result for qualifying co-term resources for a future price concession. Null when constraints passed or not applicable.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   futurePrice?: CanCreateResultFuturePriceInfo[];
 
   /**
    * Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   coTermDates?: CoTermDateEligibilityResult[];
 }
 
@@ -566,7 +403,7 @@ model CanCreateResultAddOnInfo {
    * AddOn eligibility constraints.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   eligibilityConstraints?: EligibilityConstraint[];
 }
 
@@ -613,7 +450,7 @@ model CanCreateResultPromotionInfo {
    * Promotion eligibility constraints.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   eligibilityConstraints?: EligibilityConstraint[];
 }
 
@@ -643,14 +480,14 @@ model CanCreateResultFuturePriceInfo {
    * List of qualifying resources for the future price concession
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   qualifyingResources?: CanCreateResultFuturePriceQualifyingResource[];
 
   /**
    * Types of future price concession. E.g. FuturePriceNotToExceedCap, PercentageDiscount
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   futurePriceConcessionTypes?: string[];
 
   /**
@@ -741,70 +578,6 @@ model CanCancelResultAdditionalInfo {
 }
 
 /**
- * Request to merge multiple saas resource resources into one target saas resource resource
- */
-model MergeSaasResourceRequest {
-  /**
-   * List of source resources to be merged into target resource.
-   */
-  sourceResources?: MergeSourceSaasResource[];
-}
-
-/**
- * Saas resource to be used in merge operation as source.
- */
-model MergeSourceSaasResource {
-  /**
-   * Id of the saas resource
-   */
-  id?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.SaaSHub/saasResources";
-    }
-  ]>;
-
-  /**
-   * The quantity of license to be merged
-   */
-  quantity?: int64;
-
-  /**
-   * The validation error it ran into. Null when validation passed.
-   */
-  @visibility(Lifecycle.Read)
-  validationError?: string;
-}
-
-/**
- * Validation result for canMerge operation.
- */
-model CanMergeResult {
-  /**
-   * Whether the validation passed/failed.
-   */
-  @visibility(Lifecycle.Read)
-  evaluateResult?: EvaluateResult;
-
-  /**
-   * ReasonCode for why the request payload failed validation. Null when validation passed.
-   */
-  @visibility(Lifecycle.Read)
-  reasonCode?: string;
-
-  /**
-   * Detailed reason for why the request payload failed validation. Null when validation passed.
-   */
-  @visibility(Lifecycle.Read)
-  reason?: string;
-
-  /**
-   * Additional information for failed validation.
-   */
-  @visibility(Lifecycle.Read)
-  additionalInfo?: MergeSourceSaasResource[];
-}
-
-/**
  * Validation result for canUpdate operation.
  */
 model CanUpdateResult {
@@ -853,7 +626,7 @@ model CanUpdateResultAdditionalInfo {
    * Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable. Relevant scenarios: coterm, scheduled conversion with coterm.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   coTermDates?: CoTermDateEligibilityResult[];
 }
 
@@ -871,7 +644,7 @@ model RefundableQuantityResult {
    * Batches of refundable quantity with their respective refund window end date.
    */
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   refundableQuantities?: RefundableQuantityResultRefundableQuantitiesInfo[];
 }
 
@@ -891,4 +664,492 @@ model RefundableQuantityResultRefundableQuantitiesInfo {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   returnWindowEndDateTime?: utcDateTime;
+}
+
+/**
+ * Response model for GetRefundableQuantity operation.
+ */
+model GetRefundableQuantityResponse {
+  /**
+   * List of refundable quantity information with event details.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  refundableQuantities?: GetRefundableQuantityInfo[];
+
+  /**
+   * Total refundable quantity across all events.
+   */
+  @visibility(Lifecycle.Read)
+  totalRefundableQuantity?: int64;
+}
+
+/**
+ * Model to present detailed refundable quantity information with event details.
+ */
+model GetRefundableQuantityInfo {
+  /**
+   * The date and time when the event occurred that created this refundable quantity.
+   */
+  @visibility(Lifecycle.Read)
+  eventDateTime?: utcDateTime;
+
+  /**
+   * The change in quantity from this event.
+   */
+  @visibility(Lifecycle.Read)
+  deltaQuantity?: int64;
+
+  /**
+   * The end date and time in UTC when the refund window ends for this quantity.
+   * Optional - may be null if there is no specific window limit.
+   */
+  @visibility(Lifecycle.Read)
+  returnWindowEndDateTime?: utcDateTime;
+}
+
+/**
+ * The status of a seat-based resource.
+ */
+union SeatBasedResourceStatus {
+  string,
+
+  /**
+   * Resource status is unknown
+   */
+  Unknown: "Unknown",
+
+  /**
+   * Resource status is active
+   */
+  Active: "Active",
+
+  /**
+   * Resource status is disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Resource status is deleted
+   */
+  Deleted: "Deleted",
+
+  /**
+   * Resource status is past due
+   */
+  PastDue: "PastDue",
+
+  /**
+   * Resource status is expiring
+   */
+  Expiring: "Expiring",
+
+  /**
+   * Resource status is expired
+   */
+  Expired: "Expired",
+
+  /**
+   * Resource status is auto renew
+   */
+  AutoRenew: "AutoRenew",
+
+  /**
+   * Resource status is cancelled
+   */
+  Cancelled: "Cancelled",
+
+  /**
+   * Resource status is suspended
+   */
+  Suspended: "Suspended",
+}
+
+/**
+ * Base properties for seat-based resources.
+ */
+model SeatBasedResourceProperties {
+  /**
+   * Indicates whether auto renewal is turned on or off for a seat-based resource. The default value will be 'On' for products that support autorenew.
+   */
+  autoRenew?: AutoRenew;
+
+  /**
+   * The end customer billing account in CSP scenario, will full format like /providers/Microsoft.Billing/billingAccounts/1111:2222
+   */
+  endCustomerBillingAccount?: string;
+
+  /**
+   * The name of the seat-based resource.
+   */
+  displayName?: string;
+
+  /**
+   * Type of the product for which the resource is purchased
+   */
+  @visibility(Lifecycle.Read)
+  productType?: string;
+
+  /**
+   * Linked resources for the resource
+   */
+  linkedResources?: LinkedResources;
+
+  /**
+   * Type of the offer for which the resource is purchased
+   */
+  @visibility(Lifecycle.Read)
+  offerType?: OfferType;
+
+  /**
+   * Product Universal Product Number of the product
+   */
+  productCode?: string;
+
+  /**
+   * License data of the product
+   */
+  @visibility(Lifecycle.Read)
+  licenseData?: string;
+
+  /**
+   * Gets the status of the seat-based resource at the time the operation was called.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The number of licenses purchased for the resource
+   */
+  quantity?: int64;
+
+  /**
+   * The SKU description of the product for which the resource is purchased.
+   */
+  @visibility(Lifecycle.Read)
+  skuDescription?: string;
+
+  /**
+   * The status of the seat-based resource.
+   */
+  @visibility(Lifecycle.Read)
+  status?: SeatBasedResourceStatus;
+
+  /**
+   * The suspension reason for a resource.
+   */
+  @visibility(Lifecycle.Read)
+  suspensionReasons?: string[];
+
+  /**
+   * Term details of the resource.
+   */
+  term?: TermDetails;
+
+  /**
+   * The Id of the tenant where licenses will be provisioned for this resource. It will only be populated if licenses are provisioned in a different tenant.
+   */
+  provisioningTenantId?: string;
+
+  /**
+   * An external Id which could be used to reference other commerce system entity, such as OMS sub id or proposal id. ExternalId value will have "{externalSystem}:{externalId}", e.g. "oms:1111-2222-444-666"
+   */
+  externalId?: string;
+
+  /**
+   * System imposed policies that regulate behavior of the resource.
+   */
+  systemOverrides?: SystemOverrides;
+
+  /**
+   * Resource tokens for various authorization and context purposes.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  resourceTokens?: ResourceToken[];
+
+  /**
+   * Schedule actions for future terms and changes
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  scheduleActions?: ScheduleAction[];
+}
+
+/**
+ * Base model for seat-based resources to be used in merge operations as source.
+ */
+model MergeSourceSeatBasedResource {
+  /**
+   * The quantity of license to be merged
+   */
+  quantity?: int64;
+
+  /**
+   * The validation error it ran into. Null when validation passed.
+   */
+  @visibility(Lifecycle.Read)
+  validationError?: string;
+
+  /**
+   * Resource tokens for various authorization and context purposes (for merge source).
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  resourceTokens?: ResourceToken[];
+}
+
+/**
+ * Resource token containing type and value for various authorization and context purposes.
+ */
+model ResourceToken {
+  /**
+   * The type of the resource token. Examples: "availabilityToken", "billingToken"
+   */
+  type?: string;
+
+  /**
+   * The value of the resource token.
+   */
+  @doc("Encoded resource token.")
+  value?: string;
+}
+
+/**
+ * Linked resource for scheduled actions
+ */
+model ScheduleActionLinkedResource {
+  /**
+   * The URI of the target resource for the scheduled action
+   */
+  resourceUri?: string;
+
+  /**
+   * The billing scope for the linked resource. Only applicable for SaaS resources.
+   * Format: /providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}
+   */
+  billingScope?: string;
+}
+
+/**
+ * Schedule action for resource operations
+ */
+model ScheduleAction {
+  /**
+   * The type of schedule action
+   */
+  type?: string;
+
+  /**
+   * The effective date for the schedule action
+   */
+  effectiveDate?: utcDateTime;
+
+  /**
+   * Product code for the schedule action
+   */
+  productCode?: string;
+
+  /**
+   * The quantity for the schedule action
+   */
+  quantity?: int64;
+
+  /**
+   * The end date for the schedule action
+   */
+  endDate?: utcDateTime;
+
+  /**
+   * Linked resource for the scheduled action.
+   * Optional property.
+   */
+  linkedResource?: ScheduleActionLinkedResource;
+
+  /**
+   * Resource tokens for various authorization and context purposes.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  resourceTokens?: ResourceToken[];
+}
+
+/**
+ * End date information for coterm calculation.
+ */
+model CotermEndDateItem {
+  /**
+   * Unique identifier for the end date entry.
+   */
+  id: string;
+
+  /**
+   * End date in UTC time.
+   */
+  endDate: utcDateTime;
+
+  /**
+   * Term duration for this specific end date.
+   */
+  termDuration: string;
+}
+
+/**
+ * Request model for GetCotermEndDates operation.
+ */
+model CotermEndDatesRequest {
+  /**
+   * List of end dates to calculate coterm targets for.
+   */
+  endDates: CotermEndDateItem[];
+
+  /**
+   * Start date for the coterm calculation in UTC time.
+   */
+  startDate: utcDateTime;
+
+  /**
+   * Term duration for the coterm calculation.
+   * An ISO 8601 duration using exactly one of the year, month or day designators. E.g. P1Y, P1M.
+   */
+  termDuration: string;
+}
+
+/**
+ * Response model for GetCotermEndDates operation.
+ */
+model CotermResponseItem {
+  /**
+   * Target cloud resource or contract name to coterm to.
+   */
+  @visibility(Lifecycle.Read)
+  coTermTarget: string;
+
+  /**
+   * Whether the target is cloud resource or contract.
+   */
+  @visibility(Lifecycle.Read)
+  coTermTargetType: string;
+
+  /**
+   * Term end date in UTC time.
+   */
+  @visibility(Lifecycle.Read)
+  termEndDate?: utcDateTime;
+
+  /**
+   * Error code if coterm calculation failed.
+   */
+  @visibility(Lifecycle.Read)
+  errorCode: string;
+}
+
+/**
+ * Request model for Proposal operation.
+ */
+model ProposalRequest {
+  /**
+   * The unique identifier for the proposal.
+   */
+  proposalId: string;
+}
+
+/**
+ * Error information for proposal line items.
+ */
+model ProposalLineItemError {
+  /**
+   * Error code for the line item.
+   */
+  errorCode?: string;
+
+  /**
+   * Error message for the line item.
+   */
+  message?: string;
+}
+
+/**
+ * Additional information for proposal line items.
+ */
+model ProposalLineItemAdditionalInfo {
+  /**
+   * ETag for concurrency control.
+   */
+  etag?: string;
+
+  /**
+   * System identifier.
+   */
+  systemId?: string;
+
+  /**
+   * Tracking identifier.
+   */
+  trackingId?: string;
+}
+
+/**
+ * Line item information in a proposal response.
+ */
+model ProposalLineItem {
+  /**
+   * Unique identifier for the line item.
+   */
+  lineItemId?: string;
+
+  /**
+   * Product identifier.
+   */
+  productId?: string;
+
+  /**
+   * SKU identifier.
+   */
+  skuId?: string;
+
+  /**
+   * Availability identifier.
+   */
+  availabilityId?: string;
+
+  /**
+   * BigId identifier.
+   */
+  bigId?: string;
+
+  /**
+   * Product code for the line item.
+   */
+  productCode?: string;
+
+  /**
+   * Error information if any issues occurred with this line item.
+   */
+  error?: ProposalLineItemError;
+
+  /**
+   * Additional information for the line item.
+   */
+  additionalInfo?: ProposalLineItemAdditionalInfo;
+}
+
+/**
+ * Response model for Proposal operation.
+ */
+model ProposalResponse {
+  /**
+   * Unique identifier for the proposal response.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Status of the proposal.
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * List of line items in the proposal.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  lineItems?: ProposalLineItem[];
 }
