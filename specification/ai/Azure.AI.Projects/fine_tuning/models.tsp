@@ -462,7 +462,7 @@ model MistralCompletionHyperParameters {
 @removed(Versions.v1)
 model MistralCompletionParam {
   @doc("Mistral Completion fine-tuning type")
-  type: "mistralCompletion";
+  type: "mistral_completion";
 
   @doc("The hyperparameters used for the Mistral Completion fine-tuning job.")
   hyperparameters?: MistralCompletionHyperParameters;
@@ -502,7 +502,7 @@ model MistralClassifierHyperparametersParam {
 @removed(Versions.v1)
 model MistralClassifierMethodParam {
   @doc("Mistral Classifier fine-tuning type")
-  type: "mistralClassifier";
+  type: "mistral_classifier";
 
   @doc("The hyperparameters used for the Mistral Classifier fine-tuning job.")
   hyperparameters?: MistralClassifierHyperparametersParam;
@@ -604,10 +604,10 @@ union MethodTrainingType {
   reinforcement: "reinforcement",
 
   @doc("Mistral Completion fine-tuning type")
-  mistralCompletion: "mistralCompletion",
+  mistral_completion: "mistral_completion",
 
   @doc("Mistral Classifier fine-tuning type")
-  mistralClassifier: "mistralClassifier",
+  mistral_classifier: "mistral_classifier",
 }
 
 @doc("The method used for fine-tuning.")
@@ -627,10 +627,10 @@ model Method {
   reinforcement?: ReinforcementMethodParam;
 
   @doc("Configuration for the Mistral Classifier fine-tuning method.")
-  mistralClassifier?: MistralClassifierMethodParam;
+  mistral_classifier?: MistralClassifierMethodParam;
 
   @doc("Configuration for the Mistral Completion fine-tuning method.")
-  mistralCompletion?: MistralCompletionParam;
+  mistral_completion?: MistralCompletionParam;
 }
 
 @doc("The hyperparameters used for the fine-tuning job. This value is now deprecated sin favor of `method`, and should be passed in under the `method` parameter.")
@@ -723,7 +723,7 @@ model FineTuningJob {
   suffix?: string;
 
   @doc("The SKU used for training. This is Azure AI specific parameter")
-  TrainingType?: TrainingType;
+  training_type?: TrainingType;
 
   @doc("Inference configurations. This is Azure AI specific parameter")
   inference_configs?: InferenceConfigs;
@@ -821,7 +821,7 @@ model JobCreateParams {
   validation_file?: string;
 
   @doc("The SKU used for training. This is Azure AI specific parameter")
-  TrainingType?: TrainingType;
+  training_type?: TrainingType;
 
   @doc("Inference configurations. This is Azure AI specific parameter")
   inference_configs?: InferenceConfigs;

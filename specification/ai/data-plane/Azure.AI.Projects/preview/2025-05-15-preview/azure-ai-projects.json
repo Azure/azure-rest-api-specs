@@ -3382,7 +3382,7 @@
           "type": "string",
           "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
         },
-        "TrainingType": {
+        "training_type": {
           "$ref": "#/definitions/TrainingType",
           "description": "The SKU used for training. This is Azure AI specific parameter"
         },
@@ -4132,7 +4132,7 @@
           "type": "string",
           "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
         },
-        "TrainingType": {
+        "training_type": {
           "$ref": "#/definitions/TrainingType",
           "description": "The SKU used for training. This is Azure AI specific parameter"
         },
@@ -4213,11 +4213,11 @@
           "$ref": "#/definitions/ReinforcementMethodParam",
           "description": "Configuration for the reinforcement fine-tuning method."
         },
-        "mistralClassifier": {
+        "mistral_classifier": {
           "$ref": "#/definitions/MistralClassifierMethodParam",
           "description": "Configuration for the Mistral Classifier fine-tuning method."
         },
-        "mistralCompletion": {
+        "mistral_completion": {
           "$ref": "#/definitions/MistralCompletionParam",
           "description": "Configuration for the Mistral Completion fine-tuning method."
         }
@@ -4233,8 +4233,8 @@
         "supervised",
         "dpo",
         "reinforcement",
-        "mistralCompletion",
-        "mistralClassifier"
+        "mistral_completion",
+        "mistral_classifier"
       ],
       "x-ms-enum": {
         "name": "MethodTrainingType",
@@ -4256,13 +4256,13 @@
             "description": "Reinforcement fine-tuning type"
           },
           {
-            "name": "mistralCompletion",
-            "value": "mistralCompletion",
+            "name": "mistral_completion",
+            "value": "mistral_completion",
             "description": "Mistral Completion fine-tuning type"
           },
           {
-            "name": "mistralClassifier",
-            "value": "mistralClassifier",
+            "name": "mistral_classifier",
+            "value": "mistral_classifier",
             "description": "Mistral Classifier fine-tuning type"
           }
         ]
@@ -4315,7 +4315,7 @@
           "type": "string",
           "description": "Mistral Classifier fine-tuning type",
           "enum": [
-            "mistralClassifier"
+            "mistral_classifier"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -4382,7 +4382,7 @@
           "type": "string",
           "description": "Mistral Completion fine-tuning type",
           "enum": [
-            "mistralCompletion"
+            "mistral_completion"
           ],
           "x-ms-enum": {
             "modelAsString": false
