@@ -1118,6 +1118,51 @@
             "$ref": "./examples/Messages_UpdateMessage_MinimumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "description": "Deletes an existing message on an existing thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Identifier of the message.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageDeletionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Messages_Delete_MaximumSet": {
+            "$ref": "./examples/Messages_Delete_MaximumSet_Gen.json"
+          },
+          "Messages_Delete_MinimumSet": {
+            "$ref": "./examples/Messages_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/threads/{threadId}/runs": {
@@ -4524,6 +4569,35 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "MessageDeletionStatus": {
+      "type": "object",
+      "description": "The status of a thread message deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.deleted'.",
+          "enum": [
+            "thread.message.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
       ]
     },
     "MessageDelta": {
