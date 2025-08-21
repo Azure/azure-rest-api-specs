@@ -23,6 +23,7 @@ interface UsageOperationGroup {
   @autoRoute
   @get
   @action("usages")
+  @list
   list is ComputeProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
@@ -40,6 +41,7 @@ interface VirtualMachineSizesOperationGroup {
   @autoRoute
   @get
   @action("vmSizes")
+  @list
   list is ComputeProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
@@ -57,6 +59,7 @@ interface VirtualMachineScaleSetsOperationGroup {
   @autoRoute
   @get
   @action("virtualMachineScaleSets")
+  @list
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineScaleSetListResult,
     Scope = SubscriptionActionScope,
@@ -74,6 +77,7 @@ interface VirtualMachinesOperationGroup {
   @autoRoute
   @get
   @action("virtualMachines")
+  @list
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineListResult,
     Scope = SubscriptionActionScope,
@@ -592,6 +596,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @autoRoute
   @get
   @action("runCommands")
+  @list
   list is ComputeProviderActionSync<
     Response = RunCommandListResult & {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
