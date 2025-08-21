@@ -20,7 +20,7 @@ union EvaluatorCategory {
   quality: "Quality",
 
   @doc("Safety evaluator")
-  safety: "Safety",
+  safety: "Risk and Safety",
 }
 
 @doc("The type of the evaluator")
