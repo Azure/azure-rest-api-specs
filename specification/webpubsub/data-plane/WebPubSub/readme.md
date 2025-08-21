@@ -35,3 +35,60 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
   - stable/2024-12-01/webpubsub.json
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - stable/2024-01-01/webpubsub.json
+```
+### Tag: package-2023-07-01
+
+These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-01'
+input-file:
+  - stable/2023-07-01/webpubsub.json
+```
+
+### Tag: package-2022-11-01
+
+These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11-01'
+input-file:
+  - stable/2022-11-01/webpubsub.json
+title: AzureMessagingWebPubSubServiceClient
+```
+
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01'
+input-file:
+  - stable/2021-10-01/webpubsub.json
+title: AzureMessagingWebPubSubServiceClient
+```
+
+### Tag: package-2021-08-01-preview
+
+These settings apply only when `--tag=package-2021-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01-preview'
+input-file:
+  - preview/2021-08-01-preview/webpubsub.json
+title: AzureMessagingWebPubSubServiceClient
+```
+
+### Tag: package-2021-05-01-preview
+
+These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05-01-preview'
+input-file:
+  - preview/2021-05-01-preview/webpubsub.json
+title: AzureMessagingWebPubSubServiceClient
+```
