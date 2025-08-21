@@ -13,6 +13,20 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
 
+/** Externally defined VirtualNetwork */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armVirtualResource
+@Azure.ResourceManager.Legacy.customAzureResource
+model VirtualNetwork {
+  ...ResourceNameParameter<
+    VirtualNetwork,
+    KeyName = "virtualNetworkName",
+    SegmentName = "virtualNetworks",
+    NamePattern = ""
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DnsResolversOperationGroup {
   /**
@@ -20,26 +34,21 @@ interface DnsResolversOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DnsResolvers_ListByVirtualNetwork")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolvers")
-  @post
+  @action("listDnsResolvers")
   @list
-  listByVirtualNetwork(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the virtual network.
-     */
-    @path
-    virtualNetworkName: string,
-
-    /**
-     * The maximum number of results to return. If not specified, returns up to 100 results.
-     */
-    @query("$top")
-    $top?: int32,
-  ): ArmResponse<SubResourceListResult> | CloudError;
+  listByVirtualNetwork is ArmResourceActionSync<
+    VirtualNetwork,
+    void,
+    SubResourceListResult,
+    Parameters = {
+      /**
+       * The maximum number of results to return. If not specified, returns up to 100 results.
+       */
+      @query("$top")
+      $top?: int32;
+    },
+    Error = CloudError
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -49,26 +58,21 @@ interface DnsForwardingRulesetsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DnsForwardingRulesets_ListByVirtualNetwork")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsForwardingRulesets")
-  @post
+  @action("listDnsForwardingRulesets")
   @list
-  listByVirtualNetwork(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the virtual network.
-     */
-    @path
-    virtualNetworkName: string,
-
-    /**
-     * The maximum number of results to return. If not specified, returns up to 100 results.
-     */
-    @query("$top")
-    $top?: int32,
-  ): ArmResponse<VirtualNetworkDnsForwardingRulesetListResult> | CloudError;
+  listByVirtualNetwork is ArmResourceActionSync<
+    VirtualNetwork,
+    void,
+    VirtualNetworkDnsForwardingRulesetListResult,
+    Parameters = {
+      /**
+       * The maximum number of results to return. If not specified, returns up to 100 results.
+       */
+      @query("$top")
+      $top?: int32;
+    },
+    Error = CloudError
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -78,18 +82,11 @@ interface DnsResolverPoliciesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DnsResolverPolicies_ListByVirtualNetwork")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolverPolicies")
-  @post
+  @action("listDnsResolverPolicies")
   @list
-  listByVirtualNetwork(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the virtual network.
-     */
-    @path
-    virtualNetworkName: string,
-  ): ArmResponse<SubResourceListResult> | ErrorResponse;
+  listByVirtualNetwork is ArmResourceActionSync<
+    VirtualNetwork,
+    void,
+    SubResourceListResult
+  >;
 }
