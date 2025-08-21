@@ -222,6 +222,7 @@ using Microsoft.DataBox;
 );
 @@clientName(JobDetails.datacenterAddress, "DataCenterAddress", "csharp");
 @@clientName(ShareDestinationFormatType.HCS, "Hcs", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
 @@clientName(ServiceOperationGroup.regionConfiguration,
   "GetRegionConfiguration",
   "csharp"
@@ -230,16 +231,19 @@ using Microsoft.DataBox;
   "ValidateAddress",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
 @@clientName(ServiceOperationGroup.validateInputs, "ValidateInputs", "csharp");
 @@clientName(ServiceOperationGroup.listAvailableSkusByResourceGroup,
   "GetAvailableSkus",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
 @@clientName(ServiceOperationGroup.regionConfigurationByResourceGroup,
   "GetRegionConfiguration",
   "csharp"
 );
 @@clientName(mitigate, "Mitigate", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
 @@clientName(ServiceOperationGroup.validateInputsByResourceGroup,
   "ValidateInputs",
   "csharp"
