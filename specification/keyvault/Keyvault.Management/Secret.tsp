@@ -14,29 +14,19 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Vault)
-model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
+model Secret
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    SecretProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = Secret,
     KeyName = "secretName",
     SegmentName = "secrets",
     NamePattern = ""
   >;
-
-  /**
-   * Azure location of the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * Tags assigned to the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -14,29 +14,16 @@ namespace Microsoft.KeyVault;
 /**
  * Private endpoint connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Vault)
 model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
-
-  /**
-   * Azure location of the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * Tags assigned to the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
