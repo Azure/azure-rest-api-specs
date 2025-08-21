@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/azureADOnlyAuthentications": {
+      "get": {
+        "tags": [
+          "ServerAzureADOnlyAuthentications"
+        ],
+        "description": "Gets a list of server Azure Active Directory only authentications.",
+        "operationId": "ServerAzureADOnlyAuthentications_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Azure Active Directory only authentication objects.",
+            "schema": {
+              "$ref": "#/definitions/AzureADOnlyAuthListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of Azure Active Directory only authentication object.": {
+            "$ref": "./examples/AzureADOnlyAuthList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/azureADOnlyAuthentications/{authenticationName}": {
+      "get": {
+        "tags": [
+          "ServerAzureADOnlyAuthentications"
+        ],
+        "description": "Gets a specific Azure Active Directory only authentication property.",
+        "operationId": "ServerAzureADOnlyAuthentications_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "authenticationName",
+            "in": "path",
+            "description": "The name of server azure active directory only authentication.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AuthenticationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified Azure Active Directory only authentication properties.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAADOnlyAuthTypePropertyName - Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidServerAADOnlyAuthNoAADAdminPropertyName - AAD Admin is not configured, AAD Admin must be set before enabling/disabling AAD Only Authentication.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Azure Active Directory only authentication property.": {
+            "$ref": "./examples/AzureADOnlyAuthGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerAzureADOnlyAuthentications"
+        ],
+        "description": "Sets Server Active Directory only authentication property or updates an existing server Active Directory only authentication property.",
+        "operationId": "ServerAzureADOnlyAuthentications_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "authenticationName",
+            "in": "path",
+            "description": "The name of server azure active directory only authentication.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AuthenticationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating an Active Directory only authentication property.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a Azure Active Directory only authentication property.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAADOnlyAuthTypePropertyName - Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidServerAADOnlyAuthNoAADAdminPropertyName - AAD Admin is not configured, AAD Admin must be set before enabling/disabling AAD Only Authentication.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully updated Azure Active Directory only authentication property.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates Azure Active Directory only authentication object.": {
+            "$ref": "./examples/AzureADOnlyAuthCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServerAzureADOnlyAuthentications"
+        ],
+        "description": "Deletes an existing server Active Directory only authentication property.",
+        "operationId": "ServerAzureADOnlyAuthentications_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "authenticationName",
+            "in": "path",
+            "description": "The name of server azure active directory only authentication.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AuthenticationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Azure Active Directory only property."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAADOnlyAuthTypePropertyName - Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidServerAADOnlyAuthNoAADAdminPropertyName - AAD Admin is not configured, AAD Admin must be set before enabling/disabling AAD Only Authentication.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified Azure Active Directory only property does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes Azure Active Directory only authentication object.": {
+            "$ref": "./examples/AzureADOnlyAuthDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureADOnlyAuthListResult": {
+      "description": "A list of active directory only authentications.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAzureADOnlyAuthentication"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureADOnlyAuthProperties": {
+      "description": "Properties of a active directory only authentication.",
+      "required": [
+        "azureADOnlyAuthentication"
+      ],
+      "type": "object",
+      "properties": {
+        "azureADOnlyAuthentication": {
+          "description": "Azure Active Directory only Authentication enabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ServerAzureADOnlyAuthentication": {
+      "description": "Azure Active Directory only authentication.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureADOnlyAuthProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

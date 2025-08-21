@@ -1,0 +1,192 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "jobName": "TestJobName1",
+    "api-version": "2024-02-01-preview",
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "1395"
+    ],
+    "jobResource": {
+      "properties": {
+        "transferType": "ExportFromAzure",
+        "details": {
+          "jobDetailsType": "DataBox",
+          "contactDetails": {
+            "contactName": "XXXX XXXX",
+            "phone": "0000000000",
+            "phoneExtension": "",
+            "emailList": [
+              "xxxx@xxxx.xxx"
+            ]
+          },
+          "shippingAddress": {
+            "streetAddress1": "XXXX XXXX",
+            "streetAddress2": "XXXX XXXX",
+            "city": "XXXX XXXX",
+            "stateOrProvince": "XX",
+            "country": "XX",
+            "postalCode": "00000",
+            "companyName": "XXXX XXXX",
+            "addressType": "Commercial"
+          },
+          "dataExportDetails": [
+            {
+              "transferConfiguration": {
+                "transferConfigurationType": "TransferAll",
+                "transferAllDetails": {
+                  "include": {
+                    "dataAccountType": "StorageAccount",
+                    "transferAllBlobs": true,
+                    "transferAllFiles": true
+                  }
+                }
+              },
+              "accountDetails": {
+                "dataAccountType": "StorageAccount",
+                "storageAccountId": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName"
+              }
+            }
+          ]
+        }
+      },
+      "location": "westus",
+      "sku": {
+        "name": "DataBox"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://xxx.xxx.xx"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "transferType": "ExportFromAzure",
+          "isCancellable": true,
+          "isDeletable": false,
+          "isShippingAddressEditable": true,
+          "status": "DeviceOrdered",
+          "startTime": "2019-09-21T14:49:49.0027611+05:30",
+          "details": {
+            "copyProgress": [],
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2019-09-21T14:49:52.3995743+05:30"
+              },
+              {
+                "stageName": "DevicePrepared",
+                "displayName": "Processed",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "DataCopy",
+                "displayName": "Data copy in progress",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Dispatched",
+                "displayName": "Dispatched",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Delivered",
+                "displayName": "Delivered",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "PickedUp",
+                "displayName": "Picked up",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "AtAzureDC",
+                "displayName": "Received",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Completed",
+                "displayName": "Completed",
+                "stageStatus": "None"
+              }
+            ],
+            "contactDetails": {
+              "contactName": "XXXX XXXX",
+              "phone": "0000000000",
+              "phoneExtension": "",
+              "emailList": [
+                "xxxx@xxxx.xxx"
+              ],
+              "notificationPreference": [
+                {
+                  "stageName": "DevicePrepared",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "DataCopy",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Dispatched",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Delivered",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "PickedUp",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "AtAzureDC",
+                  "sendNotification": true
+                }
+              ]
+            },
+            "shippingAddress": {
+              "streetAddress1": "XXXX XXXX",
+              "streetAddress2": "XXXX XXXX",
+              "city": "XXXX XXXX",
+              "stateOrProvince": "XX",
+              "country": "XX",
+              "postalCode": "00000",
+              "companyName": "XXXX XXXX",
+              "addressType": "Commercial"
+            },
+            "jobDetailsType": "DataBox",
+            "copyLogDetails": []
+          },
+          "deliveryType": "NonScheduled",
+          "deliveryInfo": {
+            "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+          },
+          "isCancellableWithoutFee": true
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "name": "TestJobName1",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

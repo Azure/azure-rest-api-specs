@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationName": "myApp",
+    "serviceName": "myService",
+    "api-version": "2022-01-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/applications/services",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
+        "name": "myService",
+        "properties": {
+          "provisioningState": "Updating",
+          "serviceKind": "Stateless",
+          "placementConstraints": "NodeType==frontend",
+          "serviceTypeName": "myServiceType",
+          "partitionDescription": {
+            "partitionScheme": "Singleton"
+          },
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "weight": "Low"
+            }
+          ],
+          "servicePlacementPolicies": [],
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "servicePackageActivationMode": "SharedProcess"
+        }
+      }
+    }
+  }
+}

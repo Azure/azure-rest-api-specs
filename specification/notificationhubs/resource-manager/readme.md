@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for NotificationHubs.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for NotificationHubs, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,34 +15,71 @@ To build the SDK for NotificationHubs, simply [Install AutoRest](https://aka.ms/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the NotificationHubs API.
 
 directive:
-  - where:
-      - $.definitions.NamespaceCreateOrUpdateParameters
-    suppress:
-      - TrackedResourcePatchOperation
-  - where:
-      - $.definitions.NamespaceCreateOrUpdateParameters
-    suppress:
-      - TrackedResourceGetOperation
+
+* where:
+
+  * $.definitions.NamespaceCreateOrUpdateParameters
+suppress:
+
+  * TrackedResourcePatchOperation
+
+* where:
+
+  * $.definitions.NamespaceCreateOrUpdateParameters
+suppress:
+
+  * TrackedResourceGetOperation
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-preview-2023-10
 directive:
   - where:
       - $.definitions.NamespaceCreateOrUpdateParameters
     suppress:
       - TrackedResourcePatchOperation
       - TrackedResourceGetOperation
+```
+
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.NotificationHubs/preview/2023-10-01-preview/notificationhubs.json
+```
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.NotificationHubs/stable/2023-09-01/notificationhubs.json
+```
+
+### Tag: package-preview-2023-01
+
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.NotificationHubs/preview/2023-01-01-preview/notificationhubs.json
+
+suppressions:
+ - code: RepeatedPathInfo
+   reason: We cannot remove the subscriptionId parameter without introducing a breaking change.
 ```
 
 ### Tag: package-2017-04
@@ -72,10 +109,9 @@ input-file:
 - Microsoft.NotificationHubs/stable/2014-09-01/notificationhubs.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -93,50 +129,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_notification_hubs']
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
-
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.NotificationHubs
-  output-folder: $(csharp-sdks-folder)/notificationhubs/Microsoft.Azure.Management.NotificationHubs/src/Generated
-  clear-output-folder: true
-```
-
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.notificationhubs
-  package-name: azure-mgmt-notificationhubs
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs/azure/mgmt/notificationhubs
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -173,7 +172,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2014-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.notificationhubs.v2014_09_01
-  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2014_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/notificationhubs/mgmt-v2014_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -186,7 +185,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.notificationhubs.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2017_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/notificationhubs/mgmt-v2017_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -199,36 +198,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.notificationhubs.v2016_03_01
-  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2016_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/notificationhubs/mgmt-v2016_03_01
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.NotificationHubs/stable/2017-04-01/notificationhubs.json
-  - $(this-folder)/Microsoft.NotificationHubs/stable/2016-03-01/notificationhubs.json
-  - $(this-folder)/Microsoft.NotificationHubs/stable/2014-09-01/notificationhubs.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-

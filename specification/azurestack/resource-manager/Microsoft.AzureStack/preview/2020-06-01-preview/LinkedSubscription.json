@@ -1,0 +1,434 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-06-01-preview",
+    "title": "Azure Stack Azure Bridge Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/linkedSubscriptions": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all linked subscriptions.": {
+            "$ref": "examples/LinkedSubscription/List.json"
+          }
+        },
+        "tags": [
+          "LinkedSubscriptions"
+        ],
+        "description": "Returns a list of all linked subscriptions under current resource group.",
+        "operationId": "LinkedSubscriptions_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedSubscriptionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStack/linkedSubscriptions": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all linked subscriptions.": {
+            "$ref": "examples/LinkedSubscription/ListBySubscription.json"
+          }
+        },
+        "tags": [
+          "LinkedSubscriptions"
+        ],
+        "description": "Returns a list of all linked subscriptions under current subscription.",
+        "operationId": "LinkedSubscriptions_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedSubscriptionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/linkedSubscriptions/{linkedSubscriptionName}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the properties of a Linked Subscription resource.": {
+            "$ref": "examples/LinkedSubscription/Get.json"
+          }
+        },
+        "tags": [
+          "LinkedSubscriptions"
+        ],
+        "description": "Returns the properties of a Linked Subscription resource.",
+        "operationId": "LinkedSubscriptions_Get",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkedSubscriptionNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the requested Linked Subscription.": {
+            "$ref": "./examples/LinkedSubscription/Delete.json"
+          }
+        },
+        "tags": [
+          "LinkedSubscriptions"
+        ],
+        "description": "Delete the requested Linked Subscription resource.",
+        "operationId": "LinkedSubscriptions_Delete",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkedSubscriptionNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NO CONTENT"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a Linked Subscription.": {
+            "$ref": "examples/LinkedSubscription/Put.json"
+          }
+        },
+        "tags": [
+          "LinkedSubscriptions"
+        ],
+        "description": "Create or update a linked subscription resource.",
+        "operationId": "LinkedSubscriptions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkedSubscriptionNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewLinkedSubscriptionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedSubscription"
+            }
+          },
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/LinkedSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Patch a Linked Subscription resource.": {
+            "$ref": "examples/LinkedSubscription/Patch.json"
+          }
+        },
+        "tags": [
+          "LinkedSubscriptions"
+        ],
+        "description": "Patch a Linked Subscription resource.",
+        "operationId": "LinkedSubscriptions_Update",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkedSubscriptionNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewLinkedSubscriptionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkedSubscriptionsList": {
+      "description": "List of linked subscriptions with paging support.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Linked Subscriptions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedSubscription"
+          }
+        }
+      }
+    },
+    "LinkedSubscription": {
+      "description": "Linked Subscription information.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Linked Subscription resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedSubscriptionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureStack.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LinkedSubscriptionProperties": {
+      "description": "Properties portion of the linked subscription resource.",
+      "type": "object",
+      "properties": {
+        "linkedSubscriptionId": {
+          "description": "The identifier associated with the device subscription.",
+          "type": "string"
+        },
+        "registrationResourceId": {
+          "description": "The identifier associated with the device registration.",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "The identifier of the Azure Stack device for remote management.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceObjectId": {
+          "description": "The object identifier associated with the Azure Stack device connecting to Azure.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceLinkState": {
+          "description": "The connection state of the Azure Stack device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastConnectedTime": {
+          "description": "The last remote management connection time for the Azure Stack device connected to the linked subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceConnectionStatus": {
+          "description": "The status of the remote management connection of the Azure Stack device.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LinkedSubscriptionParameter": {
+      "description": "Linked Subscription resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of the Linked Subscription resource",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedSubscriptionParameterProperties"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "enum": [
+            "global"
+          ],
+          "x-ms-enum": {
+            "name": "Location",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "properties",
+        "location"
+      ]
+    },
+    "LinkedSubscriptionParameterProperties": {
+      "description": "Properties of the Linked Subscription resource",
+      "type": "object",
+      "properties": {
+        "linkedSubscriptionId": {
+          "description": "The identifier associated with the device subscription.",
+          "type": "string"
+        },
+        "registrationResourceId": {
+          "description": "The identifier associated with the device registration.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "linkedSubscriptionId",
+        "registrationResourceId"
+      ]
+    }
+  },
+  "parameters": {
+    "LinkedSubscriptionNameParameter": {
+      "description": "Name of the Linked Subscription resource.",
+      "name": "linkedSubscriptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NewLinkedSubscriptionParameter": {
+      "description": "Linked subscription resource parameter.",
+      "name": "resource",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/LinkedSubscriptionParameter"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

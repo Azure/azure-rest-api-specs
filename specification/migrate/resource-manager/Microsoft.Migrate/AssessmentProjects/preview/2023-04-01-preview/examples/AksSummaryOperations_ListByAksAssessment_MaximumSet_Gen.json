@@ -1,0 +1,67 @@
+{
+  "title": "AksSummaryOperations_ListByAksAssessment",
+  "operationId": "AksSummaryOperations_ListByAksAssessment",
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "D6F60DF4-CE70-4E39-8217-B8FBE7CA85AA",
+    "resourceGroupName": "rgaksswagger",
+    "projectName": "testproject",
+    "assessmentName": "testaksassessment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "aksAssessmentSummary": {
+                "skuSummary": {
+                  "StandardDS_v2": {
+                    "count": 17,
+                    "monthlyCost": 18
+                  }
+                },
+                "webAppSummary": {
+                  "IIS": {
+                    "count": 17,
+                    "monthlyCost": 18
+                  }
+                },
+                "webServerSummary": {
+                  "IIS": 13
+                },
+                "webAppCount": 19,
+                "webServerCount": 28,
+                "machineCount": 17,
+                "totalMonthlyCost": 6
+              },
+              "assessmentName": "testaksassessment",
+              "summaryName": "testaksassessmentsummary",
+              "suitabilityPerTarget": {
+                "AKS": {
+                  "Ready": 11
+                }
+              },
+              "monthlyComputeCost": 8,
+              "monthlyStorageCost": 26,
+              "confidenceScore": 7
+            },
+            "eTag": "00000000-0000-0000-a616-12d4724c01d9",
+            "id": "/subscriptions/D6F60DF4-CE70-4E39-8217-B8FBE7CA85AA/resourceGroups/rgaksswagger/providers/Microsoft.Migrate/assessmentProjects/testproject/aksAssessments/testaksassessment/summaries/AKS",
+            "name": "AKS",
+            "type": "AKSAssessmentSummary",
+            "systemData": {
+              "createdBy": "User",
+              "createdByType": "User",
+              "createdAt": "2023-11-07T06:51:24.108Z",
+              "lastModifiedBy": "User",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-11-07T06:51:24.108Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

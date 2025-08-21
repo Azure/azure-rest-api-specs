@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "databaseName": "default",
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-08-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "sasUri": "https://contosostorage.blob.core.window.net/urlToBlobContainer?sasKeyParameters"
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  }
+}

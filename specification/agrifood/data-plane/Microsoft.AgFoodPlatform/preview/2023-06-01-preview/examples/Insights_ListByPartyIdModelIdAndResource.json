@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "partyId": "PARTY123",
+    "resourceId": "farmId",
+    "resourceType": "Farm",
+    "modelId": "modelId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "insightId",
+            "partyId": "pjparty",
+            "resourceId": "farmId",
+            "resourceType": "Farm",
+            "modelId": "modelId",
+            "modelVersion": "1.0",
+            "attachmentsLink": "https://contosa.farmbeats.azure.net/party/pjparty/insight-attachments/insightId?api-version=2023-06-01-preview&modelId=modelId&resourceType=Farm&resourceId=farmId",
+            "insightStartDateTime": "2021-07-26T09:31:54Z",
+            "insightEndDateTime": "2021-07-26T09:31:54Z",
+            "measurements": {
+              "additionalPropKey1": {
+                "unit": "15m/s",
+                "value": 0
+              }
+            },
+            "createdDateTime": "2021-07-26T11:19:11Z",
+            "modifiedDateTime": "2021-07-26T11:19:11Z",
+            "eTag": "00000000-0000-0000-8210-0ef9229601d7",
+            "name": "insightName",
+            "description": "insightDescription",
+            "properties": {
+              "key1": "value1",
+              "key2": 123.45
+            }
+          }
+        ],
+        "skipToken": "skipToken",
+        "nextLink": "https://{{resourceName}}.farmbeats.azure.net/insights?api-version={{apiVersion}}&skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7e23TRC%3a10%23ISA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
+      }
+    }
+  }
+}

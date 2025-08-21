@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "resourceGroupName": "oiautorest6685",
+    "workspaceName": "oiautorest6685",
+    "parameters": {
+      "properties": {
+        "sku": {
+          "name": "PerGB2018"
+        },
+        "retentionInDays": 30,
+        "workspaceCapping": {
+          "dailyQuotaGb": -1
+        }
+      }
+    },
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": {
+            "name": "PerGB2018"
+          },
+          "retentionInDays": 30,
+          "publicNetworkAccessForQuery": "Enabled",
+          "publicNetworkAccessForIngestion": "Enabled",
+          "workspaceCapping": {
+            "dailyQuotaGb": -1,
+            "quotaNextResetTime": "Mon, 16 Nov 2020 15:00:00 GMT",
+            "dataIngestionStatus": "RespectQuota"
+          }
+        },
+        "location": "australiasoutheast",
+        "tags": {
+          "tag1": "val1"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics": {
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topics_ListByNamespace",
+        "x-ms-examples": {
+          "TopicGet": {
+            "$ref": "./examples/Topics/SBTopicListByNameSpace.json"
+          }
+        },
+        "description": "Gets all the topics in a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of topics.",
+            "schema": {
+              "$ref": "#/definitions/SBTopicListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}": {
+      "put": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topics_CreateOrUpdate",
+        "x-ms-examples": {
+          "TopicCreate": {
+            "$ref": "./examples/Topics/SBTopicCreate.json"
+          }
+        },
+        "description": "Creates a topic in the specified namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBTopic"
+            },
+            "description": "Parameters supplied to create a topic resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SBTopic"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topics_Delete",
+        "x-ms-examples": {
+          "TopicDelete": {
+            "$ref": "./examples/Topics/SBTopicDelete.json"
+          }
+        },
+        "description": "Deletes a topic from the specified namespace and resource group.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic successfully deleted."
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Topics"
+        ],
+        "operationId": "Topics_Get",
+        "x-ms-examples": {
+          "TopicGet": {
+            "$ref": "./examples/Topics/SBTopicGet.json"
+          }
+        },
+        "description": "Returns a description for the specified topic.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic description successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/SBTopic"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SBTopicListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SBTopic"
+          },
+          "description": "Result of the List Topics operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of topics."
+        }
+      },
+      "description": "The response to the List Topics operation."
+    },
+    "SBTopic": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SBTopicProperties",
+          "description": "Properties of topic resource."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Description of topic resource."
+    },
+    "SBTopicProperties": {
+      "type": "object",
+      "properties": {
+        "sizeInBytes": {
+          "readOnly": true,
+          "format": "int64",
+          "type": "integer",
+          "description": "Size of the topic, in bytes."
+        },
+        "createdAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "Exact time the message was created."
+        },
+        "updatedAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "The exact time the message was updated."
+        },
+        "accessedAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "Last time the message was sent, or a request was received, for this topic."
+        },
+        "subscriptionCount": {
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of subscriptions."
+        },
+        "countDetails": {
+          "readOnly": true,
+          "$ref": "../../../common/v1/definitions.json#/definitions/MessageCountDetails",
+          "description": "Message count details"
+        },
+        "defaultMessageTimeToLive": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO 8601 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "maxSizeInMegabytes": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Maximum size of the topic in megabytes, which is the size of the memory allocated for the topic. Default is 1024."
+        },
+        "maxMessageSizeInKilobytes": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Maximum size (in KB) of the message payload that can be accepted by the topic. This property is only used in Premium today and default is 1024."
+        },
+        "requiresDuplicateDetection": {
+          "type": "boolean",
+          "description": "Value indicating if this topic requires duplicate detection."
+        },
+        "duplicateDetectionHistoryTimeWindow": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO8601 timespan structure that defines the duration of the duplicate detection history. The default value is 10 minutes."
+        },
+        "enableBatchedOperations": {
+          "type": "boolean",
+          "description": "Value that indicates whether server-side batched operations are enabled."
+        },
+        "status": {
+          "$ref": "../../../common/v1/definitions.json#/definitions/EntityStatus",
+          "description": "Enumerates the possible values for the status of a messaging entity."
+        },
+        "supportOrdering": {
+          "type": "boolean",
+          "description": "Value that indicates whether the topic supports ordering."
+        },
+        "autoDeleteOnIdle": {
+          "format": "duration",
+          "type": "string",
+          "description": "ISO 8601 timespan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "enablePartitioning": {
+          "type": "boolean",
+          "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
+        },
+        "enableExpress": {
+          "type": "boolean",
+          "description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
+        }
+      },
+      "description": "The Topic Properties definition."
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2023-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "data": [
+          {
+            "hyperparams": {
+              "batch_size": 32,
+              "learning_rate_multiplier": 1,
+              "n_epochs": 2,
+              "prompt_loss_weight": 0.1
+            },
+            "model": "curie",
+            "fine_tuned_model": "curie.ft-72a2792ef7d24ba7b82c7fe4a37e379f",
+            "training_files": [
+              {
+                "statistics": {
+                  "tokens": 42,
+                  "examples": 23
+                },
+                "bytes": 140,
+                "purpose": "fine-tune",
+                "filename": "puppy.jsonl",
+                "id": "file-181a1cbdcdcf4677ada87f63a0928099",
+                "status": "succeeded",
+                "created_at": 1646126127,
+                "updated_at": 1646127311,
+                "object": "file"
+              }
+            ],
+            "result_files": [
+              {
+                "bytes": 32423,
+                "purpose": "fine-tune-results",
+                "filename": "results.csv",
+                "id": "file-181a1cbdcdcf4677ada87f63a0928099",
+                "status": "succeeded",
+                "created_at": 1646126127,
+                "updated_at": 1646127311,
+                "object": "file"
+              }
+            ],
+            "events": [
+              {
+                "created_at": 1646126127,
+                "level": "info",
+                "message": "Job enqueued. Waiting for jobs ahead to complete.",
+                "object": "fine-tune-event"
+              },
+              {
+                "created_at": 1646126169,
+                "level": "info",
+                "message": "Job started.",
+                "object": "fine-tune-event"
+              },
+              {
+                "created_at": 1646126192,
+                "level": "info",
+                "message": "Job succeeded.",
+                "object": "fine-tune-event"
+              }
+            ],
+            "id": "ft-72a2792ef7d24ba7b82c7fe4a37e379f",
+            "status": "succeeded",
+            "created_at": 1646126127,
+            "updated_at": 1646127311,
+            "object": "fine-tune"
+          }
+        ],
+        "object": "list"
+      }
+    }
+  }
+}

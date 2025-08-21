@@ -1,0 +1,42 @@
+{
+  "title": "Random page query",
+  "description": "A query on resources specifying paging and max rows through query options",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "Resources | where name contains 'test' | project id, name, type, location",
+      "options": {
+        "$top": 2,
+        "$skip": 10
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 386,
+        "count": 2,
+        "resultTruncated": "false",
+        "facets": [],
+        "$skipToken": "eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==",
+        "data": [
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Compute/disks/third_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+            "name": "third_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+            "type": "microsoft.compute/disks",
+            "location": "eastus"
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/CCTest",
+            "name": "CCTest",
+            "type": "microsoft.automation/automationaccounts",
+            "location": "westcentralus"
+          }
+        ]
+      }
+    }
+  }
+}

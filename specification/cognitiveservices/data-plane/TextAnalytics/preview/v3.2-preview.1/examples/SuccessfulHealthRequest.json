@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "ApiVersion": "v3.2-preview.1",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "input": {
+      "documents": [
+        {
+          "id": "1",
+          "language": "en",
+          "text": "Subject is taking 100mg of ibuprofen twice daily."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.1/entities/healthcare/jobs/{jobId}"
+      }
+    }
+  }
+}

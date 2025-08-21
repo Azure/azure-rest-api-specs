@@ -1,0 +1,139 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "rg",
+    "accountName": "sampleAccount",
+    "body": {
+      "tags": {
+        "Environment": "Test"
+      },
+      "properties": {
+        "endpointAuthentications": [
+          {
+            "aadTenantID": "tenant",
+            "principalID": "oid",
+            "principalType": "User"
+          },
+          {
+            "aadTenantID": "tenant",
+            "principalID": "oid2",
+            "principalType": "User"
+          }
+        ],
+        "cors": [
+          {
+            "allowedOrigins": [
+              "http://siteA.com"
+            ],
+            "allowedMethods": [
+              "GET",
+              "PUT",
+              "POST"
+            ],
+            "allowedHeaders": [
+              "X-Custom-Header",
+              "X-Custom-Header2"
+            ]
+          }
+        ],
+        "reportsConnectionString": "https://storageAccount.blob.core.windows.net/container/root"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Test"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            },
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid2",
+              "principalType": "User"
+            }
+          ],
+          "cors": [
+            {
+              "allowedOrigins": [
+                "http://siteA.com"
+              ],
+              "allowedMethods": [
+                "GET",
+                "PUT",
+                "POST"
+              ],
+              "allowedHeaders": [
+                "X-Custom-Header",
+                "X-Custom-Header2"
+              ]
+            }
+          ],
+          "reportsConnectionString": "https://storageAccount.blob.core.windows.net/container/root",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.RecommendationsService/locations/WESTUS/operationStatuses/{operationId}?api-version={api-version}"
+      },
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/rg/providers/Microsoft.RecommendationsService/accounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/accounts",
+        "location": "West US",
+        "tags": {
+          "Environment": "Test"
+        },
+        "systemData": {},
+        "properties": {
+          "configuration": "Capacity",
+          "endpointAuthentications": [
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid",
+              "principalType": "User"
+            },
+            {
+              "aadTenantID": "tenant",
+              "principalID": "oid2",
+              "principalType": "User"
+            }
+          ],
+          "cors": [
+            {
+              "allowedOrigins": [
+                "http://siteA.com"
+              ],
+              "allowedMethods": [
+                "GET",
+                "PUT",
+                "POST"
+              ],
+              "allowedHeaders": [
+                "X-Custom-Header",
+                "X-Custom-Header2"
+              ]
+            }
+          ],
+          "reportsConnectionString": "https://storageAccount.blob.core.windows.net/container/root",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

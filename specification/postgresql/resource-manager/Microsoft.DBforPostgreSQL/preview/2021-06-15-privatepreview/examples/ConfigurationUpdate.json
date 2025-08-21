@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "serverName": "testserver",
+    "configurationName": "event_scheduler",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-06-15-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "value": "on",
+        "source": "user-override"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "value": "ON",
+          "description": "Indicates the status of the Event Scheduler.",
+          "defaultValue": "OFF",
+          "dataType": "Enumeration",
+          "allowedValues": "ON,OFF,DISABLED",
+          "source": "user-override"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/configurations/event_scheduler",
+        "name": "event_scheduler",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/configurations"
+      }
+    },
+    "202": {}
+  }
+}

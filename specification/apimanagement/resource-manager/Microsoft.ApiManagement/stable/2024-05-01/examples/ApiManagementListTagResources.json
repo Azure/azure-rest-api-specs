@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "tag": {
+              "id": "/tags/apitag123",
+              "name": "awesomeTag"
+            },
+            "operation": {
+              "id": "/apis/echo-api/operations/create-resource",
+              "apiName": "Echo API",
+              "apiRevision": "1",
+              "name": "Create resource",
+              "method": "POST",
+              "urlTemplate": "/resource",
+              "description": "A demonstration of a POST call based on the echo backend above. The request body is expected to contain JSON-formatted data (see example below). A policy is used to automatically transform any request sent in JSON directly to XML. In a real-world scenario this could be used to enable modern clients to speak to a legacy backend."
+            }
+          },
+          {
+            "tag": {
+              "id": "/tags/apitag123",
+              "name": "awesomeTag"
+            },
+            "api": {
+              "id": "/apis/echo-api",
+              "name": "Echo API",
+              "apiRevision": "1",
+              "serviceUrl": "http://echoapi.cloudapp.net/api",
+              "path": "echo",
+              "isCurrent": true
+            }
+          },
+          {
+            "tag": {
+              "id": "/tags/apitag123",
+              "name": "awesomeTag"
+            },
+            "product": {
+              "id": "/products/starter",
+              "name": "Starter",
+              "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+              "terms": "",
+              "subscriptionRequired": true,
+              "approvalRequired": false,
+              "subscriptionsLimit": 1,
+              "state": "published"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

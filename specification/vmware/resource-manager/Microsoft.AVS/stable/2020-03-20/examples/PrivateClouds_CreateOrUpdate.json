@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2020-03-20",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "privateCloud": {
+      "location": "eastus2",
+      "sku": {
+        "name": "AV36"
+      },
+      "properties": {
+        "networkBlock": "192.168.48.0/22",
+        "managementCluster": {
+          "clusterSize": 4
+        }
+      },
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1",
+        "location": "eastus2",
+        "name": "cloud1",
+        "sku": {
+          "name": "AV36"
+        },
+        "properties": {
+          "networkBlock": "192.168.48.0/22",
+          "circuit": {
+            "expressRouteID": "/subscriptions/{subscription-id}/resourceGroups/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2/providers/Microsoft.Network/expressroutecircuits/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2-xconnect",
+            "primarySubnet": "192.168.53.0/30",
+            "secondarySubnet": "192.168.53.4/30"
+          },
+          "managementCluster": {
+            "clusterId": 1,
+            "clusterSize": 4,
+            "hosts": [
+              "fakehost18.nyc1.kubernetes.center",
+              "fakehost19.nyc1.kubernetes.center",
+              "fakehost20.nyc1.kubernetes.center",
+              "fakehost21.nyc1.kubernetes.center"
+            ]
+          },
+          "endpoints": {
+            "nsxtManager": "https://192.168.50.3/",
+            "vcsa": "https://192.168.50.2/"
+          },
+          "identitySources": [
+            {
+              "alias": "groupAlias",
+              "baseGroupDN": "ou=baseGroup",
+              "baseUserDN": "ou=baseUser",
+              "domain": "domain1",
+              "name": "group1",
+              "primaryServer": "ldaps://1.1.1.1:636/",
+              "secondaryServer": "ldaps://1.1.1.2:636/",
+              "ssl": "Enabled"
+            }
+          ],
+          "internet": "Disabled",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "type": "Microsoft.AVS/privateClouds"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1",
+        "location": "eastus2",
+        "name": "cloud1",
+        "sku": {
+          "name": "AV36"
+        },
+        "properties": {
+          "networkBlock": "192.168.48.0/22",
+          "circuit": {
+            "expressRouteID": "/subscriptions/{subscription-id}/resourceGroups/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2/providers/Microsoft.Network/expressroutecircuits/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2-xconnect",
+            "primarySubnet": "192.168.53.0/30",
+            "secondarySubnet": "192.168.53.4/30"
+          },
+          "managementCluster": {
+            "clusterId": 1,
+            "clusterSize": 4,
+            "hosts": [
+              "fakehost18.nyc1.kubernetes.center",
+              "fakehost19.nyc1.kubernetes.center",
+              "fakehost20.nyc1.kubernetes.center",
+              "fakehost21.nyc1.kubernetes.center"
+            ]
+          },
+          "endpoints": {
+            "nsxtManager": "https://192.168.50.3/",
+            "vcsa": "https://192.168.50.2/"
+          },
+          "identitySources": [
+            {
+              "alias": "groupAlias",
+              "baseGroupDN": "ou=baseGroup",
+              "baseUserDN": "ou=baseUser",
+              "domain": "domain1",
+              "name": "group1",
+              "primaryServer": "ldaps://1.1.1.1:636/",
+              "secondaryServer": "ldaps://1.1.1.2:636/",
+              "ssl": "Enabled"
+            }
+          ],
+          "internet": "Disabled",
+          "provisioningState": "Updating"
+        },
+        "tags": {},
+        "type": "Microsoft.AVS/privateClouds"
+      }
+    }
+  }
+}

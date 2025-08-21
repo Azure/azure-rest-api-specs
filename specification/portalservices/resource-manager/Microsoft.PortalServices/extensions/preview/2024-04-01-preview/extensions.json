@@ -1,0 +1,252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.PortalServices",
+    "version": "2024-04-01-preview",
+    "description": "Allows creation and deletion of Azure portal extensions.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PortalTenant"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PortalServices/compilefile": {
+      "post": {
+        "operationId": "PortalTenant_Compilefile",
+        "tags": [
+          "PortalTenant"
+        ],
+        "description": "compiles a file using inline content.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "portalTenantCompileFile",
+            "in": "body",
+            "description": "The parameters required to compile a file.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortalTenantCompileFileProperties"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalTenantCompileFileResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Compiles a file using inline content.": {
+            "$ref": "./examples/PortalTenant_Compilefile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PortalServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the Microsoft.PortalServices provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PortalTenantCompileFileProperties": {
+      "type": "object",
+      "description": "The contents of the file to compile.",
+      "properties": {
+        "contents": {
+          "type": "object",
+          "description": "The contents of the file.",
+          "additionalProperties": {}
+        },
+        "stringSource": {
+          "type": "object",
+          "description": "The contents of the string source.",
+          "additionalProperties": {}
+        },
+        "files": {
+          "type": "object",
+          "description": "The contents of referenced files. The property name is the relative file path and the value is its contents.",
+          "additionalProperties": {}
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current registration or provisioning state which only appears in the response.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "contents"
+      ]
+    },
+    "PortalTenantCompileFileResult": {
+      "type": "object",
+      "description": "The contents of the file to compile.",
+      "additionalProperties": {}
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state.",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Ready",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The operation is not specified."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation is accepted."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is running."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The operation is ready."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The operation is creating."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The operation is created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The operation is deleting."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The operation is deleted."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation is canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation is failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation is succeeded."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The operation is updating."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

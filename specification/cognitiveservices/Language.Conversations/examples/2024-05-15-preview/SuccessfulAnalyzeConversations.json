@@ -1,0 +1,120 @@
+{
+  "operationId": "AnalyzeConversations",
+  "title": "SuccessfulAnalyzeConversations",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2024-05-15-preview",
+    "body": {
+      "kind": "Conversation",
+      "analysisInput": {
+        "conversationItem": {
+          "id": "1",
+          "participantId": "1",
+          "text": "Book a flight to Seattle on Oct 10th"
+        }
+      },
+      "parameters": {
+        "projectName": "{project-name}",
+        "deploymentName": "{deployment-name}",
+        "stringIndexType": "TextElement_V8"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "ConversationResult",
+        "result": {
+          "query": "Book a flight to Seattle on Oct 10th",
+          "prediction": {
+            "topIntent": "BookFlight",
+            "projectKind": "Conversation",
+            "intents": [
+              {
+                "category": "None",
+                "confidenceScore": 1
+              },
+              {
+                "category": "BookTrain",
+                "confidenceScore": 0
+              },
+              {
+                "category": "BookFlight",
+                "confidenceScore": 0
+              }
+            ],
+            "entities": [
+              {
+                "category": "Geography.Location",
+                "text": "seattle",
+                "offset": 17,
+                "length": 7,
+                "confidenceScore": 1,
+                "extraInformation": [
+                  {
+                    "extraInformationKind": "EntitySubtype",
+                    "value": "geography.location",
+                    "tags": [
+                      {
+                        "name": "City",
+                        "confidenceScore": 1
+                      },
+                      {
+                        "name": "GPE",
+                        "confidenceScore": 1
+                      },
+                      {
+                        "name": "Location",
+                        "confidenceScore": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "category": "DateTime",
+                "text": "oct 10th",
+                "offset": 28,
+                "length": 8,
+                "confidenceScore": 1,
+                "resolutions": [
+                  {
+                    "resolutionKind": "DateTimeResolution",
+                    "dateTimeSubKind": "Date",
+                    "timex": "XXXX-10-10",
+                    "value": "2023-10-10"
+                  },
+                  {
+                    "resolutionKind": "DateTimeResolution",
+                    "dateTimeSubKind": "Date",
+                    "timex": "XXXX-10-10",
+                    "value": "2024-10-10"
+                  }
+                ],
+                "extraInformation": [
+                  {
+                    "extraInformationKind": "EntitySubtype",
+                    "value": "datetime.date",
+                    "tags": [
+                      {
+                        "name": "Date",
+                        "confidenceScore": 1
+                      },
+                      {
+                        "name": "Temporal",
+                        "confidenceScore": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

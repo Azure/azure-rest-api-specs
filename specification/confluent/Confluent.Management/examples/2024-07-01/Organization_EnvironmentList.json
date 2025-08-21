@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "organizationName": "myOrganization",
+    "pageSize": 10,
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments?api-version=2024-07-01&$count=10&$skipToken=xoi3753asdfe",
+        "value": [
+          {
+            "name": "prod-finance01",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/prod-finance01",
+            "kind": "Environment",
+            "properties": {
+              "metadata": {
+                "createdTimestamp": "2006-01-02T15:04:05-07:00",
+                "deletedTimestamp": "2006-01-02T15:04:05-07:00",
+                "resourceName": "crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=e-12345",
+                "self": "https://api.confluent.cloud/org/v2/environments/e-12345",
+                "updatedTimestamp": "2006-01-02T15:04:05-07:00"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Organization_ListEnvironments",
+  "title": "Organization_ListEnvironments"
+}

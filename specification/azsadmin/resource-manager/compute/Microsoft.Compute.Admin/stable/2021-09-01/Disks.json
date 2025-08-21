@@ -1,0 +1,424 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-09-01",
+    "title": "ComputeDiskAdminManagementClient",
+    "description": "The Admin Compute Disk Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/disks": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of disks.": {
+            "$ref": "./examples/Disks/List.json"
+          }
+        },
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_List",
+        "description": "Returns a list of disks.",
+        "parameters": [
+          {
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/UserSubscriptionIdParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/DiskStateParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/SourceSharePathParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/SourceScaleUnitParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/SourceVolumeLabelParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/DiskCountParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/DiskStartParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK -- The list of disks has been returned.",
+            "schema": {
+              "$ref": "Disks.json#/definitions/DiskList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/disks/{diskId}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested disk.": {
+            "$ref": "./examples/Disks/Get.json"
+          }
+        },
+        "tags": [
+          "Disks"
+        ],
+        "operationId": "Disks_Get",
+        "description": "Returns the disk.",
+        "parameters": [
+          {
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../preview/2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/DiskIdParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/DiskSizeDetailParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK -- The disk has been returned.",
+            "schema": {
+              "$ref": "Disks.json#/definitions/Disk"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error definition.",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "readOnly": true,
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "minimum": 100,
+          "maximum": 600
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string"
+        }
+      }
+    },
+    "DiskProperties": {
+      "description": "Managed disk properties.",
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "description": "The disk id.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The disk status.",
+          "$ref": "Disks.json#/definitions/DiskState"
+        },
+        "sharePath": {
+          "description": "The disk share path.",
+          "type": "string"
+        },
+        "actualSizeGB": {
+          "description": "The actual size of disk in GB.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "provisionSizeGB": {
+          "description": "The provision size of disk in GB.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "managedBy": {
+          "description": "Compute resource Uri which owns this disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userResourceId": {
+          "description": "The disk resource Uri from user view.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskType": {
+          "description": "The type of the disk resource.",
+          "$ref": "Disks.json#/definitions/DiskResourceType",
+          "readOnly": true
+        },
+        "diskSku": {
+          "description": "the disk sku.",
+          "$ref": "Disks.json#/definitions/AccountType",
+          "readOnly": true
+        },
+        "creationSourceUri": {
+          "description": "The disk creation source uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationOption": {
+          "description": "The disk creation option.",
+          "$ref": "Disks.json#/definitions/DiskCreationOption",
+          "readOnly": true
+        },
+        "exclusiveAllocatedSize": {
+          "description": "The exclusive allocated size for the disk.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      }
+    },
+    "Disk": {
+      "description": "Managed Disk.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "Disks.json#/definitions/DiskProperties",
+          "description": "Disk properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DiskList": {
+      "type": "object",
+      "description": "List of disks.",
+      "properties": {
+        "value": {
+          "description": "List of disks.",
+          "type": "array",
+          "items": {
+            "$ref": "Disks.json#/definitions/Disk"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "DiskState": {
+      "description": "Disk State.",
+      "type": "string",
+      "enum": [
+        "Undefined",
+        "Unattached",
+        "Attached",
+        "Reserved",
+        "ActiveSAS",
+        "Unknown",
+        "All",
+        "Recommended",
+        "OfflineMigration",
+        "OnlineMigration"
+      ],
+      "x-ms-enum": {
+        "name": "DiskState",
+        "modelAsString": true
+      }
+    },
+    "DiskResourceType": {
+      "description": "Disk resource type.",
+      "type": "string",
+      "enum": [
+        "Undefined",
+        "Disk",
+        "Snapshot",
+        "RestorePoint",
+        "ManagedBlob"
+      ],
+      "x-ms-enum": {
+        "name": "DiskResourceType",
+        "modelAsString": true
+      }
+    },
+    "AccountType": {
+      "description": "Disk Sku.",
+      "type": "string",
+      "enum": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS",
+        "StandardSSD_LRS",
+        "UltraSSD_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "AccountType",
+        "modelAsString": true
+      }
+    },
+    "DiskCreationOption": {
+      "description": "Disk creation option.",
+      "type": "string",
+      "enum": [
+        "Empty",
+        "FromImage",
+        "Import",
+        "Copy",
+        "Restore",
+        "FromPreprovisioned",
+        "Undelete",
+        "Upload",
+        "RecoverFromBlob"
+      ],
+      "x-ms-enum": {
+        "name": "DiskCreationOption",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "UserSubscriptionIdParameter": {
+      "description": "User Subscription Id which the resource belongs to.",
+      "name": "userSubscriptionId",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "DiskStateParameter": {
+      "description": "The parameters of disk state.",
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceSharePathParameter": {
+      "description": "The share which the resource belongs to.",
+      "name": "sharePath",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceScaleUnitParameter": {
+      "description": "The scale unit which the resource belongs to.",
+      "name": "scaleUnit",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceVolumeLabelParameter": {
+      "description": "The volume label of the volume which the resource belongs to.",
+      "name": "volumeLabel",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskCountParameter": {
+      "description": "The maximum number of disks to return.",
+      "name": "count",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "DiskStartParameter": {
+      "description": "The start index of disks in query.",
+      "name": "start",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "DiskIdParameter": {
+      "description": "The disk guid as identity.",
+      "name": "diskId",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DiskSizeDetailParameter": {
+      "description": "Switch for whether summary or detailed disk size information is returned.",
+      "name": "showSizeDetail",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "default": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

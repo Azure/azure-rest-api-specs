@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "startrg",
+    "managedInstanceName": "mitostart",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "GP_Gen5",
+          "tier": "GeneralPurpose",
+          "capacity": 8,
+          "family": "Gen5"
+        },
+        "properties": {
+          "fullyQualifiedDomainName": "mitostart.1234567891234.database.windows.net",
+          "administratorLogin": "dummylogin",
+          "subnetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/startrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state": "Ready",
+          "provisioningState": "Succeeded",
+          "vCores": 8,
+          "storageSizeInGB": 1024,
+          "licenseType": "LicenseIncluded",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "publicDataEndpointEnabled": false,
+          "proxyOverride": "Default",
+          "minimalTlsVersion": "1.2",
+          "dnsZone": "1234567891234",
+          "instancePoolId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/startrg/providers/Microsoft.Sql/instancePools/instancePool1",
+          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+          "currentBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Geo",
+          "servicePrincipal": {
+            "principalId": "00000011-1111-2222-2222-123456789111",
+            "clientId": "00000011-1111-2222-2222-123456789111",
+            "tenantId": "00000011-1111-2222-2222-123456789111",
+            "type": "SystemAssigned"
+          },
+          "externalGovernanceStatus": "Enabled",
+          "hybridSecondaryUsage": "Passive",
+          "authenticationMetadata": "Windows",
+          "databaseFormat": "SQLServer2022"
+        },
+        "location": "japaneast",
+        "tags": {
+          "key": "value"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/startrg/providers/Microsoft.Sql/managedInstances/mitostart",
+        "name": "mitostart",
+        "type": "Microsoft.Sql/managedInstances"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/startrg/providers/Microsoft.Sql/locations/westeurope/startManagedInstanceOperationResults/11111111-1111-1111-1111-111111111111",
+        "Azure-AsyncOperation": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/startrg/providers/Microsoft.Sql/locations/westeurope/startManagedInstanceAzureAsyncOperation/11111111-1111-1111-1111-111111111111"
+      },
+      "operation": "StartManagedServer",
+      "startTime": "2021-08-11T13:01:06.013Z"
+    }
+  }
+}

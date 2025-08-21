@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "snapToRoadsBatchRequest": {
+      "batchItems": [
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.336729,
+                  47.590868
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            },
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.336042,
+                  47.601604
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            }
+          ],
+          "includeSpeedLimit": true,
+          "travelMode": "driving"
+        },
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.133269,
+                  47.6470965
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            },
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -74.00487,
+                  40.71396
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            }
+          ],
+          "travelMode": "driving"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "batchItems": [
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                    -122.336773,
+                    47.590876
+                  ]
+                },
+                "properties": {
+                  "inputIndex": 0,
+                  "isInterpolated": false,
+                  "name": "State Rte-99 N",
+                  "speedLimitInKilometersPerHour": 80
+                }
+              },
+              {
+                "type": "Feature",
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                    -122.336008,
+                    47.601606
+                  ]
+                },
+                "properties": {
+                  "inputIndex": 1,
+                  "isInterpolated": false,
+                  "name": "State Rte-99 N",
+                  "speedLimitInKilometersPerHour": 80
+                }
+              }
+            ]
+          },
+          {
+            "error": {
+              "code": "BadRequest",
+              "message": "The distance between two consecutive points (-122.133269,47.6470965) (-74.00487,40.71396) must be within 6 kilometers of each other."
+            }
+          }
+        ],
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+        }
+      }
+    }
+  }
+}

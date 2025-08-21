@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com",
+    "Content-Type": "application/json",
+    "Training-Key": "{API Key}",
+    "projectId": "bc3f7dad-5544-468c-8573-3ef04d55463e",
+    "imageIds": [
+      "4d6eb844-42ee-42bc-bd6f-c32455ef07c9"
+    ],
+    "metadata": {
+      "tag": "value"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "isBatchSuccessful": true,
+        "images": [
+          {
+            "imageId": "4d6eb844-42ee-42bc-bd6f-c32455ef07c9",
+            "status": "OK",
+            "metadata": {
+              "tag": "value"
+            }
+          }
+        ]
+      }
+    },
+    "207": {
+      "headers": {},
+      "body": {
+        "isBatchSuccessful": false,
+        "images": [
+          {
+            "imageId": "4d6eb844-42ee-42bc-bd6f-c32455ef07c9",
+            "status": "ErrorLimitExceed"
+          }
+        ]
+      }
+    }
+  }
+}

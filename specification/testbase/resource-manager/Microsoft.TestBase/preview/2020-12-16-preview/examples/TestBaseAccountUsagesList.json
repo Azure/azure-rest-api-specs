@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "476f61a4-952c-422a-b4db-568a828f35df",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "api-version": "2020-12-16-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/providers/Microsoft.TestBase/contoso-testBaseAccount1/usages?api-version=2020-12-16-preview&$skipToken=dummySkipToken",
+        "value": [
+          {
+            "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/usages/contoso-package1-usage",
+            "name": {
+              "value": "contoso-package1-usage",
+              "localizedValue": "contoso-package1-usage"
+            },
+            "unit": "Seconds",
+            "limit": -1,
+            "currentValue": 7531
+          },
+          {
+            "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/usages/contoso-package2-usage",
+            "name": {
+              "value": "contoso-package2-usage",
+              "localizedValue": "contoso-package2-usage"
+            },
+            "unit": "Seconds",
+            "limit": -1,
+            "currentValue": 3157
+          }
+        ]
+      }
+    }
+  }
+}

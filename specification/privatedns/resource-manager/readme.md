@@ -26,7 +26,7 @@ These are the global settings for the Private DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09
+tag: package-2024-06
 ```
 
 ### Tag: package-2018-09
@@ -36,6 +36,33 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
   - Microsoft.Network/stable/2018-09-01/privatedns.json
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.Network/stable/2020-01-01/privatedns.json
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.Network/stable/2020-06-01/privatedns.json
+```
+
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.Network/stable/2024-06-01/privatedns.json
 ```
 
 # Code Generation
@@ -53,26 +80,17 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.PrivateDns
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/privatedns/Microsoft.Azure.Management.PrivateDns/src/Generated
-  clear-output-folder: true
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -95,6 +113,21 @@ batch:
   - tag: package-2018-09
 ```
 
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2020-01
+```
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2020-06
+```
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2024-06
+```
+
 ### Tag: package-2018-09 and java
 
 These settings apply only when `--tag=package-2018-09 --java` is specified on the command line.
@@ -103,7 +136,49 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.privatedns.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/privatedns/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2018_09_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "privatedns"}'
+```
+
+### Tag: package-2020-01 and java
+
+These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.privatedns.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2020_01_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "privatedns"}'
+```
+
+### Tag: package-2020-06 and java
+
+These settings apply only when `--tag=package-2020-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.privatedns.v2020_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2020_06_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "privatedns"}'
+```
+
+### Tag: package-2024-06 and java
+
+These settings apply only when `--tag=package-2024-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2024-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.privatedns.v2024_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2024_06_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "privatedns"}'
@@ -134,28 +209,3 @@ directive:
     suppress: DescriptionAndTitleMissing
     reason: Common types warning.
 ```
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Network/stable/2018-09-01/privatedns.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-

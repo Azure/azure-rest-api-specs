@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-08-01",
+    "subscriptionId": "subid",
+    "sourceRegion": "West Central US",
+    "targetRegion": "East US",
+    "$filter": "$filter=(name.value eq 'Probabilistic Bounded Staleness') and timeGrain eq duration'PT5M' and startTime eq '2017-11-19T23:53:55.2780000Z' and endTime eq '2017-11-20T00:13:55.2780000Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "timeGrain": "PT5M",
+            "startTime": "2017-11-19T23:53:55.2780000Z",
+            "endTime": "2017-11-20T00:13:55.2780000Z",
+            "unit": "Milliseconds",
+            "metricValues": [
+              {
+                "timestamp": "2017-11-19T23:53:55.2780000Z",
+                "P10": 1.11,
+                "P25": 2.5,
+                "P50": 4.34,
+                "P75": 5.2,
+                "P90": 6.77,
+                "P95": 7.1,
+                "P99": 8.3
+              }
+            ],
+            "name": {
+              "value": "Probabilistic Bounded Staleness-S-West Central US-T-East US",
+              "localizedValue": "Probabilistic Bounded Staleness-S-West Central US-T-East US"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

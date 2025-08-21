@@ -1,0 +1,537 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares": {
+      "get": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_ListByWorkspace",
+        "description": "Lists all of firmwares inside a workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirmwareList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Firmwares_ListByWorkspace_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_ListByWorkspace_MaximumSet_Gen.json"
+          },
+          "Firmwares_ListByWorkspace_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_ListByWorkspace_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}": {
+      "put": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Create",
+        "description": "The operation to create a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FirmwareCreateBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Create_MaximumSet_Gen.json"
+          },
+          "Firmwares_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Update",
+        "description": "The operation to update firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FirmwareUpdateBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Update_MaximumSet_Gen.json"
+          },
+          "Firmwares_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Delete",
+        "description": "The operation to delete a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Delete_MaximumSet_Gen.json"
+          },
+          "Firmwares_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_Get",
+        "description": "Get firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_Get_MaximumSet_Gen.json"
+          },
+          "Firmwares_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/generateDownloadUrl": {
+      "post": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_GenerateDownloadUrl",
+        "description": "The operation to a url for file download.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/UrlToken"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_GenerateDownloadUrl_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateDownloadUrl_MaximumSet_Gen.json"
+          },
+          "Firmwares_GenerateDownloadUrl_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateDownloadUrl_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/generateFilesystemDownloadUrl": {
+      "post": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmwares_GenerateFilesystemDownloadUrl",
+        "description": "The operation to a url for tar file download.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/UrlToken"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firmwares_GenerateFilesystemDownloadUrl_MaximumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateFilesystemDownloadUrl_MaximumSet_Gen.json"
+          },
+          "Firmwares_GenerateFilesystemDownloadUrl_MinimumSet_Gen": {
+            "$ref": "./examples/Firmwares_GenerateFilesystemDownloadUrl_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FirmwareList": {
+      "type": "object",
+      "description": "List of firmwares",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Firmware"
+          },
+          "description": "The list of firmwares."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of asset."
+        }
+      }
+    },
+    "Firmware": {
+      "type": "object",
+      "description": "Firmware definition",
+      "properties": {
+        "properties": {
+          "title": "Firmware properties",
+          "description": "The properties of a firmware",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirmwareProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "FirmwareUpdateDefinition": {
+      "type": "object",
+      "description": "Firmware definition",
+      "properties": {
+        "properties": {
+          "title": "Firmware properties",
+          "description": "The editable properties of a firmware",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirmwareProperties"
+        }
+      }
+    },
+    "FirmwareProperties": {
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name for a firmware that user uploaded."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "Firmware vendor."
+        },
+        "model": {
+          "type": "string",
+          "description": "Firmware model."
+        },
+        "version": {
+          "type": "string",
+          "description": "Firmware version."
+        },
+        "description": {
+          "type": "string",
+          "description": "User-specified description of the firmware."
+        },
+        "fileSize": {
+          "description": "File size of the uploaded firmware image.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of firmware scan.",
+          "enum": [
+            "Pending",
+            "Extracting",
+            "Analyzing",
+            "Ready",
+            "Error"
+          ],
+          "default": "Pending",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "statusMessages": {
+          "type": "array",
+          "description": "A list of errors or other messages generated during firmware analysis",
+          "items": {
+            "$ref": "#/definitions/StatusMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Firmware properties."
+    },
+    "StatusMessage": {
+      "type": "object",
+      "description": "Error and status message",
+      "properties": {
+        "errorCode": {
+          "description": "The error code",
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "description": "The error or status message",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FirmwareCreateBodyParameter": {
+      "name": "firmware",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Firmware"
+      },
+      "description": "Details of the firmware being created or updated.",
+      "x-ms-parameter-location": "method"
+    },
+    "FirmwareUpdateBodyParameter": {
+      "name": "firmware",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/FirmwareUpdateDefinition"
+      },
+      "description": "Details of the firmware being created or updated.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

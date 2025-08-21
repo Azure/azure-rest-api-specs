@@ -1,0 +1,383 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "ExtensionTypes",
+    "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
+      "get": {
+        "description": "Get Extension Type details",
+        "operationId": "ClusterExtensionType_Get",
+        "x-ms-examples": {
+          "ClusterExtensionType_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ClusterExtensionType_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-11-01-preview/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-11-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-11-01-preview/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
+      "get": {
+        "description": "Get Extension Types",
+        "operationId": "ClusterExtensionTypes_List",
+        "x-ms-examples": {
+          "ClusterExtensionTypes_List_MaximumSet_Gen": {
+            "$ref": "./examples/ClusterExtensionTypes_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-11-01-preview/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2021-11-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2021-11-01-preview/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions": {
+      "get": {
+        "description": "List available versions for an Extension Type",
+        "operationId": "ExtensionTypeVersions_List",
+        "x-ms-examples": {
+          "ExtensionTypeVersions_List_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionTypeVersions_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "versions"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes": {
+      "get": {
+        "tags": [
+          "ExtensionType"
+        ],
+        "description": "List all Extension Types",
+        "operationId": "LocationExtensionTypes_List",
+        "x-ms-examples": {
+          "LocationExtensionTypes_List_MaximumSet_Gen": {
+            "$ref": "./examples/LocationExtensionTypes_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionLocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExtensionTypeList": {
+      "description": "List Extension Types",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Extension Types",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionType"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of Extension Types",
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionType": {
+      "type": "object",
+      "description": "Represents an Extension Type.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExtensionTypeProperties",
+          "description": "Describes the Resource Type properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      }
+    },
+    "ExtensionTypeProperties": {
+      "description": "Properties of the connected cluster.",
+      "type": "object",
+      "properties": {
+        "releaseTrains": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Extension release train: preview or stable"
+        },
+        "clusterTypes": {
+          "description": "Cluster types",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "connectedClusters",
+            "managedClusters"
+          ],
+          "x-ms-enum": {
+            "name": "clusterTypes",
+            "modelAsString": false
+          }
+        },
+        "supportedScopes": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Extension scopes",
+          "$ref": "#/definitions/SupportedScopes"
+        }
+      }
+    },
+    "ExtensionVersionList": {
+      "description": "List versions for an Extension",
+      "type": "object",
+      "properties": {
+        "versions": {
+          "description": "Versions available for this Extension Type",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "releaseTrain": {
+                "description": "The release train for this Extension Type",
+                "type": "string"
+              },
+              "versions": {
+                "type": "array",
+                "description": "Versions available for this Extension Type and release train",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of Extension Types",
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      }
+    },
+    "SupportedScopes": {
+      "type": "object",
+      "description": "Extension scopes",
+      "properties": {
+        "defaultScope": {
+          "type": "string",
+          "description": "Default extension scopes: cluster or namespace"
+        },
+        "clusterScopeSettings": {
+          "description": "Scope settings",
+          "$ref": "#/definitions/ClusterScopeSettings"
+        }
+      }
+    },
+    "ClusterScopeSettings": {
+      "type": "object",
+      "description": "Extension scope settings",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Extension scope settings",
+          "properties": {
+            "allowMultipleInstances": {
+              "type": "boolean",
+              "description": "Describes if multiple instances of the extension are allowed"
+            },
+            "defaultReleaseNamespace": {
+              "type": "string",
+              "description": "Default extension release namespace"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "ExtensionLocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "extension location",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtensionTypeNameParameter": {
+      "name": "extensionTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Extension type name",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

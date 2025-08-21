@@ -1,0 +1,31 @@
+{
+  "title": "Update a user in your application",
+  "description": "Update a user in your application.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "userId": "123",
+    "api-version": "preview",
+    "body": {
+      "roles": [
+        {
+          "role": "<new role Id>"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "EmailUser",
+        "roles": [
+          {
+            "role": "<new role Id>"
+          }
+        ],
+        "email": "bob@contoso.com"
+      }
+    }
+  }
+}

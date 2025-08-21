@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-11-15-preview",
+    "databaseRid": "databaseRid",
+    "collectionRid": "collectionRid",
+    "subscriptionId": "subid",
+    "$filter": "$filter=name.value eq 'Partition Storage'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "unit": "Bytes",
+            "quotaPeriod": "P1D",
+            "limit": 10737418240,
+            "currentValue": 0,
+            "partitionId": "00000000-0000-0000-0000-000000000000",
+            "partitionKeyRangeId": "0",
+            "name": {
+              "value": "Storage",
+              "localizedValue": "Storage"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

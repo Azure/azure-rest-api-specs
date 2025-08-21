@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2024-08-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbUserDefinitions/myUserId",
+            "name": "myUserId",
+            "type": "Microsoft.DocumentDB/databaseAccounts/mongodbUserDefinitions",
+            "properties": {
+              "userName": "myUserName",
+              "databaseName": "sales",
+              "customData": "My custom data",
+              "roles": [
+                {
+                  "db": "sales",
+                  "role": "myReadRole"
+                }
+              ],
+              "mechanisms": "SCRAM-SHA-256"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

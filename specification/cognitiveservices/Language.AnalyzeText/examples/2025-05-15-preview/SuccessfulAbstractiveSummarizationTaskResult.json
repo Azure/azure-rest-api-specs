@@ -1,0 +1,58 @@
+{
+  "operationId": "AnalyzeTextJobStatus",
+  "title": "SuccessfulAbstractiveSummarizationTaskResult",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "createdDateTime": "2020-10-01T15:00:45Z",
+        "displayName": "Document Abstractive Summarization Task Example",
+        "expirationDateTime": "2020-10-03T15:01:03Z",
+        "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18",
+        "lastUpdatedDateTime": "2020-10-01T15:01:03Z",
+        "status": "succeeded",
+        "tasks": {
+          "completed": 1,
+          "failed": 0,
+          "inProgress": 0,
+          "total": 1,
+          "items": [
+            {
+              "kind": "AbstractiveSummarizationLROResults",
+              "taskName": "Document Abstractive Summarization Task 1",
+              "lastUpdateDateTime": "2020-10-01T15:01:03Z",
+              "status": "succeeded",
+              "results": {
+                "documents": [
+                  {
+                    "summaries": [
+                      {
+                        "text": "Microsoft have been on a quest to advance AI beyond existing techniques.",
+                        "contexts": [
+                          {
+                            "offset": 0,
+                            "length": 1629
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "1",
+                    "warnings": []
+                  }
+                ],
+                "errors": [],
+                "modelVersion": "latest"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

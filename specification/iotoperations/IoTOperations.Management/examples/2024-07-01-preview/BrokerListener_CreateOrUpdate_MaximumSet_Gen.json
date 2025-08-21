@@ -1,0 +1,127 @@
+{
+  "title": "BrokerListener_CreateOrUpdate",
+  "operationId": "BrokerListener_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "9265A271-C9EC-4648-9AF8-B575759AB43E",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "brokerName": "aio-broker",
+    "listenerName": "aio-listener",
+    "resource": {
+      "properties": {
+        "brokerRef": "aio-broker",
+        "serviceType": "ClusterIp",
+        "serviceName": "aio-mq-dmqtt-frontend",
+        "ports": [
+          {
+            "authenticationRef": "authn",
+            "port": 8883,
+            "protocol": "Mqtt",
+            "tls": {
+              "automatic": {
+                "issuerRef": {
+                  "apiGroup": "cert-manager.io",
+                  "kind": "Issuer",
+                  "name": "mq-dmqtt-frontend"
+                }
+              },
+              "mode": "Automatic"
+            }
+          }
+        ]
+      },
+      "extendedLocation": {
+        "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "brokerRef": "aio-broker",
+          "serviceType": "ClusterIp",
+          "serviceName": "aio-mq-dmqtt-frontend",
+          "ports": [
+            {
+              "authenticationRef": "authn",
+              "port": 8883,
+              "protocol": "Mqtt",
+              "tls": {
+                "automatic": {
+                  "issuerRef": {
+                    "apiGroup": "cert-manager.io",
+                    "kind": "Issuer",
+                    "name": "mq-dmqtt-frontend"
+                  }
+                },
+                "mode": "Automatic"
+              }
+            }
+          ]
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/listeners/resource-name123",
+        "name": "jngsyyonj",
+        "type": "hkyuyjip",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "brokerRef": "aio-broker",
+          "serviceType": "ClusterIp",
+          "serviceName": "aio-mq-dmqtt-frontend",
+          "ports": [
+            {
+              "authenticationRef": "authn",
+              "port": 8883,
+              "protocol": "Mqtt",
+              "tls": {
+                "automatic": {
+                  "issuerRef": {
+                    "apiGroup": "cert-manager.io",
+                    "kind": "Issuer",
+                    "name": "mq-dmqtt-frontend"
+                  }
+                },
+                "mode": "Automatic"
+              }
+            }
+          ]
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/listeners/resource-name123",
+        "name": "jngsyyonj",
+        "type": "hkyuyjip",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    }
+  }
+}

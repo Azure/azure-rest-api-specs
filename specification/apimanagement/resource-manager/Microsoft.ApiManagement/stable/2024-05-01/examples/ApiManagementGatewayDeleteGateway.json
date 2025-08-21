@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "gatewayName": "example-gateway",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateway/example-gateway/operationresults/TGV2eTExMDZtMDJfVGVybV9jMmZlY2QwMA==?api-version=2024-05-01"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateway/example-gateway",
+        "name": "example-gateway",
+        "type": "Microsoft.ApiManagement/gateway",
+        "tags": {},
+        "location": "West US",
+        "etag": "AAAAAAFfhHY=",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "Deleting",
+          "createdAtUtc": "2016-12-20T19:41:21.5823069Z",
+          "frontend": {
+            "defaultHostname": "example-gateway.westus.gateway.azure-api.net"
+          },
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+            }
+          },
+          "configurationApi": {
+            "hostname": "example-gateway.westus.configuration.gateway.azure-api.net"
+          }
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1
+        }
+      }
+    },
+    "204": {}
+  }
+}

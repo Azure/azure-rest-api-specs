@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "Content-Type": "multipart/form-data",
+    "definition": "{ \"locales\":  \"en-US\"] }",
+    "audio": "{binary}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "duration": 2000,
+        "combinedPhrases": [
+          {
+            "text": "Weather"
+          }
+        ],
+        "phrases": [
+          {
+            "offset": 40,
+            "duration": 240,
+            "text": "Weather",
+            "words": [
+              {
+                "text": "Weather",
+                "offset": 40,
+                "duration": 240
+              }
+            ],
+            "locale": "en-US",
+            "confidence": 0.7881154
+          }
+        ]
+      }
+    }
+  }
+}

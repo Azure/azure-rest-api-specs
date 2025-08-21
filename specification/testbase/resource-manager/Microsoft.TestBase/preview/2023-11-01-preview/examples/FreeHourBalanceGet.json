@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "packageName": "contoso-package2",
+    "freeHourBalanceName": "TenantLevel",
+    "api-version": "2023-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TenantLevel",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/freeHourBalances/TenantLevel",
+        "type": "Microsoft.TestBase/testBaseAccounts/freeHourBalances",
+        "properties": {
+          "totalRemainingFreeHours": 160.0,
+          "incrementEntries": [
+            {
+              "freeHourType": "Permanent",
+              "freeHourStatus": "Enabled",
+              "incrementalFreeHours": 500,
+              "remainingFreeHours": 130.0,
+              "createTimeStamp": "2022-03-12T12:51:38.709Z",
+              "expirationTimeStamp": "2023-05-09T17:30:00Z"
+            },
+            {
+              "freeHourType": "Temporary",
+              "freeHourStatus": "Enabled",
+              "incrementalFreeHours": 100,
+              "remainingFreeHours": 30.0,
+              "createTimeStamp": "2022-03-12T12:51:38.709Z",
+              "expirationTimeStamp": "2023-05-09T17:30:00Z"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

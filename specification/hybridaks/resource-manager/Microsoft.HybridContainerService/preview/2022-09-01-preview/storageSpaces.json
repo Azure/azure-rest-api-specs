@@ -1,0 +1,475 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridContainerService",
+    "description": "The Microsoft.HybridContainerService Rest API spec.",
+    "version": "2022-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/storageSpaces/{storageSpacesName}": {
+      "get": {
+        "operationId": "storageSpaces_Retrieve",
+        "x-ms-examples": {
+          "GetStorageSpace": {
+            "$ref": "./examples/GetStorageSpace.json"
+          }
+        },
+        "summary": "Gets the storage space object",
+        "description": "Gets the Hybrid AKS storage space object",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storageSpacesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the storageSpaces resource.",
+            "schema": {
+              "$ref": "#/definitions/storageSpaces"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "storageSpaces_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutStorageSpace": {
+            "$ref": "./examples/PutStorageSpace.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Puts the storage object",
+        "description": "Puts the Hybrid AKS storage object",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storageSpacesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSpaces",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/storageSpaces"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the storageSpaces resource.",
+            "schema": {
+              "$ref": "#/definitions/storageSpaces"
+            }
+          },
+          "201": {
+            "description": "Creates the storageSpaces resource.",
+            "schema": {
+              "$ref": "#/definitions/storageSpaces"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "storageSpaces_Delete",
+        "x-ms-examples": {
+          "DeleteStorageSpace": {
+            "$ref": "./examples/DeleteStorageSpace.json"
+          }
+        },
+        "summary": "Deletes the storage object",
+        "description": "Deletes the Hybrid AKS storage object",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storageSpacesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the storageSpaces resource."
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "storageSpaces_Update",
+        "x-ms-examples": {
+          "UpdateStorageSpace": {
+            "$ref": "./examples/UpdateStorageSpace.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Patches the storage object",
+        "description": "Patches the Hybrid AKS storage object",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storageSpacesNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSpaces",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/storageSpacesPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the storageSpaces resource.",
+            "schema": {
+              "$ref": "#/definitions/storageSpaces"
+            }
+          },
+          "202": {
+            "description": "Updates the storageSpaces resource.",
+            "schema": {
+              "$ref": "#/definitions/storageSpaces"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/storageSpaces": {
+      "get": {
+        "operationId": "storageSpaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListStorageSpaceByResourceGroup": {
+            "$ref": "./examples/ListStorageSpaceByResourceGroup.json"
+          }
+        },
+        "summary": "List the storage object by resource group",
+        "description": "List the Hybrid AKS storage object by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all storageSpaces under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/storageSpacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/storageSpaces": {
+      "get": {
+        "operationId": "storageSpaces_ListBySubscription",
+        "x-ms-examples": {
+          "ListStorageSpaceBySubscription": {
+            "$ref": "./examples/ListStorageSpaceBySubscription.json"
+          }
+        },
+        "summary": "List the storage object by subscription",
+        "description": "List the Hybrid AKS storage object by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all storageSpaces under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/storageSpacesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "storageSpacesProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "hciStorageProfile": {
+          "type": "object",
+          "properties": {
+            "mocGroup": {
+              "type": "string",
+              "description": "Resource group in MOC(Microsoft On-premises Cloud)"
+            },
+            "mocLocation": {
+              "type": "string",
+              "description": "Location in MOC(Microsoft On-premises Cloud)"
+            },
+            "mocStorageContainer": {
+              "type": "string",
+              "description": "Name of the storage container in MOC(Microsoft On-premises Cloud)"
+            }
+          }
+        },
+        "vmwareStorageProfile": {
+          "type": "object",
+          "properties": {
+            "datacenter": {
+              "type": "string",
+              "description": "Name of the datacenter in VSphere"
+            },
+            "datastore": {
+              "type": "string",
+              "description": "Name of the datastore in VSphere"
+            },
+            "folder": {
+              "type": "string",
+              "description": "Name of the folder in VSphere"
+            },
+            "resourcePool": {
+              "type": "string",
+              "description": "Name of the resource pool in VSphere"
+            }
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting",
+            "Updating",
+            "Accepted",
+            "Created"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState"
+          }
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "provisioningStatus": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "operationId": {
+                  "type": "string"
+                },
+                "phase": {
+                  "type": "string",
+                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "description": "Contains Provisioning errors"
+            }
+          },
+          "description": "HybridAKSStorageStatus defines the observed state of HybridAKSStorage"
+        }
+      },
+      "description": "HybridAKSStorageSpec defines the desired state of HybridAKSStorage"
+    },
+    "storageSpaces": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/storageSpacesProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The storageSpaces resource definition."
+    },
+    "storageSpacesPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The storageSpaces resource patch definition."
+    },
+    "storageSpacesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/storageSpaces"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "x-ms-identifiers": []
+    }
+  },
+  "parameters": {
+    "storageSpacesNameParameter": {
+      "name": "storageSpacesName",
+      "description": "Parameter for the name of the storage object",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    }
+  }
+}

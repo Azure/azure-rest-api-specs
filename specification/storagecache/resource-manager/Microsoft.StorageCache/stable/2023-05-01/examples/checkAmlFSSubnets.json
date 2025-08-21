@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-05-01",
+    "amlFilesystemSubnetInfo": {
+      "filesystemSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/fsSub",
+      "storageCapacityTiB": 16,
+      "sku": {
+        "name": "AMLFS-Durable-Premium-125"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "400": {
+      "body": {
+        "filesystemSubnet": {
+          "status": "Invalid",
+          "message": "A subnet with a minimum size of /24 is required."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "scope": "Public"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestPublisher",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher",
+        "type": "Microsoft.HybridNetwork/publishers",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scope": "Public"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestPublisher",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher",
+        "type": "Microsoft.HybridNetwork/publishers",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "scope": "Public"
+        }
+      }
+    }
+  }
+}

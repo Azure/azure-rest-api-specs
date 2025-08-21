@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "api-version": "2020-08-20-preview",
+    "linkNotificationHubParameters": {
+      "resourceId": "/subscriptions/12345/resourceGroups/MyOtherResourceGroup/providers/Microsoft.NotificationHubs/namespaces/MyNamespace/notificationHubs/MyHub",
+      "connectionString": "Endpoint=sb://MyNamespace.servicebus.windows.net/;SharedAccessKey=abcd1234"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceId": "/subscriptions/12345/resourceGroups/MyOtherResourceGroup/providers/Microsoft.NotificationHubs/namespaces/MyNamespace/notificationHubs/MyHub"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "WrongSubscription",
+          "message": "The notification hub must be in the same subscription as the communication service"
+        }
+      }
+    }
+  }
+}

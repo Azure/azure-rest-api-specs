@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2023-10-01",
+    "name": "Prod-2022-08-01",
+    "entity": {
+      "filters": [
+        {
+          "key": "app1/*",
+          "label": "Production"
+        }
+      ],
+      "retention_period": 3600
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Content-Type": "application/vnd.microsoft.appconfig.snapshot+json",
+        "ETag": "W/\"4f6dd610dd5e4deebc7fbaef685fb903\"",
+        "Last-Modified": "Tue, 01 Aug 2022 16:52:32 GMT",
+        "Sync-Token": "zAJw6V16=NjotMSM3ODk3NjM=;sn=789763",
+        "Operation-Location": "https://{exampleAppConfigurationName}.azconfig.io/operations?snapshot=Prod-2022-08-01&Api-Version=2023-10-01"
+      },
+      "body": {
+        "etag": "4f6dd610dd5e4deebc7fbaef685fb903",
+        "name": "Prod-2022-08-01",
+        "status": "provisioning",
+        "filters": [
+          {
+            "key": "app1/*",
+            "label": "Production"
+          }
+        ],
+        "composition_type": "all",
+        "created": "2022-08-01T22:19:40+00:00",
+        "size": 0,
+        "items_count": 0,
+        "retention_period": 3600,
+        "tags": {}
+      }
+    }
+  }
+}

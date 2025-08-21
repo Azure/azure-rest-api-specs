@@ -1,117 +1,64 @@
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
-
-```yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-containerregistry
-  clear-output-folder: true
-  no-namespace-folders: true
-```
-
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
-batch:
-  - tag: package-2019-06-preview
-  - tag: package-2019-05
-  - tag: package-2019-05-preview
-  - tag: package-2019-04
-  - tag: package-2018-09
-  - tag: package-2018-02-preview
-  - tag: package-2017-10
-  - tag: package-2017-03
-```
-
-### Tag: package-2019-06-preview and python
-
-These settings apply only when `--tag=package-2019-06-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2019-06-preview' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2019_06_01_preview
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_06_01_preview
+``` yaml $(python)
+title: ContainerRegistryManagementClient
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-containerregistry
+namespace: azure.mgmt.containerregistry
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
 
-### Tag: package-2019-05 and python
-
-These settings apply only when `--tag=package-2019-05 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-05' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2019_05_01
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_05_01
+``` yaml $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry
 ```
 
-### Tag: package-2019-05-preview and python
-
-These settings apply only when `--tag=package-2019-05-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-05-preview' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2019_05_01_preview
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_05_01_preview
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions.BuildStepProperties
+    transform: >
+        $['required'] = ['type'];
+  - from: swagger-document
+    where: $.definitions.BuildStepPropertiesUpdateParameters
+    transform: >
+        $['required'] = ['type'];
+  - from: swagger-document
+    where: $.definitions.QueueBuildRequest
+    transform: >
+        $['required'] = ['type']; 
+  - from: swagger-document
+    where: $.definitions.RunRequest
+    transform: >
+        $['required'] = ['type'];
+  - from: swagger-document
+    where: $.definitions.TaskStepProperties
+    transform: >
+        $['required'] = ['type']; 
+  - from: swagger-document
+    where: $.definitions.TaskStepUpdateParameters
+    transform: >
+        $['required'] = ['type'];
 ```
 
-### Tag: package-2019-04 and python
-
-These settings apply only when `--tag=package-2019-04 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-04' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2019_04_01
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_04_01
-```
-
-### Tag: package-2018-09 and python
-
-These settings apply only when `--tag=package-2018-09 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-09' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2018_09_01
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2018_09_01
-```
-
-### Tag: package-2018-02-preview and python
-
-These settings apply only when `--tag=package-2018-02-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-02-preview' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2018_02_01_preview
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2018_02_01_preview
-```
-
-### Tag: package-2017-10 and python
-
-These settings apply only when `--tag=package-2017-10 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2017_10_01
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2017_10_01
-```
-
-### Tag: package-2017-03 and python
-
-These settings apply only when `--tag=package-2017-03 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(python)
-python:
-  namespace: azure.mgmt.containerregistry.v2017_03_01
-  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2017_03_01
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions
+    transform: >
+      $.LoginServerProperties.properties.tls = {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "The TLS properties of the connected registry login server.",
+          "readOnly": true
+        };
+      $.TlsProperties.properties.certificate = {
+          "$ref": "#/definitions/TlsCertificateProperties",
+          "description": "The certificate used to configure HTTPS for the login server.",
+          "readOnly": true
+        };
 ```

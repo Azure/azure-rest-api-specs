@@ -1,0 +1,51 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - adou
+  - armstackhcivm
+  - azurestackhci
+  - capi
+  - drtm
+  - gpup
+  - hcivm
+  - hvci
+  - igvm
+  - imds
+  - mitigations
+  - rdma
+  - sdkauto
+  - stackhcivm
+  - uefi
+  - unattend
+  - unpurposed
+  - vhds
+  - vhdx
+  - wdac
+  - azurestackhcivm
+  - armazurestackhcivm
+overrides:
+  - filename: >-
+      **/specification/azurestackhci/AzureStackHCI.StackHCIVM.Management/models.tsp
+    words:
+      - sevsnp
+  - filename: >-
+      **/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/readme.md
+    words:
+      - azurestackhci
+      - stackhcivm
+      - virtualmachineinstances
+  - filename: >-
+      **/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/**/*.json
+    words:
+      - sevsnp
+  - filename: >-
+      **/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI/**/*.json
+    words:
+      - unpurposed
+

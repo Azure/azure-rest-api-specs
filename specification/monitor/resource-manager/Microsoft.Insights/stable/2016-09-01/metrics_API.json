@@ -52,7 +52,7 @@
             "required": false
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -156,7 +156,7 @@
     },
     "Unit": {
       "type": "string",
-      "description": "the unit of the metric.",
+      "description": "The unit of the metric.",
       "enum": [
         "Count",
         "Bytes",
@@ -164,7 +164,13 @@
         "CountPerSecond",
         "BytesPerSecond",
         "Percent",
-        "MilliSeconds"
+        "MilliSeconds",
+        "ByteSeconds",
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
       ],
       "x-ms-enum": {
         "name": "Unit",
@@ -270,15 +276,6 @@
           "type": "string"
         }
       }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

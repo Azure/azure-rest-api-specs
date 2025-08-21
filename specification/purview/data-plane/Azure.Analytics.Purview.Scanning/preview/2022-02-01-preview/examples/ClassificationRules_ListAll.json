@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "api-version": "2022-02-01-preview",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "SampleResourceGroup",
+    "dataCatalogName": "Catalog1"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba"
+      },
+      "body": {
+        "count": 2,
+        "nextLink": null,
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCatalog/DataCatalogs/Catalog1/ClassificationRules/ClassificationRule1",
+            "name": "ClassificationRule1",
+            "kind": "Custom",
+            "properties": {
+              "minimumPercentageMatch": 80,
+              "classificationAction": "Keep",
+              "description": "second one",
+              "version": 4,
+              "classificationName": "CUSTOM.TEST.TWO",
+              "ruleStatus": "Enabled",
+              "createdAt": "2019-12-09T06:43:30.8478469Z",
+              "lastModifiedAt": "2019-12-09T07:04:53.2807344Z",
+              "dataPatterns": [
+                {
+                  "kind": "Regex",
+                  "pattern": "^data1$"
+                },
+                {
+                  "kind": "Regex",
+                  "pattern": "^data2$"
+                }
+              ],
+              "columnPatterns": [
+                {
+                  "kind": "Regex",
+                  "pattern": "^column1$"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCatalog/DataCatalogs/Catalog1/ClassificationRules/ClassificationRule2",
+            "name": "ClassificationRule2",
+            "kind": "Custom",
+            "properties": {
+              "minimumPercentageMatch": 80,
+              "classificationAction": "Keep",
+              "description": "second one",
+              "version": 4,
+              "classificationName": "CUSTOM.TEST.TWO",
+              "ruleStatus": "Enabled",
+              "createdAt": "2019-12-09T06:43:30.8478469Z",
+              "lastModifiedAt": "2019-12-09T07:04:53.2807344Z",
+              "dataPatterns": [
+                {
+                  "kind": "Regex",
+                  "pattern": "^data1$"
+                },
+                {
+                  "kind": "Regex",
+                  "pattern": "^data2$"
+                }
+              ],
+              "columnPatterns": [
+                {
+                  "kind": "Regex",
+                  "pattern": "^column1$"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

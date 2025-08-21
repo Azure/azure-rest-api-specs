@@ -1,0 +1,187 @@
+# providerhub
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for providerhub.
+
+## Getting Started
+
+To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+
+> `autorest readme.md`
+
+To see additional help and options, run:
+
+> `autorest --help`
+
+For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+
+---
+
+## Configuration
+
+### Basic Information
+
+These are the global settings for the providerhub.
+
+```yaml
+title: ProviderHub
+description: Provider Hub
+openapi-type: arm
+openapi-subtype: arm
+tag: package-2024-09-01
+```
+
+### Tag: package-2024-09-01
+
+These settings apply only when `--tag=package-2024-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-01'
+input-file:
+  - Microsoft.ProviderHub/stable/2024-09-01/providerhub.json
+```
+
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Microsoft.ProviderHub/preview/2021-09-01-preview/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
+```
+
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+  - Microsoft.ProviderHub/preview/2021-06-01-preview/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
+```
+
+### Tag: package-2021-05-01-preview
+
+These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05-01-preview'
+input-file:
+  - Microsoft.ProviderHub/preview/2021-05-01-preview/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
+```
+
+### Tag: package-2020-11-20
+
+These settings apply only when `--tag=package-2020-11-20` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-20'
+input-file:
+  - Microsoft.ProviderHub/stable/2020-11-20/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: providerhub.json
+    where:
+      - $.definitions.ResourceTypeRegistrationProperties.properties.resourceConcurrencyControlOptions
+      - $.definitions.ResourceTypeRegistrationProperties.properties.metadata
+      - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
+      - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
+    reason: This version requires metadata to be defined as an additional property.
+
+  - suppress: PutGetPatchResponseSchema
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"]
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers. The PUT contains the same properties as GET under the `contents` field.
+
+  - suppress: NestedResourcesMustHaveListOperation
+    from: providerhub.json
+    where:
+      - $.definitions.OperationsPutContent
+    reason: The GET operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default" returns a list of operations. There isn't a point GET for this operation.
+
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: providerhub.json
+    where:
+      - $.definitions.OperationsDefinitionArrayResponseWithContinuation
+    reason: Historically the operations definition response doesn't include ID property. This is a pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+
+  - suppress: PutRequestResponseSchemeArm
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}"].put
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+
+  - suppress: RepeatedPathInfo
+    from: providerhub.json
+    reason: Pre-existing lint error not introduced in this version which required the provider namespace to be in the body.
+
+  - suppress: GuidUsage
+    from: providerhub.json
+    where: $.parameters.ApplicationIdParameter.format
+    reason: This references the First Party Application IDs which are GUIDs.
+```
+
+---
+
+# Code Generation
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by AutoRest itself.
+
+```yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_providerhub']
+  - repo: azure-sdk-for-net
+  - repo: azure-powershell
+```
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

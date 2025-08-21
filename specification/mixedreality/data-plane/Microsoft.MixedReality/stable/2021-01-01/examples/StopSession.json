@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "endpoint": "https://remoterendering.eastus.mixedreality.azure.com",
+    "api-version": "2021-01-01",
+    "account_id": "30ea64bd-100f-4bf0-adc9-29fa45d4880c",
+    "session_id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
+  },
+  "responses": {
+    "204": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "401": {
+      "headers": {
+        "WWW-Authenticate": "Bearer error=\"invalid_token\"",
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "403": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "404": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": 15,
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      }
+    },
+    "500": {
+      "headers": {
+        "MS-CV": "dKEFmka2kkSlDmp/af+sOw"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An internal server error occurred."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfeab2-9ae0-4464-9919-dccaee2e48f0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "templateId": "str.azure-sentinel-solution-str",
+    "templateInstallationProperties": {
+      "properties": {
+        "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
+        "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
+        "displayName": "API Protection workbook template",
+        "contentKind": "AnalyticsRule",
+        "version": "1.0.1",
+        "packageVersion": "1.0.0",
+        "packageId": "str.azure-sentinel-solution-str",
+        "packageName": "str",
+        "packageKind": "Solution",
+        "source": {
+          "kind": "Solution",
+          "name": "str",
+          "sourceId": "str.azure-sentinel-solution-str"
+        },
+        "author": {
+          "name": "Microsoft",
+          "email": "support@microsoft.com"
+        },
+        "support": {
+          "tier": "Microsoft",
+          "name": "Microsoft Corporation",
+          "email": "support@microsoft.com",
+          "link": "https://support.microsoft.com/"
+        },
+        "mainTemplate": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.1",
+          "resources": [
+            {
+              "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+              "name": "8365ebfe-a381-45b7-ad08-7d818070e11f",
+              "apiVersion": "2022-04-01-preview",
+              "kind": "Scheduled",
+              "location": "[parameters('workspace-location')]",
+              "properties": {
+                "description": "Creates an incident when a large number of Critical/High severity CrowdStrike Falcon sensor detections is triggered by a single user",
+                "displayName": "Critical or High Severity Detections by User",
+                "enabled": false,
+                "query": "...",
+                "queryFrequency": "PT1H",
+                "queryPeriod": "PT1H",
+                "severity": "High",
+                "suppressionDuration": "PT1H",
+                "suppressionEnabled": false,
+                "triggerOperator": "GreaterThan",
+                "triggerThreshold": 0,
+                "status": "Available"
+              }
+            },
+            {
+              "type": "Microsoft.OperationalInsights/workspaces/providers/metadata",
+              "apiVersion": "2022-01-01-preview",
+              "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',concat('AnalyticsRule-', last(split([resourceId('Microsoft.SecurityInsights/AlertRuleTemplates', 8365ebfe-a381-45b7-ad08-7d818070e11f)],'/'))))]",
+              "properties": {
+                "description": "CrowdStrike Falcon Endpoint Protection Analytics Rule 1",
+                "parentId": "[resourceId('Microsoft.SecurityInsights/AlertRuleTemplates', 8365ebfe-a381-45b7-ad08-7d818070e11f)]",
+                "contentId": "4465ebde-b381-45f7-ad08-7d818070a11c",
+                "kind": "AnalyticsRule",
+                "version": "1.0.0",
+                "source": {
+                  "kind": "Solution",
+                  "name": "str",
+                  "sourceId": "str.azure-sentinel-solution-str"
+                },
+                "author": {
+                  "name": "Microsoft",
+                  "email": "support@microsoft.com"
+                },
+                "support": {
+                  "tier": "Microsoft",
+                  "name": "Microsoft Corporation",
+                  "email": "support@microsoft.com",
+                  "link": "https://support.microsoft.com/"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tags": {
+        "tag1": "str"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentPackages/azuresentinel.azure-sentinel-solution-ciscoumbrella",
+        "name": "azuresentinel.azure-sentinel-solution-ciscoumbrella",
+        "type": "Microsoft.SecurityInsights/contenttemplates",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
+          "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
+          "packageKind": "Solution",
+          "packageId": "str.azure-sentinel-solution-str",
+          "packageVersion": "1.0.0",
+          "contentKind": "AnalyticsRule",
+          "version": "1.0.1",
+          "displayName": "API Protection workbook template",
+          "source": {
+            "kind": "Solution",
+            "name": "CiscoUmbrella",
+            "sourceId": "azuresentinel.azure-sentinel-solution-ciscoumbrella"
+          },
+          "author": {
+            "name": "Microsoft",
+            "email": "support@microsoft.com"
+          },
+          "support": {
+            "tier": "Microsoft",
+            "name": "Microsoft Corporation",
+            "email": "support@microsoft.com",
+            "link": "https://support.microsoft.com/"
+          },
+          "dependencies": {
+            "criteria": [
+              {
+                "contentId": "strDataConnector",
+                "kind": "DataConnector",
+                "version": "2.0.0"
+              },
+              {
+                "contentId": "str-Parser",
+                "kind": "Parser",
+                "version": "2.0.0"
+              }
+            ],
+            "operator": "AND"
+          },
+          "providers": [
+            "Microsoft"
+          ],
+          "categories": {
+            "domains": [
+              "Security - Cloud Security"
+            ],
+            "verticals": null
+          },
+          "firstPublishDate": "2022-04-01"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-04-27T21:53:29.0928001Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfeab2-9ae0-4464-9919-dccaee2e48f0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/contentPackages/azuresentinel.azure-sentinel-solution-ciscoumbrella",
+        "name": "azuresentinel.azure-sentinel-solution-ciscoumbrella",
+        "type": "Microsoft.SecurityInsights/contenttemplates",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "contentId": "8365ebfe-a381-45b7-ad08-7d818070e11f",
+          "contentProductId": "str.azure-sentinel-solution-str-ar-cbfe4fndz66bi",
+          "packageKind": "Solution",
+          "packageId": "str.azure-sentinel-solution-str",
+          "packageVersion": "1.0.0",
+          "contentKind": "AnalyticsRule",
+          "version": "1.0.1",
+          "displayName": "API Protection workbook template",
+          "source": {
+            "kind": "Solution",
+            "name": "CiscoUmbrella",
+            "sourceId": "azuresentinel.azure-sentinel-solution-ciscoumbrella"
+          },
+          "author": {
+            "name": "Microsoft",
+            "email": "support@microsoft.com"
+          },
+          "support": {
+            "tier": "Microsoft",
+            "name": "Microsoft Corporation",
+            "email": "support@microsoft.com",
+            "link": "https://support.microsoft.com/"
+          },
+          "dependencies": {
+            "criteria": [
+              {
+                "contentId": "strDataConnector",
+                "kind": "DataConnector",
+                "version": "2.0.0"
+              },
+              {
+                "contentId": "str-Parser",
+                "kind": "Parser",
+                "version": "2.0.0"
+              }
+            ],
+            "operator": "AND"
+          },
+          "providers": [
+            "Microsoft"
+          ],
+          "categories": {
+            "domains": [
+              "Security - Cloud Security"
+            ],
+            "verticals": null
+          },
+          "firstPublishDate": "2022-04-01"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-04-27T21:53:29.0928001Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-04-27T21:53:29.0928001Z"
+        }
+      }
+    }
+  }
+}

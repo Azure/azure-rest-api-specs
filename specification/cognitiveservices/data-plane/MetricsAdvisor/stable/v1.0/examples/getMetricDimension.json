@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "metricId": "22222222-2222-2222-2222-000000000001",
+    "Content-Type": "application/json",
+    "body": {
+      "dimensionName": "city"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/dimension/query?$skip=2&$maxpagesize=2",
+        "value": [
+          "__SUM__",
+          "Beijing"
+        ]
+      }
+    }
+  }
+}
