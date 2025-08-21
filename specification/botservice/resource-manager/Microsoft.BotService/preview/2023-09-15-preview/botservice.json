@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Bot Service Test",
+    "title": "Azure Chat Bot Service",
     "version": "2023-09-15-preview",
     "description": "Azure Bot Service is a platform for creating smart conversational agents.",
     "x-typespec-generated": [
@@ -4814,6 +4814,16 @@
           "x-nullable": true
         }
       }
+    },
+    "TestChatChannel": {
+      "type": "object",
+      "description": "AcsChat channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "x-ms-discriminator-value": "TestChatChannel"
     },
     "WebChatChannel": {
       "type": "object",

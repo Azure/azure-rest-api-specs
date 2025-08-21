@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
  * Azure Bot Service is a platform for creating smart conversational agents.
  */
 @armProviderNamespace
-@service(#{ title: "Azure Bot Service Test" })
+@service(#{ title: "Azure Chat Bot Service" })
 @versioned(Versions)
 // FIXME: Common type version v1 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

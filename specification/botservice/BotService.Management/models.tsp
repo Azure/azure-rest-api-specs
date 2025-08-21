@@ -2514,6 +2514,16 @@ model AcsChatChannel extends Channel {
 }
 
 /**
+ * AcsChat channel definition
+ */
+model TestChatChannel extends Channel {
+  /**
+   * The channel name
+   */
+  channelName: "TestChatChannel";
+}
+
+/**
  * SearchAssistant definition
  */
 model SearchAssistant extends Channel {
