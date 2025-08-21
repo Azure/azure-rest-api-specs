@@ -1118,6 +1118,51 @@
             "$ref": "./examples/Messages_UpdateMessage_MinimumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "description": "Deletes an existing message on an existing thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Identifier of the message.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageDeletionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Messages_Delete_MaximumSet": {
+            "$ref": "./examples/Messages_Delete_MaximumSet_Gen.json"
+          },
+          "Messages_Delete_MinimumSet": {
+            "$ref": "./examples/Messages_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/threads/{threadId}/runs": {
@@ -3443,6 +3488,24 @@
         "queue_name"
       ]
     },
+    "AzureFunctionToolCallDetails": {
+      "type": "object",
+      "description": "The Azure function call description. All the fields are present in the completed run step, however\nonly some fields are present in the RunStepDeltaAzureFunctionToolCall.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure function name"
+        },
+        "arguments": {
+          "type": "string",
+          "description": "JSON serialized function arguments."
+        },
+        "output": {
+          "type": "string",
+          "description": "The function output."
+        }
+      }
+    },
     "AzureFunctionToolDefinition": {
       "type": "object",
       "description": "The input definition information for a azure function tool as used to configure an agent.",
@@ -4506,6 +4569,35 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "MessageDeletionStatus": {
+      "type": "object",
+      "description": "The status of a thread message deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.deleted'.",
+          "enum": [
+            "thread.message.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
       ]
     },
     "MessageDelta": {
@@ -5881,6 +5973,25 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "RunStepAzureFunctionToolCall": {
+      "type": "object",
+      "description": "A record of a call to an Azure Function tool.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "The description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "RunStepBingGroundingToolCall": {
       "type": "object",
       "description": "A record of a call to a bing grounding tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing grounding.",
@@ -6050,6 +6161,25 @@
           "x-ms-client-name": "stepDetails"
         }
       }
+    },
+    "RunStepDeltaAzureFunctionToolCall": {
+      "type": "object",
+      "description": "Represents the Azure Function tool call in a streaming run step.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "Partial description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
     },
     "RunStepDeltaChunk": {
       "type": "object",
