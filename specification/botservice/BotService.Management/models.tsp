@@ -2542,4 +2542,10 @@ model ConnectionItemName {
    */
   @visibility(Lifecycle.Read)
   name?: string;
+
+  /**
+   * The user who updated the connection item
+   */
+  @visibility(Lifecycle.Read)
+  updatedBy?: string;
 }

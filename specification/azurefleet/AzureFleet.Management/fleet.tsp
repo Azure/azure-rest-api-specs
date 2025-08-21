@@ -108,7 +108,7 @@ model FleetProperties {
   @added(Versions.v2025_08_01)
   displayName?: string;
 
-  @doc("Specifies the updated by a Compute Fleet test v2.")
+  @doc("Specifies the updated by a Compute Fleet test v3.")
   @added(Versions.v2025_08_01)
   updatedBy?: string;
 
