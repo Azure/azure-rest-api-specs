@@ -1804,8 +1804,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "OK."
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeResource"
+            }
           },
           "202": {
             "description": "Accepted.",
@@ -1819,7 +1822,7 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1855,13 +1858,16 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "OK."
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeResource"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
