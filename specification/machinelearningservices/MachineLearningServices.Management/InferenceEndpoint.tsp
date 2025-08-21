@@ -75,7 +75,16 @@ interface InferenceEndpoints {
   /**
    * Create or update InferenceEndpoint (asynchronous).
    */
-  createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<InferenceEndpoint>;
+  createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<
+    InferenceEndpoint,
+    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<InferenceEndpoint> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update InferenceEndpoint (asynchronous).
@@ -83,7 +92,14 @@ interface InferenceEndpoints {
   @patch(#{ implicitOptionality: false })
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
-    PatchModel = InferenceUpdateParamter
+    PatchModel = {},
+    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
@@ -92,7 +108,13 @@ interface InferenceEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**

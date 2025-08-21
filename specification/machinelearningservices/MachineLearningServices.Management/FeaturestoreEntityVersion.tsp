@@ -38,7 +38,16 @@ interface FeaturestoreEntityVersions {
   /**
    * Create or update version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityVersion>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FeaturestoreEntityVersion,
+    Response = ArmResourceUpdatedResponse<FeaturesetVersion> | (ArmResourceCreatedResponse<FeaturesetVersion> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
@@ -46,7 +55,13 @@ interface FeaturestoreEntityVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -84,6 +99,12 @@ interface FeaturestoreEntityVersions {
        */
       @query("versionName")
       versionName?: string;
+
+      /**
+       * featurestore entity version
+       */
+      @query("version")
+      version?: string;
 
       /**
        * description for the feature entity version

@@ -35,7 +35,16 @@ interface FeaturesetVersions {
   /**
    * Create or update version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetVersion>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FeaturesetVersion,
+    Response = ArmResourceUpdatedResponse<FeaturesetVersion> | (ArmResourceCreatedResponse<FeaturesetVersion> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete version.
@@ -43,7 +52,13 @@ interface FeaturesetVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -81,6 +96,12 @@ interface FeaturesetVersions {
        */
       @query("versionName")
       versionName?: string;
+
+      /**
+       * featureset version
+       */
+      @query("version")
+      version?: string;
 
       /**
        * description for the feature set version

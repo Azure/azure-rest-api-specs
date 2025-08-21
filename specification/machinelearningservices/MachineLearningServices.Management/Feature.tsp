@@ -89,6 +89,12 @@ interface Features {
       tags?: string;
 
       /**
+       * feature name.
+       */
+      @query("featureName")
+      featureName?: string;
+
+      /**
        * Description of the featureset.
        */
       @query("description")

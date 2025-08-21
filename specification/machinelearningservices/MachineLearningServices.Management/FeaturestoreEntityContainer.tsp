@@ -38,7 +38,16 @@ interface FeaturestoreEntityContainers {
   /**
    * Create or update container.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityContainer>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FeaturestoreEntityContainer,
+    Response = ArmResourceUpdatedResponse<FeaturestoreEntityContainer> | (ArmResourceCreatedResponse<FeaturestoreEntityContainer> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete container.
@@ -46,7 +55,13 @@ interface FeaturestoreEntityContainers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -78,6 +93,12 @@ interface FeaturestoreEntityContainers {
        */
       @query("pageSize")
       pageSize?: int32 = 20;
+
+      /**
+       * name for the featurestore entity
+       */
+      @query("name")
+      name?: string;
 
       /**
        * description for the featurestore entity

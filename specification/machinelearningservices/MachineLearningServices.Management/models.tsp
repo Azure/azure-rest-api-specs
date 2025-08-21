@@ -15718,7 +15718,7 @@ model InferenceUpdateParameterProperties {
   description?: string;
 }
 //Fix Me: Compile Error
-model InferenceUpdateParamter {
+model InferenceUpdateParameter {
   properties: InferenceUpdateParameterProperties;
 }
 

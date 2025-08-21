@@ -42,7 +42,16 @@ interface InferencePools {
   /**
    * Create or update InferencePool (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<InferencePool>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    InferencePool,
+    Response = ArmResourceUpdatedResponse<InferencePool> | (ArmResourceCreatedResponse<InferencePool> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update InferencePool (asynchronous).
@@ -50,7 +59,14 @@ interface InferencePools {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     InferencePool,
-    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity
+    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
+     Response = InferencePool | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
@@ -59,7 +75,13 @@ interface InferencePools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     InferencePool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**

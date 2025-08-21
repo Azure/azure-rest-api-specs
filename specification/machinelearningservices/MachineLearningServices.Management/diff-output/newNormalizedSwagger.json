@@ -7183,6 +7183,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -9193,7 +9194,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -9264,6 +9272,11 @@
           },
           {
             "name": "versionName",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "version",
             "in": "query",
             "type": "string"
           },
@@ -9393,6 +9406,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/FeaturesetVersion"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -9408,7 +9428,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FeaturesetVersion"
         },
         "x-ms-long-running-operation": true
@@ -9441,7 +9461,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -9549,6 +9576,11 @@
           },
           {
             "name": "tags",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "featureName",
             "in": "query",
             "type": "string"
           },
@@ -9701,6 +9733,11 @@
             "default": 20
           },
           {
+            "name": "name",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "description",
             "in": "query",
             "type": "string"
@@ -9809,6 +9846,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/FeaturestoreEntityContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -9824,7 +9868,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FeaturestoreEntityContainer"
         },
         "x-ms-long-running-operation": true
@@ -9851,7 +9895,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -9922,6 +9973,11 @@
           },
           {
             "name": "versionName",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "version",
             "in": "query",
             "type": "string"
           },
@@ -10044,13 +10100,20 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreEntityVersion"
+              "$ref": "#/definitions/FeaturesetVersion"
             }
           },
           "201": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreEntityVersion"
+              "$ref": "#/definitions/FeaturesetVersion"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -10066,7 +10129,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FeaturestoreEntityVersion"
         },
         "x-ms-long-running-operation": true
@@ -10099,7 +10162,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -10267,6 +10337,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/InferencePool"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -10282,7 +10359,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/InferencePool"
         },
         "x-ms-long-running-operation": true
@@ -10321,7 +10398,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -10360,7 +10444,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -10549,6 +10640,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/InferenceEndpoint"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -10564,7 +10662,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/InferenceEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -10598,7 +10696,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceUpdateParamter"
+              "type": "object"
             }
           }
         ],
@@ -10610,7 +10708,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -10656,7 +10761,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -21461,25 +21573,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "InferenceUpdateParameterProperties": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "InferenceUpdateParamter": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/InferenceUpdateParameterProperties"
-        }
-      },
-      "required": [
-        "properties"
       ]
     },
     "JobBase": {
