@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.BotService/preview/2023-09-15-preview/botservice.json
+  - preview/2023-09-15-preview/botservice.json
 directive:
   - suppress: R4009
     from: botservice.json
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-09'
 input-file:
-  - Microsoft.BotService/stable/2022-09-15/botservice.json
+  - stable/2022-09-15/botservice.json
 directive:
   - suppress: R4009
     from: botservice.json
@@ -79,7 +79,7 @@ These settings apply only when `--tag=package-preview-2022-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
-  - Microsoft.BotService/preview/2022-06-15-preview/botservice.json
+  - preview/2022-06-15-preview/botservice.json
 directive:
   - suppress: R4009
     from: botservice.json
@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-preview-2021-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-05'
 input-file:
-  - Microsoft.BotService/preview/2021-05-01-preview/botservice.json
+  - preview/2021-05-01-preview/botservice.json
 directive:
   - suppress: R4009
     from: botservice.json
@@ -120,7 +120,7 @@ These settings apply only when `--tag=package-2021-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-03-01'
 input-file:
-- Microsoft.BotService/stable/2021-03-01/botservice.json
+- stable/2021-03-01/botservice.json
 directive:
   - suppress: R4009
     from: botservice.json
@@ -139,7 +139,7 @@ These settings apply only when `--tag=package-2020-06-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-06-02'
 input-file:
-- Microsoft.BotService/stable/2020-06-02/botservice.json
+- stable/2020-06-02/botservice.json
 directive:
   - suppress: R4009
     from: botservice.json
@@ -152,7 +152,7 @@ These settings apply only when `--tag=package-2018-07-12` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-07-12'
 input-file:
-- Microsoft.BotService/preview/2018-07-12/botservice.json
+- preview/2018-07-12/botservice.json
 directive:
   - suppress: R3010
     from: botservice.json
@@ -174,7 +174,7 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
-- Microsoft.BotService/preview/2017-12-01/botservice.json
+- preview/2017-12-01/botservice.json
 directive:
   - suppress: R3010
     from: botservice.json
