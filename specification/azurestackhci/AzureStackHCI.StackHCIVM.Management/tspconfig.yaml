@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/azurestackhcivm"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,35 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/StackHCIVM/{version-status}/{version}/stackhcivm.json"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/azurestackhci"
+    package-dir: "azure-mgmt-azurestackhcivm"
+    namespace: "azure.mgmt.azurestackhcivm"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/azurestackhci"
+    package-dir: "armazurestackhcivm"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/azurestackhci"
+    package-dir: "azure-resourcemanager-azurestackhci-vm"
+    namespace: "com.azure.resourcemanager.azurestackhci.vm"
+    service-name: "Azure Stack Hci Vm"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-azurestackhcivm"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-azurestackhcivm"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

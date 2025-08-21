@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "agentResourceName": "3123432b-0b60-4af3-8720-77f01a25d34a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/businessApplicationAgents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/systems/3b6bed7b-3f1c-47fc-ab8e-2c57047ed446",
+            "name": "3b6bed7b-3f1c-47fc-ab8e-2c57047ed446",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "type": "Microsoft.SecurityInsights/businessApplicationAgents/systems",
+            "properties": {
+              "status": "Running",
+              "configuration": {
+                "azureResourceId": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
+                "connector": {
+                  "abapServerHost": "1.1.1.1",
+                  "systemNumber": "001",
+                  "systemId": "A4H",
+                  "client": "001",
+                  "authenticationType": "UsernamePassword",
+                  "type": "Rfc"
+                },
+                "logs": [
+                  {
+                    "type": "AbapAuditLog",
+                    "ingestionType": "Incremental",
+                    "status": "Enabled",
+                    "scheduleInterval": 60,
+                    "bulkSize": 100,
+                    "filters": [
+                      "filter1",
+                      "filter2"
+                    ]
+                  },
+                  {
+                    "type": "USR01",
+                    "ingestionType": "Incremental",
+                    "status": "Enabled",
+                    "scheduleInterval": 60,
+                    "bulkSize": 100,
+                    "filters": [
+                      "filter1",
+                      "filter2"
+                    ]
+                  }
+                ],
+                "type": "SAP"
+              },
+              "displayName": "A4H_System",
+              "lastModifiedTimeUtc": "2024-03-01T13:00:30Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
