@@ -616,7 +616,7 @@ model RunStepSharepointToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'sharepoint_grounding'.")
   type: "sharepoint_grounding";
 
-  @doc("SharePoint tool input and output.")
+  @doc("Reserved for future use.")
   @encodedName("application/json", "sharepoint_grounding")
   sharePoint: Record<string>;
 }
