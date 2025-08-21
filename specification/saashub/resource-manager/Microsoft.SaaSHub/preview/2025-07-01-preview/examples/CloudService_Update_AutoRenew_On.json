@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "cloudServiceResourceName": "myResourceName",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup",
+    "properties": {
+      "tags": {
+        "additionalProp1": "string"
+      },
+      "properties": {
+        "autoRenew": "On"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/myResourceName",
+        "name": "myResourceName",
+        "location": "westus",
+        "type": "Microsoft.SaaSHub/CloudServices",
+        "tags": {
+          "additionalProp1": "string"
+        },
+        "properties": {
+          "autoRenew": "On",
+          "productType": "Microsoft 365 E5",
+          "provisioningState": "Succeeded",
+          "quantity": 20,
+          "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+          "licenseData": "000089d5-0000-0080-2654-64a36bcef7ba",
+          "skuDescription": "Microsoft 365 E5",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2022-05-06T07:54:48-07:00",
+            "systemId": "2c1b572c-f003-0011-6ea6-9324a8000000",
+            "systemVersion": "1"
+          },
+          "term": {
+            "billingFrequency": "P1M",
+            "termUnit": "P1Y",
+            "startDate": "2022-04-28T17:00:00-07:00",
+            "endDate": "2023-04-27T17:00:00-07:00"
+          },
+          "status": "Active"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.SaaSHub/locations/westus/operationStatuses/{operationId}?api-version=2025-07-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "CloudServices_Update",
+  "title": "Update a SaaSHub cloud service - turn on auto renew"
+}
