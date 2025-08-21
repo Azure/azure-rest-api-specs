@@ -58,6 +58,7 @@ interface ServiceOperationGroup {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus")
   @post
+  @list
   listAvailableSkusByResourceGroup(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

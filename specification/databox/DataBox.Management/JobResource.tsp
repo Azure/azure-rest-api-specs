@@ -147,6 +147,7 @@ interface JobResources {
   /**
    * This method gets the unencrypted secrets related to the job.
    */
+  @list
   listCredentials is ArmResourceActionSync<
     JobResource,
     void,

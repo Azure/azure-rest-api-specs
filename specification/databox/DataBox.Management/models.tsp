@@ -2699,14 +2699,13 @@ model AvailableSkuRequest {
 /**
  * The available skus operation response.
  */
-@Azure.Core.pagedResult
 model AvailableSkusResult {
   /**
    * [Placeholder] Description for page model
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @Azure.Core.items
+  @pageItems
   value: SkuInformation[];
 
   /**
@@ -4264,12 +4263,11 @@ model Operation {
 /**
  * The paginated list of connected cluster API operations.
  */
-@Azure.Core.pagedResult
 model OperationList {
   /**
    * The list of connected cluster API operations.
    */
-  @Azure.Core.items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: Operation[];
 
