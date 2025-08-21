@@ -3358,38 +3358,6 @@
         "value"
       ]
     },
-    "IdentityType": {
-      "type": "string",
-      "description": "The type of identity.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User"
-          },
-          {
-            "name": "Application",
-            "value": "Application"
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity"
-          },
-          {
-            "name": "Key",
-            "value": "Key"
-          }
-        ]
-      }
-    },
     "JsonWebKeyCurveName": {
       "type": "string",
       "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256",
@@ -4583,7 +4551,7 @@
           }
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the key vault resource.",
           "readOnly": true
         },
@@ -5659,38 +5627,6 @@
             "value": "deletesas"
           }
         ]
-      }
-    },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the key vault resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the key vault resource."
-        },
-        "createdByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the key vault resource."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the key vault resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the key vault resource."
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the key vault resource."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the key vault resource last modification (UTC)."
-        }
       }
     },
     "Trigger": {

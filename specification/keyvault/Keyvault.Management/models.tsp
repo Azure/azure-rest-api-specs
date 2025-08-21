@@ -372,20 +372,6 @@ union PrivateEndpointConnectionProvisioningState {
 union ManagedHsmPrivateEndpointConnectionProvisioningState {
   PrivateEndpointConnectionProvisioningState,
 }
-/**
- * The type of identity.
- */
-union IdentityType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Key: "Key",
-}
 
 /**
  * Provisioning state.
@@ -1328,43 +1314,6 @@ model CloudErrorBody {
    * User friendly error message. The message is typically localized and may vary with service version.
    */
   message?: string;
-}
-
-/**
- * Metadata pertaining to creation and last modification of the key vault resource.
- */
-model SystemData {
-  /**
-   * The identity that created the key vault resource.
-   */
-  createdBy?: string;
-
-  /**
-   * The type of identity that created the key vault resource.
-   */
-  createdByType?: IdentityType;
-
-  /**
-   * The timestamp of the key vault resource creation (UTC).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdAt?: utcDateTime;
-
-  /**
-   * The identity that last modified the key vault resource.
-   */
-  lastModifiedBy?: string;
-
-  /**
-   * The type of identity that last modified the key vault resource.
-   */
-  lastModifiedByType?: IdentityType;
-
-  /**
-   * The timestamp of the key vault resource last modification (UTC).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedAt?: utcDateTime;
 }
 
 /**
