@@ -151,7 +151,11 @@ model DisconnectedOperationProperties {
 
   @doc("Auto renew setting")
   @added(Microsoft.Edge.Versions.v2025_08_01)
-  autoRenew?: AutoRenew;
+  autoRenew: AutoRenew;
+
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2025_08_01)
+  billingConfiguration: BillingConfiguration;
 }
 
 @doc("The disconnected operation manifest")
@@ -347,25 +351,21 @@ model BillingInfo {
 
   @visibility(Lifecycle.Update, Lifecycle.Read)
   @doc("Billing start date")
-  billingStartDate: plainDate;
+  startDate: plainDate;
 
   @visibility(Lifecycle.Update, Lifecycle.Read)
   @doc("Billing end date")
-  billingEndDate: plainDate;
+  endDate: plainDate;
 }
 
 @doc("The billing configuration properties")
 @added(Microsoft.Edge.Versions.v2025_08_01)
-model BillingConfigurationProperties {
-  @visibility(Lifecycle.Read)
-  @doc("The resource provisioning state")
-  provisioningState?: ResourceProvisioningState;
-
+model BillingConfiguration {
   @doc("Current billing configuration")
   @visibility(Lifecycle.Update, Lifecycle.Read)
-  currentBilling: BillingInfo;
+  current: BillingInfo;
 
   @doc("Next billing configuration")
   @visibility(Lifecycle.Update, Lifecycle.Read)
-  nextBilling: BillingInfo;
+  upcoming?: BillingInfo;
 }

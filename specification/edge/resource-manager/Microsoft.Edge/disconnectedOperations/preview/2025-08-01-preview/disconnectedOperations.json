@@ -50,9 +50,6 @@
     },
     {
       "name": "HardwareSettings"
-    },
-    {
-      "name": "BillingConfigurations"
     }
   ],
   "paths": {
@@ -365,262 +362,6 @@
         "x-ms-examples": {
           "DisconnectedOperations_Delete": {
             "$ref": "./examples/DisconnectedOperations_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/billingConfigurations": {
-      "get": {
-        "operationId": "BillingConfigurations_ListByParent",
-        "tags": [
-          "BillingConfigurations"
-        ],
-        "description": "List by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BillingConfigurationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingConfigurations_ListByParent_MaximumSet": {
-            "$ref": "./examples/BillingConfigurations_ListByParent_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/billingConfigurations/{billingConfigurationName}": {
-      "get": {
-        "operationId": "BillingConfigurations_Get",
-        "tags": [
-          "BillingConfigurations"
-        ],
-        "description": "Get the billing configuration resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "billingConfigurationName",
-            "in": "path",
-            "description": "The name of the BillingConfiguration",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BillingConfiguration"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingConfigurations_Get_MaximumSet": {
-            "$ref": "./examples/BillingConfigurations_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "BillingConfigurations_CreateOrUpdate",
-        "tags": [
-          "BillingConfigurations"
-        ],
-        "description": "Create or update billing configuration",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "billingConfigurationName",
-            "in": "path",
-            "description": "The name of the BillingConfiguration",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingConfiguration"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'BillingConfiguration' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BillingConfiguration"
-            }
-          },
-          "201": {
-            "description": "Resource 'BillingConfiguration' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BillingConfiguration"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingConfigurations_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/BillingConfigurations_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "BillingConfigurations_Delete",
-        "tags": [
-          "BillingConfigurations"
-        ],
-        "description": "Delete billing configuration",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "billingConfigurationName",
-            "in": "path",
-            "description": "The name of the BillingConfiguration",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BillingConfigurations_Delete_MaximumSet": {
-            "$ref": "./examples/BillingConfigurations_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1470,50 +1211,9 @@
     },
     "BillingConfiguration": {
       "type": "object",
-      "description": "Billing configuration resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BillingConfigurationProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "BillingConfigurationListResult": {
-      "type": "object",
-      "description": "The response of a BillingConfiguration list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The BillingConfiguration items on this page",
-          "items": {
-            "$ref": "#/definitions/BillingConfiguration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "BillingConfigurationProperties": {
-      "type": "object",
       "description": "The billing configuration properties",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The resource provisioning state",
-          "readOnly": true
-        },
-        "currentBilling": {
+        "current": {
           "$ref": "#/definitions/BillingInfo",
           "description": "Current billing configuration",
           "x-ms-mutability": [
@@ -1521,7 +1221,7 @@
             "update"
           ]
         },
-        "nextBilling": {
+        "upcoming": {
           "$ref": "#/definitions/BillingInfo",
           "description": "Next billing configuration",
           "x-ms-mutability": [
@@ -1531,9 +1231,30 @@
         }
       },
       "required": [
-        "currentBilling",
-        "nextBilling"
+        "current"
       ]
+    },
+    "BillingConfigurationUpdate": {
+      "type": "object",
+      "description": "The billing configuration properties",
+      "properties": {
+        "current": {
+          "$ref": "#/definitions/BillingInfoUpdate",
+          "description": "Current billing configuration",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "upcoming": {
+          "$ref": "#/definitions/BillingInfoUpdate",
+          "description": "Next billing configuration",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
     },
     "BillingInfo": {
       "type": "object",
@@ -1556,7 +1277,7 @@
             "update"
           ]
         },
-        "billingStartDate": {
+        "startDate": {
           "type": "string",
           "format": "date",
           "description": "Billing start date",
@@ -1565,7 +1286,7 @@
             "update"
           ]
         },
-        "billingEndDate": {
+        "endDate": {
           "type": "string",
           "format": "date",
           "description": "Billing end date",
@@ -1578,9 +1299,50 @@
       "required": [
         "cores",
         "pricingModel",
-        "billingStartDate",
-        "billingEndDate"
+        "startDate",
+        "endDate"
       ]
+    },
+    "BillingInfoUpdate": {
+      "type": "object",
+      "description": "Billing information",
+      "properties": {
+        "cores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cores",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "pricingModel": {
+          "$ref": "#/definitions/PricingModel",
+          "description": "Pricing model",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Billing start date",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Billing end date",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
     },
     "BillingModel": {
       "type": "string",
@@ -1788,12 +1550,18 @@
         "autoRenew": {
           "$ref": "#/definitions/AutoRenew",
           "description": "Auto renew setting"
+        },
+        "billingConfiguration": {
+          "$ref": "#/definitions/BillingConfiguration",
+          "description": "The billing configuration"
         }
       },
       "required": [
         "stampId",
         "billingModel",
-        "connectionIntent"
+        "connectionIntent",
+        "autoRenew",
+        "billingConfiguration"
       ]
     },
     "DisconnectedOperationUpdate": {
@@ -1840,6 +1608,10 @@
         "autoRenew": {
           "$ref": "#/definitions/AutoRenew",
           "description": "Auto renew setting"
+        },
+        "billingConfiguration": {
+          "$ref": "#/definitions/BillingConfigurationUpdate",
+          "description": "The billing configuration"
         }
       }
     },

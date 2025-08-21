@@ -7,7 +7,6 @@ import "./disconnectedOperations.tsp";
 import "./images.tsp";
 import "./artifacts.tsp";
 import "./hardwareSettings.tsp";
-import "./billingConfigurations.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
