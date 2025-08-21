@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-stable-2.1` is specified on the co
 
 ``` yaml $(tag) == 'package-stable-2.1'
 input-file:
-  - preview/2.1/render.json
+  - stable/2.1/render.json
 ```
 
 ### Tag: package-stable-2.0
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-stable-2.0` is specified on the co
 
 ``` yaml $(tag) == 'package-stable-2.0'
 input-file:
-  - preview/2.0/render.json
+  - stable/2.0/render.json
 ```
 
 ### Tag: package-deprecated-1.0
