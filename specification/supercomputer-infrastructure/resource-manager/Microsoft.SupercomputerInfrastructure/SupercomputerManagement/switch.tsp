@@ -63,7 +63,7 @@ model RetrieveDataOutput {
 @armResourceOperations
 interface Switches {
   get is ArmResourceRead<Switch>;
-  retrieveData is ArmResourceActionSync<
+  retrieveData is ArmResourceActionAsync<
     Switch,
     RetrieveDataRequest,
     RetrieveDataResponse
