@@ -91,7 +91,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "@TODO: Validate that empty body is indended"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc("Update an existing {name} with the given version id", EvaluatorVersion)
-  @Http.put
+  @Http.patch
   updateVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
