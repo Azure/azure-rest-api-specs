@@ -15,8 +15,10 @@ namespace Azure.AI.Projects;
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
+
   @doc("Quality evaluator")
   quality: "Quality",
+
   @doc("Safety evaluator")
   safety: "Safety",
 }
@@ -24,8 +26,10 @@ union EvaluatorCategory {
 @doc("The type of the evaluator")
 union EvaluatorType {
   string,
+
   @doc("Custom Evaluator")
   custom: "Custom",
+
   @doc("Built-in evaluator provided by the platform")
   builtin: "Built-In",
 }
@@ -33,8 +37,10 @@ union EvaluatorType {
 @doc("The sub-type of the evaluator")
 union EvaluatorSubType {
   string,
+
   @doc("LLM-based evaluator")
   llm: "LLM_Based",
+
   @doc("Code-based evaluator")
   code: "Code_Based",
 }
@@ -42,10 +48,13 @@ union EvaluatorSubType {
 @doc("The type of evaluator configuration")
 union EvaluatorConfigType {
   string,
+
   @doc("Prompt-based configuration")
   prompt: "Prompt",
+
   @doc("Prompty-based configuration")
   prompty: "Prompty",
+
   @doc("Code-based configuration")
   code: "Code",
 }
@@ -53,6 +62,7 @@ union EvaluatorConfigType {
 @doc("Scale rule types for container deployment")
 union ScaleRuleType {
   string,
+
   @doc("HTTP-based scaling rules")
   http: "http",
 }
@@ -97,13 +107,13 @@ model ContainerDeploymentConfig {
 @doc("Code-based evaluator configuration using container images")
 model CodeEvaluatorConfig extends EvaluatorConfig {
   type: EvaluatorConfigType.code;
-  
+
   @doc("URI of the container image")
   container_image_uri: string;
-  
+
   @doc("Environment variables to pass to the container")
   env_variables: Record<string>;
-  
+
   @doc("Configuration for container deployment")
   container_deployment_config: ContainerDeploymentConfig;
 }
@@ -111,10 +121,10 @@ model CodeEvaluatorConfig extends EvaluatorConfig {
 @doc("Prompt-based evaluator")
 model PromptBasedEvaluatorConfig extends EvaluatorConfig {
   type: EvaluatorConfigType.prompt;
-  
+
   @doc("The prompt text used for evaluation")
   prompt_text: string;
-  
+
   @doc("Name of the model deployment to use for evaluation")
   model_deployment_name: string;
 }
@@ -122,13 +132,13 @@ model PromptBasedEvaluatorConfig extends EvaluatorConfig {
 @doc("Prompty-based evaluator configuration using prompty files")
 model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
   type: EvaluatorConfigType.prompty;
-  
+
   @doc("Path to the prompty file")
   file_path: string;
-  
+
   @doc("Name of the model deployment to use for evaluation")
   model_deployment_name: string;
-  
+
   @doc("Connection name")
   connection_name?: string;
 }
@@ -145,22 +155,21 @@ model EvaluatorVersion {
 
   @doc("The category of this evaluator")
   category: EvaluatorCategory;
-  
+
   @doc("The evaluator type")
   type: EvaluatorType;
-  
+
   @doc("The evaluator subtype")
   sub_type: EvaluatorSubType;
-  
+
   @doc("Configuration specific to the evaluator type")
   evaluator_config: EvaluatorConfig;
+
   ...AssetBase;
 }
 
-
 @doc("The success result of createEvaluatorVersion")
 model EvaluatorCreateResult {
-
   @doc("The Evaluator's id")
   id: string;
 
