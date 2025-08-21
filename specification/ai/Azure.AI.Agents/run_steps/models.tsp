@@ -442,8 +442,7 @@ model RunStepDeltaSharepointToolCall extends RunStepDeltaToolCall {
   type: "sharepoint_grounding";
 
   @doc("SharePoint tool input and output.")
-  @encodedName("application/json", "sharepoint_grounding")
-  sharePoint: Record<string>;
+  sharepoint_grounding: Record<string>;
 }
 
 /** Represents the function data in a streaming run step delta's function tool call. */
