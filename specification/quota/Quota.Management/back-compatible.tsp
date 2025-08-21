@@ -48,14 +48,12 @@ using Microsoft.Quota;
   "GroupQuotaLimitsRequest",
   "!csharp"
 );
-@@clientName(GroupQuotasEntities.groupQuotaLimitsRequestList,
-  "ListLimitsRequests"
-);
+@@clientName(GroupQuotasEntities.groupQuotaLimitsRequestList, "List");
 @@clientLocation(GroupQuotasEntities.groupQuotaUsagesList,
   "GroupQuotaUsages",
   "!csharp"
 );
-@@clientName(GroupQuotasEntities.groupQuotaUsagesList, "ListUsages");
+@@clientName(GroupQuotasEntities.groupQuotaUsagesList, "List");
 
 @@clientLocation(SubmittedResourceRequestStatuses.get,
   "GroupQuotaLimitsRequest",
@@ -125,6 +123,18 @@ using Microsoft.Quota;
   "!csharp"
 );
 @@clientLocation(GroupQuotaSubscriptionIds.createOrUpdate,
+  "GroupQuotaSubscriptions",
+  "!csharp"
+);
+@@clientLocation(GroupQuotaSubscriptionIds.update,
+  "GroupQuotaSubscriptions",
+  "!csharp"
+);
+@@clientLocation(GroupQuotaSubscriptionIds.delete,
+  "GroupQuotaSubscriptions",
+  "!csharp"
+);
+@@clientLocation(GroupQuotaSubscriptionIds.list,
   "GroupQuotaSubscriptions",
   "!csharp"
 );
