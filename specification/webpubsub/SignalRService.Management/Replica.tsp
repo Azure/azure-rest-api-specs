@@ -17,9 +17,8 @@ namespace Microsoft.SignalRService;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(WebPubSubResource)
-@Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model Replica extends Foundations.TrackedResource {
+model Replica
+  is Azure.ResourceManager.TrackedResource<ReplicaProperties, true> {
   ...ResourceNameParameter<
     Resource = Replica,
     KeyName = "replicaName",
@@ -32,14 +31,6 @@ model Replica extends Foundations.TrackedResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ResourceSku;
-
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: ReplicaProperties;
 }
 
 @armResourceOperations
