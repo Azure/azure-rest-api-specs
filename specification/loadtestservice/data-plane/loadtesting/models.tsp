@@ -1496,6 +1496,9 @@ union OperationKind {
 
   @doc("Operation represents a clone test operation")
   CloneTest: "CloneTest",
+
+  @doc("Operation represents a test run insights generation operation")
+  GenerateTestRunInsights: "GenerateTestRunInsights",
 }
 
 @added(APIVersions.v2025_03_01_preview)
