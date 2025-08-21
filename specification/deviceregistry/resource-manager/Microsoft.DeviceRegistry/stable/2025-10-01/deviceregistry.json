@@ -3361,8 +3361,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -3378,7 +3389,11 @@
           "Delete_Schema": {
             "$ref": "./examples/Delete_Schema.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas/{schemaName}/schemaVersions": {
@@ -3641,8 +3656,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -3658,7 +3684,11 @@
           "Delete_SchemaVersion": {
             "$ref": "./examples/Delete_SchemaVersion.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -5307,6 +5337,10 @@
           "type": "string",
           "description": "Name of the management group."
         },
+        "dataSource": {
+          "type": "string",
+          "description": "Reference to a data source for a given management group."
+        },
         "managementGroupConfiguration": {
           "type": "string",
           "description": "Stringified JSON that contains connector-specific configuration for the management group."
@@ -5763,11 +5797,11 @@
           },
           "x-ms-identifiers": []
         },
-        "events": {
+        "eventGroups": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "description": "Array of event groups that are part of the asset. Each event group can have per-event group configuration.",
           "items": {
-            "$ref": "#/definitions/NamespaceEvent"
+            "$ref": "#/definitions/NamespaceEventGroup"
           },
           "x-ms-identifiers": []
         },
@@ -6099,11 +6133,11 @@
           },
           "x-ms-identifiers": []
         },
-        "events": {
+        "eventGroups": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "description": "Array of event groups that are part of the asset. Each event group can have per-event group configuration.",
           "items": {
-            "$ref": "#/definitions/NamespaceEvent"
+            "$ref": "#/definitions/NamespaceEventGroup"
           },
           "x-ms-identifiers": []
         },
@@ -6430,6 +6464,10 @@
           "$ref": "#/definitions/DeviceRef",
           "description": "Reference to the device that provides data for this asset. Must provide device name & endpoint on the device to use."
         },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
         "assetTypeRefs": {
           "type": "array",
           "description": "URIs or type definition IDs.",
@@ -6437,9 +6475,21 @@
             "type": "string"
           }
         },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the asset."
+        },
         "discoveryId": {
           "type": "string",
           "description": "Identifier used to detect changes in the asset."
+        },
+        "externalAssetId": {
+          "type": "string",
+          "description": "Asset ID provided by the customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "version": {
           "type": "integer",
@@ -6531,11 +6581,11 @@
           },
           "x-ms-identifiers": []
         },
-        "events": {
+        "eventGroups": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "description": "Array of event groups that are part of the asset. Each event group can have per-event group configuration.",
           "items": {
-            "$ref": "#/definitions/NamespaceDiscoveredEvent"
+            "$ref": "#/definitions/NamespaceDiscoveredEventGroup"
           },
           "x-ms-identifiers": []
         },
@@ -6593,12 +6643,20 @@
           "$ref": "#/definitions/DeviceRefUpdate",
           "description": "Reference to the device that provides data for this asset. Must provide device name & endpoint on the device to use."
         },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
         "assetTypeRefs": {
           "type": "array",
           "description": "URIs or type definition IDs.",
           "items": {
             "type": "string"
           }
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the asset."
         },
         "discoveryId": {
           "type": "string",
@@ -6694,11 +6752,11 @@
           },
           "x-ms-identifiers": []
         },
-        "events": {
+        "eventGroups": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "description": "Array of event groups that are part of the asset. Each event group can have per-event group configuration.",
           "items": {
-            "$ref": "#/definitions/NamespaceDiscoveredEvent"
+            "$ref": "#/definitions/NamespaceDiscoveredEventGroup"
           },
           "x-ms-identifiers": []
         },
@@ -6968,9 +7026,9 @@
           "type": "string",
           "description": "The name of the event."
         },
-        "eventNotifier": {
+        "dataSource": {
           "type": "string",
-          "description": "The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset."
+          "description": "Reference to a data source for a given event."
         },
         "eventConfiguration": {
           "type": "string",
@@ -6988,14 +7046,6 @@
           "type": "string",
           "description": "URI or type definition ID."
         },
-        "dataPoints": {
-          "type": "array",
-          "description": "Array of data points that are part of the event. Each data point can have a per-data point configuration.",
-          "items": {
-            "$ref": "#/definitions/NamespaceDiscoveredEventDataPoint"
-          },
-          "x-ms-identifiers": []
-        },
         "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
@@ -7003,35 +7053,48 @@
         }
       },
       "required": [
-        "name",
-        "eventNotifier"
+        "name"
       ]
     },
-    "NamespaceDiscoveredEventDataPoint": {
+    "NamespaceDiscoveredEventGroup": {
       "type": "object",
-      "description": "Defines the discovered event data point properties.",
+      "description": "Defines the discovered event group properties.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the data point."
+          "description": "The name of the event group."
         },
         "dataSource": {
           "type": "string",
-          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
+          "description": "The address of the notifier of the event group in the asset (e.g. URL) so that a client can access the event group on the asset."
         },
-        "dataPointConfiguration": {
+        "eventGroupConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+          "description": "Stringified JSON that contains connector-specific configuration for the event group. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
         },
-        "lastUpdatedOn": {
+        "defaultDestinations": {
+          "type": "array",
+          "description": "Destinations for events. Default destinations when destinations is not defined at the event level.",
+          "items": {
+            "$ref": "#/definitions/EventDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "typeRef": {
           "type": "string",
-          "format": "date-time",
-          "description": "UTC timestamp indicating when the data point was added or modified."
+          "description": "URI or type definition ID."
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the event group.",
+          "items": {
+            "$ref": "#/definitions/NamespaceDiscoveredEvent"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "name",
-        "dataSource"
+        "name"
       ]
     },
     "NamespaceDiscoveredManagementAction": {
@@ -7121,6 +7184,10 @@
           "type": "string",
           "description": "URI or type definition ID."
         },
+        "dataSource": {
+          "type": "string",
+          "description": "Reference to a data source for a given management group."
+        },
         "defaultTopic": {
           "type": "string",
           "description": "Default MQTT topic path on which a client will receive the request for all actions that are part of the management group."
@@ -7191,9 +7258,9 @@
           "type": "string",
           "description": "The name of the event."
         },
-        "eventNotifier": {
+        "dataSource": {
           "type": "string",
-          "description": "The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset."
+          "description": "Reference to a data source for a given event."
         },
         "eventConfiguration": {
           "type": "string",
@@ -7210,41 +7277,51 @@
         "typeRef": {
           "type": "string",
           "description": "URI or type definition ID."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NamespaceEventGroup": {
+      "type": "object",
+      "description": "Defines the event group properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the event group."
         },
-        "dataPoints": {
+        "dataSource": {
+          "type": "string",
+          "description": "The address of the notifier of the event group in the asset (e.g. URL) so that a client can access the event group on the asset."
+        },
+        "eventGroupConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the event group. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        },
+        "defaultDestinations": {
           "type": "array",
-          "description": "Array of data points that are part of the event. Each data point can have a per-data point configuration.",
+          "description": "Destinations for events. Default destinations when destinations is not defined at the event level.",
           "items": {
-            "$ref": "#/definitions/NamespaceEventDataPoint"
+            "$ref": "#/definitions/EventDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "typeRef": {
+          "type": "string",
+          "description": "URI or type definition ID."
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the event group.",
+          "items": {
+            "$ref": "#/definitions/NamespaceEvent"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "name",
-        "eventNotifier"
-      ]
-    },
-    "NamespaceEventDataPoint": {
-      "type": "object",
-      "description": "Defines the event data point properties.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the data point."
-        },
-        "dataSource": {
-          "type": "string",
-          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
-        },
-        "dataPointConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
-        }
-      },
-      "required": [
-        "name",
-        "dataSource"
+        "name"
       ]
     },
     "NamespaceListResult": {

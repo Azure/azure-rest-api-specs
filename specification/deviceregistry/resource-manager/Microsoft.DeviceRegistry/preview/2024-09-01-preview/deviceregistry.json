@@ -2148,63 +2148,6 @@
             "$ref": "./examples/Create_Schema.json"
           }
         }
-      },
-      "delete": {
-        "operationId": "Schemas_Delete",
-        "tags": [
-          "Schemas"
-        ],
-        "description": "Delete a Schema",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "schemaRegistryName",
-            "in": "path",
-            "description": "Schema registry name parameter.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Schema name parameter.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete_Schema": {
-            "$ref": "./examples/Delete_Schema.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas/{schemaName}/schemaVersions": {
@@ -2416,73 +2359,6 @@
         "x-ms-examples": {
           "Create_SchemaVersion": {
             "$ref": "./examples/Create_SchemaVersion.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SchemaVersions_Delete",
-        "tags": [
-          "SchemaVersions"
-        ],
-        "description": "Delete a SchemaVersion",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "schemaRegistryName",
-            "in": "path",
-            "description": "Schema registry name parameter.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "schemaName",
-            "in": "path",
-            "description": "Schema name parameter.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "schemaVersionName",
-            "in": "path",
-            "description": "Schema version name parameter.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 10,
-            "pattern": "^[0-9]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete_SchemaVersion": {
-            "$ref": "./examples/Delete_SchemaVersion.json"
           }
         }
       }
