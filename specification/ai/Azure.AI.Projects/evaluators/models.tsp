@@ -161,10 +161,4 @@ model EvaluatorVersion {
 model EvaluatorCreateResult {
   @doc("The Evaluator's id")
   id: string;
-
-  @doc("The Evaluator's version")
-  version: string;
-
-  @doc("The Evaluator's name")
-  name: string;
 }
