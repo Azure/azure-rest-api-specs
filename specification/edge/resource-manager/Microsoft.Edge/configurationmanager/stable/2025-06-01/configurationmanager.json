@@ -9307,6 +9307,10 @@
       "type": "object",
       "description": "The type used for update operations of the Schema.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -9315,6 +9319,10 @@
           }
         }
       }
+    },
+    "SchemaUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Schema."
     },
     "SchemaVersion": {
       "type": "object",
@@ -9886,7 +9894,24 @@
     },
     "SolutionUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Solution."
+      "description": "The type used for update operations of the Solution.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SolutionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Solution."
     },
     "SolutionVersion": {
       "type": "object",

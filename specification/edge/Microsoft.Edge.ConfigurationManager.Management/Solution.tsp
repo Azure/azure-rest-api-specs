@@ -18,6 +18,7 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Solution Properties")
 model SolutionProperties {
   @doc("Solution template Id")
@@ -38,6 +39,20 @@ model SolutionProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
+
+/** The type used for update operations of the Solution. */
+model SolutionUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: SolutionUpdateProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("The updatable properties of the Solution.")
+model SolutionUpdateProperties {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Solution Resource attached to a Target")
@@ -64,14 +79,9 @@ interface Solutions {
   @doc("Create or update a Solution Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Solution>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Update a Solution Resource")
-  update is ArmCustomPatchAsync<
-    Solution,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Solution,
-      SolutionProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<Solution, PatchModel = SolutionUpdate>;
 
   @doc("Delete a Solution Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Solution>;
