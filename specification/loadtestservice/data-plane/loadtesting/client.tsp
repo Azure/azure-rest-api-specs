@@ -179,6 +179,9 @@ interface AdministrationOperations {
   @action("clone")
   cloneTest is LoadTestAdministration.cloneTest;
 
+  getLatestTestRunInsights is LoadTestRun.getLatestInsights;
+  generateTestRunInsights is LoadTestRun.generateInsights;
+
   getOperationStatus is Operations.getStatus;
 }
 

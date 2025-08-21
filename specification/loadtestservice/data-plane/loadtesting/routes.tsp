@@ -25,6 +25,21 @@ namespace Microsoft.LoadTestService;
 );
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "body");
 
+/**
+ * Common path parameter for test run identifier used across TestRun APIs.
+ */
+model TestRunIdParam {
+  /**
+   * Unique name for the load test run, must contain only lower-case alphabetic,
+   * numeric, underscore or hyphen characters.
+   */
+  @path
+  @maxLength(50)
+  @minLength(2)
+  @pattern("^[a-z0-9_-]*$")
+  testRunId: string;
+}
+
 @tag("Test")
 interface LoadTestAdministration {
   @summary("Create a new test or update an existing test by providing the test Id.")
@@ -264,15 +279,7 @@ interface LoadTestRun {
   @get
   getLatestInsights is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     TestRunInsights
   >;
@@ -286,15 +293,7 @@ interface LoadTestRun {
   @post
   generateInsights is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     {
       @statusCode statusCode: 202;
@@ -311,15 +310,7 @@ interface LoadTestRun {
   @get
   listMetricNamespaces is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     MetricNamespaceCollection
   >;
@@ -332,15 +323,7 @@ interface LoadTestRun {
   @get
   listMetricDefinitions is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("Metric namespace to query metric definitions for.")
       @query
@@ -357,15 +340,7 @@ interface LoadTestRun {
   @list
   listMetrics is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("The aggregation")
       @query
@@ -388,15 +363,7 @@ interface LoadTestRun {
   @list
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("Dimension name")
       @path
@@ -418,15 +385,7 @@ interface LoadTestRun {
       @doc("Content type.")
       contentType: "application/merge-patch+json";
 
-      @doc("""
-        Unique Id for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("App Component model.")
       @bodyRoot
@@ -448,15 +407,7 @@ interface LoadTestRun {
   @get
   getAppComponents is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     TestRunAppComponents
   >;
@@ -472,15 +423,7 @@ interface LoadTestRun {
       @doc("Content type.")
       contentType: "application/merge-patch+json";
 
-      @doc("""
-        Unique Id for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("Server metric configuration model.")
       @bodyRoot
@@ -496,15 +439,7 @@ interface LoadTestRun {
   @get
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     TestRunServerMetricsConfiguration
   >;
