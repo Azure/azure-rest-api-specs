@@ -283,7 +283,7 @@
         "operationId": "GroupQuotas_List",
         "x-ms-examples": {
           "GroupQuotas_List_Request_ForCompute": {
-            "$ref": "./examples/GroupQuotas/GetGroupQuotasList.json"
+            "$ref": "./examples/GroupQuotas/ListGroupQuotas.json"
           }
         },
         "parameters": [
@@ -1372,7 +1372,45 @@
       "type": "string",
       "x-ms-enum": {
         "name": "RequestState",
-        "modelAsString": true
+        "modelAsString": true,
+        "x-ms-enum": {
+          "name": "RequestState",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "Escalated",
+              "description": "The quota request has been escalated for further review."
+            },
+            {
+              "value": "InProgress",
+              "description": "The quota request is currently being processed."
+            },
+            {
+              "value": "Canceled",
+              "description": "The quota request has been canceled."
+            },
+            {
+              "value": "Failed",
+              "description": "The quota request has failed."
+            },
+            {
+              "value": "Accepted",
+              "description": "The quota request has been accepted."
+            },
+            {
+              "value": "Created",
+              "description": "The quota request has been created."
+            },
+            {
+              "value": "Invalid",
+              "description": "The quota request is invalid."
+            },
+            {
+              "value": "Succeeded",
+              "description": "The quota request has succeeded."
+            }
+          ]
+        }
       }
     },
     "QuotaAllocationRequestStatus": {
@@ -2044,7 +2082,10 @@
         },
         "groupType": {
           "description": "Type of the group.",
-          "type": "string",
+          "enum": [
+            "AllocationGroup",
+            "EnnforcedGroup"
+          ],
           "readOnly": true
         },
         "provisioningState": {
