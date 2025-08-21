@@ -1,6 +1,6 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel', 'CreateServiceLabel']
+tools: ['azsdk_check_service_label', 'azsdk_create_service_label']
 ---
 
 ## Goal
@@ -10,7 +10,7 @@ Validate service label exists or create new one for SDK release process.
 Ask user for their service label. If none provided, explain that a valid service label is required for SDK release.
 
 ## Step 2: Validate Label
-Use `CheckServiceLabel` to check status:
+Use `azsdk_check_service_label` to check status:
 
 - **Exists**: Success - user can proceed with next steps in SDK release process
 - **InReview**: Label pending approval - user can proceed (will be available once merged)
@@ -27,6 +27,6 @@ When no valid service label exists, guide the user through creating a new one.
    - Avoid Service Groups: Use "Communication Rooms" instead of "Communication - Rooms"
    - Single label per service
 3. **Get confirmation**: User confirms or modifies suggested name
-4. **Create label**: Use `CreateServiceLabel` with confirmed name and documentation link given by user
+4. **Create label**: Use `azsdk_create_service_label` with confirmed name and documentation link given by user
 
 Display pull request results and inform user they can proceed.

@@ -1,13 +1,13 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel', 'ValidateCodeownersEntryForService', 'UpdateCodeowners'] 
+tools: ['azsdk_check_service_label', 'azsdk_engsys_validate_codeowners_entry_for_service', 'azsdk_engsys_codeowner_update'] 
 ---
 
 ## Goal: 
 Validate service label and ensure at least 2 valid code owners exist for SDK repositories.
 
 ## Step 1: Validate Service Label
-Use `CheckServiceLabel` to verify the service label exists:
+Use `azsdk_check_service_label` to verify the service label exists:
 - **DoesNotExist/NotAServiceLabel**: Direct user to create valid service label first. Stop validation process until service label is created.
 - **Exists/InReview**: Proceed to Step 2
 
@@ -21,7 +21,7 @@ Repository name mapping:
 - JavaScript: use "azure-sdk-for-js"
 - Go: use "azure-sdk-for-go"
 
-Use `ValidateCodeownersEntryForService` with either `serviceLabel` OR `repoPath` or both, but at least one must be used. If one isn't provided, leave the parameter field empty.
+Use `azsdk_engsys_validate_codeowners_entry_for_service` with either `serviceLabel` OR `repoPath` or both, but at least one must be used. If one isn't provided, leave the parameter field empty.
 
 **If entry exists**: Go to Step 3
 **If no entry exists**: Go to Step 4
@@ -34,7 +34,7 @@ Valid code owners must be:
 **If at least 2 valid owners**: Success - optionally add or delete additional owners
 **If less than 2 valid owners**: CRITICAL - must fix before proceeding:
 
-After any changes, re-validate with `ValidateCodeownersEntryForService`.
+After any changes, re-validate with `azsdk_engsys_validate_codeowners_entry_for_service`.
 
 ## Step 4: Create New Code Owner Entry
 When no CODEOWNERS entry exists yet:
@@ -56,7 +56,7 @@ When no CODEOWNERS entry exists yet:
    - Service owners is for getting mentioned on issues.
    - Source owners is for getting mentioned in PRs.
 2. Collect service owners and source owners (GitHub usernames)
-3. Use `UpdateCodeowners` with required parameters
+3. Use `azsdk_engsys_codeowner_update` with required parameters
 4. Must have at least 2 valid owners from the start
 
 ### Fix Options:
@@ -65,8 +65,8 @@ When no CODEOWNERS entry exists yet:
    - Azure org: [Join here](https://repos.opensource.microsoft.com/orgs/Azure), set public visibility at [Azure Org Visibility](https://github.com/orgs/Azure/people?query={github_username})
    - Write access: [Request here](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
    - Documentation about codeowners: [Read here](https://eng.ms/docs/products/azure-developer-experience/develop/supporting-sdk-customers/codeowners)
-2. **Add new owners** using `UpdateCodeowners` with `isAdding: true`
-3. **Remove invalid + add valid** owners using `UpdateCodeowners`
+2. **Add new owners** using `azsdk_engsys_codeowner_update` with `isAdding: true`
+3. **Remove invalid + add valid** owners using `azsdk_engsys_codeowner_update`
 
 ## Requirements
 - **MINIMUM**: At least 2 valid code owners at all times
