@@ -1,42 +1,41 @@
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 
+import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
+import { strictEqual } from "node:assert";
+import { join } from "path";
+import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
-  TspConfigTsMgmtModularPackageDirectorySubRule,
-  TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
-  TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
-  TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigGoMgmtPackageDirectorySubRule,
-  TspConfigGoMgmtModuleEqualStringSubRule,
-  TspConfigGoMgmtFixConstStutteringTrueSubRule,
-  TspConfigGoMgmtGenerateSamplesTrueSubRule,
-  TspConfigGoMgmtHeadAsBooleanTrueSubRule,
-  TspConfigGoAzGenerateFakesTrueSubRule,
+  TspConfigCsharpAzClearOutputFolderTrueSubRule,
+  TspConfigCsharpAzNamespaceEqualStringSubRule,
+  TspConfigCsharpAzPackageDirectorySubRule,
+  TspConfigCsharpMgmtPackageDirectorySubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
+  TspConfigGoMgmtGenerateFakesTrueSubRule,
+  TspConfigGoMgmtGenerateSamplesTrueSubRule,
+  TspConfigGoMgmtHeadAsBooleanTrueSubRule,
+  TspConfigGoMgmtModuleEqualStringSubRule,
+  TspConfigGoMgmtPackageDirectorySubRule,
+  TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
-  TspConfigPythonMgmtPackageDirectorySubRule,
+  TspConfigPythonDpPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
+  TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtPackageGenerateSampleTrueSubRule,
   TspConfigPythonMgmtPackageGenerateTestTrueSubRule,
-  TspConfigCsharpAzPackageDirectorySubRule,
-  TspConfigCsharpAzNamespaceEqualStringSubRule,
-  TspConfigCsharpAzClearOutputFolderTrueSubRule,
-  TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
-  TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsDpPackageDirectorySubRule,
+  TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
+  TspConfigTsMgmtModularPackageDirectorySubRule,
+  TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsMlcDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
-import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
-import { join } from "path";
-import { strictEqual } from "node:assert";
-import { stringify } from "yaml";
 
 import * as utils from "../src/utils.js";
 
@@ -287,15 +286,6 @@ const goManagementModuleTestCases = createEmitterOptionTestCases(
   [new TspConfigGoMgmtModuleEqualStringSubRule()],
 );
 
-const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  managementTspconfigFolder,
-  "fix-const-stuttering",
-  true,
-  false,
-  [new TspConfigGoMgmtFixConstStutteringTrueSubRule()],
-);
-
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
@@ -311,16 +301,7 @@ const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
   "generate-fakes",
   true,
   false,
-  [new TspConfigGoAzGenerateFakesTrueSubRule()],
-);
-
-const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  "",
-  "generate-fakes",
-  true,
-  false,
-  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+  [new TspConfigGoMgmtGenerateFakesTrueSubRule()],
 );
 
 const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
@@ -619,7 +600,6 @@ options:
     subRules: [
       new TspConfigGoMgmtPackageDirectorySubRule(),
       new TspConfigGoMgmtModuleEqualStringSubRule(),
-      new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
     ],
     tspconfigContent: `
 options:
@@ -661,12 +641,10 @@ describe("tspconfig", function () {
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
     ...goManagementModuleTestCases,
-    ...goManagementFixConstStutteringTestCases,
     ...goManagementGenerateExamplesTestCases,
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
-    ...goDpGenerateFakesTestCases,
     ...goDpInjectSpansTestCases,
     ...goDpModuleTestCases,
     ...goDpPackageDirTestCases,
