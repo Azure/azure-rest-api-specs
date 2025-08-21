@@ -41,6 +41,15 @@ These settings apply only when `--tag=package-2025-10` is specified on the comma
 input-file:
   - Microsoft.DeviceRegistry/stable/2025-10-01/deviceregistry.json
 suppressions:
+  - code: AvoidAdditionalProperties 
+    from: 
+      - deviceregistry.json 
+    where: 
+      - $.definitions.NamespaceAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceAssetUpdateProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.eventGroups
+    reason: These are customer defined properties with variables keys but well defined value structure.
   - code: AvoidAdditionalProperties
     from:
       - deviceregistry.json

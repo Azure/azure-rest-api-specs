@@ -129,63 +129,6 @@
               ]
             }
           ],
-          "events": [
-            {
-              "name": "event1",
-              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
-              "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
-              "destinations": [
-                {
-                  "target": "Mqtt",
-                  "configuration": {
-                    "topic": "/contoso/testEvent1",
-                    "retain": "Keep",
-                    "qos": "Qos0",
-                    "ttl": 7200
-                  }
-                }
-              ],
-              "typeRef": "event1Ref",
-              "dataPoints": [
-                {
-                  "name": "event1DataPoint1",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt5",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}"
-                },
-                {
-                  "name": "event1DataPoint2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt6",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}"
-                }
-              ]
-            },
-            {
-              "name": "event2",
-              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt7",
-              "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
-              "destinations": [
-                {
-                  "target": "Storage",
-                  "configuration": {
-                    "path": "/tmp/event2"
-                  }
-                }
-              ],
-              "typeRef": "event2Ref",
-              "dataPoints": [
-                {
-                  "name": "event2DataPoint1",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt8",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}"
-                },
-                {
-                  "name": "event2DataPoint2",
-                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt9",
-                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}"
-                }
-              ]
-            }
-          ],
           "streams": [
             {
               "name": "stream1",
@@ -266,28 +209,6 @@
             "datasets": [
               {
                 "name": "dataset1",
-                "messageSchemaReference": {
-                  "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
-                  "schemaName": "lytgdlsvivtcrtuvje",
-                  "schemaVersion": "1"
-                },
-                "error": {
-                  "code": "400",
-                  "message": "Error",
-                  "details": [
-                    {
-                      "code": "400.123.456.789",
-                      "message": "Validation error",
-                      "info": "Property is not valid.",
-                      "correlationId": "xqoettlcdlxchoscv"
-                    }
-                  ]
-                }
-              }
-            ],
-            "events": [
-              {
-                "name": "event1",
                 "messageSchemaReference": {
                   "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
                   "schemaName": "lytgdlsvivtcrtuvje",
