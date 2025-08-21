@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2025-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-05'
 input-file:
+  - Microsoft.Cdn/preview/2025-05-01-preview/afdwebapplicationfirewalldefinition.json
   - Microsoft.Cdn/preview/2025-05-01-preview/afdx.json
   - Microsoft.Cdn/preview/2025-05-01-preview/cdn.json
   - Microsoft.Cdn/preview/2025-05-01-preview/cdnwebapplicationfirewall.json
