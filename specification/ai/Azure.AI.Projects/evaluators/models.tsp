@@ -20,7 +20,7 @@ union EvaluatorCategory {
   quality: "Quality",
 
   @doc("Safety evaluator")
-  safety: "Risk and Safety",
+  safety: "Risk and Safety", // TODO: Spaces in enum value is inconsistent with other multiword enum values
 }
 
 @doc("The type of the evaluator")
@@ -51,6 +51,7 @@ union EvaluatorConfigType {
   code: "Code",
 }
 
+// TODO: What are the allowed values here
 @doc("Scale rule types for container deployment")
 union ScaleRuleType {
   string,
@@ -70,7 +71,7 @@ model EvaluatorConfig {
 alias ScalarParamType = string | "number" | "string"; // TODO: need to confirm allowed values
 
 /* The evaluator's initialization parameters */
-alias InitializationParameters = Record<ScalarParamType>;
+alias InitializationParameters = Record<ScalarParamType>; // TODO: Is this correct?
 
 @doc("Resource settings for container deployment")
 model ResourceSettings {
