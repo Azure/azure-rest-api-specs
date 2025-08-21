@@ -1243,7 +1243,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/listDefaultWafPolicies": {
       "post": {
-        "operationId": "DefaultWafPolicy_List",
+        "operationId": "DefaultWafPolicy_GetDefaultWafPolicies",
         "tags": [
           "NginxDeployments"
         ],
@@ -1290,7 +1290,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies": {
       "get": {
-        "operationId": "WafPolicy_List",
+        "operationId": "WafPolicy_GetWafPolicies",
         "tags": [
           "NginxDeployments"
         ],
@@ -1835,7 +1835,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ]
     },
@@ -2915,6 +2915,32 @@
       "required": [
         "min",
         "max"
+      ]
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "A tracked resource with the 'location' property optional",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
       ]
     },
     "UserIdentityProperties": {

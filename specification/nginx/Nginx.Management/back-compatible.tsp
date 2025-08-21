@@ -21,43 +21,61 @@ using Nginx.NginxPlus;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentUpdateProperties.nginxAppProtect, "autorest");
 
-@@clientLocation(NginxDeploymentApiKeyResponses.get, "ApiKeys");
-@@clientLocation(NginxDeploymentApiKeyResponses.createOrUpdate, "ApiKeys");
+@@clientLocation(NginxDeploymentApiKeyResponses.get, "ApiKeys", "!csharp");
+@@clientLocation(NginxDeploymentApiKeyResponses.createOrUpdate,
+  "ApiKeys",
+  "!csharp"
+);
 @@clientName(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(NginxDeploymentApiKeyResponses.delete, "ApiKeys");
-@@clientLocation(NginxDeploymentApiKeyResponses.list, "ApiKeys");
+@@clientLocation(NginxDeploymentApiKeyResponses.delete, "ApiKeys", "!csharp");
+@@clientLocation(NginxDeploymentApiKeyResponses.list, "ApiKeys", "!csharp");
 
-@@clientLocation(NginxCertificates.get, "Certificates");
-@@clientLocation(NginxCertificates.createOrUpdate, "Certificates");
+@@clientLocation(NginxCertificates.get, "Certificates", "!csharp");
+@@clientLocation(NginxCertificates.createOrUpdate, "Certificates", "!csharp");
 @@clientName(NginxCertificates.createOrUpdate::parameters.resource, "body");
-@@clientLocation(NginxCertificates.delete, "Certificates");
-@@clientLocation(NginxCertificates.list, "Certificates");
+@@clientLocation(NginxCertificates.delete, "Certificates", "!csharp");
+@@clientLocation(NginxCertificates.list, "Certificates", "!csharp");
 
-@@clientLocation(NginxConfigurationResponses.get, "Configurations");
-@@clientLocation(NginxConfigurationResponses.createOrUpdate, "Configurations");
+@@clientLocation(NginxConfigurationResponses.get, "Configurations", "!csharp");
+@@clientLocation(NginxConfigurationResponses.createOrUpdate,
+  "Configurations",
+  "!csharp"
+);
 @@clientName(NginxConfigurationResponses.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(NginxConfigurationResponses.delete, "Configurations");
-@@clientLocation(NginxConfigurationResponses.list, "Configurations");
-@@clientLocation(NginxConfigurationResponses.analysis, "Configurations");
+@@clientLocation(NginxConfigurationResponses.delete,
+  "Configurations",
+  "!csharp"
+);
+@@clientLocation(NginxConfigurationResponses.list, "Configurations", "!csharp");
+@@clientLocation(NginxConfigurationResponses.analysis,
+  "Configurations",
+  "!csharp"
+);
 
 @@clientLocation(NginxDeployments.get, "Deployments", "!csharp");
-@@clientLocation(NginxDeployments.createOrUpdate, "Deployments");
+@@clientLocation(NginxDeployments.createOrUpdate, "Deployments", "!csharp");
 @@clientName(NginxDeployments.createOrUpdate::parameters.resource, "body");
-@@clientLocation(NginxDeployments.update, "Deployments");
+@@clientLocation(NginxDeployments.update, "Deployments", "!csharp");
 @@clientName(NginxDeployments.update::parameters.properties, "body");
-@@clientLocation(NginxDeployments.delete, "Deployments");
-@@clientLocation(NginxDeployments.listByResourceGroup, "Deployments");
-@@clientLocation(NginxDeployments.list, "Deployments");
-@@clientLocation(NginxDeployments.wafPolicyList, "WafPolicy");
-@@clientName(NginxDeployments.wafPolicyList, "List");
-@@clientLocation(NginxDeployments.defaultWafPolicyList, "DefaultWafPolicy");
-@@clientName(NginxDeployments.defaultWafPolicyList, "List");
+@@clientLocation(NginxDeployments.delete, "Deployments", "!csharp");
+@@clientLocation(NginxDeployments.listByResourceGroup,
+  "Deployments",
+  "!csharp"
+);
+@@clientLocation(NginxDeployments.list, "Deployments", "!csharp");
+@@clientLocation(NginxDeployments.wafPolicyList, "WafPolicy", "!csharp");
+@@clientName(NginxDeployments.wafPolicyList, "GetWafPolicies");
+@@clientLocation(NginxDeployments.defaultWafPolicyList,
+  "DefaultWafPolicy",
+  "!csharp"
+);
+@@clientName(NginxDeployments.defaultWafPolicyList, "GetDefaultWafPolicies");
 
-@@clientLocation(NginxDeploymentWafPolicies.get, "WafPolicy");
-@@clientLocation(NginxDeploymentWafPolicies.create, "WafPolicy");
+@@clientLocation(NginxDeploymentWafPolicies.get, "WafPolicy", "!csharp");
+@@clientLocation(NginxDeploymentWafPolicies.create, "WafPolicy", "!csharp");
 @@clientName(NginxDeploymentWafPolicies.create::parameters.resource, "body");
-@@clientLocation(NginxDeploymentWafPolicies.delete, "WafPolicy");
+@@clientLocation(NginxDeploymentWafPolicies.delete, "WafPolicy", "!csharp");

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Nginx.NginxPlus;
+using Azure.Core;
 
 @@clientName(Nginx.NginxPlus, "NginxManagementClient", "javascript");
 @@clientName(Nginx.NginxPlus, "NginxManagementClient", "python");
@@ -89,7 +90,6 @@ using Nginx.NginxPlus;
   "NginxCertificateError",
   "csharp"
 );
-@@clientName(ActivationState, "NginxWafActivationState", "csharp");
 @@clientName(NginxConfigurationResponseProperties,
   "NginxConfigurationProperties",
   "csharp"
@@ -111,5 +111,53 @@ using Nginx.NginxPlus;
 @@clientName(WebApplicationFirewallPackage, "NginxWafPackage", "csharp");
 @@clientName(WebApplicationFirewallComponentVersions,
   "NginxWafComponentVersions",
+  "csharp"
+);
+
+@@clientName(AnalysisCreateConfig, "NginxAnalysisConfig", "csharp");
+@@clientName(ActivationState,
+  "WebApplicationFirewallActivationState",
+  "csharp"
+);
+@@clientName(AnalysisResultData, "NginxAnalysisResultDetails", "csharp");
+@@clientName(Level, "NginxDiagnosticLevel", "csharp");
+@@clientName(NginxConfigurationResponse, "NginxConfiguration", "csharp");
+@@clientName(NginxConfigurationResponseProperties,
+  "NginxConfigurationProperties",
+  "csharp"
+);
+@@clientName(NginxDeploymentApiKeyResponse, "NginxDeploymentApiKey", "csharp");
+@@clientName(NginxDeploymentApiKeyResponseProperties,
+  "NginxDeploymentApiKeyProperties",
+  "csharp"
+);
+@@clientName(NginxConfigurationProtectedFileRequest,
+  "NginxConfigurationProtectedFileContent",
+  "csharp"
+);
+@@clientName(NginxConfigurationProtectedFileResponse,
+  "NginxConfigurationProtectedFileResult",
+  "csharp"
+);
+
+@@alternateType(NginxDeploymentUpdateParameters.location,
+  azureLocation,
+  "csharp"
+);
+@@clientName(ResourceSku, "NginxResourceSku", "csharp");
+@@clientName(WebApplicationFirewallStatus,
+  "WebApplicationFirewallStatus",
+  "csharp"
+);
+@@clientName(WebApplicationFirewallPackage,
+  "WebApplicationFirewallPackage",
+  "csharp"
+);
+@@clientName(WebApplicationFirewallComponentVersions,
+  "WebApplicationFirewallComponentVersions",
+  "csharp"
+);
+@@clientName(WebApplicationFirewallSettings,
+  "WebApplicationFirewallSettings",
   "csharp"
 );

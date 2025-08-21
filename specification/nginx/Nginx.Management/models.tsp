@@ -449,9 +449,7 @@ model NginxConfigurationProtectedFileRequest {
  * The request body for creating an analysis for an NGINX configuration.
  */
 model AnalysisCreate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   config: AnalysisCreateConfig;
 }
 
@@ -485,9 +483,7 @@ model AnalysisResult {
    */
   status: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   data?: AnalysisResultData;
 }
 
@@ -651,8 +647,6 @@ model NginxDeploymentProperties {
   /**
    * Settings for NGINX App Protect (NAP)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   nginxAppProtect?: NginxDeploymentPropertiesNginxAppProtect;
 
   /**
@@ -781,8 +775,6 @@ model ScaleProfile {
   /**
    * The capacity parameters of the profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   capacity: ScaleProfileCapacity;
 }
 

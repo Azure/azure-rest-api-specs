@@ -14,9 +14,10 @@ namespace Nginx.NginxPlus;
 /**
  * Nginx Certificate
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NginxDeployment)
 model NginxCertificate
-  is Azure.ResourceManager.ProxyResource<NginxCertificateProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NginxCertificateProperties> {
   ...ResourceNameParameter<
     Resource = NginxCertificate,
     KeyName = "certificateName",
