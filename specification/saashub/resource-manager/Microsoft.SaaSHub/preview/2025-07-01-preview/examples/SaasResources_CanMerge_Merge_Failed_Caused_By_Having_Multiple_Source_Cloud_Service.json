@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "saasResourceName": "targetResourceName",
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "sourceResources": [
+        {
+          "id": "/providers/Microsoft.SaaSHub/saasResources/sourceResourceName1",
+          "quantity": 10
+        },
+        {
+          "id": "/providers/Microsoft.SaaSHub/saasResources/targetResourceName",
+          "quantity": 5
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "additionalInfo": null,
+        "evaluateResult": "Failed",
+        "reason": "Currently only supports single source resource",
+        "reasonCode": "InvalidRequestBody"
+      }
+    }
+  },
+  "operationId": "SaasResources_CanMerge",
+  "title": "Merge Failed Caused by having multiple Source SaasResource"
+}

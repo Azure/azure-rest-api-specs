@@ -85,7 +85,6 @@ model StageSpec {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("Stage specification")
-  @madeOptional(Versions.v2025_06_01)
   specification?: Record<unknown>;
 
   @added(Versions.v2025_06_01)
