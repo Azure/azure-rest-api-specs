@@ -154,10 +154,10 @@ the context. If there are no TypeSpec project paths in the context, then prompt 
 from the list of paths. If user does not have a TypeSpec project, then prompt user to create a new TypeSpec project.
 
 
-### Pre-requisites
+### Prerequisites
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
 - run `npm ci` to install the dependencies
-- To use MCP tool calls, user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell?view=powershell-7.5) if not installed, and recommend restarting VSCode to start the MCP server.
+- To use Azure SDK MCP tool calls, the user needs to have PowerShell installed. Provide [Azure SDK MCP documentation](https://eng.ms/docs/products/azure-developer-experience/develop/azsdk-tools-mcp) if an installation is missing, and tell the user to restart the IDE to start the MCP server. 
 
 
 ### Basic Rules for SDK Generation from TypeSpec
