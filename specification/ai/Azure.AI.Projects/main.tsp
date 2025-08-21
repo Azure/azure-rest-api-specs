@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
+import "./evaluators/routes.tsp";
 import "./datasets/routes.tsp";
 import "./indexes/routes.tsp";
 import "./deployments/routes.tsp";
