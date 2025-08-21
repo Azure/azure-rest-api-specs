@@ -189,7 +189,7 @@ interface EnvironmentContainerOperationGroup {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
     },
     Response = ArmResponse<EnvironmentContainerResourceArmPaginatedResult>
   >;

@@ -123,6 +123,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceFeatures_List")
+  @list
   @get
   @action("features")
   list is ArmResourceActionSync<
@@ -219,6 +220,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EndpointDeployment_GetInWorkspace")
+  @list
   @get
   @action("deployments")
   getInWorkspace is ArmResourceActionSync<

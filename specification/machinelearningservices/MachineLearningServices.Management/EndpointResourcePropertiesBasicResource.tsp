@@ -61,15 +61,15 @@ interface EndpointResourcePropertiesBasicResources {
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("includeOnlineEndpoints")
-      includeOnlineEndpoints?: boolean;
+      includeOnlineEndpoints?: boolean = false;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("includeServerlessEndpoints")
-      includeServerlessEndpoints?: boolean;
+      includeServerlessEndpoints?: boolean = false;
 
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("includeConnections")
-      includeConnections?: boolean;
+      includeConnections?: boolean = false;
 
       /**
        * Continuation token for pagination.
@@ -102,6 +102,7 @@ interface EndpointResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Endpoint_GetModels")
+  @list
   @get
   @action("models")
   getModels is ArmResourceActionSync<

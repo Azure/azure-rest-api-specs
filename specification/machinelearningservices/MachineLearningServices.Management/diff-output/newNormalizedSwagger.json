@@ -4477,6 +4477,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -4676,6 +4677,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -5344,6 +5346,10 @@
           "Get compute nodes information for a compute": {
             "$ref": "./examples/Compute/listNodes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "nodes"
         }
       }
     },
@@ -5624,7 +5630,8 @@
           {
             "name": "includeAll",
             "in": "query",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -5710,7 +5717,6 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
@@ -6113,6 +6119,9 @@
           "Get Azure OpenAI Connection Models": {
             "$ref": "./examples/WorkspaceConnection/getModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6361,7 +6370,10 @@
               "items": {
                 "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
               }
-            }
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
           }
         ],
         "responses": {
@@ -6422,8 +6434,10 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -6964,6 +6978,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -7452,7 +7467,8 @@
           {
             "name": "orderByAsc",
             "in": "query",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -7536,7 +7552,8 @@
           {
             "name": "skipValidation",
             "in": "query",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "body",
@@ -7718,6 +7735,9 @@
           "Get Endpoint Deployments In Workspace": {
             "$ref": "./examples/Endpoint/Deployment/getInWorkspace.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7796,17 +7816,20 @@
           {
             "name": "includeOnlineEndpoints",
             "in": "query",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeServerlessEndpoints",
             "in": "query",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeConnections",
             "in": "query",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "$skip",
@@ -8208,6 +8231,9 @@
           "Get Endpoint Models": {
             "$ref": "./examples/Endpoint/getModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8490,6 +8516,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -8689,6 +8716,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -8953,6 +8981,9 @@
           "List Workspace features": {
             "$ref": "./examples/WorkspaceFeature/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8981,6 +9012,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -8997,6 +9029,11 @@
             "type": "integer",
             "format": "int32",
             "default": 20
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string"
           },
           {
             "name": "description",
@@ -9107,6 +9144,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/FeaturesetContainer"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -9122,7 +9166,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FeaturesetContainer"
         },
         "x-ms-long-running-operation": true
@@ -9200,6 +9244,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -9516,6 +9561,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -9636,6 +9682,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -9855,6 +9902,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -11222,6 +11270,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -12263,6 +12312,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -12488,6 +12538,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",

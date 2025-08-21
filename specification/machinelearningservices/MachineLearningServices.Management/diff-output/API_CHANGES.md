@@ -111,7 +111,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.parameters[1].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3].schema.type__added` | added | `array` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.parameters[3].schema.type__added` | added | `object` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.parameters[3].schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features'].get.parameters[0].type__added` | added | `string` |
@@ -245,7 +245,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components'].get.parameters[0].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].put.parameters[2].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features'].get.parameters[0].required__added` | added | `true` |
@@ -301,6 +300,20 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].delete.responses.200__added` | added | `{"description":"ignore"}` |
+
+### Changes for `x-ms-identifiers`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.TableVerticalFeaturizationSettings.properties.transformerParams.additionalProperties['x-ms-identifiers__deleted']` | deleted | `[]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3]['x-ms-identifiers__added']` | added | `["name"]` |
+
+### Changes for `items`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3].schema.items__added` | added | `{"$ref":"#/definitions/RaiBlocklistItemBulkRequest"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.parameters[3].schema.items__added` | added | `{"type":"string"}` |
 
 ### Changes for `default`
 
@@ -394,63 +407,8 @@
 | `definitions.TrainingSettings.properties.ensembleModelDownloadTimeout.default__deleted` | deleted | `PT5M` |
 | `definitions.TrialComponent.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.TruncationSelectionPolicy.properties.truncationPercentage.default__deleted` | deleted | `0` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components'].get.parameters[3].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions'].get.parameters[7].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections'].get.parameters[3].default__deleted` | deleted | `false` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.parameters[3].default__deleted` | deleted | `ActiveOnly` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions'].get.parameters[8].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}'].put.parameters[3].default__deleted` | deleted | `false` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints'].get.parameters[2].default__deleted` | deleted | `false` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints'].get.parameters[3].default__deleted` | deleted | `false` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints'].get.parameters[4].default__deleted` | deleted | `false` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.parameters[3].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions'].get.parameters[7].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets'].get.parameters[5].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features'].get.parameters[9].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions'].get.parameters[6].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities'].get.parameters[5].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions'].get.parameters[6].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs'].get.parameters[6].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models'].get.parameters[4].default__deleted` | deleted | `ActiveOnly` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions'].get.parameters[13].default__deleted` | deleted | `ActiveOnly` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules'].get.parameters[3].default__deleted` | deleted | `EnabledOnly` |
-
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes'].post['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink","itemName":"nodes"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/deployments'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list'].post['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules'].post['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-
-### Changes for `items`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3].schema.items__added` | added | `{"$ref":"#/definitions/RaiBlocklistItemBulkRequest"}` |
-
-### Changes for `additionalProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ColumnTransformer.properties.parameters.additionalProperties__added` | added | `{}` |
-| `definitions.CommandJob.properties.parameters.additionalProperties__added` | added | `{}` |
-| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.additionalProperties__added` | added | `{}` |
-| `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.PipelineJob.properties.jobs.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
-| `definitions.ResourceConfiguration.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.additionalProperties__added` | added | `{}` |
-| `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.parameters[3].schema.additionalProperties__added` | added | `{}` |
 
 ### Changes for `collectionFormat`
 
@@ -485,7 +443,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].put.responses.201.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].put.responses.201.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
@@ -515,6 +472,17 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].patch.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.201.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
+
+### Changes for `x-ms-pageable`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list'].post['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules'].post['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 
 ### Changes for `AKS`
 
@@ -2559,6 +2527,20 @@
 |------|------------|-------|
 | `definitions.CodeVersion.properties.codeUri__deleted` | deleted | `{"type":"string","x-nullable":true,"example":"https://blobStorage/folderName"}` |
 
+### Changes for `additionalProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ColumnTransformer.properties.parameters.additionalProperties__added` | added | `{}` |
+| `definitions.CommandJob.properties.parameters.additionalProperties__added` | added | `{}` |
+| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.additionalProperties__added` | added | `{}` |
+| `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.PipelineJob.properties.jobs.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
+| `definitions.ResourceConfiguration.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.additionalProperties__added` | added | `{}` |
+| `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
+
 ### Changes for `componentSpec`
 
 | Path | Change Type | Value |
@@ -3116,12 +3098,6 @@
 |------|------------|-------|
 | `definitions.SparkJob.properties.codeId.minLength__deleted` | deleted | `1` |
 
-### Changes for `x-ms-identifiers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TableVerticalFeaturizationSettings.properties.transformerParams.additionalProperties['x-ms-identifiers__deleted']` | deleted | `[]` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
@@ -3342,7 +3318,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].put.parameters[3].schema.$ref` | `#/definitions/FeaturesetContainerResource` | `#/definitions/FeaturesetContainer` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].put.responses.200.schema.$ref` | `#/definitions/FeaturesetContainerResource` | `#/definitions/FeaturesetContainer` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].put.responses.201.schema.$ref` | `#/definitions/FeaturesetContainerResource` | `#/definitions/FeaturesetContainer` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].put['x-ms-long-running-operation-options']['final-state-via']` | `original-uri` | `azure-async-operation` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].get.responses.200.schema.$ref` | `#/definitions/FeaturesetVersionResource` | `#/definitions/FeaturesetVersion` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].put.parameters[1].name` | `name` | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].put.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |

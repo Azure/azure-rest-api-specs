@@ -110,6 +110,7 @@ interface ComputeResources {
    * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @list
   @operationId("Compute_ListNodes")
   listNodes is ArmResourceActionSync<
     ComputeResource,

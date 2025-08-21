@@ -2842,10 +2842,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -3012,10 +3009,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -3184,60 +3178,6 @@
         "x-ms-long-running-operation__deleted": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes": {
-      "post": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink",
-          "itemName": "nodes"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections": {
-      "get": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "default__deleted": false
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}": {
-      "put": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "required__added": true
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems": {
       "post": {
         "parameters": [
@@ -3253,6 +3193,9 @@
           [
             "~",
             {
+              "x-ms-identifiers__added": [
+                "name"
+              ],
               "schema": {
                 "$ref__deleted": "#/definitions/RaiBlocklistItemsBulkAddRequest",
                 "type__added": "array",
@@ -3282,8 +3225,10 @@
             {
               "schema": {
                 "$ref__deleted": "#/definitions/RaiBlocklistItemsBulkDeleteRequest",
-                "type__added": "object",
-                "additionalProperties__added": {}
+                "type__added": "array",
+                "items__added": {
+                  "type": "string"
+                }
               }
             }
           ]
@@ -3319,10 +3264,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -3711,21 +3653,7 @@
             " "
           ],
           [
-            "-",
-            {
-              "name": "orderByAsc",
-              "in": "query",
-              "type": "boolean",
-              "default": false
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "orderByAsc",
-              "in": "query",
-              "type": "boolean"
-            }
+            " "
           ]
         ]
       }
@@ -3795,10 +3723,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": false
-            }
+            " "
           ],
           [
             "~",
@@ -3892,9 +3817,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/deployments": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             " "
@@ -3964,22 +3886,13 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": false
-            }
+            " "
           ],
           [
-            "~",
-            {
-              "default__deleted": false
-            }
+            " "
           ],
           [
-            "~",
-            {
-              "default__deleted": false
-            }
+            " "
           ],
           [
             " "
@@ -3988,13 +3901,6 @@
             " "
           ]
         ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments": {
@@ -4026,10 +3932,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -4196,10 +4099,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -4365,9 +4265,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -4420,21 +4317,13 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ],
           [
             " "
           ],
           [
-            "-",
-            {
-              "name": "name",
-              "in": "query",
-              "type": "string"
-            }
+            " "
           ],
           [
             " "
@@ -4531,13 +4420,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/FeaturesetContainerResource",
@@ -4547,11 +4429,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/FeaturesetContainer",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/FeaturesetContainer"
         }
       },
       "delete": {
@@ -4629,10 +4507,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ],
           [
             " "
@@ -4898,10 +4773,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ],
           [
             " "
@@ -4987,10 +4859,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ],
           [
             " "
@@ -5196,10 +5065,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ],
           [
             " "
@@ -6318,10 +6184,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ],
           [
             " "
@@ -6740,10 +6603,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }
@@ -6933,10 +6793,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": "ActiveOnly"
-            }
+            " "
           ]
         ]
       }

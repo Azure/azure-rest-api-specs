@@ -35,7 +35,16 @@ interface FeaturesetContainers {
   /**
    * Create or update container.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetContainer>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FeaturesetContainer,
+    Response = ArmResourceUpdatedResponse<FeaturesetContainer> | (ArmResourceCreatedResponse<FeaturesetContainer> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete container.
@@ -68,13 +77,19 @@ interface FeaturesetContainers {
        * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
 
       /**
        * page size
        */
       @query("pageSize")
       pageSize?: int32 = 20;
+
+      /**
+       * name for the featureset
+       */
+      @query("name")
+      name?: string;
 
       /**
        * description for the feature set

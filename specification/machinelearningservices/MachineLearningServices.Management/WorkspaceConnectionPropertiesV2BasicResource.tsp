@@ -41,9 +41,10 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WorkspaceConnections_Create")
-  create is ArmResourceCreateOrReplaceSync<
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     WorkspaceConnectionPropertiesV2BasicResource,
-    Response = ArmResourceUpdatedResponse<WorkspaceConnectionPropertiesV2BasicResource>
+    OptionalRequestBody = true,
+    Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResource>
   >;
 
   /**
@@ -89,7 +90,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
        * query parameter that indicates if get connection call should return both connections and datastores
        */
       @query("includeAll")
-      includeAll?: boolean;
+      includeAll?: boolean = false;
     },
     Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
@@ -125,6 +126,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_GetModels")
+  @list
   @get
   @action("models")
   getModels is ArmResourceActionSync<

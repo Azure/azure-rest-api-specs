@@ -6493,6 +6493,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -6775,6 +6776,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -7717,6 +7719,10 @@
           "Get compute nodes information for a compute": {
             "$ref": "./examples/Compute/listNodes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "nodes"
         }
       }
     },
@@ -8166,7 +8172,8 @@
             "in": "query",
             "description": "query parameter that indicates if get connection call should return both connections and datastores",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -8283,7 +8290,7 @@
             "name": "body",
             "in": "body",
             "description": "The object for creating or updating a new workspace connection",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
@@ -8291,7 +8298,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'WorkspaceConnectionPropertiesV2BasicResource' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
@@ -8849,6 +8856,9 @@
           "Get Azure OpenAI Connection Models": {
             "$ref": "./examples/WorkspaceConnection/getModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -9213,7 +9223,10 @@
               "items": {
                 "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
               }
-            }
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
           }
         ],
         "responses": {
@@ -9306,8 +9319,10 @@
             "description": "List of RAI Blocklist Items Names.",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -10114,6 +10129,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -10810,7 +10826,8 @@
             "in": "query",
             "description": "Order by property in ascending order.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -10926,7 +10943,8 @@
             "in": "query",
             "description": "Flag to skip validation.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "body",
@@ -11185,6 +11203,9 @@
           "Get Endpoint Deployments In Workspace": {
             "$ref": "./examples/Endpoint/Deployment/getInWorkspace.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -11337,19 +11358,22 @@
             "name": "includeOnlineEndpoints",
             "in": "query",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeServerlessEndpoints",
             "in": "query",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "includeConnections",
             "in": "query",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "name": "$skip",
@@ -11924,6 +11948,9 @@
           "Get Endpoint Models": {
             "$ref": "./examples/Endpoint/getModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -12339,6 +12366,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -12621,6 +12649,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -12994,6 +13023,9 @@
           "List Workspace features": {
             "$ref": "./examples/WorkspaceFeature/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13042,6 +13074,7 @@
             "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -13074,6 +13107,13 @@
             "type": "integer",
             "format": "int32",
             "default": 20
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "name for the featureset",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "description",
@@ -13216,19 +13256,20 @@
             }
           },
           "201": {
-            "description": "Resource 'FeaturesetContainer' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/FeaturesetContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -13245,7 +13286,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/FeaturesetContainer"
         },
         "x-ms-long-running-operation": true
@@ -13373,6 +13414,7 @@
             "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -13843,6 +13885,7 @@
             "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -14016,6 +14059,7 @@
             "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -14347,6 +14391,7 @@
             "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -16377,6 +16422,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -17915,6 +17961,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",
@@ -18233,6 +18280,7 @@
             "description": "View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
+            "default": "ActiveOnly",
             "enum": [
               "ActiveOnly",
               "ArchivedOnly",

@@ -103,7 +103,7 @@ interface RaiBlocklistPropertiesBasicResources {
   @action("deleteRaiBlocklistItems")
   deleteBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
-    Record<unknown>,
+    string[],
     NoContentResponse
   >;
 }
@@ -120,4 +120,8 @@ interface RaiBlocklistPropertiesBasicResources {
 );
 @@doc(RaiBlocklistPropertiesBasicResources.deleteBulk::parameters.body,
   "List of RAI Blocklist Items Names."
+);
+@@OpenAPI.extension(RaiBlocklistPropertiesBasicResources.addBulk::parameters.body,
+  "x-ms-identifiers",
+  #["name"]
 );

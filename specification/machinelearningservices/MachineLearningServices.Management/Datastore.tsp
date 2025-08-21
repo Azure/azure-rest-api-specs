@@ -42,7 +42,7 @@ interface Datastores {
        * Flag to skip validation.
        */
       @query("skipValidation")
-      skipValidation?: boolean;
+      skipValidation?: boolean = false;
     }
   >;
 
@@ -97,7 +97,7 @@ interface Datastores {
        * Order by property in ascending order.
        */
       @query("orderByAsc")
-      orderByAsc?: boolean;
+      orderByAsc?: boolean = false;
     },
     Response = ArmResponse<DatastoreResourceArmPaginatedResult>
   >;

@@ -82,7 +82,7 @@ interface JobBases {
        * View type for including/excluding (for example) archived entities.
        */
       @query("listViewType")
-      listViewType?: ListViewType;
+      listViewType?: ListViewType = ListViewType.ActiveOnly;
 
       /**
        * Comma-separated list of user property names (and optionally values). Example: prop1,prop2=value2
