@@ -2,6 +2,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
+using Microsoft.SignalRService;
+
 @@clientName(Microsoft.SignalRService,
   "WebPubSubManagementClient",
   "javascript,python"
@@ -17,6 +19,14 @@ using Azure.ClientGenerator.Core;
   DocumentationMode.replace,
   "java"
 );
+
+@@clientName(WebPubSubProperties.externalIP, "externalIp", "java");
+@@clientName(WebPubSubProperties.hostName, "hostname", "java");
+@@clientName(WebPubSubProperties.hostNamePrefix, "hostnamePrefix", "java");
+@@clientName(ACLAction, "AclAction", "java");
+@@clientName(NetworkACL, "NetworkAcl", "java");
+@@clientName(IPRule, "IpRule", "java");
+@@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "java");
 
 // Resolve breaking changes for Go SDK compatibility
 @@clientName(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go");
