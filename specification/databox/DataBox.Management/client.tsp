@@ -301,3 +301,8 @@ using Microsoft.DataBox;
 @@alternateType(KeyEncryptionKey.kekUrl, url, "csharp");
 @@alternateType(PackageShippingDetails.trackingUrl, url, "csharp");
 @@alternateType(SkuCost.meterId, uuid, "csharp");
+
+@@clientName(KeyEncryptionKey.kekVaultResourceID, "kekVaultResourceId", "java");
+@@clientName(ShareCredentialDetails.userName, "username", "java");
+@@alternateType(AdditionalErrorInfo.info, unknown, "java");
+@@alternateType(JobStages.jobStageDetails, unknown, "java");
