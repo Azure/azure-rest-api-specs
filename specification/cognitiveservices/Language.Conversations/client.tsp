@@ -85,11 +85,16 @@ namespace Language.ConversationsClientCustomizations;
   "ConversationLanguageUnderstandingActionContent"
 );
 
+@@clientName(ConversationTaskParameters,
+  "ConversationActionContent",
+  "python"
+);
+
 @@clientName(ConversationalAIInputParameters,
   "AIConversationLanguageUnderstandingActionContent"
 );
 @@clientName(ConversationalAIInputParameters,
-  "ConversationalAILanguageUnderstandingActionContent",
+  "ConversationalAIActionContent",
   "python"
 );
 
