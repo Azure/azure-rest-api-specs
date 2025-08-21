@@ -39,4 +39,6 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     reason: Dictionary is used only in the AssessmentOptions proxy resource, which is a singleton and immutable across the assessment Project.
+  - code: OperationsAPIImplementation
+    reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
