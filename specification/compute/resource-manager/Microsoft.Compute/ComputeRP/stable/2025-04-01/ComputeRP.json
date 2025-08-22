@@ -7413,6 +7413,76 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut": {
+      "post": {
+        "operationId": "VirtualMachineScaleSets_ScaleOut",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "Scales out one or more virtual machines in a VM scale set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The input object for ScaleOut API.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetScaleOutInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSet Scale Out.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_ScaleOut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState": {
       "post": {
         "operationId": "VirtualMachineScaleSets_SetOrchestrationServiceState",
@@ -18280,6 +18350,34 @@
         "activePlacementGroupId": {
           "type": "string",
           "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."
+        }
+      }
+    },
+    "VMScaleSetScaleOutInput": {
+      "type": "object",
+      "description": "The input for ScaleOut",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the number of virtual machines in the scale set."
+        },
+        "properties": {
+          "$ref": "#/definitions/VMScaleSetScaleOutInputProperties",
+          "description": "The input properties for ScaleOut"
+        }
+      },
+      "required": [
+        "capacity"
+      ]
+    },
+    "VMScaleSetScaleOutInputProperties": {
+      "type": "object",
+      "description": "The input properties for ScaleOut",
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "The zone in which the scale out is requested for the virtual machine scale set."
         }
       }
     },
