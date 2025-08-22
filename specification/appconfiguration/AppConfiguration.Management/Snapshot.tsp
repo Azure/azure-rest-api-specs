@@ -24,6 +24,7 @@ model Snapshot is Azure.ResourceManager.ProxyResource<SnapshotProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource 'Snapshot' must have a delete operation."
 @armResourceOperations
 interface Snapshots {
   /**

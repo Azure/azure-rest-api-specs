@@ -53,7 +53,7 @@ using Microsoft.AppConfiguration;
   ConfigurationStores
 );
 
-@@clientLocation(OperationsOperationGroup.checkNameAvailability, "Operations");
+@@clientLocation(OperationsOperationGroup.checkNameAvailability, Operations);
 @@clientLocation(OperationsOperationGroup.regionalCheckNameAvailability,
-  "Operations"
+  Operations
 );

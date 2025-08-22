@@ -1,64 +1,34 @@
 {
   "parameters": {
-    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
-    "resourceGroupName": "myResourceGroup",
-    "configStoreName": "contoso",
     "api-version": "2025-02-01-preview",
+    "configStoreName": "contoso",
     "configStoreUpdateParameters": {
-      "tags": {
-        "Category": "Marketing"
-      },
-      "sku": {
-        "name": "Standard"
-      },
       "identity": {
         "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {}
         }
+      },
+      "sku": {
+        "name": "Standard"
+      },
+      "tags": {
+        "Category": "Marketing"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "contoso",
         "type": "Microsoft.AppConfiguration/configurationStores",
-        "properties": {
-          "provisioningState": "Succeeded",
-          "creationDate": "2018-04-24T16:30:55+00:00",
-          "endpoint": "https://contoso.azconfig.io",
-          "encryption": {
-            "keyVaultProperties": {
-              "keyIdentifier": null,
-              "identityClientId": null
-            }
-          },
-          "disableLocalAuth": false,
-          "privateEndpointConnections": [],
-          "dataPlaneProxy": {
-            "authenticationMode": "Pass-through",
-            "privateLinkDelegation": "Disabled"
-          },
-          "softDeleteRetentionInDays": 30,
-          "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
-          "enablePurgeProtection": false,
-          "publicNetworkAccess": "Disabled"
-        },
-        "systemData": {
-          "createdBy": "foo@contoso.com",
-          "createdByType": "User",
-          "createdAt": "2018-04-24T16:30:55+00:00",
-          "lastModifiedBy": "foo@contoso.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
-        },
-        "sku": {
-          "name": "Standard"
-        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
         "identity": {
+          "type": "SystemAssigned, UserAssigned",
           "principalId": "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
           "tenantId": "BBBBBBBB-BBBB-BBBB-BBBB-BBBBBBBBBBBB",
-          "type": "SystemAssigned, UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {
               "clientId": "CCCCCCCC-CCCC-CCCC-CCCC-CCCCCCCCCCCC",
@@ -66,9 +36,39 @@
             }
           }
         },
-        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
-        "name": "contoso",
         "location": "westus",
+        "properties": {
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "dataPlaneProxy": {
+            "authenticationMode": "Pass-through",
+            "privateLinkDelegation": "Disabled"
+          },
+          "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+          "disableLocalAuth": false,
+          "enablePurgeProtection": false,
+          "encryption": {
+            "keyVaultProperties": {
+              "identityClientId": null,
+              "keyIdentifier": null
+            }
+          },
+          "endpoint": "https://contoso.azconfig.io",
+          "privateEndpointConnections": [],
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled",
+          "softDeleteRetentionInDays": 30
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {
           "Category": "Marketing"
         }
@@ -76,43 +76,13 @@
     },
     "201": {
       "body": {
+        "name": "contoso",
         "type": "Microsoft.AppConfiguration/configurationStores",
-        "properties": {
-          "provisioningState": "Updating",
-          "creationDate": "2018-04-24T16:30:55+00:00",
-          "endpoint": "https://contoso.azconfig.io",
-          "encryption": {
-            "keyVaultProperties": {
-              "keyIdentifier": null,
-              "identityClientId": null
-            }
-          },
-          "disableLocalAuth": false,
-          "privateEndpointConnections": [],
-          "dataPlaneProxy": {
-            "authenticationMode": "Pass-through",
-            "privateLinkDelegation": "Disabled"
-          },
-          "softDeleteRetentionInDays": 30,
-          "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
-          "enablePurgeProtection": false,
-          "publicNetworkAccess": "Disabled"
-        },
-        "systemData": {
-          "createdBy": "foo@contoso.com",
-          "createdByType": "User",
-          "createdAt": "2018-04-24T16:30:55+00:00",
-          "lastModifiedBy": "foo@contoso.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
-        },
-        "sku": {
-          "name": "Standard"
-        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
         "identity": {
+          "type": "SystemAssigned, UserAssigned",
           "principalId": "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
           "tenantId": "BBBBBBBB-BBBB-BBBB-BBBB-BBBBBBBBBBBB",
-          "type": "SystemAssigned, UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {
               "clientId": "CCCCCCCC-CCCC-CCCC-CCCC-CCCCCCCCCCCC",
@@ -120,13 +90,45 @@
             }
           }
         },
-        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
-        "name": "contoso",
         "location": "westus",
+        "properties": {
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "dataPlaneProxy": {
+            "authenticationMode": "Pass-through",
+            "privateLinkDelegation": "Disabled"
+          },
+          "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+          "disableLocalAuth": false,
+          "enablePurgeProtection": false,
+          "encryption": {
+            "keyVaultProperties": {
+              "identityClientId": null,
+              "keyIdentifier": null
+            }
+          },
+          "endpoint": "https://contoso.azconfig.io",
+          "privateEndpointConnections": [],
+          "provisioningState": "Updating",
+          "publicNetworkAccess": "Disabled",
+          "softDeleteRetentionInDays": 30
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {
           "Category": "Marketing"
         }
       }
     }
-  }
+  },
+  "operationId": "ConfigurationStores_Update",
+  "title": "ConfigurationStores_Update_With_Identity"
 }
