@@ -2,9 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.Network;
+using Microsoft.Network;
 
 @@clientName(Microsoft.Network, "DnsResolverManagementClient", "javascript");
 
