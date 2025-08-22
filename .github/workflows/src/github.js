@@ -102,17 +102,21 @@ export async function getWorkflowRuns(github, context, workflowName, ref) {
 }
 
 /**
- * @param {import("@octokit/types").OctokitResponse<any>} response
  * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
  */
-export function rateLimitHook(response, options) {
+export function logHook(options) {
+  console.log(`[github] ${options.method.toUpperCase()} ${options.url}`);
+}
+
+/**
+ * @param {import("@octokit/types").OctokitResponse<any>} response
+ */
+export function rateLimitHook(response) {
   const limits = {
-    method: options.method.toUpperCase(),
-    url: options.url,
     limit: response.headers["x-ratelimit-limit"],
     remaining: response.headers["x-ratelimit-remaining"],
     reset: new Date(parseInt(response.headers["x-ratelimit-reset"] || "") * 1000),
   };
 
-  console.log(`rate-limits: ${JSON.stringify(limits)}`);
+  console.log(`[github] rate-limits: ${JSON.stringify(limits)}`);
 }
