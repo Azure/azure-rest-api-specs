@@ -32,7 +32,7 @@ interface SkusOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard resource operation."
 interface OperationStatusesOperationGroup {
   @doc("Gets the current status of an async operation.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "This is a valid response per operation status contract."
   @summary("Get Operation Status")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/locations/{location}/operationStatuses/{operationId}")
   @get
