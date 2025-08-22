@@ -94,7 +94,7 @@ export const setOadBaseBranch = (traceData: OadTraceData, branchName: string): O
 /**
  * Generates markdown content from OAD trace data
  */
-export const generateOadMarkdown = (traceData: OadTraceData): string => {
+export const generateOadMarkdown = async (traceData: OadTraceData): Promise<string> => {
   const oadVersion = packageJson.dependencies?.["@azure/oad"]?.replace(/[\^~]/, "") || "unknown";
   if (traceData.traces.length === 0) {
     return "";
@@ -108,13 +108,13 @@ export const generateOadMarkdown = (traceData: OadTraceData): string => {
   for (const value of traceData.traces) {
     // Compose each column for clarity
     const newFileName = basename(value.new);
-    const newVersion = getVersionFromInputFile(value.new, true);
+    const newVersion = await getVersionFromInputFile(value.new, true);
 
     // Truncate commit hash to first 8 characters for better readability
     const shortCommit = traceData.context.headCommit.substring(0, 8);
     const newCommitLink = `[${shortCommit}](${sourceBranchHref(traceData.context.sourceRepo, traceData.context.headCommit, value.new)})`;
 
-    const oldVersion = getVersionFromInputFile(value.old, true);
+    const oldVersion = await getVersionFromInputFile(value.old, true);
     const oldCommitLink = `[${traceData.baseBranch}](${specificBranchHref(traceData.context.targetRepo, value.old, traceData.baseBranch)})`;
 
     // Add a row to the markdown table with proper spacing

@@ -474,13 +474,12 @@ model ResourceCertificateDetails {
 /**
  * Replication usages for vault.
  */
-@pagedResult
 model ReplicationUsageList {
   /**
    * The list of replication usages for the given vault.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @items
+  @pageItems
   value?: ReplicationUsage[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1521,12 +1520,11 @@ model OperationResource {
 /**
  * Usage for vault.
  */
-@pagedResult
 model VaultUsageList {
   /**
    * The list of usages for the given vault.
    */
-  @items
+  @pageItems
   value?: VaultUsage[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
