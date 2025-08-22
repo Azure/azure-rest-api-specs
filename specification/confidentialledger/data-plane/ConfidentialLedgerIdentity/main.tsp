@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
     certificateEndpoint?: url = "https://identity.confidential-ledger.core.azure.com",
   }
 )
-namespace ConfidentialLedger.Certificate;
+namespace ConfidentialLedgerCertificate;
 
 /**
  * The available API versions.
@@ -65,7 +65,7 @@ model LedgerIdentityInformation {
 @summary("Gets identity information for a Confidential Ledger instance.")
 @route("/ledgerIdentity/{ledgerId}")
 @get
-op getLedgerIdentity is Common.LedgerOperation<
+op getLedgerIdentity is ConfidentialLedgerCommon.LedgerOperation<
   {
     /**
      * Id of the Confidential Ledger instance to get information for
