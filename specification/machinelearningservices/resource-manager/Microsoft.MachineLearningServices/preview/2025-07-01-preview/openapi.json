@@ -2361,6 +2361,10 @@
               "$ref": "#/definitions/DataContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2384,7 +2388,12 @@
           "CreateOrUpdate Registry Data Container.": {
             "$ref": "./examples/Registry/DataContainer/createOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/CodeContainer"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RegistryDataContainers_Delete",
@@ -2701,6 +2710,10 @@
               "$ref": "#/definitions/DataVersionBase"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2724,7 +2737,12 @@
           "CreateOrUpdate Registry Data Version Base.": {
             "$ref": "./examples/Registry/DataVersionBase/createOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/DataVersionBase"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RegistryDataVersions_Delete",
@@ -3176,7 +3194,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/EnvironmentContainer"
         },
         "x-ms-long-running-operation": true
@@ -15870,19 +15888,20 @@
             }
           },
           "201": {
-            "description": "Resource 'InferenceGroup' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/InferenceGroup"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -15899,7 +15918,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/InferenceGroup"
         },
         "x-ms-long-running-operation": true
@@ -15956,13 +15975,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'InferenceGroup' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/InferenceGroup"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -15972,6 +15991,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -15988,8 +16012,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/InferenceGroup"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -16039,7 +16062,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -16049,6 +16072,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -16214,6 +16242,9 @@
           "ListDeltaModelsAsync Inference Group.": {
             "$ref": "./examples/InferenceGroup/listDeltaModelsAsync.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -16439,6 +16470,9 @@
           "ListSkus Workspace Inference Group.": {
             "$ref": "./examples/Workspace/InferenceGroup/listSkus.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -16753,7 +16787,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -16763,6 +16797,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },

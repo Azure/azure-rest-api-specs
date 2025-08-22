@@ -813,10 +813,6 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation__deleted": true,
         "parameters": [
           [
             "-",
@@ -866,6 +862,9 @@
               }
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/CodeContainer"
         }
       },
       "delete": {
@@ -981,10 +980,6 @@
         }
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation__deleted": true,
         "parameters": [
           [
             "-",
@@ -1037,6 +1032,9 @@
               }
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/DataVersionBase"
         }
       },
       "delete": {
@@ -1248,11 +1246,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/EnvironmentContainer",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/EnvironmentContainer"
         }
       },
       "delete": {
@@ -5695,13 +5689,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/InferenceGroupTrackedResource",
@@ -5711,11 +5698,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/InferenceGroup",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/InferenceGroup"
         }
       },
       "patch": {
@@ -5760,15 +5743,6 @@
                 "__new": "#/definitions/InferenceGroup"
               }
             }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
           }
         }
       },
@@ -5796,18 +5770,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus": {
@@ -5843,9 +5806,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list": {
       "post": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "-",
@@ -5936,9 +5896,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "-",
@@ -6146,18 +6103,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}/cancel": {

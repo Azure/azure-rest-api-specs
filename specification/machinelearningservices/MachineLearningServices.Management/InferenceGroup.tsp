@@ -75,7 +75,16 @@ interface InferenceGroups {
   /**
    * Create or update InferenceGroup (asynchronous).
    */
-  createOrUpdate is InferenceGroupOps.CreateOrUpdateAsync<InferenceGroup>;
+  createOrUpdate is InferenceGroupOps.CreateOrUpdateAsync<
+    InferenceGroup,
+    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmResourceCreatedResponse<InferenceGroup> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update InferenceGroup (asynchronous).
@@ -83,7 +92,14 @@ interface InferenceGroups {
   @patch(#{ implicitOptionality: false })
   update is InferenceGroupOps.CustomPatchAsync<
     InferenceGroup,
-    PatchModel = PartialMinimalTrackedResourceWithSku
+    PatchModel = PartialMinimalTrackedResourceWithSku,
+    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
@@ -92,7 +108,13 @@ interface InferenceGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is InferenceGroupOps.DeleteWithoutOkAsync<
     InferenceGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -147,6 +169,7 @@ interface InferenceGroups {
   /**
    * List delta models associated with the InferenceGroup and the target base model.
    */
+  @list
   @action("deltaModels/list")
   listDeltaModelsAsync is InferenceGroupOps.ActionSync<
     InferenceGroup,
@@ -176,6 +199,7 @@ interface InferenceGroups {
   /**
    * List Inference Group Skus.
    */
+  @list
   @get
   @action("skus")
   listSkus is InferenceGroupOps.ActionSync<

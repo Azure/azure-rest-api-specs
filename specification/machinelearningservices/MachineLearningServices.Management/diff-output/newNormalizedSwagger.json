@@ -1606,7 +1606,12 @@
           "CreateOrUpdate Registry Data Container.": {
             "$ref": "./examples/Registry/DataContainer/createOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/CodeContainer"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RegistryDataContainers_Delete",
@@ -1842,7 +1847,12 @@
           "CreateOrUpdate Registry Data Version Base.": {
             "$ref": "./examples/Registry/DataVersionBase/createOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/DataVersionBase"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RegistryDataVersions_Delete",
@@ -2160,7 +2170,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/EnvironmentContainer"
         },
         "x-ms-long-running-operation": true
@@ -10957,6 +10967,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/InferenceGroup"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -10972,7 +10989,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/InferenceGroup"
         },
         "x-ms-long-running-operation": true
@@ -11018,7 +11035,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -11064,7 +11088,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -11191,6 +11222,9 @@
           "ListDeltaModelsAsync Inference Group.": {
             "$ref": "./examples/InferenceGroup/listDeltaModelsAsync.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -11349,6 +11383,9 @@
           "ListSkus Workspace Inference Group.": {
             "$ref": "./examples/Workspace/InferenceGroup/listSkus.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -11579,7 +11616,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"

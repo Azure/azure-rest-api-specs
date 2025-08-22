@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -67,6 +68,7 @@ interface EnvironmentContainers {
    * Create or update container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @useFinalStateVia("original-uri")
   @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
     EnvironmentContainer,

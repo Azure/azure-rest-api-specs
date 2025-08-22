@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -101,10 +102,15 @@ interface DataVersionBases {
    * Create or update version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @useFinalStateVia("original-uri")
   @operationId("RegistryDataVersions_CreateOrUpdate")
   createOrUpdate is DataVersionWithNamePatternBaseOps.CreateOrUpdateAsync<
     DataVersionBase,
-    Response = ArmResourceUpdatedResponse<DataVersionBase> | (ArmResourceCreatedResponse<DataVersionBase> & {
+    Response = ArmResourceUpdatedResponse<DataVersionBase> | (ArmResourceCreatedResponse<
+      DataVersionBase,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataVersionBase> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -89,10 +90,15 @@ interface DataContainers {
    * Create or update container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @useFinalStateVia("original-uri")
   @operationId("RegistryDataContainers_CreateOrUpdate")
   createOrUpdate is DataContainerwithNamePatternOps.CreateOrUpdateAsync<
     DataContainer,
-    Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<DataContainer> & {
+    Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<
+      DataContainer,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = CodeContainer> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
