@@ -3,11 +3,9 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/openapi";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
-namespace AttestationClient;
+namespace Microsoft.Attestation;
 
 interface PolicyOperationGroup {
   /**
