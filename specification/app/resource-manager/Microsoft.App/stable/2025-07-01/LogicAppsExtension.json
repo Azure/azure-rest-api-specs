@@ -103,7 +103,6 @@
             "name": "resource",
             "in": "body",
             "description": "Logic app resource properties.",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/LogicApp"
             }
@@ -441,7 +440,7 @@
         "tags": [
           "LogicApps"
         ],
-        "summary": "Proxies a the API call to the logic app backed by the container app.",
+        "summary": "Proxies the API call to the logic app backed by the container app.",
         "operationId": "LogicApps_Invoke",
         "parameters": [
           {
@@ -519,10 +518,20 @@
       "type": "object",
       "description": "A logic app extension resource",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/LogicAppProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The logic app resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type - Microsoft.App/logicApps."
         }
       },
       "allOf": [
@@ -530,10 +539,6 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "LogicAppProperties": {
-      "type": "object",
-      "description": "The properties of logic apps extension."
     },
     "WorkflowEnvelope": {
       "description": "Workflow properties definition.",
@@ -552,19 +557,11 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the resource type."
+          "description": "Gets the resource type for ex. Microsoft.App/logicApps/workflows."
         },
         "kind": {
           "type": "string",
-          "description": "The resource kind."
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The workflow kind for ex. Stateful/Stateless."
         },
         "properties": {
           "description": "Additional workflow properties.",
@@ -608,8 +605,8 @@
       }
     },
     "WorkflowFiles": {
-      "description": "Gets or sets the files.",
-      "type": "object"
+      "description": "Represents an object representing files in the form of { \"<filename>\" : \"<filecontent>\"}.",
+      "$ref": "#/definitions/Object"
     },
     "WorkflowHealth": {
       "description": "Represents the workflow health.",
@@ -659,24 +656,25 @@
       "properties": {
         "appSettings": {
           "$ref": "#/definitions/Object",
-          "description": "Application settings of the workflow."
+          "description": "Application settings of the workflow in the form of { \"<settingName>\" : \"<settingValue>\"}."
         },
         "files": {
           "$ref": "#/definitions/WorkflowFiles",
-          "description": "Files of the app."
+          "description": "Files to upload in the SMB (workflows, artifacts, maps, schemas etc) in the form of { \"<filename>\" : \"<filecontent>\"}."
         },
         "filesToDelete": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Files of the app to delete."
+          "description": "Array of strings representing the file names to delete from the smb."
         }
       },
       "description": "The workflow filter."
     },
     "Object": {
       "type": "object",
+      "description": "JSON object.",
       "properties": {}
     },
     "ErrorEntity": {
