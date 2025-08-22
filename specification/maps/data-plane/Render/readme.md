@@ -25,9 +25,11 @@ To see additional help and options, run:
 These are the global settings for Render Client.
 
 ``` yaml
+## Azure Maps Render 1.0 has been deprecated and will be retired on 17 September 2026.
+## Azure Maps Render 2.0 & 2.1 - The endpoint might be used by WebSDK V2.2x or older. Neither should appear in the TOC.
 title: RenderClient
 openapi-type: data-plane
-tag: package-2024-04-01
+tag: package-stable-2024-04-01
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -48,46 +50,46 @@ directive:
 ```
 
 
-### Tag: package-2024-04-01
+### Tag: package-stable-2024-04-01
 
-These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2024-04-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-01'
+```yaml $(tag) == 'package-stable-2024-04-01'
 input-file:
   - stable/2024-04-01/render.json
 ```
-### Tag: 2022-08-01
+### Tag: package-stable-2022-08-01
 
-These settings apply only when `--tag=2022-08-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2022-08-01` is specified on the command line.
 
-``` yaml $(tag) == '2022-08-01'
+``` yaml $(tag) == 'package-stable-2022-08-01'
 input-file:
   - stable/2022-08-01/render.json
 ```
 
-### Tag: 2.1-preview
+### Tag: package-stable-2.1
 
-These settings apply only when `--tag=2.1` is specified on the command line.
+These settings apply only when `--tag=package-stable-2.1` is specified on the command line.
 
-``` yaml $(tag) == '2.1'
+``` yaml $(tag) == 'package-stable-2.1'
 input-file:
   - preview/2.1/render.json
 ```
 
-### Tag: 2.0-preview
+### Tag: package-stable-2.0
 
-These settings apply only when `--tag=2.0` is specified on the command line.
+These settings apply only when `--tag=package-stable-2.0` is specified on the command line.
 
-``` yaml $(tag) == '2.0'
+``` yaml $(tag) == 'package-stable-2.0'
 input-file:
   - preview/2.0/render.json
 ```
 
-### Tag: 1.0-preview
+### Tag: package-deprecated-1.0
 
-These settings apply only when `--tag=1.0` is specified on the command line.
+These settings apply only when `--tag=package-deprecated-1.0` is specified on the command line.
 
-``` yaml $(tag) == '1.0'
+``` yaml $(tag) == 'package-deprecated-1.0'
 input-file:
   - preview/1.0/render.json
 ```
