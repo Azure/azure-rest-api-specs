@@ -2,11 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
-namespace AttestationClient;
+namespace Microsoft.Attestation;
 
 /**
  * Content type for upload
