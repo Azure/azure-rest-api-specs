@@ -1043,7 +1043,7 @@ model CatalogUpdate {
 }
 
 @doc("Properties of an environment definition.")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
 model EnvironmentDefinitionProperties {
   @doc("A short description of the environment definition.")
   @visibility(Lifecycle.Read)
@@ -1528,7 +1528,7 @@ model CheckScopedNameAvailabilityRequest {
 model CustomizationTaskListResult is Azure.Core.Page<CustomizationTask>;
 
 @doc("Properties of a Task.")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
 model CustomizationTaskProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("Inputs to the task.")
@@ -1560,7 +1560,7 @@ model CustomizationTaskInput {
 }
 
 @doc("Properties of an Image Definition.")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
 model ImageDefinitionProperties {
   @doc("Image reference information.")
   imageReference?: ImageReference;
@@ -1657,7 +1657,7 @@ model ImageDefinitionReference {
   parameters?: DefinitionParametersItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
 @doc("Properties of an Image Definition Build.")
 model ImageDefinitionBuildProperties {
   @doc("The specific image version used by the build.")
@@ -2033,7 +2033,7 @@ model NetworkConnectionUpdate is TrackedResourceUpdate {
   properties?: NetworkConnectionUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
 @doc("Health Check properties.")
 model HealthCheckStatusDetailsProperties {
   @doc("Start time of last execution of the health checks.")
