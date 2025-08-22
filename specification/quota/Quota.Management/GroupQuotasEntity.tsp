@@ -119,6 +119,7 @@ interface GroupQuotasEntities {
    * Get API to check the status of a GroupQuota request by requestId.
    */
   @get
+  @list
   @action("groupQuotaRequests")
   groupQuotaLimitsRequestList is Extension.ActionSync<
     Extension.ManagementGroup<"managementGroupId">,
@@ -147,6 +148,7 @@ interface GroupQuotasEntities {
    * Gets the GroupQuotas usages and limits(quota). Location is required paramter.
    */
   @get
+  @list
   groupQuotaUsagesList is Extension.Read<
     Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
