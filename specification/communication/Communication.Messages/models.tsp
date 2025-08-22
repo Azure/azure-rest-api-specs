@@ -298,7 +298,7 @@ model ReadReceiptContent {
   messageId: string;
 
   @doc("The Channel Registration ID for the Business Identifier.")
-  channelRegistrationId: string;
+  channelRegistrationId: uuid;
 
   @doc("Whether this status update includes a typing indicator. This field defaults to false when not provided.")
   typingIndicator?: boolean;
@@ -765,7 +765,7 @@ model NotificationMessagesSendRequestBody {
 model ReadReceiptSendRequestBody {
   @doc("Details of the read receipt update to send.")
   @bodyRoot
-  body: ReadReceiptContent;
+  readReceiptContent: ReadReceiptContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
