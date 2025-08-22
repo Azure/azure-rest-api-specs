@@ -1293,7 +1293,9 @@ model PrivateLinkServiceConnectionState {
 /**
  * An error response from Key Vault resource provider
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * An error response from Key Vault resource provider
@@ -1304,6 +1306,8 @@ model CloudError {
 /**
  * An error response from Key Vault resource provider
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * Error code. This is a mnemonic that can be consumed programmatically.
