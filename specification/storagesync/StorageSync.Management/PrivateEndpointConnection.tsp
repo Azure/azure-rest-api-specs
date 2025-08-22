@@ -16,7 +16,7 @@ namespace Microsoft.StorageSync;
  * The private endpoint connection resource.
  */
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
-alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
@@ -72,7 +72,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
-  listByStorageSyncService is ListSinglePageByParent<
+  listByStorageSyncService is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
     StorageSyncService,
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult> & {
