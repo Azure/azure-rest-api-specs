@@ -37,11 +37,7 @@ These settings apply only when `--tag=package-preview-2025-07-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-07-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-07-01-preview/openapi.json
-suppressions:
-  - code: PatchBodyParametersSchema
-    from: vdi.json
-    reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
+  - Microsoft.DevCenter/preview/2025-07-01-preview/DevCenterRP.json
 ```
 
 ### Tag: package-preview-2025-04-01-preview
