@@ -121,11 +121,6 @@ stages:
             $sdkRepoUrl = '${{ parameters.SdkRepoUrl }}'
             Write-Host "Validating SDK repo branch: '$SdkRepoBranch'"
 
-            if ($sdkRepoBranch.contains(":")) {
-              Write-Host "##vso[task.logissue type=error]'SDK repository branch' must be a commit SHA or branch name without ':'"
-              Exit 1
-            }
-
             if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
 
               # GitHub's limit is around 250 characters
