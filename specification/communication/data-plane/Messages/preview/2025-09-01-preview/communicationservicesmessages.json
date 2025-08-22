@@ -2680,7 +2680,7 @@
           "description": "The id of the message this read receipt refers to."
         },
         "channelRegistrationId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Channel Registration ID for the Business Identifier."
         },
         "typingIndicator": {
@@ -3225,7 +3225,7 @@
       "x-ms-parameter-location": "method"
     },
     "ReadReceiptSendRequestBody": {
-      "name": "body",
+      "name": "readReceiptContent",
       "in": "body",
       "description": "Details of the read receipt update to send.",
       "required": true,
