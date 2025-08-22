@@ -14,8 +14,8 @@ namespace Microsoft.NetApp;
 /**
  * Snapshot of a Volume
  */
-@parentResource(Volume)
 #suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "For backward compatibility"
+@parentResource(Volume)
 model Snapshot is Azure.ResourceManager.ProxyResource<SnapshotProperties> {
   ...ResourceNameParameter<
     Resource = Snapshot,

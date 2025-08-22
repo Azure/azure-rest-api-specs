@@ -1215,9 +1215,9 @@ model AccountProperties {
   /**
    * Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @maxLength(255)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   nfsV4IDDomain?: string;
 
   /**
@@ -1298,8 +1298,8 @@ model ActiveDirectory {
   /**
    * kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume.
    */
-  @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   kdcIP?: string;
 
   /**
@@ -1312,9 +1312,9 @@ model ActiveDirectory {
   /**
    * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @maxLength(10240)
   @minLength(1)
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   serverRootCACertificate?: string;
 
   /**
@@ -1369,15 +1369,15 @@ model LdapSearchScopeOpt {
   /**
    * This specifies the user DN, which overrides the base DN for user lookups.
    */
-  @maxLength(255)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @maxLength(255)
   userDN?: string;
 
   /**
    * This specifies the group DN, which overrides the base DN for group lookups.
    */
-  @maxLength(255)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @maxLength(255)
   groupDN?: string;
 
   /**
@@ -1893,7 +1893,7 @@ model VolumeProperties {
   mountTargets?: MountTargetProperties[];
 
   /**
-   * What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection
+   * What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection. For creating clone volume, set type to ShortTermClone
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   volumeType?: string;
