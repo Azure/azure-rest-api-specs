@@ -112,7 +112,7 @@ interface LinkerOps
       {
         ...ApiVersionParameter,
 
-        /** {resourceUri} */
+        /** The fully qualified Azure Resource manager identifier of the resource to be connected. */
         @path(#{ allowReserved: true })
         resourceUri: string,
 

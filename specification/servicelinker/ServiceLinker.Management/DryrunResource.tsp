@@ -84,7 +84,7 @@ interface LinkersOps
       {
         ...ApiVersionParameter,
 
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        /** The fully qualified Azure Resource manager identifier of the resource to be connected. */
         @path(#{ allowReserved: true })
         resourceUri: string,
 
