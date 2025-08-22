@@ -12,10 +12,8 @@ import "./routes-index.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-/**
- * Client that can be used to manage and query indexes and documents, as well as
- * manage other resources, on a search service.
- */
+
+@doc("Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.")
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
@@ -29,19 +27,13 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 namespace Search;
 
-/**
- * The available API versions.
- */
+@doc("The available API versions.")
 enum Versions {
-  /**
-   * The 2024-07-01 API version.
-   */
+  @doc("The 2024-07-01 API version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_07_01: "2024-07-01",
 
-  /**
-   * The 2025-03-01-preview API version.
-   */
+  @doc("The 2025-08-01-preview API version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2025_03_01_preview: "2025-03-01-preview",
+  v2025_08_01_preview: "2025-08-01-preview",
 }

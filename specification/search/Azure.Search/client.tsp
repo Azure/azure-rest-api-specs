@@ -6,7 +6,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2025_03_01_preview)
+@TypeSpec.Versioning.useDependency(Search.Versions.v2025_08_01_preview)
 namespace Customizations;
 
 @client({
