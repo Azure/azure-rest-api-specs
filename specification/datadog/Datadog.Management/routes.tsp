@@ -19,6 +19,7 @@ interface MarketplaceAgreementsOperationGroup {
   @summary("List Datadog marketplace agreements in the subscription.")
   @autoRoute
   @get
+  @list
   @action("agreements")
   list is ArmProviderActionSync<
     Response = DatadogAgreementResourceListResponse,
@@ -49,6 +50,7 @@ interface CreationSupportedOperationGroup {
   @summary("Informs if the current subscription is being already monitored for selected Datadog organization.")
   @autoRoute
   @get
+  @list
   @action("subscriptionStatuses")
   list is ArmProviderActionSync<
     Response = CreateResourceSupportedResponseList,

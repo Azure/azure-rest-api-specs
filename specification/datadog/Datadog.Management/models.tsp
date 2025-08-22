@@ -880,12 +880,11 @@ model OperationDisplay {
 /**
  * Represents a paginated list of operation results.
  */
-@pagedResult
 model OperationListResult {
   /**
    * The list of operations.
    */
-  @items
+  @pageItems
   value: OperationResult[];
 
   /**

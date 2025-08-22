@@ -105,6 +105,7 @@ interface DatadogMonitorResources {
   /**
    * List the api keys for a given monitor resource.
    */
+  @list
   listApiKeys is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -133,6 +134,7 @@ interface DatadogMonitorResources {
   /**
    * List the hosts for a given monitor resource.
    */
+  @list
   listHosts is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -142,6 +144,7 @@ interface DatadogMonitorResources {
   /**
    * List all Azure resources associated to the same Datadog organization as the target resource.
    */
+  @list
   listLinkedResources is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -151,6 +154,7 @@ interface DatadogMonitorResources {
   /**
    * List the resources currently being monitored by the Datadog monitor resource.
    */
+  @list
   listMonitoredResources is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
