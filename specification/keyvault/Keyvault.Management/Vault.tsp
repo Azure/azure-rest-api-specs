@@ -13,7 +13,11 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
-model Vault is Azure.ResourceManager.TrackedResource<VaultProperties, false> {
+model Vault
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    VaultProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = Vault,
     KeyName = "vaultName",

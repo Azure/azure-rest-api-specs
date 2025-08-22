@@ -15,7 +15,11 @@ namespace Microsoft.KeyVault;
  * The key resource.
  */
 @parentResource(Vault)
-model Key is Azure.ResourceManager.TrackedResource<KeyProperties, false> {
+model Key
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    KeyProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = Key,
     KeyName = "keyName",
