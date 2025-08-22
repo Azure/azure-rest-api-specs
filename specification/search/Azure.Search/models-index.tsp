@@ -600,6 +600,11 @@ union VectorFilterMode {
    * The filter will be applied before the search query.
    */
   PreFilter: "preFilter",
+
+  /**
+   * The filter will be applied after the global top-k candidate set of vector results is returned.
+   */
+  StrictPostFilter: "strictPostFilter",
 }
 
 /**
@@ -1329,6 +1334,14 @@ model VectorQuery {
   filterOverride?: string;
 
   /**
+   * The OData filter expression to apply to this specific vector query. If no
+   * filter expression is defined at the vector level, the expression defined in the
+   * top level filter parameter is used instead.
+   */
+  @added(Versions.v2025_03_01_preview)
+  perDocumentVectorLimit?: int32;
+
+  /**
    * Type of query.
    */
   kind: VectorQueryKind;
@@ -1390,6 +1403,14 @@ model SearchResult {
    */
   @encodedName("application/json", "@search.rerankerScore")
   rerankerScore?: float64;
+
+  /**
+   * The relevance score computed by boosting the Reranker Score.
+   * Search results are sorted by the RerankerScore/RerankerBoostedScore based on useScoringProfileBoostedRanking in the Semantic Config.
+   * RerankerBoostedScore is only returned for queries of type 'semantic'.
+   */
+  @encodedName("application/json", "@search.rerankerBoostedScore")
+  rerankerBoostedScore?: float64;
 
   /**
    * Text fragments from the document that indicate the matching search terms,
@@ -1456,6 +1477,12 @@ model DocumentDebugInfo {
    */
   @visibility(Lifecycle.Read)
   vectors?: VectorsDebugInfo;
+
+  /**
+   * Contains debugging information specific to vectors matched within a collection of complex types.
+   */
+  @visibility(Lifecycle.Read)
+  innerHits?: Record<QueryResultDocumentInnerHit[]>;
 }
 
 /**
@@ -1489,6 +1516,24 @@ model SemanticDebugInfo {
    */
   @visibility(Lifecycle.Read)
   rerankerInput?: QueryResultDocumentRerankerInput;
+}
+
+/**
+ * Detailed scoring information for an individual element of a complex collection.
+ */
+@added(Versions.v2025_03_01_preview)
+model QueryResultDocumentInnerHit {
+  /**
+   * Position of this specific matching element within it's original collection. Position starts at 0.
+   */
+  @visibility(Lifecycle.Read)
+  ordinal?: int64;
+
+  /**
+   * Detailed scoring information for an individual element of a complex collection that matched a vector query.
+   */
+  @visibility(Lifecycle.Read)
+  vectors?: Record<SingleVectorFieldResult>[];
 }
 
 /**
