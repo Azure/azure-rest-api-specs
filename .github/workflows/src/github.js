@@ -1,7 +1,9 @@
 // @ts-check
 
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { toPercent } from "../../shared/src/math.js";
 import { byDate, invert } from "../../shared/src/sort.js";
+import { Duration, subtract } from "../../shared/src/time.js";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
@@ -122,34 +124,35 @@ export function createLogHook(endpoint) {
  * @param {import("@octokit/types").OctokitResponse<any>} response
  */
 export function rateLimitHook(response) {
-  // const {
-  //   "x-ratelimit-limit": limit,
-  //   "x-ratelimit-remaining": remaining,
-  //   "x-ratelimit-reset": reset,
-  //   "x-ratelimit-used": used,
-  //   "x-ratelimit-resource": resource,
-  //   "x-ratelimit-policy": policy,
-  //   "retry-after": retryAfter,
-  // } = response.headers;
+  const headers = response.headers;
 
-  // TODO: Make logging more readable at-a-glance
-  // - Compute usageFraction as:
-  //   - start: reset - 1h
-  //   - duration: now - start
-  //   - durationFraction: duration / 1h
-  //   - availableLimit: limit * durationFraction
-  //   - used: limit - remaining
-  //   - usageFraction: used / availableLimit
-  // - If usageFraction is > 100%, we are "running hot" and predicted to hit limit before reset
-  // - Keep usageFraction < 50% for a safety margin.  If regularly > 50%, optimize.
+  const limit = parseInt(headers["x-ratelimit-limit"] || "");
+  const remaining = parseInt(headers["x-ratelimit-remaining"] || "");
+  const used = limit - remaining;
+
+  const reset = new Date(parseInt(response.headers["x-ratelimit-reset"] || "") * 1000);
+  const start = subtract(reset, Duration.Hour);
+  const elapsedMs = new Date().getTime() - start.getTime();
+  const elapsedFraction = elapsedMs / Duration.Hour;
+
+  // Example: If limit is 1000, and 6 minutes have elapsed (10% of 1 hour),
+  // availableLimit will be 100 (10% of total).
+  const availableLimit = limit * elapsedFraction;
+
+  // If usageFraction is > 100%, we are "running hot" and predicted to hit limit before reset
+  // Keep usageFraction < 50% for a safety margin.  If regularly > 50%, optimize.
+  const usageFraction = used / availableLimit;
+
+  const resource = headers["x-ratelimit-resource"];
 
   const limits = {
-    limit: response.headers["x-ratelimit-limit"],
-    remaining: response.headers["x-ratelimit-remaining"],
-    reset: new Date(parseInt(response.headers["x-ratelimit-reset"] || "") * 1000),
+    usage: toPercent(usageFraction),
+    used,
+    remaining,
+    limit,
+    reset,
+    resource,
   };
-
-  console.log(`[github] headers: ${JSON.stringify(response.headers, null, 2)}`);
 
   console.log(`[github] rate-limits: ${JSON.stringify(limits)}`);
 }
