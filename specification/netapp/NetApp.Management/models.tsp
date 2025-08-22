@@ -1217,6 +1217,7 @@ model AccountProperties {
    */
   @maxLength(255)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   nfsV4IDDomain?: string;
 
   /**
@@ -1298,6 +1299,7 @@ model ActiveDirectory {
    * kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume.
    */
   @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   kdcIP?: string;
 
   /**
@@ -1312,6 +1314,7 @@ model ActiveDirectory {
    */
   @maxLength(10240)
   @minLength(1)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   serverRootCACertificate?: string;
 
   /**
@@ -1332,6 +1335,7 @@ model ActiveDirectory {
   /**
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ldapOverTLS?: boolean;
 
   /**
@@ -1342,6 +1346,7 @@ model ActiveDirectory {
   /**
    * If enabled, Traffic between the SMB server to Domain Controller (DC) will be encrypted.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   encryptDCConnections?: boolean;
 
   /**
@@ -1365,12 +1370,14 @@ model LdapSearchScopeOpt {
    * This specifies the user DN, which overrides the base DN for user lookups.
    */
   @maxLength(255)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   userDN?: string;
 
   /**
    * This specifies the group DN, which overrides the base DN for group lookups.
    */
   @maxLength(255)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   groupDN?: string;
 
   /**

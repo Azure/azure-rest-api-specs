@@ -15,6 +15,7 @@ namespace Microsoft.NetApp;
  * Quota Rule of a Volume
  */
 @parentResource(Volume)
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
 model VolumeQuotaRule
   is Azure.ResourceManager.TrackedResource<VolumeQuotaRulesProperties> {
   ...ResourceNameParameter<

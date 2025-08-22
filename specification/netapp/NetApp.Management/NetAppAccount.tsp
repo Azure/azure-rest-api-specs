@@ -88,6 +88,7 @@ interface NetAppAccounts {
    * Renew identity credentials that are used to authenticate to key vault, for customer-managed key encryption. If encryption.identity.principalId does not match identity.principalId, running this operation will fix it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("Accounts_RenewCredentials")
   renewCredentials is ArmResourceActionAsync<
     NetAppAccount,
@@ -115,6 +116,7 @@ interface NetAppAccounts {
    * Contains data from encryption.keyVaultProperties as well as information about which private endpoint is used by each encryption sibling set. Response from this endpoint can be modified and used as request body for POST request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("Accounts_GetChangeKeyVaultInformation")
   @action("getKeyVaultStatus")
   getChangeKeyVaultInformation is ArmResourceActionAsync<

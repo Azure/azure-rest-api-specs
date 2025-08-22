@@ -49,6 +49,7 @@ interface SubvolumeInfos {
    * Patch a subvolume
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("Subvolumes_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -85,6 +86,7 @@ interface SubvolumeInfos {
    * Get details of the specified subvolume
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("Subvolumes_GetMetadata")
   getMetadata is ArmResourceActionAsync<
     SubvolumeInfo,

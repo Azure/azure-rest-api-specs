@@ -46,6 +46,7 @@ interface BackupPolicies {
    * Patch a backup policy for Netapp Account
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BackupPolicy,
