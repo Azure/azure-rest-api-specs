@@ -139,14 +139,14 @@ export function rateLimitHook(response) {
   // availableLimit will be 100 (10% of total).
   const availableLimit = limit * elapsedFraction;
 
-  // If usageFraction is > 100%, we are "running hot" and predicted to hit limit before reset
-  // Keep usageFraction < 50% for a safety margin.  If regularly > 50%, optimize.
-  const usageFraction = used / availableLimit;
+  // If load is > 100%, we are "running hot" and predicted to hit limit before reset
+  // Keep load < 50% for a safety margin.  If regularly > 50%, optimize.
+  const load = used / availableLimit;
 
   // const resource = headers["x-ratelimit-resource"];
 
   const limits = {
-    usage: toPercent(usageFraction),
+    load: toPercent(load),
     used,
     remaining,
     reset: formatDuration(new Date(), reset),
