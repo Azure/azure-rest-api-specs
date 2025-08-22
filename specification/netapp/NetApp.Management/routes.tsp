@@ -107,6 +107,7 @@ interface NetAppResourceUsagesOperationGroup {
   @autoRoute
   @get
   @action("usages")
+  @list
   list is ArmProviderActionSync<
     Response = UsagesListResult,
     Scope = SubscriptionActionScope,
