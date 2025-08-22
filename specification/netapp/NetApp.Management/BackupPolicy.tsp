@@ -50,7 +50,7 @@ interface BackupPolicies {
   update is ArmCustomPatchAsync<
     BackupPolicy,
     PatchModel = BackupPolicyPatch,
-    Response = ArmResponse<BackupPolicy> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = BackupPolicy> &
+    Response = ArmResponse<BackupPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupPolicy> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: BackupPolicy;

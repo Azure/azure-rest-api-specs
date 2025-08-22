@@ -254,7 +254,7 @@ interface Volumes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backups_GetLatestStatus")
   @get
-  @action("current")
+  @action("latestBackupStatus/current")
   getLatestStatus is ArmResourceActionSync<
     Volume,
     void,
@@ -267,7 +267,7 @@ interface Volumes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backups_GetVolumeLatestRestoreStatus")
   @get
-  @action("current")
+  @action("latestRestoreStatus/current")
   getVolumeLatestRestoreStatus is ArmResourceActionSync<
     Volume,
     void,

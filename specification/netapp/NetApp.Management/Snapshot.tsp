@@ -31,6 +31,12 @@ model Snapshot is Azure.ResourceManager.ProxyResource<SnapshotProperties> {
   location: string;
 }
 
+/**
+ * Snapshot of a Volume
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+model SnapshotPatch {}
+
 @armResourceOperations
 interface Snapshots {
   /**
@@ -54,7 +60,7 @@ interface Snapshots {
    * Patch a snapshot
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Snapshot, PatchModel = AnyObject>;
+  update is ArmCustomPatchAsync<Snapshot, PatchModel = SnapshotPatch>;
 
   /**
    * Delete snapshot
