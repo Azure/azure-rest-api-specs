@@ -47,6 +47,9 @@ These settings apply only when `--tag=package-2022-04-20-preview-ledger` is spec
 ```yaml $(tag) == 'package-2022-04-20-preview-ledger'
 input-file:
   - preview/2022-04-20-preview/confidentialledger.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
 ```
 
 ### Tag: package-2022-04-20-preview-identity
