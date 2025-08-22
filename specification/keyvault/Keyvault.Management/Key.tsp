@@ -14,6 +14,7 @@ namespace Microsoft.KeyVault;
 /**
  * The key resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Vault)
 model Key
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
