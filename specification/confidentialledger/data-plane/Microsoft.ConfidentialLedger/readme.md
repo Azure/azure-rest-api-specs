@@ -50,6 +50,8 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
+  - suppress: IntegerTypeMustHaveFormat
+    reason: Existing API, change would potentially be breaking.
 ```
 
 ### Tag: package-2022-04-20-preview-identity
@@ -59,6 +61,9 @@ These settings apply only when `--tag=package-2022-04-20-preview-identity` is sp
 ```yaml $(tag) == 'package-2022-04-20-preview-identity'
 input-file:
   - preview/2022-04-20-preview/identityservice.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
 ```
 
 ### Tag: package-2022-05-13-ledger
