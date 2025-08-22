@@ -384,6 +384,16 @@ model EvaluationSummaryResult {
   metrics?: AggregatedMetric[];
 }
 
+@doc("Definition for evaluation data source configuration.")
+@added(Versions.v2025_05_15_preview)
+model DataSourceConfiguration {
+  @doc("Type of the data source.")
+  type: string;
+
+  @doc("Schema of the data source.")
+  schema?: Record<unknown>;
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -433,6 +443,10 @@ model Evaluation {
   @typeChangedFrom(Versions.v2025_07_31_preview, Record<EvaluatorConfiguration>)
   evaluators: EvaluatorConfiguration[];
 
+  @doc("Overrides the judge model used to grade this evaluation.")
+  @added(Versions.v2025_07_31_preview)
+  gradeWith?: string;
+
   @doc("Specifies the type and configuration of the entity used for this evaluation.")
   @removed(Versions.v2025_07_31_preview)
   target?: EvaluationTarget;
@@ -455,6 +469,38 @@ model Evaluation {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_31_preview)
   systemData?: Record<string>;
+}
+
+@doc("Evaluation Group Definition")
+@resource("groups")
+@added(Versions.v2025_07_31_preview)
+model EvaluationGroup {
+  @doc("Identifier of the evaluation group.")
+  @key("name")
+  @encodedName("application/json", "id")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Display Name for evaluation group. It helps to find the evaluation group easily in AI Foundry. It does not need to be unique.")
+  displayName?: string;
+
+  @doc("Description of the evaluation group. It can be used to store additional information about the evaluation group and is mutable.")
+  description?: string;
+
+  @doc("Evaluation Group's tags. Unlike properties, tags are fully mutable.")
+  tags?: Record<string>;
+
+  @doc("Evaluation Group's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
+
+  @doc("Data source configuration for the evaluation group.")
+  dataSourceConfig: DataSourceConfiguration;
+
+  @doc("Evaluation Runs under the group. It is mutable.")
+  evaluationRuns?: Record<string>;
+
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators: Record<EvaluatorConfiguration>;
 }
 
 @doc("Definition for sampling strategy.")
