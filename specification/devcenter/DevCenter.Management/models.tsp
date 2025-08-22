@@ -619,7 +619,7 @@ union DayOfWeek {
 model DevCenterListResult is Azure.Core.Page<DevCenter>;
 
 @doc("Properties of the devcenter.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model DevCenterProperties extends DevCenterUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -696,7 +696,7 @@ model TrackedResourceUpdate {
 }
 
 @doc("Properties of the devcenter encryption set.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model DevCenterEncryptionSetProperties
   extends DevCenterEncryptionSetUpdateProperties {
   @doc("The provisioning state of the resource.")
@@ -739,7 +739,7 @@ model EncryptionSetUpdate is TrackedResourceUpdate {
 }
 
 @doc("Properties of an project policy.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model ProjectPolicyProperties extends ProjectPolicyUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -780,7 +780,7 @@ model ProjectPolicyUpdate {
 }
 
 @doc("Properties of a project.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model ProjectProperties extends ProjectUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -939,7 +939,7 @@ model AttachedNetworkConnectionProperties {
 model AttachedNetworkListResult is Azure.Core.Page<AttachedNetworkConnection>;
 
 @doc("Properties of a catalog.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model CatalogProperties extends CatalogUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -1239,7 +1239,7 @@ model ImageVersionProperties {
 model SkuListResult is Azure.Core.Page<DevCenterSku>;
 
 @doc("The resource model definition representing SKU for DevCenter resources.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model DevCenterSku extends Azure.ResourceManager.CommonTypes.Sku {
   @doc("The name of the resource type.")
   @visibility(Lifecycle.Read)
@@ -1267,7 +1267,7 @@ model Capability {
 }
 
 @doc("Properties of an environment type.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model EnvironmentTypeProperties extends EnvironmentTypeUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -1308,7 +1308,7 @@ model AllowedEnvironmentTypeListResult
   is Azure.Core.Page<AllowedEnvironmentType>;
 
 @doc("Properties of a project environment type.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model ProjectEnvironmentTypeProperties
   extends ProjectEnvironmentTypeUpdateProperties {
   @doc("The provisioning state of the resource.")
@@ -1384,7 +1384,7 @@ model ProjectEnvironmentTypeUpdate {
 model DevBoxDefinitionListResult is Azure.Core.Page<DevBoxDefinition>;
 
 @doc("Properties of a Dev Box definition.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model DevBoxDefinitionProperties extends DevBoxDefinitionUpdateProperties {
   @doc("Image reference information.")
   imageReference: ImageReference;
@@ -1475,7 +1475,7 @@ model OperationDisplay {
 }
 
 @doc("The current status of an async operation")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model OperationStatus extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Custom operation properties, populated only for a successful operation.")
@@ -1691,7 +1691,7 @@ model ImageCreationErrorDetails {
 }
 
 @doc("Represents a specific build of an Image Definition.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model ImageDefinitionBuildDetails
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   @doc("The specific image version used by the build.")
@@ -1784,7 +1784,7 @@ model ImageDefinitionBuildTaskParametersItem {
   value: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 @doc("Properties of a Pool.")
 model PoolProperties extends PoolUpdateProperties {
   @doc("Name of a Dev Box definition in parent Project of this Pool. Will be ignored if devBoxDefinitionType is Value.")
@@ -1937,7 +1937,7 @@ model PoolUpdate is TrackedResourceUpdate {
 }
 
 @doc("The Schedule properties defining when and what to execute.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model ScheduleProperties extends ScheduleUpdateProperties {
   @doc("Supported type this scheduled task represents.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Safe to suppress for an existing API during TypeSpec conversion."
@@ -1984,7 +1984,7 @@ model ScheduleUpdate {
 }
 
 @doc("Network properties")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model NetworkProperties extends NetworkConnectionUpdateProperties {
   @doc("The subnet to attach Virtual Machines to.")
   subnetId: string;
