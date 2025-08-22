@@ -97,9 +97,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -8672,6 +8672,20 @@
         }
       }
     },
+    "Dimension": {
+      "type": "object",
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        }
+      }
+    },
     "EncryptionIdentity": {
       "type": "object",
       "description": "Identity used to authenticate with key vault.",
@@ -9130,6 +9144,118 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Log Definition of a single resource metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of log specification."
+        }
+      }
+    },
+    "MetricAggregationType": {
+      "type": "string",
+      "enum": [
+        "Average"
+      ],
+      "x-ms-enum": {
+        "name": "MetricAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average"
+          }
+        ]
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit could be Bytes or Count."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Support metric aggregation type.",
+          "items": {
+            "$ref": "#/definitions/MetricAggregationType"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "The internal metric name."
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Whether or not the service is using regional MDM accounts."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions of blobs, including blob type and access tier.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type could be Average."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "The property to decide fill gap with zero or not."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category this metric specification belong to, could be Capacity."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Account Resource Id."
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Whether the metric is internal."
+        }
+      }
+    },
     "MirrorState": {
       "type": "string",
       "description": "The status of the replication",
@@ -9466,6 +9592,82 @@
               ]
             }
           }
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Microsoft.NetApp REST API operation definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of operations."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft NetApp."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
         }
       }
     },
@@ -10179,6 +10381,32 @@
           "format": "int64",
           "description": "Displays the total bytes transferred",
           "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "One property of operation, include metric specifications.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Metric specifications of operation.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Log specification of operation.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -11598,7 +11826,7 @@
         },
         "volumeType": {
           "type": "string",
-          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection",
+          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection. For creating clone volume, set type to ShortTermClone",
           "x-ms-mutability": [
             "read",
             "create"
