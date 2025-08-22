@@ -153,7 +153,6 @@ stages:
 
               if ([string]::IsNullOrEmpty($branchExists)) {
                 Write-Host "Branch '$SdkRepoBranch' does not exist in remote repository"
-                Write-Host "Will checkout 'main'"
                 $checkoutCommitish = 'main'
               } else {
                 Write-Host "Branch '$SdkRepoBranch' exists in remote repository"
