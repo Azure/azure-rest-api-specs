@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
   
   Translate. Renders single source-language text to multiple target-language texts with a single request.
   
-  Transliterate. Converts characters or letters of a source language to the corresponding characters or letters of a target language via translit.
+  Transliterate. Converts characters or letters of a source language to the corresponding characters or letters of a target language.
   
   Detect. Returns the source code language code and a boolean variable denoting whether the detected language is supported for text translation and transliteration.
   """)
