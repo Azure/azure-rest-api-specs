@@ -33,7 +33,6 @@ interface DnsResolversOperationGroup {
    * Lists DNS resolver resource IDs linked to a virtual network.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DnsResolvers_ListByVirtualNetwork")
   @action("listDnsResolvers")
   @list
   listByVirtualNetwork is ArmResourceActionSync<
@@ -57,7 +56,6 @@ interface DnsForwardingRulesetsOperationGroup {
    * Lists DNS forwarding ruleset resource IDs attached to a virtual network.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DnsForwardingRulesets_ListByVirtualNetwork")
   @action("listDnsForwardingRulesets")
   @list
   listByVirtualNetwork is ArmResourceActionSync<
@@ -81,7 +79,6 @@ interface DnsResolverPoliciesOperationGroup {
    * Lists DNS resolver policy resource IDs linked to a virtual network.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DnsResolverPolicies_ListByVirtualNetwork")
   @action("listDnsResolverPolicies")
   @list
   listByVirtualNetwork is ArmResourceActionSync<
