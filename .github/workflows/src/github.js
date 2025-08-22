@@ -112,7 +112,7 @@ export function createLogHook(endpoint) {
   function logHook(options) {
     const request = endpoint(options);
     const { method, url, body } = request;
-    console.log(`[github] ${method.toUpperCase()} ${url} ${JSON.stringify(body)}`);
+    console.log(`[github] ${method.toUpperCase()} ${url} ${body ? JSON.stringify(body) : ""}`);
   }
 
   return logHook;
@@ -122,6 +122,17 @@ export function createLogHook(endpoint) {
  * @param {import("@octokit/types").OctokitResponse<any>} response
  */
 export function rateLimitHook(response) {
+  // TODO: Make logging more readable at-a-glance
+  // - Compute usageFraction as:
+  //   - start: reset - 1h
+  //   - duration: now - start
+  //   - durationFraction: duration / 1h
+  //   - availableLimit: limit * durationFraction
+  //   - used: limit - remaining
+  //   - usageFraction: used / availableLimit
+  // - If usageFraction is > 100%, we are "running hot" and predicted to hit limit before reset
+  // - Keep usageFraction < 50% for a safety margin.  If regularly > 50%, optimize.
+
   const limits = {
     limit: response.headers["x-ratelimit-limit"],
     remaining: response.headers["x-ratelimit-remaining"],
