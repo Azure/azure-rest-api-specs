@@ -62,7 +62,6 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @doc("Create cluster identity.")
-  @operationId("Clusters_CreateIdentity")
   createClusterIdentity is ArmResourceActionAsync<
     Cluster,
     void,

@@ -26,6 +26,9 @@ union ProvisioningState {
   @doc("Resource creation was canceled.")
   Canceled: "Canceled",
 
+  @doc("Resource creation is in progress.")
+  InProgress: "InProgress",
+
   @doc("The resource provision state is not specified")
   NotSpecified: "NotSpecified",
 
@@ -402,7 +405,7 @@ model DeviceConfiguration {
 model NetworkConfiguration {
   @Azure.ResourceManager.identifiers(#[])
   @doc("List of network adapters.")
-  networkAdapters: NetworkAdapter[];
+  networkAdapters?: NetworkAdapter[];
 }
 
 @doc("Network adapter configuration.")
@@ -412,6 +415,12 @@ model NetworkAdapter {
 
   @doc("IP address.")
   ipAddress?: string;
+
+  @doc("Adapter Name.")
+  adapterName?: string;
+
+  @doc("MAC address.")
+  macAddress?: string;
 
   @doc("IP address range.")
   ipAddressRange?: IpAddressRange;
@@ -471,4 +480,78 @@ model TimeConfiguration {
 
   @doc("Time zone.")
   timeZone?: string;
+}
+
+@doc("Represents the provisioning operating system type.")
+union ProvisioningOsType {
+  string,
+
+  @doc("AzureLinux OS.")
+  AzureLinux: "AzureLinux",
+
+  @doc("HCI OS.")
+  HCI: "HCI",
+}
+
+@doc("Represents the status of a log collection operation.")
+union DeviceLogCollectionStatus {
+  @doc("A custom status provided as a string.")
+  string,
+
+  @doc("Log collection operation has not been initiated.")
+  NotStarted: "NotStarted",
+
+  @doc("Indicates that the log collection operation is currently running.")
+  Running: "Running",
+
+  @doc("Indicates that the log collection operation has failed.")
+  Failed: "Failed",
+
+  @doc("Indicates that the log collection operation has completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("Indicates that the log collection operation has completed successfully.")
+  Canceled: "Canceled",
+}
+
+@doc("Represents the reported properties of a log collection job.")
+model LogCollectionReportedProperties {
+  ...JobReportedProperties;
+
+  @doc("Details of the log collection session.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["correlationId"])
+  logCollectionSessionDetails?: LogCollectionSession[];
+}
+
+@doc("Represents a session for collecting logs from an edge device.")
+model LogCollectionSession {
+  @doc("The timestamp when log collection started, in ISO 8601 format.")
+  @visibility(Lifecycle.Read)
+  startTime?: string;
+
+  @doc("The timestamp when log collection ended, in ISO 8601 format.")
+  @visibility(Lifecycle.Read)
+  endTime?: string;
+
+  @doc("The total time logs were collected for, in ISO 8601 duration format.")
+  @visibility(Lifecycle.Read)
+  timeCollected?: string;
+
+  @doc("The size of the collected logs in bytes.")
+  @visibility(Lifecycle.Read)
+  logSize?: int32;
+
+  @doc("The status of the log collection session.")
+  @visibility(Lifecycle.Read)
+  status?: DeviceLogCollectionStatus;
+
+  @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
+  @visibility(Lifecycle.Read)
+  correlationId?: string;
+}
+
+@doc("Reported Properties for Provision Os job")
+model ProvisionOsReportedProperties {
+  ...JobReportedProperties;
 }

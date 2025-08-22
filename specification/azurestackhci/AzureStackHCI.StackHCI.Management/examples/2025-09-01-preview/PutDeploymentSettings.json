@@ -1,0 +1,125 @@
+{
+  "title": "Create Or Update Deployment Settings",
+  "operationId": "DeploymentSettings_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "deploymentSettingsName": "default",
+    "resource": {
+      "properties": {
+        "arcNodeResourceIds": [
+          "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.HybridCompute/machines/machine-1",
+          "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.HybridCompute/machines/machine-2"
+        ],
+        "deploymentMode": "Deploy",
+        "deploymentConfiguration": {
+          "version": "1.0.0",
+          "scaleUnits": [
+            {
+              "deploymentData": {
+                "securitySettings": {
+                  "hvciProtection": true,
+                  "drtmProtection": true
+                },
+                "observability": {
+                  "streamingDataClient": true,
+                  "euLocation": false
+                },
+                "cluster": {
+                  "name": "testHCICluster",
+                  "witnessType": "Cloud",
+                  "cloudAccountName": "myasestorageos",
+                  "azureServiceEndpoint": "core.windows.net"
+                },
+                "storage": {
+                  "configurationMode": "Express"
+                },
+                "namingPrefix": "HCI01",
+                "domainFqdn": "contoso.com",
+                "infrastructureNetwork": [
+                  {
+                    "subnetMask": "255.255.248.0",
+                    "gateway": "10.0.0.1",
+                    "ipPools": [
+                      {
+                        "startingAddress": "10.0.0.10",
+                        "endingAddress": "10.0.0.99"
+                      }
+                    ],
+                    "dnsServers": [
+                      "10.0.0.1"
+                    ],
+                    "useDhcp": false
+                  }
+                ],
+                "physicalNodes": [
+                  {
+                    "name": "machine-1",
+                    "ipv4Address": "10.0.0.10"
+                  },
+                  {
+                    "name": "machine-2",
+                    "ipv4Address": "10.0.0.11"
+                  }
+                ],
+                "hostNetwork": {
+                  "intents": [
+                    {
+                      "name": "management_compute",
+                      "trafficType": [
+                        "Management",
+                        "Compute"
+                      ],
+                      "adapter": [
+                        "ethernet"
+                      ],
+                      "overrideVirtualSwitchConfiguration": false
+                    }
+                  ],
+                  "storageNetworks": [
+                    {
+                      "name": "storageNetwork",
+                      "networkAdapterName": "ethernet",
+                      "vlanId": "711"
+                    }
+                  ]
+                },
+                "adouPath": "OU=HCI01,DC=contoso,DC=com",
+                "secretsLocation": "https://mykeyvault.vault.azure.net/",
+                "optionalServices": {
+                  "customLocation": "customLocationName"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/deploymentSettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/clusters/deploymentSettings",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "arcNodeResourceIds": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.HybridCompute/machines/machine-1",
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.HybridCompute/machines/machine-2"
+          ],
+          "deploymentMode": "Deploy",
+          "deploymentConfiguration": {
+            "version": "1.0.0",
+            "scaleUnits": []
+          }
+        }
+      }
+    }
+  }
+}
