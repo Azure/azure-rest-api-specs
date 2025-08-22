@@ -52,7 +52,6 @@ interface ReadReceiptsOperations {
   >;
 }
 
-
 interface StreamOperations {
   @tag("Stream")
   @doc("Download the Media payload from a User to Business message.")

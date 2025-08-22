@@ -53,7 +53,7 @@ union CommunicationMessageKind {
 
   @added(Versions.c2025_01_15_Preview)
   @doc("Interactive Actionable message type.")
-  interactive: "interactive"
+  interactive: "interactive",
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -668,7 +668,7 @@ model Notifications {
 @doc("A notification.")
 model ReadReceipts {
   @key
-  @visibility(Lifecycle.Read) 
+  @visibility(Lifecycle.Read)
   @invisible(Lifecycle) // The ID is only used as a key parameter.
   @doc("The ID is only used as a key parameter.")
   id: string;
