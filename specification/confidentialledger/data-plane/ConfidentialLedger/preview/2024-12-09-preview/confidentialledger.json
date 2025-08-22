@@ -37,7 +37,7 @@
   "paths": {
     "/app/collections": {
       "get": {
-        "operationId": "Operations_ListCollections",
+        "operationId": "ListCollections",
         "summary": "Retrieves a list of collection ids present in the Confidential Ledger",
         "description": "Collection ids are user-created collections of ledger entries",
         "parameters": [
@@ -55,7 +55,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -72,7 +72,7 @@
     },
     "/app/enclaveQuotes": {
       "get": {
-        "operationId": "Operations_GetEnclaveQuotes",
+        "operationId": "GetEnclaveQuotes",
         "summary": "Gets quotes for all nodes of the Confidential Ledger.",
         "description": "A quote is an SGX enclave measurement that can be used to verify the validity\nof a node and its enclave.",
         "parameters": [
@@ -90,7 +90,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -103,7 +103,7 @@
     },
     "/app/governance/constitution": {
       "get": {
-        "operationId": "Operations_GetConstitution",
+        "operationId": "GetConstitution",
         "summary": "Gets the constitution used for governance.",
         "description": "The constitution is a script that assesses and applies proposals from\nconsortium members.",
         "parameters": [
@@ -121,7 +121,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -134,7 +134,7 @@
     },
     "/app/governance/members": {
       "get": {
-        "operationId": "Operations_ListConsortiumMembers",
+        "operationId": "ListConsortiumMembers",
         "summary": "Lists the consortium members.",
         "description": "Consortium members can manage the Confidential Ledger.",
         "parameters": [
@@ -152,7 +152,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -169,7 +169,7 @@
     },
     "/app/ledgerUsers": {
       "get": {
-        "operationId": "Operations_ListLedgerUsers",
+        "operationId": "ListLedgerUsers",
         "summary": "Gets details on a list of users.",
         "description": "All users' object IDs and multiple roles will be returned.",
         "parameters": [
@@ -187,7 +187,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -204,7 +204,7 @@
     },
     "/app/ledgerUsers/{userId}": {
       "get": {
-        "operationId": "Operations_GetLedgerUser",
+        "operationId": "GetLedgerUser",
         "summary": "Gets a user with multiple roles.",
         "description": "Gets a user with multiple roles.",
         "parameters": [
@@ -229,7 +229,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -240,7 +240,7 @@
         }
       },
       "patch": {
-        "operationId": "Operations_CreateOrUpdateLedgerUser",
+        "operationId": "CreateOrUpdateLedgerUser",
         "summary": "Adds a user or updates a user's fields.",
         "description": "A JSON merge patch is applied for existing users",
         "consumes": [
@@ -277,7 +277,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -288,7 +288,7 @@
         }
       },
       "delete": {
-        "operationId": "Operations_DeleteLedgerUser",
+        "operationId": "DeleteLedgerUser",
         "summary": "Deletes a user with multiple roles from the Confidential Ledger.",
         "description": "Deletes a user with multiple roles from the Confidential Ledger.",
         "parameters": [
@@ -310,7 +310,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -323,7 +323,7 @@
     },
     "/app/roles": {
       "get": {
-        "operationId": "Operations_GetUserDefinedRole",
+        "operationId": "GetUserDefinedRole",
         "summary": "Gets role actions for user defined roles",
         "description": "user defined roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
@@ -351,7 +351,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -362,7 +362,7 @@
         }
       },
       "put": {
-        "operationId": "Operations_CreateUserDefinedRole",
+        "operationId": "CreateUserDefinedRole",
         "summary": "Creates new roles and their actions",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
@@ -389,7 +389,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -400,7 +400,7 @@
         }
       },
       "patch": {
-        "operationId": "Operations_UpdateUserDefinedRole",
+        "operationId": "UpdateUserDefinedRole",
         "summary": "Patch replaces the allowed action on existing roles,if the desire is to remove\nan existing action, the role must be deleted and recreated.",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
@@ -427,7 +427,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -438,7 +438,7 @@
         }
       },
       "delete": {
-        "operationId": "Operations_DeleteUserDefinedRole",
+        "operationId": "DeleteUserDefinedRole",
         "summary": "Deletes user defined roles",
         "description": "A user defined role allows the users to create and manage their own role\nactions using the API.",
         "parameters": [
@@ -460,7 +460,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -473,7 +473,7 @@
     },
     "/app/transactions": {
       "get": {
-        "operationId": "Operations_ListLedgerEntries",
+        "operationId": "ListLedgerEntries",
         "summary": "Gets ledger entries from a collection corresponding to a range.",
         "description": "A collection id may optionally be specified. Only entries in the specified (or\ndefault) collection will be returned.",
         "parameters": [
@@ -519,7 +519,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -534,7 +534,7 @@
         }
       },
       "post": {
-        "operationId": "Operations_CreateLedgerEntry",
+        "operationId": "CreateLedgerEntry",
         "summary": "Writes a ledger entry.",
         "description": "A collection id may optionally be specified.",
         "parameters": [
@@ -581,7 +581,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -594,7 +594,7 @@
     },
     "/app/transactions/{transactionId}": {
       "get": {
-        "operationId": "Operations_GetLedgerEntry",
+        "operationId": "GetLedgerEntry",
         "summary": "Gets the ledger entry at the specified transaction id. A collection id may\noptionally be specified to indicate the collection from which to fetch the\nvalue.",
         "description": "To return older ledger entries, the relevant sections of the ledger must be\nread from disk and validated. To prevent blocking within the enclave, the\nresponse will indicate whether the entry is ready and part of the response, or\nif the loading is still ongoing.",
         "parameters": [
@@ -626,7 +626,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -639,7 +639,7 @@
     },
     "/app/transactions/{transactionId}/receipt": {
       "get": {
-        "operationId": "Operations_GetReceipt",
+        "operationId": "GetReceipt",
         "summary": "Gets a receipt certifying ledger contents at a particular transaction id.",
         "description": "Gets a receipt certifying ledger contents at a particular transaction id.",
         "parameters": [
@@ -664,7 +664,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -677,7 +677,7 @@
     },
     "/app/transactions/{transactionId}/status": {
       "get": {
-        "operationId": "Operations_GetTransactionStatus",
+        "operationId": "GetTransactionStatus",
         "summary": "Gets the status of an entry identified by a transaction id.",
         "description": "Gets the status of an entry identified by a transaction id.",
         "parameters": [
@@ -702,7 +702,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -715,7 +715,7 @@
     },
     "/app/transactions/current": {
       "get": {
-        "operationId": "Operations_GetCurrentLedgerEntry",
+        "operationId": "GetCurrentLedgerEntry",
         "summary": "Gets the current value available in the ledger.",
         "description": "A collection id may optionally be specified.",
         "parameters": [
@@ -740,7 +740,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -753,7 +753,7 @@
     },
     "/app/userDefinedEndpoints": {
       "get": {
-        "operationId": "Operations_GetUserDefinedEndpoint",
+        "operationId": "GetUserDefinedEndpoint",
         "summary": "Gets a user defined endpoint.",
         "description": "Returns the user defined endpoint in the ACL instance",
         "parameters": [
@@ -771,7 +771,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -782,7 +782,7 @@
         }
       },
       "put": {
-        "operationId": "Operations_CreateUserDefinedEndpoint",
+        "operationId": "CreateUserDefinedEndpoint",
         "summary": "Creates a user defined endpoint.",
         "description": "Creates the user defined endpoint in the ACL instance",
         "parameters": [
@@ -806,7 +806,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -819,7 +819,7 @@
     },
     "/app/userDefinedEndpoints/modules": {
       "get": {
-        "operationId": "Operations_GetUserDefinedEndpointsModule",
+        "operationId": "GetUserDefinedEndpointsModule",
         "summary": "Module for user defined endpoints.",
         "description": "It gets the module for the user defined endpoint.",
         "parameters": [
@@ -845,7 +845,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -858,7 +858,7 @@
     },
     "/app/userDefinedEndpoints/runtimeOptions": {
       "get": {
-        "operationId": "Operations_GetRuntimeOptions",
+        "operationId": "GetRuntimeOptions",
         "summary": "Runtime options for user defined endpoints.",
         "description": "It returns the runtime options",
         "parameters": [
@@ -876,7 +876,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -887,7 +887,7 @@
         }
       },
       "patch": {
-        "operationId": "Operations_UpdateRuntimeOptions",
+        "operationId": "UpdateRuntimeOptions",
         "summary": "Runtime options for user defined endpoints.",
         "description": "Updates the runtime options.",
         "parameters": [
@@ -914,7 +914,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -927,7 +927,7 @@
     },
     "/app/userDefinedFunctions": {
       "get": {
-        "operationId": "Operations_ListUserDefinedFunctions",
+        "operationId": "ListUserDefinedFunctions",
         "summary": "Retrieves a list of user defined functions present in the Confidential Ledger",
         "description": "User defined functions stored in the Confidential Ledger",
         "parameters": [
@@ -945,7 +945,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -962,7 +962,7 @@
     },
     "/app/userDefinedFunctions/{functionId}": {
       "get": {
-        "operationId": "Operations_GetUserDefinedFunction",
+        "operationId": "GetUserDefinedFunction",
         "summary": "Gets a user defined function.",
         "description": "Returns the user defined function in the Confidential Ledger",
         "parameters": [
@@ -987,7 +987,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -998,7 +998,7 @@
         }
       },
       "put": {
-        "operationId": "Operations_CreateUserDefinedFunction",
+        "operationId": "CreateUserDefinedFunction",
         "summary": "Creates a user defined function.",
         "description": "Creates the user defined function in the Confidential Ledger",
         "parameters": [
@@ -1050,7 +1050,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -1061,7 +1061,7 @@
         }
       },
       "delete": {
-        "operationId": "Operations_DeleteUserDefinedFunction",
+        "operationId": "DeleteUserDefinedFunction",
         "summary": "Deletes a user defined function from the Confidential Ledger.",
         "description": "Deletes a user defined function from the Confidential Ledger.",
         "parameters": [
@@ -1083,7 +1083,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -1096,7 +1096,7 @@
     },
     "/app/userDefinedFunctions/{functionId}:execute": {
       "post": {
-        "operationId": "Operations_ExecuteUserDefinedFunction",
+        "operationId": "ExecuteUserDefinedFunction",
         "summary": "Executes a user defined function.",
         "description": "Executes the user defined function in the Confidential Ledger",
         "parameters": [
@@ -1130,7 +1130,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -1143,7 +1143,7 @@
     },
     "/app/users": {
       "get": {
-        "operationId": "Operations_ListUsers",
+        "operationId": "ListUsers",
         "summary": "Gets details on a list of users.",
         "description": "All users' object IDs and single role per user will be returned.",
         "parameters": [
@@ -1161,7 +1161,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -1178,7 +1178,7 @@
     },
     "/app/users/{userId}": {
       "get": {
-        "operationId": "Operations_GetUser",
+        "operationId": "GetUser",
         "summary": "Gets a user.",
         "description": "Gets a user.",
         "parameters": [
@@ -1203,7 +1203,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -1214,7 +1214,7 @@
         }
       },
       "patch": {
-        "operationId": "Operations_CreateOrUpdateUser",
+        "operationId": "CreateOrUpdateUser",
         "summary": "Adds a user or updates a user's fields.",
         "description": "A JSON merge patch is applied for existing users",
         "consumes": [
@@ -1251,7 +1251,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -1262,7 +1262,7 @@
         }
       },
       "delete": {
-        "operationId": "Operations_DeleteUser",
+        "operationId": "DeleteUser",
         "summary": "Deletes a user from the Confidential Ledger.",
         "description": "Deletes a user from the Confidential Ledger.",
         "parameters": [
@@ -1284,7 +1284,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
+              "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerError"
             }
           }
         },
@@ -1411,18 +1411,18 @@
         "collectionId"
       ]
     },
-    "ConfidentialLedger.Common.ConfidentialLedgerError": {
+    "ConfidentialLedgerCommon.ConfidentialLedgerError": {
       "type": "object",
       "description": "An error response from Confidential Ledger.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerErrorBody",
+          "$ref": "#/definitions/ConfidentialLedgerCommon.ConfidentialLedgerErrorBody",
           "description": "An error response from Confidential Ledger.",
           "readOnly": true
         }
       }
     },
-    "ConfidentialLedger.Common.ConfidentialLedgerErrorBody": {
+    "ConfidentialLedgerCommon.ConfidentialLedgerErrorBody": {
       "type": "object",
       "description": "An error response from Confidential Ledger.",
       "properties": {
