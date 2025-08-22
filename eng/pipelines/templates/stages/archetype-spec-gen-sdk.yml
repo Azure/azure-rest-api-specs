@@ -130,7 +130,7 @@ stages:
               }
 
               # Validate branch name
-              if ($sdkRepoBranch -match '^/|/$|//|\.\.|^@$|\.$/|[\x00-\x1F\x7F~^:?*@\[\]\\s]') {
+              if ($sdkRepoBranch -match '^/|/$|//|\.\.|^@$|\.$|[\x00-\x1F\x7F~^:?*@\[\]\\s]') {
                   Write-Host "##vso[task.logissue type=error]The provided SDK branch name '$sdkRepoBranch' is invalid."
                   Exit 1
               }
