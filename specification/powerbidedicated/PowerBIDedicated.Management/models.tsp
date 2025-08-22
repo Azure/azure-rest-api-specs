@@ -246,7 +246,6 @@ model DedicatedCapacityUpdateParameters {
   /**
    * Properties of the provision operation request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DedicatedCapacityMutableProperties;
 }
 
@@ -519,7 +518,6 @@ model AutoScaleVCoreUpdateParameters {
   /**
    * Properties of the update operation request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AutoScaleVCoreMutableProperties;
 }
 
