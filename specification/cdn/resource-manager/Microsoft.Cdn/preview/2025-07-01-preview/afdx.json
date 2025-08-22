@@ -4411,28 +4411,28 @@
           {
             "name": "ClientCertificateRequiredAndValidated",
             "value": "ClientCertificateRequiredAndValidated",
-            "description": "AFD establishes mTLS connection using certificates."
+            "description": "AFD enforces mTLS connection for all incoming connection and validates certificates against a configured trusted set. Connections not using mTLS will be blocked."
           },
           {
             "name": "ClientCertificateRequiredAndOriginValidates",
             "value": "ClientCertificateRequiredAndOriginValidates",
-            "description": "AFD check for existence of certificate and forwards to origin to establish mTLS connection."
+            "description": "Requires client certificates, but does not validate them. WARNING: In this configuration, mTLS authentication is NOT strictly enforced. Incoming connections MUST provide a certificate, but will be forwarded to the origin regardless of whether or not the certificate is valid. AFD will forward certificate and other relevant information to origin in headers, such as 'X-Azure-ClientCertificate'. The origin must validate theses headers in order to validate the client certificate."
           },
           {
             "name": "ClientCertificateValidatedIfPresented",
             "value": "ClientCertificateValidatedIfPresented",
-            "description": "If certificates are presented, AFD will establish mTLS connection. If certificates are not presented, AFD will not terminate the connection and forward request to the origin to establish mTLS connection."
+            "description": "Validates client certificates only when presented. WARNING: In this configuration, mTLS authentication is NOT strictly enforced: Incoming connections doing mTLS with a client certificate will have their certificate validated. AFD rejects only connections with invalid certificates according to standard validation rules. For connections unauthenticated by AFD, origin is responsible for authentication mTLS connection."
           },
           {
             "name": "CompleteMtlsPassthroughToOrigin",
             "value": "CompleteMtlsPassthroughToOrigin",
-            "description": "Customer's origin is responsible for establishing mTLS connection. AFD will act as a request proxy only"
+            "description": "Client certificate is not required and not validated by AFD. WARNING: In this configuration, mTLS authentication is validated by the origin. If incoming connections provide a certificate or alternative method of connection, AFD will forward the certificate and other relevant information to origin in headers, such as 'X-Azure-ClientCertificate'. The origin must validate these headers, in order to authenticate the mTLS connection."
           }
         ]
       }
     },
     "ClientCertificateRequiredAndValidatedAdvancedSettings": {
-      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS connection on behalf of customer.",
+      "description": "Advanced settings for MtlsScenarioType enum value: ClientCertificateRequiredAndValidated.",
       "x-ms-discriminator-value": "ClientCertificateRequiredAndValidated",
       "type": "object",
       "allOf": [
@@ -4445,7 +4445,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake.",
+          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake as the trusted issuer certificate chain.",
           "type": "array",
           "items": {
             "$ref": "./cdn.json#/definitions/ResourceReference"
@@ -4473,7 +4473,7 @@
       }
     },
     "ClientCertificateRequiredAndOriginValidatesAdvancedSettings": {
-      "description": "AFD checks for the existence of a certificate and then forwards all relevant information for the origin to establish mTLS connection.",
+      "description": "Advanced settings for MtlsScenarioType enum value: ClientCertificateRequiredAndOriginValidates.",
       "x-ms-discriminator-value": "ClientCertificateRequiredAndOriginValidates",
       "type": "object",
       "allOf": [
@@ -4484,7 +4484,7 @@
       "properties": {}
     },
     "ClientCertificateValidatedIfPresentedAdvancedSettings": {
-      "description": "Configure 1-2 MtlsCertificateChain secrets that AFD will use to establish mTLS handshake on behalf of customer if certificates are presented. If certificates are not presented, AFD will not terminate the connection. AFD will work as a request proxy only and assume client is using alternative way to establish mTLS on the origin.",
+      "description": "Advanced settings for MtlsScenarioType enum value: ClientCertificateValidatedIfPresented.",
       "x-ms-discriminator-value": "ClientCertificateValidatedIfPresented",
       "type": "object",
       "allOf": [
@@ -4497,7 +4497,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake.",
+          "description": "List of one or two of Resource References (ie. subs/rg/profile/secret) to Secrets of type MtlsCertificateChain to use in mutual TLS handshake as the trusted issuer certificate chain. ",
           "type": "array",
           "items": {
             "$ref": "./cdn.json#/definitions/ResourceReference"
@@ -4525,7 +4525,7 @@
       }
     },
     "CompleteMtlsPassthroughToOriginAdvancedSettings": {
-      "description": "AFD will work as a request proxy only and assume client is using alternative way to do the mTLS authentications on the origin.",
+      "description": "Advanced settings for MtlsScenarioType enum value: CompleteMtlsPassthroughToOrigin.",
       "x-ms-discriminator-value": "CompleteMtlsPassthroughToOrigin",
       "type": "object",
       "allOf": [
