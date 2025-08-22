@@ -6348,17 +6348,17 @@ model LastPatchInstallationSummary {
  */
 model Placement {
   /**
-   * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (for Virtual Machines) or **Auto** (for Virtual Machine Scale Sets) - Availability zones will be automatically picked by system as part of resource creation.
    */
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
-   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
    */
   includeZones?: string[];
 
   /**
-   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
    */
   excludeZones?: string[];
 }
