@@ -6344,11 +6344,11 @@ model LastPatchInstallationSummary {
 }
 
 /**
- * Describes the user-defined constraints for virtual machine hardware placement.
+ * Describes the user-defined constraints for resource hardware placement.
  */
 model Placement {
   /**
-   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (for Virtual Machines) or **Auto** (for Virtual Machine Scale Sets) - Availability zones will be automatically picked by system as part of resource creation.
+   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
    */
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
