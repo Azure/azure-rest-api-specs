@@ -291,7 +291,6 @@ union TextType {
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
-@fixed
 @doc("Translator profanity actions")
 enum ProfanityAction {
   @doc("No Action is taken on profanity")
@@ -306,7 +305,6 @@ enum ProfanityAction {
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
-@fixed
 @doc("Translator profanity markers")
 enum ProfanityMarker {
   @doc("Profanity is marked with asterisk.")
