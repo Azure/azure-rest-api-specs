@@ -748,8 +748,8 @@ model ProjectPolicyProperties extends ProjectPolicyUpdateProperties {
 
 @doc("Properties of an project policy. These properties can be updated after the resource has been created.")
 model ProjectPolicyUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource policies that are a part of this project policy.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   resourcePolicies?: ResourcePolicy[];
 
   @doc("Resources that have access to the shared resources that are a part of this project policy.")
@@ -833,8 +833,8 @@ model ProjectCatalogSettings {
 
 @doc("Settings to be used for customizations.")
 model ProjectCustomizationSettings {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The identities that can to be used in customization scenarios; e.g., to clone a repository.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   identities?: ProjectCustomizationManagedIdentity[];
 
   @doc("Indicates whether user customizations are enabled.")
@@ -1748,7 +1748,7 @@ model ImageDefinitionBuildTask {
   name?: string;
 
   @doc("Parameters for the task.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.extension("x-ms-identifiers", #[])
   parameters?: ImageDefinitionBuildTaskParametersItem[];
 
   @doc("Display name to help differentiate multiple instances of the same task.")
