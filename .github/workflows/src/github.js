@@ -146,6 +146,6 @@ export function rateLimitHook(response) {
   // const resource = headers["x-ratelimit-resource"];
 
   console.log(
-    `[rate-limits] load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}, reset: ${formatDuration(new Date(), reset)}`,
+    `[github] load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}, reset: ${formatDuration(new Date(), reset)}`,
   );
 }
