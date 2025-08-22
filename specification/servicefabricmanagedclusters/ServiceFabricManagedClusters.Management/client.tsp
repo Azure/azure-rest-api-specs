@@ -463,3 +463,6 @@ using Microsoft.ServiceFabric;
   armResourceIdentifier[],
   "csharp"
 );
+@@alternateType(ClusterMonitoringPolicy.healthCheckRetryTimeout, string, "csharp");
+@@alternateType(ClusterMonitoringPolicy.upgradeDomainTimeout, string, "csharp");
+@@alternateType(ClusterMonitoringPolicy.upgradeTimeout, string, "csharp");
