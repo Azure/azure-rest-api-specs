@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "properties": {
+        "autoRenew": "On",
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "endDate": "2023-03-12T00:00:00Z",
+            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+            "quantity": 9
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "additionalInfo": {
+          "coTermDates": [
+            {
+              "coTermTarget": "cotermTargetName",
+              "coTermTargetType": "Resource",
+              "errorCode": "InvalidCotermEndDate",
+              "termEndDate": "2023-03-12T00:00:00Z"
+            }
+          ],
+          "refundableQuantity": null
+        },
+        "evaluateResult": "Failed",
+        "reason": "Failed to satisfy coterm constraints",
+        "reasonCode": "FailedToSatisfyCotermConstraints",
+        "updateScenario": "AutoRenew"
+      }
+    }
+  },
+  "operationId": "SaasResources_CanUpdate",
+  "title": "Update Failed Caused by Coterm"
+}

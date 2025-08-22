@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "cloudServiceResourceName": "TargetResourceName",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup",
+    "body": {
+      "sourceResources": [
+        {
+          "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/SourceResourceName1",
+          "quantity": 10
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "OperationNotSupported",
+        "reason": "Update on cloudService is currently not allowed",
+        "additionalInfo": null
+      }
+    }
+  },
+  "operationId": "CloudServices_CanMerge",
+  "title": "Evaluate if SaaSHub cloud services can be merged - Failed"
+}
