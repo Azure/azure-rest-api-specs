@@ -45,7 +45,7 @@ model RetrieveDataRequest {
 }
 
 /** The response of a retrieve data action over a switch. */
-model RetrieveDataResponse {
+model RetrieveDataResult {
   /** The value of the retrieve data action. */
   @OpenAPI.extension("x-ms-identifiers", #["path", "value"])
   value: RetrieveDataOutput[];
@@ -66,7 +66,7 @@ interface Switches {
   retrieveData is ArmResourceActionAsync<
     Switch,
     RetrieveDataRequest,
-    RetrieveDataResponse
+    RetrieveDataResult
   >;
   listBySupercomputer is ArmResourceListByParent<Switch>;
 }
