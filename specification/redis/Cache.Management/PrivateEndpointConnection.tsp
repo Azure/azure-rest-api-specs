@@ -14,8 +14,7 @@ namespace Microsoft.Cache;
  * The Private Endpoint Connection resource.
  */
 @parentResource(RedisResource)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.CommonTypes.PrivateEndpointConnection {
+model PrivateEndpointConnection is PrivateEndpointConnectionResource {
   /** The name of the private endpoint connection associated with the Azure resource */
   @visibility(Lifecycle.Read)
   @path
@@ -24,10 +23,7 @@ model PrivateEndpointConnection
   privateEndpointConnectionName: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Http.Private.includeInapplicableMetadataInPayload(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
-  false
-);
+alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {

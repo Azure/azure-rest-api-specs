@@ -84,7 +84,7 @@ interface RedisResources {
   update is RedisResourcesOps.CustomPatchAsync<
     RedisResource,
     PatchModel = RedisUpdateParameters,
-    Response = RedisResource | (ArmAcceptedLroResponse & {
+    Response = RedisResource | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RedisResource>> & {
       @bodyRoot
       _: RedisResource;
     })
@@ -119,6 +119,7 @@ interface RedisResources {
    * Gets any upgrade notifications for a Redis cache.
    */
   @get
+  @list
   listUpgradeNotifications is RedisResourcesOps.ActionSync<
     RedisResource,
     void,
@@ -197,6 +198,7 @@ interface RedisResources {
    * Gets the private link resources that need to be created for a redis cache.
    */
   @get
+  @list
   @action("privateLinkResources")
   listByRedisCache is ArmResourceActionSync<
     RedisResource,

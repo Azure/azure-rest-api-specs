@@ -1031,12 +1031,11 @@ model RedisFirewallRuleCreateParameters extends RedisFirewallRule {}
 /**
  * Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.
  */
-@Azure.Core.pagedResult
 model OperationListResult {
   /**
    * List of operations supported by the resource provider.
    */
-  @Azure.Core.items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: Operation[];
 
