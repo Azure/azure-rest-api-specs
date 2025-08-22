@@ -101,6 +101,30 @@ using Microsoft.EdgeOrder;
   "GetProductFamiliesMetadata",
   "csharp"
 );
+@@clientName(AdditionalConfiguration,
+  "ProductDetailsAdditionalConfiguration",
+  "csharp"
+);
+@@clientName(AddressClassification, "EdgeOrderAddressClassification", "csharp");
+@@clientName(AutoProvisioningStatus,
+  "EdgeOrderAutoProvisioningStatus",
+  "csharp"
+);
+@@clientName(CategoryInformation,
+  "ChildConfigurationCategoryInformation",
+  "csharp"
+);
+@@clientName(ChildConfiguration, "ProductChildConfiguration", "csharp");
+@@clientName(ConfigurationDeviceDetails,
+  "ProductConfigurationDeviceDetails",
+  "csharp"
+);
+@@clientName(FulfillmentType, "ConfigurationFulfillmentType", "csharp");
+@@clientName(IdentificationType, "ConfigurationIdentificationType", "csharp");
+@@clientName(OrderMode, "EdgeOrderItemMode", "csharp");
+@@clientName(ProvisioningDetails, "EdgeOrderProvisioningDetails", "csharp");
+@@clientName(ProvisioningState, "EdgeOrderProvisioningState", "csharp");
+@@clientName(ProvisioningSupport, "EdgeOrderProvisioningSupport", "csharp");
 @@alternateType(OrderItemProperties.orderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
