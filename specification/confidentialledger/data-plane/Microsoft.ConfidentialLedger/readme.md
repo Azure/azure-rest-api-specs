@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2022-20-04-preview-ledger` is spec
 
 ```yaml $(tag) == 'package-2022-04-20-preview-ledger'
 input-file:
-  - preview/2022-04-20-preview/confidentialledger.json
+  - preview/2022-20-04-preview/confidentialledger.json
 ```
 
 ### Tag: package-2022-20-04-preview-identity
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2022-20-04-preview-identity` is sp
 
 ```yaml $(tag) == 'package-2022-04-20-preview-identity'
 input-file:
-  - preview/2022-04-20-preview/identityservice.json
+  - preview/2022-20-04-preview/identityservice.json
 ```
 
 ### Tag: package-2022-05-13-ledger
