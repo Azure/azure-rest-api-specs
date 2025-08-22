@@ -1194,11 +1194,17 @@
           "EdgeMachineJobs_CreateOrUpdate_CollectLog": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_CollectLog.json"
           },
+          "EdgeMachineJobs_CreateOrUpdate_DownloadOs": {
+            "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_DownloadOs.json"
+          },
           "EdgeMachineJobs_CreateOrUpdate_MachineAssistant": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_MachineAssistant.json"
           },
           "EdgeMachineJobs_CreateOrUpdate_ProvisionOs": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_ProvisionOs.json"
+          },
+          "EdgeMachineJobs_CreateOrUpdate_UpdateOs": {
+            "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_UpdateOs.json"
           },
           "EdgeMachineJobs_CreateOrUpdate_RemoteSupport": {
             "$ref": "./examples/EdgeMachineJobs_CreateOrUpdate_RemoteSupport.json"
@@ -1834,6 +1840,85 @@
         }
       }
     },
+    "DownloadOsJobProperties": {
+      "type": "object",
+      "description": "Represents the properties of Download Os job.",
+      "properties": {
+        "downloadRequest": {
+          "$ref": "#/definitions/DownloadRequest",
+          "description": "Download OS request."
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/ProvisionOsReportedProperties",
+          "description": "Reported Properties for Download Os job"
+        }
+      },
+      "required": [
+        "downloadRequest"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DownloadOs"
+    },
+    "DownloadOsProfile": {
+      "type": "object",
+      "description": "Operating system profile.",
+      "properties": {
+        "osName": {
+          "type": "string",
+          "description": "Name of the operating system."
+        },
+        "osType": {
+          "type": "string",
+          "description": "Type of the operating system."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Version of the operating system."
+        },
+        "osImageLocation": {
+          "type": "string",
+          "description": "Location of the operating system image."
+        },
+        "vsrVersion": {
+          "type": "string",
+          "description": "Validated Solution Recipe version to be used for the job"
+        },
+        "imageHash": {
+          "type": "string",
+          "description": "Hash of the OS package downloaded"
+        },
+        "gpgPubKey": {
+          "type": "string",
+          "description": "GPG Public Key used for package verification"
+        }
+      }
+    },
+    "DownloadRequest": {
+      "type": "object",
+      "description": "Download Request properties",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/ProvisioningOsType",
+          "description": "Target operating system to support polymorphic resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "osProfile": {
+          "$ref": "#/definitions/DownloadOsProfile",
+          "description": "Operating system profile."
+        }
+      },
+      "required": [
+        "target",
+        "osProfile"
+      ]
+    },
     "EceActionStatus": {
       "type": "object",
       "description": "Validation / deployment status details for Job.",
@@ -2002,7 +2087,8 @@
         "CollectLog",
         "RemoteSupport",
         "ProvisionOs",
-        "MachineAssistant"
+        "MachineAssistant",
+        "DownloadOs"
       ],
       "x-ms-enum": {
         "name": "EdgeMachineJobType",
@@ -2027,6 +2113,11 @@
             "name": "MachineAssistant",
             "value": "MachineAssistant",
             "description": "Job to debug machine issues using AI."
+          },
+          {
+            "name": "DownloadOs",
+            "value": "DownloadOs",
+            "description": "Job to download OS packages on to the device"
           }
         ]
       }
@@ -2970,6 +3061,30 @@
         }
       }
     },
+    "OSOperationType": {
+      "type": "string",
+      "description": "OS Provision Operation type",
+      "enum": [
+        "Provision",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "OSOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provision",
+            "value": "Provision",
+            "description": "OS Provisioning operation"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "OS Update operation"
+          }
+        ]
+      }
+    },
     "OnboardingConfiguration": {
       "type": "object",
       "description": "Onboarding configuration.",
@@ -3105,6 +3220,21 @@
           "type": "string",
           "description": "OS Version",
           "readOnly": true
+        },
+        "buildNumber": {
+          "type": "string",
+          "description": "OS Build Number",
+          "readOnly": true
+        },
+        "baseImageVersion": {
+          "type": "string",
+          "description": "OS Base Image Version",
+          "readOnly": true
+        },
+        "imageVersion": {
+          "type": "string",
+          "description": "OS Image Version",
+          "readOnly": true
         }
       }
     },
@@ -3127,6 +3257,43 @@
         "osImageLocation": {
           "type": "string",
           "description": "Location of the operating system image."
+        },
+        "vsrVersion": {
+          "type": "string",
+          "description": "Validated Solution Recipe version to be used for the job"
+        },
+        "imageHash": {
+          "type": "string",
+          "description": "Hash of the OS package downloaded"
+        },
+        "gpgPubKey": {
+          "type": "string",
+          "description": "GPG Public Key used for package verification"
+        },
+        "operationType": {
+          "type": "string",
+          "description": "Operation sub type of OS Provisioning",
+          "default": "Provision",
+          "enum": [
+            "Provision",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "OSOperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Provision",
+                "value": "Provision",
+                "description": "OS Provisioning operation"
+              },
+              {
+                "name": "Update",
+                "value": "Update",
+                "description": "OS Update operation"
+              }
+            ]
+          }
         }
       }
     },
@@ -3687,6 +3854,11 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Error information for the step",
           "readOnly": true
         }
       }
