@@ -5512,10 +5512,6 @@
       "type": "object",
       "description": "Disk persistence configuration.\n\nWhen persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: \n\n- Retained messages will be stored on disk only. \n- WILL messages will be stored on disk only. \n- DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.\n\nOptional. Everything is in-memory if not set. \nNote: if configured, all MQTT session states are written to disk.",
       "properties": {
-        "dynamicSettings": {
-          "$ref": "#/definitions/BrokerPersistenceDynamicSettings",
-          "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. \nOptionally, if the customer specifies a configurable user property, it will work to enable persistence dynamically. The default user property key is 'aio-persistence' and value 'true'."
-        },
         "maxSize": {
           "type": "string",
           "description": "The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required.",
@@ -5551,24 +5547,6 @@
       },
       "required": [
         "maxSize"
-      ]
-    },
-    "BrokerPersistenceDynamicSettings": {
-      "type": "object",
-      "description": "Dynamic settings of the persistence.",
-      "properties": {
-        "userPropertyKey": {
-          "type": "string",
-          "description": "The user property key to enable persistence."
-        },
-        "userPropertyValue": {
-          "type": "string",
-          "description": "The user property value to enable persistence."
-        }
-      },
-      "required": [
-        "userPropertyKey",
-        "userPropertyValue"
       ]
     },
     "BrokerPersistenceEncryption": {
@@ -6044,13 +6022,6 @@
         "dynamic": {
           "$ref": "#/definitions/BrokerSubscriberQueueDynamic",
           "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property. Works in addition to other groups (logical OR)."
-        },
-        "topics": {
-          "type": "array",
-          "description": "List of topics under which messages would be persisted to disk for each subscriber. Wildcards # and + supported.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -6507,6 +6478,68 @@
         }
       }
     },
+    "DataflowDestinationAddIfNotPresentHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Add if not present HeaderAction properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddIfNotPresent"
+    },
+    "DataflowDestinationAddOrReplaceHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Add or Replace HeaderAction properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add or replace."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add or replace."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddOrReplace"
+    },
+    "DataflowDestinationHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Header Action properties",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/DataflowHeaderActionType",
+          "description": "The type of header operation to perform."
+        }
+      },
+      "discriminator": "actionType",
+      "required": [
+        "actionType"
+      ]
+    },
     "DataflowDestinationOperationSettings": {
       "type": "object",
       "description": "Dataflow Destination Operation properties",
@@ -6518,12 +6551,41 @@
         "dataDestination": {
           "$ref": "#/definitions/NonEmptyString",
           "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Headers for the output data.",
+          "items": {
+            "$ref": "#/definitions/DataflowDestinationHeaderAction"
+          },
+          "x-ms-identifiers": [
+            "actionType"
+          ]
         }
       },
       "required": [
         "endpointRef",
         "dataDestination"
       ]
+    },
+    "DataflowDestinationRemoveHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Remove HeaderAction properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to remove."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "Remove"
     },
     "DataflowEndpointAuthenticationAccessToken": {
       "type": "object",
@@ -7589,6 +7651,98 @@
         }
       }
     },
+    "DataflowGraphDestinationAddIfNotPresentHeaderAction": {
+      "type": "object",
+      "description": "DataflowGraph Destination Add if not present HeaderAction properties.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddIfNotPresent"
+    },
+    "DataflowGraphDestinationAddOrReplaceHeaderAction": {
+      "type": "object",
+      "description": "DataflowGraph Destination Add or Replace HeaderAction properties.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add or replace."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add or replace."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddOrReplace"
+    },
+    "DataflowGraphDestinationHeaderAction": {
+      "type": "object",
+      "description": "DataflowGraph Destination Header Action.",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderActionType",
+          "description": "The type of header operation to perform."
+        }
+      },
+      "discriminator": "actionType",
+      "required": [
+        "actionType"
+      ]
+    },
+    "DataflowGraphDestinationHeaderActionType": {
+      "type": "string",
+      "description": "DataflowGraph Destination Header Action Types.",
+      "enum": [
+        "AddIfNotPresent",
+        "Remove",
+        "AddOrReplace"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowGraphDestinationHeaderActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AddIfNotPresent",
+            "value": "AddIfNotPresent",
+            "description": "Add if not present type."
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove type."
+          },
+          {
+            "name": "AddOrReplace",
+            "value": "AddOrReplace",
+            "description": "Add or Replace type."
+          }
+        ]
+      }
+    },
     "DataflowGraphDestinationNode": {
       "type": "object",
       "description": "DataflowGraph destination node properties.",
@@ -7620,9 +7774,15 @@
           "type": "string",
           "description": "Data destination at the endpoint."
         },
-        "outputSchemaSettings": {
-          "$ref": "#/definitions/DataflowGraphDestinationSchemaSettings",
-          "description": "Output schema settings."
+        "headers": {
+          "type": "array",
+          "description": "Headers for the output data.",
+          "items": {
+            "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+          },
+          "x-ms-identifiers": [
+            "actionType"
+          ]
         }
       },
       "required": [
@@ -7630,46 +7790,24 @@
         "dataDestination"
       ]
     },
-    "DataflowGraphDestinationSchemaSerializationFormat": {
-      "type": "string",
-      "description": "Serialization format for dataflow graph.",
-      "enum": [
-        "Parquet",
-        "Delta"
-      ],
-      "x-ms-enum": {
-        "name": "DataflowGraphDestinationSchemaSerializationFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Parquet",
-            "value": "Parquet",
-            "description": "Parquet serialization format."
-          },
-          {
-            "name": "Delta",
-            "value": "Delta",
-            "description": "Delta serialization format."
-          }
-        ]
-      }
-    },
-    "DataflowGraphDestinationSchemaSettings": {
+    "DataflowGraphDestinationRemoveHeaderAction": {
       "type": "object",
-      "description": "DataflowGraph destination node output schema settings.",
+      "description": "DataflowGraph Destination Remove HeaderAction properties.",
       "properties": {
-        "serializationFormat": {
-          "$ref": "#/definitions/DataflowGraphDestinationSchemaSerializationFormat",
-          "description": "The format of the output data."
-        },
-        "schemaRef": {
+        "key": {
           "type": "string",
-          "description": "Reference to the schema that describes the output of the transformation."
+          "description": "The name of the header to remove."
         }
       },
       "required": [
-        "serializationFormat"
-      ]
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "Remove"
     },
     "DataflowGraphGraphNode": {
       "type": "object",
@@ -7952,6 +8090,36 @@
         "endpointRef",
         "dataSources"
       ]
+    },
+    "DataflowHeaderActionType": {
+      "type": "string",
+      "description": "Dataflow Destination Header Action Types",
+      "enum": [
+        "AddIfNotPresent",
+        "Remove",
+        "AddOrReplace"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowHeaderActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AddIfNotPresent",
+            "value": "AddIfNotPresent",
+            "description": "Add if not present type"
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove type"
+          },
+          {
+            "name": "AddOrReplace",
+            "value": "AddOrReplace",
+            "description": "Add or Replace type"
+          }
+        ]
+      }
     },
     "DataflowMappingType": {
       "type": "string",

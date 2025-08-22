@@ -219,6 +219,70 @@ model DataflowDestinationOperationSettings {
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
   dataDestination: NonEmptyString;
+
+  @doc("Headers for the output data.")
+  @identifiers(#["actionType"])
+  @added(Versions.`2025-09-01-preview`)
+  headers?: DataflowDestinationHeaderAction[]
+}
+
+@added(Versions.`2025-09-01-preview`)
+@doc("Dataflow Destination Header Action properties")
+@discriminator("actionType")
+model DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: DataflowHeaderActionType;
+}
+
+@added(Versions.`2025-09-01-preview`)
+@doc("Dataflow Destination Header Action Types")
+union DataflowHeaderActionType {
+  string,
+
+  @doc("Add if not present type")
+  AddIfNotPresent: "AddIfNotPresent",
+
+  @doc("Remove type")
+  Remove: "Remove",
+
+  @doc("Add or Replace type")
+  AddOrReplace: "AddOrReplace",
+}
+
+@added(Versions.`2025-09-01-preview`)
+@doc("Dataflow Destination Add if not present HeaderAction properties")
+model DataflowDestinationAddIfNotPresentHeaderAction extends DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: AddIfNotPresent;
+
+  @doc("The name of the header to add.")
+  key: string;
+
+  @doc("The value of the header to add.")
+  value: string;
+}
+
+@added(Versions.`2025-09-01-preview`)
+@doc("Dataflow Destination Remove HeaderAction properties")
+model DataflowDestinationRemoveHeaderAction extends DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: Remove;
+
+  @doc("The name of the header to remove.")
+  key: string;
+}
+
+@added(Versions.`2025-09-01-preview`)
+@doc("Dataflow Destination Add or Replace HeaderAction properties")
+model DataflowDestinationAddOrReplaceHeaderAction extends DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: AddOrReplace;
+
+  @doc("The name of the header to add or replace.")
+  key: string;
+
+  @doc("The value of the header to add or replace.")
+  value: string;
 }
 
 @doc("Dataflow Source Operation properties")
