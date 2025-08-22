@@ -115,16 +115,11 @@ stages:
           Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
         displayName: "Create Run Time Variables"
 
-      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - pwsh: |
             $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
             $sdkRepoUrl = '${{ parameters.SdkRepoUrl }}'
             Write-Host "Validating SDK repo branch: '$SdkRepoBranch'"
-
-            if ($sdkRepoBranch.contains(":")) {
-              Write-Host "##vso[task.logissue type=error]'SDK repository branch' must be a commit SHA or branch name without ':'"
-              Exit 1
-            }
 
             if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
 
@@ -135,7 +130,7 @@ stages:
               }
 
               # Validate branch name
-              if ($sdkRepoBranch -match '^/|/$|//|\.\.|^@$|\.$/|[\x00-\x1F\x7F~^:?*@\[\]\\s]') {
+              if ($sdkRepoBranch -notmatch '^(?!/)(?!.*//)(?!.*\.\.)(?!.*\.lock$)(?!@$)(?!.*\.$)(?!.*\/$)(?!.*\\)(?!.*[~^:?*\[\]\s])[\u0020-\u007E]+$') {
                   Write-Host "##vso[task.logissue type=error]The provided SDK branch name '$sdkRepoBranch' is invalid."
                   Exit 1
               }
@@ -152,17 +147,16 @@ stages:
               $gitExitCode = $LASTEXITCODE
 
               if ($gitExitCode -ne 0) {
-                  Write-Host "##vso[task.logissue type=error]Failed to validate branch remotely (git exit code: $gitExitCode)"
-                  Exit $gitExitCode
+                Write-Host "##vso[task.logissue type=error]Failed to validate branch remotely (git exit code: $gitExitCode)"
+                Exit $gitExitCode
               }
 
               if ([string]::IsNullOrEmpty($branchExists)) {
-                  Write-Host "Branch '$SdkRepoBranch' does not exist in remote repository"
-                  Write-Host "Will checkout 'main'"
-                  $checkoutCommitish = 'main'
+                Write-Host "Branch '$SdkRepoBranch' does not exist in remote repository"
+                $checkoutCommitish = 'main'
               } else {
-                  Write-Host "Branch '$SdkRepoBranch' exists in remote repository"
-                  $checkoutCommitish = $SdkRepoBranch
+                Write-Host "Branch '$SdkRepoBranch' exists in remote repository"
+                $checkoutCommitish = $SdkRepoBranch
               }
             } else {
               Write-Host "Using commitish as-is: '$SdkRepoBranch' (main branch)"
