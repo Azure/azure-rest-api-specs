@@ -111,7 +111,8 @@ export function createLogHook(endpoint) {
    */
   function logHook(options) {
     const request = endpoint(options);
-    console.log(`[github] ${request.method.toUpperCase()} ${request.url}`);
+    const { method, url, body } = request;
+    console.log(`[github] ${method.toUpperCase()} ${url} ${JSON.stringify(body)}`);
   }
 
   return logHook;
