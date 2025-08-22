@@ -122,6 +122,16 @@ export function createLogHook(endpoint) {
  * @param {import("@octokit/types").OctokitResponse<any>} response
  */
 export function rateLimitHook(response) {
+  // const {
+  //   "x-ratelimit-limit": limit,
+  //   "x-ratelimit-remaining": remaining,
+  //   "x-ratelimit-reset": reset,
+  //   "x-ratelimit-used": used,
+  //   "x-ratelimit-resource": resource,
+  //   "x-ratelimit-policy": policy,
+  //   "retry-after": retryAfter,
+  // } = response.headers;
+
   // TODO: Make logging more readable at-a-glance
   // - Compute usageFraction as:
   //   - start: reset - 1h
@@ -138,6 +148,8 @@ export function rateLimitHook(response) {
     remaining: response.headers["x-ratelimit-remaining"],
     reset: new Date(parseInt(response.headers["x-ratelimit-reset"] || "") * 1000),
   };
+
+  console.log(`[github] headers: ${JSON.stringify(response.headers, null, 2)}`);
 
   console.log(`[github] rate-limits: ${JSON.stringify(limits)}`);
 }
