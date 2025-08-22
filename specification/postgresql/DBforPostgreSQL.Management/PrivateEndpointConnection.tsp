@@ -16,7 +16,7 @@ namespace Microsoft.DBforPostgreSQL;
  * The private endpoint connection resource.
  */
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
-alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
@@ -49,7 +49,7 @@ interface PrivateEndpointConnections {
    * Lists all private endpoint connections on a server.
    */
   @list
-  listByServer is ListSinglePageByParent<
+  listByServer is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
     Server,
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionList>
