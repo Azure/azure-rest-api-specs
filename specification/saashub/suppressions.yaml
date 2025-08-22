@@ -1,3 +1,9 @@
 - tool: TypeSpecRequirement
   path: resource-manager/Microsoft.SaaSHub/preview/2023-01-01-preview/**/*.json
   reason: This is an old api version and we won't touch it ever again after this PR. Feature has been tested in dogfood and got breaking change approved. We do not have plan to adopt typespect just for one field change, however internal partner is waiting for this change to go live. Will adopt in the new api version coming Q4.
+- tool: TypeSpecRequirement
+  path: resource-manager/Microsoft.SaaSHub/preview/2024-09-30-preview/**/*.json
+  reason: This version is no longer generated from TypeSpec sources but is still supported for backward compatibility. Only 2025-07-01-preview is now generated from TypeSpec.
+- tool: Compile
+  path: resource-manager/Microsoft.SaaSHub/preview/2024-09-30-preview/openapi.json
+  reason: This version is no longer generated from TypeSpec sources but is still supported for backward compatibility. Only 2025-07-01-preview is now generated from TypeSpec.

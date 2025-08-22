@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "cloudServiceResourceName": "myResourceName",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "SelfServeCancellationNotAllowed",
+        "reason": "CloudService is blocked from self service cancel",
+        "additionalInfo": {
+          "cancellationWindowEndTimestamp": "2023-03-12T00:00:00Z"
+        }
+      }
+    }
+  },
+  "operationId": "CloudServices_CanCancel",
+  "title": "Evaluate if a SaaSHub cloud service can be cancelled - Failed"
+}
