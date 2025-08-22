@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-2024-01-vm
 ```
 
 ## Suppression
@@ -103,6 +103,22 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/hciCommon.json
+```
+
+### Tag: package-2024-01-vm
+
+These settings apply only when `--tag=package-2024-01-vm` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-vm'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2024-01-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/logicalNetworks.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/networkInterfaces.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/storageContainers.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/virtualMachineInstances.json
 ```
 
 ### Tag: package-2024-01
