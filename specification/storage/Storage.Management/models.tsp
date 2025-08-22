@@ -1022,13 +1022,12 @@ union TriggerType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@pagedResult
 model BlobServiceItems {
   /**
    * List of blob services returned.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: BlobServiceProperties[];
 
   @nextLink
@@ -1696,6 +1695,7 @@ model FileServiceItems {
   /**
    * List of file services returned.
    */
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: FileServiceProperties[];
 }
@@ -2325,6 +2325,7 @@ model ListQueueServices {
    * List of queue services returned.
    */
   @visibility(Lifecycle.Read)
+  @pageItems
   value?: QueueServiceProperties[];
 }
 
@@ -2383,12 +2384,11 @@ model ListQueueProperties {
 /**
  * The list of available operations.
  */
-@pagedResult
 model OperationListResult {
   /**
    * List of operations supported by the resource provider.
    */
-  @items
+  @pageItems
   value?: Operation[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
@@ -2536,13 +2536,12 @@ model Dimension {
 /**
  * The response from the List Storage SKUs operation.
  */
-@pagedResult
 model StorageSkuListResult {
   /**
    * Get the list result of storage SKUs and their properties.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: SkuInformation[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4288,12 +4287,11 @@ model StorageAccountRegenerateKeyParameters {
 /**
  * The response from the List Usages operation.
  */
-@pagedResult
 model UsageListResult {
   /**
    * Gets or sets the list of Storage Resource Usages.
    */
-  @items
+  @pageItems
   value?: Usage[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4971,13 +4969,12 @@ model BlobInventoryCreationTime {
 /**
  * List of blob inventory policies returned.
  */
-@pagedResult
 model ListBlobInventoryPolicy {
   /**
    * List of blob inventory policies.
    */
   @visibility(Lifecycle.Read)
-  @items
+  @pageItems
   value?: BlobInventoryPolicy[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4988,12 +4985,11 @@ model ListBlobInventoryPolicy {
 /**
  * List of private endpoint connection associated with the specified storage account
  */
-@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * Array of private endpoint connections
    */
-  @items
+  @pageItems
   value?: PrivateEndpointConnection[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5049,12 +5045,11 @@ model PrivateLinkResourceProperties {
 /**
  * List storage account object replication policies.
  */
-@pagedResult
 model ObjectReplicationPolicies {
   /**
    * The replication policy between two storage accounts.
    */
-  @items
+  @pageItems
   value?: ObjectReplicationPolicy[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5358,6 +5353,7 @@ model ListTableServices {
    * List of table services returned.
    */
   @visibility(Lifecycle.Read)
+  @pageItems
   value?: TableServiceProperties[];
 }
 

@@ -60,6 +60,7 @@ interface QueueServices {
    * Gets a list of all the queues under the specified storage account
    */
   @get
+  @list
   @action("queues")
   queueList is ArmResourceActionSync<
     QueueServiceProperties,

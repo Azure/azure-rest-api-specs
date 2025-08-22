@@ -20,6 +20,7 @@ interface SkusOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("skus")
   list is ArmProviderActionSync<
     Response = StorageSkuListResult,
@@ -36,6 +37,7 @@ interface DeletedAccountsOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("deletedAccounts")
   list is ArmProviderActionSync<
     Response = ResourceListResult<DeletedAccount>,
@@ -52,6 +54,7 @@ interface UsagesOperationGroup {
    */
   @autoRoute
   @get
+  @list
   @action("usages")
   listByLocation is ArmProviderActionSync<
     Response = UsageListResult,
