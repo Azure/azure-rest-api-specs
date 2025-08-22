@@ -23,9 +23,9 @@ model EnvironmentType
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
   >;
 
-  @doc("Resource tags.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This is a valid property."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
+  @doc("Resource tags.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }

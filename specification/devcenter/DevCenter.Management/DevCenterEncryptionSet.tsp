@@ -23,8 +23,8 @@ model DevCenterEncryptionSet
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
   >;
 
-  @doc("Managed identity properties.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This is a valid property."
+  @doc("Managed identity properties.")
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 

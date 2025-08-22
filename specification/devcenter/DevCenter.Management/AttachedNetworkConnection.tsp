@@ -128,6 +128,12 @@ interface AttachedNetworks {
 
 @@maxLength(AttachedNetworkConnection.name, 63);
 @@minLength(AttachedNetworkConnection.name, 3);
-@@doc(AttachedNetworkConnection.name, "The name of the attached NetworkConnection.");
-@@doc(AttachedNetworkConnection.properties, "Attached NetworkConnection properties.");
-@@doc(AttachedNetworks.createOrUpdate::parameters.resource, "Represents an attached NetworkConnection.");
+@@doc(AttachedNetworkConnection.name,
+  "The name of the attached NetworkConnection."
+);
+@@doc(AttachedNetworkConnection.properties,
+  "Attached NetworkConnection properties."
+);
+@@doc(AttachedNetworks.createOrUpdate::parameters.resource,
+  "Represents an attached NetworkConnection."
+);

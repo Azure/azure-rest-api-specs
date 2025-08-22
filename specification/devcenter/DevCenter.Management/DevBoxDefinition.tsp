@@ -77,7 +77,8 @@ interface DevBoxDefinitions {
   @doc("Deletes a Dev Box definition.")
   delete is DevBoxDefinitionOps.DeleteWithoutOkAsync<
     DevBoxDefinition,
-    LroHeaders = ArmLroLocationHeader>;
+    LroHeaders = ArmLroLocationHeader
+  >;
 
   @doc("List Dev Box definitions for a devcenter.")
   listByDevCenter is DevBoxDefinitionOps.List<

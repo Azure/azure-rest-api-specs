@@ -384,7 +384,7 @@ union ImageValidationStatus {
 @doc("The unit details.")
 union UsageUnit {
   string,
-  
+
   @doc("Count.")
   Count: "Count",
 }
@@ -591,8 +591,8 @@ union ScheduleEnableStatus {
   Disabled: "Disabled",
 }
 
-@doc("The days of the week.")
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Days of week will never change."
+@doc("The days of the week.")
 union DayOfWeek {
   @doc("Monday")
   Monday: "Monday",
@@ -618,8 +618,8 @@ union DayOfWeek {
 
 model DevCenterListResult is Azure.Core.Page<DevCenter>;
 
-@doc("Properties of the devcenter.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of the devcenter.")
 model DevCenterProperties extends DevCenterUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -677,16 +677,16 @@ model DevCenterUpdate is TrackedResourceUpdate {
   @doc("Managed identity properties.")
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
-  @doc("Properties of a Dev Center to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of a Dev Center to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DevCenterUpdateProperties;
 }
 
 @doc("Base tracked resource type for PATCH updates.")
 model TrackedResourceUpdate {
-  @doc("Resource tags.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
+  @doc("Resource tags.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -695,8 +695,8 @@ model TrackedResourceUpdate {
   location?: string;
 }
 
-@doc("Properties of the devcenter encryption set.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of the devcenter encryption set.")
 model DevCenterEncryptionSetProperties
   extends DevCenterEncryptionSetUpdateProperties {
   @doc("The provisioning state of the resource.")
@@ -729,8 +729,8 @@ model KeyEncryptionKeyIdentity {
 
 @doc("The devcenter encryption set resource for partial updates. Properties not provided in the update request will not be changed.")
 model EncryptionSetUpdate is TrackedResourceUpdate {
-  @doc("Properties of a Dev Center encryption set to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of a Dev Center encryption set to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DevCenterEncryptionSetUpdateProperties;
 
@@ -738,8 +738,8 @@ model EncryptionSetUpdate is TrackedResourceUpdate {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
-@doc("Properties of an project policy.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of an project policy.")
 model ProjectPolicyProperties extends ProjectPolicyUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -773,14 +773,14 @@ model ResourcePolicy {
 
 @doc("The project policy properties for partial update. Properties not provided in the update request will not be changed.")
 model ProjectPolicyUpdate {
-  @doc("Properties of an project policy to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of an project policy to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectPolicyUpdateProperties;
 }
 
-@doc("Properties of a project.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of a project.")
 model ProjectProperties extends ProjectUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -886,8 +886,8 @@ model WorkspaceStorageSettings {
 
 @doc("The project properties for partial update. Properties not provided in the update request will not be changed.")
 model ProjectUpdate is TrackedResourceUpdate {
-  @doc("Properties of a project to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of a project to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectUpdateProperties;
 
@@ -938,8 +938,8 @@ model AttachedNetworkConnectionProperties {
 
 model AttachedNetworkListResult is Azure.Core.Page<AttachedNetworkConnection>;
 
-@doc("Properties of a catalog.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of a catalog.")
 model CatalogProperties extends CatalogUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -1013,8 +1013,8 @@ model CatalogUpdateProperties {
   @doc("Indicates the type of sync that is configured for the catalog.")
   syncType?: CatalogSyncType;
 
-  @doc("Resource tags.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
+  @doc("Resource tags.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1036,14 +1036,14 @@ model GitCatalog {
 
 @doc("The catalog's properties for partial update. Properties not provided in the update request will not be changed.")
 model CatalogUpdate {
-  @doc("Catalog properties for update.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Catalog properties for update.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CatalogUpdateProperties;
 }
 
-@doc("Properties of an environment definition.")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
+@doc("Properties of an environment definition.")
 model EnvironmentDefinitionProperties {
   @doc("A short description of the environment definition.")
   @visibility(Lifecycle.Read)
@@ -1194,8 +1194,8 @@ model RecommendedMachineConfiguration {
   @visibility(Lifecycle.Read)
   memory?: ResourceRange;
 
-  @doc("Recommended vCPU range.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy, cannot change existing name."
+  @doc("Recommended vCPU range.")
   @visibility(Lifecycle.Read)
   vCPUs?: ResourceRange;
 }
@@ -1213,8 +1213,8 @@ model ResourceRange {
 
 @doc("Properties of an image version.")
 model ImageVersionProperties {
-  @doc("The semantic version string.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Safe to suppress for an existing API during TypeSpec conversion."
+  @doc("The semantic version string.")
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -1238,8 +1238,8 @@ model ImageVersionProperties {
 @doc("Results of the Microsoft.DevCenter SKU list operation.")
 model SkuListResult is Azure.Core.Page<DevCenterSku>;
 
-@doc("The resource model definition representing SKU for DevCenter resources.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("The resource model definition representing SKU for DevCenter resources.")
 model DevCenterSku extends Azure.ResourceManager.CommonTypes.Sku {
   @doc("The name of the resource type.")
   @visibility(Lifecycle.Read)
@@ -1266,8 +1266,8 @@ model Capability {
   value?: string;
 }
 
-@doc("Properties of an environment type.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of an environment type.")
 model EnvironmentTypeProperties extends EnvironmentTypeUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -1282,13 +1282,13 @@ model EnvironmentTypeUpdateProperties {
 
 @doc("The environment type for partial update. Properties not provided in the update request will not be changed.")
 model EnvironmentTypeUpdate {
-  @doc("Properties of an environment type to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of an environment type to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: EnvironmentTypeUpdateProperties;
 
-  @doc("Resource tags.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
+  @doc("Resource tags.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1307,8 +1307,8 @@ model AllowedEnvironmentTypeProperties {
 model AllowedEnvironmentTypeListResult
   is Azure.Core.Page<AllowedEnvironmentType>;
 
-@doc("Properties of a project environment type.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of a project environment type.")
 model ProjectEnvironmentTypeProperties
   extends ProjectEnvironmentTypeUpdateProperties {
   @doc("The provisioning state of the resource.")
@@ -1367,13 +1367,13 @@ model UserRoleAssignment {
 
 @doc("The project environment type for partial update. Properties not provided in the update request will not be changed.")
 model ProjectEnvironmentTypeUpdate {
-  @doc("Properties to configure an environment type.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties to configure an environment type.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProjectEnvironmentTypeUpdateProperties;
 
-  @doc("Resource tags.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
+  @doc("Resource tags.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -1383,8 +1383,8 @@ model ProjectEnvironmentTypeUpdate {
 
 model DevBoxDefinitionListResult is Azure.Core.Page<DevBoxDefinition>;
 
-@doc("Properties of a Dev Box definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Properties of a Dev Box definition.")
 model DevBoxDefinitionProperties extends DevBoxDefinitionUpdateProperties {
   @doc("Image reference information.")
   imageReference: ImageReference;
@@ -1449,8 +1449,8 @@ model DevBoxDefinitionUpdateProperties {
 
 @doc("Partial update of a Dev Box definition resource.")
 model DevBoxDefinitionUpdate is TrackedResourceUpdate {
-  @doc("Properties of a Dev Box definition to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of a Dev Box definition to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DevBoxDefinitionUpdateProperties;
 }
@@ -1474,9 +1474,10 @@ model OperationDisplay {
   description?: string;
 }
 
-@doc("The current status of an async operation")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
-model OperationStatus extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
+@doc("The current status of an async operation")
+model OperationStatus
+  extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API and valid as per ARM/RPaaS operation status contract."
   @doc("Custom operation properties, populated only for a successful operation.")
   @visibility(Lifecycle.Read)
@@ -1527,8 +1528,8 @@ model CheckScopedNameAvailabilityRequest {
 
 model CustomizationTaskListResult is Azure.Core.Page<CustomizationTask>;
 
-@doc("Properties of a Task.")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
+@doc("Properties of a Task.")
 model CustomizationTaskProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("Inputs to the task.")
@@ -1559,8 +1560,8 @@ model CustomizationTaskInput {
   required?: boolean;
 }
 
-@doc("Properties of an Image Definition.")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read only proxy resource without a PUT."
+@doc("Properties of an Image Definition.")
 model ImageDefinitionProperties {
   @doc("Image reference information.")
   imageReference?: ImageReference;
@@ -1690,8 +1691,8 @@ model ImageCreationErrorDetails {
   message?: string;
 }
 
-@doc("Represents a specific build of an Image Definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Represents a specific build of an Image Definition.")
 model ImageDefinitionBuildDetails
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   @doc("The specific image version used by the build.")
@@ -1930,17 +1931,17 @@ model ActiveHoursConfiguration {
 
 @doc("The pool properties for partial update. Properties not provided in the update request will not be changed.")
 model PoolUpdate is TrackedResourceUpdate {
-  @doc("Properties of a pool to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of a pool to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PoolUpdateProperties;
 }
 
-@doc("The Schedule properties defining when and what to execute.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("The Schedule properties defining when and what to execute.")
 model ScheduleProperties extends ScheduleUpdateProperties {
-  @doc("Supported type this scheduled task represents.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Safe to suppress for an existing API during TypeSpec conversion."
+  @doc("Supported type this scheduled task represents.")
   type: ScheduledType;
 
   @doc("The frequency of this scheduled task.")
@@ -1977,14 +1978,14 @@ model ScheduleUpdateProperties is TrackedResourceUpdate {
 
 @doc("The schedule properties for partial update. Properties not provided in the update request will not be changed.")
 model ScheduleUpdate {
-  @doc("Properties of a schedule resource to be updated.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
+  @doc("Properties of a schedule resource to be updated.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ScheduleUpdateProperties;
 }
 
-@doc("Network properties")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
+@doc("Network properties")
 model NetworkProperties extends NetworkConnectionUpdateProperties {
   @doc("The subnet to attach Virtual Machines to.")
   subnetId: string;
