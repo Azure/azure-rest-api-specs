@@ -2134,7 +2134,7 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?BlockBlob&fromUrl")
-        op putBlobFromUrl is StorageOperationNoBody<
+        op uploadBlobFromUrl is StorageOperationNoBody<
           {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
