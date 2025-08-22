@@ -3,9 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
-using Azure.Core;
 
-namespace ConfidentialLedger.Ledger;
+namespace ConfidentialLedger;
 
 /**
  * State of a ledger query.

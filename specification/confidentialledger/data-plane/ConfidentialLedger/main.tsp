@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
     ledgerEndpoint: url,
   }
 )
-namespace ConfidentialLedger.Ledger;
+namespace ConfidentialLedger;
 
 /**
  * The available API versions.

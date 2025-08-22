@@ -3,12 +3,12 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Versioning;
 
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace ConfidentialLedger.Common;
+namespace ConfidentialLedgerCommon;
 
 op LedgerOperation<
   TParameters extends TypeSpec.Reflection.Model = {},
   TResult extends TypeSpec.Reflection.Model | void = void,
-  TError = Common.ConfidentialLedgerError
+  TError = ConfidentialLedgerCommon.ConfidentialLedgerError
 > is Azure.Core.Foundations.Operation<TParameters, TResult, {}, TError>;
 
 /**
