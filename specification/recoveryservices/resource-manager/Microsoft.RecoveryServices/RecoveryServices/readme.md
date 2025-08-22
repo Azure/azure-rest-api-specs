@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2025-02-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-02-01'
 input-file:
-  - Microsoft.RecoveryServices/stable/2025-02-01/openapi.json
+  - stable/2025-02-01/openapi.json
 ```
 
 ### Tag: package-2025-01-01
@@ -57,10 +57,10 @@ These settings apply only when `--tag=package-2025-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-01-01'
 input-file:
-  - Microsoft.RecoveryServices/stable/2025-01-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2025-01-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2025-01-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2025-01-01/vaultusages.json
+  - stable/2025-01-01/registeredidentities.json
+  - stable/2025-01-01/replicationusages.json
+  - stable/2025-01-01/vaults.json
+  - stable/2025-01-01/vaultusages.json
 ```
 
 ### Tag: package-2024-10
@@ -69,10 +69,10 @@ These settings apply only when `--tag=package-2024-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-10'
 input-file:
-  - Microsoft.RecoveryServices/stable/2024-10-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2024-10-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2024-10-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2024-10-01/vaultusages.json
+  - stable/2024-10-01/registeredidentities.json
+  - stable/2024-10-01/replicationusages.json
+  - stable/2024-10-01/vaults.json
+  - stable/2024-10-01/vaultusages.json
 ```
 
 ### Tag: package-preview-2024-09
@@ -81,10 +81,10 @@ These settings apply only when `--tag=package-preview-2024-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-09'
 input-file:
-  - Microsoft.RecoveryServices/preview/2024-09-30-preview/registeredidentities.json
-  - Microsoft.RecoveryServices/preview/2024-09-30-preview/replicationusages.json
-  - Microsoft.RecoveryServices/preview/2024-09-30-preview/vaults.json
-  - Microsoft.RecoveryServices/preview/2024-09-30-preview/vaultusages.json
+  - preview/2024-09-30-preview/registeredidentities.json
+  - preview/2024-09-30-preview/replicationusages.json
+  - preview/2024-09-30-preview/vaults.json
+  - preview/2024-09-30-preview/vaultusages.json
 ```
 
 ### Tag: package-preview-2024-04
@@ -93,10 +93,10 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
-  - Microsoft.RecoveryServices/preview/2024-04-30-preview/registeredidentities.json
-  - Microsoft.RecoveryServices/preview/2024-04-30-preview/replicationusages.json
-  - Microsoft.RecoveryServices/preview/2024-04-30-preview/vaults.json
-  - Microsoft.RecoveryServices/preview/2024-04-30-preview/vaultusages.json
+  - preview/2024-04-30-preview/registeredidentities.json
+  - preview/2024-04-30-preview/replicationusages.json
+  - preview/2024-04-30-preview/vaults.json
+  - preview/2024-04-30-preview/vaultusages.json
 ```
 
 ### Tag: package-2024-04
@@ -105,10 +105,10 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-04'
 input-file:
-  - Microsoft.RecoveryServices/stable/2024-04-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2024-04-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2024-04-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2024-04-01/vaultusages.json
+  - stable/2024-04-01/registeredidentities.json
+  - stable/2024-04-01/replicationusages.json
+  - stable/2024-04-01/vaults.json
+  - stable/2024-04-01/vaultusages.json
 ```
 
 ### Tag: package-2024-02
@@ -117,10 +117,10 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.RecoveryServices/stable/2024-02-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2024-02-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2024-02-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2024-02-01/vaultusages.json
+  - stable/2024-02-01/registeredidentities.json
+  - stable/2024-02-01/replicationusages.json
+  - stable/2024-02-01/vaults.json
+  - stable/2024-02-01/vaultusages.json
 ```
 
 ### Tag: package-2024-01
@@ -129,10 +129,10 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.RecoveryServices/stable/2024-01-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2024-01-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2024-01-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2024-01-01/vaultusages.json
+  - stable/2024-01-01/registeredidentities.json
+  - stable/2024-01-01/replicationusages.json
+  - stable/2024-01-01/vaults.json
+  - stable/2024-01-01/vaultusages.json
 ```
 
 ### Tag: package-2023-08
@@ -141,10 +141,10 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-08'
 input-file:
-  - Microsoft.RecoveryServices/stable/2023-08-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2023-08-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2023-08-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2023-08-01/vaultusages.json
+  - stable/2023-08-01/registeredidentities.json
+  - stable/2023-08-01/replicationusages.json
+  - stable/2023-08-01/vaults.json
+  - stable/2023-08-01/vaultusages.json
 ```
 
 ### Tag: package-2023-06
@@ -153,10 +153,10 @@ These settings apply only when `--tag=package-2023-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-06'
 input-file:
-  - Microsoft.RecoveryServices/stable/2023-06-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2023-06-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2023-06-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2023-06-01/vaultusages.json
+  - stable/2023-06-01/registeredidentities.json
+  - stable/2023-06-01/replicationusages.json
+  - stable/2023-06-01/vaults.json
+  - stable/2023-06-01/vaultusages.json
 ```
 
 ### Tag: package-2023-04
@@ -165,10 +165,10 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-04'
 input-file:
-  - Microsoft.RecoveryServices/stable/2023-04-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2023-04-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2023-04-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2023-04-01/vaultusages.json
+  - stable/2023-04-01/registeredidentities.json
+  - stable/2023-04-01/replicationusages.json
+  - stable/2023-04-01/vaults.json
+  - stable/2023-04-01/vaultusages.json
 ```
 
 ### Tag: package-2023-02
@@ -177,10 +177,10 @@ These settings apply only when `--tag=package-2023-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-02'
 input-file:
-  - Microsoft.RecoveryServices/stable/2023-02-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2023-02-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2023-02-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2023-02-01/vaultusages.json
+  - stable/2023-02-01/registeredidentities.json
+  - stable/2023-02-01/replicationusages.json
+  - stable/2023-02-01/vaults.json
+  - stable/2023-02-01/vaultusages.json
 ```
 
 ### Tag: package-2023-01
@@ -189,10 +189,10 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-01'
 input-file:
-  - Microsoft.RecoveryServices/stable/2023-01-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2023-01-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2023-01-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2023-01-01/vaultusages.json
+  - stable/2023-01-01/registeredidentities.json
+  - stable/2023-01-01/replicationusages.json
+  - stable/2023-01-01/vaults.json
+  - stable/2023-01-01/vaultusages.json
 ```
 
 ### Tag: package-2022-10
@@ -201,10 +201,10 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-10-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-10-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-10-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-10-01/vaultusages.json
+  - stable/2022-10-01/registeredidentities.json
+  - stable/2022-10-01/replicationusages.json
+  - stable/2022-10-01/vaults.json
+  - stable/2022-10-01/vaultusages.json
 ```
 
 ### Tag: package-preview-2022-09
@@ -213,10 +213,10 @@ These settings apply only when `--tag=package-preview-2022-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - Microsoft.RecoveryServices/preview/2022-09-30-preview/registeredidentities.json
-  - Microsoft.RecoveryServices/preview/2022-09-30-preview/replicationusages.json
-  - Microsoft.RecoveryServices/preview/2022-09-30-preview/vaults.json
-  - Microsoft.RecoveryServices/preview/2022-09-30-preview/vaultusages.json
+  - preview/2022-09-30-preview/registeredidentities.json
+  - preview/2022-09-30-preview/replicationusages.json
+  - preview/2022-09-30-preview/vaults.json
+  - preview/2022-09-30-preview/vaultusages.json
 ```
 
 ### Tag: package-2022-09
@@ -225,10 +225,10 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-09'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-09-10/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-09-10/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-09-10/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-09-10/vaultusages.json
+  - stable/2022-09-10/registeredidentities.json
+  - stable/2022-09-10/replicationusages.json
+  - stable/2022-09-10/vaults.json
+  - stable/2022-09-10/vaultusages.json
 ```
 
 ### Tag: package-2022-08
@@ -237,10 +237,10 @@ These settings apply only when `--tag=package-2022-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-08'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-08-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-08-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-08-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-08-01/vaultusages.json
+  - stable/2022-08-01/registeredidentities.json
+  - stable/2022-08-01/replicationusages.json
+  - stable/2022-08-01/vaults.json
+  - stable/2022-08-01/vaultusages.json
 ```
 
 ### Tag: package-2022-05
@@ -249,10 +249,10 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-05'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-05-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-05-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-05-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-05-01/vaultusages.json
+  - stable/2022-05-01/registeredidentities.json
+  - stable/2022-05-01/replicationusages.json
+  - stable/2022-05-01/vaults.json
+  - stable/2022-05-01/vaultusages.json
 ```
 
 ### Tag: package-2022-04
@@ -261,10 +261,10 @@ These settings apply only when `--tag=package-2022-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-04'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-04-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-04-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-04-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-04-01/vaultusages.json
+  - stable/2022-04-01/registeredidentities.json
+  - stable/2022-04-01/replicationusages.json
+  - stable/2022-04-01/vaults.json
+  - stable/2022-04-01/vaultusages.json
 ```
 
 ### Tag: package-2022-03
@@ -273,10 +273,10 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-03-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-03-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-03-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-03-01/vaultusages.json
+  - stable/2022-03-01/registeredidentities.json
+  - stable/2022-03-01/replicationusages.json
+  - stable/2022-03-01/vaults.json
+  - stable/2022-03-01/vaultusages.json
 ```
 
 ### Tag: package-2022-02
@@ -285,10 +285,10 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-02'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-02-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-02-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-02-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-02-01/vaultusages.json
+  - stable/2022-02-01/registeredidentities.json
+  - stable/2022-02-01/replicationusages.json
+  - stable/2022-02-01/vaults.json
+  - stable/2022-02-01/vaultusages.json
 ```
 
 ### Tag: package-preview-2022-01
@@ -297,10 +297,10 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
-  - Microsoft.RecoveryServices/preview/2022-01-31-preview/registeredidentities.json
-  - Microsoft.RecoveryServices/preview/2022-01-31-preview/replicationusages.json
-  - Microsoft.RecoveryServices/preview/2022-01-31-preview/vaults.json
-  - Microsoft.RecoveryServices/preview/2022-01-31-preview/vaultusages.json
+  - preview/2022-01-31-preview/registeredidentities.json
+  - preview/2022-01-31-preview/replicationusages.json
+  - preview/2022-01-31-preview/vaults.json
+  - preview/2022-01-31-preview/vaultusages.json
 ```
 
 ### Tag: package-2022-01
@@ -309,10 +309,10 @@ These settings apply only when `--tag=package-2022-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-01'
 input-file:
-  - Microsoft.RecoveryServices/stable/2022-01-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2022-01-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2022-01-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2022-01-01/vaultusages.json
+  - stable/2022-01-01/registeredidentities.json
+  - stable/2022-01-01/replicationusages.json
+  - stable/2022-01-01/vaults.json
+  - stable/2022-01-01/vaultusages.json
 ```
 
 ### Tag: package-2021-12
@@ -321,10 +321,10 @@ These settings apply only when `--tag=package-2021-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-12'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-12-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-12-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-12-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-12-01/vaultusages.json
+  - stable/2021-12-01/registeredidentities.json
+  - stable/2021-12-01/replicationusages.json
+  - stable/2021-12-01/vaults.json
+  - stable/2021-12-01/vaultusages.json
 ```
 
 ### Tag: package-preview-2021-11
@@ -333,10 +333,10 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/registeredidentities.json
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/replicationusages.json
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/vaults.json
-  - Microsoft.RecoveryServices/preview/2021-11-01-preview/vaultusages.json
+  - preview/2021-11-01-preview/registeredidentities.json
+  - preview/2021-11-01-preview/replicationusages.json
+  - preview/2021-11-01-preview/vaults.json
+  - preview/2021-11-01-preview/vaultusages.json
 ```
 
 ### Tag: package-2021-08
@@ -345,10 +345,10 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-08'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-08-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-08-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-08-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-08-01/vaultusages.json
+  - stable/2021-08-01/registeredidentities.json
+  - stable/2021-08-01/replicationusages.json
+  - stable/2021-08-01/vaults.json
+  - stable/2021-08-01/vaultusages.json
 ```
 
 ### Tag: package-2021-07
@@ -357,10 +357,10 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-07-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-07-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-07-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-07-01/vaultusages.json
+  - stable/2021-07-01/registeredidentities.json
+  - stable/2021-07-01/replicationusages.json
+  - stable/2021-07-01/vaults.json
+  - stable/2021-07-01/vaultusages.json
 ```
 
 ### Tag: package-2021-06
@@ -369,10 +369,10 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-06'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-06-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-06-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-06-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-06-01/vaultusages.json
+  - stable/2021-06-01/registeredidentities.json
+  - stable/2021-06-01/replicationusages.json
+  - stable/2021-06-01/vaults.json
+  - stable/2021-06-01/vaultusages.json
 ```
 
 ### Tag: package-2021-04
@@ -381,10 +381,10 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-04'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-04-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-04-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-04-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-04-01/vaultusages.json
+  - stable/2021-04-01/registeredidentities.json
+  - stable/2021-04-01/replicationusages.json
+  - stable/2021-04-01/vaults.json
+  - stable/2021-04-01/vaultusages.json
 ```
 
 ### Tag: package-2021-03
@@ -393,10 +393,10 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-03-01/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-03-01/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-03-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-03-01/vaultusages.json
+  - stable/2021-03-01/registeredidentities.json
+  - stable/2021-03-01/replicationusages.json
+  - stable/2021-03-01/vaults.json
+  - stable/2021-03-01/vaultusages.json
 ```
 
 ### Tag: package-2021-02
@@ -405,10 +405,10 @@ These settings apply only when `--tag=package-2021-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-02'
 input-file:
-  - Microsoft.RecoveryServices/stable/2021-02-10/registeredidentities.json
-  - Microsoft.RecoveryServices/stable/2021-02-10/replicationusages.json
-  - Microsoft.RecoveryServices/stable/2021-02-10/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-02-10/vaultusages.json
+  - stable/2021-02-10/registeredidentities.json
+  - stable/2021-02-10/replicationusages.json
+  - stable/2021-02-10/vaults.json
+  - stable/2021-02-10/vaultusages.json
 ```
 
 ### Tag: package-2016-06
@@ -417,10 +417,10 @@ These settings apply only when `--tag=package-2016-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-06'
 input-file:
-- Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
-- Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
+- stable/2016-06-01/registeredidentities.json
+- stable/2016-06-01/replicationusages.json
+- stable/2016-06-01/vaults.json
+- stable/2016-06-01/vaultusages.json
 ```
 
 ### Tag: package-2020-02
@@ -429,10 +429,10 @@ These settings apply only when `--tag=package-2020-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-02'
 input-file:
-- Microsoft.RecoveryServices/stable/2020-02-02/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2020-02-02/replicationusages.json
-- Microsoft.RecoveryServices/stable/2020-02-02/vaults.json
-- Microsoft.RecoveryServices/stable/2020-02-02/vaultusages.json
+- stable/2020-02-02/registeredidentities.json
+- stable/2020-02-02/replicationusages.json
+- stable/2020-02-02/vaults.json
+- stable/2020-02-02/vaultusages.json
 ```
 
 ### Tag: package-2020-10
@@ -441,10 +441,10 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-10'
 input-file:
-- Microsoft.RecoveryServices/stable/2020-10-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2020-10-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2020-10-01/vaults.json
-- Microsoft.RecoveryServices/stable/2020-10-01/vaultusages.json
+- stable/2020-10-01/registeredidentities.json
+- stable/2020-10-01/replicationusages.json
+- stable/2020-10-01/vaults.json
+- stable/2020-10-01/vaultusages.json
 ```
 
 ### Tag: package-2021-01
@@ -453,10 +453,10 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-01'
 input-file:
-- Microsoft.RecoveryServices/stable/2021-01-01/registeredidentities.json
-- Microsoft.RecoveryServices/stable/2021-01-01/replicationusages.json
-- Microsoft.RecoveryServices/stable/2021-01-01/vaults.json
-- Microsoft.RecoveryServices/stable/2021-01-01/vaultusages.json
+- stable/2021-01-01/registeredidentities.json
+- stable/2021-01-01/replicationusages.json
+- stable/2021-01-01/vaults.json
+- stable/2021-01-01/vaultusages.json
 ```
 
 ---
