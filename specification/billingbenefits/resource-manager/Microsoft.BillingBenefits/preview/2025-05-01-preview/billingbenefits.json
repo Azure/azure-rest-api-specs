@@ -1917,6 +1917,7 @@
         }
       }
     },
+    
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.BillingBenefits/applicableMaccs": {
       "get": {
         "description": "List maccs that are applicable for a given billing account.",
@@ -1997,1017 +1998,1017 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}": {
-    "put": {
-      "description": "Create a credit.",
-      "operationId": "Credits_Create",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "original-uri"
-      },
-      "x-ms-examples": {
-        "PromotionalCreditCreate": {
-          "$ref": "./examples/PromotionalCreditCreate.json"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}": {
+      "put": {
+        "description": "Create a credit.",
+        "operationId": "Credits_Create",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         },
-        "EndCustomerInvestmentFundCreditCreate": {
-          "$ref": "./examples/EndCustomerInvestmentFundCreditCreate.json"
-        },
-        "CreditCreate": {
-          "$ref": "./examples/CreditCreate.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditPutRequestParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The resource has been updated.",
-          "schema": {
-            "$ref": "#/definitions/Credit"
-          }
-        },
-        "201": {
-          "description": "The resource is created.",
-          "schema": {
-            "$ref": "#/definitions/Credit"
+        "x-ms-examples": {
+          "PromotionalCreditCreate": {
+            "$ref": "./examples/PromotionalCreditCreate.json"
           },
-          "headers": {
-            "Location": {
-              "description": "Location URI to poll for result.",
-              "type": "string"
-            },
-            "Azure-AsyncOperation": {
-              "type": "string",
-              "description": "URL for checking the ongoing status of the operation."
-            },
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Clients should wait for the Retry-After interval before polling again"
-            }
-          }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "get": {
-      "description": "Get a credit.",
-      "operationId": "Credits_Get",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-examples": {
-        "CreditGet": {
-          "$ref": "./examples/CreditGet.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request is completed.",
-          "schema": {
-            "$ref": "#/definitions/Credit"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "patch": {
-      "description": "Update a credit.",
-      "operationId": "Credits_Update",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-examples": {
-        "CreditTagsUpdate": {
-          "$ref": "./examples/CreditTagsUpdate.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditPatchRequestParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Success",
-          "schema": {
-            "$ref": "#/definitions/Credit"
-          }
-        },
-        "202": {
-          "description": "Accepted",
-          "headers": {
-            "Azure-AsyncOperation": {
-              "type": "string",
-              "description": "URL for checking the ongoing status of the operation."
-            },
-            "Location": {
-              "description": "Location URI to poll for result.",
-              "type": "string"
-            },
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Clients should wait for the Retry-After interval before polling again"
-            }
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "delete": {
-      "description": "Delete a credit.",
-      "operationId": "Credits_Delete",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-examples": {
-        "CreditDelete": {
-          "$ref": "./examples/CreditDelete.json"
-        }
-      },
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "The request is accepted.",
-          "headers": {
-            "Location": {
-              "description": "Location URI to poll for result.",
-              "type": "string"
-            },
-            "Azure-AsyncOperation": {
-              "type": "string",
-              "description": "URL for checking the ongoing status of the operation."
-            },
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Clients should wait for the Retry-After interval before polling again"
-            }
-          }
-        },
-        "204": {
-          "description": "Resource does not exist and the request is well formed."
-        },
-        "default": {
-          "description": "Error",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits": {
-    "get": {
-      "description": "List Credits under a resource group from primary service admin.",
-      "operationId": "Credits_ListByResourceGroup",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "x-ms-examples": {
-        "CreditsListByResourceGroup": {
-          "$ref": "./examples/CreditsListByResourceGroup.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request is completed.",
-          "schema": {
-            "$ref": "#/definitions/CreditsList"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/credits": {
-    "get": {
-      "description": "List credits under a subscription from primary service tenant.",
-      "operationId": "Credits_ListBySubscription",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "x-ms-examples": {
-        "CreditsListBySubscription": {
-          "$ref": "./examples/CreditsListBySubscription.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request is completed.",
-          "schema": {
-            "$ref": "#/definitions/CreditsList"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/cancel": {
-    "post": {
-      "description": "Cancels a credit.",
-      "operationId": "Credits_Cancel",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-examples": {
-        "CreditCancel": {
-          "$ref": "./examples/CreditCancel.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "The request is accepted.",
-          "headers": {
-            "Location": {
-              "description": "Location URI to poll for result.",
-              "type": "string"
-            },
-            "Azure-AsyncOperation": {
-              "type": "string",
-              "description": "URL for checking the ongoing status of the operation."
-            },
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Clients should wait for the Retry-After interval before polling again"
-            }
-          }
-        },
-        "200": {
-          "description": "Success",
-          "schema": {
-            "$ref": "#/definitions/Credit"
-          }
-        },
-        "default": {
-          "description": "Error",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/sources/{sourceName}": {
-    "put": {
-      "description": "Create a credit source.",
-      "operationId": "Sources_Create",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-long-running-operation": false,
-      "x-ms-examples": {
-        "CreditSourceCreate": {
-          "$ref": "./examples/CreditSourceCreate.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "#/parameters/SourceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditSourcePutRequestParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The resource has been updated.",
-          "schema": {
-            "$ref": "#/definitions/CreditSource"
-          }
-        },
-        "201": {
-          "description": "The resource is created.",
-          "schema": {
-            "$ref": "#/definitions/CreditSource"
-          }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "get": {
-      "description": "Get a credit source.",
-      "operationId": "Sources_Get",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-examples": {
-        "CreditSourceGet": {
-          "$ref": "./examples/CreditSourceGet.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "#/parameters/SourceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request is completed.",
-          "schema": {
-            "$ref": "#/definitions/CreditSource"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "patch": {
-      "description": "Update a credit source.",
-      "operationId": "Sources_Update",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-long-running-operation": false,
-      "x-ms-examples": {
-        "CreditSourceTagsUpdate": {
-          "$ref": "./examples/CreditSourceTagsUpdate.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "#/parameters/SourceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditSourcePatchRequestParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Success",
-          "schema": {
-            "$ref": "#/definitions/CreditSource"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "delete": {
-      "description": "Delete a credit source.",
-      "operationId": "Sources_Delete",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-examples": {
-        "CreditSourceDelete": {
-          "$ref": "./examples/CreditSourceDelete.json"
-        }
-      },
-      "x-ms-long-running-operation": false,
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "#/parameters/SourceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The deletion has succeeded."
-        },
-        "204": {
-          "description": "Resource does not exist and the request is well formed."
-        },
-        "default": {
-          "description": "Error",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/sources": {
-    "get": {
-      "description": "List credit sources for a credit under a resource group from primary service admin.",
-      "operationId": "Sources_ListByCredit",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "x-ms-examples": {
-        "CreditSourcesListByCredit": {
-          "$ref": "./examples/CreditSourcesListByCredit.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request is completed.",
-          "schema": {
-            "$ref": "#/definitions/CreditSourcesList"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/{scope}/providers/Microsoft.BillingBenefits/applicableCredits": {
-    "get": {
-      "description": "List applicable credits for the provided scope. Currently supported scopes: BillingAccountResourceId",
-      "operationId": "Credits_ListApplicable",
-      "tags": [
-        "Credits"
-      ],
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "x-ms-examples": {
-        "CreditSourcesListByCredit": {
-          "$ref": "./examples/CreditListApplicableCredits.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/ScopeParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request is completed.",
-          "schema": {
-            "$ref": "#/definitions/CreditsList"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}": {
-    "put": {
-      "description": "Create or update a conditional credit.",
-      "operationId": "ConditionalCredits_CreateOrUpdate",
-      "tags": [
-        "Conditional Credits"
-      ],
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-examples": {
-        "ConditionalCreditCreatePrimary": {
-          "$ref": "./examples/ConditionalCreditCreatePrimary.json"
-        },
-        "ConditionalCreditCreateContributor": {
-          "$ref": "./examples/ConditionalCreditCreateContributor.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ConditionalCreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ConditionalCreditRequestParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The resource has been created.",
-          "schema": {
-            "$ref": "#/definitions/ConditionalCredit"
-          }
-        },
-        "201": {
-          "description": "The request is being processed.",
-          "schema": {
-            "$ref": "#/definitions/ConditionalCredit"
+          "EndCustomerInvestmentFundCreditCreate": {
+            "$ref": "./examples/EndCustomerInvestmentFundCreditCreate.json"
           },
-          "headers": {
-            "Azure-AsyncOperation": {
-              "type": "string",
-              "description": "URL for checking the ongoing status of the operation."
-            },
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Clients should wait for the Retry-After interval before polling again"
-            }
+          "CreditCreate": {
+            "$ref": "./examples/CreditCreate.json"
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditPutRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been updated.",
+            "schema": {
+              "$ref": "#/definitions/Credit"
+            }
+          },
+          "201": {
+            "description": "The resource is created.",
+            "schema": {
+              "$ref": "#/definitions/Credit"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a credit.",
+        "operationId": "Credits_Get",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-examples": {
+          "CreditGet": {
+            "$ref": "./examples/CreditGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/Credit"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a credit.",
+        "operationId": "Credits_Update",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreditTagsUpdate": {
+            "$ref": "./examples/CreditTagsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditPatchRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Credit"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a credit.",
+        "operationId": "Credits_Delete",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-examples": {
+          "CreditDelete": {
+            "$ref": "./examples/CreditDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-    "get": {
-      "description": "Get a conditional credit.",
-      "operationId": "ConditionalCredits_Get",
-      "tags": [
-        "Conditional Credits"
-      ],
-      "x-ms-examples": {
-        "ConditionalCreditGet": {
-          "$ref": "./examples/ConditionalCreditGet.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits": {
+      "get": {
+        "description": "List Credits under a resource group from primary service admin.",
+        "operationId": "Credits_ListByResourceGroup",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ConditionalCreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request is completed.",
-          "schema": {
-            "$ref": "#/definitions/ConditionalCredit"
+        "x-ms-examples": {
+          "CreditsListByResourceGroup": {
+            "$ref": "./examples/CreditsListByResourceGroup.json"
           }
         },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CreditsList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-    "patch": {
-      "description": "Update a conditional credit.",
-      "operationId": "ConditionalCredits_Update",
-      "tags": [
-        "Conditional Credits"
-      ],
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-examples": {
-        "ConditionalCreditUpdate": {
-          "$ref": "./examples/ConditionalCreditUpdate.json"
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/credits": {
+      "get": {
+        "description": "List credits under a subscription from primary service tenant.",
+        "operationId": "Credits_ListBySubscription",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "ConditionalCreditUpdateContributor": {
-          "$ref": "./examples/ConditionalCreditUpdateContributor.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ConditionalCreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ConditionalCreditPatchRequestParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Success",
-          "schema": {
-            "$ref": "#/definitions/ConditionalCredit"
+        "x-ms-examples": {
+          "CreditsListBySubscription": {
+            "$ref": "./examples/CreditsListBySubscription.json"
           }
         },
-        "202": {
-          "description": "Accepted",
-          "headers": {
-            "Azure-AsyncOperation": {
-              "type": "string",
-              "description": "URL for checking the ongoing status of the operation."
-            },
-            "Location": {
-              "description": "Location URI to poll for result.",
-              "type": "string"
-            },
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Clients should wait for the Retry-After interval before polling again"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CreditsList"
             }
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-    "delete": {
-      "description": "Delete a conditional credit.",
-      "operationId": "ConditionalCredits_Delete",
-      "tags": [
-        "Conditional Credits"
-      ],
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-examples": {
-        "ConditionalCreditDelete": {
-          "$ref": "./examples/ConditionalCreditDelete.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/cancel": {
+      "post": {
+        "description": "Cancels a credit.",
+        "operationId": "Credits_Cancel",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+        "x-ms-examples": {
+          "CreditCancel": {
+            "$ref": "./examples/CreditCancel.json"
+          }
         },
-        {
-          "$ref": "#/parameters/ConditionalCreditNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "The request is accepted.",
-          "headers": {
-            "Location": {
-              "description": "Location URI to poll for result.",
-              "type": "string"
-            },
-            "Azure-AsyncOperation": {
-              "type": "string",
-              "description": "URL for checking the ongoing status of the operation."
-            },
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Clients should wait for the Retry-After interval before polling again"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Credit"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/sources/{sourceName}": {
+      "put": {
+        "description": "Create a credit source.",
+        "operationId": "Sources_Create",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "CreditSourceCreate": {
+            "$ref": "./examples/CreditSourceCreate.json"
+          }
         },
-        "204": {
-          "description": "The resource is already deleted."
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditSourcePutRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been updated.",
+            "schema": {
+              "$ref": "#/definitions/CreditSource"
+            }
+          },
+          "201": {
+            "description": "The resource is created.",
+            "schema": {
+              "$ref": "#/definitions/CreditSource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a credit source.",
+        "operationId": "Sources_Get",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-examples": {
+          "CreditSourceGet": {
+            "$ref": "./examples/CreditSourceGet.json"
+          }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CreditSource"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a credit source.",
+        "operationId": "Sources_Update",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "CreditSourceTagsUpdate": {
+            "$ref": "./examples/CreditSourceTagsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditSourcePatchRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreditSource"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a credit source.",
+        "operationId": "Sources_Delete",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-examples": {
+          "CreditSourceDelete": {
+            "$ref": "./examples/CreditSourceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deletion has succeeded."
+          },
+          "204": {
+            "description": "Resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits": {
-    "get": {
-      "description": "List conditional credits by resource group.",
-      "operationId": "ConditionalCredits_ListByResourceGroup",
-      "tags": [
-        "Conditional Credits"
-      ],
-      "x-ms-examples": {
-        "ConditionalCreditsListByResourceGroup": {
-          "$ref": "./examples/ConditionalCreditsListByResourceGroup.json"
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/credits/{creditName}/sources": {
+      "get": {
+        "description": "List credit sources for a credit under a resource group from primary service admin.",
+        "operationId": "Sources_ListByCredit",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "List of conditional credits under the given resource group.",
-          "schema": {
-            "$ref": "#/definitions/ConditionalCreditList"
+        "x-ms-examples": {
+          "CreditSourcesListByCredit": {
+            "$ref": "./examples/CreditSourcesListByCredit.json"
           }
         },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/conditionalCredits": {
-    "get": {
-      "description": "List conditional credits by subscription.",
-      "operationId": "ConditionalCredits_ListBySubscription",
-      "tags": [
-        "Conditional Credits"
-      ],
-      "x-ms-examples": {
-        "ConditionalCreditsListBySubscription": {
-          "$ref": "./examples/ConditionalCreditsListBySubscription.json"
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "List conditional credits at subscription level.",
-          "schema": {
-            "$ref": "#/definitions/ConditionalCreditList"
-          }
-        },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CreditSourcesList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
-    }
-  },
-  "/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits": {
-    "get": {
-      "description": "List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts",
-      "operationId": "ConditionalCredits_ScopeList",
-      "tags": [
-        "Conditional Credits"
-      ],
-      "x-ms-examples": {
-        "ConditionalCreditScopeList": {
-          "$ref": "./examples/ApplicableConditionalCreditList.json"
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/ScopeParameter"
+    },
+    "/{scope}/providers/Microsoft.BillingBenefits/applicableCredits": {
+      "get": {
+        "description": "List applicable credits for the provided scope. Currently supported scopes: BillingAccountResourceId",
+        "operationId": "Credits_ListApplicable",
+        "tags": [
+          "Credits"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "List of conditional credits that are applicable for a given scope.",
-          "schema": {
-            "$ref": "#/definitions/ConditionalCreditList"
+        "x-ms-examples": {
+          "CreditSourcesListByCredit": {
+            "$ref": "./examples/CreditListApplicableCredits.json"
           }
         },
-        "default": {
-          "description": "Unexpected error.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CreditsList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}": {
+      "put": {
+        "description": "Create or update a conditional credit.",
+        "operationId": "ConditionalCredits_CreateOrUpdate",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConditionalCreditCreatePrimary": {
+            "$ref": "./examples/ConditionalCreditCreatePrimary.json"
+          },
+          "ConditionalCreditCreateContributor": {
+            "$ref": "./examples/ConditionalCreditCreateContributor.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            }
+          },
+          "201": {
+            "description": "The request is being processed.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a conditional credit.",
+        "operationId": "ConditionalCredits_Get",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditGet": {
+            "$ref": "./examples/ConditionalCreditGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a conditional credit.",
+        "operationId": "ConditionalCredits_Update",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConditionalCreditUpdate": {
+            "$ref": "./examples/ConditionalCreditUpdate.json"
+          },
+          "ConditionalCreditUpdateContributor": {
+            "$ref": "./examples/ConditionalCreditUpdateContributor.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditPatchRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCredit"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a conditional credit.",
+        "operationId": "ConditionalCredits_Delete",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConditionalCreditDelete": {
+            "$ref": "./examples/ConditionalCreditDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConditionalCreditNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits": {
+      "get": {
+        "description": "List conditional credits by resource group.",
+        "operationId": "ConditionalCredits_ListByResourceGroup",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditsListByResourceGroup": {
+            "$ref": "./examples/ConditionalCreditsListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of conditional credits under the given resource group.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/conditionalCredits": {
+      "get": {
+        "description": "List conditional credits by subscription.",
+        "operationId": "ConditionalCredits_ListBySubscription",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditsListBySubscription": {
+            "$ref": "./examples/ConditionalCreditsListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List conditional credits at subscription level.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.BillingBenefits/applicableConditionalCredits": {
+      "get": {
+        "description": "List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts",
+        "operationId": "ConditionalCredits_ScopeList",
+        "tags": [
+          "Conditional Credits"
+        ],
+        "x-ms-examples": {
+          "ConditionalCreditScopeList": {
+            "$ref": "./examples/ApplicableConditionalCreditList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of conditional credits that are applicable for a given scope.",
+            "schema": {
+              "$ref": "#/definitions/ConditionalCreditList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
