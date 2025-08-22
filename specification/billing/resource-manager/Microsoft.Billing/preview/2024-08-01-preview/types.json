@@ -31,48 +31,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "Products": {
-      "description": "Product Details.",
-      "type": "object",
-      "properties": {
-        "productType": {
-          "description": "product type",
-          "type": "string",
-          "readOnly": true
-        },
-        "productId": {
-          "description": "product Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "product name",
-          "type": "string",
-          "readOnly": true
-        },
-        "skuDescription": {
-          "description": "product sku description",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "product transfer status",
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Completed",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "TransferProductStatus",
-            "modelAsString": true
-          }
-        }
-      },
-      "readOnly": true
-    },
     "Migration": {
       "description": "Migration Details.",
       "type": "object",
@@ -96,20 +54,10 @@
             "modelAsString": true
           }
         },
-        "locale": {
-          "description": "Locale for notifications. Optional property, used only for migrate enrollment",
-          "type": "string"
-        },
         "transferId": {
           "description": "Transfer Id",
           "type": "string",
           "readOnly": true
-        },
-        "products": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Products"
-          }
         }
       }
     }

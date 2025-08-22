@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "api-version": "2025-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
+        "name": "account1",
+        "type": "Microsoft.NetApp/netAppAccounts",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "activeDirectories": [
+            {
+              "site": "SiteName",
+              "activeDirectoryId": "02da3711-6c58-2d64-098a-e3af7afaf936",
+              "username": "ad_user_name",
+              "domain": "10.10.10.3",
+              "dns": "10.10.10.3",
+              "status": "InUse",
+              "smbServerName": "SMBServer",
+              "organizationalUnit": "OU=Engineering",
+              "statusDetails": "Status Details",
+              "aesEncryption": true,
+              "ldapSigning": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -20,22 +20,23 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     "basic-setup-py": true
-    "package-version": "4.9.0b1"
+    "package-name": "azure-keyvault-certificates"
+    "package-pprint-name": "Key Vault Certificates"
+    "package-version": "4.9.0"
+    "namespace": "azure.keyvault.certificates._generated"
     "package-dir": "azure-keyvault-certificates"
-    "namespace": "azure.keyvault.certificates"
-    "output-path": "."
   "@azure-tools/typespec-java":
     flavor: azure
-    "package-dir": "azure-security-keyvault-certificates"
-    "namespace": "com.azure.security.keyvault.certificates"
-    "models-subpackage": "implementation.models"
-    "custom-types": "AdministratorContact,CertificateContact,CertificateKeyCurveName,CertificateKeyType,CertificateKeyUsage,CertificateOperationError,SubjectAlternativeNames"
-    "custom-types-subpackage": "models"
-    "customization-class": "swagger/src/main/java/CertificatesCustomizations.java"
-    "partial-update": true
-    "generate-tests": false
-    "generate-samples": false
-    "include-api-view-properties": false
+    package-dir: "azure-security-keyvault-certificates"
+    namespace: "com.azure.security.keyvault.certificates"
+    models-subpackage: "implementation.models"
+    custom-types: "AdministratorContact,CertificateContact,CertificateKeyCurveName,CertificateKeyType,CertificateKeyUsage,SubjectAlternativeNames"
+    custom-types-subpackage: "models"
+    customization-class: "customizations/src/main/java/CertificatesCustomizations.java"
+    use-eclipse-language-server: false
+    generate-tests: false
+    generate-samples: false
+    include-api-view-properties: false
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
@@ -57,6 +58,7 @@ options:
     override-client-name: "Client"
     single-client: true
     inject-spans: true
+    generate-fakes: true
   "@azure-tools/typespec-rust":
     crate-name: "azure_security_keyvault_certificates"
     crate-version: "0.0.1"

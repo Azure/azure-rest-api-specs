@@ -1400,12 +1400,23 @@ model JobModelCustomProperties {
   /**
    * Gets or sets any custom properties of the affected object.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @visibility(Lifecycle.Read)
-  affectedObjectDetails?: {
-    description?: string;
-    type?: "object";
-  };
+  affectedObjectDetails?: AffectedObjectDetails;
+}
+
+/**
+ * Details of the affected object.
+ */
+model AffectedObjectDetails {
+  /**
+   * Description of the affected object details.
+   */
+  description?: string;
+
+  /**
+   * Type of the affected object details.
+   */
+  type?: "object";
 }
 
 /**

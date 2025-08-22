@@ -25,6 +25,7 @@ model CompletionsUsage {
   @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @doc("Details of the prompt tokens.")
   @added(ServiceApiVersions.v2024_10_01_Preview)
   @encodedName("application/json", "prompt_tokens_details")
@@ -40,6 +41,7 @@ model CompletionsUsage {
   };
 
   /** Breakdown of tokens used in a completion. */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @added(ServiceApiVersions.v2024_09_01_Preview)
   @encodedName("application/json", "completion_tokens_details")
   completionTokensDetails?: {

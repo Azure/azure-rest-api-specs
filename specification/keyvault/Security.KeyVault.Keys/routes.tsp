@@ -5,12 +5,9 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Rest;
 
 namespace KeyVault;
 
@@ -114,6 +111,7 @@ op deleteKey is KeyVaultOperation<
  * In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed. This operation requires the keys/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.")
 @route("/keys/{key-name}/{key-version}")
 @patch(#{ implicitOptionality: true })
@@ -131,7 +129,7 @@ op updateKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters of the key to update.
@@ -148,6 +146,7 @@ op updateKey is KeyVaultOperation<
  * The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. This operation requires the keys/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Gets the public part of a stored key.")
 @route("/keys/{key-name}/{key-version}")
 @get
@@ -165,7 +164,7 @@ op getKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
   },
   KeyBundle
 >;
@@ -261,6 +260,7 @@ op restoreKey is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("encrypt")
 @summary("Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.")
 @route("/keys/{key-name}/{key-version}/encrypt")
@@ -279,7 +279,7 @@ op encrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the encryption operation.
@@ -297,6 +297,7 @@ op encrypt is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("decrypt")
 @summary("Decrypts a single block of encrypted data.")
 @route("/keys/{key-name}/{key-version}/decrypt")
@@ -315,7 +316,7 @@ op decrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the decryption operation.
@@ -333,6 +334,7 @@ op decrypt is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("sign")
 @summary("Creates a signature from a digest using the specified key.")
 @route("/keys/{key-name}/{key-version}/sign")
@@ -351,7 +353,7 @@ op sign is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the signing operation.
@@ -369,6 +371,7 @@ op sign is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("verify")
 @summary("Verifies a signature using a specified key.")
 @route("/keys/{key-name}/{key-version}/verify")
@@ -387,7 +390,7 @@ op verify is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for verify operations.
@@ -405,6 +408,7 @@ op verify is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("wrapKey")
 @summary("Wraps a symmetric key using a specified key.")
 @route("/keys/{key-name}/{key-version}/wrapkey")
@@ -423,7 +427,7 @@ op wrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for wrap operation.
@@ -441,6 +445,7 @@ op wrapKey is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("unwrapKey")
 @summary("Unwraps a symmetric key using the specified key that was initially used for wrapping that key.")
 @route("/keys/{key-name}/{key-version}/unwrapkey")
@@ -459,7 +464,7 @@ op unwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the key operation.
@@ -477,6 +482,7 @@ op unwrapKey is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @operationId("release")
 @summary("Releases a key.")
 @route("/keys/{key-name}/{key-version}/release")
@@ -495,7 +501,7 @@ op release is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
 
     /**
      * The parameters for the key release operation.
@@ -654,6 +660,7 @@ op getRandomBytes is KeyVaultOperation<
  * The get key attestation operation returns the key along with its attestation blob. This operation requires the keys/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
 @summary("Gets the public part of a stored key along with its attestation blob.")
 @route("/keys/{key-name}/{key-version}/attestation")
@@ -672,7 +679,7 @@ op getKeyAttestation is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
-    keyVersion: string;
+    keyVersion?: string;
   },
   /**
    * A key bundle containing the key, its attributes and attestation blob.

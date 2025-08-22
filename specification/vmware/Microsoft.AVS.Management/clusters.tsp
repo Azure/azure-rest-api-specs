@@ -122,6 +122,7 @@ model ClusterUpdateProperties {
 model ClusterZoneList {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Zone and associated hosts info")
+  @identifiers(#[])
   zones?: ClusterZone[];
 }
 

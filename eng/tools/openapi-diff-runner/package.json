@@ -1,0 +1,32 @@
+{
+  "name": "@azure-tools/openapi-diff-runner",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/index.js",
+  "bin": {
+    "openapi-diff-runner": "cmd/openapi-diff-runner.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "test": "vitest",
+    "test:ci": "vitest --coverage --reporter=verbose"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "@azure/oad": "0.10.14"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^3.0.7",
+    "prettier": "~3.5.3",
+    "prettier-plugin-organize-imports": "^4.2.0",
+    "typescript": "~5.8.2",
+    "vitest": "^3.0.7"
+  }
+}

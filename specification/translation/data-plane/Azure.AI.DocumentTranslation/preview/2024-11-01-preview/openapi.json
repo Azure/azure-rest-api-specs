@@ -596,8 +596,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -624,7 +623,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -665,8 +664,7 @@
           "description": "Location of the destination for the output",
           "items": {
             "$ref": "#/definitions/TargetInput"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "storageType": {
           "$ref": "#/definitions/StorageInputType",
@@ -760,23 +758,6 @@
         "to",
         "progress",
         "id"
-      ]
-    },
-    "DocumentTranslateContent": {
-      "type": "object",
-      "description": "Document Translate Request Content",
-      "properties": {
-        "document": {
-          "type": "object",
-          "description": "Document to be translated in the form"
-        },
-        "glossary": {
-          "type": "object",
-          "description": "Glossary-translation memory will be used during translation in the form. "
-        }
-      },
-      "required": [
-        "document"
       ]
     },
     "DocumentTranslateResult": {
@@ -968,8 +949,7 @@
           "description": "The input list of documents or folders containing documents",
           "items": {
             "$ref": "#/definitions/BatchRequest"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "options": {
           "$ref": "#/definitions/BatchOptions",
@@ -1145,8 +1125,7 @@
           "description": "list of objects",
           "items": {
             "$ref": "#/definitions/FileFormat"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1174,8 +1153,7 @@
           "description": "List of Glossary",
           "items": {
             "$ref": "#/definitions/Glossary"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "storageSource": {
           "$ref": "#/definitions/StorageSource",

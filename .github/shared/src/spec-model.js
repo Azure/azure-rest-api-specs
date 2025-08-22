@@ -2,8 +2,12 @@
 
 import { readdir } from "fs/promises";
 import { resolve } from "path";
-import { mapAsync } from "./array.js";
+import { flatMapAsync, mapAsync } from "./array.js";
+import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
+
+/** @type {Map<string, SpecModel>} */
+const specModelCache = new Map();
 
 /**
  * @typedef {Object} ToJSONOptions
@@ -16,12 +20,13 @@ import { Readme } from "./readme.js";
 
 export class SpecModel {
   /** @type {string} absolute path */
+  // @ts-expect-error Ignore error that value may not be set in ctor (since we may returned cached value)
   #folder;
 
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
-  /** @type {Set<Readme> | undefined} */
+  /** @type {Map<string, Readme> | undefined} */
   #readmes;
 
   /**
@@ -30,8 +35,17 @@ export class SpecModel {
    * @param {import('./logger.js').ILogger} [options.logger]
    */
   constructor(folder, options) {
-    this.#folder = resolve(folder);
+    const resolvedFolder = resolve(folder);
+
+    const cachedSpecModel = specModelCache.get(resolvedFolder);
+    if (cachedSpecModel !== undefined) {
+      return cachedSpecModel;
+    }
+
+    this.#folder = resolvedFolder;
     this.#logger = options?.logger;
+
+    specModelCache.set(resolvedFolder, this);
   }
 
   /**
@@ -42,34 +56,35 @@ export class SpecModel {
   }
 
   /**
+   * Given a swagger file, return all the tags inside readme files that reference the file (directly or indirectly).
    * @param {string} swaggerPath
-   * @returns {Promise<Map<Readme, Set<Tag>>>}
+   * @returns {Promise<Map<string, Map<string, Tag>>>} map of readme paths to (map of tag names to Tag objects)
    */
   async getAffectedReadmeTags(swaggerPath) {
     const swaggerPathResolved = resolve(swaggerPath);
 
-    /** @type {Map<Readme, Set<Tag>>} */
+    /** @type {Map<string, Map<string, Tag>>} */
     const affectedReadmeTags = new Map();
 
-    for (const readme of await this.getReadmes()) {
-      for (const tag of await readme.getTags()) {
-        for (const inputFile of tag.inputFiles) {
+    for (const readme of (await this.getReadmes()).values()) {
+      for (const tag of (await readme.getTags()).values()) {
+        for (const inputFile of tag.inputFiles.values()) {
           if (inputFile.path === swaggerPathResolved) {
-            /** @type {Set<Tag>} */
-            const tags = affectedReadmeTags.get(readme) ?? new Set();
-            tags.add(tag);
-            affectedReadmeTags.set(readme, tags);
+            /** @type {Map<string, Tag>} */
+            const tags = affectedReadmeTags.get(readme.path) ?? new Map();
+            tags.set(tag.name, tag);
+            affectedReadmeTags.set(readme.path, tags);
 
             // No need to check refs if the swagger file is directly referenced
             continue;
           }
 
           const refs = await inputFile.getRefs();
-          if ([...refs].find((r) => r.path === swaggerPathResolved)) {
-            /** @type {Set<Tag>} */
-            const tags = affectedReadmeTags.get(readme) ?? new Set();
-            tags.add(tag);
-            affectedReadmeTags.set(readme, tags);
+          if (refs.get(swaggerPathResolved)) {
+            /** @type {Map<string, Tag>} */
+            const tags = affectedReadmeTags.get(readme.path) ?? new Map();
+            tags.set(tag.name, tag);
+            affectedReadmeTags.set(readme.path, tags);
           }
         }
       }
@@ -82,19 +97,17 @@ export class SpecModel {
    * Given a swagger file, return the swagger files that are affected by the
    * changes in the given swagger file.
    * @param {string} swaggerPath
-   * @returns {Promise<Set<Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>} map of swagger paths to Swagger objects
    */
   async getAffectedSwaggers(swaggerPath) {
     const swaggerPathResolved = resolve(swaggerPath);
 
-    // Use Map instead of Set, to ensure exactly one Swagger object per path is returned
-    // SpecModel can include multiple Swagger objects pointing to the same path
     /** @type {Map<string, Swagger>} */
     const affectedSwaggers = new Map();
 
-    for (const readme of await this.getReadmes()) {
-      for (const tag of await readme.getTags()) {
-        for (const swagger of tag.inputFiles) {
+    for (const readme of (await this.getReadmes()).values()) {
+      for (const tag of (await readme.getTags()).values()) {
+        for (const swagger of tag.inputFiles.values()) {
           // readme.md includes swaggerPath
           if (swagger.path === swaggerPathResolved) {
             affectedSwaggers.set(swagger.path, swagger);
@@ -104,9 +117,7 @@ export class SpecModel {
 
           // readme.md includes a.json
           //   a.json references swaggerPath
-          const refToSwaggerPath = [...refs].find(
-            (ref) => ref.path === swaggerPathResolved,
-          );
+          const refToSwaggerPath = refs.get(swaggerPathResolved);
           if (refToSwaggerPath) {
             // Add the Swagger object for swaggerPath
             affectedSwaggers.set(refToSwaggerPath.path, refToSwaggerPath);
@@ -120,17 +131,12 @@ export class SpecModel {
           // readme.md includes a.json
           //   a.json references b.json
           //     b.json references swaggerPath
-          for (const ref of refs) {
+          for (const ref of refs.values()) {
             const refRefs = await ref.getRefs();
-            const refRefToSwaggerPath = [...refRefs].find(
-              (ref) => ref.path === swaggerPathResolved,
-            );
+            const refRefToSwaggerPath = refRefs.get(swaggerPathResolved);
             if (refRefToSwaggerPath) {
               // Add the Swagger object for swaggerPath
-              affectedSwaggers.set(
-                refRefToSwaggerPath.path,
-                refRefToSwaggerPath,
-              );
+              affectedSwaggers.set(refRefToSwaggerPath.path, refRefToSwaggerPath);
 
               // Add the Swagger object that references swaggerPath
               //
@@ -155,16 +161,14 @@ export class SpecModel {
 
     // The swagger file supplied does not exist in the given specModel
     if (affectedSwaggers.size === 0) {
-      throw new Error(
-        `No affected swaggers found in specModel for ${swaggerPath}`,
-      );
+      throw new Error(`No affected swaggers found in specModel for ${swaggerPath}`);
     }
 
-    return new Set(affectedSwaggers.values());
+    return affectedSwaggers;
   }
 
   /**
-   * @returns {Promise<Set<Readme>>}
+   * @returns {Promise<Map<string, Readme>>} map of readme paths to readme Objects
    */
   async getReadmes() {
     if (!this.#readmes) {
@@ -179,14 +183,26 @@ export class SpecModel {
 
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 
-      this.#readmes = new Set(
-        readmePaths.map(
-          (p) => new Readme(p, { logger: this.#logger, specModel: this }),
-        ),
+      this.#readmes = new Map(
+        readmePaths.map((p) => {
+          const readme = new Readme(p, {
+            logger: this.#logger,
+            specModel: this,
+          });
+          return [readme.path, readme];
+        }),
       );
     }
 
     return this.#readmes;
+  }
+
+  async getSwaggers() {
+    const readmes = [...(await this.getReadmes()).values()];
+    const tags = await flatMapAsync(readmes, async (r) => [...(await r.getTags()).values()]);
+    const swaggers = tags.flatMap((t) => [...t.inputFiles.values()]);
+    const refs = await flatMapAsync(swaggers, async (s) => [...(await s.getRefs()).values()]);
+    return [...swaggers, ...refs];
   }
 
   /**
@@ -195,9 +211,7 @@ export class SpecModel {
    */
   async toJSONAsync(options) {
     const readmes = await mapAsync(
-      [...(await this.getReadmes())].sort((a, b) =>
-        a.path.localeCompare(b.path),
-      ),
+      [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
       async (r) => await r.toJSONAsync(options),
     );
 
@@ -213,15 +227,4 @@ export class SpecModel {
   toString() {
     return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
   }
-}
-
-// TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-function readme(file) {
-  // Filename "readme.md" with any case is a valid README file
-  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }

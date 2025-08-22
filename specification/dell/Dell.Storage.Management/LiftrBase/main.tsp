@@ -156,13 +156,13 @@ union ResourceEncryptionType {
   /**
    * Microsoft managed keys (Default)
    */
-  "Microsoft-managed keys (MMK)",
+  `Microsoft-managed keys (MMK)`: "Microsoft-managed keys (MMK)",
 
   /**
    * Customer managed keys
    * (CMK) - Only UserAssigned identity is supported
    */
-  "Customer-managed keys (CMK)",
+  `Customer-managed keys (CMK)`: "Customer-managed keys (CMK)",
 }
 
 /**

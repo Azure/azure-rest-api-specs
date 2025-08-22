@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Run TypeSpec Migration Validation 
+      - name: Run TypeSpec Migration Validation
         run: |
           ./eng/tools/typespec-migration-validation/scripts/download-main.ps1 -Verbose -callValidation $true
         shell: pwsh

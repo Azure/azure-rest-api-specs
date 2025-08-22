@@ -30,14 +30,21 @@ openapi-subtype: rpaas
 tag: package-2022-12-01
 ```
 
+### Tag: package-2025-07-01-preview
+These settings apply only when `--tag=2025-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01-preview'
+input-file:
+  - Microsoft.LoadTestService/playwright/preview/2025-07-01-preview/playwright.json
+```
+
 ### Tag: package-2024-12-01-preview
 
-These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
-  - Microsoft.LoadTestService/preview/2024-12-01-preview/loadtestservice.json
-
+  - Microsoft.LoadTestService/loadtesting/preview/2024-12-01-preview/loadtestservice.json
 directive:
   - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours"]
@@ -52,15 +59,43 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/limits/maxMonthlyVirtualUserHours/set"]
     suppress: PathForResourceAction
     reason: API design for post action for the load testing resource limits.
+suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
 
 ### Tag: package-2023-12-01-preview
 
-These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
+These settings apply only when `--tag=package-2023-12-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-12-01-preview'
 input-file:
-  - Microsoft.LoadTestService/preview/2023-12-01-preview/loadtestservice.json
+  - Microsoft.LoadTestService/loadtesting/preview/2023-12-01-preview/loadtestservice.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
 
 ### Tag: package-2022-12-01
@@ -69,59 +104,19 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-12-01'
 input-file:
-  - Microsoft.LoadTestService/stable/2022-12-01/loadtestservice.json
+  - Microsoft.LoadTestService/loadtesting/stable/2022-12-01/loadtestservice.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: loadtestservice.json
+    reason: Existing API, will be a breaking change for this api-version.
+    where:
+      - $.definitions["PagedOutboundEnvironmentEndpoint"]
 ```
-
-### Tag: package-2022-04-15-preview
-
-These settings apply only when `--tag=package-2022-04-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-04-15-preview'
-input-file:
-  - Microsoft.LoadTestService/preview/2022-04-15-preview/loadtestservice.json
-```
-### Tag: package-2021-12-01-preview
-
-These settings apply only when `--tag=package-2021-12-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-12-01-preview'
-input-file:
-  - Microsoft.LoadTestService/preview/2021-12-01-preview/loadtestservice.json
-```
-
-# Code Generation
-
-## Swagger to SDK
-
-This section describes what SDK should be generated by the automatic system.
-This is not used by Autorest itself.
-
-``` yaml $(swagger-to-sdk)
-swagger-to-sdk:
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_loadtesting']
-  - repo: azure-powershell
-```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)
