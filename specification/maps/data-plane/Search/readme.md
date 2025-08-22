@@ -66,47 +66,47 @@ input-file:
   - preview/2025-06-01-preview/search.json
 ```
 
-### Tag: package-retired-2024-04-01-preview
+### Tag: package-2024-04-01-preview
 
-These settings apply only when `--tag=package-retired-2024-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2024-04-01-preview'
+``` yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
   - preview/2024-04-01-preview/search.json
 ```
 
-### Tag: package-retired-2022-12-01-preview
+### Tag: package-2022-12-01-preview
 
-These settings apply only when `--tag=package-retired-2022-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2022-12-01-preview'
+``` yaml $(tag) == 'package-2022-12-01-preview'
 input-file:
   - preview/2022-12-01-preview/search.json
 ```
 
-### Tag: package-retired-2022-09-01-preview
+### Tag: package-2022-09-01-preview
 
-These settings apply only when `--tag=package-retired-2022-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2022-09-01-preview'
+``` yaml $(tag) == 'package-2022-09-01-preview'
 input-file:
   - preview/2022-09-01-preview/search.json
 ```
 
-### Tag: package-retired-2022-02-01-preview
+### Tag: package-2022-02-01-preview
 
-These settings apply only when `--tag=package-retired-2022-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2022-02-01-preview'
+``` yaml $(tag) == 'package-2022-02-01-preview'
 input-file:
   - preview/2022-02-01-preview/geocoding.json
 ```
 
-### Tag: package-retired-2021-11-01-preview
+### Tag: package-2021-11-01-preview
 
-These settings apply only when `--tag=package-retired-2021-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2021-11-01-preview'
+``` yaml $(tag) == 'package-2021-11-01-preview'
 input-file:
   - preview/2021-11-01-preview/geocoding.json
 ```
