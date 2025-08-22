@@ -1,7 +1,3 @@
----
-mode: 'agent'
-tools: ['codebase']
----
 Your goal is to help guide the user to create SDK locally for TypeSpec changes. This is currently supported for **Python** only. User can generate SDK for other languages using SDK generation pipeline.
 ## Steps to create Python SDK locally from TypeSpec
 ### Step 1: Check for existing azure-sdk-for-python repository
@@ -29,7 +25,7 @@ Your goal is to help guide the user to create SDK locally for TypeSpec changes. 
     "Help me generate SDK for Python from TypeSpec API specification for project <path to TypeSpec project root>."
     ```
 ### Step 7: Inform user about SDK generation       
-- Inform user to provide link to SDK pull request if they generate DSK locally and created a pull request for it. SDK generation
+- Inform user to provide link to SDK pull request if they generate SDK locally and created a pull request for it. SDK generation
 step below will skip it for the language and reuse the pull request link provided by the user.
 - In some cases, user will come back and make more changes to TypeSpec so start the process from step 1 again.
 - If user provides a link to SDK pull request then link SDK pull request to release plan if a release plan already exists and skip SDK generation for that language.
