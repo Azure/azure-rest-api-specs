@@ -15660,22 +15660,22 @@
     },
     "Placement": {
       "type": "object",
-      "description": "Describes the user-defined constraints for virtual machine hardware placement.",
+      "description": "Describes the user-defined constraints for resource hardware placement.",
       "properties": {
         "zonePlacementPolicy": {
           "$ref": "#/definitions/ZonePlacementPolicyType",
-          "description": "Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation."
+          "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation."
         },
         "includeZones": {
           "type": "array",
-          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.",
+          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.",
           "items": {
             "type": "string"
           }
         },
         "excludeZones": {
           "type": "array",
-          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.",
+          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.",
           "items": {
             "type": "string"
           }
@@ -22928,7 +22928,7 @@
     },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.",
+      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
       "enum": [
         "Any"
       ],

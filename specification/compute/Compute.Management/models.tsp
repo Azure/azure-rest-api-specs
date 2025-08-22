@@ -953,12 +953,18 @@ union PatchOperationStatus {
 }
 
 /**
- * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+ * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
  */
 union ZonePlacementPolicyType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
+  @added(Versions.v2025_04_01)
+  Auto: "Auto",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -3383,6 +3389,12 @@ model ResiliencyPolicy {
    * The configuration parameters used while performing automatic AZ balancing.
    */
   automaticZoneRebalancingPolicy?: AutomaticZoneRebalancingPolicy;
+
+  /**
+   * The configuration parameters used while performing zone allocation.
+   */
+  @added(Versions.v2025_04_01)
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
 /**
@@ -3406,6 +3418,22 @@ model ResilientVMDeletionPolicy {
 }
 
 /**
+ * The configuration parameters for zone allocation of a virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+model ZoneAllocationPolicy {
+  /**
+   * The maximum number of availability zones to use if the ZonePlacementPolicy is 'Auto'. If not specified, all availability zones will be used.
+   */
+  maxZoneCount?: int32;
+
+  /**
+   * The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.
+   */
+  maxInstancePercentPerZonePolicy?: MaxInstancePercentPerZonePolicy;
+}
+
+/**
  * The configuration parameters used while performing automatic AZ balancing.
  */
 model AutomaticZoneRebalancingPolicy {
@@ -3423,6 +3451,23 @@ model AutomaticZoneRebalancingPolicy {
    * Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete.
    */
   rebalanceBehavior?: RebalanceBehavior;
+}
+
+/**
+ * The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+model MaxInstancePercentPerZonePolicy {
+  /**
+   * Specifies whether maxInstancePercentPerZonePolicy should be enabled on the virtual machine scale set.
+   */
+  enabled?: boolean;
+
+  /**
+   * Limit on the number of instances in each zone as a percentage of the total capacity of the virtual machine scale set.
+   */
+  @maxValue(100)
+  value?: int32;
 }
 
 /**
@@ -6299,21 +6344,21 @@ model LastPatchInstallationSummary {
 }
 
 /**
- * Describes the user-defined constraints for virtual machine hardware placement.
+ * Describes the user-defined constraints for resource hardware placement.
  */
 model Placement {
   /**
-   * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
    */
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
-   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
    */
   includeZones?: string[];
 
   /**
-   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
    */
   excludeZones?: string[];
 }

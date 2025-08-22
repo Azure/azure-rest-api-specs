@@ -5513,6 +5513,9 @@
           "Create a scale set with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithEncryptionAtHost.json"
           },
+          "Create a scale set with Max Instance Percent Per Zone Policy enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithMaxInstancePercentPerZonePolicy.json"
+          },
           "Create a scale set with Network Interfaces with public ip address dns settings.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithNetworkInterfaceWithDnsSettings.json"
           },
@@ -5579,6 +5582,9 @@
           "Create a scale set with password authentication.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithPasswordAuthentication.json"
           },
+          "Create a scale set with placement policy 'Auto'": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithPlacement.json"
+          },
           "Create a scale set with premium storage.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithPremiumStorage.json"
           },
@@ -5617,6 +5623,9 @@
           },
           "Create a virtual machine scale set with high-speed interconnect placement.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithHighSpeedInterconnectPlacement.json"
+          },
+          "Create a zones-auto scale set with Max Zone Count": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithMaxZoneCount.json"
           },
           "Create or update a scale set with capacity reservation.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithCapacityReservation.json"
@@ -15081,6 +15090,22 @@
         }
       ]
     },
+    "MaxInstancePercentPerZonePolicy": {
+      "type": "object",
+      "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether maxInstancePercentPerZonePolicy should be enabled on the virtual machine scale set."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit on the number of instances in each zone as a percentage of the total capacity of the virtual machine scale set.",
+          "maximum": 100
+        }
+      }
+    },
     "MigrateToVirtualMachineScaleSetInput": {
       "type": "object",
       "description": "Describes the Virtual Machine Scale Set to migrate from Availability Set.",
@@ -15850,22 +15875,22 @@
     },
     "Placement": {
       "type": "object",
-      "description": "Describes the user-defined constraints for virtual machine hardware placement.",
+      "description": "Describes the user-defined constraints for resource hardware placement.",
       "properties": {
         "zonePlacementPolicy": {
           "$ref": "#/definitions/ZonePlacementPolicyType",
-          "description": "Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation."
+          "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation."
         },
         "includeZones": {
           "type": "array",
-          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.",
+          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.",
           "items": {
             "type": "string"
           }
         },
         "excludeZones": {
           "type": "array",
-          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.",
+          "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.",
           "items": {
             "type": "string"
           }
@@ -16322,6 +16347,10 @@
         "automaticZoneRebalancingPolicy": {
           "$ref": "#/definitions/AutomaticZoneRebalancingPolicy",
           "description": "The configuration parameters used while performing automatic AZ balancing."
+        },
+        "zoneAllocationPolicy": {
+          "$ref": "#/definitions/ZoneAllocationPolicy",
+          "description": "The configuration parameters used while performing zone allocation."
         }
       }
     },
@@ -19969,6 +19998,10 @@
           "type": "string",
           "description": "Etag is property returned in Create/Update/Get response of the VMSS, so that customer can supply it in the header to ensure optimistic updates",
           "readOnly": true
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01."
         }
       },
       "allOf": [
@@ -23268,11 +23301,27 @@
         ]
       }
     },
+    "ZoneAllocationPolicy": {
+      "type": "object",
+      "description": "The configuration parameters for zone allocation of a virtual machine scale set.",
+      "properties": {
+        "maxZoneCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of availability zones to use if the ZonePlacementPolicy is 'Auto'. If not specified, all availability zones will be used."
+        },
+        "maxInstancePercentPerZonePolicy": {
+          "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
+          "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set."
+        }
+      }
+    },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.",
+      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
       "enum": [
-        "Any"
+        "Any",
+        "Auto"
       ],
       "x-ms-enum": {
         "name": "ZonePlacementPolicyType",
@@ -23281,6 +23330,11 @@
           {
             "name": "Any",
             "value": "Any"
+          },
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Automatic zone placement in a Virtual Machine Scale Set."
           }
         ]
       }
