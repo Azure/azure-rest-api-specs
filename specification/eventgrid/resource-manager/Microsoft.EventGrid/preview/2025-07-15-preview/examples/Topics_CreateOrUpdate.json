@@ -1,74 +1,74 @@
 {
-    "parameters": {
-        "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-        "resourceGroupName": "examplerg",
-        "topicName": "exampletopic1",
-        "api-version": "2025-04-01-preview",
-        "topicInfo": {
-            "location": "westus2",
-            "tags": {
-                "tag1": "value1",
-                "tag2": "value2"
-            },
-            "identity": {
-                "type": "UserAssigned",
-                "userAssignedIdentities": {
-                    "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {}
-                }
-            },
-            "properties": {
-                "platformCapabilities": {
-                    "confidentialCompute": {
-                        "mode": "Enabled"
-                    },
-                    "encryption": {
-                        "customerManagedKeyEncryption": [
-                            {
-                                "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1",
-                                "keyEncryptionKeyIdentity": {
-                                    "type": "UserAssigned",
-                                    "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id"
-                                },
-                                "keyEncryptionKeyStatusFriendlyDescription": "Customer Managed Key (CMK) Encryption is 'Active' and running normally."
-                            }
-                        ]
-                    }
-                }
-            }
+  "parameters": {
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "resourceGroupName": "examplerg",
+    "topicName": "exampletopic1",
+    "api-version": "2025-04-01-preview",
+    "topicInfo": {
+      "location": "westus2",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {}
         }
-    },
-    "responses": {
-        "201": {
-            "body": {
-                "properties": {
-                    "endpoint": null,
-                    "provisioningState": "Creating",
-                    "platformCapabilities": {
-                        "confidentialCompute": {
-                            "mode": "Enabled"
-                        }
-                    }
+      },
+      "properties": {
+        "platformCapabilities": {
+          "confidentialCompute": {
+            "mode": "Enabled"
+          },
+          "encryption": {
+            "customerManagedKeyEncryption": [
+              {
+                "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1",
+                "keyEncryptionKeyIdentity": {
+                  "type": "UserAssigned",
+                  "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id"
                 },
-                "identity": {
-                    "type": "UserAssigned",
-                    "principalId": null,
-                    "tenantId": null,
-                    "userAssignedIdentities": {
-                        "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {
-                            "principalId": null,
-                            "clientId": null
-                        }
-                    }
-                },
-                "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
-                "location": "westus2",
-                "name": "exampletopic1",
-                "tags": {
-                    "tag1": "value1",
-                    "tag2": "value2"
-                },
-                "type": "Microsoft.EventGrid/topics"
-            }
+                "keyEncryptionKeyStatusFriendlyDescription": "Customer Managed Key (CMK) Encryption is 'Active' and running normally."
+              }
+            ]
+          }
         }
+      }
     }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "endpoint": null,
+          "provisioningState": "Creating",
+          "platformCapabilities": {
+            "confidentialCompute": {
+              "mode": "Enabled"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "principalId": null,
+          "tenantId": null,
+          "userAssignedIdentities": {
+            "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {
+              "principalId": null,
+              "clientId": null
+            }
+          }
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
+        "location": "westus2",
+        "name": "exampletopic1",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "type": "Microsoft.EventGrid/topics"
+      }
+    }
+  }
 }
