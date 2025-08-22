@@ -15,7 +15,7 @@ namespace Nginx.NginxPlus;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NginxDeployment
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NginxDeploymentProperties> {
+  is Azure.ResourceManager.TrackedResource<NginxDeploymentProperties> {
   ...ResourceNameParameter<
     Resource = NginxDeployment,
     KeyName = "deploymentName",
