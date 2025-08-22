@@ -3,7 +3,7 @@
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { toPercent } from "../../shared/src/math.js";
 import { byDate, invert } from "../../shared/src/sort.js";
-import { Duration, subtract } from "../../shared/src/time.js";
+import { Duration, formatDuration, subtract } from "../../shared/src/time.js";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
@@ -143,15 +143,13 @@ export function rateLimitHook(response) {
   // Keep usageFraction < 50% for a safety margin.  If regularly > 50%, optimize.
   const usageFraction = used / availableLimit;
 
-  const resource = headers["x-ratelimit-resource"];
+  // const resource = headers["x-ratelimit-resource"];
 
   const limits = {
     usage: toPercent(usageFraction),
     used,
     remaining,
-    limit,
-    reset,
-    resource,
+    reset: formatDuration(new Date(), reset),
   };
 
   console.log(`[github] rate-limits: ${JSON.stringify(limits)}`);
