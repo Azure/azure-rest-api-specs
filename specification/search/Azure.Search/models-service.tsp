@@ -280,6 +280,11 @@ union IndexerExecutionStatusDetail {
    * Indicates that the reset that occurred was for a call to ResetDocs.
    */
   ResetDocs: "resetDocs",
+
+  /**
+   * Indicates to selectively resync based on option(s) from data source.
+   */
+  Resync: "resync",
 }
 
 /**
@@ -299,6 +304,11 @@ union IndexingMode {
    * documents being indexed are defined on indexer status.
    */
   IndexingResetDocs: "indexingResetDocs",
+
+  /**
+   * The indexer is resyncing and indexing selective option(s) from the datasource.
+   */
+  IndexingResync: "indexingResync",
 }
 
 /**
@@ -3729,16 +3739,34 @@ union TextTranslationSkillLanguage {
 }
 
 /**
- * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'
+ * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.
  */
 @added(Versions.v2025_03_01_preview)
 union DocumentIntelligenceLayoutSkillOutputMode {
   string,
 
   /**
-   * Specify the deepest markdown header section to parse.
+   * Specify that the output should be parsed as 'oneToMany'.
    */
   OneToMany: "oneToMany",
+}
+
+/**
+ * Controls the cardinality of the output format. Default is 'markdown'.
+ */
+@added(Versions.v2025_03_01_preview)
+union DocumentIntelligenceLayoutSkillOutputFormat {
+  string,
+
+  /**
+   * Specify the format of the output as text.
+   */
+  Text: "text",
+
+  /**
+   * Specify the format of the output as markdown.
+   */
+  Markdown: "markdown",
 }
 
 /**
@@ -3777,6 +3805,37 @@ union DocumentIntelligenceLayoutSkillMarkdownHeaderDepth {
    * Header level 6.
    */
   H6: "h6",
+}
+
+/**
+ * Controls the cardinality of the content extracted from the document by the skill.
+ */
+@added(Versions.v2025_03_01_preview)
+union DocumentIntelligenceLayoutSkillExtractionOptions {
+  string,
+
+  /**
+   * Specify that image content should be extracted from the document.
+   */
+  Images: "images",
+
+  /**
+   * Specify that location metadata should be extracted from the document.
+   */
+  LocationMetadata: "locationMetadata",
+}
+
+/**
+ * Controls the cardinality of the chunk unit. Default is 'characters'
+ */
+@added(Versions.v2025_03_01_preview)
+union DocumentIntelligenceLayoutSkillChunkingUnit {
+  string,
+
+  /**
+   * Specifies chunk by characters.
+   */
+  Characters: "characters",
 }
 
 /**
@@ -5053,6 +5112,158 @@ union StopwordsList {
 }
 
 /**
+ * Options with various types of permission data to index.
+ */
+@added(Versions.v2025_03_01_preview)
+union IndexerPermissionOption {
+  string,
+
+  /**
+   * Indexer to ingest ACL userIds from data source to index.
+   */
+  UserIds: "userIds",
+
+  /**
+   * Indexer to ingest ACL groupIds from data source to index.
+   */
+  GroupIds: "groupIds",
+
+  /**
+   * Indexer to ingest Azure RBAC scope from data source to index.
+   */
+  RbacScope: "rbacScope",
+}
+
+/**
+ * A value indicating whether the field should be used as a permission filter.
+ */
+@added(Versions.v2025_03_01_preview)
+union PermissionFilter {
+  string,
+
+  /**
+   * Field represents user IDs that should be used to filter document access on queries.
+   */
+  UserIds: "userIds",
+
+  /**
+   * Field represents group IDs that should be used to filter document access on queries.
+   */
+  GroupIds: "groupIds",
+
+  /**
+   * Field represents an RBAC scope that should be used to filter document access on queries.
+   */
+  RbacScope: "rbacScope",
+}
+
+/**
+ * A value indicating whether permission filtering is enabled for the index.
+ */
+@added(Versions.v2025_03_01_preview)
+union SearchIndexPermissionFilterOption {
+  string,
+
+  /**
+   * enabled.
+   */
+  Enabled: "enabled",
+
+  /**
+   * disabled.
+   */
+  Disabled: "disabled",
+}
+
+/**
+ * Specifies how 'extraParameters' should be handled by Azure AI Foundry. Defaults to 'error'.
+ */
+@added(Versions.v2025_03_01_preview)
+union ChatCompletionExtraParametersBehavior {
+  string,
+
+  /**
+   * Passes any extra parameters directly to the model.
+   */
+  PassThrough: "passThrough",
+
+  /**
+   * Drops all extra parameters.
+   */
+  Drop: "drop",
+
+  /**
+   * Raises an error if any extra parameter is present.
+   */
+  Error: "error",
+}
+
+/**
+ * Specifies how the LLM should format the response.
+ */
+@added(Versions.v2025_03_01_preview)
+union ChatCompletionResponseFormatType {
+  string,
+
+  /**
+   * Plain text response format.
+   */
+  Text: "text",
+
+  /**
+   * Arbitrary JSON object response format.
+   */
+  JsonObject: "jsonObject",
+
+  /**
+   * JSON schema-adhering response format.
+   */
+  JsonSchema: "jsonSchema",
+}
+
+/**
+ * Represents score to use for sort order of documents.
+ */
+@added(Versions.v2025_03_01_preview)
+union RankingOrder {
+  string,
+
+  /**
+   * Sets sort order as BoostedRerankerScore
+   */
+  BoostedRerankerScore: "BoostedRerankerScore",
+
+  /**
+   * Sets sort order as ReRankerScore
+   */
+  RerankerScore: "RerankerScore",
+}
+
+/**
+ * Options with various types of permission data to index.
+ */
+@added(Versions.v2025_03_01_preview)
+union IndexerResyncOption {
+  string,
+
+  /**
+   * Indexer to re-ingest pre-selected permissions data from data source to index.
+   */
+  Permissions: "permissions",
+}
+
+/**
+ * Request body for resync indexer operation.
+ */
+@added(Versions.v2025_03_01_preview)
+model IndexerResyncBody {
+  /**
+   * Indexer to re-ingest pre-selected permissions data from data source to index.
+   */
+  options?: IndexerResyncOption[],
+}
+
+/**
  * Represents a datasource definition, which can be used to configure an indexer.
  */
 model SearchIndexerDataSource {
@@ -5072,6 +5283,11 @@ model SearchIndexerDataSource {
   type: SearchIndexerDataSourceType;
 
   /**
+   * A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts.
+   */
+  subType?: string;
+
+  /**
    * Credentials for the datasource.
    */
   credentials: DataSourceCredentials;
@@ -5089,6 +5305,12 @@ model SearchIndexerDataSource {
    */
   @added(Versions.v2025_03_01_preview)
   identity?: SearchIndexerDataIdentity;
+
+  /**
+   * Ingestion options with various types of permission data.
+   */
+  @added(Versions.v2025_03_01_preview)
+  indexerPermissionOptions?: IndexerPermissionOption[];
 
   /**
    * The data change detection policy for the datasource.
@@ -5605,6 +5827,11 @@ model ListIndexersResult {
  */
 model SearchIndexerStatus {
   /**
+   * The name of the indexer.
+   */
+  name: string;
+
+  /**
    * Overall indexer status.
    */
   status: IndexerStatus;
@@ -5640,6 +5867,13 @@ model IndexerExecutionResult {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_03_01_preview)
   statusDetail?: IndexerExecutionStatusDetail;
+
+  /**
+   * The mode the indexer is running in.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_03_01_preview)
+  mode?: IndexingMode;
 
   /**
    * All of the state that defines and dictates the indexer's current execution.
@@ -5713,28 +5947,40 @@ model IndexerCurrentState {
    * datasource.
    */
   @visibility(Lifecycle.Read)
-  allDocsInitialChangeTrackingState?: string;
+  allDocsInitialTrackingState?: string;
 
   /**
    * Change tracking state value when indexing finishes on all documents in the
    * datasource.
    */
   @visibility(Lifecycle.Read)
-  allDocsFinalChangeTrackingState?: string;
+  allDocsFinalTrackingState?: string;
 
   /**
    * Change tracking state used when indexing starts on select, reset documents in
    * the datasource.
    */
   @visibility(Lifecycle.Read)
-  resetDocsInitialChangeTrackingState?: string;
+  resetDocsInitialTrackingState?: string;
 
   /**
    * Change tracking state value when indexing finishes on select, reset documents
    * in the datasource.
    */
   @visibility(Lifecycle.Read)
-  resetDocsFinalChangeTrackingState?: string;
+  resetDocsFinalTrackingState?: string;
+
+  /**
+   * Change tracking state used when indexing starts on selective options from the datasource.
+   */
+  @visibility(Lifecycle.Read)
+  resyncInitialTrackingState?: string;
+
+  /**
+   * Change tracking state value when indexing finishes on selective options from the datasource.
+   */
+  @visibility(Lifecycle.Read)
+  resyncFinalTrackingState?: string;
 
   /**
    * The list of document keys that have been reset. The document key is the
@@ -6274,6 +6520,11 @@ model SearchIndex {
    */
   name: string;
 
+   /**
+   * The description of the index.
+   */
+  description: string;
+
   /**
    * The fields of the index.
    */
@@ -6469,6 +6720,12 @@ model SearchField {
   facetable?: boolean;
 
   /**
+   * A value indicating whether the field should be used as a permission filter.
+   */
+  @added(Versions.v2025_03_01_preview)
+  permissionFilter?: PermissionFilter;
+
+  /**
    * The name of the analyzer to use for the field. This option can be used only
    * with searchable fields and it can't be set together with either searchAnalyzer
    * or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the
@@ -6508,7 +6765,7 @@ model SearchField {
   /**
    * The dimensionality of the vector field.
    */
-  @maxValue(2048)
+  @maxValue(4096)
   @minValue(2)
   dimensions?: int32;
 
@@ -6786,7 +7043,13 @@ model SemanticConfiguration {
   prioritizedFields: SemanticPrioritizedFields;
 
   /**
-   * Determines how which semantic or query rewrite models to use during model flighting/upgrades.
+   * Specifies the score type to be used for the sort order of the search results.
+   */
+  @added(Versions.v2025_03_01_preview)
+  rankingOrder?: RankingOrder;
+
+  /**
+   * Determines which semantic or query rewrite models to use during model flighting/upgrades.
    */
   @added(Versions.v2025_03_01_preview)
   flightingOptIn?: boolean;
@@ -9836,11 +10099,15 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
 }
 
 /**
- * A skill that extracts content and layout information (as markdown), via Azure
- * AI Services, from files within the enrichment pipeline.
+ * A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline.
  */
 @added(Versions.v2025_03_01_preview)
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
+  /**
+   * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.
+   */
+  outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat;
+
   /**
    * Controls the cardinality of the output produced by the skill. Default is 'oneToMany'.
    */
@@ -9850,6 +10117,16 @@ model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
    * The depth of headers in the markdown output. Default is h6.
    */
   markdownHeaderDepth?: DocumentIntelligenceLayoutSkillMarkdownHeaderDepth = DocumentIntelligenceLayoutSkillMarkdownHeaderDepth.H6;
+
+  /**
+   * Controls the cardinality of the content extracted from the document by the skill.
+   */
+  extractionOptions?: DocumentIntelligenceLayoutSkillExtractionOptions[];
+
+  /**
+   * Controls the cardinality for chunking the content.
+   */
+  chunkingProperties?: DocumentIntelligenceLayoutSkillChunkingProperties;
 
   /**
    * A URI fragment specifying the type of skill.
@@ -10015,6 +10292,193 @@ model VisionVectorizeSkill extends SearchIndexerSkill {
 }
 
 /**
+ * Object defining the custom schema the model will use to structure its output.
+ */
+@added(Versions.v2025_03_01_preview)
+model ChatCompletionSchema {
+  /**
+   * Type of schema representation. Usually 'object'. Default is 'object'.
+   */
+  type?: string = "object";
+
+  /**
+   * A JSON-formatted string that defines the output schema's properties and constraints for the model.
+   */
+  properties?: string;
+
+  /**
+   * An array of the property names that are required to be part of the model's response.
+   */
+  required?: string[];
+
+  /**
+   * Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false.
+   */
+  additionalProperties?: boolean = false;
+}
+
+/**
+ * Determines how the language model's response should be serialized. Defaults to 'text'.
+ */
+@added(Versions.v2025_03_01_preview)
+model ChatCompletionResponseFormat {
+  /**
+   * Specifies how the LLM should format the response.
+   */
+  type?: ChatCompletionResponseFormatType = ChatCompletionResponseFormatType.Text;
+
+  /**
+   * An open dictionary for extended properties. Required if 'type' == 'json_schema'
+   */
+  jsonSchemaProperties?: ChatCompletionSchemaProperties;
+}
+
+/**
+ * Properties for JSON schema response format.
+ */
+@added(Versions.v2025_03_01_preview)
+model ChatCompletionSchemaProperties {
+  /**
+   * Name of the json schema the model will adhere to.
+   */
+  name?: string;
+
+  /**
+   * Description of the json schema the model will adhere to.
+   */
+  description?: string;
+
+  /**
+   * Whether or not the model's response should use structured outputs. Default is true.
+   */
+  strict?: boolean = true;
+
+  /**
+   * The schema definition.
+   */
+  schema?: ChatCompletionSchema;
+}
+
+/**
+ * Common language model parameters for Chat Completions. If omitted, default values are used.
+ */
+@added(Versions.v2025_03_01_preview)
+model ChatCompletionCommonModelParameters {
+  /**
+   * The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified.
+   */
+  modelName?: string;
+
+  /**
+   * A float in the range [-2,2] that reduces or increases likelihood of repeated tokens. Default is 0.
+   */
+  frequencyPenalty?: float64 = 0;
+
+  /**
+   * A float in the range [-2,2] that penalizes new tokens based on their existing presence. Default is 0.
+   */
+  presencePenalty?: float64 = 0;
+
+  /**
+   * Maximum number of tokens to generate.
+   */
+  maxTokens?: int32;
+
+  /**
+   * Sampling temperature. Default is 0.7.
+   */
+  temperature?: float64 = 0.7;
+
+  /**
+   * Random seed for controlling deterministic outputs. If omitted, randomization is used.
+   */
+  seed?: int32;
+
+  /**
+   * List of stop sequences that will cut off text generation. Default is none.
+   */
+  stop?: string[];
+}
+
+/**
+ * A skill that calls a language model via Azure AI Foundry's Chat Completions endpoint.
+ */
+@added(Versions.v2025_03_01_preview)
+model ChatCompletionSkill extends SearchIndexerSkill {
+  /**
+   * The url for the Web API.
+   */
+  uri: string;
+
+  /**
+   * The headers required to make the http request.
+   */
+  httpHeaders?: WebApiHttpHeaders;
+
+  /**
+   * The method for the http request.
+   */
+  httpMethod?: string;
+
+  /**
+   * The desired timeout for the request. Default is 30 seconds.
+   */
+  timeout?: duration;
+
+  /**
+   * The desired batch size which indicates number of documents.
+   */
+  batchSize?: int32;
+
+  /**
+   * If set, the number of parallel calls that can be made to the Web API.
+   */
+  degreeOfParallelism?: int32;
+
+  /**
+   * Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations.
+   */
+  authResourceId?: string;
+
+  /**
+   * The user-assigned managed identity used for outbound connections.
+   */
+  authIdentity?: SearchIndexerDataIdentity;
+
+  /**
+   * API key for authenticating to the model. Both apiKey and authIdentity cannot be specified at the same time.
+   */
+  apiKey?: string;
+
+  /**
+   * Common language model parameters that customers can tweak. If omitted, reasonable defaults will be applied.
+   */
+  commonModelParameters?: ChatCompletionCommonModelParameters;
+
+  /**
+   * Open-type dictionary for model-specific parameters that should be appended to the chat completions call. Follows Azure AI Foundry's extensibility pattern.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  extraParameters?: Record<unknown>;
+
+  /**
+   * How extra parameters are handled by Azure AI Foundry. Default is 'error'.
+   */
+  extraParametersBehavior?: ChatCompletionExtraParametersBehavior = ChatCompletionExtraParametersBehavior.Error;
+
+  /**
+   * Determines how the LLM should format its response. Defaults to 'text' response type.
+   */
+  responseFormat?: ChatCompletionResponseFormat;
+
+  /**
+   * A URI fragment specifying the type of skill.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  `@odata.type`: "#Microsoft.Skills.Custom.ChatCompletionSkill";
+}
+
+/**
  * Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
  */
 @added(Versions.v2025_03_01_preview)
@@ -10057,4 +10521,33 @@ model ListIndexStatsSummary {
   @visibility(Lifecycle.Read)
   @items
   value: IndexStatisticsSummary[];
+}
+
+/**
+ * Controls the cardinality for chunking the content.
+ */
+@added(Versions.v2025_03_01_preview)
+model DocumentIntelligenceLayoutSkillChunkingProperties {
+  /**
+   * The unit of the chunk.
+   */
+  unit?: DocumentIntelligenceLayoutSkillChunkingUnit;
+
+  /**
+   * The maximum chunk length in characters. Default is 500.
+   */
+  maximumLength?: int32;
+
+  /**
+   * The length of overlap provided between two text chunks. Default is 0.
+   */
+  overlapLength?: int32;
+}
+
+/**
+ * A dictionary of http request headers.
+ */
+@added(Versions.v2025_03_01_preview)
+model WebApiHttpHeaders {
+  ...Record<string>;
 }

@@ -124,6 +124,23 @@ interface Indexers {
   >;
 
   /**
+   * Resync selective options from the datasource to be re-ingested by the indexer."
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/indexers('{indexerName}')/search.resync")
+  @post
+  resync is SearchIndexerOperation<
+    {},
+    {
+      /**
+       * A process exit code.
+       */
+      @statusCode
+      code: "204";
+    }
+  >;
+
+  /**
    * Resets specific documents in the datasource to be selectively re-ingested by
    * the indexer.
    */

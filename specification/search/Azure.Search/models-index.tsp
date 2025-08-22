@@ -136,6 +136,11 @@ union QueryDebugMode {
   QueryRewrites: "queryRewrites",
 
   /**
+   * Allows the user to retrieve scoring information regarding vectors matched within a collection of complex types.
+   */
+  InnerHits: "innerHits",
+
+  /**
    * Turn on all debug options.
    */
   All: "all",
