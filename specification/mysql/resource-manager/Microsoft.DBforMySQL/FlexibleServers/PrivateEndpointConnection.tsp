@@ -14,7 +14,7 @@ using Azure.ResourceManager.Legacy;
 namespace Microsoft.DBforMySQL;
 
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
-alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
@@ -47,7 +47,10 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private endpoint connections on a server.
    */
-  listByServer is ListSinglePageByParent<Server, PrivateEndpointConnection>;
+  listByServer is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
+    Server,
+    PrivateEndpointConnection
+  >;
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
