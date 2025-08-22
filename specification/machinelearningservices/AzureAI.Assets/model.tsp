@@ -45,11 +45,10 @@ model Index is AssetVersion {
 }
 
 @doc("Paged collection of IndexVersion items.")
-@pagedResult
 model PagedIndex {
   @doc("The list of Indexes.")
-  @extension("x-ms-identifiers", #[])
-  @items
+  @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value: Index[];
 
   @doc("The link to the next page of items")
@@ -68,12 +67,11 @@ model Prompt is AssetVersion {
 }
 
 @doc("Paged collection of PromptVersion items")
-@pagedResult
 @added(Versions.`2024-05-01-preview`)
 model PagedPrompt {
   @doc("The list of Prompts.")
-  @extension("x-ms-identifiers", #[])
-  @items
+  @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value: Prompt[];
 
   @doc("The link to the next page of items")

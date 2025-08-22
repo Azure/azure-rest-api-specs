@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ManagedCluster.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -140,7 +142,7 @@ interface NodeTypes {
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
-    FaultSimulationContent,
+    FaultSimulationContentWrapper,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
@@ -172,6 +174,7 @@ interface NodeTypes {
    * Gets the list of recent fault simulations for the node type.
    */
   @tag("FaultSimulation")
+  @list
   listFaultSimulation is ArmResourceActionSync<
     NodeType,
     void,
@@ -188,6 +191,7 @@ interface NodeTypeSkus {
   @get
   @action("skus")
   @operationId("NodeTypeSkus_List")
+  @list
   list is ArmResourceActionSync<
     NodeType,
     void,
@@ -302,13 +306,13 @@ model NodeTypeProperties {
   /**
    * The secrets to install in the virtual machines.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["sourceVault"])
+  @identifiers(#["sourceVault"])
   vmSecrets?: VaultSecretGroup[];
 
   /**
    * Set of extensions that should be installed onto the virtual machines.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   vmExtensions?: VMSSExtension[];
 
   /**
@@ -329,19 +333,19 @@ model NodeTypeProperties {
   /**
    * Indicates the node type uses its own frontend configurations instead of the default one for the cluster. This setting can only be specified for non-primary node types and can not be added or removed after the node type is created.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   frontendConfigurations?: FrontendConfiguration[];
 
   /**
    * The Network Security Rules for this node type. This setting can only be specified for node types that are configured with frontend configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkSecurityRules?: NetworkSecurityRule[];
 
   /**
    * Additional managed data disks.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun"])
+  @identifiers(#["lun"])
   additionalDataDisks?: VmssDataDisk[];
 
   /**
@@ -437,12 +441,17 @@ model NodeTypeProperties {
   vmSetupActions?: VmSetupAction[];
 
   /**
-   * Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported
+   * Specifies the security type of the nodeType. Supported values include Standard, TrustedLaunch and ConfidentialVM.
    */
   securityType?: SecurityType;
 
   /**
-   * Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch SecurityType
+   * Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob and VMGuestStateOnly for encryption of just the VMGuestState blob. Note: It can be set for only Confidential VMs.
+   */
+  securityEncryptionType?: SecurityEncryptionType;
+
+  /**
+   * Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch and ConfidentialVM SecurityType.
    */
   secureBootEnabled?: boolean;
 
@@ -482,7 +491,7 @@ model NodeTypeProperties {
   /**
    * Specifies the NAT configuration on default public Load Balancer for the node type. This is only supported for node types use the default public Load Balancer.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   natConfigurations?: NodeTypeNatConfig[];
 
   /**
@@ -511,7 +520,7 @@ model NodeTypeProperties {
   /**
    * Specifies the settings for any additional secondary network interfaces to attach to the node type.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   additionalNetworkInterfaceConfigurations?: AdditionalNetworkInterfaceConfiguration[];
 
   /**
@@ -522,8 +531,20 @@ model NodeTypeProperties {
   /**
    * Specifies the gallery applications that should be made available to the underlying VMSS.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vmApplications?: VmApplication[];
+
+  /**
+   * 	Setting this to true allows stateless node types to scale out without equal distribution across zones.
+   */
+  @added(Versions.v2025_03_01_preview)
+  zoneBalance?: boolean;
+
+  /**
+   * Specifies the node type should be configured for only outbound traffic and not inbound traffic.
+   */
+  @added(Versions.v2025_06_01_preview)
+  isOutboundOnly?: boolean;
 }
 
 /**
@@ -548,7 +569,7 @@ model AdditionalNetworkInterfaceConfiguration {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations: IpConfiguration[];
 }
 
@@ -607,7 +628,7 @@ model PublicIPAddressConfiguration {
   /**
    * Specifies the list of IP tags associated with the public IP address.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipTags?: IpTag[];
 
   /**
@@ -815,7 +836,7 @@ model VaultSecretGroup {
   /**
    * The list of key vault references in SourceVault which contain certificates.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vaultCertificates: VaultCertificate[];
 }
 
@@ -891,14 +912,14 @@ model VMSSExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
-  settings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Day 0 property"
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
-  protectedSettings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Day 0 property"
+  protectedSettings?: unknown;
 
   /**
    * If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed.
@@ -924,7 +945,6 @@ model VMSSExtensionProperties {
   /**
    * Indicates the setup order for the extension.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   setupOrder?: VmssExtensionSetupOrder[];
 }
 
@@ -1164,6 +1184,28 @@ union SecurityType {
    * Standard is the default security type for all machines.
    */
   Standard: "Standard",
+
+  /**
+   * ConfidentialVM provides hardware-based encryption, trusted execution environment (TEE) and isolation of the VM memory & CPU from host.
+   */
+  ConfidentialVM: "ConfidentialVM",
+}
+
+/**
+ * Specifies the securityEncryptionType type of the nodeType. Only DiskWithVMGuestState and VMGuestStateOnly are currently supported
+ */
+union SecurityEncryptionType {
+  string,
+
+  /**
+   * For encryption of the managed disk along with VMGuestState blob.
+   */
+  DiskWithVMGuestState: "DiskWithVMGuestState",
+
+  /**
+   * For encryption of just the VMGuestState blob.
+   */
+  VMGuestStateOnly: "VMGuestStateOnly",
 }
 
 /**
@@ -1239,3 +1281,5 @@ union NodeTypeSkuScaleType {
    */
   Automatic: "Automatic",
 }
+
+@@identifiers(NodeTypeListSkuResult.value, #[]);

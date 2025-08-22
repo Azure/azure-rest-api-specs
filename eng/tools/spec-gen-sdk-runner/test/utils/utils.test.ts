@@ -1,15 +1,19 @@
-import { describe, test, expect } from "vitest";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   findFilesRecursive,
   findReadmeFiles,
+  getArgumentValue,
   getRelativePathFromSpecification,
+  mapToObject,
+  normalizePath,
+  objectToMap,
 } from "../../src/utils.js";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
-const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
+const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
 describe("Utils", () => {
   describe("findFilesRecursive", () => {
@@ -63,6 +67,14 @@ describe("Utils", () => {
     });
   });
 
+  describe("getArgumentValue", () => {
+    test("return the argument value", () => {
+      const args = ["--batch-type", "all-specs", "--pr-number", "9527"];
+      const result = getArgumentValue(args, "--batch-type", "");
+      expect(result).toBe("all-specs");
+    });
+  });
+
   describe("getRelativePathFromSpecification", () => {
     test("extracts path from specification folder", () => {
       const result = getRelativePathFromSpecification(
@@ -87,6 +99,65 @@ describe("Utils", () => {
     test("handles empty path", () => {
       const result = getRelativePathFromSpecification("");
       expect(result).toBe("");
+    });
+  });
+
+  describe("mapToObject", () => {
+    test("converts Map to Object correctly", () => {
+      const map = new Map([
+        ["key1", "value1"],
+        ["key2", "value2"],
+      ]);
+      const result = mapToObject(map);
+      expect(result).toEqual({ key1: "value1", key2: "value2" });
+    });
+
+    test("handles empty Map", () => {
+      const map = new Map();
+      const result = mapToObject(map);
+      expect(result).toEqual({});
+    });
+  });
+
+  describe("objectToMap", () => {
+    test("converts Object to Map correctly", () => {
+      const obj = { key1: "value1", key2: "value2" };
+      const result = objectToMap(obj);
+      expect(result).toEqual(
+        new Map([
+          ["key1", "value1"],
+          ["key2", "value2"],
+        ]),
+      );
+    });
+
+    test("handles empty Object", () => {
+      const obj = {};
+      const result = objectToMap(obj);
+      expect(result).toEqual(new Map());
+    });
+  });
+
+  describe("normalizePath", () => {
+    beforeEach(() => {
+      vi.clearAllMocks();
+    });
+
+    test("normalizePath in Windows", () => {
+      vi.spyOn(process, "platform", "get").mockReturnValue("win32");
+      /* eslint-disable unicorn/prefer-string-raw */
+      const path = "specification\\contosowidgetmanager\\Contoso.WidgetManager.Shared\\main.tsp";
+      const convertPath =
+        "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+      const result = normalizePath(path);
+      expect(result).toEqual(convertPath);
+    });
+
+    test("normalizePath in Linux", () => {
+      vi.spyOn(process, "platform", "get").mockReturnValue("linux");
+      const path = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+      const result = normalizePath(path);
+      expect(result).toEqual(path);
     });
   });
 });

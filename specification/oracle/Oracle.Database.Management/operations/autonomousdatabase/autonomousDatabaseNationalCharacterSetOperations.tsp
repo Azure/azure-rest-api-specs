@@ -1,4 +1,4 @@
-import "../../../models/autonomousdatabase/autonomousDatabaseNationalCharacterSet.tsp";
+import "../../models/autonomousdatabase/autonomousDatabaseNationalCharacterSet.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -9,10 +9,6 @@ namespace Oracle.Database;
 @armResourceOperations
 interface AutonomousDatabaseNationalCharacterSets
   extends OracleLocationBasedResource<AutonomousDatabaseNationalCharacterSet> {}
-
-@@doc(AutonomousDatabaseNationalCharacterSets.listByLocation,
-  "List AutonomousDatabaseNationalCharacterSet resources by Location"
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(AutonomousDatabaseNationalCharacterSets.listByLocation,

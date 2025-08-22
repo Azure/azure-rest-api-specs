@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -76,7 +78,6 @@ alias KeyValuesRequestParams = {
     """>;
   ...IfMatchHeader;
   ...IfNoneMatchHeader;
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
   ...TagsQueryParam<"""
     A filter used to query by tags. Syntax reference:
     https://aka.ms/azconfig/docs/keyvaluefiltering
@@ -121,6 +122,12 @@ op getKeyValue is Foundations.ResourceOperation<
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
     ...ClientRequestIdHeader;
+
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+    @added(Versions.v2024_09_01)
+    @doc("A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering")
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
   Body<KeyValue> &
     RequestIdResponseHeader &
@@ -138,6 +145,7 @@ op getKeyValue is Foundations.ResourceOperation<
 @put
 op putKeyValue is AppConfigOperation<
   {
+    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
@@ -200,6 +208,12 @@ op checkKeyValue is AppConfigOperation<
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
     ...SelectQueryParam<KeyValueFields>;
+
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+    @added(Versions.v2024_09_01)
+    @doc("A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering")
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
 >;
@@ -264,6 +278,7 @@ op getSnapshot is StandardOps.ResourceRead<
 @put
 op createSnapshot is Foundations.LongRunningOperation<
   {
+    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
@@ -289,10 +304,11 @@ op createSnapshot is Foundations.LongRunningOperation<
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")
 @route("/snapshots/{name}")
-@patch
+@patch(#{ implicitOptionality: true })
 op updateSnapshot is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
     @doc("Content-Type header")
     @header("Content-Type")
     contentType: "application/merge-patch+json" | "application/json";
@@ -340,6 +356,7 @@ alias LabelsRequestParams = {
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
 @route("/labels")
+@list
 op getLabels is AppConfigOperation<
   LabelsRequestParams,
   LabelListResult &
@@ -407,7 +424,6 @@ alias RevisionsRequestParams = {
   ...AfterHeader;
   ...AcceptDatetimeHeader;
   ...SelectQueryParam<KeyValueFields>;
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
   ...TagsQueryParam<"""
     A filter used to query by tags. Syntax reference:
     https://aka.ms/azconfig/docs/restapirevisions
@@ -420,6 +436,7 @@ alias RevisionsRequestParams = {
 @doc("Gets a list of key-value revisions.")
 @route("/revisions")
 @get
+@list
 op getRevisions is AppConfigOperation<
   RevisionsRequestParams,
   KeyValueListResult &

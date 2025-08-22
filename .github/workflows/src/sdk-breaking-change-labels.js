@@ -1,8 +1,12 @@
 // @ts-check
-import { sdkLabels } from "../../src/sdk-types.js";
-import { LabelAction } from "./label.js";
+import { sdkLabels } from "../../shared/src/sdk-types.js";
+import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
-import { getIssueNumber } from "./issues.js";
+import { LabelAction } from "./label.js";
+
+/**
+ * @typedef {import("../../shared/src/sdk-types.js").SdkName} SdkName
+ */
 
 /**
  * @typedef {Object} ArtifactResource
@@ -15,99 +19,74 @@ import { getIssueNumber } from "./issues.js";
  */
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelAndAction({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
-  const ado_build_id = inputs.ado_build_id;
-  const ado_project_url = inputs.ado_project_url;
-  const head_sha = inputs.head_sha;
-  if (!ado_build_id || !ado_project_url || !head_sha) {
-    throw new Error(
-      `Required inputs are not valid: ado_build_id:${ado_build_id}, ado_project_url:${ado_project_url}, head_sha:${head_sha}`,
-    );
+  const details_url = inputs.details_url;
+  if (!details_url) {
+    throw new Error(`Required inputs are not valid: details_url:${details_url}`);
   }
   return await getLabelAndActionImpl({
-    ado_build_id,
-    ado_project_url,
-    head_sha,
+    details_url,
     core,
-    github,
   });
 }
 
 /**
  * @param {Object} params
- * @param {string} params.ado_build_id
- * @param {string} params.ado_project_url
- * @param {string} params.head_sha
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api)} params.github
+ * @param {string} params.details_url
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
+ * @param {import('./retries.js').RetryOptions} [params.retryOptions]
+ * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, headSha: string, issueNumber: number}>}
  */
-export async function getLabelAndActionImpl({
-  ado_build_id,
-  ado_project_url,
-  head_sha,
-  core,
-  github,
-}) {
+export async function getLabelAndActionImpl({ details_url, core, retryOptions = {} }) {
+  // Override default logger from console.log to core.info
+  retryOptions = { logger: core.info, ...retryOptions };
+
+  let head_sha = "";
   let issue_number = NaN;
   let labelAction;
+  /** @type {String | undefined} */
   let labelName = "";
-  const artifactName = "spec-gen-sdk-breaking-change-artifact";
+  const buildInfo = getAdoBuildInfoFromUrl(details_url);
+  const ado_project_url = buildInfo.projectUrl;
+  const ado_build_id = buildInfo.buildId;
+  const artifactName = "spec-gen-sdk-artifact";
   const artifactFileName = artifactName + ".json";
-  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
-  core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
-
-  // Use Node.js fetch to call the API
-  const response = await fetch(apiUrl, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const result = await getAzurePipelineArtifact({
+    ado_build_id,
+    ado_project_url,
+    artifactName,
+    artifactFileName,
+    core,
+    retryOptions,
+    fallbackToFailedArtifact: true,
+    token: process.env.ADO_TOKEN,
   });
-
-  if (response.status === 404) {
-    core.info(
-      `Artifact '${artifactName}' not found (404). This might be expected if there are no breaking changes.`,
+  // Parse the JSON data
+  if (!result.artifactData) {
+    core.warning(
+      `Artifact '${artifactName}' not found in the build with details_url:${details_url} or failed to download it.`,
     );
-  } else if (response.ok) {
-    // Step 1: Get the download URL for the artifact
-    /** @type {Artifacts} */
-    const artifacts = /** @type {Artifacts} */ (await response.json());
-    core.info(`Artifacts found: ${JSON.stringify(artifacts)}`);
-    if (!artifacts.resource || !artifacts.resource.downloadUrl) {
-      throw new Error(
-        `Download URL not found for the artifact ${artifactName}`,
-      );
-    }
-
-    let downloadUrl = artifacts.resource.downloadUrl;
-    const index = downloadUrl.indexOf("?format=zip");
-    if (index !== -1) {
-      // Keep everything up to (but not including) "?format=zip"
-      downloadUrl = downloadUrl.substring(0, index);
-    }
-    downloadUrl += `?format=file&subPath=/${artifactFileName}`;
-    core.info(`Downloading artifact from: ${downloadUrl}`);
-
-    // Step 2: Fetch Artifact Content (as a Buffer)
-    const artifactResponse = await fetch(downloadUrl);
-    if (!artifactResponse.ok) {
-      throw new Error(
-        `Failed to fetch artifact: ${artifactResponse.statusText}`,
-      );
-    }
-
-    const artifactData = await artifactResponse.text();
-    core.info(`Artifact content: ${artifactData}`);
-
+  } else {
+    core.info(`Artifact content: ${result.artifactData}`);
     // Parse the JSON data
-    const breakingChangeResult = JSON.parse(artifactData);
-    const labelActionText = breakingChangeResult.labelAction;
-    const breakingChangeLanguage = breakingChangeResult.language;
+    const specGenSdkArtifactInfo = JSON.parse(result.artifactData);
+    const labelActionText = specGenSdkArtifactInfo.labelAction;
+
+    head_sha = specGenSdkArtifactInfo.headSha;
+
+    issue_number = parseInt(specGenSdkArtifactInfo.prNumber, 10);
+    if (!issue_number) {
+      core.warning(
+        `No PR number found in the artifact '${artifactName}' with details_url:${details_url}.`,
+      );
+    }
+
+    /** @type {SdkName} */
+    const breakingChangeLanguage = specGenSdkArtifactInfo.language;
     if (breakingChangeLanguage) {
       labelName = sdkLabels[`${breakingChangeLanguage}`].breakingChange;
     }
@@ -118,23 +97,12 @@ export async function getLabelAndActionImpl({
     } else if (labelActionText === false) {
       labelAction = LabelAction.Remove;
     }
-
-    // Get the issue number from the check run
-    if (!issue_number) {
-      const { issueNumber } = await getIssueNumber({ head_sha, core, github });
-      issue_number = issueNumber;
-    }
-  } else {
-    core.error(
-      `Failed to fetch artifacts: ${response.status}, ${response.statusText}`,
-    );
-    const errorText = await response.text();
-    core.error(`Error details: ${errorText}`);
   }
-  if (!labelAction) {
-    core.info("No label action found, defaulting to None");
+
+  if (!labelAction || !labelName) {
+    core.info("No label action or name found, defaulting to None");
     labelAction = LabelAction.None;
   }
 
-  return { labelName, labelAction, issueNumber: issue_number };
+  return { labelName, labelAction, headSha: head_sha, issueNumber: issue_number };
 }

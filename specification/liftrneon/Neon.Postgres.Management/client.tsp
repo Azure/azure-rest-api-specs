@@ -3,15 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientNamespace(Neon.Postgres,
-  "com.azure.resourcemanager.neonpostgres",
-  "java"
-);
-@@clientNamespace(LiftrBase, "com.azure.resourcemanager.neonpostgres", "java");
-@@clientNamespace(LiftrBase.Data,
-  "com.azure.resourcemanager.neonpostgres",
-  "java"
-);
 @@clientName(Neon.Postgres, "NeonPostgresMgmtClient", "python");
 @@clientName(Neon.Postgres, "NeonPostgresManagementClient", "java");
 @@clientName(Neon.Postgres.OrganizationResource, "NeonOrganization", "csharp");
@@ -32,3 +23,31 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(LiftrBase.SingleSignOnStates, "NeonSingleSignOnState", "csharp");
+
+@@clientName(Neon.Postgres.Project, "NeonProject", "csharp");
+@@clientName(Neon.Postgres.ProjectProperties,
+  "NeonProjectProperties",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.Branch, "NeonBranch", "csharp");
+@@clientName(Neon.Postgres.BranchProperties, "NeonBranchProperties", "csharp");
+
+@@clientName(Neon.Postgres.Endpoint, "NeonEndpoint", "csharp");
+@@clientName(Neon.Postgres.EndpointProperties,
+  "NeonEndpointProperties",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.Compute, "NeonCompute", "csharp");
+@@clientName(Neon.Postgres.ComputeProperties,
+  "NeonComputeProperties",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.ProjectProperties.pgVersion,
+  "postgresVersion",
+  "csharp"
+);
+
+@@clientName(Neon.Postgres.ProjectProperties.attributes, "attribute", "csharp");

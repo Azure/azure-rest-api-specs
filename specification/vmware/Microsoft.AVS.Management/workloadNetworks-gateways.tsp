@@ -1,23 +1,17 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface WorkloadNetworkGateways {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_ListGateways")
   list is ArmResourceListByParent<
     WorkloadNetworkGateway,
     Response = ArmResponse<ResourceList<WorkloadNetworkGateway>>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_GetGateway")
   get is ArmResourceRead<WorkloadNetworkGateway>;
 }
 

@@ -17,11 +17,11 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(Applications.createOrUpdate::parameters.resource, "application");
 
-@@clientName(CustomPrivateEndpointConnection.updateByWorkspace::parameters.body,
+@@clientName(CustomPrivateEndpointConnection.updateByWorkspace::parameters.resource,
   "connection"
 );
 
-@@clientName(CustomPrivateEndpointConnection.updateByHostPool::parameters.body,
+@@clientName(CustomPrivateEndpointConnection.updateByHostPool::parameters.resource,
   "connection"
 );
 
@@ -43,6 +43,10 @@ using Microsoft.DesktopVirtualization;
   "hostPoolUpdateControlParameter"
 );
 
+@@clientName(ControlSessionHostProvisioning.post::parameters.body,
+  "hostPoolProvisioningControlParameter"
+);
+
 @@clientName(SessionHostManagements.createOrUpdate::parameters.resource,
   "sessionHostManagement"
 );
@@ -58,3 +62,5 @@ using Microsoft.DesktopVirtualization;
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
+
+@@clientName(MSIXImages, "MsixImages", "autorest");

@@ -1,13 +1,8 @@
-import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 
 // Official Name: Azure Health Data Services de-identification service
 @useAuth(AadToken)
@@ -38,4 +33,7 @@ model AadToken
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15: "2024-11-15",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_07_15_preview: "2025-07-15-preview",
 }

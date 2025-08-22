@@ -62,7 +62,15 @@ enum APIVersions {
   @useDependency(Versions.v1_0_Preview_2)
   v2025_02_01: "2025-02-01",
 
-  @doc("The 2025-03-01-preview service API version")
+  @doc("The 2025-04-01-preview service API version")
   @useDependency(Versions.v1_0_Preview_2)
-  v2025_03_01_preview: "2025-03-01-preview",
+  v2025_04_01_preview: "2025-04-01-preview",
+
+  @doc("The 2025-07-01-preview service API version")
+  @useDependency(Versions.v1_0_Preview_2)
+  v2025_07_01_preview: "2025-07-01-preview",
+
+  @doc("The 2025-08-01-preview service API version")
+  @useDependency(Versions.v1_0_Preview_2)
+  v2025_08_01_preview: "2025-08-01-preview",
 }

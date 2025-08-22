@@ -3,18 +3,22 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace ModelInference;
 
 @doc("Represents some basic information about the AI model.")
 model ModelInfo {
   @doc("The name of the AI model. For example: `Phi21`")
+  @visibility(Lifecycle.Read)
   model_name: string;
 
   @doc("The type of the AI model. A Unique identifier for the profile.")
+  @visibility(Lifecycle.Read)
   model_type: ModelType;
 
-  @doc("The model provider name. For example: `Microsoft Research`")
+  @doc("The model provider name. For example: `Microsoft`")
+  @visibility(Lifecycle.Read)
   model_provider_name: string;
 }
 

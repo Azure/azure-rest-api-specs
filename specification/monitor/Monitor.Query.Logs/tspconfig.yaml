@@ -1,0 +1,62 @@
+parameters:
+  "service-dir":
+    default: "sdk/monitor"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.OperationalInsights/{version-status}/{version}/OperationalInsights.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-monitor-query"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    package-version: 2.0.0
+    flavor: azure
+    namespace: azure.monitor.query
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Monitor.Query.Logs"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "monitor-query-logs"
+    is-modular-library: true
+    package-details:
+      name: "@azure/monitor-query-logs"
+      description: "Azure Monitor Query Logs library"
+      version: "1.0.0"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-monitor-query-logs"
+    namespace: com.azure.monitor.query.logs
+    flavor: azure
+    use-object-for-unknown: true
+    generate-tests: false
+    generate-samples: false
+    partial-update: true
+    custom-types: BatchQueryRequestPath,BatchQueryRequestMethod
+    custom-types-subpackage: implementation.models
+    customization-class: "customization/src/main/java/LogsQueryCustomization.java"
+    service-name: LogsQuery
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/monitor/query"
+    package-dir: "azlogs"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/query/azlogs"
+    module-version: "0.0.1"
+    single-client: true
+    generate-fakes: true
+    inject-spans: true
+    slice-elements-byval: true
+    rawjson-as-bytes: true
+    go-generate: "build.go"

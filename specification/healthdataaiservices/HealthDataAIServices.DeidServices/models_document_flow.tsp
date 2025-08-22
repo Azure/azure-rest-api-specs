@@ -1,11 +1,11 @@
-import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -19,9 +19,11 @@ model DeidentificationJob {
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  @clientName("jobName", "csharp,java,python")
   name: string;
 
   @doc("Operation to perform on the input documents.")
+  @clientName("operationType", "csharp,java,python")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Storage location to perform the operation on.")
@@ -37,7 +39,6 @@ model DeidentificationJob {
 
   @doc("Current status of a job.")
   @visibility(Lifecycle.Read)
-  @pollingOperationParameter
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when job fails in it's entirety.")
@@ -70,19 +71,19 @@ model DeidentificationJob {
 @doc("Summary metrics of a job.")
 model DeidentificationJobSummary {
   @doc("Number of documents that have completed.")
-  @clientName("successfulCount", "java")
+  @clientName("successfulCount", "csharp,java,python")
   successful: int32;
 
   @doc("Number of documents that have failed.")
-  @clientName("failedCount", "java")
+  @clientName("failedCount", "csharp,java,python")
   failed: int32;
 
   @doc("Number of documents that have been canceled.")
-  @clientName("canceledCount", "java")
+  @clientName("canceledCount", "csharp,java,python")
   canceled: int32;
 
   @doc("Number of documents total.")
-  @clientName("totalCount", "java")
+  @clientName("totalCount", "csharp,java,python")
   total: int32;
 
   @doc("Number of bytes processed.")
@@ -100,9 +101,11 @@ model DeidentificationDocumentDetails {
   id: string;
 
   @doc("Location for the input.")
+  @clientName("inputLocation", "csharp,java,python")
   input: DeidentificationDocumentLocation;
 
   @doc("Location for the output.")
+  @clientName("outputLocation", "csharp,java,python")
   output?: DeidentificationDocumentLocation;
 
   @doc("Status of the document.")

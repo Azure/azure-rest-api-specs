@@ -9,12 +9,12 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @doc("Schema registry definition.")
 model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @doc("Schema registry name parameter.")
@@ -31,6 +31,7 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @doc("Defines the schema registry properties.")
 model SchemaRegistryProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -60,6 +61,7 @@ model SchemaRegistryProperties {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @parentResource(SchemaRegistry)
 @doc("Schema definition.")
 model Schema is ProxyResource<SchemaProperties> {
@@ -75,6 +77,7 @@ model Schema is ProxyResource<SchemaProperties> {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @doc("Defines the schema properties.")
 model SchemaProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -107,6 +110,7 @@ model SchemaProperties {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @doc("Defines the schema format.")
 union Format {
   @doc("JSON Schema version draft 7 format")
@@ -120,6 +124,7 @@ union Format {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @doc("Defines the schema type.")
 union SchemaType {
   @doc("Message Schema schema type")
@@ -130,6 +135,7 @@ union SchemaType {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @parentResource(Schema)
 @doc("Schema version's definition.")
 model SchemaVersion is ProxyResource<SchemaVersionProperties> {
@@ -145,6 +151,7 @@ model SchemaVersion is ProxyResource<SchemaVersionProperties> {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @doc("Defines the schema version properties.")
 model SchemaVersionProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -169,6 +176,7 @@ model SchemaVersionProperties {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface SchemaRegistries {
   get is ArmResourceRead<SchemaRegistry>;
@@ -190,6 +198,7 @@ interface SchemaRegistries {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface Schemas {
   get is ArmResourceRead<Schema>;
@@ -200,6 +209,7 @@ interface Schemas {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
+@added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface SchemaVersions {
   get is ArmResourceRead<SchemaVersion>;

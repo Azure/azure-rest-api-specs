@@ -11,10 +11,10 @@ namespace DocumentTranslation;
 @doc("Document Translate Request Content")
 model DocumentTranslateContent {
   @doc("Document to be translated in the form")
-  document: bytes;
+  document: HttpPart<bytes>;
 
   @doc("Glossary-translation memory will be used during translation in the form. ")
-  glossary?: bytes[];
+  glossary?: HttpPart<bytes[]>;
 }
 
 @doc("Document Translate Result / Response.")
@@ -323,10 +323,9 @@ model InnerTranslationError {
 }
 
 @doc("Translation job Status Response")
-@pagedResult
 model TranslationsStatus {
   @doc("The summary status of individual operation")
-  @items
+  @pageItems
   value: TranslationStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
@@ -440,10 +439,9 @@ model DocumentStatus {
 }
 
 @doc("Documents Status Response")
-@pagedResult
 model DocumentsStatus {
   @doc("The detail status of individual documents")
-  @items
+  @pageItems
   value: DocumentStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
@@ -515,9 +513,8 @@ model DocumentTranslateBody {
   @header
   contentType: "multipart/form-data";
 
-  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Document Translate Request Content")
-  @body
+  @multipartBody
   body: DocumentTranslateContent;
 
   @doc("Optional boolean parameter to translate text within an image in the document")

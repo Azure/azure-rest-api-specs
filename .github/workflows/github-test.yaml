@@ -14,17 +14,18 @@ on:
 permissions:
   contents: read
 
-defaults:
-  run:
-    working-directory: ./.github
-
 jobs:
   test:
     strategy:
       matrix:
+        folder: [.github, .github/shared]
         os: [ubuntu, windows]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
+
+    defaults:
+      run:
+        working-directory: ./${{ matrix.folder }}
 
     steps:
       - name: Checkout
@@ -33,15 +34,28 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Setup Node 20 and install runtime deps
+      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
+      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
+        name: Add ActionLint Problem Matcher
+        run: echo "::add-matcher::.github/matchers/actionlint.json"
+
+      - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
+        name: Lint workflows
+        uses: docker://rhysd/actionlint:1.7.7
+        with:
+          args: -color -verbose
+
+      - if: ${{ matrix.folder == '.github' }}
+        name: Setup Node 20 and install runtime deps
         uses: ./.github/actions/setup-node-install-deps
         with:
           # actions/github-script@v7 uses Node 20
           node-version: 20.x
           install-command: npm ci --omit dev
-          working-directory: ./.github
+          working-directory: ./${{ matrix.folder }}
 
-      - name: Verify all modules are importable
+      - if: ${{ matrix.folder == '.github' }}
+        name: Verify all modules are importable
         uses: actions/github-script@v7
         with:
           script: |
@@ -56,17 +70,17 @@ jobs:
         with:
           # actions/github-script@v7 uses Node 20
           node-version: 20.x
-          working-directory: ./.github
+          working-directory: ./${{ matrix.folder }}
 
       - run: npm run lint
 
-      - run: npm run prettier
+      - run: npm run format:check:ci
 
       - run: npm run test:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report-${{ matrix.os }}
-          path: ./.github/coverage
+          name: code-coverage-report-${{ matrix.os }}-${{ fromJSON('{".github":"github", ".github/shared":"github-shared"}')[matrix.folder] }}
+          path: ./${{ matrix.folder }}/coverage
           if-no-files-found: ignore

@@ -1,21 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-02-01-preview",
-    "x-ms-code-generation-settings": {
-      "host": "management.azure.com"
-    },
     "title": "iotDpsClient",
-    "description": "API for using the Azure IoT Hub Device Provisioning Service features."
+    "version": "2025-02-01-preview",
+    "description": "API for using the Azure IoT Hub Device Provisioning Service features.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -28,44 +30,61 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CertificateResponses"
+    },
+    {
+      "name": "ProvisioningServiceDescriptions"
+    },
+    {
+      "name": "GroupIdInformations"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.Devices/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "DPSOperations": {
-            "$ref": "./examples/DPSOperations.json"
-          }
-        },
-        "description": "Lists all of the available Microsoft.Devices REST API operations.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DPSOperations": {
+            "$ref": "./examples/DPSOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -73,625 +92,81 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}": {
-      "get": {
-        "tags": [
-          "DpsCertificate"
-        ],
-        "operationId": "DpsCertificate_Get",
-        "description": "Get the certificate from the provisioning service.",
-        "x-ms-examples": {
-          "DPSGetCertificate": {
-            "$ref": "./examples/DPSGetCertificate.json"
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkProvisioningServiceNameAvailability": {
+      "post": {
+        "operationId": "IotDpsResource_CheckProvisioningServiceNameAvailability",
+        "summary": "Check if a provisioning service name is available.",
+        "description": "Check if a provisioning service name is available. This will validate if the name is syntactically valid and if the name is usable",
         "parameters": [
           {
-            "name": "certificateName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the certificate to retrieve."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group identifier."
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the provisioning service the certificate is associated with."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "ETag of the certificate."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Metadata for the specified certificate.",
-            "schema": {
-              "$ref": "#/definitions/CertificateResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "DpsCertificate"
-        ],
-        "summary": "Upload the certificate to the provisioning service.",
-        "description": "Add new certificate or update an existing certificate.",
-        "operationId": "DpsCertificate_CreateOrUpdate",
-        "x-ms-examples": {
-          "DPSCreateOrUpdateCertificate": {
-            "$ref": "./examples/DPSCertificateCreateOrUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Resource group identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "description": "The name of the provisioning service.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "certificateName",
-            "in": "path",
-            "description": "The name of the certificate create or update.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "certificateDescription",
+            "name": "arguments",
             "in": "body",
-            "description": "The certificate body.",
+            "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CertificateResponse"
+              "$ref": "#/definitions/OperationInputs"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate."
           }
         ],
         "responses": {
           "200": {
-            "description": "If certificate already exist and update was successful, the operation returns HTTP status code of 201 (OK).",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CertificateResponse"
+              "$ref": "#/definitions/NameAvailabilityInfo"
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "DpsCertificate"
-        ],
-        "operationId": "DpsCertificate_Delete",
-        "summary": "Delete the Provisioning Service Certificate.",
-        "description": "Deletes the specified certificate associated with the Provisioning Service",
         "x-ms-examples": {
-          "DPSDeleteCertificate": {
-            "$ref": "./examples/DPSDeleteCertificate.json"
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group identifier."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "ETag of the certificate"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the provisioning service."
-          },
-          {
-            "name": "certificateName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "This is a mandatory field, and is the logical name of the certificate that the provisioning service will access by."
-          },
-          {
-            "name": "certificate.name",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "This is optional, and it is the Common Name of the certificate."
-          },
-          {
-            "name": "certificate.rawBytes",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "byte",
-            "description": "Raw data within the certificate."
-          },
-          {
-            "name": "certificate.isVerified",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates if certificate has been verified by owner of the private key."
-          },
-          {
-            "name": "certificate.purpose",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "A description that mentions the purpose of the certificate.",
-            "enum": [
-              "clientAuthentication",
-              "serverAuthentication"
-            ],
-            "x-ms-enum": {
-              "name": "CertificatePurpose",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "certificate.created",
-            "in": "query",
-            "description": "Time the certificate is created.",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "certificate.lastUpdated",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Time the certificate is last updated.",
-            "format": "date-time"
-          },
-          {
-            "name": "certificate.hasPrivateKey",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates if the certificate contains a private key."
-          },
-          {
-            "name": "certificate.nonce",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Random number generated to indicate Proof of Possession."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK."
-          },
-          "204": {
-            "description": "No content."
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}": {
-      "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Get the non-security related metadata of the provisioning service.",
-        "description": "Get the metadata of the provisioning service without SAS keys.",
-        "operationId": "IotDpsResource_Get",
-        "x-ms-examples": {
-          "DPSGet": {
-            "$ref": "./examples/DPSGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the provisioning service to retrieve."
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group name."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Provisioning service description with no keys is included in the response.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceDescription"
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "put": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Create or update the metadata of the provisioning service.",
-        "description": "Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
-        "x-ms-long-running-operation": true,
-        "operationId": "IotDpsResource_CreateOrUpdate",
-        "x-ms-examples": {
-          "DPSCreate": {
-            "$ref": "./examples/DPSCreate.json"
-          },
-          "DPSUpdate": {
-            "$ref": "./examples/DPSUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group identifier."
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of provisioning service to create or update."
-          },
-          {
-            "name": "iotDpsDescription",
-            "in": "body",
-            "required": true,
-            "description": "Description of the provisioning service to create or update.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceDescription"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains all the non-security properties of the provisioning service. Security-related properties are set to null.",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceDescription"
-            }
-          },
-          "201": {
-            "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceDescription"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Update an existing provisioning service's tags.",
-        "description": "Update an existing provisioning service's tags. to update other fields use the CreateOrUpdate method",
-        "x-ms-long-running-operation": true,
-        "operationId": "IotDpsResource_Update",
-        "x-ms-examples": {
-          "DPSPatch": {
-            "$ref": "./examples/DPSPatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group identifier."
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of provisioning service to create or update."
-          },
-          {
-            "name": "ProvisioningServiceTags",
-            "in": "body",
-            "required": true,
-            "description": "Updated tag information to set into the provisioning service instance.",
-            "schema": {
-              "$ref": "#/definitions/TagsResource"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Provisioning Service was successfully updated",
-            "schema": {
-              "$ref": "#/definitions/ProvisioningServiceDescription"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Delete the Provisioning Service",
-        "description": "Deletes the Provisioning Service.",
-        "x-ms-long-running-operation": true,
-        "operationId": "IotDpsResource_Delete",
-        "x-ms-examples": {
-          "DPSDelete": {
-            "$ref": "./examples/DPSDelete.json"
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of provisioning service to delete."
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group identifier."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The provisioning service resource provider always returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the provisioning service status directly, or query the operation resource."
-          },
-          "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
-          },
-          "204": {
-            "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the provisioning service metadata in the service and the status of the delete operation is set to a completed state."
-          },
-          "404": {
-            "description": "After the long running delete operation completes successfully, a 404 Not Found is returned when the status polling request no longer finds the provisioning service metadata in the service."
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates": {
-      "get": {
-        "tags": [
-          "DpsCertificate"
-        ],
-        "operationId": "DpsCertificate_List",
-        "description": "Get all the certificates tied to the provisioning service.",
-        "x-ms-examples": {
-          "DPSGetCertificates": {
-            "$ref": "./examples/DPSGetCertificates.json"
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of resource group."
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of provisioning service to retrieve certificates for."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of certificate descriptions in a JSON-serialized array.",
-            "schema": {
-              "$ref": "#/definitions/CertificateListDescription"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
+          "DPSCheckName": {
+            "$ref": "./examples/DPSCheckNameAvailability.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/provisioningServices": {
       "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Get all the provisioning services in a subscription.",
-        "description": "List all the provisioning services for a given subscription id.",
         "operationId": "IotDpsResource_ListBySubscription",
-        "x-ms-examples": {
-          "DPSListBySubscription": {
-            "$ref": "./examples/DPSListBySubscription.json"
-          }
-        },
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "List all the provisioning services for a given subscription id.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the provisioning services in the subscription.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceDescriptionListResult"
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DPSListBySubscription": {
+            "$ref": "./examples/DPSListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -701,47 +176,1012 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices": {
       "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
         "operationId": "IotDpsResource_ListByResourceGroup",
-        "description": "Get a list of all provisioning services in the given resource group.",
-        "x-ms-examples": {
-          "DPSListByResourceGroup": {
-            "$ref": "./examples/DPSListByResourceGroup.json"
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
+        "tags": [
+          "ProvisioningServiceDescriptions"
         ],
+        "description": "Get a list of all provisioning services in the given resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group identifier."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "List of provisioning services in the resource group.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ProvisioningServiceDescriptionListResult"
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DPSListByResourceGroup": {
+            "$ref": "./examples/DPSListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}": {
+      "get": {
+        "operationId": "IotDpsResource_Get",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "Get the metadata of the provisioning service without SAS keys.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGet": {
+            "$ref": "./examples/DPSGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IotDpsResource_CreateOrUpdate",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iotDpsDescription",
+            "in": "body",
+            "description": "Description of the provisioning service to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ProvisioningServiceDescription' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            }
+          },
+          "201": {
+            "description": "Resource 'ProvisioningServiceDescription' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSCreate": {
+            "$ref": "./examples/DPSCreate.json"
+          },
+          "DPSCreateWithNamespace": {
+            "$ref": "./examples/DPSCreateWithNamespace.json"
+          },
+          "DPSUpdate": {
+            "$ref": "./examples/DPSUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "IotDpsResource_Update",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "Update an existing provisioning service's tags. to update other fields use the CreateOrUpdate method",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ProvisioningServiceTags",
+            "in": "body",
+            "description": "Updated tag information to set into the provisioning service instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProvisioningServiceDescription"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSPatch": {
+            "$ref": "./examples/DPSPatch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IotDpsResource_Delete",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "Deletes the Provisioning Service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "404": {
+            "description": "The Azure resource is not found"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSDelete": {
+            "$ref": "./examples/DPSDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates": {
+      "get": {
+        "operationId": "DpsCertificate_List",
+        "tags": [
+          "CertificateResponses"
+        ],
+        "description": "Get all the certificates tied to the provisioning service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGetCertificates": {
+            "$ref": "./examples/DPSGetCertificates.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}": {
+      "get": {
+        "operationId": "DpsCertificate_Get",
+        "tags": [
+          "CertificateResponses"
+        ],
+        "description": "Get the certificate from the provisioning service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the certificate to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the certificate.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGetCertificate": {
+            "$ref": "./examples/DPSGetCertificate.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DpsCertificate_CreateOrUpdate",
+        "tags": [
+          "CertificateResponses"
+        ],
+        "description": "Add new certificate or update an existing certificate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the certificate to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "certificateDescription",
+            "in": "body",
+            "description": "The certificate body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateResponse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CertificateResponse' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSCreateOrUpdateCertificate": {
+            "$ref": "./examples/DPSCertificateCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DpsCertificate_Delete",
+        "tags": [
+          "CertificateResponses"
+        ],
+        "description": "Deletes the specified certificate associated with the Provisioning Service",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the certificate to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the certificate",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "certificate.name",
+            "in": "query",
+            "description": "This is optional, and it is the Common Name of the certificate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "certificate.rawBytes",
+            "in": "query",
+            "description": "Raw data within the certificate.",
+            "required": false,
+            "type": "string",
+            "format": "byte",
+            "x-ms-client-name": "certificateRawBytes"
+          },
+          {
+            "name": "certificate.isVerified",
+            "in": "query",
+            "description": "Indicates if certificate has been verified by owner of the private key.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "certificateIsVerified"
+          },
+          {
+            "name": "certificate.purpose",
+            "in": "query",
+            "description": "A description that mentions the purpose of the certificate.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "clientAuthentication",
+              "serverAuthentication"
+            ],
+            "x-ms-enum": {
+              "name": "CertificatePurpose",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "clientAuthentication",
+                  "value": "clientAuthentication"
+                },
+                {
+                  "name": "serverAuthentication",
+                  "value": "serverAuthentication"
+                }
+              ]
+            },
+            "x-ms-client-name": "certificatePurpose"
+          },
+          {
+            "name": "certificate.created",
+            "in": "query",
+            "description": "Time the certificate is created.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "certificateCreated"
+          },
+          {
+            "name": "certificate.lastUpdated",
+            "in": "query",
+            "description": "Certificate last updated time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "certificateLastUpdated"
+          },
+          {
+            "name": "certificate.hasPrivateKey",
+            "in": "query",
+            "description": "Indicates if the certificate contains a private key.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "certificateHasPrivateKey"
+          },
+          {
+            "name": "certificate.nonce",
+            "in": "query",
+            "description": "Random number generated to indicate Proof of Possession.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "certificateNonce"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSDeleteCertificate": {
+            "$ref": "./examples/DPSDeleteCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/generateVerificationCode": {
+      "post": {
+        "operationId": "DpsCertificate_GenerateVerificationCode",
+        "tags": [
+          "CertificateResponses"
+        ],
+        "description": "Generate verification code for Proof of Possession.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the certificate to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "certificate.name",
+            "in": "query",
+            "description": "Common Name for the certificate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "certificate.rawBytes",
+            "in": "query",
+            "description": "Raw data of certificate.",
+            "required": false,
+            "type": "string",
+            "format": "byte",
+            "x-ms-client-name": "certificateRawBytes"
+          },
+          {
+            "name": "certificate.isVerified",
+            "in": "query",
+            "description": "Indicates if the certificate has been verified by owner of the private key.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "certificateIsVerified"
+          },
+          {
+            "name": "certificate.purpose",
+            "in": "query",
+            "description": "Description mentioning the purpose of the certificate.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "clientAuthentication",
+              "serverAuthentication"
+            ],
+            "x-ms-enum": {
+              "name": "CertificatePurpose",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "clientAuthentication",
+                  "value": "clientAuthentication"
+                },
+                {
+                  "name": "serverAuthentication",
+                  "value": "serverAuthentication"
+                }
+              ]
+            },
+            "x-ms-client-name": "certificatePurpose"
+          },
+          {
+            "name": "certificate.created",
+            "in": "query",
+            "description": "Time the certificate is created.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "certificateCreated"
+          },
+          {
+            "name": "certificate.lastUpdated",
+            "in": "query",
+            "description": "Certificate last updated time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "certificateLastUpdated"
+          },
+          {
+            "name": "certificate.hasPrivateKey",
+            "in": "query",
+            "description": "Indicates if the certificate contains private key.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "certificateHasPrivateKey"
+          },
+          {
+            "name": "certificate.nonce",
+            "in": "query",
+            "description": "Random number generated to indicate Proof of Possession.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "certificateNonce"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VerificationCodeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGenerateVerificationCode": {
+            "$ref": "./examples/DPSGenerateVerificationCode.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/verify": {
+      "post": {
+        "operationId": "DpsCertificate_VerifyCertificate",
+        "tags": [
+          "CertificateResponses"
+        ],
+        "description": "Verifies the certificate's private key possession by providing the leaf cert issued by the verifying pre uploaded certificate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Name of the certificate to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag of the certificate.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "certificate.name",
+            "in": "query",
+            "description": "Common Name for the certificate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "certificate.rawBytes",
+            "in": "query",
+            "description": "Raw data of certificate.",
+            "required": false,
+            "type": "string",
+            "format": "byte",
+            "x-ms-client-name": "certificateRawBytes"
+          },
+          {
+            "name": "certificate.isVerified",
+            "in": "query",
+            "description": "Indicates if the certificate has been verified by owner of the private key.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "certificateIsVerified"
+          },
+          {
+            "name": "certificate.purpose",
+            "in": "query",
+            "description": "Describe the purpose of the certificate.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "clientAuthentication",
+              "serverAuthentication"
+            ],
+            "x-ms-enum": {
+              "name": "CertificatePurpose",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "clientAuthentication",
+                  "value": "clientAuthentication"
+                },
+                {
+                  "name": "serverAuthentication",
+                  "value": "serverAuthentication"
+                }
+              ]
+            },
+            "x-ms-client-name": "certificatePurpose"
+          },
+          {
+            "name": "certificate.created",
+            "in": "query",
+            "description": "Time the certificate is created.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "certificateCreated"
+          },
+          {
+            "name": "certificate.lastUpdated",
+            "in": "query",
+            "description": "Certificate last updated time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "certificateLastUpdated"
+          },
+          {
+            "name": "certificate.hasPrivateKey",
+            "in": "query",
+            "description": "Indicates if the certificate contains private key.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "certificateHasPrivateKey"
+          },
+          {
+            "name": "certificate.nonce",
+            "in": "query",
+            "description": "Random number generated to indicate Proof of Possession.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "certificateNonce"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The name of the certificate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerificationCodeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSVerifyCertificate": {
+            "$ref": "./examples/DPSVerifyCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
+      "post": {
+        "operationId": "IotDpsResource_ListKeysForKeyName",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "List primary and secondary keys for a specific key name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "Logical key name to get key-values for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleAccessRightsDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGetKey": {
+            "$ref": "./examples/DPSGetKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/listkeys": {
+      "post": {
+        "operationId": "IotDpsResource_ListKeys",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "List the primary and secondary keys for a provisioning service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSListKeys": {
+            "$ref": "./examples/DPSListKeys.json"
           }
         },
         "x-ms-pageable": {
@@ -751,44 +1191,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}": {
       "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
         "operationId": "IotDpsResource_GetOperationResult",
         "description": "Gets the status of a long running operation, such as create, update or delete a provisioning service.",
-        "x-ms-examples": {
-          "DPSGetOperationResult": {
-            "$ref": "./examples/DPSGetOperationResult.json"
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Operation id corresponding to long running operation. Use this to poll for the status."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group identifier."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "provisioningServiceName",
             "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
             "required": true,
-            "type": "string",
-            "description": "Name of provisioning service that the operation is running on."
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation id corresponding to long running operation. Use this to poll for the status.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "asyncinfo",
@@ -797,726 +1224,156 @@
             "required": true,
             "type": "string",
             "default": "true"
-          },
-          {
-            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
           "200": {
-            "description": "The status of the long running operation.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AsyncOperationResult"
             }
           },
           "default": {
-            "description": "Default error response.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGetOperationResult": {
+            "$ref": "./examples/DPSGetOperationResult.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/skus": {
-      "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Get the list of valid SKUs for a provisioning service.",
-        "description": "Gets the list of valid SKUs and tiers for a provisioning service.",
-        "operationId": "IotDpsResource_listValidSkus",
-        "x-ms-examples": {
-          "DPSGetValidSku": {
-            "$ref": "./examples/DPSGetValidSku.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of provisioning service."
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of resource group."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the valid SKUs for this provisioning service.",
-            "schema": {
-              "$ref": "#/definitions/IotDpsSkuDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/generateVerificationCode": {
-      "post": {
-        "tags": [
-          "DpsCertificate"
-        ],
-        "operationId": "DpsCertificate_GenerateVerificationCode",
-        "description": "Generate verification code for Proof of Possession.",
-        "x-ms-examples": {
-          "DPSGenerateVerificationCode": {
-            "$ref": "./examples/DPSGenerateVerificationCode.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "certificateName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The mandatory logical name of the certificate, that the provisioning service uses to access."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate."
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "name of resource group."
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of provisioning service."
-          },
-          {
-            "name": "certificate.name",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Common Name for the certificate."
-          },
-          {
-            "name": "certificate.rawBytes",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "byte",
-            "description": "Raw data of certificate."
-          },
-          {
-            "name": "certificate.isVerified",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates if the certificate has been verified by owner of the private key."
-          },
-          {
-            "name": "certificate.purpose",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Description mentioning the purpose of the certificate.",
-            "enum": [
-              "clientAuthentication",
-              "serverAuthentication"
-            ],
-            "x-ms-enum": {
-              "name": "CertificatePurpose",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "certificate.created",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "description": "Certificate creation time."
-          },
-          {
-            "name": "certificate.lastUpdated",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "description": "Certificate last updated time."
-          },
-          {
-            "name": "certificate.hasPrivateKey",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates if the certificate contains private key."
-          },
-          {
-            "name": "certificate.nonce",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Random number generated to indicate Proof of Possession."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Generated verification code for that certificate is returned.",
-            "schema": {
-              "$ref": "#/definitions/VerificationCodeResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/verify": {
-      "post": {
-        "tags": [
-          "DpsCertificate"
-        ],
-        "operationId": "DpsCertificate_VerifyCertificate",
-        "summary": "Verify certificate's private key possession.",
-        "description": "Verifies the certificate's private key possession by providing the leaf cert issued by the verifying pre uploaded certificate.",
-        "x-ms-examples": {
-          "DPSVerifyCertificate": {
-            "$ref": "./examples/DPSVerifyCertificate.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "certificateName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The mandatory logical name of the certificate, that the provisioning service uses to access."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "ETag of the certificate."
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "required": true,
-            "description": "The name of the certificate",
-            "schema": {
-              "$ref": "#/definitions/VerificationCodeRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource group name."
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Provisioning service name."
-          },
-          {
-            "name": "certificate.name",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Common Name for the certificate."
-          },
-          {
-            "name": "certificate.rawBytes",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "byte",
-            "description": "Raw data of certificate."
-          },
-          {
-            "name": "certificate.isVerified",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates if the certificate has been verified by owner of the private key."
-          },
-          {
-            "name": "certificate.purpose",
-            "in": "query",
-            "required": false,
-            "description": "Describe the purpose of the certificate.",
-            "type": "string",
-            "enum": [
-              "clientAuthentication",
-              "serverAuthentication"
-            ],
-            "x-ms-enum": {
-              "name": "CertificatePurpose",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "certificate.created",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "description": "Certificate creation time."
-          },
-          {
-            "name": "certificate.lastUpdated",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "description": "Certificate last updated time."
-          },
-          {
-            "name": "certificate.hasPrivateKey",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates if the certificate contains private key."
-          },
-          {
-            "name": "certificate.nonce",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Random number generated to indicate Proof of Possession."
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CertificateResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkProvisioningServiceNameAvailability": {
-      "post": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "operationId": "IotDpsResource_CheckProvisioningServiceNameAvailability",
-        "x-ms-examples": {
-          "DPSCheckName": {
-            "$ref": "./examples/DPSCheckNameAvailability.json"
-          }
-        },
-        "summary": "Check if a provisioning service name is available.",
-        "description": "Check if a provisioning service name is available. This will validate if the name is syntactically valid and if the name is usable",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "arguments",
-            "in": "body",
-            "required": true,
-            "description": "Set the name parameter in the OperationInputs structure to the name of the provisioning service to check.",
-            "schema": {
-              "$ref": "#/definitions/OperationInputs"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the provisioning service name is available. If the name is not available, the body contains the reason.",
-            "schema": {
-              "$ref": "#/definitions/NameAvailabilityInfo"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/listkeys": {
-      "post": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "operationId": "IotDpsResource_ListKeys",
-        "x-ms-examples": {
-          "DPSListKeys": {
-            "$ref": "./examples/DPSListKeys.json"
-          }
-        },
-        "summary": "Get the security metadata for a provisioning service.",
-        "description": "List the primary and secondary keys for a provisioning service.",
-        "parameters": [
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The provisioning service name to get the shared access keys for."
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "resource group name"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of shared access policies, including keys, that you can use to access the provisioning service endpoints.",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleListResult"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
-      "post": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "operationId": "IotDpsResource_ListKeysForKeyName",
-        "x-ms-examples": {
-          "DPSGetKey": {
-            "$ref": "./examples/DPSGetKey.json"
-          }
-        },
-        "summary": "Get a shared access policy by name from a provisioning service.",
-        "description": "List primary and secondary keys for a specific key name",
-        "parameters": [
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the provisioning service."
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Logical key name to get key-values for."
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "resourceGroupName",
-            "description": "The name of the resource group that contains the provisioning service.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized shared access policy, including keys, that you can use to access one or more provisioning service endpoints.",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "List private link resources",
-        "description": "List private link resources for the given provisioning service",
-        "operationId": "IotDpsResource_ListPrivateLinkResources",
-        "x-ms-examples": {
-          "PrivateLinkResources_List": {
-            "$ref": "./examples/DPSListPrivateLinkResources.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/resourceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains the list of private link resources",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResources"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources/{groupId}": {
-      "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Get the specified private link resource",
-        "description": "Get the specified private link resource for the given provisioning service",
-        "operationId": "IotDpsResource_GetPrivateLinkResources",
-        "x-ms-examples": {
-          "PrivateLinkResources_List": {
-            "$ref": "./examples/DPSGetPrivateLinkResources.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/resourceName"
-          },
-          {
-            "$ref": "#/parameters/groupId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains the specified of private link resource",
-            "schema": {
-              "$ref": "#/definitions/GroupIdInformation"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections": {
       "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "List private endpoint connections",
-        "description": "List private endpoint connection properties",
         "operationId": "IotDpsResource_ListPrivateEndpointConnections",
-        "x-ms-examples": {
-          "PrivateEndpointConnections_List": {
-            "$ref": "./examples/DPSListPrivateEndpointConnections.json"
-          }
-        },
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List private endpoint connection properties",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceName"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of private endpoint connection properties",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionsList"
             }
           },
           "default": {
-            "description": "DefaultErrorResponse",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
-        "deprecated": false
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/DPSListPrivateEndpointConnections.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Get private endpoint connection",
-        "description": "Get private endpoint connection properties",
         "operationId": "IotDpsResource_GetPrivateEndpointConnection",
-        "x-ms-examples": {
-          "PrivateEndpointConnection_Get": {
-            "$ref": "./examples/DPSGetPrivateEndpointConnection.json"
-          }
-        },
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get private endpoint connection properties",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceName"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/privateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The body contains the private endpoint connection properties",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
-            "description": "DefaultErrorResponse",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
-        "deprecated": false
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Get": {
+            "$ref": "./examples/DPSGetPrivateEndpointConnection.json"
+          }
+        }
       },
       "put": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Create or update private endpoint connection",
-        "description": "Create or update the status of a private endpoint connection with the specified name",
         "operationId": "IotDpsResource_CreateOrUpdatePrivateEndpointConnection",
-        "x-ms-examples": {
-          "PrivateEndpointConnection_CreateOrUpdate": {
-            "$ref": "./examples/DPSCreateOrUpdatePrivateEndpointConnection.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Create or update the status of a private endpoint connection with the specified name",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceName"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/privateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "privateEndpointConnection",
@@ -1529,353 +1386,609 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "200": {
-            "description": "This is returned as a response to the status polling request for the update operation.",
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "DefaultErrorResponse",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
-        "deprecated": false
+        "x-ms-examples": {
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/DPSCreateOrUpdatePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "IotDpsResource"
-        ],
-        "summary": "Delete private endpoint connection",
-        "description": "Delete private endpoint connection with the specified name",
         "operationId": "IotDpsResource_DeletePrivateEndpointConnection",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete private endpoint connection with the specified name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
         "x-ms-examples": {
           "PrivateEndpointConnection_Delete": {
             "$ref": "./examples/DPSDeletePrivateEndpointConnection.json"
           }
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources": {
+      "get": {
+        "operationId": "IotDpsResource_ListPrivateLinkResources",
+        "tags": [
+          "GroupIdInformations"
+        ],
+        "description": "List private link resources for the given provisioning service",
         "parameters": [
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceName"
-          },
-          {
-            "$ref": "#/parameters/privateEndpointConnectionName"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
-          "202": {
-            "description": "This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
-              "Location": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
-              "Retry-After": {
-                "description": "Retry After",
-                "type": "string"
-              }
-            }
-          },
           "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateLinkResources"
             }
-          },
-          "204": {
-            "description": "PrivateEndpoint does not exist."
           },
           "default": {
-            "description": "DefaultErrorResponse",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
-        "deprecated": false
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/DPSListPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources/{groupId}": {
+      "get": {
+        "operationId": "IotDpsResource_GetPrivateLinkResources",
+        "tags": [
+          "GroupIdInformations"
+        ],
+        "description": "Get the specified private link resource for the given provisioning service",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "The name of the private link resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupIdInformation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/DPSGetPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/skus": {
+      "get": {
+        "operationId": "IotDpsResource_listValidSkus",
+        "tags": [
+          "ProvisioningServiceDescriptions"
+        ],
+        "description": "Gets the list of valid SKUs and tiers for a provisioning service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "description": "Name of the provisioning service to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IotDpsSkuDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DPSGetValidSku": {
+            "$ref": "./examples/DPSGetValidSku.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },
   "definitions": {
+    "AccessRightsDescription": {
+      "type": "string",
+      "description": "Rights that this key has.",
+      "enum": [
+        "ServiceConfig",
+        "EnrollmentRead",
+        "EnrollmentWrite",
+        "DeviceConnect",
+        "RegistrationStatusRead",
+        "RegistrationStatusWrite"
+      ],
+      "x-ms-enum": {
+        "name": "AccessRightsDescription",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceConfig",
+            "value": "ServiceConfig"
+          },
+          {
+            "name": "EnrollmentRead",
+            "value": "EnrollmentRead"
+          },
+          {
+            "name": "EnrollmentWrite",
+            "value": "EnrollmentWrite"
+          },
+          {
+            "name": "DeviceConnect",
+            "value": "DeviceConnect"
+          },
+          {
+            "name": "RegistrationStatusRead",
+            "value": "RegistrationStatusRead"
+          },
+          {
+            "name": "RegistrationStatusWrite",
+            "value": "RegistrationStatusWrite"
+          }
+        ]
+      }
+    },
+    "AllocationPolicy": {
+      "type": "string",
+      "description": "Allocation policy to be used by this provisioning service.",
+      "enum": [
+        "Hashed",
+        "GeoLatency",
+        "Static"
+      ],
+      "x-ms-enum": {
+        "name": "AllocationPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hashed",
+            "value": "Hashed"
+          },
+          {
+            "name": "GeoLatency",
+            "value": "GeoLatency"
+          },
+          {
+            "name": "Static",
+            "value": "Static"
+          }
+        ]
+      }
+    },
     "AsyncOperationResult": {
       "type": "object",
       "description": "Result of a long running operation.",
       "properties": {
         "status": {
-          "description": "current status of a long running operation.",
-          "type": "string"
+          "type": "string",
+          "description": "current status of a long running operation."
         },
         "error": {
-          "description": "Error message containing code, description and details",
-          "$ref": "#/definitions/ErrorMessage"
-        }
-      }
-    },
-    "ErrorMessage": {
-      "description": "Error response containing message and code.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "standard error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "standard error description",
-          "type": "string"
-        },
-        "details": {
-          "description": "detailed summary of error",
-          "type": "string"
+          "$ref": "#/definitions/ErrorMessage",
+          "description": "Error message containing code, description and details"
         }
       }
     },
     "CertificateListDescription": {
-      "description": "The JSON-serialized array of Certificate objects.",
       "type": "object",
+      "description": "The JSON-serialized array of Certificate objects.",
       "properties": {
         "value": {
-          "description": "The array of Certificate objects.",
           "type": "array",
+          "description": "The array of Certificate objects.",
           "items": {
             "$ref": "#/definitions/CertificateResponse"
           }
         }
       }
     },
-    "CertificateBodyDescription": {
-      "description": "The JSON-serialized X509 Certificate.",
+    "CertificateProperties": {
       "type": "object",
+      "description": "The description of an X509 CA Certificate.",
       "properties": {
-        "certificate": {
-          "description": "Base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
-          "type": "string"
+        "subject": {
+          "type": "string",
+          "description": "The certificate's subject name.",
+          "readOnly": true
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "The certificate's expiration date and time.",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "The certificate's thumbprint.",
+          "readOnly": true
         },
         "isVerified": {
-          "description": "True indicates that the certificate will be created in verified state and proof of possession will not be required.",
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Determines whether certificate has been verified."
+        },
+        "certificate": {
+          "type": "string",
+          "format": "byte",
+          "description": "base-64 representation of X509 certificate .cer file or just .pem file content."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "The certificate's creation date and time.",
+          "readOnly": true
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "The certificate's last update date and time.",
+          "readOnly": true
         }
       }
     },
     "CertificateResponse": {
+      "type": "object",
       "description": "The X509 Certificate.",
-      "type": "object",
       "properties": {
         "properties": {
-          "description": "properties of a certificate",
-          "$ref": "#/definitions/CertificateProperties"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "description": "The name of the certificate.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/CertificateProperties",
+          "description": "properties of a certificate"
         },
         "etag": {
+          "type": "string",
           "description": "The entity tag.",
-          "type": "string",
           "readOnly": true
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "CertificateProperties": {
-      "description": "The description of an X509 CA Certificate.",
-      "type": "object",
-      "properties": {
-        "subject": {
-          "description": "The certificate's subject name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "expiry": {
-          "description": "The certificate's expiration date and time.",
-          "type": "string",
-          "format": "date-time-rfc1123",
-          "readOnly": true
-        },
-        "thumbprint": {
-          "description": "The certificate's thumbprint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "isVerified": {
-          "description": "Determines whether certificate has been verified.",
-          "type": "boolean"
-        },
-        "certificate": {
-          "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
-          "type": "string",
-          "format": "byte"
-        },
-        "created": {
-          "description": "The certificate's creation date and time.",
-          "type": "string",
-          "format": "date-time-rfc1123",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "The certificate's last update date and time.",
-          "type": "string",
-          "format": "date-time-rfc1123",
-          "readOnly": true
-        }
-      }
-    },
-    "IotDpsSkuInfo": {
-      "type": "object",
-      "description": "List of possible provisioning service SKUs.",
-      "properties": {
-        "name": {
-          "description": "Sku name.",
-          "enum": [
-            "S1"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IotDpsSku",
-            "modelAsString": true
-          }
-        },
-        "tier": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Pricing tier name of the provisioning service."
-        },
-        "capacity": {
-          "format": "int64",
-          "type": "integer",
-          "description": "The number of units to provision"
-        }
-      }
-    },
-    "ProvisioningServiceDescription": {
-      "description": "The description of the provisioning service.",
-      "type": "object",
-      "properties": {
-        "etag": {
-          "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Service specific properties for a provisioning service",
-          "$ref": "#/definitions/IotDpsPropertiesDescription"
-        },
-        "sku": {
-          "description": "Sku info for a provisioning Service.",
-          "$ref": "#/definitions/IotDpsSkuInfo"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        },
-        "identity": {
-          "description": "The managed identities for a provisioning service.",
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ],
-      "required": [
-        "sku",
-        "properties"
       ]
     },
-    "IotDpsPropertiesDescription": {
-      "description": "the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
+    "DeviceRegistryNamespaceAuthenticationType": {
+      "type": "string",
+      "description": "Device Registry Namespace MI authentication type: UserAssigned, SystemAssigned.",
+      "enum": [
+        "UserAssigned",
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceRegistryNamespaceAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned authentication type."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned authentication type."
+          }
+        ]
+      }
+    },
+    "DeviceRegistryNamespaceDescription": {
       "type": "object",
+      "description": "Description of the Device Registry namespace that is linked to the provisioning service.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the Device Registry namespace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces"
+              }
+            ]
+          }
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/DeviceRegistryNamespaceAuthenticationType",
+          "description": "Device Registry Namespace MI authentication type: UserAssigned, SystemAssigned."
+        },
+        "selectedUserAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The selected user-assigned identity resource Id associated with Device Registry namespace. This is required when authenticationType is UserAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "resourceId",
+        "authenticationType"
+      ]
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "httpStatusCode": {
+          "type": "string",
+          "description": "The HTTP status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "The error details.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorMessage": {
+      "type": "object",
+      "description": "Error response containing message and code.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "standard error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "standard error description"
+        },
+        "details": {
+          "type": "string",
+          "description": "detailed summary of error"
+        }
+      }
+    },
+    "GroupIdInformation": {
+      "type": "object",
+      "description": "The group information for creating a private endpoint on a provisioning service",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupIdInformationProperties",
+          "description": "The properties for a group information object"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupIdInformationProperties": {
+      "type": "object",
+      "description": "The properties for a group information object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group id"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The required members for a specific group id",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The required DNS zones for a specific group id",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IotDpsPropertiesDescription": {
+      "type": "object",
+      "description": "the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
       "properties": {
         "state": {
-          "description": "Current state of the provisioning service.",
-          "enum": [
-            "Activating",
-            "Active",
-            "Deleting",
-            "Deleted",
-            "ActivationFailed",
-            "DeletionFailed",
-            "Transitioning",
-            "Suspending",
-            "Suspended",
-            "Resuming",
-            "FailingOver",
-            "FailoverFailed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "state",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/State",
+          "description": "Current state of the provisioning service."
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "description": "Whether requests from Public Network are allowed",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "PublicNetworkAccess"
-          }
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether requests from Public Network are allowed"
         },
         "ipFilterRules": {
-          "description": "The IP filter rules.",
           "type": "array",
+          "description": "The IP filter rules.",
           "items": {
             "$ref": "#/definitions/IpFilterRule"
           }
         },
         "privateEndpointConnections": {
-          "description": "Private endpoint connections created on this IotHub",
           "type": "array",
+          "description": "Private endpoint connections created on this IotHub",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
         },
         "provisioningState": {
-          "description": "The ARM provisioning state of the provisioning service.",
-          "type": "string"
+          "type": "string",
+          "description": "The ARM provisioning state of the provisioning service."
         },
         "iotHubs": {
           "type": "array",
@@ -1884,22 +1997,17 @@
             "$ref": "#/definitions/IotHubDefinitionDescription"
           }
         },
+        "deviceRegistryNamespace": {
+          "$ref": "#/definitions/DeviceRegistryNamespaceDescription",
+          "description": "The Device Registry namespace that is linked to the provisioning service."
+        },
         "allocationPolicy": {
-          "enum": [
-            "Hashed",
-            "GeoLatency",
-            "Static"
-          ],
-          "type": "string",
-          "description": "Allocation policy to be used by this provisioning service.",
-          "x-ms-enum": {
-            "name": "AllocationPolicy",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AllocationPolicy",
+          "description": "Allocation policy to be used by this provisioning service."
         },
         "serviceOperationsHostName": {
-          "description": "Service endpoint for provisioning service.",
           "type": "string",
+          "description": "Service endpoint for provisioning service.",
           "readOnly": true
         },
         "deviceProvisioningHostName": {
@@ -1913,10 +2021,10 @@
           "readOnly": true
         },
         "authorizationPolicies": {
-          "description": "List of authorization keys for a provisioning service.",
           "type": "array",
+          "description": "List of authorization keys for a provisioning service.",
           "items": {
-            "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
+            "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleAccessRightsDescription"
           }
         },
         "enableDataResidency": {
@@ -1929,23 +2037,91 @@
         }
       }
     },
+    "IotDpsSku": {
+      "type": "string",
+      "description": "Sku name.",
+      "enum": [
+        "S1"
+      ],
+      "x-ms-enum": {
+        "name": "IotDpsSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "S1",
+            "value": "S1"
+          }
+        ]
+      }
+    },
+    "IotDpsSkuDefinition": {
+      "type": "object",
+      "description": "Available SKUs of tier and units.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/IotDpsSku",
+          "description": "Sku name."
+        }
+      }
+    },
+    "IotDpsSkuDefinitionListResult": {
+      "type": "object",
+      "description": "List of available SKUs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IotDpsSkuDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/IotDpsSkuDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IotDpsSkuInfo": {
+      "type": "object",
+      "description": "List of possible provisioning service SKUs.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/IotDpsSku",
+          "description": "Sku name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Pricing tier name of the provisioning service.",
+          "readOnly": true
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of units to provision"
+        }
+      }
+    },
     "IotHubDefinitionDescription": {
       "type": "object",
       "description": "Description of the IoT hub.",
       "properties": {
         "applyAllocationPolicy": {
-          "description": "flag for applying allocationPolicy or not for a given iot hub.",
-          "type": "boolean"
+          "type": "boolean",
+          "description": "flag for applying allocationPolicy or not for a given iot hub."
         },
         "allocationWeight": {
-          "description": "weight to apply for a given iot h.",
+          "type": "integer",
           "format": "int32",
-          "type": "integer"
+          "description": "weight to apply for a given iot h."
         },
         "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "Host name of the IoT hub."
+          "description": "Host name of the IoT hub.",
+          "readOnly": true
         },
         "connectionString": {
           "type": "string",
@@ -1954,73 +2130,44 @@
         "location": {
           "type": "string",
           "description": "ARM region of the IoT hub."
-        },
-        "authenticationType": {
-          "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.",
-          "enum": [
-            "KeyBased",
-            "UserAssigned",
-            "SystemAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IotHubAuthenticationType",
-            "modelAsString": true
-          }
-        },
-        "selectedUserAssignedIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The selected user-assigned identity resource Id associated with IoT Hub. This is required when authenticationType is UserAssigned.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
         }
       },
       "required": [
+        "connectionString",
         "location"
       ]
     },
+    "IpFilterActionType": {
+      "type": "string",
+      "description": "The desired action for requests captured by this rule.",
+      "enum": [
+        "Accept",
+        "Reject"
+      ],
+      "x-ms-enum": {
+        "name": "IpFilterActionType",
+        "modelAsString": false
+      }
+    },
     "IpFilterRule": {
-      "description": "The IP filter rules for a provisioning Service.",
       "type": "object",
+      "description": "The IP filter rules for a provisioning Service.",
       "properties": {
         "filterName": {
-          "description": "The name of the IP filter rule.",
-          "type": "string"
+          "type": "string",
+          "description": "The name of the IP filter rule."
         },
         "action": {
-          "description": "The desired action for requests captured by this rule.",
-          "enum": [
-            "Accept",
-            "Reject"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IpFilterActionType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/IpFilterActionType",
+          "description": "The desired action for requests captured by this rule."
         },
         "ipMask": {
-          "description": "A string that contains the IP address range in CIDR notation for the rule.",
-          "type": "string"
+          "type": "string",
+          "description": "A string that contains the IP address range in CIDR notation for the rule."
         },
         "target": {
-          "description": "Target for requests captured by this rule.",
-          "enum": [
-            "all",
-            "serviceApi",
-            "deviceApi"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IpFilterTargetType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/IpFilterTargetType",
+          "description": "Target for requests captured by this rule."
         }
       },
       "required": [
@@ -2029,158 +2176,197 @@
         "ipMask"
       ]
     },
-    "PrivateLinkResources": {
-      "description": "The available private link resources for a provisioning service",
+    "IpFilterTargetType": {
+      "type": "string",
+      "description": "Target for requests captured by this rule.",
+      "enum": [
+        "all",
+        "serviceApi",
+        "deviceApi"
+      ],
+      "x-ms-enum": {
+        "name": "IpFilterTargetType",
+        "modelAsString": false
+      }
+    },
+    "NameAvailabilityInfo": {
+      "type": "object",
+      "description": "Description of name availability.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "specifies if a name is available or not"
+        },
+        "reason": {
+          "$ref": "#/definitions/NameUnavailabilityReason",
+          "description": "specifies the reason a name is unavailable"
+        },
+        "message": {
+          "type": "string",
+          "description": "message containing a detailed reason name is unavailable"
+        }
+      }
+    },
+    "NameUnavailabilityReason": {
+      "type": "string",
+      "description": "specifies the reason a name is unavailable",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "NameUnavailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid"
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists"
+          }
+        ]
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Represents an operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation.",
+          "readOnly": true
+        },
+        "display": {
+          "type": "object",
+          "description": "The display information for the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft Devices.",
+              "readOnly": true
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource Type: ProvisioningServices.",
+              "readOnly": true
+            },
+            "operation": {
+              "type": "string",
+              "description": "Name of the operation.",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationInputs": {
+      "type": "object",
+      "description": "Input values for operation results call.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Provisioning Service to check."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "OperationListResult": {
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of available private link resources for a provisioning service",
           "type": "array",
+          "description": "[Placeholder] Description for value property",
           "items": {
-            "$ref": "#/definitions/GroupIdInformation"
-          }
-        }
-      }
-    },
-    "GroupIdInformation": {
-      "description": "The group information for creating a private endpoint on a provisioning service",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
         },
-        "name": {
-          "readOnly": true,
+        "nextLink": {
           "type": "string",
-          "description": "The resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "properties": {
-          "description": "The properties for a group information object",
-          "$ref": "#/definitions/GroupIdInformationProperties"
+          "description": "[Placeholder] Description for nextLink property."
         }
       },
       "required": [
-        "properties"
+        "value"
       ]
     },
-    "GroupIdInformationProperties": {
-      "description": "The properties for a group information object",
+    "PrivateEndpoint": {
       "type": "object",
+      "description": "The private endpoint property of a private endpoint connection",
       "properties": {
-        "groupId": {
+        "id": {
           "type": "string",
-          "description": "The group id"
-        },
-        "requiredMembers": {
-          "description": "The required members for a specific group id",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "description": "The required DNS zones for a specific group id",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "description": "The resource identifier.",
+          "readOnly": true
         }
-      }
-    },
-    "PrivateEndpointConnectionsList": {
-      "description": "The list of private endpoint connections for a provisioning service",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/PrivateEndpointConnection"
       }
     },
     "PrivateEndpointConnection": {
-      "description": "The private endpoint connection of a provisioning service",
-      "x-ms-azure-resource": true,
       "type": "object",
+      "description": "The private endpoint connection of a provisioning service",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "properties": {
-          "description": "The properties of a private endpoint connection",
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The properties of a private endpoint connection"
         }
       },
       "required": [
         "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "PrivateEndpointConnectionProperties": {
-      "description": "The properties of a private endpoint connection",
       "type": "object",
+      "description": "The properties of a private endpoint connection",
       "properties": {
         "privateEndpoint": {
-          "description": "The private endpoint property of a private endpoint connection",
-          "$ref": "#/definitions/PrivateEndpoint"
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint property of a private endpoint connection"
         },
         "privateLinkServiceConnectionState": {
-          "description": "The current state of a private endpoint connection",
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "The current state of a private endpoint connection"
         }
       },
       "required": [
         "privateLinkServiceConnectionState"
       ]
     },
-    "PrivateEndpoint": {
-      "description": "The private endpoint property of a private endpoint connection",
+    "PrivateEndpointConnectionsList": {
+      "type": "array",
+      "description": "Represents a list of private endpoint connections.",
+      "items": {
+        "$ref": "#/definitions/PrivateEndpointConnection"
+      }
+    },
+    "PrivateLinkResources": {
       "type": "object",
+      "description": "The available private link resources for a provisioning service",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
+        "value": {
+          "type": "array",
+          "description": "The list of available private link resources for a provisioning service",
+          "items": {
+            "$ref": "#/definitions/GroupIdInformation"
+          }
         }
       }
     },
     "PrivateLinkServiceConnectionState": {
-      "description": "The current state of a private endpoint connection",
       "type": "object",
+      "description": "The current state of a private endpoint connection",
       "properties": {
         "status": {
-          "description": "The status of a private endpoint connection",
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PrivateLinkServiceConnectionStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
+          "description": "The status of a private endpoint connection"
         },
         "description": {
           "type": "string",
@@ -2196,7 +2382,121 @@
         "description"
       ]
     },
-    "SharedAccessSignatureAuthorizationRule[AccessRightsDescription]": {
+    "PrivateLinkServiceConnectionStatus": {
+      "type": "string",
+      "description": "The status of a private endpoint connection",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected"
+          }
+        ]
+      }
+    },
+    "ProvisioningServiceDescription": {
+      "type": "object",
+      "description": "The description of the provisioning service.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention."
+        },
+        "resourcegroup": {
+          "type": "string",
+          "description": "The resource group of the resource."
+        },
+        "subscriptionid": {
+          "type": "string",
+          "description": "The subscription id of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/IotDpsPropertiesDescription",
+          "description": "Service specific properties for a provisioning service"
+        },
+        "sku": {
+          "$ref": "#/definitions/IotDpsSkuInfo",
+          "description": "Sku info for a provisioning Service."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "required": [
+        "properties",
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProvisioningServiceDescriptionListResult": {
+      "type": "object",
+      "description": "The response of a ProvisioningServiceDescription list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProvisioningServiceDescription items on this page",
+          "items": {
+            "$ref": "#/definitions/ProvisioningServiceDescription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether requests from Public Network are allowed",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
+    "SharedAccessSignatureAuthorizationRuleAccessRightsDescription": {
       "type": "object",
       "description": "Description of the shared access key.",
       "properties": {
@@ -2213,20 +2513,8 @@
           "description": "Secondary SAS key value."
         },
         "rights": {
-          "description": "Rights that this key has.",
-          "enum": [
-            "ServiceConfig",
-            "EnrollmentRead",
-            "EnrollmentWrite",
-            "DeviceConnect",
-            "RegistrationStatusRead",
-            "RegistrationStatusWrite"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AccessRightsDescription",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AccessRightsDescription",
+          "description": "Rights that this key has."
         }
       },
       "required": [
@@ -2234,244 +2522,119 @@
         "rights"
       ]
     },
-    "Resource": {
-      "description": "The common properties of an Azure resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location."
-        },
-        "resourcegroup": {
-          "type": "string",
-          "description": "The resource group of the resource."
-        },
-        "subscriptionid": {
-          "type": "string",
-          "description": "The subscription id of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The resource tags."
-        }
-      },
-      "x-ms-azure-resource": true,
-      "required": [
-        "location"
-      ]
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list provisioning service operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "description": "Provisioning service operations supported by the Microsoft.Devices resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "Provisioning Service REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Service provider: Microsoft Devices."
-            },
-            "resource": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource Type: ProvisioningServices."
-            },
-            "operation": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Name of the operation."
-            }
-          }
-        }
-      }
-    },
-    "ErrorDetails": {
-      "description": "Error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "httpStatusCode": {
-          "description": "The HTTP status code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "The error details.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "SharedAccessSignatureAuthorizationRuleListResult": {
       "type": "object",
       "description": "List of shared access keys.",
       "properties": {
         "value": {
-          "description": "The list of shared access policies.",
           "type": "array",
+          "description": "The SharedAccessSignatureAuthorizationRuleAccessRightsDescription items on this page",
           "items": {
-            "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
+            "$ref": "#/definitions/SharedAccessSignatureAuthorizationRuleAccessRightsDescription"
           }
         },
         "nextLink": {
-          "description": "The next link.",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "IotDpsSkuDefinitionListResult": {
-      "type": "object",
-      "description": "List of available SKUs.",
-      "properties": {
-        "value": {
-          "description": "The list of SKUs",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IotDpsSkuDefinition"
-          }
-        },
-        "nextLink": {
-          "description": "The next link.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "IotDpsSkuDefinition": {
-      "type": "object",
-      "description": "Available SKUs of tier and units.",
-      "properties": {
-        "name": {
-          "description": "Sku name.",
-          "enum": [
-            "S1"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IotDpsSku",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "OperationInputs": {
-      "description": "Input values for operation results call.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the Provisioning Service to check.",
-          "type": "string"
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "name"
+        "value"
       ]
     },
-    "NameAvailabilityInfo": {
-      "type": "object",
-      "description": "Description of name availability.",
-      "properties": {
-        "nameAvailable": {
-          "description": "specifies if a name is available or not",
-          "type": "boolean"
-        },
-        "reason": {
-          "description": "specifies the reason a name is unavailable",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NameUnavailabilityReason",
-            "modelAsString": true
+    "State": {
+      "type": "string",
+      "description": "Current state of the provisioning service.",
+      "enum": [
+        "Activating",
+        "Active",
+        "Deleting",
+        "Deleted",
+        "ActivationFailed",
+        "DeletionFailed",
+        "Transitioning",
+        "Suspending",
+        "Suspended",
+        "Resuming",
+        "FailingOver",
+        "FailoverFailed"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Activating",
+            "value": "Activating"
+          },
+          {
+            "name": "Active",
+            "value": "Active"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted"
+          },
+          {
+            "name": "ActivationFailed",
+            "value": "ActivationFailed"
+          },
+          {
+            "name": "DeletionFailed",
+            "value": "DeletionFailed"
+          },
+          {
+            "name": "Transitioning",
+            "value": "Transitioning"
+          },
+          {
+            "name": "Suspending",
+            "value": "Suspending"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended"
+          },
+          {
+            "name": "Resuming",
+            "value": "Resuming"
+          },
+          {
+            "name": "FailingOver",
+            "value": "FailingOver"
+          },
+          {
+            "name": "FailoverFailed",
+            "value": "FailoverFailed"
           }
-        },
-        "message": {
-          "description": "message containing a detailed reason name is unavailable",
-          "type": "string"
-        }
+        ]
       }
     },
     "TagsResource": {
+      "type": "object",
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a Provisioning Service instance.",
       "properties": {
         "tags": {
+          "type": "object",
+          "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a Provisioning Service instance."
-    },
-    "ProvisioningServiceDescriptionListResult": {
-      "type": "object",
-      "description": "List of provisioning service descriptions.",
-      "properties": {
-        "value": {
-          "description": "List of provisioning service descriptions.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProvisioningServiceDescription"
           }
-        },
-        "nextLink": {
-          "description": "the next link",
+        }
+      }
+    },
+    "VerificationCodeRequest": {
+      "type": "object",
+      "description": "The JSON-serialized leaf certificate",
+      "properties": {
+        "certificate": {
           "type": "string",
-          "readOnly": true
+          "description": "base-64 representation of X509 certificate .cer file or just .pem file content."
         }
       }
     },
@@ -2485,118 +2648,63 @@
           "readOnly": true
         },
         "etag": {
-          "readOnly": true,
           "type": "string",
-          "description": "Request etag."
+          "description": "Request etag.",
+          "readOnly": true
         },
         "id": {
-          "readOnly": true,
           "type": "string",
-          "description": "The resource identifier."
+          "description": "The resource identifier.",
+          "readOnly": true
         },
         "type": {
-          "readOnly": true,
           "type": "string",
-          "description": "The resource type."
+          "description": "The resource type.",
+          "readOnly": true
         },
         "properties": {
-          "type": "object",
-          "properties": {
-            "verificationCode": {
-              "type": "string",
-              "description": "Verification code."
-            },
-            "subject": {
-              "type": "string",
-              "description": "Certificate subject."
-            },
-            "expiry": {
-              "type": "string",
-              "description": "Code expiry."
-            },
-            "thumbprint": {
-              "type": "string",
-              "description": "Certificate thumbprint."
-            },
-            "isVerified": {
-              "type": "boolean",
-              "description": "Indicate if the certificate is verified by owner of private key."
-            },
-            "certificate": {
-              "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
-              "type": "string",
-              "format": "byte"
-            },
-            "created": {
-              "type": "string",
-              "description": "Certificate created time."
-            },
-            "updated": {
-              "type": "string",
-              "description": "Certificate updated time."
-            }
-          }
+          "$ref": "#/definitions/VerificationCodeResponseProperties"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
-    "VerificationCodeRequest": {
+    "VerificationCodeResponseProperties": {
       "type": "object",
-      "description": "The JSON-serialized leaf certificate",
       "properties": {
+        "verificationCode": {
+          "type": "string",
+          "description": "Verification code."
+        },
+        "subject": {
+          "type": "string",
+          "description": "Certificate subject."
+        },
+        "expiry": {
+          "type": "string",
+          "description": "Code expiry."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint."
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "Indicate if the certificate is verified by owner of private key."
+        },
         "certificate": {
-          "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
-          "type": "string"
+          "type": "string",
+          "format": "byte",
+          "description": "base-64 representation of X509 certificate .cer file or just .pem file content."
+        },
+        "created": {
+          "type": "string",
+          "description": "Certificate created time."
+        },
+        "updated": {
+          "type": "string",
+          "description": "Certificate updated time."
         }
       }
     }
   },
-  "parameters": {
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription identifier.",
-      "required": true,
-      "type": "string"
-    },
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The version of the API.",
-      "required": true,
-      "type": "string"
-    },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "description": "The name of the resource group that contains the provisioning service.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "resourceName": {
-      "name": "resourceName",
-      "in": "path",
-      "description": "The name of the provisioning service.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "groupId": {
-      "name": "groupId",
-      "in": "path",
-      "description": "The name of the private link resource",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "privateEndpointConnectionName": {
-      "name": "privateEndpointConnectionName",
-      "in": "path",
-      "description": "The name of the private endpoint connection",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
