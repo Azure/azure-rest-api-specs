@@ -345,6 +345,10 @@ suppressions:
   - code: XmsPageableForListCalls
     from: ComputeRP.json
     reason: VirtualMachineImages_ListWithProperties, which derives from VirtualMachineImages_List operation, returns a fixed list and does not support paging as it is a legacy operation. 
+  - code: PostResponseCodes
+    reason: ScaleOut operation returns both 200 and 202, but 200 will not return schema. This is a common pattern for VMSS action operations. 
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
 ```
 
 ### Tag: package-2025-04-01

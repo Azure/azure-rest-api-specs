@@ -8741,3 +8741,30 @@ model RunCommandResult {
   @identifiers(#[])
   value?: InstanceViewStatus[];
 }
+
+/**
+ * The input for ScaleOut
+ */
+@added(Versions.v2025_04_01)
+model VMScaleSetScaleOutInput {
+  /**
+   * Specifies the number of virtual machines in the scale set.
+   */
+  capacity: int64;
+
+  /**
+   * The input properties for ScaleOut
+   */
+  properties?: VMScaleSetScaleOutInputProperties;
+}
+
+/**
+ * The input properties for ScaleOut
+ */
+@added(Versions.v2025_04_01)
+model VMScaleSetScaleOutInputProperties {
+  /**
+   * The zone in which the scale out is requested for the virtual machine scale set.
+   */
+  zone?: string;
+}
