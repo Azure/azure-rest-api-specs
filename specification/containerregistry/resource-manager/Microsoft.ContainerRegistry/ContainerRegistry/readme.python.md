@@ -29,7 +29,6 @@ batch:
   - tag: package-2022-02-preview-only
   - tag: package-2021-08-preview-only
   - tag: package-2020-11-preview-only
-  - tag: package-2019-06-preview-only
   - tag: package-2019-05-only
   - tag: package-2019-05-preview-only
   - multiapiscript: true
@@ -128,16 +127,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2020-11-preview-only' && $(python)
 namespace: azure.mgmt.containerregistry.v2020_11_01_preview
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2020_11_01_preview
-```
-
-### Tag: package-2019-06-preview-only and python
-
-These settings apply only when `--tag=package-2019-06-preview-only --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-06-preview-only' && $(python)
-namespace: azure.mgmt.containerregistry.v2019_06_01_preview
-output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_06_01_preview
 ```
 
 ### Tag: package-2019-05-only and python
