@@ -79,6 +79,9 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+// Fix casing
+@@clientName(Azure.AI.Projects.SASCredentials, "SasCredential", "csharp");
+
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Azure.AI.Projects.Connections.get, Access.internal);
