@@ -1,6 +1,5 @@
 // @ts-check
 
-import { inspect } from "util";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { toPercent } from "../../shared/src/math.js";
 import { byDate, invert } from "../../shared/src/sort.js";
@@ -146,12 +145,7 @@ export function rateLimitHook(response) {
 
   // const resource = headers["x-ratelimit-resource"];
 
-  const limits = {
-    load: toPercent(load),
-    used,
-    remaining,
-    reset: formatDuration(new Date(), reset),
-  };
-
-  console.log(`[github] rate-limits: ${inspect(limits)}`);
+  console.log(
+    `[rate-limits] load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}, reset: ${formatDuration(new Date(), reset)}`,
+  );
 }
