@@ -1,6 +1,5 @@
 // @ts-check
 
-import { endpoint } from "@octokit/endpoint";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { byDate, invert } from "../../shared/src/sort.js";
 
@@ -103,11 +102,19 @@ export async function getWorkflowRuns(github, context, workflowName, ref) {
 }
 
 /**
- * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
+ * @param {import("@octokit/endpoint").endpoint} endpoint
+ * @returns {(options: import("@octokit/types").RequestParameters & {url: string, method: string}) => void}
  */
-export function logHook(options) {
-  const request = endpoint(options);
-  console.log(`[github] ${request.method.toUpperCase()} ${request.url}`);
+export function createLogHook(endpoint) {
+  /**
+   * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
+   */
+  function logHook(options) {
+    const request = endpoint(options);
+    console.log(`[github] ${request.method.toUpperCase()} ${request.url}`);
+  }
+
+  return logHook;
 }
 
 /**

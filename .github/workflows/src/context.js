@@ -2,7 +2,7 @@
 
 import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
-import { logHook, rateLimitHook } from "./github.js";
+import { createLogHook, rateLimitHook } from "./github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
@@ -31,7 +31,7 @@ export async function extractInputs(github, context, core) {
     core.debug(`context: ${JSON.stringify(context)}`);
   }
 
-  github.hook.before("request", logHook);
+  github.hook.before("request", createLogHook(github.request.endpoint));
   github.hook.after("request", rateLimitHook);
 
   /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
