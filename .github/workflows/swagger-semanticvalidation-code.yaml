@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger SemanticValidation - Analyze Code"
+name: "Swagger SemanticValidation - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   oav:
-    name: "[TEST-IGNORE] Swagger SemanticValidation - Analyze Code"
+    name: "Swagger SemanticValidation - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -20,5 +20,17 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Swagger Semantic Validation
+        id: swagger-semantic-validation
         run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
           npm exec --no -- oav-runner specs
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.swagger-semantic-validation.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.swagger-semantic-validation.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore

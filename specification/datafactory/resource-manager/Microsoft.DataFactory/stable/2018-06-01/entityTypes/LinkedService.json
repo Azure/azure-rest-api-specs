@@ -8663,6 +8663,19 @@
           "x-ms-format": "dfe-string",
           "description": "The ID of Microsoft Fabric Lakehouse artifact. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "LakehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -8689,6 +8702,10 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -8839,6 +8856,19 @@
           "x-ms-format": "dfe-string",
           "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
         },
+        "authenticationType": {
+          "description": "The authentication type to use.",
+          "type": "string",
+          "enum": [
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "WarehouseAuthenticationType",
+            "modelAsString": true
+          }
+        },
         "servicePrincipalId": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -8865,6 +8895,10 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
