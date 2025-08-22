@@ -1,5 +1,3 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
-
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -13,7 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevCenter;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard resource operation. SKU model is defined by ARM."
 interface SkusOperationGroup {
   @doc("Lists the Microsoft.DevCenter SKUs available in a subscription.")
   @autoRoute
@@ -31,7 +29,7 @@ interface SkusOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard resource operation."
 interface OperationStatusesOperationGroup {
   @doc("Gets the current status of an async operation.")
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -56,7 +54,7 @@ interface OperationStatusesOperationGroup {
   }) | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard resource operation."
 interface UsagesOperationGroup {
   @doc("Lists the current usages and limits in this location for the provided subscription.")
   @autoRoute
@@ -70,7 +68,7 @@ interface UsagesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard resource operation."
 interface CheckNameAvailabilityOperationGroup {
   @doc("Check the availability of name for resource.")
   @autoRoute
@@ -83,7 +81,7 @@ interface CheckNameAvailabilityOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard resource operation."
 interface CheckScopedNameAvailabilityOperationGroup {
   @doc("Check the availability of name for resource.")
   @autoRoute
