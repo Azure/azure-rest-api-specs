@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2021-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-01-01'
 input-file:
-- Microsoft.PowerBIdedicated/stable/2021-01-01/openapi.json
+- stable/2021-01-01/openapi.json
 ```
 
 ### Tag: package-2017-10-01
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2017-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-10-01'
 input-file:
-- Microsoft.PowerBIdedicated/stable/2017-10-01/powerbidedicated.json
+- stable/2017-10-01/powerbidedicated.json
 ```
 
 ---
