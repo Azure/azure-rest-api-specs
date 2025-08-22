@@ -40,22 +40,22 @@ input-file:
   - preview/0.1-preview/identityservice.json
 ```
 
-### Tag: package-2022-20-04-preview-ledger
+### Tag: package-2022-04-20-preview-ledger
 
-These settings apply only when `--tag=package-2022-20-04-preview-ledger` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-20-preview-ledger` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-04-20-preview-ledger'
 input-file:
-  - preview/2022-20-04-preview/confidentialledger.json
+  - preview/2022-04-20-preview/confidentialledger.json
 ```
 
-### Tag: package-2022-20-04-preview-identity
+### Tag: package-2022-04-20-preview-identity
 
-These settings apply only when `--tag=package-2022-20-04-preview-identity` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-20-preview-identity` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-04-20-preview-identity'
 input-file:
-  - preview/2022-20-04-preview/identityservice.json
+  - preview/2022-04-20-preview/identityservice.json
 ```
 
 ### Tag: package-2022-05-13-ledger
