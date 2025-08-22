@@ -18,7 +18,8 @@ import {
   formatDifferenceReport,
   formatModifiedValuesReport,
 } from "./summary.js";
-import { compareDocuments, printPathDiff } from "./compare.js";
+import { compareDocuments, printDiff } from "./compare.js";
+import { writeFile } from "fs/promises";
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -51,6 +52,14 @@ function parseArguments() {
     )
     .example("$0 oldSpecPath newSpecPath", "Compare using positional arguments")
     .example(
+      "$0 --oldPath ./old-spec --newPath ./new-spec --reportFile ./custom-report.md",
+      "Compare specs with custom report file",
+    )
+    .example(
+      "$0 --oldPath ./old-spec --newPath ./new-spec --outputFolder ./validation-results",
+      "Compare specs with custom output folder",
+    )
+    .example(
       "$0 add-ignore --path \"paths['/api/resource'].put.parameters[0].required__added\" --outputFolder ./results",
       "Add a path to ignore file",
     )
@@ -67,6 +76,11 @@ function parseArguments() {
     .option("outputFolder", {
       alias: "out",
       describe: "Output folder for analysis results",
+      type: "string",
+    })    
+    .option("reportFile", {
+      alias: "r",
+      describe: "Path to the report file",
       type: "string",
     })
     .option("ignoreDescription", {
@@ -94,9 +108,6 @@ function parseArguments() {
       }
       if (!argv.newPath && positional.length > 1) {
         argv.newPath = positional[1]!.toString();
-      }
-      if (!argv.outputFolder && positional.length > 2) {
-        argv.outputFolder = positional[2]!.toString();
       }
 
       if (!argv.oldPath || !argv.newPath) {
@@ -155,7 +166,7 @@ export async function main() {
 
   // If using add-ignore command, the command handler will exit the process
 
-  const { oldPath, newPath, outputFolder, ignoreDescription, ignorePathCase } = args;
+  const { oldPath, newPath, reportFile, outputFolder, ignoreDescription, ignorePathCase } = args;
   configuration.ignoreDescription = ignoreDescription;
   if (ignorePathCase !== undefined) {
     configuration.ignorePathCase = ignorePathCase;
@@ -207,7 +218,7 @@ export async function main() {
     outputMarkdown += "| Type | Level | Message |\n";
     outputMarkdown += "| ---- | ----- | ------- |\n";
     for (const diff of compareResult) {
-      outputMarkdown += printPathDiff(diff);
+      outputMarkdown += printDiff(diff);
     }
     console.log(outputMarkdown);
   }  
@@ -261,7 +272,10 @@ export async function main() {
       );
     }
   }
-  else {
+  else if (reportFile) {
+    if (compareResult.length > 0) {
+      await writeFile(reportFile, outputMarkdown);
+    }
     if (compareResult.filter((x) => x.level === "error").length > 0) {
       logError("Differences found. Please fix the issues before proceeding.");
       process.exit(1);

@@ -613,7 +613,7 @@
     "/geocode:autocomplete": {
       "get": {
         "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
-        "description": "**Autocomplete API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.\n\n",
+        "description": "\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.\n\n",
         "operationId": "Search_GetGeocodeAutocomplete",
         "produces": [
           "application/geo+json"
@@ -685,7 +685,7 @@
                   {
                     "name": "Address",
                     "value": "Address",
-                    "description": "A specific address location, which can be further categorized into resultTypes such as RoadIntersection and RoadBlock."
+                    "description": "A specific address location, which can be further categorized into resultTypes such as RoadBlock."
                   },
                   {
                     "name": "Place",
@@ -699,7 +699,7 @@
           {
             "name": "resultTypes",
             "in": "query",
-            "description": "A comma separated list of returned entity types.\nWhen type group is set to Address, the supported types are:\n\n- Address\n- RoadBlock\n- RoadIntersection\n\nAll other types belong to the Place type group. These may include entities such as AdminDivision1, Neighborhood, PopulatedPlace, and more.\nDefault value is all possible entity types.",
+            "description": "A comma separated list of returned entity types.\nWhen type group is set to Address, the supported types are:\n\n- Address\n- RoadBlock\n\nAll other types belong to the Place type group. These may include entities such as AdminDivision1, Neighborhood, PopulatedPlace, and more.\nDefault value is all possible entity types.",
             "required": false,
             "type": "array",
             "items": {
@@ -810,7 +810,6 @@
                 "ResidentialStructure",
                 "River",
                 "RoadBlock",
-                "RoadIntersection",
                 "Ruin",
                 "ScientificResearchBase",
                 "Sea",
@@ -1260,10 +1259,6 @@
                   {
                     "name": "RoadBlock",
                     "value": "RoadBlock"
-                  },
-                  {
-                    "name": "RoadIntersection",
-                    "value": "RoadIntersection"
                   },
                   {
                     "name": "Ruin",
@@ -2081,7 +2076,7 @@
               {
                 "name": "Address",
                 "value": "Address",
-                "description": "A specific address location. Supported types are: \n\n- Address\n- RoadIntersection\n- RoadBlock\n\n"
+                "description": "A specific address location. Supported types are: \n\n- Address\n- RoadBlock\n\n"
               },
               {
                 "name": "Place",
@@ -2212,7 +2207,6 @@
         "ResidentialStructure",
         "River",
         "RoadBlock",
-        "RoadIntersection",
         "Ruin",
         "ScientificResearchBase",
         "Sea",
@@ -2662,10 +2656,6 @@
           {
             "name": "RoadBlock",
             "value": "RoadBlock"
-          },
-          {
-            "name": "RoadIntersection",
-            "value": "RoadIntersection"
           },
           {
             "name": "Ruin",
