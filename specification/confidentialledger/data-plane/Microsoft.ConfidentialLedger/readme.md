@@ -64,6 +64,10 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    reason: Existing API, change would potentially be breaking.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    reason: Existing API, change would potentially be breaking.
 ```
 
 ### Tag: package-2022-05-13-ledger
