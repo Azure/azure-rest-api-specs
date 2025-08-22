@@ -1477,7 +1477,7 @@ model OperationDisplay {
 @doc("The current status of an async operation")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 model OperationStatus extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API and valid as per ARM/RPaaS operation status contract."
   @doc("Custom operation properties, populated only for a successful operation.")
   @visibility(Lifecycle.Read)
   properties?: unknown;
