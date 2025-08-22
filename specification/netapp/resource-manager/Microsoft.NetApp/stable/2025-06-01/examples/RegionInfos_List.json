@@ -1,19 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-06-01",
     "location": "eastus",
-    "api-version": "2025-06-01"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/regionInfos/default",
             "name": "eastus/default",
             "type": "Microsoft.NetApp/locations/regionInfos",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/regionInfos/default",
             "properties": {
-              "storageToNetworkProximity": "T2",
               "availabilityZoneMappings": [
                 {
                   "availabilityZone": "1",
@@ -27,11 +26,14 @@
                   "availabilityZone": "3",
                   "isAvailable": true
                 }
-              ]
+              ],
+              "storageToNetworkProximity": "T2"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "NetAppResourceRegionInfos_List",
+  "title": "RegionInfos_List"
 }

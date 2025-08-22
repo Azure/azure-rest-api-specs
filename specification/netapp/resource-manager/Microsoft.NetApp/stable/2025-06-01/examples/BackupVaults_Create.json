@@ -1,20 +1,20 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myRG",
     "accountName": "account1",
-    "backupVaultName": "backupVault1",
     "api-version": "2025-06-01",
+    "backupVaultName": "backupVault1",
     "body": {
       "location": "eastus"
-    }
+    },
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1",
         "name": "account1/backupVault1",
         "type": "Microsoft.NetApp/netAppAccounts/backupVaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1",
         "location": "eastus",
         "properties": {
           "provisioningState": "Succeeded"
@@ -23,14 +23,16 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1",
         "name": "account1/backupVault1",
         "type": "Microsoft.NetApp/netAppAccounts/backupVaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1",
         "location": "eastus",
         "properties": {
           "provisioningState": "Creating"
         }
       }
     }
-  }
+  },
+  "operationId": "BackupVaults_CreateOrUpdate",
+  "title": "BackupVault_CreateOrUpdate"
 }
