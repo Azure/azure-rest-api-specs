@@ -34,16 +34,13 @@ export function add(date, ms) {
 }
 
 /**
- * Format the duration between two dates as hh:mm:ss
- * (always zero-padded).
+ * Formats a duration of milliseconds as hh:mm:ss (always zero-padded).
  *
- * @param {Date} from
- * @param {Date} to
+ * @param {number} ms
  * @returns {string}
  */
-export function formatDuration(from, to) {
-  let diffMs = to.getTime() - from.getTime();
-  let totalSeconds = Math.floor(diffMs / Duration.Second);
+export function formatDuration(ms) {
+  let totalSeconds = Math.floor(ms / Duration.Second);
 
   const hours = Math.floor(totalSeconds / 3600);
   totalSeconds %= 3600;
@@ -54,6 +51,17 @@ export function formatDuration(from, to) {
   const pad = (/** @type {number} */ n) => String(n).padStart(2, "0");
 
   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+}
+
+/**
+ * Returns the number of milliseconds between two dates (always non-negative)
+ *
+ * @param {Date} from
+ * @param {Date} to
+ * @returns {number}
+ */
+export function getDuration(from, to) {
+  return Math.abs(from.getTime() - to.getTime());
 }
 
 /**

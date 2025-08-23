@@ -3,7 +3,7 @@
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { toPercent } from "../../shared/src/math.js";
 import { byDate, invert } from "../../shared/src/sort.js";
-import { Duration, formatDuration, subtract } from "../../shared/src/time.js";
+import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.js";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
@@ -146,6 +146,7 @@ export function rateLimitHook(response) {
   // const resource = headers["x-ratelimit-resource"];
 
   console.log(
-    `[github] load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}, reset: ${formatDuration(new Date(), reset)}`,
+    `[github] load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}` +
+      `, reset: ${formatDuration(getDuration(new Date(), reset))}`,
   );
 }
