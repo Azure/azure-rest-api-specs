@@ -150,7 +150,7 @@ export class FolderStructureRule implements Rule {
 
       if (!serviceRegex.test(serviceFolder)) {
         success = false;
-        errorOutput += `Service folder '${serviceFolder}' does not match regex ${serviceRegex}`;
+        errorOutput += `Service folder '${serviceFolder}' does not match regex ${serviceRegex}. Data-plane folders must use PascalCase without any special characters, including periods, hyphens, or underscores, among others.`;
       }
     }
 
