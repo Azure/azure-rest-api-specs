@@ -108,6 +108,10 @@ model FleetProperties {
   @added(Versions.v2025_07_01_preview)
   mode?: FleetMode;
 
+  @doc("Specifies the display name a Compute Fleet.")
+  @added(Versions.v2025_08_01)
+  displayName?: string;
+
   /**
    * Specifies capacity type for Fleet Regular and Spot priority profiles.
    * capacityType is an immutable property. Once set during Fleet creation, it cannot be updated.
