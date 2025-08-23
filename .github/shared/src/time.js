@@ -2,11 +2,12 @@
 
 /**
  * @typedef {Object} DurationType
- * @property {number} Second - 1 second in milliseconds
- * @property {number} Minute - 1 minute in milliseconds
- * @property {number} Hour   - 1 hour in milliseconds
- * @property {number} Day    - 1 day in milliseconds
- * @property {number} Week   - 1 week in milliseconds
+ * @property {number} Millisecond - 1 millisecond
+ * @property {number} Second -      1 second in milliseconds
+ * @property {number} Minute -      1 minute in milliseconds
+ * @property {number} Hour   -      1 hour in milliseconds
+ * @property {number} Day    -      1 day in milliseconds
+ * @property {number} Week   -      1 week in milliseconds
  */
 
 /**
@@ -16,6 +17,7 @@
  * @type {DurationType}
  */
 export const Duration = Object.freeze({
+  Millisecond: 1,
   Second: 1000,
   Minute: 60 * 1000,
   Hour: 60 * 60 * 1000,

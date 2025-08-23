@@ -7,6 +7,7 @@ import { add, Duration, formatDuration, getDuration, subtract } from "../src/tim
 describe("time", () => {
   // Cover Duration, formatDuration, getDuration, add, and subtract in a single test
   it.each([
+    [Duration.Millisecond, "00:00:00"],
     [Duration.Second, "00:00:01"],
     [Duration.Minute, "00:01:00"],
     [Duration.Hour, "01:00:00"],
