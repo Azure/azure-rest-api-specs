@@ -555,10 +555,81 @@ interface Aliases {
   >;
 
   @doc("Retrieves an alias definition.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/aliases('{aliasName}')")
   @get
   get is SearchAliasOperation<{}, SearchAlias>;
+}
+
+@added(Versions.v2025_08_01_preview)
+interface Agents {
+  @doc("Creates a new agent.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/agents")
+  @post
+  create is SearchOperation<
+    {
+      @doc("The definition of the agent to create.")
+      @body
+      knowledgeAgent: KnowledgeAgent;
+    },
+    KnowledgeAgent & {
+      @doc("A process exit code.")
+      @statusCode
+      code: "201";
+    }
+  >;
+  @doc("Lists all agents available for a search service.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @route("/agents")
+  @get
+  list is SearchOperation<{}, ListKnowledgeAgentsResult>;
+
+  @doc("Creates a new agent or updates an agent if it already exists.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @route("/agents('{agentName}')")
+  @put
+  createOrUpdate is SearchAgentOperation<
+    {
+      ...matchingHeader;
+      ...preferHeader;
+
+      @doc("The definition of the agent to create or update.")
+      @body
+      knowledgeAgent: KnowledgeAgent;
+    },
+    KnowledgeAgent & {
+      @doc("A process exit code.")
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "201";
+    }
+  >;
+
+  @doc("Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/agents('{agentName}')")
+  @delete
+  delete is SearchAgentOperation<
+    {
+      ...matchingHeader;
+    },
+    {
+      @doc("A process exit code.")
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "204" | "404";
+    }
+  >;
+
+  @doc("Retrieves an agent definition.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/agents('{agentName}')")
+  @get
+  get is SearchAgentOperation<{}, KnowledgeAgent>;
 }
 
 @doc("Gets service level statistics for a search service.")

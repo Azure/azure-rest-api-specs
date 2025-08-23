@@ -4273,6 +4273,161 @@ model ListAliasesResult {
   value: SearchAlias[];
 }
 
+// Knowledge Agent models
+@doc("Represents a knowledge agent definition.")
+@added(Versions.v2025_08_01_preview)
+model KnowledgeAgent {
+  @doc("The name of the knowledge agent.")
+  @key("agentName")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Contains configuration options on how to connect to AI models.")
+  @added(Versions.v2025_08_01_preview)
+  models: KnowledgeAgentModel[];
+
+  @doc("Knowledge sources referenced by this agent.")
+  @added(Versions.v2025_08_01_preview)
+  knowledgeSources: KnowledgeSourceReference[];
+
+  @doc("Output configuration for the agent.")
+  @added(Versions.v2025_08_01_preview)
+  outputConfiguration?: KnowledgeAgentOutputConfiguration;
+
+  @doc("Request limits for the agent.")
+  @added(Versions.v2025_08_01_preview)
+  requestLimits?: KnowledgeAgentRequestLimits;
+
+  @doc("Instructions considered by the knowledge agent when developing query plan.")
+  retrievalInstructions?: string;
+
+  @doc("The ETag of the agent.")
+  eTag?: string;
+
+  @doc("A description of an encryption key that you create in Azure Key Vault.")
+  encryptionKey?: SearchResourceEncryptionKey;
+
+  @doc("The description of the agent.")
+  description?: string;
+}
+
+@doc("Reference to a knowledge source.")
+@added(Versions.v2025_08_01_preview)
+model KnowledgeSourceReference {
+  @doc("The name of the knowledge source.")
+  name: string;
+
+  @doc("Indicates whether references should be included for data retrieved from this source.")
+  includeReferences?: boolean;
+
+  @doc("Indicates whether references should include the structured data obtained during retrieval in their payload.")
+  includeReferenceSourceData?: boolean;
+
+  @doc("Indicates that this knowledge source should bypass source selection and always be queried at retrieval time.")
+  alwaysQuerySource?: boolean;
+
+  @doc("The maximum number of queries that can be issued at a time when retrieving data from this source.")
+  maxSubQueries?: int32;
+
+  @doc("The reranker threshold all retrieved documents must meet to be included in the response.")
+  rerankerThreshold?: float32;
+}
+
+@doc("Output configuration for knowledge agent.")
+@added(Versions.v2025_08_01_preview)
+model KnowledgeAgentOutputConfiguration {
+  @doc("The output configuration for the agent")
+  modality?: KnowledgeAgentOutputConfigurationModality;
+
+  @doc("Instructions considered by the knowledge agent when generating answers")
+  answerInstructions?: string;
+
+  @doc("Indicates whether the agent should attempt to issue the most recent chat message as a direct query to the knowledge sources, bypassing the model calls.")
+  attemptFastPath?: boolean;
+
+  @doc("Indicates retrieval results should include activity information.")
+  includeActivity?: boolean;
+}
+
+@doc("The output configuration for the agent")
+@added(Versions.v2025_08_01_preview)
+union KnowledgeAgentOutputConfigurationModality {
+  string,
+
+  @doc("Synthesize an answer for the response payload.")
+  AnswerSynthesis: "answerSynthesis",
+
+  @doc("Return data from the knowledge sources directly without generative alteration.")
+  ExtractiveData: "extractiveData",
+}
+
+@doc("Guardrails to limit how much resources are utilized for a single agent retrieval request.")
+@added(Versions.v2025_08_01_preview)
+model KnowledgeAgentRequestLimits {
+  @doc("The maximum runtime in seconds.")
+  maxRuntimeInSeconds?: int32;
+
+  @doc("Limits the maximum size of the content in the output.")
+  maxOutputSize?: int32;
+}
+
+@doc("Result from listing knowledge agents.")
+@added(Versions.v2025_08_01_preview)
+model ListKnowledgeAgentsResult {
+  @doc("The knowledge agents in the service.")
+  value: KnowledgeAgent[];
+}
+
+@discriminator("kind")
+@doc("Specifies the connection parameters for the model to use for query planning.")
+@added(Versions.v2025_08_01_preview)
+model KnowledgeAgentModel {
+  @doc("The AI model to be used for query planning.")
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  kind: KnowledgeAgentModelKind;
+}
+
+@doc("The AI model to be used for query planning.")
+@added(Versions.v2025_08_01_preview)
+union KnowledgeAgentModelKind {
+  string,
+
+  @doc("Use Azure Open AI models for query planning.")
+  AzureOpenAI: "azureOpenAI",
+}
+
+@doc("Specifies the Azure OpenAI resource used to do query planning.")
+@added(Versions.v2025_08_01_preview)
+model KnowledgeAgentAzureOpenAiModel extends KnowledgeAgentModel {
+  kind: KnowledgeAgentModelKind.AzureOpenAI;
+  
+  @doc("Azure OpenAI parameters.")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  azureOpenAIParameters: AzureOpenAiParameters;
+}
+
+@doc("Specifies the parameters for connecting to the Azure OpenAI resource.")
+@added(Versions.v2025_08_01_preview)
+model AzureOpenAiParameters {
+  @doc("The resource URI of the Azure OpenAI resource.")
+  resourceUri: url;
+
+  @doc("ID of the Azure OpenAI model deployment on the designated resource.")
+  deploymentId: string;
+
+  @doc("API key of the designated Azure OpenAI resource.")
+  apiKey?: string;
+
+  @doc("The user-assigned managed identity used for outbound connections.")
+  authIdentity?: string;
+
+  @doc("The name of the embedding model that is deployed at the provided deploymentId path.")
+  modelName?: AzureOpenAIModelName;
+
+  @doc("The authentication method to use when connecting to the Azure OpenAI resource.")
+  authenticationMethod?: string;
+}
+
 @doc("Response from a get service statistics request. If successful, it includes service level counters and limits.")
 model SearchServiceStatistics {
   @doc("Service level resource counters.")

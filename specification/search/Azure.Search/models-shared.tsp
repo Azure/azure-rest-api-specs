@@ -66,6 +66,12 @@ alias aliasNamePath = {
   aliasName: string;
 };
 
+alias agentNamePath = {
+  @doc("The name of the agent.")
+  @path
+  agentName: string;
+};
+
 alias SearchOperation<
   TParams extends Reflection.Model,
   TResponse,
@@ -145,6 +151,18 @@ alias SearchAliasOperation<
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
   TParams & ClientRequestIdHeader & aliasNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchAgentOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & agentNamePath,
   TResponse,
   Traits,
   TError
