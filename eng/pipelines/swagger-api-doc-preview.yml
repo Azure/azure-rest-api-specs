@@ -21,22 +21,22 @@ jobs:
     variables:
       - template: /eng/pipelines/templates/variables/globals.yml
       - template: /eng/pipelines/templates/variables/image.yml
-
+      
       - name: BranchName
         value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestNumber)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
-
+      
       - name: CurrentBuildUrl
         value: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
 
       - name: StatusName
-        value: "Swagger ApiDocPreview"
+        value: 'Swagger ApiDocPreview'
 
     steps:
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
           State: pending
           TargetUrl: $(CurrentBuildUrl)
-          Description: "Starting docs build"
+          Description: 'Starting docs build'
           Context: $(StatusName)
 
       - checkout: self
@@ -96,7 +96,7 @@ jobs:
           Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
           State: pending
           TargetUrl: $(CurrentBuildUrl)
-          Description: "Waiting for docs build to finish"
+          Description: 'Waiting for docs build to finish'
           Context: $(StatusName)
 
       - task: AzureCLI@2
@@ -113,7 +113,7 @@ jobs:
             $buildStart = Get-Content buildstart.json | ConvertFrom-Json
 
             Write-Host "Waiting for build to finish: https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
-
+            
             # Timeout in 10 minutes to avoid infinite waiting
             $start = Get-Date
             while (((Get-Date) - $start).TotalMinutes -lt 10) {
@@ -202,7 +202,7 @@ jobs:
         displayName: Interpret docs build results
         condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 
-      # Sets check status from docs build using $(CheckUrl), $(CheckState), and
+      # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
       # $(CheckDescription) variables set by api-doc-preview-interpret.js.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
@@ -222,7 +222,7 @@ jobs:
           Description: No files changed require docs build
           Context: $(StatusName)
 
-      # In the event of a failure in this job (not the docs build job), set the
+      # In the event of a failure in this job (not the docs build job), set the 
       # PR status to failed and link to the current build.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
@@ -231,5 +231,5 @@ jobs:
           Condition: failed()
           State: failure
           TargetUrl: $(CurrentBuildUrl)
-          Description: "Orchestration build failed (click to see logs)"
+          Description: 'Orchestration build failed (click to see logs)'
           Context: $(StatusName)
