@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "resourceGroupName": "gigtest",
+    "ruleName": "highcpu",
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricAlerts/highcpu",
+        "type": "Microsoft.Insights/metricAlerts",
+        "name": "highcpu",
+        "location": "global",
+        "kind": "Metric",
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        },
+        "properties": {
+          "description": "This is the description of the metric alert",
+          "severity": 3,
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+          ],
+          "evaluationFrequency": "PT1M",
+          "windowSize": "PT15M",
+          "criteria": {
+            "threshold": 80.50,
+            "operator": "GreaterThan"
+          },
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
