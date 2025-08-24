@@ -405,7 +405,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Container Apps Jobs terminated successfully."
+            "description": "Container Apps Jobs terminated successfully.",
+            "schema": {
+              "$ref": "#/definitions/StopJobExecutionResponse"
+            }
           },
           "202": {
             "description": "OK",
@@ -1185,6 +1188,11 @@
           "description": "Container resource requirements."
         }
       }
+    },
+    "StopJobExecutionResponse": {
+      "description": "Stop Job Execution Response",
+      "type": "string",
+      "readOnly": true
     }
   },
   "securityDefinitions": {
