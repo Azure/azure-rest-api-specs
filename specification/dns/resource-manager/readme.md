@@ -148,6 +148,7 @@ directive:
       - $.definitions.RecordSetProperties.properties.TXTRecords
       - $.definitions.RecordSetProperties.properties.CNAMERecord
       - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetProperties.properties.TargetResource
       - $.definitions.RecordSetUpdateParameters.properties.RecordSet
     suppress:
       - DefinitionsPropertiesNamesCamelCase

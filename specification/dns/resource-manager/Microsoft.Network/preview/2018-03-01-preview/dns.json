@@ -277,6 +277,9 @@
           },
           "Create TXT recordset": {
             "$ref": "./examples/CreateOrUpdateTXTRecordset.json"
+          },
+          "Create Alias recordset": {
+            "$ref": "./examples/CreateOrUpdateAliasRecordset.json"
           }
         }
       },
@@ -1225,6 +1228,15 @@
       },
       "description": "A CAA record."
     },
+    "TargetResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the target resource of alias record."
+        }
+      },
+      "description": "A target resource of an alias record."
+    },
     "RecordSetProperties": {
       "properties": {
         "metadata": {
@@ -1316,6 +1328,11 @@
             "$ref": "#/definitions/CaaRecord"
           },
           "description": "The list of CAA records in the record set."
+        },
+        "targetResource": {
+          "$ref": "#/definitions/TargetResource",
+          "x-ms-client-name": "TargetResource",
+          "description": "The target resource for alias record."
         }
       },
       "description": "Represents the properties of the records in the record set."
