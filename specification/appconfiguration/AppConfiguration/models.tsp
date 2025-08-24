@@ -152,6 +152,9 @@ model Error {
 
 @doc("The result of a list request.")
 model KeyValueListResult {
+  @doc("key")
+  keyval?: string;
+
   @doc("The collection value.")
   @pageItems
   items?: KeyValue[];
