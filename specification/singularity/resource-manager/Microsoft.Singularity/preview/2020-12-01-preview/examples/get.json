@@ -1,0 +1,25 @@
+{
+  "operationId": "SubscriptionQuota_Get",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "ownerSubscriptionId": "myownerSubscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Singularity",
+        "id": "/subscriptions/mysubscriptionId/providers/Microsoft.Singularity/quotas",
+        "name": "myInstanceTypeSeriesQuotaList",
+        "properties": {
+          "id": "The identifier for instance type series quota.",
+          "name": "User friendly description for the instance type series.",
+          "slaTier": "Premium",
+          "limit": 1,
+          "used": 1
+        }
+      }
+    }
+  }
+}
