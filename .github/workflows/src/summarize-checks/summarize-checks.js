@@ -474,6 +474,55 @@ export async function summarizeChecksImpl(
 }
 
 /**
+ * Detect if multiple PRs share the same commit SHA and return a failing protection run.
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} prNumber
+ * @returns {Promise<CheckRunData|undefined>}
+ */
+export async function detectDuplicatePR(github, owner, repo, prNumber) {
+  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
+  const headRef = pr.head.ref;
+  if (!pr.head || !pr.head.repo) {
+    console.warn(
+      `Cannot determine head branch repo for PR #${prNumber}, skipping duplicate PR detection.`,
+    );
+    return undefined;
+  }
+  const headOwner = pr.head.repo.owner.login;
+  const relatedPRs = await github.paginate(github.rest.pulls.list, {
+    owner: owner,
+    repo: repo,
+    head: `${headOwner}:${headRef}`,
+    state: "open",
+    per_page: PER_PAGE_MAX,
+  });
+  /** @type {Array<{ number: number }>} */
+  const otherPRs = relatedPRs.filter(
+    /** @param {{ number: number }} other */
+    (other) => other.number !== prNumber,
+  );
+  if (otherPRs.length > 0) {
+    return {
+      name: "Duplicate PR Protection",
+      status: "completed",
+      conclusion: "failure",
+      checkInfo: {
+        precedence: 0,
+        name: "Duplicate PR Protection",
+        suppressionLabels: [],
+        troubleshootingGuide:
+          "This repo does not currently support submitting two PRs from the same commit SHA. " +
+          `To unblock, choose one PR from this list [${relatedPRs.map((pr) => `#${pr.number}`).join(", ")}] that will stay open. Close all but one of these PRS, then ` +
+          `push an empty commit to source branch ${headRef} to unblock this PR.`,
+      },
+    };
+  }
+  return undefined;
+}
+
+/**
  * Updates or creates a commit status with the given status
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
