@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-07-01-preview",
+    "version": "2021-04-01-preview",
     "title": "MaintenanceManagementClient",
     "description": "Azure Maintenance Management Client"
   },
@@ -1152,14 +1152,14 @@
           }
         },
         "x-ms-examples": {
+          "MaintenanceConfigurations_GetForResource": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource.json"
+          },
           "MaintenanceConfigurations_GetForResource_GuestOSPatchWindows": {
             "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchWindows.json"
           },
           "MaintenanceConfigurations_GetForResource_GuestOSPatchLinux": {
             "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchLinux.json"
-          },
-          "MaintenanceConfigurations_GetForResource": {
-            "$ref": "./examples/MaintenanceConfigurations_GetForResource.json"
           }
         }
       },
@@ -1850,7 +1850,7 @@
           "readOnly": true,
           "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -1976,7 +1976,6 @@
           "description": "Gets or sets maintenanceScope of the configuration",
           "enum": [
             "Host",
-            "Resource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -1991,10 +1990,6 @@
               {
                 "value": "Host",
                 "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
-              },
-              {
-                "value": "Resource",
-                "description": "This maintenance scope controls the default update maintenance of the Azure Resource"
               },
               {
                 "value": "OSImage",
@@ -2048,7 +2043,7 @@
         },
         "installPatches": {
           "$ref": "#/definitions/InputPatchConfiguration",
-          "description": "The input parameters to be passed to the patch run operation. This property only applies to Guest (InGuestPatch) scope."
+          "description": "The input parameters to be passed to the patch run operation."
         }
       }
     },
@@ -2058,27 +2053,26 @@
         "rebootSetting": {
           "type": "string",
           "enum": [
-            "IfRequired",
-            "Never",
-            "Always"
+            "NeverReboot",
+            "RebootIfRequired",
+            "AlwaysReboot"
           ],
           "x-ms-enum": {
             "name": "RebootOptions",
             "modelAsString": true
           },
-          "default": "IfRequired",
-          "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed. This property only applies to Guest (InGuestPatch) scope."
+          "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed."
         },
         "windowsParameters": {
           "$ref": "#/definitions/InputWindowsParameters",
-          "description": "Input parameters specific to patching a Windows machine. For Linux machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope."
+          "description": "Input parameters specific to patching a Windows machine. For Linux machines, do not pass this property."
         },
         "linuxParameters": {
           "$ref": "#/definitions/InputLinuxParameters",
-          "description": "Input parameters specific to patching Linux machine. For Windows machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope."
+          "description": "Input parameters specific to patching Linux machine. For Windows machines, do not pass this property."
         },
         "tasks": {
-          "description": "[Not supported] Tasks information for the Software update configuration.",
+          "description": "Tasks information for the Software update configuration.",
           "$ref": "#/definitions/softwareUpdateConfigurationTasks",
           "x-ms-client-flatten": true
         }
@@ -2114,7 +2108,7 @@
           "description": "Exclude patches which need reboot"
         }
       },
-      "description": "Input properties for patching a Windows machine. This property only applies to Guest (InGuestPatch) scope."
+      "description": "Input properties for patching a Windows machine."
     },
     "InputLinuxParameters": {
       "type": "object",
@@ -2141,53 +2135,51 @@
           "description": "Classification category of patches to be patched. Allowed values are 'Critical', 'Security', and 'Other'."
         }
       },
-      "description": "Input properties for patching a Linux machine. This property only applies to Guest (InGuestPatch) scope."
+      "description": "Input properties for patching a Linux machine."
     },
     "softwareUpdateConfigurationTasks": {
       "type": "object",
-      "description": "[Not supported] Task properties of the software update configuration.",
+      "description": "Task properties of the software update configuration.",
       "properties": {
         "preTasks": {
           "type": "array",
-          "description": "[Not supported] List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}]",
+          "description": "List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}]",
           "items": {
             "$ref": "#/definitions/taskProperties",
             "x-ms-client-flatten": true
-          },
-          "x-ms-identifiers": []
+          }
         },
         "postTasks": {
           "type": "array",
-          "description": "[Not supported] List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}]",
+          "description": "List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}]",
           "items": {
             "$ref": "#/definitions/taskProperties",
             "x-ms-client-flatten": true
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
     "taskProperties": {
       "type": "object",
-      "description": "[Not supported] Task properties of the software update configuration.",
+      "description": "Task properties of the software update configuration.",
       "properties": {
         "parameters": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "[Not supported] Gets or sets the parameters of the task."
+          "description": "Gets or sets the parameters of the task."
         },
         "source": {
           "type": "string",
-          "description": "[Not supported] Gets or sets the name of the runbook."
+          "description": "Gets or sets the name of the runbook."
         },
         "taskScope": {
           "enum": [
             "Global",
             "Resource"
           ],
-          "description": "[Not supported] Global Task execute once when schedule trigger. Resource task execute for each VM.",
+          "description": "Global Task execute once when schedule trigger. Resource task execute for each VM.",
           "type": "string",
           "x-ms-enum": {
             "name": "TaskScope",
@@ -2270,10 +2262,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -2335,8 +2324,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Update"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2348,7 +2336,6 @@
           "description": "The impact area",
           "enum": [
             "Host",
-            "Resource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -2363,10 +2350,6 @@
               {
                 "value": "Host",
                 "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
-              },
-              {
-                "value": "Resource",
-                "description": "This maintenance scope controls the default update maintenance of the Azure Resource"
               },
               {
                 "value": "OSImage",
