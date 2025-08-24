@@ -16,8 +16,7 @@ alias ProductsListingTraits = LanguageParameter &
   ProductsOdataFilterParameter &
   OdataExpandParameter &
   ProductsOdataOrderByParameter &
-  SearchParameter &
-  PricingAudienceListingParameter;
+  SearchParameter;
 
 // Product get traits
 alias ProductsGetTraits = SingleMarketParameter &
@@ -27,8 +26,7 @@ alias ProductsGetTraits = SingleMarketParameter &
   HideKeysParameter &
   ExcludeSkuDetailsParameter &
   IncludeFutureAvailabilitiesParameter &
-  SkuIdParameter &
-  PricingAudienceSingleParameter;
+  SkuIdParameter;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Routes for listing and single are almost the same, requires custom operation"
 @doc("Retrieves a single product by ID from the marketplace catalog")
@@ -49,20 +47,20 @@ op getProduct(
 @get
 @list
 @route("/products")
-op listProducts(...ApiVersionParameter, ...ProductsListingTraits): {
-  ...DiscoveryApiPagedResult<ProductSummary>;
-} | DiscoveryErrorPayload;
+op listProducts(
+  ...ApiVersionParameter,
+  ...ProductsListingTraits,
+): DiscoveryApiPagedProductsResult | DiscoveryErrorPayload;
 
 // Skus listing traits
 alias SkusListingTraits = ServiceParameter &
   ServiceFamilyParameter &
   LanguageParameter &
-  LocationsListingParameter &
-  ListingMarketParameter &
+  SkusLocationsListingParameter &
+  ListingSkusMarketParameter &
   OdataSelectParameter &
   SkusOdataFilterParameter &
-  SkusOdataOrderByParameter &
-  PricingAudienceListingParameter;
+  SkusOdataOrderByParameter;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Retaining custom implementation for operation parity"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Returning custom paginated object"
@@ -70,6 +68,7 @@ alias SkusListingTraits = ServiceParameter &
 @list
 @get
 @route("/skus")
-op listSkus(...ApiVersionParameter, ...SkusListingTraits): {
-  ...DiscoveryApiPagedResult<SkuSummary>;
-} | DiscoveryErrorPayload;
+op listSkus(
+  ...ApiVersionParameter,
+  ...SkusListingTraits,
+): DiscoveryApiPagedSkusResult | DiscoveryErrorPayload;

@@ -579,7 +579,7 @@ model PlanSummary {
   @doc("Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
   planType: string;
 
-  @doc("The order the plan is displayed in the 'Plans' table")
+  @doc("The order the plan is displayed in the 'Plans' table. Note that lower numbers appear first.")
   displayRank?: string;
 
   @doc("Indication that the plan is accessible to restricted audience only")
@@ -762,7 +762,7 @@ model Availability {
   @doc("Applicable billing meter information")
   meter?: Meter;
 
-  @doc("Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `Direct-Commercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `Partner-Commercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
+  @doc("Specifies the distribution channel and customer segment for product pricing and availability")
   pricingAudience: string;
 
   @doc("List of applicable terms")
@@ -847,14 +847,21 @@ model Image {
 @doc("Marketplace Catalog API")
 model SingleMarketParameter {
   @query
-  @doc("Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market: string;
 }
 
 @doc("Marketplace Catalog API")
 model ListingMarketParameter {
   @query
-  @doc("Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  market?: string;
+}
+
+@doc("Marketplace Catalog API")
+model ListingSkusMarketParameter {
+  @query
+  @doc("Market value. The response will include only skus that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market?: string;
 }
 
@@ -868,14 +875,21 @@ model LanguageParameter {
 @doc("Parameters for location filtering")
 model LocationsSingleParameter {
   @query
-  @doc("Return plans/availabilities for selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
+  @doc("Return plans/availabilities for selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/")
   locations?: string[];
 }
 
 @doc("Parameters for location filtering")
 model LocationsListingParameter {
   @query
-  @doc("Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
+  @doc("Return products available in selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/")
+  locations?: string[];
+}
+
+@doc("Parameters for location filtering")
+model SkusLocationsListingParameter {
+  @query
+  @doc("Return skus available in selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/")
   locations?: string[];
 }
 
@@ -910,22 +924,8 @@ model IncludeFutureAvailabilitiesParameter {
 @doc("SKU ID filter parameter")
 model SkuIdParameter {
   @query
-  @doc("Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID")
+  @doc("Apply SKU Id filter to the result")
   skuId?: string;
-}
-
-@doc("Pricing audience single query parameter")
-model PricingAudienceSingleParameter {
-  @query
-  @doc("Specifies the channel for which product plan availabilities will be returned. Can be 'Direct-Commercial' or 'Partner-Commercial'. By default pricingAudience is set to 'Direct-Commercial'")
-  pricingAudience?: string;
-}
-
-@doc("Pricing audience listing query parameter")
-model PricingAudienceListingParameter {
-  @query
-  @doc("Optional filter for product channel availability (see description of pricingAudience field). Can be 'Direct-Commercial' or 'Partner-Commercial'. By default pricingAudience is set to 'Direct-Commercial'")
-  pricingAudience?: string;
 }
 
 @doc("Service parameter")
@@ -988,16 +988,27 @@ model ProductsOdataOrderByParameter {
 @doc("Skus OData Expand parameter")
 model SkusOdataOrderByParameter {
   @query
-  @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy")
+  @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=productDisplayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy")
   $orderBy?: string;
 }
 
 // PageResult
-@doc("Paged response result from discovery API")
-model DiscoveryApiPagedResult<T> {
+@doc("Paged productSummary response result from discovery API")
+model DiscoveryApiPagedProductsResult {
   @pageItems
   @doc("List of items in the current page")
-  value: T[];
+  value: ProductSummary[];
+
+  @nextLink
+  @doc("Link to the next page of results, if available")
+  nextLink?: string;
+}
+
+@doc("Paged skuSummary response result from discovery API")
+model DiscoveryApiPagedSkusResult {
+  @pageItems
+  @doc("List of items in the current page")
+  value: SkuSummary[];
 
   @nextLink
   @doc("Link to the next page of results, if available")
@@ -1005,7 +1016,7 @@ model DiscoveryApiPagedResult<T> {
 }
 
 // API key def
-@doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview)")
+@doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://aka.ms/DiscoveryAPI/keys")
 model DiscoveryApiKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;
 
 // Error payload definitions

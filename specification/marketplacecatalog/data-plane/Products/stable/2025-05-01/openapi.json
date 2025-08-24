@@ -28,7 +28,7 @@
   "securityDefinitions": {
     "DiscoveryApiKey": {
       "type": "apiKey",
-      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview)",
+      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://aka.ms/DiscoveryAPI/keys",
       "name": "X-API-Key",
       "in": "header"
     }
@@ -69,33 +69,13 @@
           },
           {
             "$ref": "#/parameters/SearchParameter"
-          },
-          {
-            "$ref": "#/parameters/PricingAudienceListingParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged response result from discovery API",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of items in the current page",
-                  "items": {
-                    "$ref": "#/definitions/ProductSummary"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "description": "Link to the next page of results, if available"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/DiscoveryApiPagedProductsResult"
             }
           },
           "default": {
@@ -153,9 +133,6 @@
           },
           {
             "$ref": "#/parameters/SkuIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PricingAudienceSingleParameter"
           }
         ],
         "responses": {
@@ -200,10 +177,10 @@
             "$ref": "#/parameters/LanguageParameter"
           },
           {
-            "$ref": "#/parameters/LocationsListingParameter"
+            "$ref": "#/parameters/SkusLocationsListingParameter"
           },
           {
-            "$ref": "#/parameters/ListingMarketParameter"
+            "$ref": "#/parameters/ListingSkusMarketParameter"
           },
           {
             "$ref": "#/parameters/OdataSelectParameter"
@@ -213,33 +190,13 @@
           },
           {
             "$ref": "#/parameters/SkusOdataOrderByParameter"
-          },
-          {
-            "$ref": "#/parameters/PricingAudienceListingParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged response result from discovery API",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of items in the current page",
-                  "items": {
-                    "$ref": "#/definitions/SkuSummary"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "description": "Link to the next page of results, if available"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/DiscoveryApiPagedSkusResult"
             }
           },
           "default": {
@@ -317,7 +274,7 @@
         },
         "pricingAudience": {
           "type": "string",
-          "description": "Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `Direct-Commercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `Partner-Commercial` - Available through Cloud Solution Provider partner channel for reseller distribution"
+          "description": "Specifies the distribution channel and customer segment for product pricing and availability"
         },
         "terms": {
           "type": "array",
@@ -388,6 +345,46 @@
           "description": "Retail price with currency"
         }
       }
+    },
+    "DiscoveryApiPagedProductsResult": {
+      "type": "object",
+      "description": "Paged productSummary response result from discovery API",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of items in the current page",
+          "items": {
+            "$ref": "#/definitions/ProductSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DiscoveryApiPagedSkusResult": {
+      "type": "object",
+      "description": "Paged skuSummary response result from discovery API",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of items in the current page",
+          "items": {
+            "$ref": "#/definitions/SkuSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results, if available"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DiscoveryErrorDetails": {
       "type": "object",
@@ -870,7 +867,7 @@
         },
         "displayRank": {
           "type": "string",
-          "description": "The order the plan is displayed in the 'Plans' table"
+          "description": "The order the plan is displayed in the 'Plans' table. Note that lower numbers appear first."
         },
         "isPrivate": {
           "type": "boolean",
@@ -1699,7 +1696,15 @@
     "ListingMarketParameter": {
       "name": "market",
       "in": "query",
-      "description": "Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "description": "Product market value. The response will include only products that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListingSkusMarketParameter": {
+      "name": "market",
+      "in": "query",
+      "description": "Market value. The response will include only skus that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1707,7 +1712,7 @@
     "LocationsListingParameter": {
       "name": "locations",
       "in": "query",
-      "description": "Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+      "description": "Return products available in selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/",
       "required": false,
       "type": "array",
       "items": {
@@ -1719,7 +1724,7 @@
     "LocationsSingleParameter": {
       "name": "locations",
       "in": "query",
-      "description": "Return plans/availabilities for selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/",
+      "description": "Return plans/availabilities for selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/",
       "required": false,
       "type": "array",
       "items": {
@@ -1740,22 +1745,6 @@
       "name": "$select",
       "in": "query",
       "description": "Selects which properties to include in the results. Example: $select=displayName",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PricingAudienceListingParameter": {
-      "name": "pricingAudience",
-      "in": "query",
-      "description": "Optional filter for product channel availability (see description of pricingAudience field). Can be 'Direct-Commercial' or 'Partner-Commercial'. By default pricingAudience is set to 'Direct-Commercial'",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PricingAudienceSingleParameter": {
-      "name": "pricingAudience",
-      "in": "query",
-      "description": "Specifies the channel for which product plan availabilities will be returned. Can be 'Direct-Commercial' or 'Partner-Commercial'. By default pricingAudience is set to 'Direct-Commercial'",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1803,7 +1792,7 @@
     "SingleMarketParameter": {
       "name": "market",
       "in": "query",
-      "description": "Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "description": "Product market value. The response will include plans/availabilities that can be sold in the specified market. Based on ISO-3166 format. Possible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -1811,9 +1800,21 @@
     "SkuIdParameter": {
       "name": "skuId",
       "in": "query",
-      "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID",
+      "description": "Apply SKU Id filter to the result",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkusLocationsListingParameter": {
+      "name": "locations",
+      "in": "query",
+      "description": "Return skus available in selected location. For more information on Azure datacenter regions see: https://azure.microsoft.com/regions/",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "SkusOdataFilterParameter": {
@@ -1827,7 +1828,7 @@
     "SkusOdataOrderByParameter": {
       "name": "$orderBy",
       "in": "query",
-      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=displayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy",
+      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=productDisplayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
