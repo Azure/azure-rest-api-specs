@@ -2300,25 +2300,33 @@
         "informationalMessagesCount"
       ]
     },
+    "MongoDatabaseResourcePatch": {
+      "type": "object",
+      "description": "Mongo Database resource patch object",
+      "properties": {
+        "databaseDisplayName": {
+          "type": "string",
+          "description": "The database name."
+        },
+        "sizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "The size of the database in MB."
+        },
+        "numberOfCollections": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of collections in the database."
+        }
+      }
+    },
     "MongoDatabaseResourcePatchProperties": {
       "type": "object",
-      "description": "Mongo Database resource patch properties",
+      "description": "Mongo Database properties",
       "properties": {
         "properties": {
-          "databaseDisplayName": {
-            "type": "string",
-            "description": "The database name."
-          },
-          "sizeInMb": {
-            "type": "number",
-            "format": "float",
-            "description": "The size of the database in MB."
-          },
-          "numberOfCollections": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of collections in the database."
-          }
+          "$ref": "#/definitions/MongoDatabaseResourcePatch",
+          "description": "The database resource patch properties."
         }
       }
     },
@@ -2968,45 +2976,53 @@
         "informationalMessagesCount"
       ]
     },
-    "MongoCollectionResourcePatchProperties": {
+    "MongoCollectionResourcePatch": {
       "type": "object",
       "description": "Properties for PATCH operation on MongoCollection resource.",
       "properties": {
+        "collectionDisplayName": {
+          "type": "string",
+          "description": "The collection name."
+        },
+        "sizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "The size of the collection in MB."
+        },
+        "numberOfIndexes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of indexes in the collection."
+        },
+        "numberOfDocuments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents in the collection."
+        },
+        "averageDocumentSizeInBytes": {
+          "type": "number",
+          "format": "float",
+          "description": "The average document size in bytes."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The collection creation timestamp."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The collection last modified timestamp."
+        }
+      }
+    },
+    "MongoCollectionResourcePatchProperties": {
+      "type": "object",
+      "description": "Mongo Collection properties",
+      "properties": {
         "properties": {
-          "collectionDisplayName": {
-            "type": "string",
-            "description": "The collection name."
-          },
-          "sizeInMb": {
-            "type": "number",
-            "format": "float",
-            "description": "The size of the collection in MB."
-          },
-          "numberOfIndexes": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of indexes in the collection."
-          },
-          "numberOfDocuments": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of documents in the collection."
-          },
-          "averageDocumentSizeInBytes": {
-            "type": "number",
-            "format": "float",
-            "description": "The average document size in bytes."
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The collection creation timestamp."
-          },
-          "lastModifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The collection last modified timestamp."
-          }
+          "$ref": "#/definitions/MongoCollectionResourcePatch",
+          "description": "The collection resource patch properties."
         }
       }
     }

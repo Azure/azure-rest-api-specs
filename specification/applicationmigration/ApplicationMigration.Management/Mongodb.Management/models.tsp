@@ -640,9 +640,19 @@ model MongoDatabaseProperties is AzureResourceProperties {
 }
 
 /**
- * Mongo Database resource patch properties
+ * Mongo Database properties
  */
 model MongoDatabaseResourcePatchProperties {
+  /**
+   * The database resource patch properties.
+   */
+  properties?: MongoDatabaseResourcePatch;
+}
+
+/**
+ * Mongo Database resource patch properties
+ */
+model MongoDatabaseResourcePatch {
   /**
    * The database name.
    */
@@ -738,9 +748,19 @@ model MongoCollectionProperties is AzureResourceProperties {
 }
 
 /**
- * Properties for PATCH operation on MongoCollection resource.
+ * Mongo Collection properties
  */
 model MongoCollectionResourcePatchProperties {
+  /**
+   * The collection resource patch properties.
+   */
+  properties?: MongoCollectionResourcePatch;
+}
+
+/**
+ * Properties for PATCH operation on MongoCollection resource.
+ */
+model MongoCollectionResourcePatch {
   /** The collection name. */
   collectionDisplayName?: string;
 
