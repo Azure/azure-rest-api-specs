@@ -1,6 +1,6 @@
 @doc("Faked shared model")
 model FakedSharedModel {
-  @doc("The tag.")
+  @doc("The tag. test")
   tag: string;
 
   @doc("The created date.")
