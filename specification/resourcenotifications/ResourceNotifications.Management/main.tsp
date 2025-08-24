@@ -24,6 +24,9 @@ enum Versions {
   v2025_08_01_preview: "2025-08-01-preview",
 }
 
+/** The Azure Resource Manager Operations interface. */
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /*
  * Common enums and unions
  */
@@ -205,26 +208,12 @@ model CreateNotificationSessionResponse {
   properties?: CreateNotificationSessionResponseProperties;
 }
 
-/** Error response model. */
-model ErrorResponse {
-  /** Error details. */
-  error?: ErrorDetail;
-}
-
-/** Error detail model. */
-model ErrorDetail {
-  /** Error code. */
-  code?: string;
-
-  /** Error message. */
-  message?: string;
-}
-
 /*
  * Microsoft.ResourceNotifications RP interface definitions
  */
 
 /** Operations for notification sessions at tenant scope with location. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations, not standard ARM resource operations"
 interface NotificationsSessions {
   /** Create a notification session. */
   @put
@@ -241,32 +230,7 @@ interface NotificationsSessions {
     notificationSessionName: string,
     
     ...ApiVersionParameter,
-  ):
-    | {
-        @statusCode statusCode: 200;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | {
-        @statusCode statusCode: 202;
-        @header("Location") location?: string;
-        @header("Retry-After") retryAfter?: int32;
-      }
-    | {
-        @statusCode statusCode: 400;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 401;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 429;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 500;
-        @body body: ErrorResponse;
-      };
+  ): CreateNotificationSessionResponse;
   
   /** Get session details. */
   @post
@@ -287,27 +251,7 @@ interface NotificationsSessions {
     body: GetSessionDetailsRequest,
     
     ...ApiVersionParameter,
-  ): 
-    | {
-        @statusCode statusCode: 200;
-        @body body: GetSessionDetailsResponse;
-      }
-    | {
-        @statusCode statusCode: 400;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 401;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 429;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 500;
-        @body body: ErrorResponse;
-      };
+  ): GetSessionDetailsResponse;
   
   /** Close the session. */
   @post
@@ -324,28 +268,8 @@ interface NotificationsSessions {
     notificationSessionId: string,
     
     ...ApiVersionParameter,
-  ): 
-    | {
-        @statusCode statusCode: 200;
-        @body body: CloseSessionResponse;
-      }
-    | {
-        @statusCode statusCode: 400;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 401;
-        @body body: ErrorResponse;
-      }
-    | {
-        @statusCode statusCode: 500;
-        @body body: ErrorResponse;
-      };
+  ): CloseSessionResponse;
 }
-
-/*
- * Get Session Details specific response models
- */
 
 /** Request model for get session details operation. */
 model GetSessionDetailsRequest {

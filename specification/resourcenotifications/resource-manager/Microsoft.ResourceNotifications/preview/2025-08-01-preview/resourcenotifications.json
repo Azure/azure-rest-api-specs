@@ -38,7 +38,11 @@
       }
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
       "put": {
@@ -70,42 +74,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CreateNotificationSessionResponse"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "429": {
-            "description": "Client error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -146,24 +114,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CloseSessionResponse"
-            }
-          },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -214,36 +164,43 @@
             "schema": {
               "$ref": "#/definitions/GetSessionDetailsResponse"
             }
-          },
-          "400": {
-            "description": "The server could not understand the request due to invalid syntax.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "Access is unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "429": {
-            "description": "Client error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
           "Get session details with connection information": {
             "$ref": "./examples/NotificationsSessions_GetSessionDetails.json"
           }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceNotifications/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -297,30 +254,6 @@
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the notification session."
-        }
-      }
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "Error detail model.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response model.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDetail",
-          "description": "Error details."
         }
       }
     },
