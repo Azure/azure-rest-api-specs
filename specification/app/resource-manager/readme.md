@@ -351,6 +351,8 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 ``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.App/preview/2023-08-01-preview/AppResiliency.json
+  - Microsoft.App/preview/2023-08-01-preview/AppSpaceResources.json
+  - Microsoft.App/preview/2023-08-01-preview/AppSpaces.json
   - Microsoft.App/preview/2023-08-01-preview/AuthConfigs.json
   - Microsoft.App/preview/2023-08-01-preview/AvailableWorkloadProfiles.json
   - Microsoft.App/preview/2023-08-01-preview/BillingMeters.json
