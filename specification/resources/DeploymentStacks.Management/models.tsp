@@ -235,6 +235,14 @@ model DeploymentStackProperties extends DeploymentStacksError {
   parameters?: Record<DeploymentParameter>;
 
   /**
+   * The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of the object are determined by the deployment template."
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  extensionConfigs?: Record<DeploymentExtensionConfig>;
+
+  /**
    * The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both.
    */
   parametersLink?: DeploymentStacksParametersLink;
@@ -309,6 +317,13 @@ model DeploymentStackProperties extends DeploymentStacksError {
    */
   @visibility(Lifecycle.Read)
   resources?: ManagedResourceReference[];
+
+  /**
+   * The extensions used during deployment. Contains extension data for all extensible resources managed by the stack.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  deploymentExtensions?: DeploymentExtension[];
 
   /**
    * The resourceId of the deployment resource created by the deployment stack.
@@ -490,6 +505,27 @@ model ResourceReference {
    */
   @visibility(Lifecycle.Read)
   id?: string;
+
+  /**
+   * The extension the resource was deployed with.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  extension?: DeploymentExtension;
+
+  /**
+   * The resource type.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The API version the resource was deployed with
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  apiVersion?: string;
 }
 
 /**
@@ -580,6 +616,62 @@ model DeploymentStackTemplateDefinition {
 }
 
 /**
+ * The value or how to get a value for an extension config property.
+ */
+model DeploymentExtensionConfigItem {
+  /**
+   * The type of the value.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The value of the config item. The type is determined by the extension config schema.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The expected type is determined by the extension config schema."
+  value?: unknown;
+
+  /**
+   * The key vault reference of the config item.
+   */
+  keyVaultReference?: KeyVaultParameterReference;
+}
+
+/**
+ * The configuration of a single deployment extension. The keys of this object are extension aliases as defined in the deployment template.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys are dynamic and based on the deployment template."
+@added(Versions.v2025_07_01)
+model DeploymentExtensionConfig is Record<DeploymentExtensionConfigItem>;
+
+/**
+ * Details about the usage of a deployment extension.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentExtension {
+  /**
+   * The extension name.
+   */
+  name: string;
+
+  /**
+   * The extension version.
+   */
+  version: string;
+
+  /**
+   * The configuration ID of the extension usage. It uniquely identifies a target the extension deploys to.
+   */
+  configId?: string;
+
+  /**
+   * The configuration used for deployment. The keys of this object are config property names.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of this object are determined by the extension's config schema which is server-side data."
+  config?: Record<DeploymentExtensionConfig>;
+}
+
+/**
  * The Deployment stack validation result.
  */
 @added(Versions.v2024_03_01)
@@ -638,4 +730,10 @@ model DeploymentStackValidateProperties {
    * The array of resources that were validated.
    */
   validatedResources?: ResourceReference[];
+
+  /**
+   * The deployment extensions.
+   */
+  @added(Versions.v2025_07_01)
+  deploymentExtensions?: DeploymentExtension[];
 }
