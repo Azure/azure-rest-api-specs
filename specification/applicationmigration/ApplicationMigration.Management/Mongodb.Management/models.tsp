@@ -516,9 +516,19 @@ model MongoInstanceProperties is AzureResourceProperties {
 }
 
 /**
+ * Mongo Instance properties
+ */
+model MongoInstanceResourcePatchProperties {
+  /**
+   * The instance resource patch properties.
+   */
+  properties?: MongoInstanceResourcePatch;
+}
+
+/**
  * Mongo Instance resource patch properties
  */
-model MongoInstanceResourcePatchProperties is AzureResourceProperties {
+model MongoInstanceResourcePatch is AzureResourceProperties {
   /**
    * The Server IP/host name.
    */

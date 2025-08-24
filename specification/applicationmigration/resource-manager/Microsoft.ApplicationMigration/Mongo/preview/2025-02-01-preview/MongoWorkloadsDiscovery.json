@@ -2566,9 +2566,9 @@
         "informationalMessagesCount"
       ]
     },
-    "MongoInstanceResourcePatchProperties": {
+    "MongoInstanceResourcePatch": {
       "type": "object",
-      "description": "Mongo Instance resource patch properties",
+      "description": "Mongo Instance resource patch object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2587,6 +2587,16 @@
         "version": {
           "type": "string",
           "description": "The mongo server version."
+        }
+      }
+    },
+    "MongoInstanceResourcePatchProperties": {
+      "type": "object",
+      "description": "Mongo Instance properties",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoInstanceResourcePatch",
+          "description": "Mongo Instance resource patch properties object."
         }
       }
     },
