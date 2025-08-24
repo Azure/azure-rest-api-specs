@@ -1305,7 +1305,7 @@
         "registry": {
           "type": "string",
           "readOnly": true,
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
@@ -1371,7 +1371,7 @@
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "RegistryLoginServer"
         },
         "imageName": {
@@ -1437,7 +1437,7 @@
         "registry": {
           "type": "string",
           "readOnly": true,
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
@@ -1528,6 +1528,7 @@
     },
     "TagOrderBy": {
       "type": "string",
+      "description" : "Sort options for ordering tags in a collection.",
       "enum": [
         "none",
         "timedesc",
@@ -1556,6 +1557,7 @@
       "x-accessibility": "public"
     },
     "ArtifactArchitecture": {
+      "description" : "The artifact platform's architecture.",
       "type": "string",
       "enum": [
         "386",
@@ -1579,67 +1581,67 @@
           {
             "value": "386",
             "name": "I386",
-            "description": ""
+            "description": "i386"
           },
           {
             "value": "amd64",
             "name": "Amd64",
-            "description": ""
+            "description": "AMD64"
           },
           {
             "value": "arm",
             "name": "Arm",
-            "description": ""
+            "description": "ARM"
           },
           {
             "value": "arm64",
             "name": "Arm64",
-            "description": ""
+            "description": "ARM64"
           },
           {
             "value": "mips",
             "name": "Mips",
-            "description": ""
+            "description": "MIPS"
           },
           {
             "value": "mipsle",
             "name": "MipsLe",
-            "description": ""
+            "description": "MIPSLE"
           },
           {
             "value": "mips64",
             "name": "Mips64",
-            "description": ""
+            "description": "MIPS64"
           },
           {
             "value": "mips64le",
             "name": "Mips64Le",
-            "description": ""
+            "description": "MIPS64LE"
           },
           {
             "value": "ppc64",
             "name": "Ppc64",
-            "description": ""
+            "description": "PPC64"
           },
           {
             "value": "ppc64le",
             "name": "Ppc64Le",
-            "description": ""
+            "description": "PPC64LE"
           },
           {
             "value": "riscv64",
             "name": "RiscV64",
-            "description": ""
+            "description": "RISCv64"
           },
           {
             "value": "s390x",
             "name": "S390x",
-            "description": ""
+            "description": "s390x"
           },
           {
             "value": "wasm",
             "name": "Wasm",
-            "description": ""
+            "description": "Wasm"
           }
         ]
       },
@@ -1746,7 +1748,7 @@
       "properties": {
         "registry": {
           "type": "string",
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "x-ms-client-name": "registryLoginServer"
         },
         "imageName": {
@@ -1826,7 +1828,7 @@
       "description": "Manifest attributes details",
       "properties": {
         "registry": {
-          "description": "Registry login server.",
+          "description": "Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.",
           "readOnly": true,
           "type": "string",
           "x-ms-client-name": "registryLoginServer"
@@ -2298,7 +2300,7 @@
         "digest"
       ],
       "x-ms-client-name": "ArtifactManifestPlatform",
-      "description": "Manifest attributes details",
+      "description": "The artifact's platform, consisting of operating system and architecture.",
       "properties": {
         "digest": {
           "type": "string",
