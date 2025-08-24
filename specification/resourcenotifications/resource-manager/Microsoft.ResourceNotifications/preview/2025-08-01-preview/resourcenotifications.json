@@ -45,7 +45,7 @@
   ],
   "paths": {
     "/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
-      "put": {
+      "post": {
         "operationId": "NotificationsSessions_CreateNotificationSession",
         "description": "Create a notification session.",
         "parameters": [
@@ -237,23 +237,8 @@
           "description": "The location of the resource."
         },
         "properties": {
-          "$ref": "#/definitions/CreateNotificationSessionResponseProperties",
+          "$ref": "#/definitions/NotificationSessionProperties",
           "description": "The properties of the notification session."
-        }
-      }
-    },
-    "CreateNotificationSessionResponseProperties": {
-      "type": "object",
-      "description": "Properties for create notification session response.",
-      "properties": {
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the session was created."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the notification session."
         }
       }
     },
@@ -317,41 +302,8 @@
           "description": "Description of the notification session."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/NotificationSessionStatus",
           "description": "The status of the notification session.",
-          "default": "Active",
-          "enum": [
-            "Active",
-            "Paused",
-            "Completed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "NotificationSessionStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Active",
-                "value": "Active",
-                "description": "The session is active and processing notifications"
-              },
-              {
-                "name": "Paused",
-                "value": "Paused",
-                "description": "The session is paused and not processing notifications"
-              },
-              {
-                "name": "Completed",
-                "value": "Completed",
-                "description": "The session has completed"
-              },
-              {
-                "name": "Failed",
-                "value": "Failed",
-                "description": "The session has failed"
-              }
-            ]
-          },
           "x-ms-mutability": [
             "read",
             "update",

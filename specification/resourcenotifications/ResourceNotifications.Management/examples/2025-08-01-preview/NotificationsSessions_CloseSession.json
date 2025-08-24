@@ -18,8 +18,8 @@
       "headers": {},
       "body": {
         "error": {
-          "code": "SessionNotFound",
-          "message": "The specified notification session 'abc123def456ghi789' was not found or has already been closed."
+          "code": "InvalidSessionId",
+          "message": "The notification session ID 'abc123def456ghi789' is invalid. Session IDs must be valid alphanumeric identifiers."
         }
       }
     },
@@ -28,7 +28,16 @@
       "body": {
         "error": {
           "code": "Unauthorized",
-          "message": "Access denied. You do not have permission to close this notification session."
+          "message": "The request is not authorized. Please ensure you have valid authentication credentials and proper permissions to close notification sessions."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An internal server error occurred while closing the notification session. Please try again later. If the problem persists, contact support."
         }
       }
     }

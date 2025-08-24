@@ -28,7 +28,25 @@
       "body": {
         "error": {
           "code": "InvalidDuration",
-          "message": "The durationInMinutes value must be between 5 and 1440 minutes."
+          "message": "The specified duration '60' minutes is invalid. Duration must be between 5 and 1440 minutes (24 hours)."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "The request is not authorized. Please ensure you have valid authentication credentials and proper permissions to access session details."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An internal server error occurred while retrieving session details. Please try again later."
         }
       }
     }

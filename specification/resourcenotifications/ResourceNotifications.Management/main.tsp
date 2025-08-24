@@ -10,7 +10,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service(#{ title: "Microsoft.ResourceNotifications Management Service" })
+@service(#{
+  title: "Microsoft.ResourceNotifications Management Service",
+})
 @doc("Microsoft.ResourceNotifications Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.ResourceNotifications;
@@ -113,7 +115,7 @@ model NotificationSessionProperties {
 
   /** The status of the notification session. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  status?: NotificationSessionStatus = NotificationSessionStatus.Active;
+  status?: NotificationSessionStatus;
 
   /** The maximum duration for the session in minutes. */
   maxDurationMinutes?: int32;
@@ -178,16 +180,43 @@ model NotificationSessionResource is ProxyResource<NotificationSessionProperties
 }
 
 /*
- * Create Notification Session specific response models
+ * Request/Response Models for Operations
  */
 
-/** Properties for create notification session response. */
-model CreateNotificationSessionResponseProperties {
-  /** The time when the session was created. */
-  creationTime?: utcDateTime;
+/** Request model for get session details operation. */
+model GetSessionDetailsRequest {
+  /** Duration in minutes for which the session details are valid. */
+  durationInMinutes: int32;
+}
 
-  /** The provisioning state of the notification session. */
-  provisioningState?: string;
+/** Connection details for a notification session. */
+model NotificationSessionConnectionDetails {
+  /** Connection string for the session. */
+  connectionString?: string;
+
+  /** Endpoint to connect to. */
+  endpoint?: string;
+}
+
+/** Response model for get session details operation. */
+model GetSessionDetailsResponse {
+  /** The resource ID. */
+  id?: string;
+
+  /** Encoded notification session containing signed session id with content. */
+  encodedNotificationSession?: string;
+
+  /** Connection details for the session. */
+  connectionDetails?: NotificationSessionConnectionDetails;
+
+  /** Timestamp until which the session is valid. */
+  validUntil?: utcDateTime;
+}
+
+/** Response model for close session operation. */
+model CloseSessionResponse {
+  /** Success message for the close session operation. */
+  message?: string;
 }
 
 /** Response model for create notification session operation. */
@@ -205,18 +234,18 @@ model CreateNotificationSessionResponse {
   location?: string;
 
   /** The properties of the notification session. */
-  properties?: CreateNotificationSessionResponseProperties;
+  properties?: NotificationSessionProperties;
 }
 
 /*
- * Microsoft.ResourceNotifications RP interface definitions
+ * Operations Interface - Custom Operations
  */
 
-/** Operations for notification sessions at tenant scope with location. */
+/** Operations for notification sessions. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations, not standard ARM resource operations"
 interface NotificationsSessions {
   /** Create a notification session. */
-  @put
+  @post
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}")
   createNotificationSession(
     @doc("The location name.")
@@ -269,44 +298,4 @@ interface NotificationsSessions {
     
     ...ApiVersionParameter,
   ): CloseSessionResponse;
-}
-
-/** Request model for get session details operation. */
-model GetSessionDetailsRequest {
-  /** Duration in minutes for which the session details are valid. */
-  durationInMinutes: int32;
-}
-
-/** Connection details for a notification session. */
-model NotificationSessionConnectionDetails {
-  /** Connection string for the session. */
-  connectionString?: string;
-
-  /** Endpoint to connect to. */
-  endpoint?: string;
-}
-
-/** Response model for get session details operation. */
-model GetSessionDetailsResponse {
-  /** The resource ID. */
-  id?: string;
-
-  /** Encoded notification session containing signed session id with content. */
-  encodedNotificationSession?: string;
-
-  /** Connection details for the session. */
-  connectionDetails?: NotificationSessionConnectionDetails;
-
-  /** Timestamp until which the session is valid. */
-  validUntil?: utcDateTime;
-}
-
-/*
- * Close Session specific response models
- */
-
-/** Response model for close session operation. */
-model CloseSessionResponse {
-  /** Success message for the close session operation. */
-  message?: string;
 }
