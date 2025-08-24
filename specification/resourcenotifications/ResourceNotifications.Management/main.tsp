@@ -10,9 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service(#{
-  title: "Microsoft.ResourceNotifications Management Service",
-})
+@service(#{ title: "Microsoft.ResourceNotifications Management Service" })
 @doc("Microsoft.ResourceNotifications Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.ResourceNotifications;
@@ -169,7 +167,8 @@ model NotificationSessionStatistics {
 
 /** A notification session resource that operates within a specific location at tenant scope. */
 @parentResource(TenantLocationResource)
-model NotificationSessionResource is ProxyResource<NotificationSessionProperties> {
+model NotificationSessionResource
+  is ProxyResource<NotificationSessionProperties> {
   /** Name of the notification session. */
   @key
   @path
@@ -252,15 +251,15 @@ interface NotificationsSessions {
     @path
     @pattern("^[a-z0-9]+$")
     location: string,
-    
+
     @doc("Name of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
     notificationSessionName: string,
-    
+
     ...ApiVersionParameter,
   ): CreateNotificationSessionResponse;
-  
+
   /** Get session details. */
   @post
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails")
@@ -269,7 +268,7 @@ interface NotificationsSessions {
     @path
     @pattern("^[a-z0-9]+$")
     location: string,
-    
+
     @doc("ID of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
@@ -278,10 +277,10 @@ interface NotificationsSessions {
     @doc("Request body containing session details parameters.")
     @body
     body: GetSessionDetailsRequest,
-    
+
     ...ApiVersionParameter,
   ): GetSessionDetailsResponse;
-  
+
   /** Close the session. */
   @post
   @route("/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession")
@@ -290,12 +289,12 @@ interface NotificationsSessions {
     @path
     @pattern("^[a-z0-9]+$")
     location: string,
-    
+
     @doc("ID of the notification session.")
     @path
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$")
     notificationSessionId: string,
-    
+
     ...ApiVersionParameter,
   ): CloseSessionResponse;
 }
