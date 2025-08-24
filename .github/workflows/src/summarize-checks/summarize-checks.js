@@ -363,9 +363,7 @@ export async function summarizeChecksImpl(
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
   const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
-  core.summary.addRaw("PR: ");
-  core.summary.addLink(prUrl, prUrl);
-  core.summary.write();
+  core.summary.addRaw("PR: ").addLink(prUrl, prUrl).write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
@@ -448,8 +446,7 @@ export async function summarizeChecksImpl(
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
-  core.summary.addRaw(`\n${commentBody}\n\n`);
-  core.summary.write();
+  core.summary.addRaw(`\n${commentBody}\n\n`).write();
 
   // this will remain commented until we're comfortable with the change.
   await commentOrUpdate(
