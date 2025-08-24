@@ -33,7 +33,7 @@ model WidgetSuite {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The ID of the widget's manufacturer.")
+  @doc("The ID of the widget's manufacturers.")
   manufacturerId: string;
 
   @doc("The faked shared model.")
@@ -44,7 +44,7 @@ interface Widgets {
   @doc("Fetch a Widget by name.")
   getWidget is ResourceRead<WidgetSuite>;
 
-  @doc("Gets status of a Widget operation.")
+  @doc("Gets status of a Widget operations.")
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
 
   @doc("Creates or updates a Widget asynchronously.")
