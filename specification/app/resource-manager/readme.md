@@ -71,6 +71,7 @@ input-file:
   - Microsoft.App/stable/2025-07-01/SourceControls.json
   - Microsoft.App/stable/2025-07-01/Subscriptions.json
   - Microsoft.App/stable/2025-07-01/Usages.json
+  - Microsoft.App/stable/2025-07-01/LogicAppsExtension.json
 ```
 
 ### Tag: package-2025-01-01
