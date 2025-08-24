@@ -32,7 +32,7 @@ interface TilerStaticImages {
       @body
       body: ImageRequest;
     },
-    TileResponse
+    ImageResponse
   >;
   /**
    * Fetch an existing image export by ID
