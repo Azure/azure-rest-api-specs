@@ -1,0 +1,294 @@
+{
+  "title": "FleetManagedNamespaces_CreateOrUpdate",
+  "operationId": "FleetManagedNamespaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgfleets",
+    "fleetName": "fleet1",
+    "managedNamespaceName": "namespace1",
+    "resource": {
+      "properties": {
+        "managedNamespaceProperties": {
+          "labels": {
+            "key1": "value1"
+          },
+          "annotations": {
+            "key2": "value2"
+          },
+          "defaultResourceQuota": {
+            "cpuRequest": "1",
+            "cpuLimit": "1",
+            "memoryRequest": "10Gi",
+            "memoryLimit": "32Gi"
+          },
+          "defaultNetworkPolicy": {
+            "ingress": "AllowSameNamespace",
+            "egress": "AllowAll"
+          }
+        },
+        "adoptionPolicy": "Never",
+        "deletePolicy": "Keep",
+        "propagationPolicy": {
+          "type": "Placement",
+          "placementProfile": {
+            "defaultClusterResourcePlacement": {
+              "policy": {
+                "placementType": "PickAll",
+                "affinity": {
+                  "clusterAffinity": {
+                    "requiredDuringSchedulingIgnoredDuringExecution": {
+                      "clusterSelectorTerms": [
+                        {
+                          "labelSelector": {
+                            "matchLabels": {
+                              "gpu": "true"
+                            },
+                            "matchExpressions": [
+                              {
+                                "key": "region",
+                                "operator": "In",
+                                "values": [
+                                  "production1",
+                                  "production2"
+                                ]
+                              }
+                            ]
+                          },
+                          "propertySelector": {
+                            "matchExpressions": [
+                              {
+                                "name": "zones",
+                                "operator": "Gt",
+                                "values": [
+                                  "1"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "tolerations": [
+                  {
+                    "key": "AIWorkloadOnly",
+                    "operator": "Exists",
+                    "value": "true",
+                    "effect": "NoSchedule"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "status": {
+          "lastOperationError": {}
+        }
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "managedNamespaceProperties": {
+            "labels": {
+              "key1": "value1"
+            },
+            "annotations": {
+              "key2": "value2"
+            },
+            "defaultResourceQuota": {
+              "cpuRequest": "1",
+              "cpuLimit": "1",
+              "memoryRequest": "10Gi",
+              "memoryLimit": "32Gi"
+            },
+            "defaultNetworkPolicy": {
+              "ingress": "AllowSameNamespace",
+              "egress": "AllowAll"
+            }
+          },
+          "adoptionPolicy": "Never",
+          "deletePolicy": "Keep",
+          "propagationPolicy": {
+            "type": "Placement",
+            "placementProfile": {
+              "defaultClusterResourcePlacement": {
+                "policy": {
+                  "placementType": "PickAll",
+                  "affinity": {
+                    "clusterAffinity": {
+                      "requiredDuringSchedulingIgnoredDuringExecution": {
+                        "clusterSelectorTerms": [
+                          {
+                            "labelSelector": {
+                              "matchLabels": {
+                                "gpu": "true"
+                              },
+                              "matchExpressions": [
+                                {
+                                  "key": "region",
+                                  "operator": "In",
+                                  "values": [
+                                    "production1",
+                                    "production2"
+                                  ]
+                                }
+                              ]
+                            },
+                            "propertySelector": {
+                              "matchExpressions": [
+                                {
+                                  "name": "zones",
+                                  "operator": "Gt",
+                                  "values": [
+                                    "1"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "tolerations": [
+                    {
+                      "key": "AIWorkloadOnly",
+                      "operator": "Exists",
+                      "value": "true",
+                      "effect": "NoSchedule"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "status": {
+            "lastOperationError": {}
+          }
+        },
+        "eTag": "\"EtagValue\"",
+        "location": "eastus",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1/managedNamespaces/namespace1",
+        "name": "namespace1",
+        "type": "Microsoft.ContainerService/fleets/managedNamespaces",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2025-08-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-08-23T05:40:40.657Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-08-01"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedNamespaceProperties": {
+            "labels": {
+              "key1": "value1"
+            },
+            "annotations": {
+              "key2": "value2"
+            },
+            "defaultResourceQuota": {
+              "cpuRequest": "1",
+              "cpuLimit": "1",
+              "memoryRequest": "10Gi",
+              "memoryLimit": "32Gi"
+            },
+            "defaultNetworkPolicy": {
+              "ingress": "AllowSameNamespace",
+              "egress": "AllowAll"
+            }
+          },
+          "adoptionPolicy": "Never",
+          "deletePolicy": "Keep",
+          "propagationPolicy": {
+            "type": "Placement",
+            "placementProfile": {
+              "defaultClusterResourcePlacement": {
+                "policy": {
+                  "placementType": "PickAll",
+                  "affinity": {
+                    "clusterAffinity": {
+                      "requiredDuringSchedulingIgnoredDuringExecution": {
+                        "clusterSelectorTerms": [
+                          {
+                            "labelSelector": {
+                              "matchLabels": {
+                                "gpu": "true"
+                              },
+                              "matchExpressions": [
+                                {
+                                  "key": "region",
+                                  "operator": "In",
+                                  "values": [
+                                    "production1",
+                                    "production2"
+                                  ]
+                                }
+                              ]
+                            },
+                            "propertySelector": {
+                              "matchExpressions": [
+                                {
+                                  "name": "zones",
+                                  "operator": "Gt",
+                                  "values": [
+                                    "1"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "tolerations": [
+                    {
+                      "key": "AIWorkloadOnly",
+                      "operator": "Exists",
+                      "value": "true",
+                      "effect": "NoSchedule"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "status": {
+            "lastOperationError": {}
+          }
+        },
+        "eTag": "\"EtagValue\"",
+        "tags": {
+          "tag1": "tagValue1"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1/managedNamespaces/namespace1",
+        "name": "namespace1",
+        "type": "Microsoft.ContainerService/fleets/managedNamespaces",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2025-08-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-08-23T05:40:40.657Z"
+        }
+      }
+    }
+  }
+}
