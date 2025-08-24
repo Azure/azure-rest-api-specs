@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-07-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-07-preview'
 input-file:
-  - Microsoft.Network/preview/2023-07-01-preview/dns.json
+  - preview/2023-07-01-preview/dns.json
 directive:
   - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
@@ -103,7 +103,7 @@ These settings apply only when `--tag=package-2018-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-05'
 input-file:
-  - Microsoft.Network/stable/2018-05-01/dns.json
+  - stable/2018-05-01/dns.json
 directive:
   - where:
       - $.paths
@@ -131,7 +131,7 @@ These settings apply only when `--tag=package-2018-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-03-preview'
 input-file:
-- Microsoft.Network/preview/2018-03-01-preview/dns.json
+- preview/2018-03-01-preview/dns.json
 directive:
   - where:
       - $.paths
@@ -159,7 +159,7 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- Microsoft.Network/stable/2017-10-01/dns.json
+- stable/2017-10-01/dns.json
 directive:
   - where:
       - $.paths
@@ -187,7 +187,7 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- Microsoft.Network/stable/2017-09-01/dns.json
+- stable/2017-09-01/dns.json
 ```
 
 ### Tag: package-2016-04
@@ -196,7 +196,7 @@ These settings apply only when `--tag=package-2016-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-04'
 input-file:
-- Microsoft.Network/stable/2016-04-01/dns.json
+- stable/2016-04-01/dns.json
 ```
 
 ### Tag: package-2015-05-preview
@@ -205,7 +205,7 @@ These settings apply only when `--tag=package-2015-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- Microsoft.Network/preview/2015-05-04-preview/dns.json
+- preview/2015-05-04-preview/dns.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -214,7 +214,7 @@ These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.Network/stable/2016-04-01/dns.json
+- stable/2016-04-01/dns.json
 ```
 
 # Code Generation
