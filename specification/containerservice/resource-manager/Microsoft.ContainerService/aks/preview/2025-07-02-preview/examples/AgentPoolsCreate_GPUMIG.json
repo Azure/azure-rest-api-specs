@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "api-version": "2025-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "agentpool1",
+    "parameters": {
+      "properties": {
+        "orchestratorVersion": "",
+        "count": 3,
+        "vmSize": "Standard_ND96asr_v4",
+        "osType": "Linux",
+        "gpuInstanceProfile": "MIG2g",
+        "kubeletConfig": {
+          "cpuManagerPolicy": "static",
+          "cpuCfsQuota": true,
+          "cpuCfsQuotaPeriod": "200ms",
+          "imageGcHighThreshold": 90,
+          "imageGcLowThreshold": 70,
+          "topologyManagerPolicy": "best-effort",
+          "allowedUnsafeSysctls": [
+            "kernel.msg*",
+            "net.core.somaxconn"
+          ],
+          "failSwapOn": false
+        },
+        "linuxOSConfig": {
+          "sysctls": {
+            "netCoreWmemDefault": 12345,
+            "netIpv4TcpTwReuse": true,
+            "netIpv4IpLocalPortRange": "20000 60000",
+            "kernelThreadsMax": 99999
+          },
+          "transparentHugePageEnabled": "always",
+          "transparentHugePageDefrag": "madvise",
+          "swapFileSizeMB": 1500
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "agentpool1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "orchestratorVersion": "1.17.8",
+          "currentOrchestratorVersion": "1.17.8",
+          "count": 3,
+          "vmSize": "Standard_ND96asr_v4",
+          "maxPods": 110,
+          "osType": "Linux",
+          "gpuInstanceProfile": "MIG2g",
+          "kubeletConfig": {
+            "cpuManagerPolicy": "static",
+            "cpuCfsQuota": true,
+            "cpuCfsQuotaPeriod": "200ms",
+            "imageGcHighThreshold": 90,
+            "imageGcLowThreshold": 70,
+            "topologyManagerPolicy": "best-effort",
+            "allowedUnsafeSysctls": [
+              "kernel.msg*",
+              "net.core.somaxconn"
+            ],
+            "failSwapOn": false
+          },
+          "linuxOSConfig": {
+            "sysctls": {
+              "netCoreWmemDefault": 12345,
+              "netIpv4TcpTwReuse": true,
+              "netIpv4IpLocalPortRange": "20000 60000",
+              "kernelThreadsMax": 99999
+            },
+            "transparentHugePageEnabled": "always",
+            "transparentHugePageDefrag": "madvise",
+            "swapFileSizeMB": 1500
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "name": "agentpool1",
+        "properties": {
+          "provisioningState": "Creating",
+          "orchestratorVersion": "1.17.8",
+          "currentOrchestratorVersion": "1.17.8",
+          "count": 3,
+          "vmSize": "Standard_ND96asr_v4",
+          "maxPods": 110,
+          "osType": "Linux",
+          "gpuInstanceProfile": "MIG2g",
+          "kubeletConfig": {
+            "cpuManagerPolicy": "static",
+            "cpuCfsQuota": true,
+            "cpuCfsQuotaPeriod": "200ms",
+            "imageGcHighThreshold": 90,
+            "imageGcLowThreshold": 70,
+            "topologyManagerPolicy": "best-effort",
+            "allowedUnsafeSysctls": [
+              "kernel.msg*",
+              "net.core.somaxconn"
+            ],
+            "failSwapOn": false,
+            "podMaxPids": 100
+          },
+          "linuxOSConfig": {
+            "sysctls": {
+              "netCoreWmemDefault": 65536,
+              "netIpv4TcpTwReuse": true,
+              "netIpv4IpLocalPortRange": "20000 60000",
+              "kernelThreadsMax": 99999
+            },
+            "transparentHugePageEnabled": "always",
+            "transparentHugePageDefrag": "madvise",
+            "swapFileSizeMB": 1500
+          }
+        }
+      }
+    }
+  }
+}
