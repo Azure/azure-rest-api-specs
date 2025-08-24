@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
-  - Microsoft.Network/stable/2018-09-01/privatedns.json
+  - stable/2018-09-01/privatedns.json
 ```
 
 ### Tag: package-2020-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
-  - Microsoft.Network/stable/2020-01-01/privatedns.json
+  - stable/2020-01-01/privatedns.json
 ```
 
 ### Tag: package-2020-06
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
-  - Microsoft.Network/stable/2020-06-01/privatedns.json
+  - stable/2020-06-01/privatedns.json
 ```
 
 ### Tag: package-2024-06
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2024-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-06'
 input-file:
-  - Microsoft.Network/stable/2024-06-01/privatedns.json
+  - stable/2024-06-01/privatedns.json
 ```
 
 # Code Generation
