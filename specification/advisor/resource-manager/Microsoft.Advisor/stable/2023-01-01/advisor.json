@@ -201,6 +201,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/v2/{configurationName}": {
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Create/Overwrite Azure Advisor configuration.",
+        "description": "Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.",
+        "operationId": "Configurations_CreateInSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "configContract",
+            "in": "body",
+            "description": "The Azure Advisor configuration data structure.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "Advisor configuration name. Value must be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ConfigurationName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created/overwrote configuration.",
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "PutConfigurations": {
+            "$ref": "./examples/CreateConfiguration.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "tags": [
@@ -249,6 +310,73 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}": {
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Create/Overwrite Azure Advisor configuration.",
+        "operationId": "Configurations_CreateInResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "configContract",
+            "in": "body",
+            "description": "The Azure Advisor configuration data structure.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "Advisor configuration name. Value must be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ConfigurationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "description": "The name of the Azure resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created/overwrote configuration.",
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "PutConfigurations": {
+            "$ref": "./examples/CreateConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/v2/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
