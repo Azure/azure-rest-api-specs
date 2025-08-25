@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-01'
 input-file:
-  - Microsoft.Chaos/stable/2025-01-01/openapi.json
+  - stable/2025-01-01/openapi.json
 suppressions:
   - code: TrackedExtensionResourcesAreNotAllowed
     from: openapi.json
@@ -70,7 +70,7 @@ These settings apply only when `--tag=package-preview-2024-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-11'
 input-file:
-  - Microsoft.Chaos/preview/2024-11-01-preview/openapi.json
+  - preview/2024-11-01-preview/openapi.json
 suppressions:
   - code: TrackedExtensionResourcesAreNotAllowed
     from: openapi.json
@@ -103,14 +103,14 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Microsoft.Chaos/preview/2024-03-22-preview/capabilities.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/capabilityTypes.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/experiments.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/operationStatuses.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/operations.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/privateAccesses.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/targets.json
+  - preview/2024-03-22-preview/capabilities.json
+  - preview/2024-03-22-preview/capabilityTypes.json
+  - preview/2024-03-22-preview/experiments.json
+  - preview/2024-03-22-preview/operationStatuses.json
+  - preview/2024-03-22-preview/operations.json
+  - preview/2024-03-22-preview/privateAccesses.json
+  - preview/2024-03-22-preview/targetTypes.json
+  - preview/2024-03-22-preview/targets.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"
@@ -156,13 +156,13 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.Chaos/stable/2024-01-01/capabilities.json
-  - Microsoft.Chaos/stable/2024-01-01/capabilityTypes.json
-  - Microsoft.Chaos/stable/2024-01-01/experiments.json
-  - Microsoft.Chaos/stable/2024-01-01/operationStatuses.json
-  - Microsoft.Chaos/stable/2024-01-01/operations.json
-  - Microsoft.Chaos/stable/2024-01-01/targetTypes.json
-  - Microsoft.Chaos/stable/2024-01-01/targets.json
+  - stable/2024-01-01/capabilities.json
+  - stable/2024-01-01/capabilityTypes.json
+  - stable/2024-01-01/experiments.json
+  - stable/2024-01-01/operationStatuses.json
+  - stable/2024-01-01/operations.json
+  - stable/2024-01-01/targetTypes.json
+  - stable/2024-01-01/targets.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"
@@ -208,13 +208,13 @@ These settings apply only when `--tag=package-2023-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-11'
 input-file:
-  - Microsoft.Chaos/stable/2023-11-01/capabilities.json
-  - Microsoft.Chaos/stable/2023-11-01/capabilityTypes.json
-  - Microsoft.Chaos/stable/2023-11-01/experiments.json
-  - Microsoft.Chaos/stable/2023-11-01/operationStatuses.json
-  - Microsoft.Chaos/stable/2023-11-01/operations.json
-  - Microsoft.Chaos/stable/2023-11-01/targetTypes.json
-  - Microsoft.Chaos/stable/2023-11-01/targets.json
+  - stable/2023-11-01/capabilities.json
+  - stable/2023-11-01/capabilityTypes.json
+  - stable/2023-11-01/experiments.json
+  - stable/2023-11-01/operationStatuses.json
+  - stable/2023-11-01/operations.json
+  - stable/2023-11-01/targetTypes.json
+  - stable/2023-11-01/targets.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"
@@ -260,14 +260,14 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.Chaos/preview/2023-10-27-preview/capabilities.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/capabilityTypes.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/experiments.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/operationStatuses.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/operations.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/privateAccesses.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/targets.json
+  - preview/2023-10-27-preview/capabilities.json
+  - preview/2023-10-27-preview/capabilityTypes.json
+  - preview/2023-10-27-preview/experiments.json
+  - preview/2023-10-27-preview/operationStatuses.json
+  - preview/2023-10-27-preview/operations.json
+  - preview/2023-10-27-preview/privateAccesses.json
+  - preview/2023-10-27-preview/targetTypes.json
+  - preview/2023-10-27-preview/targets.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"
@@ -313,13 +313,13 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.Chaos/preview/2023-09-01-preview/capabilities.json
-  - Microsoft.Chaos/preview/2023-09-01-preview/capabilityTypes.json
-  - Microsoft.Chaos/preview/2023-09-01-preview/experiments.json
-  - Microsoft.Chaos/preview/2023-09-01-preview/operations.json
-  - Microsoft.Chaos/preview/2023-09-01-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2023-09-01-preview/targets.json
-  - Microsoft.Chaos/preview/2023-09-01-preview/operationStatuses.json
+  - preview/2023-09-01-preview/capabilities.json
+  - preview/2023-09-01-preview/capabilityTypes.json
+  - preview/2023-09-01-preview/experiments.json
+  - preview/2023-09-01-preview/operations.json
+  - preview/2023-09-01-preview/targetTypes.json
+  - preview/2023-09-01-preview/targets.json
+  - preview/2023-09-01-preview/operationStatuses.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"
@@ -365,12 +365,12 @@ These settings apply only when `--tag=package-2023-04-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-04-15-preview'
 input-file:
-  - Microsoft.Chaos/preview/2023-04-15-preview/capabilities.json
-  - Microsoft.Chaos/preview/2023-04-15-preview/capabilityTypes.json
-  - Microsoft.Chaos/preview/2023-04-15-preview/experiments.json
-  - Microsoft.Chaos/preview/2023-04-15-preview/operations.json
-  - Microsoft.Chaos/preview/2023-04-15-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2023-04-15-preview/targets.json
+  - preview/2023-04-15-preview/capabilities.json
+  - preview/2023-04-15-preview/capabilityTypes.json
+  - preview/2023-04-15-preview/experiments.json
+  - preview/2023-04-15-preview/operations.json
+  - preview/2023-04-15-preview/targetTypes.json
+  - preview/2023-04-15-preview/targets.json
 ```
 
 ### Tag: package-2023-04-01-preview
@@ -379,12 +379,12 @@ These settings apply only when `--tag=package-2023-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-04-01-preview'
 input-file:
-  - Microsoft.Chaos/preview/2023-04-01-preview/capabilities.json
-  - Microsoft.Chaos/preview/2023-04-01-preview/capabilityTypes.json
-  - Microsoft.Chaos/preview/2023-04-01-preview/experiments.json
-  - Microsoft.Chaos/preview/2023-04-01-preview/operations.json
-  - Microsoft.Chaos/preview/2023-04-01-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2023-04-01-preview/targets.json
+  - preview/2023-04-01-preview/capabilities.json
+  - preview/2023-04-01-preview/capabilityTypes.json
+  - preview/2023-04-01-preview/experiments.json
+  - preview/2023-04-01-preview/operations.json
+  - preview/2023-04-01-preview/targetTypes.json
+  - preview/2023-04-01-preview/targets.json
 ```
 
 ### Tag: package-2022-10-01-preview
@@ -399,12 +399,12 @@ directive:
       - $.definitions.experiment
 
 input-file:
-  - Microsoft.Chaos/preview/2022-10-01-preview/capabilities.json
-  - Microsoft.Chaos/preview/2022-10-01-preview/capabilityTypes.json
-  - Microsoft.Chaos/preview/2022-10-01-preview/experiments.json
-  - Microsoft.Chaos/preview/2022-10-01-preview/operations.json
-  - Microsoft.Chaos/preview/2022-10-01-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2022-10-01-preview/targets.json
+  - preview/2022-10-01-preview/capabilities.json
+  - preview/2022-10-01-preview/capabilityTypes.json
+  - preview/2022-10-01-preview/experiments.json
+  - preview/2022-10-01-preview/operations.json
+  - preview/2022-10-01-preview/targetTypes.json
+  - preview/2022-10-01-preview/targets.json
 ```
 
 ### Tag: package-2022-07-01-preview
@@ -419,12 +419,12 @@ directive:
       - $.definitions.experiment
 
 input-file:
-  - Microsoft.Chaos/preview/2022-07-01-preview/capabilities.json
-  - Microsoft.Chaos/preview/2022-07-01-preview/experiments.json
-  - Microsoft.Chaos/preview/2022-07-01-preview/operations.json
-  - Microsoft.Chaos/preview/2022-07-01-preview/targets.json
-  - Microsoft.Chaos/preview/2022-07-01-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2022-07-01-preview/capabilityTypes.json
+  - preview/2022-07-01-preview/capabilities.json
+  - preview/2022-07-01-preview/experiments.json
+  - preview/2022-07-01-preview/operations.json
+  - preview/2022-07-01-preview/targets.json
+  - preview/2022-07-01-preview/targetTypes.json
+  - preview/2022-07-01-preview/capabilityTypes.json
 ```
 
 ### Tag: package-2021-09-15-preview
@@ -439,12 +439,12 @@ directive:
       - $.definitions.experiment
 
 input-file:
-  - Microsoft.Chaos/preview/2021-09-15-preview/capabilities.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/experiments.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/operations.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/targets.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2021-09-15-preview/capabilityTypes.json
+  - preview/2021-09-15-preview/capabilities.json
+  - preview/2021-09-15-preview/experiments.json
+  - preview/2021-09-15-preview/operations.json
+  - preview/2021-09-15-preview/targets.json
+  - preview/2021-09-15-preview/targetTypes.json
+  - preview/2021-09-15-preview/capabilityTypes.json
 ```
 
 ---
