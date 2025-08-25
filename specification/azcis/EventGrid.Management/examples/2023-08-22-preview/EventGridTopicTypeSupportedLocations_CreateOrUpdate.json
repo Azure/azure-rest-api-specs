@@ -1,0 +1,51 @@
+{
+  "title": "Create EventGridTopicTypeSupportedLocations",
+  "operationId": "EventGridTopicTypeSupportedLocations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-08-22-preview",
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "supportedLocation",
+    "resource": {
+      "properties": {
+        "azureLocation": "useast",
+        "topicTypeName": "TestTopicType",
+        "supportedLocations": [
+          "East US"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/eventGridTopicTypeSupportedLocations/supportedLocation",
+        "name": "supportedLocation",
+        "type": "Microsoft.AzureCis/eventGridTopicTypeSupportedLocations",
+        "properties": {
+          "azureLocation": "useast",
+          "provisioningState": "Succeeded",
+          "topicTypeName": "TestTopicType",
+          "supportedLocations": [
+            "East US"
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/eventGridTopicTypeSupportedLocations/supportedLocation",
+        "name": "supportedLocation",
+        "type": "Microsoft.AzureCis/eventGridTopicTypeSupportedLocations",
+        "properties": {
+          "azureLocation": "useast",
+          "provisioningState": "Succeeded",
+          "topicTypeName": "TestTopicType",
+          "supportedLocations": [
+            "East US"
+          ]
+        }
+      }
+    }
+  }
+}

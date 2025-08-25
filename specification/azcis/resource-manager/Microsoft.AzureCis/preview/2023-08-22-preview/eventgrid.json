@@ -1,0 +1,971 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure CIS FRP",
+    "version": "2023-08-22-preview",
+    "description": "EventGrid Provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "EventGridTopicTypeEventTypes"
+    },
+    {
+      "name": "EventGridTopicTypePublisherAuthentications"
+    },
+    {
+      "name": "EventGridTopicTypeSupportedLocations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCis/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations EventGridTopicTypePublisherAuthentications": {
+            "$ref": "./examples/EventGridTopicTypePublisherAuthentications_Operations.json"
+          },
+          "List Operations EventGridTopicTypeSupportedLocations": {
+            "$ref": "./examples/EventGridTopicTypeSupportedLocations_Operations.json"
+          },
+          "List operations EventGridTopicTypeEventTypes": {
+            "$ref": "./examples/EventGridTopicTypeEventTypes_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/eventGridTopicTypeEventTypes": {
+      "get": {
+        "operationId": "EventGridTopicTypeEventTypes_ListBySubscription",
+        "tags": [
+          "EventGridTopicTypeEventTypes"
+        ],
+        "description": "List EventGridTopicTypeEventTypesResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeEventTypesResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription EventGridTopicTypeEventTypes": {
+            "$ref": "./examples/EventGridTopicTypeEventTypes_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications": {
+      "get": {
+        "operationId": "EventGridTopicTypePublisherAuthentications_ListBySubscription",
+        "tags": [
+          "EventGridTopicTypePublisherAuthentications"
+        ],
+        "description": "List EventGridTopicTypePublisherAuthenticationsResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription EventGridTopicTypePublisherAuthentications": {
+            "$ref": "./examples/EventGridTopicTypePublisherAuthentications_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/eventGridTopicTypeSupportedLocations": {
+      "get": {
+        "operationId": "EventGridTopicTypeSupportedLocations_ListBySubscription",
+        "tags": [
+          "EventGridTopicTypeSupportedLocations"
+        ],
+        "description": "List EventGridTopicTypeSupportedLocationsResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription EventGridTopicTypeSupportedLocations": {
+            "$ref": "./examples/EventGridTopicTypeSupportedLocations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/eventGridTopicTypeEventTypes": {
+      "get": {
+        "operationId": "EventGridTopicTypeEventTypes_ListByResourceGroup",
+        "tags": [
+          "EventGridTopicTypeEventTypes"
+        ],
+        "description": "List EventGridTopicTypeEventTypesResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeEventTypesResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup EventGridTopicTypeEventTypes": {
+            "$ref": "./examples/EventGridTopicTypeEventTypes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/eventGridTopicTypeEventTypes/{resourceName}": {
+      "get": {
+        "operationId": "EventGridTopicTypeEventTypes_Get",
+        "tags": [
+          "EventGridTopicTypeEventTypes"
+        ],
+        "description": "Get a EventGridTopicTypeEventTypesResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeEventTypesResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get EventGridTopicTypeEventTypes": {
+            "$ref": "./examples/EventGridTopicTypeEventTypes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EventGridTopicTypeEventTypes_CreateOrUpdate",
+        "tags": [
+          "EventGridTopicTypeEventTypes"
+        ],
+        "description": "Create a EventGridTopicTypeEventTypesResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeEventTypesResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EventGridTopicTypeEventTypesResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeEventTypesResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'EventGridTopicTypeEventTypesResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeEventTypesResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create EventGridTopicTypeEventTypes": {
+            "$ref": "./examples/EventGridTopicTypeEventTypes_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications": {
+      "get": {
+        "operationId": "EventGridTopicTypePublisherAuthentications_ListByResourceGroup",
+        "tags": [
+          "EventGridTopicTypePublisherAuthentications"
+        ],
+        "description": "List EventGridTopicTypePublisherAuthenticationsResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup EventGridTopicTypePublisherAuthentications": {
+            "$ref": "./examples/EventGridTopicTypePublisherAuthentications_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications/{resourceName}": {
+      "get": {
+        "operationId": "EventGridTopicTypePublisherAuthentications_Get",
+        "tags": [
+          "EventGridTopicTypePublisherAuthentications"
+        ],
+        "description": "Get a EventGridTopicTypePublisherAuthenticationsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get EventGridTopicTypePublisherAuthentications": {
+            "$ref": "./examples/EventGridTopicTypePublisherAuthentications_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EventGridTopicTypePublisherAuthentications_CreateOrUpdate",
+        "tags": [
+          "EventGridTopicTypePublisherAuthentications"
+        ],
+        "description": "Create a EventGridTopicTypePublisherAuthenticationsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EventGridTopicTypePublisherAuthenticationsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'EventGridTopicTypePublisherAuthenticationsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create EventGridTopicTypePublisherAuthentications": {
+            "$ref": "./examples/EventGridTopicTypePublisherAuthentications_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/eventGridTopicTypeSupportedLocations": {
+      "get": {
+        "operationId": "EventGridTopicTypeSupportedLocations_ListByResourceGroup",
+        "tags": [
+          "EventGridTopicTypeSupportedLocations"
+        ],
+        "description": "List EventGridTopicTypeSupportedLocationsResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup EventGridTopicTypeSupportedLocations": {
+            "$ref": "./examples/EventGridTopicTypeSupportedLocations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/eventGridTopicTypeSupportedLocations/{resourceName}": {
+      "get": {
+        "operationId": "EventGridTopicTypeSupportedLocations_Get",
+        "tags": [
+          "EventGridTopicTypeSupportedLocations"
+        ],
+        "description": "Get a EventGridTopicTypeSupportedLocationsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get EventGridTopicTypeSupportedLocations": {
+            "$ref": "./examples/EventGridTopicTypeSupportedLocations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EventGridTopicTypeSupportedLocations_CreateOrUpdate",
+        "tags": [
+          "EventGridTopicTypeSupportedLocations"
+        ],
+        "description": "Create a EventGridTopicTypeSupportedLocationsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EventGridTopicTypeSupportedLocationsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'EventGridTopicTypeSupportedLocationsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create EventGridTopicTypeSupportedLocations": {
+            "$ref": "./examples/EventGridTopicTypeSupportedLocations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "EventGridProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "EventGridProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "EventGridTopicTypeEventTypesResource": {
+      "type": "object",
+      "description": "EventGridTopicTypeEventTypes Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridTopicTypeEventTypesResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EventGridTopicTypeEventTypesResourceListResult": {
+      "type": "object",
+      "description": "The response of a EventGridTopicTypeEventTypesResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EventGridTopicTypeEventTypesResource items on this page",
+          "items": {
+            "$ref": "#/definitions/EventGridTopicTypeEventTypesResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EventGridTopicTypeEventTypesResourceProperties": {
+      "type": "object",
+      "description": "EventGridTopicTypeEventTypes properties",
+      "properties": {
+        "topicTypeName": {
+          "type": "string",
+          "description": "Name of the Topic Type. Required."
+        },
+        "eventTypeName": {
+          "type": "string",
+          "description": "Name of the Event Type. Required."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name of the EventType. Required."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the EventType. Required."
+        },
+        "schemaUrl": {
+          "type": "string",
+          "description": "SchemaUrl of the EventType. Required."
+        },
+        "isInDefaultSet": {
+          "type": "boolean",
+          "description": "If True, the eventType is pre-selected as part of Event Subscription creation process. Optional."
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EventGridProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "topicTypeName",
+        "eventTypeName",
+        "displayName",
+        "description",
+        "schemaUrl"
+      ]
+    },
+    "EventGridTopicTypePublisherAuthenticationsResource": {
+      "type": "object",
+      "description": "EventGridTopicTypePublisherAuthentications Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EventGridTopicTypePublisherAuthenticationsResourceListResult": {
+      "type": "object",
+      "description": "The response of a EventGridTopicTypePublisherAuthenticationsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EventGridTopicTypePublisherAuthenticationsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/EventGridTopicTypePublisherAuthenticationsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EventGridTopicTypePublisherAuthenticationsResourceProperties": {
+      "type": "object",
+      "description": "EventGridTopicTypePublisherAuthentications properties",
+      "properties": {
+        "topicTypeName": {
+          "type": "string",
+          "description": "Name of the Topic Type. Required."
+        },
+        "authenticationType": {
+          "type": "string",
+          "description": "Gets the Authentication type, e.g. \"Certificate\". Required."
+        },
+        "certificateSubjectNames": {
+          "type": "array",
+          "description": "List of certificate subject names that's used while publishing events to EventGrid. e.g., [\"CN=test.domain.com\", \"CN=test2.domain.net\"]. Required.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EventGridProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "topicTypeName",
+        "authenticationType",
+        "certificateSubjectNames"
+      ]
+    },
+    "EventGridTopicTypeSupportedLocationsResource": {
+      "type": "object",
+      "description": "EventGridTopicTypeSupportedLocations Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EventGridTopicTypeSupportedLocationsResourceListResult": {
+      "type": "object",
+      "description": "The response of a EventGridTopicTypeSupportedLocationsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EventGridTopicTypeSupportedLocationsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/EventGridTopicTypeSupportedLocationsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EventGridTopicTypeSupportedLocationsResourceProperties": {
+      "type": "object",
+      "description": "EventGridTopicTypeSupportedLocations properties",
+      "properties": {
+        "topicTypeName": {
+          "type": "string",
+          "description": "Name of the Topic Type. Required."
+        },
+        "supportedLocations": {
+          "type": "array",
+          "description": "List of supported locations for the Topic Type. Required.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EventGridProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "topicTypeName",
+        "supportedLocations"
+      ]
+    }
+  },
+  "parameters": {}
+}

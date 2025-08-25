@@ -1,0 +1,31 @@
+{
+  "title": "ListByResourceGroup EventGridTopicTypePublisherAuthentications",
+  "operationId": "EventGridTopicTypePublisherAuthentications_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2023-08-22-preview",
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications/publisherAuthentication",
+            "name": "publisherAuthentication",
+            "type": "Microsoft.AzureCis/eventGridTopicTypePublisherAuthentications",
+            "properties": {
+              "azureLocation": "useast",
+              "provisioningState": "Succeeded",
+              "topicTypeName": "TestTopicType",
+              "authenticationType": "Certificate",
+              "certificateSubjectNames": [
+                "CN=test.domain.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
