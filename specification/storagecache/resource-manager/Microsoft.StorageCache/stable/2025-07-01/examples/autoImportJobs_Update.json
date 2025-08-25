@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-07-01",
+    "amlFilesystemName": "fs1",
+    "autoImportJobName": "autojob1",
+    "autoImportJob": {
+      "properties": {
+        "adminStatus": "Disable"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "name": "autojob1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoImportJobs/autojob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/autoImportJob",
+        "properties": {
+          "adminStatus": "Disable",
+          "provisioningState": "Succeeded",
+          "autoImportPrefixes": [
+            "/"
+          ],
+          "conflictResolutionMode": "Skip",
+          "enableDeletions": false,
+          "maximumErrors": 0,
+          "status": {
+            "state": "Disabling",
+            "statusMessage": "Auto import job is being disabled.",
+            "scanStartTime": "2024-03-21T17:25:43.511Z",
+            "scanEndTime": "2024-03-21T18:25:43.511Z",
+            "totalBlobsWalked": 1000000,
+            "rateOfBlobWalk": 0,
+            "totalBlobsImported": 900000,
+            "rateOfBlobImport": 0,
+            "importedFiles": 8000,
+            "importedDirectories": 1000,
+            "importedSymlinks": 1000,
+            "preexistingFiles": 800000,
+            "preexistingDirectories": 80000,
+            "preexistingSymlinks": 10000,
+            "totalErrors": 10,
+            "totalConflicts": 5,
+            "blobSyncEvents": {
+              "importedFiles": 500,
+              "importedDirectories": 100,
+              "importedSymlinks": 50,
+              "preexistingFiles": 10000,
+              "preexistingDirectories": 1000,
+              "preexistingSymlinks": 200,
+              "totalBlobsImported": 11850,
+              "rateOfBlobImport": 0,
+              "totalErrors": 3,
+              "totalConflicts": 1,
+              "deletions": 20,
+              "lastChangeFeedEventConsumedTime": "2024-03-21T18:35:43.511Z",
+              "lastTimeFullySynchronized": "2024-03-21T18:25:43.511Z"
+            },
+            "lastStartedTimeUTC": "2024-03-21T17:25:43.511Z",
+            "lastCompletionTimeUTC": "2024-03-21T18:25:43.511Z"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/autoImportJobs/autojob1/operationResults/d05aebf3-3c1a-4c34-911c-93c51d49ef1e?api-version=2025-07-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/locations/eastus/operationResults/d05aebf3-3c1a-4c34-911c-93c51d49ef1e?api-version=2025-07-01"
+      }
+    }
+  }
+}
