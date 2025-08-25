@@ -41,11 +41,7 @@ using Microsoft.Confluent;
 @@clientName(APIKeyRecord, "ConfluentApiKeyRecord", "csharp");
 
 @@clientName(OrganizationResource, "ConfluentOrganization", "csharp");
-// @@alternateType(OrganizationResource.properties.organizationId, Azure.Core.uuid, "csharp");
-// @@clientName(OrganizationResourceListResult, "ConfluentOrganizationListResult", "csharp");
 @@clientName(ConfluentAgreementResource, "ConfluentAgreement", "csharp");
-// @@clientName(ConfluentAgreementResource.properties.accepted, "IsAccepted", "csharp");
-// @@clientName(ConfluentAgreementResource.properties.retrieveDatetime, "RetrieveOn", "csharp");
 @@clientName(OrganizationResourceUpdate,
   "ConfluentOrganizationPatch",
   "csharp"
@@ -140,10 +136,6 @@ using Microsoft.Confluent;
   "csharp"
 );
 @@clientName(OrganizationResources.listClusters, "GetAccessClusters", "csharp");
-// @@clientName(SCEnvironmentRecords.listEnvironments,
-//   "GetAccessEnvironments",
-//   "csharp"
-// );
 @@clientName(OrganizationResources.listEnvironments,
   "GetAccessEnvironments",
   "csharp"
