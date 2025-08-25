@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 input-file:
   - preview/2024-03-03-preview/webAppAssessments.json
 suppressions:
+  - code: AvoidAdditionalProperties
+    where: $.definitions.WebAppExtendedDetails.properties.sites
+    reason: Dictionary is used for web app mappings in web app assessments.
+suppressions:
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
