@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-07-01-preview'
 input-file:
-  - Microsoft.ElasticSan/preview/2024-07-01-preview/elasticsan.json
+  - preview/2024-07-01-preview/elasticsan.json
 ```
 
 ### Tag: package-preview-2024-06
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2024-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-06'
 input-file:
-  - Microsoft.ElasticSan/preview/2024-06-01-preview/elasticsan.json
+  - preview/2024-06-01-preview/elasticsan.json
 ```
 
 ### Tag: package-2024-05
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2024-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-05'
 input-file:
-  - Microsoft.ElasticSan/stable/2024-05-01/elasticsan.json
+  - stable/2024-05-01/elasticsan.json
 ```
 ### Tag: package-2023-01
 
@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-01'
 input-file:
-  - Microsoft.ElasticSan/stable/2023-01-01/elasticsan.json
+  - stable/2023-01-01/elasticsan.json
 ```
 
 ### Tag: package-preview-2022-12
@@ -70,7 +70,7 @@ These settings apply only when `--tag=package-preview-2022-12` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-12'
 input-file:
-  - Microsoft.ElasticSan/preview/2022-12-01-preview/elasticsan.json
+  - preview/2022-12-01-preview/elasticsan.json
 ```
 
 ### Tag: package-2021-11-20-preview
@@ -79,7 +79,7 @@ These settings apply only when `--tag=package-2021-11-20-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-11-20-preview'
 input-file:
-  - Microsoft.ElasticSan/preview/2021-11-20-preview/elasticsan.json
+  - preview/2021-11-20-preview/elasticsan.json
 ```
 
 ---
