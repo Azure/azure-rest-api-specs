@@ -21,6 +21,8 @@ output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/netwo
 ```
 
 ``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
 directive:
   - from: swagger-document
     where: $
