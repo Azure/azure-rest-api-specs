@@ -11718,63 +11718,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/skus": {
-      "get": {
-        "tags": [
-          "Namespaces"
-        ],
-        "summary": "Retrieves the SKU information for a specified namespace. (Requirement for Autoscale feature).",
-        "operationId": "Namespaces_GetSkus",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group within the user's subscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "Name of the namespace.",
-            "required": true,
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 3,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NamespaceSkuResourceDetails"
-            }
-          },
-          "default": {
-            "description": "Error response returned if request was unsuccessful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Namespaces_GetSkus": {
-            "$ref": "./examples/Namespaces_GetSkus.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -18120,64 +18063,6 @@
             "name": "ConfidentialComputeMode",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "NamespaceSkuInfo": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU.",
-          "enum": [
-            "Standard"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "NamespaceSkuResourceDetails": {
-      "description": "Data object used by the AutoScale team to check min/max capacity for a namespace SKU.",
-      "type": "object",
-      "properties": {
-        "resourceType": {
-          "description": "Gets or sets the type of the resource for which the SKU information is provided.\r\nExample: \"Microsoft.EventGrid/namespaces\"",
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "#/definitions/NamespaceSkuInfo",
-          "description": "Gets or sets the SKU information for the namespace.\r\nContains details such as the SKU name (e.g., Standard)."
-        },
-        "capacity": {
-          "$ref": "#/definitions/NamespaceSkusCapacityInfo",
-          "description": "Gets or sets the capacity information for the namespace SKU.\r\nIncludes minimum, maximum, default capacity, and scale type."
-        }
-      }
-    },
-    "NamespaceSkusCapacityInfo": {
-      "type": "object",
-      "properties": {
-        "minimum": {
-          "format": "int32",
-          "description": "Minimum ThroughputUnits (TUs) that the resource can scale in/down.",
-          "type": "integer"
-        },
-        "maximum": {
-          "format": "int32",
-          "description": "Maximum ThroughputUnits (TUs) that the resource can scale out/up.",
-          "type": "integer"
-        },
-        "default": {
-          "format": "int32",
-          "description": "Default ThroughputUnits (TUs) (Not used for Autoscale).",
-          "type": "integer"
-        },
-        "scaleType": {
-          "description": "ScaleType supports “automatic”, “manual” and “none”. “none” refers to no scaling. \r\n“manual” allows users to manually update TUs. “auto” enables you to perform both manual and custom autoscale.",
-          "type": "string"
         }
       }
     },
