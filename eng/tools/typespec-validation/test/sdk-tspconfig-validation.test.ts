@@ -493,7 +493,6 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageDirectorySubRule()],
 );
 
-
 const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   "",
@@ -502,8 +501,6 @@ const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
   "AAA",
   [new TspConfigCsharpAzNamespaceSubRule()],
 );
-
-
 
 const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
