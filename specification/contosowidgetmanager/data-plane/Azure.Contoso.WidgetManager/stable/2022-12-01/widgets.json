@@ -42,7 +42,7 @@
     "/widgets": {
       "get": {
         "operationId": "Widgets_ListWidgets",
-        "description": "List Widget resources",
+        "description": "List Widget resources with optional filtering and pagination support.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -122,7 +122,7 @@
       },
       "patch": {
         "operationId": "Widgets_CreateOrUpdateWidget",
-        "description": "Creates or updates a Widget asynchronously.",
+        "description": "Creates or updates a Widget asynchronously. Use this operation to manage widget lifecycle.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -196,7 +196,7 @@
       },
       "delete": {
         "operationId": "Widgets_DeleteWidget",
-        "description": "Delete a Widget asynchronously.",
+        "description": "Delete a Widget asynchronously. This operation permanently removes the widget.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -452,6 +452,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The created date."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description for the shared model."
         }
       },
       "required": [
@@ -471,6 +475,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The created date."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description for the shared model."
         }
       }
     },
@@ -495,6 +503,36 @@
         "value"
       ]
     },
+    "WidgetStatus": {
+      "type": "string",
+      "description": "Widget status options.",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Maintenance"
+      ],
+      "x-ms-enum": {
+        "name": "WidgetStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Widget is active and operational"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Widget is inactive"
+          },
+          {
+            "name": "Maintenance",
+            "value": "Maintenance",
+            "description": "Widget requires maintenance"
+          }
+        ]
+      }
+    },
     "WidgetSuite": {
       "type": "object",
       "description": "A widget.",
@@ -511,6 +549,10 @@
         "sharedModel": {
           "$ref": "#/definitions/FakedSharedModel",
           "description": "The faked shared model."
+        },
+        "status": {
+          "$ref": "#/definitions/WidgetStatus",
+          "description": "Optional widget status indicating current state."
         }
       },
       "required": [
@@ -529,6 +571,10 @@
         "sharedModel": {
           "$ref": "#/definitions/FakedSharedModelCreateOrUpdate",
           "description": "The faked shared model."
+        },
+        "status": {
+          "$ref": "#/definitions/WidgetStatus",
+          "description": "Optional widget status indicating current state."
         }
       }
     }

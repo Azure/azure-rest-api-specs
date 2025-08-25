@@ -38,6 +38,23 @@ model WidgetSuite {
 
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
+
+  @doc("Optional widget status indicating current state.")
+  status?: WidgetStatus;
+}
+
+@doc("Widget status options.")
+union WidgetStatus {
+  string,
+
+  @doc("Widget is active and operational")
+  Active: "Active",
+
+  @doc("Widget is inactive")
+  Inactive: "Inactive",
+
+  @doc("Widget requires maintenance")
+  Maintenance: "Maintenance",
 }
 
 interface Widgets {
@@ -47,15 +64,15 @@ interface Widgets {
   @doc("Gets status of a Widget operation.")
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
 
-  @doc("Creates or updates a Widget asynchronously.")
+  @doc("Creates or updates a Widget asynchronously. Use this operation to manage widget lifecycle.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
   createOrUpdateWidget is StandardResourceOperations.LongRunningResourceCreateOrUpdate<WidgetSuite>;
 
-  @doc("Delete a Widget asynchronously.")
+  @doc("Delete a Widget asynchronously. This operation permanently removes the widget.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
   deleteWidget is LongRunningResourceDelete<WidgetSuite>;
 
-  @doc("List Widget resources")
+  @doc("List Widget resources with optional filtering and pagination support.")
   listWidgets is ResourceList<
     WidgetSuite,
     {

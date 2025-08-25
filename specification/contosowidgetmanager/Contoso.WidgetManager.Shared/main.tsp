@@ -5,4 +5,7 @@ model FakedSharedModel {
 
   @doc("The created date.")
   createdAt: utcDateTime;
+
+  @doc("Optional description for the shared model.")
+  description?: string;
 }
