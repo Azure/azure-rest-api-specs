@@ -1797,6 +1797,33 @@
         ]
       }
     },
+    "ApplicationInsightsTopologyDiscoveryRuleProperties": {
+      "type": "object",
+      "description": "Discovery rule properties for an Application Insights topology query",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Application Insights resource ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/components"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "applicationInsightsResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscoveryRuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationInsightsTopology"
+    },
     "AuthenticationKind": {
       "type": "string",
       "description": "Supported kinds of authentication settings as discriminator",
@@ -2024,6 +2051,28 @@
         }
       ]
     },
+    "DiscoveryRuleKind": {
+      "type": "string",
+      "description": "Discovery rule relationship discovery behavior",
+      "enum": [
+        "ResourceGraphQuery",
+        "ApplicationInsightsTopology"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryRuleKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceGraphQuery",
+            "value": "ResourceGraphQuery"
+          },
+          {
+            "name": "ApplicationInsightsTopology",
+            "value": "ApplicationInsightsTopology"
+          }
+        ]
+      }
+    },
     "DiscoveryRuleListResult": {
       "type": "object",
       "description": "The response of a DiscoveryRule list operation.",
@@ -2060,11 +2109,9 @@
           "minLength": 1,
           "maxLength": 260
         },
-        "resourceGraphQuery": {
-          "type": "string",
-          "description": "Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.",
-          "minLength": 1,
-          "maxLength": 5000
+        "discoveryRuleKind": {
+          "$ref": "#/definitions/DiscoveryRuleKind",
+          "description": "Kind of the discovery rule"
         },
         "authenticationSetting": {
           "$ref": "#/definitions/stringResourceName",
@@ -2101,8 +2148,9 @@
           "readOnly": true
         }
       },
+      "discriminator": "discoveryRuleKind",
       "required": [
-        "resourceGraphQuery",
+        "discoveryRuleKind",
         "authenticationSetting",
         "discoverRelationships",
         "addRecommendedSignals",
@@ -2914,6 +2962,27 @@
         "parentEntityName",
         "childEntityName"
       ]
+    },
+    "ResourceGraphQueryDiscoveryRuleProperties": {
+      "type": "object",
+      "description": "Discovery rule properties for an Azure Resource Graph query",
+      "properties": {
+        "resourceGraphQuery": {
+          "type": "string",
+          "description": "Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.",
+          "minLength": 1,
+          "maxLength": 5000
+        }
+      },
+      "required": [
+        "resourceGraphQuery"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscoveryRuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGraphQuery"
     },
     "ResourceMetricSignalDefinitionProperties": {
       "type": "object",

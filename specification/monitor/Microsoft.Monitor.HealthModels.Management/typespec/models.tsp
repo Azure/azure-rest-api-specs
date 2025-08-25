@@ -597,7 +597,15 @@ model RelationshipProperties {
   deletionDate?: utcDateTime;
 }
 
+@doc("Discovery rule relationship discovery behavior")
+union DiscoveryRuleKind {
+  string,
+  ResourceGraphQuery: "ResourceGraphQuery",
+  ApplicationInsightsTopology: "ApplicationInsightsTopology",
+}
+
 @doc("Discovery rule properties")
+@discriminator("discoveryRuleKind")
 model DiscoveryRuleProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
@@ -608,10 +616,8 @@ model DiscoveryRuleProperties {
   @maxLength(260)
   displayName?: string;
 
-  @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
-  @minLength(1)
-  @maxLength(5000)
-  resourceGraphQuery: string;
+  @doc("Kind of the discovery rule")
+  discoveryRuleKind: DiscoveryRuleKind;
 
   @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
   authenticationSetting: stringResourceName;
@@ -659,4 +665,29 @@ union DiscoveryRuleRecommendedSignalsBehavior {
 
   @doc("Do not automatically add recommended signals")
   Disabled: "Disabled",
+}
+
+@doc("Discovery rule properties for an Azure Resource Graph query")
+model ResourceGraphQueryDiscoveryRuleProperties extends DiscoveryRuleProperties {
+  @doc("Kind of the discovery rule")
+  discoveryRuleKind: DiscoveryRuleKind.ResourceGraphQuery;
+
+  @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
+  @minLength(1)
+  @maxLength(5000)
+  resourceGraphQuery: string;
+}
+
+@doc("Discovery rule properties for an Application Insights topology query")
+model ApplicationInsightsTopologyDiscoveryRuleProperties
+  extends DiscoveryRuleProperties {
+  @doc("Kind of the discovery rule")
+  discoveryRuleKind: DiscoveryRuleKind.ApplicationInsightsTopology;
+
+  @doc("Application Insights resource ID")
+  applicationInsightsResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Insights/components",
+    }
+  ]>;
 }
