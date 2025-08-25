@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-sms-2025-05-29-preview
+tag: package-sms-2025-08-01-preview
 ```
 
 ### Supression
@@ -104,6 +104,18 @@ These settings apply only when `--tag=package-sms-2025-05-29-preview` is specifi
 ```yaml $(tag) == 'package-sms-2025-05-29-preview'
 input-file:
   - preview/2025-05-29-preview/communicationservicessms.json
+title:
+  Azure Communication Services
+```
+---
+
+### Tag: package-sms-2025-08-01-preview
+
+These settings apply only when `--tag=package-sms-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-sms-2025-08-01-preview'
+input-file:
+  - preview/2025-08-01-preview/communicationservicessms.json
 title:
   Azure Communication Services
 ```
