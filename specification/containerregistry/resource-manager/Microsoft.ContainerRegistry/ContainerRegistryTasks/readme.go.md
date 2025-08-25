@@ -1,23 +1,13 @@
-## TypeScript
+## Go
 
-These settings apply only when `--typescript` is specified on the command line.
-Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
+These settings apply only when `--go` is specified on the command line.
 
-### Rename OS
-```yaml
-modelerfour:
-  naming:
-    override:
-      OS: $DO_NOT_NORMALIZE$OS
-```
-
-``` yaml $(typescript)
-typescript:
-  azure-arm: true
-  package-name: "@azure/arm-containerregistry"
-  output-folder: "$(typescript-sdks-folder)/sdk/containerregistry/arm-containerregistry"
-  generate-metadata: true
-
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/containerregistry/armcontainerregistrytasks
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 directive:
   - from: containerregistry_build.json
     where: $.definitions.IdentityProperties.properties
