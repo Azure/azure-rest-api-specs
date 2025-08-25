@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2025-07-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-07-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-07-01-preview/DevCenterRP.json
+  - Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json
 ```
 
 ### Tag: package-preview-2025-04-01-preview
