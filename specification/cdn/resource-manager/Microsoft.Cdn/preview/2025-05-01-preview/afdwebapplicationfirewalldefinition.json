@@ -7,6 +7,7 @@
   "paths": {},
   "definitions": {
     "WebApplicationFirewallPolicy": {
+      "type": "object",
       "description": "Defines web application firewall policy.",
       "properties": {
         "properties": {
@@ -30,6 +31,7 @@
       ]
     },
     "WebApplicationFirewallPolicyProperties": {
+      "type": "object",
       "description": "Defines web application firewall policy properties.",
       "properties": {
         "policySettings": {
@@ -112,6 +114,7 @@
       "type": "object"
     },
     "PolicySettings": {
+      "type": "object",
       "description": "Defines top-level WebApplicationFirewallPolicy configuration settings.",
       "properties": {
         "enabledState": {
@@ -144,7 +147,8 @@
         },
         "customBlockResponseStatusCode": {
           "description": "If the action type is block, customer can override the response status code.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "customBlockResponseBody": {
           "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
@@ -207,6 +211,7 @@
       }
     },
     "CustomRuleList": {
+      "type": "object",
       "description": "Defines contents of custom rules",
       "properties": {
         "rules": {
@@ -219,6 +224,7 @@
       }
     },
     "CustomRule": {
+      "type": "object",
       "description": "Defines contents of a web application rule",
       "required": [
         "priority",
@@ -234,7 +240,8 @@
         },
         "priority": {
           "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "enabledState": {
           "description": "Describes if the custom rule is in enabled or disabled state. Defaults to Enabled if not specified.",
@@ -263,12 +270,14 @@
         "rateLimitDurationInMinutes": {
           "description": "Time window for resetting the rate limit count. Default is 1 minute.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 5
         },
         "rateLimitThreshold": {
           "description": "Number of allowed requests per client within the time window.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0
         },
         "groupBy": {
@@ -331,6 +340,7 @@
       }
     },
     "MatchCondition": {
+      "type": "object",
       "description": "Define a match condition.",
       "required": [
         "matchVariable",
@@ -404,6 +414,7 @@
       }
     },
     "ManagedRuleSetList": {
+      "type": "object",
       "description": "Defines the list of managed rule sets for the policy.",
       "properties": {
         "managedRuleSets": {
@@ -453,6 +464,7 @@
       }
     },
     "ManagedRuleGroupOverride": {
+      "type": "object",
       "description": "Defines a managed rule group override setting.",
       "required": [
         "ruleGroupName"
@@ -479,6 +491,7 @@
       }
     },
     "ManagedRuleOverride": {
+      "type": "object",
       "description": "Defines a managed rule group override setting.",
       "required": [
         "ruleId"
@@ -506,6 +519,7 @@
       }
     },
     "ManagedRuleExclusion": {
+      "type": "object",
       "required": [
         "matchVariable",
         "selectorMatchOperator",
