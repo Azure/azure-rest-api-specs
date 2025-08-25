@@ -38,8 +38,9 @@ input-file:
   - preview/2024-03-03-preview/webAppAssessments.json
 suppressions:
   - code: AvoidAdditionalProperties
-    where: preview/2024-03-03-preview/webAppAssessments.json
     reason: Dictionary is used for web app mappings in web app assessments.
+    where:
+      - $.definitions.WebAppExtendedDetails.properties.sites
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
