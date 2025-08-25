@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quota Extension API",
-    "version": "2025-07-15",
+    "version": "2025-09-01",
     "description": "Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity."
   },
   "host": "management.azure.com",
@@ -283,7 +283,7 @@
         "operationId": "GroupQuotas_List",
         "x-ms-examples": {
           "GroupQuotas_List_Request_ForCompute": {
-            "$ref": "./examples/GroupQuotas/GetGroupQuotasList.json"
+            "$ref": "./examples/GroupQuotas/ListGroupQuotas.json"
           }
         },
         "parameters": [
@@ -1363,6 +1363,7 @@
         "Created",
         "Invalid",
         "Succeeded",
+        "Escalated",
         "Failed",
         "InProgress",
         "Canceled"
@@ -1371,7 +1372,41 @@
       "type": "string",
       "x-ms-enum": {
         "name": "RequestState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Escalated",
+            "description": "The quota request has been escalated for further review. Please file a support ticket. A support engineer will follow up."
+          },
+          {
+            "value": "InProgress",
+            "description": "The quota request is currently being processed."
+          },
+          {
+            "value": "Canceled",
+            "description": "The quota request has been canceled."
+          },
+          {
+            "value": "Failed",
+            "description": "The quota request has failed."
+          },
+          {
+            "value": "Accepted",
+            "description": "The quota request has been accepted."
+          },
+          {
+            "value": "Created",
+            "description": "The quota request has been created."
+          },
+          {
+            "value": "Invalid",
+            "description": "The quota request is invalid."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The quota request has succeeded."
+          }
+        ]
       }
     },
     "QuotaAllocationRequestStatus": {
@@ -2041,6 +2076,29 @@
           "description": "Display name of the GroupQuota entity.",
           "type": "string"
         },
+        "groupType": {
+          "description": "Type of the group.",
+          "enum": [
+            "AllocationGroup",
+            "EnforcedGroup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "GroupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AllocationGroup",
+                "description": "The group is used for subscription group quota allocations."
+              },
+              {
+                "value": "EnforcedGroup",
+                "description": "The group is used for the enforced shared limit scenario"
+              }
+            ]
+          },
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
           "readOnly": true,
@@ -2170,6 +2228,11 @@
             "enforcementEnabled": {
               "$ref": "#/definitions/EnforcementState",
               "description": "Is the GroupQuota Enforcement enabled for the Azure region."
+            },
+            "enforcedGroupName": {
+              "type": "string",
+              "description": "The name of the group that is enforced.",
+              "readOnly": true
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",

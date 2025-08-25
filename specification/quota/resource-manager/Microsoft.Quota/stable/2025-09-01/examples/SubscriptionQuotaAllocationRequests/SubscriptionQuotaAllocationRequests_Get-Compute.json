@@ -1,0 +1,36 @@
+{
+  "operationId": "GroupQuotaSubscriptionAllocationRequests_Get",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
+    "allocationId": "AE000000-0000-0000-0000-00000000000A",
+    "api-version": "2025-09-01",
+    "$filter": "provider eq Microsoft.Compute & location eq westus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/quotaAllocationRequests/AE000000-0000-0000-0000-00000000000A",
+        "type": "Microsoft.Quota/groupQuotas/quotaAllocationRequests",
+        "name": "AE000000-0000-0000-0000-00000000000A",
+        "properties": {
+          "requestedResource": {
+            "properties": {
+              "region": "westus",
+              "limit": 75,
+              "name": {
+                "value": "standardav2family",
+                "localizedValue": "standard Av2 Family vCPUs"
+              }
+            }
+          },
+          "requestSubmitTime": "2023-11-17T01:06:02.191Z",
+          "provisioningState": "Failed",
+          "faultCode": "ContactSupport"
+        }
+      }
+    }
+  }
+}
