@@ -27,7 +27,7 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventSessionAvatarConnecting, Access.public, "python");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseAudioDelta, Access.public, "python");
-@@access(VoiceLive.ConversationResponseItem, Access.public, "python");
+@@access(VoiceLive.ResponseItem, Access.public, "python");
 @@access(VoiceLive.Response, Access.public, "python");
 @@access(VoiceLive.ServerEventConversationItemCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventConversationItemDeleted, Access.public, "python");
