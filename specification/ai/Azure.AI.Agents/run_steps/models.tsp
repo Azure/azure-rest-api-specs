@@ -424,6 +424,27 @@ model RunStepDeltaAzureAISearchToolCall extends RunStepDeltaToolCall {
   azureAISearch: Record<string>;
 }
 
+@doc("Represents the Microsoft Fabric tool call in a streaming run step.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaMicrosoftFabricToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'fabric_dataagent'")
+  type: "fabric_dataagent";
+
+  @doc("Fabric input and output.")
+  @encodedName("application/json", "fabric_dataagent")
+  microsoftFabric: Record<string>;
+}
+
+@doc("Represents the SharePoint tool call in a streaming run step.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaSharepointToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'sharepoint_grounding'")
+  type: "sharepoint_grounding";
+
+  @doc("SharePoint tool input and output.")
+  sharepoint_grounding: Record<string>;
+}
+
 /** Represents the function data in a streaming run step delta's function tool call. */
 @added(Versions.v2025_05_01)
 model RunStepDeltaFunction {
