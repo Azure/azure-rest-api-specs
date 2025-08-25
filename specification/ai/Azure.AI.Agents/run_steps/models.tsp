@@ -435,6 +435,16 @@ model RunStepDeltaMicrosoftFabricToolCall extends RunStepDeltaToolCall {
   microsoftFabric: Record<string>;
 }
 
+@doc("Represents the SharePoint tool call in a streaming run step.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaSharepointToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'sharepoint_grounding'")
+  type: "sharepoint_grounding";
+
+  @doc("SharePoint tool input and output.")
+  sharepoint_grounding: Record<string>;
+}
+
 /** Represents the function data in a streaming run step delta's function tool call. */
 @added(Versions.v2025_05_01)
 model RunStepDeltaFunction {

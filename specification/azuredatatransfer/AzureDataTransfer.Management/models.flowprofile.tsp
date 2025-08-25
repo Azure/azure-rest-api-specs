@@ -262,7 +262,8 @@ model MimeFilterRuleset {
   /**
    * Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model.
    */
-  filters?: MimeTypeFilter;
+  @identifiers(#["media", "extensions"])
+  filters?: MimeTypeFilter[];
 }
 
 /**

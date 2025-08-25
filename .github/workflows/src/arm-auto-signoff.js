@@ -1,7 +1,7 @@
 // @ts-check
 
-import { setEquals } from "../../shared/src/equality.js";
 import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
+import { equals } from "../../shared/src/set.js";
 import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
 import { LabelAction } from "./label.js";
@@ -193,7 +193,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   }
 
   if (
-    setEquals(
+    equals(
       new Set(requiredStatuses.map((status) => status.context)),
       new Set(requiredStatusNames),
     ) &&

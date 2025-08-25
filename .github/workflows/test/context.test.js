@@ -13,7 +13,11 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(createMockGithub(), context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'unsupported_event:unsupported_action' is not yet supported.]`,
+    );
   });
 
   it("pull_request", async () => {
@@ -99,7 +103,11 @@ describe("extractInputs", () => {
 
     // Action not yet supported
     context.payload.action = "assigned";
-    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'pull_request_target:assigned' is not yet supported.]`,
+    );
   });
 
   it("issue_comment:edited", async () => {
@@ -169,7 +177,11 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(createMockGithub(), context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(createMockGithub(), context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'workflow_run:unsupported_action' is not yet supported.]`,
+    );
   });
 
   it("workflow_run:completed:pull_request (same repo)", async () => {
@@ -426,7 +438,11 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(createMockGithub(), context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'workflow_run:completed' with 'workflow_run.event=unsupported is not yet supported.]`,
+    );
   });
 
   it("workflow_run:completed:check_run", async () => {
