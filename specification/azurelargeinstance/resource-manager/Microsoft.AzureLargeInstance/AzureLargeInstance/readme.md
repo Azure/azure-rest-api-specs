@@ -40,7 +40,7 @@ These settings apply only when `--tag=package-2023-07-20-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-07-20-preview'
 input-file:
-  - Microsoft.AzureLargeInstance/preview/2023-07-20-preview/azurelargeinstance.json
+  - preview/2023-07-20-preview/azurelargeinstance.json
 ```
 
 ### Tag: package-2024-04-10
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2024-04-10` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-10'
 input-file:
-  - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
+  - stable/2024-04-10/azurelargeinstance.json
 ```
 
 ### Tag: package-2024-08-01-preview
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
-  - Microsoft.AzureLargeInstance/preview/2024-08-01-preview/azurelargeinstance.json
+  - preview/2024-08-01-preview/azurelargeinstance.json
 ```
 
 ---

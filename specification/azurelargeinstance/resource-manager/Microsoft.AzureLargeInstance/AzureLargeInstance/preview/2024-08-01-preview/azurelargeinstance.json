@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Large Instance",
-    "version": "2023-07-20-preview",
+    "version": "2024-08-01-preview",
     "description": "The AzureLargeInstance Management client",
     "x-typespec-generated": [
       {
@@ -59,20 +59,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -95,10 +95,10 @@
         "description": "Gets a list of Azure Large Instances in the specified subscription. The\noperations returns various properties of each Azure Large Instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -111,7 +111,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -134,10 +134,10 @@
         "description": "Gets a list of AzureLargeStorageInstances in the specified subscription. The\noperations returns various properties of each Azure LargeStorage instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -150,7 +150,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -173,13 +173,13 @@
         "description": "Gets a list of Azure Large Instances in the specified subscription and resource\ngroup. The operations returns various properties of each Azure Large Instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -192,7 +192,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -215,13 +215,13 @@
         "description": "Gets an Azure Large Instance for the specified subscription, resource group,\nand instance name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "azureLargeInstanceName",
@@ -242,13 +242,73 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "AzureLargeInstance_Get": {
             "$ref": "./examples/AzureLargeInstance_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureLargeInstance_Create",
+        "tags": [
+          "AzureLargeInstances"
+        ],
+        "description": "Creates an Azure Large Instance for the specified subscription,\nresource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureLargeInstanceName",
+            "in": "path",
+            "description": "Name of the AzureLargeInstance.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureLargeInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureLargeInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureLargeInstance_Create": {
+            "$ref": "./examples/AzureLargeInstance_Create.json"
           }
         }
       },
@@ -260,13 +320,13 @@
         "description": "Patches the Tags field of an Azure Large Instance for the specified\nsubscription, resource group, and instance name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "azureLargeInstanceName",
@@ -297,7 +357,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -307,6 +367,51 @@
           },
           "AzureLargeInstance_Update_Tag": {
             "$ref": "./examples/AzureLargeInstance_PatchTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AzureLargeInstance_Delete",
+        "tags": [
+          "AzureLargeInstances"
+        ],
+        "description": "Deletes an Azure Large Instance for the specified subscription, resource group,\nand instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureLargeInstanceName",
+            "in": "path",
+            "description": "Name of the AzureLargeInstance.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureLargeInstance_Delete": {
+            "$ref": "./examples/AzureLargeInstance_Delete.json"
           }
         }
       }
@@ -320,13 +425,13 @@
         "description": "The operation to restart an Azure Large Instance (only for compute instances)",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "azureLargeInstanceName",
@@ -350,7 +455,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -370,7 +475,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -394,13 +499,13 @@
         "description": "The operation to shutdown an Azure Large Instance (only for compute instances)",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "azureLargeInstanceName",
@@ -415,7 +520,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -435,7 +540,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -459,13 +564,13 @@
         "description": "The operation to start an Azure Large Instance (only for compute instances)",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "azureLargeInstanceName",
@@ -480,7 +585,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -500,7 +605,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -524,13 +629,13 @@
         "description": "Gets a list of AzureLargeStorageInstances in the specified subscription and\nresource group. The operations returns various properties of each Azure\nLargeStorage instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -543,7 +648,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -566,13 +671,13 @@
         "description": "Gets an Azure Large Storage instance for the specified subscription, resource\ngroup, and instance name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "azureLargeStorageInstanceName",
@@ -593,13 +698,73 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "AzureLargeStorageInstance_Get": {
             "$ref": "./examples/AzureLargeStorageInstance_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureLargeStorageInstance_Create",
+        "tags": [
+          "AzureLargeStorageInstances"
+        ],
+        "description": "Creates an Azure Large Storage Instance for the specified subscription,\nresource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureLargeStorageInstanceName",
+            "in": "path",
+            "description": "Name of the AzureLargeStorageInstance.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureLargeStorageInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureLargeStorageInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeStorageInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureLargeStorageInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeStorageInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureLargeStorageInstance_Create": {
+            "$ref": "./examples/AzureLargeStorageInstance_Create.json"
           }
         }
       },
@@ -611,13 +776,13 @@
         "description": "Patches the Tags field of a Azure Large Storage Instance for the specified\nsubscription, resource group, and instance name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "azureLargeStorageInstanceName",
@@ -648,7 +813,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -660,10 +825,73 @@
             "$ref": "./examples/AzureLargeStorageInstance_PatchTags.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "AzureLargeStorageInstance_Delete",
+        "tags": [
+          "AzureLargeStorageInstances"
+        ],
+        "description": "Deletes an Azure Large Storage Instance for the specified subscription,\nresource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureLargeStorageInstanceName",
+            "in": "path",
+            "description": "Name of the AzureLargeStorageInstance.",
+            "required": true,
+            "type": "string",
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureLargeStorageInstance_Delete": {
+            "$ref": "./examples/AzureLargeStorageInstance_Delete.json"
+          }
+        }
       }
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "AzureLargeInstance": {
       "type": "object",
       "description": "Azure Large Instance info on Azure (ARM properties and AzureLargeInstance\nproperties)",
@@ -676,7 +904,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -825,27 +1053,19 @@
         },
         "azureLargeInstanceId": {
           "type": "string",
-          "description": "Specifies the Azure Large Instance unique ID.",
-          "readOnly": true
+          "description": "Specifies the Azure Large Instance unique ID."
         },
         "powerState": {
           "$ref": "#/definitions/AzureLargeInstancePowerStateEnum",
-          "description": "Resource power state",
-          "readOnly": true
+          "description": "Resource power state"
         },
         "proximityPlacementGroup": {
           "type": "string",
-          "description": "Resource proximity placement group",
-          "readOnly": true
+          "description": "Resource proximity placement group"
         },
         "hwRevision": {
           "type": "string",
-          "description": "Hardware revision of an Azure Large Instance",
-          "readOnly": true
-        },
-        "partnerNodeId": {
-          "type": "string",
-          "description": "ARM ID of another AzureLargeInstance that will share a network with this\nAzureLargeInstance"
+          "description": "Hardware revision of an Azure Large Instance"
         },
         "provisioningState": {
           "$ref": "#/definitions/AzureLargeInstanceProvisioningStatesEnum",
@@ -1218,11 +1438,15 @@
           "$ref": "#/definitions/AzureLargeStorageInstanceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1271,6 +1495,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -1347,13 +1575,11 @@
       "properties": {
         "hardwareType": {
           "$ref": "#/definitions/AzureLargeInstanceHardwareTypeNamesEnum",
-          "description": "Name of the hardware type (vendor and/or their product name)",
-          "readOnly": true
+          "description": "Name of the hardware type (vendor and/or their product name)"
         },
         "azureLargeInstanceSize": {
           "$ref": "#/definitions/AzureLargeInstanceSizeNamesEnum",
-          "description": "Specifies the Azure Large Instance SKU.",
-          "readOnly": true
+          "description": "Specifies the Azure Large Instance SKU."
         }
       }
     },
@@ -1381,8 +1607,7 @@
         },
         "circuitId": {
           "type": "string",
-          "description": "Specifies the circuit id for connecting to express route.",
-          "readOnly": true
+          "description": "Specifies the circuit id for connecting to express route."
         }
       }
     },
@@ -1396,13 +1621,11 @@
         },
         "osType": {
           "type": "string",
-          "description": "This property allows you to specify the type of the OS.",
-          "readOnly": true
+          "description": "This property allows you to specify the type of the OS."
         },
         "version": {
           "type": "string",
-          "description": "Specifies version of operating system.",
-          "readOnly": true
+          "description": "Specifies version of operating system."
         },
         "sshPublicKey": {
           "type": "string",
@@ -1491,8 +1714,7 @@
       "properties": {
         "nfsIpAddress": {
           "type": "string",
-          "description": "IP Address to connect to storage.",
-          "readOnly": true
+          "description": "IP Address to connect to storage."
         },
         "osDisks": {
           "type": "array",
