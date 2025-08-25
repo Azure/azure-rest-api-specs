@@ -103,6 +103,7 @@ interface ManagedClusters {
    * Gets the list of recent fault simulations for the cluster.
    */
   @tag("FaultSimulation")
+  @list
   listFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -441,6 +442,12 @@ model ManagedClusterProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known acronym, consistency with other properties"
   @added(Versions.v2025_03_01_preview)
   VMImage?: string = "Windows";
+
+  /**
+   * Enable the creation of node types with only outbound traffic enabled. If set, a separate load balancer backend pool will be created for node types with inbound traffic enabled. Can only be set at the time of cluster creation.
+   */
+  @added(Versions.v2025_06_01_preview)
+  enableOutboundOnlyNodeTypes?: boolean;
 }
 
 /**
@@ -686,6 +693,16 @@ model ServiceEndpoint {
    * A list of locations.
    */
   locations?: string[];
+
+  /**
+   * Specifies the resource id of the service endpoint to be used in the cluster.
+   */
+  @added(Versions.v2025_06_01_preview)
+  networkIdentifier?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/publicIPAddresses";
+    }
+  ]>;
 }
 
 /**
@@ -813,17 +830,23 @@ model ClusterMonitoringPolicy {
   /**
    * The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  healthCheckRetryTimeout: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  healthCheckRetryTimeout: duration;
 
   /**
    * The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  upgradeTimeout: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  upgradeTimeout: duration;
 
   /**
    * The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  upgradeDomainTimeout: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  upgradeDomainTimeout: duration;
 }
 
 /**

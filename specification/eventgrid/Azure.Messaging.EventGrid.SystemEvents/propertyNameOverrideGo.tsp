@@ -620,5 +620,7 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 @@clientName(AcsCallParticipantKind, "ACSCallParticipantRoleKind", "go");
+@@clientName(recordingFormatType.Mp3, "MP3", "go");
+@@clientName(recordingFormatType.Mp4, "MP4", "go");
 
 // [END] ACS renames (and acronym casing)

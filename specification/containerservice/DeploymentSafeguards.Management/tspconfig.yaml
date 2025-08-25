@@ -19,14 +19,22 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/deploymentsafeguards/{version-status}/{version}/deploymentsafeguards.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-containerservicesafeguards"
+    namespace: "azure.mgmt.containerservicesafeguards"
+    service-dir: "sdk/containerservice"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-containerservicesafeguards"
     namespace: "com.azure.resourcemanager.containerservicesafeguards"
-    service-name: "Container Service Deployment Safeguards"
+    service-name: "Container Service Safeguards"
+    service-dir: "sdk/containerservicesafeguards"
     flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/containerservicedeploymentsafeguards"
-    package-dir: "armcontainerservicedeploymentsafeguards"
+    service-dir: "sdk/resourcemanager/containerservice"
+    package-dir: "armdeploymentsafeguards"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
@@ -38,6 +46,11 @@ options:
     service-dir: "sdk/containerservice"
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-containerservicedeploymentsafeguards"
+    package-dir: "arm-containerservicesafeguards"
     package-details:
-      name: "@azure/arm-containerservicedeploymentsafeguards"
+      name: "@azure/arm-containerservicesafeguards"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.ContainerServiceSafeguards"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"

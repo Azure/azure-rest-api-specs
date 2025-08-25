@@ -23,10 +23,12 @@ options:
     flavor: "azure"
     service-name: "Informatica DataManagement"
   "@azure-tools/typespec-csharp":
-    package-dir: Azure.ResourceManager.InformaticaDataManagement
     flavor: azure
+    package-dir: "Azure.ResourceManager.InformaticaDataManagement"
     clear-output-folder: true
-    namespace: "Azure.ResourceManager.InformaticaDataManagement"
+    model-namespace: true
+    namespace: "{package-dir}"
+    service-dir: "sdk/informaticadatamanagement"
   "@azure-tools/typespec-ts":
     service-dir: "sdk/informatica"
     experimental-extensible-enums: true

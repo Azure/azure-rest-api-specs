@@ -13,7 +13,7 @@ const colors = {
   white: "\x1b[37m",
   success: "\x1b[32m✓\x1b[0m", // Green checkmark
   warning: "\x1b[33m⚠\x1b[0m", // Yellow warning
-  error: "\x1b[31m✗\x1b[0m"    // Red X
+  error: "\x1b[31m✗\x1b[0m", // Red X
 };
 
 // Helper functions for colored logging

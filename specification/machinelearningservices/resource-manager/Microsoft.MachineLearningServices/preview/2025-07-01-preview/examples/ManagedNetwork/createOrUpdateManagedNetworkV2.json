@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "aml-workspace-name",
+    "managedNetworkName": "default",
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "properties": {
+        "managedNetwork": {
+          "isolationMode": "AllowOnlyApprovedOutbound",
+          "outboundRules": {
+            "rule_name_1": {
+              "type": "FQDN",
+              "destination": "destination_endpoint",
+              "category": "UserDefined"
+            }
+          },
+          "firewallSku": "Standard",
+          "enableNetworkMonitor": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/managedNetworks/default",
+        "name": "default",
+        "type": "Microsoft.MachineLearningServices/workspaces/managedNetworks",
+        "properties": {
+          "managedNetwork": {
+            "isolationMode": "AllowOnlyApprovedOutbound",
+            "networkId": "00000000-1111-2222-3333-444444444444",
+            "outboundRules": {
+              "rule_name_1": {
+                "type": "FQDN",
+                "destination": "destination_endpoint",
+                "status": "Active",
+                "category": "UserDefined",
+                "errorInformation": null
+              }
+            },
+            "firewallSku": "Standard",
+            "firewallPublicIpAddress": "22.22.131.49"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
