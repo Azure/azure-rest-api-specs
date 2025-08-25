@@ -186,7 +186,7 @@ interface Workspaces {
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     Workspace,
     void,
-    ArmResponse<ExternalFqdnResponse>
+    ArmResponse<ExternalFQDNResponse>
   >;
 
   /**
@@ -251,6 +251,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkResources_List")
+  @list
   @get
   @action("privateLinkResources")
   privateLinkResourcesList is ArmResourceActionSync<

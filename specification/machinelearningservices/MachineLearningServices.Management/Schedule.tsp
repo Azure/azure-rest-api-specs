@@ -35,7 +35,16 @@ interface Schedules {
   /**
    * Create or update schedule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Schedule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Schedule,
+    Response = ArmResourceUpdatedResponse<Schedule> | (ArmResourceCreatedResponse<Schedule> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete schedule.
@@ -62,7 +71,7 @@ interface Schedules {
        * Status filter for schedule.
        */
       @query("listViewType")
-      listViewType?: ScheduleListViewType;
+      listViewType?: ScheduleListViewType = ScheduleListViewType.EnabledOnly;
     },
     Response = ArmResponse<ScheduleResourceArmPaginatedResult>
   >;

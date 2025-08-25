@@ -42,7 +42,16 @@ interface OnlineEndpoints {
   /**
    * Create or update Online Endpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineEndpoint>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    OnlineEndpoint,
+    Response = ArmResourceUpdatedResponse<OnlineEndpoint> | (ArmResourceCreatedResponse<OnlineEndpoint> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update Online Endpoint (asynchronous).
@@ -50,7 +59,14 @@ interface OnlineEndpoints {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OnlineEndpoint,
-    PatchModel = PartialMinimalTrackedResourceWithIdentity
+    PatchModel = PartialMinimalTrackedResourceWithIdentity,
+    Response = OnlineEndpoint | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
@@ -59,7 +75,13 @@ interface OnlineEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -6131,51 +6131,6 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks": {
-      "get": {
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ManagedNetworkListResult",
-                "__new": "#/definitions/ManagedNetworkSettingsPropertiesBasicResourceListResult"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules": {
-      "post": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OutboundRuleListResult",
-                "__new": "#/definitions/OutboundRuleBasicResourceListResult"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules": {
-      "get": {
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OutboundRuleListResult",
-                "__new": "#/definitions/OutboundRuleBasicResourceListResult"
-              }
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions": {
       "get": {
         "parameters": [
@@ -6288,13 +6243,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/MarketplaceSubscriptionResource",
@@ -6304,11 +6252,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/MarketplaceSubscription",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/MarketplaceSubscription"
         }
       },
       "delete": {
@@ -6341,18 +6285,7 @@
               "type": "string"
             }
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
@@ -6554,12 +6487,7 @@
             " "
           ],
           [
-            "-",
-            {
-              "name": "version",
-              "in": "query",
-              "type": "string"
-            }
+            " "
           ],
           [
             " "
@@ -6881,13 +6809,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/OnlineEndpointTrackedResource",
@@ -6897,11 +6818,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/OnlineEndpoint",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/OnlineEndpoint"
         }
       },
       "patch": {
@@ -6937,15 +6854,6 @@
                 "__new": "#/definitions/OnlineEndpoint"
               }
             }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
           }
         }
       },
@@ -6970,18 +6878,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
@@ -7124,13 +7021,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/OnlineDeploymentTrackedResource",
@@ -7140,11 +7030,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/OnlineDeployment",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/OnlineDeployment"
         }
       },
       "patch": {
@@ -7195,15 +7081,6 @@
                 "__new": "#/definitions/OnlineDeployment"
               }
             }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
           }
         }
       },
@@ -7231,18 +7108,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
@@ -7278,9 +7144,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "-",
@@ -7402,34 +7265,6 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
-      "get": {
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ExternalFQDNResponse",
-                "__new": "#/definitions/ExternalFqdnResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules": {
-      "get": {
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OutboundRuleListResult",
-                "__new": "#/definitions/OutboundRuleBasicResourceListResult"
-              }
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
         "x-ms-pageable__deleted": {
@@ -7473,10 +7308,7 @@
             }
           ],
           [
-            "~",
-            {
-              "default__deleted": "EnabledOnly"
-            }
+            " "
           ]
         ]
       }
@@ -7567,13 +7399,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ScheduleResource",
@@ -7583,11 +7408,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/Schedule",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/Schedule"
         }
       },
       "delete": {
@@ -9384,20 +9205,6 @@
       ],
       "x-ms-client-name": "EnvironmentVersion"
     },
-    "ExternalFQDNResponse__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FQDNEndpointsPropertyBag"
-          },
-          "x-ms-identifiers": [
-            "/properties/category"
-          ]
-        }
-      }
-    },
     "FQDNEndpoint__deleted": {
       "type": "object",
       "properties": {
@@ -9840,24 +9647,6 @@
         }
       }
     },
-    "ManagedNetworkListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        },
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
-          }
-        }
-      }
-    },
     "MarketplaceSubscriptionResource__deleted": {
       "type": "object",
       "properties": {
@@ -10056,24 +9845,6 @@
           "x-ms-identifiers": [
             "/error/code"
           ]
-        }
-      }
-    },
-    "OutboundRuleListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        },
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/OutboundRuleBasicResource"
-          }
         }
       }
     },
@@ -10538,17 +10309,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.ResourceListResult<OutboundRuleBasicResource>>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>__added": {
       "type": "object",
       "properties": {
@@ -10598,6 +10358,17 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/NotebookResourceInfo"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<OutboundRuleListResult>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/OutboundRuleListResult"
         }
       },
       "required": [
@@ -11228,20 +10999,6 @@
         }
       ]
     },
-    "ExternalFqdnResponse__added": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FqdnEndpointsPropertyBag"
-          },
-          "x-ms-identifiers": [
-            "/properties/category"
-          ]
-        }
-      }
-    },
     "FeatureProperties__added": {
       "type": "object",
       "properties": {
@@ -11691,27 +11448,6 @@
         }
       ]
     },
-    "ManagedNetworkSettingsPropertiesBasicResourceListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MarketplaceSubscriptionProperties__added": {
       "type": "object",
       "properties": {
@@ -11975,27 +11711,6 @@
         {
           "$ref": "#/definitions/EndpointPropertiesBase"
         }
-      ]
-    },
-    "OutboundRuleBasicResourceListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/OutboundRuleBasicResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "RegistryProperties__added": {
@@ -14605,6 +14320,18 @@
         }
       }
     },
+    "ExternalFQDNResponse": {
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/FQDNEndpointsPropertyBag",
+              "__new": "#/definitions/FqdnEndpointsPropertyBag"
+            }
+          }
+        }
+      }
+    },
     "Feature": {
       "x-ms-client-name__deleted": "FeatureProperties",
       "required__added": [
@@ -16676,6 +16403,11 @@
         }
       }
     },
+    "ManagedNetworkListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "ManagedNetworkSettings": {
       "properties": {
         "enableNetworkMonitor": {
@@ -17507,6 +17239,11 @@
           "x-ms-client-flatten__added": true
         }
       }
+    },
+    "OutboundRuleListResult": {
+      "required__added": [
+        "value"
+      ]
     },
     "OutputPathAssetReference": {
       "properties": {

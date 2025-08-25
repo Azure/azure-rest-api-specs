@@ -62,7 +62,10 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettings_List")
-  list is ArmResourceListByParent<ManagedNetworkSettingsPropertiesBasicResource>;
+  list is ArmResourceListByParent<
+    ManagedNetworkSettingsPropertiesBasicResource,
+    Response = ManagedNetworkListResult
+  >;
 
   /**
    * The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.
@@ -70,10 +73,12 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OutboundRules_Post")
   @action("batchOutboundRules")
+  @list
+  @post
   post is ArmResourceActionAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     ManagedNetworkSettingsBasicResource,
-    ArmResponse<ResourceListResult<OutboundRuleBasicResource>>
+    ArmResponse<OutboundRuleListResult>
   >;
 }
 

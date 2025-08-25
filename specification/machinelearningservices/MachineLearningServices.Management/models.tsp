@@ -9129,7 +9129,7 @@ model ListStorageAccountKeysResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ExternalFqdnResponse {
+model ExternalFQDNResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
@@ -15754,3 +15754,8 @@ model CustomLocationParameter {
   @pattern("^[-\\w\\._]+$")
   location: string;
 }
+
+model ManagedNetworkListResult
+  is Azure.Core.Page<ManagedNetworkSettingsPropertiesBasicResource>;
+
+model OutboundRuleListResult is Azure.Core.Page<OutboundRuleBasicResource>;

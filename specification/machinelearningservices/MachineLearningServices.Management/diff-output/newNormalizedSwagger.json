@@ -11864,7 +11864,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResourceListResult"
+              "$ref": "#/definitions/ManagedNetworkListResult"
             }
           },
           "default": {
@@ -12054,7 +12054,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
+              "$ref": "#/definitions/OutboundRuleListResult"
             }
           },
           "202": {
@@ -12072,7 +12072,10 @@
             "$ref": "./examples/ManagedNetwork/postOutboundRulesV2.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules": {
@@ -12098,7 +12101,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
+              "$ref": "#/definitions/OutboundRuleListResult"
             }
           },
           "default": {
@@ -12383,6 +12386,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MarketplaceSubscription"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -12398,7 +12408,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/MarketplaceSubscription"
         },
         "x-ms-long-running-operation": true
@@ -12422,7 +12432,14 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -12663,6 +12680,11 @@
             "in": "query",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "type": "string"
           },
           {
             "name": "description",
@@ -13094,6 +13116,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/OnlineEndpoint"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -13109,7 +13138,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/OnlineEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -13147,7 +13176,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -13185,7 +13221,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -13352,6 +13395,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/OnlineDeployment"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -13370,7 +13420,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/OnlineDeployment"
         },
         "x-ms-long-running-operation": true
@@ -13414,7 +13464,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -13461,7 +13518,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -13590,6 +13654,9 @@
           "List Managed Online Deployment Skus.": {
             "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/listSkus.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13735,7 +13802,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ExternalFqdnResponse"
+              "$ref": "#/definitions/ExternalFQDNResponse"
             }
           },
           "default": {
@@ -13768,7 +13835,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
+              "$ref": "#/definitions/OutboundRuleListResult"
             }
           },
           "default": {
@@ -14242,6 +14309,7 @@
             "name": "listViewType",
             "in": "query",
             "type": "string",
+            "default": "EnabledOnly",
             "enum": [
               "EnabledOnly",
               "DisabledOnly",
@@ -14351,6 +14419,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/Schedule"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -14366,7 +14441,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Schedule"
         },
         "x-ms-long-running-operation": true
@@ -15273,17 +15348,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.ResourceListResult<OutboundRuleBasicResource>>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>": {
       "type": "object",
       "properties": {
@@ -15333,6 +15397,17 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/NotebookResourceInfo"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<OutboundRuleListResult>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/OutboundRuleListResult"
         }
       },
       "required": [
@@ -19413,7 +19488,7 @@
         "values"
       ]
     },
-    "ExternalFqdnResponse": {
+    "ExternalFQDNResponse": {
       "type": "object",
       "properties": {
         "value": {
@@ -22445,6 +22520,27 @@
       ],
       "x-ms-discriminator-value": "ManagedIdentity"
     },
+    "ManagedNetworkListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ManagedNetworkProvisionOptions": {
       "type": "object",
       "properties": {
@@ -22606,27 +22702,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ManagedNetworkSettingsPropertiesBasicResourceListResult": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ManagedOnlineDeployment": {
@@ -24246,7 +24321,7 @@
         }
       ]
     },
-    "OutboundRuleBasicResourceListResult": {
+    "OutboundRuleListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
       "properties": {

@@ -42,7 +42,16 @@ interface OnlineDeployments {
   /**
    * Create or update Inference Endpoint Deployment (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineDeployment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    OnlineDeployment,
+    Response = ArmResourceUpdatedResponse<OnlineDeployment> | (ArmResourceCreatedResponse<OnlineDeployment> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update Online Deployment (asynchronous).
@@ -50,7 +59,14 @@ interface OnlineDeployments {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OnlineDeployment,
-    PatchModel = PartialMinimalTrackedResourceWithSku
+    PatchModel = PartialMinimalTrackedResourceWithSku,
+    Response = OnlineDeployment | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
@@ -59,7 +75,13 @@ interface OnlineDeployments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeployment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -101,6 +123,7 @@ interface OnlineDeployments {
   /**
    * List Inference Endpoint Deployment Skus.
    */
+  @list
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<

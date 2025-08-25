@@ -87,7 +87,10 @@ interface OutboundRuleBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettingsRule_List")
-  list is OutboundRuleBasicResourceOps.List<OutboundRuleBasicResource>;
+  list is OutboundRuleBasicResourceOps.List<
+    OutboundRuleBasicResource,
+    Response = OutboundRuleListResult
+  >;
 }
 @armResourceOperations
 interface OutboundRuleBasicResourceOperationGroupOps
@@ -153,7 +156,10 @@ interface OutboundRuleBasicResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OutboundRule_List")
-  list is OutboundRuleBasicResourceOperationGroupOps.List<OutboundRuleBasicResource>;
+  list is OutboundRuleBasicResourceOperationGroupOps.List<
+    OutboundRuleBasicResource,
+    Response = OutboundRuleListResult
+  >;
 }
 
 @@doc(OutboundRuleBasicResource.name,

@@ -17159,9 +17159,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResourceListResult"
+              "$ref": "#/definitions/ManagedNetworkListResult"
             }
           },
           "default": {
@@ -17444,7 +17444,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
+              "$ref": "#/definitions/OutboundRuleListResult"
             }
           },
           "202": {
@@ -17475,9 +17475,12 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CAzure.ResourceManager.ResourceListResult%3COutboundRuleBasicResource%3E%3E"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3COutboundRuleListResult%3E"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules": {
@@ -17516,9 +17519,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
+              "$ref": "#/definitions/OutboundRuleListResult"
             }
           },
           "default": {
@@ -17924,19 +17927,20 @@
             }
           },
           "201": {
-            "description": "Resource 'MarketplaceSubscription' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/MarketplaceSubscription"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -17953,7 +17957,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/MarketplaceSubscription"
         },
         "x-ms-long-running-operation": true
@@ -17992,7 +17996,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -18002,6 +18006,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -18348,6 +18357,13 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Model version.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "description",
@@ -18974,19 +18990,20 @@
             }
           },
           "201": {
-            "description": "Resource 'OnlineEndpoint' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/OnlineEndpoint"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -19003,7 +19020,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/OnlineEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -19051,13 +19068,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OnlineEndpoint"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -19067,6 +19084,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -19083,8 +19105,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/OnlineEndpoint"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -19125,7 +19146,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -19135,6 +19156,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -19357,19 +19383,20 @@
             }
           },
           "201": {
-            "description": "Resource 'OnlineDeployment' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/OnlineDeployment"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -19389,7 +19416,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/OnlineDeployment"
         },
         "x-ms-long-running-operation": true
@@ -19444,13 +19471,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OnlineDeployment"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -19460,6 +19487,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -19479,8 +19511,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/OnlineDeployment"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -19528,7 +19559,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -19538,6 +19569,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -19708,6 +19744,9 @@
           "List Managed Online Deployment Skus.": {
             "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/listSkus.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -19928,7 +19967,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExternalFqdnResponse"
+              "$ref": "#/definitions/ExternalFQDNResponse"
             }
           },
           "default": {
@@ -19973,9 +20012,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResourceListResult"
+              "$ref": "#/definitions/OutboundRuleListResult"
             }
           },
           "default": {
@@ -20704,6 +20743,7 @@
             "description": "Status filter for schedule.",
             "required": false,
             "type": "string",
+            "default": "EnabledOnly",
             "enum": [
               "EnabledOnly",
               "DisabledOnly",
@@ -20855,19 +20895,20 @@
             }
           },
           "201": {
-            "description": "Resource 'Schedule' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Schedule"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -20884,7 +20925,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Schedule"
         },
         "x-ms-long-running-operation": true
@@ -22107,19 +22148,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.ResourceListResult<OutboundRuleBasicResource>>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/OutboundRuleBasicResourceListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -22178,6 +22206,19 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/NotebookResourceInfo",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<OutboundRuleListResult>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/OutboundRuleListResult",
           "description": "The body type of the operation request or response."
         }
       },
@@ -28124,7 +28165,7 @@
         "values"
       ]
     },
-    "ExternalFqdnResponse": {
+    "ExternalFQDNResponse": {
       "type": "object",
       "properties": {
         "value": {
@@ -32060,6 +32101,27 @@
         ]
       }
     },
+    "ManagedNetworkListResult": {
+      "type": "object",
+      "description": "Paged collection of ManagedNetworkSettingsPropertiesBasicResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedNetworkSettingsPropertiesBasicResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ManagedNetworkProvisionOptions": {
       "type": "object",
       "description": "Managed Network Provisioning options for managed network of a machine learning workspace.",
@@ -32225,27 +32287,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ManagedNetworkSettingsPropertiesBasicResourceListResult": {
-      "type": "object",
-      "description": "The response of a ManagedNetworkSettingsPropertiesBasicResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ManagedNetworkSettingsPropertiesBasicResource items on this page",
-          "items": {
-            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ManagedNetworkStatus": {
@@ -34486,9 +34527,9 @@
         }
       ]
     },
-    "OutboundRuleBasicResourceListResult": {
+    "OutboundRuleListResult": {
       "type": "object",
-      "description": "The response of a OutboundRuleBasicResource list operation.",
+      "description": "Paged collection of OutboundRuleBasicResource items",
       "properties": {
         "value": {
           "type": "array",

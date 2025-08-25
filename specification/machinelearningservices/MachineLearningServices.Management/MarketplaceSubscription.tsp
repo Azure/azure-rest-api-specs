@@ -38,12 +38,30 @@ interface MarketplaceSubscriptions {
   /**
    * Create or update Marketplace Subscription (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<MarketplaceSubscription>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    MarketplaceSubscription,
+    Response = ArmResourceUpdatedResponse<MarketplaceSubscription> | (ArmResourceCreatedResponse<MarketplaceSubscription> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Delete Marketplace Subscription (asynchronous).
    */
-  delete is ArmResourceDeleteWithoutOkAsync<MarketplaceSubscription>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    MarketplaceSubscription,
+    Response = (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List containers.

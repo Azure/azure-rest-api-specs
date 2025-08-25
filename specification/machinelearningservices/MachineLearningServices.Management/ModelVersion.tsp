@@ -245,6 +245,12 @@ interface ModelVersionOperationGroup {
       $top?: int32;
 
       /**
+       * Model version.
+       */
+      @query("version")
+      version?: string;
+
+      /**
        * Model description.
        */
       @query("description")
