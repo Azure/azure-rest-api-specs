@@ -186,6 +186,11 @@ namespace Azure.AI.Agents {
         @added(Versions.v2025_05_15_preview)
         toolApprovals?: ToolApproval[];
 
+        @doc("The overridden enabled tool resources that the agent should use to run the thread.")
+        @encodedName("application/json", "tool_resources")
+        @added(Versions.v2025_05_15_preview)
+        toolResources?: ToolResources;
+
         #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability"
         @doc("If true, returns a stream of events that happen during the Run as SSE, terminating at `[DONE]`.")
         stream?: boolean | null;
