@@ -221,20 +221,23 @@ model CloseSessionResponse {
 
 /** Response model for create notification session operation. */
 model CreateNotificationSessionResponse {
-  /** The resource ID. */
+  @doc("The resource ID.")
   id?: string;
 
-  /** The resource name. */
+  @doc("The resource name.")
   name?: string;
 
-  /** The resource type. */
+  @doc("The resource type.")
   type?: string;
 
-  /** The location of the resource. */
+  @doc("The location of the resource.")
   location?: string;
 
-  /** The properties of the notification session. */
+  @doc("The properties of the notification session.")
   properties?: NotificationSessionProperties;
+
+  @doc("The system metadata related to this resource.")
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 /*
@@ -259,7 +262,12 @@ interface NotificationsSessions {
     notificationSessionName: string,
 
     ...ApiVersionParameter,
-  ): CreateNotificationSessionResponse | CommonTypes.ErrorResponse;
+  ): 
+    | {
+        @statusCode _: 201;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | CommonTypes.ErrorResponse;
 
   /** Get session details. */
   @post
@@ -280,7 +288,12 @@ interface NotificationsSessions {
     body: GetSessionDetailsRequest,
 
     ...ApiVersionParameter,
-  ): GetSessionDetailsResponse | CommonTypes.ErrorResponse;
+  ): 
+    | {
+        @statusCode _: 200;
+        @body body: GetSessionDetailsResponse;
+      }
+    | CommonTypes.ErrorResponse;
 
   /** Close the session. */
   @post
@@ -297,5 +310,10 @@ interface NotificationsSessions {
     notificationSessionId: string,
 
     ...ApiVersionParameter,
-  ): CloseSessionResponse | CommonTypes.ErrorResponse;
+  ): 
+    | {
+        @statusCode _: 200;
+        @body body: CloseSessionResponse;
+      }
+    | CommonTypes.ErrorResponse;
 }
