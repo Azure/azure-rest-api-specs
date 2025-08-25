@@ -3,14 +3,30 @@
     "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
     "resourceGroupName": "examplerg",
     "topicName": "exampletopic2",
-    "api-version": "2025-04-01-preview"
+    "api-version": "2025-07-15-preview"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
           "endpoint": "https://exampletopic2.westcentralus-1.eventgrid.azure.net/api/events",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "platformCapabilities": {
+            "confidentialCompute": {
+              "mode": "Enabled"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "principalId": null,
+          "tenantId": null,
+          "userAssignedIdentities": {
+            "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {
+              "principalId": "a6435981-c82d-453b-b244-3115b7c3779c",
+              "clientId": "61ff8271-d251-4766-9c41-15565fa13157"
+            }
+          }
         },
         "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2",
         "location": "westcentralus",

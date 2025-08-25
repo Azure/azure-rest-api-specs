@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-04-01-preview",
+    "version": "2025-07-15-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -15649,6 +15649,13 @@
           "format": "int32",
           "description": "Event retention for the namespace topic expressed in days. The property default value is 1 day.\r\nMin event retention duration value is 1 day and max event retention duration value is 1 day.",
           "type": "integer"
+        },
+        "tags": {
+          "description": "Tags relating to the namespace topic.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -15693,6 +15700,13 @@
           "format": "int32",
           "description": "Event retention for the namespace topic expressed in days. The property default value is 1 day.\r\nMin event retention duration value is 1 day and max event retention duration value is 1 day.",
           "type": "integer"
+        },
+        "tags": {
+          "description": "Tags relating to namespace topic resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -16964,6 +16978,14 @@
           "description": "Metric resource id for the system topic.",
           "type": "string",
           "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/KeyEncryption",
+          "description": "Key encryption configuration properties of the system topic resource. This is an optional property. When not specified, no key encryption is used."
+        },
+        "platformCapabilities": {
+          "$ref": "#/definitions/PlatformCapabilities",
+          "description": "Represents the platform capabilities of the resource, including Azure Confidential Compute related properties."
         }
       }
     },
@@ -17139,6 +17161,14 @@
             "name": "DataResidencyBoundary",
             "modelAsString": true
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/KeyEncryption",
+          "description": "Key encryption configuration properties of the topic resource. This is an optional property. When not specified, no key encryption is used."
+        },
+        "platformCapabilities": {
+          "$ref": "#/definitions/PlatformCapabilities",
+          "description": "Represents the platform capabilities of the resource, including Azure Confidential Compute related properties."
         }
       }
     },
@@ -17939,6 +17969,110 @@
             "$ref": "#/definitions/CustomDomainConfiguration"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "CustomerManagedKeyEncryption": {
+      "description": "All Customer-managed key encryption properties for the resource.",
+      "required": [
+        "keyEncryptionKeyUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "keyEncryptionKeyUrl": {
+          "description": "Key encryption key URL. This URL can be either versioned (e.g., https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78), or unversioned (e.g.,\r\nhttps://contosovault.vault.azure.net/keys/contosokek. When versioned URL is used, this version of the key will be used by Event Grid Runtime even if it is rotated. It is user\r\nresponsibility to update the URL with the new version by updating the namespace resource. When URL without version is used, Event Grid will query and get latest version and will\r\nbe used automatically.",
+          "type": "string"
+        },
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault. This is an optional property.\r\nWhen not specified, the SystemAssigned identity will be used."
+        },
+        "keyEncryptionKeyStatus": {
+          "description": "The state of the Customer Managed Key (CMK) encryption. This is a read-only property which determines if the associated key is active and valid and used\r\nactively by runtime as expected. When the associated CMK becomes invalid (e.g., if it is deleted, or if versioned CMK is not current anymore), Event Grid\r\nService will set this state to disabled to indicate that this key is not valid anymore and requires action from user.",
+          "enum": [
+            "Active",
+            "Revoked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyEncryptionKeyStatus",
+            "modelAsString": true
+          }
+        },
+        "keyEncryptionKeyStatusFriendlyDescription": {
+          "description": "Friendly description about the Customer Managed Key (CMK) encryption state. This is a read-only property which determines why the associated key is revoked which\r\nwill help user to mitigate the issue and re-enable the CMK key.",
+          "type": "string"
+        }
+      }
+    },
+    "KeyEncryption": {
+      "description": "Properties of the Encryption settings.",
+      "required": [
+        "customerManagedKeyEncryption"
+      ],
+      "type": "object",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "description": "List of all customer-managed key encryption properties for the resource. However only one key is supported at a time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerManagedKeyEncryption"
+          }
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentity": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used. Only UserAssigned or SystemAssigned Identity are supported.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyEncryptionIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentityResourceId": {
+          "description": "ARM fully qualified Id for the user-assigned identity associated with the resource. The resource Id takes the following format:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "string"
+        }
+      }
+    },
+    "ConfidentialCompute": {
+      "description": "Azure Confidential Compute properties of the resource.",
+      "required": [
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "This property specifies the mode of the Azure Confidential Compute configuration.\r\nPossible values are 'Disabled' or 'Enabled'.\r\nThis is an immutable property set at the time of resource creation and cannot be modified later.\r\nEnabling this property ensures that messages are processed and stored in a Azure Confidential Compute environment.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConfidentialComputeMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PlatformCapabilities": {
+      "description": "Platform capabilities properties of the resource.",
+      "type": "object",
+      "properties": {
+        "confidentialCompute": {
+          "$ref": "#/definitions/ConfidentialCompute",
+          "description": "Represents the Azure Confidential Compute properties of the resource."
         }
       }
     }
