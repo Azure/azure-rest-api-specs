@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-03-01'
 input-file:
-  - Microsoft.ManufacturingPlatform/stable/2025-03-01/manufacturingplatform.json
+  - stable/2025-03-01/manufacturingplatform.json
 suppressions:
   - code: AvoidAnonymousTypes
     from: manufacturingplatform.json
