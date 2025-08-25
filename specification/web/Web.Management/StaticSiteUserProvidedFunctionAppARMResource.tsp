@@ -1,0 +1,194 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./StaticSiteBuildARMResource.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Web;
+/**
+ * Static Site User Provided Function App ARM resource.
+ */
+@parentResource(StaticSiteBuildARMResource)
+model StaticSiteUserProvidedFunctionAppARMResource
+  is Azure.ResourceManager.ProxyResource<StaticSiteUserProvidedFunctionAppARMResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = StaticSiteUserProvidedFunctionAppARMResource,
+    KeyName = "functionAppName",
+    SegmentName = "userProvidedFunctionApps",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface StaticSiteUserProvidedFunctionAppARMResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the static site. */
+        @path
+        @segment("staticSites")
+        @key
+        name: string,
+
+        /** The stage site identifier. */
+        @path
+        @segment("builds")
+        @key
+        environmentName: string,
+      },
+      {
+        /** Name of the function app registered with the static site build. */
+        @path
+        @segment("userProvidedFunctionApps")
+        @key
+        functionAppName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface StaticSiteUserProvidedFunctionAppARMResources {
+  /**
+   * Description for Gets the details of the user provided function app registered with a static site build
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StaticSites_GetUserProvidedFunctionAppForStaticSiteBuild")
+  getUserProvidedFunctionAppForStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.Read<StaticSiteUserProvidedFunctionAppARMResource>;
+
+  /**
+   * Description for Register a user provided function app with a static site build
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("StaticSites_RegisterUserProvidedFunctionAppWithStaticSiteBuild")
+  registerUserProvidedFunctionAppWithStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.CreateOrUpdateAsync<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    Parameters = {
+      /**
+       * Specify <code>true</code> to force the update of the auth configuration on the function app even if an AzureStaticWebApps provider is already configured on the function app. The default is <code>false</code>.
+       */
+      @query("isForced")
+      isForced?: boolean;
+    },
+    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: StaticSiteUserProvidedFunctionAppARMResource;
+    }),
+    LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Description for Detach the user provided function app from the static site build
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StaticSites_DetachUserProvidedFunctionAppFromStaticSiteBuild")
+  detachUserProvidedFunctionAppFromStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.DeleteSync<StaticSiteUserProvidedFunctionAppARMResource>;
+
+  /**
+   * Description for Gets the details of the user provided function apps registered with a static site build
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StaticSites_GetUserProvidedFunctionAppsForStaticSiteBuild")
+  getUserProvidedFunctionAppsForStaticSiteBuild is StaticSiteUserProvidedFunctionAppARMResourceOps.List<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    Response = ArmResponse<StaticSiteUserProvidedFunctionAppsCollection>
+  >;
+}
+@armResourceOperations
+interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the static site. */
+        @path
+        @segment("staticSites")
+        @key
+        name: string,
+      },
+      {
+        /** Name of the function app registered with the static site. */
+        @path
+        @segment("userProvidedFunctionApps")
+        @key
+        functionAppName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
+  /**
+   * Description for Gets the details of the user provided function app registered with a static site
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StaticSites_GetUserProvidedFunctionAppForStaticSite")
+  getUserProvidedFunctionAppForStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.Read<StaticSiteUserProvidedFunctionAppARMResource>;
+
+  /**
+   * Description for Register a user provided function app with a static site
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("StaticSites_RegisterUserProvidedFunctionAppWithStaticSite")
+  registerUserProvidedFunctionAppWithStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.CreateOrUpdateAsync<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    Parameters = {
+      /**
+       * Specify <code>true</code> to force the update of the auth configuration on the function app even if an AzureStaticWebApps provider is already configured on the function app. The default is <code>false</code>.
+       */
+      @query("isForced")
+      isForced?: boolean;
+    },
+    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: StaticSiteUserProvidedFunctionAppARMResource;
+    }),
+    LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Description for Detach the user provided function app from the static site
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StaticSites_DetachUserProvidedFunctionAppFromStaticSite")
+  detachUserProvidedFunctionAppFromStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.DeleteSync<StaticSiteUserProvidedFunctionAppARMResource>;
+
+  /**
+   * Description for Gets the details of the user provided function apps registered with a static site
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StaticSites_GetUserProvidedFunctionAppsForStaticSite")
+  getUserProvidedFunctionAppsForStaticSite is StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps.List<
+    StaticSiteUserProvidedFunctionAppARMResource,
+    Response = ArmResponse<StaticSiteUserProvidedFunctionAppsCollection>
+  >;
+}
+
+@@doc(StaticSiteUserProvidedFunctionAppARMResource.name,
+  "Name of the function app registered with the static site build."
+);
+@@doc(StaticSiteUserProvidedFunctionAppARMResource.properties,
+  "StaticSiteUserProvidedFunctionAppARMResource resource specific properties"
+);
+@@doc(StaticSiteUserProvidedFunctionAppARMResources.registerUserProvidedFunctionAppWithStaticSiteBuild::parameters.resource,
+  "A JSON representation of the user provided function app properties. See example."
+);
+@@doc(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.registerUserProvidedFunctionAppWithStaticSite::parameters.resource,
+  "A JSON representation of the user provided function app properties. See example."
+);

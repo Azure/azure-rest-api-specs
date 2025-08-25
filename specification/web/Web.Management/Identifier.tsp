@@ -1,0 +1,191 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Site.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Web;
+/**
+ * A domain specific resource identifier.
+ */
+@parentResource(Site)
+model Identifier is Azure.ResourceManager.ProxyResource<IdentifierProperties> {
+  ...ResourceNameParameter<
+    Resource = Identifier,
+    KeyName = "domainOwnershipIdentifierName",
+    SegmentName = "domainOwnershipIdentifiers",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface IdentifierOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+      },
+      {
+        /** Name of domain ownership identifier. */
+        @path
+        @segment("domainOwnershipIdentifiers")
+        @key
+        domainOwnershipIdentifierName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface Identifiers {
+  /**
+   * Description for Get domain ownership identifier for web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetDomainOwnershipIdentifier")
+  getDomainOwnershipIdentifier is IdentifierOps.Read<Identifier>;
+
+  /**
+   * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("WebApps_CreateOrUpdateDomainOwnershipIdentifier")
+  createOrUpdateDomainOwnershipIdentifier is IdentifierOps.CreateOrUpdateSync<
+    Identifier,
+    Response = ArmResourceUpdatedResponse<Identifier>
+  >;
+
+  /**
+   * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateDomainOwnershipIdentifier")
+  @patch(#{ implicitOptionality: false })
+  updateDomainOwnershipIdentifier is IdentifierOps.CustomPatchSync<
+    Identifier,
+    PatchModel = Identifier
+  >;
+
+  /**
+   * Description for Deletes a domain ownership identifier for a web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_DeleteDomainOwnershipIdentifier")
+  deleteDomainOwnershipIdentifier is IdentifierOps.DeleteSync<Identifier>;
+
+  /**
+   * Description for Lists ownership identifiers for domain associated with web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListDomainOwnershipIdentifiers")
+  listDomainOwnershipIdentifiers is IdentifierOps.List<
+    Identifier,
+    Response = ArmResponse<IdentifierCollection>
+  >;
+}
+@armResourceOperations
+interface IdentifierOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the app. */
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        /** Name of the deployment slot. If a slot is not specified, the API will delete the binding for the production slot. */
+        @path
+        @segment("slots")
+        @key
+        slot: string,
+      },
+      {
+        /** Name of domain ownership identifier. */
+        @path
+        @segment("domainOwnershipIdentifiers")
+        @key
+        domainOwnershipIdentifierName: string,
+      }
+    > {}
+
+@armResourceOperations
+interface IdentifierOperationGroup {
+  /**
+   * Description for Get domain ownership identifier for web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_GetDomainOwnershipIdentifierSlot")
+  getDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.Read<Identifier>;
+
+  /**
+   * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("WebApps_CreateOrUpdateDomainOwnershipIdentifierSlot")
+  createOrUpdateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CreateOrUpdateSync<
+    Identifier,
+    Response = ArmResourceUpdatedResponse<Identifier>
+  >;
+
+  /**
+   * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_UpdateDomainOwnershipIdentifierSlot")
+  @patch(#{ implicitOptionality: false })
+  updateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CustomPatchSync<
+    Identifier,
+    PatchModel = Identifier
+  >;
+
+  /**
+   * Description for Deletes a domain ownership identifier for a web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_DeleteDomainOwnershipIdentifierSlot")
+  deleteDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.DeleteSync<Identifier>;
+
+  /**
+   * Description for Lists ownership identifiers for domain associated with web app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WebApps_ListDomainOwnershipIdentifiersSlot")
+  listDomainOwnershipIdentifiersSlot is IdentifierOperationGroupOps.List<
+    Identifier,
+    Response = ArmResponse<IdentifierCollection>
+  >;
+}
+
+@@doc(Identifier.name, "Name of domain ownership identifier.");
+@@doc(Identifier.properties, "Identifier resource specific properties");
+@@doc(Identifiers.createOrUpdateDomainOwnershipIdentifier::parameters.resource,
+  "A JSON representation of the domain ownership properties."
+);
+@@doc(Identifiers.updateDomainOwnershipIdentifier::parameters.properties,
+  "A JSON representation of the domain ownership properties."
+);
+@@doc(IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot::parameters.resource,
+  "A JSON representation of the domain ownership properties."
+);
+@@doc(IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot::parameters.properties,
+  "A JSON representation of the domain ownership properties."
+);
