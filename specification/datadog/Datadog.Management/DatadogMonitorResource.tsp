@@ -35,7 +35,8 @@ interface DatadogMonitorResourcesOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-
+      },
+      {
         /**
          * Monitor resource name
          */
@@ -43,7 +44,6 @@ interface DatadogMonitorResourcesOps
         @segment("monitors")
         monitorName: string,
       },
-      {},
       ErrorResponse
     > {}
 
