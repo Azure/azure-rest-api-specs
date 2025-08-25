@@ -1,0 +1,76 @@
+{
+  "title": "Create a notification session",
+  "operationId": "NotificationsSessions_CreateNotificationSession",
+  "description": "This example demonstrates creating a new notification session with a user-friendly name.",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "location": "westus2",
+    "notificationSessionName": "MyTestSession"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
+        "name": "MyTestSession",
+        "type": "Microsoft.ResourceNotifications/notificationSessions",
+        "location": "westus2",
+        "properties": {
+          "description": "Test notification session for development purposes",
+          "status": "Active",
+          "maxDurationMinutes": 1440,
+          "startTime": "2025-01-27T14:30:00.000Z",
+          "configuration": "{\"retryPolicy\": \"exponential\", \"maxRetries\": 3}",
+          "provisioningState": "Succeeded",
+          "createdAt": "2025-01-27T14:30:00.000Z",
+          "updatedAt": "2025-01-27T14:30:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
+        "Retry-After": "30"
+      },
+      "body": {}
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidSessionName",
+          "message": "The notification session name 'MyTestSession' is invalid. Session names must be between 3 and 64 characters and contain only alphanumeric characters and hyphens."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "The request is not authorized. Please ensure you have valid authentication credentials and proper permissions to create notification sessions."
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": "60"
+      },
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "Too many requests have been made. Please wait and retry after the specified time period."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An internal server error occurred while creating the notification session. Please try again later."
+        }
+      }
+    }
+  }
+}
