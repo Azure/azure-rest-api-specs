@@ -13,12 +13,8 @@ namespace Microsoft.RecoveryServices;
 /**
  * Resource information, as returned by the resource provider.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model Vault extends Foundations.TrackedResource {
+model Vault is Azure.ResourceManager.TrackedResource<VaultProperties, true> {
   ...ResourceNameParameter<
     Resource = Vault,
     KeyName = "vaultName",
@@ -31,13 +27,6 @@ model Vault extends Foundations.TrackedResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityData;
-
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: VaultProperties;
 
   /**
    * Identifies the unique system identifier for each Azure resource.
