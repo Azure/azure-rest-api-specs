@@ -174,6 +174,7 @@ interface NodeTypes {
    * Gets the list of recent fault simulations for the node type.
    */
   @tag("FaultSimulation")
+  @list
   listFaultSimulation is ArmResourceActionSync<
     NodeType,
     void,
@@ -190,6 +191,7 @@ interface NodeTypeSkus {
   @get
   @action("skus")
   @operationId("NodeTypeSkus_List")
+  @list
   list is ArmResourceActionSync<
     NodeType,
     void,
@@ -537,6 +539,12 @@ model NodeTypeProperties {
    */
   @added(Versions.v2025_03_01_preview)
   zoneBalance?: boolean;
+
+  /**
+   * Specifies the node type should be configured for only outbound traffic and not inbound traffic.
+   */
+  @added(Versions.v2025_06_01_preview)
+  isOutboundOnly?: boolean;
 }
 
 /**
