@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-03-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2025-03-preview-only'
 input-file:
-  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
+  - preview/2025-03-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2025-03-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2025-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2025-03-preview'
 input-file:
-  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
+  - preview/2025-03-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2019-06-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2019-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-06-preview'
 input-file:
-- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+- preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2019-06-preview-only
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2019-06-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2019-06-preview-only'
 input-file:
-- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+- preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2019-04
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
-- Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
+- stable/2019-04-01/containerregistry_build.json
 ```
 
 ### Tag: package-2019-04-only
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2019-04-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2019-04-only'
 input-file:
-- Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
+- stable/2019-04-01/containerregistry_build.json
 ```
 
 ### Tag: package-2018-09-only
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-2018-09-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2018-09-only'
 input-file:
-- Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+- stable/2018-09-01/containerregistry_build.json
 ```
 
 ### Tag: package-2018-09
@@ -98,7 +98,7 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
-- Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
+- stable/2018-09-01/containerregistry_build.json
 ```
 
 ---
