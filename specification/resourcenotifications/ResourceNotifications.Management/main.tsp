@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.ResourceNotifications Management Service" })
@@ -92,7 +93,7 @@ model TenantLocationProperties {
 }
 
 /** Tenant location resource that represents an Azure location at tenant scope. */
-model TenantLocationResource is ProxyResource<TenantLocationProperties> {
+model TenantLocationResource is Azure.ResourceManager.ProxyResource<TenantLocationProperties> {
   /** The name of the location. */
   @key
   @path
@@ -168,7 +169,7 @@ model NotificationSessionStatistics {
 /** A notification session resource that operates within a specific location at tenant scope. */
 @parentResource(TenantLocationResource)
 model NotificationSessionResource
-  is ProxyResource<NotificationSessionProperties> {
+  is Azure.ResourceManager.ProxyResource<NotificationSessionProperties> {
   /** Name of the notification session. */
   @key
   @path
@@ -241,7 +242,7 @@ model CreateNotificationSessionResponse {
  */
 
 /** Operations for notification sessions. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations, not standard ARM resource operations"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations for notification sessions, not standard ARM resource operations"
 interface NotificationsSessions {
   /** Create a notification session. */
   @post
@@ -258,7 +259,7 @@ interface NotificationsSessions {
     notificationSessionName: string,
 
     ...ApiVersionParameter,
-  ): CreateNotificationSessionResponse;
+  ): CreateNotificationSessionResponse | CommonTypes.ErrorResponse;
 
   /** Get session details. */
   @post
@@ -279,7 +280,7 @@ interface NotificationsSessions {
     body: GetSessionDetailsRequest,
 
     ...ApiVersionParameter,
-  ): GetSessionDetailsResponse;
+  ): GetSessionDetailsResponse | CommonTypes.ErrorResponse;
 
   /** Close the session. */
   @post
@@ -296,5 +297,5 @@ interface NotificationsSessions {
     notificationSessionId: string,
 
     ...ApiVersionParameter,
-  ): CloseSessionResponse;
+  ): CloseSessionResponse | CommonTypes.ErrorResponse;
 }
