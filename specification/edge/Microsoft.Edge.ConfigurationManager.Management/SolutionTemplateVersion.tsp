@@ -87,7 +87,6 @@ model BulkPublishSolutionParameter {
   @added(Versions.v2025_08_01)
   @doc("Configuration of solution")
   solutionConfiguration?: string;
-
 }
 
 @doc("Bulk publish target details")
@@ -114,7 +113,6 @@ model BulkPublishTargetDetails {
   @added(Versions.v2025_08_01)
   @doc("Configuration of solution")
   solutionConfiguration?: string;
-
 }
 
 @added(Versions.v2025_08_01)
@@ -180,5 +178,4 @@ interface SolutionTemplateVersions {
     SolutionTemplateVersion,
     BulkReviewSolutionParameter
   >;
-
 }
