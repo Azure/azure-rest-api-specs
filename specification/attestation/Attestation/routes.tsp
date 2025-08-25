@@ -89,7 +89,7 @@ model AddPolicyCertificateRequest {
 /** Request model for removing a policy certificate */
 model RemovePolicyCertificateRequest {
   /** The certificate to remove, as a string (e.g., PEM or JWK) */
-  certificate: string;
+  policyCertificateToRemove: string;
 }
 
 interface PolicyCertificatesOperationGroup {
