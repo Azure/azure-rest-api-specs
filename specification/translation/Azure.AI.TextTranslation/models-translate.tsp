@@ -245,10 +245,10 @@ model TranslateBodyDetails {
 @added(APIVersion.v2025_05_01_preview)
 model ReferenceSentencePair {
   @doc("Source reference sentence.")
-  referenceTextPairsSource: string;
+  source: string;
 
   @doc("Target reference sentence.")
-  referenceTextPairsTarget: string;
+  target: string;
 }
 
 @doc("Response for the translation API.")
@@ -360,11 +360,28 @@ model TranslationText {
 
   @added(APIVersion.v2025_05_01_preview)
   @doc("An interger indicating the number of characters in the source text string")
-  sourceCharacters: int32;
+  sourceCharacters?: int32;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("An interger indicating the number of tokens used in generating the translated text")
+  instructionTokens?: int32;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("An interger indicating the number of tokens used in the source sentence")
+  sourceTokens?: int32;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("An interger indicating the number of tokens used in the translation response")
+  responseTokens?: int32;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("An interger indicating the number of tokens used in the target sentence")
+  targetTokens?: int32;
 
   @doc("A string giving the translated text.")
   text: string;
 
+  @removed(APIVersion.v2025_05_01_preview)
   @doc("""
     An object giving the translated text in the script specified by the toScript parameter.
     """)

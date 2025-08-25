@@ -477,18 +477,18 @@
       "type": "object",
       "description": "Reference sentence pair.",
       "properties": {
-        "referenceTextPairsSource": {
+        "source": {
           "type": "string",
           "description": "Source reference sentence."
         },
-        "referenceTextPairsTarget": {
+        "target": {
           "type": "string",
           "description": "Target reference sentence."
         }
       },
       "required": [
-        "referenceTextPairsSource",
-        "referenceTextPairsTarget"
+        "source",
+        "target"
       ]
     },
     "SourceDictionaryLanguage": {
@@ -879,18 +879,33 @@
           "format": "int32",
           "description": "An interger indicating the number of characters in the source text string"
         },
+        "instructionTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An interger indicating the number of tokens used in generating the translated text"
+        },
+        "sourceTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An interger indicating the number of tokens used in the source sentence"
+        },
+        "responseTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An interger indicating the number of tokens used in the translation response"
+        },
+        "targetTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An interger indicating the number of tokens used in the target sentence"
+        },
         "text": {
           "type": "string",
           "description": "A string giving the translated text."
-        },
-        "transliteration": {
-          "$ref": "#/definitions/TransliteratedText",
-          "description": "An object giving the translated text in the script specified by the toScript parameter."
         }
       },
       "required": [
         "language",
-        "sourceCharacters",
         "text"
       ]
     },
