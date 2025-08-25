@@ -10,6 +10,8 @@ import "./SchemaVersion.tsp";
 import "./SchemaReference.tsp";
 import "./Solution.tsp";
 import "./SolutionVersion.tsp";
+import "./SolutionMetadata.tsp";
+import "./SolutionMetadataVersion.tsp";
 import "./Target.tsp";
 import "./TargetTemplate.tsp";
 import "./SolutionTemplate.tsp";
@@ -23,6 +25,9 @@ import "./ConfigurationTemplateVersion.tsp";
 import "./Workflow.tsp";
 import "./WorkflowVersion.tsp";
 import "./WorkflowTemplate.tsp";
+import "./WorkflowV2.tsp";
+import "./WorkflowVersionV2.tsp";
+import "./ExecutionV2.tsp";
 import "./WorkflowTemplateVersion.tsp";
 import "./Execution.tsp";
 import "./Job.tsp";
@@ -60,4 +65,9 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_08_01: "2025-08-01",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_08_15_preview: "2025-08-15-preview",
 }
