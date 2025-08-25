@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2025-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-02'
 input-file:
-  - Microsoft.Devices/preview/2025-02-01-preview/iotdps.json
+  - preview/2025-02-01-preview/iotdps.json
 ```
 ### Tag: package-preview-2023-03
 
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - Microsoft.Devices/preview/2023-03-01-preview/iotdps.json
+  - preview/2023-03-01-preview/iotdps.json
 ```
 ### Tag: package-2022-12
 
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-12'
 input-file:
-  - Microsoft.Devices/stable/2022-12-12/iotdps.json
+  - stable/2022-12-12/iotdps.json
 ```
 
 ### Tag: package-2022-02
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-02'
 input-file:
-  - Microsoft.Devices/stable/2022-02-05/iotdps.json
+  - stable/2022-02-05/iotdps.json
 ```
 
 ### Tag: package-preview-2020-09
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-preview-2020-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-09'
 input-file:
-  - Microsoft.Devices/preview/2020-09-01-preview/iotdps.json
+  - preview/2020-09-01-preview/iotdps.json
 ```
 
 ### Tag: package-2020-03
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
-  - Microsoft.Devices/stable/2020-03-01/iotdps.json
+  - stable/2020-03-01/iotdps.json
 ```
 
 ### Tag: package-preview-2017-08
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-preview-2017-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2017-08'
 input-file:
-- Microsoft.Devices/preview/2017-08-21-preview/iotdps.json
+- preview/2017-08-21-preview/iotdps.json
 ```
 
 ### Tag: package-2017-11
@@ -98,7 +98,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.Devices/stable/2017-11-15/iotdps.json
+- stable/2017-11-15/iotdps.json
 ```
 
 ### Tag: package-2018-01
@@ -107,7 +107,7 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
-- Microsoft.Devices/stable/2018-01-22/iotdps.json
+- stable/2018-01-22/iotdps.json
 ```
 
 ### Tag: package-2020-01
@@ -116,7 +116,7 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
-- Microsoft.Devices/stable/2020-01-01/iotdps.json
+- stable/2020-01-01/iotdps.json
 ```
 
 ---
@@ -127,7 +127,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-- Microsoft.Devices/stable/2021-10-15/iotdps.json
+- stable/2021-10-15/iotdps.json
 ```
 
 ---

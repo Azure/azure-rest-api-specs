@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2021-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-10-01'
 input-file:
-  - Microsoft.Devices/stable/2021-10-01/service.json
+  - stable/2021-10-01/service.json
 ```
 ---
 
