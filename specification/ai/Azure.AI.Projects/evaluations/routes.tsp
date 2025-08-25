@@ -129,4 +129,64 @@ interface Evaluations {
 
   @doc("Delete an evaluation run by name")
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
+
+  @doc("Get an evaluation group by name.")
+  @added(Versions.v2025_07_31_preview)
+  getGroup is EvaluationsOperations.ResourceRead<EvaluationGroup>;
+
+  @doc("List evaluation groups")
+  @added(Versions.v2025_07_31_preview)
+  listGroup is EvaluationsOperations.ResourceList<
+    EvaluationGroup,
+    ListQueryParametersTrait<DisplayPreferencesTypeParameterTrait>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("List runs under a group")
+  @route("groups/{groupId}/runs")
+  @added(Versions.v2025_07_31_preview)
+  listGroupRuns is EvaluationsOperations.ResourceList<
+    Evaluation,
+    ListQueryParametersTrait<DisplayPreferencesTypeParameterTrait>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an evaluation group.")
+  @post
+  @added(Versions.v2025_07_31_preview)
+  createGroup is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation group to be created")
+      @body
+      evaluationGroup: EvaluationGroup;
+    },
+    ResourceCreatedResponse<EvaluationGroup>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Create run under a group")
+  @post
+  createGroupRun is EvaluationsOperations.ResourceAction<
+    EvaluationGroup,
+    {
+      @header("Repeatability-Request-ID")
+      @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
+      repeatabilityRequestId?: string;
+
+      @doc("Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.")
+      @header("Repeatability-First-Sent")
+      repeatabilityFirstSent?: utcDateTime;
+
+      @doc("Complete evaluation configuration including data source, evaluators, and result settings")
+      @body
+      evaluation: Evaluation;
+    },
+    ResourceCreatedResponse<Evaluation>
+  >;
+
+  @doc("Update an evaluation group by name")
+  updateGroup is EvaluationsOperations.ResourceUpdate<EvaluationGroup>;
+
+  @doc("Delete an evaluation group by name")
+  deleteGroup is EvaluationsOperations.ResourceDelete<EvaluationGroup>;
 }
