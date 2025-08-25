@@ -491,6 +491,7 @@ model DefaultErrorResponseErrorDetailsItem {
  * ARM resource for a certificate order that is purchased through Azure.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model AppServiceCertificateOrderPatchResource extends ProxyOnlyResource {
   /**
    * AppServiceCertificateOrderPatchResource resource specific properties
@@ -498,12 +499,6 @@ model AppServiceCertificateOrderPatchResource extends ProxyOnlyResource {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServiceCertificateOrderPatchResourceProperties;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**
@@ -671,6 +666,7 @@ model AppServiceCertificateCollection
  * Key Vault container ARM resource for a certificate that is purchased through Azure.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model AppServiceCertificatePatchResource extends ProxyOnlyResource {
   /**
    * Core resource properties
@@ -678,12 +674,6 @@ model AppServiceCertificatePatchResource extends ProxyOnlyResource {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServiceCertificate;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**
