@@ -1550,9 +1550,9 @@ namespace SkillContext
 
 	@doc("Defines the state of debugging through local PluginHost")
 	enum LocalPluginHostDebugState {
-		None: "None",
-		Running: "Running",
-		Completed: "Completed",
-		Error: "Error",
+		None,
+		Running,
+		Completed,
+		Error,
 	}
 }
