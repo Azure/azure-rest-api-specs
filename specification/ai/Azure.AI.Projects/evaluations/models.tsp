@@ -385,7 +385,7 @@ model EvaluationSummaryResult {
 }
 
 @doc("Definition for evaluation data source configuration.")
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_07_31_preview)
 model DataSourceConfiguration {
   @doc("Type of the data source.")
   type: string;
