@@ -17,13 +17,18 @@ namespace Nginx.NginxPlus;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NginxDeployment)
 model NginxCertificate
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NginxCertificateProperties> {
+  is Azure.ResourceManager.ProxyResource<NginxCertificateProperties> {
   ...ResourceNameParameter<
     Resource = NginxCertificate,
     KeyName = "certificateName",
     SegmentName = "certificates",
     NamePattern = "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$"
   >;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 }
 
 @armResourceOperations

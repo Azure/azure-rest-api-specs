@@ -103,7 +103,6 @@ using Azure.Core;
 @@clientName(AnalysisDiagnostic, "NginxAnalysisDiagnostic", "csharp");
 @@clientName(DiagnosticItem, "NginxDiagnosticItem", "csharp");
 @@clientName(ProvisioningState, "NginxProvisioningState", "csharp");
-@@clientName(AutoUpgradeProfile, "NginxDeploymentAutoUpgradeProfile", "csharp");
 @@clientName(ScaleProfile, "NginxScaleProfile", "csharp");
 @@clientName(ScaleProfileCapacity, "NginxScaleProfileCapacity", "csharp");
 @@clientName(WebApplicationFirewallSettings, "NginxWafSettings", "csharp");
