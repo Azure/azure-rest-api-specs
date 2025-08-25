@@ -4,17 +4,14 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.7
- * Date: 2025-08-13T22:25:36.317Z
+ * Version: 0.10.14
+ * Date: 2025-07-18T08:45:04.778Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./back-compatible.tsp";
 import "./ComputeDiagnosticBase.tsp";
-import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -25,25 +22,23 @@ using TypeSpec.Versioning;
 /**
  * The Compute Recommender Resource Provider Client
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "ComputeRecommenderResourceProviderClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Compute;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /**
  * The available API versions.
  */
 enum Versions {
   /**
-   * The 2025-06-05-preview API version.
-   */
-  v2025_06_05_preview: "2025-06-05-preview",
-
-  /**
    * The 2025-06-05 API version.
    */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_06_05: "2025-06-05",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}

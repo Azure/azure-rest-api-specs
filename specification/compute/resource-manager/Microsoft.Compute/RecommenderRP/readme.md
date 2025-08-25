@@ -31,7 +31,7 @@ title: ComputeRecommenderResourceProviderClient
 ``` yaml
 description: The Compute Recommender Resource Provider Client
 openapi-type: arm
-tag: package-2025-06-05-preview
+tag: package-2025-06-05
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -45,15 +45,6 @@ suppressions:
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: RecommenderRP.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot"]
-```
-
-### Tag: package-2025-06-05-preview
-
-These settings apply only when `--tag=package-package-2025-06-05-preview` is specified on the command line
-
-``` yaml $(tag) == 'package-2025-06-05-preview'
-input-file:
-- preview/2025-06-05-preview/RecommenderRP.json
 ```
 
 ### Tag: package-2025-06-05

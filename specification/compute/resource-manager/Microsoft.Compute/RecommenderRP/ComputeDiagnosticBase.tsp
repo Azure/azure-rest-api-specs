@@ -15,6 +15,7 @@ namespace Microsoft.Compute;
  */
 @singleton("spot")
 @subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model ComputeDiagnosticBase
   is Azure.ResourceManager.ProxyResource<DiagnosticProperties> {
   ...ResourceNameParameter<
@@ -30,8 +31,6 @@ interface ComputeDiagnosticBases {
   /**
    * Gets Spot Placement Scores metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SpotPlacementScores_Get")
   get is ArmResourceRead<
     ComputeDiagnosticBase,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -40,8 +39,6 @@ interface ComputeDiagnosticBases {
   /**
    * Generates placement scores for Spot VM skus.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SpotPlacementScores_Post")
   @action("generate")
   post is ArmResourceActionSync<
     ComputeDiagnosticBase,
