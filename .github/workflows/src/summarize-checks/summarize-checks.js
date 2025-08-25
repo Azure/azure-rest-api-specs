@@ -19,12 +19,12 @@
 */
 
 // #region imports/constants
-import { extractInputs } from "../context.js";
-// import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { intersect } from "../../../shared/src/set.js";
 import { byDate, invert } from "../../../shared/src/sort.js";
+import { commentOrUpdate } from "../comment.js";
+import { extractInputs } from "../context.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
@@ -141,7 +141,8 @@ const FYI_CHECK_NAMES = [
   "Swagger BreakingChange",
   "Swagger PrettierCheck",
 ];
-const AUTOMATED_CHECK_NAME = "[TEST-IGNORE] Automated merging requirements met";
+const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
+const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 
 /** @type {CheckMetadata[]} */
@@ -295,8 +296,6 @@ export default async function summarizeChecks({ github, context, core }) {
     return;
   }
 
-  // TODO: This is triggered by pull_request_target AND workflow_run.  If workflow_run, targetBranch will be undefined.
-  //       Is this OK? If not, we should be able to get the base ref by calling a GH API to fetch the PR metadata.
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
@@ -363,6 +362,12 @@ export async function summarizeChecksImpl(
 ) {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
+  const prUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.summary.addRaw("PR: ");
+  core.summary.addLink(prUrl, prUrl);
+  core.summary.write();
+  core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
+
   let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
@@ -380,6 +385,7 @@ export async function summarizeChecksImpl(
 
   if (impactAssessment) {
     core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+    targetBranch = impactAssessment.targetBranch;
   } else {
     core.info(
       `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
@@ -398,24 +404,24 @@ export async function summarizeChecksImpl(
 
   for (const label of labelContext.toRemove) {
     core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-    // await github.rest.issues.removeLabel({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   name: label,
-    // });
+    await github.rest.issues.removeLabel({
+      owner: owner,
+      repo: repo,
+      issue_number: issue_number,
+      name: label,
+    });
   }
 
   if (labelContext.toAdd.size > 0) {
     core.info(
       `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
     );
-    // await github.rest.issues.addLabels({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   labels: Array.from(labelContext.toAdd),
-    // });
+    await github.rest.issues.addLabels({
+      owner: owner,
+      repo: repo,
+      issue_number: issue_number,
+      labels: Array.from(labelContext.toAdd),
+    });
   }
 
   // adjust labelNames based on labelsToAdd/labelsToRemove
@@ -434,6 +440,7 @@ export async function summarizeChecksImpl(
     requiredCheckRuns,
     fyiCheckRuns,
     impactAssessment !== undefined,
+    target_url,
   );
 
   automatedChecksMet.target_url = target_url;
@@ -441,22 +448,29 @@ export async function summarizeChecksImpl(
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
+  core.summary.addRaw(`\n${commentBody}\n\n`);
+  core.summary.write();
+
   // this will remain commented until we're comfortable with the change.
-  // await commentOrUpdate(
-  //   { github, context, core },
-  //   owner,
-  //   repo,
-  //   issue_number,
-  //   commentName,
-  //   commentBody
-  // )
+  await commentOrUpdate(
+    github,
+    core,
+    owner,
+    repo,
+    issue_number,
+    commentBody,
+    NEXT_STEPS_COMMENT_ID,
+  );
 
   // finally, update the "Automated merging requirements met" commit status
   await updateCommitStatus(github, core, owner, repo, head_sha, automatedChecksMet);
 
   core.info(
-    `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
+    `Summarize checks has identified that status of "${AUTOMATED_CHECK_NAME}" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
+  core.summary.addHeading("Automated Checks Met", 2);
+  core.summary.addCodeBlock(JSON.stringify(automatedChecksMet, null, 2));
+  core.summary.write();
 }
 
 /**
@@ -505,9 +519,6 @@ export async function updateCommitStatus(github, core, owner, repo, head_sha, ch
  * @param {string} owner
  * @param {string} repo
  * @param {number} issue_number
- * @param {*} owner
- * @param {*} repo
- * @param {*} issue_number
  * @return {Promise<string[]>}
  */
 export async function getExistingLabels(github, owner, repo, issue_number) {
@@ -719,10 +730,8 @@ export async function getCheckRunTuple(
 
     const latestCheck = sortedChecks[0];
 
-    // just handling both names for ease of integration testing
     if (
-      (latestCheck.name === "[TEST-IGNORE] Summarize PR Impact" ||
-        latestCheck.name === "Summarize PR Impact") &&
+      latestCheck.name === IMPACT_CHECK_NAME &&
       latestCheck.status === "completed" &&
       latestCheck.conclusion === "success"
     ) {
@@ -793,7 +802,7 @@ export async function getCheckRunTuple(
       );
     }
   } else {
-    requiredCheckNames = ["Summarize PR Impact", "[TEST-IGNORE] Summarize PR Impact"];
+    requiredCheckNames = [IMPACT_CHECK_NAME];
   }
 
   const filteredReqCheckRuns = unifiedCheckRuns.filter(
@@ -859,6 +868,7 @@ export function getCheckInfo(checkName) {
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
  * @param {boolean} assessmentCompleted
+ * @param {string} target_url
  * @returns {Promise<[string, CheckRunResult]>}
  */
 export async function createNextStepsComment(
@@ -869,6 +879,7 @@ export async function createNextStepsComment(
   requiredRuns,
   fyiRuns,
   assessmentCompleted,
+  target_url,
 ) {
   // select just the metadata that we need about the runs.
   const failingCheckInfos = requiredRuns
@@ -897,6 +908,7 @@ export async function createNextStepsComment(
     failingCheckInfos,
     fyiCheckInfos,
     assessmentCompleted,
+    target_url,
   );
 
   return [commentBody, automatedChecksMet];
@@ -910,6 +922,7 @@ export async function createNextStepsComment(
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
  * @param {boolean} assessmentCompleted
+ * @param {string} target_url
  * @returns {Promise<[string, CheckRunResult]>}
  */
 async function buildNextStepsToMergeCommentBody(
@@ -920,6 +933,7 @@ async function buildNextStepsToMergeCommentBody(
   failingReqChecksInfo,
   failingFyiChecksInfo,
   assessmentCompleted,
+  target_url,
 ) {
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
@@ -945,6 +959,7 @@ async function buildNextStepsToMergeCommentBody(
     failingReqChecksInfo,
     failingFyiChecksInfo,
     violatedReqLabelsRules,
+    target_url,
   );
 
   return [commentTitle + commentBody, automatedChecksMet];
@@ -958,6 +973,7 @@ async function buildNextStepsToMergeCommentBody(
  * @param {CheckMetadata[]} failingReqChecksInfo - Failing required checks info
  * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
+ * @param {string} target_url - The target URL for the automated checks met run which will be set at the outset of summarize-checks
  * @returns {[string, CheckRunResult]} The body content HTML and the CheckRunResult that automated checks met should be set to.
  */
 function getCommentBody(
@@ -967,6 +983,7 @@ function getCommentBody(
   failingReqChecksInfo,
   failingFyiChecksInfo,
   violatedRequiredLabelsRules,
+  target_url,
 ) {
   /** @type {"pending" | keyof typeof CheckConclusion} */
   let status = "pending";
@@ -989,7 +1006,7 @@ function getCommentBody(
 
     if (anyFyiPresent) {
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
-      if (!anyBlockerPresent) {
+      if (!anyBlockerPresent && requirementsMet) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
         summaryData =
           `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
@@ -1015,6 +1032,8 @@ function getCommentBody(
       "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
     // dont need to update the status of the check, as pending is the default state.
   }
+
+  bodyProper += `<br /><br />Comment generated by <a href="${target_url}">summarize-checks</a> workflow run.`;
 
   /** @type {CheckRunResult} */
   const automatedChecksMet = {

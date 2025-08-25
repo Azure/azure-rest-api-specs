@@ -85,6 +85,11 @@ export async function updateLabelsImpl({
 
       if (key.startsWith("label-")) {
         const name = key.substring("label-".length);
+
+        if (!name) {
+          throw new Error(`Invalid value for label name: '${name}'`);
+        }
+
         if (value === "true") {
           labelsToAdd.push(name);
         } else if (value === "false") {
