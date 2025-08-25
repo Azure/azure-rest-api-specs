@@ -101,7 +101,8 @@ interface GroupQuotasEnforcementStatuses {
     GroupQuotasEnforcementStatus,
     Response = ArmResourceUpdatedResponse<GroupQuotasEnforcementStatus> | ArmResourceCreatedResponse<
       LROResponse,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = GroupQuotasEnforcementStatus> &
+        Azure.Core.Foundations.RetryAfterHeader
     >,
     OptionalRequestBody = true
   >;
