@@ -1,7 +1,9 @@
 // @ts-check
 
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { toPercent } from "../../shared/src/math.js";
 import { byDate, invert } from "../../shared/src/sort.js";
+import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.js";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
@@ -102,17 +104,49 @@ export async function getWorkflowRuns(github, context, workflowName, ref) {
 }
 
 /**
- * @param {import("@octokit/types").OctokitResponse<any>} response
- * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
+ * @param {import("@octokit/endpoint").endpoint} endpoint
+ * @returns {(options: import("@octokit/types").RequestParameters & {url: string, method: string}) => void}
  */
-export function rateLimitHook(response, options) {
-  const limits = {
-    method: options.method.toUpperCase(),
-    url: options.url,
-    limit: response.headers["x-ratelimit-limit"],
-    remaining: response.headers["x-ratelimit-remaining"],
-    reset: new Date(parseInt(response.headers["x-ratelimit-reset"] || "") * 1000),
-  };
+export function createLogHook(endpoint) {
+  /**
+   * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
+   */
+  function logHook(options) {
+    const request = endpoint(options);
+    const { method, url, body } = request;
+    console.log(`[github] ${method.toUpperCase()} ${url} ${body ? JSON.stringify(body) : ""}`);
+  }
 
-  console.log(`rate-limits: ${JSON.stringify(limits)}`);
+  return logHook;
+}
+
+/**
+ * @param {import("@octokit/types").OctokitResponse<any>} response
+ */
+export function rateLimitHook(response) {
+  const headers = response.headers;
+
+  const limit = parseInt(headers["x-ratelimit-limit"] || "");
+  const remaining = parseInt(headers["x-ratelimit-remaining"] || "");
+  const used = limit - remaining;
+
+  const reset = new Date(parseInt(response.headers["x-ratelimit-reset"] || "") * 1000);
+  const start = subtract(reset, Duration.Hour);
+  const elapsedMs = new Date().getTime() - start.getTime();
+  const elapsedFraction = elapsedMs / Duration.Hour;
+
+  // Example: If limit is 1000, and 6 minutes have elapsed (10% of 1 hour),
+  // availableLimit will be 100 (10% of total).
+  const availableLimit = limit * elapsedFraction;
+
+  // If load is > 100%, we are "running hot" and predicted to hit limit before reset
+  // Keep load < 50% for a safety margin.  If regularly > 50%, optimize.
+  const load = used / availableLimit;
+
+  // const resource = headers["x-ratelimit-resource"];
+
+  console.log(
+    `[github] load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}` +
+      `, reset: ${formatDuration(getDuration(new Date(), reset))}`,
+  );
 }
