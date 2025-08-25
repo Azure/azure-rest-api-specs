@@ -278,7 +278,7 @@ stages:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
             BaseRepoOwner: azure-sdk
             CommitMsg: $(GeneratedSDKInformation)
-            TargetRepoOwner: $(SdkRepoOwner)
+            TargetRepoOwner: azure
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
@@ -291,7 +291,7 @@ stages:
             workingDirectory: $(SdkRepoDirectory)
             filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
             arguments: >
-              -RepoOwner "$(SdkRepoOwner)"
+              -RepoOwner "azure"
               -RepoName "$(SdkRepoName)"
               -BaseBranch "main"
               -PROwner "azure-sdk"
