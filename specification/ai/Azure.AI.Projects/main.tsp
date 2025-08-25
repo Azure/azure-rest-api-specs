@@ -34,9 +34,9 @@ namespace Azure.AI {
   "Azure AI",
   {
     @doc("""
-      Project endpoint. In the form "https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project"
+      Project endpoint. In the form "https://your-ai-services-account-name.services.ai.azure.com/api/projects/_project"
       if your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form 
-      "https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>" if you want to explicitly
+      "https://your-ai-services-account-name.services.ai.azure.com/api/projects/your-project-name" if you want to explicitly
       specify the Foundry Project name.
       """)
     endpoint: url,
@@ -50,12 +50,16 @@ namespace Azure.AI.Projects {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2025_05_01: "2025-05-01",
 
+    @doc("Azure AI API version v1.")
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    v1: "v1",
+
     @doc("Azure AI API version 2025-05-15-preview.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2025_05_15_preview: "2025-05-15-preview",
 
-    @doc("Azure AI API version v1.")
+    @doc("Azure AI API version 2025-07-31-preview.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v1: "v1",
+    v2025_07_31_preview: "2025-07-31-preview",
   }
 }

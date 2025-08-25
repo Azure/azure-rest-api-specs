@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.ResourceManager.Private;
+
 namespace Microsoft.Devices;
 /**
  * The description of the provisioning service.
@@ -167,6 +167,7 @@ interface ProvisioningServiceDescriptions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("skus")
+  @list
   @operationId("IotDpsResource_listValidSkus")
   listValidSkus is ArmResourceActionSync<
     ProvisioningServiceDescription,
@@ -179,6 +180,7 @@ interface ProvisioningServiceDescriptions {
    * List the primary and secondary keys for a provisioning service.
    */
   @action("listkeys")
+  @list
   listKeys is ArmResourceActionSync<
     ProvisioningServiceDescription,
     void,
