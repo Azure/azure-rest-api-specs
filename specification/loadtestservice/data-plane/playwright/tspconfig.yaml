@@ -6,8 +6,6 @@ linter:
 parameters:
   "service-dir":
     default: "sdk/playwright"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/playwright"
   "service-name":
     default: "playwright"
   "dependencies":
@@ -38,7 +36,7 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.Developer.Playwright"

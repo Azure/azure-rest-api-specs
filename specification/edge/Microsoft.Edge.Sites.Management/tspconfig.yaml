@@ -2,8 +2,6 @@ output-dir: "{project-root}/"
 parameters:
   "service-dir":
     default: "sdk/sitemanager"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/sitemanager"
   "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
   "java-sdk-folder":
@@ -37,7 +35,7 @@ options:
     package-details:
       name: "@azure/arm-sitemanager"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.ResourceManager.SiteManager"
     clear-output-folder: true
     model-namespace: false

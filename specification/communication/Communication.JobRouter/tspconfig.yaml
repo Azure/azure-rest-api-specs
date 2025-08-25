@@ -11,8 +11,6 @@ parameters:
     default: "communication"
   "service-dir":
     default: "sdk/communication"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/communication"
   "python-output-dir":
     default: "azure/communication/jobrouter/_generated"
 emit:
@@ -36,7 +34,7 @@ options:
     namespace: Azure.Communication.JobRouter
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Communication.JobRouter
     model-namespace: false
   "@azure-tools/typespec-python":

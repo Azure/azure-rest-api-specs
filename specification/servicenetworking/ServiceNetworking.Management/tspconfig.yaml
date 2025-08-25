@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/servicenetworking"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/servicenetworking"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -48,7 +46,7 @@ options:
     flavor: "azure"
     service-name: "Traffic Controller"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.ServiceNetworking"

@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/apicenter"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/apicenter"
   "dependencies":
     default: ""
 emit:
@@ -21,7 +19,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "azure.ApiCenter"
     flavor: azure
     clear-output-folder: true

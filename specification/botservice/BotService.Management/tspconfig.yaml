@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/botservice"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/botservice"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -17,7 +15,7 @@ options:
     clear-output-folder: true
     model-namespace: true
     namespace: "Azure.ResourceManager.BotService"
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-botservice"
     namespace: "azure.mgmt.botservice"

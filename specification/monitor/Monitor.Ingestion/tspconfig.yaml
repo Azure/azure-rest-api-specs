@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/monitor"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/monitor"
   "dependencies":
     default: ""
 
@@ -46,7 +44,7 @@ options:
     namespace: "{package-name}"
     generate-convenience-methods: false
     model-namespace: false
-    emitter-output-dir: "{csharp-service-dir}/{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
   "@azure-tools/typespec-ts":
     package-dir: "monitor-ingestion"
     is-modular-library: true

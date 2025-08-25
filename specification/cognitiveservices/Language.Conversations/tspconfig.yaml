@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/cognitivelanguage"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/cognitivelanguage"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -16,7 +14,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzeconversations.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
     namespace: "Azure.AI.Language.Conversations"
@@ -28,6 +26,6 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Language.Conversations
     model-namespace: true

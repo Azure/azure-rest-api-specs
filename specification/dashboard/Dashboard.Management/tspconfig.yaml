@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/dashboard"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/grafana"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -17,7 +15,7 @@ options:
     clear-output-folder: true
     model-namespace: true
     namespace: "Azure.ResourceManager.Grafana"
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dashboard"
     namespace: "azure.mgmt.dashboard"

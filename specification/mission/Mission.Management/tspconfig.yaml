@@ -38,7 +38,7 @@ options:
     package-details:
       name: "@azure/arm-virtualenclaves"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: true
@@ -49,5 +49,3 @@ linter:
 parameters:
   service-dir:
     default: sdk/virtualenclaves #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/virtualenclaves"

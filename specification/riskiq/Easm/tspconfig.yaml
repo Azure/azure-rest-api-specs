@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/easm"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/easm"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -17,13 +15,13 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.Easm/{version-status}/{version}/easm.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Analytics.Defender.Easm"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Analytics.Defender.Easm
     model-namespace: false
   "@azure-tools/typespec-ts":

@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/eventgrid"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/eventgrid"
   "service-directory-name":
     default: "eventgrid"
 emit:
@@ -26,12 +24,12 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Messaging.EventGrid.SystemEvents
     model-namespace: false
     api-version: "2018-01-01"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.SystemEvents
     flavor: azure

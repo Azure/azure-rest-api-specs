@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/monitor"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/monitor"
   "dependencies":
     default: ""
 
@@ -26,7 +24,7 @@ options:
     flavor: azure
     namespace: azure.monitor.query
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Monitor.Query.Logs"
     clear-output-folder: true
     model-namespace: false

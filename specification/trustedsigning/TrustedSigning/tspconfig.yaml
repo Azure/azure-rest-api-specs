@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/developer"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/developer"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -22,13 +20,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.Developer.TrustedSigning"
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.TrustedSigning
     model-namespace: false
   "@azure-tools/typespec-ts":

@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     "default": "sdk/documentintelligence"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/documentintelligence"
 
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,7 +12,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.DocumentIntelligence
     model-namespace: false
   "@azure-tools/typespec-autorest":
@@ -51,7 +49,7 @@ options:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.DocumentIntelligence"
     model-namespace: false
     flavor: azure

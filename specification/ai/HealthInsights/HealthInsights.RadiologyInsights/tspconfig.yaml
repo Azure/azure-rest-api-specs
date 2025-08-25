@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/healthinsights"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/healthinsights"
   "service-name":
     default: "HealthInsights"
   "dependencies":
@@ -47,14 +45,14 @@ options:
     api-version: 2024-10-01
     service-version-exclude-preview: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     save-inputs: false
     clear-output-folder: true
     namespace: "Azure.Health.Insights.RadiologyInsights"
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Health.Insights.RadiologyInsights
     model-namespace: false
   "@azure-tools/typespec-ts":

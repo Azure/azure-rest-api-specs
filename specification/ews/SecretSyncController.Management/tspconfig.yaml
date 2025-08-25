@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/edgeworkloadsecurity"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/secretsstoreextension"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -19,7 +17,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.SecretsStoreExtension"
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-secretsstoreextension"
     service-dir: "sdk/secretsstoreextension"

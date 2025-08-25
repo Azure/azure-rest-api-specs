@@ -4,8 +4,6 @@ emit:
 parameters:
   "service-dir":
     default: "sdk/purestorageblock"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/purestorageblock"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
@@ -18,7 +16,7 @@ options:
     arm-resource-flattening: true
     emit-common-types-schema: "never"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.PureStorageBlock"

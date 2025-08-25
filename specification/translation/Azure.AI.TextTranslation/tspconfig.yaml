@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/translation"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/translation"
   "dependencies":
     default: ""
 emit:
@@ -19,13 +17,13 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.AI.TextTranslation/stable/v3.0/openapi.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: Azure.AI.Translation.Text
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Translation.Text
     model-namespace: false
   "@azure-tools/typespec-python":

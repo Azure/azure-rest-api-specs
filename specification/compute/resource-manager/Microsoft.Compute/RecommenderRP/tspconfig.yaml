@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/computerecommender"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/computerecommender"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -19,7 +17,7 @@ options:
     clear-output-folder: true
     model-namespace: true
     namespace: "Azure.ResourceManager.ComputeRecommender"
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-computerecommender"
     namespace: "azure.mgmt.computerecommender"

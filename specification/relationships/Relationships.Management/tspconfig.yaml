@@ -3,8 +3,6 @@ emit:
 parameters:
   "service-dir":
     default: "sdk/relationships"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/relationships"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -12,7 +10,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/relationships.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: true

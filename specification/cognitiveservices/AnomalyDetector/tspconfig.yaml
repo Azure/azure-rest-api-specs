@@ -7,8 +7,6 @@ parameters:
     default: "{project-root}/azure-sdk-for-net/"
   "service-dir":
     default: "sdk/anomalydetector"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/anomalydetector"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -31,11 +29,11 @@ options:
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector"
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.AnomalyDetector
     model-namespace: false
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     save-inputs: false
     clear-output-folder: true
     namespace: Azure.AI.AnomalyDetector

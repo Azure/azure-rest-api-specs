@@ -1,8 +1,6 @@
 parameters:
   service-dir:
     default: "sdk/loadtesting"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/loadtesting"
   "service-name":
     default: "loadtesting"
 emit:
@@ -22,7 +20,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.LoadTesting
     model-namespace: false
   "@azure-tools/typespec-autorest":
@@ -51,7 +49,7 @@ options:
       version: 1.0.1
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     namespace: "Azure.Developer.LoadTesting"
     generate-sample-project: false

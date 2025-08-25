@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/containerservicedeploymentsafeguards"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/containerservicedeploymentsafeguards"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -52,7 +50,7 @@ options:
     package-details:
       name: "@azure/arm-containerservicesafeguards"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.ContainerServiceSafeguards"

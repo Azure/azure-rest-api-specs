@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/vision"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/vision"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -22,13 +20,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.Vision.ImageAnalysis"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Vision.ImageAnalysis
     model-namespace: false
   "@azure-tools/typespec-java":

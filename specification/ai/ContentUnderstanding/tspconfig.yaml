@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/contentunderstanding"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/contentunderstanding"
 
 emit:
   - "@azure-tools/typespec-autorest"
@@ -22,9 +20,9 @@ options:
     namespace: "Azure.AI.ContentUnderstanding"
     model-namespace: false
     flavor: azure
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.ContentUnderstanding
     model-namespace: false
   "@azure-tools/typespec-python":

@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/devopsinfrastructure"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/devopsinfrastructure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
@@ -39,7 +37,7 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.DevOpsInfrastructure"
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-devopsinfrastructure"

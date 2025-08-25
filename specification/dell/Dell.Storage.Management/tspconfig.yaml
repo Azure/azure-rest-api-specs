@@ -2,8 +2,6 @@ output-dir: "{project-root}/"
 parameters:
   "service-dir":
     default: "sdk/dell"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/dellstorage"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -21,7 +19,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Dell.Storage"
     flavor: azure
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dellstorage"
     namespace: "azure.mgmt.dellstorage"

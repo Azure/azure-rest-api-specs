@@ -3,8 +3,6 @@ emit:
 parameters:
   service-dir:
     default: "sdk/devtestlabs"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/devtestlabs"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
@@ -18,7 +16,7 @@ options:
     clear-output-folder: true
     model-namespace: true
     namespace: "Azure.ResourceManager.DevTestLabs"
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     namespace: "azure.mgmt.devtestlabs"
     package-dir: "azure-mgmt-devtestlabs"

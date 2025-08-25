@@ -6,8 +6,6 @@ linter:
 parameters:
   "service-dir":
     default: "sdk/playwrighttesting"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/playwrighttesting"
   "dependencies":
     default: ""
 options:
@@ -33,13 +31,13 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.Developer.MicrosoftPlaywrightTesting"
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.MicrosoftPlaywrightTesting
     model-namespace: false
   "@azure-tools/typespec-java":

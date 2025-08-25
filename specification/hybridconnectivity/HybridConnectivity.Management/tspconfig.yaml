@@ -4,8 +4,6 @@ linter:
 parameters:
   "service-dir":
     default: "sdk/hybridconnectivity"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/hybridconnectivity"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -18,7 +16,7 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: "azure"
     namespace: "Azure.ResourceManager.HybridConnectivity"
     clear-output-folder: true

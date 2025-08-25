@@ -3,8 +3,6 @@ emit:
 parameters:
   "service-dir":
     default: "sdk/dependencymap"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/dependencymap"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -15,7 +13,7 @@ options:
     version-enum-strategy: true
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: false

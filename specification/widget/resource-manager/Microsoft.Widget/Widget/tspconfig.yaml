@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/widget"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/widget"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,7 +12,7 @@ options:
     output-file: "{version-status}/{version}/widget.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: true

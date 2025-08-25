@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/databasefleetmanager"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/databasefleetmanager"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -34,7 +32,7 @@ options:
     inject-spans: true
     remove-unreferenced-types: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: false

@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/widgetanalytics"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/widgetanalytics"
   "dependencies":
     default: ""
 emit:
@@ -24,7 +22,7 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.WidgetAnalytics"

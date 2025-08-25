@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/storage"
-  "csharp-service-dir":
-    default: "{output-dir}/sdk/storage"
   "dependencies":
     default: ""
 emit:
@@ -19,7 +17,7 @@ options:
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{csharp-service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Storage.Blob"
     clear-output-folder: true
     model-namespace: false
