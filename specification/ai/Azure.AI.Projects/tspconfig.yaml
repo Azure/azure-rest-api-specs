@@ -18,24 +18,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: false
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-mode: "dataplane"
-    namespace: "Azure.AI.Projects"
-    package-name: "{package-dir}"
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: "Azure.AI.Projects"
     api-version: "2025-05-15-preview"
-    model-namespace: false
-    flavor: azure
-    generate-test: false
-    generate-sample: false
-    generate-sample-project: false
-    clear-output-folder: true
-  "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.AI.Projects
-    model-namespace: false
-    api-version: "2025-05-15-preview"
-
   "@azure-tools/typespec-ts":
     package-dir: "ai-projects"
     api-version: "v1"
