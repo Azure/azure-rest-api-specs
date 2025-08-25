@@ -7370,46 +7370,54 @@
       "type": "object",
       "description": "Definition of goals data in unified resilience item.",
       "properties": {
-        "goalTemplateId": {
+        "templateId": {
           "type": "string",
           "format": "arm-id",
           "description": "Arm id of the goal template."
         },
-        "goalAssignmentId": {
+        "assignmentId": {
           "type": "string",
           "format": "arm-id",
           "description": "Arm id of the goal assignment."
         },
-        "regionalRpoInMinutes": {
+        "regionalRecoveryPointObjectiveInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Regional RPO set in resilience goal in minutes."
         },
-        "regionalRpaInMinutes": {
+        "regionalRecoveryPointEstimatedInMinutes": {
           "$ref": "#/definitions/IsoDuration",
-          "description": "Computed RPA for the service group in minutes."
+          "description": "Computed recovery point estimated for the service group in minutes."
         },
-        "regionalRpoStatus": {
+        "regionalRecoveryPointObjectiveStatus": {
           "$ref": "#/definitions/ResilienceHealthStatus",
           "description": "Regional RPO status of the service group."
         },
-        "regionalRtoInMinutes": {
+        "regionalRecoveryTimeObjectiveInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Regional RTO set in resilience goal in minutes."
         },
-        "regionalRtaInMinutes": {
+        "regionalRecoveryTimeActualInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Computed RTA for the service group in minutes."
         },
-        "regionalRtoStatus": {
+        "regionalRecoveryTimeObjectiveStatus": {
           "$ref": "#/definitions/ResilienceHealthStatus",
-          "description": "Regional RPO status of the service group."
+          "description": "Regional RTO status of the service group."
+        },
+        "requireHighAvailability": {
+          "$ref": "#/definitions/UnifiedResilienceItemRequirementSelected",
+          "description": "Whether the resource is required for high availability."
+        },
+        "requireDisasterRecovery": {
+          "$ref": "#/definitions/UnifiedResilienceItemRequirementSelected",
+          "description": "Whether the resource is required for disaster recovery."
         }
       },
       "required": [
-        "goalTemplateId",
-        "goalAssignmentId",
-        "regionalRpoStatus",
-        "regionalRtoStatus"
+        "templateId",
+        "assignmentId",
+        "regionalRecoveryPointObjectiveStatus",
+        "regionalRecoveryTimeObjectiveStatus"
       ]
     },
     "HAStatus": {
@@ -8523,25 +8531,25 @@
       "type": "object",
       "description": "Definition of recommendation data related to high availability in unified resilience item.",
       "properties": {
-        "includedResourceCount": {
+        "enabledResourceCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Included resources count for high availability recommendations."
+          "description": "Count of resources that have high availability enabled."
         },
-        "notIncludedResourceCount": {
+        "notEnabledResourceCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Excluded resources count for high availability recommendations."
+          "description": "Count of resources that do not have high availability enabled."
         },
         "notEvaluatedResourceCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Not evaluated resources count for high availability recommendations."
+          "description": "Count of resources that have not been evaluated for high availability."
         },
         "evaluationDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Last evaluation date time of high availability recommendation."
+          "description": "The date and time when the high availability recommendations were last evaluated."
         }
       }
     },
@@ -10208,12 +10216,48 @@
         "recommendations": {
           "$ref": "#/definitions/RecommendationsData",
           "description": "Computed and copied data of Azure recommendations."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time of the unified resilience item."
         }
       },
       "required": [
         "goals",
-        "recommendations"
+        "recommendations",
+        "lastModifiedTime"
       ]
+    },
+    "UnifiedResilienceItemRequirementSelected": {
+      "type": "string",
+      "description": "Enum for the requirement status of the resource in the goal.",
+      "enum": [
+        "NotRequired",
+        "Required",
+        "NotSelected"
+      ],
+      "x-ms-enum": {
+        "name": "UnifiedResilienceItemRequirementSelected",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotRequired",
+            "value": "NotRequired",
+            "description": "The resource is not required for the specified goal."
+          },
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "The resource is required for the specified goal."
+          },
+          {
+            "name": "NotSelected",
+            "value": "NotSelected",
+            "description": "The resource is not selected for the specified goal."
+          }
+        ]
+      }
     },
     "UpdateGoalResourceRequest": {
       "type": "object",
