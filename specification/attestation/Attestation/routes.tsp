@@ -83,7 +83,7 @@ interface PolicyOperationGroup {
 /** Request model for adding a policy certificate */
 model AddPolicyCertificateRequest {
   /** The certificate to add, as a string (e.g., PEM or JWK) */
-  certificate: string;
+  policyCertificateToAdd: string;
 }
 
 /** Request model for removing a policy certificate */
