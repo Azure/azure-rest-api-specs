@@ -14,29 +14,21 @@ namespace Microsoft.Cache;
  * The Private Endpoint Connection resource.
  */
 @parentResource(RedisResource)
-model PrivateEndpointConnection is PrivateEndpointConnectionResource {
-  /** The name of the private endpoint connection associated with the Azure resource */
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("privateEndpointConnections")
-  @key
-  privateEndpointConnectionName: string;
-}
-
-alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the redis cache.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is PrivateEndpointOperations.Read<RedisResource>;
 
   /**
    * Update the state of specified private endpoint connection associated with the redis cache.
    */
-  put is ArmResourceCreateOrReplaceAsync<
-    PrivateEndpointConnection,
+  put is PrivateEndpointOperations.CreateOrReplaceAsync<
+    RedisResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -44,13 +36,13 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the redis cache.
    */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
+  delete is PrivateEndpointOperations.DeleteSync<RedisResource>;
 
   /**
    * List all the private endpoint connections associated with the redis cache.
    */
-  list is ArmResourceListByParent<
-    PrivateEndpointConnection,
+  list is PrivateEndpointOperations.ListByParent<
+    RedisResource,
     Response = ResourceListResult<PrivateEndpointConnection>
   >;
 }

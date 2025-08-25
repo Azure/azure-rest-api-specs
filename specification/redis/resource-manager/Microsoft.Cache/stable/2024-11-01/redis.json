@@ -2233,11 +2233,7 @@
             "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -2285,11 +2281,7 @@
             "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "properties",
@@ -2368,11 +2360,7 @@
             "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -2813,11 +2801,7 @@
           "description": "The PrivateEndpointConnection items on this page",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": [
-            "privateEndpointConnectionName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3175,7 +3159,8 @@
           "$ref": "#/definitions/ZonalAllocationPolicy",
           "description": "Optional: Specifies how availability zones are allocated to the Redis cache. 'Automatic' enables zone redundancy and Azure will automatically select zones based on regional availability and capacity. 'UserDefined' will select availability zones passed in by you using the 'zones' parameter. 'NoZones' will produce a non-zonal cache. If 'zonalAllocationPolicy' is not passed, it will be set to 'UserDefined' when zones are passed in, otherwise, it will be set to 'Automatic' in regions where zones are supported and 'NoZones' in regions where zones are not supported."
         }
-      }
+      },
+      "x-ms-external": true
     },
     "RedisCommonPropertiesRedisConfiguration": {
       "type": "object",
@@ -3351,7 +3336,8 @@
         {
           "$ref": "#/definitions/RedisCommonProperties"
         }
-      ]
+      ],
+      "x-ms-external": true
     },
     "RedisFirewallRule": {
       "type": "object",
@@ -3719,18 +3705,15 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "privateEndpointConnectionName",
-            "id"
-          ]
+          "readOnly": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/RedisCreateProperties"
         }
-      ]
+      ],
+      "x-ms-external": true
     },
     "RedisRebootParameters": {
       "type": "object",
@@ -3833,7 +3816,8 @@
         {
           "$ref": "#/definitions/RedisCommonProperties"
         }
-      ]
+      ],
+      "x-ms-external": true
     },
     "ReplicationRole": {
       "type": "string",

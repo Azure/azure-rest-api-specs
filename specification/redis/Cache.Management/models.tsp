@@ -341,6 +341,8 @@ model RedisCreateParameters {
  * Properties supplied to Create Redis operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisCreateProperties extends RedisCommonProperties {
   /**
    * The SKU of the Redis cache to deploy.
@@ -385,6 +387,8 @@ model Sku {
 /**
  * Create/Update/Get common properties of the redis cache.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisCommonProperties {
   /**
    * All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta, maxmemory-policy,notify-keyspace-events, aof-backup-enabled, aof-storage-connection-string-0, aof-storage-connection-string-1 etc.
@@ -574,6 +578,8 @@ model RedisCommonPropertiesRedisConfiguration {
  * Properties of the redis cache.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisProperties extends RedisCreateProperties {
   /**
    * Redis instance provisioning status.
@@ -720,6 +726,8 @@ model RedisUpdateParameters {
  * Patchable properties of the redis cache.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisUpdateProperties extends RedisCommonProperties {
   /**
    * The SKU of the Redis cache to deploy.
