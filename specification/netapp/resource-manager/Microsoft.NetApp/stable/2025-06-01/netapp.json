@@ -1033,6 +1033,9 @@
           "BackupPolicies_List": {
             "$ref": "./examples/BackupPolicies_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3805,6 +3808,9 @@
           "Volumes_ListReplications": {
             "$ref": "./examples/Volumes_ListReplications.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4979,6 +4985,9 @@
           "Snapshots_List": {
             "$ref": "./examples/Snapshots_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6155,6 +6164,9 @@
           "VolumeQuotaRules_List": {
             "$ref": "./examples/VolumeQuotaRules_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6833,6 +6845,9 @@
           "SnapshotPolicies_List": {
             "$ref": "./examples/SnapshotPolicies_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7160,6 +7175,9 @@
           "SnapshotPolicies_ListVolumes": {
             "$ref": "./examples/SnapshotPolicies_ListVolumes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7278,6 +7296,9 @@
           "VolumeGroups_List_SapHana": {
             "$ref": "./examples/VolumeGroups_List_SapHana.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7893,12 +7914,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A list of backup policies",
+          "description": "The BackupPolicy items on this page",
           "items": {
             "$ref": "#/definitions/BackupPolicy"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "BackupPolicy": {
       "type": "object",
@@ -9144,13 +9173,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A list of replications",
+          "description": "The Replication items on this page",
           "items": {
             "$ref": "#/definitions/Replication"
-          },
-          "x-ms-identifiers": []
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "LogSpecification": {
       "type": "object",
@@ -10505,12 +10541,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A list of snapshot policies",
+          "description": "The SnapshotPolicy items on this page",
           "items": {
             "$ref": "#/definitions/SnapshotPolicy"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SnapshotPolicy": {
       "type": "object",
@@ -10610,12 +10654,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of volumes",
+          "description": "The Volume items on this page",
           "items": {
             "$ref": "#/definitions/Volume"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SnapshotProperties": {
       "type": "object",
@@ -10668,12 +10720,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A list of Snapshots",
+          "description": "The Snapshot items on this page",
           "items": {
             "$ref": "#/definitions/Snapshot"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SubscriptionQuotaItem": {
       "type": "object",
@@ -11256,12 +11316,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of volume Groups",
+          "description": "The VolumeGroup items on this page",
           "items": {
             "$ref": "#/definitions/VolumeGroup"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "VolumeGroupListProperties": {
       "type": "object",
@@ -12248,12 +12316,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A list of Volume Quota Rules",
+          "description": "The VolumeQuotaRule items on this page",
           "items": {
             "$ref": "#/definitions/VolumeQuotaRule"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "VolumeQuotaRulesProperties": {
       "type": "object",

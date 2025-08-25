@@ -2708,14 +2708,7 @@ model ReplicationStatus {
 /**
  * List Replications
  */
-model ListReplications {
-  /**
-   * A list of replications
-   */
-  @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  value?: Replication[];
-}
+model ListReplications is Azure.Core.Page<Replication>;
 
 /**
  * Replication properties
@@ -2814,13 +2807,7 @@ model RelocateVolumeRequest {
 /**
  * List of Snapshots
  */
-model SnapshotsList {
-  /**
-   * A list of Snapshots
-   */
-  @pageItems
-  value?: Snapshot[];
-}
+model SnapshotsList is Azure.Core.Page<Snapshot>;
 
 /**
  * Snapshot properties
@@ -2868,13 +2855,7 @@ model SnapshotRestoreFiles {
 /**
  * List of Snapshot Policies
  */
-model SnapshotPoliciesList {
-  /**
-   * A list of snapshot policies
-   */
-  @pageItems
-  value?: SnapshotPolicy[];
-}
+model SnapshotPoliciesList is Azure.Core.Page<SnapshotPolicy>;
 
 /**
  * Snapshot policy properties
@@ -3062,24 +3043,12 @@ model SnapshotPolicyPatch {
 /**
  * Volumes associated with snapshot policy
  */
-model SnapshotPolicyVolumeList {
-  /**
-   * List of volumes
-   */
-  @pageItems
-  value?: Volume[];
-}
+model SnapshotPolicyVolumeList is Azure.Core.Page<Volume>;
 
 /**
  * List of Backup Policies
  */
-model BackupPoliciesList {
-  /**
-   * A list of backup policies
-   */
-  @pageItems
-  value?: BackupPolicy[];
-}
+model BackupPoliciesList is Azure.Core.Page<BackupPolicy>;
 
 /**
  * Backup policy properties
@@ -3206,13 +3175,7 @@ model BackupPolicyPatch {
 /**
  * List of Volume Quota Rules
  */
-model VolumeQuotaRulesList {
-  /**
-   * A list of Volume Quota Rules
-   */
-  @pageItems
-  value?: VolumeQuotaRule[];
-}
+model VolumeQuotaRulesList is Azure.Core.Page<VolumeQuotaRule>;
 
 /**
  * Volume Quota Rule properties
@@ -3263,13 +3226,7 @@ model VolumeQuotaRulePatch {
 /**
  * List of volume group resources
  */
-model VolumeGroupList {
-  /**
-   * List of volume Groups
-   */
-  @pageItems
-  value?: VolumeGroup[];
-}
+model VolumeGroupList is Azure.Core.Page<VolumeGroup>;
 
 /**
  * Volume group resource
