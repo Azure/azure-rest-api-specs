@@ -2529,7 +2529,8 @@
       "type": "string",
       "description": "Allowed types of evaluation targets.",
       "enum": [
-        "modelResponseGeneration"
+        "modelResponseGeneration",
+        "agentResponseGeneration"
       ],
       "x-ms-enum": {
         "name": "EvaluationTargetType",
@@ -2539,6 +2540,11 @@
             "name": "modelResponseGeneration",
             "value": "modelResponseGeneration",
             "description": "Evaluation target that uses a model for response generation."
+          },
+          {
+            "name": "agentResponseGeneration",
+            "value": "agentResponseGeneration",
+            "description": "Evaluation target that uses an agent for response generation."
           }
         ]
       }
@@ -3331,6 +3337,25 @@
         }
       ],
       "x-ms-discriminator-value": "user"
+    },
+    "agentResponseGenerationTarget": {
+      "type": "object",
+      "description": "Evaluation target for generating responses using a specified agent.",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "Identifier of the agent to be evaluated."
+        }
+      },
+      "required": [
+        "agentId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "agentResponseGeneration"
     },
     "modelResponseGenerationTarget": {
       "type": "object",
