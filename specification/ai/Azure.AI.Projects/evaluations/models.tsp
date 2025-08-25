@@ -443,10 +443,6 @@ model Evaluation {
   @typeChangedFrom(Versions.v2025_07_31_preview, Record<EvaluatorConfiguration>)
   evaluators: EvaluatorConfiguration[];
 
-  @doc("Overrides the judge model used to grade this evaluation.")
-  @added(Versions.v2025_07_31_preview)
-  gradeWith?: string;
-
   @doc("Specifies the type and configuration of the entity used for this evaluation.")
   @removed(Versions.v2025_07_31_preview)
   target?: EvaluationTarget;
@@ -496,11 +492,8 @@ model EvaluationGroup {
   @doc("Data source configuration for the evaluation group.")
   dataSourceConfig: DataSourceConfiguration;
 
-  @doc("Evaluation Runs under the group. It is mutable.")
-  evaluationRuns?: Record<string>;
-
   @doc("Evaluators to be used for the evaluation.")
-  evaluators: Record<EvaluatorConfiguration>;
+  evaluators: EvaluatorConfiguration[];
 }
 
 @doc("Definition for sampling strategy.")
