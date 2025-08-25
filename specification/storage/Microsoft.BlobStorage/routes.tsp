@@ -2166,7 +2166,11 @@ namespace Storage.Blob {
             ...SourceContentMd5Parameter;
             ...BlobTagsHeaderParameter;
             ...CopySourceParameter;
-            ...ContentLengthParameter;
+
+            /** Required to be 0 for Put Blob from URL operation. */
+            @header("Content-Length")
+            contentLength: 0;
+
             ...CopySourceBlobPropertiesParameter;
             ...CopySourceAuthorizationParameter;
             ...CopySourceTagsParameter;
