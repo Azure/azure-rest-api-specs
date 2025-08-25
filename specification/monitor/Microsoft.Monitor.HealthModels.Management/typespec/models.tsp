@@ -668,7 +668,8 @@ union DiscoveryRuleRecommendedSignalsBehavior {
 }
 
 @doc("Discovery rule properties for an Azure Resource Graph query")
-model ResourceGraphQueryDiscoveryRuleProperties extends DiscoveryRuleProperties {
+model ResourceGraphQueryDiscoveryRuleProperties
+  extends DiscoveryRuleProperties {
   @doc("Kind of the discovery rule")
   discoveryRuleKind: DiscoveryRuleKind.ResourceGraphQuery;
 
@@ -687,7 +688,7 @@ model ApplicationInsightsTopologyDiscoveryRuleProperties
   @doc("Application Insights resource ID")
   applicationInsightsResourceId: armResourceIdentifier<[
     {
-      type: "Microsoft.Insights/components",
+      type: "Microsoft.Insights/components";
     }
   ]>;
 }
