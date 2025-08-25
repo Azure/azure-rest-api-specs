@@ -1376,6 +1376,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets": {
+      "post": {
+        "tags": [
+          "vpnServerConfigurations"
+        ],
+        "operationId": "vpnServerConfigurations_ListRadiusSecrets",
+        "description": "List all Radius servers with respective radius secrets from VpnServerConfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the VpnServerConfiguration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all Radius servers with respective radius secrets from VpnServerConfiguration.",
+            "schema": {
+              "$ref": "./virtualNetworkGateway.json#/definitions/RadiusAuthServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAllVpnServerConfigurationRadiusServerSecrets": {
+            "$ref": "./examples/AllVpnServerConfigurationRadiusServerSecretsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
       "get": {
         "operationId": "VirtualHubs_Get",
