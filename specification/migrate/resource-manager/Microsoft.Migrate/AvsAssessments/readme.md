@@ -38,7 +38,7 @@ input-file:
   - preview/2024-03-03-preview/avsAssessments.json
 suppressions:
   - code: AvoidAdditionalProperties
-    where: $.definitions.AVSClusterExtendedDetails.properties.hosts
+    where: preview/2024-03-03-preview/avsAssessments.json
     reason: Dictionary is used for AVS cluster mappings in AVS assessments.
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
