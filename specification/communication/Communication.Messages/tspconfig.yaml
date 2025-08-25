@@ -28,12 +28,14 @@ options:
     emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Communication.Messages"
     clear-output-folder: true
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}"
     namespace: Azure.Communication.Messages
     package-dir: "Azure.Communication.Messages"
     save-inputs: true
+    namespace: "{package-dir}"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: Azure.Communication.Messages
