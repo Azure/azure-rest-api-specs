@@ -46,8 +46,6 @@ interface TriageResources {
   /**
    * Get a triage resource for a given review and recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("triageResources_Get")
   get is TriageResourceOps.Read<
     TriageResource,
     Parameters = {
@@ -68,8 +66,6 @@ interface TriageResources {
   /**
    * List all triage resources that belong to a review and recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("triageResources_List")
   @segment("providers/Microsoft.Advisor/triageResources")
   list is TriageResourceOps.List<
     TriageResource,
