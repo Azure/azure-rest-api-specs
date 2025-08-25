@@ -617,7 +617,6 @@ model StorageSyncServiceCreateParameters
   /**
    * The parameters used to create the storage sync service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: StorageSyncServiceCreateParametersProperties;
 }
 
@@ -708,7 +707,6 @@ model StorageSyncServiceUpdateParameters {
   /**
    * The properties of the server endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: StorageSyncServiceUpdateProperties;
 }
 
@@ -790,7 +788,6 @@ model SyncGroupCreateParameters
   /**
    * The parameters used to create the sync group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<unknown>;
 }
@@ -804,7 +801,6 @@ model CloudEndpointCreateParameters
   /**
    * The parameters used to create the cloud endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: CloudEndpointCreateParametersProperties;
 }
 
@@ -1092,7 +1088,6 @@ model PostBackupResponse {
   /**
    * Post Backup Response Properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backupMetadata?: PostBackupResponseProperties;
 }
 
@@ -1266,7 +1261,6 @@ model ServerEndpointCreateParameters
   /**
    * The parameters used to create the server endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ServerEndpointCreateParametersProperties;
 }
 
@@ -2111,7 +2105,6 @@ model ServerEndpointUpdateParameters {
   /**
    * The properties of the server endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ServerEndpointUpdateProperties;
 }
 
@@ -2362,7 +2355,6 @@ model RegisteredServerCreateParameters
   /**
    * The parameters used to create the registered server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RegisteredServerCreateParametersProperties;
 }
 
@@ -2436,7 +2428,6 @@ model RegisteredServerUpdateParameters
   /**
    * The parameters used to update the registered server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RegisteredServerUpdateProperties;
 }
 
@@ -2638,7 +2629,6 @@ model SubscriptionState {
   /**
    * Subscription state properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<unknown>;
 }
