@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 
 ``` yaml $(tag) == 'package-stable-1.0'
 input-file:
-  - preview/1.0/geolocation.json
+  - stable/1.0/geolocation.json
 ```
 
 # Code Generation
