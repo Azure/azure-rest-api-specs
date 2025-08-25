@@ -2141,7 +2141,6 @@ namespace Storage.Blob {
             ...BlobPathParameter;
             ...TimeoutParameter;
             ...ContentMd5Parameter;
-            ...ContentLengthParameter;
             ...BlobContentTypeParameter;
             ...BlobContentEncodingParameter;
             ...BlobContentLanguageParameter;
@@ -2167,6 +2166,7 @@ namespace Storage.Blob {
             ...SourceContentMd5Parameter;
             ...BlobTagsHeaderParameter;
             ...CopySourceParameter;
+            ...ContentLengthParameter;
             ...CopySourceBlobPropertiesParameter;
             ...CopySourceAuthorizationParameter;
             ...CopySourceTagsParameter;
