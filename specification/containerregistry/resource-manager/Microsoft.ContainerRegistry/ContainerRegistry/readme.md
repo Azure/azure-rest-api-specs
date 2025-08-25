@@ -29,30 +29,6 @@ openapi-type: arm
 tag: package-2025-05-preview
 ```
 
-### Tag: package-2025-05-preview-only
-
-These settings apply only when `--tag=package-2025-05-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-05-preview-only'
-input-file:
-  - preview/2025-05-01-preview/containerregistry.json
-suppressions:
-  - code: RequestSchemaForTrackedResourcesMustHaveTags
-    from: containerregistry.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put
-    reason: Not a tracked resource
-  - code: RequestSchemaForTrackedResourcesMustHaveTags
-    from: containerregistry.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].put
-    reason: Not a tracked resource
-  - code: DeleteResponseCodes
-    from: containerregistry.json
-    reason: Existing service contract needs to be backward compatible, synchronous delete returns 200
-  - code: PatchBodyParametersSchema
-    from: containerregistry.json
-    reason: Existing service contract needs to be backward compatible
-```
-
 ### Tag: package-2025-05-preview
 
 These settings apply only when `--tag=package-2025-03-preview` is specified on the command line.
@@ -77,15 +53,6 @@ suppressions:
     reason: Existing service contract needs to be backward compatible
 ```
 
-### Tag: package-2025-04-only
-
-These settings apply only when `--tag=package-2025-04-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-04-only'
-input-file:
-  - stable/2025-04-01/containerregistry.json
-```
-
 ### Tag: package-2025-04
 
 These settings apply only when `--tag=package-2025-04` is specified on the command line.
@@ -93,15 +60,6 @@ These settings apply only when `--tag=package-2025-04` is specified on the comma
 ``` yaml $(tag) == 'package-2025-04'
 input-file:
   - stable/2025-04-01/containerregistry.json
-```
-
-### Tag: package-2025-03-preview-only
-
-These settings apply only when `--tag=package-2025-03-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-03-preview-only'
-input-file:
-  - preview/2025-03-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2025-03-preview
@@ -113,15 +71,6 @@ input-file:
   - preview/2025-03-01-preview/containerregistry.json
 ```
 
-### Tag: package-2024-11-preview-only
-
-These settings apply only when `--tag=package-2024-11-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-11-preview-only'
-input-file:
-  - preview/2024-11-01-preview/containerregistry.json
-```
-
 ### Tag: package-2024-11-preview
 
 These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
@@ -129,15 +78,6 @@ These settings apply only when `--tag=package-2024-11-preview` is specified on t
 ``` yaml $(tag) == 'package-2024-11-preview'
 input-file:
   - preview/2024-11-01-preview/containerregistry.json
-```
-
-### Tag: package-2023-11-preview-only
-
-These settings apply only when `--tag=package-2023-11-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-11-preview-only'
-input-file:
-  - preview/2023-11-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2023-11-preview
@@ -149,15 +89,6 @@ input-file:
   - preview/2023-11-01-preview/containerregistry.json
 ```
 
-### Tag: package-2023-08-preview-only
-
-These settings apply only when `--tag=package-2023-08-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-08-preview-only'
-input-file:
-  - preview/2023-08-01-preview/containerregistry.json
-```
-
 ### Tag: package-2023-08-preview
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
@@ -165,15 +96,6 @@ These settings apply only when `--tag=package-2023-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2023-08-preview'
 input-file:
   - preview/2023-08-01-preview/containerregistry.json
-```
-
-### Tag: package-2023-07-only
-
-These settings apply only when `--tag=package-2023-07-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-07-only'
-input-file:
-  - stable/2023-07-01/containerregistry.json
 ```
 
 ### Tag: package-2023-07
@@ -185,15 +107,6 @@ input-file:
   - stable/2023-07-01/containerregistry.json
 ```
 
-### Tag: package-2023-06-preview-only
-
-These settings apply only when `--tag=package-2023-06-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-06-preview-only'
-input-file:
-  - preview/2023-06-01-preview/containerregistry.json
-```
-
 ### Tag: package-2023-06-preview
 
 These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
@@ -201,15 +114,6 @@ These settings apply only when `--tag=package-2023-06-preview` is specified on t
 ``` yaml $(tag) == 'package-2023-06-preview'
 input-file:
   - preview/2023-06-01-preview/containerregistry.json
-```
-
-### Tag: package-2023-01-preview-only
-
-These settings apply only when `--tag=package-2023-01-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-01-preview-only'
-input-file:
-  - preview/2023-01-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2023-01-preview
@@ -221,15 +125,6 @@ input-file:
   - preview/2023-01-01-preview/containerregistry.json
 ```
 
-### Tag: package-2022-12-only
-
-These settings apply only when `--tag=package-2022-12-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-12-only'
-input-file:
-  - stable/2022-12-01/containerregistry.json
-```
-
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
@@ -237,15 +132,6 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 ``` yaml $(tag) == 'package-2022-12'
 input-file:
   - stable/2022-12-01/containerregistry.json
-```
-
-### Tag: package-2022-02-preview-only
-
-These settings apply only when `--tag=package-2022-02-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-02-preview-only'
-input-file:
-  - preview/2022-02-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2022-02-preview
@@ -257,15 +143,6 @@ input-file:
   - preview/2022-02-01-preview/containerregistry.json
 ```
 
-### Tag: package-2021-12-preview-only
-
-These settings apply only when `--tag=package-2021-12-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-12-preview-only'
-input-file:
-  - preview/2021-12-01-preview/containerregistry.json
-```
-
 ### Tag: package-2021-12-preview
 
 These settings apply only when `--tag=package-2021-12-preview` is specified on the command line.
@@ -273,15 +150,6 @@ These settings apply only when `--tag=package-2021-12-preview` is specified on t
 ``` yaml $(tag) == 'package-2021-12-preview'
 input-file:
   - preview/2021-12-01-preview/containerregistry.json
-```
-
-### Tag: package-2021-09-only
-
-These settings apply only when `--tag=package-2021-09-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-09-only'
-input-file:
-  - stable/2021-09-01/containerregistry.json
 ```
 
 ### Tag: package-2021-09
@@ -293,15 +161,6 @@ input-file:
   - stable/2021-09-01/containerregistry.json
 ```
 
-### Tag: package-2021-08-preview-only
-
-These settings apply only when `--tag=package-2021-08-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-08-preview-only'
-input-file:
-  - preview/2021-08-01-preview/containerregistry.json
-```
-
 ### Tag: package-2021-08-preview
 
 These settings apply only when `--tag=package-2021-08-preview` is specified on the command line.
@@ -309,15 +168,6 @@ These settings apply only when `--tag=package-2021-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2021-08-preview'
 input-file:
   - preview/2021-08-01-preview/containerregistry.json
-```
-
-### Tag: package-2021-06-preview-only
-
-These settings apply only when `--tag=package-2021-06-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-06-preview-only'
-input-file:
-  - preview/2021-06-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2021-06-preview
@@ -329,15 +179,6 @@ input-file:
   - preview/2021-06-01-preview/containerregistry.json
 ```
 
-### Tag: package-2020-11-preview-only
-
-These settings apply only when `--tag=package-2020-11-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-11-preview-only'
-input-file:
-  - preview/2020-11-01-preview/containerregistry.json
-```
-
 ### Tag: package-2020-11-preview
 
 These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
@@ -345,15 +186,6 @@ These settings apply only when `--tag=package-2020-11-preview` is specified on t
 ``` yaml $(tag) == 'package-2020-11-preview'
 input-file:
   - preview/2020-11-01-preview/containerregistry.json
-```
-
-### Tag: package-2019-12-preview-only
-
-These settings apply only when `--tag=package-2019-12-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-12-preview-only'
-input-file:
-  - preview/2019-12-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2019-12-preview
@@ -376,15 +208,6 @@ input-file:
 - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
-### Tag: package-2019-05-only
-
-These settings apply only when `--tag=package-2019-05-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-only'
-input-file:
-- stable/2019-05-01/containerregistry.json
-```
-
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
@@ -392,15 +215,6 @@ These settings apply only when `--tag=package-2019-05` is specified on the comma
 ``` yaml $(tag) == 'package-2019-05'
 input-file:
 - stable/2019-05-01/containerregistry.json
-```
-
-### Tag: package-2019-05-preview-only
-
-These settings apply only when `--tag=package-2019-05-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-preview-only'
-input-file:
-- preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
 ### Tag: package-2019-05-preview

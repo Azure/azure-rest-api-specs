@@ -29,15 +29,6 @@ openapi-type: arm
 tag: package-2025-03-preview
 ```
 
-### Tag: package-2025-03-preview-only
-
-These settings apply only when `--tag=package-2025-03-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-03-preview-only'
-input-file:
-  - preview/2025-03-01-preview/containerregistry_build.json
-```
-
 ### Tag: package-2025-03-preview
 
 These settings apply only when `--tag=package-2025-03-preview` is specified on the command line.
@@ -56,15 +47,6 @@ input-file:
 - preview/2019-06-01-preview/containerregistry_build.json
 ```
 
-### Tag: package-2019-06-preview-only
-
-These settings apply only when `--tag=package-2019-06-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06-preview-only'
-input-file:
-- preview/2019-06-01-preview/containerregistry_build.json
-```
-
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
@@ -72,24 +54,6 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
 - stable/2019-04-01/containerregistry_build.json
-```
-
-### Tag: package-2019-04-only
-
-These settings apply only when `--tag=package-2019-04-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-04-only'
-input-file:
-- stable/2019-04-01/containerregistry_build.json
-```
-
-### Tag: package-2018-09-only
-
-These settings apply only when `--tag=package-2018-09-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-09-only'
-input-file:
-- stable/2018-09-01/containerregistry_build.json
 ```
 
 ### Tag: package-2018-09
