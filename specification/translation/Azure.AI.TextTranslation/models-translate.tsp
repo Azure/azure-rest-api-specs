@@ -349,8 +349,18 @@ model DetectedLanguage {
 
 @doc("Translation result")
 model TranslationText {
+  
+  @removed(APIVersion.v2025_05_01_preview)
   @doc("A string representing the language code of the target language.")
   to: string;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("A string representing the language code of the target language.")
+  language: string;
+
+  @added(APIVersion.v2025_05_01_preview)
+  @doc("An interger indicating the number of characters in the source text string")
+  sourceCharacters: int32;
 
   @doc("A string giving the translated text.")
   text: string;

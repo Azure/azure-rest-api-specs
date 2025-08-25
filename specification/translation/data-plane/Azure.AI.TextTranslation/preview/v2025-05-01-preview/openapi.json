@@ -870,9 +870,14 @@
       "type": "object",
       "description": "Translation result",
       "properties": {
-        "to": {
+        "language": {
           "type": "string",
           "description": "A string representing the language code of the target language."
+        },
+        "sourceCharacters": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An interger indicating the number of characters in the source text string"
         },
         "text": {
           "type": "string",
@@ -884,7 +889,8 @@
         }
       },
       "required": [
-        "to",
+        "language",
+        "sourceCharacters",
         "text"
       ]
     },
