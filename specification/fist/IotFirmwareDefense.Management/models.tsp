@@ -4,7 +4,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using OpenAPI;
+using Versioning;
 
+@versioned(Versions)
 namespace Microsoft.IoTFirmwareDefense;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -329,6 +331,19 @@ model CvssScore {
   score?: float32;
 }
 
+@doc("Legacy component of a CVE result.")
+@added(Versions.v2025_08_02)
+model CveComponent {
+  @doc("ID of the SBOM component.")
+  componentId?: string;
+
+  @doc("Name of the SBOM component.")
+  name?: string;
+
+  @doc("Version of the SBOM component.")
+  version?: string;
+}
+
 @doc("Details of a CVE detected in firmware.")
 model CveResult {
   @doc("ID of the CVE result.")
@@ -349,6 +364,26 @@ model CveResult {
   @doc("Name of the CVE.")
   cveName?: string;
 
+  @added(Versions.v2025_08_02)
+  @doc("Legacy property for what is now componentName")
+  component?: CveComponent;
+
+  @added(Versions.v2025_08_02)
+  @doc("Legacy property for the effective CVE score.")
+  cvssScore?: string;
+
+  @added(Versions.v2025_08_02)
+  @doc("Legacy property for the CVE CVSS version 2 score, if one existed.")
+  cvssV2Score?: string;
+
+  @added(Versions.v2025_08_02)
+  @doc("Legacy property for the CVE CVSS version 3 score, if one existed.")
+  cvssV3Score?: string;
+
+  @added(Versions.v2025_08_02)
+  @doc("Legacy property for the what CVSS version score was stored in the cvssScore property")
+  cvssVersion?: string;
+
   @doc("The most recent CVSS score of the CVE.")
   effectiveCvssScore?: float32;
 
@@ -356,12 +391,12 @@ model CveResult {
   effectiveCvssVersion?: int32;
 
   @doc("All known CVSS scores for the CVE.")
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   cvssScores?: CvssScore[];
 
   @doc("The list of reference links for the CVE.")
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["href"])
+  @extension("x-ms-identifiers", #["href"])
   links?: CveLink[];
 
   @doc("The CVE description.")
@@ -387,16 +422,34 @@ model FirmwareProperties {
   fileName?: string;
 
   @doc("Firmware vendor.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_. ,'\"~=(){}:]*$")
+  @added(Versions.v2025_08_02)
   vendor?: string;
 
-  @doc("Firmware model.")
+  @doc("Firmware vendor.")
+  @removed(Versions.v2025_08_02)
+  @renamedFrom(Versions.v2025_08_02, "vendor")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_. ,'\"~=(){}:]*$")
+  legacyVendor?: string;
+
+  @doc("Firmware model.")
+  @added(Versions.v2025_08_02)
   `model`?: string;
 
-  @doc("Firmware version.")
+  @doc("Firmware model.")
+  @removed(Versions.v2025_08_02)
+  @renamedFrom(Versions.v2025_08_02, "model")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_. ,'\"~=(){}:]*$")
+  legacyModel?: string;
+
+  @doc("Firmware version.")
+  @added(Versions.v2025_08_02)
   version?: string;
+
+  @doc("Firmware version.")
+  @removed(Versions.v2025_08_02)
+  @renamedFrom(Versions.v2025_08_02, "version")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_. ,'\"~=(){}:]*$")
+  legacyVersion?: string;
 
   @doc("User-specified description of the firmware.")
   description?: string;
@@ -408,7 +461,7 @@ model FirmwareProperties {
   status?: Status;
 
   @doc("A list of errors or other messages generated during firmware analysis")
-  @Azure.ResourceManager.identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   statusMessages?: StatusMessage[];
 
   @doc("Provisioning state of the resource.")

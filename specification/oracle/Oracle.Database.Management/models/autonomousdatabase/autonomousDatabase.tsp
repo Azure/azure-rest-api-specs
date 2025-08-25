@@ -581,7 +581,7 @@ model ScheduledOperationsType {
 @doc("The list of scheduled operations.")
 model ScheduledOperationsTypeUpdate {
   @doc("Day of week")
-  dayOfWeek: DayOfWeekUpdate;
+  dayOfWeek?: DayOfWeekUpdate;
 
   @doc("auto start time. value must be of ISO-8601 format HH:mm")
   @minLength(1)

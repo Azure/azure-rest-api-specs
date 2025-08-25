@@ -3911,7 +3911,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas/{schemaName}/dynamicSchemas/{dynamicSchemaName}/versions/{schemaVersionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas/{schemaName}/dynamicSchemas/{dynamicSchemaName}/versions/{dynamicSchemaVersionName}": {
       "get": {
         "operationId": "DynamicSchemaVersions_Get",
         "tags": [
@@ -3945,12 +3945,12 @@
             "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
-            "name": "schemaVersionName",
+            "name": "dynamicSchemaVersionName",
             "in": "path",
-            "description": "The name of the SchemaVersion",
+            "description": "The name of the DynamicSchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            "pattern": "^(v2-)?[0-9]+\\.[0-9]+\\.[0-9]+$"
           }
         ],
         "responses": {
@@ -4006,12 +4006,12 @@
             "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
-            "name": "schemaVersionName",
+            "name": "dynamicSchemaVersionName",
             "in": "path",
-            "description": "The name of the SchemaVersion",
+            "description": "The name of the DynamicSchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            "pattern": "^(v2-)?[0-9]+\\.[0-9]+\\.[0-9]+$"
           },
           {
             "name": "resource",
@@ -4097,12 +4097,12 @@
             "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
-            "name": "schemaVersionName",
+            "name": "dynamicSchemaVersionName",
             "in": "path",
-            "description": "The name of the SchemaVersion",
+            "description": "The name of the DynamicSchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            "pattern": "^(v2-)?[0-9]+\\.[0-9]+\\.[0-9]+$"
           },
           {
             "name": "properties",
@@ -4167,12 +4167,12 @@
             "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
-            "name": "schemaVersionName",
+            "name": "dynamicSchemaVersionName",
             "in": "path",
-            "description": "The name of the SchemaVersion",
+            "description": "The name of the DynamicSchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            "pattern": "^(v2-)?[0-9]+\\.[0-9]+\\.[0-9]+$"
           }
         ],
         "responses": {

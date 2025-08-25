@@ -1,9 +1,14 @@
+import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
+using Versioning;
+using Azure.ResourceManager;
 
 namespace Microsoft.DesktopVirtualization;
 
@@ -54,6 +59,18 @@ union HostPoolUpdateAction {
    * Resume the hostpool update
    */
   Resume: "Resume",
+}
+
+/**
+ * Action types for controlling hostpool provisioning.
+ */
+union HostPoolProvisioningAction {
+  string,
+
+  /**
+   * Cancel the hostpool provisioning.
+   */
+  Cancel: "Cancel",
 }
 
 /**
@@ -714,7 +731,53 @@ union AppAttachPackageArchitectures {
 /**
  * Operation status for SessionHostManagementUpdate.
  */
-union SessionHostManagementUpdateOperationStatus {
+union SessionHostManagementProvisioningOperationStatus {
+  string,
+
+  /**
+   * The operation is scheduled.
+   */
+  Scheduled: "Scheduled",
+
+  /**
+   * The operation is currently validating the provisioning.
+   */
+  ValidatingSessionHostProvisioning: "ValidatingSessionHostProvisioning",
+
+  /**
+   * Canceling the operation.
+   */
+  Cancelling: "Cancelling",
+
+  /**
+   * The operation is currently provisioning session hosts.
+   */
+  ProvisioningSessionHosts: "ProvisioningSessionHosts",
+
+  /**
+   * The operation succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The operation failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The operation is canceled.
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * Operation status for SessionHostManagementUpdate.
+ */
+@renamedFrom(
+  Versions.v2025_04_01_preview,
+  "SessionHostManagementUpdateOperationStatus"
+)
+union updateStatus {
   string,
 
   /**
@@ -1069,6 +1132,113 @@ union SessionHandlingOperation {
    * Session Host will hibernate after disconnect
    */
   Hibernate: "Hibernate",
+}
+
+/**
+ * The desired scaling method to be used to scale the hosts in the assigned host pool.
+ */
+union ScalingMethodType {
+  string,
+
+  /**
+   * Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size.
+   */
+  PowerManage: "PowerManage",
+
+  /**
+   * Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property.
+   */
+  CreateDeletePowerManage: "CreateDeletePowerManage",
+}
+
+/**
+ * The desired scaling method to be used to scale the hosts in the assigned host pool.
+ */
+union ScalingMethodPatchType {
+  string,
+
+  /**
+   * Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size.
+   */
+  PowerManage: "PowerManage",
+
+  /**
+   * Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property.
+   */
+  CreateDeletePowerManage: "CreateDeletePowerManage",
+}
+
+/**
+ * Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.
+ */
+union CanaryPolicy {
+  string,
+
+  /**
+   * Decided by service whether to provision Canary VM.
+   */
+  Auto: "Auto",
+
+  /**
+   * Never provision Canary VM.
+   */
+  Never: "Never",
+
+  /**
+   * Always provision Canary VM.
+   */
+  Always: "Always",
+}
+
+/**
+ * The policy that should be applied when the Session Host provisioning operation fails.
+ */
+union FailedSessionHostCleanupPolicySHC {
+  string,
+
+  /**
+   * Keep All.
+   */
+  KeepAll: "KeepAll",
+
+  /**
+   * Keep One.
+   */
+  KeepOne: "KeepOne",
+
+  /**
+   * Keep None.
+   */
+  KeepNone: "KeepNone",
+}
+
+/**
+ * Specifies the ephemeral disk settings for operating system disk.
+ */
+union DiffDiskOption {
+  string,
+
+  /**
+   * Operating system disk local setting.
+   */
+  Local: "Local",
+}
+
+/**
+ * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+ */
+union DiffDiskPlacement {
+  string,
+
+  /**
+   * Cache disk placement
+   */
+  CacheDisk: "CacheDisk",
+
+  /**
+   * Resource disk placement
+   */
+  ResourceDisk: "ResourceDisk",
 }
 
 /**
@@ -1442,12 +1612,51 @@ model DiskInfoProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
    */
+  @removed(Versions.v2025_04_01_preview)
   type: VirtualMachineDiskType;
+
+  /**
+   * The managed disk parameters.
+   */
+  @added(Versions.v2025_04_01_preview)
+  managedDisk?: ManagedDiskProperties;
+
+  /**
+   * Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.
+   */
+  @added(Versions.v2025_04_01_preview)
+  diffDiskSettings?: DiffDiskProperties;
+}
+
+/**
+ * Managed Disk information.
+ */
+model ManagedDiskProperties {
+  /**
+   * Managed Disk information.
+   */
+  type?: VirtualMachineDiskType;
+}
+
+/**
+ * Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.
+ */
+model DiffDiskProperties {
+  /**
+   * Specifies the ephemeral disk settings for operating system disk.
+   */
+  option?: DiffDiskOption;
+
+  /**
+   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+   */
+  placement?: DiffDiskPlacement;
 }
 
 /**
  * Disk information.
  */
+@removed(Versions.v2025_04_01_preview)
 model DiskInfoPatchProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
@@ -1632,6 +1841,7 @@ model ImageInfoProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
+  @clientName("imageType")
   type: type;
 
   /**
@@ -1652,6 +1862,7 @@ model ImageInfoPatchProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
+  @clientName("imageType")
   type?: type;
 
   /**
@@ -1901,6 +2112,39 @@ model SessionHostManagementProperties {
    * Parameters for a hostpool update.
    */
   update: HostPoolUpdateConfigurationProperties;
+
+  /**
+   * Parameters that apply when session hosts are provisioned.
+   */
+  @added(Versions.v2025_04_01_preview)
+  provisioning?: SessionHostProvisioningConfigurationProperties;
+
+  /**
+   * The policy that should be applied when the Session Host provisioning operation fails.
+   */
+  @added(Versions.v2025_04_01_preview)
+  failedSessionHostCleanupPolicy?: FailedSessionHostCleanupPolicySHC;
+}
+
+/**
+ * The configuration for session host provisioning operations.
+ */
+model SessionHostProvisioningConfigurationProperties {
+  /**
+   * Whether the session host should be set in drain mode following provisioning.
+   */
+  setDrainMode?: boolean;
+
+  /**
+   * The number of session hosts to exist in the Host Pool.
+   */
+  @minValue(1)
+  instanceCount?: int32;
+
+  /**
+   * Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.
+   */
+  canaryPolicy?: CanaryPolicy;
 }
 
 /**
@@ -2481,6 +2725,18 @@ model ScalingSchedule {
   daysOfWeek?: DayOfWeek[];
 
   /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  @added(Versions.v2025_04_01_preview)
+  scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  @added(Versions.v2025_04_01_preview)
+  createDelete?: CreateDeleteProperties;
+
+  /**
    * Starting time for ramp up period.
    */
   rampUpStartTime?: Time;
@@ -2567,6 +2823,44 @@ model ScalingSchedule {
    * Load balancing algorithm for off-peak period.
    */
   offPeakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+}
+
+/**
+ * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi"
+@added(Versions.v2025_04_01_preview)
+@OpenAPI.extension("x-nullable", true)
+model CreateDeleteProperties {
+  /**
+   * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @OpenAPI.extension("x-nullable", true)
+  rampUpMaximumHostPoolSize?: int32;
+
+  /**
+   * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @maxValue(59)
+  @OpenAPI.extension("x-nullable", true)
+  rampUpMinimumHostPoolSize?: int32;
+
+  /**
+   * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @OpenAPI.extension("x-nullable", true)
+  rampDownMaximumHostPoolSize?: int32;
+
+  /**
+   * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @maxValue(59)
+  @OpenAPI.extension("x-nullable", true)
+  rampDownMinimumHostPoolSize?: int32;
 }
 
 /**
@@ -3077,6 +3371,27 @@ model HostPoolUpdateControlParameter {
   @maxLength(260)
   cancelMessage?: string;
 }
+
+/**
+ * Object containing control action for hostpool provisioning.
+ */
+model HostPoolProvisioningControlParameter {
+  /**
+   * Action types for controlling hostpool update.
+   */
+  action: HostPoolProvisioningAction;
+
+  /**
+   * The cancel message sent to the user on the session host.
+   */
+  @maxLength(260)
+  cancelMessage?: string;
+}
+
+@@added(HostPoolPatch.identity, Versions.v2025_04_01_preview);
+#suppress "@azure-tools/typespec-azure-core/no-openapi"
+@@OpenAPI.extension(HostPoolPatch.identity, "x-nullable", true);
+
 /**
  * HostPool properties that can be patched.
  */
@@ -3093,6 +3408,11 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
    * HostPool properties that can be patched.
    */
   properties?: HostPoolPatchProperties;
+
+  /**
+   * Managed service identity (system assigned and/or user assigned identities)
+   */
+  ...ManagedServiceIdentityProperty;
 }
 
 /**
@@ -3486,6 +3806,24 @@ model SessionHostList is Azure.Core.Page<SessionHost>;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model SessionHostProperties {
   /**
+   * Number of active sessions on SessionHost.
+   */
+  @added(Versions.v2025_04_01_preview)
+  activeSessions?: int32;
+
+  /**
+   * Number of disconnected sessions on SessionHost.
+   */
+  @added(Versions.v2025_04_01_preview)
+  disconnectedSessions?: int32;
+
+  /**
+   * Number of pending sessions on SessionHost.
+   */
+  @added(Versions.v2025_04_01_preview)
+  pendingSessions?: int32;
+
+  /**
    * ObjectId of SessionHost. (internal use)
    */
   @visibility(Lifecycle.Read)
@@ -3793,12 +4131,12 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek: DayOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
    */
-  rampUpStartTime: Time;
+  rampUpStartTime?: Time;
 
   /**
    * The desired startup behavior during the ramp up period for personal vms in the hostpool.
@@ -3836,7 +4174,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for peak period.
    */
-  peakStartTime: Time;
+  peakStartTime?: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
@@ -3869,7 +4207,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for ramp down period.
    */
-  rampDownStartTime: Time;
+  rampDownStartTime?: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
@@ -3902,7 +4240,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for off-peak period.
    */
-  offPeakStartTime: Time;
+  offPeakStartTime?: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
@@ -4107,17 +4445,30 @@ model ScalingPlanPooledScheduleProperties {
    * Name of the ScalingPlanPooledSchedule
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Service already uses this property"
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek: DayOfWeek[];
+  daysOfWeek?: DayOfWeek[];
+
+  /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  @added(Versions.v2025_04_01_preview)
+  scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  @added(Versions.v2025_04_01_preview)
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
    */
-  rampUpStartTime: Time;
+  rampUpStartTime?: Time;
 
   /**
    * Load balancing algorithm for ramp up period.
@@ -4136,12 +4487,12 @@ model ScalingPlanPooledScheduleProperties {
    */
   @maxValue(100)
   @minValue(1)
-  rampUpCapacityThresholdPct: int32;
+  rampUpCapacityThresholdPct?: int32;
 
   /**
    * Starting time for peak period.
    */
-  peakStartTime: Time;
+  peakStartTime?: Time;
 
   /**
    * Load balancing algorithm for peak period.
@@ -4151,7 +4502,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Starting time for ramp down period.
    */
-  rampDownStartTime: Time;
+  rampDownStartTime?: Time;
 
   /**
    * Load balancing algorithm for ramp down period.
@@ -4170,7 +4521,7 @@ model ScalingPlanPooledScheduleProperties {
    */
   @maxValue(100)
   @minValue(1)
-  rampDownCapacityThresholdPct: int32;
+  rampDownCapacityThresholdPct?: int32;
 
   /**
    * Should users be logged off forcefully from hosts.
@@ -4195,7 +4546,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Starting time for off-peak period.
    */
-  offPeakStartTime: Time;
+  offPeakStartTime?: Time;
 
   /**
    * Load balancing algorithm for off-peak period.
@@ -4211,12 +4562,25 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Name of the ScalingPlanPooledSchedule
    */
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Set of days of the week on which this schedule is active.
    */
   daysOfWeek?: DayOfWeek[];
+
+  /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  @added(Versions.v2025_04_01_preview)
+  scalingMethod?: ScalingMethodType;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  @added(Versions.v2025_04_01_preview)
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
@@ -4508,7 +4872,8 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Disk Information
    */
-  diskInfo?: DiskInfoPatchProperties;
+  @typeChangedFrom(Versions.v2025_04_01_preview, DiskInfoPatchProperties)
+  diskInfo?: DiskInfoProperties;
 
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
@@ -4547,7 +4912,7 @@ model SessionHostConfigurationPatchProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model SessionHostManagementUpdateStatusProperties {
   /**
-   * The Log Analytics.
+   * The correlation Id for Log Analytics..
    */
   correlationId?: string;
 
@@ -4565,6 +4930,61 @@ model SessionHostManagementUpdateStatusProperties {
    * SessionHostManagement properties used for the operation.
    */
   sessionHostManagement?: SessionHostManagement;
+}
+
+/**
+ * Properties bag for sessionHostManagement Provisioning Statuses.
+ */
+model SessionHostManagementProvisioningStatusProperties {
+  /**
+   * The correlation Id for Log Analytics.
+   */
+  correlationId?: string;
+
+  /**
+   * Progress information on the sessionHostManagement operation.
+   */
+  progress?: SessionHostManagementProvisioningOperationProgress;
+
+  /**
+   * The timestamp that the update is scheduled for.
+   */
+  scheduledDateTime?: utcDateTime;
+
+  /**
+   * SessionHostManagement properties used for the operation.
+   */
+  sessionHostManagement?: SessionHostManagement;
+}
+
+/**
+ * SessionHostManagement Provisioning Operation Progress information.
+ */
+model SessionHostManagementProvisioningOperationProgress {
+  /**
+   * Time that the sessionHostManagement operation was created.
+   */
+  executionStartTime?: utcDateTime;
+
+  /**
+   * The number of sessionHosts in progress in the sessionHostManagement provisioning operation
+   */
+  sessionHostsInProgress?: int32;
+
+  /**
+   * The number of sessionHosts completed in the sessionHostManagement provisioning operation.
+   */
+  sessionHostsCompleted?: int32;
+
+  /**
+   * The final instance count of the host pool for this provisioning operation.
+   */
+  finalSessionHostsCount?: int32;
+
+  /**
+   * The initial instance count of the host pool for this provisioning operation.
+   */
+  initialSessionHostsCount?: int32;
 }
 
 /**
@@ -4728,18 +5148,38 @@ model StatusProperty {
   /**
    * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
    */
-  status: SessionHostManagementUpdateOperationStatus;
+  status: updateStatus;
 }
 
 /**
- * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+ * Operation status.
+ */
+model ProvisioningOperationStatusProperty {
+  /**
+   * Operation status.
+   */
+  status: SessionHostManagementProvisioningOperationStatus;
+}
+
+/**
+ * Properties bag for sessionHostManagement Update Statuses.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
 model UpdateStatusProperty {
   /**
-   * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+   * Properties bag for sessionHostManagement Update Statuses.
    */
   properties?: SessionHostManagementUpdateStatusProperties;
+}
+
+/**
+ * Properties bag for sessionHostManagement Provisioning Statuses.
+ */
+model ProvisioningStatusProperty {
+  /**
+   * The custom properties of the SessionHost Provisioning Status.
+   */
+  properties?: SessionHostManagementProvisioningStatusProperties;
 }
 
 /**

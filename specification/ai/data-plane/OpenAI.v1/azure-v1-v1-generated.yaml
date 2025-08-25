@@ -1,6 +1,9 @@
 openapi: 3.0.0
 info:
   title: Azure AI Foundry Models Service
+  license:
+    name: MIT
+    url: https://github.com/openai/openai-openapi/blob/master/LICENSE
   version: v1
 tags:
   - name: Evals
@@ -1512,6 +1515,153 @@ paths:
                 $ref: '#/components/schemas/AzureErrorResponse'
       tags:
         - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/checkpoints/{fine_tuning_checkpoint_id}/copy:
+    post:
+      operationId: FineTuning_CopyCheckpoint
+      description: |-
+        Creates a copy of a fine-tuning checkpoint at the given destination account and region.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copy-ft-checkpoints
+          in: header
+          required: true
+          description: |-
+            Enables access to checkpoint copy operations for models, an AOAI preview feature.
+            This feature requires the 'aoai-copy-ft-checkpoints' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyModelRequest'
+    get:
+      operationId: FineTuning_GetCheckpoint
+      description: |-
+        Gets the status of a fine-tuning checkpoint copy.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copy-ft-checkpoints
+          in: header
+          required: true
+          description: |-
+            Enables access to checkpoint copy operations for models, an AOAI preview feature.
+            This feature requires the 'aoai-copy-ft-checkpoints' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
   /fine_tuning/jobs/{fine_tuning_job_id}/events:
     get:
       operationId: listFineTuningEvents
@@ -1980,6 +2130,56 @@ components:
             - error
             - deleting
             - deleted
+    CopiedAccountDetails:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+        - status
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination resource where the model was copied to.
+        region:
+          type: string
+          description: The region where the model was copied to.
+        status:
+          type: string
+          enum:
+            - Completed
+            - Failed
+            - InProgress
+          description: The status of the copy operation.
+    CopyModelRequest:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination Resource to copy.
+        region:
+          type: string
+          description: The region to copy the model to.
+    CopyModelResponse:
+      type: object
+      required:
+        - checkpointedModelName
+        - fineTuningJobId
+        - copiedAccountDetails
+      properties:
+        checkpointedModelName:
+          type: string
+          description: The ID of the copied model.
+        fineTuningJobId:
+          type: string
+          description: The ID of the fine-tuning job that the checkpoint was copied from.
+        copiedAccountDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CopiedAccountDetails'
+          description: The ID of the destination resource id where it was copied
     OpenAI.ApproximateLocation:
       type: object
       required:

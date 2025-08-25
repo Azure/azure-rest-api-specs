@@ -13,7 +13,6 @@ namespace Microsoft.HardwareSecurityModules;
 /**
  * Resource information with extended details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CloudHsmCluster
   is Azure.ResourceManager.TrackedResource<CloudHsmClusterProperties> {
   ...ResourceNameParameter<
@@ -26,11 +25,13 @@ model CloudHsmCluster
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * SKU details
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sku?: CloudHsmClusterSku;
 }

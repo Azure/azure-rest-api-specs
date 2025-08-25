@@ -362,9 +362,14 @@ union DataClassType {
   "Files",
 
   /**
-   * Represents data related to development, security, and operations workflows subject to two-person cryptographic integrity validations.
+   * Represents data related to development, security, and operations workflows such as build artifacts subject to an NCDSMO policy.
    */
-  "DevSecOps",
+  "SoftwareArtifacts",
+
+  /**
+   * Represents rich content types such as documents (e.g., Word, PDF) and images that require specialized replication handling.
+   */
+  "Complex",
 }
 
 /**
@@ -400,7 +405,7 @@ union DataClass {
   "Video",
 
   /**
-   * (Files/DevSecOps/Complex/Mission) Replicates generic blobs data using Azure Blob Storage.
+   * (Files/SoftwareArtifacts/Complex) Replicates generic blobs data using Azure Blob Storage.
    */
   "Blob",
 

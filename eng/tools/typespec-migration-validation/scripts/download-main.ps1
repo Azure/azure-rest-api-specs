@@ -1,12 +1,18 @@
 param(
   [string]$swaggerPath,
-  [string]$reportFile = $null
+  [string]$reportFile = $null,
+  [bool]$isRPSaaSMaster = $false
 )
 
 . $PSScriptRoot/../../../scripts/ChangedFiles-Functions.ps1
 function Download-Swagger-InMain($swaggerFolder, $latestCommitId) {
   # sparce checkout its resource-manager swagger folder, later we also add the data-plane folder
-  $repoUrl = "https://github.com/Azure/azure-rest-api-specs"
+  if ($isRPSaaSMaster) {
+    $repoUrl = "https://github.com/Azure/azure-rest-api-specs-pr"
+  }
+  else {
+    $repoUrl = "https://github.com/Azure/azure-rest-api-specs"
+  }
   $repoRoot = git rev-parse --show-toplevel
   $cloneDir = Join-Path $repoRoot "sparse-spec"
   if (!(Test-Path $cloneDir)) {
@@ -74,7 +80,12 @@ if ($swaggerPath -eq "") {
 }
 
 # Get latest commit id from main branch
-$latestCommitId = git ls-remote "https://github.com/Azure/azure-rest-api-specs.git" main | Select-String -Pattern "refs/heads/main" | ForEach-Object { $_.ToString().Split("`t")[0] }
+if ($isRPSaaSMaster) {
+  $latestCommitId = git ls-remote "https://github.com/Azure/azure-rest-api-specs-pr.git" RPSaaSMaster | Select-String -Pattern "refs/heads/RPSaaSMaster" | ForEach-Object { $_.ToString().Split("`t")[0] }
+} else {
+  $latestCommitId = git ls-remote "https://github.com/Azure/azure-rest-api-specs.git" main | Select-String -Pattern "refs/heads/main" | ForEach-Object { $_.ToString().Split("`t")[0] }
+}
+
 Write-Host "Latest commit id from main branch: $latestCommitId"
 
 $swaggerFolder = ""

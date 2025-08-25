@@ -20,7 +20,6 @@ model VirtualMachine {
   @key("virtualMachineName")
   @segment("virtualMachines")
   @visibility(Lifecycle.Read)
-  @path
   name: string;
 
   /**

@@ -1,0 +1,87 @@
+{
+  "operationId": "NotificationRuleAdministration_ListNotificationRule",
+  "title": "Get all notification rules for the specified filters.",
+  "parameters": {
+    "maxPageSize": 30,
+    "lastModifiedStartTime": "2024-05-01T16:00:46.072Z",
+    "lastModifiedEndTime": "2024-05-01T16:50:46.072Z",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "notificationRuleId": "12345678-1234-1234-1234-123456789012",
+            "displayName": "Sample_Notification_Rule1",
+            "actionGroupIds": [
+              "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup1",
+              "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup2"
+            ],
+            "scope": "Tests",
+            "testIds": [
+              "12345678-1234-1234-1234-123456789012",
+              "12345678-1234-1234-1234-123456789013"
+            ],
+            "eventFilters": {
+              "eventfilter1": {
+                "kind": "TestRunEnded",
+                "condition": {
+                  "testRunStatuses": [
+                    "FAILED",
+                    "DONE"
+                  ],
+                  "testRunResults": [
+                    "PASSED",
+                    "FAILED"
+                  ]
+                }
+              },
+              "eventfilter2": {
+                "kind": "TestRunStarted"
+              },
+              "eventfilter3": {
+                "kind": "TriggerCompleted"
+              },
+              "eventfilter4": {
+                "kind": "TriggerDisabled"
+              }
+            },
+            "createdDateTime": "2024-05-01T16:43:46.072Z",
+            "createdBy": "user@contoso.com",
+            "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+            "lastModifiedBy": "user@contoso.com"
+          },
+          {
+            "notificationRuleId": "12345678-1234-1234-1234-123456789013",
+            "displayName": "Sample_Notification_Rule2",
+            "actionGroupIds": [
+              "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup2"
+            ],
+            "scope": "Tests",
+            "testIds": [
+              "12345678-1234-1234-1234-123456789012"
+            ],
+            "eventFilters": {
+              "eventfilter1": {
+                "kind": "TestRunEnded",
+                "condition": {
+                  "testRunStatuses": [
+                    "FAILED"
+                  ],
+                  "testRunResults": [
+                    "FAILED"
+                  ]
+                }
+              }
+            },
+            "createdDateTime": "2024-05-01T16:43:46.072Z",
+            "createdBy": "user@contoso.com",
+            "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+            "lastModifiedBy": "user@contoso.com"
+          }
+        ]
+      }
+    }
+  }
+}

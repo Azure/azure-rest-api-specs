@@ -174,6 +174,17 @@ model ScheduledActionProperties {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Scheduled action extension properties")
+model ScheduledActionsExtensionProperties {
+  ...ScheduledActionProperties;
+
+  @doc("The notification settings for the scheduled action at a resource level. Resource level notification settings are scope to specific resources only and submitted through attach requests.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  @visibility(Lifecycle.Read)
+  resourceNotificationSettings?: Array<NotificationProperties>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ScheduledActionResourceOperationResponse {
   @doc("The total number of resources operated on")
@@ -192,7 +203,8 @@ model ScheduledAction is TrackedResource<ScheduledActionProperties> {
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action extension")
-model ScheduledActionResources is ExtensionResource<ScheduledActionProperties> {
+model ScheduledActionResources
+  is ExtensionResource<ScheduledActionsExtensionProperties> {
   ...ResourceNameParameter<
     ScheduledActionResources,
     SegmentName = "associatedScheduledActions"

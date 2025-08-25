@@ -17,6 +17,7 @@
   "devDependencies": {
     "@actions/github-script": "github:actions/github-script",
     "@eslint/js": "^9.22.0",
+    "@octokit/endpoint": "^11.0.0",
     "@octokit/rest": "^22.0.0",
     "@octokit/types": "^14.1.0",
     "@octokit/webhooks-types": "^7.5.1",
@@ -24,16 +25,16 @@
     "@types/debug": "^4.1.12",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^3.0.7",
+    "@vitest/coverage-v8": "^3.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
-    "prettier": "~3.5.3",
+    "prettier": "~3.6.2",
     "prettier-plugin-organize-imports": "^4.2.0",
     "semver": "^7.7.1",
     "typescript": "~5.8.2",
     "typescript-eslint": "^8.38.0",
-    "vitest": "^3.0.7"
+    "vitest": "^3.1.2"
   },
   "scripts": {
     "lint": "npm run lint:eslint && npm run lint:tsc",
@@ -43,6 +44,7 @@
     "format:check": "prettier . --check",
     "format:check:ci": "prettier . --check --log-level debug",
     "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "validate": "npm run lint && npm run format:check && npm run test:ci"
   }
 }

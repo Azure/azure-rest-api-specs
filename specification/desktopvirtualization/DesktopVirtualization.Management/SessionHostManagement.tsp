@@ -1,3 +1,4 @@
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
@@ -9,6 +10,7 @@ import "./CustomOperations.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using Versioning;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -56,6 +58,20 @@ interface ControlSessionHostUpdate {
   post is ArmResourceActionNoResponseContentAsync<
     SessionHostManagement,
     HostPoolUpdateControlParameter
+  >;
+}
+
+@added(Versions.v2025_04_01_preview)
+@armResourceOperations
+@tag("SessionHostManagement")
+interface ControlSessionHostProvisioning {
+  /**
+   * Control provisioning of a hostpool.
+   */
+  @action("controlSessionHostProvisioning")
+  post is ArmResourceActionNoResponseContentAsync<
+    SessionHostManagement,
+    HostPoolProvisioningControlParameter
   >;
 }
 

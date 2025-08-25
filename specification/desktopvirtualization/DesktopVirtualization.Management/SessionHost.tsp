@@ -102,7 +102,10 @@ interface SessionHosts {
     Response = SessionHostList
   >;
 
-  retryProvisioning is ArmResourceActionNoContentSync<SessionHost, void>;
+  /**
+   * Retry provisioning on a SessionHost.
+   */
+  retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
 }
 
 @@maxLength(SessionHost.name, 48);
