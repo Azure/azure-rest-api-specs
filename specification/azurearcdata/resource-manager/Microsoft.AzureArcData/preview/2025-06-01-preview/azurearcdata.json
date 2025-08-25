@@ -885,6 +885,75 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/getBestPracticesAssessment": {
+      "post": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_getBestPracticesAssessment",
+        "description": "Retrieves SQL best practices assessment results for the SQL Server instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "name": "sqlServerInstanceBpaRequest",
+            "in": "body",
+            "description": "The request to fetch the SQL best practices assessment results.",
+            "required": true,
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceBpaRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceBpaResponse"
+            }
+          },
+          "202": {
+            "description": "Arc SQL Server best practices assessment results retrieval is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "SqlServerInstances_PostInstanceBpa",
+          "itemName": "rows"
+        },
+        "x-ms-examples": {
+          "Retrieves Arc SQL Server best practices assessment results.": {
+            "$ref": "./examples/GetSqlServerInstanceBpa.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/runMigrationAssessment": {
       "post": {
         "tags": [
@@ -923,6 +992,48 @@
         "x-ms-examples": {
           "Trigger migration assessment run on sql server instance": {
             "$ref": "./examples/RunMigrationAssessmentSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/runBestPracticesAssessment": {
+      "post": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_runBestPracticesAssessment",
+        "description": "The request to run SQL best practices assessment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceRunBestPracticesAssessmentResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger best practices assessment run on sql server instance": {
+            "$ref": "./examples/RunBestPracticesAssessmentSqlServerInstance.json"
           }
         }
       }
@@ -1125,8 +1236,8 @@
           }
         },
         "x-ms-examples": {
-          "Retrieves Arc SQL Server cpu utilization telemetry": {
-            "$ref": "./examples/GetSqlServerInstanceManagedInstanceLinkAssessment.json"
+          "Runs Managed Instance Link Assessments and retrieves the results": {
+            "$ref": "./examples/RunManagedInstanceLinkAssessment.json"
           }
         },
         "x-ms-long-running-operation": true,

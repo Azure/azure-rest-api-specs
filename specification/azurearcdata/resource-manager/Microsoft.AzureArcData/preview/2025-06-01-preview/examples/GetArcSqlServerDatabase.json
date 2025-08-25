@@ -32,7 +32,8 @@
             "isMemoryOptimizationEnabled": true,
             "isRemoteDataArchiveEnabled": true,
             "isEncrypted": true,
-            "isTrustworthyOn": true
+            "isTrustworthyOn": true,
+            "isHekatonFilesOn": false
           },
           "backupInformation": {
             "lastFullBackup": "2022-05-05T16:26:33.883Z",
@@ -58,11 +59,93 @@
               "targetReadiness": {
                 "azureSqlDatabase": {
                   "numOfBlockerIssues": 0,
-                  "recommendationStatus": "Ready"
+                  "recommendationStatus": "Ready",
+                  "impactedObjectsSummary": [
+                    {
+                      "featureId": "ServerCredential",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "AgentJobs",
+                      "numberImpacted": 3,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "PowerShellJob",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    }
+                  ],
+                  "targetSku": {
+                    "category": {
+                      "computeTier": "Provisioned",
+                      "hardwareType": "Gen5",
+                      "sqlPurchasingModel": "vCore",
+                      "sqlServiceTier": "General Purpose",
+                      "zoneRedundancyAvailable": false
+                    },
+                    "computeSize": 2,
+                    "storageMaxSizeInMb": 1024.0,
+                    "predictedDataSizeInMb": 21.94,
+                    "predictedLogSizeInMb": 2.0,
+                    "maxStorageIops": 0.44,
+                    "maxThroughputMBps": 0.0
+                  },
+                  "monthlyCost": {
+                    "computeCost": 245.13,
+                    "storageCost": 0.18,
+                    "sqlLicenseCost": 445.22,
+                    "windowsLicenseCost": 4444.44,
+                    "totalCost": 245.31
+                  },
+                  "monthlyCostOptions": [
+                    {
+                      "keyName": "With1YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 245.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With3YearASPAndDevTest",
+                      "keyValue": {
+                        "computeCost": 24.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    },
+                    {
+                      "keyName": "With1YearASPAndProd",
+                      "keyValue": {
+                        "computeCost": 242.13,
+                        "storageCost": 0.18,
+                        "iopsCost": 0
+                      }
+                    }
+                  ]
                 },
                 "azureSqlManagedInstance": {
                   "numOfBlockerIssues": 0,
-                  "recommendationStatus": "Ready"
+                  "recommendationStatus": "Ready",
+                  "impactedObjectsSummary": [
+                    {
+                      "featureId": "ServerCredential",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "AgentJobs",
+                      "numberImpacted": 3,
+                      "issueCategory": "Warning"
+                    },
+                    {
+                      "featureId": "PowerShellJob",
+                      "numberImpacted": 1,
+                      "issueCategory": "Warning"
+                    }
+                  ]
                 },
                 "azureSqlVirtualMachine": {
                   "numOfBlockerIssues": 0,

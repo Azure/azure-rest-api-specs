@@ -29,6 +29,15 @@
             "enabled": false
           }
         },
+        "bestPracticesAssessment": {
+          "enabled": true,
+          "schedule": {
+            "enabled": true,
+            "cronTrigger": {
+              "expression": "0 0 12 1 11"
+            }
+          }
+        },
         "clientConnection": {
           "enabled": false
         },
@@ -113,7 +122,8 @@
             "port": 12345,
             "isDynamicPort": false,
             "ipAddress": "123.124.125.126",
-            "certificateName": "testCertificateName"
+            "certificateName": "testCertificateName",
+            "certificateExpiryDate": "2025-03-30T00:00:00Z"
           },
           "backupPolicy": {
             "retentionPeriodDays": 1,
@@ -138,6 +148,15 @@
                 "identityType": "SystemAssignedManagedIdentity"
               }
             ]
+          },
+          "bestPracticesAssessment": {
+            "enabled": true,
+            "schedule": {
+              "enabled": true,
+              "cronTrigger": {
+                "expression": "0 0 12 1 11"
+              }
+            }
           }
         },
         "location": "northeurope",

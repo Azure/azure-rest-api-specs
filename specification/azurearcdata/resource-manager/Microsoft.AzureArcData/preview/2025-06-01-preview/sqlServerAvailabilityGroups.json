@@ -279,6 +279,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/getAllAvailabilityGroups": {
+      "post": {
+        "tags": [
+          "SqlServerAvailabilityGroups"
+        ],
+        "description": "Retrieves full properties of all the Availability Groups in a SQL Server instance.",
+        "operationId": "SqlServerInstances_GetAllAvailabilityGroups",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AvailabilityGroupRetrievalFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSqlServerAvailabilityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all availability groups associated with an Arc Enabled Sql server.": {
+            "$ref": "./examples/FilteredListBySqlServerInstanceAvailabilityGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/availabilityGroups/{availabilityGroupName}/failover": {
       "post": {
         "tags": [
@@ -696,6 +744,67 @@
         "x-ms-examples": {
           "Fail over from an Arc Sql Server availability group to a Managed Instance.": {
             "$ref": "./examples/failoverMiLink.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/availabilityGroups/{availabilityGroupName}/deleteMiLink": {
+      "post": {
+        "tags": [
+          "SqlServerAvailabilityGroups"
+        ],
+        "description": "Deletes the MI Link between an Azure Arc-enabled SQL Server and an Azure SQL Managed Instance.",
+        "operationId": "SqlServerAvailabilityGroups_deleteMiLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "#/parameters/availabilityGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MI Link deletion request has been accepted and is being processed asynchronously.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header indicates how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\nMore details can be found in https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Fail over from an Arc Sql Server availability group to a Managed Instance.": {
+            "$ref": "./examples/DeleteMiLink.json"
           }
         }
       }
@@ -1730,7 +1839,48 @@
           "type": "string",
           "description": "Azure resource id for the sql managed instance.",
           "format": "arm-id"
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Whether to perform a Force Failover as opposed to just a regular Failover."
         }
+      }
+    },
+    "AvailabilityGroupRetrievalFilters": {
+      "type": "object",
+      "properties": {
+        "availabilityGroupTypeFilter": {
+          "$ref": "#/definitions/AvailabilityGroupTypeFilter"
+        },
+        "replicationPartnerTypeFilter": {
+          "$ref": "#/definitions/ReplicationPartnerType"
+        }
+      }
+    },
+    "AvailabilityGroupTypeFilter": {
+      "description": "Filter retrieval based on availability group type.",
+      "type": "string",
+      "enum": [
+        "CONTAINED",
+        "DISTRIBUTED",
+        "DEFAULT"
+      ],
+      "x-ms-enum": {
+        "name": "arcSqlServerAvailabilityGroupTypeFilter",
+        "modelAsString": true
+      }
+    },
+    "ReplicationPartnerType": {
+      "type": "string",
+      "enum": [
+        "SQLServer",
+        "AzureSQLVM",
+        "AzureSQLManagedInstance",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "replicationPartnerType",
+        "modelAsString": false
       }
     }
   },
@@ -1758,6 +1908,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "AvailabilityGroupRetrievalFilters": {
+      "name": "availabilityGroupRetrievalFilters",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/AvailabilityGroupRetrievalFilters"
+      }
     }
   },
   "securityDefinitions": {

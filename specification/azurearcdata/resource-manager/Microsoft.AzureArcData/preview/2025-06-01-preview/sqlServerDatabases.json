@@ -426,6 +426,15 @@
             },
             "isTrustworthyOn": {
               "type": "boolean"
+            },
+            "isHekatonFilesOn": {
+              "type": "boolean",
+              "description": "Whether the database uses the In-Memory OLTP feature for storing in-memory objects."
+            },
+            "numberOfHekatonFiles": {
+              "type": "number",
+              "format": "int32",
+              "description": "How many Hekaton files the DB has on disk, if it uses in-memory OLTP objects."
             }
           }
         },
@@ -571,6 +580,80 @@
         },
         "recommendationStatus": {
           "$ref": "./common.json#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "impactedObjectsSummary": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./common.json#/definitions/ImpactedObjectsInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "monthlyCost": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "monthlyCostOptions": {
+          "$ref": "./common.json#/definitions/SkuRecommendationResultsMonthlyCostOptions"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "computeTier": {
+                  "type": "string",
+                  "description": "The compute tier of the target SKU."
+                },
+                "hardwareType": {
+                  "type": "string",
+                  "description": "The hardware type of the target SKU."
+                },
+                "sqlPurchasingModel": {
+                  "type": "string",
+                  "description": "The SQL purchasing model of the target SKU."
+                },
+                "sqlServiceTier": {
+                  "type": "string",
+                  "description": "The SQL service tier of the target SKU."
+                },
+                "zoneRedundancyAvailable": {
+                  "type": "boolean",
+                  "description": "Indicates if zone redundancy is available for the target SKU."
+                }
+              }
+            },
+            "computeSize": {
+              "type": "number",
+              "format": "int32",
+              "description": "Compute Size in vCores."
+            },
+            "storageMaxSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "max storage for this particular SKU, in MB."
+            },
+            "predictedDataSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted data size in MB in Azure SQL, will impact the billing cost."
+            },
+            "predictedLogSizeInMb": {
+              "type": "number",
+              "format": "float",
+              "description": "The predicted log size in MB in Azure SQL, will impact the billing cost."
+            },
+            "maxStorageIops": {
+              "type": "number",
+              "format": "float",
+              "description": "The max storage IOPS in Azure SQL, will impact the billing cost."
+            },
+            "maxThroughputMBps": {
+              "type": "number",
+              "format": "float",
+              "description": "The max throughput in Azure SQL, will impact the billing cost."
+            }
+          }
         }
       }
     },

@@ -127,11 +127,132 @@
       "enum": [
         "NotReady",
         "Ready",
+        "ReadyWithConditions",
         "Unknown"
       ],
       "x-ms-enum": {
         "name": "recommendationStatus",
         "modelAsString": true
+      }
+    },
+    "SkuRecommendationResultsMonthlyCost": {
+      "description": "The monthly cost of the particular SKU.",
+      "type": "object",
+      "properties": {
+        "computeCost": {
+          "format": "float",
+          "description": "Represents the Cost of Compute.",
+          "type": "number"
+        },
+        "storageCost": {
+          "format": "float",
+          "description": "Represents the Cost of Storage.",
+          "type": "number"
+        },
+        "iopsCost": {
+          "format": "float",
+          "description": "Represents the Cost of IOPS.",
+          "type": "number"
+        },
+        "sqlLicenseCost": {
+          "format": "float",
+          "description": "Represents the Cost of SQL license.",
+          "type": "number"
+        },
+        "windowsLicenseCost": {
+          "format": "float",
+          "description": "Represents the Cost of Windows license.",
+          "type": "number"
+        },
+        "totalCost": {
+          "format": "float",
+          "description": "Represents the Total Cost.",
+          "type": "number"
+        }
+      }
+    },
+    "ImpactedObjectsSuitabilitySummary": {
+      "type": "object",
+      "description": "Represents a summary of migration readiness issues/warnings per feature type for Azure SQL DB and SQL MI targets",
+      "properties": {
+        "azureSqlDatabase": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ImpactedObjectsInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "azureSqlManagedInstance": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ImpactedObjectsInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ImpactedObjectsInfo": {
+      "type": "object",
+      "description": "summary information about the incompatible feature id, number of objects impacted  and category of issue (warning/error)",
+      "properties": {
+        "featureId": {
+          "description": "Represents the feature id from https://learn.microsoft.com/en-us/data-migration/sql-server/database/assessment-rules?view=azuresql. OR https://learn.microsoft.com/en-us/data-migration/sql-server/managed-instance/assessment-rules?view=azuresql",
+          "type": "string"
+        },
+        "numberImpacted": {
+          "format": "int32",
+          "description": "Represents the number of issues/warnings.",
+          "type": "number"
+        },
+        "issueCategory": {
+          "description": "Issue or Warning",
+          "type": "string"
+        }
+      }
+    },
+    "SkuRecommendationResultsMonthlyCostOptions": {
+      "description": "The monthly cost for all different savings options applicable for the particular SKU.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/SkuRecommendationResultsMonthlyCostOptionItem"
+      },
+      "x-ms-identifiers": []
+    },
+    "SkuRecommendationResultsMonthlyCostOptionItem": {
+      "description": "The monthly cost values for this saving option combination for the particular SKU.",
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The unique combination of saving options for a price e.g. With1YearASPAndProd."
+        },
+        "keyValue": {
+          "$ref": "#/definitions/CostTypeValues"
+        }
+      }
+    },
+    "CostTypeValues": {
+      "description": "The Monthly cost of the particular SKU.",
+      "type": "object",
+      "properties": {
+        "computeCost": {
+          "format": "float",
+          "description": "Represents the Cost of Compute.",
+          "type": "number"
+        },
+        "storageCost": {
+          "format": "float",
+          "description": "Represents the Cost of Storage.",
+          "type": "number"
+        },
+        "iopsCost": {
+          "format": "float",
+          "description": "Represents the Cost of IOPS.",
+          "type": "number"
+        }
       }
     },
     "EntraAuthentication": {
