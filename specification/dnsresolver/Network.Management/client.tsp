@@ -29,17 +29,39 @@ using Microsoft.Network;
 @@clientName(Action, "DnsResolverDomainListBulkAction", "csharp");
 @@clientName(DnsForwardingRuleset.name, "rulesetName", "csharp");
 
-@@alternateType(DnsForwardingRuleset.etag, Azure.Core.eTag);
-@@alternateType(DnsResolverProperties.resourceGuid, Azure.Core.uuid);
-@@alternateType(DnsForwardingRulesetProperties.resourceGuid, Azure.Core.uuid);
-@@alternateType(DnsResolverDomainListProperties.domainsUrl, url);
-@@alternateType(DnsResolverDomainListProperties.resourceGuid, Azure.Core.uuid);
-@@alternateType(InboundEndpointProperties.resourceGuid, Azure.Core.uuid);
-@@alternateType(OutboundEndpointProperties.resourceGuid, Azure.Core.uuid);
-@@alternateType(DnsResolverPolicyProperties.resourceGuid, Azure.Core.uuid);
-@@alternateType(DnsResolverDomainListBulkProperties.storageUrl, url);
-@@alternateType(IpConfiguration.privateIpAddress, Azure.Core.ipV4Address);
-@@alternateType(TargetDnsServer.ipAddress, Azure.Core.ipV4Address);
+@@alternateType(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(DnsResolverProperties.resourceGuid, Azure.Core.uuid, "csharp");
+@@alternateType(DnsForwardingRulesetProperties.resourceGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(DnsResolverDomainListProperties.domainsUrl, url, "csharp");
+@@alternateType(DnsResolverDomainListProperties.resourceGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(InboundEndpointProperties.resourceGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(OutboundEndpointProperties.resourceGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(DnsResolverPolicyProperties.resourceGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(DnsResolverDomainListBulkProperties.storageUrl, url, "csharp");
+@@alternateType(IpConfiguration.privateIpAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(TargetDnsServer.ipAddress, Azure.Core.ipV4Address, "csharp");
 @@alternateType(VirtualNetworkDnsForwardingRuleset.id,
-  Azure.Core.armResourceIdentifier
+  Azure.Core.armResourceIdentifier,
+  "csharp"
 );
