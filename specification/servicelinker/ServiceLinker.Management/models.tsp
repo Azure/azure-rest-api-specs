@@ -401,7 +401,6 @@ model DryrunPatch {
   /**
    * The properties of the dryrun job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DryrunProperties;
 }
 
@@ -718,7 +717,6 @@ model LinkerPatch {
   /**
    * Linker properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: LinkerProperties;
 }
 
@@ -729,7 +727,6 @@ model ValidateOperationResult {
   /**
    * The validation result detail.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ValidateResult | null;
 
@@ -890,7 +887,6 @@ model ConfigurationNameItem {
   /**
    * The result detail.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ConfigurationNames | null;
 }
@@ -961,7 +957,6 @@ model DaprConfigurationResource {
   /**
    * The properties of the dapr configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DaprConfigurationProperties;
 }
 
