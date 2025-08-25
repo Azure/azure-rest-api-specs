@@ -47,7 +47,7 @@ interface RedisCacheAccessPolicyAssignments {
    * Deletes the access policy assignment from a redis cache
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy approved usage of operation response codes. Consider updating in a future API version."
   @operationId("AccessPolicyAssignment_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RedisCacheAccessPolicyAssignment,

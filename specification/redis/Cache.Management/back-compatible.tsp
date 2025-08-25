@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Cache;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisCreateParameters.properties);
 
 @@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
@@ -58,10 +58,10 @@ using Microsoft.Cache;
   "aadEnabled"
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisUpdateParameters.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisLinkedServerCreateParameters.properties);
 
 @@clientName(RedisResources.create::parameters.properties, "parameters");
@@ -70,39 +70,39 @@ using Microsoft.Cache;
 @@clientName(RedisResources.forceReboot::parameters.body, "parameters");
 @@clientName(RedisResources.importData::parameters.body, "parameters");
 @@clientName(RedisResources.exportData::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: using flattening for SDK backwards compatibility"
 @@flattenProperty(RedisResource.properties);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(RedisFirewallRules.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisFirewallRule.properties);
 
 @@clientName(RedisPatchSchedules.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisPatchSchedule.properties);
 
 @@clientName(LinkedServer.create::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisLinkedServerWithProperties.properties);
 
 @@clientName(RedisCacheAccessPolicies.createUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisCacheAccessPolicy.properties);
 
 @@clientName(RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisCacheAccessPolicyAssignment.properties);
 @@clientName(ScheduleEntries.scheduleEntries, "ScheduleEntries");
 @@clientName(RedisOperationGroup.checkNameAvailability::parameters.body,

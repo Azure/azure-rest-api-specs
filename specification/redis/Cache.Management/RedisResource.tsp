@@ -26,7 +26,7 @@ model RedisResource
   /**
    * The identity of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "An identity is a valid resource property. Possibly the problem is that it is a duplicate, of one on TrackedResource??"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
@@ -102,7 +102,7 @@ interface RedisResources {
    * Deletes a Redis cache.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy approved usage of operation response codes. Consider updating in a future API version."
   @operationId("Redis_Delete")
   delete is RedisResourcesOps.DeleteWithoutOkAsync<
     RedisResource,
@@ -185,7 +185,7 @@ interface RedisResources {
    * Import data into Redis cache.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Legacy approved usage of operation response codes. Consider updating in a future API version."
   @action("import")
   @operationId("Redis_ImportData")
   importData is RedisResourcesOps.ActionAsync<
@@ -199,7 +199,7 @@ interface RedisResources {
    * Export data from the redis cache to blobs in a container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Legacy approved usage of operation response codes. Consider updating in a future API version."
   @action("export")
   @operationId("Redis_ExportData")
   exportData is RedisResourcesOps.ActionAsync<

@@ -1891,9 +1891,6 @@
           "RedisCacheListUpgradeNotifications": {
             "$ref": "./examples/RedisCacheListUpgradeNotifications.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1986,7 +1983,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "The name of e.g. the patch schedules resource, which is a singleton, must always be 'Default' *"
                 }
               ]
             }
@@ -2050,7 +2048,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "The name of e.g. the patch schedules resource, which is a singleton, must always be 'Default' *"
                 }
               ]
             }
@@ -2129,7 +2128,8 @@
               "values": [
                 {
                   "name": "default",
-                  "value": "default"
+                  "value": "default",
+                  "description": "The name of e.g. the patch schedules resource, which is a singleton, must always be 'Default' *"
                 }
               ]
             }
@@ -2438,9 +2438,6 @@
           "StorageAccountListPrivateLinkResources": {
             "$ref": "./examples/RedisCacheListPrivateLinkResources.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2518,27 +2515,33 @@
         "values": [
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The access policy assignments are being updated *"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The access policy assignments were successfully updated *"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The access policy assignments are being deleted *"
           },
           {
             "name": "Deleted",
-            "value": "Deleted"
+            "value": "Deleted",
+            "description": "The access policy assignments are considered deleted, meaning no custom access policies are applied. *"
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The operation was canceled. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. *"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The operation failed. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. *"
           }
         ]
       }
@@ -2560,27 +2563,33 @@
         "values": [
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "An operation is in progress. *"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The operation succeeded. *"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "A delete operation is in progress. *"
           },
           {
             "name": "Deleted",
-            "value": "Deleted"
+            "value": "Deleted",
+            "description": "The access policy is considered deleted, if it still exists. *"
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The operation was canceled. Access policies may be in a partially updated state. Update them again to have a well-defined state. *"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The operation failed. Access policies may be in a partially updated state. Update them again to have a well-defined state. *"
           }
         ]
       }
@@ -2598,11 +2607,13 @@
         "values": [
           {
             "name": "Custom",
-            "value": "Custom"
+            "value": "Custom",
+            "description": "User-configurable access policy, using the redis access policy authoring language *"
           },
           {
             "name": "BuiltIn",
-            "value": "BuiltIn"
+            "value": "BuiltIn",
+            "description": "Built-in or well-known access policies, whose policy is not configurable. *"
           }
         ]
       }
@@ -2641,7 +2652,47 @@
       ],
       "x-ms-enum": {
         "name": "DayOfWeek",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          },
+          {
+            "name": "Everyday",
+            "value": "Everyday",
+            "description": "As a convenience, 'Everyday' is also accepted and means the same as specifying all days of the week. *"
+          },
+          {
+            "name": "Weekend",
+            "value": "Weekend",
+            "description": "As a conveneince, 'Weekend' is also accepted and means the same as specifying Saturday and Sunday. *"
+          }
+        ]
       }
     },
     "ExportRDBParameters": {
@@ -2884,55 +2935,68 @@
         "values": [
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "A create operation is in progress. *"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "A delete operation is in progress. *"
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "The cache is disabled and cannot be used. *"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "An operation such as create or update failed. If you failed to create the cache it will not be in a usable state, so you should delete and recreate it. *"
           },
           {
             "name": "Linking",
-            "value": "Linking"
+            "value": "Linking",
+            "description": "Georeplication link is in progress *"
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "An operation is in progress *"
           },
           {
             "name": "RecoveringScaleFailure",
-            "value": "RecoveringScaleFailure"
+            "value": "RecoveringScaleFailure",
+            "description": "A scaling operation encountered an error and recovery is in progress. *"
           },
           {
             "name": "Scaling",
-            "value": "Scaling"
+            "value": "Scaling",
+            "description": "A scaling operation is in progress *"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The most recent operation successfully completed *"
           },
           {
             "name": "Unlinking",
-            "value": "Unlinking"
+            "value": "Unlinking",
+            "description": "Georeplication unlink is in progress *"
           },
           {
             "name": "Unprovisioning",
-            "value": "Unprovisioning"
+            "value": "Unprovisioning",
+            "description": "The cache may be being disabled *"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "An update operation is in progress. *"
           },
           {
             "name": "ConfiguringAAD",
-            "value": "ConfiguringAAD"
+            "value": "ConfiguringAAD",
+            "description": "An AAD configuration update operation is in progress. *"
           }
         ]
       }
@@ -2951,15 +3015,18 @@
         "values": [
           {
             "name": "PrimaryNode",
-            "value": "PrimaryNode"
+            "value": "PrimaryNode",
+            "description": "Reboot the primary nodes used for redis write operations. (This may trigger role changes.) *"
           },
           {
             "name": "SecondaryNode",
-            "value": "SecondaryNode"
+            "value": "SecondaryNode",
+            "description": "Reboot only the secondary or replica nodes *"
           },
           {
             "name": "AllNodes",
-            "value": "AllNodes"
+            "value": "AllNodes",
+            "description": "Reboot all nodes, not guaranteed to happen simultaneously. *"
           }
         ]
       }
@@ -3163,11 +3230,13 @@
             "values": [
               {
                 "name": "Enabled",
-                "value": "Enabled"
+                "value": "Enabled",
+                "description": "Public internet access to the cache, via its public IP address, is enabled. Connections may use any network path. *"
               },
               {
                 "name": "Disabled",
-                "value": "Disabled"
+                "value": "Disabled",
+                "description": "Public internet access to the cahce, via its public IP address, is disabled. Connections must use be made via private endpoints. *"
               }
             ]
           }
@@ -3193,7 +3262,7 @@
       "properties": {
         "rdb-backup-enabled": {
           "type": "string",
-          "description": "Specifies whether the rdb backup is enabled",
+          "description": "Specifies whether the RDB backup is enabled",
           "x-ms-client-name": "rdbBackupEnabled"
         },
         "rdb-backup-frequency": {
@@ -3275,7 +3344,7 @@
         },
         "authnotrequired": {
           "type": "string",
-          "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view."
+          "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view; you should never disable authentication using this property!"
         },
         "storage-subscription-id": {
           "type": "string",
@@ -3489,7 +3558,19 @@
       ],
       "x-ms-enum": {
         "name": "RedisKeyType",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "The primary access key *"
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "The secondary access key *"
+          }
+        ]
       }
     },
     "RedisLinkedServer": {
@@ -3850,7 +3931,19 @@
       ],
       "x-ms-enum": {
         "name": "ReplicationRole",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "The linked server is in the writable primary role *"
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "The linked server is in the read-only replica role *"
+          }
+        ]
       }
     },
     "ScheduleEntries": {
@@ -3932,11 +4025,13 @@
         "values": [
           {
             "name": "C",
-            "value": "C"
+            "value": "C",
+            "description": "The SKU family to use - must be 'C' for Basic/Standard SKU redis caches. *"
           },
           {
             "name": "P",
-            "value": "P"
+            "value": "P",
+            "description": "The SKU family to use - must be 'P' for Premium SKU redis caches. *"
           }
         ]
       }
@@ -3955,15 +4050,18 @@
         "values": [
           {
             "name": "Basic",
-            "value": "Basic"
+            "value": "Basic",
+            "description": "The well known 'Basic' SKU for Azure Cache for Redis. Basic SKU does not have an availability SLA. *"
           },
           {
             "name": "Standard",
-            "value": "Standard"
+            "value": "Standard",
+            "description": "The well known 'Standard' SKU for Azure Cache for Redis. Standard SKU has an availability SLA. *"
           },
           {
             "name": "Premium",
-            "value": "Premium"
+            "value": "Premium",
+            "description": "The well known 'Premium' SKU for Azure Cache for Redis. Premium SKU has an availability SLA, and higher performance tiers and more features compared with Standard SKU. *"
           }
         ]
       }
@@ -3982,15 +4080,18 @@
         "values": [
           {
             "name": "1.0",
-            "value": "1.0"
+            "value": "1.0",
+            "description": "TLS protocol version 1.0 -- deprecated for security reasons. Do not use this value for new caches. *"
           },
           {
             "name": "1.1",
-            "value": "1.1"
+            "value": "1.1",
+            "description": "TLS protocol version 1.1 -- deprecated for security reasons. Do not use this value for new caches. *"
           },
           {
             "name": "1.2",
-            "value": "1.2"
+            "value": "1.2",
+            "description": "TLS protocol version 1.2 -- use this value, or higher, for new caches. Or do not specify, so that your cache uses the recommended default value"
           }
         ]
       }
@@ -4008,11 +4109,13 @@
         "values": [
           {
             "name": "Stable",
-            "value": "Stable"
+            "value": "Stable",
+            "description": "Stable channel receives updates, which may include important security and stability updates, later than Preview channel. *"
           },
           {
             "name": "Preview",
-            "value": "Preview"
+            "value": "Preview",
+            "description": "Preview channel normally receives updates before Stable channel, and is the recommended channel for non-production workloads. *"
           }
         ]
       }
@@ -4056,15 +4159,18 @@
         "values": [
           {
             "name": "Automatic",
-            "value": "Automatic"
+            "value": "Automatic",
+            "description": "The zones for the cache will be selected automatically based on availability and capacity. *"
           },
           {
             "name": "UserDefined",
-            "value": "UserDefined"
+            "value": "UserDefined",
+            "description": "UserDefined means the zones for the cache are manually configured using the 'zones' property, and can not be automatically selected. *"
           },
           {
             "name": "NoZones",
-            "value": "NoZones"
+            "value": "NoZones",
+            "description": "The cache will not use multiple availability zones. *"
           }
         ]
       }

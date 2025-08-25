@@ -52,8 +52,8 @@ enum Versions {
 }
 
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: eventually update and use standard Operations interface instead of redeclaring."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: eventually update and use standard Operations interface instead of redeclaring."
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")

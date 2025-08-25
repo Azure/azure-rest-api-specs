@@ -87,7 +87,7 @@ interface LinkedServer {
   /**
    * Deletes the linked server from a redis cache (requires Premium SKU).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy approved usage of operation response codes. Consider updating in a future API version."
   delete is LinkedServerOps.DeleteWithoutOkAsync<
     RedisLinkedServerWithProperties,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse

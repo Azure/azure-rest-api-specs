@@ -15,11 +15,11 @@ namespace Microsoft.Cache;
  */
 union SkuName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The well known 'Basic' SKU for Azure Cache for Redis. Basic SKU does not have an availability SLA. **/
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The well known 'Standard' SKU for Azure Cache for Redis. Standard SKU has an availability SLA. **/
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The well known 'Premium' SKU for Azure Cache for Redis. Premium SKU has an availability SLA, and higher performance tiers and more features compared with Standard SKU. **/
   Premium: "Premium",
 }
 
@@ -28,9 +28,9 @@ union SkuName {
  */
 union SkuFamily {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The SKU family to use - must be 'C' for Basic/Standard SKU redis caches. **/
   C: "C",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The SKU family to use - must be 'P' for Premium SKU redis caches. **/
   P: "P",
 }
 
@@ -39,11 +39,11 @@ union SkuFamily {
  */
 union TlsVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** TLS protocol version 1.0 -- deprecated for security reasons. Do not use this value for new caches. **/
   `1.0`: "1.0",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** TLS protocol version 1.1 -- deprecated for security reasons. Do not use this value for new caches. **/
   `1.1`: "1.1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** TLS protocol version 1.2 -- use this value, or higher, for new caches. Or do not specify, so that your cache uses the recommended default value */
   `1.2`: "1.2",
 }
 
@@ -52,9 +52,9 @@ union TlsVersion {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Public internet access to the cache, via its public IP address, is enabled. Connections may use any network path. **/
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Public internet access to the cahce, via its public IP address, is disabled. Connections must use be made via private endpoints. **/
   Disabled: "Disabled",
 }
 
@@ -63,9 +63,9 @@ union PublicNetworkAccess {
  */
 union UpdateChannel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Stable channel receives updates, which may include important security and stability updates, later than Preview channel. **/
   Stable: "Stable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Preview channel normally receives updates before Stable channel, and is the recommended channel for non-production workloads. **/
   Preview: "Preview",
 }
 
@@ -74,45 +74,45 @@ union UpdateChannel {
  */
 union ZonalAllocationPolicy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The zones for the cache will be selected automatically based on availability and capacity. **/
   Automatic: "Automatic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** UserDefined means the zones for the cache are manually configured using the 'zones' property, and can not be automatically selected. **/
   UserDefined: "UserDefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The cache will not use multiple availability zones. **/
   NoZones: "NoZones",
 }
 
 /**
  * Redis instance provisioning status.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "TODO: support a fuller set of states including Canceled, in the future"
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** A create operation is in progress. **/
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** A delete operation is in progress. **/
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The cache is disabled and cannot be used. **/
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** An operation such as create or update failed. If you failed to create the cache it will not be in a usable state, so you should delete and recreate it. **/
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Georeplication link is in progress **/
   Linking: "Linking",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** An operation is in progress **/
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** A scaling operation encountered an error and recovery is in progress. **/
   RecoveringScaleFailure: "RecoveringScaleFailure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** A scaling operation is in progress **/
   Scaling: "Scaling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The most recent operation successfully completed **/
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Georeplication unlink is in progress **/
   Unlinking: "Unlinking",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The cache may be being disabled **/
   Unprovisioning: "Unprovisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** An update operation is in progress. **/
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** An AAD configuration update operation is in progress. **/
   ConfiguringAAD: "ConfiguringAAD",
 }
 
@@ -121,18 +121,20 @@ union ProvisioningState {
  */
 union RebootType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Reboot the primary nodes used for redis write operations. (This may trigger role changes.) **/
   PrimaryNode: "PrimaryNode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Reboot only the secondary or replica nodes **/
   SecondaryNode: "SecondaryNode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Reboot all nodes, not guaranteed to happen simultaneously. **/
   AllNodes: "AllNodes",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The name of the resource that is the target of a particular operation. For singleton resources, it must be 'Default'.
+ */
 union DefaultName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The name of e.g. the patch schedules resource, which is a singleton, must always be 'Default' **/
   default: "default",
 }
 
@@ -141,17 +143,17 @@ union DefaultName {
  */
 union AccessPolicyProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** An operation is in progress. **/
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The operation succeeded. **/
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** A delete operation is in progress. **/
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The access policy is considered deleted, if it still exists. **/
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The operation was canceled. Access policies may be in a partially updated state. Update them again to have a well-defined state. **/
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The operation failed. Access policies may be in a partially updated state. Update them again to have a well-defined state. **/
   Failed: "Failed",
 }
 
@@ -160,9 +162,9 @@ union AccessPolicyProvisioningState {
  */
 union AccessPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** User-configurable access policy, using the redis access policy authoring language **/
   Custom: "Custom",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Built-in or well-known access policies, whose policy is not configurable. **/
   BuiltIn: "BuiltIn",
 }
 
@@ -171,33 +173,35 @@ union AccessPolicyType {
  */
 union AccessPolicyAssignmentProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The access policy assignments are being updated **/
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The access policy assignments were successfully updated **/
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The access policy assignments are being deleted **/
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The access policy assignments are considered deleted, meaning no custom access policies are applied. **/
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The operation was canceled. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. **/
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The operation failed. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. **/
   Failed: "Failed",
 }
 
 /**
  * The Redis access key to regenerate.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Using non-string enum for backwards compatibility"
 enum RedisKeyType {
+  /** The primary access key **/
   Primary,
+  /** The secondary access key **/
   Secondary,
 }
 
 /**
  * Day of the week when a cache can be patched.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Using non-string enum for backwards compatibility"
 enum DayOfWeek {
   Monday,
   Tuesday,
@@ -206,16 +210,20 @@ enum DayOfWeek {
   Friday,
   Saturday,
   Sunday,
+  /** As a convenience, 'Everyday' is also accepted and means the same as specifying all days of the week. **/
   Everyday,
+  /** As a conveneince, 'Weekend' is also accepted and means the same as specifying Saturday and Sunday. **/
   Weekend,
 }
 
 /**
  * Role of the linked server.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Using non-string enum for backwards compatibility"
 enum ReplicationRole {
+  /** The linked server is in the writable primary role **/
   Primary,
+  /** The linked server is in the read-only replica role **/
   Secondary,
 }
 
@@ -293,7 +301,6 @@ model UpgradeNotification {
    * Timestamp when upgrade notification occurred.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp?: utcDateTime;
 
   /**
@@ -329,7 +336,7 @@ model RedisCreateParameters {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a back compat definition of the well-known 'tags' pattern."
   tags?: Record<string>;
 
   /**
@@ -341,7 +348,7 @@ model RedisCreateParameters {
 /**
  * Properties supplied to Create Redis operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Inheritance is used instead of composition for SDK backwards compatibility"
 model RedisCreateProperties extends RedisCommonProperties {
   /**
    * The SKU of the Redis cache to deploy.
@@ -357,7 +364,7 @@ model RedisCreateProperties extends RedisCommonProperties {
   /**
    * Static IP address. Optionally, may be specified when deploying a Redis cache inside an existing Azure Virtual Network; auto assigned by default.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an acronym as in 'IP address', so this is actually valid casing style."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^\\d+\\.\\d+\\.\\d+\\.\\d+$")
   staticIP?: string;
@@ -415,7 +422,7 @@ model RedisCommonProperties {
   /**
    * A dictionary of tenant settings
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is an approved legacy usage of Record."
   tenantSettings?: Record<string>;
 
   /**
@@ -456,125 +463,127 @@ model RedisCommonPropertiesRedisConfiguration {
   ...Record<unknown>;
 
   /**
-   * Specifies whether the rdb backup is enabled
+   * Specifies whether the RDB backup is enabled
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `rdb-backup-enabled`?: string;
 
   /**
    * Specifies the frequency for creating rdb backup in minutes. Valid values: (15, 30, 60, 360, 720, 1440)
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `rdb-backup-frequency`?: string;
 
   /**
    * Specifies the maximum number of snapshots for rdb backup
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `rdb-backup-max-snapshot-count`?: string;
 
   /**
    * The storage account connection string for storing rdb file
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `rdb-storage-connection-string`?: string;
 
   /**
    * Specifies whether the aof backup is enabled
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `aof-backup-enabled`?: string;
 
   /**
    * First storage account connection string
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `aof-storage-connection-string-0`?: string;
 
   /**
    * Second storage account connection string
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `aof-storage-connection-string-1`?: string;
 
   /**
    * Value in megabytes reserved for fragmentation per shard
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `maxfragmentationmemory-reserved`?: string;
 
   /**
    * The eviction strategy used when your data won't fit within its memory limit.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `maxmemory-policy`?: string;
 
   /**
    * Value in megabytes reserved for non-cache usage per shard e.g. failover.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `maxmemory-reserved`?: string;
 
   /**
    * Value in megabytes reserved for non-cache usage per shard e.g. failover.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `maxmemory-delta`?: string;
 
   /**
    * The max clients config
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   maxclients?: string;
 
   /**
    * The keyspace events which should be monitored.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `notify-keyspace-events`?: string;
 
   /**
    * Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   @visibility(Lifecycle.Read)
   `preferred-data-archive-auth-method`?: string;
 
   /**
    * Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `preferred-data-persistence-auth-method`?: string;
 
   /**
    * Zonal Configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   @visibility(Lifecycle.Read)
   `zonal-configuration`?: string;
 
   /**
-   * Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view.
+   * Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view; you should never disable authentication using this property!
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   authnotrequired?: string;
 
   /**
    * SubscriptionId of the storage account for persistence (aof/rdb) using ManagedIdentity.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `storage-subscription-id`?: string;
 
   /**
    * Specifies whether AAD based authentication has been enabled or disabled for the cache
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
   `aad-enabled`?: string;
 }
 
 /**
  * Properties of the redis cache.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Using inheritance instead of composition for SDK back compatibility."
 model RedisProperties extends RedisCreateProperties {
   /**
    * Redis instance provisioning status.
@@ -709,7 +718,7 @@ model RedisUpdateParameters {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is an approved legacy usage supporting the well-known 'tags' pattern."
   tags?: Record<string>;
 
   /**
@@ -721,7 +730,7 @@ model RedisUpdateParameters {
 /**
  * Patchable properties of the redis cache.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Using inheritance instead of composition for SDK back compatibility."
 model RedisUpdateProperties extends RedisCommonProperties {
   /**
    * The SKU of the Redis cache to deploy.
@@ -773,7 +782,7 @@ model RedisForceRebootResponse {
 /**
  * Parameters for Redis import operation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RDB is an acronym and we have historically used it upper-case here, we will keep that casing for back compat reasons."
 model ImportRDBParameters {
   /**
    * File format.
@@ -788,12 +797,13 @@ model ImportRDBParameters {
   /**
    * Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The historical decision is to follow Redis.conf casing style for this property."
   `preferred-data-archive-auth-method`?: string;
 
   /**
    * Subscription id of the storage container containing files to import using Managed Identity.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The historical decision is to follow Redis.conf casing style for this property."
   `storage-subscription-id`?: string;
 }
 
@@ -820,13 +830,13 @@ model ExportRDBParameters {
   /**
    * Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The historical decision is to follow Redis.conf casing style for this property."
   `preferred-data-archive-auth-method`?: string;
 
   /**
    * Subscription id of the storage container for data to be exported using ManagedIdentity.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The historical decision is to follow Redis.conf casing style for this property."
   `storage-subscription-id`?: string;
 }
 
@@ -838,25 +848,25 @@ model RedisFirewallRuleProperties {
   /**
    * lowest IP address included in the range
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an acronym which is historically allowed to be upper-case."
   startIP: string;
 
   /**
    * highest IP address included in the range
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an acronym which is historically allowed to be upper-case."
   endIP: string;
 }
 
 /**
  * List of patch schedules for a Redis cache.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Patch schedules are updated synchronously and do not have a provisioning state."
 model ScheduleEntries {
   /**
    * List of patch schedules for a Redis cache.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "NOTFIXING: PropertyNameConflict - assuming not fixing it is the way to keep best back compatibility with existing APIs"
   @OpenAPI.extension("x-ms-identifiers", #[])
   scheduleEntries: ScheduleEntry[];
 }
@@ -929,12 +939,12 @@ model RedisLinkedServerCreateProperties {
 /**
  * Properties of a linked server to be returned in get/put response
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Keeping inheritance based design for best backwards compatibility"
 model RedisLinkedServerProperties extends RedisLinkedServerCreateProperties {
   /**
    * Terminal state of the link between primary and secondary redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: TODO: model the linked server provisioning state as a string union in future"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -959,7 +969,7 @@ model OperationStatus
   /**
    * Additional properties from RP, only when operation is successful
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a legacy historically approved usage for allowing additional properties to be returned in the response."
   properties?: Record<unknown>;
 }
 
@@ -976,7 +986,7 @@ model RedisCacheAccessPolicyProperties {
   /**
    * Built-In or Custom access policy
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "This property named 'type' is legacy approved, even though it aliases the top level resource 'type' property and prevents flattening"
   @visibility(Lifecycle.Read)
   type?: AccessPolicyType;
 
@@ -1027,8 +1037,8 @@ model RedisCacheAccessPolicyAssignmentList
 /**
  * Parameters required for creating a firewall rule on redis cache. (Note, you can just use the FirewallRule type instead now.)
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Keeping inheritance based design for best backwards compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Suppressing this warning because the base class has all the properties we need."
 model RedisFirewallRuleCreateParameters extends RedisFirewallRule {}
 
 /**
