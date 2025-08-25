@@ -38,6 +38,7 @@ input-file:
   - preview/2024-03-03-preview/avsAssessments.json
 suppressions:
   - code: AvoidAdditionalProperties
+    from: avsAssessments.json
     reason: Dictionary is used for AVS cluster mappings in AVS assessments.
     where:
       - $.definitions.AVSClusterExtendedDetails.properties.hosts

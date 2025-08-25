@@ -38,6 +38,7 @@ input-file:
   - preview/2024-03-03-preview/sqlAssessments.json
 suppressions:
   - code: AvoidAdditionalProperties
+    from: sqlAssessments.json
     reason: Dictionary is used for SQL instance/database mappings in SQL assessments.
     where:
       - $.definitions.SqlInstanceExtendedDetails.properties.databases

@@ -38,6 +38,7 @@ input-file:
   - preview/2024-03-03-preview/machineAssessments.json
 suppressions:
     - code: AvoidAdditionalProperties
+      from: machineAssessments.json
       reason: Dictionary is used in AssessedMachineExtendedDetails.disks property for machine assessments.
       where:
         - $.definitions.AssessedMachineExtendedDetails.properties.disks

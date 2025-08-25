@@ -38,6 +38,7 @@ input-file:
   - preview/2024-03-03-preview/webAppAssessments.json
 suppressions:
   - code: AvoidAdditionalProperties
+    from: webAppAssessments.json
     reason: Dictionary is used for web app mappings in web app assessments.
     where:
       - $.definitions.WebAppExtendedDetails.properties.sites
