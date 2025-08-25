@@ -13,10 +13,10 @@ options:
     arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.DevTestLabs"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DevTestLabs"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     namespace: "azure.mgmt.devtestlabs"
     package-dir: "azure-mgmt-devtestlabs"

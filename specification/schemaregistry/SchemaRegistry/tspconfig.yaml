@@ -35,11 +35,12 @@ options:
       name: "@azure/schema-registry"
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Data.SchemaRegistry"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Data.SchemaRegistry"
     clear-output-folder: true
     model-namespace: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Data.SchemaRegistry
     model-namespace: true

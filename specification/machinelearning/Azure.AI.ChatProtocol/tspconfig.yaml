@@ -15,12 +15,13 @@ options:
     emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.ChatProtocol"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.ChatProtocol"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.ChatProtocol
     model-namespace: false
   "@azure-tools/typespec-python":

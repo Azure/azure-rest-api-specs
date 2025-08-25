@@ -26,11 +26,11 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Chaos"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Chaos"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/chaos"
     package-dir: "armchaos"
