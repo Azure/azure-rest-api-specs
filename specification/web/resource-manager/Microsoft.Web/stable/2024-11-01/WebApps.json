@@ -6630,6 +6630,9 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -27109,7 +27112,8 @@
           "properties": {
             "provisioningState": {
               "description": "Reflects state of association persistence and configuration propagation to App Service Data Plane.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "provisioningIssues": {
               "description": "Reflects any misconfigurations and failures detected while provisioning the association or while processing configuration changes.",
@@ -27322,6 +27326,11 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
           }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
