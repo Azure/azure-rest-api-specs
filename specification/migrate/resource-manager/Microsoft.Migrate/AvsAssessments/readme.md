@@ -40,7 +40,6 @@ suppressions:
   - code: AvoidAdditionalProperties
     where: $.definitions.AVSClusterExtendedDetails.properties.hosts
     reason: Dictionary is used for AVS cluster mappings in AVS assessments.
-suppressions:
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
