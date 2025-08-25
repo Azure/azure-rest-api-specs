@@ -36,9 +36,6 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - preview/2024-03-03-preview/assessmentProjects.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: Dictionary is used only in the AssessmentOptions proxy resource, which is a singleton and immutable across the assessment Project.
 ```
 
 ### Tag: package-2024-01

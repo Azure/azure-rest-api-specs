@@ -38,7 +38,8 @@ input-file:
   - preview/2024-03-03-preview/machineAssessments.json
 suppressions:
   - code: AvoidAdditionalProperties
-    reason: Dictionary is used only in the AssessmentOptions proxy resource, which is a singleton and immutable across the assessment Project.
+    where: preview/2024-03-03-preview/machineAssessments.json
+    reason: Dictionary is used in AssessedMachineExtendedDetails.disks property for machine assessments.
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
