@@ -2638,6 +2638,11 @@
       "type": "object",
       "description": "Reservation order alias",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReservationOrderAliasResponseProperties",
+          "description": "Reservation order alias response properties",
+          "x-ms-client-flatten": true
+        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "Reservation order SKU"
@@ -2645,11 +2650,6 @@
         "location": {
           "type": "string",
           "description": "The Azure Region where the reserved resource lives."
-        },
-        "properties": {
-          "$ref": "#/definitions/ReservationOrderAliasResponseProperties",
-          "description": "Reservation order alias response properties",
-          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -2925,14 +2925,14 @@
       "type": "object",
       "description": "Savings plan",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "Savings plan SKU"
-        },
         "properties": {
           "$ref": "#/definitions/SavingsPlanModelProperties",
           "description": "Savings plan properties",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
         }
       },
       "required": [
@@ -3141,6 +3141,11 @@
       "type": "object",
       "description": "Savings plan order alias",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanOrderAliasProperties",
+          "description": "Savings plan order alias properties",
+          "x-ms-client-flatten": true
+        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "Savings plan SKU"
@@ -3148,11 +3153,6 @@
         "kind": {
           "type": "string",
           "description": "Resource provider kind"
-        },
-        "properties": {
-          "$ref": "#/definitions/SavingsPlanOrderAliasProperties",
-          "description": "Savings plan order alias properties",
-          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -3217,14 +3217,14 @@
       "type": "object",
       "description": "Savings plan order",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "Savings plan SKU"
-        },
         "properties": {
           "$ref": "#/definitions/SavingsPlanOrderModelProperties",
           "description": "Savings plan order properties",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Savings plan SKU"
         }
       },
       "required": [
