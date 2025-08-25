@@ -4,6 +4,7 @@
     "api-version": "2024-11-01",
     "certificateOrderName": "SampleCertificateOrderName",
     "keyVaultCertificate": {
+      "location": "Global",
       "properties": {
         "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
         "keyVaultSecretName": "SampleSecretName1"
@@ -26,8 +27,22 @@
         }
       },
       "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "SampleCertName1",
+        "type": "Microsoft.CertificateRegistration/certificateOrders/certificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName/certificates/SampleCertName1",
+        "location": "Global",
+        "properties": {
+          "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+          "keyVaultSecretName": "SampleSecretName1",
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
     }
   },
-  "operationId": "AppServiceCertificateOrders_UpdateCertificate",
-  "title": "Update Certificate"
+  "operationId": "AppServiceCertificateOrders_CreateOrUpdateCertificate",
+  "title": "Create Certificate"
 }
