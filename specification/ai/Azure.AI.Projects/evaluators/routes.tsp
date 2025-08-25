@@ -100,6 +100,6 @@ interface Evaluators {
       @Http.path
       version: string;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<{}>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluatorVersion>
   >;
 }

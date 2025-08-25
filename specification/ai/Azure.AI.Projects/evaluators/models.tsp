@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+// TODO: Need to ask a PM for categories to support
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
@@ -35,6 +36,9 @@ union EvaluatorType {
 
   @doc("Service-based evaluator")
   service: "Service_Based",
+
+  @doc("Math-based evaluator")
+  math: "Math_Based",
 }
 
 @doc("The type of evaluator configuration")
@@ -58,6 +62,9 @@ union ScaleRuleType {
 
   @doc("HTTP-based scaling rules")
   http: "http",
+
+    @doc("TCP-based scaling rules")
+  tcp: "tcp",
 }
 
 @doc("Base evaluator configuration with discriminator")
@@ -124,25 +131,17 @@ model PromptBasedEvaluatorConfig extends EvaluatorConfig {
   @doc("The prompt text used for evaluation")
   prompt_text: string;
 
-  @doc("Name of the model deployment to use for evaluation")
-  model_deployment_name: string;
-
   @doc("The evaluator's initialization parameters")
   init_params: InitializationParameters;
 }
+
 
 @doc("Prompty-based evaluator configuration using prompty files")
 model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
   type: EvaluatorConfigType.prompty;
 
-  @doc("Path to the prompty file")
-  file_path: string;
-
-  @doc("Name of the model deployment to use for evaluation")
-  model_deployment_name: string;
-
-  @doc("Connection name")
-  connection_name?: string;
+  @doc("The prompt text used for evaluation")
+  prompt_text: string;
 
   @doc("The evaluator's initialization parameters")
   init_params: InitializationParameters;
