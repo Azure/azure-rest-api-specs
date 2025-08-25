@@ -37,6 +37,52 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
   - Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
+directive:
+  - from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
+    where: $.paths
+    transform: |
+      for (const path in $) {
+        if (path.includes('notificationSessions')) {
+          $[path].post['x-ms-long-running-operation'] = false;
+        }
+      }
+```
+
+### Suppressions
+
+```yaml
+directive:
+  - suppress: R3023
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
+    reason: This is a tenant-scoped API for notification sessions, not a standard ARM resource API.
+
+  - suppress: R4010
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
+    reason: This is a tenant-scoped API with custom error responses.
+
+  - suppress: R4041
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
+    reason: This API does not have array identifiers (tenant-scoped).
+
+  - suppress: PathForResourceAction
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    from: Microsoft.ResourceNotifications/preview/2025-08-01-preview/resourcenotifications.json
+    reason: This is a tenant-scoped API and does not follow standard ARM resource naming patterns.
 ```
 
 ---

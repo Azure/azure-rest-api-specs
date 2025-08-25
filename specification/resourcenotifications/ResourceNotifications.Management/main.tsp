@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-autorest";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -246,6 +247,7 @@ model CreateNotificationSessionResponse {
 
 /** Operations for notification sessions. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "These are custom operations for notification sessions, not standard ARM resource operations"
+@tag("NotificationsSessions")
 interface NotificationsSessions {
   /** Create a notification session. */
   @post
