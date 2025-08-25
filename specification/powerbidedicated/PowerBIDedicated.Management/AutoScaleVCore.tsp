@@ -14,11 +14,8 @@ namespace Microsoft.PowerBIDedicated;
  * Represents an instance of an auto scale v-core resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(AutoScaleVCoreProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model AutoScaleVCore extends Azure.ResourceManager.Foundations.TrackedResource {
+model AutoScaleVCore
+  is Azure.ResourceManager.TrackedResource<AutoScaleVCoreProperties, true> {
   ...ResourceNameParameter<
     Resource = AutoScaleVCore,
     KeyName = "vcoreName",
@@ -31,11 +28,6 @@ model AutoScaleVCore extends Azure.ResourceManager.Foundations.TrackedResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: AutoScaleVCoreSku;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties: AutoScaleVCoreProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
