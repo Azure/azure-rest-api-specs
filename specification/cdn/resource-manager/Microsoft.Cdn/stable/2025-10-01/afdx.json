@@ -2444,6 +2444,15 @@
             "maxLength": 60
           },
           {
+            "name": "rule",
+            "in": "body",
+            "description": "The delivery rule properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -2454,7 +2463,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RuleSet"
+              "$ref": "#/definitions/RulesUpdateParameters"
             }
           },
           "default": {
