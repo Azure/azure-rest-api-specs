@@ -1,0 +1,81 @@
+{
+  "title": "ListBySubscription DstsServiceClientIdentityGroupSubjectNameBased",
+  "operationId": "DstsServiceClientIdentityGroupSubjectNameBased_ListBySubscription",
+  "parameters": {
+    "api-version": "2023-08-22-preview",
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/dstsServiceClientIdentityGroupSubjectNameBaseds/prodUSEastAzcis",
+            "name": "prodUSEastAzcis",
+            "type": "Microsoft.AzureCis/dstsServiceClientIdentityGroupSubjectNameBaseds",
+            "properties": {
+              "azureLocation": "useast",
+              "provisioningState": "Succeeded",
+              "requestId": "359a4430-8c8b-42f9-b62e-173747d76995",
+              "commonSubjectNames": [],
+              "groupName": "test20250820",
+              "commonServiceClientIdentityName": "exampleString",
+              "listOfClaimProvisioningsForGroup": [
+                {
+                  "claimInstance": {
+                    "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                    "value": "PlatformServiceViewer"
+                  },
+                  "isUnscoped": false,
+                  "scopedToServiceAccountGroupId": "exampleId",
+                  "scopedToServiceAccountGroup": "exampleGroupName",
+                  "scopedToServiceAccountGroupServiceTreeId": "exampleServiceTreeId"
+                }
+              ],
+              "commonCertificates": [
+                {
+                  "thumbprint": "172781DB7D67C8564AA6152434107A73C1FE4A17",
+                  "expiryDate": "2025-08-20T00:00:00Z"
+                }
+              ],
+              "commonAuthenticationRequirements": [
+                {
+                  "value": "SAWEnforcement",
+                  "requiredIpRanges": [
+                    {
+                      "fromIpAddress": "127.0.0.1",
+                      "toIpAddress": "127.0.0.255"
+                    }
+                  ]
+                }
+              ],
+              "cloudId": "Public",
+              "accountVersion": "exampleString",
+              "claimExpansions": [
+                {
+                  "expandedClaim": {
+                    "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                    "value": "PlatformServiceViewer"
+                  },
+                  "serviceAccountName": "exampleServiceAccountName",
+                  "containerId": "exampleContainerId",
+                  "dstsInstance": "uswest-dsts.dsts.core.windows.net",
+                  "cloudId": "Public",
+                  "serviceAccountGroup": "exampleServiceAccountGroup",
+                  "serviceAccountGroupServiceTreeId": "exampleServiceAccountGroupServiceTreeId",
+                  "isRegionalEnforced": true
+                }
+              ],
+              "dstsInstances": [
+                "uswest-dsts.dsts.core.windows.net"
+              ],
+              "enforceServiceClientIdentityIds": [
+                "3caa6ba0-c8b6-4a7b-ae1f-cf0aaeb6c5d8"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
