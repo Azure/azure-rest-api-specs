@@ -389,9 +389,13 @@ model EvaluationSummaryResult {
 model DataSourceConfiguration {
   @doc("Type of the data source.")
   type: string;
+}
 
+@doc("Definition for custom evaluation data source configuration.")
+@added(Versions.v2025_07_31_preview)
+model CustomDataSourceConfiguration extends DataSourceConfiguration {
   @doc("Schema of the data source.")
-  schema?: Record<unknown>;
+  schema: Record<unknown>;
 }
 
 @doc("Evaluation Definition")
