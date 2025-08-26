@@ -220,15 +220,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,63}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body to execute the configuration check template resource on demand.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/OnDemandExecutionRequest"
-            }
           }
         ],
         "responses": {
@@ -753,19 +744,6 @@
           }
         ]
       }
-    },
-    "OnDemandExecutionRequest": {
-      "type": "object",
-      "description": "Request body to start the checks execution on demand.",
-      "properties": {
-        "workloadInstanceId": {
-          "type": "string",
-          "description": "The workload instance ID to execute the checks on."
-        }
-      },
-      "required": [
-        "workloadInstanceId"
-      ]
     },
     "OutputParameters": {
       "type": "object",
