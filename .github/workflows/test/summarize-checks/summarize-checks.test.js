@@ -1184,7 +1184,7 @@ describe("Summarize Checks Unit Tests", () => {
       github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
         data: {
           artifacts: [
-            { id: 1, name: "job-summary" },
+            { id: 1, name: "job-summary" /* updated_at: "1970" (default) */ },
             { id: 2, name: "job-summary", updated_at: "2024" },
             { id: 3, name: "job-summary", updated_at: "2025" },
           ],
