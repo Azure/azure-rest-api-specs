@@ -91,4 +91,4 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "csharp");
 @@clientName(VoiceLive.ResponseStatus, "VoiceLiveResponseStatus", "csharp");
 @@clientName(VoiceLive.ServerEvent, "ServerEventBase", "csharp");
-
+@@clientName(VoiceLive.Usage, "ResponseTokenStatistics", "csharp");
