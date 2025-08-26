@@ -1,5 +1,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -27,6 +29,7 @@ union ExtendedLocationType {
 }
 
 @doc("The enum defining status of resource.")
+@lroStatus
 union ProvisioningState {
   string,
   ResourceProvisioningState,
