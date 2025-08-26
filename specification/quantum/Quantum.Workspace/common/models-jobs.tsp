@@ -9,6 +9,7 @@ import "./models.tsp";
 import "./models-items.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Quantum.Workspace;
 
@@ -116,17 +117,18 @@ model JobDetails extends ItemDetails {
   outputDataFormat?: string;
 
   /** Priority of job. */
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  jobPriority?: JobPriority;
+  priority?: Priority;
 
   /** List of user-supplied tags associated with the job. */
-  @removed(Versions.v2025_09_01_preview)
+  @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
 }
 
 /** Options for updating a job. */
-@added(Versions.v2025_09_01_preview)
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 @parentResource(Quantum.Workspace.QuantumWorkspace)
 @resource("jobUpdateOptions")
 model JobUpdateOptions {

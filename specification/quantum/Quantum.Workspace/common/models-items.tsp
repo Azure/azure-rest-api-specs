@@ -7,6 +7,7 @@ import "./common.tsp";
 import "./cost-estimates.tsp";
 import "./models.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 
 namespace Quantum.Workspace;
@@ -74,18 +75,13 @@ model ItemDetails {
   errorData?: Errors.WorkspaceItemError;
 
   /** List of user-supplied tags associated with the job. */
-  @added(Versions.v2025_09_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: string[];
-
-  /** Priority of the item. */
-  @added(Versions.v2025_09_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   priority?: Priority;
 }
 
 /** Job priority levels. */
-@added(Versions.v2025_09_01_preview)
+@added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 union Priority {
   string,
 

@@ -4,11 +4,11 @@
 // --------------------------------------------------------------------------------------------
 
 import "./common.tsp";
-
+using TypeSpec.Versioning;
 namespace Quantum.Workspace;
 
 /** The operation to be performed. */
-@removed(Versions.v2025_09_01_preview)
+@removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 union JsonPatchOperation {
   string,
 
@@ -32,7 +32,7 @@ union JsonPatchOperation {
 }
 
 /** A JSONPatch object as defined by RFC 6902. */
-@removed(Versions.v2025_09_01_preview)
+@removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 model JsonPatchObject {
   /** The operation to be performed. */
   @visibility(Lifecycle.Create)
@@ -53,5 +53,5 @@ model JsonPatchObject {
 }
 
 /** A JSONPatch document as defined by RFC 6902. */
-@removed(Versions.v2025_09_01_preview)
+@removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
 model JsonPatchDocument is JsonPatchObject[];

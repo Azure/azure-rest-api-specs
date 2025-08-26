@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 alias DefaultServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
@@ -35,7 +36,7 @@ namespace Quantum.Workspace.Services {
   alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
   /** Operation to patch a resource. */
-  @added(Versions.v2025_09_01_preview)
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @patch(#{ implicitOptionality: true })
   @updatesResource(Resource)
   op PatchOperation<Resource extends Reflection.Model> is AzureCoreOperations.ResourceUpdate<
@@ -61,8 +62,8 @@ namespace Quantum.Workspace.Services {
     The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
     See https://github.com/Azure/typespec-azure/issues/475
     """
-  @removed(Versions.v2025_09_01_preview)
-  @renamedFrom(Versions.v2025_09_01_preview, "PatchOperation")
+  @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "PatchOperation")
   @updatesResource(Resource)
   @patch(#{ implicitOptionality: true })
   op PatchOperationOld<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
