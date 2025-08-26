@@ -64,30 +64,22 @@
             ]
           }
         ],
-        "eventGroups": [
+        "events": [
           {
-            "name": "default",
-            "events": [
-              {
-                "name": "event1",
-                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
-                "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
-                "destinations": [
-                  {
-                    "target": "Mqtt",
-                    "configuration": {
-                      "topic": "/path/event1",
-                      "retain": "Keep"
-                    }
-                  }
-                ]
-              },
-              {
-                "name": "event2",
-                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
-                "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}"
-              }
-            ]
+            "name": "event1",
+            "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
+            "observabilityMode": "None",
+            "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+            "topic": {
+              "path": "/path/event1",
+              "retain": "Keep"
+            }
+          },
+          {
+            "name": "event2",
+            "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
+            "observabilityMode": "Log",
+            "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}"
           }
         ]
       }
