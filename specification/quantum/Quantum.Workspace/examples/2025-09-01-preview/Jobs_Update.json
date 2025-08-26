@@ -1,0 +1,32 @@
+{
+  "operationId": "Jobs_Update",
+  "title": "Patches a job.",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "jobId": "00000000-0000-0000-0000-000000000002",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "workspaceName": "my-workspace",
+    "resource": {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "name": "my-job-new-name",
+      "priority": "High",
+      "tags": [
+        "tag1"
+      ]
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "name": "my-job-new-name",
+          "id": "00000000-0000-0000-0000-000000000002",
+          "priority": "High",
+          "tags": [
+            "tag1",
+            "new_tag"
+          ]
+        }
+      },
+      "204": {}
+    }
+  }
