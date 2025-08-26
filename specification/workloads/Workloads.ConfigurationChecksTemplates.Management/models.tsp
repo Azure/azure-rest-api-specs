@@ -410,3 +410,12 @@ model ChecksConfigurationUpdateRequest {
   @Azure.ResourceManager.identifiers(#["checkId"])
   commonChecks?: CheckConfiguration[];
 }
+
+@doc("Request body to start the checks execution on demand.")
+model OnDemandExecutionRequest {
+  /**
+   * The workload instance ID to execute the checks on.
+   */
+  @doc("The workload instance ID to execute the checks on.")
+  workloadInstanceId: string;
+}
