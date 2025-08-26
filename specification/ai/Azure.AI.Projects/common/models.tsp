@@ -131,6 +131,16 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
   modelParameters?: Record<unknown>;
 }
 
+@doc("Azure AI agent target configuration.")
+@added(Versions.v2025_05_15_preview)
+model AzureAIAgentTarget extends TargetConfig {
+  @visibility(Lifecycle.Read)
+  type: "AzureAIAgent";
+
+  @doc("The agent identifier.")
+  agentId: string;
+}
+
 @doc("Abstract class for target configuration.")
 @added(Versions.v2025_05_15_preview)
 @discriminator("type")

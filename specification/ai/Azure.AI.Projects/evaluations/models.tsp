@@ -176,29 +176,23 @@ union RedTeamDataConfigurationType {
 }
 
 @added(Versions.v2025_07_31_preview)
-@doc("Configuration for red team data sources")
-model RedTeamDataConfiguration {
-  type: RedTeamDataConfigurationType;
-}
-
-@added(Versions.v2025_07_31_preview)
 @doc("Seed prompts data source configuration")
-model SeedPromptsDataConfiguration extends RedTeamDataConfiguration {
+model SeedPromptsDataConfiguration {
   @doc("Specifies the seed prompts data source")
   type: RedTeamDataConfigurationType.SeedPrompts;
 
   @doc("Specifies the seed prompts data source")
-  data: EvaluationDataSource;
+  data: InlineData | FoundryDatasetDataSource;
 }
 
 @added(Versions.v2025_07_31_preview)
 @doc("Configuration for taxonomy data sources")
-model TaxonomyDataConfiguration extends RedTeamDataConfiguration {
+model TaxonomyDataConfiguration {
   @doc("Specifies the taxonomy data source")
   type: RedTeamDataConfigurationType.Taxonomy;
 
   @doc("Specifies the taxonomy data source")
-  data: EvaluationDataSource;
+  data: InlineData | FoundryDatasetDataSource;
 
   @doc("Specifies the taxonomy topic name")
   name: string;
@@ -217,19 +211,19 @@ model RedTeamDataSource extends EvaluationDataSource {
   id?: string;
 
   @doc("Optional configuration for the red team data source.")
-  data?: RedTeamDataConfiguration;
+  data?: SeedPromptsDataConfiguration | TaxonomyDataConfiguration;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];
-
-  @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
-  simulationOnly?: boolean = false;
 
   @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
   applicationScenario?: string;
 
   @doc("Number of simulation rounds.")
   numTurns?: int32;
+
+  @doc("Configuration for the target AI system to be used for Red Teaming.")
+  target: TargetConfig;
 }
 
 @doc("Data source using inline data provided directly in the request. Size limit is 2 MB")
@@ -489,7 +483,7 @@ model AttackObjectiveSource {
   riskCategory: RiskCategory[];
 
   @doc("Data configuration for the red team exercise")
-  data?: RedTeamDataConfiguration;
+  data?: SeedPromptsDataConfiguration | TaxonomyDataConfiguration;
 }
 
 @added(Versions.v2025_07_31_preview)
@@ -536,43 +530,6 @@ union SummaryResultType {
 @added(Versions.v2025_07_31_preview)
 model SummaryResult {
   type: SummaryResultType;
-}
-
-@doc("Schedule type for evaluations")
-@added(Versions.v2025_07_31_preview)
-union ScheduleType {
-  @doc("One-off evaluation schedule")
-  oneOff: "oneOff",
-
-  @doc("Recurring evaluation schedule")
-  recurring: "recurring",
-
-  string,
-}
-
-@doc("Base model for schedules")
-@added(Versions.v2025_07_31_preview)
-model Schedule {
-  type: ScheduleType;
-}
-
-@doc("One-off evaluation schedule")
-@added(Versions.v2025_07_31_preview)
-model OneOffSchedule extends Schedule {
-  type: ScheduleType.oneOff;
-}
-
-@doc("Recurring evaluation schedule")
-@added(Versions.v2025_07_31_preview)
-model RecurringSchedule extends Schedule {
-  type: ScheduleType.recurring;
-
-  @doc("Cron expression for the recurring schedule")
-  cronExpression: string;
-
-  startTime: utcDateTime;
-
-  endTime?: utcDateTime;
 }
 
 @doc("Evaluation Definition")
@@ -646,10 +603,6 @@ model Evaluation {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_31_preview)
   systemData?: Record<string>;
-
-  @doc("Schedule for the evaluation.")
-  @added(Versions.v2025_07_31_preview)
-  schedule?: Schedule;
 }
 
 @doc("Definition for sampling strategy.")
@@ -908,15 +861,7 @@ model EvaluationResult {
 @doc("Comprehensive evaluation results for a single data row, including the input data, processing state, and results from all configured evaluators.")
 @added(Versions.v2025_07_31_preview)
 @resource("runs/{evaluationId}/results")
-model RedTeamResult {
-  @doc("Unique identifier for this evaluation result row")
-  @key("id")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  @doc("Error message describing why the evaluation failed for this data row, if applicable")
-  error?: string;
-
+model RedTeamResult extends EvaluationResult {
   @doc("Attack strategy used for the evaluation.")
   attackStrategy: AttackStrategy;
 
@@ -928,7 +873,4 @@ model RedTeamResult {
 
   @doc("Conversation history related to the attack.")
   conversation?: Message[];
-
-  @doc("Evaluation result of the attack conversation.")
-  metrics?: EvaluationMetric[];
 }
