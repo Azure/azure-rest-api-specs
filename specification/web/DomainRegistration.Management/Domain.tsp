@@ -44,30 +44,7 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-enum", #{name:"DomainStatus", modelAsString: false})
-  registrationStatus?:
-    "Active" |
-    "Awaiting" |
-    "Cancelled" |
-    "Confiscated" |
-    "Disabled" |
-    "Excluded" |
-    "Expired" |
-    "Failed" |
-    "Held" |
-    "Locked" |
-    "Parked" |
-    "Pending" |
-    "Reserved" |
-    "Reverted" |
-    "Suspended" |
-    "Transferred" |
-    "Unknown" |
-    "Unlocked" |
-    "Unparked" |
-    "Updated" |
-    "JsonConverterFailed" |
-    string;
+  registrationStatus?: registrationStatus;
 
   /**
    * Domain provisioning state.
@@ -75,15 +52,7 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-enum", #{name:"ProvisioningState", modelAsString: false})
-  provisioningState?:
-    "Succeeded" |
-    "Failed" |
-    "Canceled" |
-    "InProgress" |
-    "Deleting" |
-    string;
-
+  provisioningState?: provisioningState;
   /**
    * Name servers.
    */
@@ -151,8 +120,7 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
    * Current DNS type
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
-  dnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
+  dnsType?: DnsType;
 
   /**
    * Azure DNS Zone to use
@@ -163,30 +131,18 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
    * Target DNS type (would be used for migration)
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
-  targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
+  targetDnsType?: DnsType;
 
-  @visibility(Lifecycle.Create)
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   authCode?: string;
 }> {
   ...ResourceNameParameter<
     Resource = {},
     KeyName = "domainName",
     SegmentName = "domains",
-    NamePattern = ""
-  >;
-}
-
-model DomainUpdate is Azure.ResourceManager.TrackedResource<Domain> {
-  ...ResourceNameParameter<
-    Resource = Domain,
-    KeyName = "domainName",
-    SegmentName = "domains",
     NamePattern = "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
   >;
 }
-
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
@@ -219,7 +175,7 @@ interface Domains {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
-    DomainUpdate,
+    Domain,
     PatchModel = DomainPatchResource,
     Response = ArmResponse<Domain> | (AcceptedResponse & {
       @bodyRoot

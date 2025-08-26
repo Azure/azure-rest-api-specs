@@ -731,33 +731,7 @@ model DomainPatchResource extends ProxyOnlyResource {
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
-    @OpenAPI.extension(
-      "x-ms-enum",
-      #{ name: "DomainStatus", modelAsString: false }
-    )
-    registrationStatus?:
-      | "Active"
-      | "Awaiting"
-      | "Cancelled"
-      | "Confiscated"
-      | "Disabled"
-      | "Excluded"
-      | "Expired"
-      | "Failed"
-      | "Held"
-      | "Locked"
-      | "Parked"
-      | "Pending"
-      | "Reserved"
-      | "Reverted"
-      | "Suspended"
-      | "Transferred"
-      | "Unknown"
-      | "Unlocked"
-      | "Unparked"
-      | "Updated"
-      | "JsonConverterFailed"
-      | string;
+    registrationStatus?: registrationStatus;
 
     /**
      * Domain provisioning state.
@@ -843,8 +817,7 @@ model DomainPatchResource extends ProxyOnlyResource {
      * Current DNS type
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-    @OpenAPI.extension("x-ms-enum", #{ name: "DnsType", modelAsString: false })
-    dnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
+    dnsType?: dnsType;
 
     /**
      * Azure DNS Zone to use
@@ -855,13 +828,60 @@ model DomainPatchResource extends ProxyOnlyResource {
      * Target DNS type (would be used for migration)
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-    @OpenAPI.extension("x-ms-enum", #{ name: "DnsType", modelAsString: false })
-    targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
+    targetDnsType?: DnsType;
 
-    @visibility(Lifecycle.Create)
-    @visibility(Lifecycle.Read)
+    @visibility(Lifecycle.Create, Lifecycle.Read)
     authCode?: string;
   };
+}
+
+/**
+ * ARM resource for dnsType.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum dnsType {
+  AzureDns,
+  DefaultDomainRegistrarDns,
+}
+
+/**
+ * ARM resource for provisionState.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum provisioningState {
+  Succeeded,
+  Failed,
+  Canceled,
+  InProgress,
+  Deleting,
+}
+
+/**
+ * ARM resource for registrationStatus.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum registrationStatus {
+  Active,
+  Awaiting,
+  Cancelled,
+  Confiscated,
+  Disabled,
+  Excluded,
+  Expired,
+  Failed,
+  Held,
+  Locked,
+  Parked,
+  Pending,
+  Reserved,
+  Reverted,
+  Suspended,
+  Transferred,
+  Unknown,
+  Unlocked,
+  Unparked,
+  Updated,
+  JsonConverterFailed,
 }
 
 /**

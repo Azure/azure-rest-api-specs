@@ -451,7 +451,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           }
         ],
         "responses": {
@@ -495,7 +496,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           },
           {
             "name": "domain",
@@ -567,7 +569,7 @@
           {
             "name": "domainName",
             "in": "path",
-            "description": "The name of the Domain",
+            "description": "Name of the domain.",
             "required": true,
             "type": "string",
             "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
@@ -629,7 +631,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           },
           {
             "name": "forceHardDeleteDomain",
@@ -682,7 +685,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           }
         ],
         "responses": {
@@ -731,7 +735,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           },
           {
             "name": "name",
@@ -782,7 +787,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           },
           {
             "name": "name",
@@ -842,7 +848,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           },
           {
             "name": "name",
@@ -902,7 +909,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           },
           {
             "name": "name",
@@ -955,7 +963,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           }
         ],
         "responses": {
@@ -1004,7 +1013,8 @@
             "in": "path",
             "description": "Name of the domain.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
           }
         ],
         "responses": {
@@ -1143,6 +1153,18 @@
         "modelAsString": false
       }
     },
+    "DnsType": {
+      "type": "string",
+      "description": "Current DNS type",
+      "enum": [
+        "AzureDns",
+        "DefaultDomainRegistrarDns"
+      ],
+      "x-ms-enum": {
+        "name": "DnsType",
+        "modelAsString": false
+      }
+    },
     "Domain": {
       "type": "object",
       "description": "Information about a domain.",
@@ -1180,51 +1202,13 @@
               ]
             },
             "registrationStatus": {
-              "type": "string",
+              "$ref": "#/definitions/registrationStatus",
               "description": "Domain registration status.",
-              "enum": [
-                "Active",
-                "Awaiting",
-                "Cancelled",
-                "Confiscated",
-                "Disabled",
-                "Excluded",
-                "Expired",
-                "Failed",
-                "Held",
-                "Locked",
-                "Parked",
-                "Pending",
-                "Reserved",
-                "Reverted",
-                "Suspended",
-                "Transferred",
-                "Unknown",
-                "Unlocked",
-                "Unparked",
-                "Updated",
-                "JsonConverterFailed"
-              ],
-              "x-ms-enum": {
-                "name": "DomainStatus",
-                "modelAsString": false
-              },
               "readOnly": true
             },
             "provisioningState": {
-              "type": "string",
+              "$ref": "#/definitions/provisioningState",
               "description": "Domain provisioning state.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "InProgress",
-                "Deleting"
-              ],
-              "x-ms-enum": {
-                "name": "ProvisioningState",
-                "modelAsString": false
-              },
               "readOnly": true
             },
             "nameServers": {
@@ -1294,32 +1278,16 @@
               "readOnly": true
             },
             "dnsType": {
-              "type": "string",
-              "description": "Current DNS type",
-              "enum": [
-                "AzureDns",
-                "DefaultDomainRegistrarDns"
-              ],
-              "x-ms-enum": {
-                "name": "DnsType",
-                "modelAsString": false
-              }
+              "$ref": "#/definitions/DnsType",
+              "description": "Current DNS type"
             },
             "dnsZoneId": {
               "type": "string",
               "description": "Azure DNS Zone to use"
             },
             "targetDnsType": {
-              "type": "string",
-              "description": "Target DNS type (would be used for migration)",
-              "enum": [
-                "AzureDns",
-                "DefaultDomainRegistrarDns"
-              ],
-              "x-ms-enum": {
-                "name": "DnsType",
-                "modelAsString": false
-              }
+              "$ref": "#/definitions/DnsType",
+              "description": "Target DNS type (would be used for migration)"
             },
             "authCode": {
               "type": "string",
@@ -1485,35 +1453,8 @@
               ]
             },
             "registrationStatus": {
-              "type": "string",
+              "$ref": "#/definitions/registrationStatus",
               "description": "Domain registration status.",
-              "enum": [
-                "Active",
-                "Awaiting",
-                "Cancelled",
-                "Confiscated",
-                "Disabled",
-                "Excluded",
-                "Expired",
-                "Failed",
-                "Held",
-                "Locked",
-                "Parked",
-                "Pending",
-                "Reserved",
-                "Reverted",
-                "Suspended",
-                "Transferred",
-                "Unknown",
-                "Unlocked",
-                "Unparked",
-                "Updated",
-                "JsonConverterFailed"
-              ],
-              "x-ms-enum": {
-                "name": "DomainStatus",
-                "modelAsString": false
-              },
               "readOnly": true
             },
             "provisioningState": {
@@ -1599,32 +1540,16 @@
               "readOnly": true
             },
             "dnsType": {
-              "type": "string",
-              "description": "Current DNS type",
-              "enum": [
-                "AzureDns",
-                "DefaultDomainRegistrarDns"
-              ],
-              "x-ms-enum": {
-                "name": "DnsType",
-                "modelAsString": false
-              }
+              "$ref": "#/definitions/dnsType",
+              "description": "Current DNS type"
             },
             "dnsZoneId": {
               "type": "string",
               "description": "Azure DNS Zone to use"
             },
             "targetDnsType": {
-              "type": "string",
-              "description": "Target DNS type (would be used for migration)",
-              "enum": [
-                "AzureDns",
-                "DefaultDomainRegistrarDns"
-              ],
-              "x-ms-enum": {
-                "name": "DnsType",
-                "modelAsString": false
-              }
+              "$ref": "#/definitions/DnsType",
+              "description": "Target DNS type (would be used for migration)"
             },
             "authCode": {
               "type": "string",
@@ -1890,6 +1815,18 @@
         "value"
       ]
     },
+    "dnsType": {
+      "type": "string",
+      "description": "ARM resource for dnsType.",
+      "enum": [
+        "AzureDns",
+        "DefaultDomainRegistrarDns"
+      ],
+      "x-ms-enum": {
+        "name": "dnsType",
+        "modelAsString": false
+      }
+    },
     "domainNotRenewableReasonsProperties": {
       "type": "string",
       "description": "Reasons why domain is not renewable.",
@@ -1915,6 +1852,52 @@
             "value": "SubscriptionNotActive"
           }
         ]
+      }
+    },
+    "provisioningState": {
+      "type": "string",
+      "description": "ARM resource for provisionState.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": false
+      }
+    },
+    "registrationStatus": {
+      "type": "string",
+      "description": "ARM resource for registrationStatus.",
+      "enum": [
+        "Active",
+        "Awaiting",
+        "Cancelled",
+        "Confiscated",
+        "Disabled",
+        "Excluded",
+        "Expired",
+        "Failed",
+        "Held",
+        "Locked",
+        "Parked",
+        "Pending",
+        "Reserved",
+        "Reverted",
+        "Suspended",
+        "Transferred",
+        "Unknown",
+        "Unlocked",
+        "Unparked",
+        "Updated",
+        "JsonConverterFailed"
+      ],
+      "x-ms-enum": {
+        "name": "registrationStatus",
+        "modelAsString": false
       }
     }
   },
