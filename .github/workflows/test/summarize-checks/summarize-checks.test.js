@@ -1,13 +1,15 @@
 import { Octokit } from "@octokit/rest";
+import { strToU8, zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
   getCheckInfo,
   getCheckRunTuple,
   getExistingLabels,
+  getImpactAssessment,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.js";
-import { createMockCore } from "../mocks.js";
+import { createMockCore, createMockGithub } from "../mocks.js";
 
 const mockCore = createMockCore();
 const WORKFLOW_URL = "http://github.com/a/fake/workflowrun/url";
@@ -1145,6 +1147,45 @@ describe("Summarize Checks Unit Tests", () => {
       );
 
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
+    });
+  });
+
+  describe("getImpactAssessment", () => {
+    it("unzips and extracts artifact", async () => {
+      /** @type {import("../../src/summarize-checks/labelling.js").ImpactAssessment} */
+      const impactAssessment = {
+        // Set booleans arbitrarily to true|false
+        resourceManagerRequired: false,
+        dataPlaneRequired: true,
+        suppressionReviewRequired: false,
+        isNewApiVersion: true,
+        rpaasExceptionRequired: false,
+        rpaasRpNotInPrivateRepo: true,
+        rpaasChange: false,
+        newRP: true,
+        rpaasRPMissing: false,
+        typeSpecChanged: true,
+        isDraft: false,
+        targetBranch: "test-target-branch",
+      };
+
+      const zip = zipSync({
+        "summary.json": strToU8(JSON.stringify(impactAssessment)),
+      });
+
+      const github = createMockGithub();
+
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: { artifacts: [{ name: "job-summary" }] },
+      });
+
+      github.rest.actions.downloadArtifact.mockResolvedValue({
+        data: Buffer.from(zip),
+      });
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
     });
   });
 });
