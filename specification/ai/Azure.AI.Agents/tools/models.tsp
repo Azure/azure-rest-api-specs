@@ -39,6 +39,19 @@ model FileSearchToolDefinition extends ToolDefinition {
   fileSearch?: FileSearchToolDefinitionDetails;
 }
 
+@doc("The input definition information for an image generation tool as used to configure an agent.")
+@added(Versions.v2025_05_01)
+model ImageGenerationToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'image_generation'.")
+  type: "image_generation";
+
+  /**
+   * Options overrides for the image generation tool.
+   */
+  @encodedName("application/json", "image_generation")
+  imageGeneration?: ImageGenerationToolDefinitionDetails;
+}
+
 @doc("The input definition information for a function tool as used to configure an agent.")
 @added(Versions.v2025_05_01)
 model FunctionToolDefinition extends ToolDefinition {
@@ -508,6 +521,59 @@ model FileSearchToolCallContent {
 
   @doc("The text content of the file.")
   text: string;
+}
+
+@doc("""
+  A record of a call to an image generation tool, issued by the model in evaluation of a defined tool, that represents
+  executed image generation or editing operations.
+  """)
+@added(Versions.v2025_05_01)
+model RunStepImageGenerationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'image_generation'.")
+  type: "image_generation";
+
+  @doc("The details of the image generation tool call.")
+  @encodedName("application/json", "image_generation")
+  imageGeneration: RunStepImageGenerationToolCallDetails;
+}
+
+@doc("The detailed information about an image generation tool call.")
+@added(Versions.v2025_05_01)
+model RunStepImageGenerationToolCallDetails {
+  @doc("The prompt used for image generation or editing.")
+  prompt: string;
+
+  @doc("The generated image output.")
+  output?: string;
+}
+
+/**
+ * Options overrides for the image generation tool.
+ */
+@added(Versions.v2025_05_01)
+model ImageGenerationToolDefinitionDetails {
+  /**
+   * The quality of the image that will be generated. 'hd' creates images with finer details and greater consistency.
+   */
+  quality?: ImageQuality;
+
+  /**
+   * The size of the generated image. Must be one of 256x256, 512x512, 1024x1024, 1024x1792, or 1792x1024.
+   */
+  size?: ImageSize;
+
+  /**
+   * The format in which the generated image is returned.
+   */
+  @encodedName("application/json", "output_format")
+  outputFormat?: ImageOutputFormat;
+
+  /**
+   * The number of images to generate. Must be between 1 and 10.
+   */
+  @minValue(1)
+  @maxValue(10)
+  n?: int32;
 }
 
 @doc("""
