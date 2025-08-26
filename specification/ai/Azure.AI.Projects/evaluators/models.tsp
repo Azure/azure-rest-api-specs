@@ -115,7 +115,7 @@ model PromptBasedEvaluatorConfig extends EvaluatorConfig {
 @added(Versions.v2025_05_15_preview)
 model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
-  displayName?: string;
+  display_name?: string;
 
   @doc("evaluator's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
