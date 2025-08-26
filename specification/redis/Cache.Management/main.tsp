@@ -52,14 +52,13 @@ enum Versions {
 }
 
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: eventually update and use standard Operations interface instead of redeclaring."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: eventually update and use standard Operations interface instead of redeclaring."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: eventually reuse standard Operations interface instead of redeclaring."
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
-  @operationId("Operations_List")
   @segment("operations")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
@@ -67,5 +66,5 @@ interface Operations {
     @segment("providers")
     @doc("The provider namespace (this parameter will not show up in operations).")
     provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  ): OperationListResult | ErrorResponse;
 }

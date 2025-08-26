@@ -14,52 +14,39 @@ namespace Microsoft.Cache;
  * The Private Endpoint Connection resource.
  */
 @parentResource(RedisResource)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
-}
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the redis cache.
    */
-  get is ArmResourceRead<
-    PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
-  >;
+  get is PrivateEndpointOperations.Read<RedisResource>;
 
   /**
    * Update the state of specified private endpoint connection associated with the redis cache.
    */
-  put is ArmResourceCreateOrReplaceAsync<
-    PrivateEndpointConnection,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  put is PrivateEndpointOperations.CreateOrReplaceAsync<
+    RedisResource,
+    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Deletes the specified private endpoint connection associated with the redis cache.
    */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
+  delete is PrivateEndpointOperations.DeleteSync<RedisResource>;
 
   /**
    * List all the private endpoint connections associated with the redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  list is ArmResourceListByParent<
-    PrivateEndpointConnection,
-    Response = ArmResponse<ResourceListResult<PrivateEndpointConnection>>
+  list is PrivateEndpointOperations.ListByParent<
+    RedisResource,
+    Response = ResourceListResult<PrivateEndpointConnection>
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
-  "The name of the private endpoint connection associated with the Azure resource"
-);
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.put::parameters.resource,
   "The private endpoint connection properties."

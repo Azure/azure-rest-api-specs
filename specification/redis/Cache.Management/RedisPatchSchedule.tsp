@@ -8,7 +8,6 @@ import "./RedisResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cache;
 /**
@@ -19,7 +18,6 @@ model RedisPatchSchedule
   is Azure.ResourceManager.ProxyResource<ScheduleEntries, false> {
   ...ResourceNameParameter<
     Resource = RedisPatchSchedule,
-    KeyName = "default",
     SegmentName = "patchSchedules",
     NamePattern = "",
     Type = DefaultName
@@ -63,29 +61,21 @@ interface RedisPatchSchedules {
   /**
    * Gets the patching schedule of a redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PatchSchedules_Get")
   get is RedisPatchSchedulesOps.Read<RedisPatchSchedule>;
 
   /**
    * Create or replace the patching schedule for Redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PatchSchedules_CreateOrUpdate")
   createOrUpdate is RedisPatchSchedulesOps.CreateOrUpdateSync<RedisPatchSchedule>;
 
   /**
    * Deletes the patching schedule of a redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PatchSchedules_Delete")
   delete is RedisPatchSchedulesOps.DeleteSync<RedisPatchSchedule>;
 
   /**
    * Gets all patch schedules in the specified redis cache (there is only one).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PatchSchedules_ListByRedisResource")
   listByRedisResource is ArmResourceListByParent<RedisPatchSchedule>;
 }
 

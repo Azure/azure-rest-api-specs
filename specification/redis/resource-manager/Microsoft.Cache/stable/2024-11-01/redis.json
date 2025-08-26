@@ -79,7 +79,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
@@ -168,7 +168,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -204,7 +204,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RedisListResult"
             }
@@ -246,7 +246,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RedisListResult"
             }
@@ -392,7 +392,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RedisResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -431,7 +432,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
@@ -445,11 +446,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -466,7 +462,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RedisResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -561,7 +558,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RedisCacheAccessPolicyList"
             }
@@ -720,7 +717,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RedisCacheAccessPolicy"
         },
         "x-ms-long-running-operation": true
       },
@@ -826,7 +824,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentList"
             }
@@ -985,7 +983,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RedisCacheAccessPolicyAssignment"
         },
         "x-ms-long-running-operation": true
       },
@@ -1419,7 +1418,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1579,7 +1579,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RedisLinkedServerWithPropertiesList"
             }
@@ -1723,7 +1723,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RedisLinkedServerWithProperties"
         },
         "x-ms-long-running-operation": true
       },
@@ -2184,7 +2185,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -2232,11 +2233,7 @@
             "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -2284,11 +2281,7 @@
             "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "properties",
@@ -2296,7 +2289,7 @@
             "description": "The private endpoint connection properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -2304,13 +2297,13 @@
           "200": {
             "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
             "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
               "Location": {
@@ -2337,7 +2330,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -2366,11 +2360,7 @@
             "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -2853,22 +2843,6 @@
         }
       ]
     },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The Private Endpoint Connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
       "description": "The response of a PrivateEndpointConnection list operation.",
@@ -2877,7 +2851,7 @@
           "type": "array",
           "description": "The PrivateEndpointConnection items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "nextLink": {
@@ -3254,7 +3228,8 @@
           "$ref": "#/definitions/ZonalAllocationPolicy",
           "description": "Optional: Specifies how availability zones are allocated to the Redis cache. 'Automatic' enables zone redundancy and Azure will automatically select zones based on regional availability and capacity. 'UserDefined' will select availability zones passed in by you using the 'zones' parameter. 'NoZones' will produce a non-zonal cache. If 'zonalAllocationPolicy' is not passed, it will be set to 'UserDefined' when zones are passed in, otherwise, it will be set to 'Automatic' in regions where zones are supported and 'NoZones' in regions where zones are not supported."
         }
-      }
+      },
+      "x-ms-external": true
     },
     "RedisCommonPropertiesRedisConfiguration": {
       "type": "object",
@@ -3430,7 +3405,8 @@
         {
           "$ref": "#/definitions/RedisCommonProperties"
         }
-      ]
+      ],
+      "x-ms-external": true
     },
     "RedisFirewallRule": {
       "type": "object",
@@ -3808,7 +3784,7 @@
           "type": "array",
           "description": "List of private endpoint connection associated with the specified redis cache",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         }
@@ -3817,7 +3793,8 @@
         {
           "$ref": "#/definitions/RedisCreateProperties"
         }
-      ]
+      ],
+      "x-ms-external": true
     },
     "RedisRebootParameters": {
       "type": "object",
@@ -3873,7 +3850,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the resource."
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "required": [
@@ -3920,7 +3897,8 @@
         {
           "$ref": "#/definitions/RedisCommonProperties"
         }
-      ]
+      ],
+      "x-ms-external": true
     },
     "ReplicationRole": {
       "type": "string",

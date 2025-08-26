@@ -319,7 +319,6 @@ model RedisCreateParameters {
    * Redis cache properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RedisCreateProperties;
 
   /**
@@ -348,7 +347,9 @@ model RedisCreateParameters {
 /**
  * Properties supplied to Create Redis operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Inheritance is used instead of composition for SDK backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisCreateProperties extends RedisCommonProperties {
   /**
    * The SKU of the Redis cache to deploy.
@@ -393,6 +394,8 @@ model Sku {
 /**
  * Create/Update/Get common properties of the redis cache.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisCommonProperties {
   /**
    * All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta, maxmemory-policy,notify-keyspace-events, aof-backup-enabled, aof-storage-connection-string-0, aof-storage-connection-string-1 etc.
@@ -583,7 +586,9 @@ model RedisCommonPropertiesRedisConfiguration {
 /**
  * Properties of the redis cache.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Using inheritance instead of composition for SDK back compatibility."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisProperties extends RedisCreateProperties {
   /**
    * Redis instance provisioning status.
@@ -712,7 +717,6 @@ model RedisUpdateParameters {
    * Redis cache properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RedisUpdateProperties;
 
   /**
@@ -730,7 +734,9 @@ model RedisUpdateParameters {
 /**
  * Patchable properties of the redis cache.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FORNOW: Using inheritance instead of composition for SDK back compatibility."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model RedisUpdateProperties extends RedisCommonProperties {
   /**
    * The SKU of the Redis cache to deploy.
@@ -899,7 +905,6 @@ model RedisLinkedServerCreateParameters {
    * Properties required to create a linked server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RedisLinkedServerCreateProperties;
 }
 
@@ -1044,12 +1049,11 @@ model RedisFirewallRuleCreateParameters extends RedisFirewallRule {}
 /**
  * Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.
  */
-@Azure.Core.pagedResult
 model OperationListResult {
   /**
    * List of operations supported by the resource provider.
    */
-  @Azure.Core.items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: Operation[];
 

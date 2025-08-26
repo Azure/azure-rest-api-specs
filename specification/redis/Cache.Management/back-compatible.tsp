@@ -3,6 +3,128 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Cache;
 
+// Client decorators for operations (migrated from @operationId)
+
+// Operations_List from main.tsp
+@@clientName(Operations.list, "List");
+
+// RedisResources operations
+@@clientLocation(RedisResources.get, "Redis");
+@@clientName(RedisResources.get, "Get");
+
+@@clientLocation(RedisResources.create, "Redis");
+@@clientName(RedisResources.create, "Create");
+
+@@clientLocation(RedisResources.update, "Redis");
+@@clientName(RedisResources.update, "Update");
+
+@@clientLocation(RedisResources.delete, "Redis");
+@@clientName(RedisResources.delete, "Delete");
+
+@@clientLocation(RedisResources.listByResourceGroup, "Redis");
+@@clientName(RedisResources.listByResourceGroup, "ListByResourceGroup");
+
+@@clientLocation(RedisResources.listBySubscription, "Redis");
+@@clientName(RedisResources.listBySubscription, "ListBySubscription");
+
+@@clientLocation(RedisResources.listUpgradeNotifications, "Redis");
+@@clientName(RedisResources.listUpgradeNotifications,
+  "ListUpgradeNotifications"
+);
+
+@@clientLocation(RedisResources.listKeys, "Redis");
+@@clientName(RedisResources.listKeys, "ListKeys");
+
+@@clientLocation(RedisResources.regenerateKey, "Redis");
+@@clientName(RedisResources.regenerateKey, "RegenerateKey");
+
+@@clientLocation(RedisResources.forceReboot, "Redis");
+@@clientName(RedisResources.forceReboot, "ForceReboot");
+
+@@clientLocation(RedisResources.importData, "Redis");
+@@clientName(RedisResources.importData, "ImportData");
+
+@@clientLocation(RedisResources.exportData, "Redis");
+@@clientName(RedisResources.exportData, "ExportData");
+
+@@clientLocation(RedisResources.flushCache, "Redis");
+@@clientName(RedisResources.flushCache, "FlushCache");
+
+@@clientLocation(RedisResources.listByRedisCache, "PrivateLinkResources");
+@@clientName(RedisResources.listByRedisCache, "ListByRedisCache");
+
+// RedisOperationGroup operations from routes.tsp
+@@clientLocation(RedisOperationGroup.checkNameAvailability, "Redis");
+@@clientName(RedisOperationGroup.checkNameAvailability,
+  "CheckNameAvailability"
+);
+
+@@clientLocation(AsyncOperationStatusOperationGroup.get,
+  "AsyncOperationStatus"
+);
+@@clientName(AsyncOperationStatusOperationGroup.get, "Get");
+
+// RedisCacheAccessPolicies operations
+@@clientLocation(RedisCacheAccessPolicies.get, "AccessPolicy");
+@@clientName(RedisCacheAccessPolicies.get, "Get");
+
+@@clientLocation(RedisCacheAccessPolicies.createUpdate, "AccessPolicy");
+@@clientName(RedisCacheAccessPolicies.createUpdate, "CreateUpdate");
+
+@@clientLocation(RedisCacheAccessPolicies.delete, "AccessPolicy");
+@@clientName(RedisCacheAccessPolicies.delete, "Delete");
+
+@@clientLocation(RedisCacheAccessPolicies.list, "AccessPolicy");
+@@clientName(RedisCacheAccessPolicies.list, "List");
+
+// RedisCacheAccessPolicyAssignments operations
+@@clientLocation(RedisCacheAccessPolicyAssignments.get,
+  "AccessPolicyAssignment"
+);
+@@clientName(RedisCacheAccessPolicyAssignments.get, "Get");
+
+@@clientLocation(RedisCacheAccessPolicyAssignments.createUpdate,
+  "AccessPolicyAssignment"
+);
+@@clientName(RedisCacheAccessPolicyAssignments.createUpdate, "CreateUpdate");
+
+@@clientLocation(RedisCacheAccessPolicyAssignments.delete,
+  "AccessPolicyAssignment"
+);
+@@clientName(RedisCacheAccessPolicyAssignments.delete, "Delete");
+
+@@clientLocation(RedisCacheAccessPolicyAssignments.list,
+  "AccessPolicyAssignment"
+);
+@@clientName(RedisCacheAccessPolicyAssignments.list, "List");
+
+// RedisFirewallRules operations
+@@clientLocation(RedisFirewallRules.get, "FirewallRules");
+@@clientName(RedisFirewallRules.get, "Get");
+
+@@clientLocation(RedisFirewallRules.createOrUpdate, "FirewallRules");
+@@clientName(RedisFirewallRules.createOrUpdate, "CreateOrUpdate");
+
+@@clientLocation(RedisFirewallRules.delete, "FirewallRules");
+@@clientName(RedisFirewallRules.delete, "Delete");
+
+@@clientLocation(RedisFirewallRules.list, "FirewallRules");
+@@clientName(RedisFirewallRules.list, "List");
+
+// RedisPatchSchedules operations
+@@clientLocation(RedisPatchSchedules.get, "PatchSchedules");
+@@clientName(RedisPatchSchedules.get, "Get");
+
+@@clientLocation(RedisPatchSchedules.createOrUpdate, "PatchSchedules");
+@@clientName(RedisPatchSchedules.createOrUpdate, "CreateOrUpdate");
+
+@@clientLocation(RedisPatchSchedules.delete, "PatchSchedules");
+@@clientName(RedisPatchSchedules.delete, "Delete");
+
+@@clientLocation(RedisPatchSchedules.listByRedisResource, "PatchSchedules");
+@@clientName(RedisPatchSchedules.listByRedisResource, "ListByRedisResource");
+
+// Existing client decorators and properties
 #suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisCreateParameters.properties);
 
