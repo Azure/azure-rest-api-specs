@@ -9,119 +9,136 @@ using Microsoft.Cache;
 @@clientName(Operations.list, "List");
 
 // RedisResources operations
-@@clientLocation(RedisResources.get, "Redis");
+@@clientLocation(RedisResources.get, "Redis", "!csharp");
 @@clientName(RedisResources.get, "Get");
 
-@@clientLocation(RedisResources.create, "Redis");
+@@clientLocation(RedisResources.create, "Redis", "!csharp");
 @@clientName(RedisResources.create, "Create");
 
-@@clientLocation(RedisResources.update, "Redis");
+@@clientLocation(RedisResources.update, "Redis", "!csharp");
 @@clientName(RedisResources.update, "Update");
 
-@@clientLocation(RedisResources.delete, "Redis");
+@@clientLocation(RedisResources.delete, "Redis", "!csharp");
 @@clientName(RedisResources.delete, "Delete");
 
-@@clientLocation(RedisResources.listByResourceGroup, "Redis");
+@@clientLocation(RedisResources.listByResourceGroup, "Redis", "!csharp");
 @@clientName(RedisResources.listByResourceGroup, "ListByResourceGroup");
 
-@@clientLocation(RedisResources.listBySubscription, "Redis");
+@@clientLocation(RedisResources.listBySubscription, "Redis", "!csharp");
 @@clientName(RedisResources.listBySubscription, "ListBySubscription");
 
-@@clientLocation(RedisResources.listUpgradeNotifications, "Redis");
+@@clientLocation(RedisResources.listUpgradeNotifications, "Redis", "!csharp");
 @@clientName(RedisResources.listUpgradeNotifications,
   "ListUpgradeNotifications"
 );
 
-@@clientLocation(RedisResources.listKeys, "Redis");
+@@clientLocation(RedisResources.listKeys, "Redis", "!csharp");
 @@clientName(RedisResources.listKeys, "ListKeys");
 
-@@clientLocation(RedisResources.regenerateKey, "Redis");
+@@clientLocation(RedisResources.regenerateKey, "Redis", "!csharp");
 @@clientName(RedisResources.regenerateKey, "RegenerateKey");
 
-@@clientLocation(RedisResources.forceReboot, "Redis");
+@@clientLocation(RedisResources.forceReboot, "Redis", "!csharp");
 @@clientName(RedisResources.forceReboot, "ForceReboot");
 
-@@clientLocation(RedisResources.importData, "Redis");
+@@clientLocation(RedisResources.importData, "Redis", "!csharp");
 @@clientName(RedisResources.importData, "ImportData");
 
-@@clientLocation(RedisResources.exportData, "Redis");
+@@clientLocation(RedisResources.exportData, "Redis", "!csharp");
 @@clientName(RedisResources.exportData, "ExportData");
 
-@@clientLocation(RedisResources.flushCache, "Redis");
+@@clientLocation(RedisResources.flushCache, "Redis", "!csharp");
 @@clientName(RedisResources.flushCache, "FlushCache");
 
-@@clientLocation(RedisResources.listByRedisCache, "PrivateLinkResources");
+@@clientLocation(RedisResources.listByRedisCache,
+  "PrivateLinkResources",
+  "!csharp"
+);
 @@clientName(RedisResources.listByRedisCache, "ListByRedisCache");
 
 // RedisOperationGroup operations from routes.tsp
-@@clientLocation(RedisOperationGroup.checkNameAvailability, "Redis");
+@@clientLocation(RedisOperationGroup.checkNameAvailability, "Redis", "!csharp");
 @@clientName(RedisOperationGroup.checkNameAvailability,
   "CheckNameAvailability"
 );
 
 @@clientLocation(AsyncOperationStatusOperationGroup.get,
-  "AsyncOperationStatus"
+  "AsyncOperationStatus",
+  "!csharp"
 );
 @@clientName(AsyncOperationStatusOperationGroup.get, "Get");
 
 // RedisCacheAccessPolicies operations
-@@clientLocation(RedisCacheAccessPolicies.get, "AccessPolicy");
+@@clientLocation(RedisCacheAccessPolicies.get, "AccessPolicy", "!csharp");
 @@clientName(RedisCacheAccessPolicies.get, "Get");
 
-@@clientLocation(RedisCacheAccessPolicies.createUpdate, "AccessPolicy");
+@@clientLocation(RedisCacheAccessPolicies.createUpdate,
+  "AccessPolicy",
+  "!csharp"
+);
 @@clientName(RedisCacheAccessPolicies.createUpdate, "CreateUpdate");
 
-@@clientLocation(RedisCacheAccessPolicies.delete, "AccessPolicy");
+@@clientLocation(RedisCacheAccessPolicies.delete, "AccessPolicy", "!csharp");
 @@clientName(RedisCacheAccessPolicies.delete, "Delete");
 
-@@clientLocation(RedisCacheAccessPolicies.list, "AccessPolicy");
+@@clientLocation(RedisCacheAccessPolicies.list, "AccessPolicy", "!csharp");
 @@clientName(RedisCacheAccessPolicies.list, "List");
 
 // RedisCacheAccessPolicyAssignments operations
 @@clientLocation(RedisCacheAccessPolicyAssignments.get,
-  "AccessPolicyAssignment"
+  "AccessPolicyAssignment",
+  "!csharp"
 );
 @@clientName(RedisCacheAccessPolicyAssignments.get, "Get");
 
 @@clientLocation(RedisCacheAccessPolicyAssignments.createUpdate,
-  "AccessPolicyAssignment"
+  "AccessPolicyAssignment",
+  "!csharp"
 );
 @@clientName(RedisCacheAccessPolicyAssignments.createUpdate, "CreateUpdate");
 
 @@clientLocation(RedisCacheAccessPolicyAssignments.delete,
-  "AccessPolicyAssignment"
+  "AccessPolicyAssignment",
+  "!csharp"
 );
 @@clientName(RedisCacheAccessPolicyAssignments.delete, "Delete");
 
 @@clientLocation(RedisCacheAccessPolicyAssignments.list,
-  "AccessPolicyAssignment"
+  "AccessPolicyAssignment",
+  "!csharp"
 );
 @@clientName(RedisCacheAccessPolicyAssignments.list, "List");
 
 // RedisFirewallRules operations
-@@clientLocation(RedisFirewallRules.get, "FirewallRules");
+@@clientLocation(RedisFirewallRules.get, "FirewallRules", "!csharp");
 @@clientName(RedisFirewallRules.get, "Get");
 
-@@clientLocation(RedisFirewallRules.createOrUpdate, "FirewallRules");
+@@clientLocation(RedisFirewallRules.createOrUpdate, "FirewallRules", "!csharp");
 @@clientName(RedisFirewallRules.createOrUpdate, "CreateOrUpdate");
 
-@@clientLocation(RedisFirewallRules.delete, "FirewallRules");
+@@clientLocation(RedisFirewallRules.delete, "FirewallRules", "!csharp");
 @@clientName(RedisFirewallRules.delete, "Delete");
 
-@@clientLocation(RedisFirewallRules.list, "FirewallRules");
+@@clientLocation(RedisFirewallRules.list, "FirewallRules", "!csharp");
 @@clientName(RedisFirewallRules.list, "List");
 
 // RedisPatchSchedules operations
-@@clientLocation(RedisPatchSchedules.get, "PatchSchedules");
+@@clientLocation(RedisPatchSchedules.get, "PatchSchedules", "!csharp");
 @@clientName(RedisPatchSchedules.get, "Get");
 
-@@clientLocation(RedisPatchSchedules.createOrUpdate, "PatchSchedules");
+@@clientLocation(RedisPatchSchedules.createOrUpdate,
+  "PatchSchedules",
+  "!csharp"
+);
 @@clientName(RedisPatchSchedules.createOrUpdate, "CreateOrUpdate");
 
-@@clientLocation(RedisPatchSchedules.delete, "PatchSchedules");
+@@clientLocation(RedisPatchSchedules.delete, "PatchSchedules", "!csharp");
 @@clientName(RedisPatchSchedules.delete, "Delete");
 
-@@clientLocation(RedisPatchSchedules.listByRedisResource, "PatchSchedules");
+@@clientLocation(RedisPatchSchedules.listByRedisResource,
+  "PatchSchedules",
+  "!csharp"
+);
 @@clientName(RedisPatchSchedules.listByRedisResource, "ListByRedisResource");
 
 // Existing client decorators and properties
