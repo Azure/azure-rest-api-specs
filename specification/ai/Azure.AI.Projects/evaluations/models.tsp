@@ -556,6 +556,9 @@ union EvaluationTargetType {
   @doc("Evaluation target that uses a model for response generation.")
   modelResponseGeneration: "modelResponseGeneration",
 
+  @doc("Evaluation target that uses an agent for response generation.")
+  agentResponseGeneration: "agentResponseGeneration",
+
   string,
 }
 
@@ -583,6 +586,17 @@ model modelResponseGenerationTarget extends EvaluationTarget {
 
   @doc("Optional parameters passed to the model for evaluation.")
   modelParams: Record<unknown>;
+}
+
+@doc("Evaluation target for generating responses using a specified agent.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_07_31_preview)
+model agentResponseGenerationTarget extends EvaluationTarget {
+  @doc("The type of evaluation target. Always 'agentResponseGeneration'.")
+  type: EvaluationTargetType.agentResponseGeneration;
+
+  @doc("Identifier of the agent to be evaluated.")
+  agentId: string;
 }
 
 @doc("Defines the possible outcomes of an evaluation result, indicating whether the evaluated data meets the specified criteria or standards.")
