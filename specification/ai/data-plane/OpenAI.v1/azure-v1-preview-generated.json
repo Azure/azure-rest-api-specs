@@ -3067,6 +3067,7 @@
             "name": "include_obfuscation",
             "in": "query",
             "required": false,
+            "description": "When true, stream obfuscation will be enabled. Stream obfuscation adds random characters to an `obfuscation` field on streaming delta events to normalize payload sizes as a mitigation to certain side-channel attacks. These obfuscation fields are included by default, but add a small amount of overhead to the data stream. You can set `include_obfuscation` to false to optimize for bandwidth if you trust the network links between your application and the OpenAI API.",
             "schema": {
               "type": "boolean",
               "default": true
@@ -16976,7 +16977,8 @@
             "description": "The partial code snippet being streamed by the code interpreter."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
@@ -17628,7 +17630,8 @@
             "description": "The function-call arguments delta that is added."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
@@ -17942,7 +17945,8 @@
             "description": "The partial update to the arguments for the MCP tool call."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
@@ -18272,7 +18276,8 @@
             "description": "The partial update to the reasoning content."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
@@ -18361,7 +18366,8 @@
             "description": "The partial update to the reasoning summary content."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
@@ -18545,7 +18551,8 @@
             "description": "The text delta that was added to the summary."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
@@ -18635,7 +18642,8 @@
             "description": "The refusal text that is added."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
@@ -18860,7 +18868,8 @@
             "description": "The text delta that was added."
           },
           "obfuscation": {
-            "type": "boolean"
+            "type": "string",
+            "description": "A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks."
           }
         },
         "allOf": [
