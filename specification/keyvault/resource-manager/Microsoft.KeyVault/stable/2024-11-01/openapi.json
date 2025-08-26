@@ -3487,14 +3487,16 @@
         },
         "location": {
           "type": "string",
-          "description": "The supported Azure location where the managed HSM Pool should be created."
+          "description": "The supported Azure location where the managed HSM Pool should be created.",
+          "readOnly": true
         },
         "tags": {
           "type": "object",
           "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -4954,7 +4956,8 @@
           "description": "Tags assigned to the key vault resource.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "etag": {
           "type": "string",

@@ -27,6 +27,7 @@ model Key is Azure.ResourceManager.ProxyResource<KeyProperties, false> {
    * The supported Azure location where the managed HSM Pool should be created.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
@@ -34,6 +35,7 @@ model Key is Azure.ResourceManager.ProxyResource<KeyProperties, false> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
