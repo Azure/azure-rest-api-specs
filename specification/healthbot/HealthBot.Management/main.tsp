@@ -13,6 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./back-compatible.tsp";
 import "./HealthBot.tsp";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -38,8 +39,6 @@ enum Versions {
   /**
    * The 2025-05-25 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_05_25: "2025-05-25",
 }
 
