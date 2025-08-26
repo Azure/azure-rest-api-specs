@@ -45,8 +45,6 @@ interface ConfigurationChecksTemplates {
     ConfigurationChecksTemplate,
     {
       @doc("Request body to execute the configuration check template resource on demand.")
-      @body
-      body?: OnDemandExecutionRequest;
     },
     Azure.ResourceManager.Foundations.OperationStatusResult
   >;
