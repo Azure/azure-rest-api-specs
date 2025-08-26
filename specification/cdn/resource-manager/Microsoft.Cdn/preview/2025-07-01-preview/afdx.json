@@ -4297,7 +4297,7 @@
           "$ref": "#/definitions/AFDDomainHttpsParameters"
         },
         "mtlsSettings": {
-          "description": "The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDN and which server certificate(s) to use.",
+          "description": "The configuration specifying how to enable mutual TLS for the domain, including specifying allowed FQDNs and which server certificate(s) to use.",
           "type": "object",
           "$ref": "#/definitions/AFDDomainMtlsParameters"
         },
@@ -4451,8 +4451,8 @@
             "$ref": "./cdn.json#/definitions/ResourceReference"
           }
         },
-        "otherAllowedFqdns": {
-          "description": "List of FQDN that will be accepted for mutual TLS validation in addition to custom domain's hostname.",
+        "allowedFqdns": {
+          "description": "List of FQDNs that will be accepted for mutual TLS validation.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4503,9 +4503,10 @@
             "$ref": "./cdn.json#/definitions/ResourceReference"
           }
         },
-        "otherAllowedFqdns": {
-          "description": "List of FQDN that will be accepted for mutual TLS validation in addition to custom domain's hostname.",
+        "allowedFqdns": {
+          "description": "List of FQDNs that will be accepted for mutual TLS validation.",
           "type": "array",
+          "pattern": "^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,61}$",
           "items": {
             "type": "string"
           }
