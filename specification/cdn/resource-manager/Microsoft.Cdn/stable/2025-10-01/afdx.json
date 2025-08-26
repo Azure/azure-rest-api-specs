@@ -2438,7 +2438,10 @@
             "in": "path",
             "description": "Name of the rule set under the profile which is unique globally.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
+            "minLength": 1,
+            "maxLength": 60
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
