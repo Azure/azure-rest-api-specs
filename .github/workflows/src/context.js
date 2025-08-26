@@ -2,7 +2,7 @@
 
 import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
-import { rateLimitHook } from "./github.js";
+import { createLogHook, rateLimitHook } from "./github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
@@ -31,6 +31,7 @@ export async function extractInputs(github, context, core) {
     core.debug(`context: ${JSON.stringify(context)}`);
   }
 
+  github.hook.before("request", createLogHook(github.request.endpoint));
   github.hook.after("request", rateLimitHook);
 
   /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
@@ -123,6 +124,9 @@ export async function extractInputs(github, context, core) {
 
       const pull_requests = payload.workflow_run.pull_requests;
       if (pull_requests && pull_requests.length > 0) {
+        // TODO: Only include PRs to the same repo as the triggering workflow (existing filter below)
+        // TODO: Throw if more than one open PR to our repo
+
         // For non-fork PRs, we should be able to extract the PR number from the payload, which avoids an
         // unnecessary API call.  The listPullRequestsAssociatedWithCommit() API also seems to return
         // empty for non-fork PRs.  This should be the same for pull_request and pull_request_target.
