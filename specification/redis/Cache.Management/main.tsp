@@ -52,7 +52,7 @@ enum Versions {
 }
 
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: eventually reuse standard Operations interface instead of redeclaring."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: eventually reuse standard Operations interface instead of custom."
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
