@@ -37,8 +37,8 @@ union EvaluatorType {
   @doc("Service-based evaluator")
   service: "Service_Based",
 
-  @doc("Math-based evaluator")
-  math: "Math_Based",
+  @doc("Container-based evaluator")
+  Container: "Container_Based",
 }
 
 @doc("The type of evaluator configuration")
