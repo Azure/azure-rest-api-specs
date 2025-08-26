@@ -6,7 +6,7 @@ import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 
-import { getChangedFilesStatuses, swagger } from "../src/changed-files.js";
+import { getChangedFilesStatuses, swagger } from "../../shared/src/changed-files.js";
 
 import {
   getSwaggersToProcess,
