@@ -122,8 +122,7 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
   autoRenew?: boolean = true;
 
   /**
-   * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
-   *  it is hosted on name servers Azure has programmatic access to.
+   * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.
    */
   @visibility(Lifecycle.Read)
   readyForDnsRecordManagement?: boolean;
@@ -146,12 +145,7 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
    */
   @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @OpenAPI.extension("x-ms-enum", #{name:"ResourceNotRenewableReason"})
-  domainNotRenewableReasons?: (
-      | "RegistrationStatusNotSupportedForRenewal"
-      | "ExpirationNotInRenewalTimeRange"
-      | "SubscriptionNotActive"
-      | string)[];
+  domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
 
   /**
    * Current DNS type
@@ -172,7 +166,8 @@ model Domain is Azure.ResourceManager.TrackedResource< Properties={
   @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
   targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   authCode?: string;
 }> {
   ...ResourceNameParameter<
@@ -208,7 +203,7 @@ interface Domains {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    DomainUpdate,
+    Domain,
     Response = ArmResourceUpdatedResponse<Domain> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Domain;
@@ -278,7 +273,7 @@ interface Domains {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  transferOut is ArmResourceActionSync<Domain, void, ArmResponse<Domain> | BadRequestResponse>;
+  transferOut is ArmResourceActionSync<Domain, void, ArmResponse<Domain> | ArmBadRequestResponse>;
 }
 
 @@doc(Domain.name, "Name of the domain.");

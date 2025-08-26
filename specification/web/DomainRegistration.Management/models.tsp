@@ -15,14 +15,17 @@ namespace Microsoft.DomainRegistration;
  */
 union ResourceNotRenewableReason {
   string,
+
   /**
    * Registration status is not supported for renewal.
    */
   RegistrationStatusNotSupportedForRenewal: "RegistrationStatusNotSupportedForRenewal",
+
   /**
    * Domain expiration is not in the renewal time range.
    */
   ExpirationNotInRenewalTimeRange: "ExpirationNotInRenewalTimeRange",
+
   /**
    * Subscription is not active.
    */
@@ -122,7 +125,8 @@ model CsmOperationDescription {
    * Operation name, e.g. Microsoft.Web/sites/write.
    */
   name?: string;
-  /** 
+
+  /**
    * Operation display name.
    */
   isDataAction?: boolean;
@@ -151,17 +155,17 @@ model CsmOperationDisplay {
    * Provider name.
    */
   provider?: string;
-  
+
   /**
    * Resource type.
    */
   resource?: string;
-  
+
   /**
    * Operation name.
    */
   operation?: string;
-  
+
   /**
    * Operation description.
    */
@@ -203,27 +207,27 @@ model MetricSpecification {
    * Name of the resource metric.
    */
   name?: string;
-  
+
   /**
    * Display name of the resource metric.
    */
   displayName?: string;
-  
+
   /**
    * Description of the resource metric.
    */
   displayDescription?: string;
-  
+
   /**
    * Resource metric unit.
    */
   unit?: string;
-  
+
   /**
    * Resource metric aggregation type.
    */
   aggregationType?: string;
-  
+
   /**
    * Resource metric supported aggregation types.
    */
@@ -233,12 +237,12 @@ model MetricSpecification {
    * Resource metric supported time grain types.
    */
   enableRegionalMdmAccount?: boolean;
-  
+
   /**
    * Resource metric source MDM account.
    */
   sourceMdmAccount?: string;
-  
+
   /**
    * Resource metric source MDM namespace.
    */
@@ -253,7 +257,7 @@ model MetricSpecification {
    * Resource metric fill gap with zero.
    */
   fillGapWithZero?: boolean;
-  
+
   /**
    * Resource metric is internal.
    */
@@ -296,17 +300,17 @@ model Dimension {
    * Name of the dimension.
    */
   name?: string;
-  
+
   /**
    * Display name of the dimension.
    */
   displayName?: string;
-  
+
   /**
    * Dimension of the internal name.
    */
   internalName?: string;
-  
+
   /**
    * Dimension to be exported for shoebox.
    */
@@ -336,17 +340,17 @@ model LogSpecification {
    * Name of the log.
    */
   name?: string;
-  
+
   /**
    * Display name of the log.
    */
   displayName?: string;
-  
+
   /**
    * Blob duration of the log.
    */
   blobDuration?: string;
-  
+
   /**
    * Log filtered pattern of the log.
    */
@@ -693,7 +697,7 @@ model NameIdentifierCollection is Azure.Core.Page<NameIdentifier>;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model DomainPatchResource extends ProxyOnlyResource{
+model DomainPatchResource extends ProxyOnlyResource {
   /**
    * DomainPatchResource resource specific properties
    */
@@ -727,7 +731,10 @@ model DomainPatchResource extends ProxyOnlyResource{
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
-    @OpenAPI.extension("x-ms-enum", #{name:"DomainStatus", modelAsString: false})
+    @OpenAPI.extension(
+      "x-ms-enum",
+      #{ name: "DomainStatus", modelAsString: false }
+    )
     registrationStatus?:
       | "Active"
       | "Awaiting"
@@ -757,7 +764,10 @@ model DomainPatchResource extends ProxyOnlyResource{
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
-    @OpenAPI.extension("x-ms-enum", #{name:"ProvisioningState", modelAsString: false})
+    @OpenAPI.extension(
+      "x-ms-enum",
+      #{ name: "ProvisioningState", modelAsString: false }
+    )
     provisioningState?:
       | "Succeeded"
       | "Failed"
@@ -804,8 +814,7 @@ model DomainPatchResource extends ProxyOnlyResource{
     autoRenew?: boolean = true;
 
     /**
-     * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
-     *  it is hosted on name servers Azure has programmatic access to.
+     * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.
      */
     @visibility(Lifecycle.Read)
     readyForDnsRecordManagement?: boolean;
@@ -828,18 +837,13 @@ model DomainPatchResource extends ProxyOnlyResource{
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
     @visibility(Lifecycle.Read)
-    @OpenAPI.extension("x-ms-enum", #{name:"ResourceNotRenewableReason"})
-    domainNotRenewableReasons?: (
-      | "RegistrationStatusNotSupportedForRenewal"
-      | "ExpirationNotInRenewalTimeRange"
-      | "SubscriptionNotActive"
-      | string)[];
+    domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
 
     /**
      * Current DNS type
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-    @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
+    @OpenAPI.extension("x-ms-enum", #{ name: "DnsType", modelAsString: false })
     dnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
 
     /**
@@ -851,10 +855,11 @@ model DomainPatchResource extends ProxyOnlyResource{
      * Target DNS type (would be used for migration)
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-    @OpenAPI.extension("x-ms-enum", #{name:"DnsType", modelAsString: false})
+    @OpenAPI.extension("x-ms-enum", #{ name: "DnsType", modelAsString: false })
     targetDnsType?: "AzureDns" | "DefaultDomainRegistrarDns" | string;
 
-    @visibility(Lifecycle.Read, Lifecycle.Create)
+    @visibility(Lifecycle.Create)
+    @visibility(Lifecycle.Read)
     authCode?: string;
   };
 }
@@ -919,4 +924,25 @@ model TldLegalAgreement {
    * URL where a copy of the agreement details is hosted.
    */
   url?: string;
+}
+
+/**
+ * The server could not understand the request due to invalid syntax.
+ */
+@error
+model ArmBadRequestResponse {
+  ...TypeSpec.Http.Response<400>;
+}
+
+/**
+ * Reasons why domain is not renewable.
+ */
+union domainNotRenewableReasonsProperties {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  RegistrationStatusNotSupportedForRenewal : "RegistrationStatusNotSupportedForRenewal",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"  
+  ExpirationNotInRenewalTimeRange : "ExpirationNotInRenewalTimeRange",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  SubscriptionNotActive: "SubscriptionNotActive",
 }

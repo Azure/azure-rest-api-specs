@@ -49,3 +49,6 @@ using Microsoft.DomainRegistration;
 
 @@OpenAPI.extension(NameIdentifierCollection.value, "x-ms-identifiers", #["name"]);
 @@OpenAPI.extension(TldLegalAgreementCollection.value, "x-ms-identifiers", #["agreementKey"]);
+
+@@clientLocation(Operations.list, "DomainRegistrationProvider");
+@@clientName(Operations.list, "ListOperations");
