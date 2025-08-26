@@ -485,6 +485,12 @@ model SupportTicketDetailsProperties {
    */
   @added(Versions.v2025_06_01_preview)
   directConnectEscalation?: DirectConnectEscalation;
+
+  /**
+   * Contains a link to the post on the community forum.
+   */
+  @added(Versions.v2025_06_01_preview)
+  communityForumPost?: string;
 }
 
 /**
