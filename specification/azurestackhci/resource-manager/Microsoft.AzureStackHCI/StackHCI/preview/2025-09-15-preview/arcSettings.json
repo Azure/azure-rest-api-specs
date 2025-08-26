@@ -360,6 +360,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/reconcile": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_Reconcile",
+        "description": "Reconcile Arc Settings with information related to all nodes.",
+        "x-ms-examples": {
+          "Reconcile Arc Settings": {
+            "$ref": "./examples/reconcileArcSettings.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reconcileArcSettingsRequest",
+            "in": "body",
+            "description": "Request for reconciling Arc Settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReconcileArcSettingsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/consentAndInstallDefaultExtensions": {
       "post": {
         "tags": [
@@ -456,6 +517,28 @@
     }
   },
   "definitions": {
+    "ReconcileArcSettingsRequest": {
+      "description": "Request for reconciling Arc Settings.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReconcileArcSettingsRequestProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReconcileArcSettingsRequestProperties": {
+      "description": "List of Arc Nodes in the cluster",
+      "type": "object",
+      "properties": {
+        "clusterNodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ArcSettingList": {
       "description": "List of ArcSetting proxy resources for the HCI cluster.",
       "type": "object",

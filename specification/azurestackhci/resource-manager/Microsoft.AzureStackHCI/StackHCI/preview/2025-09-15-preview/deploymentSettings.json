@@ -202,6 +202,9 @@
         "x-ms-examples": {
           "Create Deployment Settings": {
             "$ref": "./examples/PutDeploymentSettings.json"
+          },
+          "Create Deployment Settings With AD Less": {
+            "$ref": "./examples/PutDeploymentSettingsWithADLess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -318,14 +321,14 @@
           "type": "string",
           "description": "For Azure blob service endpoint type, select either Default or Custom domain. If you selected **Custom domain, enter the domain for the blob service in this format core.windows.net."
         },
-        "clusterPattern": {
-          "$ref": "./hciCommon.json#/definitions/ClusterPattern",
-          "description": "Cluster Pattern supported."
-        },
         "hardwareClass": {
           "$ref": "./hciCommon.json#/definitions/HardwareClass",
           "description": "Hardware class of the cluster.",
           "readOnly": true
+        },
+        "clusterPattern": {
+          "$ref": "./hciCommon.json#/definitions/ClusterPattern",
+          "description": "Cluster Pattern supported."
         }
       }
     },
@@ -365,6 +368,10 @@
         "cluster": {
           "$ref": "#/definitions/DeploymentCluster",
           "description": "Observability config to deploy AzureStackHCI Cluster."
+        },
+        "identityProvider": {
+          "$ref": "./hciCommon.json#/definitions/IdentityProvider",
+          "description": "Identity Provider for the cluster"
         },
         "storage": {
           "$ref": "#/definitions/Storage",
@@ -603,6 +610,40 @@
           },
           "x-ms-identifiers": []
         },
+        "dnsServerConfig": {
+          "type": "string",
+          "description": "Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.",
+          "enum": [
+            "UseDnsServer",
+            "UseForwarder"
+          ],
+          "x-ms-enum": {
+            "name": "DnsServerConfig",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UseDnsServer",
+                "value": "UseDnsServer",
+                "description": "Use the provided DNS servers for the infrastructure network."
+              },
+              {
+                "name": "UseForwarder",
+                "value": "UseForwarder",
+                "description": "Use DNS forwarders for the infrastructure network."
+              }
+            ]
+          }
+        },
+        "dnsZones": {
+          "type": "array",
+          "description": "Details of the DNS Zones to be configured.",
+          "items": {
+            "$ref": "#/definitions/DnsZones"
+          },
+          "x-ms-identifiers": [
+            "dnsZoneName"
+          ]
+        },
         "dnsServers": {
           "type": "array",
           "description": "IPv4 address of the DNS servers in your environment.",
@@ -678,6 +719,23 @@
         "endingAddress": {
           "type": "string",
           "description": "Ending IP address for the management network. A minimum of six free, contiguous IPv4 addresses (excluding your host IPs) are needed for infrastructure services such as clustering."
+        }
+      }
+    },
+    "DnsZones": {
+      "type": "object",
+      "description": "Details of the DNS Zones to be configured.",
+      "properties": {
+        "dnsZoneName": {
+          "type": "string",
+          "description": "Name of the DNS Zone to be configured."
+        },
+        "dnsForwarder": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Forwarder details of the DNS Zone to be configured."
         }
       }
     },

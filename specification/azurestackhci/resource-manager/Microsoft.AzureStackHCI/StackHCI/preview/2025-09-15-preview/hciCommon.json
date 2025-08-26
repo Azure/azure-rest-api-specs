@@ -177,6 +177,31 @@
         }
       }
     },
+    "IdentityProvider": {
+      "type": "string",
+      "description": "Identity Provider for the cluster",
+      "enum": [
+        "ActiveDirectory",
+        "LocalIdentity"
+      ],
+      "default": "ActiveDirectory",
+      "x-ms-enum": {
+        "name": "IdentityProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveDirectory",
+            "value": "ActiveDirectory",
+            "description": "Active Directory as the Identity Provider. This is the default option."
+          },
+          {
+            "name": "LocalIdentity",
+            "value": "LocalIdentity",
+            "description": "Use local identity with Azure Keyvault"
+          }
+        ]
+      }
+    },
     "ClusterPattern": {
       "type": "string",
       "description": "Supported Storage Pattern for HCI Cluster",
