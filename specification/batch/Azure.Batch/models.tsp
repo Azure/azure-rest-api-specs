@@ -29,31 +29,6 @@ union ImageVerificationType {
   Unverified: "unverified",
 }
 
-@doc("BatchCertificateState enums")
-union BatchCertificateState {
-  string,
-
-  @doc("The Certificate is available for use in Pools.")
-  Active: "active",
-
-  @doc("The user has requested that the Certificate be deleted, but the delete operation has not yet completed. You may not reference the Certificate when creating or updating Pools.")
-  Deleting: "deleting",
-
-  @doc("The user requested that the Certificate be deleted, but there are Pools that still have references to the Certificate, or it is still installed on one or more Nodes. (The latter can occur if the Certificate has been removed from the Pool, but the Compute Node has not yet restarted. Compute Nodes refresh their Certificates only when they restart.) You may use the cancel Certificate delete operation to cancel the delete, or the delete Certificate operation to retry the delete.")
-  DeleteFailed: "deletefailed",
-}
-
-@doc("BatchCertificateFormat enums")
-union BatchCertificateFormat {
-  string,
-
-  @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
-  Pfx: "pfx",
-
-  @doc("The Certificate is a base64-encoded X.509 Certificate.")
-  Cer: "cer",
-}
-
 @doc("BatchJobScheduleState enums")
 union BatchJobScheduleState {
   string,
@@ -152,6 +127,17 @@ union BatchPoolLifetimeOption {
 
   @doc("The Pool exists for the lifetime of the Job to which it is dedicated. The Batch service creates the Pool when it creates the Job. If the 'job' option is applied to a Job Schedule, the Batch service creates a new auto Pool for every Job created on the schedule.")
   Job: "job",
+}
+
+@doc("The IP families used to specify IP versions available to the pool.")
+union IPFamily {
+  string,
+
+  @doc("IPv4 is available to the pool.")
+  IPv4: "IPv4",
+
+  @doc("IPv6 is available to the pool.")
+  IPv6: "IPv6",
 }
 
 @doc("CachingType enums")
@@ -312,31 +298,6 @@ union BatchAccessScope {
   Job: "job",
 }
 
-@doc("BatchCertificateStoreLocation enums")
-union BatchCertificateStoreLocation {
-  string,
-
-  @doc("Certificates should be installed to the CurrentUser Certificate store.")
-  CurrentUser: "currentuser",
-
-  @doc("Certificates should be installed to the LocalMachine Certificate store.")
-  LocalMachine: "localmachine",
-}
-
-@doc("BatchCertificateVisibility enums")
-union BatchCertificateVisibility {
-  string,
-
-  @doc("The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.")
-  StartTask: "starttask",
-
-  @doc("The Certificate should be visible to the user accounts under which Job Tasks are run.")
-  Task: "task",
-
-  @doc("The Certificate should be visible to the user accounts under which users remotely access the Compute Node.")
-  RemoteUser: "remoteuser",
-}
-
 @doc("LoginMode enums")
 union LoginMode {
   string,
@@ -346,20 +307,6 @@ union LoginMode {
 
   @doc("The LOGON32_LOGON_INTERACTIVE Win32 login mode. UAC is enabled on Windows VirtualMachineConfiguration Pools. If this option is used with an elevated user identity in a Windows VirtualMachineConfiguration Pool, the user session will not be elevated unless the application executed by the Task command line is configured to always require administrative privilege or to always require maximum privilege.")
   Interactive: "interactive",
-}
-
-@doc("BatchNodeCommunicationMode enums")
-union BatchNodeCommunicationMode {
-  string,
-
-  @doc("The node communication mode is automatically set by the Batch service.")
-  Default: "default",
-
-  @doc("Nodes using the classic communication mode require inbound TCP communication on ports 29876 and 29877 from the \"BatchNodeManagement.{region}\" service tag and outbound TCP communication on port 443 to the \"Storage.region\" and \"BatchNodeManagement.{region}\" service tags.")
-  Classic: "classic",
-
-  @doc("Nodes using the simplified communication mode require outbound TCP communication on port 443 to the \"BatchNodeManagement.{region}\" service tag. No open inbound ports are required.")
-  Simplified: "simplified",
 }
 
 @doc("BatchJobState enums")
@@ -469,6 +416,17 @@ union AllocationState {
 
   @doc("The Pool was resizing, but the user has requested that the resize be stopped, but the stop request has not yet been completed.")
   Stopping: "stopping",
+}
+
+@doc("BatchJobDefaultOrder enums")
+union BatchJobDefaultOrder {
+  string,
+
+  @doc("Tasks should be scheduled uniformly from all equal-priority jobs for the pool.")
+  None: "none",
+
+  @doc("If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first.")
+  CreationTime: "creationtime",
 }
 
 @doc("BatchPoolIdentityType enums")
@@ -643,7 +601,7 @@ union BatchNodeState {
 union UpgradeMode {
   string,
 
-  @doc("TAll virtual machines in the scale set are automatically updated at the same time.")
+  @doc("All virtual machines in the scale set are automatically updated at the same time.")
   Automatic: "automatic",
 
   @doc("You control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.")
@@ -651,6 +609,17 @@ union UpgradeMode {
 
   @doc("The existing instances in a scale set are brought down in batches to be upgraded. Once the upgraded batch is complete, the instances will begin taking traffic again and the next batch will begin. This continues until all instances brought up-to-date.")
   Rolling: "rolling",
+}
+
+@doc("HostEndpointSettingsModeTypes enums")
+union HostEndpointSettingsModeTypes {
+  string,
+
+  @doc("In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints.")
+  Audit: "Audit",
+
+  @doc("Enforce mode is the recommended mode of operation and system will enforce the access control policy. This property cannot be used together with 'inVMAccessControlProfileReferenceId'.")
+  Enforce: "Enforce",
 }
 
 @doc("SchedulingState enums")
@@ -727,10 +696,13 @@ union BatchNodeDisableSchedulingOption {
 union SecurityEncryptionTypes {
   string,
 
-  @doc("NonPersistedTPM")
+  @doc("EncryptionType of the managed disk is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob. It is not supported in data disks.")
+  DiskWithVMGuestState: "DiskWithVMGuestState",
+
+  @doc("EncryptionType of the managed disk is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob.")
   NonPersistedTPM: "NonPersistedTPM",
 
-  @doc("VMGuestStateOnly")
+  @doc("EncryptionType of the managed disk is set to VMGuestStateOnly for encryption of just the VMGuestState blob.")
   VMGuestStateOnly: "VMGuestStateOnly",
 }
 
@@ -1136,71 +1108,6 @@ model BatchJobStatistics {
   waitTime: duration;
 }
 
-@doc("""
-  A Certificate that can be installed on Compute Nodes and can be used to
-  authenticate operations on the machine.
-  """)
-model BatchCertificate {
-  @doc("The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).")
-  thumbprint: string;
-
-  @doc("The algorithm used to derive the thumbprint. This must be sha1.")
-  thumbprintAlgorithm: string;
-
-  @doc("The URL of the Certificate.")
-  @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
-  url?: url;
-
-  @doc("The state of the Certificate.")
-  @visibility(Lifecycle.Read)
-  state?: BatchCertificateState;
-
-  @doc("The time at which the Certificate entered its current state.")
-  @visibility(Lifecycle.Read)
-  stateTransitionTime?: utcDateTime;
-
-  @doc("The previous state of the Certificate. This property is not set if the Certificate is in its initial active state.")
-  @visibility(Lifecycle.Read)
-  previousState?: BatchCertificateState;
-
-  @doc("The time at which the Certificate entered its previous state. This property is not set if the Certificate is in its initial Active state.")
-  @visibility(Lifecycle.Read)
-  previousStateTransitionTime?: utcDateTime;
-
-  @doc("The public part of the Certificate as a base-64 encoded .cer file.")
-  @visibility(Lifecycle.Read)
-  publicData?: string;
-
-  @doc("The error that occurred on the last attempt to delete this Certificate. This property is set only if the Certificate is in the DeleteFailed state.")
-  @visibility(Lifecycle.Read)
-  deleteCertificateError?: BatchCertificateDeleteError;
-
-  @doc("The base64-encoded contents of the Certificate. The maximum size is 10KB.")
-  @visibility(Lifecycle.Create)
-  data: bytes;
-
-  @doc("The format of the Certificate data.")
-  @visibility(Lifecycle.Create)
-  certificateFormat?: BatchCertificateFormat;
-
-  @doc("The password to access the Certificate's private key. This must be omitted if the Certificate format is cer.")
-  @visibility(Lifecycle.Create)
-  password?: string;
-}
-
-@doc("An error encountered by the Batch service when deleting a Certificate.")
-model BatchCertificateDeleteError {
-  @doc("An identifier for the Certificate deletion error. Codes are invariant and are intended to be consumed programmatically.")
-  code?: string;
-
-  @doc("A message describing the Certificate deletion error, intended to be suitable for display in a user interface.")
-  message?: string;
-
-  @doc("A list of additional error details related to the Certificate deletion error. This list includes details such as the active Pools and Compute Nodes referencing this Certificate. However, if a large number of resources reference the Certificate, the list contains only about the first hundred.")
-  values?: NameValuePair[];
-}
-
 @doc("Represents a name-value pair.")
 model NameValuePair {
   @doc("The name in the name-value pair.")
@@ -1208,18 +1115,6 @@ model NameValuePair {
 
   @doc("The value in the name-value pair.")
   value?: string;
-}
-
-@doc("The result of listing the Certificates in the Account.")
-model BatchCertificateListResult {
-  @doc("The list of Certificates.")
-  @pageItems
-  value?: BatchCertificate[];
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
-  @doc("The URL to get the next set of results.")
-  @nextLink
-  `odata.nextLink`?: url;
 }
 
 @doc("""
@@ -1389,10 +1284,36 @@ model BatchJobScheduleConfiguration {
   recurrenceInterval?: duration;
 }
 
+@doc("Specifies particular host endpoint settings.")
+model HostEndpointSettings {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  @doc("Specifies the reference to the InVMAccessControlProfileVersion resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}.")
+  @clientName("inVmAccessControlProfileReferenceId")
+  inVMAccessControlProfileReferenceId?: string;
+
+  @doc("Specifies the access control policy execution mode.")
+  mode?: HostEndpointSettingsModeTypes;
+}
+
+@doc("Specifies ProxyAgent settings while creating the virtual machine.")
+model ProxyAgentSettings {
+  @doc("Specifies whether Metadata Security Protocol feature should be enabled on the virtual machine or virtual machine scale set. Default is False.")
+  enabled?: boolean;
+
+  @doc("Settings for the IMDS endpoint.")
+  imds?: HostEndpointSettings;
+
+  @doc("Settings for the WireServer endpoint.")
+  wireServer?: HostEndpointSettings;
+}
+
 @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
 model SecurityProfile {
   @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. For more information on encryption at host requirements, please refer to https://learn.microsoft.com/azure/virtual-machines/disk-encryption#supported-vm-sizes.")
   encryptionAtHost?: boolean;
+
+  @doc("Specifies ProxyAgent settings while creating the virtual machine.")
+  proxyAgentSettings?: ProxyAgentSettings;
 
   @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
   securityType?: SecurityTypes;
@@ -1415,10 +1336,10 @@ model BatchJobSpecification {
   @doc("The priority of Jobs created under this schedule. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
 
   @doc("The display name for Jobs created under this schedule. The name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
@@ -1435,7 +1356,7 @@ model BatchJobSpecification {
   @clientName("taskFailureMode")
   onTaskFailure?: BatchTaskFailureMode;
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
 
   @doc("The execution constraints for Jobs created under this schedule.")
@@ -1460,7 +1381,7 @@ model BatchJobSpecification {
   metadata?: BatchMetadataItem[];
 }
 
-@doc("The network configuration for the Job.")
+@doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
 model BatchJobNetworkConfiguration {
   @doc("The ARM resource identifier of the virtual network subnet which Compute Nodes running Tasks from the Job will join for the duration of the Task. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   subnetId: string;
@@ -1737,7 +1658,7 @@ model BatchUefiSettings {
   Specifies the options for the auto user that runs an Azure Batch Task.
   """)
 model AutoUserSpecification {
-  @doc("The scope for the auto user. The default value is pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by StartTasks.")
+  @doc("The scope for the auto user. The default value is pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks.")
   scope?: AutoUserScope;
 
   @doc("The elevation level of the auto user. The default value is nonAdmin.")
@@ -1910,9 +1831,6 @@ model BatchPoolSpecification {
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   resizeTimeout?: duration;
 
-  @doc("The user-specified tags associated with the pool.The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
-  resourceTags?: string;
-
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetDedicatedNodes?: int32;
 
@@ -1937,13 +1855,6 @@ model BatchPoolSpecification {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted.")
   startTask?: BatchStartTask;
 
-  @doc("""
-    For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-    Warning: This property is deprecated and will be removed after February, 2024.
-    Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-    """)
-  certificateReferences?: BatchCertificateReference[];
-
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
@@ -1955,9 +1866,6 @@ model BatchPoolSpecification {
 
   @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
   mountConfiguration?: MountConfiguration[];
-
-  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
 
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
   upgradePolicy?: UpgradePolicy;
@@ -2042,6 +1950,9 @@ model DataDisk {
   @clientName("diskSizeGb", "!go")
   diskSizeGB: int32;
 
+  @doc("The managed disk parameters.")
+  managedDisk?: ManagedDisk;
+
   @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
   storageAccountType?: StorageAccountType;
 }
@@ -2058,12 +1969,33 @@ model BatchContainerConfiguration {
   containerRegistries?: ContainerRegistryReference[];
 }
 
+@doc("The reference of one of the pool identities to encrypt Disk. This identity will be used to access the key vault.")
+model BatchPoolIdentityReference {
+  @doc("The ARM resource id of the user assigned identity. This reference must be included in the pool identities.")
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+@doc("The Customer Managed Key reference to encrypt the Disk.")
+model DiskCustomerManagedKey {
+  @doc("The reference of one of the pool identities to encrypt Disk. This identity will be used to access the KeyVault.")
+  identityReference?: BatchPoolIdentityReference;
+
+  @doc("Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.")
+  keyUrl?: string;
+
+  @doc("Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false.")
+  rotationToLatestKeyVersionEnabled?: boolean;
+}
+
 @doc("""
   The disk encryption configuration applied on compute nodes in the pool.
   Disk encryption configuration is not supported on Linux pool created with
   Azure Compute Gallery Image.
   """)
 model DiskEncryptionConfiguration {
+  @doc("The Customer Managed Key reference to encrypt the OS Disk. Customer Managed Key will encrypt OS Disk by EncryptionAtRest, and by default we will encrypt the data disk as well. It can be used only when the pool is configured with an identity and OsDisk is set as one of the targets of DiskEncryption.")
+  customerManagedKey?: DiskCustomerManagedKey;
+
   @doc("The list of disk targets Batch Service will encrypt on the compute node. The list of disk targets Batch Service will encrypt on the compute node.")
   targets?: DiskEncryptionTarget[];
 }
@@ -2139,6 +2071,9 @@ model BatchDiffDiskSettings {
 
 @doc("Specifies how Tasks should be distributed across Compute Nodes.")
 model BatchTaskSchedulingPolicy {
+  @doc("The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none.")
+  jobDefaultOrder?: BatchJobDefaultOrder = BatchJobDefaultOrder.None;
+
   @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
   nodeFillType: BatchNodeFillType;
 }
@@ -2219,8 +2154,23 @@ model BatchPublicIpAddressConfiguration {
   @clientName("IpAddressProvisioningType")
   provision?: IpAddressProvisioningType;
 
+  @doc("The IP families used to specify IP versions available to the pool. IP families are used to determine single-stack or dual-stack pools. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6.")
+  ipFamilies?: IPFamily[];
+
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
   ipAddressIds?: Azure.Core.armResourceIdentifier[];
+
+  @doc("A list of IP tags associated with the public IP addresses of the Pool. IP tags are used to categorize and filter public IP addresses for billing and management purposes.")
+  ipTags?: IPTag[];
+}
+
+@doc("Contains the IP tag associated with the public IP address.")
+model IPTag {
+  @doc("The IP Tag type. Example: FirstPartyUsage.")
+  ipTagType?: string;
+
+  @doc("The value of the IP tag associated with the public IP. Example: SQL.")
+  tag?: string;
 }
 
 @doc("""
@@ -2259,24 +2209,6 @@ model BatchStartTask {
 
   @doc("Whether the Batch service should wait for the StartTask to complete successfully (that is, to exit with exit code 0) before scheduling any Tasks on the Compute Node. If true and the StartTask fails on a Node, the Batch service retries the StartTask up to its maximum retry count (maxTaskRetryCount). If the Task has still not completed successfully after all retries, then the Batch service marks the Node unusable, and will not schedule Tasks to it. This condition can be detected via the Compute Node state and failure info details. If false, the Batch service will not wait for the StartTask to complete. In this case, other Tasks can start executing on the Compute Node while the StartTask is still running; and even if the StartTask fails, new Tasks will continue to be scheduled on the Compute Node. The default is true.")
   waitForSuccess?: boolean;
-}
-
-@doc("A reference to a Certificate to be installed on Compute Nodes in a Pool. Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.")
-model BatchCertificateReference {
-  @doc("The thumbprint of the Certificate.")
-  thumbprint: string;
-
-  @doc("The algorithm with which the thumbprint is associated. This must be sha1.")
-  thumbprintAlgorithm: string;
-
-  @doc("The location of the Certificate store on the Compute Node into which to install the Certificate. The default value is currentuser. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.")
-  storeLocation?: BatchCertificateStoreLocation;
-
-  @doc("The name of the Certificate store on the Compute Node into which to install the Certificate. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My.")
-  storeName?: string;
-
-  @doc("Which user Accounts on the Compute Node should have access to the private data of the Certificate. You can specify more than one visibility in this collection. The default is all Accounts.")
-  visibility?: BatchCertificateVisibility[];
 }
 
 @doc("""
@@ -2320,8 +2252,17 @@ model WindowsUserConfiguration {
   loginMode?: LoginMode;
 }
 
+@doc("The ARM resource id of the disk encryption set.")
+model DiskEncryptionSetParameters {
+  @doc("The ARM resource id of the disk encryption set. The resource must be in the same subscription as the Batch account.")
+  id?: Azure.Core.armResourceIdentifier;
+}
+
 @doc("The managed disk parameters.")
 model ManagedDisk {
+  @doc("Specifies the customer managed disk encryption set resource id for the managed disk. It can be set only in UserSubscription mode.")
+  diskEncryptionSet?: DiskEncryptionSetParameters;
+
   @doc("The storage account type for managed disk.")
   storageAccountType?: StorageAccountType;
 
@@ -2582,10 +2523,10 @@ model BatchJob {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
   @doc("The execution constraints for the Job.")
@@ -2619,7 +2560,7 @@ model BatchJob {
   @clientName("taskFailureMode")
   onTaskFailure?: BatchTaskFailureMode;
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   @visibility(Lifecycle.Read)
   networkConfiguration?: BatchJobNetworkConfiguration;
 
@@ -2650,10 +2591,10 @@ model BatchJobCreateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
   @doc("The execution constraints for the Job.")
@@ -2682,7 +2623,7 @@ model BatchJobCreateOptions {
   @clientName("taskFailureMode")
   onTaskFailure?: BatchTaskFailureMode;
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
 
   @doc("A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
@@ -2694,10 +2635,10 @@ model BatchJobUpdateOptions {
   @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
   priority?: int32;
 
-  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
 
   @doc("The execution constraints for the Job. If omitted, the existing execution constraints are left unchanged.")
@@ -2713,7 +2654,7 @@ model BatchJobUpdateOptions {
   @doc("A list of name-value pairs associated with the Job as metadata. If omitted, the existing Job metadata is left unchanged.")
   metadata?: BatchMetadataItem[];
 
-  @doc("The network configuration for the Job.")
+  @doc("(This property is not available by default. Please contact support for more information) The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
 }
 
@@ -2962,7 +2903,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   id?: string;
 
-  @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  @doc("The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   @visibility(Lifecycle.Read)
   displayName?: string;
 
@@ -2999,7 +2940,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   allocationStateTransitionTime?: utcDateTime;
 
-  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes, see Sizes for Virtual Machines in Azure (https://learn.microsoft.com/azure/virtual-machines/sizes/overview). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
+  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).")
   @visibility(Lifecycle.Read)
   vmSize?: string;
 
@@ -3014,10 +2955,6 @@ model BatchPool {
   @doc("A list of errors encountered while performing the last resize on the Pool. This property is set only if one or more errors occurred during the last Pool resize, and only when the Pool allocationState is Steady.")
   @visibility(Lifecycle.Read)
   resizeErrors?: ResizeError[];
-
-  @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
-  @visibility(Lifecycle.Read)
-  resourceTags?: Record<string>;
 
   @doc("The number of dedicated Compute Nodes currently in the Pool.")
   @visibility(Lifecycle.Read)
@@ -3051,7 +2988,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   autoScaleRun?: AutoScaleRun;
 
-  @doc("Whether the Pool permits direct communication between Compute Nodes. This imposes restrictions on which Compute Nodes can be assigned to the Pool. Specifying this value can reduce the chance of the requested number of Compute Nodes to be allocated in the Pool.")
+  @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
   @visibility(Lifecycle.Read)
   enableInterNodeCommunication?: boolean;
 
@@ -3061,15 +2998,6 @@ model BatchPool {
 
   @doc("A Task specified to run on each Compute Node as it joins the Pool.")
   startTask?: BatchStartTask;
-
-  @doc("""
-    For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-    For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-    For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-    Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-    """)
-  @visibility(Lifecycle.Read)
-  certificateReferences?: BatchCertificateReference[];
 
   @doc("The list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   @visibility(Lifecycle.Read)
@@ -3096,20 +3024,13 @@ model BatchPool {
   @clientName("poolStatistics")
   stats?: BatchPoolStatistics;
 
-  @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
+  @doc("Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.")
   @visibility(Lifecycle.Read)
   mountConfiguration?: MountConfiguration[];
 
   @doc("The identity of the Batch pool, if configured. The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.")
   @visibility(Lifecycle.Read)
   identity?: BatchPoolIdentity;
-
-  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
-
-  @doc("The current state of the pool communication mode.")
-  @visibility(Lifecycle.Read)
-  currentNodeCommunicationMode?: BatchNodeCommunicationMode;
 
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
   upgradePolicy?: UpgradePolicy;
@@ -3131,9 +3052,6 @@ model BatchPoolCreateOptions {
 
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   resizeTimeout?: duration;
-
-  @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
-  resourceTags?: Record<string>;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetDedicatedNodes?: int32;
@@ -3159,14 +3077,6 @@ model BatchPoolCreateOptions {
   @doc("A Task specified to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted.")
   startTask?: BatchStartTask;
 
-  @doc("""
-    For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-    For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-    For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-    Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-    """)
-  certificateReferences?: BatchCertificateReference[];
-
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
@@ -3185,9 +3095,6 @@ model BatchPoolCreateOptions {
   @doc("Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.")
   mountConfiguration?: MountConfiguration[];
 
-  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
-
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
   upgradePolicy?: UpgradePolicy;
 }
@@ -3197,24 +3104,11 @@ model BatchPoolReplaceOptions {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
   startTask?: BatchStartTask;
 
-  @doc("""
-    This list replaces any existing Certificate references configured on the Pool.
-    If you specify an empty collection, any existing Certificate references are removed from the Pool.
-    For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-    For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-    For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-    Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-    """)
-  certificateReferences: BatchCertificateReference[];
-
   @doc("The list of Application Packages to be installed on each Compute Node in the Pool. The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool.")
   applicationPackageReferences: BatchApplicationPackageReference[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata. This list replaces any existing metadata configured on the Pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the Pool.")
   metadata: BatchMetadataItem[];
-
-  @doc("The desired node communication mode for the pool. This setting replaces any existing targetNodeCommunication setting on the Pool. If omitted, the existing setting is default.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
 }
 
 @doc("Parameters for updating an Azure Batch Pool.")
@@ -3231,16 +3125,6 @@ model BatchPoolUpdateOptions {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged.")
   startTask?: BatchStartTask;
 
-  @doc("""
-    If this element is present, it replaces any existing Certificate references configured on the Pool.
-    If omitted, any existing Certificate references are left unchanged.
-    For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-    For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-    For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-    Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-    """)
-  certificateReferences?: BatchCertificateReference[];
-
   @doc("A list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. If this element is present, it replaces any existing Package references. If you specify an empty collection, then all Package references are removed from the Pool. If omitted, any existing Package references are left unchanged.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
@@ -3250,9 +3134,6 @@ model BatchPoolUpdateOptions {
   @doc("The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("The desired node communication mode for the pool. If this element is present, it replaces the existing targetNodeCommunicationMode configured on the Pool. If omitted, any existing metadata is left unchanged.")
-  targetNodeCommunicationMode?: BatchNodeCommunicationMode;
-
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
   taskSlotsPerNode?: int32;
 
@@ -3261,9 +3142,6 @@ model BatchPoolUpdateOptions {
 
   @doc("The network configuration for the Pool. This field can be updated only when the pool is empty.")
   networkConfiguration?: NetworkConfiguration;
-
-  @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.<br /><br />This field can be updated only when the pool is empty.")
-  resourceTags?: Record<string>;
 
   @doc("The list of user Accounts to be created on each Compute Node in the Pool. This field can be updated only when the pool is empty.")
   userAccounts?: UserAccount[];
@@ -3996,6 +3874,9 @@ model BatchNode {
   @doc("The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes.")
   ipAddress?: ipV4Address;
 
+  @doc("The IPv6 address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes. This property will not be present if the Pool is not configured for IPv6.")
+  ipv6Address?: ipV6Address;
+
   @doc("An identifier which can be passed when adding a Task to request that the Task be scheduled on this Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId?: string;
 
@@ -4022,14 +3903,6 @@ model BatchNode {
 
   @doc("Runtime information about the execution of the StartTask on the Compute Node.")
   startTaskInfo?: BatchStartTaskInfo;
-
-  @doc("""
-    For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.
-    For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-    For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
-    Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-    """)
-  certificateReferences?: BatchCertificateReference[];
 
   @doc("The list of errors that are currently being encountered by the Compute Node.")
   errors?: BatchNodeError[];
@@ -4183,6 +4056,13 @@ model BatchNodeDisableSchedulingOptions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
 model BatchNodeRemoteLoginSettings {
+  @doc("The IPv6 address used for remote login to the Compute Node.")
+  @clientName("ipv6RemoteLoginIpAddress")
+  ipv6RemoteLoginIPAddress?: ipV6Address;
+
+  @doc("The port used for remote login to the Compute Node.")
+  ipv6RemoteLoginPort?: int32;
+
   @doc("The IP address used for remote login to the Compute Node.")
   @clientName("remoteLoginIpAddress")
   remoteLoginIPAddress: ipV4Address;
