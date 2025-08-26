@@ -14,7 +14,8 @@ namespace Microsoft.BillingBenefits;
  * Savings plan order
  */
 @tenantResource
-model SavingsPlanOrderModel is Azure.ResourceManager.ProxyResource<SavingsPlanOrderModelProperties> {
+model SavingsPlanOrderModel
+  is Azure.ResourceManager.ProxyResource<SavingsPlanOrderModelProperties> {
   ...ResourceNameParameter<
     Resource = SavingsPlanOrderModel,
     KeyName = "savingsPlanOrderId",

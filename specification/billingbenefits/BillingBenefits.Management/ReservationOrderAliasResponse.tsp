@@ -14,7 +14,8 @@ namespace Microsoft.BillingBenefits;
  * Reservation order alias
  */
 @tenantResource
-model ReservationOrderAliasResponse is Azure.ResourceManager.ProxyResource<ReservationOrderAliasResponseProperties> {
+model ReservationOrderAliasResponse
+  is Azure.ResourceManager.ProxyResource<ReservationOrderAliasResponseProperties> {
   ...ResourceNameParameter<
     Resource = ReservationOrderAliasResponse,
     KeyName = "reservationOrderAliasName",
