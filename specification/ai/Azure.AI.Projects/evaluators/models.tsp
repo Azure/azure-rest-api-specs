@@ -58,18 +58,6 @@ union EvaluatorConfigType {
   container: "container",
 }
 
-// TODO: What are the allowed values here
-@doc("Scale rule types for container deployment")
-union ScaleRuleType {
-  string,
-
-  @doc("HTTP-based scaling rules")
-  http: "http",
-
-    @doc("TCP-based scaling rules")
-  tcp: "tcp",
-}
-
 @doc("Base evaluator configuration with discriminator")
 @discriminator("type")
 model EvaluatorConfig {
@@ -82,36 +70,6 @@ alias ScalarParamType = string | "number" | "string"; // TODO: need to confirm a
 
 /* The evaluator's initialization parameters */
 alias InitializationParameters = Record<ScalarParamType>; // TODO: Is this correct?
-
-@doc("Resource settings for container deployment")
-model ResourceSettings {
-  @doc("CPU allocation")
-  cpu: int32;
-
-  @doc("Memory allocation in GB")
-  memory: int32;
-}
-
-@doc("Scale settings for container deployment")
-model ScaleSettings {
-  @doc("Minimum number of container replicas to maintain")
-  min_replicas: int32;
-
-  @doc("Maximum number of container replicas allowed")
-  max_replicas: int32;
-
-  @doc("The type of rule used for auto-scaling decisions")
-  rule_type: ScaleRuleType;
-}
-
-@doc("Container deployment configuration")
-model ContainerDeploymentConfig {
-  @doc("Scale settings")
-  scale_settings: ScaleSettings;
-
-  @doc("Resource settings")
-  resource_settings: ResourceSettings;
-}
 
 @doc("Code-based evaluator configuration using container images")
 model CodeEvaluatorConfig extends EvaluatorConfig {
@@ -133,9 +91,6 @@ model ContainerEvaluatorConfig extends EvaluatorConfig {
 
   @doc("Environment variables to pass to the container")
   env_variables: Record<string>;
-
-  @doc("Configuration for container deployment")
-  container_deployment_config: ContainerDeploymentConfig;
 }
 
 @doc("Prompt-based evaluator")
@@ -148,7 +103,6 @@ model PromptBasedEvaluatorConfig extends EvaluatorConfig {
   @doc("The evaluator's initialization parameters")
   init_params: InitializationParameters;
 }
-
 
 @doc("Prompty-based evaluator configuration using prompty files")
 model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
