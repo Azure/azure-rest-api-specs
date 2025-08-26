@@ -60,6 +60,8 @@ model AkriConnectorTemplateProperties {
   /** A reference to a connector metadata document reference in a container registry. */
   @added(Versions.`2025-09-01-preview`)
   connectorMetadataRef?: string;
+
+  ...ResourceHealth;
 }
 
 /** AkriConnectorTemplateDeviceInboundEndpointType properties. */

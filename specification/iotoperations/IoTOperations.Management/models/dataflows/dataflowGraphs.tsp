@@ -49,6 +49,8 @@ model DataflowGraphProperties {
   /** The provisioning state of the dataflow graph. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 /** DataflowGraph node properties. */

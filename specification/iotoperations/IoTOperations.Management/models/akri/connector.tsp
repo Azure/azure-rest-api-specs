@@ -35,4 +35,6 @@ model AkriConnectorProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }

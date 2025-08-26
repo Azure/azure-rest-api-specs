@@ -50,6 +50,8 @@ model DataflowProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("Dataflow Operation properties. NOTE - One only method is allowed to be used for one entry.")

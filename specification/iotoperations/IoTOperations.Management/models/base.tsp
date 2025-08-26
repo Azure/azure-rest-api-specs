@@ -44,6 +44,33 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
+@doc("The health state of the resource.")
+@added(Versions.`2025-09-01-preview`)
+union ResourceHealthState {
+  string,
+
+  @doc("Resource is Available and functioning as expected.")
+  Available,
+
+  @doc("Resource health is degraded.")
+  Degraded,
+
+  @doc("Resource is not functioning as expected.")
+  Unavailable,
+
+  @doc("Resource state is unknown.")
+  Unknown,
+}
+
+alias ResourceHealth = {
+  @doc("The health state of the resource.")
+  @added(Versions.`2025-09-01-preview`)
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthState = Unknown;
+};
+
+
+
 @doc("Mode properties")
 union OperationalMode {
   string,

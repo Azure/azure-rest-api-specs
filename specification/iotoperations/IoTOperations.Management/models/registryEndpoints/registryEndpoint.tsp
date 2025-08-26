@@ -44,6 +44,8 @@ model RegistryEndpointProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  ...ResourceHealth;
+
   /** Trust settings for the registry endpoint */
   trustSettings?: RegistryEndpointTrustedSettings;
 }

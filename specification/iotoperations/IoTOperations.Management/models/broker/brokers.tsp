@@ -63,6 +63,8 @@ model BrokerProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("""
