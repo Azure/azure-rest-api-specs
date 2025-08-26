@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -123,6 +124,34 @@ union CreatedByType {
   ManagedIdentity: "ManagedIdentity",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Key: "Key",
+}
+
+/**
+ * Status of Direct Connect Escalation.
+ */
+@added(Versions.v2025_06_01_preview)
+union AzureEEStatus {
+  string,
+  /**
+   * Escalation is available and uninitiated
+   */
+  EscalationAvailable: "EscalationAvailable",
+  /**
+   * Escalation is unavailable and has been initiated
+   */
+  EscalationInitiated: "EscalationInitiated",
+  /**
+   * Escalation is unavailable and has finished processing after being initiated
+   */
+  EscalationProcessed: "EscalationProcessed",
+  /**
+   * Escalation is unavailable and cannot be initiated due to direct escalation being unsupported on this product or topic
+   */
+  EscalationUnsupported: "EscalationUnsupported",
+  /**
+   * Escalation is unavailable and cannot be initiated due to customer not being enrolled to direct escalation
+   */
+  EscalationUnavailable: "EscalationUnavailable",
 }
 
 /**
@@ -450,6 +479,12 @@ model SupportTicketDetailsProperties {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   secondaryConsent?: SecondaryConsent[];
+
+  /**
+   * Direct Connect Escalation details for a support ticket.
+   */
+  @added(Versions.v2025_06_01_preview)
+  directConnectEscalation?: DirectConnectEscalation;
 }
 
 /**
@@ -628,6 +663,12 @@ model UpdateSupportTicket {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   secondaryConsent?: SecondaryConsent[];
+
+  /**
+   * Direct Connect Escalation details for a support ticket.
+   */
+  @added(Versions.v2025_06_01_preview)
+  directConnectEscalation?: DirectConnectEscalation;
 }
 
 /**
@@ -834,4 +875,27 @@ model UploadFile {
    * Index of the uploaded chunk (Index starts at 0)
    */
   chunkIndex?: int32;
+}
+
+/**
+ * Direct Connect Escalation details for a support ticket.
+ */
+@added(Versions.v2025_06_01_preview)
+model DirectConnectEscalation {
+  /**
+   * Status of Direct Connect Escalation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "azureEEStatus should not be converted to camel case because 'EE' is an abbreviation for 'Escalate to Engineering'."
+  azureEEStatus: AzureEEStatus;
+
+  /**
+   * An array containing the allowed severities for direct connect escalation.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  allowedSeverities?: SeverityLevel[];
+
+  /**
+   * Reason for escalation / business impact.
+   */
+  reasonForEscalation?: string;
 }
