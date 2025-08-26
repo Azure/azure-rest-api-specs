@@ -233,51 +233,6 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-// @doc("The update request model for the Scheduler resource")
-// @added(Versions.v2024_10_01_Preview)
-// model SchedulerUpdate
-//   is UpdateableProperties<Azure.ResourceManager.TrackedResource<SchedulerPropertiesUpdate>> {
-//   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-// }
-
-// @@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
-
-// @doc("The Scheduler resource properties to be updated")
-// @added(Versions.v2024_10_01_Preview)
-// model SchedulerPropertiesUpdate {
-//   @visibility(Lifecycle.Read)
-//   @doc("The status of the last operation")
-//   provisioningState?: ProvisioningState;
-
-//   @doc("URL of the durable task scheduler")
-//   @visibility(Lifecycle.Read)
-//   endpoint?: string;
-
-//   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
-//   ipAllowlist?: string[];
-
-//   @doc("SKU of the durable task scheduler")
-//   sku?: SchedulerSkuUpdate;
-
-//   @added(Versions.v2025_05_04_Preview)
-//   @doc("Allow or disallow public network access to durable task scheduler")
-//   publicNetworkAccess?: PublicNetworkAccess;
-// }
-
-// @doc("The SKU (Stock Keeping Unit) properties to be updated")
-// @added(Versions.v2024_10_01_Preview)
-// model SchedulerSkuUpdate {
-//   @doc("The name of the SKU")
-//   name?: string;
-
-//   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
-//   capacity?: int32;
-
-//   @doc("Indicates whether the current SKU configuration is zone redundant")
-//   @visibility(Lifecycle.Read)
-//   redundancyState?: RedundancyState;
-// }
-
 @added(Versions.v2024_10_01_Preview)
 @armResourceOperations(Scheduler)
 interface Schedulers {
@@ -289,8 +244,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
-  update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
-  // update is ArmCustomPatchAsync<Scheduler, SchedulerUpdate>;
+  update is ArmCustomPatchAsync<Scheduler, Scheduler>;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
   @doc("List Schedulers by resource group")
@@ -325,7 +279,7 @@ interface RetentionPolicies {
   createOrReplace is ArmResourceCreateOrReplaceAsync<RetentionPolicy>;
   @doc("Update a Retention Policy")
   @errorsDoc("Validation error: required parameters are missing")
-  update is ArmResourcePatchAsync<RetentionPolicy, RetentionPolicyProperties>;
+  update is ArmCustomPatchAsync<RetentionPolicy, RetentionPolicy>;
   @doc("Delete a Retention Policy")
   delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;
   @doc("List Retention Policies")

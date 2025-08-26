@@ -1,6 +1,14 @@
-name: "[TEST-IGNORE] Summarize PR Impact"
+name: "Summarize PR Impact"
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+      - ready_for_review
+      - converted_to_draft
 
 permissions:
   contents: read
@@ -8,7 +16,7 @@ permissions:
 
 jobs:
   impact:
-    name: "[TEST-IGNORE] Summarize PR Impact"
+    name: "Summarize PR Impact"
     runs-on: ubuntu-24.04
 
     steps:

@@ -152,12 +152,12 @@ model FileShareProperties is AzureResourceProperties {
   /**
    * FileShare Estimated Volume Size in GB.
    */
-  fileShareEstimatedVolSizeInGb?: string;
+  fileShareEstimatedVolSizeInGb?: float64;
 
   /**
    * FileShare Estimated Size in GB.
    */
-  fileShareEstimatedSizeInGb?: string;
+  fileShareEstimatedSizeInGb?: float64;
 
   /**
    * The list of errors.
@@ -258,12 +258,12 @@ model FileShareResourcePatch {
   /**
    * FileShare Estimated Volume Size in GB.
    */
-  fileShareEstimatedVolSizeInGb?: string;
+  fileShareEstimatedVolSizeInGb?: float64;
 
   /**
    * FileShare Estimated Size in GB.
    */
-  fileShareEstimatedSizeInGb?: string;
+  fileShareEstimatedSizeInGb?: float64;
 
   /**
    * The list of errors.

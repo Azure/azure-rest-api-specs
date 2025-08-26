@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "cloudServiceResourceName": "myResourceName",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup",
+    "body": {
+      "properties": {
+        "autoRenew": "Off",
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+            "quantity": 9
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "InvalidRequestBody",
+        "reason": "AutoRenew request requires AutoRenew.On to set scheduleActions",
+        "updateScenario": "AutoRenew",
+        "additionalInfo": null
+      }
+    }
+  },
+  "operationId": "CloudServices_CanUpdate",
+  "title": "Evaluate if a SaaSHub cloud service can be updated - Invalid Request"
+}
