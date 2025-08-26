@@ -76,8 +76,11 @@ model EvaluatorConfig {
 /* Allowed parameter types */
 alias ScalarParamType = string | "number" | "string"; // TODO: need to confirm allowed values
 
-/* The evaluator's initialization parameters */
-alias InitializationParameters = Record<ScalarParamType>; // TODO: Is this correct?
+/* The evaluator's input parameters */
+alias InputParameters = Record<ScalarParamType>; 
+
+/* The evaluator's output parameters */
+alias OutputParameters = Record<ScalarParamType>;
 
 @doc("Code-based evaluator configuration using container images")
 model CodeEvaluatorConfig extends EvaluatorConfig {
@@ -86,8 +89,11 @@ model CodeEvaluatorConfig extends EvaluatorConfig {
   @doc("URI of the container image")
   inline_code: string;
 
-  @doc("The evaluator's initialization parameters")
-  init_params: InitializationParameters;
+  @doc("The evaluator's input parameters")
+  input_params: InputParameters;
+
+  @doc("The evaluator's output parameters")
+  output_params: OutputParameters;
 }
 
 @doc("Code-based evaluator configuration using container images")
@@ -108,8 +114,11 @@ model PromptBasedEvaluatorConfig extends EvaluatorConfig {
   @doc("The prompt text used for evaluation")
   prompt_text: string;
 
-  @doc("The evaluator's initialization parameters")
-  init_params: InitializationParameters;
+  @doc("The evaluator's input parameters")
+  input_params: InputParameters;
+
+  @doc("The evaluator's output parameters")
+  output_params: OutputParameters;
 }
 
 @doc("Prompty-based evaluator configuration using prompty files")
@@ -119,8 +128,11 @@ model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
   @doc("The prompt text used for evaluation")
   prompt_text: string;
 
-  @doc("The evaluator's initialization parameters")
-  init_params: InitializationParameters;
+  @doc("The evaluator's input parameters")
+  input_params: InputParameters;
+
+  @doc("The evaluator's output parameters")
+  output_params: OutputParameters;
 }
 
 @doc("The scope of an evaluator (registry, project, etc...)")
