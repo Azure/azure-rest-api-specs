@@ -1181,6 +1181,27 @@ describe("Summarize Checks Unit Tests", () => {
 
       const github = createMockGithub();
 
+      github.rest.actions.downloadArtifact.mockResolvedValue({
+        data: Buffer.from(zip),
+      });
+
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [{ id: 1, name: "job-summary" }],
+        },
+      });
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+        owner: "test-owner",
+        repo: "test-repo",
+        artifact_id: 1,
+        archive_format: "zip",
+      });
+
       github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
         data: {
           artifacts: [
@@ -1189,10 +1210,6 @@ describe("Summarize Checks Unit Tests", () => {
             { id: 3, name: "job-summary", updated_at: "2025" },
           ],
         },
-      });
-
-      github.rest.actions.downloadArtifact.mockResolvedValue({
-        data: Buffer.from(zip),
       });
 
       await expect(
