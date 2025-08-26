@@ -12,6 +12,7 @@ tags:
   - name: Fine-tuning
   - name: Models
   - name: Responses
+  - name: Vector Stores
 paths:
   /chat/completions:
     post:
@@ -2222,6 +2223,855 @@ paths:
                 $ref: '#/components/schemas/AzureErrorResponse'
       tags:
         - Responses
+  /vector_stores:
+    get:
+      operationId: listVectorStores
+      summary: Returns a list of vector stores.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListVectorStoresResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+    post:
+      operationId: createVectorStore
+      summary: Creates a vector store.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateVectorStoreRequest'
+      x-ms-examples:
+        Create a vector store request:
+          $ref: ./examples/vector_stores.yaml
+  /vector_stores/{vector_store_id}:
+    get:
+      operationId: getVectorStore
+      summary: Retrieves a vector store.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+    post:
+      operationId: modifyVectorStore
+      summary: Modifies a vector store.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store to modify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.UpdateVectorStoreRequest'
+    delete:
+      operationId: deleteVectorStore
+      summary: Delete a vector store.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.DeleteVectorStoreResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+  /vector_stores/{vector_store_id}/file_batches:
+    post:
+      operationId: createVectorStoreFileBatch
+      summary: Create a vector store file batch.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store for which to create a file batch.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreFileBatchObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateVectorStoreFileBatchRequest'
+  /vector_stores/{vector_store_id}/file_batches/{batch_id}:
+    get:
+      operationId: getVectorStoreFileBatch
+      summary: Retrieves a vector store file batch.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batch_id
+          in: path
+          required: true
+          description: The ID of the file batch being retrieved.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreFileBatchObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+  /vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel:
+    post:
+      operationId: cancelVectorStoreFileBatch
+      summary: Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batch_id
+          in: path
+          required: true
+          description: The ID of the file batch to cancel.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreFileBatchObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+  /vector_stores/{vector_store_id}/file_batches/{batch_id}/files:
+    get:
+      operationId: listFilesInVectorStoreBatch
+      summary: Returns a list of vector store files in a batch.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batch_id
+          in: path
+          required: true
+          description: The ID of the file batch that the files belong to.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
+          schema:
+            $ref: '#/components/schemas/OpenAI.ListVectorStoreFilesFilter'
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListVectorStoreFilesResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+  /vector_stores/{vector_store_id}/files:
+    get:
+      operationId: listVectorStoreFiles
+      summary: Returns a list of vector store files.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store that the files belong to.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
+          schema:
+            $ref: '#/components/schemas/OpenAI.ListVectorStoreFilesFilter'
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListVectorStoreFilesResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+    post:
+      operationId: createVectorStoreFile
+      summary: Create a vector store file by attaching a [File](/docs/api-reference/files) to a [vector store](/docs/api-reference/vector-stores/object).
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store for which to create a File.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreFileObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateVectorStoreFileRequest'
+  /vector_stores/{vector_store_id}/files/{file_id}:
+    get:
+      operationId: getVectorStoreFile
+      summary: Retrieves a vector store file.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          description: The ID of the file being retrieved.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreFileObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+    post:
+      operationId: updateVectorStoreFileAttributes
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.VectorStoreFileObject'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.UpdateVectorStoreFileAttributesRequest'
+    delete:
+      operationId: deleteVectorStoreFile
+      summary: Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the [delete file](/docs/api-reference/files/delete) endpoint.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: vector_store_id
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          description: The ID of the file to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.DeleteVectorStoreFileResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Vector Stores
 security:
   - ApiKeyAuth: []
   - ApiKeyAuth_: []
@@ -4885,6 +5735,19 @@ components:
           nullable: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Location'
+    OpenAI.AutoChunkingStrategyRequestParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - auto
+          description: Always `auto`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChunkingStrategyRequestParam'
+      description: The default strategy. This strategy currently uses a `max_chunk_size_tokens` of `800` and `chunk_overlap_tokens` of `400`.
     OpenAI.ChatCompletionFunctionCallOption:
       type: object
       required:
@@ -5545,6 +6408,37 @@ components:
         - type: string
           enum:
             - content
+    OpenAI.ChunkingStrategyRequestParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - auto
+            - static
+          description: The type of chunking strategy.
+      discriminator:
+        propertyName: type
+        mapping:
+          static: '#/components/schemas/OpenAI.StaticChunkingStrategyRequestParam'
+      description: The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
+    OpenAI.ChunkingStrategyResponseParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+            - other
+      discriminator:
+        propertyName: type
+        mapping:
+          other: '#/components/schemas/OpenAI.OtherChunkingStrategyResponseParam'
+          static: '#/components/schemas/OpenAI.StaticChunkingStrategyResponseParam'
     OpenAI.CodeInterpreterOutput:
       type: object
       required:
@@ -6516,6 +7410,71 @@ components:
             - project
       allOf:
         - $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestIntegration'
+    OpenAI.CreateVectorStoreFileBatchRequest:
+      type: object
+      required:
+        - file_ids
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 500
+          description: A list of [File](/docs/api-reference/files) IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+        chunking_strategy:
+          $ref: '#/components/schemas/OpenAI.ChunkingStrategyRequestParam'
+        attributes:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.VectorStoreFileAttributes'
+          nullable: true
+    OpenAI.CreateVectorStoreFileRequest:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: A [File](/docs/api-reference/files) ID that the vector store should use. Useful for tools like `file_search` that can access files.
+        chunking_strategy:
+          $ref: '#/components/schemas/OpenAI.ChunkingStrategyRequestParam'
+        attributes:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.VectorStoreFileAttributes'
+          nullable: true
+    OpenAI.CreateVectorStoreRequest:
+      type: object
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 500
+          description: A list of [File](/docs/api-reference/files) IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+        name:
+          type: string
+          description: The name of the vector store.
+        expires_after:
+          $ref: '#/components/schemas/OpenAI.VectorStoreExpirationAfter'
+        chunking_strategy:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.AutoChunkingStrategyRequestParam'
+            - $ref: '#/components/schemas/OpenAI.StaticChunkingStrategyRequestParam'
+          description: The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. Only applicable if `file_ids` is non-empty.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
     OpenAI.DeleteFileResponse:
       type: object
       required:
@@ -6531,6 +7490,36 @@ components:
             - file
         deleted:
           type: boolean
+    OpenAI.DeleteVectorStoreFileResponse:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+        deleted:
+          type: boolean
+        object:
+          type: string
+          enum:
+            - vector_store.file.deleted
+    OpenAI.DeleteVectorStoreResponse:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+        deleted:
+          type: boolean
+        object:
+          type: string
+          enum:
+            - vector_store.deleted
     OpenAI.Eval:
       type: object
       required:
@@ -9543,6 +10532,61 @@ components:
           type: string
           enum:
             - list
+    OpenAI.ListVectorStoreFilesFilter:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+    OpenAI.ListVectorStoreFilesResponse:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.VectorStoreFileObject'
+        first_id:
+          type: string
+        last_id:
+          type: string
+        has_more:
+          type: boolean
+    OpenAI.ListVectorStoresResponse:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.VectorStoreObject'
+        first_id:
+          type: string
+        last_id:
+          type: string
+        has_more:
+          type: boolean
     OpenAI.LocalShellExecAction:
       type: object
       required:
@@ -10079,6 +11123,19 @@ components:
           type: string
           description: The organization that owns the model.
       description: Describes an OpenAI model offering that can be used with the API.
+    OpenAI.OtherChunkingStrategyResponseParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - other
+          description: Always `other`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChunkingStrategyResponseParam'
+      description: This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the `chunking_strategy` concept was introduced in the API.
     OpenAI.ParallelToolCalls:
       type: boolean
       description: Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use.
@@ -12396,6 +13453,56 @@ components:
             - sampled_model_name
         sub_rewards: {}
         model_grader_token_usage_per_model: {}
+    OpenAI.StaticChunkingStrategy:
+      type: object
+      required:
+        - max_chunk_size_tokens
+        - chunk_overlap_tokens
+      properties:
+        max_chunk_size_tokens:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 4096
+          description: The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
+        chunk_overlap_tokens:
+          type: integer
+          format: int32
+          description: |-
+            The number of tokens that overlap between chunks. The default value is `400`.
+
+            Note that the overlap must not exceed half of `max_chunk_size_tokens`.
+    OpenAI.StaticChunkingStrategyRequestParam:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: Always `static`.
+        static:
+          $ref: '#/components/schemas/OpenAI.StaticChunkingStrategy'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChunkingStrategyRequestParam'
+      description: Customize your own chunking strategy by setting chunk size and chunk overlap.
+    OpenAI.StaticChunkingStrategyResponseParam:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: Always `static`.
+        static:
+          $ref: '#/components/schemas/OpenAI.StaticChunkingStrategy'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChunkingStrategyResponseParam'
     OpenAI.StopConfiguration:
       anyOf:
         - type: string
@@ -12598,6 +13705,40 @@ components:
             type: integer
             format: int32
       description: The top log probability of a token.
+    OpenAI.UpdateVectorStoreFileAttributesRequest:
+      type: object
+      required:
+        - attributes
+      properties:
+        attributes:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.VectorStoreFileAttributes'
+          nullable: true
+    OpenAI.UpdateVectorStoreRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the vector store.
+        expires_after:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.VectorStoreExpirationAfter'
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
     OpenAI.ValidateGraderRequest:
       type: object
       required:
@@ -12622,6 +13763,24 @@ components:
             - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
             - $ref: '#/components/schemas/OpenAI.GraderMulti'
           description: The grader used for the fine-tuning job.
+    OpenAI.VectorStoreExpirationAfter:
+      type: object
+      required:
+        - anchor
+        - days
+      properties:
+        anchor:
+          type: string
+          enum:
+            - last_active_at
+          description: 'Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.'
+        days:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 365
+          description: The number of days after the anchor time that the vector store will expire.
+      description: The expiration policy for a vector store.
     OpenAI.VectorStoreFileAttributes:
       type: object
       additionalProperties:
@@ -12639,6 +13798,229 @@ components:
         with a maximum length of 64 characters. Values are strings with a maximum
         length of 512 characters, booleans, or numbers.
       x-oaiTypeLabel: map
+    OpenAI.VectorStoreFileBatchObject:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - vector_store_id
+        - status
+        - file_counts
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store.files_batch
+          description: The object type, which is always `vector_store.file_batch`.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store files batch was created.
+        vector_store_id:
+          type: string
+          description: The ID of the [vector store](/docs/api-reference/vector-stores/object) that the [File](/docs/api-reference/files) is attached to.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - cancelled
+            - failed
+          description: The status of the vector store files batch, which can be either `in_progress`, `completed`, `cancelled` or `failed`.
+        file_counts:
+          type: object
+          properties:
+            in_progress:
+              type: integer
+              format: int32
+              description: The number of files that are currently being processed.
+            completed:
+              type: integer
+              format: int32
+              description: The number of files that have been processed.
+            failed:
+              type: integer
+              format: int32
+              description: The number of files that have failed to process.
+            cancelled:
+              type: integer
+              format: int32
+              description: The number of files that where cancelled.
+            total:
+              type: integer
+              format: int32
+              description: The total number of files.
+          required:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+            - total
+      description: A batch of files attached to a vector store.
+    OpenAI.VectorStoreFileObject:
+      type: object
+      required:
+        - id
+        - object
+        - usage_bytes
+        - created_at
+        - vector_store_id
+        - status
+        - last_error
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store.file
+          description: The object type, which is always `vector_store.file`.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: The total vector store usage in bytes. Note that this may be different from the original file size.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store file was created.
+        vector_store_id:
+          type: string
+          description: The ID of the [vector store](/docs/api-reference/vector-stores/object) that the [File](/docs/api-reference/files) is attached to.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - cancelled
+            - failed
+          description: The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use.
+        last_error:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+                - server_error
+                - unsupported_file
+                - invalid_file
+              description: One of `server_error` or `rate_limit_exceeded`.
+            message:
+              type: string
+              description: A human-readable description of the error.
+          required:
+            - code
+            - message
+          nullable: true
+          description: The last error associated with this vector store file. Will be `null` if there are no errors.
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChunkingStrategyResponseParam'
+          description: The strategy used to chunk the file.
+        attributes:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.VectorStoreFileAttributes'
+          nullable: true
+      description: A list of files attached to a vector store.
+    OpenAI.VectorStoreObject:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - name
+        - usage_bytes
+        - file_counts
+        - status
+        - last_active_at
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store
+          description: The object type, which is always `vector_store`.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store was created.
+        name:
+          type: string
+          description: The name of the vector store.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: The total number of bytes used by the files in the vector store.
+        file_counts:
+          type: object
+          properties:
+            in_progress:
+              type: integer
+              format: int32
+              description: The number of files that are currently being processed.
+            completed:
+              type: integer
+              format: int32
+              description: The number of files that have been successfully processed.
+            failed:
+              type: integer
+              format: int32
+              description: The number of files that have failed to process.
+            cancelled:
+              type: integer
+              format: int32
+              description: The number of files that were cancelled.
+            total:
+              type: integer
+              format: int32
+              description: The total number of files.
+          required:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+            - total
+        status:
+          type: string
+          enum:
+            - expired
+            - in_progress
+            - completed
+          description: The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use.
+        expires_after:
+          $ref: '#/components/schemas/OpenAI.VectorStoreExpirationAfter'
+        expires_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store will expire.
+        last_active_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store was last active.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+      description: A vector store is a collection of processed files can be used by the `file_search` tool.
     OpenAI.VoiceIdsShared:
       anyOf:
         - type: string

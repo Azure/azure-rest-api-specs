@@ -6066,6 +6066,28 @@
         },
         "description": "A content filter result for an image generation operation's output response content."
       },
+      "AzureContentFilterPersonallyIdentifiableInformationResult": {
+        "type": "object",
+        "properties": {
+          "redacted_text": {
+            "type": "string",
+            "description": "The redacted text with PII information removed or masked."
+          },
+          "sub_categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AzurePiiSubCategoryResult"
+            },
+            "description": "Detailed results for individual PIIHarmSubCategory(s)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AzureContentFilterDetectionResult"
+          }
+        ],
+        "description": "A content filter detection result for Personally Identifiable Information that includes harm extensions."
+      },
       "AzureContentFilterResultForChoice": {
         "type": "object",
         "properties": {
@@ -6187,6 +6209,14 @@
           },
           "ungrounded_material": {
             "$ref": "#/components/schemas/AzureContentFilterCompletionTextSpanDetectionResult"
+          },
+          "personally_identifiable_information": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterPersonallyIdentifiableInformationResult"
+              }
+            ],
+            "description": "A detection result that describes matches against Personal Identifiable Information with configurable subcategories."
           }
         },
         "description": "A content filter result for a single response item produced by a generative AI system."
@@ -7810,6 +7840,34 @@
             "description": "If applicable, an upstream error that originated this error."
           }
         }
+      },
+      "AzurePiiSubCategoryResult": {
+        "type": "object",
+        "required": [
+          "sub_category",
+          "filtered",
+          "detected",
+          "redacted"
+        ],
+        "properties": {
+          "sub_category": {
+            "type": "string",
+            "description": "The PIIHarmSubCategory that was evaluated."
+          },
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content detection resulted in a content filtering action for this subcategory."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether the labeled content subcategory was detected in the content."
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "Whether the content was redacted for this subcategory."
+          }
+        },
+        "description": "Result details for individual PIIHarmSubCategory(s)."
       },
       "AzureResponse": {
         "type": "object",
