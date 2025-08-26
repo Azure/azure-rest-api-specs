@@ -97,7 +97,7 @@ interface StorageTaskAssignments {
        * Optional, specifies the maximum number of storage task assignment Ids to be included in the list response.
        */
       @query("$top")
-      $maxpagesize?: int32;
+      $top?: int32;
     },
     Response = ArmResponse<StorageTaskAssignmentsList>,
     Error = ErrorResponse
