@@ -1,7 +1,7 @@
-import "../versions.tsp";
 import "./eventgridtopictypeeventtypes.tsp";
 import "./eventgridtopictypepublisherauthentications.tsp";
 import "./eventgridtopictypesupportedlocations.tsp";
+import "./versions.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
