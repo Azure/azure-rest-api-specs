@@ -4455,7 +4455,8 @@
           "description": "List of FQDNs that will be accepted for mutual TLS validation.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,61}$"
           }
         },
         "certificateRevocationCheck": {
@@ -4506,9 +4507,9 @@
         "allowedFqdns": {
           "description": "List of FQDNs that will be accepted for mutual TLS validation.",
           "type": "array",
-          "pattern": "^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,61}$",
           "items": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^((?!xn--)[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,61}$"
           }
         },
         "certificateRevocationCheck": {
