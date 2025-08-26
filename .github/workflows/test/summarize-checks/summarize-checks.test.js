@@ -1206,8 +1206,8 @@ describe("Summarize Checks Unit Tests", () => {
         data: {
           artifacts: [
             { id: 1, name: "job-summary" /* updated_at: "1970" (default) */ },
-            { id: 2, name: "job-summary", updated_at: "2024" },
-            { id: 3, name: "job-summary", updated_at: "2025" },
+            { id: 2, name: "job-summary", updated_at: "2025" },
+            { id: 3, name: "job-summary", updated_at: "2024" },
           ],
         },
       });
@@ -1219,7 +1219,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
         owner: "test-owner",
         repo: "test-repo",
-        artifact_id: 3,
+        artifact_id: 2,
         archive_format: "zip",
       });
     });
