@@ -118,9 +118,15 @@ model JobDetails extends ItemDetails {
   /** Priority of job. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   jobPriority?: JobPriority;
+
+  /** List of user-supplied tags associated with the job. */
+  @removed(Versions.v2025_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: string[];
 }
 
 /** Options for updating a job. */
+@added(Versions.v2025_09_01_preview)
 @parentResource(Quantum.Workspace.QuantumWorkspace)
 @resource("jobUpdateOptions")
 model JobUpdateOptions {
@@ -132,7 +138,7 @@ model JobUpdateOptions {
 
   /** Priority of job. */
   @visibility(Lifecycle.Update)
-  jobPriority?: JobPriority;
+  priority?: Priority;
 
   /** The name of the job. */
   @visibility(Lifecycle.Read, Lifecycle.Update)
@@ -141,15 +147,4 @@ model JobUpdateOptions {
   /** List of user-supplied tags associated with the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
-}
-
-/** Job priority levels. */
-union JobPriority {
-  string,
-
-  /** The job's base priority. */
-  Basic: "Basic",
-
-  /** The job's priority is elevated. */
-  High: "High",
 }

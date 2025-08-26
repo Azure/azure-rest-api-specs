@@ -74,6 +74,25 @@ model ItemDetails {
   errorData?: Errors.WorkspaceItemError;
 
   /** List of user-supplied tags associated with the job. */
+  @added(Versions.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: string[];
+
+  /** Priority of the item. */
+  @added(Versions.v2025_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  priority?: Priority;
 }
+
+/** Job priority levels. */
+@added(Versions.v2025_09_01_preview)
+union Priority {
+  string,
+
+  /** The job's base priority. */
+  Basic: "Basic",
+
+  /** The job's priority is elevated. */
+  High: "High",
+}
+

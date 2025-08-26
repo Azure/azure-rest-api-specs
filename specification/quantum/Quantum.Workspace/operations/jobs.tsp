@@ -19,7 +19,18 @@ namespace Quantum.Workspace.Services {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
-   update is PatchOperation<JobUpdateOptions>;
+    @added(Versions.v2025_09_01_preview)
+    update is PatchOperation<JobUpdateOptions>;
+
+    /** OLD METHOD: Update job properties. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+      There is no support for JsonPatch in Azure.Core.
+      The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
+      See https://github.com/Azure/typespec-azure/issues/475
+      """
+    @removed(Versions.v2025_09_01_preview)
+    @renamedFrom(Versions.v2025_09_01_preview, "update")
+    updateOld is PatchOperation<JobDetails>;
 
     /** Request the cancellation of an existing job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
