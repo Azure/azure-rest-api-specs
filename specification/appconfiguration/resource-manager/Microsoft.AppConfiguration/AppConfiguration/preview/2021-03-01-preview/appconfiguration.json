@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-05-01",
+    "version": "2021-03-01-preview",
     "title": "AppConfigurationManagementClient"
   },
   "host": "management.azure.com",
@@ -504,11 +504,7 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
+        "x-ms-examples": {},
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -612,7 +608,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-        "description": "Update the state of the specified private endpoint connection associated with the configuration store. This operation cannot be used to create a private endpoint connection. Private endpoint connections must be created with the Network resource provider.",
+        "description": "Update the state of the specified private endpoint connection associated with the configuration store.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -664,8 +660,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateEndpointConnection_Update": {
-            "$ref": "./examples/ConfigurationStoresUpdatePrivateEndpointConnection.json"
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationStoresCreatePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -813,6 +809,58 @@
           "PrivateLinkResources_Get": {
             "$ref": "./examples/PrivateLinkResourceGet.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues": {
+      "get": {
+        "tags": [
+          "KeyValues"
+        ],
+        "description": "Lists the key-values for a given configuration store.",
+        "operationId": "KeyValues_ListByConfigurationStore",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/KeyValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyValues_ListByConfigurationStore": {
+            "$ref": "./examples/ConfigurationStoresListKeyValues.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -971,184 +1019,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/deletedConfigurationStores": {
-      "get": {
-        "tags": [
-          "DeletedConfigurationStores"
-        ],
-        "operationId": "ConfigurationStores_ListDeleted",
-        "description": "Gets information about the deleted configuration stores in a subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved information about all deleted configuration stores in a subscription.",
-            "schema": {
-              "$ref": "#/definitions/DeletedConfigurationStoreListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeletedConfigurationStores_List": {
-            "$ref": "./examples/DeletedConfigurationStoresList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/locations/{location}/deletedConfigurationStores/{configStoreName}": {
-      "get": {
-        "tags": [
-          "DeletedConfigurationStores"
-        ],
-        "operationId": "ConfigurationStores_GetDeleted",
-        "description": "Gets a deleted Azure app configuration store.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved information about the deleted configuration store.",
-            "schema": {
-              "$ref": "#/definitions/DeletedConfigurationStore"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeletedConfigurationStores_Get": {
-            "$ref": "./examples/DeletedConfigurationStoresGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/locations/{location}/deletedConfigurationStores/{configStoreName}/purge": {
-      "post": {
-        "tags": [
-          "DeletedConfigurationStores"
-        ],
-        "operationId": "ConfigurationStores_PurgeDeleted",
-        "x-ms-long-running-operation": true,
-        "description": "Permanently deletes the specified configuration store.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
-          },
-          "204": {
-            "description": "No Content - the specified resource was not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Purge a deleted configuration store": {
-            "$ref": "./examples/DeletedConfigurationStoresPurge.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/locations/{location}/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Checks whether the configuration store name is available for use.",
-        "operationId": "Operations_RegionalCheckNameAvailability",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "checkNameAvailabilityParameters",
-            "in": "body",
-            "description": "The object containing information for the availability request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/NameAvailabilityStatus"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConfigurationStores_CheckNameAvailable": {
-            "$ref": "./examples/RegionalCheckNameAvailable.json"
-          },
-          "ConfigurationStores_CheckNameNotAvailable": {
-            "$ref": "./examples/RegionalCheckNameNotAvailable.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1178,7 +1048,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1196,7 +1066,7 @@
           "description": "The sku of the configuration store."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Resource system metadata."
         }
       }
@@ -1259,34 +1129,7 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "default": false,
           "description": "Disables all authentication methods other than AAD authentication."
-        },
-        "softDeleteRetentionInDays": {
-          "type": "integer",
-          "format": "int32",
-          "default": 7,
-          "description": "The amount of time in days that the configuration store will be retained when it is soft deleted."
-        },
-        "enablePurgeProtection": {
-          "type": "boolean",
-          "default": false,
-          "description": "Property specifying whether protection against purge is enabled for this configuration store."
-        },
-        "createMode": {
-          "type": "string",
-          "description": "Indicates whether the configuration store need to be recovered.",
-          "enum": [
-            "Recover",
-            "Default"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": false
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
         }
       }
     },
@@ -1389,10 +1232,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        },
-        "enablePurgeProtection": {
-          "type": "boolean",
-          "description": "Property specifying whether protection against purge is enabled for this configuration store."
         }
       }
     },
@@ -1606,10 +1445,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationDefinition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "The URI that can be used to request the next set of paged results.",
@@ -1686,10 +1522,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "metricSpecifications": {
           "description": "Specifications of the Metrics for Azure Monitoring",
@@ -1697,10 +1530,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -1756,10 +1586,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "fillGapWithZero": {
           "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.",
@@ -1852,7 +1679,6 @@
       "description": "Describes a configuration store SKU."
     },
     "ErrorDetails": {
-      "type": "object",
       "description": "The details of the error.",
       "properties": {
         "code": {
@@ -1871,7 +1697,6 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
-          "x-ms-identifiers": [],
           "description": "The error additional info."
         }
       }
@@ -1887,7 +1712,6 @@
       }
     },
     "ErrorAdditionalInfo": {
-      "type": "object",
       "properties": {
         "type": {
           "readOnly": true,
@@ -2096,90 +1920,6 @@
         }
       },
       "description": "Properties of a private link resource."
-    },
-    "DeletedConfigurationStore": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID for the deleted configuration store."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the configuration store."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type of the configuration store."
-        },
-        "properties": {
-          "$ref": "#/definitions/DeletedConfigurationStoreProperties",
-          "description": "Properties of the deleted configuration store",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Deleted configuration store information with extended details."
-    },
-    "DeletedConfigurationStoreProperties": {
-      "type": "object",
-      "properties": {
-        "configurationStoreId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource id of the original configuration store."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The location of the original configuration store."
-        },
-        "deletionDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The deleted date."
-        },
-        "scheduledPurgeDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The scheduled purged date."
-        },
-        "tags": {
-          "readOnly": true,
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tags of the original configuration store."
-        },
-        "purgeProtectionEnabled": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Purge protection status of the original configuration store."
-        }
-      },
-      "description": "Properties of the deleted configuration store."
-    },
-    "DeletedConfigurationStoreListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeletedConfigurationStore"
-          },
-          "description": "The list of deleted configuration store."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of deleted configuration stores."
-        }
-      },
-      "description": "List of deleted configuration stores"
     }
   },
   "parameters": {
@@ -2215,14 +1955,6 @@
       "description": "The client API version.",
       "required": true,
       "type": "string"
-    },
-    "LocationParameter": {
-      "name": "location",
-      "in": "path",
-      "description": "The location in which uniqueness will be verified.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

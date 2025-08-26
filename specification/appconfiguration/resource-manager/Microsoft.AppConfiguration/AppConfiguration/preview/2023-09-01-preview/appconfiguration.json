@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-05-01",
+    "version": "2023-09-01-preview",
     "title": "AppConfigurationManagementClient"
   },
   "host": "management.azure.com",
@@ -212,6 +212,9 @@
           },
           "ConfigurationStores_Create_With_Data_Plane_Proxy": {
             "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
+          },
+          "ConfigurationStores_Create_With_Telemetry_And_Experimentation": {
+            "$ref": "./examples/ConfigurationStoresCreateWithTelemetryAndExperimentation.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1386,14 +1389,14 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in Azure Resource Manager (ARM) Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
         "operationId": "Snapshots_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1402,7 +1405,7 @@
             "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1415,7 +1418,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1429,14 +1432,14 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Creates a snapshot. NOTE: This operation is intended for use in Azure Resource Manager (ARM) Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "description": "Creates a snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
         "operationId": "Snapshots_Create",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1445,7 +1448,7 @@
             "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -1473,7 +1476,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1516,7 +1519,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1534,7 +1537,7 @@
           "description": "The sku of the configuration store."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Resource system metadata."
         }
       }
@@ -1629,6 +1632,14 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry for this configuration store"
+        },
+        "experimentation": {
+          "$ref": "#/definitions/ExperimentationProperties",
+          "description": "Property specifying the configuration of experimentation for this configuration store"
         }
       }
     },
@@ -1689,13 +1700,13 @@
               },
               {
                 "value": "Pass-through",
-                "description": "The pass-through authentication mode. User identity will be passed through from Azure Resource Manager (ARM), requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
+                "description": "The pass-through authentication mode. User identity will be passed through from ARM, requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
               }
             ]
           }
         },
         "privateLinkDelegation": {
-          "description": "The data plane proxy private link delegation. This property manages if a request from delegated Azure Resource Manager (ARM) private link is allowed when the data plane resource requires private link.",
+          "description": "The data plane proxy private link delegation. This property manages if a request from delegated ARM private link is allowed when the data plane resource requires private link.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1707,7 +1718,7 @@
             "values": [
               {
                 "value": "Enabled",
-                "description": "Azure Resource Manager (ARM) private endpoint is required if the resource requires private link."
+                "description": "ARM private endpoint is required if the resource requires private link."
               },
               {
                 "value": "Disabled",
@@ -1789,6 +1800,14 @@
         "dataPlaneProxy": {
           "$ref": "#/definitions/DataPlaneProxyProperties",
           "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry to update for this configuration store"
+        },
+        "experimentation": {
+          "$ref": "#/definitions/ExperimentationProperties",
+          "description": "Property specifying the configuration of experimentation to update for this configuration store"
         }
       }
     },
@@ -2622,7 +2641,7 @@
           ]
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Resource system metadata.",
           "readOnly": true
         },
@@ -2669,7 +2688,6 @@
         "id": {
           "description": "The resource ID.",
           "type": "string",
-          "format": "arm-id",
           "readOnly": true
         },
         "name": {
@@ -2787,7 +2805,7 @@
           "readOnly": true
         },
         "tags": {
-          "description": "The tags of the snapshot. NOTE: These are data plane tags, not Azure Resource Manager (ARM) tags.",
+          "description": "The tags of the snapshot. NOTE: These are data plane tags, not ARM tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2814,6 +2832,33 @@
         "label": {
           "description": "Filters key-values by their label field.",
           "type": "string"
+        }
+      }
+    },
+    "TelemetryProperties": {
+      "description": "Telemetry settings",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource ID of a resource enabling telemetry collection",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
+    "ExperimentationProperties": {
+      "description": "Experimentation settings",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource ID of a resource enabling experimentation",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "dataPlaneEndpoint": {
+          "description": "The data plane endpoint of the Split experimentation workspace resource where experimentation data can be retrieved",
+          "type": "string",
+          "format": "uri"
         }
       }
     }

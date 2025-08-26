@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
-  - Microsoft.AppConfiguration/preview/2025-02-01-preview/appconfiguration.json
+  - preview/2025-02-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-preview-2024-06-15-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2024-06-15-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2024-06-15-preview'
 input-file:
-  - Microsoft.AppConfiguration/preview/2024-06-15-preview/appconfiguration.json
+  - preview/2024-06-15-preview/appconfiguration.json
 ```
 
 ### Tag: package-2024-06-01
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2024-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-06-01'
 input-file:
-  - Microsoft.AppConfiguration/stable/2024-06-01/appconfiguration.json
+  - stable/2024-06-01/appconfiguration.json
 
 ```
 
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2024-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-05-01'
 input-file:
-  - Microsoft.AppConfiguration/stable/2024-05-01/appconfiguration.json
+  - stable/2024-05-01/appconfiguration.json
 ```
 
 ### Tag: package-2023-09-01-preview
@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
-  - Microsoft.AppConfiguration/preview/2023-09-01-preview/appconfiguration.json
+  - preview/2023-09-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2023-08-01-preview
@@ -81,61 +81,61 @@ These settings apply only when `--tag=package-2023-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-08-01-preview'
 input-file:
-  - Microsoft.AppConfiguration/preview/2023-08-01-preview/appconfiguration.json
+  - preview/2023-08-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2023-03-01
 
-These settings apply only when `--tag=packge-2023-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2023-03-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2023-03-01'
 input-file:
-  - Microsoft.AppConfiguration/stable/2023-03-01/appconfiguration.json
+  - stable/2023-03-01/appconfiguration.json
 ```
 
 ### Tag: package-2022-05-01
 
-These settings apply only when `--tag=2022-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2022-05-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2022-05-01'
 input-file:
-- Microsoft.AppConfiguration/stable/2022-05-01/appconfiguration.json
+- stable/2022-05-01/appconfiguration.json
 ```
 
 ### Tag: package-2022-03-01-preview
 
-These settings apply only when `--tag=2022-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-03-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2022-03-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2022-03-01-preview/appconfiguration.json
+- preview/2022-03-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2021-10-01-preview
 
-These settings apply only when `--tag=2021-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2021-10-01-preview/appconfiguration.json
+- preview/2021-10-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2021-03-01-preview
 
-These settings apply only when `--tag=2021-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2021-03-01-preview/appconfiguration.json
+- preview/2021-03-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2020-07-01-preview
 
-These settings apply only when `--tag=2020-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-07-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2020-07-01-preview/appconfiguration.json
+- preview/2020-07-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2020-06-01
@@ -144,7 +144,7 @@ These settings apply only when `--tag=package-2020-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-06-01'
 input-file:
-- Microsoft.AppConfiguration/stable/2020-06-01/appconfiguration.json
+- stable/2020-06-01/appconfiguration.json
 ```
 
 ### Tag: package-2019-11-01-preview
@@ -153,7 +153,7 @@ These settings apply only when `--tag=package-2019-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2019-11-01-preview/appconfiguration.json
+- preview/2019-11-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2019-02-01-preview
@@ -162,7 +162,7 @@ These settings apply only when `--tag=package-2019-02-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-02-01-preview'
 input-file:
-- Microsoft.AppConfiguration/preview/2019-02-01-preview/appconfiguration.json
+- preview/2019-02-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2019-10-01
@@ -171,7 +171,7 @@ These settings apply only when `--tag=package-2019-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-10-01'
 input-file:
-- Microsoft.AppConfiguration/stable/2019-10-01/appconfiguration.json
+- stable/2019-10-01/appconfiguration.json
 ```
 
 ---
@@ -256,7 +256,7 @@ directive:
   - suppress: NestedResourcesMustHaveListOperation
     from: appconfiguration.json
     where: $.definitions.KeyValue
-    resource: Listing is not supported in ARM templates.
+    reason: Listing is not supported in ARM templates.
   - suppress: TrackedResourceListByImmediateParent
     from: appconfiguration.json
     where: $.definitions.KeyValue
