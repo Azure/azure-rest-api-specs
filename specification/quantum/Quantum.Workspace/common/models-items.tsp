@@ -72,4 +72,8 @@ model ItemDetails {
   /** Error information. */
   @visibility(Lifecycle.Read)
   errorData?: Errors.WorkspaceItemError;
+
+  /** List of user-supplied tags associated with the job. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: string[];
 }

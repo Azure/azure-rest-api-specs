@@ -99,10 +99,6 @@ model JobDetails extends ItemDetails {
   @visibility(Lifecycle.Read)
   cancellationTime?: utcDateTime;
 
-  /** List of user-supplied tags associated with the job. */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: string[];
-
   /** Quantum computing data. */
   @visibility(Lifecycle.Read)
   quantumComputingData?: QuantumComputingData;
@@ -118,4 +114,42 @@ model JobDetails extends ItemDetails {
   /** The format of the output data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataFormat?: string;
+
+  /** Priority of job. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  jobPriority?: JobPriority;
+}
+
+/** Options for updating a job. */
+@parentResource(Quantum.Workspace.QuantumWorkspace)
+@resource("jobUpdateOptions")
+model JobUpdateOptions {
+  /** Id of the job. */
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
+  @key("jobId")
+  @visibility(Lifecycle.Read)
+  id: WorkspaceItemId;
+
+  /** Priority of job. */
+  @visibility(Lifecycle.Update)
+  jobPriority?: JobPriority;
+
+  /** The name of the job. */
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  name?: string;
+
+  /** List of user-supplied tags associated with the job. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: string[];
+}
+
+/** Job priority levels. */
+union JobPriority {
+  string,
+
+  /** The job's base priority. */
+  Basic: "Basic",
+
+  /** The job's priority is elevated. */
+  High: "High",
 }
