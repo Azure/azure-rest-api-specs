@@ -45,7 +45,7 @@ model OperationStatus {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Not all values are strings in this dictionary."
   @doc("Custom operation properties, populated only for a successful operation.")
-  properties?: Record<unknown>;
+  properties?: unknown;
 
   @doc("Operation Error message.")
   error?: Azure.Core.Foundations.Error;

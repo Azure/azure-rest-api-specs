@@ -788,7 +788,6 @@ model DevBox {
   lastConnectedTime?: utcDateTime;
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
-  @visibility(Lifecycle.Read)
   localAdministrator?: LocalAdminStatus;
 
   @doc("The active hours configuration for this Dev Box, if enabled.")
