@@ -2008,10 +2008,6 @@
           "description": "An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
         }
       },
-      "required": [
-        "keyVaultKeyName",
-        "keyVaultUri"
-      ],
       "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps."
     },
     "SearchIndexerDataIdentity": {
@@ -2023,9 +2019,6 @@
           "description": "A URI fragment specifying the type of identity."
         }
       },
-      "required": [
-        "@odata.type"
-      ],
       "description": "Abstract base type for data identities."
     },
     "SearchIndexerDataUserAssignedIdentity": {
@@ -2059,9 +2052,6 @@
           "description": "The authentication key of the specified AAD application."
         }
       },
-      "required": [
-        "applicationId"
-      ],
       "description": "Credentials of a registered application created for your search service, used for authenticated access to the encryption keys stored in Azure Key Vault."
     },
     "PrivateEndpointConnectionProperties": {
