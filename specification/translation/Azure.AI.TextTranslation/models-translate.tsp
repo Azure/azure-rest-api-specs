@@ -349,7 +349,6 @@ model DetectedLanguage {
 
 @doc("Translation result")
 model TranslationText {
-  
   @removed(APIVersion.v2025_05_01_preview)
   @doc("A string representing the language code of the target language.")
   to: string;
