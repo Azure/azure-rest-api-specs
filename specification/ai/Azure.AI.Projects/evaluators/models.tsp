@@ -58,6 +58,14 @@ union EvaluatorConfigType {
   container: "container",
 }
 
+@doc("The type of evaluator configuration")
+union EvaluatorScopeType {
+  string,
+
+  @doc("Prompt-based configuration")
+  registry: "registry",
+}
+
 @doc("Base evaluator configuration with discriminator")
 @discriminator("config_type")
 model EvaluatorConfig {
@@ -115,6 +123,20 @@ model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
   init_params: InitializationParameters;
 }
 
+@doc("The scope of an evaluator (registry, project, etc...)")
+model EvaluatorScope {
+  @doc("The Evaluator Scope type")
+  type: EvaluatorScopeType;
+}
+
+@doc("Registry scope")
+model RegistryEvaluatorScope {
+  type: EvaluatorScopeType.registry;
+
+  @doc("The registry the evaluator is scoped to")
+  registry: string;
+}
+
 @doc("Evaluator Definition")
 @resource("evaluators")
 @added(Versions.v2025_05_15_preview)
@@ -136,6 +158,10 @@ model EvaluatorVersion {
 
   @doc("The Evaluator's provider")
   provider: string;
+
+  @doc("The scope of the evaluator")
+  @visibility(Lifecycle.Read)
+  scope?: EvaluatorScope:
 
   ...AssetBase;
 }
