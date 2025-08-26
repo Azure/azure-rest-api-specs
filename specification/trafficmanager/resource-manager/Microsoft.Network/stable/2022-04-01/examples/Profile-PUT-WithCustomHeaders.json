@@ -1,24 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "azuresdkfornetautoresttrafficmanager2583",
-    "profileName": "azuresdkfornetautoresttrafficmanager6192",
     "api-version": "2022-04-01",
     "parameters": {
+      "location": "global",
       "properties": {
-        "profileStatus": "Enabled",
-        "trafficRoutingMethod": "Performance",
         "dnsConfig": {
           "relativeName": "azuresdkfornetautoresttrafficmanager6192",
           "ttl": 35
         },
+        "endpoints": [
+          {
+            "name": "My external endpoint",
+            "type": "Microsoft.network/TrafficManagerProfiles/ExternalEndpoints",
+            "properties": {
+              "customHeaders": [
+                {
+                  "name": "header-2",
+                  "value": "value-2-overridden"
+                }
+              ],
+              "endpointLocation": "North Europe",
+              "endpointStatus": "Enabled",
+              "target": "foobar.contoso.com"
+            }
+          }
+        ],
         "monitorConfig": {
-          "protocol": "HTTP",
-          "port": 80,
           "path": "/testpath.aspx",
-          "intervalInSeconds": 10,
-          "timeoutInSeconds": 5,
-          "toleratedNumberOfFailures": 2,
           "customHeaders": [
             {
               "name": "header-1",
@@ -31,60 +39,65 @@
           ],
           "expectedStatusCodeRanges": [
             {
-              "min": 200,
-              "max": 205
+              "max": 205,
+              "min": 200
             },
             {
-              "min": 400,
-              "max": 410
+              "max": 410,
+              "min": 400
             }
-          ]
+          ],
+          "intervalInSeconds": 10,
+          "port": 80,
+          "timeoutInSeconds": 5,
+          "toleratedNumberOfFailures": 2,
+          "protocol": "HTTP"
         },
-        "trafficViewEnrollmentStatus": "Disabled",
-        "endpoints": [
-          {
-            "name": "My external endpoint",
-            "type": "Microsoft.network/TrafficManagerProfiles/ExternalEndpoints",
-            "properties": {
-              "target": "foobar.contoso.com",
-              "endpointStatus": "Enabled",
-              "endpointLocation": "North Europe",
-              "customHeaders": [
-                {
-                  "name": "header-2",
-                  "value": "value-2-overridden"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "location": "global"
-    }
+        "profileStatus": "Enabled",
+        "trafficRoutingMethod": "Performance",
+        "trafficViewEnrollmentStatus": "Disabled"
+      }
+    },
+    "profileName": "azuresdkfornetautoresttrafficmanager6192",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager2583",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
         "name": "azuresdkfornetautoresttrafficmanager6192",
         "type": "Microsoft.Network/trafficManagerProfiles",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
         "location": "global",
         "properties": {
-          "profileStatus": "Enabled",
-          "trafficRoutingMethod": "Performance",
           "dnsConfig": {
-            "relativeName": "azuresdkfornetautoresttrafficmanager6192",
             "fqdn": "azuresdkfornetautoresttrafficmanager6192.tmpreview.watmtest.azure-test.net",
+            "relativeName": "azuresdkfornetautoresttrafficmanager6192",
             "ttl": 35
           },
+          "endpoints": [
+            {
+              "name": "My external endpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
+              "properties": {
+                "customHeaders": [
+                  {
+                    "name": "header-2",
+                    "value": "value-2-overridden"
+                  }
+                ],
+                "endpointLocation": "North Europe",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "endpointStatus": "Enabled",
+                "priority": 1,
+                "target": "foobar.contoso.com",
+                "weight": 1
+              }
+            }
+          ],
           "monitorConfig": {
-            "profileMonitorStatus": "CheckingEndpoints",
-            "protocol": "HTTP",
-            "port": 80,
             "path": "/testpath.aspx",
-            "intervalInSeconds": 10,
-            "toleratedNumberOfFailures": 2,
-            "timeoutInSeconds": 5,
             "customHeaders": [
               {
                 "name": "header-1",
@@ -94,55 +107,55 @@
                 "name": "header-2",
                 "value": "value-2"
               }
-            ]
+            ],
+            "intervalInSeconds": 10,
+            "port": 80,
+            "profileMonitorStatus": "CheckingEndpoints",
+            "timeoutInSeconds": 5,
+            "toleratedNumberOfFailures": 2,
+            "protocol": "HTTP"
           },
-          "trafficViewEnrollmentStatus": "Disabled",
-          "endpoints": [
-            {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
-              "name": "My external endpoint",
-              "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
-              "properties": {
-                "endpointStatus": "Enabled",
-                "endpointMonitorStatus": "CheckingEndpoint",
-                "target": "foobar.contoso.com",
-                "weight": 1,
-                "priority": 1,
-                "endpointLocation": "North Europe",
-                "customHeaders": [
-                  {
-                    "name": "header-2",
-                    "value": "value-2-overridden"
-                  }
-                ]
-              }
-            }
-          ]
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Performance",
+          "trafficViewEnrollmentStatus": "Disabled"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
         "name": "azuresdkfornetautoresttrafficmanager6192",
         "type": "Microsoft.Network/trafficManagerProfiles",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
         "location": "global",
         "properties": {
-          "profileStatus": "Enabled",
-          "trafficRoutingMethod": "Performance",
           "dnsConfig": {
-            "relativeName": "azuresdkfornetautoresttrafficmanager6192",
             "fqdn": "azuresdkfornetautoresttrafficmanager6192.tmpreview.watmtest.azure-test.net",
+            "relativeName": "azuresdkfornetautoresttrafficmanager6192",
             "ttl": 35
           },
+          "endpoints": [
+            {
+              "name": "My external endpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
+              "properties": {
+                "customHeaders": [
+                  {
+                    "name": "header-2",
+                    "value": "value-2-overridden"
+                  }
+                ],
+                "endpointLocation": "North Europe",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "endpointStatus": "Enabled",
+                "priority": 1,
+                "target": "foobar.contoso.com",
+                "weight": 1
+              }
+            }
+          ],
           "monitorConfig": {
-            "profileMonitorStatus": "CheckingEndpoints",
-            "protocol": "HTTP",
-            "port": 80,
             "path": "/testpath.aspx",
-            "intervalInSeconds": 10,
-            "toleratedNumberOfFailures": 2,
-            "timeoutInSeconds": 5,
             "customHeaders": [
               {
                 "name": "header-1",
@@ -152,32 +165,21 @@
                 "name": "header-2",
                 "value": "value-2"
               }
-            ]
+            ],
+            "intervalInSeconds": 10,
+            "port": 80,
+            "profileMonitorStatus": "CheckingEndpoints",
+            "timeoutInSeconds": 5,
+            "toleratedNumberOfFailures": 2,
+            "protocol": "HTTP"
           },
-          "trafficViewEnrollmentStatus": "Disabled",
-          "endpoints": [
-            {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
-              "name": "My external endpoint",
-              "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
-              "properties": {
-                "endpointStatus": "Enabled",
-                "endpointMonitorStatus": "CheckingEndpoint",
-                "target": "foobar.contoso.com",
-                "weight": 1,
-                "priority": 1,
-                "endpointLocation": "North Europe",
-                "customHeaders": [
-                  {
-                    "name": "header-2",
-                    "value": "value-2-overridden"
-                  }
-                ]
-              }
-            }
-          ]
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Performance",
+          "trafficViewEnrollmentStatus": "Disabled"
         }
       }
     }
-  }
+  },
+  "operationId": "Profiles_CreateOrUpdate",
+  "title": "Profile-PUT-WithCustomHeaders"
 }

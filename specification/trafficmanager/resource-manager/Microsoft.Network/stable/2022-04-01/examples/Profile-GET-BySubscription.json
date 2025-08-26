@@ -1,122 +1,124 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "api-version": "2022-04-01"
+    "api-version": "2022-04-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/azsmnet1719/providers/Microsoft.Network/trafficManagerProfiles/azsmnet5183",
             "name": "azsmnet5183",
             "type": "Microsoft.Network/trafficManagerProfiles",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/azsmnet1719/providers/Microsoft.Network/trafficManagerProfiles/azsmnet5183",
             "location": "global",
-            "tags": {},
             "properties": {
-              "profileStatus": "Enabled",
-              "trafficRoutingMethod": "Performance",
               "dnsConfig": {
-                "relativeName": "azsmnet4696",
                 "fqdn": "azsmnet4696.tmpreview.watmtest.azure-test.net",
+                "relativeName": "azsmnet4696",
                 "ttl": 35
               },
+              "endpoints": [],
               "monitorConfig": {
-                "profileMonitorStatus": "Online",
-                "protocol": "HTTP",
-                "port": 80,
                 "path": "/testpath.aspx",
                 "intervalInSeconds": 30,
+                "port": 80,
+                "profileMonitorStatus": "Online",
+                "timeoutInSeconds": 10,
                 "toleratedNumberOfFailures": 3,
-                "timeoutInSeconds": 10
+                "protocol": "HTTP"
               },
-              "endpoints": []
-            }
+              "profileStatus": "Enabled",
+              "trafficRoutingMethod": "Performance"
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager5168/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3440",
             "name": "azuresdkfornetautoresttrafficmanager3440",
             "type": "Microsoft.Network/trafficManagerProfiles",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager5168/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3440",
             "location": "global",
-            "tags": {},
             "properties": {
-              "profileStatus": "Enabled",
-              "trafficRoutingMethod": "Performance",
               "dnsConfig": {
-                "relativeName": "azuresdkfornetautoresttrafficmanager3440",
                 "fqdn": "azuresdkfornetautoresttrafficmanager3440.tmpreview.watmtest.azure-test.net",
+                "relativeName": "azuresdkfornetautoresttrafficmanager3440",
                 "ttl": 35
               },
-              "monitorConfig": {
-                "profileMonitorStatus": "Online",
-                "protocol": "HTTP",
-                "port": 80,
-                "path": "/testpath.aspx",
-                "intervalInSeconds": 30,
-                "toleratedNumberOfFailures": 3,
-                "timeoutInSeconds": 10
-              },
               "endpoints": [
                 {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager5168/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3440/externalEndpoints/My external endpoint",
                   "name": "My external endpoint",
                   "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager5168/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3440/externalEndpoints/My external endpoint",
                   "properties": {
-                    "endpointStatus": "Enabled",
+                    "endpointLocation": "North Europe",
                     "endpointMonitorStatus": "Online",
-                    "target": "foobar.contoso.com",
-                    "weight": 1,
+                    "endpointStatus": "Enabled",
                     "priority": 1,
-                    "endpointLocation": "North Europe"
+                    "target": "foobar.contoso.com",
+                    "weight": 1
                   }
                 }
-              ]
-            }
+              ],
+              "monitorConfig": {
+                "path": "/testpath.aspx",
+                "intervalInSeconds": 30,
+                "port": 80,
+                "profileMonitorStatus": "Online",
+                "timeoutInSeconds": 10,
+                "toleratedNumberOfFailures": 3,
+                "protocol": "HTTP"
+              },
+              "profileStatus": "Enabled",
+              "trafficRoutingMethod": "Performance"
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/onesdk9785/providers/Microsoft.Network/trafficManagerProfiles/onesdk8819",
             "name": "onesdk8819",
             "type": "Microsoft.Network/trafficManagerProfiles",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/onesdk9785/providers/Microsoft.Network/trafficManagerProfiles/onesdk8819",
             "location": "global",
-            "tags": {},
             "properties": {
-              "profileStatus": "Enabled",
-              "trafficRoutingMethod": "Performance",
               "dnsConfig": {
-                "relativeName": "onesdk7242",
                 "fqdn": "onesdk7242.tmpreview.watmtest.azure-test.net",
+                "relativeName": "onesdk7242",
                 "ttl": 51
-              },
-              "monitorConfig": {
-                "profileMonitorStatus": "Online",
-                "protocol": "HTTPS",
-                "port": 111,
-                "path": "/testparent.asp",
-                "intervalInSeconds": 30,
-                "toleratedNumberOfFailures": 3,
-                "timeoutInSeconds": 10
               },
               "endpoints": [
                 {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/onesdk9785/providers/Microsoft.Network/trafficManagerProfiles/onesdk8819/nestedEndpoints/MyNestedEndpoint",
                   "name": "MyNestedEndpoint",
                   "type": "Microsoft.Network/trafficManagerProfiles/nestedEndpoints",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/onesdk9785/providers/Microsoft.Network/trafficManagerProfiles/onesdk8819/nestedEndpoints/MyNestedEndpoint",
                   "properties": {
-                    "endpointStatus": "Enabled",
-                    "endpointMonitorStatus": "Stopped",
-                    "targetResourceId": "/subscriptions/{subscription-id}/resourceGroups/onesdk9785/providers/Microsoft.Network/trafficManagerProfiles/onesdk1792",
-                    "target": "onesdk4285.tmpreview.watmtest.azure-test.net",
-                    "weight": 1,
-                    "priority": 1,
                     "endpointLocation": "West Europe",
-                    "minChildEndpoints": 1
+                    "endpointMonitorStatus": "Stopped",
+                    "endpointStatus": "Enabled",
+                    "minChildEndpoints": 1,
+                    "priority": 1,
+                    "target": "onesdk4285.tmpreview.watmtest.azure-test.net",
+                    "targetResourceId": "/subscriptions/{subscription-id}/resourceGroups/onesdk9785/providers/Microsoft.Network/trafficManagerProfiles/onesdk1792",
+                    "weight": 1
                   }
                 }
-              ]
-            }
+              ],
+              "monitorConfig": {
+                "path": "/testparent.asp",
+                "intervalInSeconds": 30,
+                "port": 111,
+                "profileMonitorStatus": "Online",
+                "timeoutInSeconds": 10,
+                "toleratedNumberOfFailures": 3,
+                "protocol": "HTTPS"
+              },
+              "profileStatus": "Enabled",
+              "trafficRoutingMethod": "Performance"
+            },
+            "tags": {}
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Profiles_ListBySubscription",
+  "title": "ListBySubscription"
 }

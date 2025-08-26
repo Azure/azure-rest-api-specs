@@ -1,18 +1,12 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "azuresdkfornetautoresttrafficmanager1421",
-    "profileName": "azsmnet6386",
-    "endpointType": "ExternalEndpoints",
-    "endpointName": "azsmnet7187",
     "api-version": "2022-04-01",
+    "endpointName": "azsmnet7187",
+    "endpointType": "ExternalEndpoints",
     "parameters": {
       "name": "azsmnet7187",
       "type": "Microsoft.network/TrafficManagerProfiles/ExternalEndpoints",
       "properties": {
-        "target": "foobar.contoso.com",
-        "endpointStatus": "Enabled",
-        "endpointLocation": "North Europe",
         "customHeaders": [
           {
             "name": "header-1",
@@ -22,23 +16,23 @@
             "name": "header-2",
             "value": "value-2"
           }
-        ]
+        ],
+        "endpointLocation": "North Europe",
+        "endpointStatus": "Enabled",
+        "target": "foobar.contoso.com"
       }
-    }
+    },
+    "profileName": "azsmnet6386",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager1421",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386/externalEndpoints/azsmnet7187",
         "name": "azsmnet7187",
         "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386/externalEndpoints/azsmnet7187",
         "properties": {
-          "endpointStatus": "Enabled",
-          "endpointMonitorStatus": "CheckingEndpoint",
-          "target": "foobar.contoso.com",
-          "weight": 1,
-          "priority": 1,
-          "endpointLocation": "North Europe",
           "customHeaders": [
             {
               "name": "header-1",
@@ -48,22 +42,22 @@
               "name": "header-2",
               "value": "value-2"
             }
-          ]
+          ],
+          "endpointLocation": "North Europe",
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "endpointStatus": "Enabled",
+          "priority": 1,
+          "target": "foobar.contoso.com",
+          "weight": 1
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386/externalEndpoints/azsmnet7187",
         "name": "azsmnet7187",
         "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1421/providers/Microsoft.Network/trafficManagerProfiles/azsmnet6386/externalEndpoints/azsmnet7187",
         "properties": {
-          "endpointStatus": "Enabled",
-          "endpointMonitorStatus": "CheckingEndpoint",
-          "target": "foobar.contoso.com",
-          "weight": 1,
-          "priority": 1,
-          "endpointLocation": "North Europe",
           "customHeaders": [
             {
               "name": "header-1",
@@ -73,9 +67,17 @@
               "name": "header-2",
               "value": "value-2"
             }
-          ]
+          ],
+          "endpointLocation": "North Europe",
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "endpointStatus": "Enabled",
+          "priority": 1,
+          "target": "foobar.contoso.com",
+          "weight": 1
         }
       }
     }
-  }
+  },
+  "operationId": "Endpoints_CreateOrUpdate",
+  "title": "Endpoint-PUT-External-WithCustomHeaders"
 }
