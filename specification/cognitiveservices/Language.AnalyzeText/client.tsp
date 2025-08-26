@@ -705,3 +705,9 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextSubmitJob, "analyzeTextJob", "python");
 @@clientName(analyzeTextCancelJob, "cancelJob", "python");
 @@clientName(analyzeTextJobStatus, "getJobStatus", "python");
+
+@@clientName(AnalyzeTextJobState,
+  "AnalyzeTextOperationState",
+  "python"
+);
+@@clientName(AnalyzeTextJobState.tasks, "Actions", "python");
