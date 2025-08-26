@@ -46,13 +46,13 @@ union EvaluatorConfigType {
   string,
 
   @doc("Prompt-based configuration")
-  prompt: "Prompt",
+  prompt: "prompt",
 
   @doc("Prompty-based configuration")
-  prompty: "Prompty",
+  prompty: "prompty",
 
   @doc("Code-based configuration")
-  code: "Code",
+  code: "code",
 }
 
 // TODO: What are the allowed values here
