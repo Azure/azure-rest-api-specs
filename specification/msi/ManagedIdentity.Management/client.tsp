@@ -8,5 +8,4 @@ using Microsoft.ManagedIdentity;
   "javascript, java"
 );
 
-
 @@flattenProperty(Identity.properties, "java");
