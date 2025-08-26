@@ -2141,6 +2141,13 @@ paths:
           required: true
           schema:
             type: string
+        - name: include_obfuscation
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: true
+          explode: false
         - name: include[]
           in: query
           required: false
@@ -12566,6 +12573,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -12582,6 +12590,8 @@ components:
         delta:
           type: string
           description: The partial code snippet being streamed by the code interpreter.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a partial code snippet is streamed by the code interpreter.
@@ -13026,6 +13036,7 @@ components:
         - item_id
         - output_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13042,6 +13053,8 @@ components:
         delta:
           type: string
           description: The function-call arguments delta that is added.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial function-call arguments delta.
@@ -13239,6 +13252,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13254,6 +13268,8 @@ components:
           description: The unique identifier of the MCP tool call item being processed.
         delta:
           description: The partial update to the arguments for the MCP tool call.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the arguments of an MCP tool call.
@@ -13451,6 +13467,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13470,6 +13487,8 @@ components:
           description: The index of the reasoning content part within the output item.
         delta:
           description: The partial update to the reasoning content.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning content.
@@ -13512,6 +13531,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13531,6 +13551,8 @@ components:
           description: The index of the summary part within the output item.
         delta:
           description: The partial update to the reasoning summary content.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning summary content.
@@ -13637,6 +13659,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13657,6 +13680,8 @@ components:
         delta:
           type: string
           description: The text delta that was added to the summary.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a delta is added to a reasoning summary text.
@@ -13699,6 +13724,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13719,6 +13745,8 @@ components:
         delta:
           type: string
           description: The refusal text that is added.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial refusal text.
@@ -13882,6 +13910,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13902,6 +13931,8 @@ components:
         delta:
           type: string
           description: The text delta that was added.
+        obfuscation:
+          type: boolean
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is an additional text delta.

@@ -2983,6 +2983,16 @@
             }
           },
           {
+            "name": "include_obfuscation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "explode": false
+          },
+          {
             "name": "include[]",
             "in": "query",
             "required": false,
@@ -15736,7 +15746,8 @@
           "type",
           "output_index",
           "item_id",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -15758,6 +15769,9 @@
           "delta": {
             "type": "string",
             "description": "The partial code snippet being streamed by the code interpreter."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
@@ -16384,7 +16398,8 @@
           "type",
           "item_id",
           "output_index",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -16406,6 +16421,9 @@
           "delta": {
             "type": "string",
             "description": "The function-call arguments delta that is added."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
@@ -16695,7 +16713,8 @@
           "type",
           "output_index",
           "item_id",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -16716,6 +16735,9 @@
           },
           "delta": {
             "description": "The partial update to the arguments for the MCP tool call."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
@@ -17016,7 +17038,8 @@
           "item_id",
           "output_index",
           "content_index",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -17042,6 +17065,9 @@
           },
           "delta": {
             "description": "The partial update to the reasoning content."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
@@ -17101,7 +17127,8 @@
           "item_id",
           "output_index",
           "summary_index",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -17127,6 +17154,9 @@
           },
           "delta": {
             "description": "The partial update to the reasoning summary content."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
@@ -17280,7 +17310,8 @@
           "item_id",
           "output_index",
           "summary_index",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -17307,6 +17338,9 @@
           "delta": {
             "type": "string",
             "description": "The text delta that was added to the summary."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
@@ -17366,7 +17400,8 @@
           "item_id",
           "output_index",
           "content_index",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -17393,6 +17428,9 @@
           "delta": {
             "type": "string",
             "description": "The refusal text that is added."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
@@ -17587,7 +17625,8 @@
           "item_id",
           "output_index",
           "content_index",
-          "delta"
+          "delta",
+          "obfuscation"
         ],
         "properties": {
           "type": {
@@ -17614,6 +17653,9 @@
           "delta": {
             "type": "string",
             "description": "The text delta that was added."
+          },
+          "obfuscation": {
+            "type": "boolean"
           }
         },
         "allOf": [
