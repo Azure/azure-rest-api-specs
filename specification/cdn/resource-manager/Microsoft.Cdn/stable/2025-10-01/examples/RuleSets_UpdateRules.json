@@ -4,7 +4,45 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "RG",
     "profileName": "profile1",
-    "ruleSetName": "ruleSet1"
+    "ruleSetName": "ruleSet1",
+    "rules": {
+      "toDelete": [
+        {
+          "name": "ruleToBeDeleted"
+        }
+      ],
+      "toUpsert": [
+        {
+          "properties": {
+            "order": 1,
+            "conditions": [
+              {
+                "name": "RequestMethod",
+                "parameters": {
+                  "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                  "operator": "Equal",
+                  "matchValues": [
+                    "GET"
+                  ],
+                  "negateCondition": false
+                }
+              }
+            ],
+            "actions": [
+              {
+                "name": "ModifyResponseHeader",
+                "parameters": {
+                  "typeName": "DeliveryRuleHeaderActionParameters",
+                  "headerAction": "Overwrite",
+                  "headerName": "X-CDN",
+                  "value": "MSFT"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
   },
   "responses": {
     "200": {
