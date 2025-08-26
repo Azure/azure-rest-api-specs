@@ -99,9 +99,7 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Public Cloud Connector")
 model PublicCloudConnectorUpdate extends TrackedResourceUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PublicCloudConnectorPropertiesUpdate;
 }
 
@@ -208,9 +206,7 @@ model SolutionConfigurationProperties {
 @doc("Solution Configuration")
 model SolutionConfigurationUpdate
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SolutionConfigurationPropertiesUpdate;
 }
 
