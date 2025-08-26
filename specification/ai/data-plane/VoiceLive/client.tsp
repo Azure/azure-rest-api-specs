@@ -77,10 +77,18 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(VoiceLive.Modality, "InputModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
-@@clientName(VoiceLive.Tool, "ToolCall", "csharp");
+@@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "csharp");
 @@clientName(VoiceLive.AzureCustomVoice.custom_lexicon_url, "CustomLexiconUri", "csharp");
 @@clientName(VoiceLive.IceServer.urls, "Uris", "csharp");
 @@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "csharp");
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "csharp");
 @@clientName(VoiceLive.Response, "VoiceLiveResponse", "csharp");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentConfig", "csharp");
+@@clientName(VoiceLive.FunctionTool, "VoiceLiveFunctionDefinition", "csharp");
+@@clientName(VoiceLive.ToolCall, "VoiceLiveToolDefinition", "csharp");
+
+@@clientName(VoiceLive.ContentPart, "VoiceLiveContentPart", "csharp");
+@@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "csharp");
+@@clientName(VoiceLive.ResponseStatus, "VoiceLiveResponseStatus", "csharp");
+@@clientName(VoiceLive.ServerEvent, "ServerEventBase", "csharp");
+
