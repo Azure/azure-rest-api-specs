@@ -203,6 +203,8 @@ interface SchemaRegistries {
 interface Schemas {
   get is ArmResourceRead<Schema>;
   createOrReplace is ArmResourceCreateOrReplaceSync<Schema>;
+  @added(Versions.v2024_09_01_preview)
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2025_07_01_preview)
   @removed(Versions.v2025_10_01)
   @sharedRoute
@@ -222,6 +224,8 @@ interface Schemas {
 interface SchemaVersions {
   get is ArmResourceRead<SchemaVersion>;
   createOrReplace is ArmResourceCreateOrReplaceSync<SchemaVersion>;
+  @added(Versions.v2024_09_01_preview)
+  @removed(Versions.v2024_11_01)
   @added(Versions.v2025_07_01_preview)
   @removed(Versions.v2025_10_01)
   @sharedRoute
