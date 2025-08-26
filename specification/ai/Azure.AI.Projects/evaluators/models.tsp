@@ -94,6 +94,12 @@ model ContainerEvaluatorConfig extends EvaluatorConfig {
 
   @doc("Environment variables to pass to the container")
   env_variables: Record<string>;
+
+  @doc("The evaluator's input parameters")
+  input_params: InputParameters;
+
+  @doc("The evaluator's output parameters")
+  output_params: OutputParameters;
 }
 
 @doc("Prompt-based evaluator")
