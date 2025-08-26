@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "endpointName": "My%20external%20endpoint",
+    "endpointType": "ExternalEndpoints",
+    "profileName": "azuresdkfornetautoresttrafficmanager8224",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager2191",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "My external endpoint",
+        "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager2191/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager8224/externalEndpoints/My external endpoint",
+        "properties": {
+          "endpointMonitorStatus": "CheckingEndpoint",
+          "endpointStatus": "Enabled",
+          "priority": 1,
+          "subnets": [
+            {
+              "first": "1.2.3.0",
+              "scope": 24
+            },
+            {
+              "first": "25.26.27.28",
+              "last": "29.30.31.32"
+            }
+          ],
+          "target": "foobar.contoso.com",
+          "weight": 1
+        }
+      }
+    }
+  },
+  "operationId": "Endpoints_Get",
+  "title": "Endpoint-GET-External-WithSubnetMapping"
+}
