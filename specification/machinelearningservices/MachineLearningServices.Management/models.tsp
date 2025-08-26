@@ -4430,24 +4430,28 @@ model AmlComputeNodeInformation {
    * ID of the compute node.
    */
   @visibility(Lifecycle.Read)
+  @summary("Node ID.")
   nodeId?: string;
 
   /**
    * Private IP address of the compute node.
    */
   @visibility(Lifecycle.Read)
-  privateIpAddress?: string;
+  @summary("Private IP address.")
+  privateIpAddress?: string | null;
 
   /**
    * Public IP address of the compute node.
    */
   @visibility(Lifecycle.Read)
-  publicIpAddress?: string;
+  @summary("Public IP address.")
+  publicIpAddress?: string | null;
 
   /**
    * SSH port number of the node.
    */
   @visibility(Lifecycle.Read)
+  @summary("Port.")
   port?: int32;
 
   /**
@@ -4460,7 +4464,8 @@ model AmlComputeNodeInformation {
    * ID of the Experiment running on the node, if any else null.
    */
   @visibility(Lifecycle.Read)
-  runId?: string;
+  @summary("Run ID.")
+  runId?: string | null;
 }
 
 /**
@@ -4560,7 +4565,7 @@ model AvailableQuota {
   /**
    * Available quota properties
    */
-  properties?: AvailableQuotaProperties;
+  properties?: AvailableQuotaProperties | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4647,19 +4652,19 @@ model AssetContainer extends ResourceBase {
    * Is the asset archived?
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  isArchived?: boolean;
+  isArchived?: boolean = false;
 
   /**
    * The latest version inside this container.
    */
   @visibility(Lifecycle.Read)
-  latestVersion?: string;
+  latestVersion?: string | null;
 
   /**
    * The next auto incremental version
    */
   @visibility(Lifecycle.Read)
-  nextVersion?: string;
+  nextVersion?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4711,13 +4716,13 @@ model AssetBase extends ResourceBase {
    * If the name version are system generated (anonymous registration).
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isAnonymous?: boolean;
+  isAnonymous?: boolean = false;
 
   /**
    * Is the asset archived?
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  isArchived?: boolean;
+  isArchived?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6631,27 +6636,27 @@ model ActualCapacityInfo {
   /**
    * Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.
    */
-  total?: int32;
+  total?: int32 = 0;
 
   /**
    * Gets or sets the number of instances (scale units) which have Succeeded provisioning state and target group payload.
    */
-  succeeded?: int32;
+  succeeded?: int32 = 0;
 
   /**
    * Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.
    */
-  failed?: int32;
+  failed?: int32 = 0;
 
   /**
    * Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.
    */
-  outdatedSucceeded?: int32;
+  outdatedSucceeded?: int32 = 0;
 
   /**
    * Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.
    */
-  outdatedFailed?: int32;
+  outdatedFailed?: int32 = 0;
 }
 
 /**
@@ -7394,7 +7399,7 @@ model ArmResourceId {
    * Arm ResourceId is in the format "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}"
    * or "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}"
    */
-  resourceId?: string;
+  resourceId?: string | null;
 }
 
 /**
@@ -7531,7 +7536,7 @@ model AcrDetails {
   /**
    * Details of system created ACR account to be used for the Registry
    */
-  systemCreatedAcrAccount?: SystemCreatedAcrAccount;
+  systemCreatedAcrAccount?: SystemCreatedAcrAccount | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -8683,6 +8688,17 @@ model RaiBlocklistProperties {
 }
 
 /**
+ * The list of Cognitive Services RaiBlocklist Items for batch add.
+ */
+model RaiBlocklistItemsBulkAddRequest {
+  /**
+   * List of RAI Blocklist Items to add.
+   */
+@OpenAPI.extension("x-ms-identifiers", #["name"])
+  items?: RaiBlocklistItemBulkRequest[];
+}
+
+/**
  * The Cognitive Services RaiBlocklist Item request body.
  */
 model RaiBlocklistItemBulkRequest {
@@ -9002,8 +9018,11 @@ model EndpointKeys {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AccountApiKeys {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   key1?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   key2?: string;
 }
 
@@ -10704,12 +10723,13 @@ model AksComputeSecretsProperties {
   /**
    * Image registry pull secret.
    */
-  imagePullSecretName?: string;
+  imagePullSecretName?: string | null;
 }
 
 /**
  * Secrets related to a Machine Learning compute based on AKS.
  */
+@discriminator("AKS")
 model AksComputeSecrets extends ComputeSecrets {
   ...AksComputeSecretsProperties;
 
@@ -10784,7 +10804,7 @@ model AccountKeyDatastoreSecrets extends DatastoreSecrets {
   /**
    * Storage account key.
    */
-  key?: string;
+  key?: string | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -10934,33 +10954,33 @@ model AutoMLJob extends JobBaseProperties {
    * This is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  environmentId?: string;
+  environmentId?: string | null;
 
   /**
    * Environment variables included in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  environmentVariables?: Record<string>;
+  environmentVariables?: Record<string | null> | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  outputs?: Record<JobOutput>;
+  outputs?: Record<JobOutput | null> | null;
 
   /**
    * Queue settings for the job
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  queueSettings?: QueueSettings;
+  queueSettings?: QueueSettings | null;
 
   /**
    * Compute Resource configuration for the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  resources?: JobResourceConfiguration;
+  resources?: JobResourceConfiguration = #{};
 
   /**
    * [Required] This represents scenario which can be one of Tables/NLP/Image
@@ -11032,13 +11052,13 @@ model AutoMLVertical {
   /**
    * Log verbosity for the job.
    */
-  logVerbosity?: LogVerbosity;
+  logVerbosity?: LogVerbosity = LogVerbosity.Info;
 
   /**
    * Target column name: This is prediction values column.
    * Also known as label column name in context of classification tasks.
    */
-  targetColumnName?: string;
+  targetColumnName?: string | null;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -11174,31 +11194,31 @@ model AzureBlobDatastore extends DatastoreProperties {
    * Storage account name.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  accountName?: string;
+  accountName?: string | null;
 
   /**
    * Storage account container name.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  containerName?: string;
+  containerName?: string | null;
 
   /**
    * Azure cloud endpoint for the storage account.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  endpoint?: string;
+  endpoint?: string | null;
 
   /**
    * Protocol used to communicate with the storage account.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  protocol?: string;
+  protocol?: string | null;
 
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
+  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity = ServiceDataAccessAuthIdentity.None;
 
   /**
    * [Required] Storage type backing the datastore.
@@ -11213,12 +11233,12 @@ model AzureDatastore {
   /**
    * Azure Resource Group name
    */
-  resourceGroup?: string;
+  resourceGroup?: string | null;
 
   /**
    * Azure Subscription Id
    */
-  subscriptionId?: string;
+  subscriptionId?: string | null;
 }
 
 /**
@@ -11231,7 +11251,7 @@ model AzureDataLakeGen1Datastore extends DatastoreProperties {
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
+  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity = ServiceDataAccessAuthIdentity.None;
 
   /**
    * [Required] Azure Data Lake store name.
@@ -11285,7 +11305,7 @@ model AzureDataLakeGen2Datastore extends DatastoreProperties {
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
+  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity = ServiceDataAccessAuthIdentity.None;
 
   /**
    * [Required] Storage type backing the datastore.
@@ -11321,7 +11341,7 @@ model AzureFileDatastore extends DatastoreProperties {
    * Azure cloud endpoint for the storage account.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  endpoint?: string;
+  endpoint?: string | null;
 
   /**
    * [Required] The name of the Azure file share that the datastore points to.
@@ -11335,13 +11355,13 @@ model AzureFileDatastore extends DatastoreProperties {
    * Protocol used to communicate with the storage account.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  protocol?: string;
+  protocol?: string | null;
 
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity;
+  serviceDataAccessAuthIdentity?: ServiceDataAccessAuthIdentity = ServiceDataAccessAuthIdentity.None;
 
   /**
    * [Required] Storage type backing the datastore.
@@ -11354,7 +11374,7 @@ model AzureOpenAiFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning Azure Open AI model.
    */
-  hyperParameters?: AzureOpenAiHyperParameters;
+  hyperParameters?: AzureOpenAiHyperParameters | null;
 
   /**
    * [Required] Enum to determine the type of fine tuning.

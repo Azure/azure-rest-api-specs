@@ -112,7 +112,7 @@ interface BatchEndpoints {
   listKeys is ArmResourceActionSync<
     BatchEndpoint,
     void,
-    ArmResponse<EndpointAuthKeys>
+    EndpointAuthKeys
   >;
 }
 

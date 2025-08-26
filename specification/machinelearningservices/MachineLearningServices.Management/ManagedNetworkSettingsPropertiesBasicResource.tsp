@@ -78,7 +78,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   post is ArmResourceActionAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     ManagedNetworkSettingsBasicResource,
-    ArmResponse<OutboundRuleListResult>
+    OutboundRuleListResult
   >;
 }
 

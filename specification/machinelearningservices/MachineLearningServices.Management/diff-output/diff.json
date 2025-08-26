@@ -3172,36 +3172,6 @@
         "x-ms-long-running-operation__deleted": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems": {
-      "post": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "x-ms-identifiers__added": [
-                "name"
-              ],
-              "schema": {
-                "$ref__deleted": "#/definitions/RaiBlocklistItemsBulkAddRequest",
-                "type__added": "array",
-                "items__added": {
-                  "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-                }
-              }
-            }
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems": {
       "post": {
         "parameters": [
@@ -7432,18 +7402,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints": {
@@ -7558,13 +7517,6 @@
             }
           },
           "201": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/ServerlessEndpointTrackedResource",
@@ -7574,11 +7526,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/ServerlessEndpoint",
-          "final-state-via": {
-            "__old": "original-uri",
-            "__new": "azure-async-operation"
-          }
+          "final-state-schema__added": "#/definitions/ServerlessEndpoint"
         }
       },
       "patch": {
@@ -7623,15 +7571,6 @@
                 "__new": "#/definitions/ServerlessEndpoint"
               }
             }
-          },
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
           }
         }
       },
@@ -7665,18 +7604,7 @@
               "type": "string"
             }
           ]
-        ],
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-async-operation-timeout": {
-                "type": "string",
-                "format": "duration",
-                "description": "Timeout for the client to use when polling the asynchronous operation."
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys": {
@@ -9863,15 +9791,6 @@
         }
       }
     },
-    "RaiBlocklistItemsBulkAddRequest__deleted": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-      },
-      "x-ms-identifiers": [
-        "name"
-      ]
-    },
     "RaiBlocklistItemsBulkDeleteRequest__deleted": {
       "type": "object",
       "items": {
@@ -10308,72 +10227,6 @@
           "$ref": "#/definitions/VirtualMachineSshCredentials"
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DiagnoseResponseResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<EndpointAuthKeys>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/EndpointAuthKeys"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<FeaturesetVersionBackfillResponse>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/FeaturesetVersionBackfillResponse"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ManagedNetworkProvisionStatus>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NotebookResourceInfo>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NotebookResourceInfo"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<OutboundRuleListResult>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/OutboundRuleListResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>__added": {
       "type": "object",
@@ -11899,10 +11752,10 @@
     "AccountApiKeys": {
       "properties": {
         "key1": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "key2": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -11913,42 +11766,12 @@
         }
       }
     },
-    "AccountKeyDatastoreSecrets": {
-      "properties": {
-        "key": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "AcrDetails": {
-      "properties": {
-        "systemCreatedAcrAccount": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "ActualCapacityInfo": {
-      "properties": {
-        "total": {
-          "default__deleted": 0
-        },
-        "succeeded": {
-          "default__deleted": 0
-        },
-        "failed": {
-          "default__deleted": 0
-        },
-        "outdatedSucceeded": {
-          "default__deleted": 0
-        },
-        "outdatedFailed": {
-          "default__deleted": 0
-        }
-      }
-    },
     "AksComputeSecrets": {
       "type__added": "object",
       "properties__added": {
+        "AKS": {
+          "type": "string"
+        },
         "userKubeConfig": {
           "type": "string"
         },
@@ -11956,9 +11779,14 @@
           "type": "string"
         },
         "imagePullSecretName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
+      "discriminator__added": "AKS",
+      "required__added": [
+        "AKS"
+      ],
       "allOf": [
         [
           " "
@@ -11978,60 +11806,22 @@
     },
     "AmlComputeNodeInformation": {
       "properties": {
-        "nodeId": {
-          "title__deleted": "Node ID."
-        },
-        "privateIpAddress": {
-          "title__deleted": "Private IP address.",
-          "x-nullable__deleted": true
-        },
-        "publicIpAddress": {
-          "title__deleted": "Public IP address.",
-          "x-nullable__deleted": true
-        },
         "port": {
-          "title__deleted": "Port.",
           "type": {
             "__old": "number",
             "__new": "integer"
           }
-        },
-        "runId": {
-          "title__deleted": "Run ID.",
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "ArmResourceId": {
-      "properties": {
-        "resourceId": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "AssetBase": {
-      "properties": {
-        "isAnonymous": {
-          "default__deleted": false
-        },
-        "isArchived": {
-          "default__deleted": false
         }
       }
     },
     "AssetContainer": {
       "properties": {
-        "isArchived": {
-          "default__deleted": false
-        },
         "latestVersion": {
-          "x-nullable__deleted": true,
           "x-ms-mutability__deleted": [
             "read"
           ]
         },
         "nextVersion": {
-          "x-nullable__deleted": true,
           "x-ms-mutability__deleted": [
             "read"
           ]
@@ -12040,24 +11830,10 @@
     },
     "AutoMLJob": {
       "properties": {
-        "environmentId": {
-          "x-nullable__deleted": true
-        },
-        "environmentVariables": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
         "outputs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "description__deleted": "Job output definition container information on where to find job output/logs.",
-            "x-nullable__deleted": true
+            "description__deleted": "Job output definition container information on where to find job output/logs."
           }
-        },
-        "queueSettings": {
-          "x-nullable__deleted": true
         },
         "resources": {
           "default__deleted": "{}"
@@ -12075,23 +11851,6 @@
         ]
       ]
     },
-    "AutoMLVertical": {
-      "properties": {
-        "logVerbosity": {
-          "default__deleted": "Info"
-        },
-        "targetColumnName": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "AvailableQuota": {
-      "properties": {
-        "properties": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "AvailableQuotaArmPaginatedResult": {
       "required__added": [
         "value"
@@ -12100,27 +11859,18 @@
     "AzureBlobDatastore": {
       "properties": {
         "resourceGroup__added": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId__added": {
-          "type": "string"
-        },
-        "accountName": {
-          "x-nullable__deleted": true
-        },
-        "containerName": {
-          "x-nullable__deleted": true
+          "type": "string",
+          "x-nullable": true
         },
         "endpoint": {
-          "x-nullable__deleted": true,
           "example__deleted": "core.windows.net"
         },
         "protocol": {
-          "x-nullable__deleted": true,
           "example__deleted": "https"
-        },
-        "serviceDataAccessAuthIdentity": {
-          "default__deleted": "None"
         }
       },
       "allOf": [
@@ -12144,13 +11894,12 @@
     "AzureDataLakeGen1Datastore": {
       "properties": {
         "resourceGroup__added": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId__added": {
-          "type": "string"
-        },
-        "serviceDataAccessAuthIdentity": {
-          "default__deleted": "None"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -12174,10 +11923,12 @@
     "AzureDataLakeGen2Datastore": {
       "properties": {
         "resourceGroup__added": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId__added": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "endpoint": {
           "x-nullable__deleted": true,
@@ -12186,9 +11937,6 @@
         "protocol": {
           "x-nullable__deleted": true,
           "example__deleted": "https"
-        },
-        "serviceDataAccessAuthIdentity": {
-          "default__deleted": "None"
         }
       },
       "allOf": [
@@ -12212,21 +11960,18 @@
     "AzureFileDatastore": {
       "properties": {
         "resourceGroup__added": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId__added": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "endpoint": {
-          "x-nullable__deleted": true,
           "example__deleted": "core.windows.net"
         },
         "protocol": {
-          "x-nullable__deleted": true,
           "example__deleted": "https"
-        },
-        "serviceDataAccessAuthIdentity": {
-          "default__deleted": "None"
         }
       },
       "allOf": [
@@ -17516,6 +17261,29 @@
       "required__added": [
         "value"
       ]
+    },
+    "RaiBlocklistItemsBulkAddRequest": {
+      "items__deleted": {
+        "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+      },
+      "x-ms-identifiers__deleted": [
+        "name"
+      ],
+      "properties__added": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "type": {
+        "__old": "array",
+        "__new": "object"
+      }
     },
     "RaiBlocklistPropertiesBasicResource": {
       "properties": {

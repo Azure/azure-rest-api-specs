@@ -20,7 +20,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.parameters[0].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/WorkspaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.parameters[1].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/PaginationParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components'].get.parameters[0].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/WorkspaceNameParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3].schema.$ref__deleted` | deleted | `#/definitions/RaiBlocklistItemsBulkAddRequest` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.parameters[3].schema.$ref__deleted` | deleted | `#/definitions/RaiBlocklistItemsBulkDeleteRequest` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.parameters[0].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/WorkspaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.parameters[0].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/WorkspaceNameParameter` |
@@ -109,7 +108,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.parameters[1].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components'].get.parameters[0].type__added` | added | `string` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3].schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.parameters[3].schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.parameters[0].type__added` | added | `string` |
@@ -157,6 +155,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.AksComputeSecrets.required__added` | added | `["AKS"]` |
 | `definitions.AllFeatures.required__deleted` | deleted | `["filterType"]` |
 | `definitions.AvailableQuotaArmPaginatedResult.required__added` | added | `["value"]` |
 | `definitions.AzureOpenAiFineTuning.required__deleted` | deleted | `["modelProvider"]` |
@@ -296,18 +295,11 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}'].patch['x-ms-long-running-operation__deleted']` | deleted | `true` |
 
-### Changes for `x-ms-identifiers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TableVerticalFeaturizationSettings.properties.transformerParams.additionalProperties['x-ms-identifiers__deleted']` | deleted | `[]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3]['x-ms-identifiers__added']` | added | `["name"]` |
-
 ### Changes for `items`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.parameters[3].schema.items__added` | added | `{"$ref":"#/definitions/RaiBlocklistItemBulkRequest"}` |
+| `definitions.RaiBlocklistItemsBulkAddRequest.items__deleted` | deleted | `{"$ref":"#/definitions/RaiBlocklistItemBulkRequest"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.parameters[3].schema.items__added` | added | `{"type":"string"}` |
 
 ### Changes for `collectionFormat`
@@ -344,15 +336,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-
-### Changes for `headers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].patch.responses.202.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.201.headers__deleted` | deleted | `{"x-ms-async-operation-timeout":{"type":"string","format":"duration","description":"Timeout for the ...` |
 
 ### Changes for `AKS`
 
@@ -888,12 +871,6 @@
 |------|------------|-------|
 | `definitions.PersonalComputeInstanceSettings__deleted` | deleted | `{"type":"object","properties":{"assignedUser":{"$ref":"#/definitions/AssignedUser","title":"Assigned...` |
 
-### Changes for `RaiBlocklistItemsBulkAddRequest`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RaiBlocklistItemsBulkAddRequest__deleted` | deleted | `{"type":"array","items":{"$ref":"#/definitions/RaiBlocklistItemBulkRequest"},"x-ms-identifiers":["na...` |
-
 ### Changes for `RaiBlocklistItemsBulkDeleteRequest`
 
 | Path | Change Type | Value |
@@ -1007,42 +984,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VirtualMachineSecretsSchema__deleted` | deleted | `{"type":"object","properties":{"administratorAccount":{"$ref":"#/definitions/VirtualMachineSshCreden...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/DiagnoseResponseResult"}},"required":["...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<EndpointAuthKeys>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<EndpointAuthKeys>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/EndpointAuthKeys"}},"required":["body"]...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<FeaturesetVersionBackfillResponse>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<FeaturesetVersionBackfillResponse>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/FeaturesetVersionBackfillResponse"}},"r...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ManagedNetworkProvisionStatus>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ManagedNetworkProvisionStatus>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/ManagedNetworkProvisionStatus"}},"requi...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<NotebookResourceInfo>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<NotebookResourceInfo>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/NotebookResourceInfo"}},"required":["bo...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<OutboundRuleListResult>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<OutboundRuleListResult>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/OutboundRuleListResult"}},"required":["...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>`
 
@@ -1272,12 +1213,17 @@
 |------|------------|-------|
 | `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object"}` |
 
+### Changes for `format`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AccountApiKeys.properties.key1.format__added` | added | `password` |
+| `definitions.AccountApiKeys.properties.key2.format__added` | added | `password` |
+
 ### Changes for `x-ms-secret`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AccountApiKeys.properties.key1['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.AccountApiKeys.properties.key2['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.AccountKeyDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.CertificateDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.EndpointKeys.properties.keys['x-ms-secret__deleted']` | deleted | `true` |
@@ -1303,34 +1249,304 @@
 | `definitions.WorkspaceConnectionServicePrincipal.properties.clientSecret['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.WorkspaceConnectionUsernamePassword.properties.securityToken['x-ms-secret__deleted']` | deleted | `true` |
 
+### Changes for `properties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AksComputeSecrets.properties__added` | added | `{"AKS":{"type":"string"},"userKubeConfig":{"type":"string"},"adminKubeConfig":{"type":"string"},"ima...` |
+| `definitions.BatchDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/BatchDeploymentProperties","x-ms-client-flatten":true}` |
+| `definitions.BatchEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/BatchEndpointProperties","x-ms-client-flatten":true}` |
+| `definitions.CapabilityHost.properties.properties__added` | added | `{"$ref":"#/definitions/CapabilityHostProperties","x-ms-client-flatten":true}` |
+| `definitions.CodeContainer.properties.properties__added` | added | `{"$ref":"#/definitions/CodeContainerProperties","x-ms-client-flatten":true}` |
+| `definitions.CodeVersion.properties.properties__added` | added | `{"$ref":"#/definitions/CodeVersionProperties","x-ms-client-flatten":true}` |
+| `definitions.ComponentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentContainerProperties","x-ms-client-flatten":true}` |
+| `definitions.ComponentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentVersionProperties","x-ms-client-flatten":true}` |
+| `definitions.ComputeResource.properties.properties__added` | added | `{"type":"object","x-ms-client-flatten":true}` |
+| `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
+| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
+| `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.DatabricksComputeSecrets.properties__added` | added | `{"databricksAccessToken":{"type":"string"}}` |
+| `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties","x-ms-client-flatten":true}` |
+| `definitions.Datastore.properties.properties__added` | added | `{"$ref":"#/definitions/DatastoreProperties","x-ms-client-flatten":true}` |
+| `definitions.DataVersionBase.properties.properties__added` | added | `{"$ref":"#/definitions/DataVersionBaseProperties","x-ms-client-flatten":true}` |
+| `definitions.DiagnoseResponseResult.properties.value.properties__deleted` | deleted | `{"userDefinedRouteResults":{"type":"array","items":{"$ref":"#/definitions/DiagnoseResult"},"x-ms-ide...` |
+| `definitions.EnvironmentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentContainerProperties","x-ms-client-flatten":true}` |
+| `definitions.EnvironmentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentVersionProperties","x-ms-client-flatten":true}` |
+| `definitions.Feature.properties.properties__added` | added | `{"$ref":"#/definitions/FeatureProperties","x-ms-client-flatten":true}` |
+| `definitions.FeaturesetContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetContainerProperties","x-ms-client-flatten":true}` |
+| `definitions.FeaturesetVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetVersionProperties","x-ms-client-flatten":true}` |
+| `definitions.FeaturestoreEntityContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityContainerProperties","x-ms-client-flatten":true}` |
+| `definitions.FeaturestoreEntityVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityVersionProperties","x-ms-client-flatten":true}` |
+| `definitions.InferenceEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceEndpointProperties","x-ms-client-flatten":true}` |
+| `definitions.InferenceGroup.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceGroupProperties","x-ms-client-flatten":true}` |
+| `definitions.InferencePool.properties.properties__added` | added | `{"$ref":"#/definitions/InferencePoolProperties","x-ms-client-flatten":true}` |
+| `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties","x-ms-client-flatten":true}` |
+| `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties","x-ms-client-flatten":true}` |
+| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
+| `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
+| `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties","x-ms-client-flatten":true}` |
+| `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties","x-ms-client-flatten":true}` |
+| `definitions.OnlineDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineDeploymentProperties","x-ms-client-flatten":true}` |
+| `definitions.OnlineEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineEndpointProperties","x-ms-client-flatten":true}` |
+| `definitions.OpenAIEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
+| `definitions.RaiBlocklistItemsBulkAddRequest.properties__added` | added | `{"items":{"type":"array","items":{"$ref":"#/definitions/RaiBlocklistItemBulkRequest"},"x-ms-identifi...` |
+| `definitions.Registry.properties.properties__added` | added | `{"$ref":"#/definitions/RegistryProperties","x-ms-client-flatten":true}` |
+| `definitions.Schedule.properties.properties__added` | added | `{"$ref":"#/definitions/ScheduleProperties","x-ms-client-flatten":true}` |
+| `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties","x-ms-client-flatten":true}` |
+| `definitions.SpeechEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
+| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
+| `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
+| `definitions.UriFileJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
+| `definitions.UriFolderJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.VirtualMachineSecrets.properties__added` | added | `{"administratorAccount":{"$ref":"#/definitions/VirtualMachineSshCredentials"}}` |
+
+### Changes for `discriminator`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AksComputeSecrets.discriminator__added` | added | `AKS` |
+| `definitions.Datastore.discriminator__deleted` | deleted | `datastoreType` |
+| `definitions.DataVersionBase.discriminator__deleted` | deleted | `dataType` |
+| `definitions.JobBase.discriminator__deleted` | deleted | `jobType` |
+| `definitions.OnlineDeployment.discriminator__deleted` | deleted | `endpointComputeType` |
+
+### Changes for `x-ms-mutability`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AssetContainer.properties.latestVersion['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.AssetContainer.properties.nextVersion['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.CommandJob.properties.parameters['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.DiagnoseResult.properties.code['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.DiagnoseResult.properties.level['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.DiagnoseResult.properties.message['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.EndpointDeploymentResourceProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.EndpointPropertiesBase.properties.scoringUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.EndpointPropertiesBase.properties.swaggerUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.EndpointResourceProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.JobService.properties.errorMessage['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.JobService.properties.status['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ListNotebookKeysResult.properties.primaryAccessKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ListNotebookKeysResult.properties.secondaryAccessKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ListStorageAccountKeysResult.properties.userStorageKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ListWorkspaceKeysResult.properties.appInsightsInstrumentationKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ListWorkspaceKeysResult.properties.userStorageArmId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ListWorkspaceKeysResult.properties.userStorageKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ManagedNetworkSettingsProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.MarketplacePlan.properties.offerId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.MarketplacePlan.properties.planId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.MarketplacePlan.properties.publisherId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.accessToken['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.expiresIn['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.hostName['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.notebookResourceId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.publicDns['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.refreshToken['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.scope['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.NotebookAccessTokenResult.properties.tokenType['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.OutboundRule.properties.errorInformation['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.OutboundRule.properties.parentRuleNames['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.Password.properties.name['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.Password.properties.value['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.RegistryListCredentialsResult.properties.location['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.RegistryListCredentialsResult.properties.username['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ServerlessEndpointInferenceEndpoint.properties.headers['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ServerlessEndpointInferenceEndpoint.properties.uri['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ServerlessInferenceEndpoint.properties.headers['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.ServerlessInferenceEndpoint.properties.uri['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.SkuResource.properties.resourceType['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspacePrivateEndpointResource.properties.id['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspacePrivateEndpointResource.properties.subnetArmId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.agentsEndpointUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.mlFlowTrackingUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.notebookInfo['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.privateEndpointConnections['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.privateLinkCount['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.serviceProvisionedResourceGroup['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.storageHnsEnabled['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.tenantId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+| `definitions.WorkspaceProperties.properties.workspaceId['x-ms-mutability__deleted']` | deleted | `["read"]` |
+
+### Changes for `default`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AutoMLJob.properties.resources.default__deleted` | deleted | `{}` |
+| `definitions.BanditPolicy.properties.slackAmount.default__deleted` | deleted | `0` |
+| `definitions.BanditPolicy.properties.slackFactor.default__deleted` | deleted | `0` |
+| `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
+| `definitions.Classification.properties.primaryMetric.default__deleted` | deleted | `AUCWeighted` |
+| `definitions.Collection.properties.dataCollectionMode.default__deleted` | deleted | `Disabled` |
+| `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
+| `definitions.ContentSafety.properties.contentSafetyLevel.default__deleted` | deleted | `Blocking` |
+| `definitions.DataCollector.properties.rollingRate.default__deleted` | deleted | `Hour` |
+| `definitions.DeltaModelCurrentState.properties.count.default__deleted` | deleted | `0` |
+| `definitions.DeltaModelStatusResponse.properties.actualInstanceCount.default__deleted` | deleted | `0` |
+| `definitions.DeltaModelStatusResponse.properties.expectedInstanceCount.default__deleted` | deleted | `0` |
+| `definitions.DeploymentLogsRequest.properties.containerType.default__deleted` | deleted | `InferenceServer` |
+| `definitions.DistillationJob.properties.resources.default__deleted` | deleted | `{}` |
+| `definitions.EarlyTerminationPolicy.properties.delayEvaluation.default__deleted` | deleted | `0` |
+| `definitions.EarlyTerminationPolicy.properties.evaluationInterval.default__deleted` | deleted | `0` |
+| `definitions.EndpointAuthToken.properties.expiryTimeUtc.default__deleted` | deleted | `0` |
+| `definitions.EndpointAuthToken.properties.refreshAfterTimeUtc.default__deleted` | deleted | `0` |
+| `definitions.FeatureImportanceSettings.properties.mode.default__deleted` | deleted | `Disabled` |
+| `definitions.FineTuningJob.properties.resources.default__deleted` | deleted | `{}` |
+| `definitions.Forecasting.properties.primaryMetric.default__deleted` | deleted | `NormalizedRootMeanSquaredError` |
+| `definitions.ForecastingSettings.properties.featureLags.default__deleted` | deleted | `None` |
+| `definitions.ForecastingSettings.properties.forecastHorizon.default__deleted` | deleted | `{"Mode": "Custom", "Value": 1}` |
+| `definitions.ForecastingSettings.properties.seasonality.default__deleted` | deleted | `{"Mode": "Auto"}` |
+| `definitions.ForecastingSettings.properties.shortSeriesHandlingConfig.default__deleted` | deleted | `Auto` |
+| `definitions.ForecastingSettings.properties.targetAggregateFunction.default__deleted` | deleted | `None` |
+| `definitions.ForecastingSettings.properties.useStl.default__deleted` | deleted | `None` |
+| `definitions.GroupStatus.properties.endpointCount.default__deleted` | deleted | `0` |
+| `definitions.GroupStatus.properties.requestedCapacity.default__deleted` | deleted | `0` |
+| `definitions.ImageClassification.properties.primaryMetric.default__deleted` | deleted | `Accuracy` |
+| `definitions.ImageClassificationMultilabel.properties.primaryMetric.default__deleted` | deleted | `IOU` |
+| `definitions.ImageInstanceSegmentation.properties.primaryMetric.default__deleted` | deleted | `MeanAveragePrecision` |
+| `definitions.ImageLimitSettings.properties.timeout.default__deleted` | deleted | `P7D` |
+| `definitions.ImageModelSettings.properties.learningRateScheduler.default__deleted` | deleted | `None` |
+| `definitions.ImageModelSettings.properties.optimizer.default__deleted` | deleted | `None` |
+| `definitions.ImageModelSettingsObjectDetection.properties.modelSize.default__deleted` | deleted | `None` |
+| `definitions.ImageModelSettingsObjectDetection.properties.validationMetricType.default__deleted` | deleted | `None` |
+| `definitions.ImageObjectDetection.properties.primaryMetric.default__deleted` | deleted | `MeanAveragePrecision` |
+| `definitions.IndexColumn.properties.dataType.default__deleted` | deleted | `String` |
+| `definitions.ManagedNetworkSettings.properties.enableNetworkMonitor.default__deleted` | deleted | `false` |
+| `definitions.MaterializationSettings.properties.storeType.default__deleted` | deleted | `None` |
+| `definitions.NlpVerticalLimitSettings.properties.timeout.default__deleted` | deleted | `P7D` |
+| `definitions.OneLakeDatastore.properties.serviceDataAccessAuthIdentity.default__deleted` | deleted | `None` |
+| `definitions.OnlineRequestSettings.properties.maxQueueWait.default__deleted` | deleted | `PT0.5S` |
+| `definitions.OnlineRequestSettings.properties.requestTimeout.default__deleted` | deleted | `PT5S` |
+| `definitions.PendingUploadRequestDto.properties.pendingUploadType.default__deleted` | deleted | `TemporaryBlobReference` |
+| `definitions.PendingUploadResponseDto.properties.pendingUploadType.default__deleted` | deleted | `TemporaryBlobReference` |
+| `definitions.ProbeSettings.properties.period.default__deleted` | deleted | `PT10S` |
+| `definitions.ProbeSettings.properties.timeout.default__deleted` | deleted | `PT2S` |
+| `definitions.QueueSettings.properties.jobTier.default__deleted` | deleted | `Null` |
+| `definitions.RandomSamplingAlgorithm.properties.rule.default__deleted` | deleted | `Random` |
+| `definitions.Regression.properties.primaryMetric.default__deleted` | deleted | `NormalizedRootMeanSquaredError` |
+| `definitions.RequestConfiguration.properties.requestTimeout.default__deleted` | deleted | `PT5S` |
+| `definitions.ScaleSettings.properties.minNodeCount.default__deleted` | deleted | `0` |
+| `definitions.ScaleUnitConfiguration.properties.disablePublicEgress.default__deleted` | deleted | `false` |
+| `definitions.SecretExpiry.properties.expirableSecret.default__deleted` | deleted | `false` |
+| `definitions.SkuCapacity.properties.default.default__deleted` | deleted | `0` |
+| `definitions.SkuCapacity.properties.maximum.default__deleted` | deleted | `0` |
+| `definitions.SkuCapacity.properties.minimum.default__deleted` | deleted | `0` |
+| `definitions.SkuCapacity.properties.scaleType.default__deleted` | deleted | `Automatic` |
+| `definitions.SkuSetting.properties.tier.default__deleted` | deleted | `Basic` |
+| `definitions.StackEnsembleSettings.properties.stackMetaLearnerType.default__deleted` | deleted | `None` |
+| `definitions.SweepJob.properties.limits.default__deleted` | deleted | `{}` |
+| `definitions.TableVerticalFeaturizationSettings.properties.enableDnnFeaturization.default__deleted` | deleted | `false` |
+| `definitions.TableVerticalFeaturizationSettings.properties.mode.default__deleted` | deleted | `Auto` |
+| `definitions.TableVerticalLimitSettings.properties.timeout.default__deleted` | deleted | `PT6H` |
+| `definitions.TableVerticalLimitSettings.properties.trialTimeout.default__deleted` | deleted | `PT30M` |
+| `definitions.TargetUtilizationScaleSettings.properties.pollingInterval.default__deleted` | deleted | `PT1S` |
+| `definitions.TensorFlow.properties.parameterServerCount.default__deleted` | deleted | `0` |
+| `definitions.TextClassification.properties.primaryMetric.default__deleted` | deleted | `Accuracy` |
+| `definitions.TrainingSettings.properties.enableDnnTraining.default__deleted` | deleted | `false` |
+| `definitions.TrainingSettings.properties.enableOnnxCompatibleModels.default__deleted` | deleted | `false` |
+| `definitions.TrainingSettings.properties.ensembleModelDownloadTimeout.default__deleted` | deleted | `PT5M` |
+| `definitions.TrialComponent.properties.resources.default__deleted` | deleted | `{}` |
+| `definitions.TruncationSelectionPolicy.properties.truncationPercentage.default__deleted` | deleted | `0` |
+
+### Changes for `resourceGroup`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureBlobDatastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureDataLakeGen1Datastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureDataLakeGen2Datastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureFileDatastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
+
+### Changes for `subscriptionId`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureBlobDatastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureDataLakeGen1Datastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureDataLakeGen2Datastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureFileDatastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
+
+### Changes for `example`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureBlobDatastore.properties.endpoint.example__deleted` | deleted | `core.windows.net` |
+| `definitions.AzureBlobDatastore.properties.protocol.example__deleted` | deleted | `https` |
+| `definitions.AzureDataLakeGen2Datastore.properties.endpoint.example__deleted` | deleted | `core.windows.net` |
+| `definitions.AzureDataLakeGen2Datastore.properties.protocol.example__deleted` | deleted | `https` |
+| `definitions.AzureFileDatastore.properties.endpoint.example__deleted` | deleted | `core.windows.net` |
+| `definitions.AzureFileDatastore.properties.protocol.example__deleted` | deleted | `https` |
+| `definitions.BuildContext.properties.contextUri.example__deleted` | deleted | `https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/` |
+| `definitions.BuildContext.properties.dockerfilePath.example__deleted` | deleted | `prod/Dockerfile` |
+| `definitions.ContainerResourceSettings.properties.cpu.example__deleted` | deleted | `1` |
+| `definitions.ContainerResourceSettings.properties.gpu.example__deleted` | deleted | `1` |
+| `definitions.ContainerResourceSettings.properties.memory.example__deleted` | deleted | `2Gi` |
+| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.example__deleted` | deleted | `{"endpoint":"azureml:/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGrou...` |
+| `definitions.ImageModelDistributionSettings.properties.amsGradient.example__deleted` | deleted | `choice(true, false)` |
+| `definitions.ImageModelDistributionSettings.properties.augmentations.example__deleted` | deleted | `choice('hflip;mosaic;random_crop', 'mosaic')` |
+| `definitions.ImageModelDistributionSettings.properties.beta1.example__deleted` | deleted | `uniform(0, 1)` |
+| `definitions.ImageModelDistributionSettings.properties.beta2.example__deleted` | deleted | `uniform(0, 1)` |
+| `definitions.ImageModelDistributionSettings.properties.distributed.example__deleted` | deleted | `choice(true, false)` |
+| `definitions.ImageModelDistributionSettings.properties.earlyStopping.example__deleted` | deleted | `choice(true, false)` |
+| `definitions.ImageModelDistributionSettings.properties.earlyStoppingDelay.example__deleted` | deleted | `choice(1, 5)` |
+| `definitions.ImageModelDistributionSettings.properties.earlyStoppingPatience.example__deleted` | deleted | `choice(1, 5)` |
+| `definitions.ImageModelDistributionSettings.properties.enableOnnxNormalization.example__deleted` | deleted | `choice(true, false)` |
+| `definitions.ImageModelDistributionSettings.properties.evaluationFrequency.example__deleted` | deleted | `choice(1, 5)` |
+| `definitions.ImageModelDistributionSettings.properties.gradientAccumulationStep.example__deleted` | deleted | `choice(1, 5)` |
+| `definitions.ImageModelDistributionSettings.properties.layersToFreeze.example__deleted` | deleted | `choice(1, 2)` |
+| `definitions.ImageModelDistributionSettings.properties.learningRate.example__deleted` | deleted | `uniform(0.0005, 0.005)` |
+| `definitions.ImageModelDistributionSettings.properties.learningRateScheduler.example__deleted` | deleted | `choice('warmup_cosine', 'step')` |
+| `definitions.ImageModelDistributionSettings.properties.modelName.example__deleted` | deleted | `choice('seresnext', 'resnest50')` |
+| `definitions.ImageModelDistributionSettings.properties.momentum.example__deleted` | deleted | `quniform(0, 1)` |
+| `definitions.ImageModelDistributionSettings.properties.nesterov.example__deleted` | deleted | `choice(true, false)` |
+| `definitions.ImageModelDistributionSettings.properties.numberOfEpochs.example__deleted` | deleted | `choice(15, 30)` |
+| `definitions.ImageModelDistributionSettings.properties.numberOfWorkers.example__deleted` | deleted | `uniform(8, 16)` |
+| `definitions.ImageModelDistributionSettings.properties.optimizer.example__deleted` | deleted | `choice('sgd', 'adam', 'adamw')` |
+| `definitions.ImageModelDistributionSettings.properties.randomSeed.example__deleted` | deleted | `loguniform(0, 1)` |
+| `definitions.ImageModelDistributionSettings.properties.stepLRGamma.example__deleted` | deleted | `choice(0.1, 0.2, 0.25)` |
+| `definitions.ImageModelDistributionSettings.properties.stepLRStepSize.example__deleted` | deleted | `choice(1, 2, 3)` |
+| `definitions.ImageModelDistributionSettings.properties.trainingBatchSize.example__deleted` | deleted | `choice(1, 2, 3)` |
+| `definitions.ImageModelDistributionSettings.properties.validationBatchSize.example__deleted` | deleted | `choice(1, 2, 3)` |
+| `definitions.ImageModelDistributionSettings.properties.warmupCosineLRCycles.example__deleted` | deleted | `uniform(0, 1)` |
+| `definitions.ImageModelDistributionSettings.properties.warmupCosineLRWarmupEpochs.example__deleted` | deleted | `choice(1, 2, 3)` |
+| `definitions.ImageModelDistributionSettings.properties.weightDecay.example__deleted` | deleted | `uniform(0, 1)` |
+| `definitions.ImageModelDistributionSettingsClassification.properties.trainingCropSize.example__deleted` | deleted | `choice(224, 360)` |
+| `definitions.ImageModelDistributionSettingsClassification.properties.validationCropSize.example__deleted` | deleted | `choice(224, 360)` |
+| `definitions.ImageModelDistributionSettingsClassification.properties.validationResizeSize.example__deleted` | deleted | `choice(128, 256)` |
+| `definitions.ImageModelDistributionSettingsClassification.properties.weightedLoss.example__deleted` | deleted | `choice(0, 1, 2)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxDetectionsPerImage.example__deleted` | deleted | `choice(50, 100)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxScoreThreshold.example__deleted` | deleted | `uniform(0.1, 0.2)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.imageSize.example__deleted` | deleted | `choice(224, 640)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.maxSize.example__deleted` | deleted | `choice(640, 1333)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.minSize.example__deleted` | deleted | `choice(300, 600)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.modelSize.example__deleted` | deleted | `choice('small', 'medium', 'large', 'xlarge')` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.multiScale.example__deleted` | deleted | `choice(true, false)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.nmsIouThreshold.example__deleted` | deleted | `uniform(0.1, 0.2)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileGridSize.example__deleted` | deleted | `choice('3x2', '2x2')` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileOverlapRatio.example__deleted` | deleted | `uniform(0.1, 0.2)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tilePredictionsNmsThreshold.example__deleted` | deleted | `uniform(0.2, 0.3)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.validationIouThreshold.example__deleted` | deleted | `uniform(0.2, 0.3)` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.validationMetricType.example__deleted` | deleted | `choice('none', 'coco', 'voc', 'coco_voc')` |
+| `definitions.ImageModelSettings.properties.advancedSettings.example__deleted` | deleted | `key1:val1;key2;key3:val3;key4` |
+| `definitions.ImageModelSettings.properties.augmentations.example__deleted` | deleted | `hflip;mosaic;random_crop` |
+| `definitions.ImageModelSettingsObjectDetection.properties.tileGridSize.example__deleted` | deleted | `3x2` |
+| `definitions.OneLakeDatastore.properties.endpoint.example__deleted` | deleted | `data.microsoft.com` |
+| `definitions.RegenerateEndpointKeysRequest.properties.keyType.example__deleted` | deleted | `Primary` |
+| `definitions.SparkJob.properties.args.example__deleted` | deleted | ` --input abfss://blob-container@testgen2.dfs.core.windows.net/mltable` |
+| `definitions.SparkJob.properties.conf.example__deleted` | deleted | `[{"spark.driver.memory":"2g"}]` |
+| `definitions.SparkJobPythonEntry.properties.file.example__deleted` | deleted | `train.py` |
+| `definitions.SparkJobScalaEntry.properties.className.example__deleted` | deleted | `microsoft.aml.sample.myapp` |
+
 ### Changes for `x-nullable`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AccountKeyDatastoreSecrets.properties.key['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AcrDetails.properties.systemCreatedAcrAccount['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeNodeInformation.properties.privateIpAddress['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeNodeInformation.properties.publicIpAddress['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeNodeInformation.properties.runId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ArmResourceId.properties.resourceId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AssetContainer.properties.latestVersion['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AssetContainer.properties.nextVersion['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AutoMLJob.properties.environmentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AutoMLJob.properties.environmentVariables.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AutoMLJob.properties.environmentVariables['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AutoMLJob.properties.outputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AutoMLJob.properties.outputs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AutoMLJob.properties.queueSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AutoMLVertical.properties.targetColumnName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AvailableQuota.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureBlobDatastore.properties.accountName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureBlobDatastore.properties.containerName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureBlobDatastore.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureBlobDatastore.properties.protocol['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AzureDataLakeGen2Datastore.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AzureDataLakeGen2Datastore.properties.protocol['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureFileDatastore.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureFileDatastore.properties.protocol['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AzureOpenAiFineTuning.properties.hyperParameters['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AzureOpenAiHyperParameters.properties.batchSize['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AzureOpenAiHyperParameters.properties.learningRateMultiplier['x-nullable__deleted']` | deleted | `true` |
@@ -1797,337 +2013,6 @@
 | `definitions.VulnerabilityFindings.properties.source['x-nullable__deleted']` | deleted | `true` |
 | `definitions.Webhook.properties.eventType['x-nullable__deleted']` | deleted | `true` |
 
-### Changes for `default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ActualCapacityInfo.properties.failed.default__deleted` | deleted | `0` |
-| `definitions.ActualCapacityInfo.properties.outdatedFailed.default__deleted` | deleted | `0` |
-| `definitions.ActualCapacityInfo.properties.outdatedSucceeded.default__deleted` | deleted | `0` |
-| `definitions.ActualCapacityInfo.properties.succeeded.default__deleted` | deleted | `0` |
-| `definitions.ActualCapacityInfo.properties.total.default__deleted` | deleted | `0` |
-| `definitions.AssetBase.properties.isAnonymous.default__deleted` | deleted | `false` |
-| `definitions.AssetBase.properties.isArchived.default__deleted` | deleted | `false` |
-| `definitions.AssetContainer.properties.isArchived.default__deleted` | deleted | `false` |
-| `definitions.AutoMLJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.AutoMLVertical.properties.logVerbosity.default__deleted` | deleted | `Info` |
-| `definitions.AzureBlobDatastore.properties.serviceDataAccessAuthIdentity.default__deleted` | deleted | `None` |
-| `definitions.AzureDataLakeGen1Datastore.properties.serviceDataAccessAuthIdentity.default__deleted` | deleted | `None` |
-| `definitions.AzureDataLakeGen2Datastore.properties.serviceDataAccessAuthIdentity.default__deleted` | deleted | `None` |
-| `definitions.AzureFileDatastore.properties.serviceDataAccessAuthIdentity.default__deleted` | deleted | `None` |
-| `definitions.BanditPolicy.properties.slackAmount.default__deleted` | deleted | `0` |
-| `definitions.BanditPolicy.properties.slackFactor.default__deleted` | deleted | `0` |
-| `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
-| `definitions.Classification.properties.primaryMetric.default__deleted` | deleted | `AUCWeighted` |
-| `definitions.Collection.properties.dataCollectionMode.default__deleted` | deleted | `Disabled` |
-| `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.ContentSafety.properties.contentSafetyLevel.default__deleted` | deleted | `Blocking` |
-| `definitions.DataCollector.properties.rollingRate.default__deleted` | deleted | `Hour` |
-| `definitions.DeltaModelCurrentState.properties.count.default__deleted` | deleted | `0` |
-| `definitions.DeltaModelStatusResponse.properties.actualInstanceCount.default__deleted` | deleted | `0` |
-| `definitions.DeltaModelStatusResponse.properties.expectedInstanceCount.default__deleted` | deleted | `0` |
-| `definitions.DeploymentLogsRequest.properties.containerType.default__deleted` | deleted | `InferenceServer` |
-| `definitions.DistillationJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.EarlyTerminationPolicy.properties.delayEvaluation.default__deleted` | deleted | `0` |
-| `definitions.EarlyTerminationPolicy.properties.evaluationInterval.default__deleted` | deleted | `0` |
-| `definitions.EndpointAuthToken.properties.expiryTimeUtc.default__deleted` | deleted | `0` |
-| `definitions.EndpointAuthToken.properties.refreshAfterTimeUtc.default__deleted` | deleted | `0` |
-| `definitions.FeatureImportanceSettings.properties.mode.default__deleted` | deleted | `Disabled` |
-| `definitions.FineTuningJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.Forecasting.properties.primaryMetric.default__deleted` | deleted | `NormalizedRootMeanSquaredError` |
-| `definitions.ForecastingSettings.properties.featureLags.default__deleted` | deleted | `None` |
-| `definitions.ForecastingSettings.properties.forecastHorizon.default__deleted` | deleted | `{"Mode": "Custom", "Value": 1}` |
-| `definitions.ForecastingSettings.properties.seasonality.default__deleted` | deleted | `{"Mode": "Auto"}` |
-| `definitions.ForecastingSettings.properties.shortSeriesHandlingConfig.default__deleted` | deleted | `Auto` |
-| `definitions.ForecastingSettings.properties.targetAggregateFunction.default__deleted` | deleted | `None` |
-| `definitions.ForecastingSettings.properties.useStl.default__deleted` | deleted | `None` |
-| `definitions.GroupStatus.properties.endpointCount.default__deleted` | deleted | `0` |
-| `definitions.GroupStatus.properties.requestedCapacity.default__deleted` | deleted | `0` |
-| `definitions.ImageClassification.properties.primaryMetric.default__deleted` | deleted | `Accuracy` |
-| `definitions.ImageClassificationMultilabel.properties.primaryMetric.default__deleted` | deleted | `IOU` |
-| `definitions.ImageInstanceSegmentation.properties.primaryMetric.default__deleted` | deleted | `MeanAveragePrecision` |
-| `definitions.ImageLimitSettings.properties.timeout.default__deleted` | deleted | `P7D` |
-| `definitions.ImageModelSettings.properties.learningRateScheduler.default__deleted` | deleted | `None` |
-| `definitions.ImageModelSettings.properties.optimizer.default__deleted` | deleted | `None` |
-| `definitions.ImageModelSettingsObjectDetection.properties.modelSize.default__deleted` | deleted | `None` |
-| `definitions.ImageModelSettingsObjectDetection.properties.validationMetricType.default__deleted` | deleted | `None` |
-| `definitions.ImageObjectDetection.properties.primaryMetric.default__deleted` | deleted | `MeanAveragePrecision` |
-| `definitions.IndexColumn.properties.dataType.default__deleted` | deleted | `String` |
-| `definitions.ManagedNetworkSettings.properties.enableNetworkMonitor.default__deleted` | deleted | `false` |
-| `definitions.MaterializationSettings.properties.storeType.default__deleted` | deleted | `None` |
-| `definitions.NlpVerticalLimitSettings.properties.timeout.default__deleted` | deleted | `P7D` |
-| `definitions.OneLakeDatastore.properties.serviceDataAccessAuthIdentity.default__deleted` | deleted | `None` |
-| `definitions.OnlineRequestSettings.properties.maxQueueWait.default__deleted` | deleted | `PT0.5S` |
-| `definitions.OnlineRequestSettings.properties.requestTimeout.default__deleted` | deleted | `PT5S` |
-| `definitions.PendingUploadRequestDto.properties.pendingUploadType.default__deleted` | deleted | `TemporaryBlobReference` |
-| `definitions.PendingUploadResponseDto.properties.pendingUploadType.default__deleted` | deleted | `TemporaryBlobReference` |
-| `definitions.ProbeSettings.properties.period.default__deleted` | deleted | `PT10S` |
-| `definitions.ProbeSettings.properties.timeout.default__deleted` | deleted | `PT2S` |
-| `definitions.QueueSettings.properties.jobTier.default__deleted` | deleted | `Null` |
-| `definitions.RandomSamplingAlgorithm.properties.rule.default__deleted` | deleted | `Random` |
-| `definitions.Regression.properties.primaryMetric.default__deleted` | deleted | `NormalizedRootMeanSquaredError` |
-| `definitions.RequestConfiguration.properties.requestTimeout.default__deleted` | deleted | `PT5S` |
-| `definitions.ScaleSettings.properties.minNodeCount.default__deleted` | deleted | `0` |
-| `definitions.ScaleUnitConfiguration.properties.disablePublicEgress.default__deleted` | deleted | `false` |
-| `definitions.SecretExpiry.properties.expirableSecret.default__deleted` | deleted | `false` |
-| `definitions.SkuCapacity.properties.default.default__deleted` | deleted | `0` |
-| `definitions.SkuCapacity.properties.maximum.default__deleted` | deleted | `0` |
-| `definitions.SkuCapacity.properties.minimum.default__deleted` | deleted | `0` |
-| `definitions.SkuCapacity.properties.scaleType.default__deleted` | deleted | `Automatic` |
-| `definitions.SkuSetting.properties.tier.default__deleted` | deleted | `Basic` |
-| `definitions.StackEnsembleSettings.properties.stackMetaLearnerType.default__deleted` | deleted | `None` |
-| `definitions.SweepJob.properties.limits.default__deleted` | deleted | `{}` |
-| `definitions.TableVerticalFeaturizationSettings.properties.enableDnnFeaturization.default__deleted` | deleted | `false` |
-| `definitions.TableVerticalFeaturizationSettings.properties.mode.default__deleted` | deleted | `Auto` |
-| `definitions.TableVerticalLimitSettings.properties.timeout.default__deleted` | deleted | `PT6H` |
-| `definitions.TableVerticalLimitSettings.properties.trialTimeout.default__deleted` | deleted | `PT30M` |
-| `definitions.TargetUtilizationScaleSettings.properties.pollingInterval.default__deleted` | deleted | `PT1S` |
-| `definitions.TensorFlow.properties.parameterServerCount.default__deleted` | deleted | `0` |
-| `definitions.TextClassification.properties.primaryMetric.default__deleted` | deleted | `Accuracy` |
-| `definitions.TrainingSettings.properties.enableDnnTraining.default__deleted` | deleted | `false` |
-| `definitions.TrainingSettings.properties.enableOnnxCompatibleModels.default__deleted` | deleted | `false` |
-| `definitions.TrainingSettings.properties.ensembleModelDownloadTimeout.default__deleted` | deleted | `PT5M` |
-| `definitions.TrialComponent.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.TruncationSelectionPolicy.properties.truncationPercentage.default__deleted` | deleted | `0` |
-
-### Changes for `properties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AksComputeSecrets.properties__added` | added | `{"userKubeConfig":{"type":"string"},"adminKubeConfig":{"type":"string"},"imagePullSecretName":{"type...` |
-| `definitions.BatchDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/BatchDeploymentProperties","x-ms-client-flatten":true}` |
-| `definitions.BatchEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/BatchEndpointProperties","x-ms-client-flatten":true}` |
-| `definitions.CapabilityHost.properties.properties__added` | added | `{"$ref":"#/definitions/CapabilityHostProperties","x-ms-client-flatten":true}` |
-| `definitions.CodeContainer.properties.properties__added` | added | `{"$ref":"#/definitions/CodeContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.CodeVersion.properties.properties__added` | added | `{"$ref":"#/definitions/CodeVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.ComponentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.ComponentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.ComputeResource.properties.properties__added` | added | `{"type":"object","x-ms-client-flatten":true}` |
-| `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
-| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.DatabricksComputeSecrets.properties__added` | added | `{"databricksAccessToken":{"type":"string"}}` |
-| `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.Datastore.properties.properties__added` | added | `{"$ref":"#/definitions/DatastoreProperties","x-ms-client-flatten":true}` |
-| `definitions.DataVersionBase.properties.properties__added` | added | `{"$ref":"#/definitions/DataVersionBaseProperties","x-ms-client-flatten":true}` |
-| `definitions.DiagnoseResponseResult.properties.value.properties__deleted` | deleted | `{"userDefinedRouteResults":{"type":"array","items":{"$ref":"#/definitions/DiagnoseResult"},"x-ms-ide...` |
-| `definitions.EnvironmentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.EnvironmentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.Feature.properties.properties__added` | added | `{"$ref":"#/definitions/FeatureProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturesetContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturesetVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturestoreEntityContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturestoreEntityVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.InferenceEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceEndpointProperties","x-ms-client-flatten":true}` |
-| `definitions.InferenceGroup.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceGroupProperties","x-ms-client-flatten":true}` |
-| `definitions.InferencePool.properties.properties__added` | added | `{"$ref":"#/definitions/InferencePoolProperties","x-ms-client-flatten":true}` |
-| `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties","x-ms-client-flatten":true}` |
-| `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties","x-ms-client-flatten":true}` |
-| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.OnlineDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineDeploymentProperties","x-ms-client-flatten":true}` |
-| `definitions.OnlineEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineEndpointProperties","x-ms-client-flatten":true}` |
-| `definitions.OpenAIEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
-| `definitions.Registry.properties.properties__added` | added | `{"$ref":"#/definitions/RegistryProperties","x-ms-client-flatten":true}` |
-| `definitions.Schedule.properties.properties__added` | added | `{"$ref":"#/definitions/ScheduleProperties","x-ms-client-flatten":true}` |
-| `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties","x-ms-client-flatten":true}` |
-| `definitions.SpeechEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
-| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.UriFileJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.UriFolderJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.VirtualMachineSecrets.properties__added` | added | `{"administratorAccount":{"$ref":"#/definitions/VirtualMachineSshCredentials"}}` |
-
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AmlComputeNodeInformation.properties.nodeId.title__deleted` | deleted | `Node ID.` |
-| `definitions.AmlComputeNodeInformation.properties.port.title__deleted` | deleted | `Port.` |
-| `definitions.AmlComputeNodeInformation.properties.privateIpAddress.title__deleted` | deleted | `Private IP address.` |
-| `definitions.AmlComputeNodeInformation.properties.publicIpAddress.title__deleted` | deleted | `Public IP address.` |
-| `definitions.AmlComputeNodeInformation.properties.runId.title__deleted` | deleted | `Run ID.` |
-| `definitions.ComputeInstanceDataMount.properties.mountedOn.title__deleted` | deleted | `Mounted time.` |
-| `definitions.Endpoint.properties.protocol.title__deleted` | deleted | `Endpoint Communication Protocol` |
-| `definitions.EnvironmentVariable.properties.type.title__deleted` | deleted | `Type of Environment Variable` |
-| `definitions.EstimatedVMPrice.properties.osType.title__deleted` | deleted | `OS type` |
-| `definitions.EstimatedVMPrice.properties.retailPrice.title__deleted` | deleted | `Retail price` |
-| `definitions.EstimatedVMPrice.properties.vmTier.title__deleted` | deleted | `VM tier` |
-| `definitions.EstimatedVMPrices.properties.billingCurrency.title__deleted` | deleted | `Billing currency` |
-| `definitions.EstimatedVMPrices.properties.unitOfMeasure.title__deleted` | deleted | `Unit of time measure` |
-| `definitions.EstimatedVMPrices.properties.values.title__deleted` | deleted | `List of estimated VM prices.` |
-| `definitions.Image.properties.type.title__deleted` | deleted | `Type of the image` |
-| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
-| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
-| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
-| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
-| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
-| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
-| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
-| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
-| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
-| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
-| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
-| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
-| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
-| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
-
-### Changes for `x-ms-mutability`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AssetContainer.properties.latestVersion['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.AssetContainer.properties.nextVersion['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.CommandJob.properties.parameters['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.DiagnoseResult.properties.code['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.DiagnoseResult.properties.level['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.DiagnoseResult.properties.message['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.EndpointDeploymentResourceProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.EndpointPropertiesBase.properties.scoringUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.EndpointPropertiesBase.properties.swaggerUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.EndpointResourceProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.JobService.properties.errorMessage['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.JobService.properties.status['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ListNotebookKeysResult.properties.primaryAccessKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ListNotebookKeysResult.properties.secondaryAccessKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ListStorageAccountKeysResult.properties.userStorageKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ListWorkspaceKeysResult.properties.appInsightsInstrumentationKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ListWorkspaceKeysResult.properties.userStorageArmId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ListWorkspaceKeysResult.properties.userStorageKey['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ManagedNetworkSettingsProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.MarketplacePlan.properties.offerId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.MarketplacePlan.properties.planId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.MarketplacePlan.properties.publisherId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.accessToken['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.expiresIn['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.hostName['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.notebookResourceId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.publicDns['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.refreshToken['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.scope['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.NotebookAccessTokenResult.properties.tokenType['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.OutboundRule.properties.errorInformation['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.OutboundRule.properties.parentRuleNames['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.Password.properties.name['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.Password.properties.value['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.RegistryListCredentialsResult.properties.location['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.RegistryListCredentialsResult.properties.username['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ServerlessEndpointInferenceEndpoint.properties.headers['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ServerlessEndpointInferenceEndpoint.properties.uri['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ServerlessInferenceEndpoint.properties.headers['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.ServerlessInferenceEndpoint.properties.uri['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.SkuResource.properties.resourceType['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspacePrivateEndpointResource.properties.id['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspacePrivateEndpointResource.properties.subnetArmId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.agentsEndpointUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.mlFlowTrackingUri['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.notebookInfo['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.privateEndpointConnections['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.privateLinkCount['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.provisioningState['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.serviceProvisionedResourceGroup['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.storageHnsEnabled['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.tenantId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-| `definitions.WorkspaceProperties.properties.workspaceId['x-ms-mutability__deleted']` | deleted | `["read"]` |
-
-### Changes for `resourceGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureBlobDatastore.properties.resourceGroup__added` | added | `{"type":"string"}` |
-| `definitions.AzureDataLakeGen1Datastore.properties.resourceGroup__added` | added | `{"type":"string"}` |
-| `definitions.AzureDataLakeGen2Datastore.properties.resourceGroup__added` | added | `{"type":"string"}` |
-| `definitions.AzureFileDatastore.properties.resourceGroup__added` | added | `{"type":"string"}` |
-
-### Changes for `subscriptionId`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureBlobDatastore.properties.subscriptionId__added` | added | `{"type":"string"}` |
-| `definitions.AzureDataLakeGen1Datastore.properties.subscriptionId__added` | added | `{"type":"string"}` |
-| `definitions.AzureDataLakeGen2Datastore.properties.subscriptionId__added` | added | `{"type":"string"}` |
-| `definitions.AzureFileDatastore.properties.subscriptionId__added` | added | `{"type":"string"}` |
-
-### Changes for `example`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureBlobDatastore.properties.endpoint.example__deleted` | deleted | `core.windows.net` |
-| `definitions.AzureBlobDatastore.properties.protocol.example__deleted` | deleted | `https` |
-| `definitions.AzureDataLakeGen2Datastore.properties.endpoint.example__deleted` | deleted | `core.windows.net` |
-| `definitions.AzureDataLakeGen2Datastore.properties.protocol.example__deleted` | deleted | `https` |
-| `definitions.AzureFileDatastore.properties.endpoint.example__deleted` | deleted | `core.windows.net` |
-| `definitions.AzureFileDatastore.properties.protocol.example__deleted` | deleted | `https` |
-| `definitions.BuildContext.properties.contextUri.example__deleted` | deleted | `https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/` |
-| `definitions.BuildContext.properties.dockerfilePath.example__deleted` | deleted | `prod/Dockerfile` |
-| `definitions.ContainerResourceSettings.properties.cpu.example__deleted` | deleted | `1` |
-| `definitions.ContainerResourceSettings.properties.gpu.example__deleted` | deleted | `1` |
-| `definitions.ContainerResourceSettings.properties.memory.example__deleted` | deleted | `2Gi` |
-| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.example__deleted` | deleted | `{"endpoint":"azureml:/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGrou...` |
-| `definitions.ImageModelDistributionSettings.properties.amsGradient.example__deleted` | deleted | `choice(true, false)` |
-| `definitions.ImageModelDistributionSettings.properties.augmentations.example__deleted` | deleted | `choice('hflip;mosaic;random_crop', 'mosaic')` |
-| `definitions.ImageModelDistributionSettings.properties.beta1.example__deleted` | deleted | `uniform(0, 1)` |
-| `definitions.ImageModelDistributionSettings.properties.beta2.example__deleted` | deleted | `uniform(0, 1)` |
-| `definitions.ImageModelDistributionSettings.properties.distributed.example__deleted` | deleted | `choice(true, false)` |
-| `definitions.ImageModelDistributionSettings.properties.earlyStopping.example__deleted` | deleted | `choice(true, false)` |
-| `definitions.ImageModelDistributionSettings.properties.earlyStoppingDelay.example__deleted` | deleted | `choice(1, 5)` |
-| `definitions.ImageModelDistributionSettings.properties.earlyStoppingPatience.example__deleted` | deleted | `choice(1, 5)` |
-| `definitions.ImageModelDistributionSettings.properties.enableOnnxNormalization.example__deleted` | deleted | `choice(true, false)` |
-| `definitions.ImageModelDistributionSettings.properties.evaluationFrequency.example__deleted` | deleted | `choice(1, 5)` |
-| `definitions.ImageModelDistributionSettings.properties.gradientAccumulationStep.example__deleted` | deleted | `choice(1, 5)` |
-| `definitions.ImageModelDistributionSettings.properties.layersToFreeze.example__deleted` | deleted | `choice(1, 2)` |
-| `definitions.ImageModelDistributionSettings.properties.learningRate.example__deleted` | deleted | `uniform(0.0005, 0.005)` |
-| `definitions.ImageModelDistributionSettings.properties.learningRateScheduler.example__deleted` | deleted | `choice('warmup_cosine', 'step')` |
-| `definitions.ImageModelDistributionSettings.properties.modelName.example__deleted` | deleted | `choice('seresnext', 'resnest50')` |
-| `definitions.ImageModelDistributionSettings.properties.momentum.example__deleted` | deleted | `quniform(0, 1)` |
-| `definitions.ImageModelDistributionSettings.properties.nesterov.example__deleted` | deleted | `choice(true, false)` |
-| `definitions.ImageModelDistributionSettings.properties.numberOfEpochs.example__deleted` | deleted | `choice(15, 30)` |
-| `definitions.ImageModelDistributionSettings.properties.numberOfWorkers.example__deleted` | deleted | `uniform(8, 16)` |
-| `definitions.ImageModelDistributionSettings.properties.optimizer.example__deleted` | deleted | `choice('sgd', 'adam', 'adamw')` |
-| `definitions.ImageModelDistributionSettings.properties.randomSeed.example__deleted` | deleted | `loguniform(0, 1)` |
-| `definitions.ImageModelDistributionSettings.properties.stepLRGamma.example__deleted` | deleted | `choice(0.1, 0.2, 0.25)` |
-| `definitions.ImageModelDistributionSettings.properties.stepLRStepSize.example__deleted` | deleted | `choice(1, 2, 3)` |
-| `definitions.ImageModelDistributionSettings.properties.trainingBatchSize.example__deleted` | deleted | `choice(1, 2, 3)` |
-| `definitions.ImageModelDistributionSettings.properties.validationBatchSize.example__deleted` | deleted | `choice(1, 2, 3)` |
-| `definitions.ImageModelDistributionSettings.properties.warmupCosineLRCycles.example__deleted` | deleted | `uniform(0, 1)` |
-| `definitions.ImageModelDistributionSettings.properties.warmupCosineLRWarmupEpochs.example__deleted` | deleted | `choice(1, 2, 3)` |
-| `definitions.ImageModelDistributionSettings.properties.weightDecay.example__deleted` | deleted | `uniform(0, 1)` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.trainingCropSize.example__deleted` | deleted | `choice(224, 360)` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.validationCropSize.example__deleted` | deleted | `choice(224, 360)` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.validationResizeSize.example__deleted` | deleted | `choice(128, 256)` |
-| `definitions.ImageModelDistributionSettingsClassification.properties.weightedLoss.example__deleted` | deleted | `choice(0, 1, 2)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxDetectionsPerImage.example__deleted` | deleted | `choice(50, 100)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxScoreThreshold.example__deleted` | deleted | `uniform(0.1, 0.2)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.imageSize.example__deleted` | deleted | `choice(224, 640)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.maxSize.example__deleted` | deleted | `choice(640, 1333)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.minSize.example__deleted` | deleted | `choice(300, 600)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.modelSize.example__deleted` | deleted | `choice('small', 'medium', 'large', 'xlarge')` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.multiScale.example__deleted` | deleted | `choice(true, false)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.nmsIouThreshold.example__deleted` | deleted | `uniform(0.1, 0.2)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileGridSize.example__deleted` | deleted | `choice('3x2', '2x2')` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileOverlapRatio.example__deleted` | deleted | `uniform(0.1, 0.2)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tilePredictionsNmsThreshold.example__deleted` | deleted | `uniform(0.2, 0.3)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.validationIouThreshold.example__deleted` | deleted | `uniform(0.2, 0.3)` |
-| `definitions.ImageModelDistributionSettingsObjectDetection.properties.validationMetricType.example__deleted` | deleted | `choice('none', 'coco', 'voc', 'coco_voc')` |
-| `definitions.ImageModelSettings.properties.advancedSettings.example__deleted` | deleted | `key1:val1;key2;key3:val3;key4` |
-| `definitions.ImageModelSettings.properties.augmentations.example__deleted` | deleted | `hflip;mosaic;random_crop` |
-| `definitions.ImageModelSettingsObjectDetection.properties.tileGridSize.example__deleted` | deleted | `3x2` |
-| `definitions.OneLakeDatastore.properties.endpoint.example__deleted` | deleted | `data.microsoft.com` |
-| `definitions.RegenerateEndpointKeysRequest.properties.keyType.example__deleted` | deleted | `Primary` |
-| `definitions.SparkJob.properties.args.example__deleted` | deleted | ` --input abfss://blob-container@testgen2.dfs.core.windows.net/mltable` |
-| `definitions.SparkJob.properties.conf.example__deleted` | deleted | `[{"spark.driver.memory":"2g"}]` |
-| `definitions.SparkJobPythonEntry.properties.file.example__deleted` | deleted | `train.py` |
-| `definitions.SparkJobScalaEntry.properties.className.example__deleted` | deleted | `microsoft.aml.sample.myapp` |
-
 ### Changes for `x-ms-client-name`
 
 | Path | Change Type | Value |
@@ -2462,6 +2347,38 @@
 |------|------------|-------|
 | `definitions.ComponentVersion.properties.componentSpec__deleted` | deleted | `{"type":"object","x-nullable":true,"example":{"code":"azureml:/subscriptions/00000000-1111-2222-3333...` |
 
+### Changes for `title`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ComputeInstanceDataMount.properties.mountedOn.title__deleted` | deleted | `Mounted time.` |
+| `definitions.Endpoint.properties.protocol.title__deleted` | deleted | `Endpoint Communication Protocol` |
+| `definitions.EnvironmentVariable.properties.type.title__deleted` | deleted | `Type of Environment Variable` |
+| `definitions.EstimatedVMPrice.properties.osType.title__deleted` | deleted | `OS type` |
+| `definitions.EstimatedVMPrice.properties.retailPrice.title__deleted` | deleted | `Retail price` |
+| `definitions.EstimatedVMPrice.properties.vmTier.title__deleted` | deleted | `VM tier` |
+| `definitions.EstimatedVMPrices.properties.billingCurrency.title__deleted` | deleted | `Billing currency` |
+| `definitions.EstimatedVMPrices.properties.unitOfMeasure.title__deleted` | deleted | `Unit of time measure` |
+| `definitions.EstimatedVMPrices.properties.values.title__deleted` | deleted | `List of estimated VM prices.` |
+| `definitions.Image.properties.type.title__deleted` | deleted | `Type of the image` |
+| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
+| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
+| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
+| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
+| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
+| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
+| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
+| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
+| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
+| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
+| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
+| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
+| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
+| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
+
 ### Changes for `location`
 
 | Path | Change Type | Value |
@@ -2485,15 +2402,6 @@
 | `definitions.DataContainer.properties.dataType__deleted` | deleted | `{"type":"string","enum":["uri_file","uri_folder","mltable"],"x-ms-enum":{"name":"DataType","modelAsS...` |
 | `definitions.DataVersionBase.properties.dataType__deleted` | deleted | `{"type":"string","enum":["uri_file","uri_folder","mltable"],"x-ms-enum":{"name":"DataType","modelAsS...` |
 | `definitions.Feature.properties.dataType__deleted` | deleted | `{"type":"string","default":"String","enum":["String","Integer","Long","Float","Double","Binary","Dat...` |
-
-### Changes for `discriminator`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Datastore.discriminator__deleted` | deleted | `datastoreType` |
-| `definitions.DataVersionBase.discriminator__deleted` | deleted | `dataType` |
-| `definitions.JobBase.discriminator__deleted` | deleted | `jobType` |
-| `definitions.OnlineDeployment.discriminator__deleted` | deleted | `endpointComputeType` |
 
 ### Changes for `dataUri`
 
@@ -2923,6 +2831,13 @@
 |------|------------|-------|
 | `definitions.OnlineEndpoint.properties.traffic__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"format":"int32","type":"integer"}}` |
 
+### Changes for `x-ms-identifiers`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RaiBlocklistItemsBulkAddRequest['x-ms-identifiers__deleted']` | deleted | `["name"]` |
+| `definitions.TableVerticalFeaturizationSettings.properties.transformerParams.additionalProperties['x-ms-identifiers__deleted']` | deleted | `[]` |
+
 ### Changes for `discoveryUrl`
 
 | Path | Change Type | Value |
@@ -3090,6 +3005,7 @@
 | `definitions.OnlineEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/OnlineEndpointTrackedResource` | `#/definitions/OnlineEndpoint` |
 | `definitions.PipelineJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.PrivateEndpointConnection.allOf[0].$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.RaiBlocklistItemsBulkAddRequest.type` | `array` | `object` |
 | `definitions.RegistryTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |
 | `definitions.Schedule.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.ScheduleResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ScheduleResource` | `#/definitions/Schedule` |
@@ -3325,7 +3241,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.parameters[3].schema.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.200.schema.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.201.schema.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put['x-ms-long-running-operation-options']['final-state-via']` | `original-uri` | `azure-async-operation` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys'].post.parameters[1].name` | `name` | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys'].post.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/regenerateKeys'].post.parameters[1].name` | `name` | `workspaceName` |

@@ -130,7 +130,7 @@ interface FeaturesetVersions {
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
-    ArmResponse<FeaturesetVersionBackfillResponse>
+    FeaturesetVersionBackfillResponse
   >;
 }
 

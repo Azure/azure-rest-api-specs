@@ -9237,14 +9237,8 @@
             "description": "Properties describing the custom blocklist items.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-              }
-            },
-            "x-ms-identifiers": [
-              "name"
-            ]
+              "$ref": "#/definitions/RaiBlocklistItemsBulkAddRequest"
+            }
           }
         ],
         "responses": {
@@ -11298,7 +11292,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CDiagnoseResponseResult%3E"
+          "final-state-schema": "#/definitions/DiagnoseResponseResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -13850,7 +13844,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFeaturesetVersionBackfillResponse%3E"
+          "final-state-schema": "#/definitions/FeaturesetVersionBackfillResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -17475,7 +17469,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3COutboundRuleListResult%3E"
+          "final-state-schema": "#/definitions/OutboundRuleListResult"
         },
         "x-ms-long-running-operation": true,
         "x-ms-pageable": {
@@ -20301,7 +20295,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNotebookResourceInfo%3E"
+          "final-state-schema": "#/definitions/NotebookResourceInfo"
         },
         "x-ms-long-running-operation": true
       }
@@ -20637,7 +20631,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CManagedNetworkProvisionStatus%3E"
+          "final-state-schema": "#/definitions/ManagedNetworkProvisionStatus"
         },
         "x-ms-long-running-operation": true
       }
@@ -20967,7 +20961,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -20977,6 +20971,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -21160,19 +21159,20 @@
             }
           },
           "201": {
-            "description": "Resource 'ServerlessEndpoint' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ServerlessEndpoint"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -21189,7 +21189,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ServerlessEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -21237,13 +21237,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ServerlessEndpoint' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ServerlessEndpoint"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -21253,6 +21253,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -21269,8 +21274,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ServerlessEndpoint"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -21308,7 +21312,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -21318,6 +21322,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
               }
             }
           },
@@ -21473,7 +21482,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CEndpointAuthKeys%3E"
+          "final-state-schema": "#/definitions/EndpointAuthKeys"
         },
         "x-ms-long-running-operation": true
       }
@@ -21508,10 +21517,14 @@
       "type": "object",
       "properties": {
         "key1": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "key2": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -21560,7 +21573,8 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Storage account key."
+          "description": "Storage account key.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -21576,7 +21590,8 @@
       "properties": {
         "systemCreatedAcrAccount": {
           "$ref": "#/definitions/SystemCreatedAcrAccount",
-          "description": "Details of system created ACR account to be used for the Registry"
+          "description": "Details of system created ACR account to be used for the Registry",
+          "x-nullable": true
         }
       }
     },
@@ -21586,27 +21601,32 @@
         "total": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload."
+          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.",
+          "default": 0
         },
         "succeeded": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state and target group payload."
+          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state and target group payload.",
+          "default": 0
         },
         "failed": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload."
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.",
+          "default": 0
         },
         "outdatedSucceeded": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload."
+          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.",
+          "default": 0
         },
         "outdatedFailed": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload."
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.",
+          "default": 0
         }
       }
     },
@@ -21614,6 +21634,10 @@
       "type": "object",
       "description": "Secrets related to a Machine Learning compute based on AKS.",
       "properties": {
+        "AKS": {
+          "type": "string",
+          "description": "Discriminator property for AksComputeSecrets."
+        },
         "userKubeConfig": {
           "type": "string",
           "description": "Content of kubeconfig file that can be used to connect to the Kubernetes cluster."
@@ -21624,9 +21648,14 @@
         },
         "imagePullSecretName": {
           "type": "string",
-          "description": "Image registry pull secret."
+          "description": "Image registry pull secret.",
+          "x-nullable": true
         }
       },
+      "discriminator": "AKS",
+      "required": [
+        "AKS"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ComputeSecrets"
@@ -21686,22 +21715,28 @@
       "properties": {
         "nodeId": {
           "type": "string",
+          "title": "Node ID.",
           "description": "ID of the compute node.",
           "readOnly": true
         },
         "privateIpAddress": {
           "type": "string",
+          "title": "Private IP address.",
           "description": "Private IP address of the compute node.",
+          "x-nullable": true,
           "readOnly": true
         },
         "publicIpAddress": {
           "type": "string",
+          "title": "Public IP address.",
           "description": "Public IP address of the compute node.",
+          "x-nullable": true,
           "readOnly": true
         },
         "port": {
           "type": "integer",
           "format": "int32",
+          "title": "Port.",
           "description": "SSH port number of the node.",
           "readOnly": true
         },
@@ -21712,7 +21747,9 @@
         },
         "runId": {
           "type": "string",
+          "title": "Run ID.",
           "description": "ID of the Experiment running on the node, if any else null.",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -21809,7 +21846,8 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Arm ResourceId is in the format \"/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}\"\nor \"/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}\""
+          "description": "Arm ResourceId is in the format \"/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}\"\nor \"/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}\"",
+          "x-nullable": true
         }
       }
     },
@@ -21819,6 +21857,7 @@
         "isAnonymous": {
           "type": "boolean",
           "description": "If the name version are system generated (anonymous registration).",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -21827,6 +21866,7 @@
         "isArchived": {
           "type": "boolean",
           "description": "Is the asset archived?",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "update",
@@ -21846,6 +21886,7 @@
         "isArchived": {
           "type": "boolean",
           "description": "Is the asset archived?",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "update",
@@ -21855,11 +21896,13 @@
         "latestVersion": {
           "type": "string",
           "description": "The latest version inside this container.",
+          "x-nullable": true,
           "readOnly": true
         },
         "nextVersion": {
           "type": "string",
           "description": "The next auto incremental version",
+          "x-nullable": true,
           "readOnly": true
         }
       },
@@ -21959,6 +22002,7 @@
         "environmentId": {
           "type": "string",
           "description": "The ARM resource ID of the Environment specification for the job.\nThis is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -21967,8 +22011,10 @@
         "environmentVariables": {
           "type": "object",
           "description": "Environment variables included in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -21978,8 +22024,10 @@
         "outputs": {
           "type": "object",
           "description": "Mapping of output data bindings used in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -21989,6 +22037,7 @@
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
           "description": "Queue settings for the job",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -22022,12 +22071,58 @@
       "description": "AutoML vertical class.\nBase class for AutoML verticals - TableVertical/ImageVertical/NLPVertical",
       "properties": {
         "logVerbosity": {
-          "$ref": "#/definitions/LogVerbosity",
-          "description": "Log verbosity for the job."
+          "type": "string",
+          "description": "Log verbosity for the job.",
+          "default": "Info",
+          "enum": [
+            "NotSet",
+            "Debug",
+            "Info",
+            "Warning",
+            "Error",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "LogVerbosity",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSet",
+                "value": "NotSet",
+                "description": "No logs emitted."
+              },
+              {
+                "name": "Debug",
+                "value": "Debug",
+                "description": "Debug and above log statements logged."
+              },
+              {
+                "name": "Info",
+                "value": "Info",
+                "description": "Info and above log statements logged."
+              },
+              {
+                "name": "Warning",
+                "value": "Warning",
+                "description": "Warning and above log statements logged."
+              },
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "Error and above log statements logged."
+              },
+              {
+                "name": "Critical",
+                "value": "Critical",
+                "description": "Only critical statements logged."
+              }
+            ]
+          }
         },
         "targetColumnName": {
           "type": "string",
-          "description": "Target column name: This is prediction values column.\nAlso known as label column name in context of classification tasks."
+          "description": "Target column name: This is prediction values column.\nAlso known as label column name in context of classification tasks.",
+          "x-nullable": true
         },
         "taskType": {
           "$ref": "#/definitions/TaskType",
@@ -22113,7 +22208,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvailableQuotaProperties",
-          "description": "Available quota properties"
+          "description": "Available quota properties",
+          "x-nullable": true
         }
       }
     },
@@ -22148,84 +22244,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DiagnoseResponseResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<EndpointAuthKeys>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/EndpointAuthKeys",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<FeaturesetVersionBackfillResponse>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/FeaturesetVersionBackfillResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ManagedNetworkProvisionStatus>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ManagedNetworkProvisionStatus",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NotebookResourceInfo>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NotebookResourceInfo",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<OutboundRuleListResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/OutboundRuleListResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -22248,15 +22266,18 @@
       "properties": {
         "resourceGroup": {
           "type": "string",
-          "description": "Azure Resource Group name"
+          "description": "Azure Resource Group name",
+          "x-nullable": true
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Azure Subscription Id"
+          "description": "Azure Subscription Id",
+          "x-nullable": true
         },
         "accountName": {
           "type": "string",
           "description": "Storage account name.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -22265,6 +22286,7 @@
         "containerName": {
           "type": "string",
           "description": "Storage account container name.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -22273,6 +22295,7 @@
         "endpoint": {
           "type": "string",
           "description": "Azure cloud endpoint for the storage account.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -22281,14 +22304,42 @@
         "protocol": {
           "type": "string",
           "description": "Protocol used to communicate with the storage account.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "serviceDataAccessAuthIdentity": {
-          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "type": "string",
           "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "default": "None",
+          "enum": [
+            "None",
+            "WorkspaceSystemAssignedIdentity",
+            "WorkspaceUserAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceDataAccessAuthIdentity",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Do not use any identity for service data access."
+              },
+              {
+                "name": "WorkspaceSystemAssignedIdentity",
+                "value": "WorkspaceSystemAssignedIdentity",
+                "description": "Use the system assigned managed identity of the Workspace to authenticate service data access."
+              },
+              {
+                "name": "WorkspaceUserAssignedIdentity",
+                "value": "WorkspaceUserAssignedIdentity",
+                "description": "Use the user assigned managed identity of the Workspace to authenticate service data access."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -22308,15 +22359,44 @@
       "properties": {
         "resourceGroup": {
           "type": "string",
-          "description": "Azure Resource Group name"
+          "description": "Azure Resource Group name",
+          "x-nullable": true
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Azure Subscription Id"
+          "description": "Azure Subscription Id",
+          "x-nullable": true
         },
         "serviceDataAccessAuthIdentity": {
-          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "type": "string",
           "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "default": "None",
+          "enum": [
+            "None",
+            "WorkspaceSystemAssignedIdentity",
+            "WorkspaceUserAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceDataAccessAuthIdentity",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Do not use any identity for service data access."
+              },
+              {
+                "name": "WorkspaceSystemAssignedIdentity",
+                "value": "WorkspaceSystemAssignedIdentity",
+                "description": "Use the system assigned managed identity of the Workspace to authenticate service data access."
+              },
+              {
+                "name": "WorkspaceUserAssignedIdentity",
+                "value": "WorkspaceUserAssignedIdentity",
+                "description": "Use the user assigned managed identity of the Workspace to authenticate service data access."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -22349,11 +22429,13 @@
       "properties": {
         "resourceGroup": {
           "type": "string",
-          "description": "Azure Resource Group name"
+          "description": "Azure Resource Group name",
+          "x-nullable": true
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Azure Subscription Id"
+          "description": "Azure Subscription Id",
+          "x-nullable": true
         },
         "accountName": {
           "type": "string",
@@ -22392,8 +22474,35 @@
           ]
         },
         "serviceDataAccessAuthIdentity": {
-          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "type": "string",
           "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "default": "None",
+          "enum": [
+            "None",
+            "WorkspaceSystemAssignedIdentity",
+            "WorkspaceUserAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceDataAccessAuthIdentity",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Do not use any identity for service data access."
+              },
+              {
+                "name": "WorkspaceSystemAssignedIdentity",
+                "value": "WorkspaceSystemAssignedIdentity",
+                "description": "Use the system assigned managed identity of the Workspace to authenticate service data access."
+              },
+              {
+                "name": "WorkspaceUserAssignedIdentity",
+                "value": "WorkspaceUserAssignedIdentity",
+                "description": "Use the user assigned managed identity of the Workspace to authenticate service data access."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -22427,11 +22536,13 @@
       "properties": {
         "resourceGroup": {
           "type": "string",
-          "description": "Azure Resource Group name"
+          "description": "Azure Resource Group name",
+          "x-nullable": true
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Azure Subscription Id"
+          "description": "Azure Subscription Id",
+          "x-nullable": true
         },
         "accountName": {
           "type": "string",
@@ -22446,6 +22557,7 @@
         "endpoint": {
           "type": "string",
           "description": "Azure cloud endpoint for the storage account.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -22464,14 +22576,42 @@
         "protocol": {
           "type": "string",
           "description": "Protocol used to communicate with the storage account.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "serviceDataAccessAuthIdentity": {
-          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "type": "string",
           "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "default": "None",
+          "enum": [
+            "None",
+            "WorkspaceSystemAssignedIdentity",
+            "WorkspaceUserAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceDataAccessAuthIdentity",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Do not use any identity for service data access."
+              },
+              {
+                "name": "WorkspaceSystemAssignedIdentity",
+                "value": "WorkspaceSystemAssignedIdentity",
+                "description": "Use the system assigned managed identity of the Workspace to authenticate service data access."
+              },
+              {
+                "name": "WorkspaceUserAssignedIdentity",
+                "value": "WorkspaceUserAssignedIdentity",
+                "description": "Use the user assigned managed identity of the Workspace to authenticate service data access."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -31798,54 +31938,6 @@
       ],
       "x-ms-discriminator-value": "literal"
     },
-    "LogVerbosity": {
-      "type": "string",
-      "description": "Enum for setting log verbosity.",
-      "enum": [
-        "NotSet",
-        "Debug",
-        "Info",
-        "Warning",
-        "Error",
-        "Critical"
-      ],
-      "x-ms-enum": {
-        "name": "LogVerbosity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSet",
-            "value": "NotSet",
-            "description": "No logs emitted."
-          },
-          {
-            "name": "Debug",
-            "value": "Debug",
-            "description": "Debug and above log statements logged."
-          },
-          {
-            "name": "Info",
-            "value": "Info",
-            "description": "Info and above log statements logged."
-          },
-          {
-            "name": "Warning",
-            "value": "Warning",
-            "description": "Warning and above log statements logged."
-          },
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "Error and above log statements logged."
-          },
-          {
-            "name": "Critical",
-            "value": "Critical",
-            "description": "Only critical statements logged."
-          }
-        ]
-      }
-    },
     "MLFlowModelJobInput": {
       "type": "object",
       "properties": {
@@ -35649,6 +35741,22 @@
       "required": [
         "value"
       ]
+    },
+    "RaiBlocklistItemsBulkAddRequest": {
+      "type": "object",
+      "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of RAI Blocklist Items to add.",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "RaiBlocklistProperties": {
       "type": "object",

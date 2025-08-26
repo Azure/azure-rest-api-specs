@@ -45,7 +45,16 @@ interface ServerlessEndpoints {
   /**
    * Create or update Serverless Endpoint (asynchronous).
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ServerlessEndpoint>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ServerlessEndpoint,
+    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmResourceCreatedResponse<ServerlessEndpoint> & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
+  >;
 
   /**
    * Update Serverless Endpoint (asynchronous).
@@ -53,13 +62,29 @@ interface ServerlessEndpoints {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ServerlessEndpoint,
-    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity
+    PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
+    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
    * Delete Serverless Endpoint (asynchronous).
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ServerlessEndpoint>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ServerlessEndpoint,
+    Response = (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List Serverless Endpoints.
@@ -82,7 +107,7 @@ interface ServerlessEndpoints {
   listKeys is ArmResourceActionSync<
     ServerlessEndpoint,
     void,
-    ArmResponse<EndpointAuthKeys>
+    EndpointAuthKeys
   >;
 
   /**
@@ -91,7 +116,7 @@ interface ServerlessEndpoints {
   regenerateKeys is ArmResourceActionAsync<
     ServerlessEndpoint,
     RegenerateEndpointKeysRequest,
-    ArmResponse<EndpointAuthKeys>
+    EndpointAuthKeys
   >;
 }
 

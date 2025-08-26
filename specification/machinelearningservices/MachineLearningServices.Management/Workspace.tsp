@@ -138,7 +138,7 @@ interface Workspaces {
   diagnose is ArmResourceActionAsync<
     Workspace,
     DiagnoseWorkspaceParameters,
-    ArmResponse<DiagnoseResponseResult>,
+    DiagnoseResponseResult,
     OptionalRequestBody = true
   >;
 
@@ -195,7 +195,7 @@ interface Workspaces {
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
-    ArmResponse<NotebookResourceInfo>
+    NotebookResourceInfo
   >;
 
   /**
@@ -268,7 +268,7 @@ interface Workspaces {
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
     ManagedNetworkProvisionOptions,
-    ArmResponse<ManagedNetworkProvisionStatus>,
+    ManagedNetworkProvisionStatus,
     OptionalRequestBody = true
   >;
 }

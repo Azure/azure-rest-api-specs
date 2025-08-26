@@ -141,7 +141,7 @@ interface OnlineEndpoints {
   listKeys is ArmResourceActionSync<
     OnlineEndpoint,
     void,
-    ArmResponse<EndpointAuthKeys>
+    EndpointAuthKeys
   >;
 
   /**

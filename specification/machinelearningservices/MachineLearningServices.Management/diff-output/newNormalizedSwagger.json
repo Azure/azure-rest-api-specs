@@ -6376,14 +6376,8 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-              }
-            },
-            "x-ms-identifiers": [
-              "name"
-            ]
+              "$ref": "#/definitions/RaiBlocklistItemsBulkAddRequest"
+            }
           }
         ],
         "responses": {
@@ -14468,7 +14462,14 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -14603,6 +14604,13 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ServerlessEndpoint"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -14618,7 +14626,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/ServerlessEndpoint"
         },
         "x-ms-long-running-operation": true
@@ -14656,7 +14664,14 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -14691,7 +14706,14 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "type": "string",
+                "format": "duration",
+                "description": "Timeout for the client to use when polling the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -14830,10 +14852,14 @@
       "type": "object",
       "properties": {
         "key1": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "key2": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -14876,7 +14902,8 @@
       "type": "object",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -14890,7 +14917,8 @@
       "type": "object",
       "properties": {
         "systemCreatedAcrAccount": {
-          "$ref": "#/definitions/SystemCreatedAcrAccount"
+          "$ref": "#/definitions/SystemCreatedAcrAccount",
+          "x-nullable": true
         }
       }
     },
@@ -14899,29 +14927,37 @@
       "properties": {
         "total": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "succeeded": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "failed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "outdatedSucceeded": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "outdatedFailed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         }
       }
     },
     "AksComputeSecrets": {
       "type": "object",
       "properties": {
+        "AKS": {
+          "type": "string"
+        },
         "userKubeConfig": {
           "type": "string"
         },
@@ -14929,9 +14965,14 @@
           "type": "string"
         },
         "imagePullSecretName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
+      "discriminator": "AKS",
+      "required": [
+        "AKS"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ComputeSecrets"
@@ -14962,19 +15003,25 @@
       "properties": {
         "nodeId": {
           "type": "string",
+          "title": "Node ID.",
           "readOnly": true
         },
         "privateIpAddress": {
           "type": "string",
+          "title": "Private IP address.",
+          "x-nullable": true,
           "readOnly": true
         },
         "publicIpAddress": {
           "type": "string",
+          "title": "Public IP address.",
+          "x-nullable": true,
           "readOnly": true
         },
         "port": {
           "type": "integer",
           "format": "int32",
+          "title": "Port.",
           "readOnly": true
         },
         "nodeState": {
@@ -14995,6 +15042,8 @@
         },
         "runId": {
           "type": "string",
+          "title": "Run ID.",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -15077,7 +15126,8 @@
       "type": "object",
       "properties": {
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -15086,6 +15136,7 @@
       "properties": {
         "isAnonymous": {
           "type": "boolean",
+          "default": false,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15093,6 +15144,7 @@
         },
         "isArchived": {
           "type": "boolean",
+          "default": false,
           "x-ms-mutability": [
             "create",
             "read",
@@ -15111,6 +15163,7 @@
       "properties": {
         "isArchived": {
           "type": "boolean",
+          "default": false,
           "x-ms-mutability": [
             "create",
             "read",
@@ -15119,10 +15172,12 @@
         },
         "latestVersion": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "nextVersion": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         }
       },
@@ -15167,6 +15222,7 @@
       "properties": {
         "environmentId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15174,8 +15230,10 @@
         },
         "environmentVariables": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -15184,8 +15242,10 @@
         },
         "outputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -15194,6 +15254,7 @@
         },
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15225,6 +15286,7 @@
       "properties": {
         "logVerbosity": {
           "type": "string",
+          "default": "Info",
           "enum": [
             "NotSet",
             "Debug",
@@ -15239,7 +15301,8 @@
           }
         },
         "targetColumnName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "taskType": {
           "type": "string",
@@ -15314,7 +15377,8 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AvailableQuotaProperties"
+          "$ref": "#/definitions/AvailableQuotaProperties",
+          "x-nullable": true
         }
       }
     },
@@ -15348,72 +15412,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<DiagnoseResponseResult>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DiagnoseResponseResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<EndpointAuthKeys>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/EndpointAuthKeys"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<FeaturesetVersionBackfillResponse>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/FeaturesetVersionBackfillResponse"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ManagedNetworkProvisionStatus>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NotebookResourceInfo>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NotebookResourceInfo"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<OutboundRuleListResult>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/OutboundRuleListResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>": {
       "type": "object",
       "properties": {
@@ -15432,13 +15430,16 @@
       "type": "object",
       "properties": {
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "accountName": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15446,6 +15447,7 @@
         },
         "containerName": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15453,6 +15455,7 @@
         },
         "endpoint": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15460,6 +15463,7 @@
         },
         "protocol": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15467,6 +15471,7 @@
         },
         "serviceDataAccessAuthIdentity": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "WorkspaceSystemAssignedIdentity",
@@ -15493,13 +15498,16 @@
       "type": "object",
       "properties": {
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "serviceDataAccessAuthIdentity": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "WorkspaceSystemAssignedIdentity",
@@ -15538,10 +15546,12 @@
       "type": "object",
       "properties": {
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "accountName": {
           "type": "string",
@@ -15577,6 +15587,7 @@
         },
         "serviceDataAccessAuthIdentity": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "WorkspaceSystemAssignedIdentity",
@@ -15616,10 +15627,12 @@
       "type": "object",
       "properties": {
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "accountName": {
           "type": "string",
@@ -15632,6 +15645,7 @@
         },
         "endpoint": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15648,6 +15662,7 @@
         },
         "protocol": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -15655,6 +15670,7 @@
         },
         "serviceDataAccessAuthIdentity": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "WorkspaceSystemAssignedIdentity",
@@ -25178,6 +25194,20 @@
       "required": [
         "value"
       ]
+    },
+    "RaiBlocklistItemsBulkAddRequest": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "RaiBlocklistProperties": {
       "type": "object",
