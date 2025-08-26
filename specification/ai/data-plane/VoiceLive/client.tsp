@@ -85,7 +85,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.Response, "VoiceLiveResponse", "csharp");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentConfig", "csharp");
 @@clientName(VoiceLive.FunctionTool, "VoiceLiveFunctionDefinition", "csharp");
-@@clientName(VoiceLive.ToolCall, "VoiceLiveToolDefinition", "csharp");
+@@clientName(VoiceLive.Tool, "VoiceLiveToolDefinition", "csharp");
 
 @@clientName(VoiceLive.ContentPart, "VoiceLiveContentPart", "csharp");
 @@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "csharp");
