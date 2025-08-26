@@ -48,9 +48,6 @@ union EvaluatorConfigType {
   @doc("Prompt-based configuration")
   prompt: "prompt",
 
-  @doc("Prompty-based configuration")
-  prompty: "prompty",
-
   @doc("Code-based configuration")
   code: "code",
 
@@ -110,20 +107,6 @@ model ContainerEvaluatorConfig extends EvaluatorConfig {
 @doc("Prompt-based evaluator")
 model PromptBasedEvaluatorConfig extends EvaluatorConfig {
   config_type: EvaluatorConfigType.prompt;
-
-  @doc("The prompt text used for evaluation")
-  prompt_text: string;
-
-  @doc("The evaluator's input parameters")
-  input_params: InputParameters;
-
-  @doc("The evaluator's output parameters")
-  output_params: OutputParameters;
-}
-
-@doc("Prompty-based evaluator configuration using prompty files")
-model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
-  config_type: EvaluatorConfigType.prompty;
 
   @doc("The prompt text used for evaluation")
   prompt_text: string;
