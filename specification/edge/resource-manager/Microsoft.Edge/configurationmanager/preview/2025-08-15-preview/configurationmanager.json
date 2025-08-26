@@ -116,6 +116,15 @@
     },
     {
       "name": "SiteReferences"
+    },
+    {
+      "name": "SolutionSchemas"
+    },
+    {
+      "name": "ConfigTemplateSchemas"
+    },
+    {
+      "name": "ConfigTemplateMetadatas"
     }
   ],
   "paths": {
@@ -1257,6 +1266,248 @@
         "x-ms-examples": {
           "ConfigTemplateVersions_Get_MaximumSet": {
             "$ref": "./examples/ConfigTemplateVersions_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions/{configTemplateVersionName}/configTemplateMetadata": {
+      "get": {
+        "operationId": "ConfigTemplateMetadatas_ListByConfigTemplateVersion",
+        "tags": [
+          "ConfigTemplateMetadatas"
+        ],
+        "description": "List by ConfigTemplateVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configTemplateName",
+            "in": "path",
+            "description": "The name of the ConfigTemplate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "configTemplateVersionName",
+            "in": "path",
+            "description": "The name of the ConfigTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigTemplateMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet": {
+            "$ref": "./examples/ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions/{configTemplateVersionName}/configTemplateMetadata/{configTemplateMetadataName}": {
+      "get": {
+        "operationId": "ConfigTemplateMetadatas_Get",
+        "tags": [
+          "ConfigTemplateMetadatas"
+        ],
+        "description": "Get a ConfigTemplateMetadata Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configTemplateName",
+            "in": "path",
+            "description": "The name of the ConfigTemplate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "configTemplateVersionName",
+            "in": "path",
+            "description": "The name of the ConfigTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          {
+            "name": "configTemplateMetadataName",
+            "in": "path",
+            "description": "The name of the ConfigTemplateMetadataProperties",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigTemplateMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigTemplateMetadatas_Get_MaximumSet": {
+            "$ref": "./examples/ConfigTemplateMetadatas_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions/{configTemplateVersionName}/configTemplateSchema": {
+      "get": {
+        "operationId": "ConfigTemplateSchemas_ListByConfigTemplateVersion",
+        "tags": [
+          "ConfigTemplateSchemas"
+        ],
+        "description": "List by ConfigTemplateVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configTemplateName",
+            "in": "path",
+            "description": "The name of the ConfigTemplate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "configTemplateVersionName",
+            "in": "path",
+            "description": "The name of the ConfigTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigTemplateSchemaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigTemplateSchemas_ListByConfigTemplateVersion_MaximumSet": {
+            "$ref": "./examples/ConfigTemplateSchemas_ListByConfigTemplateVersion_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions/{configTemplateVersionName}/configTemplateSchema/{configTemplateSchemaName}": {
+      "get": {
+        "operationId": "ConfigTemplateSchemas_Get",
+        "tags": [
+          "ConfigTemplateSchemas"
+        ],
+        "description": "Get a ConfigTemplateSchema Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configTemplateName",
+            "in": "path",
+            "description": "The name of the ConfigTemplate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "configTemplateVersionName",
+            "in": "path",
+            "description": "The name of the ConfigTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          {
+            "name": "configTemplateSchemaName",
+            "in": "path",
+            "description": "The name of the ConfigTemplateSchemaProperties",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigTemplateSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigTemplateSchemas_Get_MaximumSet": {
+            "$ref": "./examples/ConfigTemplateSchemas_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -5604,6 +5855,131 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/solutionSchema": {
+      "get": {
+        "operationId": "SolutionSchemas_ListBySolutionTemplateVersion",
+        "tags": [
+          "SolutionSchemas"
+        ],
+        "description": "List by SolutionTemplateVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionTemplateName",
+            "in": "path",
+            "description": "The name of the SolutionTemplate",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionTemplateVersionName",
+            "in": "path",
+            "description": "The name of the SolutionTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionSchemaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionSchemas_ListBySolutionTemplateVersion_MaximumSet": {
+            "$ref": "./examples/SolutionSchemas_ListBySolutionTemplateVersion_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/solutionSchema/{solutionSchemaName}": {
+      "get": {
+        "operationId": "SolutionSchemas_Get",
+        "tags": [
+          "SolutionSchemas"
+        ],
+        "description": "Get a SolutionSchema Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionTemplateName",
+            "in": "path",
+            "description": "The name of the SolutionTemplate",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionTemplateVersionName",
+            "in": "path",
+            "description": "The name of the SolutionTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          {
+            "name": "solutionSchemaName",
+            "in": "path",
+            "description": "The name of the SolutionSchemaProperties",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionSchemas_Get_MaximumSet": {
+            "$ref": "./examples/SolutionSchemas_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets": {
       "get": {
         "operationId": "Targets_ListByResourceGroup",
@@ -9295,6 +9671,83 @@
         "value"
       ]
     },
+    "ConfigTemplateMetadata": {
+      "type": "object",
+      "description": "SolutionSchema Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigTemplateMetadataProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConfigTemplateMetadataListResult": {
+      "type": "object",
+      "description": "The response of a ConfigTemplateMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigTemplateMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigTemplateMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigTemplateMetadataProperties": {
+      "type": "object",
+      "description": "ConfigTemplateMetadata Properties",
+      "properties": {
+        "hierarchyIds": {
+          "type": "array",
+          "description": "Hierarchy ARM Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Edge/targets"
+                },
+                {
+                  "type": "Microsoft.Edge/sites"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        },
+        "level": {
+          "type": "string",
+          "description": "Hierarchy Level",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      }
+    },
     "ConfigTemplateProperties": {
       "type": "object",
       "description": "Config Template Properties",
@@ -9325,6 +9778,63 @@
         "description": {
           "type": "string",
           "description": "Description of config template"
+        }
+      }
+    },
+    "ConfigTemplateSchema": {
+      "type": "object",
+      "description": "SolutionSchema Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigTemplateSchemaProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConfigTemplateSchemaListResult": {
+      "type": "object",
+      "description": "The response of a ConfigTemplateSchema list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigTemplateSchema items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigTemplateSchema"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigTemplateSchemaProperties": {
+      "type": "object",
+      "description": "ConfigTemplateSchema Properties",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of schema",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
         }
       }
     },
@@ -11536,6 +12046,68 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      }
+    },
+    "SolutionSchema": {
+      "type": "object",
+      "description": "SolutionSchema Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionSchemaProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionSchemaListResult": {
+      "type": "object",
+      "description": "The response of a SolutionSchema list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionSchema items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionSchema"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionSchemaProperties": {
+      "type": "object",
+      "description": "SolutionSchema Properties",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of schema",
+          "readOnly": true
+        },
+        "level": {
+          "type": "string",
+          "description": "Hierarchy Level",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
