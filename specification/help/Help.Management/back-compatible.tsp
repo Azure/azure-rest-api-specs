@@ -154,7 +154,7 @@ using Microsoft.Help;
 @@clientName(DiscoveryResponse, "SelfHelpDiscoverySolutionResult", "csharp");
 @@clientName(Error, "SelfHelpError", "csharp");
 @@clientName(Filter, "SelfHelpFilter", "csharp");
-@@clientName(CheckNameAvailabilityRequest,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "SelfHelpNameAvailabilityContent",
   "csharp"
 );
@@ -193,9 +193,18 @@ using Microsoft.Help;
   "IsNameAvailable",
   "csharp"
 );
-@@alternateType(CheckNameAvailabilityRequest.type, armResourceType, "csharp");
-@@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityRequest.name, "ResourceName", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+  armResourceType,
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.name,
+  "ResourceName",
+  "csharp"
+);
 @@clientName(ImportanceLevel, "SelfHelpImportanceLevel", "csharp");
 @@clientName(Error.type, "ErrorType ", "csharp");
 @@clientName(Step.type, "StepType", "csharp");
