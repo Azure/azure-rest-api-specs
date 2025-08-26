@@ -2,6 +2,8 @@
 
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
 
+For information about how changes to API specifications are published to public documentation, see [Documentation Publishing Process](documentation/documentation-publishing-process.md).
+
 ## Table of Contents
 <!--
   You should regenerate the TOC using the `markdown-toc` node package after making changes to this file.

@@ -7,6 +7,7 @@ This page is intended to answer questions frequently asked during Azure API spec
 3. [How to generate SDK from API specs?](#SDK)
 4. [How to generate document](#doc)
 5. [How to generate swagger examples](#examplegen)
+6. [How are changes published to public documentation?](#publishing)
 
 ## How to onboard to API spec PR review Process?<a name="Onboard"></a>
 If you are new to API spec, you can refer to this [document](https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-specs#create-your-rest-api-definition)
@@ -35,3 +36,19 @@ Refer to [document](https://eng.ms/docs/products/azure-developer-experience/desi
 
 ## How to generate examples from Swagger?<a name="examplegen"></a>
 Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md)
+
+## How are changes published to public documentation?<a name="publishing"></a>
+Changes to API specifications in this repository are automatically published to public documentation through various processes:
+
+- **GitHub Pages** - API documentation index and reference available at https://azure.github.io/azure-rest-api-specs/
+- **docs.microsoft.com** - Official Microsoft documentation for Azure services
+- **learn.microsoft.com** - Microsoft Learn platform content
+- **SDK documentation** - Generated client library documentation
+
+The publication process includes:
+1. Automatic documentation generation using DocFX
+2. GitHub Pages deployment via Azure Pipelines
+3. SDK generation and documentation for multiple programming languages
+4. Integration with Microsoft documentation platforms
+
+For detailed information about the complete publishing process, see the [Documentation Publishing Process](./documentation-publishing-process.md) guide.
