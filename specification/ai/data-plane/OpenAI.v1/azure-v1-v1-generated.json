@@ -13,6 +13,9 @@
       "name": "Chat"
     },
     {
+      "name": "Embeddings"
+    },
+    {
       "name": "Evals"
     },
     {
@@ -109,6 +112,82 @@
         "x-ms-examples": {
           "Create a chat completion": {
             "$ref": "./examples/chat_completions.yaml"
+          }
+        }
+      }
+    },
+    "/embeddings": {
+      "post": {
+        "operationId": "createEmbedding",
+        "summary": "Creates an embedding vector representing the input text.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
+            "schema": {
+              "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
+              "default": "v1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "apim-request-id": {
+                "required": false,
+                "description": "A request ID used for troubleshooting purposes.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.CreateEmbeddingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "apim-request-id": {
+                "required": false,
+                "description": "A request ID used for troubleshooting purposes.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AzureErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Embeddings"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AzureCreateEmbeddingRequest"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an embedding request": {
+            "$ref": "./examples/embeddings.yaml"
           }
         }
       }
@@ -6210,6 +6289,69 @@
           }
         }
       },
+      "AzureCreateEmbeddingRequest": {
+        "type": "object",
+        "required": [
+          "model",
+          "input"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The model to use for the embedding request."
+          },
+          "input": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            ],
+            "description": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. The input must not exceed the max input tokens for the model (8192 tokens for all embedding models), cannot be an empty string, and any array must be 2048 dimensions or less. [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken) for counting tokens. In addition to the per-input token limit, all embedding  models enforce a maximum of 300,000 tokens summed across all inputs in a  single request."
+          },
+          "encoding_format": {
+            "type": "string",
+            "enum": [
+              "float",
+              "base64"
+            ],
+            "description": "The format to return the embeddings in. Can be either `float` or [`base64`](https://pypi.org/project/pybase64/).",
+            "default": "float"
+          },
+          "dimensions": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of dimensions the resulting output embeddings should have. Only supported in `text-embedding-3` and later models."
+          },
+          "user": {
+            "type": "string",
+            "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices#end-user-ids)."
+          }
+        }
+      },
       "AzureCreateFileRequestMultiPart": {
         "type": "object",
         "required": [
@@ -9706,6 +9848,55 @@
         },
         "description": "An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`."
       },
+      "OpenAI.CreateEmbeddingResponse": {
+        "type": "object",
+        "required": [
+          "data",
+          "model",
+          "object",
+          "usage"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Embedding"
+            },
+            "description": "The list of embeddings generated by the model."
+          },
+          "model": {
+            "type": "string",
+            "description": "The name of the model used to generate the embedding."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "list"
+            ],
+            "description": "The object type, which is always \"list\"."
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "prompt_tokens": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of tokens used by the prompt."
+              },
+              "total_tokens": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of tokens used by the request."
+              }
+            },
+            "required": [
+              "prompt_tokens",
+              "total_tokens"
+            ],
+            "description": "The usage information for the request."
+          }
+        }
+      },
       "OpenAI.CreateEvalItem": {
         "anyOf": [
           {
@@ -10114,6 +10305,43 @@
             ]
           }
         }
+      },
+      "OpenAI.Embedding": {
+        "type": "object",
+        "required": [
+          "index",
+          "embedding",
+          "object"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The index of the embedding in the list of embeddings."
+          },
+          "embedding": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "The embedding vector, which is a list of floats. The length of vector depends on the model as listed in the [embedding guide](/docs/guides/embeddings)."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "embedding"
+            ],
+            "description": "The object type, which is always \"embedding\"."
+          }
+        },
+        "description": "Represents an embedding vector returned by embedding endpoint."
       },
       "OpenAI.Eval": {
         "type": "object",
