@@ -42,7 +42,9 @@ import {
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
 
-import { unzipSync } from "zlib";
+import fs from "fs/promises";
+import os from "os";
+import path from "path";
 
 /**
  * @typedef {Object} CheckMetadata
@@ -1138,18 +1140,30 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
  */
 export async function getImpactAssessment(github, core, owner, repo, runId) {
   // List artifacts for provided workflow run
-  const jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-    owner: owner,
-    repo: repo,
+  const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+    owner,
+    repo,
     run_id: runId,
-    name: "job-summary",
-    per_page: PER_PAGE_MAX,
   });
 
-  // If multiple artifacts with same name, select latest updated
-  const jobSummaryArtifact = jobSummaryArtifacts.sort(
-    invert(byDate((a) => a.updated_at || "1970")),
-  )[0];
+  // List artifacts for provided workflow run
+  // const jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+  //   owner: owner,
+  //   repo: repo,
+  //   run_id: runId,
+  //   name: "job-summary",
+  //   per_page: PER_PAGE_MAX,
+  // });
+
+  // Find the job-summary artifact
+  const jobSummaryArtifact = artifacts.data.artifacts.find(
+    (artifact) => artifact.name === "job-summary",
+  );
+
+  // // If multiple artifacts with same name, select latest updated
+  // const jobSummaryArtifact = jobSummaryArtifacts.sort(
+  //   invert(byDate((a) => a.updated_at || "1970")),
+  // )[0];
 
   if (!jobSummaryArtifact) {
     throw new Error(
