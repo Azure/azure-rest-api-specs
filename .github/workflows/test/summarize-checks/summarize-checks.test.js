@@ -1154,7 +1154,7 @@ describe("Summarize Checks Unit Tests", () => {
     it("unzips and extracts artifact", async () => {
       /** @type {import("../../src/summarize-checks/labelling.js").ImpactAssessment} */
       const impactAssessment = {
-        // Set booleans arbitrarily to true|false
+        // Set booleans arbitrarily to false|true
         resourceManagerRequired: false,
         dataPlaneRequired: true,
         suppressionReviewRequired: false,
