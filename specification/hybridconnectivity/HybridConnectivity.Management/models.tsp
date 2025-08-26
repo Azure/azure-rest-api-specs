@@ -145,8 +145,6 @@ model ServiceConfigurationResourcePatch {
   /**
    * The service configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ServiceConfigurationPropertiesPatch;
 }
 
@@ -177,8 +175,6 @@ model EndpointAccessResource {
   /**
    * Azure relay hybrid connection access properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   relay?: RelayNamespaceAccessProperties;
 }
 
@@ -229,15 +225,11 @@ model IngressGatewayResource {
   /**
    * Azure relay hybrid connection access properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   relay?: RelayNamespaceAccessProperties;
 
   /**
    * Ingress gateway profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   ingress?: IngressProfileProperties;
 }
 
@@ -253,8 +245,6 @@ model IngressProfileProperties {
   /**
    * The AAD Profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   aadProfile: AADProfileProperties;
 }
 
