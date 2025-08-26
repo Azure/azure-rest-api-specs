@@ -44,10 +44,6 @@ model SolutionProperties {
 model SolutionUpdate {
   @doc("The resource-specific properties for this resource.")
   properties?: SolutionUpdateProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("Resource tags.")
-  tags?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
