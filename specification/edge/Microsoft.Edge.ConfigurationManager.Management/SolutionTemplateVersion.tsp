@@ -58,6 +58,14 @@ model BulkDeploySolutionParameter {
   @doc("Targets to which solution needs to be deployed")
   @Azure.ResourceManager.identifiers(#[])
   targets: BulkDeployTargetDetails[];
+
+  @added(Versions.v2025_08_01)
+  @doc("ARM Id of Job of bulk publish or deploy")
+  jobId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/SolutionTemplates/Solutions/Versions/providers/Microsoft.Edge/Jobs";
+    }
+  ]>;
 }
 
 @doc("Bulk deploy target details")
@@ -87,6 +95,14 @@ model BulkPublishSolutionParameter {
   @added(Versions.v2025_08_01)
   @doc("Configuration of solution")
   solutionConfiguration?: string;
+
+  @added(Versions.v2025_08_01)
+  @doc("ARM Id of Job of bulk review or publish")
+  jobId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/SolutionTemplates/Solutions/Versions/providers/Microsoft.Edge/Jobs";
+    }
+  ]>;
 }
 
 @doc("Bulk publish target details")
@@ -132,6 +148,13 @@ model BulkReviewSolutionParameter {
 
   @doc("Configuration of solution")
   solutionConfiguration?: string;
+
+  @doc("ARM Id of Job of bulk review")
+  jobId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/SolutionTemplates/Solutions/Versions/providers/Microsoft.Edge/Jobs";
+    }
+  ]>;
 }
 
 @added(Versions.v2025_08_01)
