@@ -29,7 +29,6 @@ import "./OriginGroup.tsp";
 import "./CustomDomain.tsp";
 import "./CdnWebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
