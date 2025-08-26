@@ -1,7 +1,6 @@
 using Http;
 using Rest;
 using Azure.ResourceManager.Foundations;
-using Azure.ResourceManager.Private;
 
 namespace Azure.ResourceManager.CustomLegacy;
 
@@ -14,15 +13,9 @@ namespace Azure.ResourceManager.CustomLegacy;
  * @template Response Optional. The success response for the createOrUpdate operation
  * @template Error Optional. The error response, if non-standard.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
 @autoRoute
 @doc("Create a {name}", Resource)
 @armResourceCreateOrUpdate(Resource)
-@Private.enforceConstraint(Resource, Foundations.Resource)
-@Azure.Core.Foundations.Private.defaultFinalStateVia(#[
-  "location",
-  "azure-async-operation"
-])
 @put
 op CreateOrUpdateWithoutBodyAsync<
   Resource extends Foundations.SimpleResource,
