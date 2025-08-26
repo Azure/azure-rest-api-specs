@@ -333,7 +333,7 @@ op getSkillFilters(
 @doc("Sets the local PluginHost debug state")
 op setLocalPluginHostDebugState(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body debugState: LocalPluginHostDebugState
+@body setLocalPluginHostDebugRequest: SetLocalPluginHostDebugRequest
 ):  NoContentResponse;
 
 //TODO: move this to a different file

@@ -1555,4 +1555,9 @@ namespace SkillContext
 		Completed,
 		Error,
 	}
+
+	@doc("Wrapper request for state of debugging through local PluginHost")
+	model SetLocalPluginHostDebugRequest {
+		localPluginHostDebugState: LocalPluginHostDebugState;
+	}
 }
