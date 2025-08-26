@@ -59,3 +59,13 @@ using Microsoft.ConnectedVMwarevSphere;
 @@clientName(VirtualNetworksList, "VMwareVirtualNetworkListResult", "csharp");
 @@clientName(WindowsConfiguration, "VMwareVmWindowsConfiguration", "csharp");
 @@clientName(WindowsConfiguration.autoLogon, "isAutoLogon", "csharp");
+
+
+// Java SDK configurations
+@@clientName(NICType, "NicType", "java");
+@@clientName(NicIPSettings, "NicIpSettings", "java");
+@@clientName(NicIPAddressSettings, "NicIpAddressSettings", "java");
+@@clientName(IPAddressAllocationMethod, "IpAddressAllocationMethod", "java");
+@@clientName(VirtualSCSIController, "VirtualScsiController", "java");
+@@clientName(SCSIControllerType, "ScsiControllerType", "java");
+@@clientName(VirtualSCSISharing, "VirtualScsiSharing", "java");
