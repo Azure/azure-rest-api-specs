@@ -44,6 +44,7 @@ interface ReadReceiptsOperations {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
   @tag("ReadReceipts")
   @added(Versions.c2025_09_01_Preview)
+  @action("send")
   @doc("Sends a read receipt update from Business to User.")
   send is Operations.ResourceCollectionAction<
     ReadReceipts,
