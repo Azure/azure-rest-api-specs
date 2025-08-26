@@ -48,15 +48,16 @@ namespace Quantum.Workspace.Services {
 
       @body
       update: Resource;
-            ...Azure.Core.Traits.Private.TraitProperties<
+
+      ...Azure.Core.Traits.Private.TraitProperties<
         DefaultServiceTraits,
         TraitLocation.Parameters,
         TraitContext.Update
       >;
-        }
+    }
   >;
 
-    /** Operation to patch a resource. */
+  /** Operation to patch a resource. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     There is no support for JsonPatch in Azure.Core.
     The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
@@ -89,7 +90,6 @@ namespace Quantum.Workspace.Services {
     DefaultServiceTraits,
     Azure.Core.Foundations.ErrorResponse
   >;
-
 
   /** Operation to cancel a resource. */
   alias CancelOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;

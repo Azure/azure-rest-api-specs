@@ -91,4 +91,3 @@ union Priority {
   /** The job's priority is elevated. */
   High: "High",
 }
-
