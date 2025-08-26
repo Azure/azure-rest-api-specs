@@ -100,5 +100,6 @@ export function createMockLogger() {
     error: vi.fn(),
     info: vi.fn(),
     isDebug: vi.fn().mockReturnValue(false),
+    warning: vi.fn(),
   };
 }
