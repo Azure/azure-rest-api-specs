@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/rest";
 import { strToU8, zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
+import { execFile } from "../../../shared/src/exec.js";
 import {
   createNextStepsComment,
   getCheckInfo,
@@ -1150,8 +1151,12 @@ describe("Summarize Checks Unit Tests", () => {
     });
   });
 
-  describe("getImpactAssessment", () => {
-    it("unzips and extracts artifact", async () => {
+  describe("getImpactAssessment", async () => {
+    const unzipExists = await execFile("unzip")
+      .then(() => true)
+      .catch(() => false);
+
+    it.runIf(unzipExists)("unzips and extracts artifact", async () => {
       /** @type {import("../../src/summarize-checks/labelling.js").ImpactAssessment} */
       const impactAssessment = {
         // Set booleans arbitrarily to false|true
