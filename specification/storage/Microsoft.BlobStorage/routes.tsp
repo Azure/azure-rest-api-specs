@@ -2134,14 +2134,13 @@ namespace Storage.Blob {
         @put
         @sharedRoute
         @route("{blobName}?BlockBlob&fromUrl")
-        op putBlobFromUrl is StorageOperationNoBody<
+        op uploadBlobFromUrl is StorageOperationNoBody<
           {
             ...MetadataHeaders;
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
             ...TimeoutParameter;
             ...ContentMd5Parameter;
-            ...ContentLengthParameter;
             ...BlobContentTypeParameter;
             ...BlobContentEncodingParameter;
             ...BlobContentLanguageParameter;
@@ -2167,6 +2166,11 @@ namespace Storage.Blob {
             ...SourceContentMd5Parameter;
             ...BlobTagsHeaderParameter;
             ...CopySourceParameter;
+
+            /** Required to be 0 for Put Blob from URL operation. */
+            @header("Content-Length")
+            contentLength: 0;
+
             ...CopySourceBlobPropertiesParameter;
             ...CopySourceAuthorizationParameter;
             ...CopySourceTagsParameter;
@@ -2183,7 +2187,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
