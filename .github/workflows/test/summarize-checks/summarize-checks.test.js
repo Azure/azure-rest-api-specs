@@ -1152,11 +1152,11 @@ describe("Summarize Checks Unit Tests", () => {
   });
 
   describe("getImpactAssessment", async () => {
-    // Runtime code currently requires "unzip" executable to exist
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
 
+    // Runtime code currently requires "unzip" executable to exist
     it.runIf(unzipExists)("unzips and extracts artifact", async () => {
       /** @type {import("../../src/summarize-checks/labelling.js").ImpactAssessment} */
       const impactAssessment = {
