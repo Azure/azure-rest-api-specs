@@ -39,9 +39,9 @@ input-file:
 suppressions:
     - code: AvoidAdditionalProperties
       from: machineAssessments.json
-      reason: Dictionary is used in AssessedMachineExtendedDetails.disks property for machine assessments.
+      reason: The set of key-value pairs depend on the type of the workload and is not user-defined. Service uses this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
       where:
-        - $.definitions.AssessedMachineExtendedDetails.properties.disks
+    - $.definitions.MachineGraphAssessmentOptionsProperties.properties.edges
     - code: OperationsAPIImplementation
       reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```

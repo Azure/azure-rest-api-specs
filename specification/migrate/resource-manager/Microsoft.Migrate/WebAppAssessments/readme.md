@@ -38,10 +38,10 @@ input-file:
   - preview/2024-03-03-preview/webAppAssessments.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: webAppAssessments.json
-    reason: Dictionary is used for web app mappings in web app assessments.
     where:
-      - $.definitions.WebAppExtendedDetails.properties.sites
+       - $.definitions.WepAppGraphAssessmentOptionsProperties.properties.edges
+    reason: Edges is a dictionary type and needs additionalProperties
+    from: webAppAssessments.json
   - code: OperationsAPIImplementation
     reason: Microsoft.Migrate resource provider has one RP with multiple SDKs. Operations API is centrally implemented at the AssessmentProjects level and intentionally excluded from individual service specifications to avoid duplication across multiple SDK instances.
 ```
