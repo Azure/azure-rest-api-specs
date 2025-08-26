@@ -3,11 +3,6 @@ description: 'Generate SDKs from TypeSpec'
 ---
 Your goal is to guide user through the process of generating SDKs from TypeSpec projects. Show all the high level steps to the user to ensure they understand the flow. Use the provided tools to perform actions and gather information as needed.
 
-## Pre-Flight Check
-- Verify ${workspaceFolder} is not on main branch
-- If on main branch, prompt user: "You are currently on the main branch. Please create a new branch using `git checkout -b <branch-name>` before proceeding."
-- Wait for user confirmation before continuing
-
 ## Step 1: Identify TypeSpec Project
 **Goal**: Locate the TypeSpec project root path
 **Actions**:
@@ -46,7 +41,8 @@ Your goal is to guide user through the process of generating SDKs from TypeSpec 
 3. Display all modified files (excluding `.github` and `.vscode` folders)
 4. Prompt user: "Please review the modified files. Do you want to commit these changes? (yes/no)"
 5. If yes:
-    - Verify current branch is not "main"
+    - If on main branch, prompt user: "You are currently on the main branch. Please create a new branch using `git checkout -b <branch-name>` before proceeding."
+    - Wait for user confirmation before continuing
     - Run `git add <modified-files>`
     - Prompt for commit message
     - Run `git commit -m "<user-provided-message>"`
@@ -92,19 +88,29 @@ Your goal is to guide user through the process of generating SDKs from TypeSpec 
 **Actions**:
 1. Run `GetSDKPullRequestDetails` to fetch generated SDK PR info.
 
-## Step 9: Create release plan
+## Step 9: Validate Label and Codeowners
+**Goal**: Validate the label and all codeowners for a service. Create new label and codeowner entry if none exist.
+**Actions**:
+1. To validate a service label refer to #file:./validate-service-label.instructions.md
+2. After service label is validated or created refer to #file:./validate-codeowners.instructions.md
+3. Handle post-validation actions based on results:
+   - **If both label and codeowners were already valid**: Prompt user "Your service label and codeowners are already properly configured. Would you like to modify the existing codeowners entry for your service?"
+   - **If new label or codeowner entries were created**: Display details of the label and codeowners PR if they were created, then prompt user "The following PRs have been created for your service configuration: [list PRs]. Would you like to make any additional modifications to these entries?"
+**Success Criteria**: Service label exists and codeowners are properly configured with at least 2 valid owners. For created entries, showcase all PR's.
+
+## Step 10: Create release plan
 **Goal**: Create a release plan for the generated SDKs
 **Actions**:
 1. Refer to #file:create-release-plan.instructions.md to create a release plan using the spec pull request.
 2. If the release plan already exists, display the existing plan details.
 
-## Step 10: Mark Spec PR as Ready for Review
+## Step 11: Mark Spec PR as Ready for Review
 **Goal**: Update spec PR to ready for review status
 **Actions**:
 1. Prompt user to change spec PR to ready for review: "Please change the spec pull request to ready for review status"
 2. Get approval and merge the spec PR
 
-## Step 11: Release SDK Package
+## Step 12: Release SDK Package
 **Goal**: Release the SDK package using the release plan
 **Actions**:
 1. Run `ReleaseSdkPackage` to release the SDK package.
