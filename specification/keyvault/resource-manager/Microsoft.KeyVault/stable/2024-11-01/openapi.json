@@ -3484,6 +3484,17 @@
           "$ref": "#/definitions/KeyProperties",
           "description": "The properties of the key.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the managed HSM Pool should be created."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -3491,7 +3502,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3905,9 +3916,24 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the managed HSM Pool should be created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "sku": {
           "$ref": "#/definitions/ManagedHsmSku",
           "description": "SKU details"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -3920,7 +3946,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4117,9 +4143,24 @@
           "$ref": "#/definitions/ManagedHsmProperties",
           "description": "Properties of the managed HSM"
         },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the managed HSM Pool should be created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "sku": {
           "$ref": "#/definitions/ManagedHsmSku",
           "description": "SKU details"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -4128,7 +4169,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4903,6 +4944,18 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "type": "string",
+          "description": "Azure location of the key vault resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags assigned to the key vault resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "etag": {
           "type": "string",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
@@ -4910,7 +4963,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5249,6 +5302,19 @@
         "properties": {
           "$ref": "#/definitions/SecretProperties",
           "description": "Properties of the secret"
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location of the key vault resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags assigned to the key vault resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -5256,7 +5322,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5588,32 +5654,6 @@
         ]
       }
     },
-    "TrackedResource": {
-      "type": "object",
-      "description": "A tracked resource with the 'location' property optional",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Trigger": {
       "type": "object",
       "properties": {
@@ -5634,6 +5674,19 @@
         "properties": {
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault"
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location of the key vault resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags assigned to the key vault resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -5641,7 +5694,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

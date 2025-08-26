@@ -13,9 +13,7 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ManagedHsm
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ManagedHsmProperties> {
+model ManagedHsm is Azure.ResourceManager.ProxyResource<ManagedHsmProperties> {
   ...ResourceNameParameter<
     Resource = ManagedHsm,
     KeyName = "name",
@@ -24,10 +22,24 @@ model ManagedHsm
   >;
 
   /**
+   * The supported Azure location where the managed HSM Pool should be created.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
    * SKU details
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ManagedHsmSku;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * Managed service identity

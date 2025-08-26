@@ -14,10 +14,9 @@ namespace Microsoft.KeyVault;
 /**
  * Private endpoint connection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedHsm)
 model MhsmPrivateEndpointConnection
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MhsmPrivateEndpointConnectionProperties> {
+  is Azure.ResourceManager.ProxyResource<MhsmPrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = MhsmPrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
@@ -26,10 +25,24 @@ model MhsmPrivateEndpointConnection
   >;
 
   /**
+   * The supported Azure location where the managed HSM Pool should be created.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
    * SKU details
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ManagedHsmSku;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * Managed service identity
