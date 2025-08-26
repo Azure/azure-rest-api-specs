@@ -9,8 +9,8 @@ using Microsoft.DBforMySQL;
   "javascript"
 );
 
-@@clientName(ServerVersion.`5.7`, "Five7", "javascript");
-@@clientName(ServerVersion.`8.0.21`, "Eight021", "javascript");
+@@clientName(ServerVersion.`5.7`, "Five7", "javascript,go");
+@@clientName(ServerVersion.`8.0.21`, "Eight021", "javascript,go");
 
 // Java SDK compatibility fixes for TypeSpec migration
 @@clientName(Microsoft.DBforMySQL.MySQLServerIdentity, "Identity", "java");
