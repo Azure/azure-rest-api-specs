@@ -59,10 +59,10 @@ union EvaluatorConfigType {
 }
 
 @doc("Base evaluator configuration with discriminator")
-@discriminator("type")
+@discriminator("config_type")
 model EvaluatorConfig {
   @doc("The type of evaluator configuration")
-  type: EvaluatorConfigType;
+  config_type: EvaluatorConfigType;
 }
 
 /* Allowed parameter types */
@@ -73,7 +73,7 @@ alias InitializationParameters = Record<ScalarParamType>; // TODO: Is this corre
 
 @doc("Code-based evaluator configuration using container images")
 model CodeEvaluatorConfig extends EvaluatorConfig {
-  type: EvaluatorConfigType.code;
+  config_type: EvaluatorConfigType.code;
 
   @doc("URI of the container image")
   inline_code: string;
@@ -84,7 +84,7 @@ model CodeEvaluatorConfig extends EvaluatorConfig {
 
 @doc("Code-based evaluator configuration using container images")
 model ContainerEvaluatorConfig extends EvaluatorConfig {
-  type: EvaluatorConfigType.container;
+  config_type: EvaluatorConfigType.container;
 
   @doc("URI of the container image")
   container_image_uri: string;
@@ -95,7 +95,7 @@ model ContainerEvaluatorConfig extends EvaluatorConfig {
 
 @doc("Prompt-based evaluator")
 model PromptBasedEvaluatorConfig extends EvaluatorConfig {
-  type: EvaluatorConfigType.prompt;
+  config_type: EvaluatorConfigType.prompt;
 
   @doc("The prompt text used for evaluation")
   prompt_text: string;
@@ -106,7 +106,7 @@ model PromptBasedEvaluatorConfig extends EvaluatorConfig {
 
 @doc("Prompty-based evaluator configuration using prompty files")
 model PromptyBasedEvaluatorConfig extends EvaluatorConfig {
-  type: EvaluatorConfigType.prompty;
+  config_type: EvaluatorConfigType.prompty;
 
   @doc("The prompt text used for evaluation")
   prompt_text: string;
