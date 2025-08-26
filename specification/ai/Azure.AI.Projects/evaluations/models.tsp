@@ -59,6 +59,10 @@ model InputDataset extends InputData {
 @added(Versions.v2025_07_31_preview)
 scalar DatasetId extends string;
 
+@doc("Unique identifier of the evaluation result.")
+@added(Versions.v2025_07_31_preview)
+scalar EvaluationResultId extends string;
+
 @doc("Specifies the type of data source used for evaluation. Different types support various data input methods and formats.")
 @added(Versions.v2025_07_31_preview)
 union EvaluationDataSourceType {
@@ -335,7 +339,7 @@ model EvaluationResultSettings {
   additionalDestinations?: Array<EvaluationDestinationConfiguration>;
 }
 
-@doc("cccc Evaluation Definition")
+@doc("Single Evaluation Definition")
 @added(Versions.v2025_07_31_preview)
 model SingleEvaluation {
   @doc("Input data to evaluate. Single row support only.")
@@ -443,13 +447,12 @@ model Evaluation {
   summary?: EvaluationSummaryResult;
 
   @doc("""
-     Unique identifier of the dataset containing detailed evaluation results. This dataset is created automatically upon evaluation completion and contains row-by-row results for analysis.
-     The identifier follows the format: azureai://accounts/{resourceName}/projects/{projectName}/datasets/{datasetName}/versions/{versionNumber}.
-     Note: This dataset is only available when the result retention policy permits detailed result storage.
+     Unique identifier of the evaluation result containing detailed evaluation results. This is created automatically upon evaluation completion and contains row-by-row results for analysis.
+     The identifier follows the format: azureai://accounts/{resourceName}/projects/{projectName}/evaluationresult/{name}/versions/{versionNumber}.
     """)
   @added(Versions.v2025_07_31_preview)
   @visibility(Lifecycle.Read)
-  resultDatasetId?: DatasetId;
+  resultId?: EvaluationResultId;
 
   @doc("System-generated metadata containing internal service information for debugging and operational purposes. This field is managed by the service and cannot be modified by clients.")
   @visibility(Lifecycle.Read)

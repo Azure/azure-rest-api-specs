@@ -2770,9 +2770,9 @@
           "description": "Aggregated summary of evaluation results for each configured evaluator. This provides a high-level overview of performance across all data rows.",
           "readOnly": true
         },
-        "resultDatasetId": {
-          "$ref": "#/definitions/DatasetId",
-          "description": " Unique identifier of the dataset containing detailed evaluation results. This dataset is created automatically upon evaluation completion and contains row-by-row results for analysis.\n The identifier follows the format: azureai://accounts/{resourceName}/projects/{projectName}/datasets/{datasetName}/versions/{versionNumber}.\n Note: This dataset is only available when the result retention policy permits detailed result storage.",
+        "resultId": {
+          "$ref": "#/definitions/EvaluationResultId",
+          "description": " Unique identifier of the evaluation result containing detailed evaluation results. This is created automatically upon evaluation completion and contains row-by-row results for analysis.\n The identifier follows the format: azureai://accounts/{resourceName}/projects/{projectName}/evaluationresult/{name}/versions/{versionNumber}.",
           "readOnly": true
         },
         "systemData": {
@@ -2988,6 +2988,10 @@
       "required": [
         "id"
       ]
+    },
+    "EvaluationResultId": {
+      "type": "string",
+      "description": "Unique identifier of the evaluation result."
     },
     "EvaluationResultMetadata": {
       "type": "object",
@@ -4372,7 +4376,7 @@
     },
     "SingleEvaluation": {
       "type": "object",
-      "description": "cccc Evaluation Definition",
+      "description": "Single Evaluation Definition",
       "properties": {
         "dataSource": {
           "$ref": "#/definitions/InlineDataSource",
