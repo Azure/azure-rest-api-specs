@@ -195,12 +195,11 @@ union Type {
 /**
  * Represents a paginated list of operations.
  */
-@pagedResult
 model OperationListResult {
   /**
    * The list of operations.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value: OperationResult[];
 

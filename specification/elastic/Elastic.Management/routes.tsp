@@ -19,6 +19,7 @@ interface ElasticVersionsOperationGroup {
   @summary("Retrieve a list of all available Elastic versions for a specified region, helping you choose the best version for your deployment.")
   @autoRoute
   @get
+  @list
   @action("elasticVersions")
   list is ArmProviderActionSync<
     Response = ElasticVersionsListResponse,

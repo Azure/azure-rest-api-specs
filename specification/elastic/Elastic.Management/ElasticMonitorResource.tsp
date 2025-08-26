@@ -151,6 +151,7 @@ interface ElasticMonitorResources {
   /**
    * List all resources currently being monitored by the Elastic monitor resource, helping you manage observability.
    */
+  @list
   @action("listMonitoredResources")
   monitoredResourcesList is ArmResourceActionSync<
     ElasticMonitorResource,
@@ -196,6 +197,7 @@ interface ElasticMonitorResources {
   /**
    * List all active deployments associated with the marketplace subscription linked to the given Elastic monitor resource.
    */
+  @list
   @action("listConnectedPartnerResources")
   connectedPartnerResourcesList is ArmResourceActionSync<
     ElasticMonitorResource,
@@ -209,6 +211,7 @@ interface ElasticMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listVMHost")
+  @list
   vMHostList is ArmResourceActionSync<
     ElasticMonitorResource,
     void,
