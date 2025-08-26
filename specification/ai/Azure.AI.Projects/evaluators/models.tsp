@@ -53,6 +53,9 @@ union EvaluatorConfigType {
 
   @doc("Code-based configuration")
   code: "code",
+
+  @doc("Container-based configuration")
+  container: "container",
 }
 
 // TODO: What are the allowed values here
@@ -113,6 +116,17 @@ model ContainerDeploymentConfig {
 @doc("Code-based evaluator configuration using container images")
 model CodeEvaluatorConfig extends EvaluatorConfig {
   type: EvaluatorConfigType.code;
+
+  @doc("URI of the container image")
+  inline_code: string;
+
+  @doc("The evaluator's initialization parameters")
+  init_params: InitializationParameters;
+}
+
+@doc("Code-based evaluator configuration using container images")
+model ContainerEvaluatorConfig extends EvaluatorConfig {
+  type: EvaluatorConfigType.container;
 
   @doc("URI of the container image")
   container_image_uri: string;
