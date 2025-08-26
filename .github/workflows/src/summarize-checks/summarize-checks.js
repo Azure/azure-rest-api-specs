@@ -1174,8 +1174,12 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
   const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
   const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
   await fs.writeFile(tmpZip, zipBuffer);
+
   // Extract JSON content from zip archive
+  // Could replace with library like 'fflate' instead of 'exec unzip', but
+  // this would require 'npm i', while 'unzip' is pre-installed.
   const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
+
   await fs.unlink(tmpZip);
 
   /** @type {import("./labelling.js").ImpactAssessment} */
