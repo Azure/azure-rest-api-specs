@@ -4,7 +4,7 @@ import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { CoreLogger } from "./core-logger.js";
 import { createLogHook, createRateLimitHook } from "./github.js";
-import { getIssueNumber } from "./issues.js";
+import { getPullRequest } from "./pull-request.js";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
@@ -134,67 +134,22 @@ export async function extractInputs(github, context, core) {
         // empty for non-fork PRs.  This should be the same for pull_request and pull_request_target.
         issue_number = pull_requests[0].number;
       } else {
-        // For fork PRs, we must call an API in the head repository to get the PR number in the base repository
+        const base_owner = payload.workflow_run.repository.owner.login;
+        const base_repo = payload.workflow_run.repository.name;
 
         // Owner and repo for the PR head (at least one should differ from base for fork PRs)
         const head_owner = payload.workflow_run.head_repository.owner.login;
         const head_repo = payload.workflow_run.head_repository.name;
 
-        /** @type {PullRequest[]} */
-        let pullRequests = [];
-
-        try {
-          core.info(
-            `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
-          );
-          pullRequests = (
-            await github.paginate(github.rest.repos.listPullRequestsAssociatedWithCommit, {
-              owner: head_owner,
-              repo: head_repo,
-              commit_sha: head_sha,
-              per_page: PER_PAGE_MAX,
-            })
-          ).filter(
-            // Only include PRs to the same repo as the triggering workflow.
-            //
-            // Other unique keys like "full_name" should also work, but "id" is the safest since it's
-            // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
-            (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
-          );
-        } catch (error) {
-          // Short message always
-          core.info(`Error: ${error instanceof Error ? error.message : "unknown"}`);
-
-          // Long message only in debug
-          core.debug(`Error: ${error}`);
-        }
-
-        if (pullRequests.length === 0) {
-          // There are three cases where the "commits" REST API called above can return
-          // empty, even if there is an open PR from the commit:
-          //
-          // 1. If the head branch of a fork PR is the default branch of the fork repo, the
-          //    API always returns empty. (#33315)
-          // 2. If a PR was just merged, the API may return empty for a brief window (#33416).
-          // 3. The API may fail occasionally for no known reason (#33417).
-          //
-          // In any case, the solution is to fall back to the (lower-rate-limit) search API.
-          // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
-          issue_number = (await getIssueNumber({ head_sha, github, core })).issueNumber;
-        } else if (pullRequests.length === 1) {
-          issue_number = pullRequests[0].number;
-        } else {
-          throw new Error(
-            `Unexpected number of pull requests associated with commit '${head_sha}'. ` +
-              `Expected: '1'. Actual: '${pullRequests.length}'. PRs:\n` +
-              pullRequests.map((pr) => pr.html_url).join("\n"),
-          );
-        }
-        if (!issue_number) {
-          core.info(
-            `Could not find PR for ${head_sha} in ${head_owner}:${head_repo} from either the "commits" or "search" REST APIs`,
-          );
-        }
+        issue_number = await getPullRequest(
+          github,
+          head_sha,
+          head_owner,
+          head_repo,
+          base_owner,
+          base_repo,
+          new CoreLogger(core),
+        );
       }
     } else if (
       payload.workflow_run.event === "issue_comment" ||
