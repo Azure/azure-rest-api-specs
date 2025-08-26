@@ -1152,6 +1152,7 @@ describe("Summarize Checks Unit Tests", () => {
   });
 
   describe("getImpactAssessment", async () => {
+    // Runtime code currently requires "unzip" executable to exist
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
