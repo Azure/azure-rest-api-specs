@@ -23,8 +23,6 @@ GET /analyzerResults/{operationId}
 GET /analyzerResults/{operationId}/files/{path}
 ```
 
-Related sample: `content_analyzers_analyze_binary.py`
-
 ---
 
 ## Analyze a PDF and persist the raw JSON response
@@ -43,8 +41,6 @@ POST /analyzers/prebuilt-documentAnalyzer:analyze
 GET /analyzers/prebuilt-documentAnalyzer/operations/{operationId}
 GET /analyzerResults/{operationId}
 ```
-
-Related sample: `content_analyzers_analyze_binary_raw_json.py`
 
 ---
 
@@ -69,8 +65,6 @@ GET /analyzers/prebuilt-documentAnalyzer/operations/{operationId}
 GET /analyzerResults/{operationId}
 ```
 
-Related sample: `content_analyzers_analyze_url.py`
-
 ---
 
 ## Extract invoice fields using the prebuilt-invoice analyzer (URL)
@@ -93,8 +87,6 @@ POST /analyzers/prebuilt-invoice:analyze
 GET /analyzers/prebuilt-invoice/operations/{operationId}
 GET /analyzerResults/{operationId}
 ```
-
-Related sample: `content_analyzers_analyze_url_prebuilt_invoice.py`
 
 ---
 
@@ -121,8 +113,6 @@ PUT /analyzers/{analyzerId}
 GET /analyzers/{analyzerId}
 ```
 
-Related sample: `content_analyzers_create_or_replace.py`
-
 ---
 
 ## Update, get, list, and delete analyzers
@@ -145,8 +135,6 @@ GET /analyzers
 DELETE /analyzers/{analyzerId}
 ```
 
-Related samples: `content_analyzers_update.py`, `content_analyzers_get_analyzer.py`, `content_analyzers_list.py`, `content_analyzers_delete_analyzer.py`
-
 ---
 
 ## Retrieve analyzer operation status and results (including files)
@@ -162,8 +150,6 @@ GET /analyzerResults/{operationId}
 
 GET /analyzerResults/{operationId}/files/{path}
 ```
-
-Related samples: `content_analyzers_get_operation_status.py`, `content_analyzers_get_result.py`, `content_analyzers_get_result_file.py`
 
 ---
 
@@ -193,8 +179,6 @@ POST /classifiers/{classifierId}:classify
 GET /classifierResults/{operationId}
 ```
 
-Related samples: `content_classifiers_create_or_replace.py`, `content_classifiers_classify.py`, `content_classifiers_classify_binary.py`, `content_classifiers_get_result.py`, `content_classifiers_get_operation_status.py`
-
 ---
 
 ## Update, get, list, and delete classifiers
@@ -217,8 +201,6 @@ GET /classifiers
 DELETE /classifiers/{classifierId}
 ```
 
-Related samples: `content_classifiers_update.py`, `content_classifiers_get_classifier.py`, `content_classifiers_list.py`, `content_classifiers_delete_classifier.py`
-
 ---
 
 ## Detect faces in images (binary or URL)
@@ -235,8 +217,6 @@ POST /faces:detect
 	Content-Type: image/jpeg | application/json
 	Body: <binary image> | { "url": "https://.../image.jpg" }
 ```
-
-Related samples: `faces_detect.py`, `faces_detect_url.py`
 
 ---
 
@@ -265,4 +245,3 @@ DELETE /personDirectories/{directoryId}/persons/{personId}
 DELETE /personDirectories/{directoryId}
 ```
 
-Related samples: `person_directories_create.py`, `person_directories_add_person.py`, `person_directories_update_person.py`, `person_directories_update_face.py`, `person_directories_identify_person.py`, `person_directories_find_similar_faces.py`, `person_directories_list_persons.py`, `person_directories_list_faces.py`, `person_directories_get.py`, `person_directories_get_person.py`, `person_directories_get_face.py`, `person_directories_delete_face.py`, `person_directories_delete_person.py`, `person_directories_delete.py`
