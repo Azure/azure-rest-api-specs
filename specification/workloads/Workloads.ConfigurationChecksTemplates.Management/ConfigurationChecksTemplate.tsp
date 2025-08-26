@@ -43,9 +43,7 @@ interface ConfigurationChecksTemplates {
    */
   onDemandExecution is ArmResourceActionAsync<
     ConfigurationChecksTemplate,
-    {
-      @doc("Request body to execute the configuration check template resource on demand.")
-    },
+    void,
     Azure.ResourceManager.Foundations.OperationStatusResult
   >;
 }
