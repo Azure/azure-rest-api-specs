@@ -55,7 +55,7 @@ To enforce these rules, Here're some tweaks to the repo structure:
 6.	The preview and stable folders must only have subfolders whose name match this format: YYYY-MM-DD-preview in the preview folder and YYYY-MM-DD in the stable folder. All the files in the YYYY-MM-DD(-preview) folders must be json (swagger) files.
 7.	Each YYYY-MM-DD(-preview) folder must have an examples folder containing only example *.json files for this api-version.
 8.	It is illegal for a preview and stable version to share the same date. For example, if there is a 2024-04-01-preview, then there can never be a 2024-04-01 stable.
-9. Each new control plane api-version is recommended to be unique across all the control plane service folders for an RP Namespace. 
+9. Each new control plane api-version should be unique across all the control plane service folders for an RP Namespace. 
 10.	Each service name folder must duplicate the special "list operations" API. 
     - While this RP (not service) operation requires an api-version query parameter, the response data is not specific to this api-version; the response is api-version neutral. In addition, the response is always the same regardless of tenant/subscription. Whenever any other service in the RP gets a new api-version, the TypeSpec/Swagger for the operations service must also be updated to match this new api-version.
 
