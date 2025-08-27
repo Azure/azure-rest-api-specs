@@ -14,17 +14,19 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzetext.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Language.Text"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.AI.Language.Text"
     flavor: azure
   "@azure-tools/typespec-python":
+    package-name: "azure-ai-textanalytics"
     package-dir: "azure-ai-textanalytics"
     namespace: "azure.ai.language.text"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Language.Text
     model-namespace: false
