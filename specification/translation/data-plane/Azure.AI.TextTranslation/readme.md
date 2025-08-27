@@ -51,7 +51,6 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/stable/v3.0/openapi.json
   - $(this-folder)/preview/v2025-05-01-preview/openapi.json
 ```
 
