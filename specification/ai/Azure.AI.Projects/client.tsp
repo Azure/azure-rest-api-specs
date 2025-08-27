@@ -37,9 +37,44 @@ using Azure.ClientGenerator.Core;
 );
 
 // Less generic names for C# SDK (avoid one-word class names)
-@@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
-@@clientName(Azure.AI.Projects.Deployment, "AssetDeployment", "csharp");
-@@clientName(Azure.AI.Projects.Index, "SearchIndex", "csharp");
+@@clientName(Azure.AI.Projects.BlobReference,
+  "AIProjectBlobReference",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Connection,
+  "AIProjectConnectionProperties",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Deployment, "AIProjectDeployment", "csharp");
+@@clientName(Azure.AI.Projects.DeploymentType,
+  "AIProjectDeploymentType",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.FieldMapping,
+  "AIProjectIndexFieldMapping",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Index, "AIProjectIndex", "csharp");
+@@clientName(Azure.AI.Projects.BaseCredentials,
+  "AIProjectConnectionBaseCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.ApiKeyCredentials,
+  "AIProjectConnectionApiKeyCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.CustomCredential,
+  "AIProjectConnectionCustomCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.EntraIDCredentials,
+  "AIProjectConnectionEntraIDCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.SASCredentials,
+  "AIProjectConnectionSasCredential",
+  "csharp"
+);
 
 // Do not use terms "request" or "response" in C# class names as these are REST API terms
 @@clientName(Azure.AI.Projects.PendingUploadRequest,
@@ -52,10 +87,19 @@ using Azure.ClientGenerator.Core;
 );
 
 // Less generic names for C# subclients
-@@clientName(Azure.AI.Projects.Connections, "ConnectionsOperations", "csharp");
-@@clientName(Azure.AI.Projects.Datasets, "DatasetsOperations", "csharp");
-@@clientName(Azure.AI.Projects.Deployments, "DeploymentsOperations", "csharp");
-@@clientName(Azure.AI.Projects.Indexes, "IndexesOperations", "csharp");
+@@clientName(Azure.AI.Projects.Connections,
+  "AIProjectConnectionsOperations",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Datasets,
+  "AIProjectDatasetsOperations",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Deployments,
+  "AIProjectDeploymentsOperations",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Indexes, "AIProjectIndexesOperations", "csharp");
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Azure.AI.Projects.Connections.get, "getConnection", "csharp");
@@ -78,9 +122,6 @@ using Azure.ClientGenerator.Core;
   "listIndexVersions",
   "csharp"
 );
-
-// Fix casing
-@@clientName(Azure.AI.Projects.SASCredentials, "SasCredential", "csharp");
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
