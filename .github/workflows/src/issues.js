@@ -2,8 +2,8 @@
 
 /**
  * Retrieves the PR number associated with a specific commit SHA
- * @param {import("@octokit/logger?").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api} github - GitHub API client
- * @param {String} head_sha - The head_sha
+ * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github - GitHub API client
+ * @param {string} head_sha - The head_sha
  * @param {import('../../shared/src/logger.js').ILogger} [logger]
  * @returns {Promise<{issueNumber: number}>} - The PR number or NaN if not found
  */
