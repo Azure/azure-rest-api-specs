@@ -921,7 +921,7 @@ model AttachedNetworkConnectionProperties {
 
   @doc("The resource ID of the NetworkConnection you want to attach.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  networkConnectionId: string;
+  networkConnectionId?: string;
 
   @doc("The geo-location where the NetworkConnection resource specified in 'networkConnectionResourceId' property lives.")
   @visibility(Lifecycle.Read)
@@ -1386,12 +1386,6 @@ model DevBoxDefinitionListResult is Azure.Core.Page<DevBoxDefinition>;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 @doc("Properties of a Dev Box definition.")
 model DevBoxDefinitionProperties extends DevBoxDefinitionUpdateProperties {
-  @doc("Image reference information.")
-  imageReference: ImageReference;
-
-  @doc("The SKU for Dev Boxes created using this definition.")
-  sku: Azure.ResourceManager.CommonTypes.Sku;
-
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -1788,18 +1782,6 @@ model ImageDefinitionBuildTaskParametersItem {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 @doc("Properties of a Pool.")
 model PoolProperties extends PoolUpdateProperties {
-  @doc("Name of a Dev Box definition in parent Project of this Pool. Will be ignored if devBoxDefinitionType is Value.")
-  devBoxDefinitionName: string;
-
-  @doc("Specifies the license type indicating the caller has already acquired licenses for the Dev Boxes that will be created.")
-  licenseType: LicenseType;
-
-  @doc("Indicates whether owners of Dev Boxes in this pool are added as local administrators on the Dev Box.")
-  localAdministrator: LocalAdminStatus;
-
-  @doc("Name of a Network Connection in parent Project of this Pool")
-  networkConnectionName: string;
-
   @doc("Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.")
   @visibility(Lifecycle.Read)
   healthStatus?: HealthStatus;
@@ -1940,19 +1922,6 @@ model PoolUpdate is TrackedResourceUpdate {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 @doc("The Schedule properties defining when and what to execute.")
 model ScheduleProperties extends ScheduleUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Safe to suppress for an existing API during TypeSpec conversion."
-  @doc("Supported type this scheduled task represents.")
-  type: ScheduledType;
-
-  @doc("The frequency of this scheduled task.")
-  frequency: ScheduledFrequency;
-
-  @doc("The target time to trigger the action. The format is HH:MM.")
-  time: string;
-
-  @doc("The IANA timezone id at which the schedule should execute.")
-  timeZone: string;
-
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -1960,6 +1929,7 @@ model ScheduleProperties extends ScheduleUpdateProperties {
 
 @doc("Updatable properties of a Schedule.")
 model ScheduleUpdateProperties is TrackedResourceUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Safe to suppress for an existing API during TypeSpec conversion."
   @doc("Supported type this scheduled task represents.")
   type?: ScheduledType;
 
@@ -1987,9 +1957,6 @@ model ScheduleUpdate {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
 @doc("Network properties")
 model NetworkProperties extends NetworkConnectionUpdateProperties {
-  @doc("The subnet to attach Virtual Machines to.")
-  subnetId: string;
-
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
