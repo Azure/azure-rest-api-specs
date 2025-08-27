@@ -1118,6 +1118,51 @@
             "$ref": "./examples/Messages_UpdateMessage_MinimumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "description": "Deletes an existing message on an existing thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Identifier of the message.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageDeletionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Messages_Delete_MaximumSet": {
+            "$ref": "./examples/Messages_Delete_MaximumSet_Gen.json"
+          },
+          "Messages_Delete_MinimumSet": {
+            "$ref": "./examples/Messages_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/threads/{threadId}/runs": {
@@ -4935,6 +4980,35 @@
         "type"
       ]
     },
+    "MessageDeletionStatus": {
+      "type": "object",
+      "description": "The status of a thread message deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.deleted'.",
+          "enum": [
+            "thread.message.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
+      ]
+    },
     "MessageDelta": {
       "type": "object",
       "description": "Represents the typed 'delta' payload within a streaming message delta chunk.",
@@ -7093,6 +7167,29 @@
         }
       }
     },
+    "RunStepDeltaMicrosoftFabricToolCall": {
+      "type": "object",
+      "description": "Represents the Microsoft Fabric tool call in a streaming run step.",
+      "properties": {
+        "fabric_dataagent": {
+          "type": "object",
+          "description": "Fabric input and output.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "microsoftFabric"
+        }
+      },
+      "required": [
+        "fabric_dataagent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "fabric_dataagent"
+    },
     "RunStepDeltaOpenAPIObject": {
       "type": "object",
       "description": "Represents an invocation of openapi as part of a streaming run step.",
@@ -7135,6 +7232,28 @@
         }
       ],
       "x-ms-discriminator-value": "openapi"
+    },
+    "RunStepDeltaSharepointToolCall": {
+      "type": "object",
+      "description": "Represents the SharePoint tool call in a streaming run step.",
+      "properties": {
+        "sharepoint_grounding": {
+          "type": "object",
+          "description": "SharePoint tool input and output.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "sharepoint_grounding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "sharepoint_grounding"
     },
     "RunStepDeltaToolCall": {
       "type": "object",
@@ -7467,7 +7586,7 @@
       "properties": {
         "fabric_dataagent": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "Fabric input and output.",
           "additionalProperties": {
             "type": "string"
           },
@@ -7513,7 +7632,7 @@
       "properties": {
         "sharepoint_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "SharePoint tool input and output.",
           "additionalProperties": {
             "type": "string"
           },
