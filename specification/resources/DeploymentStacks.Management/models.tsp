@@ -211,11 +211,10 @@ model ActionOnUnmanageDeleteParameters {
 }
 
 /**
- * Deployment stack properties.
+ * Deployment stack shared properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compat. TSP doc instructs this for 'allOf' for OpenAPI"
-model DeploymentStackProperties extends DeploymentStacksError {
-  /**
+model DeploymentStackSharedProperties extends DeploymentStacksError {
+/**
    * The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Back compat. Template is a complex object"
@@ -258,13 +257,6 @@ model DeploymentStackProperties extends DeploymentStacksError {
   debugSetting?: DeploymentStacksDebugSetting;
 
   /**
-   * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
-   */
-  @added(Versions.v2024_03_01)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  bypassStackOutOfSyncError?: boolean;
-
-  /**
    * The scope at which the initial deployment should be created. If a scope is not specified, it will default to the scope of the deployment stack. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroupId}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}').
    */
   deploymentScope?: string;
@@ -293,6 +285,20 @@ model DeploymentStackProperties extends DeploymentStacksError {
   @visibility(Lifecycle.Read)
   @example("01234567-89ab-cdef-0000-000000000000")
   correlationId?: string;
+}
+
+/**
+ * Deployment stack properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compat. TSP doc instructs this for 'allOf' for OpenAPI"
+model DeploymentStackProperties extends DeploymentStackSharedProperties {
+
+  /**
+   * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
+   */
+  @added(Versions.v2024_03_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  bypassStackOutOfSyncError?: boolean;
 
   /**
    * An array of resources that were detached during the most recent Deployment stack update. Detached means that the resource was removed from the template, but no relevant deletion operations were specified. So, the resource still exists while no longer being associated with the stack.

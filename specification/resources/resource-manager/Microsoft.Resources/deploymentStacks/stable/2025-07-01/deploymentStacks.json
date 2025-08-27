@@ -1328,6 +1328,99 @@
         }
       ]
     },
+    "DeploymentStackDenyStatusChange": {
+      "type": "string",
+      "enum": [
+        "denyWriteAndDelete",
+        "denyDelete",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStackDenyStatusChange",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "denyWriteAndDelete",
+            "value": "denyWriteAndDelete",
+            "description": "The resource is denied write and delete access."
+          },
+          {
+            "name": "denyDelete",
+            "value": "denyDelete",
+            "description": "The resource is denied delete access."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "The resource is not denied access."
+          }
+        ]
+      }
+    },
+    "DeploymentStackDiagnosticLevel": {
+      "type": "string",
+      "description": "Denotes the additional response level.",
+      "enum": [
+        "info",
+        "warning",
+        "error"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStackDiagnosticLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Info",
+            "value": "info",
+            "description": "Informational message."
+          },
+          {
+            "name": "Warning",
+            "value": "warning",
+            "description": "Warning message."
+          },
+          {
+            "name": "Error",
+            "value": "error",
+            "description": "Error message."
+          }
+        ]
+      }
+    },
+    "DeploymentStackDiagnostics": {
+      "type": "object",
+      "description": "The error additional info",
+      "properties": {
+        "level": {
+          "$ref": "#/definitions/DeploymentStackDiagnosticLevel",
+          "description": "Denotes the additional response level."
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "Additional error information.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStackDiagnostics"
+          }
+        }
+      },
+      "required": [
+        "level",
+        "code",
+        "message"
+      ]
+    },
     "DeploymentStackListResult": {
       "type": "object",
       "description": "The response of a DeploymentStack list operation.",
@@ -1349,57 +1442,33 @@
         "value"
       ]
     },
+    "DeploymentStackManagementStatus": {
+      "type": "string",
+      "enum": [
+        "managed",
+        "unmanaged"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStackManagementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "managed",
+            "description": "The resource is managed by the deployment stack."
+          },
+          {
+            "name": "Unmanaged",
+            "value": "unmanaged",
+            "description": "The resource is not managed by the deployment stack."
+          }
+        ]
+      }
+    },
     "DeploymentStackProperties": {
       "type": "object",
       "description": "Deployment stack properties.",
       "properties": {
-        "template": {
-          "type": "object",
-          "description": "The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "templateLink": {
-          "$ref": "#/definitions/DeploymentStacksTemplateLink",
-          "description": "The URI of the template. Use either the templateLink property or the template property, but not both.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Name and value pairs that define the deployment parameters for the template. Use this element when providing the parameter values directly in the request, rather than linking to an existing parameter file. Use either the parametersLink property or the parameters property, but not both.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeploymentParameter"
-          }
-        },
-        "extensionConfigs": {
-          "type": "object",
-          "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeploymentExtensionConfig"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "parametersLink": {
-          "$ref": "#/definitions/DeploymentStacksParametersLink",
-          "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
-        },
-        "actionOnUnmanage": {
-          "$ref": "#/definitions/ActionOnUnmanage",
-          "description": "Defines the behavior of resources that are no longer managed after the Deployment stack is updated or deleted."
-        },
-        "debugSetting": {
-          "$ref": "#/definitions/DeploymentStacksDebugSetting",
-          "description": "The debug setting of the deployment."
-        },
         "bypassStackOutOfSyncError": {
           "type": "boolean",
           "description": "Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.",
@@ -1407,29 +1476,6 @@
             "update",
             "create"
           ]
-        },
-        "deploymentScope": {
-          "type": "string",
-          "description": "The scope at which the initial deployment should be created. If a scope is not specified, it will default to the scope of the deployment stack. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroupId}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}')."
-        },
-        "description": {
-          "type": "string",
-          "description": "Deployment stack description. Max length of 4096 characters.",
-          "maxLength": 4096
-        },
-        "denySettings": {
-          "$ref": "#/definitions/DenySettings",
-          "description": "Defines how resources deployed by the stack are locked."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/DeploymentStackProvisioningState",
-          "description": "State of the deployment stack.",
-          "readOnly": true
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "The correlation id of the last Deployment stack upsert or delete operation. It is in GUID format and is used for tracing.",
-          "readOnly": true
         },
         "detachedResources": {
           "type": "array",
@@ -1488,13 +1534,9 @@
           "readOnly": true
         }
       },
-      "required": [
-        "actionOnUnmanage",
-        "denySettings"
-      ],
       "allOf": [
         {
-          "$ref": "#/definitions/DeploymentStacksError"
+          "$ref": "#/definitions/DeploymentStackSharedProperties"
         }
       ]
     },
@@ -1576,6 +1618,91 @@
         ]
       },
       "readOnly": true
+    },
+    "DeploymentStackSharedProperties": {
+      "type": "object",
+      "description": "Deployment stack shared properties.",
+      "properties": {
+        "template": {
+          "type": "object",
+          "description": "The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.",
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "templateLink": {
+          "$ref": "#/definitions/DeploymentStacksTemplateLink",
+          "description": "The URI of the template. Use either the templateLink property or the template property, but not both.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Name and value pairs that define the deployment parameters for the template. Use this element when providing the parameter values directly in the request, rather than linking to an existing parameter file. Use either the parametersLink property or the parameters property, but not both.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentParameter"
+          }
+        },
+        "extensionConfigs": {
+          "type": "object",
+          "description": "The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExtensionConfig"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "parametersLink": {
+          "$ref": "#/definitions/DeploymentStacksParametersLink",
+          "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
+        },
+        "actionOnUnmanage": {
+          "$ref": "#/definitions/ActionOnUnmanage",
+          "description": "Defines the behavior of resources that are no longer managed after the Deployment stack is updated or deleted."
+        },
+        "debugSetting": {
+          "$ref": "#/definitions/DeploymentStacksDebugSetting",
+          "description": "The debug setting of the deployment."
+        },
+        "deploymentScope": {
+          "type": "string",
+          "description": "The scope at which the initial deployment should be created. If a scope is not specified, it will default to the scope of the deployment stack. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroupId}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}')."
+        },
+        "description": {
+          "type": "string",
+          "description": "Deployment stack description. Max length of 4096 characters.",
+          "maxLength": 4096
+        },
+        "denySettings": {
+          "$ref": "#/definitions/DenySettings",
+          "description": "Defines how resources deployed by the stack are locked."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DeploymentStackProvisioningState",
+          "description": "State of the deployment stack.",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id of the last Deployment stack upsert or delete operation. It is in GUID format and is used for tracing.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "actionOnUnmanage",
+        "denySettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentStacksError"
+        }
+      ]
     },
     "DeploymentStackTemplateDefinition": {
       "type": "object",
@@ -1676,6 +1803,294 @@
           "description": "The validation result details."
         }
       }
+    },
+    "DeploymentStackWhatIfChange": {
+      "type": "object",
+      "properties": {
+        "resourceChanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStackWhatIfResourceChange"
+          }
+        },
+        "denySettingsChange": {
+          "type": "object",
+          "properties": {
+            "delta": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeploymentStackWhatIfPropertyChange"
+              }
+            }
+          },
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "before": {
+                  "$ref": "#/definitions/DenySettings"
+                },
+                "after": {
+                  "$ref": "#/definitions/DenySettings"
+                }
+              }
+            }
+          ]
+        },
+        "deploymentScopeChange": {
+          "type": "object",
+          "properties": {
+            "before": {
+              "type": "string"
+            },
+            "after": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "resourceChanges",
+        "denySettingsChange",
+        "deploymentScopeChange"
+      ]
+    },
+    "DeploymentStackWhatIfChangeCertainty": {
+      "type": "string",
+      "enum": [
+        "definite",
+        "potential"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStackWhatIfChangeCertainty",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Definite",
+            "value": "definite",
+            "description": "The change is definite."
+          },
+          {
+            "name": "Potential",
+            "value": "potential",
+            "description": "The change may or may not happen, based on deployment-time conditions."
+          }
+        ]
+      }
+    },
+    "DeploymentStackWhatIfChangeType": {
+      "type": "string",
+      "enum": [
+        "create",
+        "delete",
+        "detach",
+        "modify",
+        "noChange"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStackWhatIfChangeType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Create",
+            "value": "create",
+            "description": "The resource does not exist in the current state but is present in the desired state. The resource will be created when the deployment is executed."
+          },
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "The resource exists in the current state and is missing from the desired state. The resource will be deleted from Azure after the deployment is executed."
+          },
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "The resource exists in the current state and is missing from the desired state. The resource will be removed from the deployment stack, but will remain in Azure, after the deployment is executed."
+          },
+          {
+            "name": "Modify",
+            "value": "modify",
+            "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will change."
+          },
+          {
+            "name": "NoChange",
+            "value": "noChange",
+            "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change."
+          }
+        ]
+      }
+    },
+    "DeploymentStackWhatIfPropertyChange": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "changeType": {
+          "$ref": "#/definitions/DeploymentStackWhatIfPropertyChangeType"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStackWhatIfPropertyChange"
+          }
+        }
+      },
+      "required": [
+        "path",
+        "changeType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceChangeBase"
+        }
+      ]
+    },
+    "DeploymentStackWhatIfPropertyChangeType": {
+      "type": "string",
+      "enum": [
+        "array",
+        "create",
+        "delete",
+        "modify",
+        "noEffect"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStackWhatIfPropertyChangeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Array",
+            "value": "array",
+            "description": "The property is an array and contains nested changes."
+          },
+          {
+            "name": "Create",
+            "value": "create",
+            "description": "The property does not exist in the current state but is present in the desired state. The property will be created when the deployment is executed."
+          },
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "The property exists in the current state and is missing from the desired state. It will be deleted when the deployment is executed."
+          },
+          {
+            "name": "Modify",
+            "value": "modify",
+            "description": "The property exists in both current and desired state and is different. The value of the property will change when the deployment is executed."
+          },
+          {
+            "name": "NoEffect",
+            "value": "noEffect",
+            "description": "The property will not be set or updated."
+          }
+        ]
+      }
+    },
+    "DeploymentStackWhatIfResourceChange": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "deploymentId": {
+          "type": "string"
+        },
+        "symbolicName": {
+          "type": "string"
+        },
+        "identifiers": {
+          "description": "The extensible resource identifiers."
+        },
+        "changeType": {
+          "$ref": "#/definitions/DeploymentStackWhatIfChangeType"
+        },
+        "changeCertainty": {
+          "$ref": "#/definitions/DeploymentStackWhatIfChangeCertainty"
+        },
+        "propertyChanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStackWhatIfPropertyChange"
+          }
+        },
+        "managementStatusChange": {
+          "type": "object",
+          "properties": {
+            "before": {
+              "$ref": "#/definitions/DeploymentStackManagementStatus"
+            },
+            "after": {
+              "$ref": "#/definitions/DeploymentStackManagementStatus"
+            }
+          }
+        },
+        "denyStatusChange": {
+          "type": "object",
+          "properties": {
+            "before": {
+              "$ref": "#/definitions/DeploymentStackDenyStatusChange"
+            },
+            "after": {
+              "$ref": "#/definitions/DeploymentStackDenyStatusChange"
+            }
+          }
+        },
+        "unsupportedReason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId",
+        "deploymentId",
+        "symbolicName",
+        "identifiers",
+        "changeType",
+        "changeCertainty",
+        "propertyChanges",
+        "managementStatusChange",
+        "denyStatusChange",
+        "unsupportedReason"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceChangeDelta"
+        }
+      ]
+    },
+    "DeploymentStackWhatIfResultProperties": {
+      "type": "object",
+      "description": "DeploymentStack WhatIfResult Properties",
+      "properties": {
+        "deploymentStackId": {
+          "type": "string",
+          "description": "The deployment stack id to use as the basis for comparison."
+        },
+        "retentionInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval to persist the deployment stack what-if result in ISO 8601 format."
+        },
+        "changes": {
+          "$ref": "#/definitions/DeploymentStackWhatIfChange",
+          "readOnly": true
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStackDiagnostics"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deploymentStackId",
+        "retentionInterval"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentStackSharedProperties"
+        }
+      ]
     },
     "DeploymentStacksDebugSetting": {
       "type": "object",
@@ -1860,6 +2275,45 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceReference"
+        }
+      ]
+    },
+    "ResourceChangeBase": {
+      "type": "object",
+      "properties": {
+        "before": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "after": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ResourceChangeDelta": {
+      "type": "object",
+      "properties": {
+        "delta": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentStackWhatIfPropertyChange"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "before": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "after": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
         }
       ]
     },
