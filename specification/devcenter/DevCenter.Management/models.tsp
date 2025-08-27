@@ -1472,10 +1472,10 @@ model OperationDisplay {
 @doc("The current status of an async operation")
 model OperationStatus
   extends Azure.ResourceManager.CommonTypes.OperationStatusResult {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy API and valid as per ARM/RPaaS operation status contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Legacy API. Closest type we can get to describe object."
   @doc("Custom operation properties, populated only for a successful operation.")
   @visibility(Lifecycle.Read)
-  properties?: unknown;
+  properties?: Record<unknown>;
 }
 
 @doc("List of Core Usages.")
