@@ -353,21 +353,6 @@ union AutomatedCheckResultType {
 }
 
 /**
- * The check availability request body.
- */
-model CheckNameAvailabilityRequest {
-  /**
-   * The name of the resource for which availability needs to be checked.
-   */
-  name?: string;
-
-  /**
-   * The resource type.
-   */
-  type?: string;
-}
-
-/**
  * Response for whether the requested resource name is available or not.
  */
 model CheckNameAvailabilityResponse {

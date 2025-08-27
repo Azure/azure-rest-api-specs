@@ -14,11 +14,10 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.RecoveryServicesDataReplication"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
-    service-dir: "sdk/recoveryservices-datareplication"
+    namespace: "Azure.ResourceManager.RecoveryServicesDataReplication"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-recoveryservicesdatareplication"
     namespace: "azure.mgmt.recoveryservicesdatareplication"
