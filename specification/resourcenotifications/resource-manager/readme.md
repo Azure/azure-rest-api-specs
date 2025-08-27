@@ -18,7 +18,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ---
 
-## Configuration
+## Configurations
 
 ### Basic Information
 
@@ -26,7 +26,7 @@ These are the global settings for the resourcenotifications.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
+
 tag: package-2025-08-01-preview
 ```
 
