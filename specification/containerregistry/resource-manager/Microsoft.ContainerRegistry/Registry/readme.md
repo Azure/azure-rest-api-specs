@@ -279,8 +279,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_registry']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
