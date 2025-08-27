@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.Attestation;
+namespace Attestation;
 
 /**
  * Content type for upload

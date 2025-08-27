@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
 /**
  * Describes the interface for the per-tenant enclave service.
  */
-@service(#{ title: "AttestationClient" })
+@service(#{ title: "Attestation REST API" })
 @versioned(Versions)
 @server(
   "{endpoint}",
@@ -37,7 +37,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-namespace Microsoft.Attestation;
+namespace Attestation;
 
 /**
  * The available API versions.
