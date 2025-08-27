@@ -277,48 +277,6 @@
     }
   },
   "definitions": {
-    "AggregationType": {
-      "type": "string",
-      "description": "Defines the available aggregation types.",
-      "enum": [
-        "Average",
-        "Min",
-        "Max",
-        "Sum",
-        "Count"
-      ],
-      "x-ms-enum": {
-        "name": "AggregationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Average",
-            "value": "Average",
-            "description": "Average value."
-          },
-          {
-            "name": "Min",
-            "value": "Min",
-            "description": "Minimum value."
-          },
-          {
-            "name": "Max",
-            "value": "Max",
-            "description": "Maximum value."
-          },
-          {
-            "name": "Sum",
-            "value": "Sum",
-            "description": "Summation."
-          },
-          {
-            "name": "Count",
-            "value": "Count",
-            "description": "Count of occurrences."
-          }
-        ]
-      }
-    },
     "AmwAccount": {
       "type": "object",
       "description": "Represents an Azure Monitor Workspace (AMW) account used for emitting metrics.",
@@ -961,7 +919,7 @@
       "description": "Represents the spatial aggregation model.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/SpatialAggregationType",
           "description": "Type of spatial aggregation."
         },
         "dimensions": {
@@ -977,12 +935,54 @@
         "dimensions"
       ]
     },
+    "SpatialAggregationType": {
+      "type": "string",
+      "description": "Defines the available aggregation types.",
+      "enum": [
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Count"
+      ],
+      "x-ms-enum": {
+        "name": "SpatialAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count of occurrences."
+          }
+        ]
+      }
+    },
     "TemporalAggregation": {
       "type": "object",
       "description": "Represents temporal aggregation settings.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AggregationType",
+          "$ref": "#/definitions/TemporalAggregationType",
           "description": "Type of temporal aggregation."
         },
         "windowSizeMinutes": {
@@ -995,6 +995,72 @@
         "type",
         "windowSizeMinutes"
       ]
+    },
+    "TemporalAggregationType": {
+      "type": "string",
+      "description": "Defines the available aggregation types.",
+      "enum": [
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Rate",
+        "IRate",
+        "Delta",
+        "IDelta",
+        "Increase"
+      ],
+      "x-ms-enum": {
+        "name": "TemporalAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Rate",
+            "value": "Rate",
+            "description": "Rate over time."
+          },
+          {
+            "name": "IRate",
+            "value": "IRate",
+            "description": "Instance rate."
+          },
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta over time."
+          },
+          {
+            "name": "IDelta",
+            "value": "IDelta",
+            "description": "Instance delta."
+          },
+          {
+            "name": "Increase",
+            "value": "Increase",
+            "description": "Increase over time."
+          }
+        ]
+      }
     },
     "WindowUptimeCriteria": {
       "type": "object",
