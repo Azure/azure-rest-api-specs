@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-09-01-privatepreview"
+    "version": "2021-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1431,7 +1431,7 @@
           "description": "AveragePartitionLoadScalingTrigger"
         }
       ],
-      "x-ms-discriminator-value": "AveragePartitionLoadTrigger",
+      "x-ms-discriminator-value": "AveragePartitionLoad",
       "required": [
         "metricName",
         "lowerLoadThreshold",
@@ -1471,7 +1471,7 @@
           "description": "AverageServiceLoadScalingTrigger"
         }
       ],
-      "x-ms-discriminator-value": "AverageServiceLoadTrigger",
+      "x-ms-discriminator-value": "AverageServiceLoad",
       "required": [
         "metricName",
         "lowerLoadThreshold",
@@ -2661,11 +2661,11 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-09-01-privatepreview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-07-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2021-09-01-privatepreview"
+        "2021-07-01-preview"
       ],
       "x-ms-parameter-location": "client"
     },

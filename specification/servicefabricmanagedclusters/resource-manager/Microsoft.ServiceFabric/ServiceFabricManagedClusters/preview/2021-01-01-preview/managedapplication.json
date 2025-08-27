@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2021-07-01-preview"
+    "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1103,7 +1103,6 @@
   },
   "definitions": {
     "AddRemoveIncrementalNamedPartitionScalingMechanism": {
-      "type": "object",
       "description": "Represents a scaling mechanism for adding or removing named partitions of a stateless service. Partition names are in the format '0','1'...'N-1'.",
       "allOf": [
         {
@@ -1173,7 +1172,6 @@
       }
     },
     "ApplicationResource": {
-      "type": "object",
       "description": "The application resource.",
       "properties": {
         "identity": {
@@ -1191,7 +1189,6 @@
       ]
     },
     "ApplicationResourceList": {
-      "type": "object",
       "description": "The list of application resources.",
       "properties": {
         "value": {
@@ -1208,7 +1205,6 @@
       }
     },
     "ApplicationResourceProperties": {
-      "type": "object",
       "description": "The application resource properties.",
       "properties": {
         "provisioningState": {
@@ -1235,7 +1231,6 @@
       }
     },
     "ApplicationTypeResource": {
-      "type": "object",
       "description": "The application type name resource",
       "properties": {
         "properties": {
@@ -1250,7 +1245,6 @@
       ]
     },
     "ApplicationTypeResourceList": {
-      "type": "object",
       "description": "The list of application type names.",
       "properties": {
         "value": {
@@ -1267,7 +1261,6 @@
       }
     },
     "ApplicationTypeResourceProperties": {
-      "type": "object",
       "description": "The application type name properties",
       "properties": {
         "provisioningState": {
@@ -1278,7 +1271,6 @@
       }
     },
     "ApplicationTypeUpdateParameters": {
-      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1295,7 +1287,6 @@
       "description": "The version of the application type as defined in the application manifest.\nThis name must be the full Arm Resource ID for the referenced application type version.\n"
     },
     "ApplicationTypeVersionResource": {
-      "type": "object",
       "description": "An application type version resource for the specified application type name resource.",
       "properties": {
         "properties": {
@@ -1310,7 +1301,6 @@
       ]
     },
     "ApplicationTypeVersionResourceList": {
-      "type": "object",
       "description": "The list of application type version resources for the specified application type name resource.",
       "properties": {
         "value": {
@@ -1327,7 +1317,6 @@
       }
     },
     "ApplicationTypeVersionResourceProperties": {
-      "type": "object",
       "description": "The properties of the application type version resource.",
       "required": [
         "appPackageUrl"
@@ -1345,7 +1334,6 @@
       }
     },
     "ApplicationTypeVersionUpdateParameters": {
-      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1358,7 +1346,6 @@
       "description": "Application type version update request"
     },
     "ApplicationUpdateParameters": {
-      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1371,7 +1358,6 @@
       "description": "Application update request"
     },
     "ApplicationUpgradePolicy": {
-      "type": "object",
       "description": "Describes the policy for a monitored application upgrade.",
       "properties": {
         "applicationHealthPolicy": {
@@ -1403,7 +1389,6 @@
       }
     },
     "ApplicationUserAssignedIdentity": {
-      "type": "object",
       "required": [
         "name",
         "principalId"
@@ -1420,7 +1405,6 @@
       }
     },
     "AveragePartitionLoadScalingTrigger": {
-      "type": "object",
       "description": "Represents a scaling trigger related to an average load of a metric/resource of a partition.",
       "allOf": [
         {
@@ -1431,7 +1415,7 @@
           "description": "AveragePartitionLoadScalingTrigger"
         }
       ],
-      "x-ms-discriminator-value": "AveragePartitionLoadTrigger",
+      "x-ms-discriminator-value": "AveragePartitionLoad",
       "required": [
         "metricName",
         "lowerLoadThreshold",
@@ -1460,7 +1444,6 @@
       }
     },
     "AverageServiceLoadScalingTrigger": {
-      "type": "object",
       "description": "Represents a scaling policy related to an average load of a metric/resource of a service.",
       "allOf": [
         {
@@ -1471,7 +1454,7 @@
           "description": "AverageServiceLoadScalingTrigger"
         }
       ],
-      "x-ms-discriminator-value": "AverageServiceLoadTrigger",
+      "x-ms-discriminator-value": "AverageServiceLoad",
       "required": [
         "metricName",
         "lowerLoadThreshold",
@@ -1529,7 +1512,6 @@
       "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
     },
     "ManagedIdentity": {
-      "type": "object",
       "description": "Describes the managed identities for an Azure resource.",
       "properties": {
         "principalId": {
@@ -1615,7 +1597,6 @@
       }
     },
     "NamedPartitionScheme": {
-      "type": "object",
       "description": "Describes the named partition scheme of the service.",
       "allOf": [
         {
@@ -1655,7 +1636,6 @@
       }
     },
     "PartitionInstanceCountScaleMechanism": {
-      "type": "object",
       "description": "Represents a scaling mechanism for adding or removing instances of stateless service partition.",
       "allOf": [
         {
@@ -1718,7 +1698,6 @@
       }
     },
     "ProxyResource": {
-      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1784,7 +1763,6 @@
       }
     },
     "RollingUpgradeMonitoringPolicy": {
-      "type": "object",
       "description": "The policy used for monitoring the application upgrade",
       "required": [
         "failureAction",
@@ -2028,7 +2006,6 @@
       }
     },
     "ServicePlacementInvalidDomainPolicy": {
-      "type": "object",
       "description": "Describes the policy to be used for placement of a Service Fabric service where a particular fault or upgrade domain should not be used for placement of the instances or replicas of that service.",
       "allOf": [
         {
@@ -2051,7 +2028,6 @@
       }
     },
     "ServicePlacementNonPartiallyPlaceServicePolicy": {
-      "type": "object",
       "description": "The name of the domain that should used for placement as per this policy.",
       "allOf": [
         {
@@ -2122,7 +2098,6 @@
       }
     },
     "ServicePlacementPreferPrimaryDomainPolicy": {
-      "type": "object",
       "description": "Describes the policy to be used for placement of a Service Fabric service where the service's \nPrimary replicas should optimally be placed in a particular domain.\n\nThis placement policy is usually used with fault domains in scenarios where the Service Fabric\ncluster is geographically distributed in order to indicate that a service's primary replica should\nbe located in a particular fault domain, which in geo-distributed scenarios usually aligns with regional\nor datacenter boundaries. Note that since this is an optimization it is possible that the Primary replica\nmay not end up located in this domain due to failures, capacity limits, or other constraints.\n",
       "allOf": [
         {
@@ -2145,7 +2120,6 @@
       }
     },
     "ServicePlacementRequiredDomainPolicy": {
-      "type": "object",
       "description": "Describes the policy to be used for placement of a Service Fabric service where the instances or replicas of that service must be placed in a particular domain.",
       "allOf": [
         {
@@ -2168,7 +2142,6 @@
       }
     },
     "ServicePlacementRequireDomainDistributionPolicy": {
-      "type": "object",
       "description": "Describes the policy to be used for placement of a Service Fabric service where two replicas\nfrom the same partition should never be placed in the same fault or upgrade domain.\n\nWhile this is not common it can expose the service to an increased risk of concurrent failures\ndue to unplanned outages or other cases of subsequent/concurrent failures. As an example, consider\na case where replicas are deployed across different data center, with one replica per location.\nIn the event that one of the datacenters goes offline, normally the replica that was placed in that\ndatacenter will be packed into one of the remaining datacenters. If this is not desirable then this\npolicy should be set.\n",
       "allOf": [
         {
@@ -2191,7 +2164,6 @@
       }
     },
     "ServiceResource": {
-      "type": "object",
       "description": "The service resource.",
       "properties": {
         "properties": {
@@ -2205,7 +2177,6 @@
       ]
     },
     "ServiceResourceList": {
-      "type": "object",
       "description": "The list of service resources.",
       "properties": {
         "value": {
@@ -2222,7 +2193,6 @@
       }
     },
     "ServiceResourceProperties": {
-      "type": "object",
       "description": "The service resource properties.",
       "allOf": [
         {
@@ -2276,7 +2246,6 @@
       }
     },
     "ServiceResourcePropertiesBase": {
-      "type": "object",
       "description": "The common service resource properties.",
       "properties": {
         "placementConstraints": {
@@ -2384,7 +2353,6 @@
       }
     },
     "ServiceUpdateParameters": {
-      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -2397,7 +2365,6 @@
       "description": "Service update request"
     },
     "SingletonPartitionScheme": {
-      "type": "object",
       "description": "Describes the partition scheme of a singleton-partitioned, or non-partitioned service.",
       "allOf": [
         {
@@ -2411,7 +2378,6 @@
       "x-ms-discriminator-value": "Singleton"
     },
     "StatefulServiceProperties": {
-      "type": "object",
       "description": "The properties of a stateful service resource.",
       "allOf": [
         {
@@ -2455,7 +2421,6 @@
       }
     },
     "StatelessServiceProperties": {
-      "type": "object",
       "description": "The properties of a stateless service resource.",
       "allOf": [
         {
@@ -2486,7 +2451,6 @@
       }
     },
     "UniformInt64RangePartitionScheme": {
-      "type": "object",
       "description": "Describes a partitioning scheme where an integer range is allocated evenly across a number of partitions.",
       "allOf": [
         {
@@ -2530,7 +2494,6 @@
       "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
     },
     "UserAssignedIdentity": {
-      "type": "object",
       "properties": {
         "principalId": {
           "type": "string",
@@ -2552,7 +2515,6 @@
       }
     },
     "AvailableOperationDisplay": {
-      "type": "object",
       "properties": {
         "provider": {
           "type": "string",
@@ -2574,7 +2536,6 @@
       "description": "Operation supported by the Service Fabric resource provider"
     },
     "ErrorModel": {
-      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorModelError",
@@ -2584,7 +2545,6 @@
       "description": "The structure of the error."
     },
     "ErrorModelError": {
-      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -2598,7 +2558,6 @@
       "description": "The error details."
     },
     "OperationResult": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2661,12 +2620,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-07-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-01-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2021-07-01-preview"
+        "2021-01-01-preview"
       ],
+      "default": "2021-01-01-preview",
       "x-ms-parameter-location": "client"
     },
     "applicationName": {
