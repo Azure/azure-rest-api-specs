@@ -78,6 +78,10 @@ model ItemDetails {
   @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   priority?: Priority;
+
+  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: string[];
 }
 
 /** Job priority levels. */
