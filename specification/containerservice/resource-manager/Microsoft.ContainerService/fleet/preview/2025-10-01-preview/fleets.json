@@ -3503,6 +3503,23 @@
         "id"
       ]
     },
+    "GroupConcurrencyStatus": {
+      "type": "object",
+      "description": "The status of the group-level concurrency.",
+      "properties": {
+        "maxConcurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of potential upgrades that can run concurrently in this group.",
+          "readOnly": true
+        },
+        "requestedMaxConcurrency": {
+          "type": "string",
+          "description": "Original requested maxConcurrency value for this group.\nEither a fixed count (e.g., \"3\") or a percentage (e.g., \"25%\").",
+          "readOnly": true
+        }
+      }
+    },
     "KubernetesVersion": {
       "type": "string"
     },
@@ -3728,6 +3745,23 @@
         "name"
       ]
     },
+    "StageConcurrencyStatus": {
+      "type": "object",
+      "description": "The status of the stage-level concurrency.",
+      "properties": {
+        "maxConcurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of upgrades that can run concurrently across all groups in this stage.",
+          "readOnly": true
+        },
+        "requestedMaxConcurrency": {
+          "type": "string",
+          "description": "Original requested maxConcurrency value for this stage. Either a fixed count (e.g., \"3\") or a percentage (e.g., \"25%\").",
+          "readOnly": true
+        }
+      }
+    },
     "SubnetResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -3811,6 +3845,11 @@
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
+        "maxConcurrency": {
+          "type": "string",
+          "description": "The max number of potential upgrades that can run concurrently in this specific group.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the group you want to tolerate at a time.\nActual concurrency may be lower depending on stage-level limits or individual member conditions.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the group size at stage start. Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\" --> up to 3 members from this group upgrade at once.\n    • \"100%\" --> “all at once”, up to all members for this group upgrade at the same time.\n    • \"25%\" --> up to 25% of the members in the group will be upgrade at the same time. ",
+          "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
+        },
         "beforeGates": {
           "type": "array",
           "description": "A list of Gates that will be created before this Group is executed.",
@@ -3845,6 +3884,10 @@
           "type": "string",
           "description": "The name of the UpdateGroup.",
           "readOnly": true
+        },
+        "groupConcurrencyStatus": {
+          "$ref": "#/definitions/GroupConcurrencyStatus",
+          "description": "Group-level concurrency status for this group."
         },
         "members": {
           "type": "array",
@@ -4135,6 +4178,11 @@
           "format": "int32",
           "description": "The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified."
         },
+        "maxConcurrency": {
+          "type": "string",
+          "description": "The max number of upgrades that can run concurrently across all groups in this stage.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the total clusters under all groups at stage start, fractional results rounded up. A minimum of 1 upgrade is enforced.\nExample: 5 --> at most 5 concurrent upgrades at once from all groups in this stage.\nExample: 100% --> If a stage has 5 clusters total, the maxConcurrency for upgrades is 5.",
+          "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
+        },
         "beforeGates": {
           "type": "array",
           "description": "A list of Gates that will be created before this Stage is executed.",
@@ -4168,6 +4216,11 @@
         "name": {
           "type": "string",
           "description": "The name of the UpdateStage.",
+          "readOnly": true
+        },
+        "stageConcurrencyStatus": {
+          "$ref": "#/definitions/StageConcurrencyStatus",
+          "description": "Stage-level concurrency status for this stage.",
           "readOnly": true
         },
         "groups": {
