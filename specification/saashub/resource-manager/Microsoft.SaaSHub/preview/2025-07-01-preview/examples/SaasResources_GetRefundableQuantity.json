@@ -1,0 +1,32 @@
+{
+  "title": "GetRefundableQuantity for SaaS Resource",
+  "operationId": "SaasResources_RefundableQuantity",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "saasResourceName": "contoso-saas-resource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "refundableQuantities": [
+          {
+            "eventDateTime": "2024-01-15T10:30:00.000Z",
+            "deltaQuantity": 100,
+            "returnWindowEndDateTime": "2024-02-15T10:30:00.000Z"
+          },
+          {
+            "eventDateTime": "2024-02-01T14:20:00.000Z",
+            "deltaQuantity": 50,
+            "returnWindowEndDateTime": "2024-03-01T14:20:00.000Z"
+          },
+          {
+            "eventDateTime": "2024-02-15T09:15:00.000Z",
+            "deltaQuantity": 25,
+            "returnWindowEndDateTime": null
+          }
+        ],
+        "totalRefundableQuantity": 175
+      }
+    }
+  }
+}
