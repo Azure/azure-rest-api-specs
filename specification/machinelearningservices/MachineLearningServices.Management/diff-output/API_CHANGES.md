@@ -1254,47 +1254,47 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AksComputeSecrets.properties__added` | added | `{"AKS":{"type":"string"},"userKubeConfig":{"type":"string"},"adminKubeConfig":{"type":"string"},"ima...` |
-| `definitions.BatchDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/BatchDeploymentProperties","x-ms-client-flatten":true}` |
-| `definitions.BatchEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/BatchEndpointProperties","x-ms-client-flatten":true}` |
-| `definitions.CapabilityHost.properties.properties__added` | added | `{"$ref":"#/definitions/CapabilityHostProperties","x-ms-client-flatten":true}` |
-| `definitions.CodeContainer.properties.properties__added` | added | `{"$ref":"#/definitions/CodeContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.CodeVersion.properties.properties__added` | added | `{"$ref":"#/definitions/CodeVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.ComponentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.ComponentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.ComputeResource.properties.properties__added` | added | `{"type":"object","x-ms-client-flatten":true}` |
+| `definitions.BatchDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/BatchDeploymentProperties"}` |
+| `definitions.BatchEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/BatchEndpointProperties"}` |
+| `definitions.CapabilityHost.properties.properties__added` | added | `{"$ref":"#/definitions/CapabilityHostProperties"}` |
+| `definitions.CodeContainer.properties.properties__added` | added | `{"$ref":"#/definitions/CodeContainerProperties"}` |
+| `definitions.CodeVersion.properties.properties__added` | added | `{"$ref":"#/definitions/CodeVersionProperties"}` |
+| `definitions.ComponentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentContainerProperties"}` |
+| `definitions.ComponentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentVersionProperties"}` |
+| `definitions.ComputeResource.properties.properties__added` | added | `{"type":"object"}` |
 | `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
 | `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
 | `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
 | `definitions.DatabricksComputeSecrets.properties__added` | added | `{"databricksAccessToken":{"type":"string"}}` |
-| `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.Datastore.properties.properties__added` | added | `{"$ref":"#/definitions/DatastoreProperties","x-ms-client-flatten":true}` |
-| `definitions.DataVersionBase.properties.properties__added` | added | `{"$ref":"#/definitions/DataVersionBaseProperties","x-ms-client-flatten":true}` |
+| `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties"}` |
+| `definitions.Datastore.properties.properties__added` | added | `{"$ref":"#/definitions/DatastoreProperties"}` |
+| `definitions.DataVersionBase.properties.properties__added` | added | `{"$ref":"#/definitions/DataVersionBaseProperties"}` |
 | `definitions.DiagnoseResponseResult.properties.value.properties__deleted` | deleted | `{"userDefinedRouteResults":{"type":"array","items":{"$ref":"#/definitions/DiagnoseResult"},"x-ms-ide...` |
-| `definitions.EnvironmentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.EnvironmentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.Feature.properties.properties__added` | added | `{"$ref":"#/definitions/FeatureProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturesetContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturesetVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturestoreEntityContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.FeaturestoreEntityVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.InferenceEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceEndpointProperties","x-ms-client-flatten":true}` |
-| `definitions.InferenceGroup.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceGroupProperties","x-ms-client-flatten":true}` |
-| `definitions.InferencePool.properties.properties__added` | added | `{"$ref":"#/definitions/InferencePoolProperties","x-ms-client-flatten":true}` |
-| `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties","x-ms-client-flatten":true}` |
-| `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties","x-ms-client-flatten":true}` |
+| `definitions.EnvironmentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentContainerProperties"}` |
+| `definitions.EnvironmentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentVersionProperties"}` |
+| `definitions.Feature.properties.properties__added` | added | `{"$ref":"#/definitions/FeatureProperties"}` |
+| `definitions.FeaturesetContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetContainerProperties"}` |
+| `definitions.FeaturesetVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetVersionProperties"}` |
+| `definitions.FeaturestoreEntityContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityContainerProperties"}` |
+| `definitions.FeaturestoreEntityVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityVersionProperties"}` |
+| `definitions.InferenceEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceEndpointProperties"}` |
+| `definitions.InferenceGroup.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceGroupProperties"}` |
+| `definitions.InferencePool.properties.properties__added` | added | `{"$ref":"#/definitions/InferencePoolProperties"}` |
+| `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties"}` |
+| `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties"}` |
 | `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
 | `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
 | `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
 | `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties","x-ms-client-flatten":true}` |
-| `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties","x-ms-client-flatten":true}` |
-| `definitions.OnlineDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineDeploymentProperties","x-ms-client-flatten":true}` |
-| `definitions.OnlineEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineEndpointProperties","x-ms-client-flatten":true}` |
+| `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties"}` |
+| `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties"}` |
+| `definitions.OnlineDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineDeploymentProperties"}` |
+| `definitions.OnlineEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineEndpointProperties"}` |
 | `definitions.OpenAIEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
 | `definitions.RaiBlocklistItemsBulkAddRequest.properties__added` | added | `{"items":{"type":"array","items":{"$ref":"#/definitions/RaiBlocklistItemBulkRequest"},"x-ms-identifi...` |
 | `definitions.Registry.properties.properties__added` | added | `{"$ref":"#/definitions/RegistryProperties","x-ms-client-flatten":true}` |
-| `definitions.Schedule.properties.properties__added` | added | `{"$ref":"#/definitions/ScheduleProperties","x-ms-client-flatten":true}` |
-| `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties","x-ms-client-flatten":true}` |
+| `definitions.Schedule.properties.properties__added` | added | `{"$ref":"#/definitions/ScheduleProperties"}` |
+| `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties"}` |
 | `definitions.SpeechEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
 | `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
 | `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
@@ -2427,19 +2427,6 @@
 |------|------------|-------|
 | `definitions.DeltaModelModifyRequest.properties.addDeltaModels.uniqueItems__deleted` | deleted | `true` |
 | `definitions.DeltaModelModifyRequest.properties.removeDeltaModels.uniqueItems__deleted` | deleted | `true` |
-
-### Changes for `x-ms-client-flatten`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EndpointDeploymentResourcePropertiesBasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-| `definitions.EndpointResourcePropertiesBasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-| `definitions.ManagedNetworkSettingsPropertiesBasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-| `definitions.OutboundRuleBasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-| `definitions.RaiBlocklistItemPropertiesBasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-| `definitions.RaiBlocklistPropertiesBasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-| `definitions.RaiPolicyPropertiesBasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-| `definitions.WorkspaceConnectionPropertiesV2BasicResource.properties.properties['x-ms-client-flatten__added']` | added | `true` |
 
 ### Changes for `readOnly`
 
