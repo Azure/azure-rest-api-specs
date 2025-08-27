@@ -8,8 +8,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface Clusters {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("Clusters_List")
   list is ArmResourceListByParent<
     Cluster,
     Response = ArmResponse<ResourceList<Cluster>>
@@ -122,6 +120,7 @@ model ClusterUpdateProperties {
 model ClusterZoneList {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Zone and associated hosts info")
+  @identifiers(#[])
   zones?: ClusterZone[];
 }
 

@@ -44,6 +44,7 @@ export type VsoLogs = Map<
 export interface SpecGenSdkArtifactInfo {
   language: string;
   result: string;
+  headSha: string;
   prNumber?: string;
   labelAction?: boolean;
   isSpecGenSdkCheckRequired: boolean;
@@ -89,7 +90,7 @@ export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
   },
   "azure-sdk-for-js": {
     dataPlane: false,
-    managementPlane: false,
+    managementPlane: true,
   },
   "azure-sdk-for-net": {
     dataPlane: false,

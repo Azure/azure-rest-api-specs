@@ -1,7 +1,7 @@
-import { marked } from "marked";
-import { kebabCase } from "change-case";
-import axios from "axios";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import axios from "axios";
+import { kebabCase } from "change-case";
+import { marked } from "marked";
 
 export enum MarkdownType {
   Arm = "arm",
@@ -16,11 +16,12 @@ export enum MarkdownType {
  */
 // TODO: Should this be placed in the Readme class?
 export async function getOpenapiType(readme: Readme): Promise<MarkdownType> {
-  const openapiType = (await readme.getGlobalConfig() as { "openapi-type"?: string })["openapi-type"];
+  const openapiType = ((await readme.getGlobalConfig()) as { "openapi-type"?: string })[
+    "openapi-type"
+  ];
   if (openapiType && Object.values(MarkdownType).includes(openapiType as MarkdownType)) {
     return openapiType as MarkdownType;
   }
-
 
   // Fallback, no openapi-type found in the file. Look at path to determine type
   // resource-manager: Arm
@@ -119,7 +120,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   return rpcRules;
 }
 
-export async function getDefaultTag(readme: Readme): Promise<string> { 
-  const tag = (await readme.getGlobalConfig() as { tag?: string }).tag;
+export async function getDefaultTag(readme: Readme): Promise<string> {
+  const tag = ((await readme.getGlobalConfig()) as { tag?: string }).tag;
   return tag ? tag : "";
 }

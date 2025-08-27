@@ -36,7 +36,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement"
 );
-@@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "fileurl");
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
   "FhirServiceHostName"
 );
@@ -62,8 +61,7 @@ using Azure.ClientGenerator.Core;
   "FhirResourceType"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
-  "FhirServiceHostName",
-  "autorest"
+  "FhirServiceHostName"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
   "FhirResourceId"
@@ -89,12 +87,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime, "queuedOn");
 @@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn"
-);
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri"
-);
-@@clientName(StorageTaskCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri"
 );
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind"
@@ -131,6 +123,116 @@ using Azure.ClientGenerator.Core;
 @@clientName(KeyVaultSecretNearExpiryEventData.EXP, "Exp");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp");
+
+@@clientName(ApiManagementUserCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+
+@@clientName(ApiManagementUserUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementUserDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiReleaseCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiReleaseDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiReleaseUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementSubscriptionCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementSubscriptionUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementSubscriptionDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementProductCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementProductUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementProductDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayApiAddedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+
+@@clientName(ResourceBaseEventData.resourceUri, "resourceUrl", "!go, !csharp");
+
+@@clientName(ContainerRegistryEventSource.instanceID, "instanceId");
 
 // autorest specific renames
 @@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "autorest");

@@ -9,8 +9,6 @@ using TypeSpec.Rest;
 alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
 interface PrivateClouds {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("PrivateClouds_List")
   list is ArmResourceListByParent<
     PrivateCloud,
     Response = ArmResponse<PrivateCloudList>
@@ -205,6 +203,7 @@ model PrivateCloudUpdateProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("vCenter Single Sign On Identity Sources")
+  @identifiers(#[])
   identitySources?: IdentitySource[];
 
   @doc("Properties describing how the cloud is distributed across availability zones")
@@ -236,6 +235,7 @@ model PrivateCloudProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("vCenter Single Sign On Identity Sources")
+  @identifiers(#[])
   identitySources?: IdentitySource[];
 
   @doc("Properties describing how the cloud is distributed across availability zones")

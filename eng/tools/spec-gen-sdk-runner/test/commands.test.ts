@@ -1,16 +1,16 @@
-import { describe, test, expect, vi, beforeEach, type Mock } from "vitest";
-import * as utils from "../src/utils.js";
+import fs from "node:fs";
+import path from "node:path";
+import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
+import * as commandHelpers from "../src/command-helpers.js";
 import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
 } from "../src/commands.js";
-import * as commandHelpers from "../src/command-helpers.js";
 import * as log from "../src/log.js";
-import * as changeFiles from "../src/spec-helpers.js";
-import fs from "node:fs";
-import path from "node:path";
 import { LogLevel } from "../src/log.js";
+import * as changeFiles from "../src/spec-helpers.js";
+import * as utils from "../src/utils.js";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
@@ -209,7 +209,7 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
-    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue([false, ""]);
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
     vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
       // mock implementation intentionally left blank
@@ -239,9 +239,9 @@ describe("generateSdkForSpecPr", () => {
     expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
       mockCommandInput,
       "succeeded", // overallExecutionResult
-      "", // breakingChangeLabel
       false, // overallRunHasBreakingChange
       true, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted
@@ -282,9 +282,9 @@ describe("generateSdkForSpecPr", () => {
     expect(generateArtifactSpy).toHaveBeenCalledWith(
       mockCommandInput,
       "succeeded", // overallExecutionResult should be set to "succeeded"
-      "", // breakingChangeLabel
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       false, // sdkGenerationExecuted should be set to false
@@ -321,9 +321,9 @@ describe("generateSdkForSpecPr", () => {
     expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
       mockCommandInput,
       "", // overallExecutionResult is empty because no spec was actually processed
-      "", // breakingChangeLabel
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted is true because there were some changed specs but they had no valid config

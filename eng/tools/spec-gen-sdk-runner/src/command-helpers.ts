@@ -1,14 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  findReadmeFiles,
-  getArgumentValue,
-  getAllTypeSpecPaths,
-  objectToMap,
-  SpecConfigs,
-} from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
+import { groupSpecConfigPaths } from "./spec-helpers.js";
 import {
   APIViewRequestData,
   SdkName,
@@ -17,7 +11,13 @@ import {
   SpecGenSdkRequiredSettings,
   VsoLogs,
 } from "./types.js";
-import { groupSpecConfigPaths } from "./spec-helpers.js";
+import {
+  findReadmeFiles,
+  getAllTypeSpecPaths,
+  getArgumentValue,
+  objectToMap,
+  SpecConfigs,
+} from "./utils.js";
 
 /**
  * Load execution-report.json.
@@ -263,26 +263,24 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
  * Process the breaking change label artifacts.
  *
  * @param executionReport - The spec-gen-sdk execution report.
- * @returns [flag of lable breaking change, breaking change label].
+ * @returns flag of lable breaking change.
  */
-export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
-  let breakingChangeLabel = "";
+export function getBreakingChangeInfo(executionReport: any): boolean {
   for (const packageInfo of executionReport.packages) {
-    breakingChangeLabel = packageInfo.breakingChangeLabel;
     if (packageInfo.shouldLabelBreakingChange) {
-      return [true, breakingChangeLabel];
+      return true;
     }
   }
-  return [false, breakingChangeLabel];
+  return false;
 }
 
 /**
  * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
  * @param result - The spec-gen-sdk execution result.
- * @param breakingChangeLabel - The breaking change label.
  * @param hasBreakingChange - A flag indicating whether there are breaking changes.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param stagedArtifactsFolder - The staged artifacts folder.
  * @param apiViewRequestData - The API view request data.
  * @param sdkGenerationExecuted - A flag indicating whether the SDK generation was executed.
@@ -291,9 +289,9 @@ export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
 export function generateArtifact(
   commandInput: SpecGenSdkCmdInput,
   result: string,
-  breakingChangeLabel: string,
   hasBreakingChange: boolean,
   hasManagementPlaneSpecs: boolean,
+  hasTypeSpecProjects: boolean,
   stagedArtifactsFolder: string,
   apiViewRequestData: APIViewRequestData[],
   sdkGenerationExecuted: boolean = true,
@@ -313,6 +311,7 @@ export function generateArtifact(
     if (sdkGenerationExecuted) {
       isSpecGenSdkCheckRequired = getRequiredSettingValue(
         hasManagementPlaneSpecs,
+        hasTypeSpecProjects,
         commandInput.sdkLanguage as SdkName,
       );
     }
@@ -321,6 +320,7 @@ export function generateArtifact(
     const artifactInfo: SpecGenSdkArtifactInfo = {
       language: commandInput.sdkLanguage,
       result,
+      headSha: commandInput.specCommitSha,
       prNumber: commandInput.prNumber,
       labelAction: hasBreakingChange,
       isSpecGenSdkCheckRequired,
@@ -333,8 +333,6 @@ export function generateArtifact(
     setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
     setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
     setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
-    setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
-    setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
     setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
@@ -364,13 +362,19 @@ export function getServiceFolderPath(specConfigPath: string): string {
 /**
  * Get the required setting value for the SDK check based on the spec PR types.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param sdkName - The SDK name.
  * @returns boolean indicating whether the SDK check is required.
  */
 export function getRequiredSettingValue(
   hasManagementPlaneSpecs: boolean,
+  hasTypeSpecProjects: boolean,
   sdkName: SdkName,
 ): boolean {
+  // If the SDK is azure-sdk-for-net, return false if there are no TypeSpec projects.
+  if (sdkName === "azure-sdk-for-net" && !hasTypeSpecProjects) {
+    return false;
+  }
   if (hasManagementPlaneSpecs) {
     return SpecGenSdkRequiredSettings[sdkName].managementPlane;
   } else {

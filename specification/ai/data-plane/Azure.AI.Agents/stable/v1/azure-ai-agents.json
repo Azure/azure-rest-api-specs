@@ -447,6 +447,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Files_UploadFile_MaximumSet": {
+            "$ref": "./examples/Files_UploadFile_MaximumSet_Gen.json"
+          },
+          "Files_UploadFile_MinimumSet": {
+            "$ref": "./examples/Files_UploadFile_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -707,6 +715,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Threads_CreateThread_MaximumSet": {
+            "$ref": "./examples/Threads_CreateThread_MaximumSet_Gen.json"
+          },
+          "Threads_CreateThread_MinimumSet": {
+            "$ref": "./examples/Threads_CreateThread_MinimumSet_Gen.json"
           }
         }
       }
@@ -983,6 +999,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Messages_CreateMessage_MaximumSet": {
+            "$ref": "./examples/Messages_CreateMessage_MaximumSet_Gen.json"
+          },
+          "Messages_CreateMessage_MinimumSet": {
+            "$ref": "./examples/Messages_CreateMessage_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1094,6 +1118,51 @@
             "$ref": "./examples/Messages_UpdateMessage_MinimumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "description": "Deletes an existing message on an existing thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Identifier of the message.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageDeletionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Messages_Delete_MaximumSet": {
+            "$ref": "./examples/Messages_Delete_MaximumSet_Gen.json"
+          },
+          "Messages_Delete_MinimumSet": {
+            "$ref": "./examples/Messages_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/threads/{threadId}/runs": {
@@ -1200,6 +1269,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_ListRuns_MaximumSet": {
+            "$ref": "./examples/Runs_ListRuns_MaximumSet_Gen.json"
+          },
+          "Runs_ListRuns_MinimumSet": {
+            "$ref": "./examples/Runs_ListRuns_MinimumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -1264,6 +1341,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_CreateRun_MaximumSet": {
+            "$ref": "./examples/Runs_CreateRun_MaximumSet_Gen.json"
+          },
+          "Runs_CreateRun_MinimumSet": {
+            "$ref": "./examples/Runs_CreateRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1302,6 +1387,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_GetRun_MaximumSet": {
+            "$ref": "./examples/Runs_GetRun_MaximumSet_Gen.json"
+          },
+          "Runs_GetRun_MinimumSet": {
+            "$ref": "./examples/Runs_GetRun_MinimumSet_Gen.json"
           }
         }
       },
@@ -1358,6 +1451,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_UpdateRun_MaximumSet": {
+            "$ref": "./examples/Runs_UpdateRun_MaximumSet_Gen.json"
+          },
+          "Runs_UpdateRun_MinimumSet": {
+            "$ref": "./examples/Runs_UpdateRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1396,6 +1497,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_CancelRun_MaximumSet": {
+            "$ref": "./examples/Runs_CancelRun_MaximumSet_Gen.json"
+          },
+          "Runs_CancelRun_MinimumSet": {
+            "$ref": "./examples/Runs_CancelRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1663,8 +1772,7 @@
                   "items": {
                     "$ref": "#/definitions/ToolOutput"
                   },
-                  "x-ms-client-name": "toolOutputs",
-                  "x-ms-identifiers": []
+                  "x-ms-client-name": "toolOutputs"
                 },
                 "stream": {
                   "type": "boolean",
@@ -1690,6 +1798,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_SubmitToolOutputsToRun_MaximumSet": {
+            "$ref": "./examples/Runs_SubmitToolOutputsToRun_MaximumSet_Gen.json"
+          },
+          "Runs_SubmitToolOutputsToRun_MinimumSet": {
+            "$ref": "./examples/Runs_SubmitToolOutputsToRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1723,6 +1839,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateThreadAndRun_MaximumSet": {
+            "$ref": "./examples/CreateThreadAndRun_MaximumSet_Gen.json"
+          },
+          "CreateThreadAndRun_MinimumSet": {
+            "$ref": "./examples/CreateThreadAndRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -2038,8 +2162,7 @@
                   "items": {
                     "$ref": "#/definitions/VectorStoreDataSource"
                   },
-                  "x-ms-client-name": "dataSources",
-                  "x-ms-identifiers": []
+                  "x-ms-client-name": "dataSources"
                 },
                 "chunking_strategy": {
                   "$ref": "#/definitions/VectorStoreChunkingStrategyRequest",
@@ -2535,6 +2658,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "VectorStoreFiles_CreateVectorStoreFile_MaximumSet": {
+            "$ref": "./examples/VectorStoreFiles_CreateVectorStoreFile_MaximumSet_Gen.json"
+          },
+          "VectorStoreFiles_CreateVectorStoreFile_MinimumSet": {
+            "$ref": "./examples/VectorStoreFiles_CreateVectorStoreFile_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2717,8 +2848,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "tool_resources": {
           "$ref": "#/definitions/ToolResources",
@@ -3044,8 +3174,7 @@
           "description": "The initial messages to associate with the new thread.",
           "items": {
             "$ref": "#/definitions/ThreadMessageOptions"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "tool_resources": {
           "$ref": "#/definitions/ToolResources",
@@ -3285,8 +3414,7 @@
           "items": {
             "$ref": "#/definitions/AISearchIndexResource"
           },
-          "x-ms-client-name": "indexList",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "indexList"
         }
       }
     },
@@ -3359,6 +3487,24 @@
         "queue_service_endpoint",
         "queue_name"
       ]
+    },
+    "AzureFunctionToolCallDetails": {
+      "type": "object",
+      "description": "The Azure function call description. All the fields are present in the completed run step, however\nonly some fields are present in the RunStepDeltaAzureFunctionToolCall.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Azure function name"
+        },
+        "arguments": {
+          "type": "string",
+          "description": "JSON serialized function arguments."
+        },
+        "output": {
+          "type": "string",
+          "description": "The function output."
+        }
+      }
     },
     "AzureFunctionToolDefinition": {
       "type": "object",
@@ -3461,8 +3607,7 @@
           "items": {
             "$ref": "#/definitions/BingGroundingSearchConfiguration"
           },
-          "x-ms-client-name": "searchConfigurations",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "searchConfigurations"
         }
       },
       "required": [
@@ -3519,8 +3664,7 @@
           "items": {
             "$ref": "#/definitions/VectorStoreDataSource"
           },
-          "x-ms-client-name": "dataSources",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "dataSources"
         }
       }
     },
@@ -3596,8 +3740,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "tool_resources": {
           "$ref": "#/definitions/ToolResources",
@@ -3668,8 +3811,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "tool_resources": {
           "$ref": "#/definitions/ToolResources",
@@ -3778,8 +3920,7 @@
           "items": {
             "$ref": "#/definitions/ThreadMessageOptions"
           },
-          "x-ms-client-name": "additionalMessages",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "additionalMessages"
         },
         "tools": {
           "type": "array",
@@ -3787,8 +3928,12 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
+        },
+        "tool_resources": {
+          "$ref": "#/definitions/ToolResources",
+          "description": "The overridden enabled tool resources that the agent should use to run the thread.",
+          "x-nullable": true
         },
         "stream": {
           "type": "boolean",
@@ -4137,8 +4282,7 @@
           "items": {
             "$ref": "#/definitions/VectorStoreConfigurations"
           },
-          "x-ms-client-name": "vectorStores",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "vectorStores"
         }
       }
     },
@@ -4427,6 +4571,35 @@
         "type"
       ]
     },
+    "MessageDeletionStatus": {
+      "type": "object",
+      "description": "The status of a thread message deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.deleted'.",
+          "enum": [
+            "thread.message.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
+      ]
+    },
     "MessageDelta": {
       "type": "object",
       "description": "Represents the typed 'delta' payload within a streaming message delta chunk.",
@@ -4440,8 +4613,7 @@
           "description": "The content of the message as an array of text and/or images.",
           "items": {
             "$ref": "#/definitions/MessageDeltaContent"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4575,8 +4747,7 @@
           "description": "Annotations for the text.",
           "items": {
             "$ref": "#/definitions/MessageDeltaTextAnnotation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5066,8 +5237,7 @@
           "description": "A list of annotations associated with this text.",
           "items": {
             "$ref": "#/definitions/MessageTextAnnotation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -5337,8 +5507,7 @@
           "items": {
             "$ref": "#/definitions/FunctionDefinition"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -5804,13 +5973,32 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "RunStepAzureFunctionToolCall": {
+      "type": "object",
+      "description": "A record of a call to an Azure Function tool.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "The description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "RunStepBingGroundingToolCall": {
       "type": "object",
       "description": "A record of a call to a bing grounding tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing grounding.",
       "properties": {
         "bing_grounding": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The dictionary with request and response from Bing Grounding search tool.",
           "additionalProperties": {
             "type": "string"
           },
@@ -5912,8 +6100,7 @@
           "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
           "items": {
             "$ref": "#/definitions/RunStepCodeInterpreterToolCallOutput"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -5975,6 +6162,25 @@
         }
       }
     },
+    "RunStepDeltaAzureFunctionToolCall": {
+      "type": "object",
+      "description": "Represents the Azure Function tool call in a streaming run step.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionToolCallDetails",
+          "description": "Partial description of an Azure function call."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "RunStepDeltaChunk": {
       "type": "object",
       "description": "Represents a run step delta i.e. any changed fields on a run step during streaming.",
@@ -6017,8 +6223,7 @@
           "description": "The outputs from the Code Interpreter tool call. Code Interpreter can output one or more\nitems, including text (`logs`) or images (`image`). Each of these are represented by a\ndifferent object type.",
           "items": {
             "$ref": "#/definitions/RunStepDeltaCodeInterpreterOutput"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -6348,8 +6553,7 @@
           "description": "The content of the result that was found. The content is only included if requested via the include query parameter.",
           "items": {
             "$ref": "#/definitions/FileSearchToolCallContent"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -6372,8 +6576,7 @@
           "description": "The array of a file search results",
           "items": {
             "$ref": "#/definitions/RunStepFileSearchToolCallResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -6836,8 +7039,7 @@
           "description": "The list of content items associated with the agent thread message.",
           "items": {
             "$ref": "#/definitions/MessageContent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "assistant_id": {
           "type": "string",
@@ -6857,8 +7059,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MessageAttachment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",
@@ -6904,8 +7105,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MessageAttachment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",
@@ -6979,8 +7179,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "created_at": {
           "type": "integer",
@@ -7169,8 +7368,7 @@
           "items": {
             "$ref": "#/definitions/ToolConnection"
           },
-          "x-ms-client-name": "connectionList",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "connectionList"
         }
       }
     },
@@ -7318,8 +7516,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "tool_resources": {
           "$ref": "#/definitions/ToolResources",
@@ -7562,8 +7759,7 @@
           "items": {
             "$ref": "#/definitions/VectorStoreDataSource"
           },
-          "x-ms-client-name": "dataSources",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "dataSources"
         }
       },
       "required": [

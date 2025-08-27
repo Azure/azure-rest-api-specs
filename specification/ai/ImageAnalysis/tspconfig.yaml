@@ -20,12 +20,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Vision.ImageAnalysis"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.AI.Vision.ImageAnalysis"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Vision.ImageAnalysis
     model-namespace: false
   "@azure-tools/typespec-java":
@@ -34,9 +35,11 @@ options:
     # We switched two public methods to private. Make sure this is not overridden next time the SDK is emitted.
     partial-update: true
     customization-class: customization/src/main/java/ImageAnalysisCustomization.java
+    use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-vision-image-analysis-rest"
+    is-modular-library: false
     package-details:
       name: "@azure-rest/ai-vision-image-analysis"
     flavor: azure

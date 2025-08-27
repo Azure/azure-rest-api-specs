@@ -1,22 +1,22 @@
-import { describe, test, expect, vi, beforeEach } from "vitest";
-import * as log from "../src/log.js";
-import * as utils from "../src/utils.js";
-import * as specHelpers from "../src/spec-helpers.js";
-import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  generateArtifact,
   getBreakingChangeInfo,
   getRequiredSettingValue,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-  generateArtifact,
   setPipelineVariables,
 } from "../src/command-helpers.js";
+import * as log from "../src/log.js";
 import { LogLevel } from "../src/log.js";
+import * as specHelpers from "../src/spec-helpers.js";
 import { APIViewRequestData } from "../src/types.js";
+import * as utils from "../src/utils.js";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -368,22 +368,22 @@ describe("commands.ts", () => {
   describe("getBreakingChangeInfo", () => {
     test("should return breaking change info if applicable", () => {
       const mockExecutionReport = {
-        packages: [{ shouldLabelBreakingChange: true, breakingChangeLabel: "breaking-change" }],
+        packages: [{ shouldLabelBreakingChange: true }],
       };
 
       const result = getBreakingChangeInfo(mockExecutionReport);
 
-      expect(result).toEqual([true, "breaking-change"]);
+      expect(result).toBe(true);
     });
 
     test("should return no breaking change info if not applicable", () => {
       const mockExecutionReport = {
-        packages: [{ shouldLabelBreakingChange: false, breakingChangeLabel: "" }],
+        packages: [{ shouldLabelBreakingChange: false }],
       };
 
       const result = getBreakingChangeInfo(mockExecutionReport);
 
-      expect(result).toEqual([false, ""]);
+      expect(result).toBe(false);
     });
 
     test("should return no breaking change info if not executionReport", () => {
@@ -393,7 +393,7 @@ describe("commands.ts", () => {
 
       const result = getBreakingChangeInfo(mockExecutionReport);
 
-      expect(result).toEqual([false, ""]);
+      expect(result).toBe(false);
     });
   });
 
@@ -421,22 +421,23 @@ describe("commands.ts", () => {
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
+        prNumber: "123",
         sdkRepoName: "",
-        specCommitSha: "",
+        specCommitSha: "abc123",
         specRepoHttpsUrl: "",
       };
       const mockResult = "succeeded";
-      const mockBreakingchangeLabel = "breaking-change";
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
+      const mockhasTypeSpecProjects = false;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
       const mockApiViewRequestData: APIViewRequestData[] = [];
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
-        mockBreakingchangeLabel,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
+        mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
       );
@@ -457,6 +458,8 @@ describe("commands.ts", () => {
           {
             language: "azure-sdk-for-js",
             result: "succeeded",
+            headSha: "abc123",
+            prNumber: "123",
             labelAction: false,
             isSpecGenSdkCheckRequired: false,
             apiViewRequestData: [],
@@ -478,8 +481,6 @@ describe("commands.ts", () => {
         "StagedArtifactsFolder",
         "mockStagedArtifactsFolder",
       );
-      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "remove");
-      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabel", "breaking-change");
       expect(log.setVsoVariable).toHaveBeenCalledWith("HasAPIViewArtifact", "false");
     });
 
@@ -507,17 +508,17 @@ describe("commands.ts", () => {
       };
 
       const mockResult = "failed";
-      const mockBreakingchangeLabel = "breaking-change";
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
+      const mockhasTypeSpecProjects = false;
       const mockStagedArtifactsFolder = "";
       const mockApiViewRequestData: APIViewRequestData[] = [];
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
-        mockBreakingchangeLabel,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
+        mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
       );
@@ -553,11 +554,11 @@ describe("commands.ts", () => {
         specRepoHttpsUrl: "",
       };
       const mockResult = "succeeded";
-      const mockBreakingchangeLabel = "breaking-change";
       const mockhasBreakingChange = false;
       // Using true for hasManagementPlaneSpecs, which would normally make isSpecGenSdkCheckRequired=true
       // for Go SDK (as tested in the getRequiredSettingValue tests)
       const mockhasManagementPlaneSpecs = true;
+      const mockhasTypeSpecProjects = true;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
       const mockApiViewRequestData: APIViewRequestData[] = [];
 
@@ -565,9 +566,9 @@ describe("commands.ts", () => {
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
-        mockBreakingchangeLabel,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
+        mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
         false, // sdkGenerationExecuted = false
@@ -588,6 +589,7 @@ describe("commands.ts", () => {
           {
             language: "azure-sdk-for-go",
             result: "succeeded",
+            headSha: "",
             labelAction: false,
             isSpecGenSdkCheckRequired: false, // This should be false when sdkGenerationExecuted is false
             apiViewRequestData: [],
@@ -601,23 +603,45 @@ describe("commands.ts", () => {
 
   describe("getRequiredSettingValue", () => {
     test("should return managementPlane setting when hasManagementPlaneSpecs is true", () => {
-      const result = getRequiredSettingValue(true, "azure-sdk-for-go");
+      const result = getRequiredSettingValue(true, true, "azure-sdk-for-go");
       // Based on the constants in types.ts, Go SDK requires check for management plane
       expect(result).toBe(true);
 
-      const result2 = getRequiredSettingValue(true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for management plane
+      const result2 = getRequiredSettingValue(true, true, "azure-sdk-for-net");
+      // .NET SDK set (managementPlane: false)
       expect(result2).toBe(false);
     });
 
     test("should return dataPlane setting when hasManagementPlaneSpecs is false", () => {
-      const result = getRequiredSettingValue(false, "azure-sdk-for-go");
+      const result = getRequiredSettingValue(false, true, "azure-sdk-for-go");
       // Based on the constants in types.ts, Go SDK requires check for data plane
       expect(result).toBe(true);
 
-      const result2 = getRequiredSettingValue(false, "azure-sdk-for-js");
+      const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
       // Based on the constants in types.ts, JS SDK does not require check for data plane
       expect(result2).toBe(false);
+
+      const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
+      // .NET SDK set (dataplane: false)
+      expect(result3).toBe(false);
+    });
+
+    test("should return false for azure-sdk-for-net when hasTypeSpecProjects is false", () => {
+      // Test the special case for .NET SDK without TypeSpec projects
+      const result = getRequiredSettingValue(true, false, "azure-sdk-for-net");
+      expect(result).toBe(false);
+
+      const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-net");
+      expect(result2).toBe(false);
+    });
+
+    test("should follow normal rules for other SDKs when hasTypeSpecProjects is false", () => {
+      // Other SDKs should follow normal rules regardless of hasTypeSpecProjects
+      const result = getRequiredSettingValue(true, false, "azure-sdk-for-go");
+      expect(result).toBe(true);
+
+      const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-python");
+      expect(result2).toBe(true);
     });
   });
 });

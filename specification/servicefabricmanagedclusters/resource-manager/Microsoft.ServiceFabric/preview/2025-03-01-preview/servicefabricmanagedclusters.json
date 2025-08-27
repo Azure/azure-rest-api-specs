@@ -294,9 +294,9 @@
             "description": "The request has succeeded."
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "Location": {
+              "location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
@@ -4560,14 +4560,17 @@
         },
         "healthCheckRetryTimeout": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "upgradeTimeout": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "upgradeDomainTimeout": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         }
       },
@@ -8160,11 +8163,9 @@
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
         },
         "settings": {
-          "type": "object",
           "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "type": "object",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
         },
         "forceUpdateTag": {

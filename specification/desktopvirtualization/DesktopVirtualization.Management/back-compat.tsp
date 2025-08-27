@@ -43,6 +43,10 @@ using Microsoft.DesktopVirtualization;
   "hostPoolUpdateControlParameter"
 );
 
+@@clientName(ControlSessionHostProvisioning.post::parameters.body,
+  "hostPoolProvisioningControlParameter"
+);
+
 @@clientName(SessionHostManagements.createOrUpdate::parameters.resource,
   "sessionHostManagement"
 );
@@ -58,3 +62,5 @@ using Microsoft.DesktopVirtualization;
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
+
+@@clientName(MSIXImages, "MsixImages", "autorest");
