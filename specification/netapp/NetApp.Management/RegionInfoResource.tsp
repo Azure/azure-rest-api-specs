@@ -14,7 +14,7 @@ namespace Microsoft.NetApp;
  * Information regarding regionInfo Item.
  */
 @singleton("default")
-@subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model RegionInfoResource is Azure.ResourceManager.ProxyResource<RegionInfo> {
   ...ResourceNameParameter<
     Resource = RegionInfoResource,

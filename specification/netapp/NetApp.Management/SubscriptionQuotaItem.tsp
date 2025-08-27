@@ -13,7 +13,7 @@ namespace Microsoft.NetApp;
 /**
  * Information regarding Subscription Quota Item.
  */
-@subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model SubscriptionQuotaItem
   is Azure.ResourceManager.ProxyResource<SubscriptionQuotaItemProperties> {
   ...ResourceNameParameter<
