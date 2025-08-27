@@ -6,11 +6,7 @@
     "api-version": "2025-05-01-preview",
     "body": {
       "properties": {
-        "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
-        "policies": {
-          "redemption": "AutoRedeem",
-          "expiration": "SuspendBillingProfile"
-        }
+        "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4"
       },
       "location": "global",
       "tags": {
@@ -32,21 +28,19 @@
         "type": "Microsoft.BillingBenefits/credits",
         "properties": {
           "productCode": "18eb6fdd-37c1-479b-b9be-550dbc461842",
+          "creditType": "PromotionalCredit",
           "credit": {
             "grain": "FullTerm",
             "amount": 20000,
             "currencyCode": "USD"
           },
-          "policies": {
-            "redemption": "AutoRedeem",
-            "expiration": "SuspendBillingProfile"
-          },
           "startAt": "2023-12-12T00:00:00Z",
           "endAt": "2024-01-12T00:00:00Z",
-          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-          "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/billingProfiles/{billingProfileId}",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/billingProfiles/{billingProfileId}",
           "customerId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/customers/{customerId}",
-          "status": "Pending"
+          "provisioningState": "Pending",
+          "provisioningSubState": "None"
         },
         "location": "global",
         "tags": {
@@ -68,21 +62,19 @@
         "type": "Microsoft.BillingBenefits/credits",
         "properties": {
           "productCode": "18eb6fdd-37c1-479b-b9be-550dbc461842",
+          "creditType": "PromotionalCredit",
           "credit": {
             "grain": "FullTerm",
             "amount": 20000,
             "currencyCode": "USD"
           },
-          "policies": {
-            "redemption": "AutoRedeem",
-            "expiration": "SuspendBillingProfile"
-          },
           "startAt": "2023-12-12T00:00:00Z",
           "endAt": "2024-01-12T00:00:00Z",
-          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-          "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/billingProfiles/{billingProfileId}",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/billingProfiles/{billingProfileId}",
           "customerId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/customers/{customerId}",
-          "status": "Succeeded"
+          "provisioningState": "Succeeded",
+          "provisioningSubState": "None"
         },
         "location": "global",
         "tags": {
