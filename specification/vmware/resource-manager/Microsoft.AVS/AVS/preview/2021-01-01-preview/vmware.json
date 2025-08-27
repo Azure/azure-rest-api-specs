@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure VMware Solution API",
     "description": "Azure VMware Solution API",
-    "version": "2020-07-17-preview"
+    "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -64,6 +64,14 @@
     },
     {
       "name": "WorkloadNetworks",
+      "description": ""
+    },
+    {
+      "name": "Addons",
+      "description": ""
+    },
+    {
+      "name": "Datastores",
       "description": ""
     }
   ],
@@ -178,6 +186,14 @@
       "required": true,
       "type": "string",
       "description": "NSX DNS Zone identifier. Generally the same as the DNS Zone's display name",
+      "x-ms-parameter-location": "method"
+    },
+    "datastoreName": {
+      "name": "datastoreName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the datastore in the private cloud cluster",
       "x-ms-parameter-location": "method"
     }
   },
@@ -924,6 +940,214 @@
         "x-ms-examples": {
           "Clusters_Delete": {
             "$ref": "./examples/Clusters_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores": {
+      "get": {
+        "operationId": "Datastores_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "Datastores"
+        ],
+        "summary": "List cloud datastores in a private cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DatastoreList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datastores_List": {
+            "$ref": "./examples/Datastores_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}": {
+      "get": {
+        "operationId": "Datastores_Get",
+        "tags": [
+          "Datastores"
+        ],
+        "summary": "Get a datastore in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/datastoreName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datastores_Get": {
+            "$ref": "./examples/Datastores_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Datastores_Create",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "Datastores"
+        ],
+        "summary": "Create a datastore in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/datastoreName"
+          },
+          {
+            "name": "datastore",
+            "description": "A datastore in a private cloud cluster",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datastores_Create": {
+            "$ref": "./examples/Datastores_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Datastores_Delete",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "Datastores"
+        ],
+        "summary": "Delete a datastore in a private cloud cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/datastoreName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The delete has succeeded"
+          },
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
+          },
+          "204": {
+            "description": "No Content. No datastore to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datastores_Delete": {
+            "$ref": "./examples/Datastores_Delete.json"
           }
         }
       }
@@ -3341,8 +3565,8 @@
           }
         },
         "x-ms-examples": {
-          "Addons_Get": {
-            "$ref": "./examples/Addons_Get.json"
+          "Addons_Get_SRM": {
+            "$ref": "./examples/Addons_Get_SRM.json"
           }
         }
       },
@@ -3404,8 +3628,8 @@
           }
         },
         "x-ms-examples": {
-          "Addons_CreateOrUpdate": {
-            "$ref": "./examples/Addons_CreateOrUpdate.json"
+          "Addons_CreateOrUpdate_SRM": {
+            "$ref": "./examples/Addons_CreateOrUpdate_SRM.json"
           }
         }
       },
@@ -4300,6 +4524,7 @@
             "Succeeded",
             "Failed",
             "Cancelled",
+            "Building",
             "Deleting",
             "Updating"
           ],
@@ -4334,6 +4559,97 @@
           "description": "URL to get the next page if any",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DatastoreList": {
+      "description": "A paged list of datastores",
+      "properties": {
+        "value": {
+          "description": "The items on a page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Datastore"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Datastore": {
+      "description": "A datastore resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a datastore resource",
+          "$ref": "#/definitions/DatastoreProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DatastoreProperties": {
+      "description": "The properties of a datastore",
+      "properties": {
+        "provisioningState": {
+          "description": "The state of the datastore provisioning",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "DatastoreProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "netAppVolume": {
+          "description": "An Azure NetApp Files volume",
+          "$ref": "#/definitions/NetAppVolume"
+        },
+        "diskPoolVolume": {
+          "description": "An iSCSI volume",
+          "$ref": "#/definitions/DiskPoolVolume"
+        }
+      }
+    },
+    "NetAppVolume": {
+      "description": "An Azure NetApp Files volume from Microsoft.NetApp provider",
+      "properties": {
+        "nfsProviderIp": {
+          "type": "string",
+          "description": "IP address of the NFS provider"
+        },
+        "nfsFilePath": {
+          "type": "string",
+          "description": "File path through which the NFS volume is exposed by the provider"
+        }
+      }
+    },
+    "DiskPoolVolume": {
+      "description": "An iSCSI volume from Microsoft.StoragePool provider",
+      "properties": {
+        "endpoints": {
+          "description": "iSCSI provider target IP address list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lunName": {
+          "type": "string",
+          "description": "Name of the LUN to be used"
         }
       }
     },
@@ -4638,7 +4954,8 @@
           "description": "Type of DHCP: SERVER or RELAY.",
           "type": "string",
           "enum": [
-            "SERVER, RELAY"
+            "SERVER",
+            "RELAY"
           ],
           "x-ms-enum": {
             "name": "DhcpTypeEnum",
