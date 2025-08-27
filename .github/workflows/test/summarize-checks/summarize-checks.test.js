@@ -1,13 +1,16 @@
 import { Octokit } from "@octokit/rest";
+import { strToU8, zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
+import { execFile } from "../../../shared/src/exec.js";
 import {
   createNextStepsComment,
   getCheckInfo,
   getCheckRunTuple,
   getExistingLabels,
+  getImpactAssessment,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.js";
-import { createMockCore } from "../mocks.js";
+import { createMockCore, createMockGithub } from "../mocks.js";
 
 const mockCore = createMockCore();
 const WORKFLOW_URL = "http://github.com/a/fake/workflowrun/url";
@@ -1145,6 +1148,90 @@ describe("Summarize Checks Unit Tests", () => {
       );
 
       expect(automatedCheckOutput).toEqual(expectedCheckOutput);
+    });
+  });
+
+  describe("getImpactAssessment", async () => {
+    const unzipExists = await execFile("unzip")
+      .then(() => true)
+      .catch(() => false);
+
+    // Runtime code currently requires "unzip" executable to exist
+    it.runIf(unzipExists)("unzips and extracts artifact", async () => {
+      /** @type {import("../../src/summarize-checks/labelling.js").ImpactAssessment} */
+      const impactAssessment = {
+        // Set booleans arbitrarily to false|true
+        resourceManagerRequired: false,
+        dataPlaneRequired: true,
+        suppressionReviewRequired: false,
+        isNewApiVersion: true,
+        rpaasExceptionRequired: false,
+        rpaasRpNotInPrivateRepo: true,
+        rpaasChange: false,
+        newRP: true,
+        rpaasRPMissing: false,
+        typeSpecChanged: true,
+        isDraft: false,
+        targetBranch: "test-target-branch",
+      };
+
+      const zip = zipSync({
+        "summary.json": strToU8(JSON.stringify(impactAssessment)),
+      });
+
+      const github = createMockGithub();
+
+      github.rest.actions.downloadArtifact.mockResolvedValue({
+        data: Buffer.from(zip),
+      });
+
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [{ id: 1, name: "job-summary" }],
+        },
+      });
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+        owner: "test-owner",
+        repo: "test-repo",
+        artifact_id: 1,
+        archive_format: "zip",
+      });
+
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { id: 1, name: "job-summary" /* updated_at: "1970" (default) */ },
+            { id: 2, name: "job-summary", updated_at: "2025" },
+            { id: 3, name: "job-summary", updated_at: "2024" },
+          ],
+        },
+      });
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+        owner: "test-owner",
+        repo: "test-repo",
+        artifact_id: 2,
+        archive_format: "zip",
+      });
+    });
+
+    it("throws if no job-summary artifact", async () => {
+      const github = createMockGithub();
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: Unable to find job-summary artifact for run ID: 123. This should never happen, as this section of code should only run with a valid runId.]`,
+      );
     });
   });
 });
