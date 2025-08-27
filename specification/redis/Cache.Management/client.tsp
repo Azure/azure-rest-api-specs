@@ -116,3 +116,11 @@ using Microsoft.Cache;
   "RedisProvisioningState",
   "csharp"
 );
+@@scope(Operations.list, "!csharp");
+@@clientName(RedisResource, "Redis", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResource,
+  "RedisPrivateLinkResource",
+  "csharp"
+);
+@@clientName(ExportRDBParameters, "ExportRdbContent", "csharp");
+@@clientName(ImportRDBParameters, "ImportRdbContent", "csharp");
