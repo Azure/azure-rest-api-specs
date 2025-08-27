@@ -1,3 +1,5 @@
+// @ts-check
+
 import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 
@@ -6,6 +8,7 @@ export function createMockGithub() {
   return {
     hook: {
       after: vi.fn(),
+      before: vi.fn(),
     },
     paginate: async (func, params) => {
       // Assume all test data fits in single page
@@ -16,6 +19,7 @@ export function createMockGithub() {
     },
     rest: {
       actions: {
+        downloadArtifact: vi.fn().mockResolvedValue({ data: new ArrayBuffer(0) }),
         listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
         listWorkflowRunArtifacts: vi.fn().mockResolvedValue({ data: { artifacts: [] } }),
         listWorkflowRunsForRepo: vi.fn().mockResolvedValue({ data: { workflow_runs: [] } }),
@@ -41,6 +45,9 @@ export function createMockGithub() {
       search: {
         issuesAndPullRequests: vi.fn(),
       },
+    },
+    request: {
+      endpoint: vi.fn(),
     },
   };
 }
@@ -69,7 +76,7 @@ export function createMockCore() {
 export function createMockRequestError(status) {
   return new RequestError(`mock RequestError with status '${status}'`, status, {
     // request properties "url" and "headers" must be defined to prevent errors
-    request: { url: "test url", headers: {} },
+    request: { method: "GET", url: "test url", headers: {} },
   });
 }
 
@@ -81,5 +88,18 @@ export function createMockContext() {
       owner: "owner",
       repo: "repo",
     },
+  };
+}
+
+/**
+ * @returns {import("../../shared/src/logger").ILogger}
+ */
+export function createMockLogger() {
+  return {
+    debug: vi.fn(),
+    error: vi.fn(),
+    info: vi.fn(),
+    isDebug: vi.fn().mockReturnValue(false),
+    warning: vi.fn(),
   };
 }
