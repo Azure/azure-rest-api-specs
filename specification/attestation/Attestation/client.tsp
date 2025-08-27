@@ -6,26 +6,6 @@ using Attestation;
 
 @@clientName(JsonWebKey.x5c, "x5C");
 
-@@clientName(PolicyCertificatesResult.`x-ms-policy-certificates`,
-  "policyCertificates"
-);
-
-@@clientName(PolicyCertificatesModificationResult.`x-ms-certificate-thumbprint`,
-  "certificateThumbprint"
-);
-@@clientName(PolicyCertificatesModificationResult.`x-ms-policycertificates-result`,
-  "certificateResolution"
-);
-
-@@clientName(StoredAttestationPolicy.AttestationPolicy, "attestationPolicy");
-
-@@clientName(PolicyResult.`x-ms-policy-result`, "policyResolution");
-@@clientName(PolicyResult.`x-ms-policy-token-hash`, "policyTokenHash");
-@@clientName(PolicyResult.`x-ms-policy-signer`, "policySigner");
-@@clientName(PolicyResult.`x-ms-policy`, "policy");
-
-@@clientName(AttestationResult.`x-ms-ver`, "version");
-@@clientName(AttestationResult.`x-ms-runtime`, "runtimeClaims");
 @@clientName(AttestationResult.`x-ms-inittime`, "inittimeClaims");
 @@clientName(AttestationResult.`x-ms-policy`, "policyClaims");
 @@clientName(AttestationResult.`x-ms-attestation-type`, "verifierType");
