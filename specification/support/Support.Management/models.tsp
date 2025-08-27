@@ -892,7 +892,7 @@ model DirectConnectEscalation {
    * Status of Direct Connect Escalation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "azureEEStatus should not be converted to camel case because 'EE' is an abbreviation for 'Escalate to Engineering'."
-  azureEEStatus: AzureEEStatus;
+  azureEEStatus?: AzureEEStatus;
 
   /**
    * An array containing the allowed severities for direct connect escalation.

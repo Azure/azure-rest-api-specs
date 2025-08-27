@@ -26,9 +26,24 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-04
+tag: package-preview-2025-06-01-preview
 ```
 
+
+### Tag: package-preview-2025-06-01-preview
+
+These settings apply only when `--tag=package-preview-2025-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01-preview'
+input-file:
+  - Microsoft.Support/preview/2025-06-01-preview/support.json
+
+suppressions:
+  - code: ConsistentPatchProperties
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - support.json
+```
 
 ### Tag: package-2024-04
 
