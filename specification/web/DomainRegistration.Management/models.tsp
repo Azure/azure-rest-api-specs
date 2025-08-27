@@ -466,7 +466,131 @@ model DomainCollection is Azure.Core.Page<Domain>;
  * Domain resource specific properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
-model DomainProperties {}
+model DomainProperties {
+  /**
+   * Administrative contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactAdmin: Contact;
+
+  /**
+   * Billing contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactBilling: Contact;
+
+  /**
+   * Registrant contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactRegistrant: Contact;
+
+  /**
+   * Technical contact.
+   */
+  @visibility(Lifecycle.Create)
+  contactTech: Contact;
+
+  /**
+   * Domain registration status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  registrationStatus?: DomainStatus;
+
+  /**
+   * Domain provisioning state.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+  /**
+   * Name servers.
+   */
+  @visibility(Lifecycle.Read)
+  nameServers?: string[];
+
+  /**
+   * <code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.
+   */
+  privacy?: boolean;
+
+  /**
+   * Domain creation timestamp.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdTime?: utcDateTime;
+
+  /**
+   * Domain expiration timestamp.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationTime?: utcDateTime;
+
+  /**
+   * Timestamp when the domain was renewed last time.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastRenewedTime?: utcDateTime;
+
+  /**
+   * <code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.
+   */
+  autoRenew?: boolean = true;
+
+  /**
+   * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.
+   */
+  @visibility(Lifecycle.Read)
+  readyForDnsRecordManagement?: boolean;
+
+  /**
+   * All hostnames derived from the domain and assigned to Azure resources.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  managedHostNames?: HostName[];
+
+  /**
+   * Legal agreement consent.
+   */
+  @visibility(Lifecycle.Create)
+  consent: DomainPurchaseConsent;
+
+  /**
+   * Reasons why domain is not renewable.
+   */
+  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
+
+  /**
+   * Current DNS type
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  dnsType?: DnsType;
+
+  /**
+   * Azure DNS Zone to use
+   */
+  dnsZoneId?: string;
+
+  /**
+   * Target DNS type (would be used for migration)
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  targetDnsType?: DnsType;
+
+  /**
+   * Authorization code for the domain.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  authCode?: string;
+}
 
 /**
  * Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois
@@ -731,24 +855,14 @@ model DomainPatchResource extends ProxyOnlyResource {
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
-    registrationStatus?: registrationStatus;
+    registrationStatus?: DomainStatus;
 
     /**
      * Domain provisioning state.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
-    @OpenAPI.extension(
-      "x-ms-enum",
-      #{ name: "ProvisioningState", modelAsString: false }
-    )
-    provisioningState?:
-      | "Succeeded"
-      | "Failed"
-      | "Canceled"
-      | "InProgress"
-      | "Deleting"
-      | string;
+    provisioningState?: ProvisioningState;
 
     /**
      * Name servers.
@@ -830,6 +944,9 @@ model DomainPatchResource extends ProxyOnlyResource {
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
     targetDnsType?: DnsType;
 
+    /**
+     * Authorization code for the domain.
+     */
     @visibility(Lifecycle.Create, Lifecycle.Read)
     authCode?: string;
   };
@@ -844,51 +961,35 @@ enum dnsType {
   DefaultDomainRegistrarDns,
 }
 
-/**
- * ARM resource for provisionState.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum provisioningState {
-  Succeeded,
-  Failed,
-  Canceled,
-  InProgress,
-  Deleting,
-}
-
-/**
- * ARM resource for registrationStatus.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum registrationStatus {
-  Active,
-  Awaiting,
-  Cancelled,
-  Confiscated,
-  Disabled,
-  Excluded,
-  Expired,
-  Failed,
-  Held,
-  Locked,
-  Parked,
-  Pending,
-  Reserved,
-  Reverted,
-  Suspended,
-  Transferred,
-  Unknown,
-  Unlocked,
-  Unparked,
-  Updated,
-  JsonConverterFailed,
-}
 
 /**
  * Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
-model ProxyOnlyResource {}
+model ProxyOnlyResource {
+  /**
+   * Resource Id.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource Name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Kind of resource.
+   */
+  kind?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
 
 /**
  * Collection of domain ownership identifiers.

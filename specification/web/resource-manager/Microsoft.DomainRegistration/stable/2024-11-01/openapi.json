@@ -1170,140 +1170,8 @@
       "description": "Information about a domain.",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/DomainProperties",
           "description": "Domain resource specific properties",
-          "properties": {
-            "contactAdmin": {
-              "$ref": "#/definitions/Contact",
-              "description": "Administrative contact.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
-            "contactBilling": {
-              "$ref": "#/definitions/Contact",
-              "description": "Billing contact.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
-            "contactRegistrant": {
-              "$ref": "#/definitions/Contact",
-              "description": "Registrant contact.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
-            "contactTech": {
-              "$ref": "#/definitions/Contact",
-              "description": "Technical contact.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
-            "registrationStatus": {
-              "$ref": "#/definitions/registrationStatus",
-              "description": "Domain registration status.",
-              "readOnly": true
-            },
-            "provisioningState": {
-              "$ref": "#/definitions/provisioningState",
-              "description": "Domain provisioning state.",
-              "readOnly": true
-            },
-            "nameServers": {
-              "type": "array",
-              "description": "Name servers.",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "privacy": {
-              "type": "boolean",
-              "description": "<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>."
-            },
-            "createdTime": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Domain creation timestamp.",
-              "readOnly": true
-            },
-            "expirationTime": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Domain expiration timestamp.",
-              "readOnly": true
-            },
-            "lastRenewedTime": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Timestamp when the domain was renewed last time.",
-              "readOnly": true
-            },
-            "autoRenew": {
-              "type": "boolean",
-              "description": "<code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.",
-              "default": true
-            },
-            "readyForDnsRecordManagement": {
-              "type": "boolean",
-              "description": "<code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \\n it is hosted on name servers Azure has programmatic access to.",
-              "readOnly": true
-            },
-            "managedHostNames": {
-              "type": "array",
-              "description": "All hostnames derived from the domain and assigned to Azure resources.",
-              "items": {
-                "$ref": "#/definitions/HostName"
-              },
-              "readOnly": true,
-              "x-ms-identifiers": [
-                "name"
-              ]
-            },
-            "consent": {
-              "$ref": "#/definitions/DomainPurchaseConsent",
-              "description": "Legal agreement consent.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
-            "domainNotRenewableReasons": {
-              "type": "array",
-              "description": "Reasons why domain is not renewable.",
-              "items": {
-                "$ref": "#/definitions/domainNotRenewableReasonsProperties"
-              },
-              "readOnly": true
-            },
-            "dnsType": {
-              "$ref": "#/definitions/DnsType",
-              "description": "Current DNS type"
-            },
-            "dnsZoneId": {
-              "type": "string",
-              "description": "Azure DNS Zone to use"
-            },
-            "targetDnsType": {
-              "$ref": "#/definitions/DnsType",
-              "description": "Target DNS type (would be used for migration)"
-            },
-            "authCode": {
-              "type": "string",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
-            }
-          },
-          "required": [
-            "contactAdmin",
-            "contactBilling",
-            "contactRegistrant",
-            "contactTech",
-            "consent"
-          ],
           "x-ms-client-flatten": true
         }
       },
@@ -1453,24 +1321,13 @@
               ]
             },
             "registrationStatus": {
-              "$ref": "#/definitions/registrationStatus",
+              "$ref": "#/definitions/DomainStatus",
               "description": "Domain registration status.",
               "readOnly": true
             },
             "provisioningState": {
-              "type": "string",
+              "$ref": "#/definitions/ProvisioningState",
               "description": "Domain provisioning state.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "InProgress",
-                "Deleting"
-              ],
-              "x-ms-enum": {
-                "name": "ProvisioningState",
-                "modelAsString": false
-              },
               "readOnly": true
             },
             "nameServers": {
@@ -1575,6 +1432,143 @@
         }
       ]
     },
+    "DomainProperties": {
+      "type": "object",
+      "description": "Domain resource specific properties",
+      "properties": {
+        "contactAdmin": {
+          "$ref": "#/definitions/Contact",
+          "description": "Administrative contact.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "contactBilling": {
+          "$ref": "#/definitions/Contact",
+          "description": "Billing contact.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "contactRegistrant": {
+          "$ref": "#/definitions/Contact",
+          "description": "Registrant contact.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "contactTech": {
+          "$ref": "#/definitions/Contact",
+          "description": "Technical contact.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "registrationStatus": {
+          "$ref": "#/definitions/DomainStatus",
+          "description": "Domain registration status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Domain provisioning state.",
+          "readOnly": true
+        },
+        "nameServers": {
+          "type": "array",
+          "description": "Name servers.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privacy": {
+          "type": "boolean",
+          "description": "<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Domain creation timestamp.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Domain expiration timestamp.",
+          "readOnly": true
+        },
+        "lastRenewedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the domain was renewed last time.",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "<code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.",
+          "default": true
+        },
+        "readyForDnsRecordManagement": {
+          "type": "boolean",
+          "description": "<code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \\n it is hosted on name servers Azure has programmatic access to.",
+          "readOnly": true
+        },
+        "managedHostNames": {
+          "type": "array",
+          "description": "All hostnames derived from the domain and assigned to Azure resources.",
+          "items": {
+            "$ref": "#/definitions/HostName"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "consent": {
+          "$ref": "#/definitions/DomainPurchaseConsent",
+          "description": "Legal agreement consent.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "domainNotRenewableReasons": {
+          "type": "array",
+          "description": "Reasons why domain is not renewable.",
+          "items": {
+            "$ref": "#/definitions/domainNotRenewableReasonsProperties"
+          },
+          "readOnly": true
+        },
+        "dnsType": {
+          "$ref": "#/definitions/DnsType",
+          "description": "Current DNS type"
+        },
+        "dnsZoneId": {
+          "type": "string",
+          "description": "Azure DNS Zone to use"
+        },
+        "targetDnsType": {
+          "$ref": "#/definitions/DnsType",
+          "description": "Target DNS type (would be used for migration)"
+        },
+        "authCode": {
+          "type": "string",
+          "description": "Authorization code for the domain.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "contactAdmin",
+        "contactBilling",
+        "contactRegistrant",
+        "contactTech",
+        "consent"
+      ]
+    },
     "DomainPurchaseConsent": {
       "type": "object",
       "description": "Domain purchase consent object, representing acceptance of applicable legal agreements.",
@@ -1610,6 +1604,37 @@
           "format": "int32",
           "description": "Maximum number of recommendations."
         }
+      }
+    },
+    "DomainStatus": {
+      "type": "string",
+      "description": "Domain registration status.",
+      "enum": [
+        "Active",
+        "Awaiting",
+        "Cancelled",
+        "Confiscated",
+        "Disabled",
+        "Excluded",
+        "Expired",
+        "Failed",
+        "Held",
+        "Locked",
+        "Parked",
+        "Pending",
+        "Reserved",
+        "Reverted",
+        "Suspended",
+        "Transferred",
+        "Unknown",
+        "Unlocked",
+        "Unparked",
+        "Updated",
+        "JsonConverterFailed"
+      ],
+      "x-ms-enum": {
+        "name": "DomainStatus",
+        "modelAsString": false
       }
     },
     "DomainType": {
@@ -1703,9 +1728,45 @@
         "value"
       ]
     },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Domain provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false
+      }
+    },
     "ProxyOnlyResource": {
       "type": "object",
-      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager."
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      }
     },
     "TldLegalAgreement": {
       "type": "object",
@@ -1852,52 +1913,6 @@
             "value": "SubscriptionNotActive"
           }
         ]
-      }
-    },
-    "provisioningState": {
-      "type": "string",
-      "description": "ARM resource for provisionState.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "InProgress",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "provisioningState",
-        "modelAsString": false
-      }
-    },
-    "registrationStatus": {
-      "type": "string",
-      "description": "ARM resource for registrationStatus.",
-      "enum": [
-        "Active",
-        "Awaiting",
-        "Cancelled",
-        "Confiscated",
-        "Disabled",
-        "Excluded",
-        "Expired",
-        "Failed",
-        "Held",
-        "Locked",
-        "Parked",
-        "Pending",
-        "Reserved",
-        "Reverted",
-        "Suspended",
-        "Transferred",
-        "Unknown",
-        "Unlocked",
-        "Unparked",
-        "Updated",
-        "JsonConverterFailed"
-      ],
-      "x-ms-enum": {
-        "name": "registrationStatus",
-        "modelAsString": false
       }
     }
   },
