@@ -2107,6 +2107,14 @@
         "responses": {
           "200": {
             "description": "OK",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/listQuotaReportResponse"
             }
@@ -2115,6 +2123,9 @@
             "description": "Accepted",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -4977,7 +4988,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Volumes_RestoreStatus": {
+          "QuotaLimitsAccount_List": {
             "$ref": "examples/QuotaLimitsAccount_List.json"
           }
         }
@@ -5933,6 +5944,12 @@
         "responses": {
           "200": {
             "description": "OK - Bucket updated",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL that can be used to check the status of the asynchronous operation",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/bucket"
             }
@@ -6015,6 +6032,16 @@
         "responses": {
           "200": {
             "description": "OK",
+            "headers": {
+              "Location": {
+                "description": "URI to poll the status of the operation",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL that can be used to check the status of the asynchronous operation",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/bucket"
             }
@@ -6097,7 +6124,17 @@
             }
           },
           "204": {
-            "description": "NoContent -- Resource does not exist."
+            "description": "NoContent -- Resource does not exist.",
+            "headers": {
+              "Location": {
+                "description": "URI to poll the status of the operation",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL that can be used to check the status of the asynchronous operation",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
