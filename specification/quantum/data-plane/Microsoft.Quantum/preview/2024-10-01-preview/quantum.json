@@ -324,6 +324,97 @@
           }
         }
       },
+      "patch": {
+        "operationId": "Jobs_Update",
+        "description": "Update job properties.",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonPatchDocument"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches a job.": {
+            "$ref": "./examples/Jobs_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "Jobs_Cancel",
         "description": "Request the cancellation of an existing job.",
@@ -1447,6 +1538,18 @@
           "description": "The time when a job was successfully cancelled.",
           "readOnly": true
         },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "quantumComputingData": {
           "$ref": "#/definitions/QuantumComputingData",
           "description": "Quantum computing data.",
@@ -1473,18 +1576,6 @@
           "description": "The format of the output data.",
           "x-ms-mutability": [
             "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
             "create"
           ]
         }
@@ -1568,6 +1659,100 @@
             "name": "Optimization",
             "value": "Optimization",
             "description": "Optimization job type."
+          }
+        ]
+      }
+    },
+    "JsonPatchDocument": {
+      "type": "array",
+      "description": "A JSONPatch document as defined by RFC 6902.",
+      "items": {
+        "$ref": "#/definitions/JsonPatchObject"
+      }
+    },
+    "JsonPatchObject": {
+      "type": "object",
+      "description": "A JSONPatch object as defined by RFC 6902.",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/JsonPatchOperation",
+          "description": "The operation to be performed.",
+          "x-ms-client-name": "operation",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "A JSON-Pointer.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "value": {
+          "type": "object",
+          "description": "A value to be used in the operation on the path.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "description": "Optional field used in copy and move operations.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "op",
+        "path"
+      ]
+    },
+    "JsonPatchOperation": {
+      "type": "string",
+      "description": "The operation to be performed.",
+      "enum": [
+        "add",
+        "remove",
+        "replace",
+        "move",
+        "copy",
+        "test"
+      ],
+      "x-ms-enum": {
+        "name": "JsonPatchOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "add",
+            "value": "add",
+            "description": "Add value operation."
+          },
+          {
+            "name": "remove",
+            "value": "remove",
+            "description": "Remove value operation."
+          },
+          {
+            "name": "replace",
+            "value": "replace",
+            "description": "Replace value operation."
+          },
+          {
+            "name": "move",
+            "value": "move",
+            "description": "Move value operation."
+          },
+          {
+            "name": "copy",
+            "value": "copy",
+            "description": "Copy value operation."
+          },
+          {
+            "name": "test",
+            "value": "test",
+            "description": "Test value operation."
           }
         ]
       }

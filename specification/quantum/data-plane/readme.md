@@ -57,12 +57,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}"].put.operationId
     reason:
       A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action). 
-  - code: PatchContentType
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}"].patch.consumes
-    reason:
-      For historical reasons and backward compatibility, the Job Update operation
-      uses a JsonPatchDocument. 
 ```
 
 ### Tag: package-2025-09-01-preview
