@@ -12,6 +12,7 @@ import {
   OpenAPI2SchemaRefProperty,
 } from "@azure-tools/typespec-autorest";
 import {
+  getOriginalParameter,
   isApiVersionParameter,
   isResourceGroupNameParameter,
   isSubscriptionIdParameter,
@@ -19,6 +20,13 @@ import {
 import { configuration } from "./configuration.js";
 
 let originalDocument: OpenAPI2Document | undefined = undefined;
+
+export function getOriginalDocument(): OpenAPI2Document {
+  if (originalDocument === undefined) {
+    throw new Error("Original document is not set. Please call processDocument first.");
+  }
+  return originalDocument;
+}
 
 export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   originalDocument = deepCopy(document);
@@ -49,7 +57,13 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
     if (configuration.ignorePathCase) {
       const normalizedRoute = route
         .replace(/\/resourcegroups\//i, "/resourceGroups/")
-        .replace(/\/subscriptions\//i, "/subscriptions/");
+        .replace(/\/subscriptions\//i, "/subscriptions/")
+        .split('/')
+        .map(segment => {
+          if (segment.length === 0) return segment;
+          return segment.charAt(0).toLowerCase() + segment.slice(1);
+        })
+        .join('/');
       delete newDocument.paths[route];
       newDocument.paths[normalizedRoute] = processedPath;
     } else {
@@ -174,7 +188,7 @@ function processResponse(response: OpenAPI2Response): OpenAPI2Response {
   newResponse.description = "ignore";
   if (newResponse.headers) {
     for (const header in newResponse.headers) {
-      if (header === "Location" || header === "Retry-After" || header === "Azure-AsyncOperation") {
+      if (header === "Retry-After") {
         delete newResponse.headers[header];
       }
     }
@@ -189,13 +203,8 @@ function processParameter(parameter: Refable<OpenAPI2Parameter>): Refable<OpenAP
   const newParameter: Refable<OpenAPI2Parameter> = deepCopy(parameter);
   if ((parameter as Ref<OpenAPI2Parameter>).$ref) {
     const refPath = (parameter as Ref<OpenAPI2Parameter>).$ref;
-    if (refPath.startsWith("#/parameters/")) {
-      const parameterName = refPath.substring("#/parameters/".length);
-      const originalParameter = originalDocument?.parameters?.[parameterName];
-      if (originalParameter) {
-        return processParameter(originalParameter);
-      }
-    }
+    const originalParameter = getOriginalParameter(refPath);
+    if (originalParameter) return processParameter(originalParameter);
   } else {
     const inlineParameter = parameter as OpenAPI2Parameter;
     if ((parameter as any).enum && (newParameter as any)["x-ms-enum"]?.["values"]) {

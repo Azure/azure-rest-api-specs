@@ -15,6 +15,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.AI.DocumentTranslation/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     package-dir: "Azure.AI.Translation.Document"
     namespace: "{package-dir}"
@@ -22,6 +23,7 @@ options:
     model-namespace: false
     generate-sample-project: false
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Translation.Document
     model-namespace: false
   "@azure-tools/typespec-python":
@@ -46,6 +48,7 @@ options:
   "@azure-tools/typespec-ts":
     package-dir: "ai-translation-document-rest"
     generate-metadata: true
+    is-modular-library: false
     package-details:
       name: "@azure-rest/ai-translation-document"
       description: "Microsoft Translation Document"

@@ -24,6 +24,7 @@ debug.enable("simple-git");
 export default async function incrementalTypeSpec({ core }) {
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
+    paths: ["specification"],
     logger: new CoreLogger(core),
   };
 

@@ -120,6 +120,7 @@ interface ScalingPlans {
    */
   @get
   @action("scalingPlans")
+  @list
   listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,

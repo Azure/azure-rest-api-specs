@@ -289,7 +289,6 @@ union TextType {
   Html: "Html",
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
 @doc("Translator profanity actions")
 enum ProfanityAction {
@@ -303,7 +302,6 @@ enum ProfanityAction {
   Deleted: "Deleted",
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
 @doc("Translator profanity markers")
 enum ProfanityMarker {

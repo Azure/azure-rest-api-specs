@@ -1,14 +1,15 @@
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { describe, expect, it } from "vitest";
+import { Context } from "../../src/types/breaking-change.js";
 import {
-  createOadTrace,
   addOadTrace,
+  createOadTrace,
   generateOadMarkdown,
   setOadBaseBranch,
 } from "../../src/types/oad-types.js";
-import { Context } from "../../src/types/breaking-change.js";
 
 const mockContext: Context = {
-  runType: "SameVersion",
+  runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
   prUrl: "https://github.com/Azure/azure-rest-api-specs/pull/12345",
   prTargetBranch: "main",
   prSourceBranch: "feature-branch",
@@ -19,7 +20,8 @@ const mockContext: Context = {
   logFileFolder: "/path/to/logs",
   swaggerDirs: ["/path/to/swagger"],
   checkName: "test-check",
-  repo: "Azure/azure-rest-api-specs",
+  targetRepo: "Azure/azure-rest-api-specs",
+  sourceRepo: "Azure/azure-rest-api-specs",
   prNumber: "12345",
   oadMessageProcessorContext: {
     logFilePath: "/path/to/log",
@@ -43,7 +45,6 @@ describe("OAD Trace Functions", () => {
     expect(updatedTrace.traces[0]).toEqual({
       old: "path/to/old.json",
       new: "path/to/new.json",
-      baseBranch: "main",
     });
   });
 
@@ -54,14 +55,14 @@ describe("OAD Trace Functions", () => {
     expect(updatedTrace.baseBranch).toBe("feature-branch");
   });
 
-  it("should generate empty markdown when no traces", () => {
+  it("should generate empty markdown when no traces", async () => {
     const traceData = createOadTrace(mockContext);
-    const markdown = generateOadMarkdown(traceData);
+    const markdown = await generateOadMarkdown(traceData);
 
     expect(markdown).toBe("");
   });
 
-  it("should generate markdown table when traces exist", () => {
+  it("should generate markdown table when traces exist", async () => {
     let traceData = createOadTrace(mockContext);
     traceData = addOadTrace(
       traceData,
@@ -69,7 +70,7 @@ describe("OAD Trace Functions", () => {
       "specification/storage/resource-manager/Microsoft.Storage/stable/2021-09-01/storage.json",
     );
 
-    const markdown = generateOadMarkdown(traceData);
+    const markdown = await generateOadMarkdown(traceData);
 
     expect(markdown).toContain("| Compared specs");
     expect(markdown).toContain("storage.json");

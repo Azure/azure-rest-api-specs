@@ -137,7 +137,6 @@ model TargetDictionaryLanguage {
   code: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
 @doc("Language Directionality")
 enum LanguageDirectionality {
