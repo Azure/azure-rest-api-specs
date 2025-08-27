@@ -58,7 +58,8 @@ model ResponseSession {
 }
 
 @doc("Supported OpenAI voice names (string enum).")
-enum OAIVoice {
+union OAIVoice {
+  string,
   alloy: "alloy",
   ash: "ash",
   ballad: "ballad",
@@ -162,7 +163,16 @@ model AzurePersonalVoice extends AzureVoice {
 
 @doc("Voice identifier for Phi4mm voices.")
 union Phi4mmVoice {
+  string,
   "cosyvoice"
+}
+
+@doc("""
+Voice configuration for LLM (Large Language Model) voices.
+""")
+model LLMVoice {
+  type: "llm";
+  name: Phi4mmVoice;
 }
 
 // --- Top-level Voice union -------------------------------------------------
@@ -172,7 +182,8 @@ union Voice {
   OAIVoice,
   OpenAIVoice,
   AzureVoice,   // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
-  Phi4mmVoice
+  Phi4mmVoice,
+  LLMVoice
 }
 
 union AudioFormat {
