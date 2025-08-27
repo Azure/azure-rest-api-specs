@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-03-01
+tag: package-2025-04-01
 
 directive:
   - where:
@@ -340,6 +340,17 @@ suppressions:
   - code: XmsPageableForListCalls
     from: ComputeRP.json
     reason: VirtualMachineImages_ListWithProperties, which derives from VirtualMachineImages_List operation, returns a fixed list and does not support paging as it is a legacy operation. 
+```
+
+### Tag: package-2025-04-01-only
+
+These settings apply only when `--tag=package-2025-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04-01-only'
+input-file:
+  - Microsoft.Compute/ComputeRP/stable/2025-04-01/ComputeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2025-04-01/runCommand.json
+  - Microsoft.Compute/ComputeRP/stable/2025-04-01/virtualMachine.json
 ```
 
 ### Tag: package-2025-03-01
