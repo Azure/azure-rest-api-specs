@@ -12,11 +12,11 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.RecoveryServices"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.RecoveryServices"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-recoveryservices"
     namespace: "azure.mgmt.recoveryservices"
