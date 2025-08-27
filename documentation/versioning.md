@@ -4,7 +4,7 @@ This document defines what an Azure service is, the rules that govern the servic
 The end of this document describes the problems that arise from Azure services that do not follow the service versioning rules and why they must now adopt these rules to greatly improve the Azure customer experience as well as the Azure engineering experience.  
 For questions related to Azure Service Versioning, contact azversioning@service.microsoft.com  
 
-## What Is aa Azure Service?
+## What Is an Azure Service?
 
 An Azure service is a set of operations that version uniformly (in perpetuity).  
 - A customer client app is expected to use only one version of a service at any given point in time.  
