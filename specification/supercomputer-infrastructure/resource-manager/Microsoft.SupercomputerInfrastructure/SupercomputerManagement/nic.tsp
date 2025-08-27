@@ -24,7 +24,8 @@ model NicProperties {
   provisioningState?: TopologicalProvisioningState;
 
   /** The ID of the device that the NIC resides within. */
-  parentDeviceId: string;
+  @visibility(Lifecycle.Read)
+  parentDeviceId: NodeArmResourceId;
 }
 
 @armResourceOperations

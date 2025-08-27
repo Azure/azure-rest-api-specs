@@ -24,7 +24,8 @@ model RackProperties {
   provisioningState?: TopologicalProvisioningState;
 
   /** The cluster that the rack is associated with, if any. */
-  clusterId?: string;
+  @visibility(Lifecycle.Read)
+  clusterId?: ClusterArmResourceId;
 }
 
 @armResourceOperations

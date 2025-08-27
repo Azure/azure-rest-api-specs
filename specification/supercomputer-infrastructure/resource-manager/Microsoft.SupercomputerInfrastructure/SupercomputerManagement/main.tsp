@@ -7,7 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./link.tsp";
 import "./nic.tsp";
 import "./node.tsp";
-import "./port.tsp";
+import "./device-logical-port.tsp";
 import "./rack.tsp";
 import "./supercomputer.tsp";
 import "./switch.tsp";

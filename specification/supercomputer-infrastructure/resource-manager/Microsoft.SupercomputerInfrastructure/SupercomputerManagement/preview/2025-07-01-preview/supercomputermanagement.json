@@ -61,7 +61,7 @@
       "name": "Nodes"
     },
     {
-      "name": "Ports"
+      "name": "DeviceLogicalPorts"
     },
     {
       "name": "Switches"
@@ -544,6 +544,111 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/deviceLogicalPorts": {
+      "get": {
+        "operationId": "DeviceLogicalPorts_ListBySupercomputer",
+        "tags": [
+          "DeviceLogicalPorts"
+        ],
+        "description": "List DeviceLogicalPort resources by Supercomputer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceLogicalPortListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceLogicalPorts_ListBySupercomputer": {
+            "$ref": "./examples/DeviceLogicalPorts_ListBySupercomputer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/deviceLogicalPorts/{deviceLogicalPortName}": {
+      "get": {
+        "operationId": "DeviceLogicalPorts_Get",
+        "tags": [
+          "DeviceLogicalPorts"
+        ],
+        "description": "Get a DeviceLogicalPort",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "deviceLogicalPortName",
+            "in": "path",
+            "description": "The name of the DeviceLogicalPort",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceLogicalPort"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceLogicalPorts_Get": {
+            "$ref": "./examples/DeviceLogicalPorts_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/links": {
       "get": {
         "operationId": "Links_ListBySupercomputer",
@@ -645,111 +750,6 @@
         "x-ms-examples": {
           "Links_Get": {
             "$ref": "./examples/Links_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/ports": {
-      "get": {
-        "operationId": "Ports_ListBySupercomputer",
-        "tags": [
-          "Ports"
-        ],
-        "description": "List Port resources by Supercomputer",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "supercomputerName",
-            "in": "path",
-            "description": "The name of the Supercomputer",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PortListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Ports_ListBySupercomputer": {
-            "$ref": "./examples/Ports_ListBySupercomputer.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/ports/{portName}": {
-      "get": {
-        "operationId": "Ports_Get",
-        "tags": [
-          "Ports"
-        ],
-        "description": "Get a Port",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "supercomputerName",
-            "in": "path",
-            "description": "The name of the Supercomputer",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "portName",
-            "in": "path",
-            "description": "The name of the Port",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Port"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Ports_Get": {
-            "$ref": "./examples/Ports_Get.json"
           }
         }
       }
@@ -1253,7 +1253,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RetrieveDataResult"
+              "$ref": "#/definitions/RetrieveDataResponse"
             }
           },
           "202": {
@@ -1324,6 +1324,18 @@
         }
       ]
     },
+    "ClusterArmResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/clusters"
+          }
+        ]
+      }
+    },
     "ClusterListResult": {
       "type": "object",
       "description": "The response of a Cluster list operation.",
@@ -1356,6 +1368,104 @@
         }
       }
     },
+    "DeviceArmResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/switches"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nics"
+          }
+        ]
+      }
+    },
+    "DeviceLogicalPort": {
+      "type": "object",
+      "description": "A logical port that resides on a device in the network.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceLogicalPortProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceLogicalPortArmResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts"
+          }
+        ]
+      }
+    },
+    "DeviceLogicalPortListResult": {
+      "type": "object",
+      "description": "The response of a DeviceLogicalPort list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceLogicalPort items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceLogicalPort"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceLogicalPortProperties": {
+      "type": "object",
+      "description": "The properties of a logical port.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this port.",
+          "readOnly": true
+        },
+        "deviceId": {
+          "$ref": "#/definitions/DeviceArmResourceId",
+          "description": "The device (e.g., NIC or Switch) this port resides on.",
+          "readOnly": true
+        },
+        "nameOnDevice": {
+          "type": "string",
+          "description": "The port's name on the device (e.g., Ethernet 1/1).",
+          "readOnly": true
+        },
+        "linkId": {
+          "$ref": "#/definitions/LinkArmResourceId",
+          "description": "The link that the port is interfaced with.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "$ref": "#/definitions/ClusterArmResourceId",
+          "description": "The cluster that the port is associated with, if any.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceId",
+        "nameOnDevice"
+      ]
+    },
     "Link": {
       "type": "object",
       "description": "A network link between two devices within a datacenter.",
@@ -1370,6 +1480,18 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "LinkArmResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/links"
+          }
+        ]
+      }
     },
     "LinkListResult": {
       "type": "object",
@@ -1402,35 +1524,41 @@
           "readOnly": true
         },
         "deviceOneId": {
-          "type": "string",
-          "description": "The ARM resource ID of the first device connected via this network link."
+          "$ref": "#/definitions/DeviceArmResourceId",
+          "description": "The ARM resource ID of the first device connected via this network link.",
+          "readOnly": true
         },
-        "portOneId": {
-          "type": "string",
-          "description": "The ARM resource ID of the port that this network link is connected to the first device."
+        "deviceLogicalPortOneId": {
+          "$ref": "#/definitions/DeviceLogicalPortArmResourceId",
+          "description": "The ARM resource ID of the port that this network link is connected to the first device.",
+          "readOnly": true
         },
         "deviceTwoId": {
-          "type": "string",
-          "description": "The ARM resource ID of the second device connected via this network link."
+          "$ref": "#/definitions/DeviceArmResourceId",
+          "description": "The ARM resource ID of the second device connected via this network link.",
+          "readOnly": true
         },
-        "portTwoId": {
-          "type": "string",
-          "description": "The ARM resource ID of the port that this network link is connected to the second device."
+        "deviceLogicalPortTwoId": {
+          "$ref": "#/definitions/DeviceLogicalPortArmResourceId",
+          "description": "The ARM resource ID of the port that this network link is connected to the second device.",
+          "readOnly": true
         },
         "planeId": {
           "type": "string",
-          "description": "The ID of the plane that this link is associated with."
+          "description": "The ID of the plane that this link is associated with.",
+          "readOnly": true
         },
         "clusterId": {
-          "type": "string",
-          "description": "The cluster that the link is associated with, if any."
+          "$ref": "#/definitions/ClusterArmResourceId",
+          "description": "The cluster that the link is associated with, if any.",
+          "readOnly": true
         }
       },
       "required": [
         "deviceOneId",
-        "portOneId",
+        "deviceLogicalPortOneId",
         "deviceTwoId",
-        "portTwoId",
+        "deviceLogicalPortTwoId",
         "planeId"
       ]
     },
@@ -1498,8 +1626,9 @@
           "readOnly": true
         },
         "parentDeviceId": {
-          "type": "string",
-          "description": "The ID of the device that the NIC resides within."
+          "$ref": "#/definitions/NodeArmResourceId",
+          "description": "The ID of the device that the NIC resides within.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1520,6 +1649,18 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "NodeArmResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nodes"
+          }
+        ]
+      }
     },
     "NodeListResult": {
       "type": "object",
@@ -1552,73 +1693,6 @@
           "readOnly": true
         }
       }
-    },
-    "Port": {
-      "type": "object",
-      "description": "A port that resides on a device in the network.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PortProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PortListResult": {
-      "type": "object",
-      "description": "The response of a Port list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Port items on this page",
-          "items": {
-            "$ref": "#/definitions/Port"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PortProperties": {
-      "type": "object",
-      "description": "The properties of a port.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/TopologicalProvisioningState",
-          "description": "The status of the last operation on this port.",
-          "readOnly": true
-        },
-        "device": {
-          "type": "string",
-          "description": "The device (e.g., NIC or Switch) this port resides on."
-        },
-        "nameOnDevice": {
-          "type": "string",
-          "description": "The port's name on the device."
-        },
-        "link": {
-          "type": "string",
-          "description": "The link that the port is interfaced with."
-        },
-        "clusterId": {
-          "type": "string",
-          "description": "The cluster that the port is associated with, if any."
-        }
-      },
-      "required": [
-        "device",
-        "nameOnDevice"
-      ]
     },
     "Rack": {
       "type": "object",
@@ -1666,8 +1740,9 @@
           "readOnly": true
         },
         "clusterId": {
-          "type": "string",
-          "description": "The cluster that the rack is associated with, if any."
+          "$ref": "#/definitions/ClusterArmResourceId",
+          "description": "The cluster that the rack is associated with, if any.",
+          "readOnly": true
         }
       }
     },
@@ -1705,7 +1780,7 @@
         "paths"
       ]
     },
-    "RetrieveDataResult": {
+    "RetrieveDataResponse": {
       "type": "object",
       "description": "The response of a retrieve data action over a switch.",
       "properties": {
@@ -1907,11 +1982,13 @@
         },
         "networkType": {
           "$ref": "#/definitions/NetworkType",
-          "description": "The network type of the switch."
+          "description": "The network type of the switch.",
+          "readOnly": true
         },
         "clusterId": {
-          "type": "string",
-          "description": "The cluster that the switch is associated with, if any."
+          "$ref": "#/definitions/ClusterArmResourceId",
+          "description": "The cluster that the switch is associated with, if any.",
+          "readOnly": true
         }
       },
       "required": [

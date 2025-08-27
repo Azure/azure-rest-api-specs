@@ -13,33 +13,37 @@ using Azure.ResourceManager;
 
 namespace Microsoft.SupercomputerInfrastructure;
 
-/** A port that resides on a device in the network. */
+/** A logical port that resides on a device in the network. */
 @parentResource(Supercomputer)
-model Port is ProxyResource<PortProperties> {
-  ...ResourceNameParameter<Port>;
+model DeviceLogicalPort is ProxyResource<DeviceLogicalPortProperties> {
+  ...ResourceNameParameter<DeviceLogicalPort>;
 }
 
-/** The properties of a port. */
-model PortProperties {
+/** The properties of a logical port. */
+model DeviceLogicalPortProperties {
   /** The status of the last operation on this port. */
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;
 
   /** The device (e.g., NIC or Switch) this port resides on. */
-  device: string;
+  @visibility(Lifecycle.Read)
+  deviceId: DeviceArmResourceId;
 
-  /** The port's name on the device. */
+  /** The port's name on the device (e.g., Ethernet 1/1). */
+  @visibility(Lifecycle.Read)
   nameOnDevice: string;
 
   /** The link that the port is interfaced with. */
-  link?: string;
+  @visibility(Lifecycle.Read)
+  linkId?: LinkArmResourceId;
 
   /** The cluster that the port is associated with, if any. */
-  clusterId?: string;
+  @visibility(Lifecycle.Read)
+  clusterId?: ClusterArmResourceId;
 }
 
 @armResourceOperations
-interface Ports {
-  get is ArmResourceRead<Port>;
-  listBySupercomputer is ArmResourceListByParent<Port>;
+interface DeviceLogicalPorts {
+  get is ArmResourceRead<DeviceLogicalPort>;
+  listBySupercomputer is ArmResourceListByParent<DeviceLogicalPort>;
 }

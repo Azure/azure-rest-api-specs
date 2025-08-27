@@ -24,10 +24,12 @@ model SwitchProperties {
   provisioningState?: TopologicalProvisioningState;
 
   /** The network type of the switch. */
+  @visibility(Lifecycle.Read)
   networkType: NetworkType;
 
   /** The cluster that the switch is associated with, if any. */
-  clusterId?: string;
+  @visibility(Lifecycle.Read)
+  clusterId?: ClusterArmResourceId;
 }
 
 /** The type of the network the switch resides in. */
@@ -45,7 +47,7 @@ model RetrieveDataRequest {
 }
 
 /** The response of a retrieve data action over a switch. */
-model RetrieveDataResult {
+model RetrieveDataResponse {
   /** The value of the retrieve data action. */
   @OpenAPI.extension("x-ms-identifiers", #["path", "value"])
   value: RetrieveDataOutput[];
@@ -66,7 +68,7 @@ interface Switches {
   retrieveData is ArmResourceActionAsync<
     Switch,
     RetrieveDataRequest,
-    RetrieveDataResult
+    RetrieveDataResponse
   >;
   listBySupercomputer is ArmResourceListByParent<Switch>;
 }

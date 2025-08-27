@@ -24,22 +24,28 @@ model LinkProperties {
   provisioningState?: TopologicalProvisioningState;
 
   /** The ARM resource ID of the first device connected via this network link. */
-  deviceOneId: string;
+  @visibility(Lifecycle.Read)
+  deviceOneId: DeviceArmResourceId;
 
   /** The ARM resource ID of the port that this network link is connected to the first device. */
-  portOneId: string;
+  @visibility(Lifecycle.Read)
+  deviceLogicalPortOneId: DeviceLogicalPortArmResourceId;
 
   /** The ARM resource ID of the second device connected via this network link. */
-  deviceTwoId: string;
+  @visibility(Lifecycle.Read)
+  deviceTwoId: DeviceArmResourceId;
 
   /** The ARM resource ID of the port that this network link is connected to the second device. */
-  portTwoId: string;
+  @visibility(Lifecycle.Read)
+  deviceLogicalPortTwoId: DeviceLogicalPortArmResourceId;
 
   /** The ID of the plane that this link is associated with. */
+  @visibility(Lifecycle.Read)
   planeId: string;
 
   /** The cluster that the link is associated with, if any. */
-  clusterId?: string;
+  @visibility(Lifecycle.Read)
+  clusterId?: ClusterArmResourceId;
 }
 
 @armResourceOperations

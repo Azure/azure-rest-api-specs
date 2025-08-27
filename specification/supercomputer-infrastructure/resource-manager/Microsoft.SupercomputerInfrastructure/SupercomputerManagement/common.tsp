@@ -14,3 +14,41 @@ union TopologicalProvisioningState {
   /** The resource is currently being updated */
   Updating: "Updating",
 }
+
+scalar ClusterArmResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/clusters",
+    }
+  ]>;
+
+scalar DeviceArmResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/switches",
+    },
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/nics",
+    }
+  ]>;
+
+scalar LinkArmResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/links",
+    }
+  ]>;
+
+scalar NodeArmResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/nodes",
+    }
+  ]>;
+
+scalar DeviceLogicalPortArmResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts",
+    }
+  ]>;
