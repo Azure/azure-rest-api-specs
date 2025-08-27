@@ -134,20 +134,11 @@ export async function extractInputs(github, context, core) {
         // empty for non-fork PRs.  This should be the same for pull_request and pull_request_target.
         issue_number = pull_requests[0].number;
       } else {
-        const base_owner = payload.workflow_run.repository.owner.login;
-        const base_repo = payload.workflow_run.repository.name;
-
-        // Owner and repo for the PR head (at least one should differ from base for fork PRs)
-        const head_owner = payload.workflow_run.head_repository.owner.login;
-        const head_repo = payload.workflow_run.head_repository.name;
-
         issue_number = await getPullRequest(
           github,
           head_sha,
-          head_owner,
-          head_repo,
-          base_owner,
-          base_repo,
+          payload.workflow_run.head_repository,
+          payload.workflow_run.repository,
           new CoreLogger(core),
         );
       }

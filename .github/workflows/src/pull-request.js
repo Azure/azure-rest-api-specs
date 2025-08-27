@@ -10,22 +10,12 @@ import { getIssueNumber } from "./issues.js";
  *
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {string} head_sha
- * @param {string} head_owner
- * @param {string} head_repo
- * @param {string} base_owner
- * @param {string} base_repo
+ * @param {import("@octokit/webhooks-types").RepositoryLite} head_repo
+ * @param {import("@octokit/webhooks-types").RepositoryLite} base_repo
  * @param {import('../../shared/src/logger.js').ILogger} [logger]
  * @returns {Promise<number>}
  */
-export async function getPullRequest(
-  github,
-  head_sha,
-  head_owner,
-  head_repo,
-  base_owner,
-  base_repo,
-  logger,
-) {
+export async function getPullRequest(github, head_sha, head_repo, base_repo, logger) {
   /** @type {Number} */
   let issue_number;
 
@@ -35,17 +25,19 @@ export async function getPullRequest(
   try {
     // For fork PRs, we must call an API in the head repository to get the PR number in the base repository
 
-    logger?.info(`listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`);
+    logger?.info(
+      `listPullRequestsAssociatedWithCommit(${head_repo.owner.login}, ${head_repo.name}, ${head_sha})`,
+    );
     pullRequests = (
       await github.paginate(github.rest.repos.listPullRequestsAssociatedWithCommit, {
-        owner: head_owner,
-        repo: head_repo,
+        owner: head_repo.owner.login,
+        repo: head_repo.name,
         commit_sha: head_sha,
         per_page: PER_PAGE_MAX,
       })
     ).filter(
       // Only include PRs to the same repo as the triggering workflow.
-      (pr) => pr.base.repo.owner.login === base_owner && pr.base.repo.name === base_repo,
+      (pr) => pr.base.repo.id === base_repo.id,
     );
   } catch (error) {
     // Short message always
@@ -78,7 +70,7 @@ export async function getPullRequest(
   }
   if (!issue_number) {
     logger?.info(
-      `Could not find PR for ${head_sha} in ${head_owner}:${head_repo} from either the "commits" or "search" REST APIs`,
+      `Could not find PR for ${head_sha} in ${head_repo.owner.login}:${head_repo.name} from either the "commits" or "search" REST APIs`,
     );
   }
 
