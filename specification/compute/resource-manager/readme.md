@@ -348,9 +348,7 @@ These settings apply only when `--tag=package-2025-04-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2025-04-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2025-04-01/ComputeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2025-04-01/runCommand.json
-  - Microsoft.Compute/ComputeRP/stable/2025-04-01/virtualMachine.json
 ```
 
 ### Tag: package-2025-03-01
