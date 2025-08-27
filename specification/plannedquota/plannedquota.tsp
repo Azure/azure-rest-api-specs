@@ -30,12 +30,12 @@ model PlannedQuotaResourceProperties {
   stage?: string;
 
   @doc("Region name")
-  @added(Versions.v2023_08_22)
-  @removed(Versions.v2024_06_24_preview)
+  @added(Microsoft.PlannedQuota.Versions.v2023_08_22)
+  @removed(Microsoft.PlannedQuota.Versions.v2024_06_24_preview)
   region: string;
 
   @doc("The Azure location")
-  @added(Versions.v2024_06_24_preview)
+  @added(Microsoft.PlannedQuota.Versions.v2024_06_24_preview)
   azureLocation: azureLocation;
 
   @doc("Plan version")
@@ -52,19 +52,19 @@ model PlannedQuotaResourceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: PlannedQuotaProvisioningState;
 
-  @added(Versions.v2024_06_24_preview)
+  @added(Microsoft.PlannedQuota.Versions.v2024_06_24_preview)
   @doc("The planned quota request identifier; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   requestId?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @added(Versions.v2024_06_24_preview)
+  @added(Microsoft.PlannedQuota.Versions.v2024_06_24_preview)
   @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   fulfilledPlan?: {};
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
-  @added(Versions.v2024_06_24_preview)
+  @added(Microsoft.PlannedQuota.Versions.v2024_06_24_preview)
   @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   alternatives?: {};
