@@ -63,5 +63,21 @@ suppressions:
 - code: RequiredPropertiesMissingInResourceModel
   from: openapi.json
   where: $.definitions.ProductDetails
-  reason: The detailed response already returning existing API does not have these fields populated 
+  reason: The detailed response already returning existing API does not have these fields populated
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/products"].get
+  reason: Doesn't generate in TypeSpec compiler version 1.3 - issue with nested Pageables
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/products"].get
+  reason: Doesn't generate in TypeSpec compiler version 1.3 - issue with nested Pageables  
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/providers/Microsoft.Marketplace/products"].get
+  reason: Doesn't generate in TypeSpec compiler version 1.3 - issue with nested Pageables  
+- code: XmsPageableForListCalls
+  from: openapi.json
+  where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products"].get
+  reason: Doesn't generate in TypeSpec compiler version 1.3 - issue with nested Pageables  
 ```
