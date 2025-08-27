@@ -166,7 +166,7 @@ using Microsoft.Cache;
 #suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisLinkedServerCreateParameters.properties);
 
-@@clientName(RedisResources.create::parameters.properties, "parameters");
+@@clientName(RedisResources.create::parameters.resource, "parameters");
 @@clientName(RedisResources.update::parameters.properties, "parameters");
 @@clientName(RedisResources.regenerateKey::parameters.body, "parameters");
 @@clientName(RedisResources.forceReboot::parameters.body, "parameters");
