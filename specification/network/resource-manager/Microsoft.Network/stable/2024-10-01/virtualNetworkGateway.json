@@ -3814,6 +3814,7 @@
         },
         "radiusServerSecret": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "The secret used for this radius server."
         }
       },
@@ -3889,6 +3890,7 @@
         },
         "radiusServerSecret": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection."
         },
         "radiusServers": {
@@ -4243,10 +4245,11 @@
       "properties": {
         "radiusServerAddress": {
           "type": "string",
-          "description": "Radius server name"
+          "description": "Radius server IPAddress"
         },
         "radiusServerSecret": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "Radius server secret"
         }
       },
@@ -4262,6 +4265,10 @@
           },
           "description": "List of Radius servers with respective radius secrets.",
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
       },
       "description": "List of Radius servers with respective radius secrets."
