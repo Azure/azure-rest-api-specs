@@ -3,9 +3,19 @@
 import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 
-// Partial mock of `github` parameter passed into github-script actions
+/**
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["github"]} GitHub
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["core"]} Core
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["context"]} Context
+ */
+
+/**
+ * Partial mock of `github` parameter passed into github-script actions
+ *
+ * @returns {GitHub}
+ */
 export function createMockGithub() {
-  return {
+  const mock = {
     hook: {
       after: vi.fn(),
       before: vi.fn(),
@@ -50,11 +60,17 @@ export function createMockGithub() {
       endpoint: vi.fn(),
     },
   };
+
+  // @ts-expect-error partial mock
+  return mock;
 }
 
-// Partial mock of `core` parameter passed into to github-script actions
+/**
+ * Partial mock of `core` parameter passed into to github-script actions
+ * @returns {Core}
+ */
 export function createMockCore() {
-  return {
+  const mock = {
     debug: vi.fn(console.debug),
     info: vi.fn(console.log),
     notice: vi.fn(console.log),
@@ -71,8 +87,15 @@ export function createMockCore() {
       write: vi.fn().mockResolvedValue(undefined),
     },
   };
+
+  // @ts-expect-error partial mock
+  return mock;
 }
 
+/**
+ * @param {number} status
+ * @returns {RequestError}
+ */
 export function createMockRequestError(status) {
   return new RequestError(`mock RequestError with status '${status}'`, status, {
     // request properties "url" and "headers" must be defined to prevent errors
@@ -80,15 +103,21 @@ export function createMockRequestError(status) {
   });
 }
 
-// Partial mock of `context` parameter passed into github-script actions
+/**
+ * Partial mock of `context` parameter passed into github-script actions
+ * @returns {Context}
+ */
 export function createMockContext() {
-  return {
+  const mock = {
     payload: {},
     repo: {
       owner: "owner",
       repo: "repo",
     },
   };
+
+  // @ts-expect-error partial mock
+  return mock;
 }
 
 /**
