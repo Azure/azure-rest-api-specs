@@ -82,7 +82,6 @@ union DataType {
 /**
  * The result of the operation
  */
-@usage(Usage.output)
 union CertificateModification {
   string,
 
@@ -102,7 +101,6 @@ union CertificateModification {
 /**
  * The result of the operation
  */
-@usage(Usage.output)
 union PolicyModification {
   string,
 
@@ -183,7 +181,6 @@ model PolicyCertificatesModifyResponse {
 /**
  * Attestation request for Intel SGX enclaves
  */
-@usage(Usage.output)
 model AttestOpenEnclaveRequest {
   /**
    * OpenEnclave report from the enclave to be attested
@@ -273,7 +270,6 @@ model AttestationResponse {
 /**
  * Attestation request for Intel SGX enclaves
  */
-@usage(Usage.output)
 model AttestSgxEnclaveRequest {
   /**
    * Quote of the enclave to be attested
@@ -466,7 +462,6 @@ model TcbBaseline {
 /**
  * JsonWebKeySet
  */
-@usage(Usage.output)
 model JsonWebKeySet {
   /**
    * The value of the "keys" parameter is an array of JWK values.  By
@@ -638,7 +633,6 @@ model OpenIDConfigurationResponse {
 /**
  * The body of the JWT used for the PolicyCertificates APIs
  */
-@usage(Usage.output)
 model AttestationCertificateManagementBody {
   /**
    * RFC 7517 Json Web Key describing the certificate.
@@ -649,7 +643,6 @@ model AttestationCertificateManagementBody {
 /**
  * The result of a call to retrieve policy certificates.
  */
-@usage(Usage.output)
 model PolicyCertificatesResult {
   /**
    * SHA256 Hash of the binary representation certificate which was added or removed
@@ -661,7 +654,6 @@ model PolicyCertificatesResult {
 /**
  * The result of a policy certificate modification
  */
-@usage(Usage.output)
 model PolicyCertificatesModificationResult {
   /**
    * Hex encoded SHA1 Hash of the binary representation certificate which was added
@@ -680,7 +672,6 @@ model PolicyCertificatesModificationResult {
 /**
  * StoredAttestationPolicy
  */
-@usage(Usage.output)
 model StoredAttestationPolicy {
   /**
    * Policy text to set as a sequence of UTF-8 encoded octets.
@@ -692,7 +683,6 @@ model StoredAttestationPolicy {
 /**
  * The result of a policy certificate modification
  */
-@usage(Usage.output)
 model PolicyResult {
   /**
    * The result of the operation
@@ -725,7 +715,6 @@ model PolicyResult {
  * A Microsoft Azure Attestation response token body - the body of a response
  * token issued by MAA
  */
-@usage(Usage.output)
 model AttestationResult {
   /**
    * Unique Identifier for the token
