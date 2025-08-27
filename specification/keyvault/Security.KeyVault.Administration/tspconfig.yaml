@@ -38,10 +38,11 @@ options:
     generate-samples: false
     include-api-view-properties: false
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Security.KeyVault.Administration
     model-namespace: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Security.KeyVault.Administration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Security.KeyVault.Administration"
     "output-path": "./src/Generated"
     flavor: azure
