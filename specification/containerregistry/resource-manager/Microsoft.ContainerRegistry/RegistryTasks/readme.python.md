@@ -17,3 +17,31 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistrytasks
 ```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions.BuildStepProperties
+    transform: >
+        $['required'] = ['type'];
+  - from: swagger-document
+    where: $.definitions.BuildStepPropertiesUpdateParameters
+    transform: >
+        $['required'] = ['type'];
+  - from: swagger-document
+    where: $.definitions.QueueBuildRequest
+    transform: >
+        $['required'] = ['type']; 
+  - from: swagger-document
+    where: $.definitions.RunRequest
+    transform: >
+        $['required'] = ['type'];
+  - from: swagger-document
+    where: $.definitions.TaskStepProperties
+    transform: >
+        $['required'] = ['type']; 
+  - from: swagger-document
+    where: $.definitions.TaskStepUpdateParameters
+    transform: >
+        $['required'] = ['type'];
+```
