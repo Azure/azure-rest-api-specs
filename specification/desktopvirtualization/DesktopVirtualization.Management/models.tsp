@@ -2542,6 +2542,7 @@ model HostPoolProperties {
    */
   managementType?: ManagementType;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
    */
