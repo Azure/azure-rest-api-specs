@@ -36,21 +36,6 @@ These settings apply only when `--tag=package-2025-03-preview` is specified on t
 ``` yaml $(tag) == 'package-2025-05-preview'
 input-file:
   - preview/2025-05-01-preview/containerregistry.json
-suppressions:
-  - code: RequestSchemaForTrackedResourcesMustHaveTags
-    from: containerregistry.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put
-    reason: Not a tracked resource
-  - code: RequestSchemaForTrackedResourcesMustHaveTags
-    from: containerregistry.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].put
-    reason: Not a tracked resource
-  - code: DeleteResponseCodes
-    from: containerregistry.json
-    reason: Existing service contract needs to be backward compatible, synchronous delete returns 200
-  - code: PatchBodyParametersSchema
-    from: containerregistry.json
-    reason: Existing service contract needs to be backward compatible
 ```
 
 ### Tag: package-2025-04
@@ -294,18 +279,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-### Suppress rules to be fixed
-
-``` yaml
-suppressions:
-  - code: TrackedResourcePatchOperation
-    from: containerregistry.json
-    reason: The following workitems will be implemented to improve the swagger for the next API verison. Workitems 24979281, 24778096, 24802955, 24802955. This is planned for 2023-11-01-preview
-
-  - code: PatchBodyParametersSchema
-    reasons: Common property used for create and update. existing definitions and sdk already released. breaking change to fix.
-    from: containerregistry.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}"].patch.parameters[5].schema.properties.properties
-```
