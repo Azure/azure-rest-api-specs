@@ -116,7 +116,7 @@ interface RedisResources {
   >;
 
   /**
-   * Gets any upgrade notifications for a Redis cache.
+   * [Deprecated] Gets any upgrade notifications for a Redis cache.
    */
   @get
   @list
