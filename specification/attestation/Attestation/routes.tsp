@@ -5,7 +5,7 @@ import "@typespec/openapi";
 
 using TypeSpec.Http;
 
-namespace Microsoft.Attestation;
+namespace Attestation;
 
 interface PolicyOperationGroup {
   /**
