@@ -11,11 +11,11 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Relationships"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Relationships"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-relationships"
     namespace: "azure.mgmt.relationships"
