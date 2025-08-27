@@ -20,6 +20,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Schema Properties")
 model SchemaProperties {
   @doc("Current Version of schema")
@@ -57,6 +58,20 @@ model Schema is TrackedResource<SchemaProperties> {
   ...EntityTagProperty;
 }
 
+/** The type used for update operations of the Schema. */
+model SchemaUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: SchemaUpdateProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("The updatable properties of the Schema.")
+model SchemaUpdateProperties {}
+
 @armResourceOperations
 interface Schemas {
   @doc("Get a Schema Resource")
@@ -66,7 +81,7 @@ interface Schemas {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Schema>;
 
   @doc("update a Schema Resource")
-  update is ArmResourcePatchSync<Schema, SchemaProperties>;
+  update is ArmCustomPatchSync<Schema, PatchModel = SchemaUpdate>;
 
   @doc("Delete a Schema Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Schema>;
