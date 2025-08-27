@@ -43,7 +43,7 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     from: afdx.json
-    line: 549
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains/{customDomainName}"].patch.parameters
     reason: Swagger LintDiff false positive. Property "scenario" is only required inside parent property "mtlsSettings", so only required if "mtlsSettings" is included in PATCH request for AFDDomainUpdateParameters
 ```
 
