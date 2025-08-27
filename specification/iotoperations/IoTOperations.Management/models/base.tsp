@@ -72,8 +72,6 @@ alias ResourceHealth = {
   healthState?: ResourceHealthState = Unknown;
 };
 
-
-
 @doc("Mode properties")
 union OperationalMode {
   string,

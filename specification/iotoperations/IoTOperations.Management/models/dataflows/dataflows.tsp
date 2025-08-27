@@ -225,7 +225,7 @@ model DataflowDestinationOperationSettings {
   @doc("Headers for the output data.")
   @identifiers(#["actionType"])
   @added(Versions.`2025-09-01-preview`)
-  headers?: DataflowDestinationHeaderAction[]
+  headers?: DataflowDestinationHeaderAction[];
 }
 
 @added(Versions.`2025-09-01-preview`)
@@ -253,7 +253,8 @@ union DataflowHeaderActionType {
 
 @added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Add if not present HeaderAction properties")
-model DataflowDestinationAddIfNotPresentHeaderAction extends DataflowDestinationHeaderAction {
+model DataflowDestinationAddIfNotPresentHeaderAction
+  extends DataflowDestinationHeaderAction {
   @doc("The type of header operation to perform.")
   actionType: AddIfNotPresent;
 
@@ -266,7 +267,8 @@ model DataflowDestinationAddIfNotPresentHeaderAction extends DataflowDestination
 
 @added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Remove HeaderAction properties")
-model DataflowDestinationRemoveHeaderAction extends DataflowDestinationHeaderAction {
+model DataflowDestinationRemoveHeaderAction
+  extends DataflowDestinationHeaderAction {
   @doc("The type of header operation to perform.")
   actionType: Remove;
 
@@ -276,7 +278,8 @@ model DataflowDestinationRemoveHeaderAction extends DataflowDestinationHeaderAct
 
 @added(Versions.`2025-09-01-preview`)
 @doc("Dataflow Destination Add or Replace HeaderAction properties")
-model DataflowDestinationAddOrReplaceHeaderAction extends DataflowDestinationHeaderAction {
+model DataflowDestinationAddOrReplaceHeaderAction
+  extends DataflowDestinationHeaderAction {
   @doc("The type of header operation to perform.")
   actionType: AddOrReplace;
 

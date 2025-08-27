@@ -214,7 +214,8 @@ union DataflowGraphDestinationHeaderActionType {
 
 /** DataflowGraph Destination Add if not present HeaderAction properties. */
 @added(Versions.`2025-09-01-preview`)
-model DataflowGraphDestinationAddIfNotPresentHeaderAction extends DataflowGraphDestinationHeaderAction {
+model DataflowGraphDestinationAddIfNotPresentHeaderAction
+  extends DataflowGraphDestinationHeaderAction {
   actionType: AddIfNotPresent;
 
   /** The name of the header to add. */
@@ -226,7 +227,8 @@ model DataflowGraphDestinationAddIfNotPresentHeaderAction extends DataflowGraphD
 
 /** DataflowGraph Destination Remove HeaderAction properties. */
 @added(Versions.`2025-09-01-preview`)
-model DataflowGraphDestinationRemoveHeaderAction extends DataflowGraphDestinationHeaderAction {
+model DataflowGraphDestinationRemoveHeaderAction
+  extends DataflowGraphDestinationHeaderAction {
   actionType: Remove;
 
   /** The name of the header to remove. */
@@ -235,7 +237,8 @@ model DataflowGraphDestinationRemoveHeaderAction extends DataflowGraphDestinatio
 
 /** DataflowGraph Destination Add or Replace HeaderAction properties. */
 @added(Versions.`2025-09-01-preview`)
-model DataflowGraphDestinationAddOrReplaceHeaderAction extends DataflowGraphDestinationHeaderAction {
+model DataflowGraphDestinationAddOrReplaceHeaderAction
+  extends DataflowGraphDestinationHeaderAction {
   actionType: AddOrReplace;
 
   /** The name of the header to add or replace. */
