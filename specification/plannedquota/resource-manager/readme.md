@@ -1,14 +1,18 @@
-````markdown
-# Readme
+# plannedquota
 
 > see https://aka.ms/autorest
 
+This is the AutoRest configuration file for the Microsoft.PlannedQuota resource provider.
+
+## Configuration
+
+### Basic Information
+
 ```yaml
-title: RPaaSClient
 openapi-type: arm
-openapi-subtype: rpaas
 tag: 2024-06-24-preview
 ```
+
 ### Tag: 2023-08-22-preview
 
 These settings apply only when `--tag=2023-08-22-preview` is specified on the command line.
@@ -35,7 +39,3 @@ These settings apply only when `--tag=2024-06-24-preview` is specified on the co
 input-file:
   - Microsoft.PlannedQuota/preview/2024-06-24-preview/plannedQuota.json
 ```
-
-## Suppression
-
-````
