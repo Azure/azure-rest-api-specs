@@ -79,7 +79,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
@@ -1672,12 +1672,14 @@
           {
             "name": "name",
             "in": "path",
+            "description": "The name of the redis cache.",
             "required": true,
             "type": "string"
           },
           {
             "name": "linkedServerName",
             "in": "path",
+            "description": "The name of the RedisLinkedServerWithProperties",
             "required": true,
             "type": "string"
           },

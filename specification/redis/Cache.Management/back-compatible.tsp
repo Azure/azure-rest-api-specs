@@ -6,140 +6,103 @@ using Microsoft.Cache;
 // Client decorators for operations (migrated from @operationId)
 
 // Operations_List from main.tsp
-@@clientName(Operations.list, "List");
 
 // RedisResources operations
 @@clientLocation(RedisResources.get, "Redis", "!csharp");
-@@clientName(RedisResources.get, "Get");
 
 @@clientLocation(RedisResources.create, "Redis", "!csharp");
-@@clientName(RedisResources.create, "Create");
 
 @@clientLocation(RedisResources.update, "Redis", "!csharp");
-@@clientName(RedisResources.update, "Update");
 
 @@clientLocation(RedisResources.delete, "Redis", "!csharp");
-@@clientName(RedisResources.delete, "Delete");
 
 @@clientLocation(RedisResources.listByResourceGroup, "Redis", "!csharp");
-@@clientName(RedisResources.listByResourceGroup, "ListByResourceGroup");
 
 @@clientLocation(RedisResources.listBySubscription, "Redis", "!csharp");
-@@clientName(RedisResources.listBySubscription, "ListBySubscription");
 
 @@clientLocation(RedisResources.listUpgradeNotifications, "Redis", "!csharp");
-@@clientName(RedisResources.listUpgradeNotifications,
-  "ListUpgradeNotifications"
-);
 
 @@clientLocation(RedisResources.listKeys, "Redis", "!csharp");
-@@clientName(RedisResources.listKeys, "ListKeys");
 
 @@clientLocation(RedisResources.regenerateKey, "Redis", "!csharp");
-@@clientName(RedisResources.regenerateKey, "RegenerateKey");
 
 @@clientLocation(RedisResources.forceReboot, "Redis", "!csharp");
-@@clientName(RedisResources.forceReboot, "ForceReboot");
 
 @@clientLocation(RedisResources.importData, "Redis", "!csharp");
-@@clientName(RedisResources.importData, "ImportData");
 
 @@clientLocation(RedisResources.exportData, "Redis", "!csharp");
-@@clientName(RedisResources.exportData, "ExportData");
 
 @@clientLocation(RedisResources.flushCache, "Redis", "!csharp");
-@@clientName(RedisResources.flushCache, "FlushCache");
 
 @@clientLocation(RedisResources.listByRedisCache,
   "PrivateLinkResources",
   "!csharp"
 );
-@@clientName(RedisResources.listByRedisCache, "ListByRedisCache");
 
 // RedisOperationGroup operations from routes.tsp
 @@clientLocation(RedisOperationGroup.checkNameAvailability, "Redis", "!csharp");
-@@clientName(RedisOperationGroup.checkNameAvailability,
-  "CheckNameAvailability"
-);
 
 @@clientLocation(AsyncOperationStatusOperationGroup.get,
   "AsyncOperationStatus",
   "!csharp"
 );
-@@clientName(AsyncOperationStatusOperationGroup.get, "Get");
 
 // RedisCacheAccessPolicies operations
 @@clientLocation(RedisCacheAccessPolicies.get, "AccessPolicy", "!csharp");
-@@clientName(RedisCacheAccessPolicies.get, "Get");
 
 @@clientLocation(RedisCacheAccessPolicies.createUpdate,
   "AccessPolicy",
   "!csharp"
 );
-@@clientName(RedisCacheAccessPolicies.createUpdate, "CreateUpdate");
 
 @@clientLocation(RedisCacheAccessPolicies.delete, "AccessPolicy", "!csharp");
-@@clientName(RedisCacheAccessPolicies.delete, "Delete");
 
 @@clientLocation(RedisCacheAccessPolicies.list, "AccessPolicy", "!csharp");
-@@clientName(RedisCacheAccessPolicies.list, "List");
 
 // RedisCacheAccessPolicyAssignments operations
 @@clientLocation(RedisCacheAccessPolicyAssignments.get,
   "AccessPolicyAssignment",
   "!csharp"
 );
-@@clientName(RedisCacheAccessPolicyAssignments.get, "Get");
 
 @@clientLocation(RedisCacheAccessPolicyAssignments.createUpdate,
   "AccessPolicyAssignment",
   "!csharp"
 );
-@@clientName(RedisCacheAccessPolicyAssignments.createUpdate, "CreateUpdate");
 
 @@clientLocation(RedisCacheAccessPolicyAssignments.delete,
   "AccessPolicyAssignment",
   "!csharp"
 );
-@@clientName(RedisCacheAccessPolicyAssignments.delete, "Delete");
 
 @@clientLocation(RedisCacheAccessPolicyAssignments.list,
   "AccessPolicyAssignment",
   "!csharp"
 );
-@@clientName(RedisCacheAccessPolicyAssignments.list, "List");
 
 // RedisFirewallRules operations
 @@clientLocation(RedisFirewallRules.get, "FirewallRules", "!csharp");
-@@clientName(RedisFirewallRules.get, "Get");
 
 @@clientLocation(RedisFirewallRules.createOrUpdate, "FirewallRules", "!csharp");
-@@clientName(RedisFirewallRules.createOrUpdate, "CreateOrUpdate");
 
 @@clientLocation(RedisFirewallRules.delete, "FirewallRules", "!csharp");
-@@clientName(RedisFirewallRules.delete, "Delete");
 
 @@clientLocation(RedisFirewallRules.list, "FirewallRules", "!csharp");
-@@clientName(RedisFirewallRules.list, "List");
 
 // RedisPatchSchedules operations
 @@clientLocation(RedisPatchSchedules.get, "PatchSchedules", "!csharp");
-@@clientName(RedisPatchSchedules.get, "Get");
 
 @@clientLocation(RedisPatchSchedules.createOrUpdate,
   "PatchSchedules",
   "!csharp"
 );
-@@clientName(RedisPatchSchedules.createOrUpdate, "CreateOrUpdate");
 
 @@clientLocation(RedisPatchSchedules.delete, "PatchSchedules", "!csharp");
-@@clientName(RedisPatchSchedules.delete, "Delete");
 
 @@clientLocation(RedisPatchSchedules.listByRedisResource,
   "PatchSchedules",
   "!csharp"
 );
-@@clientName(RedisPatchSchedules.listByRedisResource, "ListByRedisResource");
 
 // Existing client decorators and properties
 #suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
@@ -228,7 +191,7 @@ using Microsoft.Cache;
 #suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisPatchSchedule.properties);
 
-@@clientName(LinkedServer.create::parameters.properties, "parameters");
+@@clientName(LinkedServer.create::parameters.resource, "parameters");
 #suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 @@flattenProperty(RedisLinkedServerWithProperties.properties);
 

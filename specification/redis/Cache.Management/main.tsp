@@ -51,20 +51,8 @@ enum Versions {
   v2024_11_01: "2024-11-01",
 }
 
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: eventually reuse standard Operations interface instead of redeclaring."
-  @tag("Operations")
-  @autoRoute
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  @list
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): OperationListResult | ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}
