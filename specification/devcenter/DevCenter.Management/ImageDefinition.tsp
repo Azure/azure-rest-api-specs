@@ -161,7 +161,7 @@ interface ProjectCatalogImageDefinitions {
     ImageDefinition,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader & ArmAsyncOperationHeader>
   >;
 }
 
