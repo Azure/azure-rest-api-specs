@@ -13,50 +13,25 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "runtimeConfiguration": {
-            "runtimeConfigurationType": "ManagedConfiguration",
-            "managedConfigurationSettings": {
-              "allocation": {
-                "policy": "Bucketized",
-                "bucketSize": 1
-              },
-              "persistentVolumeClaims": [
-                {
-                  "claimName": "test-pvc",
-                  "mountPath": "/data/connector"
-                }
-              ],
-              "secrets": [
-                {
-                  "secretAlias": "username",
-                  "secretRef": "secret-a",
-                  "secretKey": "username"
-                },
-                {
-                  "secretAlias": "password",
-                  "secretRef": "secret-a",
-                  "secretKey": "password"
-                }
-              ],
-              "trustSettings": {
-                "trustListSecretRef": "trust-list-secret"
-              },
-              "managedConfigurationType": "ImageConfiguration",
-              "imageConfigurationSettings": {
-                "imageName": "samples/akri-connector-minimalist",
-                "tagDigestSettings": {
-                  "tagDigestType": "Tag",
-                  "tag": "0.0.1"
-                },
-                "registrySettings": {
-                  "registrySettingsType": "ContainerRegistry",
-                  "containerRegistrySettings": {
-                    "registry": "mycr.azurecr.io"
+              "runtimeConfiguration": {
+                "runtimeConfigurationType": "ManagedConfiguration",
+                "managedConfigurationSettings": {
+                  "managedConfigurationType": "ImageConfiguration",
+                  "imageConfigurationSettings": {
+                    "registrySettings": {
+                      "registrySettingsType": "ContainerRegistry",
+                      "containerRegistrySettings": {
+                        "registry": "akribuilds.azurecr.io"
+                      }
+                    },
+                    "imageName": "akri-connectors/rest",
+                    "tagDigestSettings": {
+                      "tagDigestType": "Tag",
+                      "tag": "0.5.0-20250825.4"
+                    }
                   }
                 }
-              }
-            }
-          },
+              },
           "diagnostics": {
             "logs": {
               "level": "info"
