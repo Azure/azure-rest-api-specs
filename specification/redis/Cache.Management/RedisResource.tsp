@@ -188,10 +188,13 @@ interface RedisResources {
    * Deletes all of the keys in a cache.
    */
   @action("flush")
-  flushCache is ArmResourceActionAsync<
+  flushCache is ArmResourceActionAsyncBase<
     RedisResource,
     void,
-    Azure.ResourceManager.CommonTypes.OperationStatusResult
+    Response = (ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> &
+      ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RedisResource>,
+    Error = ErrorResponse
   >;
 
   /**
