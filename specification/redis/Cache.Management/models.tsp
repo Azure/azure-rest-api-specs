@@ -15,11 +15,14 @@ namespace Microsoft.Cache;
  */
 union SkuName {
   string,
-  /** The well known 'Basic' SKU for Azure Cache for Redis. Basic SKU does not have an availability SLA. **/
+
+  /** The well known 'Basic' SKU for Azure Cache for Redis. Basic SKU does not have an availability SLA. */
   Basic: "Basic",
-  /** The well known 'Standard' SKU for Azure Cache for Redis. Standard SKU has an availability SLA. **/
+
+  /** The well known 'Standard' SKU for Azure Cache for Redis. Standard SKU has an availability SLA. */
   Standard: "Standard",
-  /** The well known 'Premium' SKU for Azure Cache for Redis. Premium SKU has an availability SLA, and higher performance tiers and more features compared with Standard SKU. **/
+
+  /** The well known 'Premium' SKU for Azure Cache for Redis. Premium SKU has an availability SLA, and higher performance tiers and more features compared with Standard SKU. */
   Premium: "Premium",
 }
 
@@ -28,9 +31,11 @@ union SkuName {
  */
 union SkuFamily {
   string,
-  /** The SKU family to use - must be 'C' for Basic/Standard SKU redis caches. **/
+
+  /** The SKU family to use - must be 'C' for Basic/Standard SKU redis caches. */
   C: "C",
-  /** The SKU family to use - must be 'P' for Premium SKU redis caches. **/
+
+  /** The SKU family to use - must be 'P' for Premium SKU redis caches. */
   P: "P",
 }
 
@@ -39,10 +44,13 @@ union SkuFamily {
  */
 union TlsVersion {
   string,
-  /** TLS protocol version 1.0 -- deprecated for security reasons. Do not use this value for new caches. **/
+
+  /** TLS protocol version 1.0 -- deprecated for security reasons. Do not use this value for new caches. */
   `1.0`: "1.0",
-  /** TLS protocol version 1.1 -- deprecated for security reasons. Do not use this value for new caches. **/
+
+  /** TLS protocol version 1.1 -- deprecated for security reasons. Do not use this value for new caches. */
   `1.1`: "1.1",
+
   /** TLS protocol version 1.2 -- use this value, or higher, for new caches. Or do not specify, so that your cache uses the recommended default value */
   `1.2`: "1.2",
 }
@@ -52,9 +60,10 @@ union TlsVersion {
  */
 union PublicNetworkAccess {
   string,
-  /** Public internet access to the cache, via its public IP address, is enabled. Connections may use any network path. **/
+
+  /** Public internet access to the cache, via its public IP address, is enabled. Connections may use any network path. */
   Enabled: "Enabled",
-  /** Public internet access to the cache, via its public IP address, is disabled. Connections must use be made via private endpoints. **/
+  /** Public internet access to the cache, via its public IP address, is disabled. Connections must use be made via private endpoints. */
   Disabled: "Disabled",
 }
 
@@ -63,9 +72,11 @@ union PublicNetworkAccess {
  */
 union UpdateChannel {
   string,
-  /** Stable channel receives updates, which may include important security and stability updates, later than Preview channel. **/
+
+  /** Stable channel receives updates, which may include important security and stability updates, later than Preview channel. */
   Stable: "Stable",
-  /** Preview channel normally receives updates before Stable channel, and is the recommended channel for non-production workloads. **/
+
+  /** Preview channel normally receives updates before Stable channel, and is the recommended channel for non-production workloads. */
   Preview: "Preview",
 }
 
@@ -74,11 +85,14 @@ union UpdateChannel {
  */
 union ZonalAllocationPolicy {
   string,
-  /** The zones for the cache will be selected automatically based on availability and capacity. **/
+
+  /** The zones for the cache will be selected automatically based on availability and capacity. */
   Automatic: "Automatic",
-  /** UserDefined means the zones for the cache are manually configured using the 'zones' property, and can not be automatically selected. **/
+
+  /** UserDefined means the zones for the cache are manually configured using the 'zones' property, and can not be automatically selected. */
   UserDefined: "UserDefined",
-  /** The cache will not use multiple availability zones. **/
+
+  /** The cache will not use multiple availability zones. */
   NoZones: "NoZones",
 }
 
@@ -88,31 +102,44 @@ union ZonalAllocationPolicy {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "TODO: support a fuller set of states including Canceled, in the future"
 union ProvisioningState {
   string,
-  /** A create operation is in progress. **/
+
+  /** A create operation is in progress. */
   Creating: "Creating",
-  /** A delete operation is in progress. **/
+
+  /** A delete operation is in progress. */
   Deleting: "Deleting",
-  /** The cache is disabled and cannot be used. **/
+
+  /** The cache is disabled and cannot be used. */
   Disabled: "Disabled",
-  /** An operation such as create or update failed. If you failed to create the cache it will not be in a usable state, so you should delete and recreate it. **/
+
+  /** An operation such as create or update failed. If you failed to create the cache it will not be in a usable state, so you should delete and recreate it. */
   Failed: "Failed",
-  /** Georeplication link is in progress **/
+
+  /** Georeplication link is in progress */
   Linking: "Linking",
-  /** An operation is in progress **/
+
+  /** An operation is in progress */
   Provisioning: "Provisioning",
-  /** A scaling operation encountered an error and recovery is in progress. **/
+
+  /** A scaling operation encountered an error and recovery is in progress. */
   RecoveringScaleFailure: "RecoveringScaleFailure",
-  /** A scaling operation is in progress **/
+
+  /** A scaling operation is in progress */
   Scaling: "Scaling",
-  /** The most recent operation successfully completed **/
+
+  /** The most recent operation successfully completed */
   Succeeded: "Succeeded",
-  /** Georeplication unlink is in progress **/
+
+  /** Georeplication unlink is in progress */
   Unlinking: "Unlinking",
-  /** The cache may be being disabled **/
+
+  /** The cache may be being disabled */
   Unprovisioning: "Unprovisioning",
-  /** An update operation is in progress. **/
+
+  /** An update operation is in progress. */
   Updating: "Updating",
-  /** An AAD configuration update operation is in progress. **/
+
+  /** An AAD configuration update operation is in progress. */
   ConfiguringAAD: "ConfiguringAAD",
 }
 
@@ -121,11 +148,14 @@ union ProvisioningState {
  */
 union RebootType {
   string,
-  /** Reboot the primary nodes used for redis write operations. (This may trigger role changes.) **/
+
+  /** Reboot the primary nodes used for redis write operations. (This may trigger role changes.) */
   PrimaryNode: "PrimaryNode",
-  /** Reboot only the secondary or replica nodes **/
+
+  /** Reboot only the secondary or replica nodes */
   SecondaryNode: "SecondaryNode",
-  /** Reboot all nodes, not guaranteed to happen simultaneously. **/
+
+  /** Reboot all nodes, not guaranteed to happen simultaneously. */
   AllNodes: "AllNodes",
 }
 
@@ -134,7 +164,8 @@ union RebootType {
  */
 union DefaultName {
   string,
-  /** The name of e.g. the patch schedules resource, which is a singleton, must always be 'Default' **/
+
+  /** The name of e.g. the patch schedules resource, which is a singleton, must always be 'Default' */
   default: "default",
 }
 
@@ -143,17 +174,23 @@ union DefaultName {
  */
 union AccessPolicyProvisioningState {
   string,
-  /** An operation is in progress. **/
+
+  /** An operation is in progress. */
   Updating: "Updating",
-  /** The operation succeeded. **/
+
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
-  /** A delete operation is in progress. **/
+
+  /** A delete operation is in progress. */
   Deleting: "Deleting",
-  /** The access policy is considered deleted, if it still exists. **/
+
+  /** The access policy is considered deleted, if it still exists. */
   Deleted: "Deleted",
-  /** The operation was canceled. Access policies may be in a partially updated state. Update them again to have a well-defined state. **/
+
+  /** The operation was canceled. Access policies may be in a partially updated state. Update them again to have a well-defined state. */
   Canceled: "Canceled",
-  /** The operation failed. Access policies may be in a partially updated state. Update them again to have a well-defined state. **/
+
+  /** The operation failed. Access policies may be in a partially updated state. Update them again to have a well-defined state. */
   Failed: "Failed",
 }
 
@@ -162,9 +199,11 @@ union AccessPolicyProvisioningState {
  */
 union AccessPolicyType {
   string,
-  /** User-configurable access policy, using the redis access policy authoring language **/
+
+  /** User-configurable access policy, using the redis access policy authoring language */
   Custom: "Custom",
-  /** Built-in or well-known access policies, whose policy is not configurable. **/
+
+  /** Built-in or well-known access policies, whose policy is not configurable. */
   BuiltIn: "BuiltIn",
 }
 
@@ -173,17 +212,23 @@ union AccessPolicyType {
  */
 union AccessPolicyAssignmentProvisioningState {
   string,
-  /** The access policy assignments are being updated **/
+
+  /** The access policy assignments are being updated */
   Updating: "Updating",
-  /** The access policy assignments were successfully updated **/
+
+  /** The access policy assignments were successfully updated */
   Succeeded: "Succeeded",
-  /** The access policy assignments are being deleted **/
+
+  /** The access policy assignments are being deleted */
   Deleting: "Deleting",
-  /** The access policy assignments are considered deleted, meaning no custom access policies are applied. **/
+
+  /** The access policy assignments are considered deleted, meaning no custom access policies are applied. */
   Deleted: "Deleted",
-  /** The operation was canceled. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. **/
+
+  /** The operation was canceled. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. */
   Canceled: "Canceled",
-  /** The operation failed. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. **/
+
+  /** The operation failed. Access policy assignments may be in a partially updated state. Update them again to have a well-defined state. */
   Failed: "Failed",
 }
 
@@ -192,9 +237,10 @@ union AccessPolicyAssignmentProvisioningState {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Using non-string enum for backwards compatibility"
 enum RedisKeyType {
-  /** The primary access key **/
+  /** The primary access key */
   Primary,
-  /** The secondary access key **/
+
+  /** The secondary access key */
   Secondary,
 }
 
@@ -210,9 +256,10 @@ enum DayOfWeek {
   Friday,
   Saturday,
   Sunday,
-  /** As a convenience, 'Everyday' is also accepted and means the same as specifying all days of the week. **/
+
+  /** As a convenience, 'Everyday' is also accepted and means the same as specifying all days of the week. */
   Everyday,
-  /** As a convenience, 'Weekend' is also accepted and means the same as specifying Saturday and Sunday. **/
+  /** As a conveneince, 'Weekend' is also accepted and means the same as specifying Saturday and Sunday. */
   Weekend,
 }
 
@@ -221,9 +268,10 @@ enum DayOfWeek {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Using non-string enum for backwards compatibility"
 enum ReplicationRole {
-  /** The linked server is in the writable primary role **/
+  /** The linked server is in the writable primary role */
   Primary,
-  /** The linked server is in the read-only replica role **/
+
+  /** The linked server is in the read-only replica role */
   Secondary,
 }
 
@@ -534,8 +582,8 @@ model RedisCommonPropertiesRedisConfiguration {
   /**
    * The max clients config
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  @visibility(Lifecycle.Read)
   maxclients?: string;
 
   /**

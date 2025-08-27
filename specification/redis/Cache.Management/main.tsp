@@ -36,7 +36,7 @@ using TypeSpec.OpenAPI;
 @armProviderNamespace
 @service(#{ title: "RedisManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.Cache;
 
 /**
@@ -46,25 +46,11 @@ enum Versions {
   /**
    * The 2024-11-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_11_01: "2024-11-01",
 }
 
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: eventually reuse standard Operations interface instead of custom."
-  @tag("Operations")
-  @autoRoute
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  @list
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): OperationListResult | ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}

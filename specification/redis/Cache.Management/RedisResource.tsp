@@ -55,25 +55,14 @@ interface RedisResources {
   /**
    * Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.
    */
-  @put
-  create is Azure.ResourceManager.Legacy.UpdateOperation<
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-      ...Azure.ResourceManager.Legacy.Provider;
-
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @segment("redis")
-      @path
-      name: string;
-    },
-    RedisCreateParameters,
-    RedisResource | ArmResourceCreatedResponse<
+  create is RedisResourcesOps.CreateOrUpdateAsync<
+    RedisResource,
+    Request = RedisCreateParameters,
+    Response = RedisResource | ArmResourceCreatedResponse<
       RedisResource,
       LroHeaders = ArmLroLocationHeader<FinalResult = RedisResource>
     >,
-    ErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -188,10 +177,13 @@ interface RedisResources {
    * Deletes all of the keys in a cache.
    */
   @action("flush")
-  flushCache is ArmResourceActionAsync<
+  flushCache is ArmResourceActionAsyncBase<
     RedisResource,
     void,
-    Azure.ResourceManager.CommonTypes.OperationStatusResult
+    Response = (ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> &
+      ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RedisResource>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -209,7 +201,7 @@ interface RedisResources {
 
 @@doc(RedisResource.name, "The name of the Redis cache.");
 @@doc(RedisResource.properties, "Redis cache properties.");
-@@doc(RedisResources.create::parameters.properties,
+@@doc(RedisResources.create::parameters.resource,
   "Parameters supplied to the Create Redis operation."
 );
 @@doc(RedisResources.update::parameters.properties,

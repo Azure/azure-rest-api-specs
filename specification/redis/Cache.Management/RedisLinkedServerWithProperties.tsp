@@ -60,29 +60,13 @@ interface LinkedServer {
    * Adds a linked server to the Redis cache (requires Premium SKU).
    */
   @put
-  create is Azure.ResourceManager.Legacy.UpdateOperation<
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-      ...Azure.ResourceManager.Legacy.Provider;
-
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @segment("redis")
-      @path
-      name: string;
-
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @segment("linkedServers")
-      @path
-      linkedServerName: string;
-    },
-    RedisLinkedServerCreateParameters,
-    RedisLinkedServerWithProperties | ArmResourceCreatedResponse<
+  create is LinkedServerOps.CreateOrUpdateAsync<
+    RedisLinkedServerWithProperties,
+    Request = RedisLinkedServerCreateParameters,
+    Response = RedisLinkedServerWithProperties | ArmResourceCreatedResponse<
       RedisLinkedServerWithProperties,
       LroHeaders = ArmLroLocationHeader<FinalResult = RedisLinkedServerWithProperties>
-    >,
-    ErrorResponse
+    >
   >;
 
   /**
@@ -107,6 +91,6 @@ interface LinkedServer {
 @@doc(RedisLinkedServerWithProperties.properties,
   "Properties of the linked server."
 );
-@@doc(LinkedServer.create::parameters.properties,
+@@doc(LinkedServer.create::parameters.resource,
   "Parameters supplied to the Create Linked server operation."
 );
