@@ -35,7 +35,7 @@ using Azure.Core.Traits;
   "Single server endpoint",
   {
     /** Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com). */
-    Endpoint: string,
+    Endpoint: url,
   }
 )
 @versioned(Versions)
