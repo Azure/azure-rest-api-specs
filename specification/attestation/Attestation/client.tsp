@@ -6,18 +6,6 @@ using Attestation;
 
 @@clientName(JsonWebKey.x5c, "x5C");
 
-@@clientName(OpenIDConfigurationResponse.response_types_supported,
-  "responseTypesSupported"
-);
-@@clientName(OpenIDConfigurationResponse.id_token_signing_alg_values_supported,
-  "idTokenSigningAlgValuesSupported"
-);
-@@clientName(OpenIDConfigurationResponse.revocation_endpoint,
-  "revocationEndpoint"
-);
-@@clientName(OpenIDConfigurationResponse.jwks_uri, "jwksUri");
-@@clientName(OpenIDConfigurationResponse.claims_supported, "claimsSupported");
-
 @@clientName(PolicyCertificatesResult.`x-ms-policy-certificates`,
   "policyCertificates"
 );
