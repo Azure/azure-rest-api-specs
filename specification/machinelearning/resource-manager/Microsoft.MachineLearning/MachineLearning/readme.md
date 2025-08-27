@@ -50,7 +50,7 @@ These settings apply only when `--tag=package-webservices-2017-01` is specified 
 
 ``` yaml $(tag) == 'package-webservices-2017-01'
 input-file:
-- Microsoft.MachineLearning/stable/2017-01-01/webservices.json
+- stable/2017-01-01/webservices.json
 ```
 
 ### Tag: package-commitmentPlans-2016-05-preview
@@ -59,7 +59,7 @@ These settings apply only when `--tag=package-commitmentPlans-2016-05-preview` i
 
 ``` yaml $(tag) == 'package-commitmentPlans-2016-05-preview'
 input-file:
-- Microsoft.MachineLearning/preview/2016-05-01-preview/commitmentPlans.json
+- preview/2016-05-01-preview/commitmentPlans.json
 ```
 
 ### Tag: package-workspaces-2016-04
@@ -68,7 +68,7 @@ These settings apply only when `--tag=package-workspaces-2016-04` is specified o
 
 ``` yaml $(tag) == 'package-workspaces-2016-04'
 input-file:
-- Microsoft.MachineLearning/stable/2016-04-01/workspaces.json
+- stable/2016-04-01/workspaces.json
 ```
 
 ### Tag: package-workspaces-2019-10
@@ -77,7 +77,7 @@ These settings apply only when `--tag=package-workspaces-2019-10` is specified o
 
 ``` yaml $(tag) == 'package-workspaces-2019-10'
 input-file:
-- Microsoft.MachineLearning/stable/2019-10-01/workspaces.json
+- stable/2019-10-01/workspaces.json
 ```
 
 ### Tag: package-webservices-2016-05-preview
@@ -86,7 +86,7 @@ These settings apply only when `--tag=package-webservices-2016-05-preview` is sp
 
 ``` yaml $(tag) == 'package-webservices-2016-05-preview'
 input-file:
-- Microsoft.MachineLearning/preview/2016-05-01-preview/webservices.json
+- preview/2016-05-01-preview/webservices.json
 ```
 
 
