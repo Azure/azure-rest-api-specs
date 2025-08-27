@@ -5893,12 +5893,14 @@
       "enum": [
         "SavingsPlan",
         "MACC",
-        "ConditionalCredits"
+        "ConditionalCredits",
+        "Credits"
       ],
       "x-enum-description": [
         "Savings plan resource type.",
         "MACC resource type.",
-        "ConditionalCredits resource type."
+        "ConditionalCredits resource type.",
+        "Credits resource type."
       ],
       "x-ms-enum": {
         "name": "BenefitType",
@@ -5949,6 +5951,19 @@
         }
       ],
       "x-ms-discriminator-value": "SavingsPlan"
+    },
+    "CreditsValidateModel": {
+      "type": "object",
+      "description": "Credits validate model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BenefitValidateModel"
+        },
+        {
+          "$ref": "#/definitions/Credit"
+        }
+      ],
+      "x-ms-discriminator-value": "Credits"
     },
     "BenefitValidateResponse": {
       "type": "object",
