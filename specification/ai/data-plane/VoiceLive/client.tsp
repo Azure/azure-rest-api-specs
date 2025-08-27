@@ -74,6 +74,7 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ClientEventSessionUpdate, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
+@@access(VoiceLive.Response.voice, Access.internal, "csharp");
 
 @@clientName(VoiceLive.Modality, "InputModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
@@ -83,6 +84,8 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "csharp");
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "csharp");
 @@clientName(VoiceLive.Response, "VoiceLiveResponse", "csharp");
+@@clientName(VoiceLive.Response.voice, "VoiceInternal", "csharp");
+@@clientName(VoiceLive.ResponseSession.voice, "VoiceInternal", "csharp");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentConfig", "csharp");
 @@clientName(VoiceLive.FunctionTool, "VoiceLiveFunctionDefinition", "csharp");
 @@clientName(VoiceLive.Tool, "VoiceLiveToolDefinition", "csharp");
