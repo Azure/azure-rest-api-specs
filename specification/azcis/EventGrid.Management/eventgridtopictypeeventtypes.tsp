@@ -44,7 +44,9 @@ model EventGridTopicTypeEventTypesResourceProperties {
 model EventGridTopicTypeEventTypesResource
   is ProxyResource<EventGridTopicTypeEventTypesResourceProperties> {
   @doc("The name of the resource.")
-  @pattern("^[a-zA-Z0-9-]{3,80}$")
+  @pattern("^[a-zA-Z0-9-]*$")
+  @minLength(3)
+  @maxLength(80)
   @key("resourceName")
   @segment("eventGridTopicTypeEventTypes") // Start with lower case. Should be plural
   @visibility(Lifecycle.Read)
@@ -52,7 +54,7 @@ model EventGridTopicTypeEventTypesResource
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Delete operation is currently not supported by FRP."
 @armResourceOperations
 interface EventGridTopicTypeEventTypes {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<EventGridTopicTypeEventTypesResource>;
