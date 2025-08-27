@@ -22,15 +22,25 @@ model AppServiceCertificateOrder
     NamePattern = ""
   >;
 }
-model AppServiceCertificateOrderSimple
-  is Azure.ResourceManager.TrackedResource<AppServiceCertificateOrderProperties> {
-  ...ResourceNameParameter<
-    Resource = AppServiceCertificateOrder,
-    KeyName = "name",
-    SegmentName = "certificateOrders",
-    NamePattern = ""
-  >;
-}
+
+@armResourceOperations
+interface AppServiceCertificateOrderOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         * The name of the certificate order.
+         */
+        @path
+        @segment("certificateOrders")
+        name: string,
+      }
+    > {}
 
 @armResourceOperations
 interface AppServiceCertificateOrders {
@@ -134,8 +144,8 @@ interface AppServiceCertificateOrders {
   /**
    * Description for Retrieve the list of certificate actions.
    */
-  retrieveCertificateActions is ArmResourceActionSync<
-    AppServiceCertificateOrderSimple,
+  retrieveCertificateActions is AppServiceCertificateOrderOps.ActionSync<
+    AppServiceCertificateOrder,
     void,
     ArmResponse<CertificateOrderAction[]>
   >;
@@ -144,8 +154,8 @@ interface AppServiceCertificateOrders {
    * Description for Retrieve email history.
    */
   @action("retrieveEmailHistory")
-  retrieveCertificateEmailHistory is ArmResourceActionSync<
-    AppServiceCertificateOrderSimple,
+  retrieveCertificateEmailHistory is AppServiceCertificateOrderOps.ActionSync<
+    AppServiceCertificateOrder,
     void,
     ArmResponse<CertificateEmail[]>
   >;

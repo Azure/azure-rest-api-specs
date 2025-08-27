@@ -497,7 +497,6 @@ model AppServiceCertificateOrderPatchResource extends ProxyOnlyResource {
    * AppServiceCertificateOrderPatchResource resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServiceCertificateOrderPatchResourceProperties;
 }
 
@@ -672,7 +671,6 @@ model AppServiceCertificatePatchResource extends ProxyOnlyResource {
    * Core resource properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AppServiceCertificate;
 }
 
@@ -685,7 +683,6 @@ model ReissueCertificateOrderRequest extends ProxyOnlyResource {
    * ReissueCertificateOrderRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ReissueCertificateOrderRequestProperties;
 }
 
@@ -723,7 +720,6 @@ model RenewCertificateOrderRequest extends ProxyOnlyResource {
    * RenewCertificateOrderRequest resource specific properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RenewCertificateOrderRequestProperties;
 }
 
@@ -780,7 +776,6 @@ model SiteSeal {
    * HTML snippet
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   html: string;
 }
 

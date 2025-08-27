@@ -26,10 +26,7 @@ model AppServiceCertificateResource
 }
 
 @armResourceOperations
-interface AppServiceCertificateResources {
-  
-}
+interface AppServiceCertificateResources {}
 
 @@doc(AppServiceCertificateResource.name, "Name of the certificate.");
 @@doc(AppServiceCertificateResource.properties, "Core resource properties");
-
