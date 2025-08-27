@@ -126,6 +126,9 @@
           },
           "Get an elastic pool with serverless properties": {
             "$ref": "./examples/GetElasticPoolWithServerlessProperties.json"
+          },
+          "Get an elastic pool with confidential compute": {
+            "$ref": "./examples/GetElasticPoolWithConfidentialCompute.json"
           }
         }
       },
@@ -221,6 +224,9 @@
           },
           "Create or Update an elastic pool with serverless properties": {
             "$ref": "./examples/ElasticPoolCreateOrUpdateServerlessProperties.json"
+          },
+          "Create or Update an elastic pool with confidential compute": {
+            "$ref": "./examples/CreateElasticPoolWithConfidentialCompute.json"
           }
         }
       },
@@ -430,6 +436,34 @@
     }
   },
   "definitions": {
+    "ArmConfidentialCompute": {
+      "description": "Confidential compute mode for the database..",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "Confidential compute mode for the database.\r\n\r\nEnabled: Enable the confindential compute mode.\r\n\r\nDisabled: Disable the confidential compute mode.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ArmPlatformCapabilities": {
+      "description": "Platform Capabilities for a database",
+      "type": "object",
+      "properties": {
+        "confidentialCompute": {
+          "$ref": "#/definitions/ArmConfidentialCompute",
+          "description": "Confidential compute settings for the database."
+        }
+      }
+    },
     "ElasticPool": {
       "description": "An elastic pool.",
       "required": [
@@ -591,6 +625,15 @@
             "name": "AvailabilityZoneType",
             "modelAsString": true
           }
+        },
+        "currentSku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the current SKU.",
+          "readOnly": true
+        },
+        "platformCapabilities": {
+          "$ref": "#/definitions/ArmPlatformCapabilities",
+          "description": "The platform capabilities for the database."
         }
       }
     },
@@ -688,6 +731,15 @@
             "name": "AvailabilityZoneType",
             "modelAsString": true
           }
+        },
+        "currentSku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the current SKU.",
+          "readOnly": true
+        },
+        "platformCapabilities": {
+          "$ref": "#/definitions/ArmPlatformCapabilities",
+          "description": "The platform capabilities for the database."
         }
       }
     }

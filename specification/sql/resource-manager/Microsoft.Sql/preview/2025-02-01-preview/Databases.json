@@ -31,8 +31,32 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "$skipToken",
+            "name": "$top",
             "in": "query",
+            "description": "The number of elements to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of elements in the collection to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "How the results should be ordered.",
             "required": false,
             "type": "string"
           },
@@ -57,10 +81,14 @@
             }
           }
         },
+        "x-ms-odata": "#/definitions/Database",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
+          "Gets a list of databases with OData filtering.": {
+            "$ref": "./examples/ListVCoreDatabasesByServerWithOdata.json"
+          },
           "Gets a list of databases.": {
             "$ref": "./examples/ListVCoreDatabasesByServer.json"
           },
@@ -88,20 +116,6 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "description": "The child resources to include in the response.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -122,7 +136,6 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/Database",
         "x-ms-examples": {
           "Gets a database configured with Default enclave type.": {
             "$ref": "./examples/GetVCoreDatabaseDefaultEnclave.json"
@@ -133,14 +146,14 @@
           "Gets a database.": {
             "$ref": "./examples/GetVCoreDatabase.json"
           },
-          "Gets a database with database level keys expanded.": {
-            "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeys.json"
-          },
           "Gets a database with Availability zone specified.": {
             "$ref": "./examples/GetDatabaseWithAvailabilityZone.json"
           },
           "Gets a database with database level keys expanded using versionless keys.": {
             "$ref": "./examples/GetVCoreDatabaseWithExpandEqualsKeysWithVersionlessKeys.json"
+          },
+          "Gets a database with confidential compute status specified.": {
+            "$ref": "./examples/GetDatabaseWithConfidentialCompute.json"
           }
         }
       },
@@ -277,6 +290,12 @@
           },
           "Creates a database with database-level versionless customer managed keys.": {
             "$ref": "./examples/CreateDatabaseDefaultModeWithVersionlessKeysAndVersionlessEncryptionProtector.json"
+          },
+          "Creates a database with confidential compute status specified as disabled.": {
+            "$ref": "./examples/CreateDatabaseWithConfidentialComputeDisabled.json"
+          },
+          "Creates a database with confidential compute status specified as enabled.": {
+            "$ref": "./examples/CreateDatabaseWithConfidentialComputeEnabled.json"
           }
         }
       },
@@ -411,6 +430,9 @@
           },
           "Patch a database with database-level customer managed keys.": {
             "$ref": "./examples/PatchVCoreDatabaseWithKeysAndEncryptionProtector.json"
+          },
+          "Updates a database with confidential compute status update.": {
+            "$ref": "./examples/PatchDatabaseWithConfidentialCompute.json"
           }
         }
       }
@@ -948,6 +970,34 @@
     }
   },
   "definitions": {
+    "ArmConfidentialCompute": {
+      "description": "Confidential compute mode for the database..",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "Confidential compute mode for the database.\r\n\r\nEnabled: Enable the confindential compute mode.\r\n\r\nDisabled: Disable the confidential compute mode.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ArmPlatformCapabilities": {
+      "description": "Platform Capabilities for a database",
+      "type": "object",
+      "properties": {
+        "confidentialCompute": {
+          "$ref": "#/definitions/ArmConfidentialCompute",
+          "description": "Confidential compute settings for the database."
+        }
+      }
+    },
     "Database": {
       "description": "A database resource.",
       "required": [
@@ -1500,6 +1550,15 @@
         "encryptionProtectorAutoRotation": {
           "description": "The flag to enable or disable auto rotation of database encryption protector AKV key.",
           "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "Specifies the provisioning state for this resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "platformCapabilities": {
+          "$ref": "#/definitions/ArmPlatformCapabilities",
+          "description": "The platform capabilities for the database."
         }
       }
     },
@@ -1929,6 +1988,15 @@
         "encryptionProtectorAutoRotation": {
           "description": "The flag to enable or disable auto rotation of database encryption protector AKV key.",
           "type": "boolean"
+        },
+        "provisioningState": {
+          "description": "Specifies the provisioning state for this resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "platformCapabilities": {
+          "$ref": "#/definitions/ArmPlatformCapabilities",
+          "description": "The platform capabilities for the database."
         }
       }
     },
