@@ -5958,12 +5958,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/BenefitValidateModel"
-        },
-        {
-          "$ref": "#/definitions/Credit"
         }
       ],
-      "x-ms-discriminator-value": "Credits"
+      "x-ms-discriminator-value": "Credits",
+      "properties": {
+        "properties": {
+          "description": "Credits validate properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Credit"
+        }
+      }
     },
     "BenefitValidateResponse": {
       "type": "object",
