@@ -5498,12 +5498,12 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Compute target for batch inference operation.
    */
-  compute?: string;
+  compute?: string | null;
 
   /**
    * Properties relevant to different deployment types.
    */
-  deploymentConfiguration?: BatchDeploymentConfiguration;
+  deploymentConfiguration?: BatchDeploymentConfiguration | null;
 
   /**
    * Error threshold, if the error count for the entire input goes above this value,
@@ -5517,7 +5517,7 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Logging level for batch inference operation.
    */
-  loggingLevel?: BatchLoggingLevel;
+  loggingLevel?: BatchLoggingLevel = BatchLoggingLevel.Info;
 
   /**
    * Indicates maximum number of parallelism per instance.
@@ -5534,12 +5534,12 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Reference to the model asset for the endpoint deployment.
    */
-  `model`?: AssetReferenceBase;
+  `model`?: AssetReferenceBase | null;
 
   /**
    * Indicates how the output will be organized.
    */
-  outputAction?: BatchOutputAction;
+  outputAction?: BatchOutputAction = BatchOutputAction.AppendRow;
 
   /**
    * Customized output file name for append_row output action.
@@ -5556,13 +5556,13 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
    * Indicates compute configuration for the job.
    * If not provided, will default to the defaults defined in ResourceConfiguration.
    */
-  resources?: DeploymentResourceConfiguration;
+  resources?: DeploymentResourceConfiguration | null;
 
   /**
    * Retry Settings for the batch inference operation.
    * If not provided, will default to the defaults defined in BatchRetrySettings.
    */
-  retrySettings?: BatchRetrySettings;
+  retrySettings?: BatchRetrySettings | null;
 }
 
 /**
@@ -8694,7 +8694,7 @@ model RaiBlocklistItemsBulkAddRequest {
   /**
    * List of RAI Blocklist Items to add.
    */
-@OpenAPI.extension("x-ms-identifiers", #["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   items?: RaiBlocklistItemBulkRequest[];
 }
 
@@ -11389,17 +11389,17 @@ model AzureOpenAiHyperParameters {
   /**
    * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
    */
-  batchSize?: int32;
+  batchSize?: int32 | null;
 
   /**
    * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting.
    */
-  learningRateMultiplier?: float64;
+  learningRateMultiplier?: float64 | null;
 
   /**
    * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
    */
-  nEpochs?: int32;
+  nEpochs?: int32 | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -11440,12 +11440,12 @@ model BanditPolicy extends EarlyTerminationPolicy {
   /**
    * Absolute distance allowed from the best performing run.
    */
-  slackAmount?: float32;
+  slackAmount?: float32 = 0;
 
   /**
    * Ratio of the allowed distance from the best performing run.
    */
-  slackFactor?: float32;
+  slackFactor?: float32 = 0;
 
   /**
    * [Required] Name of policy configuration

@@ -15701,7 +15701,8 @@
       "type": "object",
       "properties": {
         "hyperParameters": {
-          "$ref": "#/definitions/AzureOpenAiHyperParameters"
+          "$ref": "#/definitions/AzureOpenAiHyperParameters",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -15716,15 +15717,18 @@
       "properties": {
         "batchSize": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "learningRateMultiplier": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "nEpochs": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         }
       }
     },
@@ -15733,11 +15737,13 @@
       "properties": {
         "slackAmount": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "default": 0
         },
         "slackFactor": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "default": 0
         }
       },
       "allOf": [
@@ -15797,10 +15803,12 @@
       "type": "object",
       "properties": {
         "compute": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "deploymentConfiguration": {
-          "$ref": "#/definitions/BatchDeploymentConfiguration"
+          "$ref": "#/definitions/BatchDeploymentConfiguration",
+          "x-nullable": true
         },
         "errorThreshold": {
           "type": "integer",
@@ -15809,6 +15817,7 @@
         },
         "loggingLevel": {
           "type": "string",
+          "default": "Info",
           "enum": [
             "Info",
             "Warning",
@@ -15830,10 +15839,12 @@
           "default": 10
         },
         "model": {
-          "$ref": "#/definitions/AssetReferenceBase"
+          "$ref": "#/definitions/AssetReferenceBase",
+          "x-nullable": true
         },
         "outputAction": {
           "type": "string",
+          "default": "AppendRow",
           "enum": [
             "SummaryOnly",
             "AppendRow"
@@ -15865,10 +15876,12 @@
           "readOnly": true
         },
         "resources": {
-          "$ref": "#/definitions/DeploymentResourceConfiguration"
+          "$ref": "#/definitions/DeploymentResourceConfiguration",
+          "x-nullable": true
         },
         "retrySettings": {
-          "$ref": "#/definitions/BatchRetrySettings"
+          "$ref": "#/definitions/BatchRetrySettings",
+          "x-nullable": true
         }
       },
       "allOf": [

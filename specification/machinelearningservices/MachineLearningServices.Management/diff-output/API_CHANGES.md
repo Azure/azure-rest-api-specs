@@ -995,7 +995,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeploymentProperties__added` | added | `{"type":"object","properties":{"compute":{"type":"string"},"deploymentConfiguration":{"$ref":"#/defi...` |
+| `definitions.BatchDeploymentProperties__added` | added | `{"type":"object","properties":{"compute":{"type":"string","x-nullable":true},"deploymentConfiguratio...` |
 
 ### Changes for `BatchEndpointProperties`
 
@@ -1377,8 +1377,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AutoMLJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.BanditPolicy.properties.slackAmount.default__deleted` | deleted | `0` |
-| `definitions.BanditPolicy.properties.slackFactor.default__deleted` | deleted | `0` |
 | `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
 | `definitions.Classification.properties.primaryMetric.default__deleted` | deleted | `AUCWeighted` |
 | `definitions.Collection.properties.dataCollectionMode.default__deleted` | deleted | `Disabled` |
@@ -1547,10 +1545,6 @@
 |------|------------|-------|
 | `definitions.AzureDataLakeGen2Datastore.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AzureDataLakeGen2Datastore.properties.protocol['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureOpenAiFineTuning.properties.hyperParameters['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureOpenAiHyperParameters.properties.batchSize['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureOpenAiHyperParameters.properties.learningRateMultiplier['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureOpenAiHyperParameters.properties.nEpochs['x-nullable__deleted']` | deleted | `true` |
 | `definitions.BatchEndpointDefaults.properties.deploymentName['x-nullable__deleted']` | deleted | `true` |
 | `definitions.BatchPipelineComponentDeploymentConfiguration.properties.componentId['x-nullable__deleted']` | deleted | `true` |
 | `definitions.BatchPipelineComponentDeploymentConfiguration.properties.description['x-nullable__deleted']` | deleted | `true` |

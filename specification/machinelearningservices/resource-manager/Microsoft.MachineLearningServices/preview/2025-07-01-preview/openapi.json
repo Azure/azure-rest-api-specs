@@ -22634,7 +22634,8 @@
       "properties": {
         "hyperParameters": {
           "$ref": "#/definitions/AzureOpenAiHyperParameters",
-          "description": "HyperParameters for fine tuning Azure Open AI model."
+          "description": "HyperParameters for fine tuning Azure Open AI model.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -22651,17 +22652,20 @@
         "batchSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.",
+          "x-nullable": true
         },
         "learningRateMultiplier": {
           "type": "number",
           "format": "double",
-          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting."
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting.",
+          "x-nullable": true
         },
         "nEpochs": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.",
+          "x-nullable": true
         }
       }
     },
@@ -22672,12 +22676,14 @@
         "slackAmount": {
           "type": "number",
           "format": "float",
-          "description": "Absolute distance allowed from the best performing run."
+          "description": "Absolute distance allowed from the best performing run.",
+          "default": 0
         },
         "slackFactor": {
           "type": "number",
           "format": "float",
-          "description": "Ratio of the allowed distance from the best performing run."
+          "description": "Ratio of the allowed distance from the best performing run.",
+          "default": 0
         }
       },
       "allOf": [
@@ -22760,11 +22766,13 @@
       "properties": {
         "compute": {
           "type": "string",
-          "description": "Compute target for batch inference operation."
+          "description": "Compute target for batch inference operation.",
+          "x-nullable": true
         },
         "deploymentConfiguration": {
           "$ref": "#/definitions/BatchDeploymentConfiguration",
-          "description": "Properties relevant to different deployment types."
+          "description": "Properties relevant to different deployment types.",
+          "x-nullable": true
         },
         "errorThreshold": {
           "type": "integer",
@@ -22773,8 +22781,32 @@
           "default": -1
         },
         "loggingLevel": {
-          "$ref": "#/definitions/BatchLoggingLevel",
-          "description": "Logging level for batch inference operation."
+          "type": "string",
+          "description": "Logging level for batch inference operation.",
+          "default": "Info",
+          "enum": [
+            "Info",
+            "Warning",
+            "Debug"
+          ],
+          "x-ms-enum": {
+            "name": "BatchLoggingLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Info",
+                "value": "Info"
+              },
+              {
+                "name": "Warning",
+                "value": "Warning"
+              },
+              {
+                "name": "Debug",
+                "value": "Debug"
+              }
+            ]
+          }
         },
         "maxConcurrencyPerInstance": {
           "type": "integer",
@@ -22790,11 +22822,31 @@
         },
         "model": {
           "$ref": "#/definitions/AssetReferenceBase",
-          "description": "Reference to the model asset for the endpoint deployment."
+          "description": "Reference to the model asset for the endpoint deployment.",
+          "x-nullable": true
         },
         "outputAction": {
-          "$ref": "#/definitions/BatchOutputAction",
-          "description": "Indicates how the output will be organized."
+          "type": "string",
+          "description": "Indicates how the output will be organized.",
+          "default": "AppendRow",
+          "enum": [
+            "SummaryOnly",
+            "AppendRow"
+          ],
+          "x-ms-enum": {
+            "name": "BatchOutputAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SummaryOnly",
+                "value": "SummaryOnly"
+              },
+              {
+                "name": "AppendRow",
+                "value": "AppendRow"
+              }
+            ]
+          }
         },
         "outputFileName": {
           "type": "string",
@@ -22808,11 +22860,13 @@
         },
         "resources": {
           "$ref": "#/definitions/DeploymentResourceConfiguration",
-          "description": "Indicates compute configuration for the job.\nIf not provided, will default to the defaults defined in ResourceConfiguration."
+          "description": "Indicates compute configuration for the job.\nIf not provided, will default to the defaults defined in ResourceConfiguration.",
+          "x-nullable": true
         },
         "retrySettings": {
           "$ref": "#/definitions/BatchRetrySettings",
-          "description": "Retry Settings for the batch inference operation.\nIf not provided, will default to the defaults defined in BatchRetrySettings."
+          "description": "Retry Settings for the batch inference operation.\nIf not provided, will default to the defaults defined in BatchRetrySettings.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -22923,55 +22977,6 @@
       "required": [
         "value"
       ]
-    },
-    "BatchLoggingLevel": {
-      "type": "string",
-      "description": "Log verbosity for batch inferencing.\nIncreasing verbosity order for logging is : Warning, Info and Debug.\nThe default value is Info.",
-      "enum": [
-        "Info",
-        "Warning",
-        "Debug"
-      ],
-      "x-ms-enum": {
-        "name": "BatchLoggingLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Info",
-            "value": "Info"
-          },
-          {
-            "name": "Warning",
-            "value": "Warning"
-          },
-          {
-            "name": "Debug",
-            "value": "Debug"
-          }
-        ]
-      }
-    },
-    "BatchOutputAction": {
-      "type": "string",
-      "description": "Enum to determine how batch inferencing will handle output",
-      "enum": [
-        "SummaryOnly",
-        "AppendRow"
-      ],
-      "x-ms-enum": {
-        "name": "BatchOutputAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SummaryOnly",
-            "value": "SummaryOnly"
-          },
-          {
-            "name": "AppendRow",
-            "value": "AppendRow"
-          }
-        ]
-      }
     },
     "BatchPipelineComponentDeploymentConfiguration": {
       "type": "object",

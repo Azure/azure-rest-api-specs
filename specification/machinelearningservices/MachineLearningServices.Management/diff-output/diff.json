@@ -10246,10 +10246,12 @@
       "type": "object",
       "properties": {
         "compute": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "deploymentConfiguration": {
-          "$ref": "#/definitions/BatchDeploymentConfiguration"
+          "$ref": "#/definitions/BatchDeploymentConfiguration",
+          "x-nullable": true
         },
         "errorThreshold": {
           "type": "integer",
@@ -10258,6 +10260,7 @@
         },
         "loggingLevel": {
           "type": "string",
+          "default": "Info",
           "enum": [
             "Info",
             "Warning",
@@ -10279,10 +10282,12 @@
           "default": 10
         },
         "model": {
-          "$ref": "#/definitions/AssetReferenceBase"
+          "$ref": "#/definitions/AssetReferenceBase",
+          "x-nullable": true
         },
         "outputAction": {
           "type": "string",
+          "default": "AppendRow",
           "enum": [
             "SummaryOnly",
             "AppendRow"
@@ -10314,10 +10319,12 @@
           "readOnly": true
         },
         "resources": {
-          "$ref": "#/definitions/DeploymentResourceConfiguration"
+          "$ref": "#/definitions/DeploymentResourceConfiguration",
+          "x-nullable": true
         },
         "retrySettings": {
-          "$ref": "#/definitions/BatchRetrySettings"
+          "$ref": "#/definitions/BatchRetrySettings",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -11995,35 +12002,7 @@
     "AzureOpenAiFineTuning": {
       "required__deleted": [
         "modelProvider"
-      ],
-      "properties": {
-        "hyperParameters": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "AzureOpenAiHyperParameters": {
-      "properties": {
-        "batchSize": {
-          "x-nullable__deleted": true
-        },
-        "learningRateMultiplier": {
-          "x-nullable__deleted": true
-        },
-        "nEpochs": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "BanditPolicy": {
-      "properties": {
-        "slackAmount": {
-          "default__deleted": 0
-        },
-        "slackFactor": {
-          "default__deleted": 0
-        }
-      }
+      ]
     },
     "BatchDeployment": {
       "x-ms-client-name__deleted": "BatchDeploymentProperties",
