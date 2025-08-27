@@ -39,7 +39,8 @@
           "primaryResourceId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
           "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{contributorAcctId:orgId}",
           "provisioningState": "Pending",
-          "status": "Pending"
+          "status": "Pending",
+          "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}"
         },
         "location": "global",
         "tags": {
@@ -77,7 +78,6 @@
               "status": "Active",
               "endAt": "2025-10-01T00:00:00Z",
               "spendTarget": {
-                "grain": "Cumulative",
                 "amount": 50000,
                 "currencyCode": "USD"
               }
@@ -88,12 +88,12 @@
               "status": "Scheduled",
               "endAt": "2026-01-01T00:00:00Z",
               "spendTarget": {
-                "grain": "Cumulative",
                 "amount": 100000,
                 "currencyCode": "USD"
               }
             }
-          ]
+          ],
+          "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}"
         },
         "location": "global",
         "tags": {

@@ -6088,6 +6088,10 @@
             "$ref": "#/definitions/ContributorConditionalCreditMilestone"
           },
           "description": "List of milestones copied from primary conditional credit (excludes award details)"
+        },
+        "primaryBillingAccountResourceId": {
+          "$ref": "#/definitions/BillingAccountResourceId",
+          "description": "Fully-qualified billing account resource identifier of the primary CACO. Format must be Azure Resource ID: /providers/Microsoft.Billing/billingAccounts/{acctId:orgId}."
         }
       }
     },
@@ -6181,7 +6185,7 @@
       ]
     },
     "SpendTarget": {
-      "$ref": "#/definitions/Commitment",
+      "$ref": "#/definitions/Price",
       "description": "Spend target specification"
     },
     "Award": {
