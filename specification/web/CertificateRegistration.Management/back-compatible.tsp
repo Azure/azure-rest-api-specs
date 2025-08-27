@@ -39,25 +39,25 @@ using Microsoft.CertificateRegistration;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AppServiceCertificateOrder.properties);
 
-@@clientLocation(AppServiceCertificateOrders.getCertificate,
+@@clientLocation(AppServiceCertificateResources.getCertificate,
   "AppServiceCertificateOrders"
 );
-@@clientLocation(AppServiceCertificateOrders.createOrUpdateCertificate,
+@@clientLocation(AppServiceCertificateResources.createOrUpdateCertificate,
   "AppServiceCertificateOrders"
 );
-@@clientName(AppServiceCertificateOrders.createOrUpdateCertificate::parameters.resource,
+@@clientName(AppServiceCertificateResources.createOrUpdateCertificate::parameters.resource,
   "keyVaultCertificate"
 );
-@@clientLocation(AppServiceCertificateOrders.updateCertificate,
+@@clientLocation(AppServiceCertificateResources.updateCertificate,
   "AppServiceCertificateOrders"
 );
-@@clientName(AppServiceCertificateOrders.updateCertificate::parameters.properties,
+@@clientName(AppServiceCertificateResources.updateCertificate::parameters.properties,
   "keyVaultCertificate"
 );
-@@clientLocation(AppServiceCertificateOrders.deleteCertificate,
+@@clientLocation(AppServiceCertificateResources.deleteCertificate,
   "AppServiceCertificateOrders"
 );
-@@clientLocation(AppServiceCertificateOrders.listCertificates,
+@@clientLocation(AppServiceCertificateResources.listCertificates,
   "AppServiceCertificateOrders"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -96,7 +96,7 @@ using Microsoft.CertificateRegistration;
 @@summary(AppServiceCertificateOrders.update,
   "Create or update a certificate purchase order."
 );
-@@summary(AppServiceCertificateOrders.deleteCertificate,
+@@summary(AppServiceCertificateResources.deleteCertificate,
   "Delete the certificate associated with a certificate order."
 );
 @@summary(AppServiceCertificateOrders.reissue,
@@ -121,16 +121,16 @@ using Microsoft.CertificateRegistration;
 @@summary(AppServiceCertificateOrders.verifyDomainOwnership,
   "Verify domain ownership for this certificate order."
 );
-@@summary(AppServiceCertificateOrders.listCertificates,
+@@summary(AppServiceCertificateResources.listCertificates,
   "List all certificates associated with a certificate order."
 );
-@@summary(AppServiceCertificateOrders.getCertificate,
+@@summary(AppServiceCertificateResources.getCertificate,
   "Get the certificate associated with a certificate order."
 );
-@@summary(AppServiceCertificateOrders.createOrUpdateCertificate,
+@@summary(AppServiceCertificateResources.createOrUpdateCertificate,
   "Creates or updates a certificate and associates with key vault secret."
 );
-@@summary(AppServiceCertificateOrders.updateCertificate,
+@@summary(AppServiceCertificateResources.updateCertificate,
   "Creates or updates a certificate and associates with key vault secret."
 );
 @@summary(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
@@ -157,19 +157,19 @@ using Microsoft.CertificateRegistration;
 @@errorsDoc(AppServiceCertificateOrders.retrieveCertificateEmailHistory,
   "App Service error response."
 );
-@@errorsDoc(AppServiceCertificateOrders.listCertificates,
+@@errorsDoc(AppServiceCertificateResources.listCertificates,
   "App Service error response."
 );
-@@errorsDoc(AppServiceCertificateOrders.getCertificate,
+@@errorsDoc(AppServiceCertificateResources.getCertificate,
   "App Service error response."
 );
-@@errorsDoc(AppServiceCertificateOrders.createOrUpdateCertificate,
+@@errorsDoc(AppServiceCertificateResources.createOrUpdateCertificate,
   "App Service error response."
 );
-@@errorsDoc(AppServiceCertificateOrders.updateCertificate,
+@@errorsDoc(AppServiceCertificateResources.updateCertificate,
   "App Service error response."
 );
-@@errorsDoc(AppServiceCertificateOrders.deleteCertificate,
+@@errorsDoc(AppServiceCertificateResources.deleteCertificate,
   "App Service error response."
 );
 @@errorsDoc(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,

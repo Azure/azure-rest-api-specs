@@ -159,51 +159,6 @@ interface AppServiceCertificateOrders {
     void,
     ArmResponse<CertificateEmail[]>
   >;
-
-  /**
-   * Description for Get the certificate associated with a certificate order.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppServiceCertificateOrders_GetCertificate")
-  getCertificate is ArmResourceRead<AppServiceCertificateResource>;
-
-  /**
-   * Description for Creates or updates a certificate and associates with key vault secret.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppServiceCertificateOrders_CreateOrUpdateCertificate")
-  createOrUpdateCertificate is ArmResourceCreateOrReplaceAsync<
-    AppServiceCertificateResource,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /**
-   * Description for Creates or updates a certificate and associates with key vault secret.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppServiceCertificateOrders_UpdateCertificate")
-  @patch(#{ implicitOptionality: false })
-  updateCertificate is ArmCustomPatchSync<
-    AppServiceCertificateResource,
-    PatchModel = AppServiceCertificatePatchResource
-  >;
-
-  /**
-   * Description for Delete the certificate associated with a certificate order.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppServiceCertificateOrders_DeleteCertificate")
-  deleteCertificate is ArmResourceDeleteSync<AppServiceCertificateResource>;
-
-  /**
-   * Description for List all certificates associated with a certificate order.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppServiceCertificateOrders_ListCertificates")
-  listCertificates is ArmResourceListByParent<
-    AppServiceCertificateResource,
-    Response = ArmResponse<AppServiceCertificateCollection>
-  >;
 }
 
 @@doc(AppServiceCertificateOrder.name, "Name of the certificate order..");
@@ -225,10 +180,4 @@ interface AppServiceCertificateOrders {
 );
 @@doc(AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
   "Site seal request."
-);
-@@doc(AppServiceCertificateOrders.createOrUpdateCertificate::parameters.resource,
-  "Key vault certificate resource Id."
-);
-@@doc(AppServiceCertificateOrders.updateCertificate::parameters.properties,
-  "Key vault certificate resource Id."
 );
