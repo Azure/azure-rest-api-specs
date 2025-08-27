@@ -91,7 +91,7 @@ interface ImageDefinitions {
     ImageDefinition,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader & ArmAsyncOperationHeader>
   >;
 }
 @armResourceOperations

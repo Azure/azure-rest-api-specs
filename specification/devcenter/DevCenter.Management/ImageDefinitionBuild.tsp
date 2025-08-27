@@ -88,7 +88,7 @@ interface ImageDefinitionBuilds {
     ImageDefinitionBuild,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader & ArmAsyncOperationHeader>
   >;
 
   @doc("Gets Build details.")
