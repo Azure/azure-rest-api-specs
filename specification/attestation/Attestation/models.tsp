@@ -597,20 +597,20 @@ model OpenIDConfigurationResponse {
   /**
    * Types supported in the OpenID metadata API
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  response_types_supported?: string[];
+  @encodedName("application/json", "response_types_supported")
+  responseTypesSupported?: string[];
 
   /**
    * List of the supported signing algorithms
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  id_token_signing_alg_values_supported?: string[];
+  @encodedName("application/json", "id_token_signing_alg_values_supported")
+  idTokenSigningAlgValuesSupported?: string[];
 
   /**
    * Revocation endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  revocation_endpoint?: string;
+  @encodedName("application/json", "revocation_endpoint")
+  revocationEndpoint?: string;
 
   /**
    * Issuer tenant base endpoint
@@ -620,14 +620,14 @@ model OpenIDConfigurationResponse {
   /**
    * The URI to retrieve the signing keys
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  jwks_uri?: string;
+  @encodedName("application/json", "jwks_uri")
+  jwksUri?: string;
 
   /**
    * Set of claims supported by the OpenID metadata endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  claims_supported?: string[];
+  @encodedName("application/json", "claims_supported")
+  claimsSupported?: string[];
 }
 
 /**

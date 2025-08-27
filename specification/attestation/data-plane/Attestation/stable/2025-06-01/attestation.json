@@ -1520,18 +1520,21 @@
           "description": "Types supported in the OpenID metadata API",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "responseTypesSupported"
         },
         "id_token_signing_alg_values_supported": {
           "type": "array",
           "description": "List of the supported signing algorithms",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "idTokenSigningAlgValuesSupported"
         },
         "revocation_endpoint": {
           "type": "string",
-          "description": "Revocation endpoint"
+          "description": "Revocation endpoint",
+          "x-ms-client-name": "revocationEndpoint"
         },
         "issuer": {
           "type": "string",
@@ -1539,14 +1542,16 @@
         },
         "jwks_uri": {
           "type": "string",
-          "description": "The URI to retrieve the signing keys"
+          "description": "The URI to retrieve the signing keys",
+          "x-ms-client-name": "jwksUri"
         },
         "claims_supported": {
           "type": "array",
           "description": "Set of claims supported by the OpenID metadata endpoint",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "claimsSupported"
         }
       }
     },
