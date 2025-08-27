@@ -647,8 +647,8 @@ model PolicyCertificatesResult {
   /**
    * SHA256 Hash of the binary representation certificate which was added or removed
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policy-certificates`?: JsonWebKeySet;
+  @encodedName("application/json", "x-ms-policy-certificates")
+  policyCertificates?: JsonWebKeySet;
 }
 
 /**
@@ -659,14 +659,14 @@ model PolicyCertificatesModificationResult {
    * Hex encoded SHA1 Hash of the binary representation certificate which was added
    * or removed
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-certificate-thumbprint`?: string;
+  @encodedName("application/json", "x-ms-certificate-thumbprint")
+  certificateThumbprint?: string;
 
   /**
    * The result of the operation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policycertificates-result`?: CertificateModification;
+  @encodedName("application/json", "x-ms-certificate-result")
+  certificateResolution?: CertificateModification;
 }
 
 /**
@@ -676,8 +676,8 @@ model StoredAttestationPolicy {
   /**
    * Policy text to set as a sequence of UTF-8 encoded octets.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  AttestationPolicy?: bytes;
+  @encodedName("application/json", "AttestationPolicy")
+  attestationPolicy?: bytes;
 }
 
 /**
@@ -687,28 +687,28 @@ model PolicyResult {
   /**
    * The result of the operation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policy-result`?: PolicyModification;
+  @encodedName("application/json", "x-ms-policy-result")
+  policyResolution?: PolicyModification;
 
   /**
    * The SHA256 hash of the policy object modified
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policy-token-hash`?: bytes;
+  @encodedName("application/json", "x-ms-policy-token-hash")
+  policyTokenHash?: bytes;
 
   /**
    * The certificate used to sign the policy object, if specified
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policy-signer`?: JsonWebKey;
+  @encodedName("application/json", "x-ms-policy-signer")
+  policySigner?: JsonWebKey;
 
   /**
    * A JSON Web Token containing a StoredAttestationPolicy object with the
    * attestation policy
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
+  @encodedName("application/json", "x-ms-policy")
   @pattern("[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*")
-  `x-ms-policy`?: string;
+  policy?: string;
 }
 
 /**
@@ -757,159 +757,162 @@ model AttestationResult {
   /**
    * The Schema version of this structure. Current Value: 1.0
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-ver`?: string;
+  @encodedName("application/json", "x-ms-ver")
+  version?: string;
 
   /**
    * Runtime Claims
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-runtime`?: Record<string>;
+  @encodedName("application/json", "x-ms-runtime")
+  runtimeClaims?: Record<string>;
 
   /**
    * Inittime Claims
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-inittime`?: Record<string>;
+  @encodedName("application/json", "x-ms-inittime")
+  inittimeClaims?: Record<string>;
 
   /**
    * Policy Generated Claims
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policy`?: Record<string>;
+  @encodedName("application/json", "x-ms-policy")
+  policyClaims?: Record<string>;
 
   /**
    * The Attestation type being attested.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-attestation-type`?: string;
+  @encodedName("application/json", "x-ms-attestation-type")
+  verifierType?: string;
 
   /**
    * The certificate used to sign the policy object, if specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policy-signer`?: JsonWebKey;
+  @encodedName("application/json", "x-ms-policy-signer")
+  policySigner?: JsonWebKey;
 
   /**
    * The SHA256 hash of the BASE64URL encoded policy text used for attestation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-policy-hash`?: bytes;
+  @encodedName("application/json", "x-ms-policy-hash")
+  policyHash?: bytes;
 
   /**
    * True if the enclave is debuggable, false otherwise
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-sgx-is-debuggable`?: boolean;
+  @encodedName("application/json", "x-ms-sgx-is-debuggable")
+  isDebuggable?: boolean;
 
   /**
    * The SGX Product ID for the enclave.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-sgx-product-id`?: float32;
+  @encodedName("application/json", "x-ms-sgx-product-id")
+  productId?: float32;
 
   /**
    * The HEX encoded SGX MRENCLAVE value for the enclave.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-sgx-mrenclave`?: string;
+  @encodedName("application/json", "x-ms-sgx-mrenclave")
+  mrEnclave?: string;
 
   /**
    * The HEX encoded SGX MRSIGNER value for the enclave.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-sgx-mrsigner`?: string;
+  @encodedName("application/json", "x-ms-sgx-mrsigner")
+  mrSigner?: string;
 
   /**
    * The SGX SVN value for the enclave.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-sgx-svn`?: float32;
+  @encodedName("application/json", "x-ms-sgx-svn")
+  sgxSvn?: float32;
 
   /**
    * A copy of the RuntimeData specified as an input to the attest call.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-sgx-ehd`?: bytes;
+  @encodedName("application/json", "x-ms-sgx-ehd")
+  enclaveHeldData?: bytes;
 
   /**
    * The SGX SVN value for the enclave.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `x-ms-sgx-collateral`?: Record<string>;
+  @encodedName("application/json", "x-ms-sgx-collateral")
+  sgxCollateral?: Record<string>;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-ver claim.
    */
-  ver?: string;
+  @encodedName("application/json", "ver")
+  deprecatedVersion?: string;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-is-debuggable claim.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `is-debuggable`?: boolean;
+  @encodedName("application/json", "is-debuggable")
+  deprecatedIsDebuggable?: boolean;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-collateral claim.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `maa-attestationcollateral`?: Record<string>;
+  @encodedName("application/json", "maa-attestationcollateral")
+  deprecatedSgxCollateral?: Record<string>;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `aas-ehd`?: bytes;
+  @encodedName("application/json", "aas-ehd")
+  deprecatedEnclaveHeldData?: bytes;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `maa-ehd`?: bytes;
+  @encodedName("application/json", "maa-ehd")
+  deprecatedEnclaveHeldData2?: bytes;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-product-id
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `product-id`?: float32;
+  @encodedName("application/json", "product-id")
+  deprecatedProductId?: float32;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-mrenclave.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `sgx-mrenclave`?: string;
+  @encodedName("application/json", "sgx-mrenclave")
+  deprecatedMrEnclave?: string;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-mrsigner.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  `sgx-mrsigner`?: string;
+  @encodedName("application/json", "sgx-mrsigner")
+  deprecatedMrSigner?: string;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-svn.
    */
-  svn?: float32;
+  @encodedName("application/json", "svn")
+  deprecatedSvn?: float32;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-tee.
    */
-  tee?: string;
+  @encodedName("application/json", "tee")
+  deprecatedTee?: string;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-policy-signer
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  policy_signer?: JsonWebKey;
+  @encodedName("application/json", "policy_signer")
+  deprecatedPolicySigner?: JsonWebKey;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-policy-hash
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  policy_hash?: bytes;
+  @encodedName("application/json", "policy_hash")
+  deprecatedPolicyHash?: bytes;
 
   /**
    * DEPRECATED: Private Preview version of nonce
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
-  rp_data?: string;
+  @encodedName("application/json", "rp_data")
+  deprecatedRpData?: string;
 }
