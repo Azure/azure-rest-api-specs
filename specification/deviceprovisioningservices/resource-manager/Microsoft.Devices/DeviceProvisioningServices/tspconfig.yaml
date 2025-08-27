@@ -12,11 +12,11 @@ options:
     output-file: "{version-status}/{version}/iotdps.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.DeviceProvisioningServices"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DeviceProvisioningServices"
   "@azure-tools/typespec-python":
     service-dir: "sdk/iothub"
     package-dir: "azure-mgmt-iothubprovisioningservices"
