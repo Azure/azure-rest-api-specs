@@ -70,6 +70,12 @@
             "schema": {
               "$ref": "#/definitions/RunCommandListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -118,6 +124,12 @@
             "schema": {
               "$ref": "#/definitions/RunCommandDocument"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         }
       }
@@ -147,6 +159,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine."
           },
           {
@@ -174,6 +187,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -207,6 +226,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -241,6 +261,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -269,6 +295,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine where the run command should be created or updated."
           },
           {
@@ -340,6 +367,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine where the run command should be updated."
           },
           {
@@ -405,6 +433,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine where the run command should be deleted."
           },
           {
@@ -464,6 +493,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine containing the run command."
           },
           {
@@ -528,6 +558,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine containing the run command."
           },
           {
@@ -588,6 +619,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -666,6 +698,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -738,6 +771,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -804,6 +838,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -875,6 +910,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -942,6 +978,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine where the run command should be created or updated."
           },
           {
@@ -1013,6 +1050,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine where the run command should be updated."
           },
           {
@@ -1078,6 +1116,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine where the diagnostic run command should be deleted."
           },
           {
@@ -1137,6 +1176,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine containing the run command."
           },
           {
@@ -1201,6 +1241,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the virtual machine containing the run command."
           },
           {
@@ -1261,6 +1302,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -1339,6 +1381,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -1411,6 +1454,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -1477,6 +1521,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
@@ -1548,6 +1593,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]$|^[a-zA-Z0-9]$",
             "description": "The name of the VM scale set."
           },
           {
