@@ -2466,6 +2466,14 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/RuleSet"
             }
@@ -2483,6 +2491,14 @@
           },
           "default": {
             "description": "Azure Front Door error response describing why the operation failed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
