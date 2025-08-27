@@ -64,7 +64,7 @@ union PublicNetworkAccess {
   /** Public internet access to the cache, via its public IP address, is enabled. Connections may use any network path. * */
   Enabled: "Enabled",
 
-  /** Public internet access to the cahce, via its public IP address, is disabled. Connections must use be made via private endpoints. * */
+  /** Public internet access to the cache, via its public IP address, is disabled. Connections must use be made via private endpoints. * */
   Disabled: "Disabled",
 }
 
@@ -261,7 +261,7 @@ enum DayOfWeek {
   /** As a convenience, 'Everyday' is also accepted and means the same as specifying all days of the week. * */
   Everyday,
 
-  /** As a conveneince, 'Weekend' is also accepted and means the same as specifying Saturday and Sunday. * */
+  /** As a convenience, 'Weekend' is also accepted and means the same as specifying Saturday and Sunday. * */
   Weekend,
 }
 
