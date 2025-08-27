@@ -107,6 +107,18 @@ union RiskCategory {
   SelfHarm: "SelfHarm",
 }
 
+
+@doc("Taxonomy as source for red team operations.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Taxonomy extends InputData {
+  type: "taxonomy";
+  @doc("Red team input taxonomy data")
+  id : string;
+  name: string;
+  description: string;
+}
+
 @doc("Red team details.")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -116,6 +128,9 @@ model RedTeam {
   @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
   name: string;
+
+  @doc("Data for red team operation.")
+  data?: InputData;
 
   @doc("Name of the red-team run.")
   displayName?: string;
