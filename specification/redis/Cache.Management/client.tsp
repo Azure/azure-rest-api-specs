@@ -46,3 +46,72 @@ using Microsoft.Cache;
 // Fix Java SDK handwritten code
 @@usage(RedisResource, Usage.input | Usage.output, "java");
 @@usage(RedisFirewallRuleCreateParameters, Usage.input, "java");
+
+@@clientName(RedisCommonPropertiesRedisConfiguration,
+  "RedisCommonConfiguration",
+  "csharp"
+);
+
+@@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
+  "IsRdbBackupEnabled",
+  "csharp"
+);
+@@alternateType(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
+  boolean,
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
+  "IsAofBackupEnabled",
+  "csharp"
+);
+@@alternateType(RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
+  boolean,
+  "csharp"
+);
+@@alternateType(RedisCommonPropertiesRedisConfiguration.`rdb-backup-max-snapshot-count`,
+  int32,
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.`aad-enabled`,
+  "IsAadEnabled",
+  "csharp"
+);
+@@clientName(RedisCommonProperties.disableAccessKeyAuthentication,
+  "IsAccessKeyAuthenticationDisabled",
+  "csharp"
+);
+@@clientName(ScheduleEntries, "RedisPatchScheduleSettings", "csharp");
+@@clientName(ScheduleEntry, "RedisPatchScheduleSetting", "csharp");
+@@clientName(DefaultName, "RedisPatchScheduleDefaultName", "csharp");
+@@clientName(UpgradeNotification, "RedisUpgradeNotification", "csharp");
+@@clientName(NotificationListResponse,
+  "RedisUpgradeNotificationListResponse",
+  "csharp"
+);
+@@clientName(RedisKeyType, "RedisRegenerateKeyType", "csharp");
+@@clientName(ReplicationRole, "RedisLinkedServerRole", "csharp");
+@@clientName(RedisForceRebootResponse, "RedisForceRebootResult", "csharp");
+@@clientName(SkuFamily.C, "BasicOrStandard", "csharp");
+@@clientName(SkuFamily.P, "Premium", "csharp");
+@@clientName(CheckNameAvailabilityParameters,
+  "RedisNameAvailabilityContent",
+  "csharp"
+);
+@@alternateType(RedisCacheAccessPolicyAssignmentProperties.objectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@clientName(OperationStatus, "RedisOperationStatus", "csharp");
+@@clientName(ProvisioningState, "RedisProvisioningState", "csharp");
+@@clientName(PublicNetworkAccess, "RedisPublicNetworkAccess", "csharp");
+@@clientName(RebootType, "RedisRebootType", "csharp");
+@@clientName(TlsVersion, "RedisTlsVersion", "csharp");
+@@clientName(DayOfWeek, "RedisDayOfWeek", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "RedisPrivateLinkServiceConnectionState",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.provisioningState,
+  "RedisProvisioningState",
+  "csharp"
+);
