@@ -1520,18 +1520,21 @@
           "description": "Types supported in the OpenID metadata API",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "responseTypesSupported"
         },
         "id_token_signing_alg_values_supported": {
           "type": "array",
           "description": "List of the supported signing algorithms",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "idTokenSigningAlgValuesSupported"
         },
         "revocation_endpoint": {
           "type": "string",
-          "description": "Revocation endpoint"
+          "description": "Revocation endpoint",
+          "x-ms-client-name": "revocationEndpoint"
         },
         "issuer": {
           "type": "string",
@@ -1539,14 +1542,16 @@
         },
         "jwks_uri": {
           "type": "string",
-          "description": "The URI to retrieve the signing keys"
+          "description": "The URI to retrieve the signing keys",
+          "x-ms-client-name": "jwksUri"
         },
         "claims_supported": {
           "type": "array",
           "description": "Set of claims supported by the OpenID metadata endpoint",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "claimsSupported"
         }
       }
     },
@@ -1556,11 +1561,13 @@
       "properties": {
         "x-ms-certificate-thumbprint": {
           "type": "string",
-          "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added\nor removed"
+          "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added\nor removed",
+          "x-ms-client-name": "certificateThumbprint"
         },
-        "x-ms-policycertificates-result": {
+        "x-ms-certificate-result": {
           "$ref": "#/definitions/CertificateModification",
-          "description": "The result of the operation"
+          "description": "The result of the operation",
+          "x-ms-client-name": "certificateResolution"
         }
       }
     },
@@ -1592,7 +1599,8 @@
       "properties": {
         "x-ms-policy-certificates": {
           "$ref": "#/definitions/JsonWebKeySet",
-          "description": "SHA256 Hash of the binary representation certificate which was added or removed"
+          "description": "SHA256 Hash of the binary representation certificate which was added or removed",
+          "x-ms-client-name": "policyCertificates"
         }
       }
     },
@@ -1637,21 +1645,25 @@
       "properties": {
         "x-ms-policy-result": {
           "$ref": "#/definitions/PolicyModification",
-          "description": "The result of the operation"
+          "description": "The result of the operation",
+          "x-ms-client-name": "policyResolution"
         },
         "x-ms-policy-token-hash": {
           "type": "string",
           "format": "byte",
-          "description": "The SHA256 hash of the policy object modified"
+          "description": "The SHA256 hash of the policy object modified",
+          "x-ms-client-name": "policyTokenHash"
         },
         "x-ms-policy-signer": {
           "$ref": "#/definitions/JsonWebKey",
-          "description": "The certificate used to sign the policy object, if specified"
+          "description": "The certificate used to sign the policy object, if specified",
+          "x-ms-client-name": "policySigner"
         },
         "x-ms-policy": {
           "type": "string",
           "description": "A JSON Web Token containing a StoredAttestationPolicy object with the\nattestation policy",
-          "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*"
+          "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*",
+          "x-ms-client-name": "policy"
         }
       }
     },
@@ -1724,7 +1736,8 @@
         "AttestationPolicy": {
           "type": "string",
           "format": "byte",
-          "description": "Policy text to set as a sequence of UTF-8 encoded octets."
+          "description": "Policy text to set as a sequence of UTF-8 encoded octets.",
+          "x-ms-client-name": "attestationPolicy"
         }
       }
     },
