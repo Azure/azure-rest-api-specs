@@ -30,7 +30,7 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-09-01'
 input-file:
-- Microsoft.AVS/stable/2024-09-01/vmware.json
+- stable/2024-09-01/vmware.json
 ```
 
 ### Tag: package-2023-09-01
@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-09-01'
 input-file:
-- Microsoft.AVS/stable/2023-09-01/vmware.json
+- stable/2023-09-01/vmware.json
 ```
 
 ### Tag: package-2023-03-01
@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2023-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-03-01'
 input-file:
-- Microsoft.AVS/stable/2023-03-01/vmware.json
+- stable/2023-03-01/vmware.json
 ```
 
 ### Tag: package-2022-05-01
@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2022-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-05-01'
 input-file:
-- Microsoft.AVS/stable/2022-05-01/vmware.json
+- stable/2022-05-01/vmware.json
 ```
 
 ### Tag: package-2021-12-01
@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-2021-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-12-01'
 input-file:
-- Microsoft.AVS/stable/2021-12-01/vmware.json
+- stable/2021-12-01/vmware.json
 ```
 
 ### Tag: package-2021-06-01
@@ -75,7 +75,7 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-06-01'
 input-file:
-- Microsoft.AVS/stable/2021-06-01/vmware.json
+- stable/2021-06-01/vmware.json
 ```
 
 ### Tag: package-2021-01-01-preview
@@ -84,7 +84,7 @@ These settings apply only when `--tag=package-2021-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-01-01-preview'
 input-file:
-- Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+- preview/2021-01-01-preview/vmware.json
 ```
 
 ### Tag: package-2020-07-17-preview
@@ -93,7 +93,7 @@ These settings apply only when `--tag=package-2020-07-17-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-07-17-preview'
 input-file:
-- Microsoft.AVS/preview/2020-07-17-preview/vmware.json
+- preview/2020-07-17-preview/vmware.json
 ```
 
 ### Tag: package-2020-03-20
@@ -102,7 +102,7 @@ These settings apply only when `--tag=package-2020-03-20` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-03-20'
 input-file:
-- Microsoft.AVS/stable/2020-03-20/vmware.json
+- stable/2020-03-20/vmware.json
 ```
 
 ---
