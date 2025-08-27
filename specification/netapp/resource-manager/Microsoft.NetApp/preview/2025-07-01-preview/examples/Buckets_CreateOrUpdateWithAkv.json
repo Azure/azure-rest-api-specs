@@ -18,8 +18,17 @@
         "path": "/path",
         "server": {
           "fqdn": "fullyqualified.domainname.com",
-          "certificateObject": "<REDACTED>",
-          "onCertificateConflictAction": "Update"
+          "onCertificateConflictAction": "Fail"
+        },
+        "akvDetails": {
+          "certificateAkvDetails": {
+            "certificateKeyVaultUri": "https://REDACTED.vault.azure.net/",
+            "certificateName": "my-certificate"
+          },
+          "credentialsAkvDetails": {
+            "credentialsKeyVaultUri": "https://REDACTED.vault.azure.net/",
+            "secretName": "my-secret"
+          }
         },
         "permissions": "ReadOnly"
       }
@@ -46,6 +55,16 @@
             "certificateCommonName": "www.example.com",
             "certificateExpiryDate": "2027-08-15T13:23:32Z",
             "ipAddress": "1.2.3.4"
+          },
+          "akvDetails": {
+            "certificateAkvDetails": {
+              "certificateKeyVaultUri": "https://REDACTED.vault.azure.net/",
+              "certificateName": "my-certificate"
+            },
+            "credentialsAkvDetails": {
+              "credentialsKeyVaultUri": "https://REDACTED.vault.azure.net/",
+              "secretName": "my-secret"
+            }
           },
           "permissions": "ReadOnly"
         }
@@ -75,6 +94,16 @@
             "certificateCommonName": "www.example.com",
             "certificateExpiryDate": "2027-08-15T13:23:32Z",
             "ipAddress": "1.2.3.4"
+          },
+          "akvDetails": {
+            "certificateAkvDetails": {
+              "certificateKeyVaultUri": "https://REDACTED.vault.azure.net/",
+              "certificateName": "my-certificate"
+            },
+            "credentialsAkvDetails": {
+              "credentialsKeyVaultUri": "https://REDACTED.vault.azure.net/",
+              "secretName": "my-secret"
+            }
           },
           "permissions": "ReadOnly"
         }
