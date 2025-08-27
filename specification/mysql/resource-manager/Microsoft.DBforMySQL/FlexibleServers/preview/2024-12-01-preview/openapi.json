@@ -5106,11 +5106,6 @@
         ]
       }
     },
-    "ExtendedData": {
-      "type": "object",
-      "description": "Extended data with additional properties",
-      "additionalProperties": {}
-    },
     "FeatureProperty": {
       "type": "object",
       "description": "Server version capabilities.",
@@ -6081,8 +6076,9 @@
       "description": "Represents Operation Results API Response",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ExtendedData",
-          "description": "The extended properties of Operation Results"
+          "type": "object",
+          "description": "The extended properties of Operation Results",
+          "additionalProperties": {}
         }
       },
       "allOf": [

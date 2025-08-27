@@ -1865,7 +1865,7 @@ model OperationStatusExtendedResult
    * The extended properties of Operation Results
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ExtendedData;
+  properties?: Record<unknown>;
 }
 
 /**
@@ -2316,12 +2316,6 @@ model ServerListResult {
   @doc("The link to the next page of items")
   @nextLink
   nextLink?: url;
-}
-
-/** Extended data with additional properties */
-model ExtendedData {
-  /** Additional properties that can be added to the object */
-  ...Record<unknown>;
 }
 
 /**
