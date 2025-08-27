@@ -59,7 +59,7 @@ To enforce these rules, here are some notes about the repo structure:
 10.	Each service name folder must duplicate the special "list operations" API. 
     - While this RP (not service) operation requires an api-version query parameter, the response data is not specific to this api-version; the response is api-version neutral. In addition, the response is always the same regardless of tenant/subscription. Whenever any other service in the RP gets a new api-version, the TypeSpec/OpenAPI for the operations service must also be updated to match this new api-version.
 
-## POSITIVE CONSEQUENCES OF THE AZURE SERVICE DEFINITION
+## Positive Consequences of the Azure Service Definition
 
 From the above definition, many processes and assets naturally flow, providing both Azure engineering teams and customers with great experiences:
 - Each service version is documented separately allowing a customer to reference the specific version of the service they are targeting.
