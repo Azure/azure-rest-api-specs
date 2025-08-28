@@ -350,8 +350,8 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
   - code: LroAzureAsyncOperationHeader
-  - from: ComputeRP.json
-  - reason: Compute does not include the LroAzureAsyncOperationHeader header
+    from: ComputeRP.json
+    reason: Compute does not include the LroAzureAsyncOperationHeader header
 ```
 
 ### Tag: package-2025-04-01
