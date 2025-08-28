@@ -35,7 +35,7 @@ model AccessPointAccountProperties {
   imageMod: string;
 
   @doc("The classification of the access point account")
-  classification: Classification;
+  classification: string;
 
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
