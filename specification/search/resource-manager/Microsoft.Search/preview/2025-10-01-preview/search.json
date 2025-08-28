@@ -2012,12 +2012,16 @@
     },
     "SearchIndexerDataIdentity": {
       "type": "object",
+      "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
           "type": "string",
           "description": "A URI fragment specifying the type of identity."
         }
       },
+      "required": [
+        "@odata.type"
+      ],
       "description": "Abstract base type for data identities."
     },
     "SearchIndexerDataUserAssignedIdentity": {
