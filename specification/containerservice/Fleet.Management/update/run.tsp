@@ -235,30 +235,30 @@ model UpdateRunStatus {
 @doc("The status of the stage-level concurrency.")
 @added(Versions.v2025_10_01_preview)
 model StageConcurrencyStatus {
-    @visibility(Lifecycle.Read)
-    @doc("The max number of upgrades that can run concurrently across all groups in this stage.")
-    maxConcurrency?: int32;
+  @visibility(Lifecycle.Read)
+  @doc("The max number of upgrades that can run concurrently across all groups in this stage.")
+  maxConcurrency?: int32;
 
-    @visibility(Lifecycle.Read)
-    @doc("""
+  @visibility(Lifecycle.Read)
+  @doc("""
     Original requested maxConcurrency value for this stage. Either a fixed count (e.g., "3") or a percentage (e.g., "25%").
     """)
-    requestedMaxConcurrency?: string;
+  requestedMaxConcurrency?: string;
 }
 
 @doc("The status of the group-level concurrency.")
 @added(Versions.v2025_10_01_preview)
 model GroupConcurrencyStatus {
-    @visibility(Lifecycle.Read)
-    @doc("The max number of potential upgrades that can run concurrently in this group.")
-    maxConcurrency?: int32;
+  @visibility(Lifecycle.Read)
+  @doc("The max number of potential upgrades that can run concurrently in this group.")
+  maxConcurrency?: int32;
 
-    @visibility(Lifecycle.Read)
-    @doc("""
+  @visibility(Lifecycle.Read)
+  @doc("""
     Original requested maxConcurrency value for this group.
     Either a fixed count (e.g., "3") or a percentage (e.g., "25%").
     """)
-    requestedMaxConcurrency?: string;
+  requestedMaxConcurrency?: string;
 }
 
 @doc("The node image upgrade specs for the update run.")
