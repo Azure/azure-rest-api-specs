@@ -294,19 +294,30 @@ model ArcSettingsPatchProperties {
   connectivityProperties?: ArcConnectivityProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * The password credential associated with the arc setting.
+ */
 model PasswordCredential {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * The password secret text.
+   */
   secretText?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The unique identifier of the password key.
+   */
   keyId?: string;
 
+  /**
+   * The start date and time of the password validity.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   startDateTime?: utcDateTime;
 
+  /**
+   * The end date and time of the password validity.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   endDateTime?: utcDateTime;
 }
 
@@ -323,15 +334,28 @@ model ArcIdentityResponse {
   properties?: ArcIdentityResponseProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Arc identity response properties.
+ */
 model ArcIdentityResponseProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * The Arc application client identifier.
+   */
   arcApplicationClientId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The Arc application tenant identifier.
+   */
   arcApplicationTenantId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The Arc service principal object identifier.
+   */
   arcServicePrincipalObjectId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * The Arc application object identifier.
+   */
   arcApplicationObjectId?: string;
 }
 
@@ -349,7 +373,9 @@ model ReconcileArcSettingsRequest {
  * List of Arc Nodes in the cluster
  */
 model ReconcileArcSettingsRequestProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * List of cluster node names to reconcile Arc settings for.
+   */
   clusterNodes?: string[];
 }
 

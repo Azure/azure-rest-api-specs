@@ -15,41 +15,59 @@ namespace Microsoft.AzureStackHCI;
  */
 union ArcSettingAggregateState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The state is not specified. */
   NotSpecified: "NotSpecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An error occurred. */
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation was canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is connected. */
   Connected: "Connected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is disconnected. */
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is deleted. */
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is being created. */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is being updated. */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is being moved. */
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation partially succeeded. */
   PartiallySucceeded: "PartiallySucceeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is partially connected. */
   PartiallyConnected: "PartiallyConnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation is in progress. */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation has been accepted. */
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc setting is provisioning. */
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Disable operation is in progress. */
   DisableInProgress: "DisableInProgress",
 }
 
@@ -58,41 +76,59 @@ union ArcSettingAggregateState {
  */
 union NodeArcState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The state is not specified. */
   NotSpecified: "NotSpecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An error occurred. */
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation was canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is connected. */
   Connected: "Connected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is disconnected. */
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is deleted. */
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is being created. */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is being updated. */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is being moved. */
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation partially succeeded. */
   PartiallySucceeded: "PartiallySucceeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is partially connected. */
   PartiallyConnected: "PartiallyConnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation is in progress. */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation has been accepted. */
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The arc agent is provisioning. */
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Disable operation is in progress. */
   DisableInProgress: "DisableInProgress",
 }
 
@@ -101,13 +137,17 @@ union NodeArcState {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The resource was created by a user. */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The resource was created by an application. */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The resource was created by a managed identity. */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The resource was created by a key. */
   Key: "Key",
 }
 
@@ -116,35 +156,50 @@ union CreatedByType {
  */
 union Status {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster agent is not yet registered. */
   NotYetRegistered: "NotYetRegistered",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster agent connected recently. */
   ConnectedRecently: "ConnectedRecently",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster agent has not connected recently. */
   NotConnectedRecently: "NotConnectedRecently",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster agent is disconnected. */
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An error occurred. */
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The state is not specified. */
   NotSpecified: "NotSpecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Validation is in progress. */
   ValidationInProgress: "ValidationInProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Validation was successful. */
   ValidationSuccess: "ValidationSuccess",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Validation failed. */
   ValidationFailed: "ValidationFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Deployment is in progress. */
   DeploymentInProgress: "DeploymentInProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Deployment failed. */
   DeploymentFailed: "DeploymentFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Deployment was successful. */
   DeploymentSuccess: "DeploymentSuccess",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation is in progress. */
   InProgress: "InProgress",
 }
 
@@ -153,17 +208,23 @@ union Status {
  */
 union ConnectivityStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster is not yet registered. */
   NotYetRegistered: "NotYetRegistered",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster is connected. */
   Connected: "Connected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster has not connected recently. */
   NotConnectedRecently: "NotConnectedRecently",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster is partially connected. */
   PartiallyConnected: "PartiallyConnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The cluster is disconnected. */
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The state is not specified. */
   NotSpecified: "NotSpecified",
 }
 
@@ -172,9 +233,11 @@ union ConnectivityStatus {
  */
 union SoftwareAssuranceStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Software Assurance is enabled. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Software Assurance is disabled. */
   Disabled: "Disabled",
 }
 
@@ -183,9 +246,11 @@ union SoftwareAssuranceStatus {
  */
 union SoftwareAssuranceIntent {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Enable Software Assurance. */
   Enable: "Enable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Disable Software Assurance. */
   Disable: "Disable",
 }
 
@@ -194,9 +259,11 @@ union SoftwareAssuranceIntent {
  */
 union LogCollectionJobType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** On-demand log collection job. */
   OnDemand: "OnDemand",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Scheduled log collection job. */
   Scheduled: "Scheduled",
 }
 
@@ -205,9 +272,11 @@ union LogCollectionJobType {
  */
 union AccessLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Diagnostics access level. */
   Diagnostics: "Diagnostics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Diagnostics and repair access level. */
   DiagnosticsAndRepair: "DiagnosticsAndRepair",
 }
 
@@ -216,9 +285,11 @@ union AccessLevel {
  */
 union WindowsServerSubscription {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Windows Server Subscription is disabled. */
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Windows Server Subscription is enabled. */
   Enabled: "Enabled",
 }
 
@@ -227,11 +298,14 @@ union WindowsServerSubscription {
  */
 union DiagnosticLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Diagnostic data is turned off. */
   Off: "Off",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Basic level of diagnostic data. */
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Enhanced level of diagnostic data. */
   Enhanced: "Enhanced",
 }
 
@@ -240,9 +314,11 @@ union DiagnosticLevel {
  */
 union ClusterNodeType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** First party cluster node. */
   FirstParty: "FirstParty",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Third party cluster node. */
   ThirdParty: "ThirdParty",
 }
 
@@ -251,9 +327,11 @@ union ClusterNodeType {
  */
 union OemActivation {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** OEM activation is disabled. */
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** OEM activation is enabled. */
   Enabled: "Enabled",
 }
 
@@ -262,9 +340,11 @@ union OemActivation {
  */
 union ImdsAttestation {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** IMDS attestation is disabled. */
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** IMDS attestation is enabled. */
   Enabled: "Enabled",
 }
 
@@ -380,41 +460,59 @@ union DeviceKind {
  */
 union ExtensionAggregateState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The state is not specified. */
   NotSpecified: "NotSpecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An error occurred. */
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation was canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is connected. */
   Connected: "Connected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is disconnected. */
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is deleted. */
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being created. */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being updated. */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being moved. */
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation partially succeeded. */
   PartiallySucceeded: "PartiallySucceeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is partially connected. */
   PartiallyConnected: "PartiallyConnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation is in progress. */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation has been accepted. */
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is provisioning. */
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Upgrade failed but rollback succeeded. */
   UpgradeFailedRollbackSucceeded: "UpgradeFailedRollbackSucceeded",
 }
 
@@ -423,39 +521,56 @@ union ExtensionAggregateState {
  */
 union NodeExtensionState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The state is not specified. */
   NotSpecified: "NotSpecified",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An error occurred. */
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation was canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is connected. */
   Connected: "Connected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is disconnected. */
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is deleted. */
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being created. */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being updated. */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is being moved. */
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation partially succeeded. */
   PartiallySucceeded: "PartiallySucceeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is partially connected. */
   PartiallyConnected: "PartiallyConnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation is in progress. */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The operation has been accepted. */
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The extension is provisioning. */
   Provisioning: "Provisioning",
 }
 
@@ -464,11 +579,14 @@ union NodeExtensionState {
  */
 union StatusLevelTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Information level. */
   Info: "Info",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Warning level. */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Error level. */
   Error: "Error",
 }
 
@@ -477,9 +595,11 @@ union StatusLevelTypes {
  */
 union ExtensionManagedBy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Extension is managed by user. */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Extension is managed by Azure. */
   Azure: "Azure",
 }
 
@@ -527,13 +647,17 @@ union ComplianceStatus {
  */
 union UpdateRunPropertiesState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update run state is unknown. */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update run succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update run is in progress. */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update run failed. */
   Failed: "Failed",
 }
 
@@ -542,71 +666,103 @@ union UpdateRunPropertiesState {
  */
 union State {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update has prerequisites that need to be installed first. */
   HasPrerequisite: "HasPrerequisite",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is obsolete. */
   Obsolete: "Obsolete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is ready to be installed. */
   Ready: "Ready",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is not applicable because another update is in progress. */
   NotApplicableBecauseAnotherUpdateIsInProgress: "NotApplicableBecauseAnotherUpdateIsInProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is being prepared for installation. */
   Preparing: "Preparing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is being installed. */
   Installing: "Installing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update has been installed. */
   Installed: "Installed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update preparation failed. */
   PreparationFailed: "PreparationFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update installation failed. */
   InstallationFailed: "InstallationFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is invalid. */
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update has been recalled. */
   Recalled: "Recalled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is being downloaded. */
   Downloading: "Downloading",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update download failed. */
   DownloadFailed: "DownloadFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is undergoing health checking. */
   HealthChecking: "HealthChecking",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update health check failed. */
   HealthCheckFailed: "HealthCheckFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update is ready to be installed. */
   ReadyToInstall: "ReadyToInstall",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update scan is in progress. */
   ScanInProgress: "ScanInProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update scan failed. */
   ScanFailed: "ScanFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update requires additional content. */
   AdditionalContentRequired: "AdditionalContentRequired",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Whether a reboot is required after applying the update.
+ */
 union RebootRequirement {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The reboot requirement is unknown. */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** A reboot is required. */
   True: "True",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** A reboot is not required. */
   False: "False",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * The overall health state.
+ */
 union HealthState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The health state is unknown. */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The health check was successful. */
   Success: "Success",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The health check failed. */
   Failure: "Failure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The health check returned a warning. */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The health check returned an error. */
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The health check is in progress. */
   InProgress: "InProgress",
 }
 
@@ -615,13 +771,17 @@ union HealthState {
  */
 union Severity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Critical severity - blocks updates. */
   Critical: "Critical",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Warning severity. */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Informational severity. */
   Informational: "Informational",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Hidden severity. */
   Hidden: "Hidden",
 }
 
@@ -630,11 +790,14 @@ union Severity {
  */
 union AvailabilityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Update content is available locally. */
   Local: "Local",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Update content is available online. */
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Update content requires notification. */
   Notify: "Notify",
 }
 
@@ -643,21 +806,29 @@ union AvailabilityType {
  */
 union UpdateSummariesPropertiesState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update state is unknown. */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Updates were applied successfully. */
   AppliedSuccessfully: "AppliedSuccessfully",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An update is available. */
   UpdateAvailable: "UpdateAvailable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An update is in progress. */
   UpdateInProgress: "UpdateInProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** An update failed. */
   UpdateFailed: "UpdateFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** The update needs attention. */
   NeedsAttention: "NeedsAttention",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Update preparation is in progress. */
   PreparationInProgress: "PreparationInProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Update preparation failed. */
   PreparationFailed: "PreparationFailed",
 }
 
@@ -666,7 +837,8 @@ union UpdateSummariesPropertiesState {
  */
 union ServiceName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Windows Admin Center service. */
   WAC: "WAC",
 }
 
@@ -914,7 +1086,9 @@ model DeploymentStep {
   exception?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Result of a precheck validation test.
+ */
 model PrecheckResult {
   /**
    * Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer.

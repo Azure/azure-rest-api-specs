@@ -5890,11 +5890,13 @@
         "values": [
           {
             "name": "Diagnostics",
-            "value": "Diagnostics"
+            "value": "Diagnostics",
+            "description": "Diagnostics access level."
           },
           {
             "name": "DiagnosticsAndRepair",
-            "value": "DiagnosticsAndRepair"
+            "value": "DiagnosticsAndRepair",
+            "description": "Diagnostics and repair access level."
           }
         ]
       }
@@ -6006,18 +6008,23 @@
     },
     "ArcIdentityResponseProperties": {
       "type": "object",
+      "description": "Arc identity response properties.",
       "properties": {
         "arcApplicationClientId": {
-          "type": "string"
+          "type": "string",
+          "description": "The Arc application client identifier."
         },
         "arcApplicationTenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "The Arc application tenant identifier."
         },
         "arcServicePrincipalObjectId": {
-          "type": "string"
+          "type": "string",
+          "description": "The Arc service principal object identifier."
         },
         "arcApplicationObjectId": {
-          "type": "string"
+          "type": "string",
+          "description": "The Arc application object identifier."
         }
       }
     },
@@ -6066,75 +6073,93 @@
         "values": [
           {
             "name": "NotSpecified",
-            "value": "NotSpecified"
+            "value": "NotSpecified",
+            "description": "The state is not specified."
           },
           {
             "name": "Error",
-            "value": "Error"
+            "value": "Error",
+            "description": "An error occurred."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The operation succeeded."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The operation was canceled."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The operation failed."
           },
           {
             "name": "Connected",
-            "value": "Connected"
+            "value": "Connected",
+            "description": "The arc setting is connected."
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "The arc setting is disconnected."
           },
           {
             "name": "Deleted",
-            "value": "Deleted"
+            "value": "Deleted",
+            "description": "The arc setting is deleted."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The arc setting is being created."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The arc setting is being updated."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The arc setting is being deleted."
           },
           {
             "name": "Moving",
-            "value": "Moving"
+            "value": "Moving",
+            "description": "The arc setting is being moved."
           },
           {
             "name": "PartiallySucceeded",
-            "value": "PartiallySucceeded"
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
           },
           {
             "name": "PartiallyConnected",
-            "value": "PartiallyConnected"
+            "value": "PartiallyConnected",
+            "description": "The arc setting is partially connected."
           },
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "The operation is in progress."
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "The operation has been accepted."
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "The arc setting is provisioning."
           },
           {
             "name": "DisableInProgress",
-            "value": "DisableInProgress"
+            "value": "DisableInProgress",
+            "description": "Disable operation is in progress."
           }
         ]
       },
@@ -6315,15 +6340,18 @@
         "values": [
           {
             "name": "Local",
-            "value": "Local"
+            "value": "Local",
+            "description": "Update content is available locally."
           },
           {
             "name": "Online",
-            "value": "Online"
+            "value": "Online",
+            "description": "Update content is available online."
           },
           {
             "name": "Notify",
-            "value": "Notify"
+            "value": "Notify",
+            "description": "Update content requires notification."
           }
         ]
       }
@@ -6598,18 +6626,23 @@
     },
     "ClusterIdentityResponseProperties": {
       "type": "object",
+      "description": "Cluster identity response properties.",
       "properties": {
         "aadClientId": {
-          "type": "string"
+          "type": "string",
+          "description": "App id of cluster AAD identity."
         },
         "aadTenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "Tenant id of cluster AAD identity."
         },
         "aadServicePrincipalObjectId": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of cluster identity service principal."
         },
         "aadApplicationObjectId": {
-          "type": "string"
+          "type": "string",
+          "description": "Object id of cluster AAD identity."
         }
       }
     },
@@ -6732,11 +6765,13 @@
         "values": [
           {
             "name": "FirstParty",
-            "value": "FirstParty"
+            "value": "FirstParty",
+            "description": "First party cluster node."
           },
           {
             "name": "ThirdParty",
-            "value": "ThirdParty"
+            "value": "ThirdParty",
+            "description": "Third party cluster node."
           }
         ]
       }
@@ -7255,27 +7290,33 @@
         "values": [
           {
             "name": "NotYetRegistered",
-            "value": "NotYetRegistered"
+            "value": "NotYetRegistered",
+            "description": "The cluster is not yet registered."
           },
           {
             "name": "Connected",
-            "value": "Connected"
+            "value": "Connected",
+            "description": "The cluster is connected."
           },
           {
             "name": "NotConnectedRecently",
-            "value": "NotConnectedRecently"
+            "value": "NotConnectedRecently",
+            "description": "The cluster has not connected recently."
           },
           {
             "name": "PartiallyConnected",
-            "value": "PartiallyConnected"
+            "value": "PartiallyConnected",
+            "description": "The cluster is partially connected."
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "The cluster is disconnected."
           },
           {
             "name": "NotSpecified",
-            "value": "NotSpecified"
+            "value": "NotSpecified",
+            "description": "The state is not specified."
           }
         ]
       }
@@ -7295,19 +7336,23 @@
         "values": [
           {
             "name": "User",
-            "value": "User"
+            "value": "User",
+            "description": "The resource was created by a user."
           },
           {
             "name": "Application",
-            "value": "Application"
+            "value": "Application",
+            "description": "The resource was created by an application."
           },
           {
             "name": "ManagedIdentity",
-            "value": "ManagedIdentity"
+            "value": "ManagedIdentity",
+            "description": "The resource was created by a managed identity."
           },
           {
             "name": "Key",
-            "value": "Key"
+            "value": "Key",
+            "description": "The resource was created by a key."
           }
         ]
       }
@@ -8330,15 +8375,18 @@
         "values": [
           {
             "name": "Off",
-            "value": "Off"
+            "value": "Off",
+            "description": "Diagnostic data is turned off."
           },
           {
             "name": "Basic",
-            "value": "Basic"
+            "value": "Basic",
+            "description": "Basic level of diagnostic data."
           },
           {
             "name": "Enhanced",
-            "value": "Enhanced"
+            "value": "Enhanced",
+            "description": "Enhanced level of diagnostic data."
           }
         ]
       }
@@ -9577,75 +9625,93 @@
         "values": [
           {
             "name": "NotSpecified",
-            "value": "NotSpecified"
+            "value": "NotSpecified",
+            "description": "The state is not specified."
           },
           {
             "name": "Error",
-            "value": "Error"
+            "value": "Error",
+            "description": "An error occurred."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The operation succeeded."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The operation was canceled."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The operation failed."
           },
           {
             "name": "Connected",
-            "value": "Connected"
+            "value": "Connected",
+            "description": "The extension is connected."
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "The extension is disconnected."
           },
           {
             "name": "Deleted",
-            "value": "Deleted"
+            "value": "Deleted",
+            "description": "The extension is deleted."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The extension is being created."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The extension is being updated."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The extension is being deleted."
           },
           {
             "name": "Moving",
-            "value": "Moving"
+            "value": "Moving",
+            "description": "The extension is being moved."
           },
           {
             "name": "PartiallySucceeded",
-            "value": "PartiallySucceeded"
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
           },
           {
             "name": "PartiallyConnected",
-            "value": "PartiallyConnected"
+            "value": "PartiallyConnected",
+            "description": "The extension is partially connected."
           },
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "The operation is in progress."
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "The operation has been accepted."
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "The extension is provisioning."
           },
           {
             "name": "UpgradeFailedRollbackSucceeded",
-            "value": "UpgradeFailedRollbackSucceeded"
+            "value": "UpgradeFailedRollbackSucceeded",
+            "description": "Upgrade failed but rollback succeeded."
           }
         ]
       },
@@ -9664,11 +9730,13 @@
         "values": [
           {
             "name": "User",
-            "value": "User"
+            "value": "User",
+            "description": "Extension is managed by user."
           },
           {
             "name": "Azure",
-            "value": "Azure"
+            "value": "Azure",
+            "description": "Extension is managed by Azure."
           }
         ]
       }
@@ -10451,6 +10519,7 @@
     },
     "HealthState": {
       "type": "string",
+      "description": "The overall health state.",
       "enum": [
         "Unknown",
         "Success",
@@ -10465,27 +10534,33 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "The health state is unknown."
           },
           {
             "name": "Success",
-            "value": "Success"
+            "value": "Success",
+            "description": "The health check was successful."
           },
           {
             "name": "Failure",
-            "value": "Failure"
+            "value": "Failure",
+            "description": "The health check failed."
           },
           {
             "name": "Warning",
-            "value": "Warning"
+            "value": "Warning",
+            "description": "The health check returned a warning."
           },
           {
             "name": "Error",
-            "value": "Error"
+            "value": "Error",
+            "description": "The health check returned an error."
           },
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "The health check is in progress."
           }
         ]
       }
@@ -10527,11 +10602,13 @@
         "values": [
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "IMDS attestation is disabled."
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "IMDS attestation is enabled."
           }
         ]
       }
@@ -10853,11 +10930,13 @@
         "values": [
           {
             "name": "OnDemand",
-            "value": "OnDemand"
+            "value": "OnDemand",
+            "description": "On-demand log collection job."
           },
           {
             "name": "Scheduled",
-            "value": "Scheduled"
+            "value": "Scheduled",
+            "description": "Scheduled log collection job."
           }
         ]
       }
@@ -10886,6 +10965,7 @@
         },
         "logCollectionSessionDetails": {
           "type": "array",
+          "description": "Log collection session details for the cluster.",
           "items": {
             "$ref": "#/definitions/ClustersLogCollectionSession"
           },
@@ -11214,75 +11294,93 @@
         "values": [
           {
             "name": "NotSpecified",
-            "value": "NotSpecified"
+            "value": "NotSpecified",
+            "description": "The state is not specified."
           },
           {
             "name": "Error",
-            "value": "Error"
+            "value": "Error",
+            "description": "An error occurred."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The operation succeeded."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The operation was canceled."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The operation failed."
           },
           {
             "name": "Connected",
-            "value": "Connected"
+            "value": "Connected",
+            "description": "The arc agent is connected."
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "The arc agent is disconnected."
           },
           {
             "name": "Deleted",
-            "value": "Deleted"
+            "value": "Deleted",
+            "description": "The arc agent is deleted."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The arc agent is being created."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The arc agent is being updated."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The arc agent is being deleted."
           },
           {
             "name": "Moving",
-            "value": "Moving"
+            "value": "Moving",
+            "description": "The arc agent is being moved."
           },
           {
             "name": "PartiallySucceeded",
-            "value": "PartiallySucceeded"
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
           },
           {
             "name": "PartiallyConnected",
-            "value": "PartiallyConnected"
+            "value": "PartiallyConnected",
+            "description": "The arc agent is partially connected."
           },
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "The operation is in progress."
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "The operation has been accepted."
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "The arc agent is provisioning."
           },
           {
             "name": "DisableInProgress",
-            "value": "DisableInProgress"
+            "value": "DisableInProgress",
+            "description": "Disable operation is in progress."
           }
         ]
       },
@@ -11316,71 +11414,88 @@
         "values": [
           {
             "name": "NotSpecified",
-            "value": "NotSpecified"
+            "value": "NotSpecified",
+            "description": "The state is not specified."
           },
           {
             "name": "Error",
-            "value": "Error"
+            "value": "Error",
+            "description": "An error occurred."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The operation succeeded."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The operation was canceled."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The operation failed."
           },
           {
             "name": "Connected",
-            "value": "Connected"
+            "value": "Connected",
+            "description": "The extension is connected."
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "The extension is disconnected."
           },
           {
             "name": "Deleted",
-            "value": "Deleted"
+            "value": "Deleted",
+            "description": "The extension is deleted."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The extension is being created."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The extension is being updated."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The extension is being deleted."
           },
           {
             "name": "Moving",
-            "value": "Moving"
+            "value": "Moving",
+            "description": "The extension is being moved."
           },
           {
             "name": "PartiallySucceeded",
-            "value": "PartiallySucceeded"
+            "value": "PartiallySucceeded",
+            "description": "The operation partially succeeded."
           },
           {
             "name": "PartiallyConnected",
-            "value": "PartiallyConnected"
+            "value": "PartiallyConnected",
+            "description": "The extension is partially connected."
           },
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "The operation is in progress."
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "The operation has been accepted."
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "The extension is provisioning."
           }
         ]
       },
@@ -11419,11 +11534,13 @@
         "values": [
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "OEM activation is disabled."
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "OEM activation is enabled."
           }
         ]
       }
@@ -11695,20 +11812,25 @@
     },
     "PasswordCredential": {
       "type": "object",
+      "description": "The password credential associated with the arc setting.",
       "properties": {
         "secretText": {
-          "type": "string"
+          "type": "string",
+          "description": "The password secret text."
         },
         "keyId": {
-          "type": "string"
+          "type": "string",
+          "description": "The unique identifier of the password key."
         },
         "startDateTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The start date and time of the password validity."
         },
         "endDateTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The end date and time of the password validity."
         }
       }
     },
@@ -11788,6 +11910,7 @@
     },
     "PrecheckResult": {
       "type": "object",
+      "description": "Result of a precheck validation test.",
       "properties": {
         "name": {
           "type": "string",
@@ -12118,9 +12241,11 @@
     },
     "RawCertificateData": {
       "type": "object",
+      "description": "Raw certificate data.",
       "properties": {
         "certificates": {
           "type": "array",
+          "description": "List of certificates to upload.",
           "items": {
             "type": "string"
           }
@@ -12153,6 +12278,7 @@
     },
     "RebootRequirement": {
       "type": "string",
+      "description": "Whether a reboot is required after applying the update.",
       "enum": [
         "Unknown",
         "True",
@@ -12164,15 +12290,18 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "The reboot requirement is unknown."
           },
           {
             "name": "True",
-            "value": "True"
+            "value": "True",
+            "description": "A reboot is required."
           },
           {
             "name": "False",
-            "value": "False"
+            "value": "False",
+            "description": "A reboot is not required."
           }
         ]
       }
@@ -12193,6 +12322,7 @@
       "properties": {
         "clusterNodes": {
           "type": "array",
+          "description": "List of cluster node names to reconcile Arc settings for.",
           "items": {
             "type": "string"
           }
@@ -12298,6 +12428,7 @@
         },
         "remoteSupportNodeSettings": {
           "type": "array",
+          "description": "Remote support node settings for the cluster.",
           "items": {
             "$ref": "#/definitions/ClustersRemoteSupportNodeSettings"
           },
@@ -12306,6 +12437,7 @@
         },
         "remoteSupportSessionDetails": {
           "type": "array",
+          "description": "Remote support session details for the cluster.",
           "items": {
             "$ref": "#/definitions/PerNodeRemoteSupportSession"
           },
@@ -12769,7 +12901,8 @@
         "values": [
           {
             "name": "WAC",
-            "value": "WAC"
+            "value": "WAC",
+            "description": "Windows Admin Center service."
           }
         ]
       }
@@ -12799,19 +12932,23 @@
         "values": [
           {
             "name": "Critical",
-            "value": "Critical"
+            "value": "Critical",
+            "description": "Critical severity - blocks updates."
           },
           {
             "name": "Warning",
-            "value": "Warning"
+            "value": "Warning",
+            "description": "Warning severity."
           },
           {
             "name": "Informational",
-            "value": "Informational"
+            "value": "Informational",
+            "description": "Informational severity."
           },
           {
             "name": "Hidden",
-            "value": "Hidden"
+            "value": "Hidden",
+            "description": "Hidden severity."
           }
         ]
       }
@@ -12929,14 +13066,17 @@
     },
     "SoftwareAssuranceChangeRequest": {
       "type": "object",
+      "description": "Software Assurance change request.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties"
+          "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties",
+          "description": "Properties for Software Assurance change request."
         }
       }
     },
     "SoftwareAssuranceChangeRequestProperties": {
       "type": "object",
+      "description": "Properties for Software Assurance change request.",
       "properties": {
         "softwareAssuranceIntent": {
           "$ref": "#/definitions/SoftwareAssuranceIntent",
@@ -12957,11 +13097,13 @@
         "values": [
           {
             "name": "Enable",
-            "value": "Enable"
+            "value": "Enable",
+            "description": "Enable Software Assurance."
           },
           {
             "name": "Disable",
-            "value": "Disable"
+            "value": "Disable",
+            "description": "Disable Software Assurance."
           }
         ]
       }
@@ -13000,11 +13142,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Software Assurance is enabled."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Software Assurance is disabled."
           }
         ]
       }
@@ -13039,79 +13183,98 @@
         "values": [
           {
             "name": "HasPrerequisite",
-            "value": "HasPrerequisite"
+            "value": "HasPrerequisite",
+            "description": "The update has prerequisites that need to be installed first."
           },
           {
             "name": "Obsolete",
-            "value": "Obsolete"
+            "value": "Obsolete",
+            "description": "The update is obsolete."
           },
           {
             "name": "Ready",
-            "value": "Ready"
+            "value": "Ready",
+            "description": "The update is ready to be installed."
           },
           {
             "name": "NotApplicableBecauseAnotherUpdateIsInProgress",
-            "value": "NotApplicableBecauseAnotherUpdateIsInProgress"
+            "value": "NotApplicableBecauseAnotherUpdateIsInProgress",
+            "description": "The update is not applicable because another update is in progress."
           },
           {
             "name": "Preparing",
-            "value": "Preparing"
+            "value": "Preparing",
+            "description": "The update is being prepared for installation."
           },
           {
             "name": "Installing",
-            "value": "Installing"
+            "value": "Installing",
+            "description": "The update is being installed."
           },
           {
             "name": "Installed",
-            "value": "Installed"
+            "value": "Installed",
+            "description": "The update has been installed."
           },
           {
             "name": "PreparationFailed",
-            "value": "PreparationFailed"
+            "value": "PreparationFailed",
+            "description": "The update preparation failed."
           },
           {
             "name": "InstallationFailed",
-            "value": "InstallationFailed"
+            "value": "InstallationFailed",
+            "description": "The update installation failed."
           },
           {
             "name": "Invalid",
-            "value": "Invalid"
+            "value": "Invalid",
+            "description": "The update is invalid."
           },
           {
             "name": "Recalled",
-            "value": "Recalled"
+            "value": "Recalled",
+            "description": "The update has been recalled."
           },
           {
             "name": "Downloading",
-            "value": "Downloading"
+            "value": "Downloading",
+            "description": "The update is being downloaded."
           },
           {
             "name": "DownloadFailed",
-            "value": "DownloadFailed"
+            "value": "DownloadFailed",
+            "description": "The update download failed."
           },
           {
             "name": "HealthChecking",
-            "value": "HealthChecking"
+            "value": "HealthChecking",
+            "description": "The update is undergoing health checking."
           },
           {
             "name": "HealthCheckFailed",
-            "value": "HealthCheckFailed"
+            "value": "HealthCheckFailed",
+            "description": "The update health check failed."
           },
           {
             "name": "ReadyToInstall",
-            "value": "ReadyToInstall"
+            "value": "ReadyToInstall",
+            "description": "The update is ready to be installed."
           },
           {
             "name": "ScanInProgress",
-            "value": "ScanInProgress"
+            "value": "ScanInProgress",
+            "description": "The update scan is in progress."
           },
           {
             "name": "ScanFailed",
-            "value": "ScanFailed"
+            "value": "ScanFailed",
+            "description": "The update scan failed."
           },
           {
             "name": "AdditionalContentRequired",
-            "value": "AdditionalContentRequired"
+            "value": "AdditionalContentRequired",
+            "description": "The update requires additional content."
           }
         ]
       }
@@ -13142,63 +13305,78 @@
         "values": [
           {
             "name": "NotYetRegistered",
-            "value": "NotYetRegistered"
+            "value": "NotYetRegistered",
+            "description": "The cluster agent is not yet registered."
           },
           {
             "name": "ConnectedRecently",
-            "value": "ConnectedRecently"
+            "value": "ConnectedRecently",
+            "description": "The cluster agent connected recently."
           },
           {
             "name": "NotConnectedRecently",
-            "value": "NotConnectedRecently"
+            "value": "NotConnectedRecently",
+            "description": "The cluster agent has not connected recently."
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "The cluster agent is disconnected."
           },
           {
             "name": "Error",
-            "value": "Error"
+            "value": "Error",
+            "description": "An error occurred."
           },
           {
             "name": "NotSpecified",
-            "value": "NotSpecified"
+            "value": "NotSpecified",
+            "description": "The state is not specified."
           },
           {
             "name": "ValidationInProgress",
-            "value": "ValidationInProgress"
+            "value": "ValidationInProgress",
+            "description": "Validation is in progress."
           },
           {
             "name": "ValidationSuccess",
-            "value": "ValidationSuccess"
+            "value": "ValidationSuccess",
+            "description": "Validation was successful."
           },
           {
             "name": "ValidationFailed",
-            "value": "ValidationFailed"
+            "value": "ValidationFailed",
+            "description": "Validation failed."
           },
           {
             "name": "DeploymentInProgress",
-            "value": "DeploymentInProgress"
+            "value": "DeploymentInProgress",
+            "description": "Deployment is in progress."
           },
           {
             "name": "DeploymentFailed",
-            "value": "DeploymentFailed"
+            "value": "DeploymentFailed",
+            "description": "Deployment failed."
           },
           {
             "name": "DeploymentSuccess",
-            "value": "DeploymentSuccess"
+            "value": "DeploymentSuccess",
+            "description": "Deployment was successful."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The operation succeeded."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The operation failed."
           },
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "The operation is in progress."
           }
         ]
       },
@@ -13218,15 +13396,18 @@
         "values": [
           {
             "name": "Info",
-            "value": "Info"
+            "value": "Info",
+            "description": "Information level."
           },
           {
             "name": "Warning",
-            "value": "Warning"
+            "value": "Warning",
+            "description": "Warning level."
           },
           {
             "name": "Error",
-            "value": "Error"
+            "value": "Error",
+            "description": "Error level."
           }
         ]
       }
@@ -13494,6 +13675,7 @@
         },
         "rebootRequired": {
           "$ref": "#/definitions/RebootRequirement",
+          "description": "Whether a reboot is required after applying the update.",
           "x-ms-client-flatten": true
         },
         "healthState": {
@@ -13659,19 +13841,23 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "The update run state is unknown."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The update run succeeded."
           },
           {
             "name": "InProgress",
-            "value": "InProgress"
+            "value": "InProgress",
+            "description": "The update run is in progress."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The update run failed."
           }
         ]
       },
@@ -13860,35 +14046,43 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "The update state is unknown."
           },
           {
             "name": "AppliedSuccessfully",
-            "value": "AppliedSuccessfully"
+            "value": "AppliedSuccessfully",
+            "description": "Updates were applied successfully."
           },
           {
             "name": "UpdateAvailable",
-            "value": "UpdateAvailable"
+            "value": "UpdateAvailable",
+            "description": "An update is available."
           },
           {
             "name": "UpdateInProgress",
-            "value": "UpdateInProgress"
+            "value": "UpdateInProgress",
+            "description": "An update is in progress."
           },
           {
             "name": "UpdateFailed",
-            "value": "UpdateFailed"
+            "value": "UpdateFailed",
+            "description": "An update failed."
           },
           {
             "name": "NeedsAttention",
-            "value": "NeedsAttention"
+            "value": "NeedsAttention",
+            "description": "The update needs attention."
           },
           {
             "name": "PreparationInProgress",
-            "value": "PreparationInProgress"
+            "value": "PreparationInProgress",
+            "description": "Update preparation is in progress."
           },
           {
             "name": "PreparationFailed",
-            "value": "PreparationFailed"
+            "value": "PreparationFailed",
+            "description": "Update preparation failed."
           }
         ]
       }
@@ -13926,9 +14120,11 @@
     },
     "UploadCertificateRequest": {
       "type": "object",
+      "description": "Upload certificate request.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RawCertificateData"
+          "$ref": "#/definitions/RawCertificateData",
+          "description": "Raw certificate data for upload."
         }
       }
     },
@@ -14287,11 +14483,13 @@
         "values": [
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Windows Server Subscription is disabled."
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Windows Server Subscription is enabled."
           }
         ]
       }

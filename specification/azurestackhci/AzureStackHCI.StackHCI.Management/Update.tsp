@@ -146,8 +146,10 @@ model UpdateProperties {
   @Azure.ResourceManager.Private.conditionalClientFlatten
   componentVersions?: PackageVersionInfo[];
 
+  /**
+   * Whether a reboot is required after applying the update.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   rebootRequired?: RebootRequirement;
 

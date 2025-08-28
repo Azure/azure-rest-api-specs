@@ -381,7 +381,9 @@ model LogCollectionProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastLogGenerated?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Log collection session details for the cluster.
+   */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   logCollectionSessionDetails?: ClustersLogCollectionSession[];
@@ -490,12 +492,16 @@ model RemoteSupportProperties {
   @visibility(Lifecycle.Read)
   remoteSupportType?: RemoteSupportType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Remote support node settings for the cluster.
+   */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   remoteSupportNodeSettings?: ClustersRemoteSupportNodeSettings[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Remote support session details for the cluster.
+   */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
@@ -891,15 +897,23 @@ model SecretsLocationsChangeRequest {
   properties?: SecretsLocationDetails[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Upload certificate request.
+ */
 model UploadCertificateRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Raw certificate data for upload.
+   */
   properties?: RawCertificateData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Raw certificate data.
+ */
 model RawCertificateData {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * List of certificates to upload.
+   */
   certificates?: string[];
 }
 
@@ -916,25 +930,44 @@ model ClusterIdentityResponse {
   properties?: ClusterIdentityResponseProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Cluster identity response properties.
+ */
 model ClusterIdentityResponseProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * App id of cluster AAD identity.
+   */
   aadClientId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Tenant id of cluster AAD identity.
+   */
   aadTenantId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Id of cluster identity service principal.
+   */
   aadServicePrincipalObjectId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Object id of cluster AAD identity.
+   */
   aadApplicationObjectId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Software Assurance change request.
+ */
 model SoftwareAssuranceChangeRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Properties for Software Assurance change request.
+   */
   properties?: SoftwareAssuranceChangeRequestProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Properties for Software Assurance change request.
+ */
 model SoftwareAssuranceChangeRequestProperties {
   /**
    * Customer Intent for Software Assurance Benefit.
