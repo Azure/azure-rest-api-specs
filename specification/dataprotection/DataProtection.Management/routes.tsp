@@ -55,16 +55,16 @@ interface OperationResultOperationGroup {
 
     ...LocationResourceParameter,
   ): OperationJobExtendedInfo | {
-      @statusCode _: 202;
+    @statusCode _: 202;
 
-      @header("Azure-AsyncOperation")
-      azureAsyncOperation?: string;
+    @header("Azure-AsyncOperation")
+    azureAsyncOperation?: string;
 
-      @header("Location")
-      location?: string;
+    @header("Location")
+    location?: string;
 
-      @header("Retry-After")
-      retryAfter?: int32;
+    @header("Retry-After")
+    retryAfter?: int32;
   } | CloudError;
 }
 
