@@ -42,7 +42,7 @@ These settings apply only when `--tag=package-deprecated-1.0` is specified on th
 
 ``` yaml $(tag) == 'package-deprecated-1.0'
 input-file:
-  - preview/1.0/traffic.json
+  - stable/1.0/traffic.json
 ```
 
 ### Tag: package-stable-2025-01-01
