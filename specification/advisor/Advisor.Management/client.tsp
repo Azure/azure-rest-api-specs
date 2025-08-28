@@ -76,14 +76,14 @@ using Microsoft.Advisor;
   "AdvisorTriageResourceDataList",
   "csharp"
 );
-@@clientName(AssessmentResult, "AdvisorAssessmentResult", "csharp");
+@@clientName(AssessmentResult, "AdvisorAssessment", "csharp");
 @@clientName(ResiliencyReview, "AdvisorResiliencyReview", "csharp");
 @@clientName(ResiliencyReviewCollection,
   "AdvisorResiliencyReviewList",
   "csharp"
 );
 @@clientName(Control, "RecommendationControlType", "csharp");
-@@clientName(Duration, "MinimumDuration", "csharp");
+@@clientName(Duration, "AdvisorLowCpuEvaluationDuration", "csharp");
 @@clientName(OperationEntity, "AdvisorOperationEntity", "csharp");
 @@clientName(OperationDisplayInfo, "AdvisorOperationDisplayInfo", "csharp");
 @@clientName(Category, "RecommendationCategory", "csharp");
@@ -105,7 +105,13 @@ using Microsoft.Advisor;
 @@clientName(ReviewStatus, "ResiliencyReviewStatus", "csharp");
 @@clientName(ScoreEntity, "AdvisorScoreEntityContent", "csharp");
 @@clientName(State, "RecommendationState", "csharp");
-@@clientName(WorkloadResult, "AdvisorWorkloadResult", "csharp");
+@@clientName(WorkloadResult, "AdvisorWorkload", "csharp");
+@@clientName(AssessmentTypeResult, "AdvisorAssessmentType", "csharp");
+@@clientName(ConfigData, "AdvisorConfigData", "csharp");
+@@clientName(TimeSeriesEntity, "AdvisorTimeSeriesEntity", "csharp");
+@@clientName(PredictionType, "AdvisorPredictionType", "csharp");
+@@clientName(ReasonForRejectionName, "AdvisorReasonForRejectionName", "csharp");
+@@clientName(PredictionRequest, "AdvisorPredictionContent", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(ConfigurationsOperationGroup.listBySubscription,
   "GetConfigurations",
@@ -135,8 +141,15 @@ using Microsoft.Advisor;
   "GetGenerateStatusRecommendation",
   "csharp"
 );
+@@clientName(predict, "AdvisorPredict", "csharp");
+@@clientName(AssessmentTypesOperationGroup.list,
+  "GetAdvisorAssessmentTypes",
+  "csharp"
+);
+@@clientName(WorkloadsOperationGroup.list, "GetAdvisorWorkloads", "csharp");
 @@alternateType(RecommendationsOperationGroup.getGenerateStatus::parameters.operationId,
   Azure.Core.uuid,
   "csharp"
 );
 @@usage(ResourceRecommendationBase, Usage.input, "csharp");
+@@scope(Operations.list, "!csharp");
