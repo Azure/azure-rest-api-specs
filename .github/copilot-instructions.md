@@ -220,3 +220,14 @@ Do not skip the step that choose SDK generation method to ensure the user select
 
 ## Release readiness of SDK and information about the release pipeline
 Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+
+## Instructions for GitHub coding agent to generate SDKs using GitHub.com
+Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when Github copilot coding agent is used to geneate SDK and if a release plan is available in the context.
+Coding agent must wait until all SDK generation pipeline is in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running copilot from visual studio and vs code.
+  
+  steps:
+    - Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description.
+    - Keep checking the pipeline status until pipeline is in completed or failed status.
+    - Find SDK pull request links from the pipeline run.
+  constraints:
+    - Do not invoke other steps
