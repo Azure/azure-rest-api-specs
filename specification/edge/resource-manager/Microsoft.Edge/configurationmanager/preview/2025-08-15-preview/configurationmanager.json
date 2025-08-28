@@ -1035,13 +1035,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/configTemplateMetadata": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/configTemplateMetadatas": {
       "get": {
-        "operationId": "ConfigTemplateMetadatas_ListByConfigTemplateVersion",
+        "operationId": "ConfigTemplateMetadatas_ListByConfigTemplate",
         "tags": [
           "ConfigTemplateMetadatas"
         ],
-        "description": "List by ConfigTemplateVersion",
+        "description": "List by ConfigTemplate",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1051,14 +1051,6 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configTemplateName",
-            "in": "path",
-            "description": "The name of the ConfigTemplate",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -1076,8 +1068,8 @@
           }
         },
         "x-ms-examples": {
-          "ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet": {
-            "$ref": "./examples/ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet_Gen.json"
+          "ConfigTemplateMetadatas_ListByConfigTemplate_MaximumSet": {
+            "$ref": "./examples/ConfigTemplateMetadatas_ListByConfigTemplate_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
