@@ -49,24 +49,6 @@ union StatusCategory {
 }
 
 /**
- * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
- */
-union Origin {
-  string,
-  user: "user",
-  system: "system",
-  `user,system`: "user,system",
-}
-
-/**
- * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
- */
-union ActionType {
-  string,
-  Internal: "Internal",
-}
-
-/**
  * Query Generation Request
  */
 model QueryGenerationRequest {
