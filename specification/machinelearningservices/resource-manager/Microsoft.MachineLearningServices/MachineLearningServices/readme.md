@@ -36,11 +36,11 @@ These settings apply only when `--tag=package-preview-2025-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-07'
 input-file:
-  - ./preview/2025-07-01-preview/machineLearningServices.json
-  - ./preview/2025-07-01-preview/mfe.json
-  - ./preview/2025-07-01-preview/registries.json
-  - ./preview/2025-07-01-preview/workspaceFeatures.json
-  - ./preview/2025-07-01-preview/workspaceRP.json
+  - preview/2025-07-01-preview/machineLearningServices.json
+  - preview/2025-07-01-preview/mfe.json
+  - preview/2025-07-01-preview/registries.json
+  - preview/2025-07-01-preview/workspaceFeatures.json
+  - preview/2025-07-01-preview/workspaceRP.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: This is necessary to allow users to specify custom inference parameters and 
@@ -165,11 +165,11 @@ These settings apply only when `--tag=package-2025-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-06-01'
 input-file:
-  - ./stable/2025-06-01/machineLearningServices.json
-  - ./stable/2025-06-01/mfe.json
-  - ./stable/2025-06-01/registries.json
-  - ./stable/2025-06-01/workspaceFeatures.json
-  - ./stable/2025-06-01/workspaceRP.json
+  - stable/2025-06-01/machineLearningServices.json
+  - stable/2025-06-01/mfe.json
+  - stable/2025-06-01/registries.json
+  - stable/2025-06-01/workspaceFeatures.json
+  - stable/2025-06-01/workspaceRP.json
 suppressions:
   - code: PatchBodyParametersSchema
     reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
@@ -225,11 +225,11 @@ These settings apply only when `--tag=package-2025-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-04-01'
 input-file:
-  - ./stable/2025-04-01/machineLearningServices.json
-  - ./stable/2025-04-01/mfe.json
-  - ./stable/2025-04-01/registries.json
-  - ./stable/2025-04-01/workspaceFeatures.json
-  - ./stable/2025-04-01/workspaceRP.json
+  - stable/2025-04-01/machineLearningServices.json
+  - stable/2025-04-01/mfe.json
+  - stable/2025-04-01/registries.json
+  - stable/2025-04-01/workspaceFeatures.json
+  - stable/2025-04-01/workspaceRP.json
 suppressions:
   - code: PatchBodyParametersSchema
     reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
@@ -275,11 +275,11 @@ These settings apply only when `--tag=package-preview-2025-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-04'
 input-file:
-  - ./preview/2025-04-01-preview/machineLearningServices.json
-  - ./preview/2025-04-01-preview/mfe.json
-  - ./preview/2025-04-01-preview/registries.json
-  - ./preview/2025-04-01-preview/workspaceFeatures.json
-  - ./preview/2025-04-01-preview/workspaceRP.json
+  - preview/2025-04-01-preview/machineLearningServices.json
+  - preview/2025-04-01-preview/mfe.json
+  - preview/2025-04-01-preview/registries.json
+  - preview/2025-04-01-preview/workspaceFeatures.json
+  - preview/2025-04-01-preview/workspaceRP.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: This is necessary to allow users to specify custom inference parameters and 
@@ -404,11 +404,11 @@ These settings apply only when `--tag=package-preview-2025-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-01'
 input-file:
-  - ./preview/2025-01-01-preview/machineLearningServices.json
-  - ./preview/2025-01-01-preview/mfe.json
-  - ./preview/2025-01-01-preview/registries.json
-  - ./preview/2025-01-01-preview/workspaceFeatures.json
-  - ./preview/2025-01-01-preview/workspaceRP.json
+  - preview/2025-01-01-preview/machineLearningServices.json
+  - preview/2025-01-01-preview/mfe.json
+  - preview/2025-01-01-preview/registries.json
+  - preview/2025-01-01-preview/workspaceFeatures.json
+  - preview/2025-01-01-preview/workspaceRP.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: This is necessary to allow users to specify custom inference parameters and 
@@ -530,11 +530,11 @@ These settings apply only when `--tag=package-2024-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-10'
 input-file:
-  - ./stable/2024-10-01/machineLearningServices.json
-  - ./stable/2024-10-01/mfe.json
-  - ./stable/2024-10-01/registries.json
-  - ./stable/2024-10-01/workspaceFeatures.json
-  - ./stable/2024-10-01/workspaceRP.json
+  - stable/2024-10-01/machineLearningServices.json
+  - stable/2024-10-01/mfe.json
+  - stable/2024-10-01/registries.json
+  - stable/2024-10-01/workspaceFeatures.json
+  - stable/2024-10-01/workspaceRP.json
 suppressions:
   - code: PatchBodyParametersSchema
     reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
@@ -580,11 +580,11 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
-  - ./preview/2024-10-01-preview/machineLearningServices.json
-  - ./preview/2024-10-01-preview/mfe.json
-  - ./preview/2024-10-01-preview/registries.json
-  - ./preview/2024-10-01-preview/workspaceFeatures.json
-  - ./preview/2024-10-01-preview/workspaceRP.json
+  - preview/2024-10-01-preview/machineLearningServices.json
+  - preview/2024-10-01-preview/mfe.json
+  - preview/2024-10-01-preview/registries.json
+  - preview/2024-10-01-preview/workspaceFeatures.json
+  - preview/2024-10-01-preview/workspaceRP.json
 suppressions:
   - code: NestedResourcesMustHaveListOperation
     reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
@@ -660,11 +660,11 @@ These settings apply only when `--tag=package-preview-2024-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-07'
 input-file:
-  - ./preview/2024-07-01-preview/machineLearningServices.json
-  - ./preview/2024-07-01-preview/mfe.json
-  - ./preview/2024-07-01-preview/registries.json
-  - ./preview/2024-07-01-preview/workspaceFeatures.json
-  - ./preview/2024-07-01-preview/workspaceRP.json
+  - preview/2024-07-01-preview/machineLearningServices.json
+  - preview/2024-07-01-preview/mfe.json
+  - preview/2024-07-01-preview/registries.json
+  - preview/2024-07-01-preview/workspaceFeatures.json
+  - preview/2024-07-01-preview/workspaceRP.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: As discussed In office hour this conf property is string dictionary 
@@ -755,11 +755,11 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-04'
 input-file:
-  - ./stable/2024-04-01/machineLearningServices.json
-  - ./stable/2024-04-01/mfe.json
-  - ./stable/2024-04-01/registries.json
-  - ./stable/2024-04-01/workspaceFeatures.json
-  - ./stable/2024-04-01/workspaceRP.json
+  - stable/2024-04-01/machineLearningServices.json
+  - stable/2024-04-01/mfe.json
+  - stable/2024-04-01/registries.json
+  - stable/2024-04-01/workspaceFeatures.json
+  - stable/2024-04-01/workspaceRP.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     reason: This provisioningState property is marked as readOnly. 
@@ -896,11 +896,11 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
-  - ./preview/2024-04-01-preview/machineLearningServices.json
-  - ./preview/2024-04-01-preview/mfe.json
-  - ./preview/2024-04-01-preview/registries.json
-  - ./preview/2024-04-01-preview/workspaceFeatures.json
-  - ./preview/2024-04-01-preview/workspaceRP.json
+  - preview/2024-04-01-preview/machineLearningServices.json
+  - preview/2024-04-01-preview/mfe.json
+  - preview/2024-04-01-preview/registries.json
+  - preview/2024-04-01-preview/workspaceFeatures.json
+  - preview/2024-04-01-preview/workspaceRP.json
 suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, 
@@ -919,11 +919,11 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - ./preview/2024-01-01-preview/machineLearningServices.json
-  - ./preview/2024-01-01-preview/mfe.json
-  - ./preview/2024-01-01-preview/registries.json
-  - ./preview/2024-01-01-preview/workspaceFeatures.json
-  - ./preview/2024-01-01-preview/workspaceRP.json
+  - preview/2024-01-01-preview/machineLearningServices.json
+  - preview/2024-01-01-preview/mfe.json
+  - preview/2024-01-01-preview/registries.json
+  - preview/2024-01-01-preview/workspaceFeatures.json
+  - preview/2024-01-01-preview/workspaceRP.json
 suppressions:
   - code: PathForResourceAction
     reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
@@ -979,11 +979,11 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - ./preview/2023-08-01-preview/machineLearningServices.json
-  - ./preview/2023-08-01-preview/mfe.json
-  - ./preview/2023-08-01-preview/registries.json
-  - ./preview/2023-08-01-preview/workspaceFeatures.json
-  - ./preview/2023-08-01-preview/workspaceRP.json
+  - preview/2023-08-01-preview/machineLearningServices.json
+  - preview/2023-08-01-preview/mfe.json
+  - preview/2023-08-01-preview/registries.json
+  - preview/2023-08-01-preview/workspaceFeatures.json
+  - preview/2023-08-01-preview/workspaceRP.json
 suppressions:
   - code: LroPostReturn
     reason: LRO does not return 200 by design.
@@ -1001,10 +1001,10 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-10'
 input-file:
-  - ./stable/2023-10-01/machineLearningServices.json
-  - ./stable/2023-10-01/mfe.json
-  - ./stable/2023-10-01/registries.json
-  - ./stable/2023-10-01/workspaceFeatures.json
+  - stable/2023-10-01/machineLearningServices.json
+  - stable/2023-10-01/mfe.json
+  - stable/2023-10-01/registries.json
+  - stable/2023-10-01/workspaceFeatures.json
 ```
 
 ### Tag: package-preview-2023-06
@@ -1013,11 +1013,11 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-06'
 input-file:
-  - ./preview/2023-06-01-preview/machineLearningServices.json
-  - ./preview/2023-06-01-preview/mfe.json
-  - ./preview/2023-06-01-preview/registries.json
-  - ./preview/2023-06-01-preview/workspaceFeatures.json
-  - ./preview/2023-06-01-preview/workspaceRP.json
+  - preview/2023-06-01-preview/machineLearningServices.json
+  - preview/2023-06-01-preview/mfe.json
+  - preview/2023-06-01-preview/registries.json
+  - preview/2023-06-01-preview/workspaceFeatures.json
+  - preview/2023-06-01-preview/workspaceRP.json
 ```
 
 ### Tag: package-2023-04
@@ -1026,10 +1026,10 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-04'
 input-file:
-  - ./stable/2023-04-01/machineLearningServices.json
-  - ./stable/2023-04-01/mfe.json
-  - ./stable/2023-04-01/registries.json
-  - ./stable/2023-04-01/workspaceFeatures.json
+  - stable/2023-04-01/machineLearningServices.json
+  - stable/2023-04-01/mfe.json
+  - stable/2023-04-01/registries.json
+  - stable/2023-04-01/workspaceFeatures.json
 ```
 
 ### Tag: package-preview-2023-04
@@ -1038,10 +1038,10 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - ./preview/2023-04-01-preview/machineLearningServices.json
-  - ./preview/2023-04-01-preview/mfe.json
-  - ./preview/2023-04-01-preview/registries.json
-  - ./preview/2023-04-01-preview/workspaceFeatures.json
+  - preview/2023-04-01-preview/machineLearningServices.json
+  - preview/2023-04-01-preview/mfe.json
+  - preview/2023-04-01-preview/registries.json
+  - preview/2023-04-01-preview/workspaceFeatures.json
 ```
 
 ### Tag: package-preview-2023-02
@@ -1050,10 +1050,10 @@ These settings apply only when `--tag=package-preview-2023-02` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
-  - ./preview/2023-02-01-preview/machineLearningServices.json
-  - ./preview/2023-02-01-preview/mfe.json
-  - ./preview/2023-02-01-preview/registries.json
-  - ./preview/2023-02-01-preview/workspaceFeatures.json
+  - preview/2023-02-01-preview/machineLearningServices.json
+  - preview/2023-02-01-preview/mfe.json
+  - preview/2023-02-01-preview/registries.json
+  - preview/2023-02-01-preview/workspaceFeatures.json
 ```
 
 ### Tag: package-preview-2022-12
@@ -1062,10 +1062,10 @@ These settings apply only when `--tag=package-preview-2022-12` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-12'
 input-file:
-  - ./preview/2022-12-01-preview/machineLearningServices.json
-  - ./preview/2022-12-01-preview/mfe.json
-  - ./preview/2022-12-01-preview/registries.json
-  - ./preview/2022-12-01-preview/workspaceFeatures.json
+  - preview/2022-12-01-preview/machineLearningServices.json
+  - preview/2022-12-01-preview/mfe.json
+  - preview/2022-12-01-preview/registries.json
+  - preview/2022-12-01-preview/workspaceFeatures.json
 ```
 
 ### Tag: package-preview-2022-10
@@ -1074,10 +1074,10 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - ./preview/2022-10-01-preview/machineLearningServices.json
-  - ./preview/2022-10-01-preview/mfe.json
-  - ./preview/2022-10-01-preview/workspaceFeatures.json
-  - ./preview/2022-10-01-preview/registries.json
+  - preview/2022-10-01-preview/machineLearningServices.json
+  - preview/2022-10-01-preview/mfe.json
+  - preview/2022-10-01-preview/workspaceFeatures.json
+  - preview/2022-10-01-preview/registries.json
 ```
 
 ### Tag: package-2022-10
@@ -1086,9 +1086,9 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-  - ./stable/2022-10-01/machineLearningServices.json
-  - ./stable/2022-10-01/mfe.json
-  - ./stable/2022-10-01/workspaceFeatures.json
+  - stable/2022-10-01/machineLearningServices.json
+  - stable/2022-10-01/mfe.json
+  - stable/2022-10-01/workspaceFeatures.json
 ```
 
 ### Tag: package-preview-2022-06
@@ -1097,9 +1097,9 @@ These settings apply only when `--tag=package-preview-2022-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
-  - ./preview/2022-06-01-preview/machineLearningServices.json
-  - ./preview/2022-06-01-preview/mfe.json
-  - ./preview/2022-06-01-preview/workspaceFeatures.json
+  - preview/2022-06-01-preview/machineLearningServices.json
+  - preview/2022-06-01-preview/mfe.json
+  - preview/2022-06-01-preview/workspaceFeatures.json
 ```
 
 ### Tag: package-2022-05-01
@@ -1108,9 +1108,9 @@ These settings apply only when `--tag=package-2022-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-05-01'
 input-file:
-  - ./stable/2022-05-01/machineLearningServices.json
-  - ./stable/2022-05-01/mfe.json
-  - ./stable/2022-05-01/workspaceFeatures.json
+  - stable/2022-05-01/machineLearningServices.json
+  - stable/2022-05-01/mfe.json
+  - stable/2022-05-01/workspaceFeatures.json
 ```
 
 ### Tag: package-2022-02-01-preview
@@ -1119,9 +1119,9 @@ These settings apply only when `--tag=package-2022-02-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-02-01-preview'
 input-file:
-  - ./preview/2022-02-01-preview/machineLearningServices.json
-  - ./preview/2022-02-01-preview/mfe.json
-  - ./preview/2022-02-01-preview/workspaceFeatures.json
+  - preview/2022-02-01-preview/machineLearningServices.json
+  - preview/2022-02-01-preview/mfe.json
+  - preview/2022-02-01-preview/workspaceFeatures.json
 ```
 
 ### Tag: package-2022-01-01-preview
@@ -1130,9 +1130,9 @@ These settings apply only when `--tag=package-2022-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
-  - ./preview/2022-01-01-preview/machineLearningServices.json
-  - ./preview/2022-01-01-preview/workspaceFeatures.json
-  - ./preview/2022-01-01-preview/workspaceSkus.json
+  - preview/2022-01-01-preview/machineLearningServices.json
+  - preview/2022-01-01-preview/workspaceFeatures.json
+  - preview/2022-01-01-preview/workspaceSkus.json
 ```
 
 ### Tag: package-2021-07-01
@@ -1141,9 +1141,9 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-07-01'
 input-file:
-  - ./stable/2021-07-01/machineLearningServices.json
-  - ./stable/2021-07-01/workspaceFeatures.json
-  - ./stable/2021-07-01/workspaceSkus.json
+  - stable/2021-07-01/machineLearningServices.json
+  - stable/2021-07-01/workspaceFeatures.json
+  - stable/2021-07-01/workspaceSkus.json
 ```
 
 ### Tag: package-2021-04-01
@@ -1152,7 +1152,7 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-04-01'
 input-file:
-  - ./stable/2021-04-01/machineLearningServices.json
+  - stable/2021-04-01/machineLearningServices.json
 ```
 
 ### Tag: package-2021-01-01
@@ -1161,7 +1161,7 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-01-01'
 input-file:
-  - ./stable/2021-01-01/machineLearningServices.json
+  - stable/2021-01-01/machineLearningServices.json
 ```
 
 ### Tag: package-2021-03-01-preview
@@ -1170,10 +1170,10 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
-  - ./preview/2021-03-01-preview/machineLearningServices.json
-  - ./preview/2021-03-01-preview/mfe.json
-  - ./preview/2021-03-01-preview/workspaceFeatures.json
-  - ./preview/2021-03-01-preview/workspaceSkus.json
+  - preview/2021-03-01-preview/machineLearningServices.json
+  - preview/2021-03-01-preview/mfe.json
+  - preview/2021-03-01-preview/workspaceFeatures.json
+  - preview/2021-03-01-preview/workspaceSkus.json
 ```
 
 ### Tag: package-2020-08-01
@@ -1182,7 +1182,7 @@ These settings apply only when `--tag=package-2020-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-08-01'
 input-file:
-  - ./stable/2020-08-01/machineLearningServices.json
+  - stable/2020-08-01/machineLearningServices.json
 ```
 
 ### Tag: package-2020-06-01
@@ -1191,7 +1191,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06-01'
 input-file:
-  - ./stable/2020-06-01/machineLearningServices.json
+  - stable/2020-06-01/machineLearningServices.json
 ```
 
 ### Tag: package-preview-2020-05
@@ -1200,7 +1200,7 @@ These settings apply only when `--tag=package-preview-2020-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-05'
 input-file:
-  - ./preview/2020-05-15-preview/machineLearningServices.json
+  - preview/2020-05-15-preview/machineLearningServices.json
 ```
 
 ### Tag: package-2020-04-01
@@ -1209,7 +1209,7 @@ These settings apply only when `--tag=package-2020-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-04-01'
 input-file:
-  - ./stable/2020-04-01/machineLearningServices.json
+  - stable/2020-04-01/machineLearningServices.json
 ```
 
 ### Tag: package-2020-03-01
@@ -1218,7 +1218,7 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-03-01'
 input-file:
-  - ./stable/2020-03-01/machineLearningServices.json
+  - stable/2020-03-01/machineLearningServices.json
 ```
 
 ### Tag: package-2020-01-01
@@ -1227,7 +1227,7 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
-  - ./stable/2020-01-01/machineLearningServices.json
+  - stable/2020-01-01/machineLearningServices.json
 ```
 
 ### Tag: package-2019-11-01
@@ -1236,7 +1236,7 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-11-01'
 input-file:
-  - ./stable/2019-11-01/machineLearningServices.json
+  - stable/2019-11-01/machineLearningServices.json
 ```
 
 ### Tag: package-2019-06-01
@@ -1245,7 +1245,7 @@ These settings apply only when `--tag=package-2019-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-06-01'
 input-file:
-- ./stable/2019-06-01/machineLearningServices.json
+- stable/2019-06-01/machineLearningServices.json
 ```
 
 ### Tag: package-2019-05-01
@@ -1254,7 +1254,7 @@ These settings apply only when `--tag=package-2019-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-05-01'
 input-file:
-- ./stable/2019-05-01/machineLearningServices.json
+- stable/2019-05-01/machineLearningServices.json
 ```
 
 ### Tag: package-2018-11-19
@@ -1263,7 +1263,7 @@ These settings apply only when `--tag=package-2018-11-19` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-11-19'
 input-file:
-- ./stable/2018-11-19/machineLearningServices.json
+- stable/2018-11-19/machineLearningServices.json
 ```
 
 ### Tag: package-2020-09-01-preview
@@ -1272,8 +1272,8 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
-- ./preview/2020-09-01-preview/jobs.json
-- ./preview/2020-09-01-preview/machineLearningServices.json
+- preview/2020-09-01-preview/jobs.json
+- preview/2020-09-01-preview/machineLearningServices.json
 ```
 
 ### Tag: package-2020-05-01-preview
@@ -1282,7 +1282,7 @@ These settings apply only when `--tag=package-2020-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-05-01-preview'
 input-file:
-- ./preview/2020-05-01-preview/machineLearningServices.json
+- preview/2020-05-01-preview/machineLearningServices.json
 ```
 
 ### Tag: package-2020-04-01-preview
@@ -1291,7 +1291,7 @@ These settings apply only when `--tag=package-2020-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
-- ./preview/2020-04-01-preview/machineLearningServices.json
+- preview/2020-04-01-preview/machineLearningServices.json
 ```
 
 ### Tag: package-2020-02-18-preview
@@ -1300,7 +1300,7 @@ These settings apply only when `--tag=package-2020-02-18-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-02-18-preview'
 input-file:
-- ./preview/2020-02-18-preview/machineLearningServices.json
+- preview/2020-02-18-preview/machineLearningServices.json
 ```
 
 ### Tag: package-2018-03-preview
@@ -1309,7 +1309,7 @@ These settings apply only when `--tag=package-2018-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-03-preview'
 input-file:
-- ./preview/2018-03-01-preview/machineLearningServices.json
+- preview/2018-03-01-preview/machineLearningServices.json
 ```
 
 ---
