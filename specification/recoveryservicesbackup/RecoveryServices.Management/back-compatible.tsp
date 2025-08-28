@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
@@ -342,3 +343,5 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(ValidateIaasVMRestoreOperationRequest,
   ValidateRestoreOperationRequest
 );
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail, "ArmErrorDetail", "python");
