@@ -491,27 +491,6 @@
         "modelAsString": true
       }
     },
-    "WorkflowArtifacts": {
-      "type": "object",
-      "properties": {
-        "appSettings": {
-          "$ref": "#/definitions/Object",
-          "description": "Application settings of the workflow in the form of { \"<settingName>\" : \"<settingValue>\"}."
-        },
-        "files": {
-          "$ref": "#/definitions/WorkflowFiles",
-          "description": "Files to upload in the SMB (workflows, artifacts, maps, schemas etc) in the form of { \"<filename>\" : \"<filecontent>\"}."
-        },
-        "filesToDelete": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Array of strings representing the file names to delete from the smb."
-        }
-      },
-      "description": "The workflow filter."
-    },
     "Object": {
       "type": "object",
       "description": "JSON object.",
