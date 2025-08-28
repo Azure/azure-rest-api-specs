@@ -20,12 +20,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.Security.CodeTransparency"
-    namespace: "{package-dir}"
+    namespace: "Azure.Security.CodeTransparency"
     clear-output-folder: true
     model-namespace: false
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Security.CodeTransparency
     model-namespace: false
   "@azure-tools/typespec-ts":
