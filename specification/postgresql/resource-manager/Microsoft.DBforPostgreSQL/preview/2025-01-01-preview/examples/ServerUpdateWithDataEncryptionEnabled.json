@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc4",
-    "resourceGroupName": "TestGroup",
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
     "parameters": {
       "sku": {
         "tier": "GeneralPurpose",
@@ -11,20 +11,20 @@
       },
       "identity": {
         "userAssignedIdentities": {
-          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {},
-          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {}
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {},
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplegeoredundantidentity": {}
         },
         "type": "UserAssigned"
       },
       "properties": {
-        "administratorLoginPassword": "newpassword",
+        "administratorLoginPassword": "examplenewpassword",
         "createMode": "Update",
         "dataEncryption": {
           "type": "AzureKeyVault",
-          "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
-          "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
-          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity"
+          "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
+          "geoBackupKeyURI": "https://examplegeoredundantkeyvault.vault.azure.net/keys/examplekey/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplegeoredundantidentity"
         },
         "backup": {
           "backupRetentionDays": 20
@@ -41,15 +41,15 @@
         },
         "identity": {
           "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {
               "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
               "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             },
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity-1": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity-1": {
               "principalId": "90008082-e024-4cc3-8fcf-63bcdb9cf6b6",
               "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             },
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplegeoredundantidentity": {
               "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
               "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             }
@@ -58,10 +58,10 @@
           "tenantId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
         },
         "properties": {
-          "fullyQualifiedDomainName": "pgtestsvc4.test-private-dns-zone.postgres.database.azure.com",
+          "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
           "version": "16",
-          "minorVersion": "6",
-          "administratorLogin": "login",
+          "minorVersion": "8",
+          "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
           "authConfig": {
@@ -70,10 +70,10 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
-            "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
-            "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity",
+            "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
+            "geoBackupKeyURI": "https://examplegeoredundantkeyvault.vault.azure.net/keys/examplekey/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+            "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplegeoredundantidentity",
             "primaryEncryptionKeyStatus": "Valid",
             "geoBackupEncryptionKeyStatus": "Valid"
           },
@@ -86,12 +86,12 @@
           "backup": {
             "backupRetentionDays": 20,
             "geoRedundantBackup": "Enabled",
-            "earliestRestoreDate": "2025-02-26T01:16:58.3723361+00:00"
+            "earliestRestoreDate": "2025-01-01T18:35:22.123456Z"
           },
           "network": {
             "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -106,11 +106,8 @@
           }
         },
         "location": "westus",
-        "tags": {
-          "ElasticServer": "1"
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-        "name": "pgtestsvc4",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     },

@@ -20,22 +20,23 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     "basic-setup-py": true
-    "package-version": "4.10.0b1"
+    "package-name": "azure-keyvault-keys"
+    "package-pprint-name": "Key Vault Keys"
+    "package-version": "4.10.0"
+    "namespace": "azure.keyvault.keys._generated"
     "package-dir": "azure-keyvault-keys"
-    "namespace": "azure.keyvault.keys"
-    "output-path": "./azure/keyvault/keys/_generated"
   "@azure-tools/typespec-java":
     flavor: azure
-    "package-dir": "azure-security-keyvault-keys"
-    "namespace": "com.azure.security.keyvault.keys"
-    "models-subpackage": "implementation.models"
-    "custom-types": "KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult"
-    "custom-types-subpackage": "models"
-    "customization-class": "swagger/src/main/java/KeysCustomizations.java"
-    "partial-update": true
-    "generate-tests": false
-    "generate-samples": false
-    "include-api-view-properties": false
+    package-dir: "azure-security-keyvault-keys"
+    namespace: "com.azure.security.keyvault.keys"
+    models-subpackage: "implementation.models"
+    custom-types: "KeyAttestation,KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult"
+    custom-types-subpackage: "models"
+    customization-class: "customizations/src/main/java/KeysCustomizations.java"
+    use-eclipse-language-server: false
+    generate-tests: false
+    generate-samples: false
+    include-api-view-properties: false
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
@@ -57,6 +58,7 @@ options:
     override-client-name: "Client"
     single-client: true
     inject-spans: true
+    generate-fakes: true
   "@azure-tools/typespec-rust":
     crate-name: "azure_security_keyvault_keys"
     crate-version: "0.0.1"

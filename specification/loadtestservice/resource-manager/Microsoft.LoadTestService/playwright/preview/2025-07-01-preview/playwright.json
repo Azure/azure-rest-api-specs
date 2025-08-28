@@ -1,0 +1,1088 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Playwright Service Management API",
+    "version": "2025-07-01-preview",
+    "description": "Playwright service provides access to Playwright workspace resource and it's operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PlaywrightWorkspaces"
+    },
+    {
+      "name": "PlaywrightQuotas"
+    },
+    {
+      "name": "PlaywrightWorkspaceQuotas"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.LoadTestService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/checkNameAvailability": {
+      "post": {
+        "operationId": "PlaywrightWorkspaces_CheckNameAvailability",
+        "tags": [
+          "PlaywrightWorkspaces"
+        ],
+        "description": "Implements global CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaces_CheckNameAvailability": {
+            "$ref": "./examples/PlaywrightWorkspaces_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/playwrightQuotas": {
+      "get": {
+        "operationId": "PlaywrightQuotas_ListBySubscription",
+        "tags": [
+          "PlaywrightQuotas"
+        ],
+        "description": "List Playwright quota resources for a given subscription Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightQuotaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightQuotas_ListBySubscription": {
+            "$ref": "./examples/PlaywrightQuotas_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/playwrightQuotas/{playwrightQuotaName}": {
+      "get": {
+        "operationId": "PlaywrightQuotas_Get",
+        "tags": [
+          "PlaywrightQuotas"
+        ],
+        "description": "Get subscription-level location-based Playwright quota resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "playwrightQuotaName",
+            "in": "path",
+            "description": "The name of the PlaywrightQuota",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ExecutionMinutes"
+            ],
+            "x-ms-enum": {
+              "name": "QuotaName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ExecutionMinutes",
+                  "value": "ExecutionMinutes",
+                  "description": "Quota for execution duration in minutes."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightQuota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightQuotas_Get": {
+            "$ref": "./examples/PlaywrightQuotas_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/playwrightWorkspaces": {
+      "get": {
+        "operationId": "PlaywrightWorkspaces_ListBySubscription",
+        "tags": [
+          "PlaywrightWorkspaces"
+        ],
+        "description": "List PlaywrightWorkspace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaces_ListBySubscription": {
+            "$ref": "./examples/PlaywrightWorkspaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces": {
+      "get": {
+        "operationId": "PlaywrightWorkspaces_ListByResourceGroup",
+        "tags": [
+          "PlaywrightWorkspaces"
+        ],
+        "description": "List PlaywrightWorkspace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaces_ListByResourceGroup": {
+            "$ref": "./examples/PlaywrightWorkspaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}": {
+      "get": {
+        "operationId": "PlaywrightWorkspaces_Get",
+        "tags": [
+          "PlaywrightWorkspaces"
+        ],
+        "description": "Get a PlaywrightWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "playwrightWorkspaceName",
+            "in": "path",
+            "description": "The name of the PlaywrightWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaces_Get": {
+            "$ref": "./examples/PlaywrightWorkspaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PlaywrightWorkspaces_CreateOrUpdate",
+        "tags": [
+          "PlaywrightWorkspaces"
+        ],
+        "description": "Create a PlaywrightWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "playwrightWorkspaceName",
+            "in": "path",
+            "description": "The name of the PlaywrightWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PlaywrightWorkspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'PlaywrightWorkspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaces_CreateOrUpdate": {
+            "$ref": "./examples/PlaywrightWorkspaces_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PlaywrightWorkspaces_Update",
+        "tags": [
+          "PlaywrightWorkspaces"
+        ],
+        "description": "Update a PlaywrightWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "playwrightWorkspaceName",
+            "in": "path",
+            "description": "The name of the PlaywrightWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaces_Update": {
+            "$ref": "./examples/PlaywrightWorkspaces_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PlaywrightWorkspaces_Delete",
+        "tags": [
+          "PlaywrightWorkspaces"
+        ],
+        "description": "Delete a PlaywrightWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "playwrightWorkspaceName",
+            "in": "path",
+            "description": "The name of the PlaywrightWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaces_Delete": {
+            "$ref": "./examples/PlaywrightWorkspaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}/quotas": {
+      "get": {
+        "operationId": "PlaywrightWorkspaceQuotas_ListByPlaywrightWorkspace",
+        "tags": [
+          "PlaywrightWorkspaceQuotas"
+        ],
+        "description": "List quota resources for a given Playwright workspace resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "playwrightWorkspaceName",
+            "in": "path",
+            "description": "The name of the PlaywrightWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspaceQuotaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaceQuotas_ListByPlaywrightWorkspace": {
+            "$ref": "./examples/PlaywrightWorkspaceQuotas_ListByPlaywrightWorkspace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}/quotas/{quotaName}": {
+      "get": {
+        "operationId": "PlaywrightWorkspaceQuotas_Get",
+        "tags": [
+          "PlaywrightWorkspaceQuotas"
+        ],
+        "description": "Get Playwright workspace quota resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "playwrightWorkspaceName",
+            "in": "path",
+            "description": "The name of the PlaywrightWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "quotaName",
+            "in": "path",
+            "description": "The name of the PlaywrightWorkspaceQuota",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ExecutionMinutes"
+            ],
+            "x-ms-enum": {
+              "name": "QuotaName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ExecutionMinutes",
+                  "value": "ExecutionMinutes",
+                  "description": "Quota for execution duration in minutes."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightWorkspaceQuota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightWorkspaceQuotas_Get": {
+            "$ref": "./examples/PlaywrightWorkspaceQuotas_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EnablementStatus": {
+      "type": "string",
+      "description": "The enablement status of a feature.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnablementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The feature is Enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The feature is Disabled."
+          }
+        ]
+      }
+    },
+    "FreeTrialProperties": {
+      "type": "object",
+      "description": "Subscription-level location-based Playwright quota resource free-trial properties.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "Playwright workspace-id that has free-trial in the subscription.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/FreeTrialState",
+          "description": "The free-trial state.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "workspaceId",
+        "state"
+      ]
+    },
+    "FreeTrialState": {
+      "type": "string",
+      "description": "The free-trial state.",
+      "enum": [
+        "Active",
+        "Expired",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "FreeTrialState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The free-trial is Active."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The free-trial is Expired."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The free-trial is Not Applicable."
+          }
+        ]
+      }
+    },
+    "PlaywrightQuota": {
+      "type": "object",
+      "description": "Subscription-level location-based Playwright quota resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlaywrightQuotaProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlaywrightQuotaListResult": {
+      "type": "object",
+      "description": "The response of a PlaywrightQuota list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlaywrightQuota items on this page",
+          "items": {
+            "$ref": "#/definitions/PlaywrightQuota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlaywrightQuotaProperties": {
+      "type": "object",
+      "description": "Subscription-level location-based Playwright quota resource properties.",
+      "properties": {
+        "freeTrial": {
+          "$ref": "#/definitions/FreeTrialProperties",
+          "description": "The subscription-level location-based Playwright quota resource free-trial properties.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last resource operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "PlaywrightWorkspace": {
+      "type": "object",
+      "description": "Playwright workspace resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlaywrightWorkspaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PlaywrightWorkspaceFreeTrialProperties": {
+      "type": "object",
+      "description": "Playwright workspace quota resource resource free-trial properties.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The free-trial createdAt utcDateTime.",
+          "readOnly": true
+        },
+        "expiryAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The free-trial expiryAt utcDateTime.",
+          "readOnly": true
+        },
+        "allocatedValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The free-trial allocated limit value eg. allocated free execution minutes.",
+          "readOnly": true
+        },
+        "usedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "The free-trial used value eg. used free execution minutes.",
+          "readOnly": true
+        },
+        "percentageUsed": {
+          "type": "number",
+          "format": "float",
+          "description": "The free-trial percentage used.",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "createdAt",
+        "expiryAt",
+        "allocatedValue",
+        "usedValue",
+        "percentageUsed"
+      ]
+    },
+    "PlaywrightWorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a PlaywrightWorkspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlaywrightWorkspace items on this page",
+          "items": {
+            "$ref": "#/definitions/PlaywrightWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlaywrightWorkspaceProperties": {
+      "type": "object",
+      "description": "Playwright workspace resource properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last resource operation.",
+          "readOnly": true
+        },
+        "dataplaneUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The workspace data plane URI.",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "type": "string",
+          "description": "This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "PlaywrightWorkspaceQuota": {
+      "type": "object",
+      "description": "Playwright workspace quota resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlaywrightWorkspaceQuotaProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlaywrightWorkspaceQuotaListResult": {
+      "type": "object",
+      "description": "The response of a PlaywrightWorkspaceQuota list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlaywrightWorkspaceQuota items on this page",
+          "items": {
+            "$ref": "#/definitions/PlaywrightWorkspaceQuota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlaywrightWorkspaceQuotaProperties": {
+      "type": "object",
+      "description": "Playwright workspace quota resource properties.",
+      "properties": {
+        "freeTrial": {
+          "$ref": "#/definitions/PlaywrightWorkspaceFreeTrialProperties",
+          "description": "The Playwright workspace quota resource free-trial properties.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last resource operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "PlaywrightWorkspaceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the PlaywrightWorkspace.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PlaywrightWorkspaceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PlaywrightWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the PlaywrightWorkspace.",
+      "properties": {
+        "regionalAffinity": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created."
+        },
+        "localAuth": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the last resource operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creation in progress.."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress.."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Request accepted for processing.."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

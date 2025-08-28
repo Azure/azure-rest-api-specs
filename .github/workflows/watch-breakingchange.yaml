@@ -1,0 +1,27 @@
+# Use ~ to sort the workflow to the bottom of the list
+name: "~Watch - BreakingChange"
+
+on:
+  # check_suite is preferred over check_run to avoid triggering on all check
+  # runs. In some cases, check_run must be used in testing environments.
+  check_suite:
+    types: completed
+
+  workflow_run:
+    types: completed
+    workflows:
+      - "\\[TEST-IGNORE\\] Swagger BreakingChange - Set Status"
+
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  statuses: read
+
+jobs:
+  BreakingChange:
+    name: Watch BreakingChange
+    uses: ./.github/workflows/_reusable-verify-run-status.yaml
+    with:
+      check_run_name: "Swagger BreakingChange"
+      commit_status_name: "[TEST-IGNORE] Swagger BreakingChange"

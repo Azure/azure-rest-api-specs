@@ -15,8 +15,9 @@ alias ListIndexVersionParameters = {};
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_01)
 interface Indexes
-  extends ServicePatterns.VersionedOperations<
+  extends VersionedOperations<
       Index,
+      InputParameters<Index, "index">,
       ListIndexVersionParameters,
       ListIndexVersionParameters
     > {}

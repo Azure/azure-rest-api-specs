@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -73,7 +73,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets private endpoint connection.": {
+          "Get a private endpoint connection.": {
             "$ref": "./examples/PrivateEndpointConnectionGet.json"
           }
         }
@@ -82,7 +82,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Approve or reject a private endpoint connection with a given name.",
+        "description": "Approves or rejects a private endpoint connection.",
         "operationId": "PrivateEndpointConnection_Update",
         "parameters": [
           {
@@ -107,7 +107,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
-            "description": "The required parameters for updating private endpoint connection."
+            "description": "Parameters required to update a private endpoint connection."
           }
         ],
         "responses": {
@@ -140,7 +140,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Approve or reject a private endpoint connection with a given name.": {
+          "Approve or reject a private endpoint connection.": {
             "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
           }
         }
@@ -149,7 +149,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Deletes a private endpoint connection with a given name.",
+        "description": "Deletes a private endpoint connection.",
         "operationId": "PrivateEndpointConnection_Delete",
         "parameters": [
           {
@@ -192,7 +192,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Deletes a private endpoint connection with a given name.": {
+          "Delete a private endpoint connection.": {
             "$ref": "./examples/PrivateEndpointConnectionDelete.json"
           }
         }
@@ -203,7 +203,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Gets all private endpoint connections on a server.",
+        "description": "Lists all private endpoint connections on a flexible server.",
         "operationId": "PrivateEndpointConnections_ListByServer",
         "parameters": [
           {
@@ -237,7 +237,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets list of private endpoint connections on a server.": {
+          "List all private endpoint connections on a flexible server.": {
             "$ref": "./examples/PrivateEndpointConnectionList.json"
           }
         }
@@ -246,7 +246,7 @@
   },
   "definitions": {
     "PrivateEndpointConnectionListResult": {
-      "description": "A list of private endpoint connections.",
+      "description": "List of private endpoint connections.",
       "type": "object",
       "properties": {
         "value": {
@@ -258,7 +258,7 @@
           "readOnly": true
         },
         "nextLink": {
-          "description": "The URL to get the next set of results.",
+          "description": "Link used to get the next page of results.",
           "type": "string",
           "format": "uri",
           "readOnly": true

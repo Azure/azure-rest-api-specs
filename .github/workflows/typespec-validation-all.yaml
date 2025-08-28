@@ -19,13 +19,14 @@ on:
       - package.json
       - tsconfig.json
       - eng/**
-      - '!eng/common/**'
+      - "!eng/common/**"
       - specification/suppressions.yaml
       - specification/common-types/**
 
       # Workflow and workflow dependencies
-      - .github/workflows/typespec-validation-all.yaml
       - .github/actions/setup-node-npm-ci/**
+      - .github/shared/**
+      - .github/workflows/typespec-validation-all.yaml
 
   schedule:
     # Run 4x/day

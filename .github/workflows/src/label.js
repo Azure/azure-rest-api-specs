@@ -1,20 +1,14 @@
 // @ts-check
 
-// @ts-nocheck Prevent false positive for duplicate typedef and const names
-/**
- * @typedef {"none" | "add" | "remove"} LabelAction
- */
-
 /**
  * @readonly
- * @enum {LabelAction}
+ * @enum {"none" | "add" | "remove"}
  */
 export const LabelAction = Object.freeze({
   None: "none",
   Add: "add",
   Remove: "remove",
 });
-// @ts-check
 
 export const Label = {
   /**

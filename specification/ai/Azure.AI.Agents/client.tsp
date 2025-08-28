@@ -73,6 +73,8 @@ using Azure.AI.Agents;
 );
 
 // nested Runs interface
+@@access(Azure.AI.Agents.Runs.createRun, Access.internal, "csharp");
+@@clientName(Azure.AI.Agents.Runs.createRun, "InternalCreateRun", "csharp");
 @@clientName(Azure.AI.Agents.Runs.createRun, "create", "python");
 @@clientName(Azure.AI.Agents.Runs.listRuns, "list", "python");
 @@clientName(Azure.AI.Agents.Runs.getRun, "get", "python");

@@ -25,12 +25,54 @@ These are the global settings for the Azure Device Registry.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11
+tag: package-preview-2025-07
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-preview-2025-07
+
+These settings apply only when `--tag=package-preview-2025-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2025-07-01-preview/deviceregistry.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.NamespaceAssetProperties.properties.attributes
+      - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.inbound
+      - $.definitions.MessagingEndpointsUpdate.properties.inbound
+      - $.definitions.OutboundEndpoints.properties.assigned
+      - $.definitions.OutboundEndpointsUpdate.properties.assigned
+      - $.definitions.OutboundEndpoints.properties.unassigned
+      - $.definitions.OutboundEndpointsUpdate.properties.unassigned
+      - $.definitions.NamespaceDiscoveredDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredDeviceUpdateProperties.properties.attributes
+      - $.definitions.DiscoveredMessagingEndpoints.properties.inbound
+      - $.definitions.DiscoveredMessagingEndpointsUpdate.properties.inbound
+      - $.definitions.DiscoveredOutboundEndpoints.properties.assigned
+      - $.definitions.DiscoveredOutboundEndpointsUpdate.properties.assigned
+      - $.definitions.DeviceStatusEndpoints.properties.inbound
+    reason: attributes is a customer-defined property of any shape and custom keys for other properties
+  - code: OperationIdNounVerb
+    from:
+      - deviceregistry.json
+    reason: An existing resource type is called 'schemas'
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
 ```
 
 ### Tag: package-2024-11
