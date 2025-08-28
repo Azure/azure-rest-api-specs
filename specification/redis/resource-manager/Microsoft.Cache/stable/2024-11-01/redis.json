@@ -2995,6 +2995,30 @@
         ]
       }
     },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether or not public endpoint access is allowed for this cache.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method. Default value is 'Enabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public internet access to the cache, via its public IP address, is enabled. Connections may use any network path."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public internet access to the cache, via its public IP address, is disabled. Connections must use be made via private endpoints."
+          }
+        ]
+      }
+    },
     "RebootType": {
       "type": "string",
       "description": "Which Redis node(s) to reboot. Depending on this value data loss is possible.",
@@ -3211,29 +3235,8 @@
           "description": "Optional: requires clients to use a specified TLS version (or higher) to connect (e,g, '1.0', '1.1', '1.2')"
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "description": "Whether or not public endpoint access is allowed for this cache.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method. Default value is 'Enabled'",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Public internet access to the cache, via its public IP address, is enabled. Connections may use any network path."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Public internet access to the cache, via its public IP address, is disabled. Connections must use be made via private endpoints."
-              }
-            ]
-          }
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public endpoint access is allowed for this cache.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method."
         },
         "updateChannel": {
           "$ref": "#/definitions/UpdateChannel",
