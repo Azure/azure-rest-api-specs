@@ -1803,11 +1803,29 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeResource"
+            },
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
               "location": {
                 "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -1821,14 +1839,10 @@
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/disableInteractiveQuery": {
@@ -1861,8 +1875,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "OK."
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeResource"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
