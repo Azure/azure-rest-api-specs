@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.5`)
+@TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.6`)
 namespace ClientCustomizations;
 
 @client(
@@ -26,16 +26,26 @@ interface Client {
   preFullRestore is KeyVault.preFullRestoreOperation;
 }
 
-@@clientName(KeyVault.SASTokenParameter, "SASTokenParameters", "go");
-@@clientName(KeyVault.RestoreOperationParameters.sasTokenParameters,
+using KeyVault;
+
+@@clientName(SASTokenParameter, "SASTokenParameters", "go");
+@@clientName(RestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
-@@clientName(KeyVault.SelectiveKeyRestoreOperationParameters.sasTokenParameters,
+@@clientName(SelectiveKeyRestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
-@@clientName(KeyVault.PreRestoreOperationParameters.sasTokenParameters,
+@@clientName(PreRestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
+
+@@alternateType(FullBackupOperation.status, string, "go");
+@@alternateType(RestoreOperation.status, string, "go");
+@@alternateType(SelectiveKeyRestoreOperation.status, string, "go");
+
+@@alternateType(FullBackupOperation.error, string, "go");
+@@alternateType(RestoreOperation.error, string, "go");
+@@alternateType(SelectiveKeyRestoreOperation.error, string, "go");
