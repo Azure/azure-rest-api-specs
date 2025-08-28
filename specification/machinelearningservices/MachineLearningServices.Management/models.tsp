@@ -4353,17 +4353,17 @@ model BindOptions {
   /**
    * Type of Bind Option
    */
-  propagation?: string;
+  propagation?: string | null;
 
   /**
    * Indicate whether to create host path.
    */
-  createHostPath?: boolean;
+  createHostPath?: boolean | null;
 
   /**
    * Mention the selinux options.
    */
-  selinux?: string;
+  selinux?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4700,7 +4700,7 @@ model CodeVersionProperties extends AssetBase {
   /**
    * Uri where code is located
    */
-  codeUri?: string;
+  codeUri?: string | null;
 
   /**
    * Provisioning state for the code version.
@@ -4762,17 +4762,17 @@ model BlobReferenceForConsumptionDto {
    * Blob URI path for client to upload data.
    * Example: https://blob.windows.core.net/Container/Path
    */
-  blobUri?: url;
+  blobUri?: url | null;
 
   /**
    * Credential info to access storage account
    */
-  credential?: PendingUploadCredentialDto;
+  credential?: PendingUploadCredentialDto | null;
 
   /**
    * Arm ID of the storage account to use
    */
-  storageAccountArmId?: string;
+  storageAccountArmId?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5385,7 +5385,7 @@ model BatchEndpointDefaults {
    * Name of the deployment that will be default for the endpoint.
    * This deployment will end up getting 100% traffic when the endpoint scoring URL is invoked.
    */
-  deploymentName?: string;
+  deploymentName?: string | null;
 }
 
 /**
@@ -5668,7 +5668,7 @@ model CodeConfiguration {
    * ARM resource ID of the code asset.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  codeId?: string;
+  codeId?: string | null;
 
   /**
    * [Required] The script to execute on startup. eg. "score.py"
@@ -5711,17 +5711,17 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * List of AI services connections.
    */
-  aiServicesConnections?: string[];
+  aiServicesConnections?: string[] | null;
 
   /**
    * Kind of this capability host.
    */
-  capabilityHostKind?: CapabilityHostKind;
+  capabilityHostKind?: CapabilityHostKind = CapabilityHostKind.Agents;
 
   /**
    * Customer subnet info to help set up this capability host.
    */
-  customerSubnet?: string;
+  customerSubnet?: string | null;
 
   /**
    * Provisioning state for the CapabilityHost.
@@ -5732,17 +5732,17 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * List of Storage connections.
    */
-  storageConnections?: string[];
+  storageConnections?: string[] | null;
 
   /**
    * List of Thread storage connections.
    */
-  threadStorageConnections?: string[];
+  threadStorageConnections?: string[] | null;
 
   /**
    * List of VectorStore connections.
    */
-  vectorStoreConnections?: string[];
+  vectorStoreConnections?: string[] | null;
 }
 
 /**
@@ -7083,17 +7083,17 @@ model Collection {
   /**
    * The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.
    */
-  clientId?: string;
+  clientId?: string | null;
 
   /**
    * Enable or disable data collection.
    */
-  dataCollectionMode?: DataCollectionMode;
+  dataCollectionMode?: DataCollectionMode = DataCollectionMode.Disabled;
 
   /**
    * The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage.
    */
-  dataId?: string;
+  dataId?: string | null;
 
   /**
    * The sampling rate for collection. Sampling rate 1.0 means we collect 100% of data by default.
@@ -11482,24 +11482,24 @@ model BatchPipelineComponentDeploymentConfiguration
   /**
    * The ARM id of the component to be run.
    */
-  componentId?: IdAssetReference;
+  componentId?: IdAssetReference | null;
 
   /**
    * The description which will be applied to the job.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * Run-time settings for the pipeline job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  settings?: Record<string>;
+  settings?: Record<string | null> | null;
 
   /**
    * The tags which will be applied to the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
+  tags?: Record<string | null> | null;
 
   /**
    * [Required] The type of the deployment
@@ -11654,7 +11654,7 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * Authority URL used for authentication.
    */
-  authorityUrl?: string;
+  authorityUrl?: string | null;
 
   /**
    * [Required] Service principal client ID.
@@ -11666,7 +11666,7 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * Resource the service principal has access to.
    */
-  resourceUrl?: string;
+  resourceUrl?: string | null;
 
   /**
    * [Required] Service principal secrets.
@@ -11701,7 +11701,7 @@ model CertificateDatastoreSecrets extends DatastoreSecrets {
   /**
    * Service principal certificate.
    */
-  certificate?: string;
+  certificate?: string | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -11718,17 +11718,17 @@ model Classification extends AutoMLVertical {
   /**
    * Positive label for binary metrics calculation.
    */
-  positiveLabel?: string;
+  positiveLabel?: string | null;
 
   /**
    * Primary metric for the task.
    */
-  primaryMetric?: ClassificationPrimaryMetrics;
+  primaryMetric?: ClassificationPrimaryMetrics = ClassificationPrimaryMetrics.AUCWeighted;
 
   /**
    * Inputs for training phase for an AutoML Job.
    */
-  trainingSettings?: ClassificationTrainingSettings;
+  trainingSettings?: ClassificationTrainingSettings | null;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -11744,12 +11744,12 @@ model ClassificationTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for classification task.
    */
-  allowedTrainingAlgorithms?: ClassificationModels[];
+  allowedTrainingAlgorithms?: ClassificationModels[] | null;
 
   /**
    * Blocked models for classification task.
    */
-  blockedTrainingAlgorithms?: ClassificationModels[];
+  blockedTrainingAlgorithms?: ClassificationModels[] | null;
 }
 
 /**
@@ -11820,52 +11820,52 @@ model TableVertical {
   /**
    * Columns to use for CVSplit data.
    */
-  cvSplitColumnNames?: string[];
+  cvSplitColumnNames?: string[] | null;
 
   /**
    * Featurization inputs needed for AutoML job.
    */
-  featurizationSettings?: TableVerticalFeaturizationSettings;
+  featurizationSettings?: TableVerticalFeaturizationSettings | null;
 
   /**
    * Execution constraints for AutoMLJob.
    */
-  limitSettings?: TableVerticalLimitSettings;
+  limitSettings?: TableVerticalLimitSettings | null;
 
   /**
    * Number of cross validation folds to be applied on training dataset
    * when validation dataset is not provided.
    */
-  nCrossValidations?: NCrossValidations;
+  nCrossValidations?: NCrossValidations | null;
 
   /**
    * Test data input.
    */
-  testData?: MLTableJobInput;
+  testData?: MLTableJobInput | null;
 
   /**
    * The fraction of test dataset that needs to be set aside for validation purpose.
    * Values between (0.0 , 1.0)
    * Applied when validation dataset is not provided.
    */
-  testDataSize?: float64;
+  testDataSize?: float64 | null;
 
   /**
    * Validation data inputs.
    */
-  validationData?: MLTableJobInput;
+  validationData?: MLTableJobInput | null;
 
   /**
    * The fraction of training dataset that needs to be set aside for validation purpose.
    * Values between (0.0 , 1.0)
    * Applied when validation dataset is not provided.
    */
-  validationDataSize?: float64;
+  validationDataSize?: float64 | null;
 
   /**
    * The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.
    */
-  weightColumnName?: string;
+  weightColumnName?: string | null;
 }
 
 /**
@@ -11910,13 +11910,13 @@ model ColumnTransformer {
   /**
    * Fields to apply transformer logic on.
    */
-  fields?: string[];
+  fields?: string[] | null;
 
   /**
    * Different properties to be passed to transformer.
    * Input expected is dictionary of key,value pairs in JSON format.
    */
-  parameters?: Record<unknown>;
+  parameters?: unknown | null;
 }
 
 /**
@@ -11977,7 +11977,7 @@ model CommandJob extends JobBaseProperties {
    * ARM resource ID of the code asset.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  codeId?: string;
+  codeId?: string | null;
 
   /**
    * [Required] The command to execute on startup of the job. eg. "python train.py"
@@ -11991,7 +11991,7 @@ model CommandJob extends JobBaseProperties {
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  distribution?: DistributionConfiguration;
+  distribution?: DistributionConfiguration | null;
 
   /**
    * [Required] The ARM resource ID of the Environment specification for the job.
@@ -12006,39 +12006,39 @@ model CommandJob extends JobBaseProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  environmentVariables?: Record<string>;
+  environmentVariables?: Record<string | null> | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputs?: Record<JobInput>;
+  inputs?: Record<JobInput | null> | null;
 
   /**
    * Command Job limit.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  limits?: CommandJobLimits;
+  limits?: CommandJobLimits | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  outputs?: Record<JobOutput>;
+  outputs?: Record<JobOutput | null> | null;
 
   /**
    * Input parameters.
    */
   @visibility(Lifecycle.Read)
-  parameters?: Record<unknown>;
+  parameters?: unknown | null;
 
   /**
    * Queue settings for the job
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  queueSettings?: QueueSettings;
+  queueSettings?: QueueSettings | null;
 
   /**
    * Compute Resource configuration for the job.

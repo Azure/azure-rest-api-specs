@@ -90,6 +90,8 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AksComputeSecrets.type__added` | added | `object` |
+| `definitions.ColumnTransformer.properties.parameters.type__deleted` | deleted | `object` |
+| `definitions.CommandJob.properties.parameters.type__deleted` | deleted | `object` |
 | `definitions.DatabricksComputeSecrets.type__added` | added | `object` |
 | `definitions.DiagnoseResponseResult.properties.value.type__deleted` | deleted | `object` |
 | `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.type__added` | added | `object` |
@@ -289,11 +291,11 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].delete.responses.200__added` | added | `{"description":"ignore"}` |
 
-### Changes for `x-ms-long-running-operation`
+### Changes for `x-ms-long-running-operation-options`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}'].patch['x-ms-long-running-operation__deleted']` | deleted | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}'].patch['x-ms-long-running-operation-options__added']` | added | `{"final-state-via":"azure-async-operation","final-state-schema":"#/definitions/ComputeResource"}` |
 
 ### Changes for `items`
 
@@ -1007,7 +1009,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHostProperties__added` | added | `{"type":"object","properties":{"aiServicesConnections":{"type":"array","items":{"type":"string"}},"c...` |
+| `definitions.CapabilityHostProperties__added` | added | `{"type":"object","properties":{"aiServicesConnections":{"type":"array","x-nullable":true,"items":{"t...` |
 
 ### Changes for `CodeContainerProperties`
 
@@ -1019,7 +1021,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CodeVersionProperties__added` | added | `{"type":"object","properties":{"codeUri":{"type":"string"},"provisioningState":{"type":"string","enu...` |
+| `definitions.CodeVersionProperties__added` | added | `{"type":"object","properties":{"codeUri":{"type":"string","x-nullable":true},"provisioningState":{"t...` |
 
 ### Changes for `ComponentContainerProperties`
 
@@ -1378,8 +1380,6 @@
 |------|------------|-------|
 | `definitions.AutoMLJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
-| `definitions.Classification.properties.primaryMetric.default__deleted` | deleted | `AUCWeighted` |
-| `definitions.Collection.properties.dataCollectionMode.default__deleted` | deleted | `Disabled` |
 | `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.ContentSafety.properties.contentSafetyLevel.default__deleted` | deleted | `Blocking` |
 | `definitions.DataCollector.properties.rollingRate.default__deleted` | deleted | `Hour` |
@@ -1545,42 +1545,6 @@
 |------|------------|-------|
 | `definitions.AzureDataLakeGen2Datastore.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AzureDataLakeGen2Datastore.properties.protocol['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BatchEndpointDefaults.properties.deploymentName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BatchPipelineComponentDeploymentConfiguration.properties.componentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BatchPipelineComponentDeploymentConfiguration.properties.description['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BatchPipelineComponentDeploymentConfiguration.properties.settings.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BatchPipelineComponentDeploymentConfiguration.properties.settings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BatchPipelineComponentDeploymentConfiguration.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BatchPipelineComponentDeploymentConfiguration.properties.tags['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BindOptions.properties.createHostPath['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BindOptions.properties.propagation['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BindOptions.properties.selinux['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BlobReferenceForConsumptionDto.properties.blobUri['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BlobReferenceForConsumptionDto.properties.credential['x-nullable__deleted']` | deleted | `true` |
-| `definitions.BlobReferenceForConsumptionDto.properties.storageAccountArmId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CertificateDatastoreCredentials.properties.authorityUrl['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CertificateDatastoreCredentials.properties.resourceUrl['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CertificateDatastoreSecrets.properties.certificate['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Classification.properties.positiveLabel['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Classification.properties.trainingSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ClassificationTrainingSettings.properties.allowedTrainingAlgorithms['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ClassificationTrainingSettings.properties.blockedTrainingAlgorithms['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CodeConfiguration.properties.codeId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Collection.properties.clientId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Collection.properties.dataId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ColumnTransformer.properties.fields['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ColumnTransformer.properties.parameters['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.codeId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.distribution['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.environmentVariables.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.environmentVariables['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.inputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.inputs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.limits['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.outputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.outputs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.parameters['x-nullable__deleted']` | deleted | `true` |
-| `definitions.CommandJob.properties.queueSettings['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ContainerResourceRequirements.properties.containerResourceLimits['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ContainerResourceRequirements.properties.containerResourceRequests['x-nullable__deleted']` | deleted | `true` |
@@ -2226,17 +2190,17 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.cvSplitColumnNames__added` | added | `{"type":"array","items":{"type":"string"}}` |
-| `definitions.Forecasting.properties.cvSplitColumnNames__added` | added | `{"type":"array","items":{"type":"string"}}` |
-| `definitions.Regression.properties.cvSplitColumnNames__added` | added | `{"type":"array","items":{"type":"string"}}` |
+| `definitions.Classification.properties.cvSplitColumnNames__added` | added | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.Forecasting.properties.cvSplitColumnNames__added` | added | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.Regression.properties.cvSplitColumnNames__added` | added | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
 
 ### Changes for `featurizationSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings"}` |
-| `definitions.Forecasting.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings"}` |
-| `definitions.Regression.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings"}` |
+| `definitions.Classification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
+| `definitions.Forecasting.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
+| `definitions.Regression.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
 | `definitions.TextClassification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings"}` |
 | `definitions.TextClassificationMultilabel.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings"}` |
 | `definitions.TextNer.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings"}` |
@@ -2245,13 +2209,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings"}` |
-| `definitions.Forecasting.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings"}` |
+| `definitions.Classification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","x-nullable":true}` |
+| `definitions.Forecasting.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","x-nullable":true}` |
 | `definitions.ImageClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
 | `definitions.ImageClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
 | `definitions.ImageInstanceSegmentation.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
 | `definitions.ImageObjectDetection.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
-| `definitions.Regression.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings"}` |
+| `definitions.Regression.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","x-nullable":true}` |
 | `definitions.TextClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings"}` |
 | `definitions.TextClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings"}` |
 | `definitions.TextNer.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings"}` |
@@ -2260,37 +2224,37 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations"}` |
-| `definitions.Forecasting.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations"}` |
-| `definitions.Regression.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations"}` |
+| `definitions.Classification.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","x-nullable":true}` |
+| `definitions.Forecasting.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","x-nullable":true}` |
+| `definitions.Regression.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","x-nullable":true}` |
 
 ### Changes for `testData`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.Forecasting.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.Regression.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
+| `definitions.Classification.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.Forecasting.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.Regression.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
 
 ### Changes for `testDataSize`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.testDataSize__added` | added | `{"type":"number","format":"double"}` |
-| `definitions.Forecasting.properties.testDataSize__added` | added | `{"type":"number","format":"double"}` |
-| `definitions.Regression.properties.testDataSize__added` | added | `{"type":"number","format":"double"}` |
+| `definitions.Classification.properties.testDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.Forecasting.properties.testDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.Regression.properties.testDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
 
 ### Changes for `validationData`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.Forecasting.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
+| `definitions.Classification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.Forecasting.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
 | `definitions.ImageClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
 | `definitions.ImageClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
 | `definitions.ImageInstanceSegmentation.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
 | `definitions.ImageObjectDetection.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
-| `definitions.Regression.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
+| `definitions.Regression.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
 | `definitions.TextClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
 | `definitions.TextClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
 | `definitions.TextNer.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput"}` |
@@ -2299,41 +2263,27 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
-| `definitions.Forecasting.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
+| `definitions.Classification.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.Forecasting.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
 | `definitions.ImageClassification.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
 | `definitions.ImageClassificationMultilabel.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
 | `definitions.ImageInstanceSegmentation.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
 | `definitions.ImageObjectDetection.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
-| `definitions.Regression.properties.validationDataSize__added` | added | `{"type":"number","format":"double"}` |
+| `definitions.Regression.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
 
 ### Changes for `weightColumnName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.weightColumnName__added` | added | `{"type":"string"}` |
-| `definitions.Forecasting.properties.weightColumnName__added` | added | `{"type":"string"}` |
-| `definitions.Regression.properties.weightColumnName__added` | added | `{"type":"string"}` |
+| `definitions.Classification.properties.weightColumnName__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.Forecasting.properties.weightColumnName__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.Regression.properties.weightColumnName__added` | added | `{"type":"string","x-nullable":true}` |
 
 ### Changes for `codeUri`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.CodeVersion.properties.codeUri__deleted` | deleted | `{"type":"string","x-nullable":true,"example":"https://blobStorage/folderName"}` |
-
-### Changes for `additionalProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ColumnTransformer.properties.parameters.additionalProperties__added` | added | `{}` |
-| `definitions.CommandJob.properties.parameters.additionalProperties__added` | added | `{}` |
-| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.additionalProperties__added` | added | `{}` |
-| `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.PipelineJob.properties.jobs.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
-| `definitions.ResourceConfiguration.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.additionalProperties__added` | added | `{}` |
-| `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
 
 ### Changes for `componentSpec`
 
@@ -2439,6 +2389,18 @@
 | `definitions.ServerlessEndpointInferenceEndpoint.properties.uri.readOnly__added` | added | `true` |
 | `definitions.ServerlessInferenceEndpoint.properties.uri.readOnly__added` | added | `true` |
 | `definitions.UpdateWorkspaceQuotas.properties.status.readOnly__deleted` | deleted | `false` |
+
+### Changes for `additionalProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.additionalProperties__added` | added | `{}` |
+| `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.PipelineJob.properties.jobs.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
+| `definitions.ResourceConfiguration.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.additionalProperties__added` | added | `{}` |
+| `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
 
 ### Changes for `autoRebuild`
 

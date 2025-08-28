@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 // FIXME: ComputeResource has no properties property
@@ -56,7 +57,8 @@ interface ComputeResources {
   update is ArmCustomPatchAsync<
     ComputeResource,
     PatchModel = ClusterUpdateParameters,
-    Response = ArmResponse<ComputeResource>
+    Response = ArmResponse<ComputeResource> &
+      ArmAsyncOperationHeader<FinalResult = ComputeResource>
   >;
 
   /**

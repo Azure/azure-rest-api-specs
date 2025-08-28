@@ -7396,9 +7396,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -7412,7 +7418,12 @@
           "Update a AmlCompute Compute": {
             "$ref": "./examples/Compute/patch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ComputeResource"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Compute_Delete",
@@ -22931,7 +22942,8 @@
       "properties": {
         "deploymentName": {
           "type": "string",
-          "description": "Name of the deployment that will be default for the endpoint.\nThis deployment will end up getting 100% traffic when the endpoint scoring URL is invoked."
+          "description": "Name of the deployment that will be default for the endpoint.\nThis deployment will end up getting 100% traffic when the endpoint scoring URL is invoked.",
+          "x-nullable": true
         }
       }
     },
@@ -22982,24 +22994,30 @@
       "properties": {
         "componentId": {
           "$ref": "#/definitions/IdAssetReference",
-          "description": "The ARM id of the component to be run."
+          "description": "The ARM id of the component to be run.",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "The description which will be applied to the job."
+          "description": "The description which will be applied to the job.",
+          "x-nullable": true
         },
         "settings": {
           "type": "object",
           "description": "Run-time settings for the pipeline job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "tags": {
           "type": "object",
           "description": "The tags which will be applied to the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -23059,15 +23077,18 @@
       "properties": {
         "propagation": {
           "type": "string",
-          "description": "Type of Bind Option"
+          "description": "Type of Bind Option",
+          "x-nullable": true
         },
         "createHostPath": {
           "type": "boolean",
-          "description": "Indicate whether to create host path."
+          "description": "Indicate whether to create host path.",
+          "x-nullable": true
         },
         "selinux": {
           "type": "string",
-          "description": "Mention the selinux options."
+          "description": "Mention the selinux options.",
+          "x-nullable": true
         }
       }
     },
@@ -23077,15 +23098,18 @@
         "blobUri": {
           "type": "string",
           "format": "uri",
-          "description": "Blob URI path for client to upload data.\nExample: https://blob.windows.core.net/Container/Path"
+          "description": "Blob URI path for client to upload data.\nExample: https://blob.windows.core.net/Container/Path",
+          "x-nullable": true
         },
         "credential": {
           "$ref": "#/definitions/PendingUploadCredentialDto",
-          "description": "Credential info to access storage account"
+          "description": "Credential info to access storage account",
+          "x-nullable": true
         },
         "storageAccountArmId": {
           "type": "string",
-          "description": "Arm ID of the storage account to use"
+          "description": "Arm ID of the storage account to use",
+          "x-nullable": true
         }
       }
     },
@@ -23207,39 +23231,39 @@
         }
       ]
     },
-    "CapabilityHostKind": {
-      "type": "string",
-      "enum": [
-        "Agents"
-      ],
-      "x-ms-enum": {
-        "name": "CapabilityHostKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Agents",
-            "value": "Agents"
-          }
-        ]
-      }
-    },
     "CapabilityHostProperties": {
       "type": "object",
       "properties": {
         "aiServicesConnections": {
           "type": "array",
           "description": "List of AI services connections.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "capabilityHostKind": {
-          "$ref": "#/definitions/CapabilityHostKind",
-          "description": "Kind of this capability host."
+          "type": "string",
+          "description": "Kind of this capability host.",
+          "default": "Agents",
+          "enum": [
+            "Agents"
+          ],
+          "x-ms-enum": {
+            "name": "CapabilityHostKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Agents",
+                "value": "Agents"
+              }
+            ]
+          }
         },
         "customerSubnet": {
           "type": "string",
-          "description": "Customer subnet info to help set up this capability host."
+          "description": "Customer subnet info to help set up this capability host.",
+          "x-nullable": true
         },
         "provisioningState": {
           "$ref": "#/definitions/CapabilityHostProvisioningState",
@@ -23249,6 +23273,7 @@
         "storageConnections": {
           "type": "array",
           "description": "List of Storage connections.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -23256,6 +23281,7 @@
         "threadStorageConnections": {
           "type": "array",
           "description": "List of Thread storage connections.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -23263,6 +23289,7 @@
         "vectorStoreConnections": {
           "type": "array",
           "description": "List of VectorStore connections.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -23475,7 +23502,8 @@
       "properties": {
         "authorityUrl": {
           "type": "string",
-          "description": "Authority URL used for authentication."
+          "description": "Authority URL used for authentication.",
+          "x-nullable": true
         },
         "clientId": {
           "type": "string",
@@ -23484,7 +23512,8 @@
         },
         "resourceUrl": {
           "type": "string",
-          "description": "Resource the service principal has access to."
+          "description": "Resource the service principal has access to.",
+          "x-nullable": true
         },
         "secrets": {
           "$ref": "#/definitions/CertificateDatastoreSecrets",
@@ -23525,7 +23554,8 @@
       "properties": {
         "certificate": {
           "type": "string",
-          "description": "Service principal certificate."
+          "description": "Service principal certificate.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -23542,55 +23572,105 @@
         "cvSplitColumnNames": {
           "type": "array",
           "description": "Columns to use for CVSplit data.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "featurizationSettings": {
           "$ref": "#/definitions/TableVerticalFeaturizationSettings",
-          "description": "Featurization inputs needed for AutoML job."
+          "description": "Featurization inputs needed for AutoML job.",
+          "x-nullable": true
         },
         "limitSettings": {
           "$ref": "#/definitions/TableVerticalLimitSettings",
-          "description": "Execution constraints for AutoMLJob."
+          "description": "Execution constraints for AutoMLJob.",
+          "x-nullable": true
         },
         "nCrossValidations": {
           "$ref": "#/definitions/NCrossValidations",
-          "description": "Number of cross validation folds to be applied on training dataset\nwhen validation dataset is not provided."
+          "description": "Number of cross validation folds to be applied on training dataset\nwhen validation dataset is not provided.",
+          "x-nullable": true
         },
         "testData": {
           "$ref": "#/definitions/MLTableJobInput",
-          "description": "Test data input."
+          "description": "Test data input.",
+          "x-nullable": true
         },
         "testDataSize": {
           "type": "number",
           "format": "double",
-          "description": "The fraction of test dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided."
+          "description": "The fraction of test dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
+          "x-nullable": true
         },
         "validationData": {
           "$ref": "#/definitions/MLTableJobInput",
-          "description": "Validation data inputs."
+          "description": "Validation data inputs.",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
           "format": "double",
-          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided."
+          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
+          "x-nullable": true
         },
         "weightColumnName": {
           "type": "string",
-          "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down."
+          "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.",
+          "x-nullable": true
         },
         "positiveLabel": {
           "type": "string",
-          "description": "Positive label for binary metrics calculation."
+          "description": "Positive label for binary metrics calculation.",
+          "x-nullable": true
         },
         "primaryMetric": {
-          "$ref": "#/definitions/ClassificationPrimaryMetrics",
-          "description": "Primary metric for the task."
+          "type": "string",
+          "description": "Primary metric for the task.",
+          "default": "AUCWeighted",
+          "enum": [
+            "AUCWeighted",
+            "Accuracy",
+            "NormMacroRecall",
+            "AveragePrecisionScoreWeighted",
+            "PrecisionScoreWeighted"
+          ],
+          "x-ms-enum": {
+            "name": "ClassificationPrimaryMetrics",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AUCWeighted",
+                "value": "AUCWeighted",
+                "description": "AUC is the Area under the curve.\nThis metric represents arithmetic mean of the score for each class,\nweighted by the number of true instances in each class."
+              },
+              {
+                "name": "Accuracy",
+                "value": "Accuracy",
+                "description": "Accuracy is the ratio of predictions that exactly match the true class labels."
+              },
+              {
+                "name": "NormMacroRecall",
+                "value": "NormMacroRecall",
+                "description": "Normalized macro recall is recall macro-averaged and normalized, so that random\nperformance has a score of 0, and perfect performance has a score of 1."
+              },
+              {
+                "name": "AveragePrecisionScoreWeighted",
+                "value": "AveragePrecisionScoreWeighted",
+                "description": "The arithmetic mean of the average precision score for each class, weighted by\nthe number of true instances in each class."
+              },
+              {
+                "name": "PrecisionScoreWeighted",
+                "value": "PrecisionScoreWeighted",
+                "description": "The arithmetic mean of precision for each class, weighted by number of true instances in each class."
+              }
+            ]
+          }
         },
         "trainingSettings": {
           "$ref": "#/definitions/ClassificationTrainingSettings",
-          "description": "Inputs for training phase for an AutoML Job."
+          "description": "Inputs for training phase for an AutoML Job.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -23787,6 +23867,7 @@
         "allowedTrainingAlgorithms": {
           "type": "array",
           "description": "Allowed models for classification task.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ClassificationModels"
           }
@@ -23794,6 +23875,7 @@
         "blockedTrainingAlgorithms": {
           "type": "array",
           "description": "Blocked models for classification task.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ClassificationModels"
           }
@@ -23833,6 +23915,7 @@
         "codeId": {
           "type": "string",
           "description": "ARM resource ID of the code asset.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -23932,7 +24015,8 @@
       "properties": {
         "codeUri": {
           "type": "string",
-          "description": "Uri where code is located"
+          "description": "Uri where code is located",
+          "x-nullable": true
         },
         "provisioningState": {
           "$ref": "#/definitions/AssetProvisioningState",
@@ -23993,15 +24077,36 @@
       "properties": {
         "clientId": {
           "type": "string",
-          "description": "The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth."
+          "description": "The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.",
+          "x-nullable": true
         },
         "dataCollectionMode": {
-          "$ref": "#/definitions/DataCollectionMode",
-          "description": "Enable or disable data collection."
+          "type": "string",
+          "description": "Enable or disable data collection.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "DataCollectionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "dataId": {
           "type": "string",
-          "description": "The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage."
+          "description": "The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage.",
+          "x-nullable": true
         },
         "samplingRate": {
           "type": "number",
@@ -24018,14 +24123,14 @@
         "fields": {
           "type": "array",
           "description": "Fields to apply transformer logic on.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "parameters": {
-          "type": "object",
           "description": "Different properties to be passed to transformer.\nInput expected is dictionary of key,value pairs in JSON format.",
-          "additionalProperties": {}
+          "x-nullable": true
         }
       }
     },
@@ -24036,6 +24141,7 @@
         "codeId": {
           "type": "string",
           "description": "ARM resource ID of the code asset.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -24054,6 +24160,7 @@
         "distribution": {
           "$ref": "#/definitions/DistributionConfiguration",
           "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -24072,8 +24179,10 @@
         "environmentVariables": {
           "type": "object",
           "description": "Environment variables included in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -24083,8 +24192,10 @@
         "inputs": {
           "type": "object",
           "description": "Mapping of input data bindings used in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -24094,6 +24205,7 @@
         "limits": {
           "$ref": "#/definitions/CommandJobLimits",
           "description": "Command Job limit.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -24102,8 +24214,10 @@
         "outputs": {
           "type": "object",
           "description": "Mapping of output data bindings used in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -24111,14 +24225,14 @@
           ]
         },
         "parameters": {
-          "type": "object",
           "description": "Input parameters.",
-          "additionalProperties": {},
+          "x-nullable": true,
           "readOnly": true
         },
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
           "description": "Queue settings for the job",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -25686,27 +25800,6 @@
           {
             "name": "Complete",
             "value": "Complete"
-          }
-        ]
-      }
-    },
-    "DataCollectionMode": {
-      "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DataCollectionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled"
           }
         ]
       }
@@ -29272,43 +29365,52 @@
         "cvSplitColumnNames": {
           "type": "array",
           "description": "Columns to use for CVSplit data.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "featurizationSettings": {
           "$ref": "#/definitions/TableVerticalFeaturizationSettings",
-          "description": "Featurization inputs needed for AutoML job."
+          "description": "Featurization inputs needed for AutoML job.",
+          "x-nullable": true
         },
         "limitSettings": {
           "$ref": "#/definitions/TableVerticalLimitSettings",
-          "description": "Execution constraints for AutoMLJob."
+          "description": "Execution constraints for AutoMLJob.",
+          "x-nullable": true
         },
         "nCrossValidations": {
           "$ref": "#/definitions/NCrossValidations",
-          "description": "Number of cross validation folds to be applied on training dataset\nwhen validation dataset is not provided."
+          "description": "Number of cross validation folds to be applied on training dataset\nwhen validation dataset is not provided.",
+          "x-nullable": true
         },
         "testData": {
           "$ref": "#/definitions/MLTableJobInput",
-          "description": "Test data input."
+          "description": "Test data input.",
+          "x-nullable": true
         },
         "testDataSize": {
           "type": "number",
           "format": "double",
-          "description": "The fraction of test dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided."
+          "description": "The fraction of test dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
+          "x-nullable": true
         },
         "validationData": {
           "$ref": "#/definitions/MLTableJobInput",
-          "description": "Validation data inputs."
+          "description": "Validation data inputs.",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
           "format": "double",
-          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided."
+          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
+          "x-nullable": true
         },
         "weightColumnName": {
           "type": "string",
-          "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down."
+          "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.",
+          "x-nullable": true
         },
         "forecastingSettings": {
           "$ref": "#/definitions/ForecastingSettings",
@@ -36385,43 +36487,52 @@
         "cvSplitColumnNames": {
           "type": "array",
           "description": "Columns to use for CVSplit data.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "featurizationSettings": {
           "$ref": "#/definitions/TableVerticalFeaturizationSettings",
-          "description": "Featurization inputs needed for AutoML job."
+          "description": "Featurization inputs needed for AutoML job.",
+          "x-nullable": true
         },
         "limitSettings": {
           "$ref": "#/definitions/TableVerticalLimitSettings",
-          "description": "Execution constraints for AutoMLJob."
+          "description": "Execution constraints for AutoMLJob.",
+          "x-nullable": true
         },
         "nCrossValidations": {
           "$ref": "#/definitions/NCrossValidations",
-          "description": "Number of cross validation folds to be applied on training dataset\nwhen validation dataset is not provided."
+          "description": "Number of cross validation folds to be applied on training dataset\nwhen validation dataset is not provided.",
+          "x-nullable": true
         },
         "testData": {
           "$ref": "#/definitions/MLTableJobInput",
-          "description": "Test data input."
+          "description": "Test data input.",
+          "x-nullable": true
         },
         "testDataSize": {
           "type": "number",
           "format": "double",
-          "description": "The fraction of test dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided."
+          "description": "The fraction of test dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
+          "x-nullable": true
         },
         "validationData": {
           "$ref": "#/definitions/MLTableJobInput",
-          "description": "Validation data inputs."
+          "description": "Validation data inputs.",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
           "format": "double",
-          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided."
+          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
+          "x-nullable": true
         },
         "weightColumnName": {
           "type": "string",
-          "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down."
+          "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.",
+          "x-nullable": true
         },
         "primaryMetric": {
           "$ref": "#/definitions/RegressionPrimaryMetrics",

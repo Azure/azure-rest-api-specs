@@ -5132,7 +5132,12 @@
           "Update a AmlCompute Compute": {
             "$ref": "./examples/Compute/patch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ComputeResource"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Compute_Delete",
@@ -15939,7 +15944,8 @@
       "type": "object",
       "properties": {
         "deploymentName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -15997,21 +16003,27 @@
       "type": "object",
       "properties": {
         "componentId": {
-          "$ref": "#/definitions/IdAssetReference"
+          "$ref": "#/definitions/IdAssetReference",
+          "x-nullable": true
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "settings": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "tags": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       },
@@ -16049,13 +16061,16 @@
       "type": "object",
       "properties": {
         "propagation": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "createHostPath": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "selinux": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -16064,13 +16079,16 @@
       "properties": {
         "blobUri": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "x-nullable": true
         },
         "credential": {
-          "$ref": "#/definitions/PendingUploadCredentialDto"
+          "$ref": "#/definitions/PendingUploadCredentialDto",
+          "x-nullable": true
         },
         "storageAccountArmId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -16120,12 +16138,14 @@
       "properties": {
         "aiServicesConnections": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "capabilityHostKind": {
           "type": "string",
+          "default": "Agents",
           "enum": [
             "Agents"
           ],
@@ -16135,7 +16155,8 @@
           }
         },
         "customerSubnet": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -16155,18 +16176,21 @@
         },
         "storageConnections": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "threadStorageConnections": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "vectorStoreConnections": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -16272,14 +16296,16 @@
       "type": "object",
       "properties": {
         "authorityUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "clientId": {
           "type": "string",
           "format": "uuid"
         },
         "resourceUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "secrets": {
           "$ref": "#/definitions/CertificateDatastoreSecrets",
@@ -16315,7 +16341,8 @@
       "type": "object",
       "properties": {
         "certificate": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -16330,41 +16357,52 @@
       "properties": {
         "cvSplitColumnNames": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "featurizationSettings": {
-          "$ref": "#/definitions/TableVerticalFeaturizationSettings"
+          "$ref": "#/definitions/TableVerticalFeaturizationSettings",
+          "x-nullable": true
         },
         "limitSettings": {
-          "$ref": "#/definitions/TableVerticalLimitSettings"
+          "$ref": "#/definitions/TableVerticalLimitSettings",
+          "x-nullable": true
         },
         "nCrossValidations": {
-          "$ref": "#/definitions/NCrossValidations"
+          "$ref": "#/definitions/NCrossValidations",
+          "x-nullable": true
         },
         "testData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "testDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "weightColumnName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "positiveLabel": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
+          "default": "AUCWeighted",
           "enum": [
             "AUCWeighted",
             "Accuracy",
@@ -16378,7 +16416,8 @@
           }
         },
         "trainingSettings": {
-          "$ref": "#/definitions/ClassificationTrainingSettings"
+          "$ref": "#/definitions/ClassificationTrainingSettings",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -16393,6 +16432,7 @@
       "properties": {
         "allowedTrainingAlgorithms": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -16418,6 +16458,7 @@
         },
         "blockedTrainingAlgorithms": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -16470,6 +16511,7 @@
       "properties": {
         "codeId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -16572,7 +16614,8 @@
       "type": "object",
       "properties": {
         "codeUri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -16643,10 +16686,12 @@
       "type": "object",
       "properties": {
         "clientId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "dataCollectionMode": {
           "type": "string",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -16657,7 +16702,8 @@
           }
         },
         "dataId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "samplingRate": {
           "type": "number",
@@ -16671,13 +16717,13 @@
       "properties": {
         "fields": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "parameters": {
-          "type": "object",
-          "additionalProperties": {}
+          "x-nullable": true
         }
       }
     },
@@ -16686,6 +16732,7 @@
       "properties": {
         "codeId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -16702,6 +16749,7 @@
         },
         "distribution": {
           "$ref": "#/definitions/DistributionConfiguration",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -16718,8 +16766,10 @@
         },
         "environmentVariables": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -16728,8 +16778,10 @@
         },
         "inputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -16738,6 +16790,7 @@
         },
         "limits": {
           "$ref": "#/definitions/CommandJobLimits",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -16745,8 +16798,10 @@
         },
         "outputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -16754,12 +16809,12 @@
           ]
         },
         "parameters": {
-          "type": "object",
-          "additionalProperties": {},
+          "x-nullable": true,
           "readOnly": true
         },
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -20265,35 +20320,44 @@
       "properties": {
         "cvSplitColumnNames": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "featurizationSettings": {
-          "$ref": "#/definitions/TableVerticalFeaturizationSettings"
+          "$ref": "#/definitions/TableVerticalFeaturizationSettings",
+          "x-nullable": true
         },
         "limitSettings": {
-          "$ref": "#/definitions/TableVerticalLimitSettings"
+          "$ref": "#/definitions/TableVerticalLimitSettings",
+          "x-nullable": true
         },
         "nCrossValidations": {
-          "$ref": "#/definitions/NCrossValidations"
+          "$ref": "#/definitions/NCrossValidations",
+          "x-nullable": true
         },
         "testData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "testDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "weightColumnName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "forecastingSettings": {
           "$ref": "#/definitions/ForecastingSettings"
@@ -25708,35 +25772,44 @@
       "properties": {
         "cvSplitColumnNames": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "featurizationSettings": {
-          "$ref": "#/definitions/TableVerticalFeaturizationSettings"
+          "$ref": "#/definitions/TableVerticalFeaturizationSettings",
+          "x-nullable": true
         },
         "limitSettings": {
-          "$ref": "#/definitions/TableVerticalLimitSettings"
+          "$ref": "#/definitions/TableVerticalLimitSettings",
+          "x-nullable": true
         },
         "nCrossValidations": {
-          "$ref": "#/definitions/NCrossValidations"
+          "$ref": "#/definitions/NCrossValidations",
+          "x-nullable": true
         },
         "testData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "testDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "validationData": {
-          "$ref": "#/definitions/MLTableJobInput"
+          "$ref": "#/definitions/MLTableJobInput",
+          "x-nullable": true
         },
         "validationDataSize": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "weightColumnName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
