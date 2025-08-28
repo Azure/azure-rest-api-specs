@@ -41,10 +41,7 @@ using Azure.ClientGenerator.Core;
   "AIProjectBlobReference",
   "csharp"
 );
-@@clientName(Azure.AI.Projects.Connection,
-  "AIProjectConnectionProperties",
-  "csharp"
-);
+@@clientName(Azure.AI.Projects.Connection, "AIProjectConnection", "csharp");
 @@clientName(Azure.AI.Projects.Deployment, "AIProjectDeployment", "csharp");
 @@clientName(Azure.AI.Projects.DeploymentType,
   "AIProjectDeploymentType",
