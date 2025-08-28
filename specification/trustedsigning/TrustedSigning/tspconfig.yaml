@@ -20,12 +20,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
-    package-dir: "Azure.Developer.TrustedSigning"
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.Developer.TrustedSigning"
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.TrustedSigning
     model-namespace: false
   "@azure-tools/typespec-ts":
