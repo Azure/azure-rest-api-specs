@@ -1212,6 +1212,10 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
+        },
+        "retentionPolicy": {
+          "description": "The Acs Chat retention policy model",
+          "$ref": "/#/definitions/AcsChatRetentionPolicyModel"
         }
       },
       "required": [
@@ -1253,6 +1257,10 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
+        },
+        "retentionPolicy": {
+          "description": "The Acs Chat retention policy model",
+          "$ref": "/#/definitions/AcsChatRetentionPolicyModel"
         }
       },
       "required": [
@@ -1301,6 +1309,26 @@
           "description": "The deletion time of the thread",
           "format": "date-time",
           "type": "string"
+        },
+        "reason": {
+          "description": "The deletion reason of the chat.",
+          "type": "string",
+          "enum": [
+            "DeletedByUser",
+            "DeletedByPolicy"
+          ],
+          "x-ms-enum": {
+            "name": "AcsChatThreadDeletedReasonType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "deletedByPolicy"
+              },
+              {
+                "value": "deletedByUser"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1338,6 +1366,10 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "retentionPolicy": {
+          "description": "The Acs Chat retention policy model",
+          "$ref": "/#/definitions/AcsChatRetentionPolicyModel"
         }
       },
       "required": [
@@ -1376,6 +1408,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "retentionPolicy": {
+          "description": "The Acs Chat retention policy model",
+          "$ref": "/#/definitions/AcsChatRetentionPolicyModel"
         }
       },
       "required": [
@@ -1965,6 +2001,37 @@
           "description": "The version of the thread",
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "AcsChatRetentionPolicyModel": {
+      "description": "The Acs Chat retention policy model ",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The chat retention policy type.",
+          "type": "string",
+          "enum": [
+            "ThreadCreationDate",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "AcsChatRetentionPolicyKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "threadCreationDate"
+              },
+              {
+                "value": "none"
+              }
+            ]
+          }
+        },
+        "deleteThreadAfterDays": {
+          "description": "Specifies when the chat should be deleted. ",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

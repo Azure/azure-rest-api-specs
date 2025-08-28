@@ -189,6 +189,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   properties: Record<unknown>;
+
+  /** The chat retention policy */
+  retentionPolicy?: AcsChatRetentionPolicyModel;
 }
 
 // @example(AcsChatThreadPropertiesUpdatedExample)
@@ -197,6 +200,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadPropertiesBaseEventData;
+
+  /** The chat retention policy */
+  retentionPolicy?: AcsChatRetentionPolicyModel;
 }
 
 // @example(MicrosoftCommunicationChatParticipantAddedToThreadWithUserExample)
@@ -889,6 +895,9 @@ alias AcsChatThreadBaseEventData = {
   /** The list of properties of participants who are part of the thread */
   @visibility(Lifecycle.Read)
   participants: AcsChatThreadParticipantProperties[];
+
+  /** The chat retention policy */
+  retentionPolicy?: AcsChatRetentionPolicyModel;
 };
 
 alias AcsChatThreadDeletedBaseEventData = {
@@ -898,6 +907,9 @@ alias AcsChatThreadDeletedBaseEventData = {
   /** The deletion time of the thread */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   deleteTime: utcDateTime;
+
+  /** The deleteion reason of the thread */
+  reason?: AcsChatThreadDeletedReasonType;
 };
 
 alias AcsChatThreadPropertiesBaseEventData = {
@@ -1029,6 +1041,37 @@ model AcsEmailDeliveryReportStatusDetails {
 
   /** Recipient mail server host name */
   recipientMailServerHostName?: string;
+}
+
+/** The Acs Chat retention policy model */
+model AcsChatRetentionPolicyModel {
+  /** The chat retention policy type. */
+  kind?: AcsChatRetentionPolicyKind;
+
+  /** Specifies when the chat should be deleted. */
+  deleteThreadAfterDays?: int32;
+}
+
+/** The chat retention policy type. */
+union AcsChatRetentionPolicyKind {
+  /** None */
+  "None",
+
+  /** Thread Creation Date */
+  "ThreadCreationDate",
+
+  string,
+}
+
+/** The deletion reason of the chat. */
+union AcsChatThreadDeletedReasonType {
+  /** Deleted By User */
+  "DeletedByUser",
+
+  /** Deleted By Policy */
+  "DeletedByPolicy",
+
+  string,
 }
 
 /** Schema of common properties of all chat thread events */
