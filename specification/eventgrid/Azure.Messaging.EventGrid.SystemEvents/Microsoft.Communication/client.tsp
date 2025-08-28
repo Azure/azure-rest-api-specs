@@ -130,6 +130,12 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedWithUserEventData,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyModel,
+  Usage.output | Usage.json
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyModel,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedEventData,
   Usage.output | Usage.json
 );
@@ -621,6 +627,12 @@ using Azure.ClientGenerator.Core;
   Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedReasonType,
+  Usage.output | Usage.json
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedReasonType,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,

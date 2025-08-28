@@ -189,6 +189,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   properties: Record<unknown>;
+
+  /** The retention policy for Chat. */
+  retentionPolicy?: AcsChatRetentionPolicyModel;
 }
 
 // @example(AcsChatThreadPropertiesUpdatedExample)
@@ -196,7 +199,10 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
-  ...AcsChatThreadPropertiesBaseEventData;
+  ...AcsChatThreadPropertiesBaseEventData;f
+
+  /** The retention policy for Chat. */
+  retentionPolicy?: AcsChatRetentionPolicyModel;
 }
 
 // @example(MicrosoftCommunicationChatParticipantAddedToThreadWithUserExample)
@@ -889,6 +895,9 @@ alias AcsChatThreadBaseEventData = {
   /** The list of properties of participants who are part of the thread */
   @visibility(Lifecycle.Read)
   participants: AcsChatThreadParticipantProperties[];
+
+  /** The retention policy for Chat. */
+  retentionPolicy?: AcsChatRetentionPolicyModel;
 };
 
 alias AcsChatThreadDeletedBaseEventData = {
@@ -898,6 +907,9 @@ alias AcsChatThreadDeletedBaseEventData = {
   /** The deletion time of the thread */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   deleteTime: utcDateTime;
+
+  /** The reason for chat thread deleted */
+  reason?: AcsChatThreadDeletedReasonType;
 };
 
 alias AcsChatThreadPropertiesBaseEventData = {
@@ -936,6 +948,17 @@ union recordingContentType {
 
   /** Audio content type */
   "Audio",
+
+  string,
+}
+
+/** Chat Thread Deleted Reason Type */
+union AcsChatThreadDeletedReasonType {
+  /** Deleted By User */
+  "deletedByUser",
+
+  /** Deleted By Policy */
+  "deletedByPolicy",
 
   string,
 }
@@ -1321,6 +1344,27 @@ model CommunicationIdentifierModel {
 
   /** The Microsoft Teams application. */
   microsoftTeamsApp?: MicrosoftTeamsAppIdentifierModel;
+}
+
+/** Acs Chat Retention Policy Model. */
+model AcsChatRetentionPolicyModel {
+  /** The identifier kind. */
+  kind?: AcsChatRetentionPolicyKind;
+
+  /** Delete Acs chat thread days count. */
+  deleteThreadAfterDays?: int32;
+
+}
+
+/** Chat Retention Policy model identifier kind */
+union AcsChatRetentionPolicyKind {
+  /** None */
+  "none",
+
+  /** Thread Creation Date */
+  "threadCreationDate",
+
+  string,
 }
 
 /** Communication model identifier kind */
