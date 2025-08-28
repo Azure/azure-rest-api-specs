@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure CIS FRP",
+    "title": "Azure Planned Quota",
     "version": "2024-06-24-preview",
     "description": "Planned Quota Provider",
     "x-typespec-generated": [
@@ -47,7 +47,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.AzureCis/operations": {
+    "/providers/Microsoft.PlannedQuota/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -73,17 +73,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List Operations PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_Operations.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/plannedQuotas": {
       "get": {
         "operationId": "PlannedQuota_ListBySubscription",
         "tags": [
@@ -122,7 +117,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/{resourceName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/plannedQuotas/{resourceName}": {
       "get": {
         "operationId": "PlannedQuota_Get",
         "tags": [
@@ -292,7 +287,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -315,6 +310,92 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "PlannedQuotaResourceProperties": {
+      "type": "object",
+      "description": "plannedQuota properties",
+      "properties": {
+        "plannedQuotaName": {
+          "type": "string",
+          "description": "Name of the resource template"
+        },
+        "contactEmail": {
+          "type": "string",
+          "description": "Contact email for manual approval"
+        },
+        "subscriptionNameInPlan": {
+          "type": "string",
+          "description": "Subscription Name in plan"
+        },
+        "stage": {
+          "type": "string",
+          "description": "Stage name"
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
+        },
+        "planVersion": {
+          "type": "string",
+          "description": "Plan version"
+        },
+        "propertyBindings": {
+          "type": "array",
+          "description": "Property bindings",
+          "items": {
+            "$ref": "#/definitions/PropertyBinding"
+          },
+          "x-ms-identifiers": []
+        },
+        "skipUnsupportedSilently": {
+          "type": "boolean",
+          "description": "Skip unsupported silently"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PlannedQuotaProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The planned quota request identifier; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "fulfilledPlan": {
+          "type": "object",
+          "description": "Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "alternatives": {
+          "type": "object",
+          "description": "Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "plannedQuotaName",
+        "contactEmail",
+        "subscriptionNameInPlan",
+        "azureLocation"
+      ]
+    },
+    "PropertyBinding": {
+      "type": "object",
+      "description": "plannedQuota Property Binding",
+      "properties": {
+        "placeholder": {
+          "type": "string",
+          "description": "Property binding placeholder"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Resource name of the property"
+        }
+      },
+      "required": [
+        "placeholder",
+        "resourceName"
       ]
     }
   },

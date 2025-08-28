@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure CIS FRP",
+    "title": "Azure Planned Quota",
     "version": "2023-08-22",
     "description": "Planned Quota Provider",
     "x-typespec-generated": [
@@ -47,7 +47,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.AzureCis/operations": {
+    "/providers/Microsoft.PlannedQuota/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -83,7 +83,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/plannedQuotas": {
       "get": {
         "operationId": "PlannedQuota_ListBySubscription",
         "tags": [
@@ -122,7 +122,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/{resourceName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PlannedQuota/plannedQuotas/{resourceName}": {
       "get": {
         "operationId": "PlannedQuota_Get",
         "tags": [
@@ -333,9 +333,9 @@
           "type": "string",
           "description": "Stage name"
         },
-        "azureLocation": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure location"
+        "region": {
+          "type": "string",
+          "description": "Region name"
         },
         "planVersion": {
           "type": "string",
@@ -357,28 +357,13 @@
           "$ref": "#/definitions/PlannedQuotaProvisioningState",
           "description": "Provisioning status of the resource.",
           "readOnly": true
-        },
-        "requestId": {
-          "type": "string",
-          "description": "The planned quota request identifier; a part of provisioning ResultData output.",
-          "readOnly": true
-        },
-        "fulfilledPlan": {
-          "type": "object",
-          "description": "Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.",
-          "readOnly": true
-        },
-        "alternatives": {
-          "type": "object",
-          "description": "Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.",
-          "readOnly": true
         }
       },
       "required": [
         "plannedQuotaName",
         "contactEmail",
         "subscriptionNameInPlan",
-        "azureLocation"
+        "region"
       ]
     },
     "PropertyBinding": {
