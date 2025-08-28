@@ -25,6 +25,21 @@ namespace Microsoft.LoadTestService;
 );
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "body");
 
+/**
+ * Common path parameter for test run identifier used across TestRun APIs.
+ */
+model TestRunIdParam {
+  /**
+   * Unique name for the load test run, must contain only lower-case alphabetic,
+   * numeric, underscore or hyphen characters.
+   */
+  @path
+  @maxLength(50)
+  @minLength(2)
+  @pattern("^[a-z0-9_-]*$")
+  testRunId: string;
+}
+
 @tag("Test")
 interface LoadTestAdministration {
   @summary("Create a new test or update an existing test by providing the test Id.")
@@ -50,6 +65,20 @@ interface LoadTestAdministration {
   listTests is StandardResourceOperations.ResourceList<
     Test,
     ListQueryParametersTrait<ListTestQueryParams>
+  >;
+
+  @summary("Clone a load test.")
+  @doc("""
+    Clone the given test with optional overrides applied to the clone test.
+    """)
+  @pollingOperation(Operations.getStatus)
+  @finalOperation(LoadTestAdministration.getTest)
+  @added(APIVersions.v2025_03_01_preview)
+  @action("clone")
+  cloneTest is StandardResourceOperations.LongRunningResourceAction<
+    Test,
+    CloneTestRequest,
+    never
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
@@ -243,6 +272,37 @@ interface LoadTestRun {
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Get the latest insights for the test run.")
+  @doc("Get the latest insights for the test run.")
+  @added(APIVersions.v2025_03_01_preview)
+  @route("/test-runs/{testRunId}/insights/latest")
+  @get
+  getLatestInsights is Azure.Core.Foundations.Operation<
+    {
+      ...TestRunIdParam;
+    },
+    TestRunInsights
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Generate insights for the test run.")
+  @doc("Generate insights for the test run.")
+  @pollingOperation(LoadTestRun.getLatestInsights)
+  @added(APIVersions.v2025_03_01_preview)
+  @route("/test-runs/{testRunId}/insights:generate")
+  @post
+  generateInsights is Azure.Core.Foundations.Operation<
+    {
+      ...TestRunIdParam;
+    },
+    {
+      @statusCode statusCode: 202;
+      @header("Operation-Location") operationLocation: url;
+      @bodyRoot @added(APIVersions.v2025_03_01_preview) body: OperationStatus;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the metric namespaces for a load test run.")
   @doc("List the metric namespaces for a load test run.")
@@ -250,15 +310,7 @@ interface LoadTestRun {
   @get
   listMetricNamespaces is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     MetricNamespaceCollection
   >;
@@ -271,15 +323,7 @@ interface LoadTestRun {
   @get
   listMetricDefinitions is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("Metric namespace to query metric definitions for.")
       @query
@@ -296,15 +340,7 @@ interface LoadTestRun {
   @list
   listMetrics is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("The aggregation")
       @query
@@ -327,15 +363,7 @@ interface LoadTestRun {
   @list
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("Dimension name")
       @path
@@ -357,15 +385,7 @@ interface LoadTestRun {
       @doc("Content type.")
       contentType: "application/merge-patch+json";
 
-      @doc("""
-        Unique Id for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("App Component model.")
       @bodyRoot
@@ -387,15 +407,7 @@ interface LoadTestRun {
   @get
   getAppComponents is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     TestRunAppComponents
   >;
@@ -411,15 +423,7 @@ interface LoadTestRun {
       @doc("Content type.")
       contentType: "application/merge-patch+json";
 
-      @doc("""
-        Unique Id for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
 
       @doc("Server metric configuration model.")
       @bodyRoot
@@ -435,18 +439,18 @@ interface LoadTestRun {
   @get
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam;
     },
     TestRunServerMetricsConfiguration
   >;
+}
+
+@tag("Operations")
+interface Operations {
+  @added(APIVersions.v2025_03_01_preview)
+  @summary("Get the status of a long running operation.")
+  @doc("Get the status of a long running operation.")
+  getStatus is StandardResourceOperations.ResourceRead<OperationStatus>;
 }
 
 // NOTE(mitsha): In clients.tsp, when we use `op is <Op>` syntax, it removes all the decorators defined on the interface
