@@ -1035,6 +1035,111 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/configTemplateMetadata": {
+      "get": {
+        "operationId": "ConfigTemplateMetadatas_ListByConfigTemplateVersion",
+        "tags": [
+          "ConfigTemplateMetadatas"
+        ],
+        "description": "List by ConfigTemplateVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configTemplateName",
+            "in": "path",
+            "description": "The name of the ConfigTemplate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigTemplateMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet": {
+            "$ref": "./examples/ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/configTemplateMetadata/{configTemplateMetadataName}": {
+      "get": {
+        "operationId": "ConfigTemplateMetadatas_Get",
+        "tags": [
+          "ConfigTemplateMetadatas"
+        ],
+        "description": "Get a ConfigTemplateMetadata Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configTemplateName",
+            "in": "path",
+            "description": "The name of the ConfigTemplate",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "configTemplateMetadataName",
+            "in": "path",
+            "description": "The name of the ConfigTemplateMetadataProperties",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigTemplateMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigTemplateMetadatas_Get_MaximumSet": {
+            "$ref": "./examples/ConfigTemplateMetadatas_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/createVersion": {
       "post": {
         "operationId": "ConfigTemplates_CreateVersion",
@@ -1266,127 +1371,6 @@
         "x-ms-examples": {
           "ConfigTemplateVersions_Get_MaximumSet": {
             "$ref": "./examples/ConfigTemplateVersions_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions/{configTemplateVersionName}/configTemplateMetadata": {
-      "get": {
-        "operationId": "ConfigTemplateMetadatas_ListByConfigTemplateVersion",
-        "tags": [
-          "ConfigTemplateMetadatas"
-        ],
-        "description": "List by ConfigTemplateVersion",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configTemplateName",
-            "in": "path",
-            "description": "The name of the ConfigTemplate",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "configTemplateVersionName",
-            "in": "path",
-            "description": "The name of the ConfigTemplateVersion",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigTemplateMetadataListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet": {
-            "$ref": "./examples/ConfigTemplateMetadatas_ListByConfigTemplateVersion_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions/{configTemplateVersionName}/configTemplateMetadata/{configTemplateMetadataName}": {
-      "get": {
-        "operationId": "ConfigTemplateMetadatas_Get",
-        "tags": [
-          "ConfigTemplateMetadatas"
-        ],
-        "description": "Get a ConfigTemplateMetadata Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configTemplateName",
-            "in": "path",
-            "description": "The name of the ConfigTemplate",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "configTemplateVersionName",
-            "in": "path",
-            "description": "The name of the ConfigTemplateVersion",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-          },
-          {
-            "name": "configTemplateMetadataName",
-            "in": "path",
-            "description": "The name of the ConfigTemplateMetadataProperties",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConfigTemplateMetadata"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConfigTemplateMetadatas_Get_MaximumSet": {
-            "$ref": "./examples/ConfigTemplateMetadatas_Get_MaximumSet_Gen.json"
           }
         }
       }

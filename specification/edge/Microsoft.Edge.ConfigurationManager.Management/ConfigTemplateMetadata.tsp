@@ -41,7 +41,7 @@ model ConfigTemplateMetadataProperties {
 
 @added(Versions.v2025_08_15_preview)
 @doc("SolutionSchema Resource")
-@parentResource(ConfigTemplateVersion)
+@parentResource(ConfigTemplate)
 model ConfigTemplateMetadata
   is ProxyResource<ConfigTemplateMetadataProperties> {
   @doc("The name of the ConfigTemplateMetadataProperties")
