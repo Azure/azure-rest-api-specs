@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Private;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.DocumentDB;
