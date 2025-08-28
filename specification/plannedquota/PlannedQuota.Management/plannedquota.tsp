@@ -99,7 +99,7 @@ interface PlannedQuota {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     PlannedQuotaResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
   listBySubscription is ArmListBySubscription<PlannedQuotaResource>;
   get is ArmResourceRead<PlannedQuotaResource>;

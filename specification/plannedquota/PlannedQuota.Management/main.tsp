@@ -1,8 +1,10 @@
+import "@azure-tools/typespec-autorest";
 import "./versions.tsp";
 import "./plannedquota.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Autorest;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
@@ -10,6 +12,11 @@ using Azure.ResourceManager;
 @doc("Planned Quota Provider")
 @versioned(Microsoft.PlannedQuota.Versions)
 namespace Microsoft.PlannedQuota;
+
+@@Autorest.example(Operations.list,
+  "./examples/PlannedQuota_Operations.json",
+  "List Operations"
+);
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
