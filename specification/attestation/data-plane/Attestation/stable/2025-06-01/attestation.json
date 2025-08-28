@@ -1561,13 +1561,11 @@
       "properties": {
         "x-ms-certificate-thumbprint": {
           "type": "string",
-          "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added\nor removed",
-          "x-ms-client-name": "certificateThumbprint"
+          "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added\nor removed"
         },
-        "x-ms-certificate-result": {
+        "x-ms-policycertificates-result": {
           "$ref": "#/definitions/CertificateModification",
-          "description": "The result of the operation",
-          "x-ms-client-name": "certificateResolution"
+          "description": "The result of the operation"
         }
       }
     },
@@ -1599,8 +1597,7 @@
       "properties": {
         "x-ms-policy-certificates": {
           "$ref": "#/definitions/JsonWebKeySet",
-          "description": "SHA256 Hash of the binary representation certificate which was added or removed",
-          "x-ms-client-name": "policyCertificates"
+          "description": "SHA256 Hash of the binary representation certificate which was added or removed"
         }
       }
     },
@@ -1645,25 +1642,21 @@
       "properties": {
         "x-ms-policy-result": {
           "$ref": "#/definitions/PolicyModification",
-          "description": "The result of the operation",
-          "x-ms-client-name": "policyResolution"
+          "description": "The result of the operation"
         },
         "x-ms-policy-token-hash": {
           "type": "string",
           "format": "byte",
-          "description": "The SHA256 hash of the policy object modified",
-          "x-ms-client-name": "policyTokenHash"
+          "description": "The SHA256 hash of the policy object modified"
         },
         "x-ms-policy-signer": {
           "$ref": "#/definitions/JsonWebKey",
-          "description": "The certificate used to sign the policy object, if specified",
-          "x-ms-client-name": "policySigner"
+          "description": "The certificate used to sign the policy object, if specified"
         },
         "x-ms-policy": {
           "type": "string",
           "description": "A JSON Web Token containing a StoredAttestationPolicy object with the\nattestation policy",
-          "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*",
-          "x-ms-client-name": "policy"
+          "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*"
         }
       }
     },
@@ -1736,8 +1729,7 @@
         "AttestationPolicy": {
           "type": "string",
           "format": "byte",
-          "description": "Policy text to set as a sequence of UTF-8 encoded octets.",
-          "x-ms-client-name": "attestationPolicy"
+          "description": "Policy text to set as a sequence of UTF-8 encoded octets."
         }
       }
     },
