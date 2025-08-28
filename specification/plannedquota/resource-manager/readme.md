@@ -19,7 +19,7 @@ These settings apply only when `--tag=2023-08-22-preview` is specified on the co
 
 ```yaml $(tag) == '2023-08-22-preview'
 input-file:
-  - Microsoft.PlannedQuota/preview/2023-08-22-preview/plannedQuota.json
+  - Microsoft.PlannedQuota/preview/2023-08-22-preview/*
 ```
 
 ### Tag: 2023-08-22
@@ -28,7 +28,7 @@ These settings apply only when `--tag=2023-08-22` is specified on the command li
 
 ```yaml $(tag) == '2023-08-22'
 input-file:
-  - Microsoft.PlannedQuota/stable/2023-08-22/plannedQuota.json
+  - Microsoft.PlannedQuota/stable/2023-08-22/*
 ```
 
 ### Tag: 2024-06-24-preview
@@ -37,5 +37,5 @@ These settings apply only when `--tag=2024-06-24-preview` is specified on the co
 
 ```yaml $(tag) == '2024-06-24-preview'
 input-file:
-  - Microsoft.PlannedQuota/preview/2024-06-24-preview/plannedQuota.json
+  - Microsoft.PlannedQuota/preview/2024-06-24-preview/*
 ```
