@@ -199,7 +199,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
-  ...AcsChatThreadPropertiesBaseEventData;f
+  ...AcsChatThreadPropertiesBaseEventData;
 
   /** The retention policy for Chat. */
   retentionPolicy?: AcsChatRetentionPolicyModel;
