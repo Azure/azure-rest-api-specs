@@ -351,7 +351,7 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
   - code: LroAzureAsyncOperationHeader
   - from: ComputeRP.json
-  - reason: Brownfield Service which does not invclude the LroAzureAsyncOperationHeader header
+  - reason: Compute does not invclude the LroAzureAsyncOperationHeader header
 ```
 
 ### Tag: package-2025-04-01
