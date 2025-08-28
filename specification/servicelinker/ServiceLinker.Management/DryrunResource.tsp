@@ -12,9 +12,8 @@ namespace Microsoft.ServiceLinker;
 /**
  * a dryrun job resource
  */
-@subscriptionResource
-@parentResource(SubscriptionLocationResource)
-model DryrunResource is Azure.ResourceManager.ProxyResource<DryrunProperties> {
+model DryrunResource
+  is Azure.ResourceManager.ExtensionResource<DryrunProperties> {
   ...ResourceNameParameter<
     Resource = DryrunResource,
     KeyName = "dryrunName",
@@ -79,42 +78,27 @@ interface DryrunResources {
 }
 
 @armResourceOperations
-interface LinkersOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-
-        /** The fully qualified Azure Resource manager identifier of the resource to be connected. */
-        @path(#{ allowReserved: true })
-        resourceUri: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = DryrunResource,
-        KeyName = "dryrunName",
-        SegmentName = "dryruns",
-        NamePattern = ""
-      >>
-    > {}
-@armResourceOperations
 interface Linkers {
   /**
    * get a dryrun job
    */
-  getDryrun is LinkersOps.Read<DryrunResource>;
+  getDryrun is Extension.Read<Extension.ScopeParameter, DryrunResource>;
 
   /**
    * create a dryrun job to do necessary check before actual creation
    */
-  createDryrun is LinkersOps.CreateOrUpdateAsync<DryrunResource>;
+  createDryrun is Extension.CreateOrUpdateAsync<
+    Extension.ScopeParameter,
+    DryrunResource
+  >;
 
   /**
    * add a dryrun job to do necessary check before actual creation
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  updateDryrun is LinkersOps.CustomPatchAsync<
+  updateDryrun is Extension.CustomPatchAsync<
+    Extension.ScopeParameter,
     DryrunResource,
     PatchModel = DryrunPatch,
     Response = ArmResourceUpdatedResponse<DryrunResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>>
@@ -123,12 +107,16 @@ interface Linkers {
   /**
    * delete a dryrun job
    */
-  deleteDryrun is LinkersOps.DeleteSync<DryrunResource>;
+  deleteDryrun is Extension.DeleteSync<
+    Extension.ScopeParameter,
+    DryrunResource
+  >;
 
   /**
    * list dryrun jobs
    */
-  listDryrun is LinkersOps.List<
+  listDryrun is Extension.ListByTarget<
+    Extension.ScopeParameter,
     DryrunResource,
     Response = ArmResponse<DryrunList>
   >;

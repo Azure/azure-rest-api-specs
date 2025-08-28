@@ -80,3 +80,8 @@ using Microsoft.ServiceLinker;
   "parameters"
 );
 @@clientName(Linker.generateConfigurations::parameters.body, "parameters");
+
+@@doc(Azure.ResourceManager.Extension.ScopeParameter.scope,
+  "The fully qualified Azure Resource manager identifier of the resource to be connected."
+);
+@@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceUri");

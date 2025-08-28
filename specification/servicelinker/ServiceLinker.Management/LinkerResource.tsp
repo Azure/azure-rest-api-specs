@@ -12,14 +12,12 @@ namespace Microsoft.ServiceLinker;
 /**
  * Linker of source and target resource
  */
-@subscriptionResource
-@parentResource(SubscriptionLocationResource)
 model LinkerResource
-  is Azure.ResourceManager.ProxyResource<LinkerProperties, false> {
+  is Azure.ResourceManager.ExtensionResource<LinkerProperties, false> {
   ...ResourceNameParameter<
     Resource = LinkerResource,
-    KeyName = "connectorName",
-    SegmentName = "connectors",
+    KeyName = "linkerName",
+    SegmentName = "linkers",
     NamePattern = ""
   >;
 }
@@ -106,43 +104,28 @@ interface LinkerResources {
     OptionalRequestBody = true
   >;
 }
-@armResourceOperations
-interface LinkerOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-
-        /** The fully qualified Azure Resource manager identifier of the resource to be connected. */
-        @path(#{ allowReserved: true })
-        resourceUri: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = LinkerResource,
-        KeyName = "linkerName",
-        SegmentName = "linkers",
-        NamePattern = ""
-      >>
-    > {}
 
 @armResourceOperations
 interface Linker {
   /**
    * Returns Linker resource for a given name.
    */
-  get is LinkerOps.Read<LinkerResource>;
+  get is Extension.Read<Extension.ScopeParameter, LinkerResource>;
 
   /**
    * Create or update Linker resource.
    */
-  createOrUpdate is LinkerOps.CreateOrUpdateAsync<LinkerResource>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<
+    Extension.ScopeParameter,
+    LinkerResource
+  >;
 
   /**
    * Operation to update an existing Linker.
    */
   @patch(#{ implicitOptionality: false })
-  update is LinkerOps.CustomPatchAsync<
+  update is Extension.CustomPatchAsync<
+    Extension.ScopeParameter,
     LinkerResource,
     PatchModel = LinkerPatch,
     Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<
@@ -156,7 +139,8 @@ interface Linker {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is LinkerOps.DeleteWithoutOkAsync<
+  delete is Extension.DeleteWithoutOkAsync<
+    Extension.ScopeParameter,
     LinkerResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
@@ -166,13 +150,18 @@ interface Linker {
    * Returns list of Linkers which connects to the resource. which supports to config both application and target service during the resource provision.
    */
   @segment("linkers")
-  list is LinkerOps.List<LinkerResource, Response = ArmResponse<ResourceList>>;
+  list is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    LinkerResource,
+    Response = ArmResponse<ResourceList>
+  >;
 
   /**
    * Validate a Linker.
    */
   @action("validateLinker")
-  validate is LinkerOps.ActionAsync<
+  validate is Extension.ActionAsync<
+    Extension.ScopeParameter,
     LinkerResource,
     void,
     ValidateOperationResult
@@ -181,7 +170,8 @@ interface Linker {
   /**
    * list source configurations for a Linker.
    */
-  listConfigurations is LinkerOps.ActionSync<
+  listConfigurations is Extension.ActionSync<
+    Extension.ScopeParameter,
     LinkerResource,
     void,
     ArmResponse<ConfigurationResult>
@@ -190,7 +180,8 @@ interface Linker {
   /**
    * Generate configurations for a Linker.
    */
-  generateConfigurations is LinkerOps.ActionSync<
+  generateConfigurations is Extension.ActionSync<
+    Extension.ScopeParameter,
     LinkerResource,
     ConfigurationInfo,
     ArmResponse<ConfigurationResult>,
@@ -198,7 +189,7 @@ interface Linker {
   >;
 }
 
-@@doc(LinkerResource.name, "The name of resource.");
+@@doc(LinkerResource.name, "The name Linker resource.");
 @@doc(LinkerResource.properties, "The properties of the Linker.");
 @@doc(LinkerResources.createOrUpdate::parameters.resource,
   "Connector details."
