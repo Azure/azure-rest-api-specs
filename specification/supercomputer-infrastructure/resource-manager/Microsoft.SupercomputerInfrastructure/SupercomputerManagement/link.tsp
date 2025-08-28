@@ -25,19 +25,19 @@ model LinkProperties {
 
   /** The ARM resource ID of the first device connected via this network link. */
   @visibility(Lifecycle.Read)
-  deviceOneId: DeviceArmResourceId;
+  deviceOneId: DeviceResourceId;
 
   /** The ARM resource ID of the port that this network link is connected to the first device. */
   @visibility(Lifecycle.Read)
-  deviceLogicalPortOneId: DeviceLogicalPortArmResourceId;
+  deviceLogicalPortOneId: DeviceLogicalPortResourceId;
 
   /** The ARM resource ID of the second device connected via this network link. */
   @visibility(Lifecycle.Read)
-  deviceTwoId: DeviceArmResourceId;
+  deviceTwoId: DeviceResourceId;
 
   /** The ARM resource ID of the port that this network link is connected to the second device. */
   @visibility(Lifecycle.Read)
-  deviceLogicalPortTwoId: DeviceLogicalPortArmResourceId;
+  deviceLogicalPortTwoId: DeviceLogicalPortResourceId;
 
   /** The ID of the plane that this link is associated with. */
   @visibility(Lifecycle.Read)
@@ -45,7 +45,7 @@ model LinkProperties {
 
   /** The cluster that the link is associated with, if any. */
   @visibility(Lifecycle.Read)
-  clusterId?: ClusterArmResourceId;
+  clusterId?: ClusterResourceId;
 }
 
 @armResourceOperations

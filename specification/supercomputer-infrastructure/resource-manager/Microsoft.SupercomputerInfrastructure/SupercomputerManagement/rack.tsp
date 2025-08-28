@@ -25,7 +25,7 @@ model RackProperties {
 
   /** The cluster that the rack is associated with, if any. */
   @visibility(Lifecycle.Read)
-  clusterId?: ClusterArmResourceId;
+  clusterId?: ClusterResourceId;
 }
 
 @armResourceOperations

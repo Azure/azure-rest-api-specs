@@ -25,7 +25,7 @@ model NicProperties {
 
   /** The ID of the device that the NIC resides within. */
   @visibility(Lifecycle.Read)
-  parentDeviceId: NodeArmResourceId;
+  parentDeviceId: NodeResourceId;
 }
 
 @armResourceOperations

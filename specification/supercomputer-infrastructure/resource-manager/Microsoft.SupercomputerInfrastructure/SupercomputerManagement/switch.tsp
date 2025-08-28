@@ -29,7 +29,7 @@ model SwitchProperties {
 
   /** The cluster that the switch is associated with, if any. */
   @visibility(Lifecycle.Read)
-  clusterId?: ClusterArmResourceId;
+  clusterId?: ClusterResourceId;
 }
 
 /** The type of the network the switch resides in. */

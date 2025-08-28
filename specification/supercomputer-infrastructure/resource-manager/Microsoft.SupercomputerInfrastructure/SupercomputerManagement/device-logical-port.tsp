@@ -27,7 +27,7 @@ model DeviceLogicalPortProperties {
 
   /** The device (e.g., NIC or Switch) this port resides on. */
   @visibility(Lifecycle.Read)
-  deviceId: DeviceArmResourceId;
+  deviceId: DeviceResourceId;
 
   /** The port's name on the device (e.g., Ethernet 1/1). */
   @visibility(Lifecycle.Read)
@@ -35,11 +35,11 @@ model DeviceLogicalPortProperties {
 
   /** The link that the port is interfaced with. */
   @visibility(Lifecycle.Read)
-  linkId?: LinkArmResourceId;
+  linkId?: LinkResourceId;
 
   /** The cluster that the port is associated with, if any. */
   @visibility(Lifecycle.Read)
-  clusterId?: ClusterArmResourceId;
+  clusterId?: ClusterResourceId;
 }
 
 @armResourceOperations

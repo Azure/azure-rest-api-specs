@@ -15,14 +15,14 @@ union TopologicalProvisioningState {
   Updating: "Updating",
 }
 
-scalar ClusterArmResourceId
+scalar ClusterResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SupercomputerInfrastructure/supercomputers/clusters",
     }
   ]>;
 
-scalar DeviceArmResourceId
+scalar DeviceResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SupercomputerInfrastructure/supercomputers/switches",
@@ -32,21 +32,21 @@ scalar DeviceArmResourceId
     }
   ]>;
 
-scalar LinkArmResourceId
+scalar LinkResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SupercomputerInfrastructure/supercomputers/links",
     }
   ]>;
 
-scalar NodeArmResourceId
+scalar NodeResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SupercomputerInfrastructure/supercomputers/nodes",
     }
   ]>;
 
-scalar DeviceLogicalPortArmResourceId
+scalar DeviceLogicalPortResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts",

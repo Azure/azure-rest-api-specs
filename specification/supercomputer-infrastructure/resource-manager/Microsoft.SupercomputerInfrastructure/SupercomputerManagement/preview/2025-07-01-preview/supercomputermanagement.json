@@ -1324,18 +1324,6 @@
         }
       ]
     },
-    "ClusterArmResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/clusters"
-          }
-        ]
-      }
-    },
     "ClusterListResult": {
       "type": "object",
       "description": "The response of a Cluster list operation.",
@@ -1368,17 +1356,14 @@
         }
       }
     },
-    "DeviceArmResourceId": {
+    "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
       "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/switches"
-          },
-          {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nics"
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/clusters"
           }
         ]
       }
@@ -1397,18 +1382,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "DeviceLogicalPortArmResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts"
-          }
-        ]
-      }
     },
     "DeviceLogicalPortListResult": {
       "type": "object",
@@ -1441,7 +1414,7 @@
           "readOnly": true
         },
         "deviceId": {
-          "$ref": "#/definitions/DeviceArmResourceId",
+          "$ref": "#/definitions/DeviceResourceId",
           "description": "The device (e.g., NIC or Switch) this port resides on.",
           "readOnly": true
         },
@@ -1451,12 +1424,12 @@
           "readOnly": true
         },
         "linkId": {
-          "$ref": "#/definitions/LinkArmResourceId",
+          "$ref": "#/definitions/LinkResourceId",
           "description": "The link that the port is interfaced with.",
           "readOnly": true
         },
         "clusterId": {
-          "$ref": "#/definitions/ClusterArmResourceId",
+          "$ref": "#/definitions/ClusterResourceId",
           "description": "The cluster that the port is associated with, if any.",
           "readOnly": true
         }
@@ -1465,6 +1438,33 @@
         "deviceId",
         "nameOnDevice"
       ]
+    },
+    "DeviceLogicalPortResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts"
+          }
+        ]
+      }
+    },
+    "DeviceResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/switches"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nics"
+          }
+        ]
+      }
     },
     "Link": {
       "type": "object",
@@ -1480,18 +1480,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "LinkArmResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/links"
-          }
-        ]
-      }
     },
     "LinkListResult": {
       "type": "object",
@@ -1524,22 +1512,22 @@
           "readOnly": true
         },
         "deviceOneId": {
-          "$ref": "#/definitions/DeviceArmResourceId",
+          "$ref": "#/definitions/DeviceResourceId",
           "description": "The ARM resource ID of the first device connected via this network link.",
           "readOnly": true
         },
         "deviceLogicalPortOneId": {
-          "$ref": "#/definitions/DeviceLogicalPortArmResourceId",
+          "$ref": "#/definitions/DeviceLogicalPortResourceId",
           "description": "The ARM resource ID of the port that this network link is connected to the first device.",
           "readOnly": true
         },
         "deviceTwoId": {
-          "$ref": "#/definitions/DeviceArmResourceId",
+          "$ref": "#/definitions/DeviceResourceId",
           "description": "The ARM resource ID of the second device connected via this network link.",
           "readOnly": true
         },
         "deviceLogicalPortTwoId": {
-          "$ref": "#/definitions/DeviceLogicalPortArmResourceId",
+          "$ref": "#/definitions/DeviceLogicalPortResourceId",
           "description": "The ARM resource ID of the port that this network link is connected to the second device.",
           "readOnly": true
         },
@@ -1549,7 +1537,7 @@
           "readOnly": true
         },
         "clusterId": {
-          "$ref": "#/definitions/ClusterArmResourceId",
+          "$ref": "#/definitions/ClusterResourceId",
           "description": "The cluster that the link is associated with, if any.",
           "readOnly": true
         }
@@ -1561,6 +1549,18 @@
         "deviceLogicalPortTwoId",
         "planeId"
       ]
+    },
+    "LinkResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/links"
+          }
+        ]
+      }
     },
     "NetworkType": {
       "type": "string",
@@ -1626,7 +1626,7 @@
           "readOnly": true
         },
         "parentDeviceId": {
-          "$ref": "#/definitions/NodeArmResourceId",
+          "$ref": "#/definitions/NodeResourceId",
           "description": "The ID of the device that the NIC resides within.",
           "readOnly": true
         }
@@ -1649,18 +1649,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "NodeArmResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nodes"
-          }
-        ]
-      }
     },
     "NodeListResult": {
       "type": "object",
@@ -1692,6 +1680,18 @@
           "description": "The status of the last operation on this node.",
           "readOnly": true
         }
+      }
+    },
+    "NodeResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nodes"
+          }
+        ]
       }
     },
     "Rack": {
@@ -1740,7 +1740,7 @@
           "readOnly": true
         },
         "clusterId": {
-          "$ref": "#/definitions/ClusterArmResourceId",
+          "$ref": "#/definitions/ClusterResourceId",
           "description": "The cluster that the rack is associated with, if any.",
           "readOnly": true
         }
@@ -1986,7 +1986,7 @@
           "readOnly": true
         },
         "clusterId": {
-          "$ref": "#/definitions/ClusterArmResourceId",
+          "$ref": "#/definitions/ClusterResourceId",
           "description": "The cluster that the switch is associated with, if any.",
           "readOnly": true
         }
