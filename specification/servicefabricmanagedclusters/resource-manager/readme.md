@@ -406,6 +406,11 @@ suppressions:
       - $.definitions.UserAssignedIdentityMap
       - $.definitions.VMSSExtensionProperties.properties.settings
       - $.definitions.VMSSExtensionProperties.properties.protectedSettings
+    
+  - code: AvoidAdditionalProperties
+    reason: Documenting already shipped APi
+    where:
+      - $.definitions.RuntimeApplicationHealthPolicy.serviceTypeHealthPolicyMap
       
   - code: BodyTopLevelProperties
     reason: Backwards compatability with previously approved specs. Model did not change.
