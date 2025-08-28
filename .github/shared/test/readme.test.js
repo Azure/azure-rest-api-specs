@@ -26,8 +26,6 @@ describe("readme", () => {
     expect(readme.path).toBe(resolve("/specs/foo/readme.md"));
   });
 
-  // TODO: Test that path is resolved against backpointer
-
   it("can be created with string content", async () => {
     const folder = "/fake";
     const readme = new Readme(resolve(folder, "readme.md"), {
