@@ -60,6 +60,6 @@ interface ConfigTemplateMetadatas {
   @doc("Get a ConfigTemplateMetadata Resource")
   get is ArmResourceRead<ConfigTemplateMetadata>;
 
-  @doc("List by ConfigTemplateVersion")
+  @doc("List by ConfigTemplate")
   listByConfigTemplate is ArmResourceListByParent<ConfigTemplateMetadata>;
 }
