@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcecopilot.json
+  - Microsoft.ResourceIntelligence/preview/2023-09-01-preview/resourcecopilot.json
 ```
 
 # Code Generation
