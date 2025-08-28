@@ -223,7 +223,7 @@ Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-packa
 
 ## Instructions for GitHub coding agent to generate SDKs using GitHub.com
 Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when Github copilot coding agent is used to geneate SDK and if a release plan is available in the context.
-Coding agent must wait until all SDK generation pipeline is in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running copilot from visual studio and vs code.
+Coding agent must wait until all SDK generation pipeline are in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running Copilot from Visual Studio and VS Code.
   
   steps:
     - Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description.
