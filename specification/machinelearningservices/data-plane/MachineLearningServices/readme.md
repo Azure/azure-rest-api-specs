@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-05-01-preview'
 input-file:
-  - ./preview/2024-05-01-preview/azure-ai-assets.json
+  - preview/2024-05-01-preview/azure-ai-assets.json
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - ./preview/2024-04-01-preview/azure-ai-assets.json
+  - preview/2024-04-01-preview/azure-ai-assets.json
 ```
 
 ### Tag: package-2019-09-preview
@@ -72,12 +72,12 @@ These settings apply only when `--tag=package-2019-09-preview` is specified on t
 
 ```yaml $(tag) == 'package-2019-09-preview'
 input-file:
-  - ./preview/2019-09-30/execution.json
-  - ./preview/2019-09-30/modelManagement.json
-  - ./preview/2019-09-30/runHistory.json
-  - ./preview/2019-09-30/datastore.json
-  - ./preview/2019-09-30/artifact.json
-  - ./preview/2019-09-30/hyperdrive.json
+  - preview/2019-09-30/execution.json
+  - preview/2019-09-30/modelManagement.json
+  - preview/2019-09-30/runHistory.json
+  - preview/2019-09-30/datastore.json
+  - preview/2019-09-30/artifact.json
+  - preview/2019-09-30/hyperdrive.json
 ```
 
 ### Tag: package-2019-08-preview
@@ -86,12 +86,12 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
-  - ./preview/2019-08-01/execution.json
-  - ./preview/2019-08-01/modelManagement.json
-  - ./preview/2019-08-01/runHistory.json
-  - ./preview/2019-08-01/datastore.json
-  - ./preview/2019-08-01/artifact.json
-  - ./preview/2019-08-01/hyperdrive.json
+  - preview/2019-08-01/execution.json
+  - preview/2019-08-01/modelManagement.json
+  - preview/2019-08-01/runHistory.json
+  - preview/2019-08-01/datastore.json
+  - preview/2019-08-01/artifact.json
+  - preview/2019-08-01/hyperdrive.json
 ```
 
 ---
