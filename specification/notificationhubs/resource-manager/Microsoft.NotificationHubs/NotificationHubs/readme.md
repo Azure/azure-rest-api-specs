@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.NotificationHubs/preview/2023-10-01-preview/notificationhubs.json
+  - preview/2023-10-01-preview/notificationhubs.json
 ```
 ### Tag: package-2023-09
 
@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-09'
 input-file:
-  - Microsoft.NotificationHubs/stable/2023-09-01/notificationhubs.json
+  - stable/2023-09-01/notificationhubs.json
 ```
 
 ### Tag: package-preview-2023-01
@@ -75,7 +75,7 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - Microsoft.NotificationHubs/preview/2023-01-01-preview/notificationhubs.json
+  - preview/2023-01-01-preview/notificationhubs.json
 
 suppressions:
  - code: RepeatedPathInfo
@@ -88,7 +88,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.NotificationHubs/stable/2017-04-01/notificationhubs.json
+- stable/2017-04-01/notificationhubs.json
 ```
 
 ### Tag: package-2016-03
@@ -97,7 +97,7 @@ These settings apply only when `--tag=package-2016-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-03'
 input-file:
-- Microsoft.NotificationHubs/stable/2016-03-01/notificationhubs.json
+- stable/2016-03-01/notificationhubs.json
 ```
 
 ### Tag: package-2014-09
@@ -106,7 +106,7 @@ These settings apply only when `--tag=package-2014-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-09'
 input-file:
-- Microsoft.NotificationHubs/stable/2014-09-01/notificationhubs.json
+- stable/2014-09-01/notificationhubs.json
 ```
 
 ---
