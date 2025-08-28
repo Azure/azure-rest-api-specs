@@ -114,22 +114,22 @@ using Microsoft.Advisor;
 @@clientName(PredictionRequest, "AdvisorPredictionContent", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(ConfigurationsOperationGroup.listBySubscription,
-  "GetConfigurations",
+  "GetAdvisorConfigurations",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(ConfigurationsOperationGroup.listByResourceGroup,
-  "GetConfigurations",
+  "GetAdvisorConfigurations",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(ConfigurationsOperationGroup.createInSubscription,
-  "CreateConfiguration",
+  "CreateAdvisorConfiguration",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(ConfigurationsOperationGroup.createInResourceGroup,
-  "CreateConfiguration",
+  "CreateAdvisorConfiguration",
   "csharp"
 );
 @@clientName(ConfigurationsOperationGroup, "Configurations", "csharp");
