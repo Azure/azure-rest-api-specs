@@ -37,6 +37,11 @@ jobs:
 
           $matchedFiles = @($changedFiles | Where-Object { $changedFile = $_; $protectedFiles | Where-Object { $changedFile -like $_ } })
 
+          $matchedFiles = $matchedFiles | Where-Object {
+              $p = $_.Replace('\','/')
+              -not ($p -match '^\.github/CODEOWNERS$')
+          }
+
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {
               Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
