@@ -665,12 +665,14 @@
   "definitions": {
     "RunRequest": {
       "description": "The request parameters for scheduling a run.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of the run request.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "isArchiveEnabled": {
           "description": "The value that indicates whether archiving is enabled for the run or not.",
@@ -1181,6 +1183,9 @@
     },
     "TaskStepProperties": {
       "description": "Base properties for any task step.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -1191,7 +1196,6 @@
             "EncodedTask"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "StepType",
             "modelAsString": true
@@ -1603,6 +1607,9 @@
     },
     "TaskStepUpdateParameters": {
       "description": "Base properties for updating any task step.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -1613,7 +1620,6 @@
             "EncodedTask"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "StepType",
             "modelAsString": true
