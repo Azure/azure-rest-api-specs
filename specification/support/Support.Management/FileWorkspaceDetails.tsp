@@ -36,7 +36,7 @@ interface FileWorkspaceOps
         Resource = FileWorkspaceDetails,
         KeyName = "fileWorkspaceName",
         SegmentName = "fileWorkspaces",
-        NamePattern = ""
+        NamePattern = "^[0-9a-zA-Z_\\-. ]+$"
       >>
     > {}
 
@@ -52,12 +52,9 @@ interface FileWorkspaces {
    * Creates a new file workspace for the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodySync<
+  create is FileWorkspaceOps.CreateOrUpdateSync<
     FileWorkspaceDetails,
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-    },
+    Request = void,
     Response = ArmResourceCreatedSyncResponse<FileWorkspaceDetails>
   >;
 }
@@ -72,7 +69,7 @@ interface FileWorkspacesNoSubscriptionOps
         Resource = FileWorkspaceDetails,
         KeyName = "fileWorkspaceName",
         SegmentName = "fileWorkspaces",
-        NamePattern = ""
+        NamePattern = "^[0-9a-zA-Z_\\-. ]+$"
       >>
     > {}
 
@@ -88,11 +85,9 @@ interface FileWorkspacesNoSubscription {
    * Creates a new file workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodySync<
+  create is FileWorkspacesNoSubscriptionOps.CreateOrUpdateSync<
     FileWorkspaceDetails,
-    {
-      ...ApiVersionParameter;
-    },
+    Request = void,
     Response = ArmResourceCreatedSyncResponse<FileWorkspaceDetails>
   >;
 }
