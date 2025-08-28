@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../common/models.tsp";
 
 namespace Azure.AI.Projects;
 using TypeSpec.Versioning;
@@ -29,6 +30,16 @@ alias AssetBase = {
   tags?: Record<string>;
 };
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Abstract data class.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InputData {
+  @doc("Type of the data")
+  type: string;
+}
+
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create responses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;
@@ -52,6 +63,8 @@ union PendingUploadType {
   @doc("Blob Reference is the only supported type.")
   BlobReference: "BlobReference",
 }
+
+
 
 @doc("The type of credential used to access the storage account.")
 union PendingUploadCredentialType {

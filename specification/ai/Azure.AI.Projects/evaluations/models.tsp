@@ -37,15 +37,6 @@ model EvaluatorConfiguration {
   dataMapping?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
-@doc("Abstract data class.")
-@discriminator("type")
-@added(Versions.v2025_05_15_preview)
-model InputData {
-  @doc("Type of the data")
-  type: string;
-}
-
 @doc("Dataset as source for evaluation.")
 @added(Versions.v2025_05_15_preview)
 model InputDataset extends InputData {
