@@ -1,0 +1,191 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-recoveryservicesdatareplication
+      breaking-changes:
+        - Deleted or renamed client method `RecoveryServicesDataReplicationMgmtClient.check_name_availability`
+        - Deleted or renamed client method `RecoveryServicesDataReplicationMgmtClient.deployment_preflight`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.dra_operation_status`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.dra`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.fabric_operations_status`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.policy_operation_status`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.protected_item_operation_status`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.recovery_points`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.replication_extension_operation_status`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.vault_operation_status`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.workflow_operation_status`
+        - Deleted or renamed client operation group `RecoveryServicesDataReplicationMgmtClient.workflow`
+        - Deleted or renamed enum value `ProvisioningState.UPDATING`
+        - Deleted or renamed model `DraModelCollection`
+        - Deleted or renamed model `DraModelCustomProperties`
+        - Deleted or renamed model `DraModelProperties`
+        - Deleted or renamed model `DraModelSystemData`
+        - Deleted or renamed model `DraModel`
+        - Deleted or renamed model `DraOperationStatusOperations`
+        - Deleted or renamed model `DraOperations`
+        - Deleted or renamed model `EmailConfigurationModelCollection`
+        - Deleted or renamed model `EmailConfigurationModelSystemData`
+        - Deleted or renamed model `EventModelCollection`
+        - Deleted or renamed model `EventModelSystemData`
+        - Deleted or renamed model `FabricModelCollection`
+        - Deleted or renamed model `FabricModelSystemData`
+        - Deleted or renamed model `FabricModelUpdateSystemData`
+        - Deleted or renamed model `FabricOperationsStatusOperations`
+        - Deleted or renamed model `FailoverWorkflowModelCustomProperties`
+        - Deleted or renamed model `OperationModelCollection`
+        - Deleted or renamed model `OperationModelProperties`
+        - Deleted or renamed model `OperationModel`
+        - Deleted or renamed model `PolicyModelCollection`
+        - Deleted or renamed model `PolicyModelSystemData`
+        - Deleted or renamed model `PolicyOperationStatusOperations`
+        - Deleted or renamed model `ProtectedItemModelCollection`
+        - Deleted or renamed model `ProtectedItemModelPropertiesCurrentJob`
+        - Deleted or renamed model `ProtectedItemModelPropertiesLastFailedEnableProtectionJob`
+        - Deleted or renamed model `ProtectedItemModelPropertiesLastFailedPlannedFailoverJob`
+        - Deleted or renamed model `ProtectedItemModelPropertiesLastTestFailoverJob`
+        - Deleted or renamed model `ProtectedItemModelSystemData`
+        - Deleted or renamed model `ProtectedItemOperationStatusOperations`
+        - Deleted or renamed model `RecoveryPointModelCollection`
+        - Deleted or renamed model `RecoveryPointModelSystemData`
+        - Deleted or renamed model `RecoveryPointsOperations`
+        - Deleted or renamed model `RecoveryServicesDataReplicationMgmtClientOperationsMixin`
+        - Deleted or renamed model `ReplicationExtensionModelCollection`
+        - Deleted or renamed model `ReplicationExtensionModelSystemData`
+        - Deleted or renamed model `ReplicationExtensionOperationStatusOperations`
+        - Deleted or renamed model `SystemDataModel`
+        - Deleted or renamed model `TestFailoverCleanupWorkflowModelCustomProperties`
+        - Deleted or renamed model `TestFailoverWorkflowModelCustomProperties`
+        - Deleted or renamed model `VMwareDraModelCustomProperties`
+        - Deleted or renamed model `VaultModelCollection`
+        - Deleted or renamed model `VaultModelSystemData`
+        - Deleted or renamed model `VaultModelUpdateSystemData`
+        - Deleted or renamed model `VaultOperationStatusOperations`
+        - Deleted or renamed model `WorkflowModelCollection`
+        - Deleted or renamed model `WorkflowModelCustomProperties`
+        - Deleted or renamed model `WorkflowModelProperties`
+        - Deleted or renamed model `WorkflowModelSystemData`
+        - Deleted or renamed model `WorkflowModel`
+        - Deleted or renamed model `WorkflowObjectType`
+        - Deleted or renamed model `WorkflowOperationStatusOperations`
+        - Deleted or renamed model `WorkflowOperations`
+        - Deleted or renamed model `WorkflowState`
+        - Method `EmailConfigurationOperations.create` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `EmailConfigurationOperations.create` inserted a `positional_or_keyword` parameter `resource`
+        - Method `EmailConfigurationOperations.create` re-ordered its parameters from `['self', 'resource_group_name', 'vault_name', 'email_configuration_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'vault_name', 'email_configuration_name', 'resource', 'kwargs']`
+        - Method `EventOperations.list` changed its parameter `continuation_token_parameter` from `positional_or_keyword` to `keyword_only`
+        - Method `EventOperations.list` deleted or renamed its parameter `filter` of kind `positional_or_keyword`
+        - Method `FabricOperations.begin_create` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `FabricOperations.begin_create` inserted a `positional_or_keyword` parameter `resource`
+        - Method `FabricOperations.begin_create` re-ordered its parameters from `['self', 'resource_group_name', 'fabric_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'fabric_name', 'resource', 'kwargs']`
+        - Method `FabricOperations.begin_update` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `FabricOperations.begin_update` inserted a `positional_or_keyword` parameter `properties`
+        - Method `FabricOperations.begin_update` re-ordered its parameters from `['self', 'resource_group_name', 'fabric_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'fabric_name', 'properties', 'kwargs']`
+        - Method `FabricOperations.list_by_subscription` deleted or renamed its parameter `continuation_token_parameter` of kind `positional_or_keyword`
+        - Method `FabricOperations.list` changed its parameter `continuation_token_parameter` from `positional_or_keyword` to `keyword_only`
+        - Method `PolicyOperations.begin_create` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `PolicyOperations.begin_create` inserted a `positional_or_keyword` parameter `resource`
+        - Method `PolicyOperations.begin_create` re-ordered its parameters from `['self', 'resource_group_name', 'vault_name', 'policy_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'vault_name', 'policy_name', 'resource', 'kwargs']`
+        - Method `ProtectedItemOperations.begin_create` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `ProtectedItemOperations.begin_create` inserted a `positional_or_keyword` parameter `resource`
+        - Method `ProtectedItemOperations.begin_create` re-ordered its parameters from `['self', 'resource_group_name', 'vault_name', 'protected_item_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'vault_name', 'protected_item_name', 'resource', 'kwargs']`
+        - Method `ProtectedItemOperations.begin_delete` changed its parameter `force_delete` from `positional_or_keyword` to `keyword_only`
+        - Method `ProtectedItemOperations.begin_planned_failover` removed default value `None` from its parameter `body`
+        - Method `ReplicationExtensionOperations.begin_create` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `ReplicationExtensionOperations.begin_create` inserted a `positional_or_keyword` parameter `resource`
+        - Method `ReplicationExtensionOperations.begin_create` re-ordered its parameters from `['self', 'resource_group_name', 'vault_name', 'replication_extension_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'vault_name', 'replication_extension_name', 'resource', 'kwargs']`
+        - Method `VaultOperations.begin_create` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `VaultOperations.begin_create` inserted a `positional_or_keyword` parameter `resource`
+        - Method `VaultOperations.begin_create` re-ordered its parameters from `['self', 'resource_group_name', 'vault_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'vault_name', 'resource', 'kwargs']`
+        - Method `VaultOperations.begin_update` deleted or renamed its parameter `body` of kind `positional_or_keyword`
+        - Method `VaultOperations.begin_update` inserted a `positional_or_keyword` parameter `properties`
+        - Method `VaultOperations.begin_update` re-ordered its parameters from `['self', 'resource_group_name', 'vault_name', 'body', 'kwargs']` to `['self', 'resource_group_name', 'vault_name', 'properties', 'kwargs']`
+        - Method `VaultOperations.list_by_subscription` deleted or renamed its parameter `continuation_token_parameter` of kind `positional_or_keyword`
+        - Method `VaultOperations.list` changed its parameter `continuation_token_parameter` from `positional_or_keyword` to `keyword_only`
+        - Model `AzStackHCIClusterProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `AzStackHCIFabricModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `CheckNameAvailabilityModel` deleted or renamed its instance variable `additional_properties`
+        - Model `CheckNameAvailabilityResponseModel` deleted or renamed its instance variable `additional_properties`
+        - Model `DeploymentPreflightModel` deleted or renamed its instance variable `additional_properties`
+        - Model `DeploymentPreflightResource` deleted or renamed its instance variable `additional_properties`
+        - Model `EmailConfigurationModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `EmailConfigurationModel` deleted or renamed its instance variable `additional_properties`
+        - Model `ErrorAdditionalInfo` deleted or renamed its instance variable `additional_properties`
+        - Model `ErrorDetail` deleted or renamed its instance variable `additional_properties`
+        - Model `ErrorModel` deleted or renamed its instance variable `additional_properties`
+        - Model `ErrorResponse` deleted or renamed its instance variable `additional_properties`
+        - Model `EventModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `EventModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `EventModel` deleted or renamed its instance variable `additional_properties`
+        - Model `FabricModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `FabricModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `FabricModelUpdate` deleted or renamed its instance variable `additional_properties`
+        - Model `FabricModel` deleted or renamed its instance variable `additional_properties`
+        - Model `FailoverProtectedItemProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HealthErrorModel` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVMigrateFabricModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIDiskInput` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIEventModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCINicInput` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIPlannedFailoverModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIPolicyModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIProtectedDiskProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIProtectedItemModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIProtectedItemModelCustomProperties` deleted or renamed its instance variable `source_dra_name`
+        - Model `HyperVToAzStackHCIProtectedItemModelCustomProperties` deleted or renamed its instance variable `target_dra_name`
+        - Model `HyperVToAzStackHCIProtectedNicProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIRecoveryPointModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `HyperVToAzStackHCIReplicationExtensionModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `IdentityModel` deleted or renamed its instance variable `additional_properties`
+        - Model `InnerHealthErrorModel` deleted or renamed its instance variable `additional_properties`
+        - Model `OperationDisplay` deleted or renamed its instance variable `additional_properties`
+        - Model `OperationStatus` deleted or renamed its instance variable `additional_properties`
+        - Model `Operation` deleted or renamed its instance variable `additional_properties`
+        - Model `PlannedFailoverModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `PlannedFailoverModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `PlannedFailoverModel` deleted or renamed its instance variable `additional_properties`
+        - Model `PolicyModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `PolicyModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `PolicyModel` deleted or renamed its instance variable `additional_properties`
+        - Model `ProtectedItemDynamicMemoryConfig` deleted or renamed its instance variable `additional_properties`
+        - Model `ProtectedItemJobProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `ProtectedItemModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `ProtectedItemModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `ProtectedItemModelProperties` deleted or renamed its instance variable `dra_id`
+        - Model `ProtectedItemModelProperties` deleted or renamed its instance variable `target_dra_id`
+        - Model `ProtectedItemModel` deleted or renamed its instance variable `additional_properties`
+        - Model `RecoveryPointModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `RecoveryPointModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `RecoveryPointModel` deleted or renamed its instance variable `additional_properties`
+        - Model `ReplicationExtensionModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `ReplicationExtensionModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `ReplicationExtensionModel` deleted or renamed its instance variable `additional_properties`
+        - Model `StorageContainerProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `TaskModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `TaskModel` deleted or renamed its instance variable `additional_properties`
+        - Model `TaskModel` deleted or renamed its instance variable `children_workflows`
+        - Model `VMwareMigrateFabricModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCIDiskInput` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCINicInput` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCIPlannedFailoverModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCIPolicyModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCIProtectedDiskProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCIProtectedItemModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCIProtectedItemModelCustomProperties` deleted or renamed its instance variable `source_dra_name`
+        - Model `VMwareToAzStackHCIProtectedItemModelCustomProperties` deleted or renamed its instance variable `target_dra_name`
+        - Model `VMwareToAzStackHCIProtectedNicProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VMwareToAzStackHCIReplicationExtensionModelCustomProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VaultModelProperties` deleted or renamed its instance variable `additional_properties`
+        - Model `VaultModelUpdate` deleted or renamed its instance variable `additional_properties`
+        - Model `VaultModel` deleted or renamed its instance variable `additional_properties`
+        - Operation ContainerAppsSourceControlsOperations.begin_create_or_update has a new required parameter x_ms_github_auxiliary
+        - Operation ContainerAppsSourceControlsOperations.begin_delete has a new required parameter x_ms_github_auxiliary
+        - Operation JobsOperations.proxy_get no longer has parameter api_name
+        - The 'JobsOperations' method 'proxy_get' had its parameter 'api_name' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - The 'JobsOperations' method 'proxy_get' had its parameter 'api_name' of kind 'positional_or_keyword' deleted or renamed in the current version
+        - Method `JobsOperations.proxy_get` deleted or renamed its parameter `api_name` of kind `positional_or_keyword`
+        - Deleted or renamed method `ConnectedEnvironmentsCertificatesOperations.create_or_update`
+        - Deleted or renamed method `ConnectedEnvironmentsCertificatesOperations.delete`
+        - Deleted or renamed method `ConnectedEnvironmentsCertificatesOperations.update`
+        - Deleted or renamed method `ConnectedEnvironmentsDaprComponentsOperations.create_or_update`
+        - Deleted or renamed method `ConnectedEnvironmentsDaprComponentsOperations.delete`
+        - Deleted or renamed method `ConnectedEnvironmentsStoragesOperations.create_or_update`
+        - Deleted or renamed method `ConnectedEnvironmentsStoragesOperations.delete`
