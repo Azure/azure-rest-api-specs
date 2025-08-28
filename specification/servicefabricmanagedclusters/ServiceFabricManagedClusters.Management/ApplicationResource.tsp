@@ -2,13 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -136,6 +134,9 @@ interface Applications {
 );
 @@doc(Applications.resumeUpgrade::parameters.body,
   "The parameters for resuming an application upgrade."
+);
+@@doc(Applications.updateUpgrade::parameters.body,
+  "The parameters for updating an application upgrade."
 );
 
 /**
@@ -468,7 +469,7 @@ model RuntimeResumeApplicationUpgradeParameters {
 }
 
 /**
- * Cluster level definitoon for the kind of upgrade.
+ * Cluster level definition for the kind of upgrade.
  */
 union RuntimeUpgradeKind {
   string,
