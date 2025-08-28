@@ -38,7 +38,6 @@ interface DeletedBackupInstanceResources {
   /**
    * Gets deleted backup instances belonging to a backup vault
    */
-  // /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances
   @list
   list is ArmResourceListByParent<
     DeletedBackupInstanceResource,

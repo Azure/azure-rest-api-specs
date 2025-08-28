@@ -61,7 +61,7 @@ interface BackupVaultResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = BackupVaultResource> &
       Azure.Core.Foundations.RetryAfterHeader,
     OverrideErrorType = CloudError
   >;
@@ -128,6 +128,7 @@ interface BackupVaultResources {
     BackupVaultResource,
     ValidateForBackupRequest,
     OperationJobExtendedInfo,
+    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     OverrideErrorType = CloudError
   >;
 
@@ -140,6 +141,7 @@ interface BackupVaultResources {
     BackupVaultResource,
     void,
     NoContentResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -190,7 +192,18 @@ interface BackupVaultOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is BackupVaultOperationResultOps.Read<
     BackupVaultResource,
-    Response = ArmResponse<BackupVaultResource> | AcceptedResponse,
+    Response = ArmResponse<BackupVaultResource> | {
+      @statusCode _: 202;
+
+      @header("Azure-AsyncOperation")
+      azureAsyncOperation?: string;
+
+      @header("Location")
+      location?: string;
+
+      @header("Retry-After")
+      retryAfter?: int32;
+    },
     OverrideErrorType = CloudError
   >;
 
