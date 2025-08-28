@@ -13,6 +13,7 @@ using Autorest;
 @versioned(Microsoft.PlannedQuota.Versions)
 namespace Microsoft.PlannedQuota;
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Using Autorest.example intentionally to attach provider operations example"
 @@Autorest.example(Operations.list,
   "./examples/PlannedQuota_Operations.json",
   "List Operations"
