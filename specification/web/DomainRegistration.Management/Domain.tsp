@@ -56,7 +56,7 @@ interface Domains {
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
-    Response = ArmResponse<Domain> | (AcceptedResponse & {
+    Response = ArmResponse<Domain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
       @bodyRoot
       _: Domain;
     })
@@ -108,7 +108,11 @@ interface Domains {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  transferOut is ArmResourceActionSync<Domain, void, ArmResponse<Domain> | ArmBadRequestResponse>;
+  transferOut is ArmResourceActionSync<
+    Domain,
+    void,
+    ArmResponse<Domain> | ArmBadRequestResponse
+  >;
 }
 
 @@doc(Domain.name, "Name of the domain.");
