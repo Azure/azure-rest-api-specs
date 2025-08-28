@@ -60,10 +60,10 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 input-file:
   - Microsoft.StorageDiscovery/stable/2025-09-01/storageDiscoveryWorkspace.json
 suppressions:
-  - code: PatchBodyParametersSchema
+  - code: ArmResourcePropertiesBag
     from: storageDiscoveryWorkspace.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties
-    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+    where: $.definitions["StorageDiscoveryWorkspace"]
+    reason: The sku property name is critical. Present in already approved version.
   - code: OperationIdNounVerb
     from: storageDiscoveryWorkspace.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport"].post.operationId
