@@ -314,72 +314,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/deployWorkflowArtifacts": {
-      "post": {
-        "tags": [
-          "LogicApps"
-        ],
-        "description": "Creates or updates the artifacts for the logic app",
-        "operationId": "LogicApps_DeployWorkflowArtifacts",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the Logic App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "workflowArtifacts",
-            "in": "body",
-            "description": "Application settings and files of the workflow.",
-            "required": false,
-            "x-ms-secret": true,
-            "schema": {
-              "$ref": "#/definitions/WorkflowArtifacts"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Artifacts deployed."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deploys workflow artifacts": {
-            "$ref": "./examples/LogicApps_PostDeployWorkflowArtifacts.json"
-          },
-          "Delete workflow artifacts": {
-            "$ref": "./examples/LogicApps_DeleteDeployWorkflowArtifacts.json"
-          }
-        },
-        "x-ms-long-running-operation": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/listWorkflowsConnections": {
       "post": {
         "tags": [
@@ -434,106 +368,12 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/invoke": {
-      "post": {
-        "tags": [
-          "LogicApps"
-        ],
-        "summary": "Proxies the API call to the logic app backed by the container app.",
-        "operationId": "LogicApps_Invoke",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the LogicApp App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "x-ms-logicApps-proxy-path",
-            "in": "header",
-            "description": "The proxy path for the API call",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "x-ms-logicApps-proxy-method",
-            "in": "header",
-            "description": "The proxy method for the API call",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "GET",
-              "POST"
-            ],
-            "x-ms-enum": {
-              "name": "LogicAppsProxyMethod",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Logic App call response.",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get workflow list call back URL": {
-            "$ref": "./examples/LogicApps_ListCallbackURL.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
     "LogicApp": {
       "type": "object",
       "description": "A logic app extension resource",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The logic app resource id."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource type - Microsoft.App/logicApps."
-        }
-      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
