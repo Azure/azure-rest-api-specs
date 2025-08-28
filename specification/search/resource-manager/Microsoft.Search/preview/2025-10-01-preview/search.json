@@ -2003,14 +2003,14 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "$ref": "#/definitions/DataIdentity",
           "x-nullable": true,
           "description": "An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If \"none\" is specified, the value of this property is cleared."
         }
       },
       "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps."
     },
-    "SearchIndexerDataIdentity": {
+    "DataIdentity": {
       "type": "object",
       "discriminator": "@odata.type",
       "properties": {
@@ -2024,13 +2024,23 @@
       ],
       "description": "Abstract base type for data identities."
     },
-    "SearchIndexerDataUserAssignedIdentity": {
+    "DataNoneIdentity": {
       "type": "object",
-      "description": "Specifies the identity for a datasource to use.",
+      "description": "Clears the identity property.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataNoneIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataIdentity"
+        }
+      ]
+    },
+    "DataUserAssignedIdentity": {
+      "type": "object",
+      "description": "Specifies the user assigned identity to use.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
       "allOf": [
         {
-          "$ref": "#/definitions/SearchIndexerDataIdentity"
+          "$ref": "#/definitions/DataIdentity"
         }
       ],
       "properties": {
