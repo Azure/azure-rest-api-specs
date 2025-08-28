@@ -52,6 +52,10 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(Azure.AI.Projects.Index, "AIProjectIndex", "csharp");
+@@clientName(Azure.AI.Projects.CosmosDBIndex,
+  "AIProjectCosmosDBIndex",
+  "csharp"
+);
 @@clientName(Azure.AI.Projects.BaseCredentials,
   "AIProjectConnectionBaseCredential",
   "csharp"
