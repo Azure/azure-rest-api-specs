@@ -18,9 +18,7 @@ interface BackupVaultsOperationGroup {
   /**
    * API to check for resource name availability
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("API to check for resource name availability")
-  @operationId("BackupVaults_CheckNameAvailability")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/checkNameAvailability")
   @post
   checkNameAvailability(
@@ -42,11 +40,9 @@ interface OperationResultOperationGroup {
   /**
    * Gets the operation result for a resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the operation status for a resource.")
-  @operationId("OperationResult_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationResults/{operationId}")
   @get
   get(
@@ -66,9 +62,7 @@ interface OperationStatusOperationGroup {
   /**
    * Gets the operation status for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets the operation status for a resource.")
-  @operationId("OperationStatus_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationStatus/{operationId}")
   @get
   get(
@@ -87,9 +81,7 @@ interface OperationStatusResourceGroupContextOperationGroup {
   /**
    * Gets the operation status for an operation over a ResourceGroup's context.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets the operation status for an operation over a ResourceGroup's context.")
-  @operationId("OperationStatusResourceGroupContext_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/operationStatus/{operationId}")
   @get
   get(
@@ -108,9 +100,7 @@ interface DataProtectionOperationGroup {
   /**
    * Validates if a feature is supported
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Validates if a feature is supported")
-  @operationId("DataProtection_CheckFeatureSupport")
   @autoRoute
   checkFeatureSupport is ArmProviderActionSync<
     Request = FeatureValidationRequestBase,
@@ -126,8 +116,6 @@ interface BackupInstancesOperationGroup {
   /**
    * Triggers Cross Region Restore for BackupInstance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_TriggerCrossRegionRestore")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/crossRegionRestore")
   @post
   triggerCrossRegionRestore(
@@ -146,8 +134,6 @@ interface BackupInstancesOperationGroup {
   /**
    * Validates whether Cross Region Restore can be triggered for DataSource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_ValidateCrossRegionRestore")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/validateCrossRegionRestore")
   @post
   validateCrossRegionRestore(
@@ -169,8 +155,6 @@ interface FetchSecondaryRecoveryPointsOperationGroup {
   /**
    * Returns a list of Secondary Recovery Points for a DataSource in a vault, that can be used for Cross Region Restore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FetchSecondaryRecoveryPoints_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints")
   @post
   @list
@@ -205,8 +189,6 @@ interface FetchCrossRegionRestoreJobOperationGroup {
   /**
    * Fetches the Cross Region Restore Job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FetchCrossRegionRestoreJob_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJob")
   @post
   get(
@@ -228,8 +210,6 @@ interface FetchCrossRegionRestoreJobsOperationGroup {
   /**
    * Fetches list of Cross Region Restore job belonging to the vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FetchCrossRegionRestoreJobs_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJobs")
   @post
   @list
@@ -258,8 +238,6 @@ interface BackupInstancesExtensionRoutingOperationGroup {
   /**
    * Gets a list of backup instances associated with a tracked resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstancesExtensionRouting_List")
   @route("/{+resourceId}/providers/Microsoft.DataProtection/backupInstances")
   @get
   @list

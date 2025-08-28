@@ -30,8 +30,6 @@ interface AzureBackupRecoveryPointResources {
   /**
    * Gets a Recovery Point using recoveryPointId for a Datasource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RecoveryPoints_Get")
   get is ArmResourceRead<
     Resource = AzureBackupRecoveryPointResource,
     Error = CloudError
@@ -40,8 +38,6 @@ interface AzureBackupRecoveryPointResources {
   /**
    * Returns a list of Recovery Points for a DataSource in a vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RecoveryPoints_List")
   @list
   list is ArmResourceListByParent<
     AzureBackupRecoveryPointResource,

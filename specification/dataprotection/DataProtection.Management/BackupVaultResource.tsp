@@ -45,8 +45,6 @@ interface BackupVaultResources {
   /**
    * Returns a resource belonging to a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupVaults_Get")
   get is BackupVaultResourceOps.Read<
     Resource = BackupVaultResource,
     OverrideErrorType = CloudError
@@ -55,8 +53,6 @@ interface BackupVaultResources {
   /**
    * Creates or updates a BackupVault resource belonging to a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupVaults_CreateOrUpdate")
   createOrUpdate is BackupVaultResourceOps.CreateOrUpdateAsync<
     BackupVaultResource,
     Parameters = {
@@ -73,10 +69,8 @@ interface BackupVaultResources {
   /**
    * Updates a BackupVault resource belonging to a resource group. For example, updating tags for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("BackupVaults_Update")
   update is BackupVaultResourceOps.CustomPatchAsync<
     BackupVaultResource,
     PatchModel = PatchResourceRequestInput,
@@ -92,9 +86,7 @@ interface BackupVaultResources {
   /**
    * Deletes a BackupVault resource from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("BackupVaults_Delete")
   delete is BackupVaultResourceOps.DeleteWithoutOkAsync<
     BackupVaultResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -106,8 +98,6 @@ interface BackupVaultResources {
    */
   // /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults
   // /subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/backupVaults
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupVaults_GetInSubscription")
   @list
   getInSubscription is ArmListBySubscription<
     BackupVaultResource,
@@ -118,9 +108,7 @@ interface BackupVaultResources {
   /**
    * Gets the operation status for an operation over a BackupVault's context.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @operationId("OperationStatusBackupVaultContext_Get")
   operationStatusBackupVaultContextGet is BackupVaultResourceOps.Read<
     BackupVaultResource,
     Response = ArmResponse<OperationResource>,
@@ -136,8 +124,6 @@ interface BackupVaultResources {
   /**
    * Validate whether adhoc backup will be successful or not
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_ValidateForBackup")
   validateForBackup is BackupVaultResourceOps.ActionAsync<
     BackupVaultResource,
     ValidateForBackupRequest,
@@ -148,10 +134,8 @@ interface BackupVaultResources {
   /**
    * Triggers export of jobs and returns an OperationID to track.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("exportBackupJobs")
-  @operationId("ExportJobs_Trigger")
   trigger is BackupVaultResourceOps.ActionAsync<
     BackupVaultResource,
     void,
@@ -162,10 +146,8 @@ interface BackupVaultResources {
   /**
    * Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also contains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("ExportJobsOperationResult_Get")
   exportJobsOperationResultGet is BackupVaultResourceOps.Read<
     BackupVaultResource,
     Response = ArmResponse<ExportJobsResult> | AcceptedResponse,
@@ -215,8 +197,6 @@ interface BackupVaultOperationResults {
   /**
    * Returns resource collection belonging to a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupVaults_GetInResourceGroup")
   @list
   getInResourceGroup is ArmResourceListByParent<
     BackupVaultResource,

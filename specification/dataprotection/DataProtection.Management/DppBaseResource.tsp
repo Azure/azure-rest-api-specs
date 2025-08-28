@@ -192,8 +192,6 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultDisableSoftDeleteRequestsObject")
   getDefaultDisableSoftDeleteRequestsObject is DppBaseResourceOps.Read<
     Resource = DppBaseResource,
     OverrideErrorType = CloudError
@@ -202,8 +200,6 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDisableSoftDeleteRequestsObjects")
   @segment("disableSoftDeleteRequests")
   getDisableSoftDeleteRequestsObjects is DppBaseResourceOps.List<
     DppBaseResource,
@@ -213,8 +209,6 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultUpdateProtectedItemRequestsObject")
   getDefaultUpdateProtectedItemRequestsObject is DppBaseResourceUpdateProtectedItemOperationGroupOps.Read<
     Resource = DppBaseResource,
     OverrideErrorType = CloudError
@@ -223,9 +217,7 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @segment("updateProtectedItemRequests")
-  @operationId("ResourceGuards_GetUpdateProtectedItemRequestsObjects")
   getUpdateProtectedItemRequestsObjects is DppBaseResourceUpdateProtectedItemOperationGroupOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>,
@@ -235,8 +227,6 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultUpdateProtectionPolicyRequestsObject")
   getDefaultUpdateProtectionPolicyRequestsObject is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.Read<
     Resource = DppBaseResource,
     OverrideErrorType = CloudError
@@ -245,9 +235,7 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @segment("updateProtectionPolicyRequests")
-  @operationId("ResourceGuards_GetUpdateProtectionPolicyRequestsObjects")
   getUpdateProtectionPolicyRequestsObjects is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>,
@@ -257,8 +245,6 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultDeleteProtectedItemRequestsObject")
   getDefaultDeleteProtectedItemRequestsObject is DppBaseResourceDeleteProtectedItemOperationGroupOps.Read<
     Resource = DppBaseResource,
     OverrideErrorType = CloudError
@@ -267,8 +253,6 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDeleteProtectedItemRequestsObjects")
   @segment("deleteProtectedItemRequests")
   getDeleteProtectedItemRequestsObjects is DppBaseResourceDeleteProtectedItemOperationGroupOps.List<
     DppBaseResource,
@@ -279,9 +263,7 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ResourceGuards_GetDefaultBackupSecurityPINRequestsObject")
   getDefaultBackupSecurityPINRequestsObject is DppBaseResourceGetBackupSecurityPINOperationGroupOps.Read<
     Resource = DppBaseResource,
     OverrideErrorType = CloudError
@@ -290,10 +272,8 @@ interface DppBaseResourceOperationGroup {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @segment("getBackupSecurityPINRequests")
-  @operationId("ResourceGuards_GetBackupSecurityPINRequestsObjects")
   getBackupSecurityPINRequestsObjects is DppBaseResourceGetBackupSecurityPINOperationGroupOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>,

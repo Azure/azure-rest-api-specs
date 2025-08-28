@@ -57,8 +57,6 @@ interface BackupInstanceResources {
   /**
    * Gets a backup instance with name in a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_Get")
   get is BackupInstanceResourceOps.Read<
     Resource = BackupInstanceResource,
     OverrideErrorType = CloudError
@@ -67,9 +65,7 @@ interface BackupInstanceResources {
   /**
    * Create or update a backup instance in a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("BackupInstances_CreateOrUpdate")
   createOrUpdate is BackupInstanceResourceOps.CreateOrUpdateAsync<
     BackupInstanceResource,
     Parameters = {
@@ -88,9 +84,7 @@ interface BackupInstanceResources {
   /**
    * Delete a backup instance in a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("BackupInstances_Delete")
   delete is BackupInstanceResourceOps.DeleteWithoutOkAsync<
     BackupInstanceResource,
     Parameters = {
@@ -106,9 +100,7 @@ interface BackupInstanceResources {
   /**
    * Trigger adhoc backup
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("backup")
-  @operationId("BackupInstances_AdhocBackup")
   adhocBackup is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     TriggerBackupRequest,
@@ -119,8 +111,6 @@ interface BackupInstanceResources {
   /**
    * Validate whether update for backup instance will be successful or not
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_ValidateForModifyBackup")
   validateForModifyBackup is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ValidateForModifyBackupRequest,
@@ -131,10 +121,8 @@ interface BackupInstanceResources {
   /**
    * rehydrate recovery point for restore for a BackupInstance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("rehydrate")
-  @operationId("BackupInstances_TriggerRehydrate")
   triggerRehydrate is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     AzureBackupRehydrationRequest,
@@ -145,9 +133,7 @@ interface BackupInstanceResources {
   /**
    * Triggers restore for a BackupInstance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("restore")
-  @operationId("BackupInstances_TriggerRestore")
   triggerRestore is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     AzureBackupRestoreRequest,
@@ -164,8 +150,6 @@ interface BackupInstanceResources {
   /**
    * This operation will resume backups for backup instance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_ResumeBackups")
   resumeBackups is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
@@ -176,8 +160,6 @@ interface BackupInstanceResources {
   /**
    * This operation will resume protection for a stopped backup instance
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_ResumeProtection")
   resumeProtection is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
@@ -188,8 +170,6 @@ interface BackupInstanceResources {
   /**
    * This operation will stop protection of a backup instance and data will be held forever
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_StopProtection")
   stopProtection is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     StopProtectionRequest,
@@ -207,8 +187,6 @@ interface BackupInstanceResources {
   /**
    * This operation will stop backup for a backup instance and retains the backup data as per the policy (except latest Recovery point, which will be retained forever)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupInstances_SuspendBackups")
   suspendBackups is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     SuspendBackupRequest,
@@ -227,9 +205,7 @@ interface BackupInstanceResources {
    * Sync backup instance again in case of failure
    * This action will retry last failed operation and will bring backup instance to valid state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("sync")
-  @operationId("BackupInstances_SyncBackupInstance")
   syncBackupInstance is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     SyncBackupInstanceRequest,
@@ -240,9 +216,7 @@ interface BackupInstanceResources {
   /**
    * Validates if Restore can be triggered for a DataSource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("validateRestore")
-  @operationId("BackupInstances_ValidateForRestore")
   validateForRestore is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ValidateRestoreRequestObject,
@@ -250,10 +224,8 @@ interface BackupInstanceResources {
     OverrideErrorType = CloudError
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("findRestorableTimeRanges")
-  @operationId("RestorableTimeRanges_Find")
   find is BackupInstanceResourceOps.ActionSync<
     BackupInstanceResource,
     AzureBackupFindRestorableTimeRangesRequest,

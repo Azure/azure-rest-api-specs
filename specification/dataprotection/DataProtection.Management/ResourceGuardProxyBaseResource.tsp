@@ -30,8 +30,6 @@ interface ResourceGuardProxyBaseResources {
   /**
    * Returns the ResourceGuardProxy object associated with the vault, and that matches the name in the request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DppResourceGuardProxy_Get")
   get is ArmResourceRead<
     Resource = ResourceGuardProxyBaseResource,
     Error = CloudError
@@ -40,9 +38,7 @@ interface ResourceGuardProxyBaseResources {
   /**
    * Creates or Updates a ResourceGuardProxy
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("DppResourceGuardProxy_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ResourceGuardProxyBaseResource,
     Response = ArmResourceUpdatedResponse<ResourceGuardProxyBaseResource>,
@@ -52,8 +48,6 @@ interface ResourceGuardProxyBaseResources {
   /**
    * Deletes the ResourceGuardProxy
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DppResourceGuardProxy_Delete")
   delete is ArmResourceDeleteSync<
     Resource = ResourceGuardProxyBaseResource,
     Error = CloudError
@@ -62,8 +56,6 @@ interface ResourceGuardProxyBaseResources {
   /**
    * Returns the list of ResourceGuardProxies associated with the vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DppResourceGuardProxy_List")
   @list
   list is ArmResourceListByParent<
     ResourceGuardProxyBaseResource,
@@ -74,8 +66,6 @@ interface ResourceGuardProxyBaseResources {
   /**
    * UnlockDelete call for ResourceGuardProxy, executed before one can delete it
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DppResourceGuardProxy_UnlockDelete")
   unlockDelete is ArmResourceActionSync<
     ResourceGuardProxyBaseResource,
     UnlockDeleteRequest,

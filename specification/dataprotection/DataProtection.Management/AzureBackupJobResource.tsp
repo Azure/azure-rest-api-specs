@@ -7,7 +7,6 @@ import "./BackupVaultResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DataProtection;
 /**
@@ -29,15 +28,11 @@ interface AzureBackupJobResources {
   /**
    * Gets a job with id in a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Jobs_Get")
   get is ArmResourceRead<Resource = AzureBackupJobResource, Error = CloudError>;
 
   /**
    * Returns list of jobs belonging to a backup vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Jobs_List")
   @list
   list is ArmResourceListByParent<
     AzureBackupJobResource,
