@@ -16,12 +16,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-10-01-preview")
   v2024_10_01_Preview: "2024-10-01-preview",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2025-04-01-preview")
   v2025_04_01_Preview: "2025-04-01-preview",
