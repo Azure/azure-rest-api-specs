@@ -94,6 +94,9 @@ union EdgeMachineJobType {
 
   @doc("Job to debug machine issues using AI.")
   MachineAssistant: "MachineAssistant",
+
+  @doc("Job to download OS packages on to the device")
+  DownloadOs: "DownloadOs",
 }
 
 @doc("Represents the various statuses a job can have throughout its lifecycle.")
@@ -178,6 +181,28 @@ model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   provisioningRequest: ProvisioningRequest;
 
   @doc("Reported Properties for Provision Os job")
+  reportedProperties?: ProvisionOsReportedProperties;
+}
+
+@doc("Download Request properties")
+model DownloadRequest {
+  @doc("Target operating system to support polymorphic resource.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  target: ProvisioningOsType;
+
+  @doc("Operating system profile.")
+  osProfile: DownloadOsProfile;
+}
+
+@doc("Represents the properties of Download Os job.")
+model DownloadOsJobProperties extends EdgeMachineJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  jobType: EdgeMachineJobType.DownloadOs;
+
+  @doc("Download OS request.")
+  downloadRequest: DownloadRequest;
+
+  @doc("Reported Properties for Download Os job")
   reportedProperties?: ProvisionOsReportedProperties;
 }
 
@@ -466,6 +491,10 @@ model Step {
   @doc("List of exceptions in job execution.")
   @visibility(Lifecycle.Read)
   exception?: string[];
+
+  @doc("Error information for the step")
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("Operating system profile.")
@@ -481,6 +510,53 @@ model OsProvisionProfile {
 
   @doc("Location of the operating system image.")
   osImageLocation?: string;
+
+  @doc("Validated Solution Recipe version to be used for the job")
+  vsrVersion?: string;
+
+  @doc("Hash of the OS package downloaded")
+  imageHash?: string;
+
+  @doc("GPG Public Key used for package verification")
+  gpgPubKey?: string;
+
+  @doc("Operation sub type of OS Provisioning")
+  operationType?: OSOperationType = OSOperationType.Provision;
+}
+
+@doc("Operating system profile.")
+model DownloadOsProfile {
+  @doc("Name of the operating system.")
+  osName?: string;
+
+  @doc("Type of the operating system.")
+  osType?: string;
+
+  @doc("Version of the operating system.")
+  osVersion?: string;
+
+  @doc("Location of the operating system image.")
+  osImageLocation?: string;
+
+  @doc("Validated Solution Recipe version to be used for the job")
+  vsrVersion?: string;
+
+  @doc("Hash of the OS package downloaded")
+  imageHash?: string;
+
+  @doc("GPG Public Key used for package verification")
+  gpgPubKey?: string;
+}
+
+@doc("OS Provision Operation type")
+union OSOperationType {
+  string,
+
+  @doc("OS Provisioning operation")
+  Provision: "Provision",
+
+  @doc("OS Update operation")
+  Update: "Update",
 }
 
 @doc("User configuration.")

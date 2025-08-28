@@ -576,6 +576,24 @@ model OsProfile {
    */
   @visibility(Lifecycle.Read)
   osVersion?: string;
+
+  /**
+   * OS Build Number
+   */
+  @visibility(Lifecycle.Read)
+  buildNumber?: string;
+
+  /**
+   * OS Base Image Version
+   */
+  @visibility(Lifecycle.Read)
+  baseImageVersion?: string;
+
+  /**
+   * OS Image Version
+   */
+  @visibility(Lifecycle.Read)
+  imageVersion?: string;
 }
 
 /**

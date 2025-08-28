@@ -53,45 +53,65 @@ union ResilienceHealthStatus {
   string,
 }
 
+@doc("Enum for the requirement status of the resource in the goal.")
+union UnifiedResilienceItemRequirementSelected {
+  string,
+
+  @doc("The resource is not required for the specified goal.")
+  NotRequired: "NotRequired",
+
+  @doc("The resource is required for the specified goal.")
+  Required: "Required",
+
+  @doc("The resource is not selected for the specified goal.")
+  NotSelected: "NotSelected",
+}
+
 @doc("Definition of goals data in unified resilience item.")
 model GoalsData {
   @doc("Arm id of the goal template.")
-  goalTemplateId: armResourceIdentifier;
+  templateId: armResourceIdentifier;
 
   @doc("Arm id of the goal assignment.")
-  goalAssignmentId: armResourceIdentifier;
+  assignmentId: armResourceIdentifier;
 
   @doc("Regional RPO set in resilience goal in minutes.")
-  regionalRpoInMinutes?: IsoDuration;
+  regionalRecoveryPointObjectiveInMinutes?: IsoDuration;
 
-  @doc("Computed RPA for the service group in minutes.")
-  regionalRpaInMinutes?: IsoDuration;
+  @doc("Computed recovery point estimated for the service group in minutes.")
+  regionalRecoveryPointEstimatedInMinutes?: IsoDuration;
 
   @doc("Regional RPO status of the service group.")
-  regionalRpoStatus: ResilienceHealthStatus;
+  regionalRecoveryPointObjectiveStatus: ResilienceHealthStatus;
 
   @doc("Regional RTO set in resilience goal in minutes.")
-  regionalRtoInMinutes?: IsoDuration;
+  regionalRecoveryTimeObjectiveInMinutes?: IsoDuration;
 
   @doc("Computed RTA for the service group in minutes.")
-  regionalRtaInMinutes?: IsoDuration;
+  regionalRecoveryTimeActualInMinutes?: IsoDuration;
 
-  @doc("Regional RPO status of the service group.")
-  regionalRtoStatus: ResilienceHealthStatus;
+  @doc("Regional RTO status of the service group.")
+  regionalRecoveryTimeObjectiveStatus: ResilienceHealthStatus;
+
+  @doc("Whether the resource is required for high availability.")
+  requireHighAvailability?: UnifiedResilienceItemRequirementSelected;
+
+  @doc("Whether the resource is required for disaster recovery.")
+  requireDisasterRecovery?: UnifiedResilienceItemRequirementSelected;
 }
 
 @doc("Definition of recommendation data related to high availability in unified resilience item.")
 model RecommendationsHighAvailabilityData {
-  @doc("Included resources count for high availability recommendations.")
-  includedResourceCount?: int64;
+  @doc("Count of resources that have high availability enabled.")
+  enabledResourceCount?: int64;
 
-  @doc("Excluded resources count for high availability recommendations.")
-  notIncludedResourceCount?: int64;
+  @doc("Count of resources that do not have high availability enabled.")
+  notEnabledResourceCount?: int64;
 
-  @doc("Not evaluated resources count for high availability recommendations.")
+  @doc("Count of resources that have not been evaluated for high availability.")
   notEvaluatedResourceCount?: int64;
 
-  @doc("Last evaluation date time of high availability recommendation.")
+  @doc("The date and time when the high availability recommendations were last evaluated.")
   evaluationDateTime?: utcDateTime;
 }
 
@@ -113,6 +133,9 @@ model UnifiedResilienceItemProperties {
 
   @doc("Computed and copied data of Azure recommendations.")
   recommendations: RecommendationsData;
+
+  @doc("Last modified time of the unified resilience item.")
+  lastModifiedTime: utcDateTime;
 }
 
 @tenantResource
