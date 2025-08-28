@@ -1803,20 +1803,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeResource"
-            },
-            "headers": {
-              "location": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "type": "string"
-              }
-            }
+          "204": {
+            "description": "OK."
           },
           "202": {
             "description": "Accepted.",
@@ -1828,12 +1816,6 @@
               "Azure-AsyncOperation": {
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeNodeIpAddress"
             }
           },
           "default": {
@@ -1875,11 +1857,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeResource"
-            }
+          "204": {
+            "description": "OK."
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
