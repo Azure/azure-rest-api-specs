@@ -118,7 +118,6 @@ interface Applications {
   /**
    * Send a request to update the current application upgrade.
    */
-  @added(Versions.v2025_test_preview)
   updateUpgrade is ArmResourceActionAsync<
     ApplicationResource,
     RuntimeUpdateApplicationUpgradeParameters,
@@ -219,6 +218,51 @@ model ApplicationUpgradePolicy {
    * Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed.
    */
   recreateApplication?: boolean;
+}
+
+/**
+ * Represents the health policy used to evaluate the health of services belonging to a service type.
+ *
+ */
+model ServiceTypeHealthPolicy {
+  /**
+   * The maximum allowed percentage of unhealthy services.
+   *
+   * The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
+   * If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.
+   * This is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.
+   * The computation rounds up to tolerate one failure on small numbers of services.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyServices: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy partitions per service.
+   *
+   * The percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.
+   * If the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.
+   * The computation rounds up to tolerate one failure on small numbers of partitions.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyPartitionsPerService: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy replicas per partition.
+   *
+   * The percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.
+   * If the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.
+   * The computation rounds up to tolerate one failure on small numbers of replicas.
+   *
+   */
+  @maxValue(100)
+  @minValue(0)
+  maxPercentUnhealthyReplicasPerPartition: int32;
 }
 
 /**
@@ -361,7 +405,6 @@ union RollingUpgradeMode {
 /**
  * Describes the parameters for updating a rolling upgrade of application or cluster.
  */
-@added(Versions.v2025_test_preview)
 model RuntimeRollingUpgradeUpdateDescription {
   /**
    * The mode used to monitor health during a rolling upgrade.
@@ -427,7 +470,6 @@ model RuntimeResumeApplicationUpgradeParameters {
 /**
  * Cluster level definitoon for the kind of upgrade.
  */
-@added(Versions.v2025_test_preview)
 union RuntimeUpgradeKind {
   string,
 
@@ -438,10 +480,53 @@ union RuntimeUpgradeKind {
 }
 
 /**
+ * Cluster level definition that represents the health policy used to evaluate the health of services belonging to a service type.
+ */
+model RuntimeServiceTypeHealthPolicy {
+  /**
+   * The maximum allowed percentage of unhealthy services.
+   *
+   * The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
+   * If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.
+   * This is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.
+   * The computation rounds up to tolerate one failure on small numbers of services.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyServices: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy partitions per service.
+   *
+   * The percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.
+   * If the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.
+   * The computation rounds up to tolerate one failure on small numbers of partitions.
+   *
+   */
+  @minValue(0)
+  @maxValue(100)
+  maxPercentUnhealthyPartitionsPerService: int32;
+
+  /**
+   * The maximum allowed percentage of unhealthy replicas per partition.
+   *
+   * The percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.
+   * If the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.
+   * The computation rounds up to tolerate one failure on small numbers of replicas.
+   *
+   */
+  @maxValue(100)
+  @minValue(0)
+  maxPercentUnhealthyReplicasPerPartition: int32;
+}
+
+/**
  * Cluster level definition for a health policy used to evaluate the health of an application or one of its children entities.
  *
  */
-@added(Versions.v2025_test_preview)
 model RuntimeApplicationHealthPolicy {
   /**
    * Indicates whether warnings are treated with the same severity as errors.
@@ -465,14 +550,13 @@ model RuntimeApplicationHealthPolicy {
   /**
    * The map with service type health policy per service type name. The map is empty by default.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to ServiceTypeHealthPolicy dictionary"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string as service name to ServiceTypeHealthPolicy dictionary"
   serviceTypeHealthPolicyMap?: Record<RuntimeServiceTypeHealthPolicy>;
 }
 
 /**
  * Cluster level definition for the compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations. Invalid indicates the failure action is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual indicates that the upgrade will switch to UnmonitoredManual upgrade mode.
  */
-@added(Versions.v2025_test_preview)
 union RuntimeFailureAction {
   string,
 
@@ -490,25 +574,28 @@ union RuntimeFailureAction {
 /**
  * Cluster level definition for the mode used to monitor health during a rolling upgrade. The values are Monitored, and UnmonitoredAuto.
  */
-@added(Versions.v2025_test_preview)
 union RuntimeRollingUpgradeMode {
   string,
 
   /**
-   * The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 0.
-   */
-  Monitored: "Monitored",
-
-  /**
-   * The upgrade will proceed automatically without performing any health monitoring. The value is 1.
+   * The upgrade will proceed automatically without performing any health monitoring.
    */
   UnmonitoredAuto: "UnmonitoredAuto",
+
+  /**
+   * The upgrade will stop after completing each upgrade domain, giving the opportunity to manually monitor health before proceeding.
+   */
+  UnmonitoredManual: "UnmonitoredManual",
+
+  /**
+   * The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding.
+   */
+  Monitored: "Monitored",
 }
 
 /**
  * Parameters for the Update Upgrade action.
  */
-@added(Versions.v2025_test_preview)
 model RuntimeUpdateApplicationUpgradeParameters {
   /**
    * The name of the application, including the 'fabric:' URI scheme.
