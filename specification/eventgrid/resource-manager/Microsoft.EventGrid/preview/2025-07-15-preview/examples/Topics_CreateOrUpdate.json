@@ -20,19 +20,19 @@
         "platformCapabilities": {
           "confidentialCompute": {
             "mode": "Enabled"
-          },
-          "encryption": {
-            "customerManagedKeyEncryption": [
-              {
-                "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1",
-                "keyEncryptionKeyIdentity": {
-                  "type": "UserAssigned",
-                  "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id"
-                },
-                "keyEncryptionKeyStatusFriendlyDescription": "Customer Managed Key (CMK) Encryption is 'Active' and running normally."
-              }
-            ]
           }
+        },
+        "encryption": {
+          "customerManagedKeyEncryption": [
+            {
+              "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1",
+              "keyEncryptionKeyIdentity": {
+                "type": "UserAssigned",
+                "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id"
+              },
+              "keyEncryptionKeyStatusFriendlyDescription": "Customer Managed Key (CMK) Encryption is 'Active' and running normally."
+            }
+          ]
         }
       }
     }
@@ -41,8 +41,8 @@
     "201": {
       "body": {
         "properties": {
-          "endpoint": null,
-          "provisioningState": "Creating",
+          "endpoint": "https://exampletopic1.westus2-1.eventgrid.azure.net/api/events",
+          "provisioningState": "Succeeded",
           "platformCapabilities": {
             "confidentialCompute": {
               "mode": "Enabled"
@@ -51,12 +51,10 @@
         },
         "identity": {
           "type": "UserAssigned",
-          "principalId": null,
-          "tenantId": null,
           "userAssignedIdentities": {
             "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {
-              "principalId": null,
-              "clientId": null
+              "principalId": "a5435982-c82d-453b-b244-3115b7c8789c",
+              "clientId": "11af827c-d951-4766-9c41-15565fa13157"
             }
           }
         },
