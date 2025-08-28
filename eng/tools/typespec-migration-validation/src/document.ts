@@ -188,7 +188,7 @@ function processResponse(response: OpenAPI2Response): OpenAPI2Response {
   newResponse.description = "ignore";
   if (newResponse.headers) {
     for (const header in newResponse.headers) {
-      if (header === "Location" || header === "Retry-After" || header === "Azure-AsyncOperation") {
+      if (header === "Retry-After") {
         delete newResponse.headers[header];
       }
     }
