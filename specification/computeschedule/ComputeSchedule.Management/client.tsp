@@ -142,9 +142,12 @@ using Microsoft.ComputeSchedule;
   "CreateResourceOperationResult",
   "csharp"
 );
-@@clientName(ScheduledActionResource, "ScheduledActionModel", "csharp");
-@@clientName(OccurrenceResource, "OccurrenceModel", "csharp");
-@@clientName(OccurrenceExtensionResource, "OccurrenceExtensionModel", "csharp");
+@@clientName(ScheduledActionResource, "ScheduledActionResourceModel", "csharp");
+@@clientName(OccurrenceResource, "OccurrenceResourceModel", "csharp");
+@@clientName(OccurrenceExtensionResource,
+  "OccurrenceExtensionResourceModel",
+  "csharp"
+);
 @@clientName(ResourceOperationResponse,
   "RecurringActionsResourceOperationResult",
   "csharp,javascript,go,python,java"
