@@ -7,6 +7,7 @@ import "./Firmware.tsp";
 import "./BinaryHardeningResource.tsp";
 import "./CryptoCertificateResource.tsp";
 import "./CryptoKeyResource.tsp";
+import "./LegacyCveResource.tsp";
 import "./CveResource.tsp";
 import "./PasswordHashResource.tsp";
 import "./SbomComponentResource.tsp";
@@ -30,10 +31,13 @@ namespace Microsoft.IoTFirmwareDefense;
  * The available API versions.
  */
 enum Versions {
-  /**
-   * The 2025-04-01 API version.
-   */
+  @doc("The 2025-04-01-preview API version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_04_01_preview: "2025-04-01-preview",
+
+  @doc("The 2025-08-02 API version.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_08_02: "2025-08-02",
 }

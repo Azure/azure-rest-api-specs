@@ -56,11 +56,6 @@ export function outputErrorSummary(errors: ReportableOavError[], reportName: str
     checkName = "validate-example";
   }
 
-  builtLines.push(`⚠️ This check is testing a new version of '${reportName}'. ⚠️`);
-  builtLines.push(
-    "Failures are expected, and should be completely ignored by spec authors and reviewers.",
-  );
-  builtLines.push(`Meaningful results for this PR are in required check '${reportName}'.`);
   builtLines.push("| File | Line#Column | Code | Message |");
   builtLines.push("| --- | --- | --- | --- |");
 
