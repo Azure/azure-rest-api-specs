@@ -164,7 +164,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EntraidGovernance/guestGovernanceUsage/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EntraidGovernance/guestGovernanceUsage/{name}": {
       "get": {
         "operationId": "GuestGovernanceUsages_Get",
         "tags": [
@@ -180,6 +180,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
           }
         ],
         "responses": {
@@ -217,6 +225,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
           },
           {
             "name": "resource",
@@ -286,6 +302,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
             "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
@@ -330,6 +354,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Singleton Guest Governance resource",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
           }
         ],
         "responses": {

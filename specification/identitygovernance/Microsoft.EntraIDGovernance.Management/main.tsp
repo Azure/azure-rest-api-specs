@@ -54,7 +54,6 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-@singleton
 @doc("Entraid Guest Governance Usage resource")
 @added(Versions.v2025_06_13_preview)
 model GuestGovernanceUsage is TrackedResource<GuestGovernanceUsageProperties> {
