@@ -72,7 +72,6 @@ interface SnapshotPolicies {
   /**
    * Get volumes associated with snapshot policy
    */
-  @list
   @get
   @action("volumes")
   listVolumes is ArmResourceActionSync<

@@ -1158,6 +1158,10 @@
               "$ref": "#/definitions/BackupPolicy"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1190,7 +1194,12 @@
           "BackupPolicies_Create": {
             "$ref": "./examples/BackupPolicies_Create.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/BackupPolicy"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "BackupPolicies_Update",
@@ -2705,6 +2714,10 @@
               "$ref": "#/definitions/Volume"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2737,7 +2750,12 @@
           "Volumes_CreateOrUpdate": {
             "$ref": "./examples/Volumes_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Volume"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Volumes_Update",
@@ -5785,6 +5803,10 @@
               "$ref": "#/definitions/SubvolumeInfo"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -5817,7 +5839,12 @@
           "Subvolumes_Create": {
             "$ref": "./examples/Subvolumes_Create.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SubvolumeInfo"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Subvolumes_Update",
@@ -7187,9 +7214,6 @@
           "SnapshotPolicies_ListVolumes": {
             "$ref": "./examples/SnapshotPolicies_ListVolumes.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -10666,20 +10690,12 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Volume items on this page",
+          "description": "List of volumes",
           "items": {
             "$ref": "#/definitions/Volume"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "SnapshotProperties": {
       "type": "object",

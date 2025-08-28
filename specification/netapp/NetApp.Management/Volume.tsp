@@ -37,9 +37,14 @@ interface Volumes {
    * Create or update the specified volume within the capacity pool
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Volume,
-    Response = ArmResourceUpdatedResponse<Volume> | ArmResourceCreatedResponse<Volume> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<Volume> | ArmResourceCreatedResponse<
+      Volume,
+      ArmAsyncOperationHeader<FinalResult = Volume> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**

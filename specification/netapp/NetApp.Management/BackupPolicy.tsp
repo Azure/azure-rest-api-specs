@@ -37,9 +37,14 @@ interface BackupPolicies {
    * Create a backup policy for Netapp Account
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     BackupPolicy,
-    Response = ArmResourceUpdatedResponse<BackupPolicy> | ArmResourceCreatedResponse<BackupPolicy> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<BackupPolicy> | ArmResourceCreatedResponse<
+      BackupPolicy,
+      ArmAsyncOperationHeader<FinalResult = BackupPolicy> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**

@@ -40,9 +40,14 @@ interface SubvolumeInfos {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Subvolumes_Create")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     SubvolumeInfo,
-    Response = ArmResourceUpdatedResponse<SubvolumeInfo> | ArmResourceCreatedResponse<SubvolumeInfo> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SubvolumeInfo> | ArmResourceCreatedResponse<
+      SubvolumeInfo,
+      ArmAsyncOperationHeader<FinalResult = SubvolumeInfo> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**

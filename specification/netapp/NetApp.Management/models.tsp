@@ -3043,7 +3043,12 @@ model SnapshotPolicyPatch {
 /**
  * Volumes associated with snapshot policy
  */
-model SnapshotPolicyVolumeList is Azure.Core.Page<Volume>;
+model SnapshotPolicyVolumeList {
+  /**
+   * List of volumes
+   */
+  value?: Volume[];
+}
 
 /**
  * List of Backup Policies
