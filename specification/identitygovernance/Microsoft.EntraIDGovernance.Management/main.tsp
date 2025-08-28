@@ -54,12 +54,12 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
+@singleton
 @doc("Entraid Guest Governance Usage resource")
 @added(Versions.v2025_06_13_preview)
 model GuestGovernanceUsage is TrackedResource<GuestGovernanceUsageProperties> {
-  @doc("The Tenant ID having the guest governance usage resource")
-  @pattern("default")
-  @key("name")
+  @doc("Singleton Guest Governance resource")
+  @key
   @segment("guestGovernanceUsage")
   @path
   name: string;
