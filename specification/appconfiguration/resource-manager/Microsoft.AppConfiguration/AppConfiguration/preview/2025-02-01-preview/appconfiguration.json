@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-08-01-preview",
+    "version": "2025-02-01-preview",
     "title": "AppConfigurationManagementClient"
   },
   "host": "management.azure.com",
@@ -47,7 +47,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,7 +96,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -141,7 +141,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -196,7 +196,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -212,6 +212,9 @@
           },
           "ConfigurationStores_Create_With_Data_Plane_Proxy": {
             "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
+          },
+          "ConfigurationStores_Create_With_Telemetry": {
+            "$ref": "./examples/ConfigurationStoresCreateWithTelemetry.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -241,7 +244,22 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for the operation result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Indicates how long the client should wait before polling the URL in the Location or Azure-AsyncOperation header."
+              }
+            }
           },
           "204": {
             "description": "No Content - the specified resource was not found."
@@ -249,7 +267,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -305,7 +323,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -357,7 +375,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -409,7 +427,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -463,7 +481,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -503,7 +521,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -548,7 +566,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -600,7 +618,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -662,7 +680,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -713,7 +731,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -756,7 +774,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -808,7 +826,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -857,7 +875,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -897,7 +915,7 @@
             "name": "keyValueParameters",
             "in": "body",
             "description": "The parameters for creating a key-value.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/KeyValue"
             }
@@ -913,7 +931,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -963,7 +981,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1000,7 +1018,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1045,7 +1063,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1091,7 +1109,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1139,7 +1157,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1191,7 +1209,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1244,7 +1262,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1306,7 +1324,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1366,7 +1384,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1390,10 +1408,10 @@
         "operationId": "Snapshots_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1402,7 +1420,7 @@
             "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1415,7 +1433,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1433,10 +1451,10 @@
         "operationId": "Snapshots_Create",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigStoreNameParameter"
@@ -1445,7 +1463,7 @@
             "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -1473,7 +1491,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1516,7 +1534,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1534,7 +1552,7 @@
           "description": "The sku of the configuration store."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Resource system metadata."
         }
       }
@@ -1606,6 +1624,11 @@
           "default": 7,
           "description": "The amount of time in days that the configuration store will be retained when it is soft deleted."
         },
+        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
+        },
         "enablePurgeProtection": {
           "type": "boolean",
           "default": false,
@@ -1629,6 +1652,15 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry for this configuration store"
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
+          "readOnly": true
         }
       }
     },
@@ -1789,6 +1821,15 @@
         "dataPlaneProxy": {
           "$ref": "#/definitions/DataPlaneProxyProperties",
           "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
+        },
+        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry to update for this configuration store"
         }
       }
     },
@@ -2247,57 +2288,6 @@
       },
       "description": "Describes a configuration store SKU."
     },
-    "ErrorDetails": {
-      "type": "object",
-      "description": "The details of the error.",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "x-ms-identifiers": [],
-          "description": "The error additional info."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
-    },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
       "description": "A list of private endpoint connections",
@@ -2622,7 +2612,7 @@
           ]
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Resource system metadata.",
           "readOnly": true
         },
@@ -2669,6 +2659,7 @@
         "id": {
           "description": "The resource ID.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "name": {
@@ -2813,6 +2804,17 @@
         "label": {
           "description": "Filters key-values by their label field.",
           "type": "string"
+        }
+      }
+    },
+    "TelemetryProperties": {
+      "description": "Telemetry settings",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource ID of a resource enabling telemetry collection",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     }

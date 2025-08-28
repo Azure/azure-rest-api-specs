@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-02-01-preview",
+    "version": "2022-05-01",
     "title": "AppConfigurationManagementClient"
   },
   "host": "management.azure.com",
@@ -47,7 +47,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,7 +96,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -141,7 +141,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -182,13 +182,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The update request was successful; the request was well-formed and received properly.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/ConfigurationStore"
             }
           },
           "201": {
-            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
             "schema": {
               "$ref": "#/definitions/ConfigurationStore"
             }
@@ -196,7 +196,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -209,12 +209,6 @@
           },
           "ConfigurationStores_Create_With_Local_Auth_Disabled": {
             "$ref": "./examples/ConfigurationStoresCreateWithLocalAuthDisabled.json"
-          },
-          "ConfigurationStores_Create_With_Data_Plane_Proxy": {
-            "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
-          },
-          "ConfigurationStores_Create_With_Telemetry": {
-            "$ref": "./examples/ConfigurationStoresCreateWithTelemetry.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -244,22 +238,7 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "URL to query for the operation result",
-                "type": "string"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Indicates how long the client should wait before polling the URL in the Location or Azure-AsyncOperation header."
-              }
-            }
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
             "description": "No Content - the specified resource was not found."
@@ -267,7 +246,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -323,7 +302,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -375,7 +354,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -427,7 +406,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -481,7 +460,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -521,7 +500,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -566,7 +545,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -618,7 +597,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -666,13 +645,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The update request was successful; the request was well-formed and received properly.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -680,7 +659,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -731,7 +710,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -774,7 +753,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -826,7 +805,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -842,7 +821,7 @@
         "tags": [
           "KeyValues"
         ],
-        "description": "Gets the properties of the specified key-value. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration key-values the data plane API should be used instead.",
+        "description": "Gets the properties of the specified key-value.",
         "operationId": "KeyValues_Get",
         "parameters": [
           {
@@ -875,7 +854,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -889,7 +868,7 @@
         "tags": [
           "KeyValues"
         ],
-        "description": "Creates a key-value. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration key-values the data plane API should be used instead.",
+        "description": "Creates a key-value.",
         "operationId": "KeyValues_CreateOrUpdate",
         "parameters": [
           {
@@ -915,7 +894,7 @@
             "name": "keyValueParameters",
             "in": "body",
             "description": "The parameters for creating a key-value.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/KeyValue"
             }
@@ -931,7 +910,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -945,7 +924,7 @@
         "tags": [
           "KeyValues"
         ],
-        "description": "Deletes a key-value. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration key-values the data plane API should be used instead.",
+        "description": "Deletes a key-value.",
         "operationId": "KeyValues_Delete",
         "parameters": [
           {
@@ -981,7 +960,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1018,7 +997,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1063,7 +1042,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1109,7 +1088,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1157,7 +1136,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1168,341 +1147,6 @@
           "ConfigurationStores_CheckNameNotAvailable": {
             "$ref": "./examples/RegionalCheckNameNotAvailable.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/replicas": {
-      "get": {
-        "tags": [
-          "Replicas"
-        ],
-        "description": "Lists the replicas for a given configuration store.",
-        "operationId": "Replicas_ListByConfigurationStore",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ReplicaListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Replicas_ListByConfigurationStore": {
-            "$ref": "./examples/ConfigurationStoresListReplicas.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/replicas/{replicaName}": {
-      "get": {
-        "tags": [
-          "Replicas"
-        ],
-        "description": "Gets the properties of the specified replica.",
-        "operationId": "Replicas_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "replicaName",
-            "in": "path",
-            "description": "The name of the replica.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Replica"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Replicas_Get": {
-            "$ref": "./examples/ConfigurationStoresGetReplica.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Replicas"
-        ],
-        "description": "Creates a replica with the specified parameters.",
-        "operationId": "Replicas_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "replicaName",
-            "in": "path",
-            "description": "The name of the replica.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "replicaCreationParameters",
-            "in": "body",
-            "description": "The parameters for creating a replica.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Replica"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The update request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Replica"
-            }
-          },
-          "201": {
-            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
-            "schema": {
-              "$ref": "#/definitions/Replica"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Replicas_Create": {
-            "$ref": "./examples/ConfigurationStoresCreateReplica.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "delete": {
-        "tags": [
-          "Replicas"
-        ],
-        "description": "Deletes a replica.",
-        "operationId": "Replicas_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "replicaName",
-            "in": "path",
-            "description": "The name of the replica.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "No Content - the specified resource was not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Replicas_Delete": {
-            "$ref": "./examples/ConfigurationStoresDeleteReplica.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
-        "operationId": "Snapshots_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Snapshots_Get": {
-            "$ref": "./examples/ConfigurationStoresGetSnapshot.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Snapshots"
-        ],
-        "description": "Creates a snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
-        "operationId": "Snapshots_Create",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The parameters for creating a snapshot.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The update request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "201": {
-            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Snapshots_Create": {
-            "$ref": "./examples/ConfigurationStoresCreateSnapshot.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -1534,7 +1178,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1552,7 +1196,7 @@
           "description": "The sku of the configuration store."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Resource system metadata."
         }
       }
@@ -1624,19 +1268,10 @@
           "default": 7,
           "description": "The amount of time in days that the configuration store will be retained when it is soft deleted."
         },
-        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
-        },
         "enablePurgeProtection": {
           "type": "boolean",
           "default": false,
           "description": "Property specifying whether protection against purge is enabled for this configuration store."
-        },
-        "dataPlaneProxy": {
-          "$ref": "#/definitions/DataPlaneProxyProperties",
-          "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
         },
         "createMode": {
           "type": "string",
@@ -1652,15 +1287,6 @@
           "x-ms-mutability": [
             "create"
           ]
-        },
-        "telemetry": {
-          "$ref": "#/definitions/TelemetryProperties",
-          "description": "Property specifying the configuration of telemetry for this configuration store"
-        },
-        "managedOnBehalfOfConfiguration": {
-          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
-          "description": "Managed On Behalf Of Configuration.",
-          "readOnly": true
         }
       }
     },
@@ -1697,56 +1323,6 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "The properties of a private endpoint connection.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DataPlaneProxyProperties": {
-      "type": "object",
-      "description": "The data plane proxy settings for a configuration store.",
-      "properties": {
-        "authenticationMode": {
-          "description": "The data plane proxy authentication mode. This property manages the authentication mode of request to the data plane resources.",
-          "enum": [
-            "Local",
-            "Pass-through"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AuthenticationMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Local",
-                "description": "The local authentication mode. Users are not required to have data plane permissions if local authentication is not disabled."
-              },
-              {
-                "value": "Pass-through",
-                "description": "The pass-through authentication mode. User identity will be passed through from ARM, requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
-              }
-            ]
-          }
-        },
-        "privateLinkDelegation": {
-          "description": "The data plane proxy private link delegation. This property manages if a request from delegated ARM private link is allowed when the data plane resource requires private link.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PrivateLinkDelegation",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Enabled",
-                "description": "ARM private endpoint is required if the resource requires private link."
-              },
-              {
-                "value": "Disabled",
-                "description": "Request is denied if the resource requires private link."
-              }
-            ]
-          }
         }
       }
     },
@@ -1817,19 +1393,6 @@
         "enablePurgeProtection": {
           "type": "boolean",
           "description": "Property specifying whether protection against purge is enabled for this configuration store."
-        },
-        "dataPlaneProxy": {
-          "$ref": "#/definitions/DataPlaneProxyProperties",
-          "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
-        },
-        "defaultKeyValueRevisionRetentionPeriodInSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores."
-        },
-        "telemetry": {
-          "$ref": "#/definitions/TelemetryProperties",
-          "description": "Property specifying the configuration of telemetry to update for this configuration store"
         }
       }
     },
@@ -2288,6 +1851,57 @@
       },
       "description": "Describes a configuration store SKU."
     },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
       "description": "A list of private endpoint connections",
@@ -2566,257 +2180,6 @@
         }
       },
       "description": "List of deleted configuration stores"
-    },
-    "ReplicaListResult": {
-      "description": "The result of a request to list replicas.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Replica"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "Replica": {
-      "description": "The replica resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the replica.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the replica.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Resource system metadata.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ReplicaProperties",
-          "description": "All replica properties.",
-          "x-ms-client-flatten": true,
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ReplicaProperties": {
-      "description": "All replica properties.",
-      "type": "object",
-      "properties": {
-        "endpoint": {
-          "description": "The URI of the replica where the replica API will be available.",
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "The provisioning state of the replica.",
-          "enum": [
-            "Creating",
-            "Succeeded",
-            "Deleting",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ReplicaProvisioningState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "Snapshot": {
-      "description": "The snapshot resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "format": "arm-id",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the snapshot.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/SnapshotProperties",
-          "description": "All snapshot properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SnapshotProperties": {
-      "description": "All snapshot properties.",
-      "type": "object",
-      "required": [
-        "filters"
-      ],
-      "properties": {
-        "provisioningState": {
-          "description": "The provisioning state of the snapshot.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "The current status of the snapshot.",
-          "enum": [
-            "Provisioning",
-            "Ready",
-            "Archived",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SnapshotStatus",
-            "modelAsString": true
-          }
-        },
-        "filters": {
-          "description": "A list of filters used to filter the key-values included in the snapshot.",
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 3,
-          "items": {
-            "$ref": "#/definitions/KeyValueFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "compositionType": {
-          "description": "The composition type describes how the key-values within the snapshot are composed. The 'key' composition type ensures there are no two key-values containing the same key. The 'key_label' composition type ensures there are no two key-values containing the same key and label.",
-          "type": "string",
-          "enum": [
-            "Key",
-            "Key_Label"
-          ],
-          "x-ms-enum": {
-            "name": "CompositionType",
-            "modelAsString": true
-          }
-        },
-        "created": {
-          "description": "The time that the snapshot was created.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "expires": {
-          "description": "The time that the snapshot will expire.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "retentionPeriod": {
-          "description": "The amount of time, in seconds, that a snapshot will remain in the archived state before expiring. This property is only writable during the creation of a snapshot. If not specified, the default lifetime of key-value revisions will be used.",
-          "type": "integer",
-          "minimum": 3600,
-          "maximum": 7776000,
-          "format": "int64",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "size": {
-          "description": "The size in bytes of the snapshot.",
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true
-        },
-        "itemsCount": {
-          "description": "The amount of key-values in the snapshot.",
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true
-        },
-        "tags": {
-          "description": "The tags of the snapshot. NOTE: These are data plane tags, not ARM tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "etag": {
-          "description": "A value representing the current state of the snapshot.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "KeyValueFilter": {
-      "description": "Enables filtering of key-values.",
-      "type": "object",
-      "required": [
-        "key"
-      ],
-      "properties": {
-        "key": {
-          "description": "Filters key-values by their key field.",
-          "type": "string"
-        },
-        "label": {
-          "description": "Filters key-values by their label field.",
-          "type": "string"
-        }
-      }
-    },
-    "TelemetryProperties": {
-      "description": "Telemetry settings",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Resource ID of a resource enabling telemetry collection",
-          "type": "string",
-          "format": "arm-id"
-        }
-      }
     }
   },
   "parameters": {
@@ -2859,15 +2222,6 @@
       "description": "The location in which uniqueness will be verified.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SnapshotNameParameter": {
-      "name": "snapshotName",
-      "in": "path",
-      "description": "The name of the snapshot.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[^\\x00-\\x1F\\x7F]+$",
       "x-ms-parameter-location": "method"
     }
   },

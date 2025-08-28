@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-03-01",
+    "version": "2022-03-01-preview",
     "title": "AppConfigurationManagementClient"
   },
   "host": "management.azure.com",
@@ -504,11 +504,7 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
+        "x-ms-examples": {},
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -612,7 +608,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-        "description": "Update the state of the specified private endpoint connection associated with the configuration store. This operation cannot be used to create a private endpoint connection. Private endpoint connections must be created with the Network resource provider.",
+        "description": "Update the state of the specified private endpoint connection associated with the configuration store.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -664,8 +660,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateEndpointConnection_Update": {
-            "$ref": "./examples/ConfigurationStoresUpdatePrivateEndpointConnection.json"
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationStoresCreatePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -816,12 +812,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues": {
+      "get": {
+        "tags": [
+          "KeyValues"
+        ],
+        "description": "Lists the key-values for a given configuration store.",
+        "operationId": "KeyValues_ListByConfigurationStore",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/KeyValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyValues_ListByConfigurationStore": {
+            "$ref": "./examples/ConfigurationStoresListKeyValues.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues/{keyValueName}": {
       "get": {
         "tags": [
           "KeyValues"
         ],
-        "description": "Gets the properties of the specified key-value. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration key-values the data plane API should be used instead.",
+        "description": "Gets the properties of the specified key-value.",
         "operationId": "KeyValues_Get",
         "parameters": [
           {
@@ -868,7 +916,7 @@
         "tags": [
           "KeyValues"
         ],
-        "description": "Creates a key-value. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration key-values the data plane API should be used instead.",
+        "description": "Creates a key-value.",
         "operationId": "KeyValues_CreateOrUpdate",
         "parameters": [
           {
@@ -924,7 +972,7 @@
         "tags": [
           "KeyValues"
         ],
-        "description": "Deletes a key-value. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration key-values the data plane API should be used instead.",
+        "description": "Deletes a key-value.",
         "operationId": "KeyValues_Delete",
         "parameters": [
           {
@@ -1227,8 +1275,7 @@
             "in": "path",
             "description": "The name of the replica.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1312,10 +1359,7 @@
             "$ref": "./examples/ConfigurationStoresCreateReplica.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1349,13 +1393,7 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            }
+            "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
             "description": "No Content - the specified resource was not found."
@@ -1374,7 +1412,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     }
@@ -1406,7 +1444,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1424,7 +1462,7 @@
           "description": "The sku of the configuration store."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Resource system metadata."
         }
       }
@@ -1617,10 +1655,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        },
-        "enablePurgeProtection": {
-          "type": "boolean",
-          "description": "Property specifying whether protection against purge is enabled for this configuration store."
         }
       }
     },
@@ -2080,7 +2114,6 @@
       "description": "Describes a configuration store SKU."
     },
     "ErrorDetails": {
-      "type": "object",
       "description": "The details of the error.",
       "properties": {
         "code": {
@@ -2115,7 +2148,6 @@
       }
     },
     "ErrorAdditionalInfo": {
-      "type": "object",
       "properties": {
         "type": {
           "readOnly": true,
@@ -2447,14 +2479,10 @@
         },
         "location": {
           "description": "The location of the replica.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "type": "string"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Resource system metadata.",
           "readOnly": true
         },
