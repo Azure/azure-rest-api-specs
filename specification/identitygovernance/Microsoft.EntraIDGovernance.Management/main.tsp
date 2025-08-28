@@ -60,6 +60,7 @@ union ProvisioningState {
 model GuestGovernanceUsage is TrackedResource<GuestGovernanceUsageProperties> {
   @doc("Singleton Guest Governance resource")
   @key
+  @pattern("default")
   @segment("guestGovernanceUsage")
   @path
   name: string;
