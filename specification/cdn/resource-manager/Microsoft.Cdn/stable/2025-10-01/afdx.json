@@ -2414,16 +2414,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/updateRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/deleteOrUpsertRules": {
       "post": {
         "tags": [
           "RuleSets"
         ],
-        "description": "Update the rules with the specified rule set under the given Azure Front Door profile..",
-        "operationId": "RuleSets_UpdateRules",
+        "description": "Delete or upsert the rules with the specified rule set under the given Azure Front Door profile..",
+        "operationId": "RuleSets_DeleteOrUpsertRules",
         "x-ms-examples": {
           "RuleSets_UpdateRules": {
-            "$ref": "./examples/RuleSets_UpdateRules.json"
+            "$ref": "./examples/RuleSets_DeleteOrUpsertRules.json"
           }
         },
         "parameters": [
@@ -2449,7 +2449,7 @@
             "description": "The toDelete and toUpsert rules properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RulesUpdateParameters"
+              "$ref": "#/definitions/RulesDeleteOrUpsertParameters"
             }
           },
           {
@@ -5613,7 +5613,7 @@
         }
       }
     },
-    "RulesUpdateParameters": {
+    "RulesDeleteOrUpsertParameters": {
       "description": "The JSON object that contains the properties of the Rules to delete or upsert.",
       "type": "object",
       "properties": {
