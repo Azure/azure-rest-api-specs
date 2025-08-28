@@ -76,7 +76,8 @@ interface BackupInstanceResources {
     },
     Response = ArmResourceUpdatedResponse<BackupInstanceResource> | ArmResourceCreatedResponse<
       BackupInstanceResource,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = BackupInstanceResource> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse,
     OverrideErrorType = CloudError
   >;
