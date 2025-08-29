@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-02-16-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-02-16-preview'
 input-file:
-  - Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+  - preview/2021-02-16-preview/recoveryservicesdatareplication.json
 ```
 
 ### Tag: package-2024-09-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-09-01'
 input-file:
-  - Microsoft.DataReplication/stable/2024-09-01/recoveryservicesdatareplication.json
+  - stable/2024-09-01/recoveryservicesdatareplication.json
 ```
 
 ---
