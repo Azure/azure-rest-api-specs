@@ -50,7 +50,8 @@ These settings apply only when `--tag=package-2025-07-15` is specified on the co
 
 ```yaml $(tag) == 'package-2025-07-15'
 input-file:
-  - Microsoft.Quota/stable/2025-07-15/openapi.json
+  - Microsoft.Quota/stable/2025-07-15/groupquota.json
+  - Microsoft.Quota/stable/2025-07-15/quota.json
 ```
 
 ### Tag: package-2025-03-01
