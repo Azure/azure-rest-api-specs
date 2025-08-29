@@ -50,9 +50,6 @@
       "name": "STAC Collection Configuration"
     },
     {
-      "name": "GeoCatalog Instance Configuration"
-    },
-    {
       "name": "Image Exports for STAC Collections"
     },
     {
@@ -7283,126 +7280,6 @@
         }
       }
     },
-    "/geocatalog/auth": {
-      "get": {
-        "operationId": "GeoCatalogAuthConfigOperations_Get",
-        "tags": [
-          "GeoCatalog Instance Configuration"
-        ],
-        "summary": "Get Auth Config",
-        "description": "Get the app id and tenant id information to make a MSAL request for this\nGeoCatalog instance.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AuthConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GeoCatalogAuthConfigOperations_Get": {
-            "$ref": "./examples/GeoCatalogAuthConfigOperations_Get.json"
-          }
-        }
-      }
-    },
-    "/geocatalog/map/id": {
-      "get": {
-        "operationId": "GeoCatalogAzmapsClient_GetId",
-        "tags": [
-          "GeoCatalog Instance Configuration"
-        ],
-        "summary": "Get Azmaps Client Id",
-        "description": "Fetch the client id for the Azure Maps API service based on the current\non the current identity. This client id is used for the Explorer to\nauthenticate with the Azure Maps API service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AzMapsClientId"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GeoCatalogAzmapsClient_GetId": {
-            "$ref": "./examples/GeoCatalogAzmapsClient_GetId.json"
-          }
-        }
-      }
-    },
-    "/geocatalog/map/token": {
-      "get": {
-        "operationId": "GeoCatalogAzmapsToken_Get",
-        "tags": [
-          "GeoCatalog Instance Configuration"
-        ],
-        "summary": "Get Azmaps Token",
-        "description": "Fetch a token for the Azure Maps API service based on the current\nservice identity. This token is used for the Explorer to authenticate\nwith the Azure Maps API service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AzMapsToken"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GeoCatalogAzmapsToken_Get": {
-            "$ref": "./examples/GeoCatalogAzmapsToken_Get.json"
-          }
-        }
-      }
-    },
     "/inma/collections/{collectionId}/ingestions": {
       "get": {
         "operationId": "Ingestions_List",
@@ -8455,7 +8332,8 @@
             "description": "The duration, in minutes, that the SAS token will be valid. Only valid for approved users.",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "x-ms-client-name": "durationInMinutes"
           }
         ],
         "responses": {
@@ -8510,7 +8388,8 @@
             "description": "The duration, in minutes, that the SAS token will be valid. Only valid for approved users.",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "x-ms-client-name": "durationInMinutes"
           }
         ],
         "responses": {
@@ -8558,7 +8437,8 @@
             "description": "The duration, in minutes, that the SAS token will be valid. Only valid for approved users.",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "x-ms-client-name": "durationInMinutes"
           }
         ],
         "responses": {
@@ -8667,10 +8547,11 @@
           {
             "name": "duration",
             "in": "query",
-            "description": "URL signature duration in seconds.",
+            "description": "URL signature duration in minutes.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-ms-client-name": "durationInMinutes"
           }
         ],
         "responses": {
@@ -8815,10 +8696,11 @@
           {
             "name": "duration",
             "in": "query",
-            "description": "URL signature duration in seconds.",
+            "description": "URL signature duration in minutes.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-ms-client-name": "durationInMinutes"
           }
         ],
         "responses": {
@@ -10939,10 +10821,11 @@
           {
             "name": "duration",
             "in": "query",
-            "description": "URL signature duration in seconds.",
+            "description": "URL signature duration in minutes.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-ms-client-name": "durationInMinutes"
           },
           {
             "name": "query",
@@ -11334,38 +11217,6 @@
       },
       "additionalProperties": {}
     },
-    "AuthConfig": {
-      "type": "object",
-      "description": "Microsoft Authentication Library (MSAL) configuration for frontend authentication.",
-      "properties": {
-        "authn_app_id": {
-          "type": "string",
-          "description": "Application ID for authentication.",
-          "x-ms-client-name": "authnAppId"
-        },
-        "tenant_id": {
-          "type": "string",
-          "description": "Azure Active Directory tenant ID.",
-          "x-ms-client-name": "tenantId"
-        },
-        "instance": {
-          "type": "string",
-          "format": "uri",
-          "description": "Azure AD instance URL."
-        },
-        "redirect_uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "Redirect URI after authentication.",
-          "x-ms-client-name": "redirectUri"
-        }
-      },
-      "required": [
-        "authn_app_id",
-        "tenant_id",
-        "instance"
-      ]
-    },
     "AvailableAssetsResponse": {
       "type": "object",
       "description": "Return a list of supported assets.",
@@ -11381,40 +11232,6 @@
       },
       "required": [
         "body"
-      ]
-    },
-    "AzMapsClientId": {
-      "type": "object",
-      "description": "Represents an Azure Maps client ID for authentication.",
-      "properties": {
-        "client_id": {
-          "type": "string",
-          "description": "The client ID for Azure Maps authentication.",
-          "x-ms-client-name": "clientId"
-        }
-      },
-      "required": [
-        "client_id"
-      ]
-    },
-    "AzMapsToken": {
-      "type": "object",
-      "description": "Represents an Azure Maps token for map visualization.",
-      "properties": {
-        "token": {
-          "type": "string",
-          "description": "The authentication token for Azure Maps."
-        },
-        "expires_on": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Expiration timestamp of the token in Unix time.",
-          "x-ms-client-name": "expiresOn"
-        }
-      },
-      "required": [
-        "token",
-        "expires_on"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -15828,7 +15645,8 @@
         "duration": {
           "type": "integer",
           "format": "int32",
-          "description": "URL signature duration in seconds."
+          "description": "URL signature duration in minutes.",
+          "x-ms-client-name": "durationInMinutes"
         },
         "query": {
           "$ref": "#/definitions/StacQuery",

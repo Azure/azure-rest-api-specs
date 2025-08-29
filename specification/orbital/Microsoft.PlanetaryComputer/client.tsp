@@ -101,21 +101,6 @@ namespace Customizations;
 @@clientName(StacItem, "StacItemModel", "csharp");
 @@clientName(ItemCollection, "ItemCollectionModel", "csharp");
 
-// === GeoCatalog Instance Configuration ===
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@client(
-  {
-    name: "GeocatalogClient",
-    service: Microsoft.PlanetaryComputer,
-  },
-  "csharp,java,python"
-)
-interface GeocatalogClient {
-  getAuthConfig is GeoCatalogAuthConfigOperations.get;
-  getAzmapsClientId is GeoCatalogAzmapsClient.getId;
-  getAzmapsToken is GeoCatalogAzmapsToken.get;
-}
-
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(

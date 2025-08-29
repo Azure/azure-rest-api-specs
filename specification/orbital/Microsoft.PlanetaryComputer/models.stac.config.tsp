@@ -352,61 +352,6 @@ model DefaultLocation {
 }
 
 /**
- * Represents an Azure Maps token for map visualization.
- */
-model AzMapsToken {
-  /**
-   * The authentication token for Azure Maps.
-   */
-  token: string;
-
-  /**
-   * Expiration timestamp of the token in Unix time.
-   */
-  @encodedName("application/json", "expires_on")
-  expiresOn: int32;
-}
-
-/**
- * Represents an Azure Maps client ID for authentication.
- */
-model AzMapsClientId {
-  /**
-   * The client ID for Azure Maps authentication.
-   */
-  @encodedName("application/json", "client_id")
-  clientId: string;
-}
-
-/**
- * Microsoft Authentication Library (MSAL) configuration for frontend authentication.
- */
-model AuthConfig {
-  /**
-   * Application ID for authentication.
-   */
-  @encodedName("application/json", "authn_app_id")
-  authnAppId: string;
-
-  /**
-   * Azure Active Directory tenant ID.
-   */
-  @encodedName("application/json", "tenant_id")
-  tenantId: string;
-
-  /**
-   * Azure AD instance URL.
-   */
-  instance: url;
-
-  /**
-   * Redirect URI after authentication.
-   */
-  @encodedName("application/json", "redirect_uri")
-  redirectUri?: url;
-}
-
-/**
  * FormContent model for file upload.
  */
 model FormContent {

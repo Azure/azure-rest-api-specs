@@ -631,47 +631,6 @@ interface StacCollectionPartitionTypes {
   >;
 }
 
-interface GeoCatalogAzmapsToken {
-  /**
-   * Fetch a token for the Azure Maps API service based on the current
-   * service identity. This token is used for the Explorer to authenticate
-   * with the Azure Maps API service.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Azmaps Token")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/map/token")
-  @get
-  get is Azure.Core.Foundations.Operation<{}, AzMapsToken>;
-}
-
-interface GeoCatalogAzmapsClient {
-  /**
-   * Fetch the client id for the Azure Maps API service based on the current
-   * on the current identity. This client id is used for the Explorer to
-   * authenticate with the Azure Maps API service.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Azmaps Client Id")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/map/id")
-  @get
-  getId is Azure.Core.Foundations.Operation<{}, AzMapsClientId>;
-}
-
-interface GeoCatalogAuthConfigOperations {
-  /**
-   * Get the app id and tenant id information to make a MSAL request for this
-   * GeoCatalog instance.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Auth Config")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/auth")
-  @get
-  get is Azure.Core.Foundations.Operation<{}, AuthConfig>;
-}
-
 interface StacQueryables {
   /**
    * Endpoint.
