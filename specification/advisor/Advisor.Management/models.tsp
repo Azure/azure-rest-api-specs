@@ -857,8 +857,8 @@ model PredictionResponseProperties {
   /**
    * Extended properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedProperties?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  extendedProperties?: unknown;
 
   /**
    * Type of the prediction.
