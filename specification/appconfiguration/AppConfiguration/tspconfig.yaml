@@ -20,12 +20,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Data.AppConfiguration"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Data.AppConfiguration"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Data.AppConfiguration
     model-namespace: false
   "@azure-tools/typespec-ts":

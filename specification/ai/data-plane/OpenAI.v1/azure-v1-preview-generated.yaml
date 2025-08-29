@@ -1,9 +1,11 @@
 openapi: 3.0.0
 info:
   title: Azure AI Foundry Models Service
+  license:
+    name: MIT
+    url: https://github.com/openai/openai-openapi/blob/master/LICENSE
   version: preview
 tags:
-  - name: Audio
   - name: Chat
   - name: Embeddings
   - name: Evals
@@ -15,163 +17,6 @@ tags:
   - name: Vector Stores
   - name: Video
 paths:
-  /audio/speech:
-    post:
-      operationId: createSpeech
-      summary: Generates text-to-speech audio from the input text.
-      parameters:
-        - name: api-version
-          in: query
-          required: false
-          description: |-
-            The explicit Azure AI Foundry Models API version to use for this request.
-            `v1` if not otherwise specified.
-          schema:
-            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
-            default: v1
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-        default:
-          description: An unexpected error response.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureErrorResponse'
-      tags:
-        - Audio
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AzureCreateSpeechRequestMultiPart'
-      x-ms-examples:
-        Create a speech request:
-          $ref: ./examples/audio_speech.yaml
-  /audio/transcriptions:
-    post:
-      operationId: createTranscription
-      summary: Transcribes audio into the input language.
-      parameters:
-        - name: api-version
-          in: query
-          required: false
-          description: |-
-            The explicit Azure AI Foundry Models API version to use for this request.
-            `v1` if not otherwise specified.
-          schema:
-            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
-            default: v1
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureAudioTranscriptionResponse'
-            text/plain:
-              schema:
-                type: string
-        default:
-          description: An unexpected error response.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureErrorResponse'
-      tags:
-        - Audio
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AzureCreateTranscriptionRequestMultiPart'
-      x-ms-examples:
-        Create a transcription request:
-          $ref: ./examples/audio_transcription.yaml
-  /audio/translations:
-    post:
-      operationId: createTranslation
-      summary: Gets English language transcribed text and associated metadata from provided spoken audio data.
-      parameters:
-        - name: api-version
-          in: query
-          required: false
-          description: |-
-            The explicit Azure AI Foundry Models API version to use for this request.
-            `v1` if not otherwise specified.
-          schema:
-            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
-            default: v1
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureAudioTranslationResponse'
-            text/plain:
-              schema:
-                type: string
-        default:
-          description: An unexpected error response.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureErrorResponse'
-      tags:
-        - Audio
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AzureCreateTranslationRequestMultiPart'
-      x-ms-examples:
-        Create an audio translation request:
-          $ref: ./examples/audio_translation.yaml
   /chat/completions:
     post:
       operationId: createChatCompletion
@@ -1779,6 +1624,153 @@ paths:
                 $ref: '#/components/schemas/AzureErrorResponse'
       tags:
         - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/checkpoints/{fine_tuning_checkpoint_id}/copy:
+    post:
+      operationId: FineTuning_CopyCheckpoint
+      description: |-
+        Creates a copy of a fine-tuning checkpoint at the given destination account and region.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copy-ft-checkpoints
+          in: header
+          required: true
+          description: |-
+            Enables access to checkpoint copy operations for models, an AOAI preview feature.
+            This feature requires the 'aoai-copy-ft-checkpoints' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyModelRequest'
+    get:
+      operationId: FineTuning_GetCheckpoint
+      description: |-
+        Gets the status of a fine-tuning checkpoint copy.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copy-ft-checkpoints
+          in: header
+          required: true
+          description: |-
+            Enables access to checkpoint copy operations for models, an AOAI preview feature.
+            This feature requires the 'aoai-copy-ft-checkpoints' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
   /fine_tuning/jobs/{fine_tuning_job_id}/events:
     get:
       operationId: listFineTuningEvents
@@ -1936,52 +1928,6 @@ paths:
                 $ref: '#/components/schemas/AzureErrorResponse'
       tags:
         - Fine-tuning
-  /images/edits:
-    post:
-      operationId: createImageEdit
-      parameters:
-        - name: api-version
-          in: query
-          required: false
-          description: |-
-            The explicit Azure AI Foundry Models API version to use for this request.
-            `v1` if not otherwise specified.
-          schema:
-            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
-            default: v1
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureImagesResponse'
-        default:
-          description: An unexpected error response.
-          headers:
-            apim-request-id:
-              required: false
-              description: A request ID used for troubleshooting purposes.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AzureErrorResponse'
-      tags:
-        - Images
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AzureCreateImageEditRequestMultiPart'
   /images/generations:
     post:
       operationId: createImage
@@ -2195,6 +2141,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: include_obfuscation
+          in: query
+          required: false
+          description: When true, stream obfuscation will be enabled. Stream obfuscation adds random characters to an `obfuscation` field on streaming delta events to normalize payload sizes as a mitigation to certain side-channel attacks. These obfuscation fields are included by default, but add a small amount of overhead to the data stream. You can set `include_obfuscation` to false to optimize for bandwidth if you trust the network links between your application and the OpenAI API.
+          schema:
+            type: boolean
+            default: true
+          explode: false
         - name: include[]
           in: query
           required: false
@@ -3261,9 +3215,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AzureOpenAIVideoGenerationErrorResponse'
-      x-ms-examples:
-        Create a simple video generation job request:
-          $ref: ./examples/create_video_generation_job_simple.json
       tags:
         - Video
       requestBody:
@@ -3376,9 +3327,6 @@ paths:
                 $ref: '#/components/schemas/AzureOpenAIVideoGenerationErrorResponse'
       tags:
         - Video
-      x-ms-examples:
-        Retrieve properties of a video generation job:
-          $ref: ./examples/get_video_generation_job.json
     delete:
       operationId: VideoGenerationJobs_Delete
       description: Deletes a video generation job.
@@ -3613,142 +3561,11 @@ components:
       schema:
         type: string
   schemas:
-    AudioTaskLabel:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - transcribe
-            - translate
-      description: Defines the possible descriptors for available audio operation responses.
-    AudioTranslationSegment:
-      type: object
-      required:
-        - id
-        - start
-        - end
-        - text
-        - temperature
-        - avg_logprob
-        - compression_ratio
-        - no_speech_prob
-        - tokens
-        - seek
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: The 0-based index of this segment within a translation.
-        start:
-          type: number
-          format: float
-          description: The time at which this segment started relative to the beginning of the translated audio.
-        end:
-          type: number
-          format: float
-          description: The time at which this segment ended relative to the beginning of the translated audio.
-        text:
-          type: string
-          description: The translated text that was part of this audio segment.
-        temperature:
-          type: number
-          format: float
-          description: The temperature score associated with this audio segment.
-        avg_logprob:
-          type: number
-          format: float
-          description: The average log probability associated with this audio segment.
-        compression_ratio:
-          type: number
-          format: float
-          description: The compression ratio of this audio segment.
-        no_speech_prob:
-          type: number
-          format: float
-          description: The probability of no speech detection within this audio segment.
-        tokens:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: The token IDs matching the translated text in this audio segment.
-        seek:
-          type: integer
-          format: int32
-          description: |-
-            The seek position associated with the processing of this audio segment.
-            Seek positions are expressed as hundredths of seconds.
-            The model may process several segments from a single seek position, so while the seek position will never represent
-            a later time than the segment's start, the segment's start may represent a significantly later time than the
-            segment's associated seek position.
-      description: |-
-        Extended information about a single segment of translated audio data.
-        Segments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not
-        necessarily sentences.
     AzureAIFoundryModelsApiVersion:
       type: string
       enum:
         - v1
         - preview
-    AzureAudioTranscriptionResponse:
-      type: object
-      required:
-        - text
-      properties:
-        text:
-          type: string
-          description: The transcribed text for the provided audio data.
-        task:
-          allOf:
-            - $ref: '#/components/schemas/AudioTaskLabel'
-          description: The label that describes which operation type generated the accompanying response data.
-        language:
-          type: string
-          description: |-
-            The spoken language that was detected in the transcribed audio data.
-            This is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'.
-        duration:
-          type: number
-          format: float
-          description: The total duration of the audio processed to produce accompanying transcription information.
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.TranscriptionSegment'
-          description: A collection of information about the timing, probabilities, and other detail of each processed audio segment.
-        words:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.TranscriptionWord'
-          description: A collection of information about the timing of each processed word.
-      description: Result information for an operation that transcribed spoken audio into written text.
-    AzureAudioTranslationResponse:
-      type: object
-      required:
-        - text
-      properties:
-        text:
-          type: string
-          description: The translated text for the provided audio data.
-        task:
-          allOf:
-            - $ref: '#/components/schemas/AudioTaskLabel'
-          description: The label that describes which operation type generated the accompanying response data.
-        language:
-          type: string
-          description: |-
-            The spoken language that was detected in the translated audio data.
-            This is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'.
-        duration:
-          type: number
-          format: float
-          description: The total duration of the audio processed to produce accompanying translation information.
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudioTranslationSegment'
-          description: A collection of information about the timing, probabilities, and other detail of each processed audio segment.
-      description: Result information for an operation that translated spoken audio into written text.
     AzureChatCompletionResponseMessage:
       type: object
       required:
@@ -4441,6 +4258,20 @@ components:
             A content filter category that describes language related to physical actions intended to purposely hurt, injure,
             damage one's body or kill oneself.
       description: A content filter result for an image generation operation's output response content.
+    AzureContentFilterPersonallyIdentifiableInformationResult:
+      type: object
+      properties:
+        redacted_text:
+          type: string
+          description: The redacted text with PII information removed or masked.
+        sub_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzurePiiSubCategoryResult'
+          description: Detailed results for individual PIIHarmSubCategory(s).
+      allOf:
+        - $ref: '#/components/schemas/AzureContentFilterDetectionResult'
+      description: A content filter detection result for Personally Identifiable Information that includes harm extensions.
     AzureContentFilterResultForChoice:
       type: object
       properties:
@@ -4530,6 +4361,10 @@ components:
           description: A detection result that describes a match against licensed code or other protected source material.
         ungrounded_material:
           $ref: '#/components/schemas/AzureContentFilterCompletionTextSpanDetectionResult'
+        personally_identifiable_information:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterPersonallyIdentifiableInformationResult'
+          description: A detection result that describes matches against Personal Identifiable Information with configurable subcategories.
       description: A content filter result for a single response item produced by a generative AI system.
     AzureContentFilterResultForPrompt:
       type: object
@@ -5310,117 +5145,6 @@ components:
             - fine-tune
             - evals
           description: 'The intended purpose of the uploaded file. One of: - `assistants`: Used in the Assistants API - `batch`: Used in the Batch API - `fine-tune`: Used for fine-tuning - `evals`: Used for eval data sets'
-    AzureCreateImageEditRequestMultiPart:
-      type: object
-      required:
-        - image
-        - prompt
-        - model
-      properties:
-        image:
-          anyOf:
-            - type: string
-              format: binary
-            - type: array
-              items:
-                type: string
-                format: byte
-          description: |-
-            The image(s) to edit. Must be a supported image file or an array of images.
-
-            For `gpt-image-1`, each image should be a `png`, `webp`, or `jpg` file less
-            than 50MB. You can provide up to 16 images.
-
-            For `dall-e-2`, you can only provide one image, and it should be a square
-            `png` file less than 4MB.
-        prompt:
-          type: string
-          description: A text description of the desired image(s). The maximum length is 1000 characters for `dall-e-2`, and 32000 characters for `gpt-image-1`.
-        mask:
-          type: string
-          format: binary
-        background:
-          type: string
-          enum:
-            - transparent
-            - opaque
-            - auto
-          nullable: true
-          description: |-
-            Allows to set transparency for the background of the generated image(s).
-            This parameter is only supported for `gpt-image-1`. Must be one of
-            `transparent`, `opaque` or `auto` (default value). When `auto` is used, the
-            model will automatically determine the best background for the image.
-
-            If `transparent`, the output format needs to support transparency, so it
-            should be set to either `png` (default value) or `webp`.
-          default: auto
-        'n':
-          type: integer
-          format: int32
-          nullable: true
-          minimum: 1
-          maximum: 10
-          description: The number of images to generate. Must be between 1 and 10.
-          default: 1
-        size:
-          type: string
-          enum:
-            - 256x256
-            - 512x512
-            - 1024x1024
-            - 1536x1024
-            - 1024x1536
-            - auto
-          nullable: true
-          description: The size of the generated images. Must be one of `1024x1024`, `1536x1024` (landscape), `1024x1536` (portrait), or `auto` (default value) for `gpt-image-1`, and one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`.
-          default: 1024x1024
-        response_format:
-          type: string
-          enum:
-            - url
-            - b64_json
-          nullable: true
-          description: The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated. This parameter is only supported for `dall-e-2`, as `gpt-image-1` will always return base64-encoded images.
-          default: url
-        output_format:
-          type: string
-          enum:
-            - png
-            - jpeg
-            - webp
-          nullable: true
-          description: |-
-            The format in which the generated images are returned. This parameter is
-            only supported for `gpt-image-1`. Must be one of `png`, `jpeg`, or `webp`.
-            The default value is `png`.
-          default: png
-        output_compression:
-          type: integer
-          format: int32
-          nullable: true
-          description: |-
-            The compression level (0-100%) for the generated images. This parameter
-            is only supported for `gpt-image-1` with the `webp` or `jpeg` output
-            formats, and defaults to 100.
-          default: 100
-        user:
-          type: string
-          description: A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. [Learn more](/docs/guides/safety-best-practices#end-user-ids).
-        quality:
-          type: string
-          enum:
-            - standard
-            - low
-            - medium
-            - high
-            - auto
-          nullable: true
-          description: The quality of the image that will be generated. `high`, `medium` and `low` are only supported for `gpt-image-1`. `dall-e-2` only supports `standard` quality. Defaults to `auto`.
-          default: auto
-        model:
-          type: string
-          description: The model deployment to use for the image edit operation.
     AzureCreateImageRequest:
       type: object
       required:
@@ -5732,147 +5456,6 @@ components:
         model:
           type: string
           description: The model deployment to use for the creation of this response.
-    AzureCreateSpeechRequestMultiPart:
-      type: object
-      required:
-        - input
-        - voice
-        - model
-      properties:
-        input:
-          type: string
-          maxLength: 4096
-          description: The text to generate audio for. The maximum length is 4096 characters.
-        instructions:
-          type: string
-          maxLength: 4096
-          description: Control the voice of your generated audio with additional instructions. Does not work with `tts-1` or `tts-1-hd`.
-        voice:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.VoiceIdsShared'
-          description: The voice to use when generating the audio. Supported voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`, and `verse`. Previews of the voices are available in the [Text to speech guide](/docs/guides/text-to-speech#voice-options).
-        stream_format:
-          type: string
-          enum:
-            - sse
-            - audio
-          description: The format to stream the audio in. Supported formats are `sse` and `audio`. `sse` is not supported for `tts-1` or `tts-1-hd`.
-          default: audio
-        response_format:
-          allOf:
-            - $ref: '#/components/schemas/SpeechGenerationResponseFormat'
-          description: The audio output format for the spoken text. By default, the MP3 format will be used.
-        speed:
-          type: number
-          format: float
-          minimum: 0.25
-          maximum: 4
-          description: The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.
-          default: 1
-        model:
-          type: string
-          description: The model to use for this text-to-speech request.
-      description: A representation of the request options that control the behavior of a text-to-speech operation.
-    AzureCreateTranscriptionRequestMultiPart:
-      type: object
-      required:
-        - file
-      properties:
-        file:
-          type: string
-          format: binary
-        language:
-          type: string
-          description: The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.
-        prompt:
-          type: string
-          description: An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text#prompting) should match the audio language.
-        response_format:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.TranscriptionAudioResponseFormat'
-          default: json
-        temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
-          default: 0
-        include[]:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.TranscriptionInclude'
-          description: |-
-            Additional information to include in the transcription response.
-            `logprobs` will return the log probabilities of the tokens in the
-            response to understand the model's confidence in the transcription.
-            `logprobs` only works with response_format set to `json` and only with
-            the models `gpt-4o-transcribe` and `gpt-4o-mini-transcribe`.
-        timestamp_granularities[]:
-          type: array
-          items:
-            type: string
-            enum:
-              - word
-              - segment
-          description: 'The timestamp granularities to populate for this transcription. `response_format` must be set `verbose_json` to use timestamp granularities. Either or both of these options are supported: `word`, or `segment`. Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.'
-          default:
-            - segment
-        stream:
-          type: boolean
-          nullable: true
-          description: |-
-            If set to true, the model response data will be streamed to the client
-            as it is generated using [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
-            See the [Streaming section of the Speech-to-Text guide](/docs/guides/speech-to-text?lang=curl#streaming-transcriptions)
-            for more information.
-
-            Note: Streaming is not supported for the `whisper-1` model and will be ignored.
-          default: false
-        chunking_strategy:
-          type: object
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.VadConfig'
-          nullable: true
-          description: Controls how the audio is cut into chunks. When set to `"auto"`, the server first normalizes loudness and then uses voice activity detection (VAD) to choose boundaries. `server_vad` object can be provided to tweak VAD detection parameters manually. If unset, the audio is transcribed as a single block.
-          x-oaiTypeLabel: string
-        filename:
-          type: string
-          description: The optional filename or descriptive identifier to associate with with the audio data.
-        model:
-          type: string
-          description: The model to use for this transcription request.
-      description: The configuration information for an audio transcription request.
-    AzureCreateTranslationRequestMultiPart:
-      type: object
-      required:
-        - file
-      properties:
-        file:
-          type: string
-          format: binary
-        prompt:
-          type: string
-          description: An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text#prompting) should be in English.
-        response_format:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.TranslationAudioResponseFormat'
-          description: 'The format of the output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.'
-          default: json
-        temperature:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
-          default: 0
-        filename:
-          type: string
-          description: The optional filename or descriptive identifier to associate with with the audio data
-        model:
-          type: string
-          description: The model to use for this translation request.
-      description: The configuration information for an audio transcription request.
     AzureErrorResponse:
       type: object
       properties:
@@ -6177,6 +5760,27 @@ components:
             error_details:
               description: The content filter result details associated with the inner error.
           description: If applicable, an upstream error that originated this error.
+    AzurePiiSubCategoryResult:
+      type: object
+      required:
+        - sub_category
+        - filtered
+        - detected
+        - redacted
+      properties:
+        sub_category:
+          type: string
+          description: The PIIHarmSubCategory that was evaluated.
+        filtered:
+          type: boolean
+          description: Whether the content detection resulted in a content filtering action for this subcategory.
+        detected:
+          type: boolean
+          description: Whether the labeled content subcategory was detected in the content.
+        redacted:
+          type: boolean
+          description: Whether the content was redacted for this subcategory.
+      description: Result details for individual PIIHarmSubCategory(s).
     AzureResponse:
       type: object
       required:
@@ -6557,6 +6161,56 @@ components:
       items:
         $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCall'
       description: The tool calls generated by the model, such as function calls.
+    CopiedAccountDetails:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+        - status
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination resource where the model was copied to.
+        region:
+          type: string
+          description: The region where the model was copied to.
+        status:
+          type: string
+          enum:
+            - Completed
+            - Failed
+            - InProgress
+          description: The status of the copy operation.
+    CopyModelRequest:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination Resource to copy.
+        region:
+          type: string
+          description: The region to copy the model to.
+    CopyModelResponse:
+      type: object
+      required:
+        - checkpointedModelName
+        - fineTuningJobId
+        - copiedAccountDetails
+      properties:
+        checkpointedModelName:
+          type: string
+          description: The ID of the copied model.
+        fineTuningJobId:
+          type: string
+          description: The ID of the fine-tuning job that the checkpoint was copied from.
+        copiedAccountDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CopiedAccountDetails'
+          description: The ID of the destination resource id where it was copied
     CreateVideoGenerationRequest:
       type: object
       required:
@@ -7053,15 +6707,6 @@ components:
           nullable: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Location'
-    OpenAI.AudioResponseFormat:
-      type: string
-      enum:
-        - json
-        - text
-        - srt
-        - verbose_json
-        - vtt
-      description: 'The format of the output, in one of these options: `json`, `text`, `srt`, `verbose_json`, or `vtt`. For `gpt-4o-transcribe` and `gpt-4o-mini-transcribe`, the only supported format is `json`.'
     OpenAI.AutoChunkingStrategyRequestParam:
       type: object
       required:
@@ -12929,6 +12574,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -12945,6 +12591,9 @@ components:
         delta:
           type: string
           description: The partial code snippet being streamed by the code interpreter.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a partial code snippet is streamed by the code interpreter.
@@ -13389,6 +13038,7 @@ components:
         - item_id
         - output_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13405,6 +13055,9 @@ components:
         delta:
           type: string
           description: The function-call arguments delta that is added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial function-call arguments delta.
@@ -13602,6 +13255,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13617,6 +13271,9 @@ components:
           description: The unique identifier of the MCP tool call item being processed.
         delta:
           description: The partial update to the arguments for the MCP tool call.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the arguments of an MCP tool call.
@@ -13814,6 +13471,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13833,6 +13491,9 @@ components:
           description: The index of the reasoning content part within the output item.
         delta:
           description: The partial update to the reasoning content.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning content.
@@ -13875,6 +13536,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13894,6 +13556,9 @@ components:
           description: The index of the summary part within the output item.
         delta:
           description: The partial update to the reasoning summary content.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning summary content.
@@ -14000,6 +13665,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -14020,6 +13686,9 @@ components:
         delta:
           type: string
           description: The text delta that was added to the summary.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a delta is added to a reasoning summary text.
@@ -14062,6 +13731,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -14082,6 +13752,9 @@ components:
         delta:
           type: string
           description: The refusal text that is added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial refusal text.
@@ -14245,6 +13918,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -14265,6 +13939,9 @@ components:
         delta:
           type: string
           description: The text delta that was added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is an additional text delta.
@@ -15092,87 +14769,6 @@ components:
             type: integer
             format: int32
       description: The top log probability of a token.
-    OpenAI.TranscriptionAudioResponseFormat:
-      $ref: '#/components/schemas/OpenAI.AudioResponseFormat'
-    OpenAI.TranscriptionInclude:
-      type: string
-      enum:
-        - logprobs
-    OpenAI.TranscriptionSegment:
-      type: object
-      required:
-        - id
-        - seek
-        - start
-        - end
-        - text
-        - tokens
-        - temperature
-        - avg_logprob
-        - compression_ratio
-        - no_speech_prob
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Unique identifier of the segment.
-        seek:
-          type: integer
-          format: int32
-          description: Seek offset of the segment.
-        start:
-          type: number
-          format: float
-          description: Start time of the segment in seconds.
-        end:
-          type: number
-          format: float
-          description: End time of the segment in seconds.
-        text:
-          type: string
-          description: Text content of the segment.
-        tokens:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: Array of token IDs for the text content.
-        temperature:
-          type: number
-          format: float
-          description: Temperature parameter used for generating the segment.
-        avg_logprob:
-          type: number
-          format: float
-          description: Average logprob of the segment. If the value is lower than -1, consider the logprobs failed.
-        compression_ratio:
-          type: number
-          format: float
-          description: Compression ratio of the segment. If the value is greater than 2.4, consider the compression failed.
-        no_speech_prob:
-          type: number
-          format: float
-          description: Probability of no speech in the segment. If the value is higher than 1.0 and the `avg_logprob` is below -1, consider this segment silent.
-    OpenAI.TranscriptionWord:
-      type: object
-      required:
-        - word
-        - start
-        - end
-      properties:
-        word:
-          type: string
-          description: The text content of the word.
-        start:
-          type: number
-          format: float
-          description: Start time of the word in seconds.
-        end:
-          type: number
-          format: float
-          description: End time of the word in seconds.
-    OpenAI.TranslationAudioResponseFormat:
-      $ref: '#/components/schemas/OpenAI.AudioResponseFormat'
     OpenAI.UpdateVectorStoreFileAttributesRequest:
       type: object
       required:
@@ -15207,39 +14803,6 @@ components:
             Keys are strings with a maximum length of 64 characters. Values are strings
             with a maximum length of 512 characters.
           x-oaiTypeLabel: map
-    OpenAI.VadConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - server_vad
-          description: Must be set to `server_vad` to enable manual chunking using server side VAD.
-        prefix_padding_ms:
-          type: integer
-          format: int32
-          description: |-
-            Amount of audio to include before the VAD detected speech (in
-            milliseconds).
-          default: 300
-        silence_duration_ms:
-          type: integer
-          format: int32
-          description: |-
-            Duration of silence to detect speech stop (in milliseconds).
-            With shorter values the model will respond more quickly,
-            but may jump in on short pauses from the user.
-          default: 200
-        threshold:
-          type: number
-          format: float
-          description: |-
-            Sensitivity threshold (0.0 to 1.0) for voice activity detection. A
-            higher threshold will require louder audio to activate the model, and
-            thus might perform better in noisy environments.
-          default: 0.5
     OpenAI.ValidateGraderRequest:
       type: object
       required:
@@ -15831,18 +15394,6 @@ components:
         both text and audio responses, you can use:
 
         `["text", "audio"]`
-    SpeechGenerationResponseFormat:
-      oneOf:
-        - type: string
-        - type: string
-          enum:
-            - mp3
-            - opus
-            - aac
-            - flac
-            - wav
-            - pcm
-      description: The supported audio output formats for text-to-speech.
     VideoGeneration:
       type: object
       required:
