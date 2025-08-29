@@ -27,6 +27,18 @@ union JobType {
 
   @doc("A validation job.")
   ExternalValidation: "externalValidation",
+
+  @added(Versions.v2025_08_01)
+  @doc("A bulk deployment job.")
+  BulkDeploy: "bulkDeploy",
+
+  @added(Versions.v2025_08_01)
+  @doc("A bulk publish job.")
+  BulkPublish: "bulkPublish",
+
+  @added(Versions.v2025_08_01)
+  @doc("A bulk review job.")
+  BulkReview: "bulkReview",
 }
 
 @doc("Status of a job or job step.")
