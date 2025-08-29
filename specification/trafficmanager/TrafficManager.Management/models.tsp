@@ -148,6 +148,12 @@ enum EndpointType {
   NestedEndpoints,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum HeatMapType {
+  default,
+}
+
 /**
  * Class representing a Traffic Manager endpoint properties.
  */
@@ -283,42 +289,6 @@ model Resource {
    * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
    */
   type?: string;
-}
-
-/**
- * An error returned by the Azure Resource Manager
- */
-@error
-model CloudError {
-  /**
-   * The content of the error.
-   */
-  error?: CloudErrorBody;
-}
-
-/**
- * The content of an error returned by the Azure Resource Manager
- */
-model CloudErrorBody {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message
-   */
-  message?: string;
-
-  /**
-   * Error target
-   */
-  target?: string;
-
-  /**
-   * Error details
-   */
-  details?: CloudErrorBody[];
 }
 
 /**

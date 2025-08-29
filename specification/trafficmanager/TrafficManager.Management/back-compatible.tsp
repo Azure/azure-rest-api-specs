@@ -12,6 +12,10 @@ using Microsoft.Network;
 
 @@clientName(Profiles.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Profiles.update::parameters.properties, "parameters");
+
+@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,  "parameters");
+@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2::parameters.body,  "parameters");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Profile.properties);
 

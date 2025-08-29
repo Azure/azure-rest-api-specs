@@ -24,66 +24,135 @@ model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
   >;
 }
 
-@armResourceOperations
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}")
 interface Endpoints {
   /**
    * Gets a Traffic Manager endpoint.
    */
-  get is ArmResourceRead<
-    Endpoint,
-    Parameters = {
-      /**
-       * The type of the Traffic Manager endpoint.
-       */
-      @path
-      endpointType: EndpointType;
-    }
-  >;
+  @get
+  @armResourceRead(Endpoint)
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the Traffic Manager profile.
+     */
+    @path
+    profileName?: string,
+
+    /**
+     * The type of the Traffic Manager endpoint.
+     */
+    @path
+    endpointType?: EndpointType,
+
+    /**
+     * The name of the Traffic Manager endpoint.
+     */
+    @path
+    endpointName?: string,
+  ): ArmResponse<Endpoint> | ErrorResponse;
 
   /**
    * Create or update a Traffic Manager endpoint.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    Endpoint,
-    Parameters = {
-      /**
-       * The type of the Traffic Manager endpoint to be created or updated.
-       */
-      @path
-      endpointType: EndpointType;
-    }
-  >;
+  @put
+  @armResourceCreateOrUpdate(Endpoint)
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the Traffic Manager profile.
+     */
+    @path
+    profileName?: string,
+
+    /**
+     * The type of the Traffic Manager endpoint.
+     */
+    @path
+    endpointType?: EndpointType,
+
+    /**
+     * The name of the Traffic Manager endpoint.
+     */
+    @path
+    endpointName?: string,
+
+    /**
+     * The properties of the Traffic Manager endpoint.
+     */
+    @body
+    resource: Endpoint,
+  ): ArmResponse<Endpoint> | ArmCreatedResponse<Endpoint> | ErrorResponse;
 
   /**
    * Update a Traffic Manager endpoint.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    Endpoint,
-    PatchModel = Endpoint,
-    Parameters = {
-      /**
-       * The type of the Traffic Manager endpoint to be updated.
-       */
-      @path
-      endpointType: EndpointType;
-    }
-  >;
+  @armResourceUpdate(Endpoint)
+  update(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the Traffic Manager profile.
+     */
+    @path
+    profileName?: string,
+
+    /**
+     * The type of the Traffic Manager endpoint.
+     */
+    @path
+    endpointType?: EndpointType,
+
+    /**
+     * The name of the Traffic Manager endpoint.
+     */
+    @path
+    endpointName?: string,
+
+    /**
+     * The properties of the Traffic Manager endpoint.
+     */
+    @body
+    properties: Endpoint,
+  ): ArmResponse<Endpoint> | ErrorResponse;
 
   /**
    * Deletes a Traffic Manager endpoint.
    */
-  delete is ArmResourceDeleteSync<
-    Endpoint,
-    Parameters = {
-      /**
-       * The type of the Traffic Manager endpoint to be deleted.
-       */
-      @path
-      endpointType: EndpointType;
-    },
-    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse
-  >;
+  @delete
+  @armResourceDelete(Endpoint)
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the Traffic Manager profile.
+     */
+    @path
+    profileName?: string,
+
+    /**
+     * The type of the Traffic Manager endpoint.
+     */
+    @path
+    endpointType?: EndpointType,
+
+    /**
+     * The name of the Traffic Manager endpoint.
+     */
+    @path
+    endpointName?: string,
+  ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
 }
 
 @@doc(Endpoint.name, "The name of the Traffic Manager endpoint.");
