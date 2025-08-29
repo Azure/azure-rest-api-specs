@@ -26,7 +26,7 @@ union ScheduleProvisioningStatus {
   Paused: "Paused",
 
   @doc("Represents the completed status of the schedule.")
-  Completed: "Completed"
+  Completed: "Completed",
 }
 
 @doc("Type of the trigger.")
@@ -41,7 +41,7 @@ union TriggerType {
   Recurrence: "Recurrence",
 
   @doc("One-time trigger.")
-  OneTime: "OneTime"
+  OneTime: "OneTime",
 }
 
 @doc("Base model for Trigger of the schedule.")
@@ -78,7 +78,7 @@ union RecurrencePatternType {
   Weekly: "Weekly",
 
   @doc("Monthly recurrence pattern.")
-  Monthly: "Monthly"
+  Monthly: "Monthly",
 }
 
 @doc("Recurrence pattern for the schedule.")
@@ -138,7 +138,11 @@ model RecurrenceTrigger extends Trigger {
   type: TriggerType.Recurrence;
 
   @doc("Recurrence pattern for the schedule.")
-  recurrencePattern: HourlyRecurrencePattern | DailyRecurrencePattern | WeeklyRecurrencePattern | MonthlyRecurrencePattern;
+  recurrencePattern:
+    | HourlyRecurrencePattern
+    | DailyRecurrencePattern
+    | WeeklyRecurrencePattern
+    | MonthlyRecurrencePattern;
 
   @doc("Time zone for the recurrence schedule.")
   timeZone: string;
@@ -160,10 +164,8 @@ model OneTimeTrigger extends Trigger {
 @added(Versions.v2025_09_15_preview)
 union ScheduleTaskType {
   string,
-
   Evaluation: "Evaluation",
-
-  AgentRunAnalysis: "AgentAnalysis"
+  AgentRunAnalysis: "AgentAnalysis",
 }
 
 @doc("Schedule task model.")
@@ -238,7 +240,7 @@ union ScheduleRunTriggerStatus {
   Skipped: "Skipped",
 
   @doc("Failed status of the schedule run.")
-  Failed: "Failed"
+  Failed: "Failed",
 }
 
 @doc("Schedule run model.")
@@ -267,8 +269,7 @@ model ScheduleRun {
 @added(Versions.v2025_09_15_preview)
 union ScheduleRunEventAction {
   string,
-
-  Skip: "Skip"
+  Skip: "Skip",
 }
 
 @doc("Event model for schedule run actions.")
