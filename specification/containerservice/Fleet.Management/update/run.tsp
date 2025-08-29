@@ -232,6 +232,26 @@ model UpdateRunStatus {
   nodeImageSelection?: NodeImageSelectionStatus;
 }
 
+@doc("The status of the stage-level concurrency.")
+@added(Versions.v2025_10_01_preview)
+model StageConcurrencyStatus {
+  @visibility(Lifecycle.Read)
+  @doc("""
+    The max number of upgrades that can run concurrently across all groups in this stage, resolved from the UpdateStrategy.UpdateStage.maxConcurrency value. If no value was provided, this value defaults to "${StageMaxConcurrencyDefault}".
+    """)
+  maxConcurrency?: int32;
+}
+
+@doc("The status of the group-level concurrency.")
+@added(Versions.v2025_10_01_preview)
+model GroupConcurrencyStatus {
+  @visibility(Lifecycle.Read)
+  @doc("""
+    The max number of upgrades that can run concurrently in this group, resolved from the UpdateStrategy.UpdateGroup.maxConcurrency value. If no value was provided, this value defaults to "${GroupMaxConcurrencyDefault}".
+    """)
+  maxConcurrency?: int32;
+}
+
 @doc("The node image upgrade specs for the update run.")
 @added(Versions.v2023_06_15_preview)
 model NodeImageSelectionStatus {
@@ -258,6 +278,11 @@ model UpdateStageStatus {
   @visibility(Lifecycle.Read)
   @doc("The name of the UpdateStage.")
   name?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Stage-level concurrency status for this stage.")
+  @added(Versions.v2025_10_01_preview)
+  stageConcurrencyStatus?: StageConcurrencyStatus;
 
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
@@ -290,6 +315,10 @@ model UpdateGroupStatus {
   @visibility(Lifecycle.Read)
   @doc("The name of the UpdateGroup.")
   name?: string;
+
+  @doc("Group-level concurrency status for this group.")
+  @added(Versions.v2025_10_01_preview)
+  groupConcurrencyStatus?: GroupConcurrencyStatus;
 
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
