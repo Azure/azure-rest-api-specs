@@ -1,7 +1,9 @@
 import "./models.tsp";
+import "@typespec/openapi";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using Versioning;
 
@@ -58,6 +60,8 @@ interface CapacityBlocksOperationGroup {
   /**
    * Get available capacity blocks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CapacityBlocks_Get")
   @autoRoute
   @get
   @action("capacityBlocks")
@@ -80,6 +84,8 @@ interface RegionalCapacityBlocksOperationGroup {
   /**
    * Get available capacity blocks by location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("RegionalCapacityBlocks_Get")
   @autoRoute
   @get
   @action("capacityBlocks")
