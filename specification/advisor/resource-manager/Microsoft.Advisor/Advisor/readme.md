@@ -34,9 +34,9 @@ These settings apply only when `--tag=package-2025-05-preview` is specified on t
 
 ```yaml $(tag) == 'package-2025-05-preview'
 input-file:
-  - Microsoft.Advisor/preview/2025-05-01-preview/advisor.json
-  - Microsoft.Advisor/preview/2025-05-01-preview/assessments.json
-  - Microsoft.Advisor/preview/2025-05-01-preview/resiliencyReviews.json
+  - preview/2025-05-01-preview/advisor.json
+  - preview/2025-05-01-preview/assessments.json
+  - preview/2025-05-01-preview/resiliencyReviews.json
 suppressions:
   - code: ArmResourcePropertiesBag
     reason: Suppressing for now to avoid breaking change.
@@ -58,9 +58,9 @@ These settings apply only when `--tag=package-2024-11-preview` is specified on t
 
 ```yaml $(tag) == 'package-2024-11-preview'
 input-file:
-  - Microsoft.Advisor/preview/2024-11-18-preview/advisor.json
-  - Microsoft.Advisor/preview/2024-11-18-preview/assessments.json
-  - Microsoft.Advisor/preview/2024-11-18-preview/resiliencyReviews.json
+  - preview/2024-11-18-preview/advisor.json
+  - preview/2024-11-18-preview/assessments.json
+  - preview/2024-11-18-preview/resiliencyReviews.json
 suppressions:
   - code: ArmResourcePropertiesBag
     reason: Suppressing for now to avoid breaking change.
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2025-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-01'
 input-file:
-  - Microsoft.Advisor/stable/2025-01-01/advisor.json
+  - stable/2025-01-01/advisor.json
 ```
 
 ### Tag: package-2023-09-preview
@@ -91,9 +91,9 @@ These settings apply only when `--tag=package-2023-09-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-09-preview'
 input-file:
-  - Microsoft.Advisor/preview/2023-09-01-preview/advisor.json
-  - Microsoft.Advisor/preview/2023-09-01-preview/assessments.json
-  - Microsoft.Advisor/preview/2023-09-01-preview/resiliencyReviews.json
+  - preview/2023-09-01-preview/advisor.json
+  - preview/2023-09-01-preview/assessments.json
+  - preview/2023-09-01-preview/resiliencyReviews.json
 ```
 
 ### Tag: package-2023-01
@@ -102,7 +102,7 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-01'
 input-file:
-  - Microsoft.Advisor/stable/2023-01-01/advisor.json
+  - stable/2023-01-01/advisor.json
 ```
 
 ### Tag: package-2022-10
@@ -111,7 +111,7 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-  - Microsoft.Advisor/stable/2022-10-01/advisor.json
+  - stable/2022-10-01/advisor.json
 ```
 
 ### Tag: package-2022-09
@@ -120,7 +120,7 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-09'
 input-file:
-  - Microsoft.Advisor/stable/2022-09-01/advisor.json
+  - stable/2022-09-01/advisor.json
 ```
 
 ### Tag: package-2022-02-preview
@@ -129,7 +129,7 @@ These settings apply only when `--tag=package-2022-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2022-02-preview'
 input-file:
-  - Microsoft.Advisor/preview/2022-02-01-preview/predictRecommendation.json
+  - preview/2022-02-01-preview/predictRecommendation.json
 ```
 
 ### Tag: package-2020-07-preview
@@ -138,7 +138,7 @@ These settings apply only when `--tag=package-2020-07-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-07-preview'
 input-file:
-  - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
+  - preview/2020-07-01-preview/advisor.json
 ```
 
 ### Tag: package-2020-01
@@ -147,7 +147,7 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
-  - Microsoft.Advisor/stable/2020-01-01/advisor.json
+  - stable/2020-01-01/advisor.json
 ```
 
 ### Tag: package-2017-04
@@ -156,7 +156,7 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.Advisor/stable/2017-04-19/advisor.json
+- stable/2017-04-19/advisor.json
 ```
 
 ### Tag: package-2017-03
@@ -165,7 +165,7 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
-- Microsoft.Advisor/stable/2017-03-31/advisor.json
+- stable/2017-03-31/advisor.json
 ```
 
 ### Tag: package-2016-07-preview
@@ -174,7 +174,7 @@ These settings apply only when `--tag=package-2016-07-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2016-07-preview'
 input-file:
-- Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
+- preview/2016-07-12-preview/advisor.json
 ```
 
 ---
