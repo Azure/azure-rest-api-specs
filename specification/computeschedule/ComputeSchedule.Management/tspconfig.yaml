@@ -16,18 +16,16 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    # TODO: remove this once issue resolved: https://github.com/Azure/autorest.typescript/issues/3228
-    generate-sample: false
     experimental-extensible-enums: true
     package-dir: "arm-computeschedule"
     flavor: azure
     package-details:
       name: "@azure/arm-computeschedule"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ComputeSchedule"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ComputeSchedule"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-computeschedule"
     namespace: "com.azure.resourcemanager.computeschedule"

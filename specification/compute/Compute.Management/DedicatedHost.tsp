@@ -88,6 +88,7 @@ interface DedicatedHosts {
    */
   @get
   @action("hostSizes")
+  @list
   listAvailableSizes is ComputeResourceActionSync<
     DedicatedHost,
     void,

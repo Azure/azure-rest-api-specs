@@ -14,13 +14,26 @@ namespace Microsoft.Maintenance;
  * Maintenance configuration record type
  */
 model MaintenanceConfiguration
-  is Azure.ResourceManager.TrackedResource<MaintenanceConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<MaintenanceConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = MaintenanceConfiguration,
     KeyName = "resourceName",
     SegmentName = "publicMaintenanceConfigurations",
     NamePattern = ""
   >;
+
+  /**
+   * Gets or sets location of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /**
+   * Gets or sets tags of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 @armResourceOperations
