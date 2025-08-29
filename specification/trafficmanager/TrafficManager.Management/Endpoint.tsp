@@ -165,7 +165,7 @@ interface Endpoints {
     #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointName?: string,
-  ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
+  ): ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse | ErrorResponse;
 }
 
 @@doc(Endpoint.name, "The name of the Traffic Manager endpoint.");

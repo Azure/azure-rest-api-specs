@@ -272,7 +272,7 @@ model EndpointPropertiesCustomHeadersItem {
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyResource extends Resource {}
 
 /**
@@ -360,12 +360,19 @@ model ProfileListResult {
    */
   @pageItems
   value?: Profile[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Class representing the Traffic Manager profile properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProfileProperties {
   /**
    * The status of the Traffic Manager profile.

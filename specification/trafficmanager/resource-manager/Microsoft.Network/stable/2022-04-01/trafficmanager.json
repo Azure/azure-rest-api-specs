@@ -302,7 +302,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedProfileListResult"
+              "$ref": "#/definitions/ProfileListResult"
             }
           },
           "default": {
@@ -344,7 +344,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedProfileListResult"
+              "$ref": "#/definitions/ProfileListResult"
             }
           },
           "default": {
@@ -878,7 +878,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1464,27 +1467,6 @@
         ]
       }
     },
-    "PagedProfileListResult": {
-      "type": "object",
-      "description": "Paged collection of ProfileListResult items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProfileListResult items on this page",
-          "items": {
-            "$ref": "#/definitions/ProfileListResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "Profile": {
       "type": "object",
       "description": "Class representing a Traffic Manager profile.",
@@ -1511,6 +1493,10 @@
           "items": {
             "$ref": "#/definitions/Profile"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items."
         }
       }
     },

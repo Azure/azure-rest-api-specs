@@ -55,7 +55,7 @@ interface Profiles {
    */
   listByResourceGroup is ArmResourceListByParent<
     Profile,
-    Response = ArmResponse<Azure.Core.Page<ProfileListResult>>
+    Response = ArmResponse<ProfileListResult>
   >;
 
   /**
@@ -63,7 +63,7 @@ interface Profiles {
    */
   listBySubscription is ArmListBySubscription<
     Profile,
-    Response = ArmResponse<Azure.Core.Page<ProfileListResult>>
+    Response = ArmResponse<ProfileListResult>
   >;
 }
 
