@@ -41,8 +41,7 @@ interface Clusters {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
-      ArmLroLocationHeader<FinalResult = Cluster>
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>
   >;
 
   /**
@@ -50,12 +49,11 @@ interface Clusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("location")
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterForUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
-      ArmLroLocationHeader<FinalResult = Cluster>,
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
       @bodyRoot
       _: Cluster;
     })
@@ -67,8 +65,7 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
