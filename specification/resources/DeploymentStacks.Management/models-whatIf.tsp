@@ -17,7 +17,7 @@ namespace Microsoft.Resources.DeploymentStacks;
 @added(Versions.v2025_07_01)
 model DeploymentStackWhatIfResult
   is Azure.ResourceManager.ProxyResource<DeploymentStackWhatIfResultProperties> {
-  ...DeploymentStackNameParameter;
+  ...DeploymentStackWhatIfNameParameter;
 
   /** The geo-location where the resource lives. Required for subscription and management group scoped stacks. The location is inherited from the resource group for resource group scoped stacks. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
@@ -29,6 +29,13 @@ model DeploymentStackWhatIfResult
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
   tags?: Record<string>;
 }
+
+alias DeploymentStackWhatIfNameParameter = ResourceNameParameter<
+  Resource = DeploymentStackWhatIfResult,
+  KeyName = "deploymentStackWhatIfName",
+  SegmentName = "deploymentStackWhatIf",
+  NamePattern = "^[-\\w\\._\\(\\)]+$"
+>;
 
 /**
  * DeploymentStack WhatIfResult Properties
@@ -58,7 +65,7 @@ model DeploymentStackWhatIfResultProperties extends DeploymentStackSharedPropert
 }
 
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfChange {
+model DeploymentStackWhatIfChange { 
     
     resourceChanges: DeploymentStackWhatIfResourceChange[];
 
@@ -67,6 +74,9 @@ model DeploymentStackWhatIfChange {
     deploymentScopeChange: DeploymentStackChangeBase<string>;
 }
 
+/**
+ * Information about a single resource change predicted by What-If operation.
+ */
 @added(Versions.v2025_07_01)
 model DeploymentStackWhatIfResourceChange extends ResourceChangeDelta {
     
@@ -89,11 +99,14 @@ model DeploymentStackWhatIfResourceChange extends ResourceChangeDelta {
 
     managementStatusChange: DeploymentStackChangeBase<DeploymentStackManagementStatus>;
 
-    denyStatusChange: DeploymentStackChangeBase<DeploymentStackDenyStatusChange>;
+    denyStatusChange: DeploymentStackChangeBase<DenyStatusMode>;
 
     unsupportedReason: string;
 }
 
+/**
+ * Denotes the confidence level of the predicted change.
+ */
 @added(Versions.v2025_07_01)
 union DeploymentStackWhatIfChangeCertainty {
     string,
@@ -112,9 +125,14 @@ union DeploymentStackWhatIfChangeCertainty {
 // Ideally I'd model as object - should see what we do for deployments
 @added(Versions.v2025_07_01)
 model DeploymentStackChangeBase<T> {
-    
+    /**
+     * The predicted value before the deployment is executed.
+     */
     before?: T;
 
+    /**
+     * The predicted value after the deployment is executed.
+     */
     after?: T;
 }
 
@@ -125,18 +143,36 @@ model ResourceChangeBase is DeploymentStackChangeBase<Record<unknown>>;
 model ResourceChangeDelta is DeploymentStackChangeDelta<Record<unknown>>;
 
 @added(Versions.v2025_07_01)
-model DeploymentStackChangeDelta<T> extends DeploymentStackChangeBase<T> {
+model DeploymentStackChangeDelta<T> {
+    ... DeploymentStackChangeBase<T>;
 
+    /**
+     * The predicted changes to the properties."
+     */
+    @OpenAPI.extension("x-ms-identifiers", #["path"])
     delta?: DeploymentStackWhatIfPropertyChange[];
 
 }
 
+/**
+ * The predicted change to the resource property.
+*/
 model DeploymentStackWhatIfPropertyChange extends ResourceChangeBase {
 
+    /**
+     * Type of change that will be made to the resource when the deployment is executed.
+     */
     path: string;
 
+    /**
+     * Type of change that will be made to the resource when the deployment is executed.
+     */
     changeType: DeploymentStackWhatIfPropertyChangeType;
 
+    /**
+     * Nested property changes.
+     */
+    @OpenAPI.extension("x-ms-identifiers", #["path"])
     children?: DeploymentStackWhatIfPropertyChange[];
 }
 
@@ -181,6 +217,9 @@ model DeploymentStackDiagnostics {
 }
 */
 
+/**
+ * The management status of the deployment stack resource.
+ */
 @added(Versions.v2025_07_01)
 union DeploymentStackManagementStatus {
     string,
@@ -193,26 +232,11 @@ union DeploymentStackManagementStatus {
      * The resource is not managed by the deployment stack.
      */
     Unmanaged: "unmanaged";
-}
-
-// TODO (R) - this or DenySettingsMode ?
-@added(Versions.v2025_07_01)
-union DeploymentStackDenyStatusChange {
-    string,
-    /**
-     * The resource is denied write and delete access.
-     */
-    denyWriteAndDelete: "denyWriteAndDelete";
 
     /**
-     * The resource is denied delete access.
+     * The management state of the resource could not be determined.
      */
-    denyDelete: "denyDelete";
-
-    /**
-     * The resource is not denied access.
-     */
-    none: "none";
+    Unknown: "unknown";
 }
 
 @added(Versions.v2025_07_01)

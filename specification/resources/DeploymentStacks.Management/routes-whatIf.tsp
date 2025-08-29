@@ -10,17 +10,16 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Microsoft.Resources.DeploymentStacksWhatIfResults;
 
 namespace Microsoft.Resources.DeploymentStacks;
 
 // Interface for all what-if operations for deployment stacks.
 interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Model> {
   /** Gets the Deployment stack with the given name. */
-  get is ArmResourceRead<DeploymentStackWhatIfResult, BaseParameters = TBaseParams>;
+  getWhatIf is ArmResourceRead<DeploymentStackWhatIfResult, BaseParameters = TBaseParams>;
 
   /** Lists Deployment stacks at the specified scope. */
-  list is ArmResourceListByParent<
+  listWhatIf is ArmResourceListByParent<
     DeploymentStackWhatIfResult,
     BaseParameters = TBaseParams
   >;
