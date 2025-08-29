@@ -1,38 +1,36 @@
 {
   "parameters": {
-    "api-version": "2025-07-15",
+    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus",
     "id": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-    "scope": "subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus"
+    "api-version": "2025-07-15"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-        "type": "Microsoft.Quota/quotaRequests",
         "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "type": "Microsoft.Quota/quotaRequests",
+        "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "properties": {
+          "requestSubmitTime": "2019-08-19T19:23:17.904Z",
           "message": "Request completed",
           "provisioningState": "Succeeded",
-          "requestSubmitTime": "2019-08-19T19:23:17.904Z",
           "value": [
             {
-              "name": {
-                "localizedValue": "Standard NC Promo Family vCPUs",
-                "value": "standardNCPromoFamily"
-              },
               "limit": {
                 "limitObjectType": "LimitValue",
                 "value": 50
               },
+              "unit": "Count",
+              "name": {
+                "value": "standardNCPromoFamily",
+                "localizedValue": "Standard NC Promo Family vCPUs"
+              },
               "message": "Request completed",
-              "provisioningState": "Succeeded",
-              "unit": "Count"
+              "provisioningState": "Succeeded"
             }
           ]
         }
       }
     }
-  },
-  "operationId": "QuotaRequestStatus_Get",
-  "title": "QuotaRequestStatus"
+  }
 }
