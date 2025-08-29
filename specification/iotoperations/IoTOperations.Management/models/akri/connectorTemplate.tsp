@@ -61,6 +61,10 @@ model AkriConnectorTemplateProperties {
   @added(Versions.`2025-09-01-preview`)
   connectorMetadataRef?: string;
 
+  /** A displayname for the connector template in the Digital Operator Experience UI. */
+  @added(Versions.`2025-09-01-preview`)
+  displayName?: string;
+
   ...ResourceHealth;
 }
 
