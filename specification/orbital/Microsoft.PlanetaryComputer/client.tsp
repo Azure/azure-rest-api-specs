@@ -163,14 +163,18 @@ interface StacClient {
   createOrReplaceMosaic is StacCollectionMosaics.createOrReplace;
   deleteMosaic is StacCollectionMosaics.delete;
   getMosaic is StacCollectionMosaics.get;
-  getAllMosaics is StacCollectionMosaics.getAll;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listMosaics is StacCollectionMosaics.getAll;
 
   // STAC Collections
   createCollection is StacCollectionOperations.create;
   createOrReplaceCollection is StacCollectionOperations.createOrReplace;
   deleteCollection is StacCollectionOperations.delete;
   getCollection is StacCollectionOperations.get;
-  getAllCollections is StacCollectionOperations.getAll;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listCollections is StacCollectionOperations.getAll;
 
   // Collection Partition Types
   getPartitionType is StacCollectionPartitionTypes.get;
@@ -181,7 +185,8 @@ interface StacClient {
   createOrReplaceRenderOption is StacCollectionRenderOptions.createOrReplace;
   deleteRenderOption is StacCollectionRenderOptions.delete;
   getRenderOption is StacCollectionRenderOptions.get;
-  getAllRenderOptions is StacCollectionRenderOptions.getAll;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listRenderOptions is StacCollectionRenderOptions.getAll;
 
   // Collection Thumbnails
   getCollectionThumbnail is StacCollectionThumbnails.get;
@@ -208,8 +213,12 @@ interface StacClient {
   createQueryables is StacQueryables.create;
   createOrReplaceQueryable is StacQueryables.createOrReplace;
   deleteQueryable is StacQueryables.delete;
-  getAllQueryables is StacQueryables.getAll;
-  getAllQueryablesByCollection is StacQueryables.getAllByCollection;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listQueryables is StacQueryables.getAll;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listQueryablesByCollection is StacQueryables.getAllByCollection;
 
   // STAC Search
   createSearchOperations is StacSearchOperations.create;
@@ -231,20 +240,24 @@ interface TilerClient {
   getTileMatrixList is TileMatrixList.get;
 
   // Statistics
-  getAssetStatistics is TilerAssetStatistics.getAll;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listAssetStatistics is TilerAssetStatistics.getAll;
 
   // Basic Info and Assets
-  getAvailableAssets is TilerAvailableAssets.getAll;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listAvailableAssets is TilerAvailableAssets.getAll;
 
   // Basic Info and Assets
-  getBounds is TilerBound.getAll;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listBounds is TilerBound.getAll;
 
   // Parts/Crops
   cropGeoJson is TilerGeoJsons.cropFormat;
   cropGeoJsonWithDimensions is TilerGeoJsons.cropWidthByHeightFormat;
 
   // Statistics
-  getGeoJsonStatistics is TilerGeoJsonStatistics.getAll;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listGeoJsonStatistics is TilerGeoJsonStatistics.getAll;
 
   // Basic Info and Assets
   getInfoGeoJson is TilerInfoGeoJsonOperations.get;
@@ -266,7 +279,8 @@ interface TilerClient {
   getStaticImage is TilerStaticImages.get;
 
   // Statistics
-  getStatistics is TilerStatistics.getAll;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listStatistics is TilerStatistics.getAll;
 
   // Tile JSON
   getTileJson is TilerTileJsonOperations.get;
