@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Private;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.DocumentDB;
@@ -260,10 +258,12 @@ model StorageProperties {
 
   /** The IOPs of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */
   @added(Versions.v2025_04_01_preview)
+  @removed(Versions.v2025_08_01_preview)
   iops?: int64;
 
   /** The throughput of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */
   @added(Versions.v2025_04_01_preview)
+  @removed(Versions.v2025_08_01_preview)
   throughput?: int64;
 }
 
