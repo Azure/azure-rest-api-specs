@@ -451,6 +451,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/Registry"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -528,6 +534,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -722,6 +732,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -952,6 +966,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -1200,6 +1218,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -1430,6 +1452,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -1588,6 +1614,10 @@
               "$ref": "#/definitions/DataContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -1637,6 +1667,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -1829,6 +1863,10 @@
               "$ref": "#/definitions/DataVersionBase"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -1884,6 +1922,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -2150,6 +2192,10 @@
               "$ref": "#/definitions/EnvironmentContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -2200,6 +2246,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -2445,6 +2495,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -2654,6 +2708,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -2914,6 +2972,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -3023,6 +3085,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -3148,7 +3214,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -3191,7 +3263,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -3229,7 +3307,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -3432,6 +3516,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -3477,6 +3565,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -3714,6 +3806,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -3765,6 +3861,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -3954,6 +4054,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -4397,7 +4501,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -4905,7 +5015,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -5048,6 +5164,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -5119,6 +5241,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -5176,7 +5304,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -5397,7 +5531,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -5435,7 +5575,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -5473,7 +5619,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -5511,7 +5663,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -5984,6 +6142,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -6032,7 +6196,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -6283,6 +6453,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/RaiBlocklistPropertiesBasicResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -6331,7 +6507,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -6396,7 +6578,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -6452,7 +6640,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -6636,6 +6830,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/RaiBlocklistItemPropertiesBasicResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -6691,7 +6891,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -6854,6 +7060,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -6902,7 +7114,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -6950,7 +7168,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -7410,7 +7634,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -7778,7 +8008,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -7949,7 +8185,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -8096,7 +8338,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -8144,7 +8392,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -8390,6 +8644,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -8438,7 +8698,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -8944,7 +9210,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -9205,6 +9477,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -9472,6 +9748,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -9537,7 +9817,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -9906,6 +10192,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10173,6 +10463,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10409,6 +10703,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10455,6 +10753,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10719,6 +11021,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10772,6 +11078,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -11036,6 +11346,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -11089,6 +11403,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -11263,7 +11581,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -11617,6 +11941,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -11665,7 +11993,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -11956,7 +12290,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -12005,7 +12345,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -12057,7 +12403,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -12207,7 +12559,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -12250,7 +12608,13 @@
         ],
         "responses": {
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -12433,6 +12797,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -12933,7 +13301,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -13177,6 +13551,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -13222,6 +13600,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -13465,6 +13847,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -13519,6 +13905,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -13729,7 +14119,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -13927,7 +14323,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -13966,7 +14368,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -14006,7 +14414,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -14237,7 +14651,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -14271,7 +14691,13 @@
             "description": "ignore"
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -14469,6 +14895,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -14671,6 +15101,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -14713,6 +15147,10 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -14811,7 +15249,13 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -14838,6 +15282,79 @@
         }
       ],
       "x-ms-discriminator-value": "AAD"
+    },
+    "AKS": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AKSSchemaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "AKS"
+    },
+    "AKSSchemaProperties": {
+      "type": "object",
+      "properties": {
+        "clusterFqdn": {
+          "type": "string"
+        },
+        "systemServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SystemService"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "publicIpAddress"
+          ]
+        },
+        "agentCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agentVmSize": {
+          "type": "string"
+        },
+        "clusterPurpose": {
+          "type": "string",
+          "default": "FastProd",
+          "enum": [
+            "FastProd",
+            "DenseProd",
+            "DevTest"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterPurpose",
+            "modelAsString": true
+          }
+        },
+        "sslConfiguration": {
+          "$ref": "#/definitions/SslConfiguration"
+        },
+        "aksNetworkingConfiguration": {
+          "$ref": "#/definitions/AksNetworkingConfiguration"
+        },
+        "loadBalancerType": {
+          "type": "string",
+          "default": "PublicIp",
+          "enum": [
+            "PublicIp",
+            "InternalLoadBalancer"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerType",
+            "modelAsString": true
+          }
+        },
+        "loadBalancerSubnet": {
+          "type": "string"
+        }
+      }
     },
     "AccessKeyAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
@@ -14960,9 +15477,6 @@
     "AksComputeSecrets": {
       "type": "object",
       "properties": {
-        "AKS": {
-          "type": "string"
-        },
         "userKubeConfig": {
           "type": "string"
         },
@@ -14974,16 +15488,32 @@
           "x-nullable": true
         }
       },
-      "discriminator": "AKS",
-      "required": [
-        "AKS"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ComputeSecrets"
         }
       ],
       "x-ms-discriminator-value": "AKS"
+    },
+    "AksNetworkingConfiguration": {
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string"
+        },
+        "serviceCidr": {
+          "type": "string",
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
+        },
+        "dnsServiceIP": {
+          "type": "string",
+          "pattern": "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        },
+        "dockerBridgeCidr": {
+          "type": "string",
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
+        }
+      }
     },
     "AllFeatures": {
       "type": "object",
@@ -15002,6 +15532,20 @@
         }
       ],
       "x-ms-discriminator-value": "All"
+    },
+    "AmlCompute": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AmlComputeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "AmlCompute"
     },
     "AmlComputeNodeInformation": {
       "type": "object",
@@ -15069,6 +15613,114 @@
         "nextLink": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "AmlComputeProperties": {
+      "type": "object",
+      "properties": {
+        "osType": {
+          "type": "string",
+          "default": "Linux",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          }
+        },
+        "vmSize": {
+          "type": "string"
+        },
+        "vmPriority": {
+          "type": "string",
+          "enum": [
+            "Dedicated",
+            "LowPriority"
+          ],
+          "x-ms-enum": {
+            "name": "VmPriority",
+            "modelAsString": true
+          }
+        },
+        "virtualMachineImage": {
+          "$ref": "#/definitions/VirtualMachineImage"
+        },
+        "isolatedNetwork": {
+          "type": "boolean"
+        },
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings"
+        },
+        "userAccountCredentials": {
+          "$ref": "#/definitions/UserAccountCredentials"
+        },
+        "subnet": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "remoteLoginPortPublicAccess": {
+          "type": "string",
+          "default": "NotSpecified",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "RemoteLoginPortPublicAccess",
+            "modelAsString": true
+          }
+        },
+        "allocationState": {
+          "type": "string",
+          "enum": [
+            "Steady",
+            "Resizing"
+          ],
+          "x-ms-enum": {
+            "name": "AllocationState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "allocationStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
+        },
+        "currentNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "targetNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "nodeStateCounts": {
+          "$ref": "#/definitions/NodeStateCounts",
+          "readOnly": true
+        },
+        "enableNodePublicIp": {
+          "type": "boolean",
+          "default": true
+        },
+        "propertyBag": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
@@ -15213,6 +15865,21 @@
         "referenceType"
       ]
     },
+    "AssignedUser": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "objectId",
+        "tenantId"
+      ]
+    },
     "AutoForecastHorizon": {
       "type": "object",
       "allOf": [
@@ -15350,6 +16017,34 @@
         }
       ],
       "x-ms-discriminator-value": "Auto"
+    },
+    "AutoPauseProperties": {
+      "type": "object",
+      "properties": {
+        "delayInMinutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AutoScaleProperties": {
+      "type": "object",
+      "properties": {
+        "minNodeCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "maxNodeCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "AutoSeasonality": {
       "type": "object",
@@ -16932,6 +17627,7 @@
       "properties": {
         "componentSpec": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {},
           "x-ms-mutability": [
             "create",
@@ -16981,6 +17677,257 @@
       "required": [
         "value"
       ]
+    },
+    "Compute": {
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "type": "string",
+          "enum": [
+            "AKS",
+            "Kubernetes",
+            "AmlCompute",
+            "ComputeInstance",
+            "DataFactory",
+            "VirtualMachine",
+            "HDInsight",
+            "Databricks",
+            "DataLakeAnalytics",
+            "SynapseSpark"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": true
+          }
+        },
+        "computeLocation": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Updating",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "provisioningErrors": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
+        },
+        "isAttachedCompute": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "computeType",
+      "required": [
+        "computeType"
+      ]
+    },
+    "ComputeInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComputeInstanceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "ComputeInstance"
+    },
+    "ComputeInstanceApplication": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "endpointUri": {
+          "type": "string"
+        }
+      }
+    },
+    "ComputeInstanceAutologgerSettings": {
+      "type": "object",
+      "properties": {
+        "mlflowAutologger": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MlflowAutologger",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceConnectivityEndpoints": {
+      "type": "object",
+      "properties": {
+        "publicIpAddress": {
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      }
+    },
+    "ComputeInstanceContainer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "autosave": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Local",
+            "Remote"
+          ],
+          "x-ms-enum": {
+            "name": "Autosave",
+            "modelAsString": true
+          }
+        },
+        "gpu": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string",
+          "enum": [
+            "Bridge",
+            "Host"
+          ],
+          "x-ms-enum": {
+            "name": "Network",
+            "modelAsString": true
+          }
+        },
+        "environment": {
+          "$ref": "#/definitions/ComputeInstanceEnvironmentInfo"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ComputeInstanceCreatedBy": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "userOrgId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "userId": {
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      }
+    },
+    "ComputeInstanceDataDisk": {
+      "type": "object",
+      "properties": {
+        "caching": {
+          "type": "string",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "Caching",
+            "modelAsString": true
+          }
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The initial disk size in gigabytes."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The logical unit number."
+        },
+        "storageAccountType": {
+          "type": "string",
+          "default": "Standard_LRS",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ComputeInstanceDataMount": {
       "type": "object",
@@ -17048,18 +17995,353 @@
         },
         "mountedOn": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "Mounted time."
         },
         "error": {
           "type": "string"
         }
       }
     },
+    "ComputeInstanceEnvironmentInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "ComputeInstanceLastOperation": {
+      "type": "object",
+      "properties": {
+        "operationName": {
+          "type": "string",
+          "enum": [
+            "Create",
+            "Start",
+            "Stop",
+            "Restart",
+            "Resize",
+            "Reimage",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "OperationName",
+            "modelAsString": true
+          }
+        },
+        "operationTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "operationStatus": {
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "CreateFailed",
+            "StartFailed",
+            "StopFailed",
+            "RestartFailed",
+            "ResizeFailed",
+            "ReimageFailed",
+            "DeleteFailed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        },
+        "operationTrigger": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Schedule",
+            "IdleShutdown"
+          ],
+          "x-ms-enum": {
+            "name": "OperationTrigger",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "type": "string"
+        },
+        "subnet": {
+          "$ref": "#/definitions/ResourceId",
+          "title": "Subnet"
+        },
+        "applicationSharingPolicy": {
+          "type": "string",
+          "title": "Sharing policy for applications on this compute instance",
+          "default": "Shared",
+          "enum": [
+            "Personal",
+            "Shared"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationSharingPolicy",
+            "modelAsString": true
+          }
+        },
+        "autologgerSettings": {
+          "$ref": "#/definitions/ComputeInstanceAutologgerSettings",
+          "x-nullable": true
+        },
+        "sshSettings": {
+          "$ref": "#/definitions/ComputeInstanceSshSettings",
+          "x-nullable": true
+        },
+        "customServices": {
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/CustomService"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "osImageMetadata": {
+          "$ref": "#/definitions/ImageMetadata",
+          "readOnly": true
+        },
+        "connectivityEndpoints": {
+          "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints",
+          "readOnly": true
+        },
+        "applications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceApplication"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        },
+        "createdBy": {
+          "$ref": "#/definitions/ComputeInstanceCreatedBy",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "title": "Errors",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "CreateFailed",
+            "Deleting",
+            "Running",
+            "Restarting",
+            "Resizing",
+            "JobRunning",
+            "SettingUp",
+            "SetupFailed",
+            "Starting",
+            "Stopped",
+            "Stopping",
+            "UserSettingUp",
+            "UserSetupFailed",
+            "Unknown",
+            "Unusable"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeInstanceState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "computeInstanceAuthorizationType": {
+          "type": "string",
+          "title": "Compute Instance Authorization type.",
+          "default": "personal",
+          "enum": [
+            "personal"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeInstanceAuthorizationType",
+            "modelAsString": true
+          }
+        },
+        "enableOSPatching": {
+          "type": "boolean",
+          "title": "Enable Auto OS Patching.",
+          "x-nullable": true
+        },
+        "enableRootAccess": {
+          "type": "boolean",
+          "title": "Enable root access.",
+          "default": true
+        },
+        "enableSSO": {
+          "type": "boolean",
+          "title": "Enable SSO (single sign on).",
+          "default": true
+        },
+        "releaseQuotaOnStop": {
+          "type": "boolean",
+          "title": "Release quota if compute instance stopped."
+        },
+        "personalComputeInstanceSettings": {
+          "$ref": "#/definitions/PersonalComputeInstanceSettings",
+          "title": "Personal Compute Instance settings."
+        },
+        "setupScripts": {
+          "$ref": "#/definitions/SetupScripts",
+          "x-nullable": true
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/ComputeInstanceLastOperation",
+          "readOnly": true
+        },
+        "schedules": {
+          "$ref": "#/definitions/ComputeSchedules"
+        },
+        "idleTimeBeforeShutdown": {
+          "type": "string"
+        },
+        "enableNodePublicIp": {
+          "type": "boolean"
+        },
+        "containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceContainer"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceDataDisk"
+          },
+          "readOnly": true
+        },
+        "dataMounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeInstanceDataMount"
+          },
+          "readOnly": true
+        },
+        "versions": {
+          "$ref": "#/definitions/ComputeInstanceVersion",
+          "readOnly": true
+        }
+      }
+    },
+    "ComputeInstanceSshSettings": {
+      "type": "object",
+      "properties": {
+        "sshPublicAccess": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "SshPublicAccess",
+            "modelAsString": true
+          }
+        },
+        "adminUserName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sshPort": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "adminPublicKey": {
+          "type": "string"
+        }
+      }
+    },
+    "ComputeInstanceVersion": {
+      "type": "object",
+      "properties": {
+        "runtime": {
+          "type": "string"
+        }
+      }
+    },
+    "ComputeRecurrenceSchedule": {
+      "type": "object",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "x-ms-enum": {
+              "name": "ComputeWeekDay",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "required": [
+        "hours",
+        "minutes"
+      ]
+    },
     "ComputeResource": {
       "type": "object",
       "properties": {
         "properties": {
-          "type": "object"
+          "$ref": "#/definitions/ComputeResourceSchema"
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
@@ -17074,11 +18356,30 @@
         }
       ]
     },
+    "ComputeResourceSchema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Compute"
+        }
+      }
+    },
     "ComputeRuntimeDto": {
       "type": "object",
       "properties": {
         "sparkRuntimeVersion": {
           "type": "string"
+        }
+      }
+    },
+    "ComputeSchedules": {
+      "type": "object",
+      "properties": {
+        "computeStartStop": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeStartStopSchedule"
+          }
         }
       }
     },
@@ -17110,14 +18411,81 @@
         "computeType"
       ]
     },
+    "ComputeStartStopSchedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "provisioningStatus": {
+          "type": "string",
+          "enum": [
+            "Completed",
+            "Provisioning",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleStatus",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Start",
+            "Stop"
+          ],
+          "x-ms-enum": {
+            "name": "ComputePowerAction",
+            "modelAsString": true
+          }
+        },
+        "triggerType": {
+          "type": "string",
+          "enum": [
+            "Recurrence",
+            "Cron"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeTriggerType",
+            "modelAsString": true
+          }
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Recurrence"
+        },
+        "cron": {
+          "$ref": "#/definitions/Cron"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleBase"
+        }
+      }
+    },
     "ContainerResourceRequirements": {
       "type": "object",
       "properties": {
         "containerResourceLimits": {
-          "$ref": "#/definitions/ContainerResourceSettings"
+          "$ref": "#/definitions/ContainerResourceSettings",
+          "x-nullable": true
         },
         "containerResourceRequests": {
-          "$ref": "#/definitions/ContainerResourceSettings"
+          "$ref": "#/definitions/ContainerResourceSettings",
+          "x-nullable": true
         }
       }
     },
@@ -17238,6 +18606,21 @@
         }
       ],
       "x-ms-discriminator-value": "CreateMonitor"
+    },
+    "Cron": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string",
+          "default": "UTC"
+        },
+        "expression": {
+          "type": "string"
+        }
+      }
     },
     "CronTrigger": {
       "type": "object",
@@ -17777,6 +19160,15 @@
       ],
       "x-ms-discriminator-value": "DataDrift"
     },
+    "DataFactory": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "DataFactory"
+    },
     "DataGenerationVertical": {
       "type": "object",
       "properties": {
@@ -17833,6 +19225,28 @@
         "dataGenerationType",
         "teacherModelEndpoint"
       ]
+    },
+    "DataLakeAnalytics": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataLakeAnalyticsSchemaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "DataLakeAnalytics"
+    },
+    "DataLakeAnalyticsSchemaProperties": {
+      "type": "object",
+      "properties": {
+        "dataLakeStoreAccountName": {
+          "type": "string"
+        }
+      }
     },
     "DataPathAssetReference": {
       "type": "object",
@@ -18045,6 +19459,20 @@
         "value"
       ]
     },
+    "Databricks": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabricksProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "Databricks"
+    },
     "DatabricksComputeSecrets": {
       "type": "object",
       "properties": {
@@ -18058,6 +19486,17 @@
         }
       ],
       "x-ms-discriminator-value": "Databricks"
+    },
+    "DatabricksProperties": {
+      "type": "object",
+      "properties": {
+        "databricksAccessToken": {
+          "type": "string"
+        },
+        "workspaceUrl": {
+          "type": "string"
+        }
+      }
     },
     "DatasetReference": {
       "type": "object",
@@ -20700,6 +22139,35 @@
         }
       }
     },
+    "HDInsight": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HDInsightProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "HDInsight"
+    },
+    "HDInsightProperties": {
+      "type": "object",
+      "properties": {
+        "sshPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address": {
+          "type": "string"
+        },
+        "administratorAccount": {
+          "$ref": "#/definitions/VirtualMachineSshCredentials"
+        }
+      }
+    },
     "IPRule": {
       "type": "object",
       "properties": {
@@ -20986,6 +22454,24 @@
         "timeout": {
           "type": "string",
           "format": "duration"
+        }
+      }
+    },
+    "ImageMetadata": {
+      "type": "object",
+      "properties": {
+        "currentImageVersion": {
+          "type": "string"
+        },
+        "latestImageVersion": {
+          "type": "string"
+        },
+        "isLatestOsImageVersion": {
+          "type": "boolean"
+        },
+        "osPatchingStatus": {
+          "$ref": "#/definitions/OsPatchingStatus",
+          "readOnly": true
         }
       }
     },
@@ -21764,6 +23250,37 @@
         "value"
       ]
     },
+    "InstanceTypeSchema": {
+      "type": "object",
+      "properties": {
+        "nodeSelector": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "$ref": "#/definitions/InstanceTypeSchemaResources"
+        }
+      }
+    },
+    "InstanceTypeSchemaResources": {
+      "type": "object",
+      "properties": {
+        "requests": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "JobBase": {
       "type": "object",
       "properties": {
@@ -22171,6 +23688,20 @@
         "keyVaultArmId"
       ]
     },
+    "Kubernetes": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "Kubernetes"
+    },
     "KubernetesOnlineDeployment": {
       "type": "object",
       "properties": {
@@ -22184,6 +23715,39 @@
         }
       ],
       "x-ms-discriminator-value": "Kubernetes"
+    },
+    "KubernetesProperties": {
+      "type": "object",
+      "properties": {
+        "relayConnectionString": {
+          "type": "string"
+        },
+        "serviceBusConnectionString": {
+          "type": "string"
+        },
+        "extensionPrincipalId": {
+          "type": "string"
+        },
+        "extensionInstanceReleaseTrain": {
+          "type": "string"
+        },
+        "vcName": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string",
+          "default": "default"
+        },
+        "defaultInstanceType": {
+          "type": "string"
+        },
+        "instanceTypes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InstanceTypeSchema"
+          }
+        }
+      }
     },
     "LabelGeneration": {
       "type": "object",
@@ -23628,6 +25192,41 @@
         }
       }
     },
+    "NodeStateCounts": {
+      "type": "object",
+      "properties": {
+        "idleNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "runningNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "preparingNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "unusableNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "leavingNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "preemptedNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
     "Nodes": {
       "type": "object",
       "properties": {
@@ -24308,6 +25907,43 @@
       ],
       "x-ms-discriminator-value": "Azure.OpenAI"
     },
+    "OsPatchingStatus": {
+      "type": "object",
+      "properties": {
+        "patchStatus": {
+          "type": "string",
+          "enum": [
+            "CompletedWithWarnings",
+            "Failed",
+            "InProgress",
+            "Succeeded",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "PatchStatus",
+            "modelAsString": true
+          }
+        },
+        "latestPatchTime": {
+          "type": "string"
+        },
+        "rebootPending": {
+          "type": "boolean"
+        },
+        "scheduledRebootTime": {
+          "type": "string"
+        },
+        "osPatchingErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
+        }
+      }
+    },
     "OutboundRule": {
       "type": "object",
       "properties": {
@@ -24693,6 +26329,14 @@
             "name": "PendingUploadType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "PersonalComputeInstanceSettings": {
+      "type": "object",
+      "properties": {
+        "assignedUser": {
+          "$ref": "#/definitions/AssignedUser"
         }
       }
     },
@@ -25448,6 +27092,39 @@
       ],
       "x-ms-discriminator-value": "Random"
     },
+    "Recurrence": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "type": "string",
+          "enum": [
+            "Minute",
+            "Hour",
+            "Day",
+            "Week",
+            "Month"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeRecurrenceFrequency",
+            "modelAsString": true
+          }
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string",
+          "default": "UTC"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ComputeRecurrenceSchedule"
+        }
+      }
+    },
     "RecurrenceSchedule": {
       "type": "object",
       "properties": {
@@ -25974,6 +27651,17 @@
         }
       }
     },
+    "ResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "ResourceName": {
       "type": "object",
       "properties": {
@@ -26264,6 +27952,37 @@
         "actionType"
       ]
     },
+    "ScheduleBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "provisioningStatus": {
+          "type": "string",
+          "enum": [
+            "Completed",
+            "Provisioning",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ScheduleProperties": {
       "type": "object",
       "properties": {
@@ -26346,6 +28065,34 @@
       "required": [
         "value"
       ]
+    },
+    "ScriptReference": {
+      "type": "object",
+      "properties": {
+        "scriptSource": {
+          "type": "string"
+        },
+        "scriptData": {
+          "type": "string"
+        },
+        "scriptArguments": {
+          "type": "string"
+        },
+        "timeout": {
+          "type": "string"
+        }
+      }
+    },
+    "ScriptsToExecute": {
+      "type": "object",
+      "properties": {
+        "startupScript": {
+          "$ref": "#/definitions/ScriptReference"
+        },
+        "creationScript": {
+          "$ref": "#/definitions/ScriptReference"
+        }
+      }
     },
     "Seasonality": {
       "type": "object",
@@ -26797,6 +28544,14 @@
       ],
       "x-ms-discriminator-value": "ServiceTag"
     },
+    "SetupScripts": {
+      "type": "object",
+      "properties": {
+        "scripts": {
+          "$ref": "#/definitions/ScriptsToExecute"
+        }
+      }
+    },
     "SharedPrivateLinkResource": {
       "type": "object",
       "properties": {
@@ -27191,6 +28946,38 @@
       ],
       "x-ms-discriminator-value": "Azure.Speech"
     },
+    "SslConfiguration": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled",
+            "Auto"
+          ],
+          "x-ms-enum": {
+            "name": "SslConfigStatus",
+            "modelAsString": true
+          }
+        },
+        "cert": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "cname": {
+          "type": "string"
+        },
+        "leafDomainLabel": {
+          "type": "string"
+        },
+        "overwriteExistingDomain": {
+          "type": "boolean"
+        }
+      }
+    },
     "StackEnsembleSettings": {
       "type": "object",
       "properties": {
@@ -27401,6 +29188,56 @@
       ],
       "x-ms-discriminator-value": "Sweep"
     },
+    "SynapseSpark": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SynapseSparkProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "SynapseSpark"
+    },
+    "SynapseSparkProperties": {
+      "type": "object",
+      "properties": {
+        "autoScaleProperties": {
+          "$ref": "#/definitions/AutoScaleProperties"
+        },
+        "autoPauseProperties": {
+          "$ref": "#/definitions/AutoPauseProperties"
+        },
+        "sparkVersion": {
+          "type": "string"
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nodeSize": {
+          "type": "string"
+        },
+        "nodeSizeFamily": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "workspaceName": {
+          "type": "string"
+        },
+        "poolName": {
+          "type": "string"
+        }
+      }
+    },
     "SystemCreatedAcrAccount": {
       "type": "object",
       "properties": {
@@ -27432,6 +29269,23 @@
         },
         "storageAccountType": {
           "type": "string"
+        }
+      }
+    },
+    "SystemService": {
+      "type": "object",
+      "properties": {
+        "systemServiceType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -28336,6 +30190,23 @@
         }
       }
     },
+    "UserAccountCredentials": {
+      "type": "object",
+      "properties": {
+        "adminUserName": {
+          "type": "string"
+        },
+        "adminUserSshPublicKey": {
+          "type": "string"
+        },
+        "adminUserPassword": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "adminUserName"
+      ]
+    },
     "UserIdentity": {
       "type": "object",
       "allOf": [
@@ -28358,6 +30229,56 @@
         }
       ],
       "x-ms-discriminator-value": "UsernamePassword"
+    },
+    "VirtualMachine": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineSchemaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "VirtualMachineImage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "VirtualMachineSchemaProperties": {
+      "type": "object",
+      "properties": {
+        "virtualMachineSize": {
+          "type": "string"
+        },
+        "sshPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notebookServerPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address": {
+          "type": "string"
+        },
+        "administratorAccount": {
+          "$ref": "#/definitions/VirtualMachineSshCredentials"
+        },
+        "isNotebookInstanceCompute": {
+          "type": "boolean"
+        }
+      }
     },
     "VirtualMachineSecrets": {
       "type": "object",

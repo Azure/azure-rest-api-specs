@@ -17,7 +17,8 @@ namespace Microsoft.MachineLearningServices;
  * Machine Learning compute object wrapped into ARM resource envelope.
  */
 @parentResource(Workspace)
-model ComputeResource is Azure.ResourceManager.TrackedResource<{}> {
+model ComputeResource
+  is Azure.ResourceManager.TrackedResource<ComputeResourceSchema> {
   ...ResourceNameParameter<
     Resource = ComputeResource,
     KeyName = "computeName",

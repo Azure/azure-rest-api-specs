@@ -76,6 +76,12 @@
             }
           },
           "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            },
             "schema": {
               "$ref": {
                 "__old": "#/definitions/RegistryTrackedResource",
@@ -95,6 +101,20 @@
               "$ref": {
                 "__old": "#/definitions/RegistryTrackedResource",
                 "__new": "#/definitions/Registry"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
               }
             }
           }
@@ -209,6 +229,12 @@
                 "__old": "#/definitions/CodeContainerResource",
                 "__new": "#/definitions/CodeContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -237,7 +263,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions": {
@@ -373,6 +411,12 @@
                 "__old": "#/definitions/CodeVersionResource",
                 "__new": "#/definitions/CodeVersion"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -404,7 +448,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}/startPendingUpload": {
@@ -546,6 +602,12 @@
                 "__old": "#/definitions/ComponentContainerResource",
                 "__new": "#/definitions/ComponentContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -574,7 +636,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions": {
@@ -710,6 +784,12 @@
                 "__old": "#/definitions/ComponentVersionResource",
                 "__new": "#/definitions/ComponentVersion"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -741,7 +821,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data": {
@@ -860,6 +952,14 @@
                 "__old": "#/definitions/DataContainerResource",
                 "__new": "#/definitions/DataContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
+              }
             }
           }
         },
@@ -888,7 +988,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions": {
@@ -1030,6 +1142,14 @@
                 "__old": "#/definitions/DataVersionBaseResource",
                 "__new": "#/definitions/DataVersionBase"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
+              }
             }
           }
         },
@@ -1061,7 +1181,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}/startPendingUpload": {
@@ -1242,6 +1374,14 @@
                 "__old": "#/definitions/EnvironmentContainerResource",
                 "__new": "#/definitions/EnvironmentContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
+              }
             }
           }
         },
@@ -1270,7 +1410,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions": {
@@ -1409,6 +1561,12 @@
                 "__old": "#/definitions/EnvironmentVersionResource",
                 "__new": "#/definitions/EnvironmentVersion"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -1440,7 +1598,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models": {
@@ -1559,6 +1729,12 @@
                 "__old": "#/definitions/ModelContainerResource",
                 "__new": "#/definitions/ModelContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -1587,7 +1763,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions": {
@@ -1743,6 +1931,12 @@
                 "__old": "#/definitions/ModelVersionResource",
                 "__new": "#/definitions/CodeContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -1774,7 +1968,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}/startPendingUpload": {
@@ -1832,6 +2038,58 @@
               "$ref": {
                 "__old": "#/definitions/RegistryTrackedResource",
                 "__new": "#/definitions/Registry"
+              }
+            }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}": {
+      "put": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
               }
             }
           }
@@ -1963,6 +2221,12 @@
                 "__old": "#/definitions/BatchEndpointTrackedResource",
                 "__new": "#/definitions/BatchEndpoint"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -2012,6 +2276,16 @@
                 "__new": "#/definitions/BatchEndpoint"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -2036,7 +2310,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
@@ -2184,6 +2470,12 @@
                 "__old": "#/definitions/BatchDeploymentTrackedResource",
                 "__new": "#/definitions/BatchDeployment"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -2239,6 +2531,16 @@
                 "__new": "#/definitions/BatchDeployment"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -2266,7 +2568,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
@@ -2385,6 +2699,12 @@
                 "__old": "#/definitions/CapabilityHostResource",
                 "__new": "#/definitions/CodeContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -2415,6 +2735,16 @@
           ]
         ],
         "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
           "200__added": {
             "description": "ignore"
           }
@@ -2773,7 +3103,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload": {
@@ -3164,14 +3506,197 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "x-ms-long-running-operation-options__added": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ComputeResource"
+        },
+        "responses": {
+          "200": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              },
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -3199,7 +3724,91 @@
               }
             }
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/testconnection": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data": {
@@ -3562,7 +4171,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
@@ -3817,6 +4438,22 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints": {
       "get": {
         "parameters": [
@@ -3865,6 +4502,80 @@
             " "
           ]
         ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
+      "put": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}": {
+      "put": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}": {
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments": {
@@ -4224,7 +4935,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features": {
@@ -4389,6 +5112,12 @@
                 "__old": "#/definitions/FeaturesetContainerResource",
                 "__new": "#/definitions/FeaturesetContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -4417,7 +5146,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions": {
@@ -4580,6 +5321,12 @@
                 "__old": "#/definitions/FeaturesetVersionResource",
                 "__new": "#/definitions/FeaturesetVersion"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -4611,7 +5358,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/backfill": {
@@ -4642,7 +5401,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features": {
@@ -4888,6 +5659,12 @@
                 "__old": "#/definitions/FeaturestoreEntityContainerResource",
                 "__new": "#/definitions/FeaturestoreEntityContainer"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -4916,7 +5693,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions": {
@@ -5079,6 +5868,12 @@
                 "__old": "#/definitions/FeaturestoreEntityVersionResource",
                 "__new": "#/definitions/FeaturesetVersion"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -5110,7 +5905,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools": {
@@ -5243,6 +6050,12 @@
                 "__old": "#/definitions/InferencePoolTrackedResource",
                 "__new": "#/definitions/InferencePool"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -5283,6 +6096,16 @@
                 "__new": "#/definitions/InferencePool"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -5307,7 +6130,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints": {
@@ -5449,6 +6284,12 @@
                 "__old": "#/definitions/InferenceEndpointTrackedResource",
                 "__new": "#/definitions/InferenceEndpoint"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -5498,6 +6339,16 @@
                 "__new": "#/definitions/InferenceEndpoint"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -5525,7 +6376,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups": {
@@ -5667,6 +6530,12 @@
                 "__old": "#/definitions/InferenceGroupTrackedResource",
                 "__new": "#/definitions/InferenceGroup"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -5716,6 +6585,16 @@
                 "__new": "#/definitions/InferenceGroup"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -5743,7 +6622,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus": {
@@ -5836,7 +6727,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/getStatus": {
@@ -6076,7 +6979,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}/cancel": {
@@ -6101,7 +7016,95 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}": {
+      "put": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}": {
+      "put": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions": {
@@ -6221,6 +7224,12 @@
                 "__old": "#/definitions/MarketplaceSubscriptionResource",
                 "__new": "#/definitions/MarketplaceSubscription"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -6258,7 +7267,19 @@
               "type": "string"
             }
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
@@ -6639,7 +7660,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
@@ -6787,6 +7820,12 @@
                 "__old": "#/definitions/OnlineEndpointTrackedResource",
                 "__new": "#/definitions/OnlineEndpoint"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -6827,6 +7866,16 @@
                 "__new": "#/definitions/OnlineEndpoint"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -6851,7 +7900,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
@@ -6999,6 +8060,12 @@
                 "__old": "#/definitions/OnlineDeploymentTrackedResource",
                 "__new": "#/definitions/OnlineDeployment"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -7054,6 +8121,16 @@
                 "__new": "#/definitions/OnlineDeployment"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -7081,7 +8158,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
@@ -7210,7 +8299,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/token": {
@@ -7238,6 +8339,52 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}": {
+      "put": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
         "x-ms-pageable__deleted": {
@@ -7249,6 +8396,38 @@
       "get": {
         "x-ms-pageable__deleted": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -7377,6 +8556,12 @@
                 "__old": "#/definitions/ScheduleResource",
                 "__new": "#/definitions/Schedule"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -7405,7 +8590,19 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints": {
@@ -7525,6 +8722,12 @@
                 "__old": "#/definitions/ServerlessEndpointTrackedResource",
                 "__new": "#/definitions/ServerlessEndpoint"
               }
+            },
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "URI to poll for asynchronous operation status."
+              }
             }
           }
         },
@@ -7574,6 +8777,16 @@
                 "__new": "#/definitions/ServerlessEndpoint"
               }
             }
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
           }
         }
       },
@@ -7607,7 +8820,19 @@
               "type": "string"
             }
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys": {
@@ -7678,22 +8903,23 @@
           [
             " "
           ]
-        ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation result.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
   "definitions": {
-    "AKS__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/AKSSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "AKS"
-    },
     "AKSSchema__deleted": {
       "type": "object",
       "properties": {
@@ -7790,163 +9016,6 @@
         }
       }
     },
-    "AksNetworkingConfiguration__deleted": {
-      "type": "object",
-      "properties": {
-        "subnetId": {
-          "type": "string"
-        },
-        "serviceCidr": {
-          "type": "string",
-          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
-        },
-        "dnsServiceIP": {
-          "type": "string",
-          "pattern": "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-        },
-        "dockerBridgeCidr": {
-          "type": "string",
-          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
-        }
-      }
-    },
-    "AmlCompute__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/AmlComputeSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "AmlCompute"
-    },
-    "AmlComputeProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "osType": {
-          "type": "string",
-          "default": "Linux",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "x-ms-enum": {
-            "name": "OsType",
-            "modelAsString": true
-          }
-        },
-        "vmSize": {
-          "type": "string"
-        },
-        "vmPriority": {
-          "type": "string",
-          "enum": [
-            "Dedicated",
-            "LowPriority"
-          ],
-          "x-ms-enum": {
-            "name": "VmPriority",
-            "modelAsString": true
-          }
-        },
-        "virtualMachineImage": {
-          "$ref": "#/definitions/VirtualMachineImage",
-          "x-nullable": true
-        },
-        "isolatedNetwork": {
-          "type": "boolean"
-        },
-        "scaleSettings": {
-          "$ref": "#/definitions/ScaleSettings"
-        },
-        "userAccountCredentials": {
-          "$ref": "#/definitions/UserAccountCredentials",
-          "title": "User account credentials.",
-          "x-nullable": true
-        },
-        "subnet": {
-          "$ref": "#/definitions/ResourceId",
-          "title": "Subnet.",
-          "x-nullable": true
-        },
-        "remoteLoginPortPublicAccess": {
-          "type": "string",
-          "title": "Close remote Login Access Port",
-          "default": "NotSpecified",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "NotSpecified"
-          ],
-          "x-ms-enum": {
-            "name": "RemoteLoginPortPublicAccess",
-            "modelAsString": true
-          }
-        },
-        "allocationState": {
-          "type": "string",
-          "title": "Allocation state.",
-          "enum": [
-            "Steady",
-            "Resizing"
-          ],
-          "x-ms-enum": {
-            "name": "AllocationState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "allocationStateTransitionTime": {
-          "type": "string",
-          "format": "date-time",
-          "title": "Allocation state transition time.",
-          "readOnly": true
-        },
-        "errors": {
-          "type": "array",
-          "title": "Errors.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
-        },
-        "currentNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Current node count.",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "targetNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Target node count.",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "nodeStateCounts": {
-          "$ref": "#/definitions/NodeStateCounts",
-          "title": "Node state counts.",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "enableNodePublicIp": {
-          "type": "boolean",
-          "title": "Enable node public IP.",
-          "default": true,
-          "x-nullable": true
-        },
-        "propertyBag": {
-          "type": "object",
-          "x-nullable": true
-        }
-      }
-    },
     "AmlComputeSchema__deleted": {
       "type": "object",
       "properties": {
@@ -8015,49 +9084,6 @@
         "uri": {
           "type": "string",
           "x-nullable": true
-        }
-      }
-    },
-    "AssignedUser__deleted": {
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "type": "string"
-        },
-        "tenantId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "objectId",
-        "tenantId"
-      ]
-    },
-    "AutoPauseProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "delayInMinutes": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enabled": {
-          "type": "boolean"
-        }
-      }
-    },
-    "AutoScaleProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "minNodeCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enabled": {
-          "type": "boolean"
-        },
-        "maxNodeCount": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -8270,713 +9296,11 @@
       ],
       "x-ms-client-name": "ComponentVersion"
     },
-    "Compute__deleted": {
-      "type": "object",
-      "properties": {
-        "computeType": {
-          "type": "string",
-          "enum": [
-            "AKS",
-            "Kubernetes",
-            "AmlCompute",
-            "ComputeInstance",
-            "DataFactory",
-            "VirtualMachine",
-            "HDInsight",
-            "Databricks",
-            "DataLakeAnalytics",
-            "SynapseSpark"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeType",
-            "modelAsString": true
-          }
-        },
-        "computeLocation": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "Updating",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "createdOn": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "modifiedOn": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "resourceId": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "provisioningErrors": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
-        },
-        "isAttachedCompute": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "disableLocalAuth": {
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "computeType",
-      "required": [
-        "computeType"
-      ]
-    },
-    "ComputeInstance__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/ComputeInstanceSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "ComputeInstance"
-    },
-    "ComputeInstanceApplication__deleted": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string"
-        },
-        "endpointUri": {
-          "type": "string"
-        }
-      }
-    },
-    "ComputeInstanceAutologgerSettings__deleted": {
-      "type": "object",
-      "properties": {
-        "mlflowAutologger": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "MlflowAutologger",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ComputeInstanceConnectivityEndpoints__deleted": {
-      "type": "object",
-      "properties": {
-        "publicIpAddress": {
-          "type": "string",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "privateIpAddress": {
-          "type": "string",
-          "x-nullable": true,
-          "readOnly": true
-        }
-      },
-      "readOnly": true
-    },
-    "ComputeInstanceContainer__deleted": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "autosave": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Local",
-            "Remote"
-          ],
-          "x-ms-enum": {
-            "name": "Autosave",
-            "modelAsString": true
-          }
-        },
-        "gpu": {
-          "type": "string"
-        },
-        "network": {
-          "type": "string",
-          "enum": [
-            "Bridge",
-            "Host"
-          ],
-          "x-ms-enum": {
-            "name": "Network",
-            "modelAsString": true
-          }
-        },
-        "environment": {
-          "$ref": "#/definitions/ComputeInstanceEnvironmentInfo"
-        },
-        "services": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ComputeInstanceCreatedBy__deleted": {
-      "type": "object",
-      "properties": {
-        "userName": {
-          "type": "string",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "userOrgId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "userId": {
-          "type": "string",
-          "x-nullable": true,
-          "readOnly": true
-        }
-      },
-      "readOnly": true
-    },
-    "ComputeInstanceDataDisk__deleted": {
-      "type": "object",
-      "properties": {
-        "caching": {
-          "type": "string",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "Caching",
-            "modelAsString": true
-          }
-        },
-        "diskSizeGB": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The initial disk size in gigabytes."
-        },
-        "lun": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The logical unit number."
-        },
-        "storageAccountType": {
-          "type": "string",
-          "default": "Standard_LRS",
-          "enum": [
-            "Standard_LRS",
-            "Premium_LRS"
-          ],
-          "x-ms-enum": {
-            "name": "StorageAccountType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ComputeInstanceEnvironmentInfo__deleted": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      }
-    },
-    "ComputeInstanceLastOperation__deleted": {
-      "type": "object",
-      "properties": {
-        "operationName": {
-          "type": "string",
-          "enum": [
-            "Create",
-            "Start",
-            "Stop",
-            "Restart",
-            "Resize",
-            "Reimage",
-            "Delete"
-          ],
-          "x-ms-enum": {
-            "name": "OperationName",
-            "modelAsString": true
-          }
-        },
-        "operationTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "operationStatus": {
-          "type": "string",
-          "enum": [
-            "InProgress",
-            "Succeeded",
-            "CreateFailed",
-            "StartFailed",
-            "StopFailed",
-            "RestartFailed",
-            "ResizeFailed",
-            "ReimageFailed",
-            "DeleteFailed"
-          ],
-          "x-ms-enum": {
-            "name": "OperationStatus",
-            "modelAsString": true
-          }
-        },
-        "operationTrigger": {
-          "type": "string",
-          "enum": [
-            "User",
-            "Schedule",
-            "IdleShutdown"
-          ],
-          "x-ms-enum": {
-            "name": "OperationTrigger",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ComputeInstanceProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "vmSize": {
-          "type": "string"
-        },
-        "subnet": {
-          "$ref": "#/definitions/ResourceId",
-          "title": "Subnet.",
-          "x-nullable": true
-        },
-        "applicationSharingPolicy": {
-          "type": "string",
-          "title": "Sharing policy for applications on this compute instance",
-          "default": "Shared",
-          "enum": [
-            "Personal",
-            "Shared"
-          ],
-          "x-ms-enum": {
-            "name": "ApplicationSharingPolicy",
-            "modelAsString": true
-          }
-        },
-        "autologgerSettings": {
-          "$ref": "#/definitions/ComputeInstanceAutologgerSettings",
-          "x-nullable": true
-        },
-        "sshSettings": {
-          "$ref": "#/definitions/ComputeInstanceSshSettings",
-          "x-nullable": true
-        },
-        "customServices": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/CustomService"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "osImageMetadata": {
-          "$ref": "#/definitions/ImageMetadata",
-          "readOnly": true
-        },
-        "connectivityEndpoints": {
-          "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints",
-          "readOnly": true
-        },
-        "applications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComputeInstanceApplication"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
-        },
-        "createdBy": {
-          "$ref": "#/definitions/ComputeInstanceCreatedBy",
-          "readOnly": true
-        },
-        "errors": {
-          "type": "array",
-          "title": "Errors.",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "Creating",
-            "CreateFailed",
-            "Deleting",
-            "Running",
-            "Restarting",
-            "Resizing",
-            "JobRunning",
-            "SettingUp",
-            "SetupFailed",
-            "Starting",
-            "Stopped",
-            "Stopping",
-            "UserSettingUp",
-            "UserSetupFailed",
-            "Unknown",
-            "Unusable"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeInstanceState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "computeInstanceAuthorizationType": {
-          "type": "string",
-          "title": "Compute Instance Authorization type.",
-          "default": "personal",
-          "enum": [
-            "personal"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeInstanceAuthorizationType",
-            "modelAsString": true
-          },
-          "x-nullable": true
-        },
-        "enableOSPatching": {
-          "type": "boolean",
-          "title": "Enable Auto OS Patching.",
-          "default": false,
-          "x-nullable": true
-        },
-        "enableRootAccess": {
-          "type": "boolean",
-          "title": "Enable root access.",
-          "default": true,
-          "x-nullable": true
-        },
-        "enableSSO": {
-          "type": "boolean",
-          "title": "Enable SSO (single sign on).",
-          "default": true,
-          "x-nullable": true
-        },
-        "releaseQuotaOnStop": {
-          "type": "boolean",
-          "title": "Release quota if compute instance stopped.",
-          "default": false,
-          "x-nullable": true
-        },
-        "personalComputeInstanceSettings": {
-          "$ref": "#/definitions/PersonalComputeInstanceSettings",
-          "title": "Personal Compute Instance settings.",
-          "x-nullable": true
-        },
-        "setupScripts": {
-          "$ref": "#/definitions/SetupScripts",
-          "x-nullable": true
-        },
-        "lastOperation": {
-          "$ref": "#/definitions/ComputeInstanceLastOperation",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "schedules": {
-          "$ref": "#/definitions/ComputeSchedules",
-          "x-nullable": true
-        },
-        "idleTimeBeforeShutdown": {
-          "type": "string"
-        },
-        "enableNodePublicIp": {
-          "type": "boolean",
-          "title": "Enable node public IP.",
-          "x-nullable": true
-        },
-        "containers": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/ComputeInstanceContainer"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "dataDisks": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/ComputeInstanceDataDisk"
-          },
-          "readOnly": true
-        },
-        "dataMounts": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/ComputeInstanceDataMount"
-          },
-          "readOnly": true
-        },
-        "versions": {
-          "$ref": "#/definitions/ComputeInstanceVersion",
-          "readOnly": true
-        }
-      }
-    },
     "ComputeInstanceSchema__deleted": {
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ComputeInstanceProperties"
-        }
-      }
-    },
-    "ComputeInstanceSshSettings__deleted": {
-      "type": "object",
-      "properties": {
-        "sshPublicAccess": {
-          "type": "string",
-          "title": "Access policy for SSH",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "SshPublicAccess",
-            "modelAsString": true
-          }
-        },
-        "adminUserName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "sshPort": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "adminPublicKey": {
-          "type": "string"
-        }
-      }
-    },
-    "ComputeInstanceVersion__deleted": {
-      "type": "object",
-      "properties": {
-        "runtime": {
-          "type": "string",
-          "x-nullable": true
-        }
-      }
-    },
-    "ComputeRecurrenceSchedule__deleted": {
-      "type": "object",
-      "properties": {
-        "hours": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "minutes": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "monthDays": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "weekDays": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "type": "string",
-            "enum": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "x-ms-enum": {
-              "name": "ComputeWeekDay",
-              "modelAsString": true
-            }
-          }
-        }
-      },
-      "required": [
-        "hours",
-        "minutes"
-      ]
-    },
-    "ComputeResourceSchema__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Compute"
-        }
-      }
-    },
-    "ComputeSchedules__deleted": {
-      "type": "object",
-      "properties": {
-        "computeStartStop": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComputeStartStopSchedule"
-          }
-        }
-      }
-    },
-    "ComputeStartStopSchedule__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "provisioningStatus": {
-          "type": "string",
-          "enum": [
-            "Completed",
-            "Provisioning",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleStatus",
-            "modelAsString": true
-          }
-        },
-        "action": {
-          "type": "string",
-          "enum": [
-            "Start",
-            "Stop"
-          ],
-          "x-ms-enum": {
-            "name": "ComputePowerAction",
-            "modelAsString": true
-          }
-        },
-        "triggerType": {
-          "type": "string",
-          "enum": [
-            "Recurrence",
-            "Cron"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeTriggerType",
-            "modelAsString": true
-          }
-        },
-        "recurrence": {
-          "$ref": "#/definitions/Recurrence"
-        },
-        "cron": {
-          "$ref": "#/definitions/Cron"
-        },
-        "schedule": {
-          "$ref": "#/definitions/ScheduleBase"
-        }
-      }
-    },
-    "Cron__deleted": {
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "timeZone": {
-          "type": "string",
-          "default": "UTC"
-        },
-        "expression": {
-          "type": "string"
         }
       }
     },
@@ -8996,25 +9320,6 @@
         }
       ],
       "x-ms-client-name": "DataContainer"
-    },
-    "DataFactory__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        }
-      ],
-      "x-ms-discriminator-value": "DataFactory"
-    },
-    "DataLakeAnalytics__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/DataLakeAnalyticsSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "DataLakeAnalytics"
     },
     "DataLakeAnalyticsSchema__deleted": {
       "type": "object",
@@ -9047,32 +9352,10 @@
       ],
       "x-ms-client-name": "DataVersionBase"
     },
-    "Databricks__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/DatabricksSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "Databricks"
-    },
     "DatabricksComputeSecretsProperties__deleted": {
       "type": "object",
       "properties": {
         "databricksAccessToken": {
-          "type": "string"
-        }
-      }
-    },
-    "DatabricksProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "databricksAccessToken": {
-          "type": "string"
-        },
-        "workspaceUrl": {
           "type": "string"
         }
       }
@@ -9272,33 +9555,6 @@
       ],
       "x-ms-client-name": "FeaturestoreEntityVersion"
     },
-    "HDInsight__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/HDInsightSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "HDInsight"
-    },
-    "HDInsightProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "sshPort": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "address": {
-          "type": "string"
-        },
-        "administratorAccount": {
-          "$ref": "#/definitions/VirtualMachineSshCredentials",
-          "x-nullable": true
-        }
-      }
-    },
     "HDInsightSchema__deleted": {
       "type": "object",
       "properties": {
@@ -9327,24 +9583,6 @@
           "$ref": "#/definitions/ImageVertical"
         }
       ]
-    },
-    "ImageMetadata__deleted": {
-      "type": "object",
-      "properties": {
-        "currentImageVersion": {
-          "type": "string"
-        },
-        "latestImageVersion": {
-          "type": "string"
-        },
-        "isLatestOsImageVersion": {
-          "type": "boolean"
-        },
-        "osPatchingStatus": {
-          "$ref": "#/definitions/OsPatchingStatus",
-          "readOnly": true
-        }
-      }
     },
     "ImageObjectDetectionBase__deleted": {
       "type": "object",
@@ -9478,32 +9716,6 @@
         "type": "string"
       }
     },
-    "InstanceTypeSchema__deleted": {
-      "type": "object",
-      "properties": {
-        "nodeSelector": {
-          "type": "object",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        },
-        "resources": {
-          "type": "object",
-          "properties": {
-            "requests": {
-              "$ref": "#/definitions/InstanceResourceSchema",
-              "description": "Resource requests for this instance type"
-            },
-            "limits": {
-              "$ref": "#/definitions/InstanceResourceSchema",
-              "description": "Resource limits for this instance type"
-            }
-          }
-        }
-      }
-    },
     "JobBaseResource__deleted": {
       "type": "object",
       "properties": {
@@ -9520,55 +9732,6 @@
         }
       ],
       "x-ms-client-name": "JobBase"
-    },
-    "Kubernetes__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/KubernetesSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "Kubernetes"
-    },
-    "KubernetesProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "relayConnectionString": {
-          "type": "string",
-          "x-nullable": true,
-          "x-ms-secret": true
-        },
-        "serviceBusConnectionString": {
-          "type": "string",
-          "x-nullable": true,
-          "x-ms-secret": true
-        },
-        "extensionPrincipalId": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "extensionInstanceReleaseTrain": {
-          "type": "string"
-        },
-        "vcName": {
-          "type": "string"
-        },
-        "namespace": {
-          "type": "string",
-          "default": "default"
-        },
-        "defaultInstanceType": {
-          "type": "string"
-        },
-        "instanceTypes": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/InstanceTypeSchema"
-          }
-        }
-      }
     },
     "KubernetesSchema__deleted": {
       "type": "object",
@@ -9646,47 +9809,6 @@
         }
       }
     },
-    "NodeStateCounts__deleted": {
-      "type": "object",
-      "properties": {
-        "idleNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Idle node count.",
-          "readOnly": true
-        },
-        "runningNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Running node count.",
-          "readOnly": true
-        },
-        "preparingNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Preparing node count.",
-          "readOnly": true
-        },
-        "unusableNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Unusable node count.",
-          "readOnly": true
-        },
-        "leavingNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Leaving node count.",
-          "readOnly": true
-        },
-        "preemptedNodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "Preempted node count.",
-          "readOnly": true
-        }
-      }
-    },
     "OnlineDeploymentTrackedResource__deleted": {
       "type": "object",
       "properties": {
@@ -9741,97 +9863,16 @@
       ],
       "x-ms-client-name": "OnlineEndpoint"
     },
-    "OsPatchingStatus__deleted": {
-      "type": "object",
-      "properties": {
-        "patchStatus": {
-          "type": "string",
-          "enum": [
-            "CompletedWithWarnings",
-            "Failed",
-            "InProgress",
-            "Succeeded",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "PatchStatus",
-            "modelAsString": true
-          }
-        },
-        "latestPatchTime": {
-          "type": "string"
-        },
-        "rebootPending": {
-          "type": "boolean"
-        },
-        "scheduledRebootTime": {
-          "type": "string"
-        },
-        "osPatchingErrors": {
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
-        }
-      }
-    },
     "PartialRegistry__deleted": {
       "type": "object"
     },
     "PartialUserAssignedIdentity__deleted": {
       "type": "object"
     },
-    "PersonalComputeInstanceSettings__deleted": {
-      "type": "object",
-      "properties": {
-        "assignedUser": {
-          "$ref": "#/definitions/AssignedUser",
-          "title": "Assigned User."
-        }
-      }
-    },
     "RaiBlocklistItemsBulkDeleteRequest__deleted": {
       "type": "object",
       "items": {
         "type": "string"
-      }
-    },
-    "Recurrence__deleted": {
-      "type": "object",
-      "properties": {
-        "frequency": {
-          "type": "string",
-          "enum": [
-            "Minute",
-            "Hour",
-            "Day",
-            "Week",
-            "Month"
-          ],
-          "x-ms-enum": {
-            "name": "ComputeRecurrenceFrequency",
-            "modelAsString": true
-          }
-        },
-        "interval": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "startTime": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "timeZone": {
-          "type": "string",
-          "default": "UTC"
-        },
-        "schedule": {
-          "$ref": "#/definitions/ComputeRecurrenceSchedule"
-        }
       }
     },
     "RegistryTrackedResource__deleted": {
@@ -9862,49 +9903,6 @@
       ],
       "x-ms-client-name": "Registry"
     },
-    "ResourceId__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "ScheduleBase__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "provisioningStatus": {
-          "type": "string",
-          "enum": [
-            "Completed",
-            "Provisioning",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleStatus",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "ScheduleResource__deleted": {
       "type": "object",
       "properties": {
@@ -9921,34 +9919,6 @@
         }
       ],
       "x-ms-client-name": "Schedule"
-    },
-    "ScriptReference__deleted": {
-      "type": "object",
-      "properties": {
-        "scriptSource": {
-          "type": "string"
-        },
-        "scriptData": {
-          "type": "string"
-        },
-        "scriptArguments": {
-          "type": "string"
-        },
-        "timeout": {
-          "type": "string"
-        }
-      }
-    },
-    "ScriptsToExecute__deleted": {
-      "type": "object",
-      "properties": {
-        "startupScript": {
-          "$ref": "#/definitions/ScriptReference"
-        },
-        "creationScript": {
-          "$ref": "#/definitions/ScriptReference"
-        }
-      }
     },
     "ServerlessEndpointTrackedResource__deleted": {
       "type": "object",
@@ -9976,126 +9946,6 @@
         }
       ],
       "x-ms-client-name": "ServerlessEndpoint"
-    },
-    "SetupScripts__deleted": {
-      "type": "object",
-      "properties": {
-        "scripts": {
-          "$ref": "#/definitions/ScriptsToExecute"
-        }
-      }
-    },
-    "SslConfiguration__deleted": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled",
-            "Auto"
-          ],
-          "x-ms-enum": {
-            "name": "SslConfigStatus",
-            "modelAsString": true
-          }
-        },
-        "cert": {
-          "type": "string",
-          "x-nullable": true,
-          "x-ms-secret": true
-        },
-        "key": {
-          "type": "string",
-          "x-nullable": true,
-          "x-ms-secret": true
-        },
-        "cname": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "leafDomainLabel": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "overwriteExistingDomain": {
-          "type": "boolean"
-        }
-      }
-    },
-    "SynapseSpark__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "autoScaleProperties": {
-              "$ref": "#/definitions/AutoScaleProperties",
-              "description": "Auto scale properties."
-            },
-            "autoPauseProperties": {
-              "$ref": "#/definitions/AutoPauseProperties",
-              "description": "Auto pause properties."
-            },
-            "sparkVersion": {
-              "type": "string",
-              "description": "Spark version."
-            },
-            "nodeCount": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The number of compute nodes currently assigned to the compute."
-            },
-            "nodeSize": {
-              "type": "string",
-              "description": "Node size."
-            },
-            "nodeSizeFamily": {
-              "type": "string",
-              "description": "Node size family."
-            },
-            "subscriptionId": {
-              "type": "string",
-              "description": "Azure subscription identifier."
-            },
-            "resourceGroup": {
-              "type": "string",
-              "description": "Name of the resource group in which workspace is located."
-            },
-            "workspaceName": {
-              "type": "string",
-              "description": "Name of Azure Machine Learning workspace."
-            },
-            "poolName": {
-              "type": "string",
-              "description": "Pool name."
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        }
-      ],
-      "x-ms-discriminator-value": "SynapseSpark"
-    },
-    "SystemService__deleted": {
-      "type": "object",
-      "properties": {
-        "systemServiceType": {
-          "type": "string",
-          "readOnly": true
-        },
-        "publicIpAddress": {
-          "type": "string",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "TableVertical__deleted": {
       "type": "object",
@@ -10143,50 +9993,6 @@
         }
       }
     },
-    "UserAccountCredentials__deleted": {
-      "type": "object",
-      "properties": {
-        "adminUserName": {
-          "type": "string",
-          "title": "User name."
-        },
-        "adminUserSshPublicKey": {
-          "type": "string",
-          "title": "SSH public key.",
-          "x-ms-secret": true
-        },
-        "adminUserPassword": {
-          "type": "string",
-          "title": "Password.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "adminUserName"
-      ]
-    },
-    "VirtualMachine__deleted": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Compute"
-        },
-        {
-          "$ref": "#/definitions/VirtualMachineSchema"
-        }
-      ],
-      "x-ms-discriminator-value": "VirtualMachine"
-    },
-    "VirtualMachineImage__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "VirtualMachineSchema__deleted": {
       "type": "object",
       "properties": {
@@ -10228,6 +10034,65 @@
       "properties": {
         "administratorAccount": {
           "$ref": "#/definitions/VirtualMachineSshCredentials"
+        }
+      }
+    },
+    "AKSSchemaProperties__added": {
+      "type": "object",
+      "properties": {
+        "clusterFqdn": {
+          "type": "string"
+        },
+        "systemServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SystemService"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "publicIpAddress"
+          ]
+        },
+        "agentCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agentVmSize": {
+          "type": "string"
+        },
+        "clusterPurpose": {
+          "type": "string",
+          "default": "FastProd",
+          "enum": [
+            "FastProd",
+            "DenseProd",
+            "DevTest"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterPurpose",
+            "modelAsString": true
+          }
+        },
+        "sslConfiguration": {
+          "$ref": "#/definitions/SslConfiguration"
+        },
+        "aksNetworkingConfiguration": {
+          "$ref": "#/definitions/AksNetworkingConfiguration"
+        },
+        "loadBalancerType": {
+          "type": "string",
+          "default": "PublicIp",
+          "enum": [
+            "PublicIp",
+            "InternalLoadBalancer"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerType",
+            "modelAsString": true
+          }
+        },
+        "loadBalancerSubnet": {
+          "type": "string"
         }
       }
     },
@@ -10521,6 +10386,7 @@
       "properties": {
         "componentSpec": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {},
           "x-ms-mutability": [
             "create",
@@ -10578,6 +10444,14 @@
           "$ref": "#/definitions/AssetContainer"
         }
       ]
+    },
+    "DataLakeAnalyticsSchemaProperties__added": {
+      "type": "object",
+      "properties": {
+        "dataLakeStoreAccountName": {
+          "type": "string"
+        }
+      }
     },
     "DataVersionBaseProperties__added": {
       "type": "object",
@@ -11199,6 +11073,23 @@
         }
       ]
     },
+    "InstanceTypeSchemaResources__added": {
+      "type": "object",
+      "properties": {
+        "requests": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "JobBaseProperties__added": {
       "type": "object",
       "properties": {
@@ -11760,11 +11651,91 @@
         "string"
       ]
     },
+    "SynapseSparkProperties__added": {
+      "type": "object",
+      "properties": {
+        "autoScaleProperties": {
+          "$ref": "#/definitions/AutoScaleProperties"
+        },
+        "autoPauseProperties": {
+          "$ref": "#/definitions/AutoPauseProperties"
+        },
+        "sparkVersion": {
+          "type": "string"
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nodeSize": {
+          "type": "string"
+        },
+        "nodeSizeFamily": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "workspaceName": {
+          "type": "string"
+        },
+        "poolName": {
+          "type": "string"
+        }
+      }
+    },
     "TypeSpec.Http.NoContentResponse__added": {
       "type": "object"
     },
     "TypeSpec.Http.OkResponse__added": {
       "type": "object"
+    },
+    "VirtualMachineSchemaProperties__added": {
+      "type": "object",
+      "properties": {
+        "virtualMachineSize": {
+          "type": "string"
+        },
+        "sshPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notebookServerPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address": {
+          "type": "string"
+        },
+        "administratorAccount": {
+          "$ref": "#/definitions/VirtualMachineSshCredentials"
+        },
+        "isNotebookInstanceCompute": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AKS": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/AKSSchemaProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/AKSSchema"
+          }
+        ]
+      ]
     },
     "AccountApiKeys": {
       "properties": {
@@ -11786,9 +11757,6 @@
     "AksComputeSecrets": {
       "type__added": "object",
       "properties__added": {
-        "AKS": {
-          "type": "string"
-        },
         "userKubeConfig": {
           "type": "string"
         },
@@ -11800,10 +11768,6 @@
           "x-nullable": true
         }
       },
-      "discriminator__added": "AKS",
-      "required__added": [
-        "AKS"
-      ],
       "allOf": [
         [
           " "
@@ -11821,6 +11785,25 @@
         "filterType"
       ]
     },
+    "AmlCompute": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/AmlComputeProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/AmlComputeSchema"
+          }
+        ]
+      ]
+    },
     "AmlComputeNodeInformation": {
       "properties": {
         "port": {
@@ -11828,6 +11811,54 @@
             "__old": "number",
             "__new": "integer"
           }
+        }
+      }
+    },
+    "AmlComputeProperties": {
+      "properties": {
+        "virtualMachineImage": {
+          "x-nullable__deleted": true
+        },
+        "userAccountCredentials": {
+          "title__deleted": "User account credentials.",
+          "x-nullable__deleted": true
+        },
+        "subnet": {
+          "title__deleted": "Subnet.",
+          "x-nullable__deleted": true
+        },
+        "remoteLoginPortPublicAccess": {
+          "title__deleted": "Close remote Login Access Port"
+        },
+        "allocationState": {
+          "title__deleted": "Allocation state."
+        },
+        "allocationStateTransitionTime": {
+          "title__deleted": "Allocation state transition time."
+        },
+        "errors": {
+          "title__deleted": "Errors.",
+          "x-nullable__deleted": true
+        },
+        "currentNodeCount": {
+          "title__deleted": "Current node count.",
+          "x-nullable__deleted": true
+        },
+        "targetNodeCount": {
+          "title__deleted": "Target node count.",
+          "x-nullable__deleted": true
+        },
+        "nodeStateCounts": {
+          "title__deleted": "Node state counts.",
+          "x-nullable__deleted": true
+        },
+        "enableNodePublicIp": {
+          "title__deleted": "Enable node public IP.",
+          "x-nullable__deleted": true
+        },
+        "propertyBag": {
+          "x-nullable__deleted": true,
+          "additionalProperties__added": {}
         }
       }
     },
@@ -12664,10 +12695,116 @@
         }
       }
     },
-    "ComputeInstanceDataMount": {
+    "ComputeInstance": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/ComputeInstanceProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/ComputeInstanceSchema"
+          }
+        ]
+      ]
+    },
+    "ComputeInstanceConnectivityEndpoints": {
+      "readOnly__deleted": true
+    },
+    "ComputeInstanceContainer": {
       "properties": {
-        "mountedOn": {
-          "title__deleted": "Mounted time."
+        "services": {
+          "items": {
+            "additionalProperties__added": {}
+          }
+        }
+      }
+    },
+    "ComputeInstanceCreatedBy": {
+      "readOnly__deleted": true
+    },
+    "ComputeInstanceProperties": {
+      "properties": {
+        "subnet": {
+          "x-nullable__deleted": true,
+          "title": {
+            "__old": "Subnet.",
+            "__new": "Subnet"
+          }
+        },
+        "errors": {
+          "title": {
+            "__old": "Errors.",
+            "__new": "Errors"
+          }
+        },
+        "computeInstanceAuthorizationType": {
+          "x-nullable__deleted": true
+        },
+        "enableOSPatching": {
+          "default__deleted": false
+        },
+        "enableRootAccess": {
+          "x-nullable__deleted": true
+        },
+        "enableSSO": {
+          "x-nullable__deleted": true
+        },
+        "releaseQuotaOnStop": {
+          "default__deleted": false,
+          "x-nullable__deleted": true
+        },
+        "personalComputeInstanceSettings": {
+          "x-nullable__deleted": true
+        },
+        "lastOperation": {
+          "x-nullable__deleted": true
+        },
+        "schedules": {
+          "x-nullable__deleted": true
+        },
+        "enableNodePublicIp": {
+          "title__deleted": "Enable node public IP.",
+          "x-nullable__deleted": true
+        },
+        "containers": {
+          "x-nullable__deleted": true
+        },
+        "dataDisks": {
+          "x-nullable__deleted": true
+        },
+        "dataMounts": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
+    "ComputeInstanceSshSettings": {
+      "properties": {
+        "sshPublicAccess": {
+          "title__deleted": "Access policy for SSH"
+        }
+      }
+    },
+    "ComputeInstanceVersion": {
+      "properties": {
+        "runtime": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
+    "ComputeRecurrenceSchedule": {
+      "properties": {
+        "monthDays": {
+          "x-nullable__deleted": true
+        },
+        "weekDays": {
+          "x-nullable__deleted": true
         }
       }
     },
@@ -12684,7 +12821,7 @@
           }
         },
         "properties__added": {
-          "type": "object"
+          "$ref": "#/definitions/ComputeResourceSchema"
         },
         "sku": {
           "x-nullable__deleted": true
@@ -12707,16 +12844,6 @@
           }
         ]
       ]
-    },
-    "ContainerResourceRequirements": {
-      "properties": {
-        "containerResourceLimits": {
-          "x-nullable__deleted": true
-        },
-        "containerResourceRequests": {
-          "x-nullable__deleted": true
-        }
-      }
     },
     "ContainerResourceSettings": {
       "properties": {
@@ -12779,6 +12906,13 @@
           " "
         ]
       ]
+    },
+    "Cron": {
+      "properties": {
+        "startTime": {
+          "x-nullable__deleted": true
+        }
+      }
     },
     "CustomMetricThreshold": {
       "properties": {
@@ -13003,6 +13137,9 @@
         }
       }
     },
+    "DataFactory": {
+      "type__added": "object"
+    },
     "DataGenerationVertical": {
       "properties": {
         "promptSettings": {
@@ -13012,6 +13149,25 @@
           "x-nullable__deleted": true
         }
       }
+    },
+    "DataLakeAnalytics": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/DataLakeAnalyticsSchemaProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/DataLakeAnalyticsSchema"
+          }
+        ]
+      ]
     },
     "DataPathAssetReference": {
       "properties": {
@@ -13116,6 +13272,25 @@
           }
         }
       }
+    },
+    "Databricks": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/DatabricksProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/DatabricksSchema"
+          }
+        ]
+      ]
     },
     "DatabricksComputeSecrets": {
       "type__added": "object",
@@ -14568,6 +14743,32 @@
         }
       }
     },
+    "HDInsight": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/HDInsightProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/HDInsightSchema"
+          }
+        ]
+      ]
+    },
+    "HDInsightProperties": {
+      "properties": {
+        "administratorAccount": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
     "Image": {
       "properties": {
         "type": {
@@ -15416,6 +15617,30 @@
         }
       }
     },
+    "InstanceTypeSchema": {
+      "properties": {
+        "nodeSelector": {
+          "x-nullable__deleted": true,
+          "additionalProperties": {
+            "x-nullable__deleted": true
+          }
+        },
+        "resources": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "requests": {
+              "$ref": "#/definitions/InstanceResourceSchema",
+              "description": "Resource requests for this instance type"
+            },
+            "limits": {
+              "$ref": "#/definitions/InstanceResourceSchema",
+              "description": "Resource limits for this instance type"
+            }
+          },
+          "$ref__added": "#/definitions/InstanceTypeSchemaResources"
+        }
+      }
+    },
     "JobBase": {
       "discriminator__deleted": "jobType",
       "x-ms-client-name__deleted": "JobBaseProperties",
@@ -15662,6 +15887,25 @@
         }
       }
     },
+    "Kubernetes": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/KubernetesSchema"
+          }
+        ]
+      ]
+    },
     "KubernetesOnlineDeployment": {
       "properties": {
         "containerResourceRequirements": {
@@ -15679,6 +15923,21 @@
           }
         ]
       ]
+    },
+    "KubernetesProperties": {
+      "properties": {
+        "relayConnectionString": {
+          "x-nullable__deleted": true,
+          "x-ms-secret__deleted": true
+        },
+        "serviceBusConnectionString": {
+          "x-nullable__deleted": true,
+          "x-ms-secret__deleted": true
+        },
+        "extensionPrincipalId": {
+          "x-nullable__deleted": true
+        }
+      }
     },
     "LabelGeneration": {
       "required__deleted": [
@@ -16415,6 +16674,28 @@
         }
       }
     },
+    "NodeStateCounts": {
+      "properties": {
+        "idleNodeCount": {
+          "title__deleted": "Idle node count."
+        },
+        "runningNodeCount": {
+          "title__deleted": "Running node count."
+        },
+        "preparingNodeCount": {
+          "title__deleted": "Preparing node count."
+        },
+        "unusableNodeCount": {
+          "title__deleted": "Unusable node count."
+        },
+        "leavingNodeCount": {
+          "title__deleted": "Leaving node count."
+        },
+        "preemptedNodeCount": {
+          "title__deleted": "Preempted node count."
+        }
+      }
+    },
     "NotebookAccessTokenResult": {
       "properties": {
         "accessToken": {
@@ -16789,6 +17070,13 @@
         ]
       ]
     },
+    "OsPatchingStatus": {
+      "properties": {
+        "osPatchingErrors": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
     "OutboundRule": {
       "properties": {
         "errorInformation": {
@@ -16933,6 +17221,13 @@
         },
         "pendingUploadType": {
           "default__deleted": "TemporaryBlobReference"
+        }
+      }
+    },
+    "PersonalComputeInstanceSettings": {
+      "properties": {
+        "assignedUser": {
+          "title__deleted": "Assigned User."
         }
       }
     },
@@ -17112,6 +17407,13 @@
           "default__deleted": "Random"
         },
         "seed": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
+    "Recurrence": {
+      "properties": {
+        "startTime": {
           "x-nullable__deleted": true
         }
       }
@@ -17579,6 +17881,13 @@
         ]
       ]
     },
+    "ScheduleBase": {
+      "properties": {
+        "id": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
     "ScheduleResourceArmPaginatedResult": {
       "required__added": [
         "value"
@@ -17958,6 +18267,24 @@
         ]
       ]
     },
+    "SslConfiguration": {
+      "properties": {
+        "cert": {
+          "x-nullable__deleted": true,
+          "x-ms-secret__deleted": true
+        },
+        "key": {
+          "x-nullable__deleted": true,
+          "x-ms-secret__deleted": true
+        },
+        "cname": {
+          "x-nullable__deleted": true
+        },
+        "leafDomainLabel": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
     "StackEnsembleSettings": {
       "properties": {
         "stackMetaLearnerKWargs": {
@@ -18047,6 +18374,57 @@
         },
         "trialTimeout": {
           "x-nullable__deleted": true
+        }
+      }
+    },
+    "SynapseSpark": {
+      "properties": {
+        "properties": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "autoScaleProperties": {
+              "$ref": "#/definitions/AutoScaleProperties",
+              "description": "Auto scale properties."
+            },
+            "autoPauseProperties": {
+              "$ref": "#/definitions/AutoPauseProperties",
+              "description": "Auto pause properties."
+            },
+            "sparkVersion": {
+              "type": "string",
+              "description": "Spark version."
+            },
+            "nodeCount": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The number of compute nodes currently assigned to the compute."
+            },
+            "nodeSize": {
+              "type": "string",
+              "description": "Node size."
+            },
+            "nodeSizeFamily": {
+              "type": "string",
+              "description": "Node size family."
+            },
+            "subscriptionId": {
+              "type": "string",
+              "description": "Azure subscription identifier."
+            },
+            "resourceGroup": {
+              "type": "string",
+              "description": "Name of the resource group in which workspace is located."
+            },
+            "workspaceName": {
+              "type": "string",
+              "description": "Name of Azure Machine Learning workspace."
+            },
+            "poolName": {
+              "type": "string",
+              "description": "Pool name."
+            }
+          },
+          "$ref__added": "#/definitions/SynapseSparkProperties"
         }
       }
     },
@@ -18571,6 +18949,40 @@
     "UsageAndQuotaDetailsArmPaginatedResult": {
       "required__added": [
         "value"
+      ]
+    },
+    "UserAccountCredentials": {
+      "properties": {
+        "adminUserName": {
+          "title__deleted": "User name."
+        },
+        "adminUserSshPublicKey": {
+          "title__deleted": "SSH public key.",
+          "x-ms-secret__deleted": true
+        },
+        "adminUserPassword": {
+          "title__deleted": "Password.",
+          "x-ms-secret__deleted": true
+        }
+      }
+    },
+    "VirtualMachine": {
+      "type__added": "object",
+      "properties__added": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineSchemaProperties"
+        }
+      },
+      "allOf": [
+        [
+          " "
+        ],
+        [
+          "-",
+          {
+            "$ref": "#/definitions/VirtualMachineSchema"
+          }
+        ]
       ]
     },
     "VirtualMachineSecrets": {

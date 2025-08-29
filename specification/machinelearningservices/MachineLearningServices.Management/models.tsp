@@ -4094,7 +4094,7 @@ model Compute {
   /**
    * The description of the Machine Learning compute.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * The time at which the compute was created.
@@ -4113,14 +4113,14 @@ model Compute {
   /**
    * ARM resource id of the underlying compute
    */
-  resourceId?: string;
+  resourceId?: string | null;
 
   /**
    * Errors during provisioning
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
-  provisioningErrors?: ErrorResponse[];
+  provisioningErrors?: ErrorResponse[] | null;
 
   /**
    * Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false.
@@ -4527,6 +4527,7 @@ model ComputeInstanceDataMount {
    * The time when the disk mounted.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @summary("Mounted time.")
   mountedOn?: utcDateTime;
 
   /**
@@ -4819,7 +4820,7 @@ model ComponentVersionProperties extends AssetBase {
    * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  componentSpec?: Record<unknown>;
+  componentSpec?: Record<unknown> | null;
 
   /**
    * Provisioning state for the component version.
@@ -9776,28 +9777,30 @@ model ComputeInstanceProperties {
   /**
    * Virtual network subnet resource ID the compute nodes belong to.
    */
+  @summary("Subnet")
   subnet?: ResourceId;
 
   /**
    * Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.
    */
+  @summary("Sharing policy for applications on this compute instance")
   applicationSharingPolicy?: ApplicationSharingPolicy = ApplicationSharingPolicy.Shared;
 
   /**
    * Specifies settings for autologger.
    */
-  autologgerSettings?: ComputeInstanceAutologgerSettings;
+  autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
    * Specifies policy and settings for SSH access.
    */
-  sshSettings?: ComputeInstanceSshSettings;
+  sshSettings?: ComputeInstanceSshSettings | null;
 
   /**
    * List of Custom Services added to the compute.
    */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  customServices?: CustomService[];
+  customServices?: CustomService[] | null;
 
   /**
    * Returns metadata about the operating system image for this compute instance.
@@ -9829,6 +9832,7 @@ model ComputeInstanceProperties {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
+  @summary("Errors")
   errors?: ErrorResponse[];
 
   /**
@@ -9840,37 +9844,43 @@ model ComputeInstanceProperties {
   /**
    * The Compute Instance Authorization type. Available values are personal (default).
    */
+  @summary("Compute Instance Authorization type.")
   computeInstanceAuthorizationType?: ComputeInstanceAuthorizationType = ComputeInstanceAuthorizationType.personal;
 
   /**
    * Enable Auto OS Patching. Possible values are: true, false.
    */
-  enableOSPatching?: boolean;
+  @summary("Enable Auto OS Patching.")
+  enableOSPatching?: boolean | null;
 
   /**
    * Enable root access. Possible values are: true, false.
    */
+  @summary("Enable root access.")
   enableRootAccess?: boolean = true;
 
   /**
    * Enable SSO (single sign on). Possible values are: true, false.
    */
+  @summary("Enable SSO (single sign on).")
   enableSSO?: boolean = true;
 
   /**
    * Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.
    */
+  @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean;
 
   /**
    * Settings for a personal compute instance.
    */
+  @summary("Personal Compute Instance settings.")
   personalComputeInstanceSettings?: PersonalComputeInstanceSettings;
 
   /**
    * Details of customized scripts to execute for setting up the cluster.
    */
-  setupScripts?: SetupScripts;
+  setupScripts?: SetupScripts | null;
 
   /**
    * The last operation on ComputeInstance.
@@ -10023,13 +10033,13 @@ model ComputeInstanceConnectivityEndpoints {
    * Public IP Address of this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  publicIpAddress?: string;
+  publicIpAddress?: string | null;
 
   /**
    * Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).
    */
   @visibility(Lifecycle.Read)
-  privateIpAddress?: string;
+  privateIpAddress?: string | null;
 }
 
 /**
@@ -10055,7 +10065,7 @@ model ComputeInstanceCreatedBy {
    * Name of the user.
    */
   @visibility(Lifecycle.Read)
-  userName?: string;
+  userName?: string | null;
 
   /**
    * Uniquely identifies user' Azure Active Directory organization.
@@ -10067,7 +10077,7 @@ model ComputeInstanceCreatedBy {
    * Uniquely identifies the user within his/her organization.
    */
   @visibility(Lifecycle.Read)
-  userId?: string;
+  userId?: string | null;
 }
 
 /**
@@ -10189,7 +10199,7 @@ model ComputeStartStopSchedule {
    * A system assigned id for the schedule.
    */
   @visibility(Lifecycle.Read)
-  id?: string;
+  id?: string | null;
 
   /**
    * The current deployment state of schedule.
@@ -10386,11 +10396,13 @@ model ComputeInstanceDataDisk {
   /**
    * The initial disk size in gigabytes.
    */
+  @summary("The initial disk size in gigabytes.")
   diskSizeGB?: int32;
 
   /**
    * The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun.
    */
+  @summary("The logical unit number.")
   lun?: int32;
 
   /**
@@ -10729,7 +10741,6 @@ model AksComputeSecretsProperties {
 /**
  * Secrets related to a Machine Learning compute based on AKS.
  */
-@discriminator("AKS")
 model AksComputeSecrets extends ComputeSecrets {
   ...AksComputeSecretsProperties;
 
@@ -12095,12 +12106,12 @@ model ContainerResourceRequirements {
   /**
    * Container resource limit info:
    */
-  containerResourceLimits?: ContainerResourceSettings;
+  containerResourceLimits?: ContainerResourceSettings | null;
 
   /**
    * Container resource request info:
    */
-  containerResourceRequests?: ContainerResourceSettings;
+  containerResourceRequests?: ContainerResourceSettings | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
