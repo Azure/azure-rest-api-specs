@@ -13,6 +13,7 @@ namespace Azure.AI.Projects;
 
 @doc("Strategies for attacks.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 union AttackStrategy {
   string,
 
@@ -91,6 +92,7 @@ union AttackStrategy {
 
 @doc("Risk category for the attack objective.")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 union RiskCategory {
   string,
 
@@ -107,9 +109,29 @@ union RiskCategory {
   SelfHarm: "SelfHarm",
 }
 
+@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model AzureOpenAIModelConfiguration extends TargetConfig {
+  type: "AzureOpenAIModel";
+
+  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
+  modelDeploymentName: string;
+}
+
+@doc("Abstract class for target configuration.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+@discriminator("type")
+model TargetConfig {
+  @doc("Type of the model configuration.")
+  type: string;
+}
+
 @doc("Red team details.")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
 model RedTeam {
   @doc("Identifier of the red team run.")
   @key("name")

@@ -1140,16 +1140,18 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
  */
 export async function getImpactAssessment(github, core, owner, repo, runId) {
   // List artifacts for provided workflow run
-  const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+  const jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
     owner,
     repo,
     run_id: runId,
+    name: "job-summary",
+    per_page: PER_PAGE_MAX,
   });
 
-  // Find the job-summary artifact
-  const jobSummaryArtifact = artifacts.data.artifacts.find(
-    (artifact) => artifact.name === "job-summary",
-  );
+  // If multiple artifacts with same name, select latest updated
+  const jobSummaryArtifact = jobSummaryArtifacts.sort(
+    invert(byDate((a) => a.updated_at || "1970")),
+  )[0];
 
   if (!jobSummaryArtifact) {
     throw new Error(
@@ -1174,8 +1176,12 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
   const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
   const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
   await fs.writeFile(tmpZip, zipBuffer);
+
   // Extract JSON content from zip archive
+  // Could replace with library like 'fflate' instead of 'exec unzip', but
+  // this would require 'npm i', while 'unzip' is pre-installed.
   const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
+
   await fs.unlink(tmpZip);
 
   /** @type {import("./labelling.js").ImpactAssessment} */

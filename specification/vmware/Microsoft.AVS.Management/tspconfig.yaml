@@ -19,11 +19,11 @@ options:
     use-read-only-status-schema: true
 
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Avs"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Avs"
 
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/avs"

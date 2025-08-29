@@ -14,11 +14,10 @@ options:
     arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.SecretsStoreExtension"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
-    service-dir: "sdk/secretsstoreextension"
+    namespace: "Azure.ResourceManager.SecretsStoreExtension"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-secretsstoreextension"
     service-dir: "sdk/secretsstoreextension"

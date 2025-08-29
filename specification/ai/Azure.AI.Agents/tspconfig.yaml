@@ -19,15 +19,16 @@ options:
     generate-sample: false
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     api-version: "2025-05-15-preview"
-    package-dir: "Azure.AI.Agents.Persistent"
-    namespace: "{package-dir}"
+    namespace: Azure.AI.Agents.Persistent
     package-name: "{package-dir}"
     model-namespace: false
     flavor: azure
     examples-dir: "{project-dir}/examples"
     clear-output-folder: true
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Agents.Persistent
     model-namespace: false
     api-version: "2025-05-15-preview"
