@@ -5,6 +5,6 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Edge, "WorkloadOrchestrationMgmtClient", "python");
 @@clientName(Microsoft.Edge,
-    "WorkloadOrchestrationManagementClient",
-    "javascript"
+  "WorkloadOrchestrationManagementClient",
+  "javascript"
 );
