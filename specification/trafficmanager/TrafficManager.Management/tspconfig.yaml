@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/resourcemanager"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,40 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-trafficmanager"
+    namespace: "azure.mgmt.trafficmanager"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.TrafficManager"
+    flavor: azure
+    generate-sample-project: false
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-trafficmanager"
+    flavor: azure
+    package-details:
+    name: "@azure/arm-trafficmanager"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-trafficmanager"
+    namespace: "com.azure.resourcemanager.trafficmanager"
+    flavor: azure
+    service-name: "Traffic Manager"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/trafficmanager"
+    package-dir: "armtrafficmanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
