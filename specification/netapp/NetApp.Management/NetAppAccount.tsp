@@ -117,13 +117,15 @@ interface NetAppAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "For backward compatibility"
   @operationId("Accounts_GetChangeKeyVaultInformation")
   @action("getKeyVaultStatus")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   getChangeKeyVaultInformation is ArmResourceActionAsync<
     NetAppAccount,
     void,
     ArmResponse<GetKeyVaultStatusResponse>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = GetKeyVaultStatusResponse> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = GetKeyVaultStatusResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

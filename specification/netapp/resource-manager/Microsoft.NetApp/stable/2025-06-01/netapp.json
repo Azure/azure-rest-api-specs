@@ -6680,9 +6680,9 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -6704,7 +6704,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/GetKeyVaultStatusResponse"
         },
         "x-ms-long-running-operation": true
