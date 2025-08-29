@@ -103,14 +103,8 @@ namespace Customizations;
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@client(
-  {
-    name: "IngestionManagementClient",
-    service: Microsoft.PlanetaryComputer,
-  },
-  "csharp,java,python"
-)
-interface IngestionManagementClient {
+@operationGroup
+interface Ingestion {
   // Ingestion operations management
   deleteIngestionOperation is IngestionOperations.delete;
   deleteAllIngestionOperations is IngestionOperations.deleteAll;
@@ -140,14 +134,8 @@ interface IngestionManagementClient {
 
 // === SpatioTemporal Asset Catalog (STAC) API ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@client(
-  {
-    name: "StacClient",
-    service: Microsoft.PlanetaryComputer,
-  },
-  "csharp,java,python"
-)
-interface StacClient {
+@operationGroup
+interface Stac {
   // Collection Assets
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
   createCollectionAsset is StacCollectionAssets.create;
@@ -227,14 +215,8 @@ interface StacClient {
 
 // === Tiles for STAC Items ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@client(
-  {
-    name: "TilerClient",
-    service: Microsoft.PlanetaryComputer,
-  },
-  "csharp,java,python"
-)
-interface TilerClient {
+@operationGroup
+interface Tiler {
   // Tile Matrix Sets
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
   getTileMatrixList is TileMatrixList.get;
@@ -323,14 +305,8 @@ interface TilerClient {
 
 // === Shared Access Signature (SAS) ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@client(
-  {
-    name: "SharedAccessSignatureClient",
-    service: Microsoft.PlanetaryComputer,
-  },
-  "csharp,java,python"
-)
-interface SharedAccessSignatureClient {
+@operationGroup
+interface SharedAccessSignature {
   // Sign HREF for read access
   getSign is Sas.getSign;
 

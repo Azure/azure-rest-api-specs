@@ -664,7 +664,11 @@ namespace IngestionSources {
     objectId: uuid;
 
     @doc("ARM path or resource id of the managed identity")
-    resourceId: string;
+    resourceId: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+      }
+    ]>;
   }
 
   @doc("Ingestion source parameters")

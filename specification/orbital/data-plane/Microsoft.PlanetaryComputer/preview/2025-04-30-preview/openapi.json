@@ -13560,7 +13560,15 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "ARM path or resource id of the managed identity"
+          "format": "arm-id",
+          "description": "ARM path or resource id of the managed identity",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       },
       "required": [
