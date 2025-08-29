@@ -51,12 +51,16 @@ interface TriageRecommendations {
   /**
    * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("triageRecommendations_Get")
   get is TriageRecommendationOps.Read<TriageRecommendation>;
 
   /**
    * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @segment("providers/Microsoft.Advisor/triageRecommendations")
+  @operationId("triageRecommendations_List")
   list is TriageRecommendationOps.List<
     TriageRecommendation,
     Parameters = {
@@ -78,8 +82,10 @@ interface TriageRecommendations {
   /**
    * Approve a triage recommendation for a given id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Rest.Private.actionSegment("approve")
+  @operationId("triageRecommendations_ApproveTriageRecommendation")
   approveTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     void,
@@ -89,8 +95,10 @@ interface TriageRecommendations {
   /**
    * Reject an existing triage recommendation for a given id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Rest.Private.actionSegment("reject")
+  @operationId("triageRecommendations_RejectTriageRecommendation")
   rejectTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     RecommendationRejectBody,
@@ -100,8 +108,10 @@ interface TriageRecommendations {
   /**
    * Reset an existing triage recommendation for a given id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Rest.Private.actionSegment("reset")
+  @operationId("triageRecommendations_ResetTriageRecommendation")
   resetTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     void,

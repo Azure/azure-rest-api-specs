@@ -1113,7 +1113,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews": {
       "get": {
-        "operationId": "ResiliencyReviews_List",
+        "operationId": "resiliencyReviews_List",
         "tags": [
           "ResiliencyReviews"
         ],
@@ -1163,6 +1163,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListResiliencyReviews": {
+            "$ref": "./examples/ResiliencyReviewsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1170,7 +1175,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}": {
       "get": {
-        "operationId": "ResiliencyReviews_Get",
+        "operationId": "resiliencyReviews_Get",
         "tags": [
           "ResiliencyReviews"
         ],
@@ -1203,12 +1208,17 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetResiliencyReview": {
+            "$ref": "./examples/ResiliencyReviewsGet.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations": {
       "get": {
-        "operationId": "TriageRecommendations_List",
+        "operationId": "triageRecommendations_List",
         "description": "Get list of recommendations for an existing Azure Advisor Resiliency Review Id.",
         "parameters": [
           {
@@ -1255,6 +1265,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListTriageRecommendations": {
+            "$ref": "./examples/TriageRecommendationsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1262,7 +1277,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}": {
       "get": {
-        "operationId": "TriageRecommendations_Get",
+        "operationId": "triageRecommendations_Get",
         "description": "Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.",
         "parameters": [
           {
@@ -1299,12 +1314,17 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetTriageRecommendation": {
+            "$ref": "./examples/TriageRecommendationsGet.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve": {
       "post": {
-        "operationId": "TriageRecommendations_ApproveTriageRecommendation",
+        "operationId": "triageRecommendations_ApproveTriageRecommendation",
         "description": "Approve a triage recommendation for a given id.",
         "parameters": [
           {
@@ -1338,12 +1358,17 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Approve a triage recommendation": {
+            "$ref": "./examples/TriageRecommendationsApprove.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
       "get": {
-        "operationId": "TriageResources_List",
+        "operationId": "triageResources_List",
         "description": "List all triage resources that belong to a review and recommendation.",
         "parameters": [
           {
@@ -1380,6 +1405,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListTriageResources": {
+            "$ref": "./examples/TriageResourcesList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1387,7 +1417,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}": {
       "get": {
-        "operationId": "TriageResources_Get",
+        "operationId": "triageResources_Get",
         "description": "Get a triage resource for a given review and recommendation.",
         "parameters": [
           {
@@ -1430,12 +1460,17 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetTriageResource": {
+            "$ref": "./examples/TriageResourcesGet.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject": {
       "post": {
-        "operationId": "TriageRecommendations_RejectTriageRecommendation",
+        "operationId": "triageRecommendations_RejectTriageRecommendation",
         "description": "Reject an existing triage recommendation for a given id.",
         "parameters": [
           {
@@ -1478,12 +1513,17 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Reject a triage recommendation": {
+            "$ref": "./examples/TriageRecommendationsReject.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset": {
       "post": {
-        "operationId": "TriageRecommendations_ResetTriageRecommendation",
+        "operationId": "triageRecommendations_ResetTriageRecommendation",
         "description": "Reset an existing triage recommendation for a given id.",
         "parameters": [
           {
@@ -1516,6 +1556,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Reset a triage recommendation": {
+            "$ref": "./examples/TriageRecommendationsReset.json"
           }
         }
       }
