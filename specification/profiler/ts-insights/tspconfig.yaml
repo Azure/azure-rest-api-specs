@@ -1,0 +1,33 @@
+parameters:  
+  "service-dir":
+    default: "sdk/ts-insights"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    package-dir: "azure-profiler"
+    namespace: "azure.azure.profiler"
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Profiler"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "azure-profiler-rest"
+    package-details:
+      name: "@azure-rest/azure-profiler"
+      description: "Azure.Profiler Service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-profiler"
+    namespace: com.azure.profiler
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
