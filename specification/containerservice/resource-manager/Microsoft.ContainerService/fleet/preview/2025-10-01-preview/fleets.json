@@ -3510,12 +3510,7 @@
         "maxConcurrency": {
           "type": "integer",
           "format": "int32",
-          "description": "The max number of potential upgrades that can run concurrently in this group.",
-          "readOnly": true
-        },
-        "requestedMaxConcurrency": {
-          "type": "string",
-          "description": "Original requested maxConcurrency value for this group.\nEither a fixed count (e.g., \"3\") or a percentage (e.g., \"25%\").",
+          "description": "The max number of upgrades that can run concurrently in this group, resolved from the UpdateStrategy.UpdateGroup.maxConcurrency value. If no value was provided, this value defaults to \"1\".",
           "readOnly": true
         }
       }
@@ -3752,12 +3747,7 @@
         "maxConcurrency": {
           "type": "integer",
           "format": "int32",
-          "description": "The max number of upgrades that can run concurrently across all groups in this stage.",
-          "readOnly": true
-        },
-        "requestedMaxConcurrency": {
-          "type": "string",
-          "description": "Original requested maxConcurrency value for this stage. Either a fixed count (e.g., \"3\") or a percentage (e.g., \"25%\").",
+          "description": "The max number of upgrades that can run concurrently across all groups in this stage, resolved from the UpdateStrategy.UpdateStage.maxConcurrency value. If no value was provided, this value defaults to \"10\".",
           "readOnly": true
         }
       }
@@ -3847,7 +3837,7 @@
         },
         "maxConcurrency": {
           "type": "string",
-          "description": "The max number of potential upgrades that can run concurrently in this specific group.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the group you want to tolerate at a time.\nActual concurrency may be lower depending on stage-level limits or individual member conditions.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the group size at stage start. Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\" --> up to 3 members from this group upgrade at once.\n    • \"100%\" --> “all at once”, up to all members for this group upgrade at the same time.\n    • \"25%\" --> up to 25% of the members in the group will be upgrade at the same time. ",
+          "description": "The max number of upgrades that can run concurrently in this specific group.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the group you want to tolerate at a time.\nActual concurrency may be lower depending on stage-level concurrency limits or individual member conditions.\nGroup maxConcurrency has a min value of \"1\". The max value is min(number of clusters in the group, the stage maxConcurrency).\nIf no value is provided, defaults to 1.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the number of clusters in the group. \n      Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\" --> up to 3 members from this group upgrade at once.\n    • \"100%\" --> “all at once”, up to all members for this group upgrade at the same time.\n    • \"25%\" --> up to 25% of the members in the group will be upgraded at the same time.",
           "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
         },
         "beforeGates": {
@@ -4180,7 +4170,7 @@
         },
         "maxConcurrency": {
           "type": "string",
-          "description": "The max number of upgrades that can run concurrently across all groups in this stage.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the total clusters under all groups at stage start, fractional results rounded up. A minimum of 1 upgrade is enforced.\nExample: 5 --> at most 5 concurrent upgrades at once from all groups in this stage.\nExample: 100% --> If a stage has 5 clusters total, the maxConcurrency for upgrades is 5.",
+          "description": "The max number of upgrades that can run concurrently across all groups in this stage.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the stage you want to tolerate at a time.\nActual concurrency may be lower depending on group-level concurrency limits or individual member conditions.\nStage maxConcurrency has a min value of \"1\". The max value is the min(number of clusters in this stage, system-defined limit of \"50\").\nAccepts either:\n    • A fixed count, e.g., \"3\"\n    • A percentage, e.g., \"25%\" (range 1–100). Percentage is of the total number of clusters across all groups in the stage.\n      Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\"     --> up to 3 clusters from this stage upgrade at once (across all groups).\n    • \"100%\"  --> “all at once”; up to all clusters in this stage upgrade at the same time.\n    • \"25%\"   --> up to 25% of the stage’s total clusters upgrade at the same time.",
           "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
         },
         "beforeGates": {
