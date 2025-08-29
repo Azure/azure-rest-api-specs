@@ -26,7 +26,7 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-06
+tag: package-2024-04
 ```
 
 
@@ -127,7 +127,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_support']

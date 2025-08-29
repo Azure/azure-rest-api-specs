@@ -15,7 +15,7 @@ model Replica is ProxyResource<MongoClusterProperties> {
   @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
   @key("replicaName")
   @segment("replicas")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

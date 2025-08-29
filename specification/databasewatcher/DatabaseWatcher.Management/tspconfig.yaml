@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/databasewatcher"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,40 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Watcher.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    flavor: azure
+    model-namespace: false
+    namespace: "Azure.ResourceManager.DatabaseWatcher"
+  "@azure-tools/typespec-python":
+    flavor: azure
+    generate-sample: true
+    generate-test: true
+    package-dir: "azure-mgmt-databasewatcher"
+    namespace: "azure.mgmt.databasewatcher"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    namespace: "com.azure.resourcemanager.databasewatcher"
+    package-dir: "azure-resourcemanager-databasewatcher"
+    service-name: "Database Watcher"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    flavor: azure
+    package-dir: "arm-databasewatcher"
+    package-details:
+      name: "@azure/arm-databasewatcher"
+  "@azure-tools/typespec-go":
+    fix-const-stuttering: true
+    flavor: azure
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
+    service-dir: "sdk/resourcemanager/databasewatcher"
+    package-dir: "armdatabasewatcher"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

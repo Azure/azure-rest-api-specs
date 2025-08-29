@@ -11,10 +11,10 @@ namespace DocumentTranslation;
 @doc("Document Translate Request Content")
 model DocumentTranslateContent {
   @doc("Document to be translated in the form")
-  document: bytes;
+  document: HttpPart<bytes>;
 
   @doc("Glossary-translation memory will be used during translation in the form. ")
-  glossary?: bytes[];
+  glossary?: HttpPart<bytes[]>;
 }
 
 @doc("Document Translate Result / Response.")
@@ -274,7 +274,7 @@ model TranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -308,7 +308,7 @@ model InnerTranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -323,14 +323,13 @@ model InnerTranslationError {
 }
 
 @doc("Translation job Status Response")
-@pagedResult
 model TranslationsStatus {
   @doc("The summary status of individual operation")
-  @items
+  @pageItems
   value: TranslationStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -440,14 +439,13 @@ model DocumentStatus {
 }
 
 @doc("Documents Status Response")
-@pagedResult
 model DocumentsStatus {
   @doc("The detail status of individual documents")
-  @items
+  @pageItems
   value: DocumentStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -516,7 +514,7 @@ model DocumentTranslateBody {
   contentType: "multipart/form-data";
 
   @doc("Document Translate Request Content")
-  @body
+  @multipartBody
   body: DocumentTranslateContent;
 
   @doc("Optional boolean parameter to translate text within an image in the document")

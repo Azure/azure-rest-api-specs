@@ -55,7 +55,7 @@ function Invoke-Query($fields, $wiql, $output = $true)
   }
 
   $response = Invoke-RestMethod -Method POST `
-    -Uri "https://dev.azure.com/azure-sdk/Release/_apis/wit/wiql/?`$top=10000&api-version=6.0" `
+    -Uri "https://dev.azure.com/azure-sdk/Release/_apis/wit/wiql/?`$top=100000&api-version=6.0" `
     -Headers (Get-DevOpsRestHeaders) -Body $body -ContentType "application/json" | ConvertTo-Json -Depth 10 | ConvertFrom-Json -AsHashTable
 
   if ($response -isnot [HashTable] -or !$response.ContainsKey("workItems") -or $response.workItems.Count -eq 0) {
@@ -529,7 +529,7 @@ function FindOrCreatePackageGroupParent($serviceName, $packageDisplayName, $outp
 {
   $existingItem = FindParentWorkItem $serviceName $packageDisplayName -outputCommand $outputCommand -ignoreReleasePlannerTests $ignoreReleasePlannerTests -tag $tag
   if ($existingItem) {
-    Write-Host "Found existing product work item [$($existingItem.id)]"
+    Write-Verbose "Found existing product work item [$($existingItem.id)]"
     $newparentItem = FindOrCreateServiceParent $serviceName -outputCommand $outputCommand -ignoreReleasePlannerTests $ignoreReleasePlannerTests -tag $tag
     UpdateWorkItemParent $existingItem $newParentItem
     return $existingItem
@@ -552,7 +552,7 @@ function FindOrCreateServiceParent($serviceName, $outputCommand = $true, $ignore
 {
   $serviceParent = FindParentWorkItem $serviceName -packageDisplayName $null -outputCommand $outputCommand -ignoreReleasePlannerTests $ignoreReleasePlannerTests -tag $tag
   if ($serviceParent) {
-    Write-Host "Found existing service work item [$($serviceParent.id)]"
+    Write-Verbose "Found existing service work item [$($serviceParent.id)]"
     return $serviceParent
   }
 
@@ -1014,4 +1014,63 @@ function UpdateValidationStatus($pkgvalidationDetails, $BuildDefinition, $Pipeli
     $workItem = UpdateWorkItem -id $workItem.id -fields $fields
     Write-Host "[$($workItem.id)]$LanguageDisplayName - $pkgName($versionMajorMinor) - Updated"
     return $true
+}
+
+
+function Get-LanguageDevOpsName($LanguageShort)
+{
+    switch ($LanguageShort.ToLower()) 
+    {
+        "net" { return "Dotnet" }
+        "js" { return "JavaScript" }
+        "java" { return "Java" }
+        "go" { return "Go" }
+        "python" { return "Python" }
+        default { return $null }
+    }
+}
+
+function Get-ReleasePlanForPackage($packageName)
+{
+    $devopsFieldLanguage = Get-LanguageDevOpsName -LanguageShort $LanguageShort
+    if (!$devopsFieldLanguage)
+    {
+        Write-Host "Unsupported language to check release plans, language [$LanguageShort]"
+        return $null
+    }
+
+    $prStatusFieldName = "SDKPullRequestStatusFor$($devopsFieldLanguage)"
+    $packageNameFieldName = "$($devopsFieldLanguage) Package Name"
+    $fields = @()
+    $fields += "System.ID"
+    $fields += "System.State"
+    $fields += "System.AssignedTo"
+    $fields += "System.Parent"
+    $fields += "System.Tags"
+
+    $fieldList = ($fields | ForEach-Object { "[$_]"}) -join ", "
+    $query = "SELECT ${fieldList} FROM WorkItems WHERE [Work Item Type] = 'Release Plan' AND [${packageNameFieldName}] = '${packageName}'"
+    $query += " AND [${prStatusFieldName}] = 'merged'"
+    $query += " AND [System.State] IN ('In Progress')"
+    $query += " AND [System.Tags] NOT CONTAINS 'Release Planner App Test'"
+    $workItems = Invoke-Query $fields $query
+    return $workItems
+}
+
+function Update-ReleaseStatusInReleasePlan($releasePlanWorkItemId, $status, $version)
+{  
+    $devopsFieldLanguage = Get-LanguageDevOpsName -LanguageShort $LanguageShort
+    if (!$devopsFieldLanguage)
+    {
+        Write-Host "Unsupported language to check release plans, language [$LanguageShort]"
+        return $null
+    }
+
+    $fields = @()
+    $fields += "`"ReleaseStatusFor$($devopsFieldLanguage)=$status`""
+    $fields += "`"ReleasedVersionFor$($devopsFieldLanguage)=$version`""
+
+    Write-Host "Updating Release Plan [$releasePlanWorkItemId] with status [$status] for language [$LanguageShort]."
+    $workItem = UpdateWorkItem -id $releasePlanWorkItemId -fields $fields
+    Write-Host "Updated release status for [$LanguageShort] in Release Plan [$releasePlanWorkItemId]"
 }

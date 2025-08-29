@@ -1,16 +1,12 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptPackages {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("ScriptPackages_List")
   list is ArmResourceListByParent<
     ScriptPackage,
     Response = ArmResponse<ResourceList<ScriptPackage, "{name}sList">>
@@ -39,22 +35,22 @@ union ScriptPackageProvisioningState {
 @doc("Properties of a Script Package subresource")
 model ScriptPackageProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ScriptPackageProvisioningState;
 
   @doc("User friendly description of the package")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("Module version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   @doc("Company that created and supports the package")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   company?: string;
 
   @doc("Link to support by the package vendor")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri?: string;
 }

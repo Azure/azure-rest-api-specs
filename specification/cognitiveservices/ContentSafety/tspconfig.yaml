@@ -16,20 +16,25 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-contentsafety"
     package-version: "1.0.0"
-    package-name: "{package-dir}"
+    namespace: "azure.ai.contentsafety"
     package-pprint-name: '"Azure AI Content Safety"'
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.ContentSafety"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.AI.ContentSafety"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.AI.ContentSafety
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "ai-content-safety-rest"
-    packageDetails:
+    is-modular-library: false
+    package-details:
       name: "@azure-rest/ai-content-safety"
       version: "1.0.0"
       description: "ContentSafety Service"

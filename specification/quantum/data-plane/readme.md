@@ -26,7 +26,7 @@ These are the global settings for the quantum.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2024-03-01-preview
+tag: package-2024-10-01-preview
 suppressions:
   - code: OperationId
     where:
@@ -63,6 +63,15 @@ suppressions:
     reason:
       For historical reasons and backward compatibility, the Job Update operation
       uses a JsonPatchDocument. 
+```
+
+### Tag: package-2024-10-01-preview
+
+These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01-preview'
+input-file:
+  - Microsoft.Quantum/preview/2024-10-01-preview/quantum.json
 ```
 
 ### Tag: package-2024-03-01-preview

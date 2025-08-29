@@ -5,6 +5,14 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ComputeSchedule;
 
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmt", "python");
+@@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "java");
+@@clientNamespace(Microsoft.ComputeSchedule,
+  "com.azure.resourcemanager.computeschedule",
+  "java"
+);
+
+@@clientName(CancelOccurrenceRequest, "CancelOccurrenceContent", "csharp");
+@@clientName(DelayRequest, "DelayContent", "csharp");
 
 @@clientName(ScheduledActions.virtualMachinesSubmitDeallocate,
   "SubmitVirtualMachineDeallocate",
@@ -80,14 +88,72 @@ using Microsoft.ComputeSchedule;
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
 
-@@clientName(SubmitDeallocateRequest.correlationid, "correlationId", "csharp");
-@@clientName(SubmitStartRequest.correlationid, "correlationId", "csharp");
-@@clientName(SubmitHibernateRequest.correlationid, "correlationId", "csharp");
-@@clientName(ExecuteDeallocateRequest.correlationid, "correlationId", "csharp");
-@@clientName(ExecuteHibernateRequest.correlationid, "correlationId", "csharp");
-@@clientName(ExecuteStartRequest.correlationid, "correlationId", "csharp");
+@@clientName(SubmitDeallocateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(SubmitStartRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(SubmitHibernateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteDeallocateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteHibernateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteStartRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
 @@clientName(GetOperationStatusRequest.correlationid,
   "correlationId",
+  "csharp,javascript"
+);
+@@clientName(CancelOperationsRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(Schedule.deadLine, "userRequestDeadline", "csharp,javascript");
+@@clientName(Schedule.timeZone, "userRequestTimezone", "csharp,javascript");
+@@clientName(ResourceOperationDetails.timeZone,
+  "operationTimezone",
+  "csharp,javascript"
+);
+@@clientName(OperationErrorDetails.timeStamp,
+  "errorDetailsTimestamp",
+  "csharp,javascript"
+);
+@@clientName(Versions.`2024-10-01`,
+  "$DO_NOT_NORMALIZE$V2024-10-01",
+  "javascript"
+);
+@@clientName(DeleteResourceOperationResponse,
+  "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(CancelOperationsRequest.correlationid, "correlationId", "csharp");
+@@clientName(CreateResourceOperationResponse,
+  "CreateResourceOperationResult",
+  "csharp"
+);
+@@clientName(ScheduledActionResource, "ScheduledActionResourceModel", "csharp");
+@@clientName(OccurrenceResource, "OccurrenceResourceModel", "csharp");
+@@clientName(OccurrenceExtensionResource,
+  "OccurrenceExtensionResourceModel",
+  "csharp"
+);
+@@clientName(ResourceOperationResponse,
+  "RecurringActionsResourceOperationResult",
+  "csharp,javascript,go,python,java"
+);
+@@clientName(Microsoft.ComputeSchedule.Versions.`2025-05-01`,
+  "V2025-05-01",
+  "javascript"
+);
+@@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");

@@ -112,14 +112,13 @@ union LabelFields {
 }
 
 @doc("The result of a list request.")
-@pagedResult
 model KeyListResult {
   @doc("The collection value.")
-  @items
+  @pageItems
   items?: Key[];
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @Azure.Core.nextLink
+  @nextLink
   `@nextLink`?: string;
 }
 
@@ -128,7 +127,7 @@ model KeyListResult {
 model Key {
   @doc("The name of the key.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -152,17 +151,16 @@ model Error {
 }
 
 @doc("The result of a list request.")
-@pagedResult
 model KeyValueListResult {
   @doc("The collection value.")
-  @items
+  @pageItems
   items?: KeyValue[];
 
   @doc("An identifier representing the returned state of the resource.")
   etag?: string;
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @Azure.Core.nextLink
+  @nextLink
   `@nextLink`?: string;
 }
 
@@ -170,7 +168,7 @@ model KeyValueListResult {
 @resource("kv")
 model KeyValue {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The key of the key-value.")
   key: string;
 
@@ -200,14 +198,13 @@ model KeyValue {
 }
 
 @doc("The result of a snapshot list request.")
-@pagedResult
 model SnapshotListResult {
   @doc("The collection value.")
-  @items
+  @pageItems
   items?: Snapshot[];
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @Azure.Core.nextLink
+  @nextLink
   `@nextLink`?: string;
 }
 
@@ -216,11 +213,11 @@ model SnapshotListResult {
 model Snapshot {
   @key
   @doc("The name of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The current status of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SnapshotStatus;
 
   @doc("A list of filters used to filter the key-values included in the snapshot.")
@@ -239,12 +236,12 @@ model Snapshot {
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Pre-existing API contract."
   @doc("The time that the snapshot was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   created?: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Pre-existing API contract."
   @doc("The time that the snapshot will expire.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expires?: offsetDateTime;
 
   @doc("""
@@ -259,11 +256,11 @@ model Snapshot {
   retentionPeriod?: int64;
 
   @doc("The size in bytes of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   size?: int64;
 
   @doc("The amount of key-values in the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "items_count")
   itemsCount?: int64;
 
@@ -271,7 +268,7 @@ model Snapshot {
   tags?: Record<string>;
 
   @doc("A value representing the current state of the snapshot.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 
@@ -297,14 +294,13 @@ model SnapshotUpdateParameters {
 }
 
 @doc("The result of a list request.")
-@pagedResult
 model LabelListResult {
   @doc("The collection value.")
-  @items
+  @pageItems
   items?: Label[];
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @Azure.Core.nextLink
+  @nextLink
   `@nextLink`?: string;
 }
 
@@ -328,3 +324,117 @@ model OperationDetails {
     """)
   error?: Foundations.Error;
 }
+
+alias SyncTokenHeader = {
+  @doc("Used to guarantee real-time consistency between requests.")
+  @header("Sync-Token")
+  syncToken?: string;
+};
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+alias ContentTypeHeader<T extends string> = {
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Avoiding creating a bunch of types for each content type."
+  @doc("Content-Type header")
+  @header("Content-Type")
+  contentType?: T | "application/problem+json";
+};
+
+alias AppConfigResponseHeaders = {
+  ...SyncTokenHeader;
+
+  @doc("A value representing the current state of the resource.")
+  @header("ETag")
+  etagHeader?: string;
+};
+
+alias AfterHeader = {
+  @doc("""
+    Instructs the server to return elements that appear after the element referred
+    to by the specified token.
+    """)
+  @query("After")
+  after?: string;
+};
+
+alias AcceptDatetimeHeader = {
+  @doc("""
+    Requests the server to respond with the state of the resource at the specified
+    time.
+    """)
+  @header("Accept-Datetime")
+  acceptDatetime?: string;
+};
+
+alias SelectQueryParam<Type extends TypeSpec.Reflection.Model | string> = {
+  @doc("Used to select what fields are present in the returned resource(s).")
+  @query("$Select")
+  select?: Type[];
+};
+
+alias NameQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @query("name")
+  name?: string;
+};
+
+alias KeyQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @query("key")
+  key?: string;
+};
+
+alias IfMatchHeader = {
+  @doc("""
+    Used to perform an operation only if the targeted resource's etag matches the
+    value provided.
+    """)
+  @header("If-Match")
+  ifMatch?: string;
+};
+
+alias IfNoneMatchHeader = {
+  @doc("""
+    Used to perform an operation only if the targeted resource's etag does not
+    match the value provided.
+    """)
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+};
+
+alias KeyPathParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @path
+  key: string;
+};
+
+alias LabelQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @query("label")
+  label?: string;
+};
+
+alias SnapshotOptionalQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @query("snapshot")
+  snapshot?: string;
+};
+
+alias TagsQueryParam<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+  @doc(TDoc)
+  @query(#{ name: "tags", explode: true })
+  tags?: string[];
+};
+
+alias LinkHeader = {
+  @doc("Includes links to related resources.")
+  @header("Link")
+  link?: string;
+};
+
+alias NamePathParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @maxLength(256)
+  @path
+  name: string;
+};

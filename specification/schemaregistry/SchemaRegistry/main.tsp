@@ -18,9 +18,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
-  title: "Azure Schema Registry",
-})
+@service(#{ title: "Azure Schema Registry" })
 
 // Supported operations.
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
@@ -34,7 +32,7 @@ using Azure.Core;
   "The Schema Registry service endpoint.",
   {
     @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
-    fullyQualifiedNamespace: url,
+    fullyQualifiedNamespace: string,
   }
 )
 @versioned(ServiceVersion)
@@ -64,6 +62,7 @@ alias resourceOperations = Azure.Core.StandardResourceOperations;
 @summary("Get list of schema groups.")
 @doc("Gets the list of schema groups user is authorized to access.")
 @route("/$schemaGroups")
+@list
 op listSchemaGroups is Azure.Core.Foundations.Operation<{}, SchemaGroups, {}>;
 
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions?api-version={apiVersion}
@@ -71,6 +70,7 @@ op listSchemaGroups is Azure.Core.Foundations.Operation<{}, SchemaGroups, {}>;
 @summary("List schema versions.")
 @doc("Gets the list of all versions of one schema.")
 @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
+@list
 op listSchemaVersions is Azure.Core.Foundations.Operation<
   {
     @doc("Name of schema group.")
@@ -240,33 +240,31 @@ model Schema {
 /**
  * The list of schema group names with server paging support.
  */
-@Azure.Core.pagedResult
 model SchemaGroups {
   /** The collection of pageable schema group name items. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.items
+  @pageItems
   Value: string[];
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
-  NextLink?: string;
+  @nextLink
+  NextLink?: url;
 }
 
 /**
  * The list of schema versions with server paging support.
  */
-@Azure.Core.pagedResult
 model SchemaVersions {
   /** The collection of schema version pageable items. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.items
+  @pageItems
   Value: int32[];
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
-  NextLink?: string;
+  @nextLink
+  NextLink?: url;
 }
 
 // Resource Models
@@ -275,7 +273,7 @@ model SchemaVersions {
 model SchemaGroup {
   @key("groupName")
   @doc("Name of schema group.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupName: string;
 }
 
@@ -285,7 +283,7 @@ model SchemaGroup {
 model SchemasName {
   @key("schemaName")
   @doc("Name of schema.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
   schemaName: string;

@@ -21,7 +21,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @key("fleetMemberName")
   @path
   @segment("members")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -40,7 +40,7 @@ model FleetMemberProperties {
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The ARM resource id of the cluster that joins the Fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'.")
   clusterResourceId: ClusterResourceId;
 
@@ -51,9 +51,31 @@ model FleetMemberProperties {
   @added(Versions.v2023_03_15_preview)
   group?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: FleetMemberProvisioningState;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
+  @added(Versions.v2025_04_01_preview)
+  @doc("The labels for the fleet member.")
+  labels?: Record<string>;
+
+  @added(Versions.v2025_03_01)
+  @visibility(Lifecycle.Read)
+  @doc("Status information of the last operation for fleet member.")
+  status?: FleetMemberStatus;
+}
+
+@added(Versions.v2025_03_01)
+@doc("Status information for the fleet member")
+model FleetMemberStatus {
+  @visibility(Lifecycle.Read)
+  @doc("The last operation ID for the fleet member")
+  lastOperationId?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The last operation error of the fleet member")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @lroStatus
@@ -106,9 +128,7 @@ interface FleetMembers {
   @operationId("FleetMembers_Update")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "original-uri",
-    }
+    #{ `final-state-via`: "original-uri" }
   )
   updateAsync is ArmCustomPatchAsync<
     FleetMember,

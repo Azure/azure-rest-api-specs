@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/applicationinsights"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -16,22 +15,22 @@ options:
     output-file: "{azure-resource-provider-folder}/LiveMetrics/{version-status}/{version}/livemetrics.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-applicationinsights-livemetrics"
-    package-name: "{package-dir}"
+    namespace: "azure.applicationinsights.livemetrics"
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "LiveMetrics"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "LiveMetrics"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "livemetrics-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
-      name: "@azure-rest/livemetrics-rest"
+    generate-metadata: true
+    is-modular-library: false
+    package-details:
+      name: "@azure-rest/livemetrics"
       description: "LiveMetrics Service"
     flavor: azure
   "@azure-tools/typespec-java":

@@ -1,54 +1,61 @@
+import "./AppConfigurationExample.tsp";
 /** Describes the schema of the Azure App Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 // need to figure out an alternative to this method --- should we pass in docstring here or should we just copy/paste and see what happens
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event. */
+@example(MicrosoftAppConfigurationKeyValueModifiedExample)
 model AppConfigurationKeyValueModifiedEventData {
   /** The key used to identify the key-value that was modified. */
-  key?: string;
+  key: string;
 
   /** The label, if any, used to identify the key-value that was modified. */
-  label?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "This property does return null."
+  label: string | null;
 
   /** The etag representing the new state of the key-value. */
-  etag?: string;
+  etag: string;
 
   /** The sync token representing the server state after the event. */
-  syncToken?: string;
+  syncToken: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event. */
+@example(MicrosoftAppConfigurationKeyValueDeletedExample)
 model AppConfigurationKeyValueDeletedEventData {
   /** The key used to identify the key-value that was deleted. */
-  key?: string;
+  key: string;
 
   /** The label, if any, used to identify the key-value that was deleted. */
-  label?: string;
+  label: string;
 
   /** The etag representing the key-value that was deleted. */
-  etag?: string;
+  etag: string;
 
   /** The sync token representing the server state after the event. */
-  syncToken?: string;
+  syncToken: string;
 }
 
 /** Schema of common properties of snapshot events */
 model AppConfigurationSnapshotEventData {
   /** The name of the snapshot. */
-  name?: string;
+  name: string;
 
   /** The etag representing the new state of the snapshot. */
-  etag?: string;
+  etag: string;
 
   /** The sync token representing the server state after the event. */
-  syncToken?: string;
+  syncToken: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAppConfigurationSnapshotCreatedExample)
 model AppConfigurationSnapshotCreatedEventData
   extends AppConfigurationSnapshotEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftAppConfigurationSnapshotModifiedExample)
 model AppConfigurationSnapshotModifiedEventData
   extends AppConfigurationSnapshotEventData {}

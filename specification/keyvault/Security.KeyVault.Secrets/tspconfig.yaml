@@ -1,0 +1,66 @@
+parameters:
+  "service-dir":
+    default: "sdk/keyvault"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/secrets.json"
+  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
+  "@azure-tools/typespec-python":
+    flavor: azure
+    "basic-setup-py": true
+    "package-name": "azure-keyvault-secrets"
+    "package-pprint-name": "Key Vault Secrets"
+    "package-version": "4.9.0"
+    "namespace": "azure.keyvault.secrets._generated"
+    "package-dir": "azure-keyvault-secrets"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    package-dir: "azure-security-keyvault-secrets"
+    namespace: "com.azure.security.keyvault.secrets"
+    models-subpackage: "implementation.models"
+    customization-class: "customizations/src/main/java/SecretsCustomizations.java"
+    use-eclipse-language-server: false
+    generate-tests: false
+    generate-samples: false
+    include-api-view-properties: false
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  # "@azure-tools/typespec-csharp": true
+  "@azure-tools/typespec-ts":
+    package-dir: "keyvault-secrets"
+    generate-metadata: true
+    src-folder: "src/generated"
+    experimental-extensible-enums: true
+    is-modular-library: true
+    package-details:
+      name: "@azure/keyvault-secrets"
+      description: "Azure Key Vault Secrets"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/security/keyvault"
+    package-dir: "azsecrets"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    override-client-name: "Client"
+    single-client: true
+    inject-spans: true
+    generate-fakes: true
+  "@azure-tools/typespec-rust":
+    crate-name: "azure_security_keyvault_secrets"
+    crate-version: "0.0.1"
+    emitter-output-dir: "{project-root}/generated"
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/keyvault/Security.KeyVault.Common/"

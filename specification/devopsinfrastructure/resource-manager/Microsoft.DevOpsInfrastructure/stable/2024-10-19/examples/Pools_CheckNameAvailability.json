@@ -1,0 +1,22 @@
+{
+  "title": "Pools_CheckNameAvailability",
+  "operationId": "Pools_CheckNameAvailability",
+  "parameters": {
+    "subscriptionId": "a2e95d27-c161-4b61-bda4-11512c14c2c2",
+    "api-version": "2024-10-19",
+    "body": {
+      "name": "mydevopspool",
+      "type": "Microsoft.DevOpsInfrastructure/pools"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "available": "Unavailable",
+        "message": "Managed DevOps pool mydevopspool is already in use. Please choose a pool name that has not been taken.",
+        "name": "mydevopspool",
+        "reason": "AlreadyExists"
+      }
+    }
+  }
+}

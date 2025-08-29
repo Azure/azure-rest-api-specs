@@ -1325,7 +1325,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Contains additional information like job Id",
+            "description": "Contains additional information like job Id and Operation Job Extended Info of the asynchronous operation to track the status.",
             "schema": {
               "$ref": "#/definitions/OperationJobExtendedInfo"
             }
@@ -1435,7 +1435,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OperationJobExtendedInfo"
         }
       }
     },

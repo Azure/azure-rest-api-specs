@@ -483,8 +483,7 @@
           "description": "errors",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -528,8 +527,7 @@
           "description": "Set of tasks to execute on the input conversation.",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationLROTask"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1354,16 +1352,14 @@
           "description": "The collection of entity resolution objects.",
           "items": {
             "$ref": "#/definitions/BaseResolution"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "extraInformation": {
           "type": "array",
           "description": "The collection of entity extra information objects.",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1432,13 +1428,12 @@
       "description": "Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.",
       "enum": [
         "Address",
-        "CreditCardNumber",
+        "CreditCard",
         "Email",
         "Person",
         "NumericIdentifier",
-        "PhoneNumber",
+        "Phone",
         "USSocialSecurityNumber",
-        "Miscellaneous",
         "All",
         "Default"
       ],
@@ -1452,9 +1447,9 @@
             "description": "Address category"
           },
           {
-            "name": "CreditCardNumber",
-            "value": "CreditCardNumber",
-            "description": "Credit card number category"
+            "name": "CreditCard",
+            "value": "CreditCard",
+            "description": "Credit card category"
           },
           {
             "name": "Email",
@@ -1472,19 +1467,14 @@
             "description": "Numeric identifier category"
           },
           {
-            "name": "PhoneNumber",
-            "value": "PhoneNumber",
-            "description": "Phone number category"
+            "name": "Phone",
+            "value": "Phone",
+            "description": "Phone category"
           },
           {
             "name": "USSocialSecurityNumber",
             "value": "USSocialSecurityNumber",
             "description": "US social security number category"
-          },
-          {
-            "name": "Miscellaneous",
-            "value": "Miscellaneous",
-            "description": "Miscellaneous category"
           },
           {
             "name": "All",
@@ -1504,11 +1494,11 @@
       "description": "Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.",
       "enum": [
         "Address",
-        "CreditCardNumber",
+        "CreditCard",
         "Email",
         "Person",
         "NumericIdentifier",
-        "PhoneNumber",
+        "Phone",
         "USSocialSecurityNumber"
       ],
       "x-ms-enum": {
@@ -1521,9 +1511,9 @@
             "description": "Address category"
           },
           {
-            "name": "CreditCardNumber",
-            "value": "CreditCardNumber",
-            "description": "Credit card number category"
+            "name": "CreditCard",
+            "value": "CreditCard",
+            "description": "Credit card category"
           },
           {
             "name": "Email",
@@ -1541,9 +1531,9 @@
             "description": "Numeric identifier category"
           },
           {
-            "name": "PhoneNumber",
-            "value": "PhoneNumber",
-            "description": "Phone number category"
+            "name": "Phone",
+            "value": "Phone",
+            "description": "Phone category"
           },
           {
             "name": "USSocialSecurityNumber",
@@ -1570,8 +1560,7 @@
           "description": "Array of Entities",
           "items": {
             "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1761,16 +1750,14 @@
           "description": "The intent classification results.",
           "items": {
             "$ref": "#/definitions/ConversationIntent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entities": {
           "type": "array",
           "description": "The entity extraction results.",
           "items": {
             "$ref": "#/definitions/ConversationEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2036,8 +2023,7 @@
           "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics",
@@ -2113,8 +2099,7 @@
           "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics",
@@ -2125,8 +2110,7 @@
           "description": "array of summaries",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2444,8 +2428,7 @@
           "description": "List of entity tags. Tags express similarities between entity categories for the extracted entity type.",
           "items": {
             "$ref": "#/definitions/EntityTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
@@ -2494,8 +2477,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
@@ -3065,8 +3047,7 @@
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -3328,8 +3309,7 @@
           "description": "List of metadata.",
           "items": {
             "$ref": "#/definitions/MetadataRecord"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "logicalOperation": {
           "type": "string",
@@ -3765,8 +3745,7 @@
           "description": "List of redacted audio segments.",
           "items": {
             "$ref": "#/definitions/AudioTiming"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -3780,7 +3759,7 @@
         },
         "regexPattern": {
           "type": "string",
-          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
+          "description": "The .NET regex pattern used in extracting the entity. Please visit https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
         }
       },
       "allOf": [
@@ -4289,8 +4268,7 @@
           "description": "Context list of the summary.",
           "items": {
             "$ref": "#/definitions/ItemizedSummaryContext"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4353,8 +4331,7 @@
           "description": "List of results from tasks (if available).",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationJobResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4743,8 +4720,7 @@
           "description": "List of word-level audio timing information.",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "conversationItemLevelTiming": {
           "$ref": "#/definitions/ConversationItemLevelTiming",

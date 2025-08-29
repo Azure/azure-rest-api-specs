@@ -11,14 +11,14 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     new-line: lf
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.HealthDataAIServices"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.HealthDataAIServices"
     service-name: "Health Data AI Services"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-healthdataaiservices"
     flavor: "azure"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.healthdataaiservices"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
@@ -27,16 +27,11 @@ options:
     namespace: "com.azure.resourcemanager.healthdataaiservices"
     service-name: "Health Data AI Services"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     package-dir: "arm-healthdataaiservices"
     emitter-output-dir: "{project-root}/{service-dir}/{package-dir}"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-healthdataaiservices"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/healthdataaiservices"
@@ -44,11 +39,10 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

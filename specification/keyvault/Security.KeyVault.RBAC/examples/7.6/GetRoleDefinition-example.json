@@ -1,0 +1,34 @@
+{
+  "operationId": "RoleDefinitions_Get",
+  "title": "Get the specified role definition",
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
+    "scope": "/",
+    "api-version": "7.6",
+    "roleDefinitionName": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "roleName": "My custom role",
+          "type": "CustomRole",
+          "description": "Role description",
+          "assignableScopes": [
+            "/"
+          ],
+          "permissions": [
+            {
+              "dataActions": [
+                "Microsoft.KeyVault/managedHsm/keys/sign/action"
+              ]
+            }
+          ]
+        },
+        "id": "Microsoft.KeyVault/providers/Microsoft.Authorization/roleDefinitions/00000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Authorization/roleDefinitions",
+        "name": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+}

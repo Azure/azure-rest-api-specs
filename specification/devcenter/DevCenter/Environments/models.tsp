@@ -174,7 +174,7 @@ model Environment {
   ...EnvironmentUpdateProperties;
 
   @doc("The unique URI of the environment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_02_01)
   uri: url;
 
@@ -183,35 +183,35 @@ model Environment {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Environment type.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentType: string;
 
   @doc("The AAD object id of the owner of this Environment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   user?: Azure.Core.uuid;
 
   @doc("The provisioning state of the environment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EnvironmentProvisioningState;
 
   @doc("The identifier of the resource group containing the environment's resources.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroupId?: string;
 
   @doc("Name of the catalog.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   catalogName: string;
 
   @doc("Name of the environment definition.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentDefinitionName: string;
 
   @doc("Provisioning error details. Populated only for error states.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.Core.Foundations.Error;
 }
 
@@ -268,7 +268,7 @@ model EnvironmentOperation {
   @minLength(36)
   @maxLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("operationId")
   operationId: Azure.Core.uuid;
 
@@ -304,12 +304,12 @@ model EnvironmentAction {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("actionName")
   name: string;
 
   @doc("Uri of the action resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri: url;
 
   @doc("The action that will be taken.")
@@ -319,7 +319,7 @@ model EnvironmentAction {
   next?: EnvironmentNextAction;
 
   @doc("Object Id of the user who last modified the action.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: Azure.Core.uuid;
 
   @doc("Time the object was last modified, in RFC3339 format.")
@@ -346,7 +346,7 @@ model Catalog {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -368,7 +368,7 @@ model EnvironmentDefinition {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Name of the catalog.")
@@ -437,7 +437,7 @@ model EnvironmentType {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("""

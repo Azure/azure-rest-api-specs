@@ -1,0 +1,1125 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CommunicationIdentityClient",
+    "description": "Azure Communication Identity Service",
+    "version": "2025-03-02-preview"
+  },
+  "paths": {
+    "/identities": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Create a new identity with an optional customId mapping, and optionally, an access token. If called again with the same customId, the returned identity will be the same as the one returned previously.",
+        "operationId": "CommunicationIdentity_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Additional options to return an access token, and to map with a custom id that is meaningful to you.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Created - Returns the created identity.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an Identity with an optional customId mapping, and optionally an access token with custom expiration time within the [60-1440] minutes range. If expiration time is not specified, the default value of 1440 minutes (24 hours) will be used.": {
+            "$ref": "./examples/CreateIdentity.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}": {
+      "delete": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
+        "operationId": "CommunicationIdentity_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete an identity": {
+            "$ref": "./examples/DeleteIdentity.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Get an identity by its id.",
+        "operationId": "CommunicationIdentity_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentity"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an identity.": {
+            "$ref": "./examples/GetIdentity.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}/:revokeAccessTokens": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Revoke all access tokens for the specific identity.",
+        "operationId": "CommunicationIdentity_RevokeAccessTokens",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Revoke access tokens": {
+            "$ref": "./examples/RevokeAccessTokens.json"
+          }
+        }
+      }
+    },
+    "/teamsUser/:exchangeAccessToken": {
+      "post": {
+        "tags": [
+          "TeamsUser"
+        ],
+        "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
+        "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsUserExchangeTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessToken"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams user access token": {
+            "$ref": "./examples/ExchangeTeamsUserAccessToken.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}/:issueAccessToken": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Issue a new token for an identity.",
+        "operationId": "CommunicationIdentity_IssueAccessToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity to issue token for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Requested scopes for the new token.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessToken"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue an access token. Optionally specify a custom expiration time within the [60-1440] minutes range. In case an expiration time is not specified, the default value of 1440 minutes (24 hours) will be used.": {
+            "$ref": "./examples/IssueAccessToken.json"
+          }
+        }
+      }
+    },
+    "/access/teamsExtension/:exchangeAccessToken": {
+      "post": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Exchanges a Teams Phone token for an ACS user access token.",
+        "operationId": "TeamsExtensionToken_Exchange",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionExchangeTokenRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams Phone token": {
+            "$ref": "./examples/ExchangeTeamsExtensionToken.json"
+          }
+        }
+      }
+    },
+    "/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}": {
+      "get": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Get Teams Phone access assignment by object id.",
+        "operationId": "TeamsExtensionAssignment_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant Id we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object Id we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assignment": {
+            "$ref": "./examples/GetTeamsExtensionAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Creates or replaces a Teams Phone access assignment.",
+        "operationId": "TeamsExtensionAssignment_Upsert",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant Id we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object Id we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Values we want to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Assignment": {
+            "$ref": "./examples/CreateOrReplaceTeamsExtensionAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Removes a Teams Phone access assignment.",
+        "operationId": "TeamsExtensionAssignment_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant Id we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object Id we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Assignment": {
+            "$ref": "./examples/DeleteTeamsExtensionAssignment.json"
+          }
+        }
+      }
+    },
+    "/access/entra/:exchangeAccessToken": {
+      "post": {
+        "tags": [
+          "EntraId"
+        ],
+        "summary": "Exchanges an Entra ID token for an ACS user access token.",
+        "operationId": "EntraIdToken_Exchange",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntraExchangeTokenRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams Phone token": {
+            "$ref": "./examples/ExchangeEntraIdToken.json"
+          }
+        }
+      }
+    },
+    "/access/entra/assignments": {
+      "patch": {
+        "tags": [
+          "EntraId"
+        ],
+        "summary": "Updates Entra access assignments in bulk.",
+        "operationId": "EntraIdAssignments_Update",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Set of assignments to be added, updated or removed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntraAssignmentUpdateBulkRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EntraAssignmentsResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Update Assignments": {
+            "$ref": "./examples/UpdateEntraAssignments.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EntraId"
+        ],
+        "summary": "Lists Entra access assignments.",
+        "operationId": "EntraIdAssignments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EntraAssignmentsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Assignments": {
+            "$ref": "./examples/ListEntraAssignments.json"
+          }
+        }
+      }
+    },
+    "/access/entra/assignments/{objectId}": {
+      "get": {
+        "tags": [
+          "EntraId"
+        ],
+        "summary": "Get Entra access assignment by object id.",
+        "operationId": "EntraIdAssignment_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "objectId we want to get the assignment for. AcsResourceId is taken from authentication.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EntraAssignment"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assignment": {
+            "$ref": "./examples/GetEntraAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EntraId"
+        ],
+        "summary": "Creates or replaces an Entra access assignment.",
+        "operationId": "EntraIdAssignment_Upsert",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "objectId we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Values we want to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntraAssignmentCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EntraAssignment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EntraAssignment"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Assignment": {
+            "$ref": "./examples/CreateOrReplaceEntraAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EntraId"
+        ],
+        "summary": "Removes an Entra access assignment.",
+        "operationId": "EntraIdAssignment_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "objectId we want to remove the assignment for. AcsResourceId is taken from authentication.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Assignment": {
+            "$ref": "./examples/DeleteEntraAssignment.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CommunicationIdentity": {
+      "description": "A communication identity.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "customId": {
+          "description": "The custom Id if one has been associated with the identity.",
+          "type": "string"
+        },
+        "lastTokenIssuedAt": {
+          "format": "date-time",
+          "description": "Last time a token has been issued for the identity.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Identifier of the identity.",
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationIdentityAccessToken": {
+      "description": "An access token.",
+      "required": [
+        "expiresOn",
+        "token"
+      ],
+      "type": "object",
+      "properties": {
+        "token": {
+          "description": "The access token issued for the identity.",
+          "type": "string"
+        },
+        "expiresOn": {
+          "format": "date-time",
+          "description": "The expiry time of the token.",
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationIdentityAccessTokenRequest": {
+      "required": [
+        "scopes"
+      ],
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "List of scopes attached to the token.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        },
+        "expiresInMinutes": {
+          "format": "int32",
+          "description": "Optional custom validity period of the token within [60,1440] minutes range. If not provided, the default value of 1440 minutes (24 hours) will be used.",
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 1440,
+          "default": 1440
+        }
+      }
+    },
+    "CommunicationIdentityAccessTokenResult": {
+      "description": "A communication identity with access token.",
+      "required": [
+        "identity"
+      ],
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/CommunicationIdentity"
+        },
+        "accessToken": {
+          "$ref": "#/definitions/CommunicationIdentityAccessToken"
+        }
+      }
+    },
+    "CommunicationIdentityCreateRequest": {
+      "type": "object",
+      "properties": {
+        "customId": {
+          "description": "Set to tag the identity with your own id, Maximum length is 256 characters.",
+          "type": "string",
+          "minLength": 1
+        },
+        "createTokenWithScopes": {
+          "description": "Also create access token for the created identity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        },
+        "expiresInMinutes": {
+          "format": "int32",
+          "description": "Optional custom validity period of the token within [60,1440] minutes range. If not provided, the default value of 1440 minutes (24 hours) will be used.",
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 1440,
+          "default": 1440
+        }
+      }
+    },
+    "CommunicationIdentityTokenScope": {
+      "description": "List of scopes for an access token.",
+      "enum": [
+        "chat",
+        "voip",
+        "chat.join",
+        "chat.join.limited",
+        "voip.join"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentityTokenScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "chat",
+            "description": "Use this for full access to Chat APIs."
+          },
+          {
+            "value": "voip",
+            "description": "Use this for full access to Calling APIs."
+          },
+          {
+            "value": "chat.join",
+            "description": "Access to Chat APIs but without the authorization to create, delete or update chat threads."
+          },
+          {
+            "value": "chat.join.limited",
+            "description": "A more limited version of chat.join that doesn't allow to add or remove participants. Use this scope when the token bearer is not fully trusted, for example in guest scenarios."
+          },
+          {
+            "value": "voip.join",
+            "description": "Access to Calling APIs but without the authorization to start new calls."
+          }
+        ]
+      }
+    },
+    "TeamsUserExchangeTokenRequest": {
+      "description": "A request to create or update a Teams Phone assignment.",
+      "required": [
+        "appId",
+        "token",
+        "userId"
+      ],
+      "type": "object",
+      "properties": {
+        "token": {
+          "description": "Entra ID access token of a Teams User to acquire a new Communication Identity access token.",
+          "type": "string"
+        },
+        "appId": {
+          "description": "Client ID of an Entra ID application to be verified against the appid claim in the Entra ID access token.",
+          "type": "string"
+        },
+        "userId": {
+          "description": "Object ID of an Entra ID user (Teams User) to be verified against the oid claim in the Entra ID access token.",
+          "type": "string"
+        }
+      }
+    },
+    "TeamsExtensionExchangeTokenRequest": {
+      "type": "object",
+      "properties": {}
+    },
+    "TeamsExtensionAssignmentCreateOrUpdateRequest": {
+      "required": [
+        "principalType"
+      ],
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "$ref": "#/definitions/TeamsExtensionPrincipalType"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TeamsExtensionAssignmentResponse": {
+      "required": [
+        "objectId",
+        "principalType",
+        "tenantId"
+      ],
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "principalType": {
+          "$ref": "#/definitions/TeamsExtensionPrincipalType"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TeamsExtensionPrincipalType": {
+      "description": "The type of principal the assignment is for.",
+      "enum": [
+        "resourceAccount",
+        "user"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TeamsExtensionPrincipalType",
+        "modelAsString": true
+      }
+    },
+    "EntraExchangeTokenRequest": {
+      "type": "object",
+      "properties": {}
+    },
+    "EntraAssignment": {
+      "required": [
+        "objectId",
+        "principalType",
+        "tenantId",
+        "clientIds"
+      ],
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "principalType": {
+          "$ref": "#/definitions/EntraPrincipalType"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntraAssignmentCreateOrUpdateRequest": {
+      "required": [
+        "principalType",
+        "tenantId",
+        "clientIds"
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "principalType": {
+          "$ref": "#/definitions/EntraPrincipalType"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntraAssignmentUpdateBulkRequest": {
+      "type": "object",
+      "description": "Map of values to be added, updated or removed for objectIds in keys.",
+      "additionalProperties": {
+        "$ref": "#/definitions/EntraAssignmentCreateOrUpdateRequest"
+      },
+      "example": {
+        "350adb03-7be9-4846-b078-35adb0d0e119": {
+          "principalType": "user",
+          "tenantId": "3f14cf17-84d5-42c2-8689-a6365c474b4e",
+          "clientIds": [
+            "07474a86-625a-452f-977b-db4e13f21260"
+          ]
+        },
+        "d7233e76-d261-46c6-94b3-39073103ae81": null
+      }
+    },
+    "EntraAssignmentsResponse": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntraAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "EntraPrincipalType": {
+      "enum": [
+        "user",
+        "group",
+        "tenant"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EntraPrincipalType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "x-ms-parameter-location": "client",
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "url",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  }
+}

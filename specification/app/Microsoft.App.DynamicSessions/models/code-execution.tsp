@@ -1,6 +1,5 @@
 import "./common.tsp";
 using Azure.Core;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 
 namespace Microsoft.App.DynamicSessions;
@@ -17,7 +16,7 @@ model SessionCodeExecutionRequest {
   code: string;
 
   @doc("Code execution timeout in seconds.")
-  timeoutInSeconds: int64;
+  timeoutInSeconds: int32;
 }
 
 @doc("The result of the code execution.")
@@ -39,7 +38,7 @@ model SessionCodeExecutionResult {
 @doc("The session code execution resource.")
 @resource("executions")
 model SessionCodeExecutionResource {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Session code execution id.")
   @key("executionId")
   id: string;

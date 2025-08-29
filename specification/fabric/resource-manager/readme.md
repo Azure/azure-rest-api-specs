@@ -48,6 +48,20 @@ suppressions:
 ```
 ---
 
+### Tag: package-2025-01-15-preview
+
+These settings apply only when `--tag=package-2025-01-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-15-preview'
+input-file:
+  - Microsoft.Fabric/preview/2025-01-15-preview/fabric.json
+suppressions:
+  - code: PostResponseCodes
+    reason: 2 POST Methods Resume and Suspend are LRO and the result returns 200 OK with no schema. It would take a while to fix the backend to return 204. Once fixed, will publish a new version. Specifying only 202 causes failues in the Az CLI Tools generation.
+    from: fabric.json
+```
+---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -59,8 +73,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -69,17 +81,9 @@ swagger-to-sdk:
 
 See configuration in [readme.az.md](./readme.az.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

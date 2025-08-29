@@ -1,20 +1,14 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface WorkloadNetworks {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_Get")
   get is ArmResourceRead<WorkloadNetwork>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_List")
   list is ArmResourceListByParent<
     WorkloadNetwork,
     Response = ArmResponse<ResourceList<WorkloadNetwork>>
@@ -51,6 +45,6 @@ union WorkloadNetworkProvisioningState {
 @doc("The properties of a workload network")
 model WorkloadNetworkProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkProvisioningState;
 }

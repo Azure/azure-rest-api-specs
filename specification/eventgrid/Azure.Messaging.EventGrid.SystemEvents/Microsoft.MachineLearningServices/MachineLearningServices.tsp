@@ -6,114 +6,117 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event. */
 model MachineLearningServicesModelRegisteredEventData {
   /** The name of the model that was registered. */
-  modelName?: string;
+  modelName: string;
 
   /** The version of the model that was registered. */
-  modelVersion?: string;
+  modelVersion: string;
 
   /** The tags of the model that was registered. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Model tags is type object"
-  modelTags: Record<unknown>;
+  modelTags?: Record<unknown>;
 
   /** The properties of the model that was registered. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Model tags is type object"
-  modelProperties: Record<unknown>;
+  modelProperties?: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event. */
 model MachineLearningServicesModelDeployedEventData {
   /** The name of the deployed service. */
-  serviceName?: string;
+  serviceName: string;
 
   /** The compute type (e.g. ACI, AKS) of the deployed service. */
-  serviceComputeType?: string;
+  serviceComputeType: string;
 
   /** A common separated list of model IDs. The IDs of the models deployed in the service. */
-  modelIds?: string;
+  modelIds: string;
 
   /** The tags of the deployed service. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service tags is type any"
-  serviceTags: Record<unknown>;
+  serviceTags?: Record<unknown>;
 
   /** The properties of the deployed service. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service properties is type any"
-  serviceProperties: Record<unknown>;
+  serviceProperties?: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event. */
 model MachineLearningServicesRunCompletedEventData {
   /** The ID of the experiment that the run belongs to. */
-  experimentId?: string;
+  experimentId: string;
 
   /** The name of the experiment that the run belongs to. */
-  experimentName?: string;
+  experimentName: string;
 
   /** The ID of the Run that was completed. */
-  runId?: string;
+  runId: string;
 
   /** The Run Type of the completed Run. */
-  runType?: string;
+  runType: string;
 
   /** The tags of the completed Run. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Run tags is type any"
-  runTags: Record<unknown>;
+  runTags?: Record<unknown>;
 
   /** The properties of the completed Run. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Run properties is type any"
-  runProperties: Record<unknown>;
+  runProperties?: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event. */
 model MachineLearningServicesDatasetDriftDetectedEventData {
   /** The ID of the data drift monitor that triggered the event. */
-  dataDriftId?: string;
+  dataDriftId: string;
 
   /** The name of the data drift monitor that triggered the event. */
-  dataDriftName?: string;
+  dataDriftName: string;
 
   /** The ID of the Run that detected data drift. */
-  runId?: string;
+  runId: string;
 
   /** The ID of the base Dataset used to detect drift. */
-  baseDatasetId?: string;
+  baseDatasetId: string;
 
   /** The ID of the target Dataset used to detect drift. */
-  targetDatasetId?: string;
+  targetDatasetId: string;
 
   /** The coefficient result that triggered the event. */
-  driftCoefficient?: float64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  driftCoefficient: float64;
 
   /** The start time of the target dataset time series that resulted in drift detection. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "In source code if the value is null, they stringify it to null"
   @madeRequired(ServiceApiVersions.v2024_01_01)
-  startTime: utcDateTime;
+  startTime: utcDateTime | null;
 
   /** The end time of the target dataset time series that resulted in drift detection. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "In source code if the value is null, they stringify it to null"
   @madeRequired(ServiceApiVersions.v2024_01_01)
-  endTime: utcDateTime;
+  endTime: utcDateTime | null;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */
 model MachineLearningServicesRunStatusChangedEventData {
   /** The ID of the experiment that the Machine Learning Run belongs to. */
-  experimentId?: string;
+  experimentId: string;
 
   /** The name of the experiment that the Machine Learning Run belongs to. */
-  experimentName?: string;
+  experimentName: string;
 
   /** The ID of the Machine Learning Run. */
-  runId?: string;
+  runId: string;
 
   /** The Run Type of the Machine Learning Run. */
-  runType?: string;
+  runType: string;
 
   /** The tags of the Machine Learning Run. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Run tags is type object"
-  runTags: Record<unknown>;
+  runTags?: Record<unknown>;
 
   /** The properties of the Machine Learning Run. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Run properties is type object"
-  runProperties: Record<unknown>;
+  runProperties?: Record<unknown>;
 
   /** The status of the Machine Learning Run. */
-  runStatus?: string;
+  runStatus: string;
 }

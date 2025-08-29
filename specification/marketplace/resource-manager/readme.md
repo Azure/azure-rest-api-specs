@@ -26,12 +26,21 @@ These are the global settings for the Marketplace API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-01-01
+tag: package-2025-01-01
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.Marketplace/stable/2025-01-01/Marketplace.json
+```
 
 ### Tag: package-2023-01-01
 
@@ -136,7 +145,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell

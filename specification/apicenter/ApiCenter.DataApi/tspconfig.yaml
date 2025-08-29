@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/apicenter"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,23 +13,23 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure.apicenter.dataapi.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-apicenter"
-    package-name: "{package-dir}"
+    namespace: "azure.apicenter"
     package-mode: dataplane
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "azure.ApiCenter"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "azure.ApiCenter"
     flavor: azure
     clear-output-folder: true
     model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "azure-apicenter-rest"
-    generateMetadata: true
-    generateTest: true
+    generate-metadata: true
+    is-modular-library: false
     flavor: azure
-    packageDetails:
+    package-details:
       name: "@azure-rest/azure-apicenter-rest"
       description: "azure.ApiCenter Service"
   "@azure-tools/typespec-java":

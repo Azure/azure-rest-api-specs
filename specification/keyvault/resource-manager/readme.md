@@ -26,7 +26,37 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-07
+tag: package-2024-11-01
+```
+
+### Tag: package-2024-11-01
+
+These settings apply only when `--tag=package-2024-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-01'
+input-file:
+  - Microsoft.KeyVault/stable/2024-11-01/common.json
+  - Microsoft.KeyVault/stable/2024-11-01/keys.json
+  - Microsoft.KeyVault/stable/2024-11-01/keysManagedHsm.json
+  - Microsoft.KeyVault/stable/2024-11-01/keyvault.json
+  - Microsoft.KeyVault/stable/2024-11-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2024-11-01/providers.json
+  - Microsoft.KeyVault/stable/2024-11-01/secrets.json
+```
+
+### Tag: package-preview-2024-12
+
+These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12'
+input-file:
+  - Microsoft.KeyVault/preview/2024-12-01-preview/common.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/keysManagedHsm.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/secrets.json
 ```
 
 ### Tag: package-preview-2024-04
@@ -281,7 +311,7 @@ directive:
     - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
     - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
     - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
-    - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team.
+    - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and synchronous return types (200, 201, 204) as directed by SDK team.
     - R4009 # Vault object is the only one that need to be tracked with SystemData
 
 - suppress: DefinitionsPropertiesNamesCamelCase
@@ -309,7 +339,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

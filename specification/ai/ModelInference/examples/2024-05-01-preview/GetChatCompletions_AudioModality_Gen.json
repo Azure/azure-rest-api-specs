@@ -1,0 +1,98 @@
+{
+  "title": "Audio modality chat completion",
+  "operationId": "GetChatCompletions",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "extra-parameters": "error",
+    "body": {
+      "modalities": [
+        "text",
+        "audio"
+      ],
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant"
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "input_audio",
+              "input_audio": {
+                "data": "<base64 encoded audio data>",
+                "format": "wav"
+              }
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "audio": {
+            "id": "abcdef1234"
+          }
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "input_audio",
+              "input_audio": {
+                "data": "<base64 encoded audio data>",
+                "format": "wav"
+              }
+            }
+          ]
+        }
+      ],
+      "frequency_penalty": 0,
+      "presence_penalty": 0,
+      "temperature": 0,
+      "top_p": 0,
+      "seed": 21,
+      "model": "my-model-name"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "kgousajxgzyhugvqekuswuqbk",
+        "object": "chat.completion",
+        "created": 1696522361,
+        "model": "my-model-name",
+        "usage": {
+          "completion_tokens": 19,
+          "prompt_tokens": 28,
+          "total_tokens": 16,
+          "completion_tokens_details": {
+            "audio_tokens": 5,
+            "total_tokens": 5
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": 10,
+            "cached_tokens": 0
+          }
+        },
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": null,
+              "audio": {
+                "id": "abcdef1234",
+                "format": "wav",
+                "data": "<base64 encoded audio data>",
+                "expires_at": 1896522361,
+                "transcript": "This is a sample transcript"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

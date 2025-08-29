@@ -26,7 +26,7 @@ model StandbyVirtualMachineResource
   @pattern("^[_a-zA-Z0-9-]{3,64}$")
   @key("standbyVirtualMachineName")
   @segment("standbyVirtualMachines")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby virtual machine")
   @path
   name: string;
@@ -38,7 +38,7 @@ model StandbyVirtualMachineResourceProperties {
   virtualMachineResourceId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

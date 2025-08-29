@@ -74,6 +74,20 @@ batch:
   - tag: package-2022-03
   - tag: package-2023-01
   - tag: package-2023-05
+  - tag: package-2025-01
+```
+
+### Tag: package-2025-01 and java
+
+These settings apply only when `--tag=package-2025-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2025-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.dataprotection.v2025_01_01
+  output-folder: $(azure-libraries-for-java-folder)/dataprotection/resource-manager/v2025_01_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2023-05 and java

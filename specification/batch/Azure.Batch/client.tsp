@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "./java-client.tsp";
 
 using Azure.ClientGenerator.Core;
 
@@ -8,6 +9,7 @@ using Azure.ClientGenerator.Core;
 namespace Client;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "deprecated" ""
 @client({
   name: "BatchClient",
   service: Azure.Batch,
@@ -45,6 +47,12 @@ interface BatchClient {
   listJobsFromSchedule is Azure.Batch.Jobs.listJobsFromSchedule;
   listJobPreparationAndReleaseTaskStatus is Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus;
   getJobTaskCounts is Azure.Batch.Jobs.getJobTaskCounts;
+
+  createCertificate is Azure.Batch.Certificates.createCertificate;
+  listCertificates is Azure.Batch.Certificates.listCertificates;
+  cancelCertificateDeletion is Azure.Batch.Certificates.cancelCertificateDeletion;
+  deleteCertificate is Azure.Batch.Certificates.deleteCertificate;
+  getCertificate is Azure.Batch.Certificates.getCertificate;
 
   jobScheduleExists is Azure.Batch.JobSchedules.jobScheduleExists;
   deleteJobSchedule is Azure.Batch.JobSchedules.deleteJobSchedule;
@@ -94,6 +102,49 @@ interface BatchClient {
 
 /* C SHARP OVERRIDES */
 // Api overrides
+
+@@access(Azure.Batch.Pools.removeNodes, Access.internal, "csharp");
+@@clientName(BatchClient.removeNodes, "removeNodesInternal", "csharp");
+@@access(Azure.Batch.Pools.resizePool, Access.internal, "csharp");
+@@clientName(BatchClient.resizePool, "resizePoolInternal", "csharp");
+@@access(Azure.Batch.Pools.stopPoolResize, Access.internal, "csharp");
+@@clientName(BatchClient.stopPoolResize, "stopPoolResizeInternal", "csharp");
+@@access(Azure.Batch.Jobs.deleteJob, Access.internal, "csharp");
+@@clientName(BatchClient.deleteJob, "deleteJobInternal", "csharp");
+@@access(Azure.Batch.Jobs.terminateJob, Access.internal, "csharp");
+@@clientName(BatchClient.terminateJob, "terminateJobInternal", "csharp");
+@@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "csharp");
+@@clientName(BatchClient.deleteJobSchedule,
+  "deleteJobScheduleInternal",
+  "csharp"
+);
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+  Access.internal,
+  "csharp"
+);
+@@clientName(BatchClient.terminateJobSchedule,
+  "terminateJobScheduleInternal",
+  "csharp"
+);
+@@access(Azure.Batch.Pools.deletePool, Access.internal, "csharp");
+@@clientName(BatchClient.deletePool, "deletePoolInternal", "csharp");
+@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "csharp");
+@@clientName(BatchClient.deleteCertificate,
+  "deleteCertificateInternal",
+  "csharp"
+);
+@@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "csharp");
+@@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.startNode, Access.internal, "csharp");
+@@clientName(BatchClient.startNode, "startNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.rebootNode, Access.internal, "csharp");
+@@clientName(BatchClient.rebootNode, "rebootNodeInternal", "csharp");
+@@access(Azure.Batch.Nodes.reimageNode, Access.internal, "csharp");
+@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "csharp");
+@@access(Azure.Batch.Jobs.disableJob, Access.internal, "csharp");
+@@clientName(BatchClient.disableJob, "disableJobInternal", "csharp");
+@@access(Azure.Batch.Jobs.enableJob, Access.internal, "csharp");
+@@clientName(BatchClient.enableJob, "enableJobInternal", "csharp");
 @@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
@@ -107,228 +158,252 @@ interface BatchClient {
   "csharp"
 );
 
-/* JAVA OVERRIDES */
-// client name overrides
-@@clientName(BatchClient.listApplications, "listApplicationsInternal", "java");
-@@clientName(BatchClient.getApplication, "getApplicationInternal", "java");
-
-@@clientName(BatchClient.listPoolUsageMetrics,
-  "listPoolUsageMetricsInternal",
-  "java"
+/* PYTHON OVERRIDES */
+@@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "python");
+@@clientName(BatchClient.getTaskFileProperties,
+  "getTaskFilePropertiesInternal",
+  "python"
 );
-@@clientName(BatchClient.createPool, "createPoolInternal", "java");
-@@clientName(BatchClient.listPools, "listPoolsInternal", "java");
-@@clientName(BatchClient.deletePool, "deletePoolInternal", "java");
-@@clientName(BatchClient.poolExists, "poolExistsInternal", "java");
-@@clientName(BatchClient.getPool, "getPoolInternal", "java");
-@@clientName(BatchClient.updatePool, "updatePoolInternal", "java");
-@@clientName(BatchClient.disablePoolAutoScale,
-  "disablePoolAutoScaleInternal",
-  "java"
+@@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "python");
+@@clientName(BatchClient.getNodeFileProperties,
+  "getNodeFilePropertiesInternal",
+  "python"
 );
-@@clientName(BatchClient.enablePoolAutoScale,
-  "enablePoolAutoScaleInternal",
-  "java"
-);
-@@clientName(BatchClient.evaluatePoolAutoScale,
-  "evaluatePoolAutoScaleInternal",
-  "java"
-);
-@@clientName(BatchClient.resizePool, "resizePoolInternal", "java");
-@@clientName(BatchClient.stopPoolResize, "stopPoolResizeInternal", "java");
-@@clientName(BatchClient.replacePoolProperties,
-  "replacePoolPropertiesInternal",
-  "java"
-);
-@@clientName(BatchClient.removeNodes, "removeNodesInternal", "java");
-@@clientName(BatchClient.listSupportedImages,
-  "listSupportedImagesInternal",
-  "java"
-);
-@@clientName(BatchClient.listPoolNodeCounts,
-  "listPoolNodeCountsInternal",
-  "java"
-);
-
-@@clientName(BatchClient.deleteJob, "deleteJobInternal", "java");
-@@clientName(BatchClient.getJob, "getJobInternal", "java");
-@@clientName(BatchClient.updateJob, "updateJobInternal", "java");
-@@clientName(BatchClient.replaceJob, "replaceJobInternal", "java");
-@@clientName(BatchClient.disableJob, "disableJobInternal", "java");
-@@clientName(BatchClient.enableJob, "enableJobInternal", "java");
-@@clientName(BatchClient.terminateJob, "terminateJobInternal", "java");
-@@clientName(BatchClient.createJob, "createJobInternal", "java");
-@@clientName(BatchClient.listJobs, "listJobsInternal", "java");
-@@clientName(BatchClient.listJobsFromSchedule,
-  "listJobsFromScheduleInternal",
-  "java"
-);
-@@clientName(BatchClient.listJobPreparationAndReleaseTaskStatus,
-  "listJobPreparationAndReleaseTaskStatusInternal",
-  "java"
-);
-@@clientName(BatchClient.getJobTaskCounts, "getJobTaskCountsInternal", "java");
-
-@@clientName(BatchClient.jobScheduleExists,
-  "jobScheduleExistsInternal",
-  "java"
-);
+// Python LRO private methods
+@@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
+@@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");
+@@access(Azure.Batch.Pools.resizePool, Access.internal, "python");
+@@clientName(BatchClient.resizePool, "resizePoolInternal", "python");
+@@access(Azure.Batch.Pools.stopPoolResize, Access.internal, "python");
+@@clientName(BatchClient.stopPoolResize, "stopPoolResizeInternal", "python");
+@@access(Azure.Batch.Jobs.deleteJob, Access.internal, "python");
+@@clientName(BatchClient.deleteJob, "deleteJobInternal", "python");
+@@access(Azure.Batch.Jobs.terminateJob, Access.internal, "python");
+@@clientName(BatchClient.terminateJob, "terminateJobInternal", "python");
+@@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "python");
 @@clientName(BatchClient.deleteJobSchedule,
   "deleteJobScheduleInternal",
-  "java"
+  "python"
 );
-@@clientName(BatchClient.getJobSchedule, "getJobScheduleInternal", "java");
-@@clientName(BatchClient.updateJobSchedule,
-  "updateJobScheduleInternal",
-  "java"
-);
-@@clientName(BatchClient.replaceJobSchedule,
-  "replaceJobScheduleInternal",
-  "java"
-);
-@@clientName(BatchClient.disableJobSchedule,
-  "disableJobScheduleInternal",
-  "java"
-);
-@@clientName(BatchClient.enableJobSchedule,
-  "enableJobScheduleInternal",
-  "java"
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+  Access.internal,
+  "python"
 );
 @@clientName(BatchClient.terminateJobSchedule,
   "terminateJobScheduleInternal",
-  "java"
+  "python"
 );
-@@clientName(BatchClient.createJobSchedule,
-  "createJobScheduleInternal",
-  "java"
+@@access(Azure.Batch.Pools.deletePool, Access.internal, "python");
+@@clientName(BatchClient.deletePool, "deletePoolInternal", "python");
+@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "python");
+@@clientName(BatchClient.deleteCertificate,
+  "deleteCertificateInternal",
+  "python"
 );
-@@clientName(BatchClient.listJobSchedules, "listJobSchedulesInternal", "java");
+@@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "python");
+@@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "python");
+@@access(Azure.Batch.Nodes.startNode, Access.internal, "python");
+@@clientName(BatchClient.startNode, "startNodeInternal", "python");
+@@access(Azure.Batch.Nodes.rebootNode, Access.internal, "python");
+@@clientName(BatchClient.rebootNode, "rebootNodeInternal", "python");
+@@access(Azure.Batch.Nodes.reimageNode, Access.internal, "python");
+@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "python");
+@@access(Azure.Batch.Jobs.disableJob, Access.internal, "python");
+@@clientName(BatchClient.disableJob, "disableJobInternal", "python");
+@@access(Azure.Batch.Jobs.enableJob, Access.internal, "python");
+@@clientName(BatchClient.enableJob, "enableJobInternal", "python");
 
-@@clientName(BatchClient.createTask, "createTaskInternal", "java");
-@@clientName(BatchClient.listTasks, "listTasksInternal", "java");
-@@clientName(BatchClient.createTaskCollection,
-  "createTaskCollectionInternal",
-  "java"
-);
-@@clientName(BatchClient.deleteTask, "deleteTaskInternal", "java");
-@@clientName(BatchClient.getTask, "getTaskInternal", "java");
-@@clientName(BatchClient.replaceTask, "replaceTaskInternal", "java");
-@@clientName(BatchClient.listSubTasks, "listSubTasksInternal", "java");
-@@clientName(BatchClient.terminateTask, "terminateTaskInternal", "java");
-@@clientName(BatchClient.reactivateTask, "reactivateTaskInternal", "java");
-@@clientName(BatchClient.deleteTaskFile, "deleteTaskFileInternal", "java");
-@@clientName(BatchClient.getTaskFile, "getTaskFileInternal", "java");
-@@clientName(BatchClient.getTaskFileProperties,
-  "getTaskFilePropertiesInternal",
-  "java"
-);
-@@clientName(BatchClient.listTaskFiles, "listTaskFilesInternal", "java");
+// Set Python models to public
+@@access(Azure.Batch.BatchPoolResizeOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeRemoveOptions, Access.public, "python");
+@@access(Azure.Batch.BatchJobDisableOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeDeallocationOption, Access.public, "python");
+@@access(Azure.Batch.DisableBatchJobOption, Access.public, "python");
 
-@@clientName(BatchClient.createNodeUser, "createNodeUserInternal", "java");
-@@clientName(BatchClient.deleteNodeUser, "deleteNodeUserInternal", "java");
-@@clientName(BatchClient.replaceNodeUser, "replaceNodeUserInternal", "java");
-@@clientName(BatchClient.getNode, "getNodeInternal", "java");
-@@clientName(BatchClient.rebootNode, "rebootNodeInternal", "java");
-@@clientName(BatchClient.startNode, "startNodeInternal", "java");
-@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "java");
-@@clientName(BatchClient.deallocateNode, "deallocateNodeInternal", "java");
-@@clientName(BatchClient.disableNodeScheduling,
-  "disableNodeSchedulingInternal",
-  "java"
+/* GO OVERRIDES */
+// don't export API for this operation because it retired before the first Go SDK release
+@@access(Azure.Batch.Pools.listPoolUsageMetrics, Access.internal, "go");
+// ODataNextLink -> NextLink
+@@clientName(Azure.Batch.BatchAccountListSupportedImagesResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-@@clientName(BatchClient.enableNodeScheduling,
-  "enableNodeSchedulingInternal",
-  "java"
+@@clientName(Azure.Batch.BatchApplicationListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-@@clientName(BatchClient.getNodeRemoteLoginSettings,
-  "getNodeRemoteLoginSettingsInternal",
-  "java"
+@@clientName(Azure.Batch.BatchCertificateListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-@@clientName(BatchClient.uploadNodeLogs, "uploadNodeLogsInternal", "java");
-@@clientName(BatchClient.listNodes, "listNodesInternal", "java");
-@@clientName(BatchClient.getNodeExtension, "getNodeExtensionInternal", "java");
-@@clientName(BatchClient.listNodeExtensions,
-  "listNodeExtensionsInternal",
-  "java"
+@@clientName(Azure.Batch.BatchJobListResult.`odata.nextLink`, "NextLink", "go");
+@@clientName(Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-@@clientName(BatchClient.deleteNodeFile, "deleteNodeFileInternal", "java");
-@@clientName(BatchClient.getNodeFile, "getNodeFileInternal", "java");
-@@clientName(BatchClient.getNodeFileProperties,
-  "getNodeFilePropertiesInternal",
-  "java"
+@@clientName(Azure.Batch.BatchJobScheduleListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-@@clientName(BatchClient.listNodeFiles, "listNodeFilesInternal", "java");
-
-// operation overrides
-@@access(Azure.Batch.ListOperation, Access.internal, "java");
-@@access(Azure.Batch.ReadOperation, Access.internal, "java");
-@@access(Azure.Batch.DeleteOperation, Access.internal, "java");
-@@access(Azure.Batch.CreateOperation, Access.internal, "java");
-@@access(Azure.Batch.UpdateOperation, Access.internal, "java");
-@@access(Azure.Batch.ReplaceOperation, Access.internal, "java");
-@@access(Azure.Batch.PostOperation, Access.internal, "java");
-@@access(Azure.Batch.FileOperation, Access.internal, "java");
-@@access(Azure.Batch.HeadFileOperation, Access.internal, "java");
-@@access(Azure.Batch.ResourceInfoOperationWithAdditionalResponse,
-  Access.internal,
-  "java"
+@@clientName(Azure.Batch.BatchNodeFileListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-
-// model overrides
-@@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
-@@access(Azure.Batch.BatchApplication, Access.public, "java");
-@@access(Azure.Batch.BatchPoolListUsageMetricsResult, Access.public, "java");
-@@access(Azure.Batch.BatchPoolCreateContent, Access.public, "java");
-@@access(Azure.Batch.BatchPoolListResult, Access.public, "java");
-@@access(Azure.Batch.BatchPool, Access.public, "java");
-@@access(Azure.Batch.BatchPoolUpdateContent, Access.public, "java");
-@@access(Azure.Batch.BatchPoolEnableAutoScaleContent, Access.public, "java");
-@@access(Azure.Batch.BatchPoolEvaluateAutoScaleContent, Access.public, "java");
-@@access(Azure.Batch.AutoScaleRun, Access.public, "java");
-@@access(Azure.Batch.BatchPoolResizeContent, Access.public, "java");
-@@access(Azure.Batch.BatchPoolReplaceContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeRemoveContent, Access.public, "java");
-@@access(Azure.Batch.BatchAccountListSupportedImagesResult,
-  Access.public,
-  "java"
+@@clientName(Azure.Batch.BatchNodeListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-@@access(Azure.Batch.BatchPoolNodeCountsListResult, Access.public, "java");
-@@access(Azure.Batch.BatchJob, Access.public, "java");
-@@access(Azure.Batch.BatchJobUpdateContent, Access.public, "java");
-@@access(Azure.Batch.BatchJobDisableContent, Access.public, "java");
-@@access(Azure.Batch.BatchJobTerminateContent, Access.public, "java");
-@@access(Azure.Batch.BatchJobCreateContent, Access.public, "java");
-@@access(Azure.Batch.BatchJobListResult, Access.public, "java");
-@@access(Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult,
-  Access.public,
-  "java"
+@@clientName(Azure.Batch.BatchNodeVMExtensionListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
 );
-@@access(Azure.Batch.BatchTaskCountsResult, Access.public, "java");
-@@access(Azure.Batch.BatchJobSchedule, Access.public, "java");
-@@access(Azure.Batch.BatchJobScheduleUpdateContent, Access.public, "java");
-@@access(Azure.Batch.BatchJobScheduleCreateContent, Access.public, "java");
-@@access(Azure.Batch.BatchJobScheduleListResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskCreateContent, Access.public, "java");
-@@access(Azure.Batch.BatchTaskListResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskGroup, Access.public, "java");
-@@access(Azure.Batch.BatchTaskAddCollectionResult, Access.public, "java");
-@@access(Azure.Batch.BatchTask, Access.public, "java");
-@@access(Azure.Batch.BatchTaskListSubtasksResult, Access.public, "java");
-@@access(Azure.Batch.BatchTaskFileClientPathContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeUserCreateContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeUserUpdateContent, Access.public, "java");
-@@access(Azure.Batch.BatchNode, Access.public, "java");
-@@access(Azure.Batch.BatchNodeRebootContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeDeallocateContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeReimageContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeDisableSchedulingContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeRemoteLoginSettings, Access.public, "java");
-@@access(Azure.Batch.UploadBatchServiceLogsContent, Access.public, "java");
-@@access(Azure.Batch.UploadBatchServiceLogsResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeListResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeVMExtension, Access.public, "java");
-@@access(Azure.Batch.BatchNodeVMExtensionListResult, Access.public, "java");
-@@access(Azure.Batch.BatchNodeFileClientPathContent, Access.public, "java");
-@@access(Azure.Batch.BatchNodeFileListResult, Access.public, "java");
-@@access(Azure.Batch.BatchError, Access.public, "java");
+@@clientName(Azure.Batch.BatchPoolListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolListUsageMetricsResult.`odata.nextLink`,
+  "NextLink",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolNodeCountsListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
+);
+@@clientName(Azure.Batch.BatchTaskListResult.`odata.nextLink`,
+  "NextLink",
+  "go"
+);
+@@clientName(Azure.Batch.BatchTaskListSubtasksResult.`odata.nextLink`,
+  "NextLink",
+  "go"
+);
+// capitalize initialisms
+@@clientName(Azure.Batch.AutomaticOsUpgradePolicy,
+  "AutomaticOSUpgradePolicy",
+  "go"
+);
+@@clientName(Azure.Batch.AzureBlobFileSystemConfiguration.sasKey,
+  "SASKey",
+  "go"
+);
+@@clientName(Azure.Batch.BatchCertificate.certificateFormat, "Format", "go");
+@@clientName(Azure.Batch.BatchCertificateFormat.Cer, "CER", "go");
+@@clientName(Azure.Batch.BatchCertificateFormat.Pfx, "PFX", "go");
+@@clientName(Azure.Batch.BatchJobScheduleStatistics.readIOps, "ReadIOPS", "go");
+@@clientName(Azure.Batch.BatchJobScheduleStatistics.writeIOps,
+  "WriteIOPS",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskReadIOps,
+  "DiskReadIOPS",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskWriteIOps,
+  "DiskWriteIOPS",
+  "go"
+);
+@@clientName(Azure.Batch.BatchTaskStatistics.readIOps, "ReadIOPS", "go");
+@@clientName(Azure.Batch.BatchTaskStatistics.writeIOps, "WriteIOPS", "go");
+@@clientName(Azure.Batch.CifsMountConfiguration,
+  "CIFSMountConfiguration",
+  "go"
+);
+@@clientName(Azure.Batch.CommonListParameters.maxresults, "MaxResults", "go");
+@@clientName(Azure.Batch.BatchInboundNatPool, "InboundNATPool", "go");
+@@clientName(Azure.Batch.IpAddressProvisioningType,
+  "IPAddressProvisioningType",
+  "go"
+);
+@@clientName(Azure.Batch.LinuxUserConfiguration.gid, "GID", "go");
+@@clientName(Azure.Batch.NfsMountConfiguration, "NFSMountConfiguration", "go");
+@@clientName(Azure.Batch.BatchPublicIpAddressConfiguration,
+  "PublicIPAddressConfiguration",
+  "go"
+);
+@@clientName(Azure.Batch.BatchUefiSettings, "UEFISettings", "go");
+@@clientName(Azure.Batch.BatchUefiSettings.vTpmEnabled, "VTPMEnabled", "go");
+// align model names with method names
+@@clientName(Azure.Batch.BatchJobCreateOptions, "CreateJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobDisableOptions, "DisableJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobScheduleCreateOptions,
+  "CreateJobScheduleOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchJobTerminateOptions, "TerminateJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobUpdateOptions, "UpdateJobOptions", "go");
+@@clientName(Azure.Batch.BatchJobScheduleUpdateOptions,
+  "UpdateJobScheduleOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchNodeDeallocateOptions,
+  "DeallocateNodeOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchNodeDisableSchedulingOptions,
+  "DisableNodeSchedulingOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolCreateOptions, "CreatePoolOptions", "go");
+@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
+  "EnablePoolAutoScaleOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
+  "EvaluatePoolAutoScaleOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolListUsageMetricsResult,
+  "ListPoolUsageMetricsResult",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolNodeCountsListResult,
+  "ListPoolNodeCountsResult",
+  "go"
+);
+@@clientName(Azure.Batch.BatchPoolReplaceOptions, "ReplacePoolOptions", "go");
+@@clientName(Azure.Batch.BatchPoolResizeOptions, "ResizePoolOptions", "go");
+@@clientName(Azure.Batch.BatchPoolUpdateOptions, "UpdatePoolOptions", "go");
+@@clientName(Azure.Batch.BatchCreateTaskCollectionResult,
+  "CreateTaskCollectionResult",
+  "go"
+);
+@@clientName(Azure.Batch.BatchTaskCreateOptions, "CreateTaskOptions", "go");
+@@clientName(Azure.Batch.BatchNodeRebootOptions, "RebootNodeOptions", "go");
+@@clientName(Azure.Batch.BatchNodeReimageOptions, "ReimageNodeOptions", "go");
+@@clientName(Azure.Batch.BatchNodeRemoveOptions, "RemoveNodeOptions", "go");
+@@clientName(Azure.Batch.BatchNodeUserCreateOptions,
+  "CreateNodeUserOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
+  "UpdateNodeUserOptions",
+  "go"
+);
+@@clientName(Azure.Batch.BatchCertificateDeleteError,
+  "DeleteCertificateError",
+  "go"
+);
+@@clientName(Azure.Batch.UploadBatchServiceLogsOptions,
+  "UploadNodeLogsOptions",
+  "go"
+);
+@@clientName(Azure.Batch.UploadBatchServiceLogsResult,
+  "UploadNodeLogsResult",
+  "go"
+);
+// remove "Batch" from field names
+@@clientName(Azure.Batch.ContainerHostBatchBindMountEntry,
+  "ContainerHostBindMountEntry",
+  "go"
+);
+@@clientName(Azure.Batch.DisableBatchJobOption, "DisableJobOption", "go");
+@@clientName(Azure.Batch.BatchAllTasksCompleteMode,
+  "AllTasksCompleteMode",
+  "go"
+);
+@@clientName(Azure.Batch.BatchTaskFailureMode, "TaskFailureMode", "go");
+@@clientName(Azure.Batch.RecentBatchJob, "RecentJob", "go");
+@@clientName(Azure.Batch.BatchVmDiskSecurityProfile,
+  "VMDiskSecurityProfile",
+  "go"
+);

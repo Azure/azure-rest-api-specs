@@ -1,0 +1,62 @@
+{
+  "title": "HealthModels_Update",
+  "operationId": "HealthModels_Update",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "model1",
+    "properties": {
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ua1": {}
+        }
+      },
+      "tags": {
+        "key21": "menfkmseplchh"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "dataplaneEndpoint": "https://mymodel123.healthmodels.azure.com",
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "principalId": "b3f9c5a0-7c5b-4a5a-8b7a-3b5fddc1b0a0",
+          "tenantId": "b3f9c5a0-7c5b-4a5a-8b7a-3b5fddc1b0a0",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ua1": {
+              "principalId": "b3f9c5a0-7c5b-4a5a-8b7a-3b5fddc1b0a1",
+              "clientId": "b3f9c5a0-7c5b-4a5a-8b7a-3b5fddc1b0a0"
+            }
+          }
+        },
+        "tags": {
+          "key2961": "hbljozzkqrpcthsjtfkyozpwyx"
+        },
+        "location": "eastus2",
+        "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/model1",
+        "name": "model1",
+        "type": "Microsoft.CloudHealth/healthmodels",
+        "systemData": {
+          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdByType": "User",
+          "createdAt": "2023-09-18T14:04:09.327Z",
+          "lastModifiedBy": "arz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

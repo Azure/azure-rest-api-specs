@@ -1976,8 +1976,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -2004,7 +2003,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -2181,10 +2180,7 @@
         "localAdministrator": {
           "$ref": "#/definitions/LocalAdminStatus",
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -2849,7 +2845,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -2901,8 +2899,7 @@
           "description": "The Catalog items on this page",
           "items": {
             "$ref": "#/definitions/Catalog"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2923,8 +2920,7 @@
           "description": "The DevBox items on this page",
           "items": {
             "$ref": "#/definitions/DevBox"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2945,8 +2941,7 @@
           "description": "The DevBoxAction items on this page",
           "items": {
             "$ref": "#/definitions/DevBoxAction"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2967,8 +2962,7 @@
           "description": "The DevBoxActionDelayResult items on this page",
           "items": {
             "$ref": "#/definitions/DevBoxActionDelayResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2989,8 +2983,7 @@
           "description": "The Environment items on this page",
           "items": {
             "$ref": "#/definitions/Environment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3032,8 +3025,7 @@
           "description": "The EnvironmentType items on this page",
           "items": {
             "$ref": "#/definitions/EnvironmentType"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3054,8 +3046,7 @@
           "description": "The Pool items on this page",
           "items": {
             "$ref": "#/definitions/Pool"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3076,8 +3067,7 @@
           "description": "The Project items on this page",
           "items": {
             "$ref": "#/definitions/Project"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3098,8 +3088,7 @@
           "description": "The Schedule items on this page",
           "items": {
             "$ref": "#/definitions/Schedule"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

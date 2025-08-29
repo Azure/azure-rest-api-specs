@@ -23,9 +23,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 @armProviderNamespace
-@service({
-  title: "Azure API Center",
-})
+@service(#{ title: "Azure API Center" })
 @versioned(Versions)
 @doc("Azure API Center Resource Provider.")
 @Azure.ResourceManager.armCommonTypesVersion("v5")
@@ -126,8 +124,8 @@ enum Versions {
 
 @@clientName(Services.exportMetadataSchema::parameters.body, "payload");
 
-@@visibility(Azure.Core.Page.nextLink, "read");
-@@visibility(Azure.Core.Page.value, "read");
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
 /**
  * A resource list operation, at the scope of the resource's parent
  * @template TResource the resource being patched
@@ -139,6 +137,7 @@ enum Versions {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @get
 @autoRoute
+@list
 @listsResource(TResource)
 @segmentOf(TResource)
 @armResourceList(TResource)
