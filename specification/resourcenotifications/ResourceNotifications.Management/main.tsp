@@ -94,7 +94,8 @@ model TenantLocationProperties {
 }
 
 /** Tenant location resource that represents an Azure location at tenant scope. */
-model TenantLocationResource is Azure.ResourceManager.ProxyResource<TenantLocationProperties> {
+model TenantLocationResource
+  is Azure.ResourceManager.ProxyResource<TenantLocationProperties> {
   /** The name of the location. */
   @key
   @path
@@ -264,12 +265,10 @@ interface NotificationsSessions {
     notificationSessionName: string,
 
     ...ApiVersionParameter,
-  ): 
-    | {
-        @statusCode _: 201;
-        @body body: CreateNotificationSessionResponse;
-      }
-    | CommonTypes.ErrorResponse;
+  ): {
+    @statusCode _: 201;
+    @body body: CreateNotificationSessionResponse;
+  } | CommonTypes.ErrorResponse;
 
   /** Get session details. */
   @post
@@ -290,12 +289,10 @@ interface NotificationsSessions {
     body: GetSessionDetailsRequest,
 
     ...ApiVersionParameter,
-  ): 
-    | {
-        @statusCode _: 200;
-        @body body: GetSessionDetailsResponse;
-      }
-    | CommonTypes.ErrorResponse;
+  ): {
+    @statusCode _: 200;
+    @body body: GetSessionDetailsResponse;
+  } | CommonTypes.ErrorResponse;
 
   /** Close the session. */
   @post
@@ -312,10 +309,8 @@ interface NotificationsSessions {
     notificationSessionId: string,
 
     ...ApiVersionParameter,
-  ): 
-    | {
-        @statusCode _: 200;
-        @body body: CloseSessionResponse;
-      }
-    | CommonTypes.ErrorResponse;
+  ): {
+    @statusCode _: 200;
+    @body body: CloseSessionResponse;
+  } | CommonTypes.ErrorResponse;
 }

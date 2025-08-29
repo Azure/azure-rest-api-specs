@@ -1,0 +1,32 @@
+# OpenAPI validation suppressions for ResourceNotifications generated swagger files
+directive:
+  - suppress: R3023
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    reason: This is a tenant-scoped API for notification sessions, not a standard ARM resource API.
+
+  - suppress: R4010
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    reason: This is a tenant-scoped API with custom error responses.
+
+  - suppress: R4041
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    reason: This API does not have array identifiers (tenant-scoped).
+
+  - suppress: PathForResourceAction
+    where: 
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/getSessionDetails"]
+      - $.paths["/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionId}/closeSession"]
+    reason: This is a tenant-scoped API and does not follow standard ARM resource naming patterns.
+
+# TypeSpec validation should ignore this file as it's for OpenAPI validation
+# TypeSpec suppressions should be placed in the TypeSpec project directory
