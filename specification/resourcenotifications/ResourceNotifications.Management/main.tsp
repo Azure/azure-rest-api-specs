@@ -265,10 +265,38 @@ interface NotificationsSessions {
     notificationSessionName: string,
 
     ...ApiVersionParameter,
-  ): {
-    @statusCode _: 201;
-    @body body: CreateNotificationSessionResponse;
-  } | CommonTypes.ErrorResponse;
+  ):
+    | {
+        @statusCode _: 200;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | {
+        @statusCode _: 201;
+        @body body: CreateNotificationSessionResponse;
+      }
+    | {
+        @statusCode _: 202;
+        @header location?: string;
+        @header("Retry-After") retryAfter?: string;
+      }
+    | {
+        @statusCode _: 400;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | {
+        @statusCode _: 401;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | {
+        @statusCode _: 429;
+        @header("Retry-After") retryAfter?: string;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | {
+        @statusCode _: 500;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | CommonTypes.ErrorResponse;
 
   /** Get session details. */
   @post
@@ -289,10 +317,24 @@ interface NotificationsSessions {
     body: GetSessionDetailsRequest,
 
     ...ApiVersionParameter,
-  ): {
-    @statusCode _: 200;
-    @body body: GetSessionDetailsResponse;
-  } | CommonTypes.ErrorResponse;
+  ):
+    | {
+        @statusCode _: 200;
+        @body body: GetSessionDetailsResponse;
+      }
+    | {
+        @statusCode _: 400;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | {
+        @statusCode _: 401;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | {
+        @statusCode _: 500;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | CommonTypes.ErrorResponse;
 
   /** Close the session. */
   @post
@@ -309,8 +351,22 @@ interface NotificationsSessions {
     notificationSessionId: string,
 
     ...ApiVersionParameter,
-  ): {
-    @statusCode _: 200;
-    @body body: CloseSessionResponse;
-  } | CommonTypes.ErrorResponse;
+  ):
+    | {
+        @statusCode _: 200;
+        @body body: CloseSessionResponse;
+      }
+    | {
+        @statusCode _: 400;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | {
+        @statusCode _: 401;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | {
+        @statusCode _: 500;
+        @body body: CommonTypes.ErrorResponse;
+      }
+    | CommonTypes.ErrorResponse;
 }

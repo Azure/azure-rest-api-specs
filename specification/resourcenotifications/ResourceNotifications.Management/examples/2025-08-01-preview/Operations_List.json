@@ -1,0 +1,58 @@
+{
+  "title": "List available operations",
+  "operationId": "Operations_List",
+  "description": "This example demonstrates listing all available operations for the Microsoft.ResourceNotifications resource provider.",
+  "parameters": {
+    "api-version": "2025-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.ResourceNotifications/notificationSessions/read",
+            "display": {
+              "provider": "Microsoft Resource Notifications",
+              "resource": "Notification Sessions",
+              "operation": "Get notification session details",
+              "description": "Gets the details of a notification session including connection information."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.ResourceNotifications/notificationSessions/write",
+            "display": {
+              "provider": "Microsoft Resource Notifications",
+              "resource": "Notification Sessions",
+              "operation": "Create notification session",
+              "description": "Creates a new notification session for receiving resource notifications."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.ResourceNotifications/notificationSessions/action",
+            "display": {
+              "provider": "Microsoft Resource Notifications",
+              "resource": "Notification Sessions",
+              "operation": "Close notification session",
+              "description": "Closes an active notification session and releases associated resources."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.ResourceNotifications/operations/read",
+            "display": {
+              "provider": "Microsoft Resource Notifications",
+              "resource": "Operations",
+              "operation": "List operations",
+              "description": "Lists all available operations for the Microsoft.ResourceNotifications provider."
+            },
+            "origin": "user,system"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
