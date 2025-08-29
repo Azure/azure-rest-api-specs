@@ -400,7 +400,6 @@ model ConfigData extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The Advisor configuration data structure.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ConfigDataProperties;
 }
 
@@ -822,7 +821,6 @@ model PredictionRequest {
   /**
    * Request properties for prediction recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PredictionRequestProperties;
 }
 
@@ -838,8 +836,8 @@ model PredictionRequestProperties {
   /**
    * Extended properties are arguments specific for each prediction type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedProperties?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  extendedProperties?: unknown;
 }
 
 /**
@@ -849,7 +847,6 @@ model PredictionResponse {
   /**
    * The properties of the prediction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PredictionResponseProperties;
 }
 

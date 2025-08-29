@@ -83,9 +83,8 @@ interface TriageRecommendations {
    * Approve a triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Rest.Private.actionSegment("approve")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
+  @action("approve")
   approveTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     void,
@@ -96,9 +95,8 @@ interface TriageRecommendations {
    * Reject an existing triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Rest.Private.actionSegment("reject")
   @operationId("triageRecommendations_RejectTriageRecommendation")
+  @action("reject")
   rejectTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     RecommendationRejectBody,
@@ -109,9 +107,8 @@ interface TriageRecommendations {
    * Reset an existing triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Rest.Private.actionSegment("reset")
   @operationId("triageRecommendations_ResetTriageRecommendation")
+  @action("reset")
   resetTriageRecommendation is TriageRecommendationOps.ActionSync<
     TriageRecommendation,
     void,
