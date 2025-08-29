@@ -2141,6 +2141,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: include_obfuscation
+          in: query
+          required: false
+          description: When true, stream obfuscation will be enabled. Stream obfuscation adds random characters to an `obfuscation` field on streaming delta events to normalize payload sizes as a mitigation to certain side-channel attacks. These obfuscation fields are included by default, but add a small amount of overhead to the data stream. You can set `include_obfuscation` to false to optimize for bandwidth if you trust the network links between your application and the OpenAI API.
+          schema:
+            type: boolean
+            default: true
+          explode: false
         - name: include[]
           in: query
           required: false
@@ -4250,6 +4258,20 @@ components:
             A content filter category that describes language related to physical actions intended to purposely hurt, injure,
             damage one's body or kill oneself.
       description: A content filter result for an image generation operation's output response content.
+    AzureContentFilterPersonallyIdentifiableInformationResult:
+      type: object
+      properties:
+        redacted_text:
+          type: string
+          description: The redacted text with PII information removed or masked.
+        sub_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzurePiiSubCategoryResult'
+          description: Detailed results for individual PIIHarmSubCategory(s).
+      allOf:
+        - $ref: '#/components/schemas/AzureContentFilterDetectionResult'
+      description: A content filter detection result for Personally Identifiable Information that includes harm extensions.
     AzureContentFilterResultForChoice:
       type: object
       properties:
@@ -4339,6 +4361,10 @@ components:
           description: A detection result that describes a match against licensed code or other protected source material.
         ungrounded_material:
           $ref: '#/components/schemas/AzureContentFilterCompletionTextSpanDetectionResult'
+        personally_identifiable_information:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterPersonallyIdentifiableInformationResult'
+          description: A detection result that describes matches against Personal Identifiable Information with configurable subcategories.
       description: A content filter result for a single response item produced by a generative AI system.
     AzureContentFilterResultForPrompt:
       type: object
@@ -5734,6 +5760,27 @@ components:
             error_details:
               description: The content filter result details associated with the inner error.
           description: If applicable, an upstream error that originated this error.
+    AzurePiiSubCategoryResult:
+      type: object
+      required:
+        - sub_category
+        - filtered
+        - detected
+        - redacted
+      properties:
+        sub_category:
+          type: string
+          description: The PIIHarmSubCategory that was evaluated.
+        filtered:
+          type: boolean
+          description: Whether the content detection resulted in a content filtering action for this subcategory.
+        detected:
+          type: boolean
+          description: Whether the labeled content subcategory was detected in the content.
+        redacted:
+          type: boolean
+          description: Whether the content was redacted for this subcategory.
+      description: Result details for individual PIIHarmSubCategory(s).
     AzureResponse:
       type: object
       required:
@@ -12527,6 +12574,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -12543,6 +12591,9 @@ components:
         delta:
           type: string
           description: The partial code snippet being streamed by the code interpreter.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a partial code snippet is streamed by the code interpreter.
@@ -12987,6 +13038,7 @@ components:
         - item_id
         - output_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13003,6 +13055,9 @@ components:
         delta:
           type: string
           description: The function-call arguments delta that is added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial function-call arguments delta.
@@ -13200,6 +13255,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13215,6 +13271,9 @@ components:
           description: The unique identifier of the MCP tool call item being processed.
         delta:
           description: The partial update to the arguments for the MCP tool call.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the arguments of an MCP tool call.
@@ -13412,6 +13471,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13431,6 +13491,9 @@ components:
           description: The index of the reasoning content part within the output item.
         delta:
           description: The partial update to the reasoning content.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning content.
@@ -13473,6 +13536,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13492,6 +13556,9 @@ components:
           description: The index of the summary part within the output item.
         delta:
           description: The partial update to the reasoning summary content.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning summary content.
@@ -13598,6 +13665,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13618,6 +13686,9 @@ components:
         delta:
           type: string
           description: The text delta that was added to the summary.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a delta is added to a reasoning summary text.
@@ -13660,6 +13731,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13680,6 +13752,9 @@ components:
         delta:
           type: string
           description: The refusal text that is added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial refusal text.
@@ -13843,6 +13918,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13863,6 +13939,9 @@ components:
         delta:
           type: string
           description: The text delta that was added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is an additional text delta.
