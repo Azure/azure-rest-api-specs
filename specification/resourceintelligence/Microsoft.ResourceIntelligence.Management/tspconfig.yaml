@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/resourceintelligence"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,7 +16,7 @@ options:
     package-dir: "Azure.ResourceManager.ResourceIntelligence"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ResourceIntelligence"
     examples-dir: "{project-root}/examples"
     enable-bicep-serialization: true
   "@azure-tools/typespec-python":
