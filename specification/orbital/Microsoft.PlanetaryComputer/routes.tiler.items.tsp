@@ -143,7 +143,7 @@ interface TilerAvailableAssets {
       @pattern(".*")
       itemId: string;
     },
-    AvailableAssetsResponse | NoContentResponse
+    AvailableAssetsResponse
   >;
 }
 
@@ -321,7 +321,7 @@ interface TilerTiles {
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
@@ -560,7 +560,7 @@ interface TilerWmts {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesResponse | NoContentResponse
+    WmtsCapabilitiesResponse
   >;
 }
 

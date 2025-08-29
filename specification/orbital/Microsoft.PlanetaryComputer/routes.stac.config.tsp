@@ -149,7 +149,7 @@ interface StacCollectionAssets {
       @pattern(".*")
       assetId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -187,7 +187,6 @@ interface StacCollectionThumbnails {
       | ImageJp2Response
       | ImageTiffResponse
       | ApplicationXbinaryResponse
-      | NoContentResponse
   >;
 }
 
@@ -233,7 +232,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       collectionId: string;
     },
-    Mosaic[] | NoContentResponse
+    Mosaic[]
   >;
   /**
    * Add a mosaic definition to a given collection
@@ -359,7 +358,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       mosaicId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -382,7 +381,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       collectionId: string;
     },
-    RenderOption[] | NoContentResponse
+    RenderOption[]
   >;
   /**
    * Add a render option for a given collection
@@ -508,7 +507,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       renderOptionId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -627,7 +626,7 @@ interface StacCollectionPartitionTypes {
       @body
       body: PartitionType;
     },
-    PartitionType | NoContentResponse
+    PartitionType
   >;
 }
 
@@ -640,10 +639,7 @@ interface StacQueryables {
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/queryables")
   @get
-  getAll is Azure.Core.Foundations.Operation<
-    {},
-    JsonSchema | NoContentResponse
-  >;
+  getAll is Azure.Core.Foundations.Operation<{}, JsonSchema>;
   /**
    * Delete queryables by name for specified collection.
    */
@@ -670,7 +666,7 @@ interface StacQueryables {
       @pattern(".*")
       queryableName: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
   /**
    * Endpoint.
@@ -690,7 +686,7 @@ interface StacQueryables {
       @pattern(".*")
       collectionId: string;
     },
-    JsonSchema | NoContentResponse
+    JsonSchema
   >;
   /**
    * Set queryables for a collection given a list of queryable definitions
@@ -722,7 +718,7 @@ interface StacQueryables {
 
       @body
       body: QueryableDefinition[];
-    } | NoContentResponse
+    }
   >;
   /**
    * Updates a queryable given a queryable definition and

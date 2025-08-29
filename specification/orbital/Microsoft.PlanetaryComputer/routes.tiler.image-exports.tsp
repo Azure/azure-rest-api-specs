@@ -60,6 +60,6 @@ interface TilerStaticImages {
       @pattern(".*")
       id: string;
     },
-    ImagePngResponse | NoContentResponse
+    ImagePngResponse
   >;
 }

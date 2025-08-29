@@ -45,7 +45,7 @@ interface MapsIntervalLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    IntervalLegendsResponse | NoContentResponse
+    IntervalLegendsResponse
   >;
 }
 
@@ -85,7 +85,7 @@ interface MapsClassmapLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    ClassmapLegendResponse | NoContentResponse
+    ClassmapLegendResponse
   >;
 }
 
@@ -148,6 +148,6 @@ interface MapsLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    ImagePngResponse | NoContentResponse
+    ImagePngResponse
   >;
 }

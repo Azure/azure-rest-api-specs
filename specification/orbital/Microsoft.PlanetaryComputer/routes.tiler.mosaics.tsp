@@ -56,7 +56,7 @@ interface MosaicsTiles {
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
@@ -110,7 +110,7 @@ interface MosaicsTileMatrixSets {
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
@@ -333,7 +333,7 @@ interface MosaicsWmtsMosaics {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesXmlResponse | NoContentResponse
+    WmtsCapabilitiesXmlResponse
   >;
 }
 
@@ -384,7 +384,7 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesXmlResponse | NoContentResponse
+    WmtsCapabilitiesXmlResponse
   >;
 }
 
@@ -455,7 +455,7 @@ interface MosaicsAssetsForTiles {
       @query("tileMatrixSetId")
       tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
-    ApplicationJsonResponse | NoContentResponse
+    ApplicationJsonResponse
   >;
 }
 
@@ -490,7 +490,7 @@ interface MosaicsAssetsForTileMatrixSets {
 
       ...ZxyPathParameters;
     },
-    ApplicationJsonResponse | NoContentResponse
+    ApplicationJsonResponse
   >;
 }
 

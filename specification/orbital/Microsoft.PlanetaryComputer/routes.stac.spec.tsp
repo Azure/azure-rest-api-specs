@@ -123,7 +123,7 @@ interface StacSearchOperations {
       @query("token")
       token?: string;
     },
-    ItemCollection | NoContentResponse
+    ItemCollection
   >;
   /**
    * Endpoint.
@@ -141,6 +141,6 @@ interface StacSearchOperations {
       @body
       body: SearchPostRequest;
     },
-    ItemCollection | NoContentResponse
+    ItemCollection
   >;
 }
