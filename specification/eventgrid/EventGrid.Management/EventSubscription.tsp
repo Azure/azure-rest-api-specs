@@ -393,9 +393,9 @@ interface EventSubscriptionOperationGroup {
   @operationId("EventSubscriptions_Update")
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOperationGroupOps.CustomPatchAsync<
-    Extension.ScopeParameter,
     EventSubscription,
-    PatchModel = EventSubscriptionUpdateParameters,
+    EventSubscriptionUpdateParameters,
+    Extension.ScopeParameter,
     Response = ArmResourceCreatedResponse<EventSubscription>
   >;
 
@@ -417,7 +417,6 @@ interface EventSubscriptionOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EventSubscriptions_ListGlobalBySubscription")
   listGlobalBySubscription is EventSubscriptionOperationGroupOps.List<
-    Extension.ScopeParameter,
     EventSubscription,
     Parameters = {
       ...SubscriptionIdParameter;
@@ -443,9 +442,8 @@ interface EventSubscriptionOperationGroup {
   @operationId("EventSubscriptions_GetDeliveryAttributes")
   @list
   getDeliveryAttributes is EventSubscriptionOperationGroupOps.ActionSync<
-    Extension.ScopeParameter,
     EventSubscription,
-    void,
+    Extension.ScopeParameter,
     ArmResponse<DeliveryAttributeListResult>
   >;
 
@@ -455,9 +453,8 @@ interface EventSubscriptionOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EventSubscriptions_GetFullUrl")
   getFullUrl is EventSubscriptionOperationGroupOps.ActionSync<
-    Extension.ScopeParameter,
     EventSubscription,
-    void,
+    Extension.ScopeParameter,
     ArmResponse<EventSubscriptionFullUrl>
   >;
 }
