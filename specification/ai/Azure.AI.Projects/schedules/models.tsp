@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @doc("Schedule provisioning status.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 union ScheduleProvisioningStatus {
   string,
 
@@ -30,7 +30,7 @@ union ScheduleProvisioningStatus {
 }
 
 @doc("Type of the trigger.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 union TriggerType {
   string,
 
@@ -45,14 +45,14 @@ union TriggerType {
 }
 
 @doc("Base model for Trigger of the schedule.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model Trigger {
   @doc("Type of the trigger.")
   type: TriggerType;
 }
 
 @doc("Cron based trigger.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model CronTrigger extends Trigger {
   type: TriggerType.Cron;
 
@@ -64,7 +64,7 @@ model CronTrigger extends Trigger {
 }
 
 @doc("Recurrence pattern type.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 union RecurrencePatternType {
   string,
 
@@ -82,7 +82,7 @@ union RecurrencePatternType {
 }
 
 @doc("Recurrence pattern for the schedule.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model HourlyRecurrencePattern {
   type: RecurrencePatternType.Hourly;
 
@@ -91,7 +91,7 @@ model HourlyRecurrencePattern {
 }
 
 @doc("Recurrence pattern for the schedule.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model DailyRecurrencePattern {
   type: RecurrencePatternType.Daily;
 
@@ -103,7 +103,7 @@ model DailyRecurrencePattern {
 }
 
 @doc("Recurrence pattern for the schedule.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model WeeklyRecurrencePattern {
   type: RecurrencePatternType.Weekly;
 
@@ -118,7 +118,7 @@ model WeeklyRecurrencePattern {
 }
 
 @doc("Recurrence pattern for the schedule.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model MonthlyRecurrencePattern {
   type: RecurrencePatternType.Monthly;
 
@@ -133,7 +133,7 @@ model MonthlyRecurrencePattern {
 }
 
 @doc("Recurrence based trigger.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model RecurrenceTrigger extends Trigger {
   type: TriggerType.Recurrence;
 
@@ -149,7 +149,7 @@ model RecurrenceTrigger extends Trigger {
 }
 
 @doc("One-time trigger.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model OneTimeTrigger extends Trigger {
   type: TriggerType.OneTime;
 
@@ -161,7 +161,7 @@ model OneTimeTrigger extends Trigger {
 }
 
 @doc("Type of the task.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 union ScheduleTaskType {
   string,
   Evaluation: "Evaluation",
@@ -169,7 +169,7 @@ union ScheduleTaskType {
 }
 
 @doc("Schedule task model.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model ScheduleTask {
   @doc("Identifier of the task.")
   @encodedName("application/json", "id")
@@ -189,7 +189,7 @@ model ScheduleTask {
 }
 
 @doc("Schedule model.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model Schedule {
   @doc("Identifier of the schedule.")
   @key("id")
@@ -226,7 +226,7 @@ model Schedule {
 }
 
 @doc("Trigger status of the schedule run.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 union ScheduleRunTriggerStatus {
   string,
 
@@ -244,7 +244,7 @@ union ScheduleRunTriggerStatus {
 }
 
 @doc("Schedule run model.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
   @key("id")
@@ -266,14 +266,14 @@ model ScheduleRun {
 }
 
 @doc("Type of action for schedule run event.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 union ScheduleRunEventAction {
   string,
   Skip: "Skip",
 }
 
 @doc("Event model for schedule run actions.")
-@added(Versions.v2025_09_15_preview)
+@added(Versions.v2025_07_31_preview)
 model ScheduleRunEvent {
   @doc("Identifier of the schedule.")
   scheduleId: string;
