@@ -1,6 +1,6 @@
 {
   "operationId": "MongoClusters_CreateOrUpdate",
-  "title": "Creates a Mongo Cluster resource from a point in time restore",
+  "title": "Creates a Mongo Cluster resource from a point in time restore with Microsoft Entra ID authentication mode enabled.",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestResourceGroup",
@@ -10,9 +10,10 @@
       "location": "westus2",
       "properties": {
         "createMode": "PointInTimeRestore",
-        "administrator": {
-          "userName": "mongoAdmin",
-          "password": "password"
+        "authConfig": {
+          "allowsModes": [
+            "MicrosoftEntraID"
+          ]
         },
         "restoreParameters": {
           "pointInTimeUTC": "2023-01-13T20:07:35Z",
@@ -29,12 +30,9 @@
         "type": "/Microsoft.DocumentDB/mongoClusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "administrator": {
-            "userName": "mongoAdmin"
-          },
           "authConfig": {
-            "allowedModes": [
-              "NativeAuth"
+            "allowsModes": [
+              "MicrosoftEntraID"
             ]
           },
           "serverVersion": "5.0",
