@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-02-05",
+    "version": "2021-10-15",
     "x-ms-code-generation-settings": {
       "host": "management.azure.com"
     },
@@ -76,7 +76,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}": {
       "get": {
         "tags": [
-          "DpsCertificate"
+          "GET"
         ],
         "operationId": "DpsCertificate_Get",
         "description": "Get the certificate from the provisioning service.",
@@ -142,7 +142,7 @@
       },
       "put": {
         "tags": [
-          "DpsCertificate"
+          "PUT"
         ],
         "summary": "Upload the certificate to the provisioning service.",
         "description": "Add new certificate or update an existing certificate.",
@@ -187,7 +187,7 @@
             "description": "The certificate body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CertificateResponse"
+              "$ref": "#/definitions/CertificateBodyDescription"
             }
           },
           {
@@ -222,7 +222,7 @@
       },
       "delete": {
         "tags": [
-          "DpsCertificate"
+          "DELETE"
         ],
         "operationId": "DpsCertificate_Delete",
         "summary": "Delete the Provisioning Service Certificate.",
@@ -358,7 +358,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "summary": "Get the non-security related metadata of the provisioning service.",
         "description": "Get the metadata of the provisioning service without SAS keys.",
@@ -413,7 +413,7 @@
       },
       "put": {
         "tags": [
-          "IotDpsResource"
+          "PUT"
         ],
         "summary": "Create or update the metadata of the provisioning service.",
         "description": "Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
@@ -484,7 +484,7 @@
       },
       "patch": {
         "tags": [
-          "IotDpsResource"
+          "PATCH"
         ],
         "summary": "Update an existing provisioning service's tags.",
         "description": "Update an existing provisioning service's tags. to update other fields use the CreateOrUpdate method",
@@ -543,7 +543,7 @@
       },
       "delete": {
         "tags": [
-          "IotDpsResource"
+          "DELETE"
         ],
         "summary": "Delete the Provisioning Service",
         "description": "Deletes the Provisioning Service.",
@@ -605,7 +605,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates": {
       "get": {
         "tags": [
-          "DpsCertificate"
+          "GET"
         ],
         "operationId": "DpsCertificate_List",
         "description": "Get all the certificates tied to the provisioning service.",
@@ -659,7 +659,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/provisioningServices": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "summary": "Get all the provisioning services in a subscription.",
         "description": "List all the provisioning services for a given subscription id.",
@@ -699,7 +699,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "operationId": "IotDpsResource_ListByResourceGroup",
         "description": "Get a list of all provisioning services in the given resource group.",
@@ -749,7 +749,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "operationId": "IotDpsResource_GetOperationResult",
         "description": "Gets the status of a long running operation, such as create, update or delete a provisioning service.",
@@ -818,7 +818,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/skus": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "summary": "Get the list of valid SKUs for a provisioning service.",
         "description": "Gets the list of valid SKUs and tiers for a provisioning service.",
@@ -872,7 +872,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/generateVerificationCode": {
       "post": {
         "tags": [
-          "DpsCertificate"
+          "POST"
         ],
         "operationId": "DpsCertificate_GenerateVerificationCode",
         "description": "Generate verification code for Proof of Possession.",
@@ -1003,7 +1003,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}/verify": {
       "post": {
         "tags": [
-          "DpsCertificate"
+          "POST"
         ],
         "operationId": "DpsCertificate_VerifyCertificate",
         "summary": "Verify certificate's private key possession.",
@@ -1150,7 +1150,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkProvisioningServiceNameAvailability": {
       "post": {
         "tags": [
-          "IotDpsResource"
+          "POST"
         ],
         "operationId": "IotDpsResource_CheckProvisioningServiceNameAvailability",
         "x-ms-examples": {
@@ -1196,7 +1196,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/listkeys": {
       "post": {
         "tags": [
-          "IotDpsResource"
+          "POST"
         ],
         "operationId": "IotDpsResource_ListKeys",
         "x-ms-examples": {
@@ -1250,7 +1250,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
       "post": {
         "tags": [
-          "IotDpsResource"
+          "POST"
         ],
         "operationId": "IotDpsResource_ListKeysForKeyName",
         "x-ms-examples": {
@@ -1308,7 +1308,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "summary": "List private link resources",
         "description": "List private link resources for the given provisioning service",
@@ -1352,7 +1352,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources/{groupId}": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "summary": "Get the specified private link resource",
         "description": "Get the specified private link resource for the given provisioning service",
@@ -1399,7 +1399,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "summary": "List private endpoint connections",
         "description": "List private endpoint connection properties",
@@ -1443,7 +1443,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
-          "IotDpsResource"
+          "GET"
         ],
         "summary": "Get private endpoint connection",
         "description": "Get private endpoint connection properties",
@@ -1488,7 +1488,7 @@
       },
       "put": {
         "tags": [
-          "IotDpsResource"
+          "PUT"
         ],
         "summary": "Create or update private endpoint connection",
         "description": "Create or update the status of a private endpoint connection with the specified name",
@@ -1549,7 +1549,7 @@
       },
       "delete": {
         "tags": [
-          "IotDpsResource"
+          "DELETE"
         ],
         "summary": "Delete private endpoint connection",
         "description": "Delete private endpoint connection with the specified name",
@@ -1582,20 +1582,6 @@
             "description": "This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
-              "Location": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
-              "Retry-After": {
-                "description": "Retry After",
-                "type": "string"
-              }
             }
           },
           "200": {
@@ -1629,11 +1615,11 @@
         },
         "error": {
           "description": "Error message containing code, description and details",
-          "$ref": "#/definitions/ErrorMessage"
+          "$ref": "#/definitions/ErrorMesssage"
         }
       }
     },
-    "ErrorMessage": {
+    "ErrorMesssage": {
       "description": "Error response containing message and code.",
       "type": "object",
       "properties": {
@@ -1707,7 +1693,7 @@
           "description": "The resource type."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -1735,12 +1721,14 @@
         },
         "isVerified": {
           "description": "Determines whether certificate has been verified.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "certificate": {
           "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "readOnly": true
         },
         "created": {
           "description": "The certificate's creation date and time.",
@@ -1800,7 +1788,7 @@
           "$ref": "#/definitions/IotDpsSkuInfo"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -2093,7 +2081,7 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
