@@ -7761,7 +7761,7 @@
         },
         "sharedKey": {
           "type": "string",
-          "description": "SharedKey for the vpn connection. This is no more used."
+          "description": "Deprecated: SharedKey for the vpn connection. This is no more used."
         },
         "enableBgp": {
           "type": "boolean",
@@ -7957,6 +7957,7 @@
         },
         "sharedKey": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "SharedKey for the vpn link connection. We will no longer return sharedKey in any Create/Update/Get/List/UpdateTags VpnGateway/VpnConnection/VpnLinkConnection APIs response. Please use 'Vpn Link Connections - List Default Shared Key' API to fetch Vpn link connection sharedKey."
         },
         "enableBgp": {
@@ -8531,6 +8532,7 @@
         },
         "radiusServerSecret": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "The radius secret property of the VpnServerConfiguration resource for point to site client connection. We will no longer return radiusServerSecret in VpnServerConfiguration Create/Update/Get/List/UpdateTags APIs response. Please use VpnServerConfiguration ListRadiusSecrets API to fetch radius server secrets."
         },
         "radiusServers": {
