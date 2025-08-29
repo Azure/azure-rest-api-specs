@@ -24,6 +24,7 @@ model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}")
 interface Endpoints {
   /**
@@ -39,18 +40,21 @@ interface Endpoints {
     /**
      * The name of the Traffic Manager profile.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     profileName?: string,
 
     /**
      * The type of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointType?: EndpointType,
 
     /**
      * The name of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointName?: string,
   ): ArmResponse<Endpoint> | ErrorResponse;
@@ -68,25 +72,28 @@ interface Endpoints {
     /**
      * The name of the Traffic Manager profile.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     profileName?: string,
 
     /**
      * The type of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointType?: EndpointType,
 
     /**
      * The name of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointName?: string,
 
     /**
      * The properties of the Traffic Manager endpoint.
      */
-    @body
+    @bodyRoot
     resource: Endpoint,
   ): ArmResponse<Endpoint> | ArmCreatedResponse<Endpoint> | ErrorResponse;
 
@@ -103,25 +110,28 @@ interface Endpoints {
     /**
      * The name of the Traffic Manager profile.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     profileName?: string,
 
     /**
      * The type of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointType?: EndpointType,
 
     /**
      * The name of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointName?: string,
 
     /**
      * The properties of the Traffic Manager endpoint.
      */
-    @body
+    @bodyRoot
     properties: Endpoint,
   ): ArmResponse<Endpoint> | ErrorResponse;
 
@@ -138,18 +148,21 @@ interface Endpoints {
     /**
      * The name of the Traffic Manager profile.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     profileName?: string,
 
     /**
      * The type of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointType?: EndpointType,
 
     /**
      * The name of the Traffic Manager endpoint.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointName?: string,
   ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;

@@ -24,11 +24,13 @@ model HeatMapModel is Azure.ResourceManager.ProxyResource<HeatMapProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface HeatMapModels {
   /**
    * Gets latest heatmap for Traffic Manager profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @armResourceRead(HeatMapModel)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}")
@@ -41,12 +43,14 @@ interface HeatMapModels {
     /**
      * The name of the Traffic Manager profile.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     profileName?: string,
 
     /**
      * The type of the heatmap.
      */
+    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     heatMapType?: HeatMapType,
 
