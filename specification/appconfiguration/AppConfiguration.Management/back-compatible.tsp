@@ -57,3 +57,6 @@ using Microsoft.AppConfiguration;
 @@clientLocation(OperationsOperationGroup.regionalCheckNameAvailability,
   Operations
 );
+
+
+@@clientName(OperationsOperationGroup.checkNameAvailability::parameters.body, "checkNameAvailabilityParameters");
