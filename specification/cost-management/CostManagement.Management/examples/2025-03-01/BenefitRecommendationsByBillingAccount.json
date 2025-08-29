@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "$expand": "properties/usage,properties/allRecommendationDetails",
+    "$filter": "properties/lookBackPeriod eq 'Last7Days' AND properties/term eq 'P1Y'",
+    "api-version": "2025-03-01",
+    "billingScope": "providers/Microsoft.Billing/billingAccounts/123456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.CostManagement/benefitRecommendations",
+            "id": "/providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/benefitRecommendations/00000000-0000-0000-0000-000000000000",
+            "kind": "SavingsPlan",
+            "properties": {
+              "allRecommendationDetails": {
+                "value": [
+                  {
+                    "averageUtilizationPercentage": 99.33,
+                    "benefitCost": 52.002,
+                    "commitmentAmount": 0.164,
+                    "coveragePercentage": 54.609,
+                    "overageCost": 144.841,
+                    "savingsAmount": 21.424,
+                    "savingsPercentage": 9.815,
+                    "totalCost": 196.843,
+                    "wastageCost": 0.035
+                  },
+                  {
+                    "averageUtilizationPercentage": 81.474,
+                    "benefitCost": 83.754,
+                    "commitmentAmount": 0.161,
+                    "coveragePercentage": 56.748,
+                    "overageCost": 120.389,
+                    "savingsAmount": 14.124,
+                    "savingsPercentage": 6.47,
+                    "totalCost": 204.143,
+                    "wastageCost": 0.1
+                  }
+                ]
+              },
+              "armSkuName": "Compute_Savings_Plan",
+              "commitmentGranularity": "Hourly",
+              "costWithoutBenefit": 218.267,
+              "currencyCode": "USD",
+              "firstConsumptionDate": "2022-10-18T00:00:00Z",
+              "lastConsumptionDate": "2022-10-25T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "recommendationDetails": {
+                "averageUtilizationPercentage": 99.33,
+                "benefitCost": 52.002,
+                "commitmentAmount": 0.164,
+                "coveragePercentage": 54.609,
+                "overageCost": 144.841,
+                "savingsAmount": 21.424,
+                "savingsPercentage": 9.815,
+                "totalCost": 196.843,
+                "wastageCost": 0.035
+              },
+              "scope": "Shared",
+              "term": "P1Y",
+              "totalHours": 168,
+              "usage": {
+                "charges": [
+                  1,
+                  1,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "usageGrain": "Hourly"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BenefitRecommendations_List",
+  "title": "BenefitRecommendationsBillingAccountList"
+}

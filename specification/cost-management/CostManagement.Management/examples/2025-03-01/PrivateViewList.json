@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "swaggerExample",
+            "type": "Microsoft.CostManagement/Views",
+            "eTag": "\"1d4ff9fe66f1d10\"",
+            "id": "/providers/Microsoft.CostManagement/views/swaggerExample",
+            "properties": {
+              "accumulated": "true",
+              "chart": "Table",
+              "displayName": "swagger Example",
+              "kpis": [
+                {
+                  "type": "Forecast",
+                  "enabled": true,
+                  "id": null
+                },
+                {
+                  "type": "Budget",
+                  "enabled": true,
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/swaggerDemo"
+                }
+              ],
+              "metric": "ActualCost",
+              "pivots": [
+                {
+                  "name": "ServiceName",
+                  "type": "Dimension"
+                },
+                {
+                  "name": "MeterCategory",
+                  "type": "Dimension"
+                },
+                {
+                  "name": "swaggerTagKey",
+                  "type": "TagKey"
+                }
+              ],
+              "query": {
+                "type": "Usage",
+                "dataSet": {
+                  "aggregation": {
+                    "totalCost": {
+                      "name": "PreTaxCost",
+                      "function": "Sum"
+                    }
+                  },
+                  "granularity": "Daily",
+                  "grouping": [],
+                  "sorting": [
+                    {
+                      "name": "UsageDate",
+                      "direction": "Ascending"
+                    }
+                  ]
+                },
+                "timeframe": "MonthToDate"
+              },
+              "scope": ""
+            }
+          },
+          {
+            "name": "swaggerExample2",
+            "type": "Microsoft.CostManagement/Views",
+            "eTag": "\"1d4ffa5a9c2430c\"",
+            "id": "/providers/Microsoft.CostManagement/views/swaggerExample2",
+            "properties": {
+              "accumulated": "true",
+              "chart": "GroupedColumn",
+              "displayName": "swagger Example 2",
+              "kpis": [
+                {
+                  "type": "Forecast",
+                  "enabled": true,
+                  "id": null
+                },
+                {
+                  "type": "Budget",
+                  "enabled": true,
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/swaggerDemo"
+                }
+              ],
+              "metric": "ActualCost",
+              "pivots": [
+                {
+                  "name": "ServiceName",
+                  "type": "Dimension"
+                },
+                {
+                  "name": "MeterCategory",
+                  "type": "Dimension"
+                },
+                {
+                  "name": "swaggerTagKey",
+                  "type": "TagKey"
+                }
+              ],
+              "query": {
+                "type": "Usage",
+                "dataSet": {
+                  "aggregation": {
+                    "totalCost": {
+                      "name": "PreTaxCost",
+                      "function": "Sum"
+                    }
+                  },
+                  "granularity": "Daily",
+                  "grouping": [],
+                  "sorting": [
+                    {
+                      "name": "UsageDate",
+                      "direction": "Ascending"
+                    }
+                  ]
+                },
+                "timeframe": "LastMonthToDate"
+              },
+              "scope": ""
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Views_List",
+  "title": "PrivateViewList"
+}
