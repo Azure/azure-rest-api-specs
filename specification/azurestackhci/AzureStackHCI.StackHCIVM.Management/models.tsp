@@ -481,7 +481,6 @@ union LoadBalancerProbeProtocol {
 @added(Versions.v2025_09_01_preview)
 @doc("Backend Address Admin states")
 union LoadBalancerBackendAddressAdminState {
-
   @doc("Up - forced admin state up")
   Up: "Up",
 
@@ -520,7 +519,6 @@ union InboundNATRuleProtocol {
 
   string,
 }
-
 
 @added(Versions.v2025_09_01_preview)
 @doc("Fabric resource type")
@@ -1529,25 +1527,25 @@ model PublicIPAddressProperties {
 model InboundNATRuleProperties {
   @doc("Protocol for the NAT rule")
   protocol: InboundNATRuleProtocol;
-  
+
   @doc("Frontend Port for the inbound rule")
   frontendPort: int32;
-  
+
   @doc("backend Port for the inbound rule")
   backendPort: int32;
-  
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("IP configuration for the target backend.")
   backendIPConfiguration: IPConfigurationArmReference;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Public IP Address for this NAT rule")
-  publicIPAddress: PublicIPAddressArmReference
+  publicIPAddress: PublicIPAddressArmReference;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("Inbound nat rule properties")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 model InboundNATRule {
   @doc("name of the inbound nat rule")
   name: string;
@@ -1659,7 +1657,6 @@ model BackendAddressPool {
 @added(Versions.v2025_09_01_preview)
 @doc("LoadBalancer Backend Address properties")
 model LoadBalancerBackendAddressProperties {
-
   @doc("admin state - if set to false, the address is removed from the pool")
   adminState?: LoadBalancerBackendAddressAdminState;
 
@@ -1687,7 +1684,6 @@ model LoadBalancerBackendAddressProperties {
 @added(Versions.v2025_09_01_preview)
 @doc("LoadBalancer Backend Address")
 model LoadBalancerBackendAddress {
-
   @doc("name of the backend address")
   name: string;
 
@@ -1767,9 +1763,8 @@ model Probe {
 @added(Versions.v2025_09_01_preview)
 @doc("Load Balancer resource properties")
 model LoadBalancerProperties {
-
-  @doc("Frontend IPs for the loadbalancer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Frontend IPs for the loadbalancer.")
   frontendIPConfigurations: FrontendIPConfiguration[];
 
   @doc("backendAddressPools for the loadbalancer")
