@@ -17,8 +17,7 @@ alias ScheduleServiceTraits = SupportsClientRequestId &
 alias ScheduleOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
 
 @route("schedules")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
+@added(Versions.v2025_07_31_preview)
 interface Schedules {
   @doc("Delete a schedule.")
   delete is ScheduleOperations.ResourceDelete<Schedule>;
