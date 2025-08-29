@@ -11,6 +11,7 @@ using Azure.Core;
 
 namespace Microsoft.Web;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 @error
 model ArmNotFoundResponse {
   ...TypeSpec.Http.Response<404>;

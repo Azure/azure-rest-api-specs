@@ -56,7 +56,10 @@ interface ContinuousWebJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetContinuousWebJob")
-  getContinuousWebJob is ContinuousWebJobOps.Read<ContinuousWebJob>;
+  getContinuousWebJob is ContinuousWebJobOps.Read<
+    ContinuousWebJob,
+    Response = ArmResponse<ContinuousWebJob> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Delete a continuous web job by its ID for an app, or a deployment slot.
@@ -84,7 +87,7 @@ interface ContinuousWebJobs {
   startContinuousWebJob is ContinuousWebJobOps.ActionSync<
     ContinuousWebJob,
     void,
-    OkResponse
+    OkResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -96,7 +99,7 @@ interface ContinuousWebJobs {
   stopContinuousWebJob is ContinuousWebJobOps.ActionSync<
     ContinuousWebJob,
     void,
-    OkResponse
+    OkResponse | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
@@ -136,7 +139,10 @@ interface ContinuousWebJobOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetContinuousWebJobSlot")
-  getContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.Read<ContinuousWebJob>;
+  getContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.Read<
+    ContinuousWebJob,
+    Response = ArmResponse<ContinuousWebJob> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Delete a continuous web job by its ID for an app, or a deployment slot.
@@ -164,7 +170,7 @@ interface ContinuousWebJobOperationGroup {
   startContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,
     void,
-    OkResponse
+    OkResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -176,7 +182,7 @@ interface ContinuousWebJobOperationGroup {
   stopContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,
     void,
-    OkResponse
+    OkResponse | ArmNotFoundResponse
   >;
 }
 

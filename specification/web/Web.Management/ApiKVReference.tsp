@@ -44,7 +44,7 @@ interface ApiKVReferenceOps
         @path
         @segment("config")
         @key
-        configreferences: string,
+        configreferences: "configreference",
       },
       {
         /** App Setting key name. */
@@ -56,7 +56,7 @@ interface ApiKVReferenceOps
     > {}
 
 @armResourceOperations
-interface ApiKVReferences {
+interface AppSettingKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
    */
@@ -74,6 +74,7 @@ interface ApiKVReferences {
     Response = ArmResponse<ApiKVReferenceCollection>
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface ApiKVReferenceOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -93,10 +94,11 @@ interface ApiKVReferenceOperationGroupOps
         @path
         @segment("config")
         @key
-        configreferences: string,
+        configreferences: "configreferences",
       },
       {
         /**  */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("connectionstrings")
         @key
@@ -105,7 +107,7 @@ interface ApiKVReferenceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface ApiKVReferenceOperationGroup {
+interface SiteConnectionStringKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
    */
@@ -125,7 +127,7 @@ interface ApiKVReferenceOperationGroup {
   >;
 }
 @armResourceOperations
-interface ApiKVReferenceOperationGroupOps_2
+interface AppSettingKeyVaultReferenceSlotOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -139,7 +141,7 @@ interface ApiKVReferenceOperationGroupOps_2
         @key
         name: string,
 
-        /**  */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("slots")
         @key
@@ -149,7 +151,7 @@ interface ApiKVReferenceOperationGroupOps_2
         @path
         @segment("config")
         @key
-        configreferences: string,
+        configreferences: "configreferences",
       },
       {
         /** App Setting key name. */
@@ -161,26 +163,26 @@ interface ApiKVReferenceOperationGroupOps_2
     > {}
 
 @armResourceOperations
-interface ApiKVReferenceOperationGroup_2 {
+interface AppSettingKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAppSettingKeyVaultReferenceSlot")
-  getAppSettingKeyVaultReferenceSlot is ApiKVReferenceOperationGroupOps_2.Read<ApiKVReference>;
+  getAppSettingKeyVaultReferenceSlot is AppSettingKeyVaultReferenceSlotOps.Read<ApiKVReference>;
 
   /**
    * Description for Gets the config reference app settings and status of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetAppSettingsKeyVaultReferencesSlot")
-  getAppSettingsKeyVaultReferencesSlot is ApiKVReferenceOperationGroupOps_2.List<
+  getAppSettingsKeyVaultReferencesSlot is AppSettingKeyVaultReferenceSlotOps.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>
   >;
 }
 @armResourceOperations
-interface ApiKVReferenceOperationGroupOps_3
+interface SiteConnectionStringKeyVaultReferenceSlotOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -194,20 +196,21 @@ interface ApiKVReferenceOperationGroupOps_3
         @key
         name: string,
 
-        /**  */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("slots")
         @key
         slot: string,
 
-        /** undefined */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("config")
         @key
-        configreferences: string,
+        configreferences: "configreferences",
       },
       {
         /**  */
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
         @path
         @segment("connectionstrings")
         @key
@@ -216,13 +219,13 @@ interface ApiKVReferenceOperationGroupOps_3
     > {}
 
 @armResourceOperations
-interface ApiKVReferenceOperationGroup_3 {
+interface SiteConnectionStringKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteConnectionStringKeyVaultReferenceSlot")
-  getSiteConnectionStringKeyVaultReferenceSlot is ApiKVReferenceOperationGroupOps_3.Read<ApiKVReference>;
+  getSiteConnectionStringKeyVaultReferenceSlot is SiteConnectionStringKeyVaultReferenceSlotOps.Read<ApiKVReference>;
 
   /**
    * Description for Gets the config reference app settings and status of an app
@@ -230,7 +233,7 @@ interface ApiKVReferenceOperationGroup_3 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetSiteConnectionStringKeyVaultReferencesSlot")
   @segment("connectionstrings")
-  getSiteConnectionStringKeyVaultReferencesSlot is ApiKVReferenceOperationGroupOps_3.List<
+  getSiteConnectionStringKeyVaultReferencesSlot is SiteConnectionStringKeyVaultReferenceSlotOps.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>
   >;

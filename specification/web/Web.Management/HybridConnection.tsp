@@ -90,6 +90,7 @@ interface HybridConnections {
   @operationId("AppServicePlans_ListWebAppsByHybridConnection")
   @get
   @action("sites")
+  @list
   listWebAppsByHybridConnection is HybridConnectionOps.ActionSync<
     HybridConnection,
     void,
@@ -165,11 +166,11 @@ interface HybridConnectionOperationGroup {
   @operationId("WebApps_DeleteHybridConnection")
   deleteHybridConnection is HybridConnectionOperationGroupOps.DeleteSync<
     HybridConnection,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 }
 @armResourceOperations
-interface HybridConnectionOperationGroupOps_2
+interface HybridConnectionSlotOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -205,13 +206,13 @@ interface HybridConnectionOperationGroupOps_2
     > {}
 
 @armResourceOperations
-interface HybridConnectionOperationGroup_2 {
+interface HybridConnectionSlotOperationGroup {
   /**
    * Description for Retrieves a specific Service Bus Hybrid Connection used by this Web App.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetHybridConnectionSlot")
-  getHybridConnectionSlot is HybridConnectionOperationGroupOps_2.Read<HybridConnection>;
+  getHybridConnectionSlot is HybridConnectionSlotOps.Read<HybridConnection>;
 
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
@@ -219,7 +220,7 @@ interface HybridConnectionOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_CreateOrUpdateHybridConnectionSlot")
-  createOrUpdateHybridConnectionSlot is HybridConnectionOperationGroupOps_2.CreateOrUpdateSync<
+  createOrUpdateHybridConnectionSlot is HybridConnectionSlotOps.CreateOrUpdateSync<
     HybridConnection,
     Response = ArmResourceUpdatedResponse<HybridConnection>
   >;
@@ -230,7 +231,7 @@ interface HybridConnectionOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateHybridConnectionSlot")
   @patch(#{ implicitOptionality: false })
-  updateHybridConnectionSlot is HybridConnectionOperationGroupOps_2.CustomPatchSync<
+  updateHybridConnectionSlot is HybridConnectionSlotOps.CustomPatchSync<
     HybridConnection,
     PatchModel = HybridConnection
   >;
@@ -241,9 +242,9 @@ interface HybridConnectionOperationGroup_2 {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_DeleteHybridConnectionSlot")
-  deleteHybridConnectionSlot is HybridConnectionOperationGroupOps_2.DeleteSync<
+  deleteHybridConnectionSlot is HybridConnectionSlotOps.DeleteSync<
     HybridConnection,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 }
 
@@ -257,9 +258,9 @@ interface HybridConnectionOperationGroup_2 {
 @@doc(HybridConnectionOperationGroup.updateHybridConnection::parameters.properties,
   "The details of the hybrid connection."
 );
-// @@doc(HybridConnectionOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
-//   "The details of the hybrid connection."
-// );
-// @@doc(HybridConnectionOperationGroup.updateHybridConnectionSlot::parameters.properties,
-//   "The details of the hybrid connection."
-// );
+@@doc(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
+  "The details of the hybrid connection."
+);
+@@doc(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot::parameters.properties,
+  "The details of the hybrid connection."
+);

@@ -49,6 +49,52 @@ interface FunctionEnvelopeOps
       }
     > {}
 
+alias FunctionEnvelopesParameters = {
+  ...ResourceInstanceParameters<FunctionEnvelope>;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @path
+  @segment("keys")
+  @key
+  keyName: string;
+};
+    
+@armResourceOperations
+interface FunctionEnvelopeSlotOperationGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("sites")
+        @key
+        name: string,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("slots")
+        @key
+        slot: string,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("functions")
+        @key
+        functionName: string,
+      },
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("keys")
+        @key
+        keyName: string,
+      }
+    > {}
+
 @armResourceOperations
 interface FunctionEnvelopes {
   /**
@@ -56,7 +102,10 @@ interface FunctionEnvelopes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetFunction")
-  getFunction is FunctionEnvelopeOps.Read<FunctionEnvelope>;
+  getFunction is FunctionEnvelopeOps.Read<
+    FunctionEnvelope,
+    Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Create function for web site, or a deployment slot.
@@ -80,7 +129,7 @@ interface FunctionEnvelopes {
   @operationId("WebApps_DeleteFunction")
   deleteFunction is FunctionEnvelopeOps.DeleteSync<
     FunctionEnvelope,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -90,48 +139,31 @@ interface FunctionEnvelopes {
   @operationId("WebApps_ListFunctions")
   listFunctions is FunctionEnvelopeOps.List<
     FunctionEnvelope,
-    Response = ArmResponse<FunctionEnvelopeCollection>
+    Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse
   >;
 
   /**
    * Description for Add or update a function secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_CreateOrUpdateFunctionSecret")
   @put
-  @action("{keyName}")
-  createOrUpdateFunctionSecret is FunctionEnvelopeOps.ActionSync<
-    FunctionEnvelope,
-    KeyInfo,
-    ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
-    Parameters = {
-      /**
-       * The name of the key.
-       */
-      @path
-      keyName: string;
-    }
-  >;
-
+  createOrUpdateFunctionSecret(
+    ...FunctionEnvelopesParameters,
+    @body key: KeyInfo,
+  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
   /**
    * Description for Delete a function secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteFunctionSecret")
   @delete
-  @action("{keyName}")
-  deleteFunctionSecret is FunctionEnvelopeOps.ActionSync<
-    FunctionEnvelope,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * The name of the key.
-       */
-      @path
-      keyName: string;
-    }
-  >;
+  deleteFunctionSecret(
+    ...FunctionEnvelopesParameters,
+  ): NoContentResponse | ArmNotFoundResponse;
 
   /**
    * Description for Get function keys for a function in a web site, or a deployment slot.
@@ -194,7 +226,10 @@ interface FunctionEnvelopeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_GetInstanceFunctionSlot")
-  getInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.Read<FunctionEnvelope>;
+  getInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.Read<
+    FunctionEnvelope,
+    Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse
+  >;
 
   /**
    * Description for Create function for web site, or a deployment slot.
@@ -213,12 +248,13 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Delete a function for web site, or a deployment slot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebApps_DeleteInstanceFunctionSlot")
   deleteInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.DeleteSync<
     FunctionEnvelope,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -228,47 +264,33 @@ interface FunctionEnvelopeOperationGroup {
   @operationId("WebApps_ListInstanceFunctionsSlot")
   listInstanceFunctionsSlot is FunctionEnvelopeOperationGroupOps.List<
     FunctionEnvelope,
-    Response = ArmResponse<FunctionEnvelopeCollection>
+    Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse
   >;
 
   /**
    * Description for Add or update a function secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_CreateOrUpdateFunctionSecretSlot")
   @put
-  @action("{keyName}")
-  createOrUpdateFunctionSecretSlot is FunctionEnvelopeOperationGroupOps.ActionSync<
+  createOrUpdateFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.CreateOrUpdateAsync<
     FunctionEnvelope,
-    KeyInfo,
-    ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
-    Parameters = {
-      /**
-       * The name of the key.
-       */
-      @path
-      keyName: string;
-    }
+    Request=KeyInfo,
+    Response=ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>
   >;
 
   /**
    * Description for Delete a function secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteFunctionSecretSlot")
   @delete
-  @action("{keyName}")
-  deleteFunctionSecretSlot is FunctionEnvelopeOperationGroupOps.ActionSync<
+  deleteFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.DeleteSync<
     FunctionEnvelope,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * The name of the key.
-       */
-      @path
-      keyName: string;
-    }
+    Response = NoContentResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -277,7 +299,7 @@ interface FunctionEnvelopeOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListFunctionKeysSlot")
   @action("listkeys")
-  listFunctionKeysSlot is FunctionEnvelopeOperationGroupOps.ActionSync<
+  listFunctionKeysSlot is FunctionEnvelopeSlotOperationGroupOps.ActionSync<
     FunctionEnvelope,
     void,
     ArmResponse<StringDictionary>
@@ -303,12 +325,12 @@ interface FunctionEnvelopeOperationGroup {
 @@doc(FunctionEnvelopes.createFunction::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
+@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.key,
   "The key to create or update"
 );
 @@doc(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.body,
+@@doc(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "The key to create or update"
 );

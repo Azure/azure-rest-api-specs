@@ -395,17 +395,18 @@ interface RecommendationsOperationGroup {
   @autoRoute
   @action("disable")
   disableRecommendationForSubscription is ArmProviderActionSync<
-    Response = {@body body:void},
+    Response = {
+      @body body: void;
+    },
     Scope = SubscriptionActionScope,
     Parameters = {
-      /**
-       * Rule name
-       */
-      @path
-      @segment("recommendations")
-      name: string;
+      // /**
+      //  * Rule name
+      //  */
+      // @path
+      // @segment("recommendations")
+      // name: string;
     }
-
   >;
 }
 

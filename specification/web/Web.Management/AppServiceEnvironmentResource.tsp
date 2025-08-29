@@ -120,6 +120,7 @@ interface AppServiceEnvironmentResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_ListCapacities")
   @get
+  @list
   @action("compute")
   listCapacities is ArmResourceActionSync<
     AppServiceEnvironmentResource,
@@ -137,10 +138,15 @@ interface AppServiceEnvironmentResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_ChangeVnet")
   @action("changeVirtualNetwork")
-  changeVnet is ArmResourceActionAsync<
+  @list
+  changeVnet is Azure.ResourceManager.ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     VirtualNetworkProfile,
-    ArmResponse<WebAppCollection>
+    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+      @bodyRoot
+      _: WebAppCollection;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>
   >;
 
   /**
@@ -173,6 +179,7 @@ interface AppServiceEnvironmentResources {
   @operationId("AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints")
   @get
   @action("inboundNetworkDependenciesEndpoints")
+  @list
   getInboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -222,6 +229,7 @@ interface AppServiceEnvironmentResources {
   @operationId("AppServiceEnvironments_GetOutboundNetworkDependenciesEndpoints")
   @get
   @action("outboundNetworkDependenciesEndpoints")
+  @list
   getOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -257,6 +265,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_Resume")
+  @list
   resume is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
@@ -274,6 +283,7 @@ interface AppServiceEnvironmentResources {
   @operationId("AppServiceEnvironments_ListAppServicePlans")
   @get
   @action("serverfarms")
+  @list
   listAppServicePlans is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -287,6 +297,7 @@ interface AppServiceEnvironmentResources {
   @operationId("AppServiceEnvironments_ListWebApps")
   @get
   @action("sites")
+  @list
   listWebApps is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -305,6 +316,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AppServiceEnvironments_Suspend")
+  @list
   suspend is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
@@ -322,6 +334,7 @@ interface AppServiceEnvironmentResources {
   @operationId("AppServiceEnvironments_ListUsages")
   @get
   @action("usages")
+  @list
   listUsages is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -342,6 +355,7 @@ interface AppServiceEnvironmentResources {
   @operationId("Recommendations_ListHistoryForHostingEnvironment")
   @get
   @action("recommendationHistory")
+  @list
   listHistoryForHostingEnvironment is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -374,6 +388,7 @@ interface AppServiceEnvironmentResources {
   @operationId("Recommendations_ListRecommendedRulesForHostingEnvironment")
   @get
   @action("recommendations")
+  @list
   listRecommendedRulesForHostingEnvironment is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,

@@ -58,7 +58,7 @@ interface CsmDeploymentStatuses {
   @operationId("WebApps_GetProductionSiteDeploymentStatus")
   getProductionSiteDeploymentStatus is CsmDeploymentStatusOps.Read<
     CsmDeploymentStatus,
-    Response = ArmResponse<CsmDeploymentStatus> | (AcceptedResponse & {
+    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CsmDeploymentStatus>> & {
       @bodyRoot
       _: CsmDeploymentStatus;
     })
@@ -113,7 +113,7 @@ interface CsmDeploymentStatusOperationGroup {
   @operationId("WebApps_GetSlotSiteDeploymentStatusSlot")
   getSlotSiteDeploymentStatusSlot is CsmDeploymentStatusOperationGroupOps.Read<
     CsmDeploymentStatus,
-    Response = ArmResponse<CsmDeploymentStatus> | (AcceptedResponse & {
+    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CsmDeploymentStatus>> & {
       @bodyRoot
       _: CsmDeploymentStatus;
     })

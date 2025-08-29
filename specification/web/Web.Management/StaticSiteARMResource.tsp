@@ -158,7 +158,7 @@ interface StaticSiteARMResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StaticSites_UpdateStaticSiteUser")
-  @patch
+  @patch(#{ implicitOptionality: true })
   @action("{userid}")
   updateStaticSiteUser is ArmResourceActionSync<
     StaticSiteARMResource,

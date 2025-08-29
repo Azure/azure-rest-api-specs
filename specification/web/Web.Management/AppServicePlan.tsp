@@ -119,6 +119,7 @@ interface AppServicePlans {
    */
   @get
   @action("hybridConnectionRelays")
+  @list
   listHybridConnections is ArmResourceActionSync<
     AppServicePlan,
     void,
@@ -147,6 +148,7 @@ interface AppServicePlans {
    */
   @get
   @action("sites")
+  @list
   listWebApps is ArmResourceActionSync<
     AppServicePlan,
     void,
@@ -188,6 +190,7 @@ interface AppServicePlans {
    */
   @get
   @action("usages")
+  @list
   listUsages is ArmResourceActionSync<
     AppServicePlan,
     void,

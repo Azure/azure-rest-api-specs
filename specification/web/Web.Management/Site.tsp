@@ -52,21 +52,50 @@ interface SiteOps
       }
     > {}
 
-alias HostSecretParameters= {
+alias HostSecretParameters = {
   ...ResourceInstanceParameters<Site>;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   @path
   @key
   @segment("host")
   host: "default";
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   @path
   @key
-  keyType:string;
+  keyType: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   @path
   @key
-  keyName:string;
+  keyName: string;
+};
+
+alias HostSecretSlotParameters = {
+  ...ResourceInstanceParameters<Site>;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @path
+  @key
+  @segment("slots")
+  slot: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @path
+  @key
+  @segment("host")
+  host: "default";
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @path
+  @key
+  keyType: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @path
+  @key
+  keyName: string;
 };
 
 @armResourceOperations
@@ -98,10 +127,10 @@ interface Sites {
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("WebApps_Update")
-  @patch(#{ implicitOptionality: false })
   update is SiteOps.CustomPatchSync<
     Site,
     PatchModel = SitePatchResource,
@@ -287,6 +316,7 @@ interface Sites {
   /**
    * Description for Replaces the application settings of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_UpdateApplicationSettings")
   @put
@@ -338,6 +368,7 @@ interface Sites {
    * Description for Updates the Azure storage account configurations of an app.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @operationId("WebApps_UpdateAzureStorageAccounts")
   @put
   @action("config/azurestorageaccounts")
@@ -445,11 +476,12 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListPublishingCredentials")
   @action("config/publishingcredentials/list")
-  listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
+  listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsync<
     Site,
     void,
     ArmResponse<User>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Site>,
+    LroHeaders = ArmLroLocationHeader<FinalResult = Site>
   >;
 
   /**
@@ -574,7 +606,10 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_CreateOrUpdateHostSecret")
   @put
-  createOrUpdateHostSecret(...HostSecretParameters; @body body: KeyInfo): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
+  createOrUpdateHostSecret(
+    ...HostSecretParameters,
+    @body body: KeyInfo,
+  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
 
   /**
    * Description for Delete a host level secret.
@@ -582,8 +617,9 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_DeleteHostSecret")
   @delete
-  deleteHostSecret (...HostSecretParameters): NoContentResponse | NotFoundResponse ;
-
+  deleteHostSecret(
+    ...HostSecretParameters,
+  ): NoContentResponse | ArmNotFoundResponse;
 
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
@@ -625,6 +661,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListSiteBackups")
   @action("listbackups")
+  @list
   listSiteBackups is SiteOps.ActionSync<
     Site,
     void,
@@ -1332,6 +1369,7 @@ interface WebApps {
   /**
    * Description for Replaces the application settings of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
   @action("appsettings")
   updateApplicationSettingsSlot is WebAppOps.ActionSync<
@@ -1353,6 +1391,7 @@ interface WebApps {
   /**
    * Description for Updates the Authentication / Authorization settings associated with web app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
   @action("authsettings")
   updateAuthSettingsSlot is WebAppOps.ActionSync<
@@ -1374,6 +1413,7 @@ interface WebApps {
   /**
    * Description for Updates the Azure storage account configurations of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
   @action("azurestorageaccounts")
   updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
@@ -1395,6 +1435,7 @@ interface WebApps {
   /**
    * Description for Updates the backup configuration of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
   @action("backup")
   updateBackupConfigurationSlot is WebAppOps.ActionSync<
@@ -1423,6 +1464,7 @@ interface WebApps {
   /**
    * Description for Replaces the connection strings of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
   @action("connectionstrings")
   updateConnectionStringsSlot is WebAppOps.ActionSync<
@@ -1444,6 +1486,7 @@ interface WebApps {
   /**
    * Description for Replaces the metadata of an app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
   @action("metadata")
   updateMetadataSlot is WebAppOps.ActionSync<
@@ -1476,6 +1519,7 @@ interface WebApps {
   /**
    * Description for Updates the Push settings associated with web app.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @put
   @action("pushsettings")
   updateSitePushSettingsSlot is WebAppOps.ActionSync<
@@ -1497,6 +1541,7 @@ interface WebApps {
   /**
    * Description for Gets the last lines of docker logs for the given site
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @action("containerlogs")
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
@@ -1507,7 +1552,8 @@ interface WebApps {
   /**
    * Description for Gets the ZIP archived docker log files for the given site
    */
-  @action("download")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  @action("containerlogs/zipdownload")
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
@@ -1556,26 +1602,12 @@ interface WebApps {
   /**
    * Description for Add or update a host level secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   @put
-  @action("{keyName}")
-  createOrUpdateHostSecretSlot is WebAppOps.ActionSync<
-    Site,
-    KeyInfo,
-    ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>,
-    Parameters = {
-      /**
-       * The type of host key.
-       */
-      @path
-      keyType: string;
-
-      /**
-       * The name of the key.
-       */
-      @path
-      keyName: string;
-    }
-  >;
+  createOrUpdateHostSecretSlot(
+    ...HostSecretSlotParameters,
+    @body body: KeyInfo,
+  ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
 
   /**
    * Description for Delete a host level secret.
@@ -1585,7 +1617,7 @@ interface WebApps {
   deleteHostSecretSlot is WebAppOps.ActionSync<
     Site,
     void,
-    NoContentResponse,
+    NoContentResponse | ArmNotFoundResponse,
     Parameters = {
       /**
        * The type of host key.
@@ -1636,6 +1668,7 @@ interface WebApps {
   /**
    * Description for Gets existing backups of an app.
    */
+  @list
   @action("listbackups")
   listSiteBackupsSlot is WebAppOps.ActionSync<
     Site,
@@ -1657,11 +1690,9 @@ interface WebApps {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   @get
-  @action("networkTrace/operationresults/{operationId}")
-  getNetworkTraceOperationSlot is WebAppOps.ActionSync<
+  getNetworkTraceOperationSlot is WebAppOps.Read<
     Site,
-    void,
-    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @bodyRoot
       _: "paths·fho602·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktrace-operationresults-operationid·get·responses·202·content·application-json·schema";
     }),
@@ -1670,6 +1701,7 @@ interface WebApps {
        * GUID of the operation.
        */
       @path
+      @segment("networkTrace/operationresults")
       operationId: string;
     }
   >;
@@ -1735,6 +1767,7 @@ interface WebApps {
   /**
    * Description for Stop ongoing capturing network packets for the site.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
   @action("networkTrace/stop")
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
@@ -1746,16 +1779,15 @@ interface WebApps {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   @get
-  @action("networkTrace/{operationId}")
-  getNetworkTracesSlot is WebAppOps.ActionSync<
+  getNetworkTracesSlot is WebAppOps.Read<
     Site,
-    void,
-    ArmResponse<NetworkTrace[]>,
+    Response = ArmResponse<NetworkTrace[]>,
     Parameters = {
       /**
        * GUID of the operation.
        */
       @path
+      @segment("networkTrace")
       operationId: string;
     }
   >;
@@ -1764,11 +1796,9 @@ interface WebApps {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   @get
-  @action("networkTraces/current/operationresults/{operationId}")
-  getNetworkTraceOperationSlotV2 is WebAppOps.ActionSync<
+  getNetworkTraceOperationSlotV2 is WebAppOps.Read<
     Site,
-    void,
-    ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
+    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
       @bodyRoot
       _: "paths·nokhyf·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-web-sites-name-slots-slot-networktraces-current-operationresults-operationid·get·responses·202·content·application-json·schema";
     }),
@@ -1777,6 +1807,7 @@ interface WebApps {
        * GUID of the operation.
        */
       @path
+      @segment("networkTraces/current/operationresults")
       operationId: string;
     }
   >;
@@ -1933,6 +1964,7 @@ interface WebApps {
    * Description for Get the difference in configuration settings between two web app slots.
    */
   @action("slotsdiffs")
+  @list
   listSlotDifferencesSlot is WebAppOps.ActionSync<
     Site,
     CsmSlotEntity,
@@ -1960,6 +1992,7 @@ interface WebApps {
    * Description for Returns all Snapshots to the user from DRSecondary endpoint.
    */
   @get
+  @list
   @action("snapshotsdr")
   listSnapshotsFromDRSecondarySlot is WebAppOps.ActionSync<
     Site,
@@ -2039,6 +2072,7 @@ interface WebApps {
    */
   @get
   @action("usages")
+  @list
   listUsagesSlot is WebAppOps.ActionSync<
     Site,
     void,
@@ -2115,17 +2149,35 @@ interface WebApps {
 @@doc(Sites.createOrUpdateHostSecret::parameters.body,
   "The key to create or update"
 );
-// @@doc(Sites.`migrateStorage`::parameters.body, "Migration migrationOptions.");
-// @@doc(Sites.`migrateMySql`::parameters.body, "MySql migration options.");
-// @@doc(Sites.`listPublishingProfileXmlWithSecrets`::parameters.body, "Specifies publishingProfileOptions for publishing profile. For example, use {"format": "FileZilla3"} to get a FileZilla publishing profile.");
-// @@doc(Sites.`restoreFromBackupBlob`::parameters.body, "Information on restore request .");
-// @@doc(Sites.`restoreFromDeletedApp`::parameters.body, "Deleted web app restore information.");
-// @@doc(Sites.`restoreSnapshot`::parameters.body, "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.");
-// @@doc(Sites.`listSlotDifferencesFromProduction`::parameters.body, "JSON object that contains the target slot name. See example.");
-// @@doc(Sites.`swapSlotWithProduction`::parameters.body, "JSON object that contains the target slot name. See example.");
-// @@doc(Sites.`deployWorkflowArtifacts`::parameters.body, "Application settings and files of the workflow.");
-// @@doc(Sites.`regenerateAccessKey`::parameters.body, "The access key type.");
-// @@doc(Sites.`validate`::parameters.body, "The workflow.");
+@@doc(Sites.migrateStorage::parameters.body, "Migration migrationOptions.");
+@@doc(Sites.migrateMySql::parameters.body, "MySql migration options.");
+// @@doc(Sites.listPublishingProfileXmlWithSecrets::parameters.body,
+//   "Specifies publishingProfileOptions for publishing profile. For example, use {",
+//   format,
+//   ": ",
+//   FileZilla3,
+//   "} to get a FileZilla publishing profile."
+// );
+@@doc(Sites.restoreFromBackupBlob::parameters.body,
+  "Information on restore request ."
+);
+@@doc(Sites.restoreFromDeletedApp::parameters.body,
+  "Deleted web app restore information."
+);
+@@doc(Sites.restoreSnapshot::parameters.body,
+  "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API."
+);
+@@doc(Sites.listSlotDifferencesFromProduction::parameters.body,
+  "JSON object that contains the target slot name. See example."
+);
+@@doc(Sites.swapSlotWithProduction::parameters.body,
+  "JSON object that contains the target slot name. See example."
+);
+@@doc(Sites.deployWorkflowArtifacts::parameters.body,
+  "Application settings and files of the workflow."
+);
+@@doc(Sites.regenerateAccessKey::parameters.body, "The access key type.");
+@@doc(Sites.validate::parameters.body, "The workflow.");
 @@doc(WebApps.createOrUpdateSlot::parameters.resource,
   "A JSON representation of the app properties. See example."
 );

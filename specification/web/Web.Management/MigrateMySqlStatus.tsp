@@ -46,7 +46,7 @@ interface MigrateMySqlStatusOps
         @path
         @segment("migratemysql")
         @key
-        status: string,
+        status: "status",
       }
     > {}
 
@@ -85,7 +85,7 @@ interface MigrateMySqlStatusOperationGroupOps
         @path
         @segment("migratemysql")
         @key
-        status: string,
+        status: "status",
       }
     > {}
 

@@ -65,7 +65,7 @@ interface BackupItems {
   @operationId("WebApps_DeleteBackup")
   deleteBackup is BackupItemOps.DeleteSync<
     BackupItem,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 
   /**
@@ -144,7 +144,7 @@ interface BackupItemOperationGroup {
   @operationId("WebApps_DeleteBackupSlot")
   deleteBackupSlot is BackupItemOperationGroupOps.DeleteSync<
     BackupItem,
-    Response = ArmDeletedResponse
+    Response = ArmDeletedResponse | ArmNotFoundResponse
   >;
 
   /**

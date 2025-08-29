@@ -86,8 +86,8 @@ interface SiteConfigResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebApps_ListConfigurationSnapshotInfo")
   @get
-  @action("snapshots")
-  listConfigurationSnapshotInfo is SiteConfigResourceOps.ActionSync<
+  @action("config/web/snapshots")
+  listConfigurationSnapshotInfo is ArmResourceActionSync<
     SiteConfigResource,
     void,
     ArmResponse<SiteConfigurationSnapshotInfoCollection>

@@ -64,7 +64,7 @@ interface VnetInfoResources {
   @operationId("AppServicePlans_ListVnets")
   listVnets is VnetInfoResourceOps.List<
     VnetInfoResource,
-    Response = ArmResponse<VnetInfoResource[]>
+    Response = ArmResponse<Azure.Core.Page<VnetInfoResource>>
   >;
 }
 @armResourceOperations
@@ -146,7 +146,7 @@ interface VnetInfoResourceOperationGroup {
   @operationId("WebApps_ListVnetConnectionsSlot")
   listVnetConnectionsSlot is VnetInfoResourceOperationGroupOps.List<
     VnetInfoResource,
-    Response = ArmResponse<VnetInfoResource[]>
+    Response = ArmResponse<Azure.Core.Page<VnetInfoResource>>
   >;
 }
 @armResourceOperations
@@ -223,7 +223,7 @@ interface VnetInfoResourceOperationGroup_2 {
   @segment("virtualNetworkConnections")
   listVnetConnections is VnetInfoResourceOperationGroupOps_2.List<
     VnetInfoResource,
-    Response = ArmResponse<VnetInfoResource[]>
+    Response = ArmResponse<Azure.Core.Page<VnetInfoResource>>
   >;
 }
 

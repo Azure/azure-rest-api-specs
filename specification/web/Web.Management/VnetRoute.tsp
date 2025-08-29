@@ -73,7 +73,7 @@ interface VnetRoutes {
   @operationId("AppServicePlans_ListRoutesForVnet")
   listRoutesForVnet is ArmResourceListByParent<
     VnetRoute,
-    Response = ArmResponse<VnetRoute[]>
+    Response = ArmResponse<Azure.Core.Page<VnetRoute>>
   >;
 }
 

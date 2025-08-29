@@ -567,21 +567,21 @@ using Microsoft.Web;
 );
 @@clientName(WebApps.discoverBackupSlot::parameters.body, "request");
 @@clientName(WebApps.createOrUpdateHostSecretSlot::parameters.body, "key");
-// @@clientName(WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
-//   "publishingProfileOptions"
-// );
-// @@clientName(WebApps.restoreFromBackupBlobSlot::parameters.body, "request");
-// @@clientName(WebApps.restoreFromDeletedAppSlot::parameters.body,
-//   "restoreRequest"
-// );
-// @@clientName(WebApps.restoreSnapshotSlot::parameters.body, "restoreRequest");
-// @@clientName(WebApps.listSlotDifferencesSlot::parameters.body,
-//   "slotSwapEntity"
-// );
-// @@clientName(WebApps.swapSlotSlot::parameters.body, "slotSwapEntity");
-// @@clientName(WebApps.deployWorkflowArtifactsSlot::parameters.body,
-//   "workflowArtifacts"
-// );
+@@clientName(WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
+  "publishingProfileOptions"
+);
+@@clientName(WebApps.restoreFromBackupBlobSlot::parameters.body, "request");
+@@clientName(WebApps.restoreFromDeletedAppSlot::parameters.body,
+  "restoreRequest"
+);
+@@clientName(WebApps.restoreSnapshotSlot::parameters.body, "restoreRequest");
+@@clientName(WebApps.listSlotDifferencesSlot::parameters.body,
+  "slotSwapEntity"
+);
+@@clientName(WebApps.swapSlotSlot::parameters.body, "slotSwapEntity");
+@@clientName(WebApps.deployWorkflowArtifactsSlot::parameters.body,
+  "workflowArtifacts"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Site.properties);
 
@@ -696,30 +696,30 @@ using Microsoft.Web;
 @@clientLocation(HybridConnectionOperationGroup.updateHybridConnection,
   WebApps
 );
-// @@clientName(HybridConnectionOperationGroup.updateHybridConnection::parameters.properties,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(HybridConnectionOperationGroup.deleteHybridConnection,
-//   WebApps
-// );
-// @@clientLocation(HybridConnectionOperationGroup.getHybridConnectionSlot,
-//   WebApps
-// );
-// @@clientLocation(HybridConnectionOperationGroup.createOrUpdateHybridConnectionSlot,
-//   WebApps
-// );
-// @@clientName(HybridConnectionOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(HybridConnectionOperationGroup.updateHybridConnectionSlot,
-//   WebApps
-// );
-// @@clientName(HybridConnectionOperationGroup.updateHybridConnectionSlot::parameters.properties,
-//   "connectionEnvelope"
-// );
-// @@clientLocation(HybridConnectionOperationGroup.deleteHybridConnectionSlot,
-//   WebApps
-// );
+@@clientName(HybridConnectionOperationGroup.updateHybridConnection::parameters.properties,
+  "connectionEnvelope"
+);
+@@clientLocation(HybridConnectionOperationGroup.deleteHybridConnection,
+  WebApps
+);
+@@clientLocation(HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
+  WebApps
+);
+@@clientLocation(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
+  WebApps
+);
+@@clientName(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
+  "connectionEnvelope"
+);
+@@clientLocation(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
+  WebApps
+);
+@@clientName(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot::parameters.properties,
+  "connectionEnvelope"
+);
+@@clientLocation(HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
+  WebApps
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(HybridConnection.properties);
 
@@ -1287,30 +1287,30 @@ using Microsoft.Web;
 @@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed,
   WebApps
 );
-// @@clientName(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
-//   "csmPublishingAccessPoliciesEntity"
-// );
-// @@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.getFtpAllowedSlot,
-//   WebApps
-// );
-// @@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateFtpAllowedSlot,
-//   WebApps
-// );
-// @@clientName(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateFtpAllowedSlot::parameters.resource,
-//   "csmPublishingAccessPoliciesEntity"
-// );
-// @@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.listBasicPublishingCredentialsPoliciesSlot,
-//   WebApps
-// );
-// @@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.getScmAllowedSlot,
-//   WebApps
-// );
-// @@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowedSlot,
-//   WebApps
-// );
-// @@clientName(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowedSlot::parameters.resource,
-//   "csmPublishingAccessPoliciesEntity"
-// );
+@@clientName(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
+  "csmPublishingAccessPoliciesEntity"
+);
+@@clientLocation(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.getFtpAllowedSlot,
+  WebApps
+);
+@@clientLocation(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot,
+  WebApps
+);
+@@clientName(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot::parameters.resource,
+  "csmPublishingAccessPoliciesEntity"
+);
+@@clientLocation(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.listBasicPublishingCredentialsPoliciesSlot,
+  WebApps
+);
+@@clientLocation(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.getScmAllowedSlot,
+  WebApps
+);
+@@clientLocation(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot,
+  WebApps
+);
+@@clientName(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
+  "csmPublishingAccessPoliciesEntity"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CsmPublishingCredentialsPoliciesEntity.properties);
 
@@ -1382,26 +1382,30 @@ using Microsoft.Web;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SiteAuthSettingsV2.properties);
 
-@@clientLocation(ApiKVReferences.getAppSettingKeyVaultReference, WebApps);
-@@clientLocation(ApiKVReferences.getAppSettingsKeyVaultReferences, WebApps);
-// @@clientLocation(ApiKVReferenceOperationGroup.getSiteConnectionStringKeyVaultReference,
-//   WebApps
-// );
-// @@clientLocation(ApiKVReferenceOperationGroup.getSiteConnectionStringKeyVaultReferences,
-//   WebApps
-// );
-// @@clientLocation(ApiKVReferenceOperationGroup.getAppSettingKeyVaultReferenceSlot,
-//   WebApps
-// );
-// @@clientLocation(ApiKVReferenceOperationGroup.getAppSettingsKeyVaultReferencesSlot,
-//   WebApps
-// );
-// @@clientLocation(ApiKVReferenceOperationGroup.getSiteConnectionStringKeyVaultReferenceSlot,
-//   WebApps
-// );
-// @@clientLocation(ApiKVReferenceOperationGroup.getSiteConnectionStringKeyVaultReferencesSlot,
-//   WebApps
-// );
+@@clientLocation(AppSettingKeyVaultReference.getAppSettingKeyVaultReference,
+  WebApps
+);
+@@clientLocation(AppSettingKeyVaultReference.getAppSettingsKeyVaultReferences,
+  WebApps
+);
+@@clientLocation(SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReference,
+  WebApps
+);
+@@clientLocation(SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReferences,
+  WebApps
+);
+@@clientLocation(AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
+  WebApps
+);
+@@clientLocation(AppSettingKeyVaultReferenceSlot.getAppSettingsKeyVaultReferencesSlot,
+  WebApps
+);
+@@clientLocation(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
+  WebApps
+);
+@@clientLocation(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
+  WebApps
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApiKVReference.properties);
 
@@ -1534,9 +1538,9 @@ using Microsoft.Web;
 @@clientLocation(FunctionEnvelopes.deleteFunction, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctions, WebApps);
 @@clientLocation(FunctionEnvelopes.createOrUpdateFunctionSecret, WebApps);
-@@clientName(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
-  "key"
-);
+// @@clientName(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.key,
+//   "key"
+// );
 @@clientLocation(FunctionEnvelopes.deleteFunctionSecret, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctionKeys, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctionSecrets, WebApps);
@@ -1558,9 +1562,7 @@ using Microsoft.Web;
 @@clientLocation(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
   WebApps
 );
-@@clientName(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.body,
-  "key"
-);
+
 @@clientLocation(FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
   WebApps
 );
