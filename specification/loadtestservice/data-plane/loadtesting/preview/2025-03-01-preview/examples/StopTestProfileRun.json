@@ -1,0 +1,52 @@
+{
+  "operationId": "TestProfileRunAdministration_StopTestProfileRun",
+  "title": "Stop a test profile run",
+  "parameters": {
+    "testProfileRunId": "12316678-1234-1234-1234-122451189012",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "testProfileRunId": "12316678-1234-1234-1234-122451189012",
+        "displayName": "Performance_TestProfile_Run1",
+        "description": "sample description",
+        "testProfileId": "12345678-1234-1234-1234-123456789012",
+        "status": "CANCELLING",
+        "startDateTime": "2024-05-01T16:43:46.072Z",
+        "endDateTime": "2024-05-01T16:43:46.072Z",
+        "durationInSeconds": 400,
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.Web/sites/myfunctionapp",
+        "targetResourceConfigurations": {
+          "kind": "FunctionsFlexConsumption",
+          "configurations": {
+            "config1": {
+              "instanceMemoryMB": 2048,
+              "httpConcurrency": 16
+            },
+            "config2": {
+              "instanceMemoryMB": 4096,
+              "httpConcurrency": 16
+            }
+          }
+        },
+        "testRunDetails": {
+          "testRun1": {
+            "status": "DONE",
+            "configurationId": "config1",
+            "properties": {}
+          },
+          "testRun2": {
+            "status": "DONE",
+            "configurationId": "config2",
+            "properties": {}
+          }
+        },
+        "createdDateTime": "2024-05-01T16:43:46.072Z",
+        "createdBy": "user@contoso.com",
+        "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+        "lastModifiedBy": "user@contoso.com"
+      }
+    }
+  }
+}
