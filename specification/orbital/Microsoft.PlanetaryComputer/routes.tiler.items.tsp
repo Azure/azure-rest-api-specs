@@ -112,7 +112,7 @@ interface TilerInfoGeoJsonOperations {
       @query(#{ explode: true })
       assets?: string[];
     },
-    FeaturePolygonDictStrRioTilerModelsInfo
+    TilerInfoGeoJsonFeature
   >;
 }
 
@@ -143,7 +143,7 @@ interface TilerAvailableAssets {
       @pattern(".*")
       itemId: string;
     },
-    AvailableAssetsResponse | NoContentResponse
+    AvailableAssetsResponse
   >;
 }
 
@@ -258,7 +258,7 @@ interface TilerGeoJsonStatistics {
        * Request GeoJson body
        */
       @body
-      body: GeoJson;
+      body: ItemCollection;
     },
     GeoJsonStatisticsItemCollectionResponse
   >;
@@ -273,7 +273,7 @@ interface TilerTiles {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -315,13 +315,13 @@ interface TilerTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
@@ -334,7 +334,7 @@ interface TilerTileMatrixSets {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -422,7 +422,7 @@ interface TilerTileJsonOperations {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
@@ -541,7 +541,7 @@ interface TilerWmts {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Output image type. Default is png.
@@ -560,7 +560,7 @@ interface TilerWmts {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesResponse | NoContentResponse
+    WmtsCapabilitiesResponse
   >;
 }
 
@@ -822,7 +822,7 @@ interface TilerParts {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}/{width}x{height}.{format}")
   @get
-  getMinxMinyMaxxMaxyWidthxHeightFormat is Azure.Core.Foundations.Operation<
+  getCroppedToBoundingBoxWidthByHeight is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -907,7 +907,7 @@ interface TilerParts {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{minx},{miny},{maxx},{maxy}.{format}")
   @get
-  getMinxMinyMaxxMaxyFormat is Azure.Core.Foundations.Operation<
+  getCroppedToBoundingBox is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -984,7 +984,7 @@ interface TilerGeoJsons {
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/crop/{width}x{height}.{format}")
   @post
-  cropWidthxHeightFormat is Azure.Core.Foundations.Operation<
+  cropWidthByHeightFormat is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
       ...AlgorithmQueryParameters;
@@ -1055,7 +1055,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: GeoJson;
+      body: StacItem;
     },
     TileResponse
   >;
@@ -1127,7 +1127,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: GeoJson;
+      body: Geometry;
     },
     TileResponse
   >;

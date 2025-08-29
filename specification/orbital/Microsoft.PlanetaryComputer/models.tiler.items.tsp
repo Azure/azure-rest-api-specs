@@ -32,18 +32,20 @@ model StatisticsQueryParameters {
   categorical?: boolean;
 
   /**
-   * List of values for which to report counts.
+   * List of pixel categorical values for which to report counts.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query("c")
   @query(#{ explode: true })
-  c?: string[];
+  categoriesPixels?: string[];
 
   /**
    * List of percentile values (default to [2, 98]).
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query("p")
   @query(#{ explode: true })
-  p?: int32[];
+  percentiles?: int32[];
 
   /**
    *
@@ -305,13 +307,15 @@ model TilerInfo {
    * Minzoom
    */
   @summary("Minzoom")
-  minzoom?: int64;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int64;
 
   /**
    * Maxzoom
    */
   @summary("Maxzoom")
-  maxzoom?: int64;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int64;
 }
 /**
  * Union type for band metadata elements
@@ -566,10 +570,9 @@ model GeoJsonStatisticsItemCollectionResponse {
   links?: Link[];
 
   /**
-   *
-   * https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification
-   *
    * Pagination context for the response
+   *
+   * See the [STAC Context Extension](https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification)
    */
   context?: ContextExtension;
 }

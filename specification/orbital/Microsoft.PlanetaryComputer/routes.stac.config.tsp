@@ -49,7 +49,7 @@ interface StacCollectionAssets {
        * Multi-part form data
        */
       @multipartBody
-      body: FormData;
+      body: FormContent;
     },
     {
       ...CreatedResponse;
@@ -106,7 +106,7 @@ interface StacCollectionAssets {
        * Multi-part form data
        */
       @multipartBody
-      body: FormData;
+      body: FormContent;
     },
     {
       ...CreatedResponse;
@@ -149,7 +149,7 @@ interface StacCollectionAssets {
       @pattern(".*")
       assetId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -187,7 +187,6 @@ interface StacCollectionThumbnails {
       | ImageJp2Response
       | ImageTiffResponse
       | ApplicationXbinaryResponse
-      | NoContentResponse
   >;
 }
 
@@ -233,7 +232,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       collectionId: string;
     },
-    Mosaic[] | NoContentResponse
+    Mosaic[]
   >;
   /**
    * Add a mosaic definition to a given collection
@@ -359,7 +358,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       mosaicId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -382,7 +381,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       collectionId: string;
     },
-    RenderOption[] | NoContentResponse
+    RenderOption[]
   >;
   /**
    * Add a render option for a given collection
@@ -508,7 +507,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       renderOptionId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -521,7 +520,7 @@ interface StacCollectionTileSettings {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/configurations/tile-settings")
   @get
-  getAll is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.
@@ -627,47 +626,138 @@ interface StacCollectionPartitionTypes {
       @body
       body: PartitionType;
     },
-    PartitionType | NoContentResponse
+    PartitionType
   >;
 }
 
-interface GeoCatalogAzmapsToken {
+interface StacQueryables {
   /**
-   * Fetch a token for the Azure Maps API service based on the current
-   * service identity. This token is used for the Explorer to authenticate
-   * with the Azure Maps API service.
+   * Endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Azmaps Token")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/map/token")
+  @summary("Queryables")
+  @tag("SpatioTemporal Asset Catalog (STAC) API")
+  @route("/stac/queryables")
   @get
-  get is Azure.Core.Foundations.Operation<{}, AzMapsToken>;
-}
+  getAll is Azure.Core.Foundations.Operation<{}, JsonSchema>;
+  /**
+   * Delete queryables by name for specified collection.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Delete Queryables")
+  @tag("STAC Collection Configuration")
+  @route("/stac/collections/{collectionId}/queryables/{queryableName}")
+  @delete
+  delete is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Unique identifier for the STAC collection.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
 
-interface GeoCatalogAzmapsClient {
+      /**
+       * Name of the queryable property to operate on.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      queryableName: string;
+    },
+    OkResponse
+  >;
   /**
-   * Fetch the client id for the Azure Maps API service based on the current
-   * on the current identity. This client id is used for the Explorer to
-   * authenticate with the Azure Maps API service.
+   * Endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Azmaps Client Id")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/map/id")
+  @summary("Collection Queryables")
+  @tag("SpatioTemporal Asset Catalog (STAC) API")
+  @route("/stac/collections/{collectionId}/queryables")
   @get
-  getId is Azure.Core.Foundations.Operation<{}, AzMapsClientId>;
-}
+  getAllByCollection is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Collection ID
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+    },
+    JsonSchema
+  >;
+  /**
+   * Set queryables for a collection given a list of queryable definitions
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Set Collection Queryables")
+  @tag("SpatioTemporal Asset Catalog (STAC) API")
+  @route("/stac/collections/{collectionId}/queryables")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Unique identifier for the STAC collection.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
 
-interface GeoCatalogAuthConfigOperations {
+      /**
+       * Request queryable definition body
+       */
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" ""
+      @body
+      body: QueryableDefinition[];
+    },
+    {
+      ...CreatedResponse;
+
+      @body
+      body: QueryableDefinition[];
+    }
+  >;
   /**
-   * Get the app id and tenant id information to make a MSAL request for this
-   * GeoCatalog instance.
+   * Updates a queryable given a queryable definition and
+   * corresponding collection id.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Auth Config")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/auth")
-  @get
-  get is Azure.Core.Foundations.Operation<{}, AuthConfig>;
+  @summary("Update Collection Queryables")
+  @tag("STAC Collection Configuration")
+  @route("/stac/collections/{collectionId}/queryables/{queryableName}")
+  @put
+  createOrReplace is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Unique identifier for the STAC collection.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * Name of the queryable property to operate on.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      queryableName: string;
+
+      /**
+       * Request queryable definition body
+       */
+      @body
+      body: QueryableDefinition;
+    },
+    {
+      ...CreatedResponse;
+
+      @body
+      body: QueryableDefinition;
+    } | QueryableDefinition
+  >;
 }
