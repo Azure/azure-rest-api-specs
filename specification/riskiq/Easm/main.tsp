@@ -39,14 +39,11 @@ namespace Easm;
 @doc("The EASM Defender service version.")
 enum Versions {
   @doc("Version 2023-03-01-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_03_01_preview: "2023-03-01-preview",
 
   @doc("Version 2024-03-01-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_03_01_preview: "2024-03-01-preview",
 
   @doc("Version 2024-10-01-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_10_01_preview: "2024-10-01-preview",
 }

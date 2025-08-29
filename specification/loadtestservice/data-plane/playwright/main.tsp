@@ -47,10 +47,8 @@ namespace Playwright;
 @doc("Available versions of the Playwright Service API.")
 enum Versions {
   @doc("Preview version 2025-07-01-preview with experimental features.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_07_01_preview: "2025-07-01-preview",
 
   @doc("Stable version 2025-09-01 with general availability features.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_09_01: "2025-09-01",
 }

@@ -28,25 +28,21 @@ namespace Neon.Postgres;
 @doc("Supported API versions for the Neon.Postgres resource provider.")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v1_preview)
   v1_preview: "2024-12-22-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
   v2_preview: "2025-03-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
   v2025_03_01: "2025-03-01",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
   v3_preview: "2025-06-23-preview",

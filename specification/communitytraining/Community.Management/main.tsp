@@ -17,7 +17,6 @@ namespace Microsoft.Community;
 /** Api versions */
 enum Versions {
   /** 2023-11-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-11-01`,
 }
 

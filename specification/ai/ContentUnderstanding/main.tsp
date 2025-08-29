@@ -39,11 +39,10 @@ namespace ContentUnderstanding;
 
 @doc("Service API versions.")
 enum Versions {
-  // @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  //
   // @doc("The 2024-12-01-preview version of the Content Understanding service.")
   // v2024_12_01_preview: "2024-12-01-preview",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2025-05-01-preview version of the Content Understanding service.")
   v2025_05_01_preview: "2025-05-01-preview",
 }

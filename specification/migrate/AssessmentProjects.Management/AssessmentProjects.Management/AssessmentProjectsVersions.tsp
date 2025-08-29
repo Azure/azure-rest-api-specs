@@ -8,7 +8,6 @@ namespace Microsoft.Migrate;
 @doc("API Versions for Assessment Project Resource.")
 enum AssessmentProjectApiVersions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("2024-03-03-preview API Version.")
   v2024_03_03_preview: "2024-03-03-preview",
 }
