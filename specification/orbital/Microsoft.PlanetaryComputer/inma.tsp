@@ -841,10 +841,10 @@ interface StacCollectionOperations {
       sign?: SignType;
 
       /**
-       * URL signature duration in seconds.
+       * URL signature duration in minutes.
        */
       @query("duration")
-      duration?: int32;
+      durationInMinutes?: int32;
     },
     FeatureCollections
   >;
@@ -892,10 +892,10 @@ interface StacCollectionOperations {
       sign?: SignType;
 
       /**
-       * URL signature duration in seconds.
+       * URL signature duration in minutes.
        */
       @query("duration")
-      duration?: int32;
+      durationInMinutes?: int32;
     }>
   >;
 

@@ -243,9 +243,10 @@ model SearchPostRequest {
   sign?: SignType;
 
   /**
-   * URL signature duration in seconds.
+   * URL signature duration in minutes.
    */
-  duration?: int32;
+  @encodedName("application/json", "duration")
+  durationInMinutes?: int32;
 
   /**
    * STAC Query

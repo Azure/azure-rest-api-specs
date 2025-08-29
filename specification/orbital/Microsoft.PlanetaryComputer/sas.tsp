@@ -106,8 +106,8 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query
-    duration?: int64,
+    @query("duration")
+    durationInMinutes?: int64,
   ): TokenResponse | ErrorResponse;
 
   /**
@@ -129,8 +129,8 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query
-    duration?: int64,
+    @query("duration")
+    durationInMinutes?: int64,
   ): OkResponse | ErrorResponse;
 
   /**
@@ -159,7 +159,7 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query
-    duration?: int64,
+    @query("duration")
+    durationInMinutes?: int64,
   ): SignedHrefResponse | ErrorResponse;
 }

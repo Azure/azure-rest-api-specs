@@ -88,10 +88,10 @@ interface StacSearchOperations {
       sign?: SignType;
 
       /**
-       * URL signature duration in seconds.
+       * URL signature duration in minutes.
        */
       @query("duration")
-      duration?: int32;
+      durationInMinutes?: int32;
 
       /**
        * Property-based filtering expressed as a JSON object.
