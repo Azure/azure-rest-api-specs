@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
 using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2024_11_30)
+@TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2025_09_01)
 namespace ClientCustomizations;
 
 @client({
@@ -20,6 +20,8 @@ interface DocumentIntelligenceClient {
   analyzeDocument is DocumentModels.analyzeDocument;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultPdf is DocumentModels.getAnalyzeResultPdf;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getAnalyzeResultPng is DocumentModels.getAnalyzeResultPng;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getAnalyzeResultFigure is DocumentModels.getAnalyzeResultFigure;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
