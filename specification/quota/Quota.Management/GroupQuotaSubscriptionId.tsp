@@ -44,7 +44,7 @@ interface GroupQuotaSubscriptionIds {
     GroupQuotaSubscriptionId,
     Response = ArmResourceUpdatedResponse<GroupQuotaSubscriptionId> | ArmResourceCreatedResponse<
       LROResponse,
-      ArmLroLocationHeader<FinalResult = GroupQuotaSubscriptionId> &
+      ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
         Azure.Core.Foundations.RetryAfterHeader
     >
   >;
@@ -58,7 +58,9 @@ interface GroupQuotaSubscriptionIds {
   update is Azure.ResourceManager.CustomExtension.CustomPatchWithoutBodyAsync<
     Extension.ManagementGroup<"managementGroupId">,
     GroupQuotaSubscriptionId,
-    PatchModel = {}
+    PatchModel = {},
+    Response = ArmResponse<GroupQuotaSubscriptionId> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -66,7 +68,9 @@ interface GroupQuotaSubscriptionIds {
    */
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup<"managementGroupId">,
-    GroupQuotaSubscriptionId
+    GroupQuotaSubscriptionId,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

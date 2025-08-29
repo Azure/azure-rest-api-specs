@@ -101,7 +101,7 @@ interface GroupQuotasEnforcementStatuses {
     GroupQuotasEnforcementStatus,
     Response = ArmResourceUpdatedResponse<GroupQuotasEnforcementStatus> | ArmResourceCreatedResponse<
       LROResponse,
-      ArmLroLocationHeader<FinalResult = GroupQuotasEnforcementStatus> &
+      ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
     OptionalRequestBody = true
@@ -118,6 +118,8 @@ interface GroupQuotasEnforcementStatuses {
   update is GroupQuotasEnforcementStatusesOps.CustomPatchAsync<
     GroupQuotasEnforcementStatus,
     PatchModel = GroupQuotasEnforcementStatus,
+    Response = ArmResponse<GroupQuotasEnforcementStatus> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
 

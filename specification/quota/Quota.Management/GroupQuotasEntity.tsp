@@ -81,7 +81,7 @@ interface GroupQuotasEntities {
     GroupQuotasEntity,
     Response = ArmResourceUpdatedResponse<GroupQuotasEntity> | ArmResourceCreatedResponse<
       LROResponse,
-      ArmLroLocationHeader<FinalResult = GroupQuotasEntity> &
+      ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
     OptionalRequestBody = true
@@ -95,6 +95,8 @@ interface GroupQuotasEntities {
   update is GroupQuotasEntitiesOps.CustomPatchAsync<
     GroupQuotasEntity,
     PatchModel = GroupQuotasEntityPatch,
+    Response = ArmResponse<GroupQuotasEntity> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
 
@@ -103,7 +105,9 @@ interface GroupQuotasEntities {
    */
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup<"managementGroupId">,
-    GroupQuotasEntity
+    GroupQuotasEntity,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

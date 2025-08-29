@@ -113,7 +113,9 @@ interface GroupQuotaLimitLists {
   update is GroupQuotaLimitListsOps.CustomPatchAsync<
     GroupQuotaLimitList,
     PatchModel = GroupQuotaLimitList,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Response = ArmResponse<GroupQuotaLimitList> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotaLimitList> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 
