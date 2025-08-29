@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-05-01",
+    "version": "2022-07-01-preview",
     "title": "MaintenanceManagementClient",
     "description": "Azure Maintenance Management Client"
   },
@@ -425,6 +425,96 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "summary": "Get configuration assignment",
+        "description": "Get configuration for resource.",
+        "operationId": "ConfigurationAssignments_GetParent",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "Configuration assignment name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_GetParent": {
+            "$ref": "./examples/ConfigurationAssignments_GetParent.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "ConfigurationAssignments"
@@ -617,6 +707,82 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "summary": "Get configuration assignment",
+        "description": "Get configuration for resource.",
+        "operationId": "ConfigurationAssignments_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "Configuration assignment name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_Get": {
+            "$ref": "./examples/ConfigurationAssignments_Get.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "ConfigurationAssignments"
@@ -986,6 +1152,12 @@
           }
         },
         "x-ms-examples": {
+          "MaintenanceConfigurations_GetForResource_GuestOSPatchWindows": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchWindows.json"
+          },
+          "MaintenanceConfigurations_GetForResource_GuestOSPatchLinux": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchLinux.json"
+          },
           "MaintenanceConfigurations_GetForResource": {
             "$ref": "./examples/MaintenanceConfigurations_GetForResource.json"
           }
@@ -1359,6 +1531,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments": {
+      "get": {
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "summary": "[UNSUPPORTED] Get configuration assignment within a subscription. This API is not implemented yet.",
+        "operationId": "ConfigurationAssignmentsWithinSubscription_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsResultWithinSubscription_List": {
+            "$ref": "./examples/ConfigurationAssignmentsResultWithinSubscription_List.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Maintenance/operations": {
       "get": {
         "tags": [
@@ -1635,7 +1850,7 @@
           "readOnly": true,
           "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -1737,7 +1952,7 @@
           "type": "string"
         },
         "recurEvery": {
-          "description": "Rate at which a Maintenance window is expected to recur. The rate can be expressed as daily, weekly, or monthly schedules. Daily schedule are formatted as recurEvery: [Frequency as integer]['Day(s)']. If no frequency is provided, the default frequency is 1. Daily schedule examples are recurEvery: Day, recurEvery: 3Days.  Weekly schedule are formatted as recurEvery: [Frequency as integer]['Week(s)'] [Optional comma separated list of weekdays Monday-Sunday]. Weekly schedule examples are recurEvery: 3Weeks, recurEvery: Week Saturday,Sunday. Monthly schedules are formatted as [Frequency as integer]['Month(s)'] [Comma separated list of month days] or [Frequency as integer]['Month(s)'] [Week of Month (First, Second, Third, Fourth, Last)] [Weekday Monday-Sunday]. Monthly schedule examples are recurEvery: Month, recurEvery: 2Months, recurEvery: Month day23,day24, recurEvery: Month Last Sunday, recurEvery: Month Fourth Monday.",
+          "description": "Rate at which a Maintenance window is expected to recur. The rate can be expressed as daily, weekly, or monthly schedules. Daily schedule are formatted as recurEvery: [Frequency as integer]['Day(s)']. If no frequency is provided, the default frequency is 1. Daily schedule examples are recurEvery: Day, recurEvery: 3Days.  Weekly schedule are formatted as recurEvery: [Frequency as integer]['Week(s)'] [Optional comma separated list of weekdays Monday-Sunday]. Weekly schedule examples are recurEvery: 3Weeks, recurEvery: Week Saturday,Sunday. Monthly schedules are formatted as [Frequency as integer]['Month(s)'] [Comma separated list of month days] or [Frequency as integer]['Month(s)'] [Week of Month (First, Second, Third, Fourth, Last)] [Weekday Monday-Sunday] [Optional Offset(No. of days)]. Offset value must be between -6 to 6 inclusive. Monthly schedule examples are recurEvery: Month, recurEvery: 2Months, recurEvery: Month day23,day24, recurEvery: Month Last Sunday, recurEvery: Month Fourth Monday, recurEvery: Month Last Sunday Offset-3, recurEvery: Month Third Sunday Offset6.",
           "type": "string"
         }
       }
@@ -1761,6 +1976,7 @@
           "description": "Gets or sets maintenanceScope of the configuration",
           "enum": [
             "Host",
+            "Resource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -1775,6 +1991,10 @@
               {
                 "value": "Host",
                 "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+              },
+              {
+                "value": "Resource",
+                "description": "This maintenance scope controls the default update maintenance of the Azure Resource"
               },
               {
                 "value": "OSImage",
@@ -1825,6 +2045,155 @@
               }
             ]
           }
+        },
+        "installPatches": {
+          "$ref": "#/definitions/InputPatchConfiguration",
+          "description": "The input parameters to be passed to the patch run operation. This property only applies to Guest (InGuestPatch) scope."
+        }
+      }
+    },
+    "InputPatchConfiguration": {
+      "type": "object",
+      "properties": {
+        "rebootSetting": {
+          "type": "string",
+          "enum": [
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "RebootOptions",
+            "modelAsString": true
+          },
+          "default": "IfRequired",
+          "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed. This property only applies to Guest (InGuestPatch) scope."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/InputWindowsParameters",
+          "description": "Input parameters specific to patching a Windows machine. For Linux machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/InputLinuxParameters",
+          "description": "Input parameters specific to patching Linux machine. For Windows machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope."
+        },
+        "tasks": {
+          "description": "[Not supported] Tasks information for the Software update configuration.",
+          "$ref": "#/definitions/softwareUpdateConfigurationTasks",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Input configuration for a patch run"
+    },
+    "InputWindowsParameters": {
+      "type": "object",
+      "properties": {
+        "kbNumbersToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Windows KBID to be excluded for patching."
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Windows KBID to be included for patching."
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Classification category of patches to be patched. Allowed values are 'Critical', 'Security', 'UpdateRollup', 'FeaturePack', 'ServicePack', 'Definition', 'Tools', and 'Updates'."
+        },
+        "excludeKbsRequiringReboot": {
+          "type": "boolean",
+          "description": "Exclude patches which need reboot"
+        }
+      },
+      "description": "Input properties for patching a Windows machine. This property only applies to Guest (InGuestPatch) scope."
+    },
+    "InputLinuxParameters": {
+      "type": "object",
+      "properties": {
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package names to be excluded for patching."
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package names to be included for patching."
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Classification category of patches to be patched. Allowed values are 'Critical', 'Security', and 'Other'."
+        }
+      },
+      "description": "Input properties for patching a Linux machine. This property only applies to Guest (InGuestPatch) scope."
+    },
+    "softwareUpdateConfigurationTasks": {
+      "type": "object",
+      "description": "[Not supported] Task properties of the software update configuration.",
+      "properties": {
+        "preTasks": {
+          "type": "array",
+          "description": "[Not supported] List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}]",
+          "items": {
+            "$ref": "#/definitions/taskProperties",
+            "x-ms-client-flatten": true
+          },
+          "x-ms-identifiers": []
+        },
+        "postTasks": {
+          "type": "array",
+          "description": "[Not supported] List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}]",
+          "items": {
+            "$ref": "#/definitions/taskProperties",
+            "x-ms-client-flatten": true
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "taskProperties": {
+      "type": "object",
+      "description": "[Not supported] Task properties of the software update configuration.",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "[Not supported] Gets or sets the parameters of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "[Not supported] Gets or sets the name of the runbook."
+        },
+        "taskScope": {
+          "enum": [
+            "Global",
+            "Resource"
+          ],
+          "description": "[Not supported] Global Task execute once when schedule trigger. Resource task execute for each VM.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaskScope",
+            "modelAsString": true
+          },
+          "default": "Global"
         }
       }
     },
@@ -1901,7 +2270,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1963,7 +2335,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Update"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1975,6 +2348,7 @@
           "description": "The impact area",
           "enum": [
             "Host",
+            "Resource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -1989,6 +2363,10 @@
               {
                 "value": "Host",
                 "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+              },
+              {
+                "value": "Resource",
+                "description": "This maintenance scope controls the default update maintenance of the Azure Resource"
               },
               {
                 "value": "OSImage",
