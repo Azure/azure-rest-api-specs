@@ -15,12 +15,12 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/Azure.AI.TextTranslation/stable/v3.0/openapi.json"
+    output-file: "{azure-resource-provider-folder}/Azure.AI.TextTranslation/{version-status}/v{version}/openapi.json"
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: Azure.AI.Translation.Text
+    namespace: "{package-dir}"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
@@ -29,6 +29,7 @@ options:
   "@azure-tools/typespec-python":
     namespace: "azure.ai.translation.text"
     package-dir: "azure-ai-translation-text"
+    package-name: "{package-dir}"
     flavor: azure
     generate-test: true
     generate-sample: true
