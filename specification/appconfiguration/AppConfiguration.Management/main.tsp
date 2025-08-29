@@ -34,7 +34,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "AppConfigurationManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AppConfiguration;
 
 /**
