@@ -26,9 +26,18 @@ These are the global settings for the RedisEnterprise API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-05-01
+tag: package-2025-07-01
 ```
 
+
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - Microsoft.Cache/stable/2025-07-01/redisenterprise.json
+```
 
 ### Tag: package-preview-2025-05-01
 
