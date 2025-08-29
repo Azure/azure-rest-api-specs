@@ -2534,11 +2534,22 @@
           "$ref": "#/definitions/MaintenanceConfigurationProperties",
           "description": "Gets or sets properties of the resource",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets location of the resource"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets tags of the resource",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

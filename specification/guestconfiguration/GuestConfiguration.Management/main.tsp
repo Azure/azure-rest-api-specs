@@ -15,7 +15,6 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./GuestConfigurationAssignment.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -43,29 +42,8 @@ enum Versions {
   v2024_04_05: "2024-04-05",
 }
 
-/**
- * This is the interface that implements the standard Azure Resource Manager operation that returns
- * all supported RP operations. You should have exactly one declaration for each
- * Azure Resource Manager service. It implements
- *   GET "/providers/Microsoft.ContosoProviderHub/operations"
- */
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @armUpdateProviderNamespace
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationList> | ErrorResponse;
-}
-
-// interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationList>,
+      ErrorResponse
+    > {}

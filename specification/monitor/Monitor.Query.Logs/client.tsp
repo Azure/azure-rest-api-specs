@@ -64,7 +64,7 @@ interface Client {
   queryBatch is MonitorQueryLogs.Query.batch;
 }
 
-@@access(Versions, Access.internal, "go");
+@@access(Versions, Access.internal, "go,python");
 
 @@clientName(BatchQueryRequest.workspace, "WorkspaceID", "go");
 
@@ -81,3 +81,11 @@ interface Client {
 @@clientName(QueryBody.workspaces, "AdditionalWorkspaces", "go");
 
 @@alternateType(Table.rows, bytes[][], "go");
+
+@@clientName(ColumnDataType, "_ColumnType", "python");
+@@access(MonitorQueryLogsClient.batch, Access.internal, "python");
+@@access(MonitorQueryLogsClient.execute, Access.internal, "python");
+@@access(MonitorQueryLogsClient.executeWithResourceId,
+  Access.internal,
+  "python"
+);
