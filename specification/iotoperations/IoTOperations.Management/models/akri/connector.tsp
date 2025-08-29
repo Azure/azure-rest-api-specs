@@ -48,7 +48,6 @@ model AkriConnectorProperties {
 /** AkriConnector allocated device. */
 @added(Versions.`2025-09-01-preview`)
 model AkriConnectorAllocatedDevice {
-
   /** The name of the inbound endpoint for the device. */
   deviceInboundEndpointName: string;
 
