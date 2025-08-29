@@ -64,7 +64,6 @@ interface SBAuthorizationRules {
    * Gets an authorization rule for a namespace by rule name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_GetAuthorizationRule")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx")
   getAuthorizationRule is SBAuthorizationRuleOps.Read<SBAuthorizationRule>;
 
@@ -73,7 +72,6 @@ interface SBAuthorizationRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_CreateOrUpdateAuthorizationRule")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx")
   createOrUpdateAuthorizationRule is SBAuthorizationRuleOps.CreateOrUpdateSync<
     SBAuthorizationRule,
@@ -84,7 +82,6 @@ interface SBAuthorizationRules {
    * Deletes a namespace authorization rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_DeleteAuthorizationRule")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx")
   deleteAuthorizationRule is SBAuthorizationRuleOps.DeleteSync<SBAuthorizationRule>;
 
@@ -92,7 +89,6 @@ interface SBAuthorizationRules {
    * Gets the authorization rules for a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_ListAuthorizationRules")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx")
   listAuthorizationRules is SBAuthorizationRuleOps.List<SBAuthorizationRule>;
 
@@ -100,7 +96,6 @@ interface SBAuthorizationRules {
    * Gets the primary and secondary connection strings for the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_ListKeys")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx")
   listKeys is SBAuthorizationRuleOps.ActionSync<
     SBAuthorizationRule,
@@ -112,7 +107,6 @@ interface SBAuthorizationRules {
    * Regenerates the primary or secondary connection strings for the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_RegenerateKeys")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx")
   regenerateKeys is SBAuthorizationRuleOps.ActionSync<
     SBAuthorizationRule,

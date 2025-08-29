@@ -43,7 +43,6 @@ interface SBNamespaces {
    * Gets a description for the specified namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_Get")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   get is ArmResourceRead<SBNamespace>;
 
@@ -52,7 +51,6 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_CreateOrUpdate")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SBNamespace,
@@ -68,7 +66,6 @@ interface SBNamespaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Namespaces_Update")
   update is ArmCustomPatchSync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
@@ -80,7 +77,6 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_Delete")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     SBNamespace,
@@ -91,7 +87,6 @@ interface SBNamespaces {
    * Gets the available namespaces within a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_ListByResourceGroup")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
   listByResourceGroup is ArmResourceListByParent<SBNamespace>;
 
@@ -99,7 +94,6 @@ interface SBNamespaces {
    * Gets all the available namespaces within the subscription, irrespective of the resource groups.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_List")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
   list is ArmListBySubscription<SBNamespace>;
 
@@ -109,7 +103,6 @@ interface SBNamespaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_Get")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   privateLinkResourcesGet is ArmResourceActionSync<
     SBNamespace,
@@ -122,7 +115,6 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("disasterRecoveryConfigs/CheckNameAvailability")
-  @operationId("DisasterRecoveryConfigs_CheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     SBNamespace,
     CheckNameAvailability,
