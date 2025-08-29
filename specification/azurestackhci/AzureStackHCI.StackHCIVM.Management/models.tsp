@@ -1722,7 +1722,7 @@ model LoadBalancerRuleProperties {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("LoadBalancerRule")
+@doc("LoadBalancer Rules")
 model LoadBalancerRule {
   @doc("name of the load balancer rule")
   name: string;
