@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-02-02-preview",
+    "version": "2025-07-01",
     "title": "ContainerApps API Client"
   },
   "host": "management.azure.com",
@@ -1334,163 +1334,6 @@
         }
       }
     },
-    "AppInsightsConfiguration": {
-      "description": "Configuration of Application Insights ",
-      "type": "object",
-      "properties": {
-        "connectionString": {
-          "description": "Application Insights connection string",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "OpenTelemetryConfiguration": {
-      "description": "Configuration of Open Telemetry",
-      "type": "object",
-      "properties": {
-        "destinationsConfiguration": {
-          "description": "Open telemetry destinations configuration",
-          "$ref": "#/definitions/DestinationsConfiguration"
-        },
-        "tracesConfiguration": {
-          "description": "Open telemetry trace configuration",
-          "$ref": "#/definitions/TracesConfiguration"
-        },
-        "logsConfiguration": {
-          "description": "Open telemetry logs configuration",
-          "$ref": "#/definitions/LogsConfiguration"
-        },
-        "metricsConfiguration": {
-          "description": "Open telemetry metrics configuration",
-          "$ref": "#/definitions/MetricsConfiguration"
-        }
-      }
-    },
-    "DestinationsConfiguration": {
-      "description": "Configuration of Open Telemetry destinations",
-      "type": "object",
-      "properties": {
-        "dataDogConfiguration": {
-          "description": "Open telemetry datadog destination configuration",
-          "$ref": "#/definitions/DataDogConfiguration"
-        },
-        "otlpConfigurations": {
-          "description": "Open telemetry otlp configurations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OtlpConfiguration"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "DataDogConfiguration": {
-      "description": "Configuration of datadog ",
-      "type": "object",
-      "properties": {
-        "site": {
-          "description": "The data dog site",
-          "type": "string"
-        },
-        "key": {
-          "description": "The data dog api key",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "OtlpConfiguration": {
-      "description": "Configuration of otlp ",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of otlp configuration",
-          "type": "string"
-        },
-        "endpoint": {
-          "description": "The endpoint of otlp configuration",
-          "type": "string"
-        },
-        "insecure": {
-          "description": "Boolean indicating if otlp configuration is insecure",
-          "type": "boolean"
-        },
-        "headers": {
-          "description": "Headers of otlp configurations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Header"
-          },
-          "x-ms-identifiers": [
-            "key"
-          ]
-        }
-      }
-    },
-    "Header": {
-      "description": "Header of otlp configuration",
-      "type": "object",
-      "properties": {
-        "key": {
-          "description": "The key of otlp configuration header",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value of otlp configuration header",
-          "type": "string"
-        }
-      }
-    },
-    "TracesConfiguration": {
-      "description": "Configuration of Open Telemetry traces",
-      "type": "object",
-      "properties": {
-        "includeDapr": {
-          "type": "boolean",
-          "description": "Boolean indicating if including dapr traces"
-        },
-        "destinations": {
-          "description": "Open telemetry traces destinations",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "LogsConfiguration": {
-      "description": "Configuration of Open Telemetry logs",
-      "type": "object",
-      "properties": {
-        "destinations": {
-          "description": "Open telemetry logs destinations",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MetricsConfiguration": {
-      "description": "Configuration of Open Telemetry metrics",
-      "type": "object",
-      "properties": {
-        "includeKeda": {
-          "type": "boolean",
-          "description": "Boolean indicating if including keda metrics"
-        },
-        "destinations": {
-          "description": "Open telemetry metrics destinations",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "KedaConfiguration": {
       "type": "object",
       "description": "Configuration properties Keda component",
@@ -1577,22 +1420,6 @@
           "description": "Name of the workload profile used by the ingress component. Required.",
           "type": "string"
         },
-        "scale": {
-          "description": "Scaling configuration for the ingress component. Required.",
-          "type": "object",
-          "properties": {
-            "minReplicas": {
-              "description": "Minimum number of ingress replicas. Must be at least 2. Required.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "maxReplicas": {
-              "description": "Maximum number of ingress replicas. Must be greater than or equal to minReplicas.",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        },
         "terminationGracePeriodSeconds": {
           "description": "Time (in seconds) to allow active connections to complete on termination. Must be between 0 and 3600. Defaults to 480 seconds.",
           "type": "integer",
@@ -1607,34 +1434,6 @@
           "description": "Duration (in minutes) before idle requests are timed out. Must be between 4 and 30 inclusive. Defaults to 4 minutes.",
           "type": "integer",
           "format": "int32"
-        }
-      }
-    },
-    "DiskEncryptionConfiguration": {
-      "description": "Configuration properties for disk encryption",
-      "type": "object",
-      "properties": {
-        "keyVaultConfiguration": {
-          "description": "The Key Vault that contains your key to use for disk encryption. The Key Vault must be in the same region as the Managed Environment.",
-          "type": "object",
-          "properties": {
-            "keyUrl": {
-              "description": "Key URL pointing to a key in KeyVault. Version segment of the Url is required.",
-              "type": "string",
-              "format": "uri"
-            },
-            "auth": {
-              "description": "Configuration properties for the authentication to the Key Vault",
-              "type": "object",
-              "properties": {
-                "identity": {
-                  "description": "Resource ID of a user-assigned managed identity to authenticate to the Key Vault. The identity must be assigned to the managed environment, in the same tenant as the Key Vault, and it must have the following key permissions on the Key Vault: wrapkey, unwrapkey, get.",
-                  "type": "string",
-                  "format": "arm-id"
-                }
-              }
-            }
-          }
         }
       }
     },
@@ -1653,7 +1452,7 @@
         },
         "identity": {
           "description": "Managed identities for the Managed Environment to interact with other Azure services without maintaining any secrets or credentials in code.",
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "Managed environment resource specific properties",
@@ -1704,11 +1503,6 @@
               "type": "string",
               "readOnly": true
             },
-            "privateLinkDefaultDomain": {
-              "description": "Private Link Default Domain Name for the environment",
-              "type": "string",
-              "readOnly": true
-            },
             "staticIp": {
               "description": "Static IP of the Environment",
               "type": "string",
@@ -1716,15 +1510,7 @@
             },
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
-              "description": "Cluster configuration which enables the log daemon to export app logs to configured destination"
-            },
-            "appInsightsConfiguration": {
-              "$ref": "#/definitions/AppInsightsConfiguration",
-              "description": "Environment level Application Insights configuration"
-            },
-            "openTelemetryConfiguration": {
-              "$ref": "#/definitions/OpenTelemetryConfiguration",
-              "description": "Environment Open Telemetry configuration"
+              "description": "Cluster configuration which enables the log daemon to export app logs to configured destination."
             },
             "zoneRedundant": {
               "description": "Whether or not this Managed Environment is zone-redundant.",
@@ -1733,13 +1519,6 @@
                 "create",
                 "read"
               ]
-            },
-            "availabilityZones": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "The list of availability zones to use for managed environment"
             },
             "customDomainConfiguration": {
               "$ref": "./CommonDefinitions.json#/definitions/CustomDomainConfiguration",
@@ -1825,10 +1604,6 @@
                 "name": "PublicNetworkAccess",
                 "modelAsString": true
               }
-            },
-            "diskEncryptionConfiguration": {
-              "$ref": "#/definitions/DiskEncryptionConfiguration",
-              "description": "Disk encryption configuration for the Managed Environment."
             }
           },
           "x-ms-client-flatten": true
@@ -1872,10 +1647,6 @@
             "update"
           ],
           "x-ms-secret": true
-        },
-        "dynamicJsonColumns": {
-          "description": "Boolean indicating whether to parse json string log into dynamic json columns",
-          "type": "boolean"
         }
       }
     },
@@ -1916,11 +1687,6 @@
         "name": {
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
           "description": "Workload profile type for the workloads to run on."
-        },
-        "enableFips": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles."
         },
         "workloadProfileType": {
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
