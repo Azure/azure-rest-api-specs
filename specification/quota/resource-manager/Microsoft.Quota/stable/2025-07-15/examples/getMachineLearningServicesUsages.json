@@ -1,48 +1,46 @@
 {
   "parameters": {
-    "api-version": "2025-07-15",
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus"
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus",
+    "api-version": "2025-07-15"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "standardDv2Family",
-            "type": "Microsoft.Quota/usages",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/usages/standardDv2Family",
+            "type": "Microsoft.Quota/usages",
+            "name": "standardDv2Family",
             "properties": {
-              "name": {
-                "localizedValue": "Standard Dv2 Family vCPUs",
-                "value": "standardDv2Family"
-              },
-              "resourceType": "dedicated",
-              "unit": "Count",
               "usages": {
                 "value": 10
-              }
+              },
+              "unit": "Count",
+              "name": {
+                "value": "standardDv2Family",
+                "localizedValue": "Standard Dv2 Family vCPUs"
+              },
+              "resourceType": "dedicated"
             }
           },
           {
-            "name": "totalLowPriorityCores",
-            "type": "Microsoft.Quota/usages",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/usages/totalLowPriorityCores",
+            "type": "Microsoft.Quota/usages",
+            "name": "totalLowPriorityCores",
             "properties": {
-              "name": {
-                "localizedValue": "Total Regional Low-priority vCPUs",
-                "value": "totalLowPriorityCores"
-              },
-              "resourceType": "lowPriority",
-              "unit": "Count",
               "usages": {
                 "value": 10
-              }
+              },
+              "unit": "Count",
+              "name": {
+                "value": "totalLowPriorityCores",
+                "localizedValue": "Total Regional Low-priority vCPUs"
+              },
+              "resourceType": "lowPriority"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "Usages_List",
-  "title": "Quotas_listUsagesMachineLearningServices"
+  }
 }
