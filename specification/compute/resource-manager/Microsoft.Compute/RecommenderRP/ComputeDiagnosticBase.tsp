@@ -55,6 +55,7 @@ interface ComputeDiagnosticBases {
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@armResourceOperations
 @added(Versions.v2025_06_05_preview)
 interface CapacityBlocksOperationGroup {
   /**
@@ -65,7 +66,8 @@ interface CapacityBlocksOperationGroup {
   @autoRoute
   @get
   @action("capacityBlocks")
-  get is ArmProviderActionSync<
+  @list
+  list is ArmProviderActionSync<
     Response = CapacityBlocks,
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -79,6 +81,7 @@ interface CapacityBlocksOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@armResourceOperations
 @added(Versions.v2025_06_05_preview)
 interface RegionalCapacityBlocksOperationGroup {
   /**
@@ -89,7 +92,8 @@ interface RegionalCapacityBlocksOperationGroup {
   @autoRoute
   @get
   @action("capacityBlocks")
-  get is ArmProviderActionSync<
+  @list
+  list is ArmProviderActionSync<
     Response = CapacityBlocks,
     Scope = SubscriptionActionScope,
     Parameters = {

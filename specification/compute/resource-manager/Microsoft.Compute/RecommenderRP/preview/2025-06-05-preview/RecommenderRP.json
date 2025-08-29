@@ -44,6 +44,12 @@
     },
     {
       "name": "ComputeDiagnosticBases"
+    },
+    {
+      "name": "CapacityBlocksOperationGroup"
+    },
+    {
+      "name": "RegionalCapacityBlocksOperationGroup"
     }
   ],
   "paths": {
@@ -89,6 +95,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityBlocks": {
       "get": {
         "operationId": "CapacityBlocks_Get",
+        "tags": [
+          "CapacityBlocksOperationGroup"
+        ],
         "description": "Get available capacity blocks.",
         "parameters": [
           {
@@ -123,12 +132,18 @@
           "Returns list of capacity block objects.": {
             "$ref": "./examples/GetCapacityBlocks.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/capacityBlocks": {
       "get": {
         "operationId": "RegionalCapacityBlocks_Get",
+        "tags": [
+          "RegionalCapacityBlocksOperationGroup"
+        ],
         "description": "Get available capacity blocks by location.",
         "parameters": [
           {
@@ -166,6 +181,9 @@
           "Returns list of capacity block objects.": {
             "$ref": "./examples/GetCapacityBlocksByLocation.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -280,11 +298,16 @@
         "zone": {
           "type": "integer",
           "format": "int32",
-          "description": "Logical Zone of the Capacity Block"
+          "description": "Logical Zone of the Capacity Block",
+          "readOnly": true
         },
         "location": {
           "type": "string",
-          "description": "Location of the Capacity Block."
+          "description": "Location of the Capacity Block.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sku": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
@@ -388,12 +411,14 @@
         "start": {
           "type": "string",
           "format": "date-time",
-          "description": "Start DateTime of Capacity Block reservation."
+          "description": "Start DateTime of Capacity Block reservation.",
+          "readOnly": true
         },
         "end": {
           "type": "string",
           "format": "date-time",
-          "description": "End DateTime of Capacity Block Reservation."
+          "description": "End DateTime of Capacity Block Reservation.",
+          "readOnly": true
         }
       }
     },

@@ -127,7 +127,7 @@ model PlacementScore {
 @added(Versions.v2025_06_05_preview)
 model CapacityBlocks is Azure.Core.Page<CapacityBlock>;
 
-/** 
+/**
  * Capacity block.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -147,11 +147,13 @@ model CapacityBlockProperties {
   /**
    * Logical Zone of the Capacity Block
    */
+  @visibility(Lifecycle.Read)
   zone?: int32;
 
   /**
    * Location of the Capacity Block.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
@@ -173,10 +175,12 @@ model ScheduleProfile {
   /**
    * Start DateTime of Capacity Block reservation.
    */
+  @visibility(Lifecycle.Read)
   start?: utcDateTime;
 
   /**
    * End DateTime of Capacity Block Reservation.
    */
+  @visibility(Lifecycle.Read)
   end?: utcDateTime;
 }
