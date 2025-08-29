@@ -279,9 +279,10 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 ```yaml $(tag) == 'package-2021-01'
 input-file:
   - Microsoft.DataProtection/stable/2021-01-01/dataprotection.json
-suppressions:
-  - code: DISCRIMINATOR_PROPERTY_NOT_FOUND
+directive:
+  - suppress: DISCRIMINATOR_PROPERTY_NOT_FOUND
     from: dataprotection.json
+    where: $.definitions.OperationJobExtendedInfo
     reason: OperationJobExtendedInfo derived model has x-ms-discriminator-value but base model is missing discriminator property. This is an old spec so we will skip updating this.
 ```
 
@@ -292,9 +293,10 @@ These settings apply only when `--tag=package-2021-02-preview` is specified on t
 ```yaml $(tag) == 'package-2021-02-preview'
 input-file:
   - Microsoft.DataProtection/preview/2021-02-01-preview/dataprotection.json
-suppressions:
-  - code: DISCRIMINATOR_PROPERTY_NOT_FOUND
+directive:
+  - suppress: DISCRIMINATOR_PROPERTY_NOT_FOUND
     from: dataprotection.json
+    where: $.definitions.OperationJobExtendedInfo
     reason: OperationJobExtendedInfo derived model has x-ms-discriminator-value but base model is missing discriminator property. This is an old spec so we will skip updating this.
 ```
 
@@ -305,9 +307,10 @@ These settings apply only when `--tag=package-2021-06-preview` is specified on t
 ```yaml $(tag) == 'package-2021-06-preview'
 input-file:
   - Microsoft.DataProtection/preview/2021-06-01-preview/dataprotection.json
-suppressions:
-  - code: DISCRIMINATOR_PROPERTY_NOT_FOUND
+directive:
+  - suppress: DISCRIMINATOR_PROPERTY_NOT_FOUND
     from: dataprotection.json
+    where: $.definitions.OperationJobExtendedInfo
     reason: OperationJobExtendedInfo derived model has x-ms-discriminator-value but base model is missing discriminator property. This is an old spec so we will skip updating this.
 ```
 
