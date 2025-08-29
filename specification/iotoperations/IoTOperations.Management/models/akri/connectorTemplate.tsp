@@ -68,7 +68,12 @@ model AkriConnectorTemplateProperties {
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDeviceInboundEndpointType {
   /** A description of the device inbound endpoint. */
+  @removed(Versions.`2025-09-01-preview`)
   description?: string;
+
+  /** The display name of the device inbound endpoint. */
+  @added(Versions.`2025-09-01-preview`)
+  displayName?: string;
 
   /** The type of the device inbound endpoint. */
   endpointType: NonEmptyString;

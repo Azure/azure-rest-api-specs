@@ -4058,6 +4058,24 @@
         }
       }
     },
+    "AkriConnectorAllocatedDevice": {
+      "type": "object",
+      "description": "AkriConnector allocated device.",
+      "properties": {
+        "deviceInboundEndpointName": {
+          "type": "string",
+          "description": "The name of the inbound endpoint for the device."
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "The name of the device."
+        }
+      },
+      "required": [
+        "deviceInboundEndpointName",
+        "deviceName"
+      ]
+    },
     "AkriConnectorProperties": {
       "type": "object",
       "description": "AkriConnector properties.",
@@ -4066,6 +4084,18 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "allocatedDevices": {
+          "type": "array",
+          "description": "The allocated devices for the connector.",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorAllocatedDevice"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "deviceInboundEndpointName",
+            "deviceName"
+          ]
         },
         "healthState": {
           "type": "string",
@@ -4223,9 +4253,9 @@
       "type": "object",
       "description": "AkriConnectorTemplateDeviceInboundEndpointType properties.",
       "properties": {
-        "description": {
+        "displayName": {
           "type": "string",
-          "description": "A description of the device inbound endpoint."
+          "description": "The display name of the device inbound endpoint."
         },
         "endpointType": {
           "$ref": "#/definitions/NonEmptyString",

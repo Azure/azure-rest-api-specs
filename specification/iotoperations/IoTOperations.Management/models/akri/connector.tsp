@@ -36,5 +36,22 @@ model AkriConnectorProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  /** The allocated devices for the connector. */
+  @visibility(Lifecycle.Read)
+  @added(Versions.`2025-09-01-preview`)
+  @identifiers(#["deviceInboundEndpointName", "deviceName"])
+  allocatedDevices?: AkriConnectorAllocatedDevice[];
+
   ...ResourceHealth;
+}
+
+/** AkriConnector allocated device. */
+@added(Versions.`2025-09-01-preview`)
+model AkriConnectorAllocatedDevice {
+
+  /** The name of the inbound endpoint for the device. */
+  deviceInboundEndpointName: string;
+
+  /** The name of the device. */
+  deviceName: string;
 }

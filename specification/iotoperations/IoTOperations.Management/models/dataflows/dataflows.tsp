@@ -242,13 +242,13 @@ union DataflowHeaderActionType {
   string,
 
   @doc("Add if not present type")
-  AddIfNotPresent: "AddIfNotPresent",
+  AddIfNotPresent,
 
   @doc("Remove type")
-  Remove: "Remove",
+  Remove,
 
   @doc("Add or Replace type")
-  AddOrReplace: "AddOrReplace",
+  AddOrReplace,
 }
 
 @added(Versions.`2025-09-01-preview`)
