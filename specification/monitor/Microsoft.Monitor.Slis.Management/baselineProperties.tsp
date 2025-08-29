@@ -27,8 +27,6 @@ model Baseline {
   @doc("Specifies how evaluation is calculated, either based on calendar days or a rolling window.")
   evaluationCalculationType: EvaluationCalculationType;
 
-  @doc("A flag to determine whether alert is enabled.")
-  enableAlert: boolean;
 }
 
 @doc("Specifies the method for evaluation calculation.")
