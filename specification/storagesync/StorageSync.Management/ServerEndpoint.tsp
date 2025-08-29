@@ -138,6 +138,10 @@ interface ServerEndpoints {
   listBySyncGroup is ArmResourceListByParent<
     ServerEndpoint,
     Response = ArmResponse<ServerEndpointArray> & {
+      @header("Location")
+      @doc("Operation Status Location URI")
+      location?: string;
+
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;

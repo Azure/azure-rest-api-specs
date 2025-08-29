@@ -788,8 +788,8 @@ model SyncGroupCreateParameters
   /**
    * The parameters used to create the sync group
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties?: unknown;
 }
 
 /**

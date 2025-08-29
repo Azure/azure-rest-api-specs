@@ -2749,6 +2749,10 @@
               "$ref": "#/definitions/ServerEndpointArray"
             },
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
               "x-ms-correlation-request-id": {
                 "type": "string",
                 "description": "correlation request id."
@@ -6161,9 +6165,7 @@
       "description": "The parameters used when creating a sync group.",
       "properties": {
         "properties": {
-          "type": "object",
           "description": "The parameters used to create the sync group",
-          "additionalProperties": {},
           "x-ms-client-flatten": true
         }
       },
