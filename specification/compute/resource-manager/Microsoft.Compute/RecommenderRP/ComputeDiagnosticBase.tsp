@@ -58,6 +58,7 @@ interface CapacityBlocksOperationGroup {
   /**
    * Get available capacity blocks.
    */
+  @autoRoute
   @get
   @action("capacityBlocks")
   get is ArmProviderActionSync<
@@ -79,6 +80,7 @@ interface RegionalCapacityBlocksOperationGroup {
   /**
    * Get available capacity blocks by location.
    */
+  @autoRoute
   @get
   @action("capacityBlocks")
   get is ArmProviderActionSync<
