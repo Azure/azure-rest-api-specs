@@ -35,7 +35,7 @@ union ResourceNotRenewableReason {
 /**
  * Valid values are Regular domain: Azure will charge the full price of domain registration, SoftDeleted: Purchasing this domain will simply restore it and this operation will not cost anything.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DomainType {
   Regular,
   SoftDeleted,
@@ -44,7 +44,7 @@ enum DomainType {
 /**
  * Domain registration status.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DomainStatus {
   Active,
   Awaiting,
@@ -72,7 +72,7 @@ enum DomainStatus {
 /**
  * Domain provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ProvisioningState {
   Succeeded,
   Failed,
@@ -84,7 +84,7 @@ enum ProvisioningState {
 /**
  * Type of the Azure resource the hostname is assigned to.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AzureResourceType {
   Website,
   TrafficManager,
@@ -93,7 +93,7 @@ enum AzureResourceType {
 /**
  * Type of the DNS record.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CustomHostNameDnsRecordType {
   CName,
   A,
@@ -102,7 +102,7 @@ enum CustomHostNameDnsRecordType {
 /**
  * Type of the hostname.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum HostNameType {
   Verified,
   Managed,
@@ -111,7 +111,7 @@ enum HostNameType {
 /**
  * Current DNS type
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DnsType {
   AzureDns,
   DefaultDomainRegistrarDns,
@@ -465,7 +465,7 @@ model DomainCollection is Azure.Core.Page<Domain>;
 /**
  * Domain resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DomainProperties {
   /**
    * Administrative contact.
@@ -494,17 +494,18 @@ model DomainProperties {
   /**
    * Domain registration status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   registrationStatus?: DomainStatus;
 
   /**
    * Domain provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
   /**
    * Name servers.
    */
@@ -564,14 +565,14 @@ model DomainProperties {
   /**
    * Reasons why domain is not renewable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
 
   /**
    * Current DNS type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dnsType?: DnsType;
 
   /**
@@ -582,7 +583,7 @@ model DomainProperties {
   /**
    * Target DNS type (would be used for migration)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDnsType?: DnsType;
 
   /**
@@ -769,7 +770,7 @@ model Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -819,8 +820,8 @@ model NameIdentifierCollection is Azure.Core.Page<NameIdentifier>;
 /**
  * ARM resource for a domain.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DomainPatchResource extends ProxyOnlyResource {
   /**
    * DomainPatchResource resource specific properties
@@ -923,14 +924,14 @@ model DomainPatchResource extends ProxyOnlyResource {
     /**
      * Reasons why domain is not renewable.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read)
     domainNotRenewableReasons?: domainNotRenewableReasonsProperties[];
 
     /**
      * Current DNS type
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     dnsType?: dnsType;
 
     /**
@@ -941,7 +942,7 @@ model DomainPatchResource extends ProxyOnlyResource {
     /**
      * Target DNS type (would be used for migration)
      */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     targetDnsType?: DnsType;
 
     /**
@@ -955,17 +956,16 @@ model DomainPatchResource extends ProxyOnlyResource {
 /**
  * ARM resource for dnsType.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum dnsType {
   AzureDns,
   DefaultDomainRegistrarDns,
 }
 
-
 /**
  * Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyOnlyResource {
   /**
    * Resource Id.
@@ -998,9 +998,31 @@ model DomainOwnershipIdentifierCollection
   is Azure.Core.Page<DomainOwnershipIdentifier>;
 
 /**
+ * DomainOwnershipIdentifier resource specific properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model DomainOwnershipIdentifierProperties {
+  /**
+   * Ownership Id.
+   */
+  ownershipId?: string;
+}
+
+/**
  * Collection of Top-level domains.
  */
 model TopLevelDomainCollection is Azure.Core.Page<TopLevelDomain>;
+
+/**
+ * TopLevelDomain resource specific properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model TopLevelDomainProperties {
+  /**
+   * If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.
+   */
+  privacy?: boolean;
+}
 
 /**
  * Options for retrieving the list of top level domain legal agreements.
@@ -1060,10 +1082,10 @@ model ArmBadRequestResponse {
  */
 union domainNotRenewableReasonsProperties {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  RegistrationStatusNotSupportedForRenewal : "RegistrationStatusNotSupportedForRenewal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"  
-  ExpirationNotInRenewalTimeRange : "ExpirationNotInRenewalTimeRange",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  RegistrationStatusNotSupportedForRenewal: "RegistrationStatusNotSupportedForRenewal",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ExpirationNotInRenewalTimeRange: "ExpirationNotInRenewalTimeRange",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SubscriptionNotActive: "SubscriptionNotActive",
 }

@@ -32,23 +32,33 @@ using Microsoft.DomainRegistration;
 @@clientLocation(DomainsOperationGroup.getControlCenterSsoRequest, "Domains");
 @@clientLocation(DomainsOperationGroup.listRecommendations, "Domains");
 
-@@clientName(DomainsOperationGroup.listRecommendations::parameters.body, "parameters");
-@@clientName(DomainsOperationGroup.checkAvailability::parameters.body, "identifier");
+@@clientName(DomainsOperationGroup.listRecommendations::parameters.body,
+  "parameters"
+);
+@@clientName(DomainsOperationGroup.checkAvailability::parameters.body,
+  "identifier"
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainOwnershipIdentifier.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainPatchResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TopLevelDomain.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Domain.properties);
 
-@@OpenAPI.extension(NameIdentifierCollection.value, "x-ms-identifiers", #["name"]);
-@@OpenAPI.extension(TldLegalAgreementCollection.value, "x-ms-identifiers", #["agreementKey"]);
+@@OpenAPI.extension(NameIdentifierCollection.value,
+  "x-ms-identifiers",
+  #["name"]
+);
+@@OpenAPI.extension(TldLegalAgreementCollection.value,
+  "x-ms-identifiers",
+  #["agreementKey"]
+);
 
 @@clientLocation(Operations.list, "DomainRegistrationProvider");
 @@clientName(Operations.list, "ListOperations");

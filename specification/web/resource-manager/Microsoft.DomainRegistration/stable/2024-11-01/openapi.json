@@ -525,11 +525,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -546,7 +541,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Domain"
         },
         "x-ms-long-running-operation": true
       },
@@ -1257,14 +1253,8 @@
       "description": "Domain ownership Identifier.",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/DomainOwnershipIdentifierProperties",
           "description": "DomainOwnershipIdentifier resource specific properties",
-          "properties": {
-            "ownershipId": {
-              "type": "string",
-              "description": "Ownership Id."
-            }
-          },
           "x-ms-client-flatten": true
         }
       },
@@ -1294,6 +1284,16 @@
       "required": [
         "value"
       ]
+    },
+    "DomainOwnershipIdentifierProperties": {
+      "type": "object",
+      "description": "DomainOwnershipIdentifier resource specific properties",
+      "properties": {
+        "ownershipId": {
+          "type": "string",
+          "description": "Ownership Id."
+        }
+      }
     },
     "DomainPatchResource": {
       "type": "object",
@@ -1836,14 +1836,8 @@
       "description": "A top level domain object.",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/TopLevelDomainProperties",
           "description": "TopLevelDomain resource specific properties",
-          "properties": {
-            "privacy": {
-              "type": "boolean",
-              "description": "If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>."
-            }
-          },
           "x-ms-client-flatten": true
         }
       },
@@ -1887,6 +1881,16 @@
       "required": [
         "value"
       ]
+    },
+    "TopLevelDomainProperties": {
+      "type": "object",
+      "description": "TopLevelDomain resource specific properties",
+      "properties": {
+        "privacy": {
+          "type": "boolean",
+          "description": "If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>."
+        }
+      }
     },
     "dnsType": {
       "type": "string",

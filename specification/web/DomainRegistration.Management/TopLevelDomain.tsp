@@ -16,12 +16,7 @@ namespace Microsoft.DomainRegistration;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
 model TopLevelDomain
-  is Azure.ResourceManager.ProxyResource<{
-  /**
-   * If <code>true</code>, then the top level domain supports domain privacy; otherwise, <code>false</code>.
-   */
-  privacy?: boolean;
-}> {
+  is Azure.ResourceManager.ProxyResource<TopLevelDomainProperties> {
   ...ResourceNameParameter<
     Resource = TopLevelDomain,
     KeyName = "name",
@@ -53,7 +48,7 @@ interface TopLevelDomains {
    * Description for Gets all legal agreements that user needs to accept before purchasing a domain.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
+  @list
   listAgreements is ArmResourceActionSync<
     TopLevelDomain,
     TopLevelDomainAgreementOption,
