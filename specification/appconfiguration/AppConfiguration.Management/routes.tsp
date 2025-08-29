@@ -21,6 +21,7 @@ interface ConfigurationStoresOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConfigurationStores_ListDeleted")
   @autoRoute
+  @list
   @get
   @action("deletedConfigurationStores")
   listDeleted is ArmProviderActionSync<
