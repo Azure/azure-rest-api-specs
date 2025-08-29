@@ -58,5 +58,9 @@ using Microsoft.AppConfiguration;
   Operations
 );
 
-
-@@clientName(OperationsOperationGroup.checkNameAvailability::parameters.body, "checkNameAvailabilityParameters");
+@@clientName(OperationsOperationGroup.checkNameAvailability::parameters.body,
+  "checkNameAvailabilityParameters"
+);
+@@clientName(OperationsOperationGroup.regionalCheckNameAvailability::parameters.body,
+  "checkNameAvailabilityParameters"
+);

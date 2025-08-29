@@ -30,7 +30,6 @@ interface DeletedConfigurationStores {
    * Gets a deleted Azure app configuration store.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConfigurationStores_GetDeleted")
   getDeleted is ArmResourceRead<
     DeletedConfigurationStore,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -41,7 +40,6 @@ interface DeletedConfigurationStores {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Long-running post operations must have 202 and default responses. They must also have a 200 response if the final response has a schema. They must not have any other responses."
-  @operationId("ConfigurationStores_PurgeDeleted")
   @action("purge")
   purgeDeleted is ArmResourceActionAsync<
     DeletedConfigurationStore,
