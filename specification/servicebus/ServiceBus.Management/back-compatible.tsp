@@ -79,8 +79,6 @@ using Microsoft.ServiceBus;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SBSubscription.properties);
 
-@@clientName(Microsoft.ServiceBus.Resource, "ResourceAutogen", "python");
-
 @@clientName(NamespacesOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
