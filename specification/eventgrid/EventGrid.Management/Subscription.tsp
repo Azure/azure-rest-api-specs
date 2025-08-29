@@ -51,8 +51,11 @@ interface Subscriptions {
   update is ArmCustomPatchAsync<
     Subscription,
     PatchModel = SubscriptionUpdateParameters,
-    Response = ArmResponse<Subscription> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = Subscription> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    Response = ArmResponse<Subscription> | (ArmAcceptedLroResponse<
+      "EventSubscription update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = Subscription> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
       @bodyRoot
       _: Subscription;
     })

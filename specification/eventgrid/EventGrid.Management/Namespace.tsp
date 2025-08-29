@@ -54,8 +54,11 @@ interface Namespaces {
   update is ArmCustomPatchAsync<
     Namespace,
     PatchModel = NamespaceUpdateParameters,
-    Response = ArmResponse<Namespace> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = Namespace> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    Response = ArmResponse<Namespace> | (ArmAcceptedLroResponse<
+      "Namespace update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = Namespace> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
       @bodyRoot
       _: Namespace;
     })
