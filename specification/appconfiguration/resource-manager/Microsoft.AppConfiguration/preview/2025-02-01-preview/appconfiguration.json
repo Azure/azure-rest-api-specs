@@ -228,7 +228,55 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/deletedConfigurationStores/{configStoreName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "Operations_RegionalCheckNameAvailability",
+        "description": "Checks whether the configuration store name is available for use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "checkNameAvailabilityParameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationStores_CheckNameAvailable": {
+            "$ref": "./examples/RegionalCheckNameAvailable.json"
+          },
+          "ConfigurationStores_CheckNameNotAvailable": {
+            "$ref": "./examples/RegionalCheckNameNotAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/locations/{location}/deletedConfigurationStores/{configStoreName}": {
       "get": {
         "operationId": "ConfigurationStores_GetDeleted",
         "tags": [
@@ -241,6 +289,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "configStoreName",
@@ -274,7 +325,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/deletedConfigurationStores/{configStoreName}/purge": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/locations/{location}/deletedConfigurationStores/{configStoreName}/purge": {
       "post": {
         "operationId": "ConfigurationStores_PurgeDeleted",
         "tags": [
@@ -287,6 +338,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "configStoreName",
@@ -337,54 +391,6 @@
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20Azure.ResourceManager.%7B%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/locations/{location}/checkNameAvailability": {
-      "post": {
-        "operationId": "Operations_RegionalCheckNameAvailability",
-        "description": "Checks whether the configuration store name is available for use.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "checkNameAvailabilityParameters",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/NameAvailabilityStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConfigurationStores_CheckNameAvailable": {
-            "$ref": "./examples/RegionalCheckNameAvailable.json"
-          },
-          "ConfigurationStores_CheckNameNotAvailable": {
-            "$ref": "./examples/RegionalCheckNameNotAvailable.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores": {

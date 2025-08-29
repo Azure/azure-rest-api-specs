@@ -13,7 +13,7 @@ namespace Microsoft.AppConfiguration;
 /**
  * Deleted configuration store information with extended details.
  */
-@subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model DeletedConfigurationStore
   is Azure.ResourceManager.ProxyResource<DeletedConfigurationStoreProperties> {
   ...ResourceNameParameter<
