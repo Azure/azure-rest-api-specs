@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace ResourceIntelligenceClient;
+namespace Microsoft.ResourceIntelligence;
 
 @armResourceOperations
 interface QueryOperationGroup {

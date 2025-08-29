@@ -24,10 +24,10 @@ using TypeSpec.Versioning;
  * // (missing-service-description) Add service description
  */
 @armProviderNamespace
-@service(#{ title: "ResourceIntelligenceClient" })
+@service(#{ title: "Microsoft.ResourceIntelligence" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-namespace ResourceIntelligenceClient;
+namespace Microsoft.ResourceIntelligence;
 
 /**
  * The available API versions.

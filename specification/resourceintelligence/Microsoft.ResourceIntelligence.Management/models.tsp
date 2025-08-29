@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace ResourceIntelligenceClient;
+namespace Microsoft.ResourceIntelligence;
 
 /**
  * The role which generates a specific message. Restricted to the user or assistant role.
