@@ -1459,6 +1459,10 @@ namespace Storage.Blob {
           ...VersionIdParameter;
           ...LeaseIdOptionalParameter;
           ...IfTagsParameter;
+          ...IfBlobModifiedSinceHeader;
+          ...IfBlobUnmodifiedSinceHeader;
+          ...IfBlobMatchHeader;
+          ...IfBlobNoneMatchHeader;
         },
         {
           ...DateResponseHeader;
@@ -1487,6 +1491,11 @@ namespace Storage.Blob {
           /** The blob tags. */
           @body
           tags: BlobTags;
+
+          ...IfBlobModifiedSinceHeader;
+          ...IfBlobUnmodifiedSinceHeader;
+          ...IfBlobMatchHeader;
+          ...IfBlobNoneMatchHeader;
         },
         {
           @statusCode statusCode: 204;
