@@ -1,0 +1,11 @@
+# TypeSpec validation suppressions for ResourceNotifications TypeSpec project
+# This file suppresses TypeSpec validation rules, not OpenAPI validation rules
+# OpenAPI suppressions are handled separately in the generated swagger directories
+
+# Suppress TypeSpec validation for generated OpenAPI suppressions files
+- tool: TypeSpecValidation
+  paths: 
+    - "../resource-manager/Microsoft.ResourceNotifications/preview/2025-08-01-preview/suppressions.yaml"
+  reason: "OpenAPI suppressions file should not be validated by TypeSpec validation tools"
+  rules: 
+    - "Compile"
