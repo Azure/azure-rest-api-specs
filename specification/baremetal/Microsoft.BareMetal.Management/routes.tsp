@@ -19,7 +19,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface LocationsUtilization {
   /**
    * Get the Utilization for all clusters in the given location
-   * New API route starting from 2025-02-01-preview
+   * New API route starting from 2025-08-01-preview
    */
   @armResourceList(ClusterProperties)
   @route("/providers/Microsoft.BareMetal/locations/{location}/utilization")
