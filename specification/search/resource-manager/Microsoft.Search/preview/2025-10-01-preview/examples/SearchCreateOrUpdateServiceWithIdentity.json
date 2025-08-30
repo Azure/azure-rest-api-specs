@@ -1,0 +1,157 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "subid",
+    "service": {
+      "location": "westus",
+      "tags": {
+        "app-name": "My e-commerce app"
+      },
+      "sku": {
+        "name": "standard"
+      },
+      "properties": {
+        "replicaCount": 3,
+        "partitionCount": 1,
+        "hostingMode": "default",
+        "computeType": "default"
+      },
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-mi": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "endpoint": "https://mysearchservice.search.windows.net/",
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "computeType": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": [],
+            "bypass": "None"
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": [],
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified",
+            "encryptionComplianceStatus": "Compliant"
+          },
+          "disableLocalAuth": false,
+          "authOptions": {
+            "aadOrApiKey": {
+              "aadAuthFailureMode": "http401WithBearerChallenge"
+            }
+          },
+          "dataExfiltrationProtections": [],
+          "upgradeAvailable": "notAvailable",
+          "serviceUpgradedAt": null
+        },
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "9d1e1f18-2122-4988-a11c-878782e40a5c",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-mi": {
+              "clientId": "cd1dcac8-82dd-45b5-9aed-76795d529f6b",
+              "principalId": "24e07a75-1286-41e5-a15d-ded85ec3acd7"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "My e-commerce app",
+          "createdByType": "Application",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "fakeuser@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-01T00:00:00Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 3,
+          "partitionCount": 1,
+          "endpoint": "https://mysearchservice.search.windows.net/",
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "computeType": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": [],
+            "bypass": "None"
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": [],
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified",
+            "encryptionComplianceStatus": "Compliant"
+          },
+          "disableLocalAuth": false,
+          "authOptions": {
+            "aadOrApiKey": {
+              "aadAuthFailureMode": "http401WithBearerChallenge"
+            }
+          },
+          "dataExfiltrationProtections": [],
+          "upgradeAvailable": "notAvailable",
+          "serviceUpgradedAt": null
+        },
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "9d1e1f18-2122-4988-a11c-878782e40a5c",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-mi": {
+              "clientId": "cd1dcac8-82dd-45b5-9aed-76795d529f6b",
+              "principalId": "24e07a75-1286-41e5-a15d-ded85ec3acd7"
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "My e-commerce app",
+          "createdByType": "Application",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "fakeuser@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-01T00:00:00Z"
+        }
+      }
+    }
+  }
+}
