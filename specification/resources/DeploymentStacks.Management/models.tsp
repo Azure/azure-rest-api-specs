@@ -54,6 +54,19 @@ union DeploymentStacksDeleteDetachEnum {
 }
 
 /**
+ * Specifies an action for resources that do not support deletion.
+ */
+union DeploymentStacksResourcesWithoutDeleteSupportEnum {
+  string,
+
+  /** Detach the specified resources from the deployment stack and continue */
+  Detach: "detach",
+
+  /** Fail the deployment stack if resources cannot be deleted */
+  Fail: "fail",
+}
+
+/**
  * denySettings Mode that defines denied actions.
  */
 union DenySettingsMode {
@@ -113,6 +126,10 @@ union DeploymentStackProvisioningState {
 
   /** The deployment stack is being deleted */
   Deleting: "deleting",
+
+  /** The deployment stack is currently being initialized */
+  @added(Versions.v2025_07_01)
+  Initializing: "initializing",
 }
 
 /**
@@ -201,6 +218,13 @@ model ActionOnUnmanageDeleteParameters {
    */
   @query("unmanageAction.ManagementGroups")
   unmanageActionManagementGroups?: DeploymentStacksDeleteDetachEnum;
+
+  /**
+   * Some resources do not support deletion.  This flag will denote how the stack should handle those resources.
+   */
+  @query("unmanageAction.ResourcesWithoutDeleteSupport")
+  @added(Versions.v2025_07_01)
+  unmanageActionResourcesWithoutDeleteSupport?: DeploymentStacksResourcesWithoutDeleteSupportEnum;
 
   /**
    * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
@@ -459,6 +483,12 @@ model ActionOnUnmanage {
    * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
    */
   managementGroups?: DeploymentStacksDeleteDetachEnum;
+
+  /**
+   * Some resources do not support deletion.  This flag will denote how the stack should handle those resources.
+   */
+  @added(Versions.v2025_07_01)
+  resourcesWithoutDeleteSupport?: DeploymentStacksResourcesWithoutDeleteSupportEnum;
 }
 
 /**
