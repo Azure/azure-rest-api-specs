@@ -45,6 +45,7 @@ union TriggerType {
 }
 
 @doc("Base model for Trigger of the schedule.")
+@discriminator("type")
 @added(Versions.v2025_07_31_preview)
 model Trigger {
   @doc("Type of the trigger.")
@@ -81,9 +82,18 @@ union RecurrencePatternType {
   Monthly: "Monthly",
 }
 
+@doc("Base model for the recurrence pattern.")
+@discriminator("type")
+@added(Versions.v2025_07_31_preview)
+model RecurrencePattern {
+  @doc("Type of the recurrence pattern.")
+  type: RecurrencePatternType;
+}
+
 @doc("Recurrence pattern for the schedule.")
 @added(Versions.v2025_07_31_preview)
-model HourlyRecurrencePattern {
+model HourlyRecurrencePattern extends RecurrencePattern {
+  @doc("Type of the recurrence pattern.")
   type: RecurrencePatternType.Hourly;
 
   @doc("Interval in hours for the hourly recurrence.")
@@ -92,7 +102,8 @@ model HourlyRecurrencePattern {
 
 @doc("Recurrence pattern for the schedule.")
 @added(Versions.v2025_07_31_preview)
-model DailyRecurrencePattern {
+model DailyRecurrencePattern extends RecurrencePattern {
+  @doc("Type of the recurrence pattern.")
   type: RecurrencePatternType.Daily;
 
   @doc("Interval in days for the daily recurrence.")
@@ -104,7 +115,8 @@ model DailyRecurrencePattern {
 
 @doc("Recurrence pattern for the schedule.")
 @added(Versions.v2025_07_31_preview)
-model WeeklyRecurrencePattern {
+model WeeklyRecurrencePattern extends RecurrencePattern {
+  @doc("Type of the recurrence pattern.")
   type: RecurrencePatternType.Weekly;
 
   @doc("Interval in weeks for the weekly recurrence. Possible values: 1-3")
@@ -119,7 +131,8 @@ model WeeklyRecurrencePattern {
 
 @doc("Recurrence pattern for the schedule.")
 @added(Versions.v2025_07_31_preview)
-model MonthlyRecurrencePattern {
+model MonthlyRecurrencePattern extends RecurrencePattern {
+  @doc("Type of the recurrence pattern.")
   type: RecurrencePatternType.Monthly;
 
   @doc("Interval in months for the monthly recurrence. Possible values: 1-12")
@@ -135,14 +148,11 @@ model MonthlyRecurrencePattern {
 @doc("Recurrence based trigger.")
 @added(Versions.v2025_07_31_preview)
 model RecurrenceTrigger extends Trigger {
+  @doc("Type of the trigger.")
   type: TriggerType.Recurrence;
 
   @doc("Recurrence pattern for the schedule.")
-  recurrencePattern:
-    | HourlyRecurrencePattern
-    | DailyRecurrencePattern
-    | WeeklyRecurrencePattern
-    | MonthlyRecurrencePattern;
+  recurrencePattern: RecurrencePattern;
 
   @doc("Time zone for the recurrence schedule.")
   timeZone: string;
@@ -164,7 +174,11 @@ model OneTimeTrigger extends Trigger {
 @added(Versions.v2025_07_31_preview)
 union ScheduleTaskType {
   string,
+
+  @doc("Evaluation task.")
   Evaluation: "Evaluation",
+
+  @doc("Agent run analysis task.")
   AgentRunAnalysis: "AgentAnalysis",
 }
 
@@ -184,11 +198,13 @@ model ScheduleTask {
   @doc("Configuration for the task.")
   configuration: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
   @doc("Definition of the task. JSON payload that will be used by task execution provider.")
   definition: unknown;
 }
 
 @doc("Schedule model.")
+@resource("schedules")
 @added(Versions.v2025_07_31_preview)
 model Schedule {
   @doc("Identifier of the schedule.")
@@ -248,6 +264,7 @@ union ScheduleRunTriggerStatus {
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
   @key("id")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "id")
   id: string;
 
@@ -269,15 +286,14 @@ model ScheduleRun {
 @added(Versions.v2025_07_31_preview)
 union ScheduleRunEventAction {
   string,
+
+  @doc("Skip action for schedule run event.")
   Skip: "Skip",
 }
 
 @doc("Event model for schedule run actions.")
 @added(Versions.v2025_07_31_preview)
 model ScheduleRunEvent {
-  @doc("Identifier of the schedule.")
-  scheduleId: string;
-
   @doc("Index of the schedule run to be acted upon from the last triggered run. Possible values 1-5.")
   scheduleRunIndex: int32;
 

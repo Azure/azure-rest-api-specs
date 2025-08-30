@@ -16,7 +16,6 @@ alias ScheduleServiceTraits = SupportsClientRequestId &
 
 alias ScheduleOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
 
-@route("schedules")
 @added(Versions.v2025_07_31_preview)
 @removed(Versions.v1)
 interface Schedules {
@@ -41,15 +40,20 @@ interface Schedules {
     ResourceCreatedResponse<Schedule>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a schedule run event.")
   @post
-  @route("runEvent")
+  @route("schedules/{scheduleId}/runEvent")
   createRunEvent is Azure.Core.Foundations.Operation<
     {
+      @doc("Identifier of the schedule.")
+      @path
+      scheduleId: string;
+
       @doc("Schedule run event")
       @body
       ScheduleEvent: ScheduleRunEvent;
     },
-    Http.Response<200> | Http.Response<400> | Http.Response<default>
+    Http.Response<204>
   >;
 }
