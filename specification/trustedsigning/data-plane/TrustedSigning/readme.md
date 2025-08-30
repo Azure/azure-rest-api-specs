@@ -35,7 +35,7 @@ These settings apply only when `--tag=2023-06-15-preview` is specified on the co
 
 ```yaml $(tag) == '2023-06-15-preview'
 input-file:
-  - Azure.Developer.TrustedSigning/preview/2023-06-15-preview/azure.developer.trustedsigning.json
+  - preview/2023-06-15-preview/azure.developer.trustedsigning.json
 ```
 
 ## Suppression
