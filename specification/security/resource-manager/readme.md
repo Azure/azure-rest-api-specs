@@ -157,6 +157,14 @@ input-file:
   - Microsoft.Security/preview/2025-07-01-preview/operations.json
 ```
 
+### Tag: package-2025-06
+These settings apply only when `--tag=package-2025-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06'
+input-file:
+  - Microsoft.Security/stable/2025-06-01/defenderForStorageSettings.json
+```
+
 ### Tag: package-preview-2025-02
 These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
 
