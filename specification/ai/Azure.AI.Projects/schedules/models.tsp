@@ -61,7 +61,13 @@ model CronTrigger extends Trigger {
   cronExpression: string;
 
   @doc("Time zone for the cron schedule.")
-  timeZone: string;
+  timeZone?: string = "UTC";
+
+  @doc("Start time for the cron schedule in ISO 8601 format.")
+  startTime: string;
+
+  @doc("End time for the cron schedule in ISO 8601 format.")
+  endTime: string;
 }
 
 @doc("Recurrence pattern type.")
@@ -88,6 +94,12 @@ union RecurrencePatternType {
 model RecurrencePattern {
   @doc("Type of the recurrence pattern.")
   type: RecurrencePatternType;
+
+  @doc("Start time for the recurrence pattern in ISO 8601 format.")
+  startTime: string;
+
+  @doc("End time for the recurrence pattern in ISO 8601 format.")
+  endTime: string;
 }
 
 @doc("Recurrence pattern for the schedule.")
@@ -155,7 +167,7 @@ model RecurrenceTrigger extends Trigger {
   recurrencePattern: RecurrencePattern;
 
   @doc("Time zone for the recurrence schedule.")
-  timeZone: string;
+  timeZone?: string = "UTC";
 }
 
 @doc("One-time trigger.")
@@ -167,7 +179,7 @@ model OneTimeTrigger extends Trigger {
   triggerAt: string;
 
   @doc("Time zone for the one-time trigger.")
-  timeZone: string;
+  timeZone?: string = "UTC";
 }
 
 @doc("Type of the task.")
@@ -203,8 +215,8 @@ model ScheduleTask {
   definition: unknown;
 }
 
-@doc("Schedule model.")
 @resource("schedules")
+@doc("Schedule model.")
 @added(Versions.v2025_07_31_preview)
 model Schedule {
   @doc("Identifier of the schedule.")
@@ -225,10 +237,6 @@ model Schedule {
 
   @doc("Task for the schedule.")
   task: ScheduleTask;
-
-  @visibility(Lifecycle.Read)
-  @doc("Schedule's runs.")
-  runs?: ScheduleRun[];
 
   @doc("Schedule's tags. Unlike properties, tags are fully mutable.")
   tags?: Record<string>;
@@ -260,6 +268,7 @@ union ScheduleRunTriggerStatus {
 }
 
 @doc("Schedule run model.")
+@resource("schedules/{scheduleId}/runs")
 @added(Versions.v2025_07_31_preview)
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
@@ -269,7 +278,7 @@ model ScheduleRun {
   id: string;
 
   @doc("Identifier of the schedule.")
-  scheduleId?: string;
+  scheduleId: string;
 
   @doc("Trigger status of the schedule run.")
   @visibility(Lifecycle.Read)
