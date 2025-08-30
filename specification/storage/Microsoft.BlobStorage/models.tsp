@@ -2352,3 +2352,10 @@ alias IfBlobUnmodifiedSinceHeader = {
   @encode("rfc7231")
   ifUnmodifiedSince?: utcDateTime;
 };
+
+alias ListBlobsStartFrom = {
+  /** Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive) */
+  @added(Versions.v2026_02_06)
+  @query
+  startFrom?: string;
+};
