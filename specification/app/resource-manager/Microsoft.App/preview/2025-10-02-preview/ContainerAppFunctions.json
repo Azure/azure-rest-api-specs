@@ -1,0 +1,414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-10-02-preview",
+    "title": "ContainerApps API Client",
+    "description": "Container App Functions API for managing functions within Container Apps and their revisions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/functions": {
+      "get": {
+        "tags": [
+          "ContainerAppRevisionFunctions"
+        ],
+        "summary": "Get the Functions for a given Container App Revision.",
+        "operationId": "ContainerAppRevisionFunctions_ListFunctions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "Name of the Container App Revision.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppRevisionFunctionCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container App Revision's functions": {
+            "$ref": "./examples/ContainerAppRevisionFunctions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/functions/{functionName}": {
+      "get": {
+        "tags": [
+          "ContainerAppRevisionFunctions"
+        ],
+        "summary": "Get a function of a Container App Revision.",
+        "operationId": "ContainerAppRevisionFunctions_GetFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "Name of the Container App Revision.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Name of the Function.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppRevisionFunction"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App Revision's function": {
+            "$ref": "./examples/ContainerAppRevisionFunctions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/functions": {
+      "get": {
+        "tags": [
+          "ContainerAppFunctions"
+        ],
+        "summary": "Get the Functions for a given Container App.",
+        "operationId": "ContainerAppFunctions_ListFunctions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppFunctionCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container App's functions": {
+            "$ref": "./examples/ContainerAppFunctions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/functions/{functionName}": {
+      "get": {
+        "tags": [
+          "ContainerAppFunctions"
+        ],
+        "summary": "Get a function of a Container App.",
+        "operationId": "ContainerAppFunctions_GetFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Name of the Function.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppFunction"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container App's function": {
+            "$ref": "./examples/ContainerAppFunctions_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerAppRevisionFunction": {
+      "description": "Container App Revision Function.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Function resource specific properties",
+          "type": "object",
+          "properties": {
+            "revisionName": {
+              "description": "Name of the Container App Revision.",
+              "type": "string",
+              "readOnly": true
+            },
+            "name": {
+              "description": "Name of the Function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "invokeUrl": {
+              "description": "Invoke URL for the function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "triggerType": {
+              "description": "Trigger type of the function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "language": {
+              "description": "Programming language of the function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "isDisabled": {
+              "description": "Indicates whether the function is disabled.",
+              "type": "boolean",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContainerAppRevisionFunctionCollection": {
+      "description": "Container App Revision Functions collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppRevisionFunction"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerAppFunction": {
+      "description": "Container App Function.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Function resource specific properties",
+          "type": "object",
+          "properties": {
+            "revisionName": {
+              "description": "Name of the Container App Revision.",
+              "type": "string",
+              "readOnly": true
+            },
+            "name": {
+              "description": "Name of the Function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "invokeUrl": {
+              "description": "Invoke URL for the function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "triggerType": {
+              "description": "Trigger type of the function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "language": {
+              "description": "Programming language of the function.",
+              "type": "string",
+              "readOnly": true
+            },
+            "isDisabled": {
+              "description": "Indicates whether the function is disabled.",
+              "type": "boolean",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContainerAppFunctionCollection": {
+      "description": "Container App Functions collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerAppFunction"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
