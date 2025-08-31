@@ -6,12 +6,13 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/signalr.json"
+    output-file: "{version-status}/{version}/signalr.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
     emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
     package-dir: "Azure.ResourceManager.SignalR"
