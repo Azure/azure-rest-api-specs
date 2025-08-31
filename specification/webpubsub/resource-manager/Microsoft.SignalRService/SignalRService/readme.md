@@ -77,7 +77,7 @@ These settings apply only when `--tag=package-2021-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-10-01'
 input-file:
-- Microsoft.SignalRService/stable/2021-10-01/webpubsub.json
+- stable/2021-10-01/webpubsub.json
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -86,7 +86,7 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2021-09-01-preview/webpubsub.json
+- preview/2021-09-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -95,7 +95,7 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2021-06-01-preview/webpubsub.json
+- preview/2021-06-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2021-04-01-preview
@@ -104,7 +104,7 @@ These settings apply only when `--tag=package-2021-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-04-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2021-04-01-preview/webpubsub.json
+- preview/2021-04-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2022-08-01-preview
@@ -113,7 +113,7 @@ These settings apply only when `--tag=package-2022-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-08-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2022-08-01-preview/webpubsub.json
+- preview/2022-08-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2023-02-01
@@ -122,7 +122,7 @@ These settings apply only when `--tag=package-2023-02-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-02-01'
 input-file:
-- Microsoft.SignalRService/stable/2023-02-01/webpubsub.json
+- stable/2023-02-01/webpubsub.json
 ```
 
 ### Tag: package-2023-03-01-preview
@@ -131,7 +131,7 @@ These settings apply only when `--tag=package-2023-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-03-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2023-03-01-preview/webpubsub.json
+- preview/2023-03-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -140,7 +140,7 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2023-06-01-preview/webpubsub.json
+- preview/2023-06-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2023-08-01-preview
@@ -149,7 +149,7 @@ These settings apply only when `--tag=package-2023-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-08-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2023-08-01-preview/webpubsub.json
+- preview/2023-08-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2024-01-01-preview
@@ -158,7 +158,7 @@ These settings apply only when `--tag=package-2024-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-01-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2024-01-01-preview/webpubsub.json
+- preview/2024-01-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2024-03-01
@@ -167,7 +167,7 @@ These settings apply only when `--tag=package-2024-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-03-01'
 input-file:
-- Microsoft.SignalRService/stable/2024-03-01/webpubsub.json
+- stable/2024-03-01/webpubsub.json
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -176,7 +176,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2024-04-01-preview/webpubsub.json
+- preview/2024-04-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2024-08-01-preview
@@ -185,7 +185,7 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2024-08-01-preview/webpubsub.json
+- preview/2024-08-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -194,7 +194,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2024-10-01-preview/webpubsub.json
+- preview/2024-10-01-preview/webpubsub.json
 ```
 
 ### Tag: package-2025-01-01-preview
@@ -203,7 +203,7 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-01-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2025-01-01-preview/webpubsub.json
+- preview/2025-01-01-preview/webpubsub.json
 ```
 
 ---

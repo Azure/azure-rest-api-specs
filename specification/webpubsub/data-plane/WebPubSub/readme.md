@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
-  - WebPubSub/stable/2024-12-01/webpubsub.json
+  - stable/2024-12-01/webpubsub.json
 ```
 
 ### Tag: package-2024-01
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - WebPubSub/stable/2024-01-01/webpubsub.json
+  - stable/2024-01-01/webpubsub.json
 ```
 ### Tag: package-2023-07-01
 
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2023-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-07-01'
 input-file:
-  - WebPubSub/stable/2023-07-01/webpubsub.json
+  - stable/2023-07-01/webpubsub.json
 ```
 
 ### Tag: package-2022-11-01
@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2022-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-11-01'
 input-file:
-  - WebPubSub/stable/2022-11-01/webpubsub.json
+  - stable/2022-11-01/webpubsub.json
 title: AzureMessagingWebPubSubServiceClient
 ```
 
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2021-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-10-01'
 input-file:
-  - WebPubSub/stable/2021-10-01/webpubsub.json
+  - stable/2021-10-01/webpubsub.json
 title: AzureMessagingWebPubSubServiceClient
 ```
 
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-2021-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-08-01-preview'
 input-file:
-  - WebPubSub/preview/2021-08-01-preview/webpubsub.json
+  - preview/2021-08-01-preview/webpubsub.json
 title: AzureMessagingWebPubSubServiceClient
 ```
 
@@ -102,7 +102,7 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-  - WebPubSub/preview/2021-05-01-preview/webpubsub.json
+  - preview/2021-05-01-preview/webpubsub.json
 title: AzureMessagingWebPubSubServiceClient
 ```
 
@@ -171,7 +171,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/WebPubSub/preview/2021-05-01-preview/webpubsub.json
+  - $(this-folder)/preview/2021-05-01-preview/webpubsub.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,
