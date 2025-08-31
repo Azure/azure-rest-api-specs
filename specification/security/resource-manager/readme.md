@@ -163,6 +163,7 @@ These settings apply only when `--tag=package-2025-06` is specified on the comma
 ```yaml $(tag) == 'package-2025-06'
 input-file:
   - Microsoft.Security/stable/2025-06-01/defenderForStorageSettings.json
+  - Microsoft.Security/stable/2025-06-01/operations.json
 ```
 
 ### Tag: package-preview-2025-02
