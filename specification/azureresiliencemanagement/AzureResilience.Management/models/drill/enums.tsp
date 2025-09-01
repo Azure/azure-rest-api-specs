@@ -32,8 +32,8 @@ union ExecutionState {
 /**
  * Enum of the readiness state.
  */
-@doc("Drill Readiness State")
-union ReadinessState {
+@doc("Drill Execution Readiness State")
+union ExecutionReadinessState {
   string,
 
   @doc("Drill is ready to run.")
@@ -335,4 +335,21 @@ union DrillRunTasks {
 
   @doc("ReprotectReverse task.")
   ReprotectReverse: "ReprotectReverse",
+}
+
+/**
+ * Enum for Health Status.
+ */
+@doc("Enum for Health Status.")
+union HealthStatus {
+  string,
+
+  @doc("Healthy status.")
+  Healthy: "Healthy",
+
+  @doc("Degraded status.")
+  Degraded: "Degraded",
+
+  @doc("Unhealthy Status.")
+  Unhealthy: "Unhealthy",
 }

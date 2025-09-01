@@ -51,6 +51,9 @@ model DrillProperties {
   @doc("Metric properties.")
   metricsProperties?: MetricsProperties;
 
+  @doc("HealthModel properties.")
+  healthModelProperties?: HealthModelProperties;
+
   @doc("ROPlan properties.")
   roPlanProperties: RoPlanProperties;
 
@@ -63,7 +66,7 @@ model DrillProperties {
 
   @doc("Readiness state of the Drill.")
   @visibility(Lifecycle.Read)
-  readinessState?: ReadinessState;
+  executionReadinessState?: ExecutionReadinessState;
 
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
@@ -174,6 +177,22 @@ model MetricsProperties {
   @doc("Metrics associated with this Drill. These will be tracked through the Drill Run.")
   @OpenAPI.extension("x-ms-identifiers", #[])
   metricsToTrack: MetricsToTrack[];
+}
+
+/**
+ * Model that represents the Health Model properties
+ */
+@doc("Health Model properties.")
+model HealthModelProperties {
+  @doc("Identity to use for Health Model operations.")
+  identity: AssociatedIdentity;
+
+  @doc("Full ARM Id of the Health Model.")
+  healthModelId: armResourceIdentifier<[
+    {
+      type: "Microsoft.CloudHealth/healthmodels";
+    }
+  ]>;
 }
 
 /**
@@ -361,8 +380,12 @@ model ResourceLists {
 
 @doc("Include or Update resource")
 model IncludeOrUpdateResource {
-  @doc("Resource Id.")
-  resourceId: armResourceIdentifier<[]>;
+  @doc("Id of the DrillResource to be included (NOT the ARM Id of the underlying resource).")
+  id: armResourceIdentifier<[
+    {
+      type: "microsoft.azureresiliencemanagement/drills/drillresources";
+    }
+  ]>;
 
   @doc("Fault properties.")
   faultProperties?: FaultProperties;
@@ -388,7 +411,14 @@ model AddOrUpdateResourcesResponse {
 
 @doc("Failed Include, Exclude or Update resource.")
 model FailedDrillResource {
-  @doc("Resource Id.")
+  @doc("Id of the failed drill resource.")
+  id: armResourceIdentifier<[
+    {
+      type: "microsoft.azureresiliencemanagement/drills/drillresources";
+    }
+  ]>;
+
+  @doc("Resource Id of the underlying resource of the failed Drill resource.")
   resourceId: armResourceIdentifier<[]>;
 
   @doc("T and C assignment error.")

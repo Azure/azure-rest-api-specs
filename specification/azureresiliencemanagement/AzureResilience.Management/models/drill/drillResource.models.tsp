@@ -31,8 +31,8 @@ model DrillResource is ProxyResource<DrillResourceProperties> {
 
 @doc("Properties of the Resiliency Drill Resource")
 model DrillResourceProperties {
-  @doc("Id of the resource.")
-  resourceId: string;
+  @doc("ARM Id of the underlying resource.")
+  resourceId: armResourceIdentifier<[]>;
 
   @doc("Type of the Drill resource.")
   resourceType: string;
