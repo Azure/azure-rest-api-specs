@@ -20,7 +20,6 @@ import {
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigJavaAzPackageDirectorySubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
   TspConfigPythonDpPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
@@ -366,15 +365,6 @@ const goDpServiceDirTestCases = createEmitterOptionTestCases(
   [new TspConfigGoDpServiceDirMatchPatternSubRule()],
 );
 
-const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-java",
-  "",
-  "package-dir",
-  "azure-aaa",
-  "aaa",
-  [new TspConfigJavaAzPackageDirectorySubRule()],
-);
-
 const javaMgmtNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-java",
   managementTspconfigFolder,
@@ -613,7 +603,6 @@ describe("tspconfig", function () {
     ...goDpPackageDirTestCases,
     ...goDpServiceDirTestCases,
     // java
-    ...javaManagementPackageDirTestCases,
     ...javaMgmtNamespaceTestCases,
     ...javaMgmtNamespaceExtendedTestCases,
     // python
