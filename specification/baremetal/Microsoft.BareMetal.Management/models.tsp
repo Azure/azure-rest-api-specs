@@ -193,7 +193,8 @@ model BareMetalConnectionUpdate {
  * Network Interface Attachment resource.
  */
 @added(Versions.v2025_08_01_preview)
-model NetworkInterfaceAttachment is TrackedResource<NetworkInterfaceAttachmentProperties> {
+model NetworkInterfaceAttachment
+  is TrackedResource<NetworkInterfaceAttachmentProperties> {
   /**
    * The name of the Network Interface Attachment resource.
    */
@@ -214,9 +215,11 @@ model NetworkInterfaceAttachment is TrackedResource<NetworkInterfaceAttachmentPr
 model NetworkInterfaceAttachmentCreateProperties {
   /** Subnet resource id. */
   subnetResourceId: Azure.Core.armResourceIdentifier<[]>;
+
   /** Single digit physical AZ in string format (e.g., "1"). */
   @pattern("^[0-9]$")
   sddcPhysicalAz: string;
+
   /** SDDC identifier (GUID). */
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   sddcId: string;
@@ -229,8 +232,10 @@ model NetworkInterfaceAttachmentCreateProperties {
 model NetworkInterfaceIpConfiguration {
   /** Private IP address in CIDR. */
   privateIpAddress: string;
+
   /** IP version. */
   privateIpAddressVersion: "IPv4" | "IPv6" | string;
+
   /** Whether this is primary. */
   primary: boolean;
 }
@@ -242,6 +247,7 @@ model NetworkInterfaceIpConfiguration {
 model NetworkInterface {
   /** NIC ARM resource id. */
   id: Azure.Core.armResourceIdentifier<[]>;
+
   /** IP configurations (1-1024). */
   @minItems(1)
   @maxItems(1024)
@@ -253,7 +259,8 @@ model NetworkInterface {
  * Full properties of Network Interface Attachment.
  */
 @added(Versions.v2025_08_01_preview)
-model NetworkInterfaceAttachmentProperties is NetworkInterfaceAttachmentCreateProperties {
+model NetworkInterfaceAttachmentProperties
+  is NetworkInterfaceAttachmentCreateProperties {
   /** BGP NICs (always exactly 2, read-only). */
   @minItems(2)
   @maxItems(2)
@@ -266,6 +273,7 @@ model NetworkInterfaceAttachmentProperties is NetworkInterfaceAttachmentCreatePr
   @maxItems(8)
   @Azure.ResourceManager.identifiers(#["id"])
   anchorNics?: NetworkInterface[];
+
   /** Provisioning state. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -280,6 +288,7 @@ model NetworkInterfaceAttachmentPatchModel {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Patch tags object"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
+
   /** Anchor NICs (1 to 8). */
   @minItems(1)
   @maxItems(8)
