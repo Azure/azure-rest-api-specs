@@ -231,6 +231,7 @@ model NetworkInterfaceAttachmentCreateProperties {
 @added(Versions.v2025_08_01_preview)
 model NetworkInterfaceIpConfiguration {
   /** Private IP address in CIDR. */
+  @pattern("^(([0-9]{1,3}\\.){3}[0-9]{1,3}|([a-fA-F0-9:]+))(\\/([0-9]{1,3}))?$")
   privateIpAddress: string;
 
   /** IP version. */
@@ -261,14 +262,11 @@ model NetworkInterface {
 model NetworkInterfaceAttachmentProperties
   is NetworkInterfaceAttachmentCreateProperties {
   /** BGP NICs (always exactly 2, read-only). */
-  @minItems(2)
-  @maxItems(2)
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["id"])
   bgpNics?: NetworkInterface[];
 
-  /** Anchor NICs (minimum 1). Not provided in PUT request body (service populates after create). Required in PATCH request body. Returned in all responses. */
-  @minItems(1)
+  /** Anchor NICs. Not provided in PUT request body (service populates after create). Returned in all responses. */
   @Azure.ResourceManager.identifiers(#["id"])
   anchorNics?: NetworkInterface[];
 
@@ -288,7 +286,6 @@ model NetworkInterfaceAttachmentPatchModel {
   tags?: Record<string>;
 
   /** Anchor NICs (minimum 1). Required in PATCH. */
-  @minItems(1)
   anchorNics?: NetworkInterface[];
 }
 
