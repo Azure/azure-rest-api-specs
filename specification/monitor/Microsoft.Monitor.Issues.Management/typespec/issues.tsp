@@ -6,15 +6,26 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 import "./models.tsp";
 import "../../Microsoft.Monitor.Accounts.Management/typespec/models.tsp";
-import "../../Microsoft.Monitor.Accounts.Management/typespec/service.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
+@armProviderNamespace("Microsoft.Monitor")
+@service(#{ title: "Azure Monitor Workspaces Control Plane API" })
+@versioned(Versions)
 namespace Microsoft.Monitor;
+
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("API Version 2025-05-03-preview")
+  v2025_05_03: "2025-05-03-preview",
+}
 
 @doc("The issue properties")
 model IssueProperties {
