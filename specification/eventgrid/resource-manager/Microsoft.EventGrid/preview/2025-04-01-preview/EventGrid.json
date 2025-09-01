@@ -135,6 +135,180 @@
   ],
   "paths": {
     "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}": {
+      "get": {
+        "operationId": "EventSubscriptions_Get",
+        "tags": [
+          "EventSubscriptionOperationGroup"
+        ],
+        "description": "Get properties of an event subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "undefined",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be found.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventSubscriptions_GetForCustomTopic": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic.json"
+          },
+          "EventSubscriptions_GetForCustomTopic_AzureFunctionDestination": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_AzureFunctionDestination.json"
+          },
+          "EventSubscriptions_GetForCustomTopic_EventHubDestination": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_EventHubDestination.json"
+          },
+          "EventSubscriptions_GetForCustomTopic_HybridConnectionDestination": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_HybridConnectionDestination.json"
+          },
+          "EventSubscriptions_GetForCustomTopic_ServiceBusQueueDestination": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_ServiceBusQueueDestination.json"
+          },
+          "EventSubscriptions_GetForCustomTopic_ServiceBusTopicDestination": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_ServiceBusTopicDestination.json"
+          },
+          "EventSubscriptions_GetForCustomTopic_StorageQueueDestination": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_StorageQueueDestination.json"
+          },
+          "EventSubscriptions_GetForCustomTopic_WebhookDestination": {
+            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_WebhookDestination.json"
+          },
+          "EventSubscriptions_GetForResource": {
+            "$ref": "./examples/EventSubscriptions_GetForResource.json"
+          },
+          "EventSubscriptions_GetForResourceGroup": {
+            "$ref": "./examples/EventSubscriptions_GetForResourceGroup.json"
+          },
+          "EventSubscriptions_GetForSubscription": {
+            "$ref": "./examples/EventSubscriptions_GetForSubscription.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EventSubscriptions_CreateOrUpdate",
+        "tags": [
+          "EventSubscriptionOperationGroup"
+        ],
+        "description": "Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "undefined",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be found.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionInfo",
+            "in": "body",
+            "description": "Event subscription properties containing the destination and filter information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource 'EventSubscription' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EventSubscription"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventSubscriptions_CreateOrUpdateForCustomTopic": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_AzureFunctionDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_AzureFunctionDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusQueueDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusQueueDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusTopicDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusTopicDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForResource": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResource.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForResourceGroup": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResourceGroup.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForSubscription": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "patch": {
         "operationId": "EventSubscriptions_Update",
         "tags": [
@@ -304,117 +478,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/{scope}": {
-      "put": {
-        "operationId": "EventSubscriptions_CreateOrUpdate",
-        "tags": [
-          "EventSubscriptionOperationGroup"
-        ],
-        "description": "Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "eventSubscriptionName",
-            "in": "path",
-            "description": "Name of the event subscription to be found.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "eventSubscriptionInfo",
-            "in": "body",
-            "description": "Event subscription properties containing the destination and filter information.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "The default scope parameter for an extension resource."
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Resource 'EventSubscription' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/EventSubscription"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EventSubscriptions_CreateOrUpdateForCustomTopic": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic_AzureFunctionDestination": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_AzureFunctionDestination.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusQueueDestination": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusQueueDestination.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusTopicDestination": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_ServiceBusTopicDestination.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForResource": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResource.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForResourceGroup": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResourceGroup.json"
-          },
-          "EventSubscriptions_CreateOrUpdateForSubscription": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForSubscription.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/{scope}/getDeliveryAttributes": {
+    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
       "post": {
         "operationId": "EventSubscriptions_GetDeliveryAttributes",
         "tags": [
@@ -440,21 +504,12 @@
             "type": "string"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The default scope parameter for an extension resource."
+              "type": "object"
             }
           }
         ],
@@ -479,7 +534,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/{scope}/getFullUrl": {
+    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/getFullUrl": {
       "post": {
         "operationId": "EventSubscriptions_GetFullUrl",
         "tags": [
@@ -505,21 +560,12 @@
             "type": "string"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The default scope parameter for an extension resource."
+              "type": "object"
             }
           }
         ],
@@ -549,108 +595,6 @@
           },
           "EventSubscriptions_GetFullUrlForSubscription": {
             "$ref": "./examples/EventSubscriptions_GetFullUrlForSubscription.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/eventSubscriptions/{name}": {
-      "get": {
-        "operationId": "EventSubscriptions_Get",
-        "tags": [
-          "EventSubscriptionOperationGroup"
-        ],
-        "description": "Get properties of an event subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "eventSubscriptionName",
-            "in": "path",
-            "description": "Name of the event subscription to be found.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the event subscription to be found.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EventSubscription"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "description": "The default scope parameter for an extension resource.",
-              "properties": {
-                "scope": {
-                  "type": "string",
-                  "description": "The fully qualified Azure Resource manager identifier of the resource."
-                }
-              },
-              "required": [
-                "scope"
-              ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EventSubscriptions_GetForCustomTopic": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic.json"
-          },
-          "EventSubscriptions_GetForCustomTopic_AzureFunctionDestination": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_AzureFunctionDestination.json"
-          },
-          "EventSubscriptions_GetForCustomTopic_EventHubDestination": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_EventHubDestination.json"
-          },
-          "EventSubscriptions_GetForCustomTopic_HybridConnectionDestination": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_HybridConnectionDestination.json"
-          },
-          "EventSubscriptions_GetForCustomTopic_ServiceBusQueueDestination": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_ServiceBusQueueDestination.json"
-          },
-          "EventSubscriptions_GetForCustomTopic_ServiceBusTopicDestination": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_ServiceBusTopicDestination.json"
-          },
-          "EventSubscriptions_GetForCustomTopic_StorageQueueDestination": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_StorageQueueDestination.json"
-          },
-          "EventSubscriptions_GetForCustomTopic_WebhookDestination": {
-            "$ref": "./examples/EventSubscriptions_GetForCustomTopic_WebhookDestination.json"
-          },
-          "EventSubscriptions_GetForResource": {
-            "$ref": "./examples/EventSubscriptions_GetForResource.json"
-          },
-          "EventSubscriptions_GetForResourceGroup": {
-            "$ref": "./examples/EventSubscriptions_GetForResourceGroup.json"
-          },
-          "EventSubscriptions_GetForSubscription": {
-            "$ref": "./examples/EventSubscriptions_GetForSubscription.json"
           }
         }
       }
@@ -693,67 +637,6 @@
           "ExtensionTopics_Get": {
             "$ref": "./examples/ExtensionTopics_Get.json"
           }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.EventGrid/subscriptions/{subscriptionId}/eventSubscriptions": {
-      "get": {
-        "operationId": "EventSubscriptions_ListGlobalBySubscription",
-        "tags": [
-          "EventSubscriptionOperationGroup"
-        ],
-        "description": "List all aggregated global event subscriptions under a specific Azure subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EventSubscriptionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EventSubscriptions_ListGlobalBySubscription": {
-            "$ref": "./examples/EventSubscriptions_ListGlobalBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1044,6 +927,60 @@
         "x-ms-examples": {
           "Domains_ListBySubscription": {
             "$ref": "./examples/Domains_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/eventSubscriptions": {
+      "get": {
+        "operationId": "EventSubscriptions_ListGlobalBySubscription",
+        "tags": [
+          "EventSubscriptionOperationGroup"
+        ],
+        "description": "List all aggregated global event subscriptions under a specific Azure subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EventSubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventSubscriptions_ListGlobalBySubscription": {
+            "$ref": "./examples/EventSubscriptions_ListGlobalBySubscription.json"
           }
         },
         "x-ms-pageable": {
