@@ -269,33 +269,6 @@ model EndpointPropertiesCustomHeadersItem {
 }
 
 /**
- * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProxyResource extends Resource {}
-
-/**
- * The core properties of ARM resources
- */
-model Resource {
-  /**
-   * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
-   */
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  name?: string;
-
-  /**
-   * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
-   */
-  type?: string;
-}
-
-/**
  * The result of the request or operation.
  */
 model DeleteOperationResult {
@@ -515,25 +488,6 @@ model MonitorConfigExpectedStatusCodeRangesItem {
    * Max status code.
    */
   max?: int32;
-}
-
-/**
- * The resource model definition for a ARM tracked top level resource
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TrackedResource extends Resource {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-
-  /**
-   * The Azure Region where the resource lives
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
 }
 
 /**
