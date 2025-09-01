@@ -267,6 +267,7 @@ model NetworkInterfaceAttachmentProperties
   bgpNics?: NetworkInterface[];
 
   /** Anchor NICs. Not provided in PUT request body (service populates after create). Returned in all responses. */
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["id"])
   anchorNics?: NetworkInterface[];
 
