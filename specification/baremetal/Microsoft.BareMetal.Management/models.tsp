@@ -267,7 +267,7 @@ model NetworkInterfaceAttachmentProperties
   @Azure.ResourceManager.identifiers(#["id"])
   bgpNics?: NetworkInterface[];
 
-  /** Anchor NICs (1 to 8). Returned in GET/PUT/PATCH responses; patchable via PATCH. */
+  /** Anchor NICs (minimum 1). Not provided in PUT request body (service populates after create). Required in PATCH request body. Returned in all responses. */
   @minItems(1)
   @Azure.ResourceManager.identifiers(#["id"])
   anchorNics?: NetworkInterface[];
@@ -287,7 +287,7 @@ model NetworkInterfaceAttachmentPatchModel {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
-  /** Anchor NICs (1 to 8). */
+  /** Anchor NICs (minimum 1). Required in PATCH. */
   @minItems(1)
   anchorNics?: NetworkInterface[];
 }
