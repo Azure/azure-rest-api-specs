@@ -1307,7 +1307,6 @@
           "type": "array",
           "description": "IP configurations (1-1024).",
           "minItems": 1,
-          "maxItems": 1024,
           "items": {
             "$ref": "#/definitions/NetworkInterfaceIpConfiguration"
           },
@@ -1373,9 +1372,7 @@
         },
         "anchorNics": {
           "type": "array",
-          "description": "Anchor NICs (1 to 8).",
-          "minItems": 1,
-          "maxItems": 8,
+          "description": "Anchor NICs (minimum 1). Required in PATCH.",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           }
@@ -1407,8 +1404,6 @@
         "bgpNics": {
           "type": "array",
           "description": "BGP NICs (always exactly 2, read-only).",
-          "minItems": 2,
-          "maxItems": 2,
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           },
@@ -1419,9 +1414,7 @@
         },
         "anchorNics": {
           "type": "array",
-          "description": "Anchor NICs (1 to 8). Returned in GET/PUT/PATCH responses; patchable via PATCH.",
-          "minItems": 1,
-          "maxItems": 8,
+          "description": "Anchor NICs. Not provided in PUT request body (service populates after create). Returned in all responses.",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           },
@@ -1447,7 +1440,8 @@
       "properties": {
         "privateIpAddress": {
           "type": "string",
-          "description": "Private IP address in CIDR."
+          "description": "Private IP address in CIDR.",
+          "pattern": "^(([0-9]{1,3}\\.){3}[0-9]{1,3}|([a-fA-F0-9:]+))(\\/([0-9]{1,3}))?$"
         },
         "privateIpAddressVersion": {
           "type": "string",
