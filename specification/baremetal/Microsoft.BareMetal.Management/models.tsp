@@ -250,7 +250,6 @@ model NetworkInterface {
 
   /** IP configurations (1-1024). */
   @minItems(1)
-  @maxItems(1024)
   @OpenAPI.extension("x-ms-identifiers", #[])
   ipConfigurations: NetworkInterfaceIpConfiguration[];
 }
@@ -270,7 +269,6 @@ model NetworkInterfaceAttachmentProperties
 
   /** Anchor NICs (1 to 8). Returned in GET/PUT/PATCH responses; patchable via PATCH. */
   @minItems(1)
-  @maxItems(8)
   @Azure.ResourceManager.identifiers(#["id"])
   anchorNics?: NetworkInterface[];
 
@@ -291,7 +289,6 @@ model NetworkInterfaceAttachmentPatchModel {
 
   /** Anchor NICs (1 to 8). */
   @minItems(1)
-  @maxItems(8)
   anchorNics?: NetworkInterface[];
 }
 
