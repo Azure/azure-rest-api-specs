@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2023-03-02-preview/postgresqlhsc.json
+  - preview/2023-03-02-preview/postgresqlhsc.json
 ```
 ### Tag: package-2022-11-08
 
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2022-11-08` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-11-08'
 input-file:
-  - Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json
+  - stable/2022-11-08/postgresqlhsc.json
 ```
 
 ### Tag: package-2020-10-05-privatepreview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2020-10-05-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-10-05-privatepreview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2020-10-05-privatepreview/postgresqlhsc.json
+  - preview/2020-10-05-privatepreview/postgresqlhsc.json
 ```
 
 ## Suppression
