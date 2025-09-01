@@ -75,3 +75,6 @@ using Azure.Core;
 @@clientName(Minute.`30`, "Thirty", "csharp,go");
 @@usage(JobRun, Usage.input, "csharp");
 @@usage(JobRunError, Usage.output, "csharp");
+
+// Java SDK migration fixes
+@@clientName(AgentProperties.localIPAddress, "localIpAddress", "java");
