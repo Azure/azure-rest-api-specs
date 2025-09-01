@@ -8056,12 +8056,14 @@
           "type": "string",
           "format": "date-time",
           "description": "The snapshot creation date of the backup",
+          "x-nullable": true,
           "readOnly": true
         },
         "completionDate": {
           "type": "string",
           "format": "date-time",
           "description": "The completion date of the backup",
+          "x-nullable": true,
           "readOnly": true
         },
         "provisioningState": {
@@ -8108,6 +8110,7 @@
         "useExistingSnapshot": {
           "type": "boolean",
           "description": "Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -8151,8 +8154,10 @@
         "fileList": {
           "type": "array",
           "description": "List of files to be restored",
+          "minItems": 1,
+          "maxItems": 8,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/FileName"
           }
         },
         "restoreFilePath": {
@@ -8362,7 +8367,8 @@
         },
         "confirmRunningDisruptiveOperation": {
           "type": "boolean",
-          "description": "Break File locks could be a disruptive operation for application as locks on the volume will be broken, if want to process, set to true."
+          "description": "Break File locks could be a disruptive operation for application as locks on the volume will be broken, if want to process, set to true.",
+          "default": false
         }
       }
     },
@@ -8805,30 +8811,36 @@
         },
         "kerberos5ReadOnly": {
           "type": "boolean",
-          "description": "Kerberos5 Read only access. To be use with swagger version 2020-05-01 or later"
+          "description": "Kerberos5 Read only access. To be use with swagger version 2020-05-01 or later",
+          "default": false
         },
         "kerberos5ReadWrite": {
           "type": "boolean",
-          "description": "Kerberos5 Read and write access. To be use with swagger version 2020-05-01 or later"
+          "description": "Kerberos5 Read and write access. To be use with swagger version 2020-05-01 or later",
+          "default": false
         },
         "kerberos5iReadOnly": {
           "type": "boolean",
           "description": "Kerberos5i Read only access. To be use with swagger version 2020-05-01 or later",
+          "default": false,
           "x-ms-client-name": "kerberos5IReadOnly"
         },
         "kerberos5iReadWrite": {
           "type": "boolean",
           "description": "Kerberos5i Read and write access. To be use with swagger version 2020-05-01 or later",
+          "default": false,
           "x-ms-client-name": "kerberos5IReadWrite"
         },
         "kerberos5pReadOnly": {
           "type": "boolean",
           "description": "Kerberos5p Read only access. To be use with swagger version 2020-05-01 or later",
+          "default": false,
           "x-ms-client-name": "kerberos5PReadOnly"
         },
         "kerberos5pReadWrite": {
           "type": "boolean",
           "description": "Kerberos5p Read and write access. To be use with swagger version 2020-05-01 or later",
+          "default": false,
           "x-ms-client-name": "kerberos5PReadWrite"
         },
         "cifs": {
@@ -8877,6 +8889,11 @@
         }
       }
     },
+    "FileName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
     "FilePathAvailabilityRequest": {
       "type": "object",
       "description": "File path availability request content - availability is based on the name and the subnetId.",
@@ -8891,7 +8908,8 @@
         },
         "availabilityZone": {
           "type": "string",
-          "description": "The Azure Resource logical availability zone which is used within zone mapping lookup for the subscription and region. The lookup will retrieve the physical zone where volume is placed."
+          "description": "The Azure Resource logical availability zone which is used within zone mapping lookup for the subscription and region. The lookup will retrieve the physical zone where volume is placed.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -9504,6 +9522,10 @@
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -9711,6 +9733,7 @@
         "peerIpAddresses": {
           "type": "array",
           "description": "A list of IC-LIF IPs that can be used to connect to the On-prem cluster",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
@@ -9762,8 +9785,29 @@
           "default": 4398046511104
         },
         "qosType": {
-          "$ref": "#/definitions/QosType",
-          "description": "The qos type of the pool"
+          "type": "string",
+          "description": "The qos type of the pool",
+          "default": "Auto",
+          "enum": [
+            "Auto",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "QosType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Auto",
+                "value": "Auto",
+                "description": "qos type Auto"
+              },
+              {
+                "name": "Manual",
+                "value": "Manual",
+                "description": "qos type Manual"
+              }
+            ]
+          }
         },
         "coolAccess": {
           "type": "boolean",
@@ -9772,7 +9816,8 @@
         "customThroughputMibps": {
           "type": "number",
           "format": "float",
-          "description": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level"
+          "description": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
+          "x-nullable": true
         }
       }
     },
@@ -9857,15 +9902,38 @@
         "customThroughputMibps": {
           "type": "number",
           "format": "float",
-          "description": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level"
+          "description": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
+          "x-nullable": true
         },
         "qosType": {
-          "$ref": "#/definitions/QosType",
-          "description": "The qos type of the pool"
+          "type": "string",
+          "description": "The qos type of the pool",
+          "default": "Auto",
+          "enum": [
+            "Auto",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "QosType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Auto",
+                "value": "Auto",
+                "description": "qos type Auto"
+              },
+              {
+                "name": "Manual",
+                "value": "Manual",
+                "description": "qos type Manual"
+              }
+            ]
+          }
         },
         "coolAccess": {
           "type": "boolean",
-          "description": "If enabled (true) the pool can contain cool Access enabled volumes."
+          "description": "If enabled (true) the pool can contain cool Access enabled volumes.",
+          "default": false
         },
         "encryptionType": {
           "type": "string",
@@ -9876,7 +9944,6 @@
             "Double"
           ],
           "x-ms-enum": {
-            "name": "EncryptionType",
             "modelAsString": true,
             "values": [
               {
@@ -9891,6 +9958,7 @@
               }
             ]
           },
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -9920,30 +9988,6 @@
       },
       "readOnly": true
     },
-    "QosType": {
-      "type": "string",
-      "description": "The qos type of the pool",
-      "enum": [
-        "Auto",
-        "Manual"
-      ],
-      "x-ms-enum": {
-        "name": "QosType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Auto",
-            "value": "Auto",
-            "description": "qos type Auto"
-          },
-          {
-            "name": "Manual",
-            "value": "Manual",
-            "description": "qos type Manual"
-          }
-        ]
-      }
-    },
     "QueryNetworkSiblingSetRequest": {
       "type": "object",
       "description": "Network sibling set query.",
@@ -9959,6 +10003,10 @@
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -10281,6 +10329,28 @@
         }
       }
     },
+    "ReplicationRelationshipStatus": {
+      "type": "string",
+      "description": "Status of the mirror relationship",
+      "enum": [
+        "Idle",
+        "Transferring"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationRelationshipStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Idle",
+            "value": "Idle"
+          },
+          {
+            "name": "Transferring",
+            "value": "Transferring"
+          }
+        ]
+      }
+    },
     "ReplicationSchedule": {
       "type": "string",
       "description": "Schedule",
@@ -10317,7 +10387,7 @@
           "description": "Replication health check"
         },
         "relationshipStatus": {
-          "$ref": "#/definitions/RelationshipStatus",
+          "$ref": "#/definitions/ReplicationRelationshipStatus",
           "description": "Status of the mirror relationship"
         },
         "mirrorState": {
@@ -10681,8 +10751,10 @@
         "filePaths": {
           "type": "array",
           "description": "List of files to be restored",
+          "minItems": 1,
+          "maxItems": 10,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/FileName"
           }
         },
         "destinationPath": {
@@ -10871,7 +10943,8 @@
         "size": {
           "type": "integer",
           "format": "int64",
-          "description": "Truncate subvolume to the provided size in bytes"
+          "description": "Truncate subvolume to the provided size in bytes",
+          "x-nullable": true
         },
         "path": {
           "type": "string",
@@ -10901,11 +10974,13 @@
         "size": {
           "type": "integer",
           "format": "int64",
-          "description": "Truncate subvolume to the provided size in bytes"
+          "description": "Truncate subvolume to the provided size in bytes",
+          "x-nullable": true
         },
         "parentPath": {
           "type": "string",
-          "description": "parent path to the subvolume"
+          "description": "parent path to the subvolume",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -11000,6 +11075,10 @@
           "type": "string",
           "format": "arm-id",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -11160,7 +11239,11 @@
           "description": "The availability zones.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [

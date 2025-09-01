@@ -26,6 +26,11 @@ model Volume is Azure.ResourceManager.TrackedResource<VolumeProperties, false> {
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
+@@visibility(Azure.ResourceManager.AvailabilityZonesProperty.zones,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+
 @armResourceOperations
 interface Volumes {
   /**
@@ -75,11 +80,7 @@ interface Volumes {
   /**
    * This operation will populate availability zone information for a volume
    */
-  populateAvailabilityZone is ArmResourceActionAsync<
-    Volume,
-    void,
-    Volume
-  >;
+  populateAvailabilityZone is ArmResourceActionAsync<Volume, void, Volume>;
 
   /**
    * Revert a volume to the snapshot specified in the body
@@ -99,11 +100,7 @@ interface Volumes {
   /**
    *  Split operation to convert clone volume to an independent volume.
    */
-  splitCloneFromParent is ArmResourceActionAsync<
-    Volume,
-    void,
-    Volume
-  >;
+  splitCloneFromParent is ArmResourceActionAsync<Volume, void, Volume>;
 
   /**
    * Break all the file locks on a volume

@@ -15,6 +15,10 @@ namespace Microsoft.NetApp;
 @maxLength(255)
 scalar UserName extends string;
 
+@minLength(1)
+@maxLength(1024)
+scalar FileName extends string;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union MetricAggregationType {
   string,
@@ -583,6 +587,17 @@ union RelationshipStatus {
 }
 
 /**
+ * Status of the mirror relationship
+ */
+union ReplicationRelationshipStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Idle: "Idle",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Transferring: "Transferring",
+}
+
+/**
  * The status of the replication
  */
 union MirrorState {
@@ -917,7 +932,8 @@ model FilePathAvailabilityRequest {
   /**
    * The Azure Resource logical availability zone which is used within zone mapping lookup for the subscription and region. The lookup will retrieve the physical zone where volume is placed.
    */
-  availabilityZone?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  availabilityZone?: string | null;
 }
 
 /**
@@ -1080,6 +1096,7 @@ model QueryNetworkSiblingSetRequest {
   /**
    * The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -1102,6 +1119,7 @@ model NetworkSiblingSet {
   /**
    * The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -1166,6 +1184,7 @@ model UpdateNetworkSiblingSetRequest {
   /**
    * The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -1689,23 +1708,25 @@ model PoolProperties {
   /**
    * Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level
    */
-  customThroughputMibps?: float32;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  customThroughputMibps?: float32 | null;
 
   /**
    * The qos type of the pool
    */
-  qosType?: QosType;
+  qosType?: QosType = QosType.Auto;
 
   /**
    * If enabled (true) the pool can contain cool Access enabled volumes.
    */
-  coolAccess?: boolean;
+  coolAccess?: boolean = false;
 
   /**
    * Encryption type of the capacity pool, set encryption type for data at rest for this pool and all volumes in it. This value can only be set when creating new pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  encryptionType?: EncryptionType = EncryptionType.Single;
+  encryptionType?: EncryptionType | null = EncryptionType.Single;
 }
 
 /**
@@ -1761,7 +1782,7 @@ model PoolPatchProperties {
   /**
    * The qos type of the pool
    */
-  qosType?: QosType;
+  qosType?: QosType = QosType.Auto;
 
   /**
    * If enabled (true) the pool can contain cool Access enabled volumes.
@@ -1771,7 +1792,8 @@ model PoolPatchProperties {
   /**
    * Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level
    */
-  customThroughputMibps?: float32;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  customThroughputMibps?: float32 | null;
 }
 
 /**
@@ -2166,32 +2188,32 @@ model ExportPolicyRule {
   /**
    * Kerberos5 Read only access. To be use with swagger version 2020-05-01 or later
    */
-  kerberos5ReadOnly?: boolean;
+  kerberos5ReadOnly?: boolean = false;
 
   /**
    * Kerberos5 Read and write access. To be use with swagger version 2020-05-01 or later
    */
-  kerberos5ReadWrite?: boolean;
+  kerberos5ReadWrite?: boolean = false;
 
   /**
    * Kerberos5i Read only access. To be use with swagger version 2020-05-01 or later
    */
-  kerberos5iReadOnly?: boolean;
+  kerberos5iReadOnly?: boolean = false;
 
   /**
    * Kerberos5i Read and write access. To be use with swagger version 2020-05-01 or later
    */
-  kerberos5iReadWrite?: boolean;
+  kerberos5iReadWrite?: boolean = false;
 
   /**
    * Kerberos5p Read only access. To be use with swagger version 2020-05-01 or later
    */
-  kerberos5pReadOnly?: boolean;
+  kerberos5pReadOnly?: boolean = false;
 
   /**
    * Kerberos5p Read and write access. To be use with swagger version 2020-05-01 or later
    */
-  kerberos5pReadWrite?: boolean;
+  kerberos5pReadWrite?: boolean = false;
 
   /**
    * Allows CIFS protocol
@@ -2638,7 +2660,7 @@ model BreakFileLocksRequest {
   /**
    * Break File locks could be a disruptive operation for application as locks on the volume will be broken, if want to process, set to true.
    */
-  confirmRunningDisruptiveOperation?: boolean;
+  confirmRunningDisruptiveOperation?: boolean = false;
 }
 
 /**
@@ -2695,7 +2717,7 @@ model ReplicationStatus {
   /**
    * Status of the mirror relationship
    */
-  relationshipStatus?: RelationshipStatus;
+  relationshipStatus?: ReplicationRelationshipStatus;
 
   /**
    * The status of the replication
@@ -2769,6 +2791,7 @@ model PeerClusterForVolumeMigrationRequest {
   /**
    * A list of IC-LIF IPs that can be used to connect to the On-prem cluster
    */
+  @minItems(1)
   peerIpAddresses: string[];
 }
 
@@ -2852,7 +2875,9 @@ model SnapshotRestoreFiles {
   /**
    * List of files to be restored
    */
-  filePaths: string[];
+  @maxItems(10)
+  @minItems(1)
+  filePaths: FileName[];
 
   /**
    * Destination folder where the files will be restored
@@ -3405,12 +3430,14 @@ model SubvolumeProperties {
   /**
    * Truncate subvolume to the provided size in bytes
    */
-  size?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  size?: int64 | null;
 
   /**
    * parent path to the subvolume
    */
-  parentPath?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  parentPath?: string | null;
 
   /**
    * Azure lifecycle management
@@ -3439,7 +3466,8 @@ model SubvolumePatchParams {
   /**
    * Truncate subvolume to the provided size in bytes
    */
-  size?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  size?: int64 | null;
 
   /**
    * path to the subvolume
@@ -3664,16 +3692,18 @@ model BackupProperties {
   /**
    * The snapshot creation date of the backup
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  snapshotCreationDate?: utcDateTime;
+  snapshotCreationDate?: utcDateTime | null;
 
   /**
    * The completion date of the backup
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  completionDate?: utcDateTime;
+  completionDate?: utcDateTime | null;
 
   /**
    * Azure lifecycle management
@@ -3719,7 +3749,7 @@ model BackupProperties {
    * Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  useExistingSnapshot?: boolean;
+  useExistingSnapshot?: boolean = false;
 
   /**
    * The name of the snapshot
@@ -3801,7 +3831,9 @@ model BackupRestoreFiles {
   /**
    * List of files to be restored
    */
-  fileList: string[];
+  @maxItems(8)
+  @minItems(1)
+  fileList: FileName[];
 
   /**
    * Destination folder where the files will be restored. The path name should start with a forward slash. If it is omitted from request then restore is done at the root folder of the destination volume by default
