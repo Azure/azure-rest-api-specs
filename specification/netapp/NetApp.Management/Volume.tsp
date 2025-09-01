@@ -196,7 +196,7 @@ interface Volumes {
   peerExternalCluster is ArmResourceActionAsync<
     Volume,
     PeerClusterForVolumeMigrationRequest,
-    ArmResponse<ClusterPeerCommandResponse>
+    ClusterPeerCommandResponse
   >;
 
   /**
