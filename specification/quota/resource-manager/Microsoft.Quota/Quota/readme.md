@@ -40,8 +40,8 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-09-01'
 input-file:
-  - Microsoft.Quota/stable/2025-09-01/groupquota.json
-  - Microsoft.Quota/stable/2025-09-01/quota.json
+  - stable/2025-09-01/groupquota.json
+  - stable/2025-09-01/quota.json
 ```
 
 ### Tag: package-2025-07-15
@@ -50,8 +50,8 @@ These settings apply only when `--tag=package-2025-07-15` is specified on the co
 
 ```yaml $(tag) == 'package-2025-07-15'
 input-file:
-  - Microsoft.Quota/stable/2025-07-15/groupquota.json
-  - Microsoft.Quota/stable/2025-07-15/quota.json
+  - stable/2025-07-15/groupquota.json
+  - stable/2025-07-15/quota.json
 ```
 
 ### Tag: package-2025-03-01
@@ -60,8 +60,8 @@ These settings apply only when `--tag=package-2025-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-03-01'
 input-file:
-  - Microsoft.Quota/stable/2025-03-01/groupquota.json
-  - Microsoft.Quota/stable/2025-03-01/quota.json
+  - stable/2025-03-01/groupquota.json
+  - stable/2025-03-01/quota.json
 ```
 
 ### Tag: package-2025-03-15-preview
@@ -70,8 +70,8 @@ These settings apply only when `--tag=package-2025-03-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-03-15-preview'
 input-file:
-  - Microsoft.Quota/preview/2025-03-15-preview/groupquota.json
-  - Microsoft.Quota/preview/2025-03-15-preview/quota.json
+  - preview/2025-03-15-preview/groupquota.json
+  - preview/2025-03-15-preview/quota.json
 ```
 
 ### Tag: package-2024-12-18-preview
@@ -80,8 +80,8 @@ These settings apply only when `--tag=package-2024-12-18-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-12-18-preview'
 input-file:
-  - Microsoft.Quota/preview/2024-12-18-preview/groupquota.json
-  - Microsoft.Quota/preview/2024-12-18-preview/quota.json
+  - preview/2024-12-18-preview/groupquota.json
+  - preview/2024-12-18-preview/quota.json
 ```
 
 ### Tag: package-2024-10-15-preview
@@ -90,8 +90,8 @@ These settings apply only when `--tag=package-2024-10-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-10-15-preview'
 input-file:
-  - Microsoft.Quota/preview/2024-10-15-preview/groupquota.json
-  - Microsoft.Quota/preview/2024-10-15-preview/quota.json
+  - preview/2024-10-15-preview/groupquota.json
+  - preview/2024-10-15-preview/quota.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -100,8 +100,8 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-  - Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
-  - Microsoft.Quota/preview/2023-06-01-preview/quota.json
+  - preview/2023-06-01-preview/groupquota.json
+  - preview/2023-06-01-preview/quota.json
 ```
 
 ### Tag: package-2023-02-01
@@ -110,7 +110,7 @@ These settings apply only when `--tag=package-2023-02-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-02-01'
 input-file:
-  - Microsoft.Quota/stable/2023-02-01/quota.json
+  - stable/2023-02-01/quota.json
 ```
 
 ### Tag: package-2021-03-15-preview
@@ -119,7 +119,7 @@ These settings apply only when `--tag=package-2021-03-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-03-15-preview'
 input-file:
-  - Microsoft.Quota/preview/2021-03-15-preview/quota.json
+  - preview/2021-03-15-preview/quota.json
 ```
 
 ### Suppressions
