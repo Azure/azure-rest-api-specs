@@ -1,6 +1,7 @@
 import "./common.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
@@ -17,6 +18,10 @@ model SessionCodeExecutionRequest {
 
   @doc("Code execution timeout in seconds.")
   timeoutInSeconds: int32;
+
+  @added(Versions.v2025_02_02_preview)
+  @doc("The maximum length of the output streams. Default value is 4096.")
+  outputStreamsMaxLength?: int32;
 }
 
 @doc("The result of the code execution.")
