@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-11-30",
+    "version": "2021-09-30-preview",
     "title": "ManagedServiceIdentityClient",
     "description": "The Managed Service Identity Client."
   },
@@ -161,6 +161,63 @@
             "description": "OK. The list of userAssignedIdentities was retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/UserAssignedIdentitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/listAssociatedResources": {
+      "post": {
+        "operationId": "UserAssignedIdentities_ListAssociatedResources",
+        "description": "Lists the associated resources for this identity.",
+        "x-ms-examples": {
+          "IdentityListAssociatedResources": {
+            "$ref": "./examples/IdentityListAssociatedResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderbyParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of resources associated with this identity.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedResourcesListResult"
             }
           },
           "default": {
@@ -348,191 +405,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
-      "get": {
-        "operationId": "FederatedIdentityCredentials_List",
-        "description": "Lists all the federated identity credentials under the specified user assigned identity.",
-        "x-ms-examples": {
-          "FederatedIdentityCredentialList": {
-            "$ref": "./examples/FederatedIdentityCredentialList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/SkipTokenParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The list of federated identity credentials for the specified user assigned identity was retrieved and returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/FederatedIdentityCredentialsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
-      "put": {
-        "operationId": "FederatedIdentityCredentials_CreateOrUpdate",
-        "description": "Create or update a federated identity credential under the specified user assigned identity.",
-        "x-ms-examples": {
-          "FederatedIdentityCredentialCreate": {
-            "$ref": "./examples/FederatedIdentityCredentialCreate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FederatedIdentityCredential"
-            },
-            "description": "Parameters to create or update the federated identity credential."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated federated identity credential.",
-            "schema": {
-              "$ref": "#/definitions/FederatedIdentityCredential"
-            }
-          },
-          "201": {
-            "description": "Created federated identity credential.",
-            "schema": {
-              "$ref": "#/definitions/FederatedIdentityCredential"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "FederatedIdentityCredentials_Get",
-        "description": "Gets the federated identity credential.",
-        "x-ms-examples": {
-          "FederatedIdentityCredentialGet": {
-            "$ref": "./examples/FederatedIdentityCredentialGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The requested federated identity credential.",
-            "schema": {
-              "$ref": "#/definitions/FederatedIdentityCredential"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "FederatedIdentityCredentials_Delete",
-        "description": "Deletes the federated identity credential.",
-        "x-ms-examples": {
-          "FederatedIdentityCredentialDelete": {
-            "$ref": "./examples/FederatedIdentityCredentialDelete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FederatedIdentityCredentialResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Deleted federated identity credential."
-          },
-          "204": {
-            "description": "The specified federated identity credential does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -547,26 +419,10 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an identity resource."
-    },
-    "FederatedIdentityCredential": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The properties associated with the federated identity credential.",
-          "$ref": "#/definitions/FederatedIdentityCredentialProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Describes a federated identity credential."
     },
     "IdentityUpdate": {
       "properties": {
@@ -599,7 +455,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an identity resource."
@@ -638,7 +494,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a system assigned identity resource."
@@ -695,74 +551,69 @@
           "readOnly": true,
           "format": "uuid",
           "description": "The id of the app associated with the identity. This is a random generated UUID by MSI."
-        },
-        "isolationScope": {
-          "type": "string",
-          "description": "Enum to configure regional restrictions on identity assignment, as necessary.",
-          "enum": [
-            "None",
-            "Regional"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "x-ms-enum": {
-            "name": "isolationScope",
-            "modelAsString": true,
-            "modelAsExtensible": true
-          }
         }
       }
     },
-    "FederatedIdentityCredentialProperties": {
-      "description": "The properties associated with a federated identity credential.",
+    "AzureResource": {
+      "description": "Describes an Azure resource that is attached to an identity.",
       "type": "object",
-      "title": "Federated identity credential properties.",
-      "required": [
-        "issuer",
-        "subject",
-        "audiences"
-      ],
+      "title": "Azure Resource properties.",
       "properties": {
-        "issuer": {
+        "id": {
           "type": "string",
-          "format": "uri",
-          "description": "The URL of the issuer to be trusted."
+          "readOnly": true,
+          "description": "The ID of this resource."
         },
-        "subject": {
+        "name": {
           "type": "string",
-          "description": "The identifier of the external identity."
+          "readOnly": true,
+          "description": "The name of this resource."
         },
-        "audiences": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of audiences that can appear in the issued token."
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of this resource."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource group this resource belongs to."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the subscription this resource belongs to."
+        },
+        "subscriptionDisplayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the subscription this resource belongs to."
         }
       }
     },
-    "FederatedIdentityCredentialsListResult": {
+    "AssociatedResourcesListResult": {
       "type": "object",
       "properties": {
+        "totalCount": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Total number of Azure resources assigned to the identity."
+        },
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/FederatedIdentityCredential"
+            "$ref": "#/definitions/AzureResource"
           },
-          "x-ms-identifiers": [
-            "id"
-          ],
-          "description": "The collection of federated identity credentials returned by the listing operation."
+          "description": "The collection of Azure resources returned by the resource action to get a list of assigned resources."
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "description": "The url to get the next page of results, if any."
         }
       },
-      "description": "Values returned by the List operation for federated identity credentials."
+      "description": "Azure resources returned by the resource action to get a list of assigned resources."
     },
     "UserAssignedIdentitiesListResult": {
       "properties": {
@@ -810,9 +661,6 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
-          "x-ms-identifiers": [
-            "code"
-          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -870,9 +718,6 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "title": "Operations List.",
           "description": "A list of operations supported by Microsoft.ManagedIdentity Resource Provider."
         },
@@ -924,6 +769,22 @@
       "required": true,
       "type": "string"
     },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "OData filter expression to apply to the query.",
+      "required": false,
+      "type": "string"
+    },
+    "OrderbyParameter": {
+      "name": "$orderby",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "OData orderBy expression to apply to the query.",
+      "required": false,
+      "type": "string"
+    },
     "TopQueryParameter": {
       "name": "$top",
       "in": "query",
@@ -934,20 +795,21 @@
       "minimum": 1,
       "x-ms-parameter-location": "method"
     },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to skip.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
     "SkipTokenParameter": {
       "in": "query",
       "name": "$skiptoken",
       "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "FederatedIdentityCredentialResourceNameParameter": {
-      "name": "federatedIdentityCredentialResourceName",
-      "in": "path",
-      "description": "The name of the federated identity credential resource.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$",
       "x-ms-parameter-location": "method"
     }
   }
