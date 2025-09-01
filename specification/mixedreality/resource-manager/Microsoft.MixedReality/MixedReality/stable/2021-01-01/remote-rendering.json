@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Mixed Reality",
-    "description": "Mixed Reality Resource Provider Spatial Anchors Resource API",
-    "version": "2020-05-01"
+    "description": "Mixed Reality Resource Provider Remote Rendering Resource API",
+    "version": "2021-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,17 +34,17 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
       "get": {
-        "operationId": "SpatialAnchorsAccounts_ListBySubscription",
+        "operationId": "RemoteRenderingAccounts_ListBySubscription",
         "tags": [
           "Resource",
           "Proxy"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n List Spatial Anchors Accounts by Subscription",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n List Remote Rendering Accounts by Subscription",
         "x-ms-examples": {
-          "List spatial anchors accounts by subscription": {
-            "$ref": "./examples/spatial-anchors/GetBySubscription.json"
+          "List remote rendering accounts by subscription": {
+            "$ref": "./examples/remote-rendering/GetBySubscription.json"
           }
         },
         "parameters": [
@@ -59,7 +59,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SpatialAnchorsAccountPage"
+              "$ref": "#/definitions/RemoteRenderingAccountPage"
             }
           },
           "default": {
@@ -74,16 +74,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
       "get": {
-        "operationId": "SpatialAnchorsAccounts_ListByResourceGroup",
+        "operationId": "RemoteRenderingAccounts_ListByResourceGroup",
         "tags": [
           "Resource"
         ],
         "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n List Resources by Resource Group",
         "x-ms-examples": {
-          "List spatial anchor accounts by resource group": {
-            "$ref": "./examples/spatial-anchors/GetByResourceGroup.json"
+          "List remote rendering accounts by resource group": {
+            "$ref": "./examples/remote-rendering/GetByResourceGroup.json"
           }
         },
         "parameters": [
@@ -101,7 +101,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SpatialAnchorsAccountPage"
+              "$ref": "#/definitions/RemoteRenderingAccountPage"
             }
           },
           "default": {
@@ -116,16 +116,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}": {
       "delete": {
-        "operationId": "SpatialAnchorsAccounts_Delete",
+        "operationId": "RemoteRenderingAccounts_Delete",
         "tags": [
           "Resource"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Delete a Spatial Anchors Account.",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Delete a Remote Rendering Account.",
         "x-ms-examples": {
-          "Delete spatial anchors account": {
-            "$ref": "./examples/spatial-anchors/Delete.json"
+          "Delete remote rendering account": {
+            "$ref": "./examples/remote-rendering/Delete.json"
           }
         },
         "parameters": [
@@ -158,14 +158,14 @@
         }
       },
       "get": {
-        "operationId": "SpatialAnchorsAccounts_Get",
+        "operationId": "RemoteRenderingAccounts_Get",
         "tags": [
           "Resource"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Retrieve a Spatial Anchors Account.",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Retrieve a Remote Rendering Account.",
         "x-ms-examples": {
-          "Get spatial anchors account": {
-            "$ref": "./examples/spatial-anchors/Get.json"
+          "Get remote rendering account": {
+            "$ref": "./examples/remote-rendering/Get.json"
           }
         },
         "parameters": [
@@ -186,7 +186,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SpatialAnchorsAccount"
+              "$ref": "#/definitions/RemoteRenderingAccount"
             }
           },
           "default": {
@@ -198,14 +198,14 @@
         }
       },
       "patch": {
-        "operationId": "SpatialAnchorsAccounts_Update",
+        "operationId": "RemoteRenderingAccounts_Update",
         "tags": [
           "Resource"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Updating a Spatial Anchors Account",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Updating a Remote Rendering Account",
         "x-ms-examples": {
-          "Update spatial anchors account": {
-            "$ref": "./examples/spatial-anchors/Patch.json"
+          "Update remote rendering account": {
+            "$ref": "./examples/remote-rendering/Patch.json"
           }
         },
         "parameters": [
@@ -219,7 +219,7 @@
             "$ref": "./common.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/spatialAnchorsAccountParameter"
+            "$ref": "#/parameters/remoteRenderingAccountParameter"
           },
           {
             "$ref": "./common.json#/parameters/apiVersionParameter"
@@ -229,7 +229,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SpatialAnchorsAccount"
+              "$ref": "#/definitions/RemoteRenderingAccount"
             }
           },
           "default": {
@@ -241,14 +241,14 @@
         }
       },
       "put": {
-        "operationId": "SpatialAnchorsAccounts_Create",
+        "operationId": "RemoteRenderingAccounts_Create",
         "tags": [
           "Resource"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Creating or Updating a Spatial Anchors Account.",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Creating or Updating a Remote Rendering Account.",
         "x-ms-examples": {
-          "Create spatial anchor account": {
-            "$ref": "./examples/spatial-anchors/Put.json"
+          "Create remote rendering account": {
+            "$ref": "./examples/remote-rendering/Put.json"
           }
         },
         "parameters": [
@@ -262,7 +262,7 @@
             "$ref": "./common.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/spatialAnchorsAccountParameter"
+            "$ref": "#/parameters/remoteRenderingAccountParameter"
           },
           {
             "$ref": "./common.json#/parameters/apiVersionParameter"
@@ -272,13 +272,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SpatialAnchorsAccount"
+              "$ref": "#/definitions/RemoteRenderingAccount"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/SpatialAnchorsAccount"
+              "$ref": "#/definitions/RemoteRenderingAccount"
             }
           },
           "default": {
@@ -290,16 +290,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/listKeys": {
       "post": {
-        "operationId": "SpatialAnchorsAccounts_ListKeys",
+        "operationId": "RemoteRenderingAccounts_ListKeys",
         "tags": [
           "Key"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n List Both of the 2 Keys of a Spatial Anchors Account",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n List Both of the 2 Keys of a Remote Rendering Account",
         "x-ms-examples": {
-          "List spatial anchor account key": {
-            "$ref": "./examples/spatial-anchors/ListKeys.json"
+          "List remote rendering account key": {
+            "$ref": "./examples/remote-rendering/ListKeys.json"
           }
         },
         "parameters": [
@@ -332,16 +332,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/regenerateKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/regenerateKeys": {
       "post": {
-        "operationId": "SpatialAnchorsAccounts_RegenerateKeys",
+        "operationId": "RemoteRenderingAccounts_RegenerateKeys",
         "tags": [
           "Key"
         ],
-        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Regenerate specified Key of a Spatial Anchors Account",
+        "description": "\n\n> [!NOTE]\n>\n> **Mixed Reality retirement**\n>\n> The Mixed Reality service is now deprecated and will be retired. \n\n Regenerate specified Key of a Remote Rendering Account",
         "x-ms-examples": {
-          "Regenerate spatial anchors account keys": {
-            "$ref": "./examples/spatial-anchors/RegenerateKey.json"
+          "Regenerate remote rendering account keys": {
+            "$ref": "./examples/remote-rendering/RegenerateKey.json"
           }
         },
         "parameters": [
@@ -379,13 +379,13 @@
     }
   },
   "definitions": {
-    "SpatialAnchorsAccount": {
+    "RemoteRenderingAccount": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "SpatialAnchorsAccount Response.",
+      "description": "RemoteRenderingAccount Response.",
       "type": "object",
       "properties": {
         "properties": {
@@ -395,34 +395,34 @@
         },
         "identity": {
           "description": "The identity associated with this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         },
         "plan": {
           "description": "The plan associated with this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         },
         "sku": {
           "description": "The sku associated with this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
         },
         "kind": {
           "description": "The kind of account, if supported",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Sku"
         },
         "systemData": {
           "description": "System metadata for this account",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
-    "SpatialAnchorsAccountPage": {
+    "RemoteRenderingAccountPage": {
       "description": "Result of the request to get resource collection. It contains a list of resources and a URL link to get the next set of results.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SpatialAnchorsAccount"
+            "$ref": "#/definitions/RemoteRenderingAccount"
           },
           "description": "List of resources supported by the Resource Provider."
         },
@@ -434,12 +434,12 @@
     }
   },
   "parameters": {
-    "spatialAnchorsAccountParameter": {
-      "name": "spatialAnchorsAccount",
-      "description": "Spatial Anchors Account parameter.",
+    "remoteRenderingAccountParameter": {
+      "name": "remoteRenderingAccount",
+      "description": "Remote Rendering Account parameter.",
       "in": "body",
       "schema": {
-        "$ref": "#/definitions/SpatialAnchorsAccount"
+        "$ref": "#/definitions/RemoteRenderingAccount"
       },
       "required": true,
       "x-ms-parameter-location": "method"

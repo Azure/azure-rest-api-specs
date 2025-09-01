@@ -39,21 +39,21 @@ tag: package-2021-03-01-preview
 directive:
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.MixedReality/stable/2021-01-01/common.json
+      - stable/2021-01-01/common.json
     where:
       - $.definitions.AccountKeys.properties.primaryKey
       - $.definitions.AccountKeys.properties.secondaryKey
     reason: Secrets are OK to return in a POST response.
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.MixedReality/stable/2020-05-01/common.json
+      - stable/2020-05-01/common.json
     where:
       - $.definitions.AccountKeys.properties.primaryKey
       - $.definitions.AccountKeys.properties.secondaryKey
     reason: Secrets are OK to return in a POST response.
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.MixedReality/preview/2020-04-06-preview/common.json
+      - preview/2020-04-06-preview/common.json
     where:
       - $.definitions.AccountKeys.properties.primaryKey
       - $.definitions.AccountKeys.properties.secondaryKey
@@ -64,7 +64,7 @@ directive:
 directive:
   - suppress: SECRET_PROPERTY
     from:
-      - Microsoft.MixedReality/preview/2021-03-01-preview/common.json
+      - preview/2021-03-01-preview/common.json
     where:
       - $.definitions.AccountKeys.properties.primaryKey
       - $.definitions.AccountKeys.properties.secondaryKey
@@ -77,8 +77,8 @@ These settings apply only when `--tag=package-2025-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-01-01'
 input-file:
-  - Microsoft.MixedReality/stable/2025-01-01/proxy.json
-  - Microsoft.MixedReality/stable/2025-01-01/remote-rendering.json
+  - stable/2025-01-01/proxy.json
+  - stable/2025-01-01/remote-rendering.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -89,10 +89,10 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
-  - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
-  - Microsoft.MixedReality/preview/2021-03-01-preview/spatial-anchors.json
-  - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
-  - Microsoft.MixedReality/preview/2021-03-01-preview/object-anchors.json
+  - preview/2021-03-01-preview/proxy.json
+  - preview/2021-03-01-preview/spatial-anchors.json
+  - preview/2021-03-01-preview/remote-rendering.json
+  - preview/2021-03-01-preview/object-anchors.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -103,9 +103,9 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-01'
 input-file:
-  - Microsoft.MixedReality/stable/2021-01-01/proxy.json
-  - Microsoft.MixedReality/stable/2021-01-01/spatial-anchors.json
-  - Microsoft.MixedReality/stable/2021-01-01/remote-rendering.json
+  - stable/2021-01-01/proxy.json
+  - stable/2021-01-01/spatial-anchors.json
+  - stable/2021-01-01/remote-rendering.json
 ```
 
 ### Tag: package-2020-05
@@ -114,9 +114,9 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-05'
 input-file:
-- Microsoft.MixedReality/stable/2020-05-01/proxy.json
-- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
-- Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
+- stable/2020-05-01/proxy.json
+- stable/2020-05-01/spatial-anchors.json
+- preview/2020-04-06-preview/remote-rendering.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -128,8 +128,8 @@ These settings apply only when `--tag=package-2020-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-05-01'
 input-file:
-- Microsoft.MixedReality/stable/2020-05-01/proxy.json
-- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
+- stable/2020-05-01/proxy.json
+- stable/2020-05-01/spatial-anchors.json
 ```
 
 ### Tag: package-2020-04-06-preview
@@ -138,8 +138,8 @@ These settings apply only when `--tag=package-2020-04-06-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-04-06-preview'
 input-file:
-- Microsoft.MixedReality/preview/2020-04-06-preview/proxy.json
-- Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
+- preview/2020-04-06-preview/proxy.json
+- preview/2020-04-06-preview/remote-rendering.json
 ```
 
 ### Tag: package-2019-12-preview
@@ -148,9 +148,9 @@ These settings apply only when `--tag=package-2019-12-02-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-12-02-preview'
 input-file:
-- Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
-- Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
-- Microsoft.MixedReality/preview/2019-12-02-preview/spatial-anchors.json
+- preview/2019-12-02-preview/proxy.json
+- preview/2019-12-02-preview/remote-rendering.json
+- preview/2019-12-02-preview/spatial-anchors.json
 ```
 
 ### Tag: package-2019-02-preview
@@ -159,7 +159,7 @@ These settings apply only when `--tag=package-2019-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-02-preview'
 input-file:
-- Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
+- preview/2019-02-28-preview/mixedreality.json
 ```
 
 ---
