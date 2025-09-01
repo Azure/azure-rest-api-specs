@@ -27,6 +27,7 @@ interface NetworkInterfaceAttachments {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterfaceAttachment>;
 
   /** Patch (LRO). */
+  @doc("Update anchor NICs and/or tags. Service returns the full NetworkInterfaceAttachment resource (including read-only bgpNics).")
   update is ArmCustomPatchAsync<NetworkInterfaceAttachment, NetworkInterfaceAttachmentPatchModel>;
 
   /** Delete the resource (LRO). */
