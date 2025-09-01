@@ -78,7 +78,7 @@ interface Volumes {
   populateAvailabilityZone is ArmResourceActionAsync<
     Volume,
     void,
-    ArmResponse<Volume>
+    Volume
   >;
 
   /**
@@ -102,7 +102,7 @@ interface Volumes {
   splitCloneFromParent is ArmResourceActionAsync<
     Volume,
     void,
-    ArmResponse<Volume>
+    Volume
   >;
 
   /**
@@ -122,7 +122,7 @@ interface Volumes {
   listGetGroupIdListForLdapUser is ArmResourceActionAsync<
     Volume,
     GetGroupIdListForLdapUserRequest,
-    ArmResponse<GetGroupIdListForLdapUserResponse>
+    GetGroupIdListForLdapUserResponse
   >;
 
   /**
@@ -205,7 +205,7 @@ interface Volumes {
   authorizeExternalReplication is ArmResourceActionAsync<
     Volume,
     void,
-    ArmResponse<SvmPeerCommandResponse>
+    SvmPeerCommandResponse
   >;
 
   /**

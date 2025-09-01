@@ -3019,7 +3019,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CSvmPeerCommandResponse%3E"
+          "final-state-schema": "#/definitions/SvmPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -3635,7 +3635,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CGetGroupIdListForLdapUserResponse%3E"
+          "final-state-schema": "#/definitions/GetGroupIdListForLdapUserResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -4279,7 +4279,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CVolume%3E"
+          "final-state-schema": "#/definitions/Volume"
         },
         "x-ms-long-running-operation": true
       }
@@ -5575,7 +5575,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CVolume%3E"
+          "final-state-schema": "#/definitions/Volume"
         },
         "x-ms-long-running-operation": true
       }
@@ -7713,19 +7713,15 @@
         "backupOperators": {
           "type": "array",
           "description": "Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier",
-          "minItems": 1,
-          "maxItems": 255,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/UserName"
           }
         },
         "administrators": {
           "type": "array",
           "description": "Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier",
-          "minItems": 1,
-          "maxItems": 255,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/UserName"
           }
         },
         "kdcIP": {
@@ -7758,10 +7754,8 @@
         "securityOperators": {
           "type": "array",
           "description": "Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier",
-          "minItems": 1,
-          "maxItems": 255,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/UserName"
           }
         },
         "ldapOverTLS": {
@@ -7861,45 +7855,6 @@
           "description": "Resource id of the remote volume"
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<GetGroupIdListForLdapUserResponse>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/GetGroupIdListForLdapUserResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<SvmPeerCommandResponse>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SvmPeerCommandResponse",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Volume>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Volume",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "Backup": {
       "type": "object",
@@ -11180,6 +11135,11 @@
       "required": [
         "value"
       ]
+    },
+    "UserName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
     },
     "Volume": {
       "type": "object",

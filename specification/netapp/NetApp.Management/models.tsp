@@ -11,6 +11,10 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.NetApp;
 
+@minLength(1)
+@maxLength(255)
+scalar UserName extends string;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union MetricAggregationType {
   string,
@@ -1291,16 +1295,12 @@ model ActiveDirectory {
   /**
    * Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier
    */
-  @maxItems(255)
-  @minItems(1)
-  backupOperators?: string[];
+  backupOperators?: UserName[];
 
   /**
    * Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier
    */
-  @maxItems(255)
-  @minItems(1)
-  administrators?: string[];
+  administrators?: UserName[];
 
   /**
    * kdc server IP address for the active directory machine. This optional parameter is used only while creating kerberos volume.
@@ -1338,9 +1338,7 @@ model ActiveDirectory {
   /**
    * Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier
    */
-  @maxItems(255)
-  @minItems(1)
-  securityOperators?: string[];
+  securityOperators?: UserName[];
 
   /**
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
