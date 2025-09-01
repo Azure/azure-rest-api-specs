@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "MyResourceGroup",
+    "scopeName": "MyPrivateLinkScope",
+    "name": "scoped-resource-name",
+    "api-version": "2023-06-01-preview",
+    "parameters": {
+      "properties": {
+        "kind": "PlatformMetrics",
+        "linkedResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444",
+        "subscriptionLocation": "eastus"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/scopedResources/scoped-resource-name",
+        "name": "scoped-resource-name",
+        "type": "Microsoft.Insights/privateLinkScopes/scopedResources",
+        "systemData": {
+          "createdBy": "bobby@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2021-06-16T12:59:57.051056Z",
+          "lastModifiedBy": "bobby@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-06-16T12:59:57.051056Z"
+        },
+        "properties": {
+          "kind": "PlatformMetrics",
+          "linkedResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444",
+          "subscriptionLocation": "eastus",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/scopedResources/scoped-resource-name",
+        "name": "scoped-resource-name",
+        "type": "Microsoft.Insights/privateLinkScopes/scopedResources",
+        "systemData": {
+          "createdBy": "bobby@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2021-06-16T12:59:57.051056Z",
+          "lastModifiedBy": "bobby@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-06-16T12:59:57.051056Z"
+        },
+        "properties": {
+          "kind": "PlatformMetrics",
+          "linkedResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444",
+          "subscriptionLocation": "eastus",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopeOperationStatuses/{asyncOperationId}"
+      }
+    }
+  }
+}

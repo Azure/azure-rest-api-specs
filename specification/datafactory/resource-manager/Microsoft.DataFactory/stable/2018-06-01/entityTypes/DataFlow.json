@@ -21,6 +21,9 @@
       "description": "Azure Data Factory nested object which contains a flow with data movements and transformations.",
       "type": "object",
       "discriminator": "type",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -35,7 +38,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "folder": {
           "description": "The folder that this data flow is in. If not specified, Data flow will appear at the root level.",
@@ -81,9 +85,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowletTypeProperties"
         }
-      },
-      "additionalProperties": {
-        "type": "object"
       }
     },
     "MappingDataFlowTypeProperties": {
@@ -94,21 +95,30 @@
           "description": "List of sources in data flow.",
           "items": {
             "$ref": "#/definitions/DataFlowSource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sinks": {
           "type": "array",
           "description": "List of sinks in data flow.",
           "items": {
             "$ref": "#/definitions/DataFlowSink"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "transformations": {
           "type": "array",
           "description": "List of transformations in data flow.",
           "items": {
             "$ref": "#/definitions/Transformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",
@@ -149,7 +159,10 @@
           "description": "List of sources in Power Query.",
           "items": {
             "$ref": "#/definitions/PowerQuerySource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",
@@ -170,21 +183,30 @@
           "description": "List of sources in Flowlet.",
           "items": {
             "$ref": "#/definitions/DataFlowSource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sinks": {
           "type": "array",
           "description": "List of sinks in Flowlet.",
           "items": {
             "$ref": "#/definitions/DataFlowSink"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "transformations": {
           "type": "array",
           "description": "List of transformations in Flowlet.",
           "items": {
             "$ref": "#/definitions/Transformation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "script": {
           "type": "string",
@@ -196,9 +218,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "additionalProperties": {
-          "type": "object"
         }
       }
     },
@@ -213,6 +232,14 @@
         "description": {
           "description": "Transformation description.",
           "type": "string"
+        },
+        "dataset": {
+          "description": "Dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        },
+        "linkedService": {
+          "description": "Linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
         },
         "flowlet": {
           "description": "Flowlet Reference",
@@ -267,6 +294,10 @@
         },
         "schemaLinkedService": {
           "description": "Schema linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "rejectedDataLinkedService": {
+          "description": "Rejected data linked service reference.",
           "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
         },
         "flowlet": {

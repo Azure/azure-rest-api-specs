@@ -1,0 +1,198 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkFabricSkus/{networkFabricSkuName}": {
+      "get": {
+        "tags": [
+          "NetworkFabricSkus"
+        ],
+        "operationId": "NetworkFabricSkus_Get",
+        "summary": "Gets a Network Fabric Sku.",
+        "description": "Implements Network Fabric Sku GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricSkuName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Fabric Sku"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFabricSkus_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricSkus_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkFabricSkus": {
+      "get": {
+        "operationId": "NetworkFabricSkus_ListBySubscription",
+        "summary": "List NetworkFabricSkus by subscription.",
+        "description": "Implements NetworkFabricSkus list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkFabricSkus under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricSkusListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkFabricSkus_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabricSkus_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkFabricSkuProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of Network Fabric Sku.",
+          "readOnly": true
+        },
+        "maxComputeRacks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of compute racks available for this Network Fabric SKU."
+        },
+        "minSupportedVer": {
+          "type": "string",
+          "description": "Minimum supported version.",
+          "readOnly": true
+        },
+        "maxSupportedVer": {
+          "type": "string",
+          "description": "Maximum supported version.",
+          "readOnly": true
+        },
+        "detailsUri": {
+          "type": "string",
+          "description": "The URI gives full details of sku.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "NetworkFabricSkuProperties define the resource properties."
+    },
+    "NetworkFabricSku": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkFabricSkuProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The NetworkFabricSku resource definition."
+    },
+    "NetworkFabricSkusListResult": {
+      "type": "object",
+      "description": "List of NetworkFabricSkus.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkFabricSku resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkFabricSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

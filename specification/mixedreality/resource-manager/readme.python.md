@@ -5,7 +5,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: update
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.mixedreality
@@ -16,12 +15,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
 ```

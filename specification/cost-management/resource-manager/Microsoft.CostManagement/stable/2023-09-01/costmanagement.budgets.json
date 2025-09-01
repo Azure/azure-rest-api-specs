@@ -1,0 +1,768 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CostManagementClient",
+    "description": "CostManagement management client provides access to CostManagement resources for Azure Enterprise Subscriptions.",
+    "version": "2023-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.CostManagement/budgets": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_List",
+        "description": "Lists all budgets for the defined scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionBudgetsList": {
+            "$ref": "./examples/Budgets/List/RBAC/SubscriptionBudgetsList.json"
+          },
+          "ResourceGroupBudgetsList": {
+            "$ref": "./examples/Budgets/List/RBAC/ResourceGroupBudgetsList.json"
+          },
+          "ManagementGroupBudgetsList": {
+            "$ref": "./examples/Budgets/List/RBAC/ManagementGroupBudgetsList.json"
+          },
+          "BillingAccountBudgetsList-EA": {
+            "$ref": "./examples/Budgets/List/EA/BillingAccountBudgetsList-EA.json"
+          },
+          "BillingAccountBudgetsList-EA-CategoryTypeFilter": {
+            "$ref": "./examples/Budgets/List/EA/BillingAccountBudgetsList-EA-CategoryTypeFilter.json"
+          },
+          "DepartmentBudgetsList-EA": {
+            "$ref": "./examples/Budgets/List/EA/DepartmentBudgetsList.json"
+          },
+          "EnrollmentAccountBudgetsList-EA": {
+            "$ref": "./examples/Budgets/List/EA/EnrollmentAccountBudgetsList.json"
+          },
+          "BillingAccountBudgetsList-MCA": {
+            "$ref": "./examples/Budgets/List/MCA/BillingAccountBudgetsList-MCA.json"
+          },
+          "BillingAccountBudgetsList-MCA-CategoryTypeFilter": {
+            "$ref": "./examples/Budgets/List/MCA/BillingAccountBudgetsList-MCA-CategoryTypeFilter.json"
+          },
+          "BillingProfileBudgetsList-MCA": {
+            "$ref": "./examples/Budgets/List/MCA/BillingProfileBudgetsList.json"
+          },
+          "BillingProfileBudgetsList-MCA-CategoryTypeFilter": {
+            "$ref": "./examples/Budgets/List/MCA/BillingProfileBudgetsList-CategoryTypeFilter.json"
+          },
+          "InvoiceSectionBudgetsList-MCA": {
+            "$ref": "./examples/Budgets/List/MCA/InvoiceSectionBudgetsList.json"
+          },
+          "CustomerBudgetsList-MCA-CSP": {
+            "$ref": "./examples/Budgets/List/MCA/CustomerBudgetsList.json"
+          },
+          "CustomerBudgetsList-MCA-CSP-CategoryTypeFilter": {
+            "$ref": "./examples/Budgets/List/MCA/CustomerBudgetsList-CategoryTypeFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetCategoryFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/budgets/{budgetName}": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_Get",
+        "description": "Gets the budget for the scope by budget name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
+        },
+        "x-ms-examples": {
+          "Get-Cost-Budget": {
+            "$ref": "./examples/Budgets/Get/Cost/Get-Cost-Budget.json"
+          },
+          "Get-ReservationUtilization-AlertRule": {
+            "$ref": "./examples/Budgets/Get/ReservationUtilization/Get-ReservationUtilization-AlertRule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_CreateOrUpdate",
+        "description": "The operation to create or update a budget. You can optionally provide an eTag if desired as a form of concurrency control. To obtain the latest eTag for a given budget, perform a get operation prior to your put operation.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate-Cost-Subscription-Budget": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/Cost/CreateOrUpdate-Cost-Subscription-Budget.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/EA/BillingAccountEA-AlertRule.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule-ReservedResourceTypeFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/EA/BillingAccountEA-AlertRule-ReservedResourceTypeFilter.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule-ReservationIdFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/EA/BillingAccountEA-AlertRule-ReservationIdFilter.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-BillingProfileMCA-AlertRule.json": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/BillingProfile-AlertRule.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-BillingProfileMCA-AlertRule-ReservedResourceTypeFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/BillingProfile-AlertRule-ReservedResourceTypeFilter.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-BillingProfileMCA-AlertRule-ReservationIdFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/BillingProfile-AlertRule-ReservationIdFilter.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-CustomerCSP-AlertRule.json": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/Customer-AlertRule.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-CustomerCSP-AlertRule-ReservedResourceTypeFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/Customer-AlertRule-ReservedResourceTypeFilter.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-CustomerCSP-AlertRule-ReservationIdFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/Customer-AlertRule-ReservationIdFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            },
+            "description": "Parameters supplied to the Create Budget operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded and the Budget update is complete.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_Delete",
+        "description": "The operation to delete a budget.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/CostManagement/"
+        },
+        "x-ms-examples": {
+          "DeleteBudget": {
+            "$ref": "./examples/Budgets/Delete/DeleteBudget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BudgetsListResult": {
+      "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of budgets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Budget"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.\r\nIt's null for now, added for future use.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Budget": {
+      "description": "A budget resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "common-types.json#/definitions/CostManagementProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BudgetProperties",
+          "title": "Budget properties"
+        }
+      }
+    },
+    "BudgetProperties": {
+      "description": "The properties of the budget.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The category of the budget.\n- 'Cost' defines a Budget.\n- 'ReservationUtilization' defines a Reservation Utilization Alert Rule.",
+          "type": "string",
+          "enum": [
+            "Cost",
+            "ReservationUtilization"
+          ],
+          "x-ms-enum": {
+            "name": "CategoryType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Cost",
+                "description": "A Budget that evaluates monetary cost of Azure resources against an amount, and alerts based on a configured notification threshold.",
+                "name": "Cost"
+              },
+              {
+                "value": "ReservationUtilization",
+                "description": "An Alert Rule that evaluates the utilization percentage of Azure Reservations, and alerts based on a configured notification threshold."
+              }
+            ]
+          }
+        },
+        "amount": {
+          "description": "The total amount of cost to track with the budget.\n\n Supported for CategoryType(s): Cost.\n\n Required for CategoryType(s): Cost.",
+          "type": "number"
+        },
+        "timeGrain": {
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.\n\nSupported for CategoryType(s): Cost, ReservationUtilization.\n\n Supported timeGrainTypes for **CategoryType: Cost**\n\n- Monthly\n- Quarterly\n- Annually\n- BillingMonth*\n- BillingQuarter*\n- BillingAnnual*\n\n  *only supported for Web Direct customers.\n\n Supported timeGrainTypes for **CategoryType: ReservationUtilization**\n- Last7Days\n- Last30Days\n\n Required for CategoryType(s): Cost, ReservationUtilization.",
+          "type": "string",
+          "enum": [
+            "Monthly",
+            "Quarterly",
+            "Annually",
+            "BillingMonth",
+            "BillingQuarter",
+            "BillingAnnual",
+            "Last7Days",
+            "Last30Days"
+          ],
+          "x-ms-enum": {
+            "name": "TimeGrainType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Monthly",
+                "description": "The budget will track costs in the current calendar month against the amount.\n\n Supported for CategoryType: Cost only.",
+                "name": "Monthly"
+              },
+              {
+                "value": "Quarterly",
+                "description": "The budget will track costs in the current calendar quarter against the amount.\n\n Supported for CategoryType: Cost only.",
+                "name": "Quarterly"
+              },
+              {
+                "value": "Annually",
+                "description": "The budget will track costs in the current calendar year against the amount.\n\n Supported for CategoryType: Cost only.",
+                "name": "Annually"
+              },
+              {
+                "value": "BillingMonth",
+                "description": "The budget will track costs in the current billing month against the amount.\n\n Supported for CategoryType: Cost and Web Direct customers only.",
+                "name": "BillingMonth"
+              },
+              {
+                "value": "BillingQuarter",
+                "description": "The budget will track costs in the current billing quarter against the amount.\n\n Supported for CategoryType: Cost and Web Direct customers only.",
+                "name": "BillingQuarter"
+              },
+              {
+                "value": "BillingAnnual",
+                "description": "The budget will track costs in the current billing year against the amount.\n\n Supported for CategoryType: Cost and Web Direct customers only.",
+                "name": "BillingAnnual"
+              },
+              {
+                "value": "Last7Days",
+                "description": "The Reservation Utilization Alert Rule will evaluate reservations based on their 7-Day utilization percentage.\n\n Supported for CategoryType: ReservationUtilization only.",
+                "name": "Last7Days"
+              },
+              {
+                "value": "Last30Days",
+                "description": "The Reservation Utilization Alert Rule will evaluate reservations based on their 30-Day utilization percentage.\n\n Supported for CategoryType: ReservationUtilization only.",
+                "name": "Last30Days"
+              }
+            ]
+          }
+        },
+        "timePeriod": {
+          "description": "The time period that defines the active period of the budget. The budget will evaluate data on or after the startDate and will expire on the endDate.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\n Required for CategoryType(s): Cost, ReservationUtilization.",
+          "type": "object",
+          "$ref": "#/definitions/BudgetTimePeriod"
+        },
+        "filter": {
+          "description": "May be used to filter budgets by user-specified dimensions and/or tags.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.",
+          "type": "object",
+          "$ref": "#/definitions/BudgetFilter"
+        },
+        "currentSpend": {
+          "description": "The current amount of cost which is being tracked for a budget.\n\n Supported for CategoryType(s): Cost.",
+          "$ref": "#/definitions/CurrentSpend",
+          "readOnly": true
+        },
+        "notifications": {
+          "type": "object",
+          "description": "Dictionary of notifications associated with the budget.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\n- Constraints for **CategoryType: Cost** - Budget can have up to 5 notifications with thresholdType: Actual and 5 notifications with thresholdType: Forecasted.\n- Constraints for **CategoryType: ReservationUtilization** - Only one notification allowed. thresholdType is not applicable.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Notification"
+          },
+          "maxItems": 5
+        },
+        "forecastSpend": {
+          "description": "The forecasted cost which is being tracked for a budget.\n\n Supported for CategoryType(s): Cost.",
+          "$ref": "#/definitions/ForecastSpend",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "category",
+        "timeGrain",
+        "timePeriod"
+      ]
+    },
+    "BudgetTimePeriod": {
+      "description": "The time period that defines the active period of the budget. The budget will evaluate data on or after the startDate and will expire on the endDate.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\n Required for CategoryType(s): Cost, ReservationUtilization.",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "description": "The start date for the budget.\n\n- Constraints for **CategoryType: Cost** - Must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than twelve months. Past start date should  be selected within the timegrain period.\n\n- Constraints for **CategoryType: ReservationUtilization** - Must be on or after the current date and less than the end date.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end date for the budget.\n\n- Constraints for **CategoryType: Cost** - No constraints. If not provided, we default this to 10 years from the start date.\n\n- Constraints for **CategoryType: ReservationUtilization** - End date cannot be more than 3 years after the start date.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "startDate"
+      ]
+    },
+    "BudgetFilter": {
+      "description": "May be used to filter budgets by user-specified dimensions and/or tags.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.",
+      "type": "object",
+      "properties": {
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.\n\n Supported for CategoryType(s): Cost.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BudgetFilterProperties"
+          },
+          "x-ms-identifiers": [],
+          "minItems": 0
+        },
+        "dimensions": {
+          "description": "Has comparison expression for a dimension.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\nSupported dimension names for **CategoryType: ReservationUtilization** \n- ReservationId\n- ReservedResourceType",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        },
+        "tags": {
+          "description": "Has comparison expression for a tag.\n\n Supported for CategoryType(s): Cost.",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        }
+      }
+    },
+    "BudgetFilterProperties": {
+      "description": "The Dimensions or Tags to filter a budget by.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.",
+      "type": "object",
+      "properties": {
+        "dimensions": {
+          "description": "Has comparison expression for a dimension.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\nSupported dimension names for **CategoryType: ReservationUtilization** \n- ReservationId\n- ReservedResourceType",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        },
+        "tags": {
+          "description": "Has comparison expression for a tag.\n\n Supported for CategoryType(s): Cost.",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        }
+      }
+    },
+    "BudgetComparisonExpression": {
+      "description": "The comparison expression to be used in the budgets.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "BudgetOperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "CurrentSpend": {
+      "description": "The current amount of cost which is being tracked for a budget.\n\n Supported for CategoryType(s): Cost.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "The total amount of cost which is being tracked by the budget.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ForecastSpend": {
+      "description": "The forecasted cost which is being tracked for a budget.\n\n Supported for CategoryType(s): Cost.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "The forecasted cost for the total time period which is being tracked by the budget. This value is only provided if the budget contains a forecast alert type.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Notification": {
+      "description": "The notification associated with a budget.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "The notification is enabled or not.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.",
+          "type": "boolean"
+        },
+        "operator": {
+          "description": "The comparison operator.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\n Supported operators for **CategoryType: Cost**\n- GreaterThan\n- GreaterThanOrEqualTo\n\n Supported operators for **CategoryType: ReservationUtilization**\n- LessThan",
+          "type": "string",
+          "enum": [
+            "EqualTo",
+            "GreaterThan",
+            "GreaterThanOrEqualTo",
+            "LessThan"
+          ],
+          "x-ms-enum": {
+            "name": "BudgetNotificationOperatorType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EqualTo",
+                "description": "Notification will be triggered if the evaluated cost is the same as threshold value. Note: It’s not recommended to use this OperatorType as there’s low chance of cost being exactly the same as threshold value, leading to missing of your alert. This OperatorType will be deprecated in future.\n\n Supported for CategoryType(s): Cost.",
+                "name": "EqualTo"
+              },
+              {
+                "value": "GreaterThan",
+                "description": "Notification will be triggered if the evaluated cost is greater than the threshold value. Note: This is the recommended OperatorType while configuring Budget Alert.\n\n Supported for CategoryType(s): Cost.",
+                "name": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanOrEqualTo",
+                "description": "Notification will be triggered if the evaluated cost is greater than or equal to the threshold value.\n\n Supported for CategoryType(s): Cost.",
+                "name": "GreaterThanOrEqualTo"
+              },
+              {
+                "value": "LessThan",
+                "description": "Notification will be triggered if any Reservations in the scope of the Reservation Utilization Alert Rule have a utilization less than the threshold percentage.\n\n Supported for CategoryType(s): ReservationUtilization.",
+                "name": "LessThan"
+              }
+            ]
+          }
+        },
+        "threshold": {
+          "description": "Threshold value associated with a notification. It is always percent with a maximum of 2 decimal places.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\n **CategoryType: Cost** - Must be between 0 and 1000. Notification is sent when the cost exceeded the threshold.\n\n **CategoryType: ReservationUtilization** - Must be between 0 and 100. Notification is sent when a reservation has a utilization percentage below the threshold.",
+          "type": "number"
+        },
+        "frequency": {
+          "description": "Frequency of a notification. Represents how long the notification will be silent after triggering an alert for a threshold breach. If not specified, the frequency will be set by default based on the timeGrain (Weekly when timeGrain: Last7Days, Monthly when timeGrain: Last30Days).\n\n Supported for CategoryType(s): ReservationUtilization.",
+          "type": "string",
+          "enum": [
+            "Daily",
+            "Weekly",
+            "Monthly"
+          ],
+          "x-ms-enum": {
+            "name": "Frequency",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Daily",
+                "description": "After the threshold breaches and an Alert is fired, no further alerts will be sent until the next calendar day.",
+                "name": "Daily"
+              },
+              {
+                "value": "Weekly",
+                "description": "After the threshold breaches and an Alert is fired, no further alerts will be sent for 7 calendar days.",
+                "name": "Weekly"
+              },
+              {
+                "value": "Monthly",
+                "description": "After the threshold breaches and an Alert is fired, no further alerts will be sent for 30 calendar days.",
+                "name": "Monthly"
+              }
+            ]
+          }
+        },
+        "contactEmails": {
+          "description": "Email addresses to send the notification to when the threshold is breached. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 50
+        },
+        "contactRoles": {
+          "description": "Subscription or Resource Group scopes only. Contact roles to send the notification to when the threshold is breached.\n\n Supported for CategoryType(s): Cost.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contactGroups": {
+          "description": "Subscription or Resource Group scopes only. Action groups to send the notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id.\n\n Supported for CategoryType(s): Cost.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 50
+        },
+        "thresholdType": {
+          "description": "The type of threshold.\n\n Supported for CategoryType(s): Cost.",
+          "type": "string",
+          "enum": [
+            "Actual",
+            "Forecasted"
+          ],
+          "x-ms-enum": {
+            "name": "ThresholdType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Actual",
+                "description": "Actual costs budget alerts notify when the actual accrued cost exceeds the allocated budget.",
+                "name": "Actual"
+              },
+              {
+                "value": "Forecasted",
+                "description": "Forecasted costs budget alerts provide advanced notification that your spending trends are likely to exceed your allocated budget, as it relies on forecasted cost predictions.",
+                "name": "Forecasted"
+              }
+            ]
+          },
+          "default": "Actual"
+        },
+        "locale": {
+          "description": "Language in which the recipient will receive the notification, \n\n Supported for CategoryType(s): Cost, ReservationUtilization.",
+          "type": "string",
+          "enum": [
+            "en-us",
+            "ja-jp",
+            "zh-cn",
+            "de-de",
+            "es-es",
+            "fr-fr",
+            "it-it",
+            "ko-kr",
+            "pt-br",
+            "ru-ru",
+            "zh-tw",
+            "cs-cz",
+            "pl-pl",
+            "tr-tr",
+            "da-dk",
+            "en-gb",
+            "hu-hu",
+            "nb-no",
+            "nl-nl",
+            "pt-pt",
+            "sv-se"
+          ],
+          "x-ms-enum": {
+            "name": "CultureCode",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "enabled",
+        "operator",
+        "threshold",
+        "contactEmails"
+      ]
+    }
+  },
+  "parameters": {
+    "scopeBudgetParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with budget operations.\n\n Supported scopes for **CategoryType: Cost**\n\n Azure RBAC Scopes:\n- '/subscriptions/{subscriptionId}/' for subscription scope\n- '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope\n- '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope\n\n EA (Enterprise Agreement) Scopes:\n\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope\n\n MCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only)\n\n Supported scopes for **CategoryType: ReservationUtilization**\n\n EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account Scope\n\nMCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope (non-CSP only)\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only)",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "budgetNameParameter": {
+      "name": "budgetName",
+      "in": "path",
+      "description": "Budget Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 63
+    },
+    "budgetCategoryFilterParameter": {
+      "name": "$filter",
+      "description": "OData filter option. May be used to filter budgets by properties/category. The filter supports 'eq' only.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

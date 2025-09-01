@@ -240,6 +240,18 @@
             "modelAsString": false
           }
         },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
+        },
+        "tags": {
+          "description": "Tags for the subscription",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "subscriptionPolicies": {
           "$ref": "#/definitions/SubscriptionPolicies",
           "description": "The subscription policies."
@@ -294,9 +306,6 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "required": [
-        "nextLink"
-      ],
       "description": "Subscription list operation response."
     },
     "TenantIdDescription": {
@@ -310,6 +319,41 @@
           "readOnly": true,
           "type": "string",
           "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
+        },
+        "tenantCategory": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The category of the tenant. Possible values are TenantCategoryHome,TenantCategoryProjectedBy,TenantCategoryManagedBy"
+        },
+        "country": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The country/region name of the address for the tenant."
+        },
+        "countryCode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Country/region abbreviation for the tenant."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the tenant."
+        },
+        "domains": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The list of domains for the tenant."
+        },
+        "defaultDomain": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default domain for the tenant."
+        },
+        "tenantType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant type. Only available for Home tenant category."
         }
       },
       "description": "Tenant Id information."

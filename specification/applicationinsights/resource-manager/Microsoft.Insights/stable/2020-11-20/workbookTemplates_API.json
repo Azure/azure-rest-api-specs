@@ -340,7 +340,11 @@
           "description": "Workbook galleries supported by the template.",
           "items": {
             "$ref": "#/definitions/WorkbookTemplateGallery"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ]
         },
         "localized": {
           "type": "object",
@@ -349,7 +353,8 @@
             "type": "array",
             "items": {
               "$ref": "#/definitions/WorkbookTemplateLocalizedGallery"
-            }
+            },
+            "x-ms-identifiers": []
           }
         }
       }
@@ -392,7 +397,11 @@
           "description": "Workbook galleries supported by the template.",
           "items": {
             "$ref": "#/definitions/WorkbookTemplateGallery"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ]
         }
       }
     },
@@ -455,6 +464,10 @@
           "items": {
             "$ref": "#/definitions/WorkbookTemplateErrorFieldContract"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "The list of invalid fields send in request, in case of validation error."
         }
       }

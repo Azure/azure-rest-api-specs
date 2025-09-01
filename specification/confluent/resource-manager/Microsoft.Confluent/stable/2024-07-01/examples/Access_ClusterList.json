@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "body": {
+      "searchFilters": {
+        "pageSize": "10",
+        "pageToken": "asc4fts4ft"
+      }
+    },
+    "environment": "env-00000",
+    "organizationName": "myOrganization",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "dlz-f3a90de",
+            "kind": "Cluster",
+            "metadata": {
+              "created_at": "2006-01-02T15:04:05-07:00",
+              "deleted_at": "2006-01-02T15:04:05-07:00",
+              "resource_name": "crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-12345",
+              "self": "https://api.confluent.cloud/cmk/v2/clusters/lkc-12345",
+              "updated_at": "2006-01-02T15:04:05-07:00"
+            },
+            "spec": {
+              "api_endpoint": "https://pkac-00000.us-west-2.aws.confluent.cloud",
+              "availability": "SINGLE_ZONE",
+              "byok": {
+                "id": "cck-00000",
+                "related": "https://api.confluent.cloud/byok/v1/keys/cck-00000",
+                "resource_name": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-00000"
+              },
+              "cloud": "GCP",
+              "config": {
+                "kind": "Basic"
+              },
+              "display_name": "ProdKafkaCluster",
+              "environment": {
+                "environment": "string",
+                "id": "env-00000",
+                "related": "https://api.confluent.cloud/v2/environments/env-00000",
+                "resource_name": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"
+              },
+              "http_endpoint": "https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud",
+              "kafka_bootstrap_endpoint": "lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092",
+              "network": {
+                "environment": "string",
+                "id": "n-00000",
+                "related": "https://api.confluent.cloud/networking/v1/networks/n-00000",
+                "resource_name": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000"
+              },
+              "region": "us-east4"
+            },
+            "status": {
+              "cku": 2,
+              "phase": "PROVISIONED"
+            }
+          }
+        ],
+        "kind": "ClusterList",
+        "metadata": {
+          "first": "https://api.confluent.cloud/cmk/v2/clusters",
+          "last": "https://api.confluent.cloud/cmk/v2/clusters?page_token=bcAOehAY8F16YD84Z1wT",
+          "next": "https://api.confluent.cloud/cmk/v2/clusters?page_token=UvmDWOB1iwfAIBPj6EYb",
+          "prev": "https://api.confluent.cloud/cmk/v2/clusters?page_token=YIXRY97wWYmwzrax4dld",
+          "total_size": 123
+        }
+      }
+    }
+  },
+  "operationId": "Access_ListClusters",
+  "title": "Access_ClusterList"
+}

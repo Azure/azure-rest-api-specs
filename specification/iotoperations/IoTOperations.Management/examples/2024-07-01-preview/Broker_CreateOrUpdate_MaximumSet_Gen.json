@@ -1,0 +1,186 @@
+{
+  "title": "Broker_CreateOrUpdate",
+  "operationId": "Broker_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "9265A271-C9EC-4648-9AF8-B575759AB43E",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "brokerName": "aio-broker",
+    "resource": {
+      "properties": {
+        "memoryProfile": "Medium",
+        "generateResourceLimits": {
+          "cpu": "Disabled"
+        },
+        "cardinality": {
+          "backendChain": {
+            "partitions": 2,
+            "workers": 2,
+            "redundancyFactor": 2
+          },
+          "frontend": {
+            "replicas": 2,
+            "workers": 2
+          }
+        },
+        "advanced": {
+          "encryptInternalTraffic": "Enabled"
+        },
+        "diagnostics": {
+          "logs": {
+            "level": "info"
+          },
+          "metrics": {
+            "prometheusPort": 9600
+          },
+          "selfCheck": {
+            "intervalSeconds": 30,
+            "mode": "Enabled",
+            "timeoutSeconds": 15
+          },
+          "traces": {
+            "cacheSizeMegabytes": 16,
+            "mode": "Enabled",
+            "selfTracing": {
+              "intervalSeconds": 30,
+              "mode": "Enabled"
+            },
+            "spanChannelCapacity": 1000
+          }
+        }
+      },
+      "extendedLocation": {
+        "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "memoryProfile": "Medium",
+          "generateResourceLimits": {
+            "cpu": "Disabled"
+          },
+          "cardinality": {
+            "backendChain": {
+              "partitions": 2,
+              "workers": 2,
+              "redundancyFactor": 2
+            },
+            "frontend": {
+              "replicas": 2,
+              "workers": 2
+            }
+          },
+          "advanced": {
+            "encryptInternalTraffic": "Enabled"
+          },
+          "diagnostics": {
+            "logs": {
+              "level": "info"
+            },
+            "metrics": {
+              "prometheusPort": 9600
+            },
+            "selfCheck": {
+              "intervalSeconds": 30,
+              "mode": "Enabled",
+              "timeoutSeconds": 15
+            },
+            "traces": {
+              "cacheSizeMegabytes": 16,
+              "mode": "Enabled",
+              "selfTracing": {
+                "intervalSeconds": 30,
+                "mode": "Enabled"
+              },
+              "spanChannelCapacity": 1000
+            }
+          }
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123",
+        "name": "dnpky",
+        "type": "tdsdsqy",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "memoryProfile": "Medium",
+          "generateResourceLimits": {
+            "cpu": "Disabled"
+          },
+          "cardinality": {
+            "backendChain": {
+              "partitions": 2,
+              "workers": 2,
+              "redundancyFactor": 2
+            },
+            "frontend": {
+              "replicas": 2,
+              "workers": 2
+            }
+          },
+          "advanced": {
+            "encryptInternalTraffic": "Enabled"
+          },
+          "diagnostics": {
+            "logs": {
+              "level": "info"
+            },
+            "metrics": {
+              "prometheusPort": 9600
+            },
+            "selfCheck": {
+              "intervalSeconds": 30,
+              "mode": "Enabled",
+              "timeoutSeconds": 15
+            },
+            "traces": {
+              "cacheSizeMegabytes": 16,
+              "mode": "Enabled",
+              "selfTracing": {
+                "intervalSeconds": 30,
+                "mode": "Enabled"
+              },
+              "spanChannelCapacity": 1000
+            }
+          }
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123",
+        "name": "dnpky",
+        "type": "tdsdsqy",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    }
+  }
+}

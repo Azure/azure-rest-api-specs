@@ -1,0 +1,31 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-managementgroups
+      breaking-changes:
+        - Deleted or renamed model `Enum0`
+        - Deleted or renamed model `Enum2`
+        - Deleted or renamed model `Enum3`
+        - Method `ManagementGroupsAPI.__init__` parameter `base_url` changed default value from `None` to `str`
+  azure-sdk-for-js:
+    - package: "@azure/arm-managementgroups"
+      breaking-changes:
+        - Interface EntitiesListNextOptionalParams no longer has parameter filter
+        - Interface EntitiesListNextOptionalParams no longer has parameter groupName
+        - Interface EntitiesListNextOptionalParams no longer has parameter search
+        - Interface EntitiesListNextOptionalParams no longer has parameter select
+        - Interface EntitiesListNextOptionalParams no longer has parameter skip
+        - Interface EntitiesListNextOptionalParams no longer has parameter skiptoken
+        - Interface EntitiesListNextOptionalParams no longer has parameter top
+        - Interface EntitiesListNextOptionalParams no longer has parameter view
+        - Interface ManagementGroupSubscriptionsGetSubscriptionsUnderManagementGroupNextOptionalParams no longer has parameter skiptoken
+        - Interface ManagementGroupsGetDescendantsNextOptionalParams no longer has parameter skiptoken
+        - Interface ManagementGroupsGetDescendantsNextOptionalParams no longer has parameter top
+        - Interface ManagementGroupsListNextOptionalParams no longer has parameter skiptoken
+        - Removed Enum KnownEnum0
+        - Removed Enum KnownEnum2
+        - Removed Enum KnownEnum3
+        - Removed Enum KnownManagementGroupChildType
+        - Removed Enum KnownPermissions
+        - Type of parameter expand of interface ManagementGroupsGetOptionalParams is changed from Enum0 to ManagementGroupExpandType
+        - Type of parameter search of interface EntitiesListOptionalParams is changed from Enum2 to EntitySearchType
+        - Type of parameter view of interface EntitiesListOptionalParams is changed from Enum3 to EntityViewParameterType

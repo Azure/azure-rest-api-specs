@@ -1,0 +1,630 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-10-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ApiError": {
+      "type": "object",
+      "description": "Error information.",
+      "properties": {
+        "error": {
+          "description": "Error information in OData format",
+          "$ref": "#/definitions/ODataError"
+        },
+        "systemData": {
+          "$ref": "../sqlmigration.json#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NameAvailabilityResponse": {
+      "type": "object",
+      "description": "Indicates whether a proposed resource name is available",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "If true, the name is valid and available. If false, 'reason' describes why not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason why the name is not available, if nameAvailable is false",
+          "enum": [
+            "AlreadyExists",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "NameCheckFailureReason",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "The localized reason why the name is not available, if nameAvailable is false"
+        }
+      }
+    },
+    "NameAvailabilityRequest": {
+      "type": "object",
+      "description": "A resource type and proposed name",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The proposed resource name"
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type chain (e.g. virtualMachines/extensions)"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "Error information in OData format.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The machine-readable description of the error, such as 'InvalidRequest' or 'InternalServerError'"
+        },
+        "message": {
+          "type": "string",
+          "description": "The human-readable description of the error"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          },
+          "description": "Inner errors that caused this error"
+        }
+      }
+    },
+    "Quota": {
+      "type": "object",
+      "description": "Describes a quota for or usage details about a resource",
+      "properties": {
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "The current value of the quota. If null or missing, the current value cannot be determined in the context of the request."
+        },
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the quota object"
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum value of the quota. If null or missing, the quota has no maximum, in which case it merely tracks usage."
+        },
+        "name": {
+          "type": "object",
+          "description": "The name of the quota",
+          "properties": {
+            "localizedValue": {
+              "type": "string",
+              "description": "The localized name of the quota"
+            },
+            "value": {
+              "type": "string",
+              "description": "The unlocalized name (or ID) of the quota"
+            }
+          }
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit for the quota, such as Count, Bytes, BytesPerSecond, etc."
+        }
+      }
+    },
+    "QuotaList": {
+      "type": "object",
+      "description": "OData page of quota objects",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of quotas",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of quotas, or null or missing if this is the last page"
+        }
+      }
+    },
+    "ReportableException": {
+      "type": "object",
+      "description": "Exception object for all custom exceptions",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "actionableMessage": {
+          "type": "string",
+          "description": "Actionable steps for this exception"
+        },
+        "filePath": {
+          "type": "string",
+          "description": "The path to the file where exception occurred"
+        },
+        "lineNumber": {
+          "type": "string",
+          "description": "The line number where exception occurred"
+        },
+        "hResult": {
+          "type": "integer",
+          "description": "Coded numerical value that is assigned to a specific exception"
+        },
+        "stackTrace": {
+          "type": "string",
+          "description": "Stack trace"
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ConnectionInfo": {
+      "type": "object",
+      "description": "Defines the connection properties of a server",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of connection info"
+        },
+        "userName": {
+          "type": "string",
+          "description": "User name"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password credential."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "AuthenticationType": {
+      "type": "string",
+      "description": "An enumeration of possible authentication types when connecting",
+      "enum": [
+        "None",
+        "WindowsAuthentication",
+        "SqlAuthentication",
+        "ActiveDirectoryIntegrated",
+        "ActiveDirectoryPassword"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true
+      }
+    },
+    "MongoDbConnectionInfo": {
+      "type": "object",
+      "description": "Describes a connection to a MongoDB data source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "A MongoDB connection string or blob container URL. The user name and password can be specified here or in the userName and password properties"
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "Data source "
+        },
+        "encryptConnection": {
+          "type": "boolean",
+          "description": "Whether to encrypt the connection"
+        },
+        "serverBrandVersion": {
+          "type": "string",
+          "description": "server brand version"
+        },
+        "enforceSSL": {
+          "type": "boolean"
+        },
+        "port": {
+          "type": "integer",
+          "description": "port for server"
+        },
+        "additionalSettings": {
+          "type": "string",
+          "description": "Additional connection settings"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "SqlConnectionInfo": {
+      "x-ms-discriminator-value": "SqlConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to SQL database server",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "properties": {
+        "dataSource": {
+          "type": "string",
+          "description": "Data source in the format Protocol:MachineName\\SQLServerInstanceName,PortNumber"
+        },
+        "serverName": {
+          "type": "string",
+          "description": "name of the server"
+        },
+        "port": {
+          "type": "string",
+          "description": "port for server"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Represents the ID of an HTTP resource represented by an Azure resource provider."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "Authentication type to use for connection"
+        },
+        "encryptConnection": {
+          "type": "boolean",
+          "description": "Whether to encrypt the connection",
+          "default": true
+        },
+        "additionalSettings": {
+          "type": "string",
+          "description": "Additional connection settings"
+        },
+        "trustServerCertificate": {
+          "type": "boolean",
+          "description": "Whether to trust the server certificate",
+          "default": false
+        },
+        "platform": {
+          "$ref": "#/definitions/SqlServerSourcePlatform",
+          "description": "Server platform type for connection"
+        }
+      },
+      "required": [
+        "dataSource"
+      ]
+    },
+    "SqlServerSourcePlatform": {
+      "type": "string",
+      "description": "An enumeration of source platform types",
+      "enum": [
+        "SqlOnPrem"
+      ],
+      "x-ms-enum": {
+        "name": "SqlSourcePlatform",
+        "modelAsString": true
+      }
+    },
+    "MySqlConnectionInfo": {
+      "x-ms-discriminator-value": "MySqlConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to MySQL server",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of the server"
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "Data source "
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port for Server"
+        },
+        "encryptConnection": {
+          "type": "boolean",
+          "description": "Whether to encrypt the connection",
+          "default": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "serverName",
+        "port"
+      ]
+    },
+    "OracleConnectionInfo": {
+      "x-ms-discriminator-value": "OracleConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to Oracle server",
+      "properties": {
+        "dataSource": {
+          "type": "string",
+          "description": "EZConnect or TNSName connection string."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "dataSource"
+      ]
+    },
+    "PostgreSqlConnectionInfo": {
+      "x-ms-discriminator-value": "PostgreSqlConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to PostgreSQL server",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of the server"
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "Data source "
+        },
+        "serverVersion": {
+          "type": "string",
+          "description": "server version"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port for Server"
+        },
+        "encryptConnection": {
+          "type": "boolean",
+          "description": "Whether to encrypt the connection",
+          "default": true
+        },
+        "trustServerCertificate": {
+          "type": "boolean",
+          "description": "Whether to trust the server certificate",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "serverName",
+        "port"
+      ]
+    },
+    "MySqlTargetPlatform": {
+      "type": "string",
+      "description": "An enumeration of possible target types when migrating from MySQL",
+      "enum": [
+        "SqlServer",
+        "AzureDbForMySQL"
+      ],
+      "x-ms-enum": {
+        "name": "MySqlTargetPlatformType",
+        "modelAsString": true
+      }
+    },
+    "ServerLevelPermissionsGroup": {
+      "type": "string",
+      "description": "Permission group for validations. These groups will run a set of permissions for validating user activity. Select the permission group for the activity that you are performing.",
+      "enum": [
+        "Default",
+        "MigrationFromSqlServerToAzureDB",
+        "MigrationFromSqlServerToAzureMI",
+        "MigrationFromMySQLToAzureDBForMySQL"
+      ],
+      "x-ms-enum": {
+        "name": "ServerLevelPermissionsGroup"
+      }
+    },
+    "AzureActiveDirectoryApp": {
+      "type": "object",
+      "description": "Azure Active Directory Application",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID of the Azure Active Directory Application"
+        },
+        "appKey": {
+          "type": "string",
+          "description": "Key used to authenticate to the Azure Active Directory Application"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id of the customer"
+        }
+      },
+      "required": [
+        "applicationId",
+        "appKey",
+        "tenantId"
+      ]
+    },
+    "MiSqlConnectionInfo": {
+      "x-ms-discriminator-value": "MiSqlConnectionInfo",
+      "type": "object",
+      "description": "Properties required to create a connection to Azure SQL database Managed instance",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "properties": {
+        "managedInstanceResourceId": {
+          "type": "string",
+          "description": "Resource id for Azure SQL database Managed instance"
+        }
+      },
+      "required": [
+        "managedInstanceResourceId"
+      ]
+    },
+    "BackupSetInfo": {
+      "type": "object",
+      "description": "Information of backup set",
+      "properties": {
+        "backupSetId": {
+          "type": "string",
+          "description": "Id for the set of backup files"
+        },
+        "firstLsn": {
+          "type": "string",
+          "description": "First log sequence number of the backup file"
+        },
+        "lastLsn": {
+          "type": "string",
+          "description": "Last log sequence number of the backup file"
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time of the backup file in share location"
+        },
+        "backupType": {
+          "$ref": "#/definitions/BackupType",
+          "description": "Enum of the different backup types"
+        },
+        "listOfBackupFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupFileInfo"
+          },
+          "description": "List of files in the backup set"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database to which the backup set belongs"
+        },
+        "backupStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time that the backup operation began"
+        },
+        "backupFinishedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time that the backup operation finished"
+        },
+        "isBackupRestored": {
+          "type": "boolean",
+          "description": "Whether the backup set is restored or not"
+        }
+      },
+      "readOnly": true
+    },
+    "BackupType": {
+      "type": "string",
+      "description": "Enum of the different backup types.",
+      "enum": [
+        "Database",
+        "TransactionLog",
+        "File",
+        "DifferentialDatabase",
+        "DifferentialFile",
+        "Partial",
+        "DifferentialPartial"
+      ],
+      "x-ms-enum": {
+        "name": "BackupType",
+        "modelAsString": true
+      }
+    },
+    "BackupFileInfo": {
+      "type": "object",
+      "description": "Information of the backup file",
+      "properties": {
+        "fileLocation": {
+          "type": "string",
+          "description": "Location of the backup file in shared folder"
+        },
+        "familySequenceNumber": {
+          "type": "integer",
+          "description": "Sequence number of the backup file in the backup set"
+        },
+        "status": {
+          "$ref": "#/definitions/BackupFileStatus",
+          "description": "Status of the backup file during migration"
+        }
+      },
+      "readOnly": true
+    },
+    "BackupFileStatus": {
+      "type": "string",
+      "description": "An enumeration of Status of the log backup file.",
+      "enum": [
+        "Arrived",
+        "Queued",
+        "Uploading",
+        "Uploaded",
+        "Restoring",
+        "Restored",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "BackupFileStatus",
+        "modelAsString": true
+      }
+    },
+    "OrphanedUserInfo": {
+      "type": "object",
+      "description": "Information of orphaned users on the SQL server database.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the orphaned user"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Parent database of the user"
+        }
+      }
+    }
+  }
+}

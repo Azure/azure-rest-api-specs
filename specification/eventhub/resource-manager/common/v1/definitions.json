@@ -151,6 +151,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$",
       "minLength": 6,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
@@ -163,6 +164,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The PrivateEndpointConnection name"
+    },
+    "ResourceAssociationNameParameter": {
+      "name": "resourceAssociationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The ResourceAssociation Name"
     },
     "EventHubNameParameter": {
       "name": "eventHubName",

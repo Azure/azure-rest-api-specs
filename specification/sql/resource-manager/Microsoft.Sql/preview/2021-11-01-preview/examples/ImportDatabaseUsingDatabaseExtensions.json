@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "17ca4d13-bf7d-4c33-a60e-b87a2820a325",
+    "resourceGroupName": "rg_062866bf-c4f4-41f9-abf0-b59132ca7924",
+    "serverName": "srv_2d6be2d2-26c8-4930-8fb6-82a5e95e0e82",
+    "databaseName": "db_2a47e946-e414-4c00-94ac-ed886bb78302",
+    "extensionName": "Import",
+    "api-version": "2021-11-01-preview",
+    "parameters": {
+      "properties": {
+        "operationMode": "Import",
+        "storageKeyType": "StorageAccessKey",
+        "storageKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "storageUri": "https://teststorage.blob.core.windows.net/testcontainer/Manifest.xml",
+        "administratorLogin": "login",
+        "administratorLoginPassword": "password",
+        "authenticationType": "Sql"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "requestId": "10000000-0000-0000-0000-000000000002",
+          "requestType": "Import",
+          "lastModifiedTime": "lastModifiedTime",
+          "serverName": "srv_2d6be2d2-26c8-4930-8fb6-82a5e95e0e82",
+          "databaseName": "db_2a47e946-e414-4c00-94ac-ed886bb78302",
+          "status": "Completed",
+          "queuedTime": "09/10/2021 18:35:10",
+          "blobUri": "https://teststorage.blob.core.windows.net/testcontainer/samplebacpac.bacpac",
+          "privateEndpointConnections": []
+        },
+        "id": "10000000-0000-0000-0000-000000000002",
+        "name": "10000000-0000-0000-0000-000000000002",
+        "type": "Microsoft.Sql/servers/databases/extensions"
+      }
+    },
+    "202": {}
+  }
+}

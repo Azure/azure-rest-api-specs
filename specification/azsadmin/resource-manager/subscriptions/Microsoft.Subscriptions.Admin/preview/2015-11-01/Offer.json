@@ -37,16 +37,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OfferList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         },
@@ -79,16 +79,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OfferList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         },
@@ -124,16 +124,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -167,10 +167,10 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
+          "200": {
+            "description": "OK",
             "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
+              "$ref": "#/definitions/Offer"
             }
           },
           "201": {
@@ -179,10 +179,10 @@
               "$ref": "#/definitions/Offer"
             }
           },
-          "200": {
-            "description": "OK",
+          "default": {
+            "description": "Unexpected Error",
             "schema": {
-              "$ref": "#/definitions/Offer"
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -213,17 +213,17 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK"
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -255,16 +255,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "Subscriptions.json#/definitions/MetricList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -297,16 +297,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "Subscriptions.json#/definitions/MetricDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -342,16 +342,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -387,16 +387,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Unexpected Error",
-            "schema": {
-              "$ref": "Subscriptions.json#/definitions/Error"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -466,7 +466,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddonPlanDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         }
       }
     },

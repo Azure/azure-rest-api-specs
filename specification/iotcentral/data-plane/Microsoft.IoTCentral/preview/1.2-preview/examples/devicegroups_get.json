@@ -1,0 +1,23 @@
+{
+  "title": "Get device group by Id.",
+  "description": "Get device group by Id in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceGroupId": "475cad48-b7ff-4a09-b51e-1a9021385453",
+    "api-version": "1.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "475cad48-b7ff-4a09-b51e-1a9021385453",
+        "displayName": "DeviceGroupEntry1",
+        "description": "This is a default device group containing all the devices for this particular Device Template.",
+        "filter": "SELECT * FROM devices WHERE $template = \"dtmi:modelDefinition:dtdlv2\" AND $provisioned = true",
+        "organizations": [
+          "seattle"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "location": "westus2",
+    "api-version": "2023-09-15-preview",
+    "parameters": {
+      "name": "existingmongocluster",
+      "type": "Microsoft.DocumentDB/mongoClusters"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": false,
+        "reason": "AlreadyExists",
+        "message": "Cluster name 'existingmongocluster' is already in use."
+      }
+    }
+  }
+}

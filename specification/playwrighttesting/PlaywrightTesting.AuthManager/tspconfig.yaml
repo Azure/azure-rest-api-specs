@@ -1,0 +1,52 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+parameters:
+  "service-dir":
+    default: "sdk/playwrighttesting"
+  "dependencies":
+    default: ""
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-developer-microsoftplaywrighttesting"
+    namespace: "azure.developer.microsoftplaywrighttesting"
+    package-mode: azure-dataplane
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "microsoft-playwright-testing-rest"
+    title: Microsoft Playwright Testing
+    description: Microsoft Playwright Testing Client
+    generate-metadata: true
+    is-modular-library: false
+    package-details:
+      name: "@azure-rest/microsoft-playwright-testing"
+      description: "This package contains Microsoft Playwright Testing client library."
+      version: 1.0.0
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.Developer.MicrosoftPlaywrightTesting"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Developer.MicrosoftPlaywrightTesting
+    model-namespace: false
+  "@azure-tools/typespec-java":
+    package-dir: "azure-developer-microsoftplaywrighttesting"
+    namespace: com.azure.developer.microsoftplaywrighttesting
+    partial-update: true
+    generate-tests: false
+    service-name: Microsoft Playwright Testing
+    flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/playwrighttesting/PlaywrightTesting.Shared/"

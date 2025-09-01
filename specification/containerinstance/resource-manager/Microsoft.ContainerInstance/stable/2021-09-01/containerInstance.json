@@ -402,6 +402,9 @@
           "202": {
             "description": "Started - the container group is starting."
           },
+          "204": {
+            "description": "Started - the container group is already running or starting."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -765,6 +768,56 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
+      "delete": {
+        "operationId": "SubnetServiceAssociationLink_Delete",
+        "x-ms-examples": {
+          "SubnetServiceAssociationLinkDelete": {
+            "$ref": "./examples/SubnetServiceAssociationLinkDelete.json"
+          }
+        },
+        "summary": "Delete container group virtual network association links.",
+        "description": "Delete container group virtual network association links. The operation does not delete other resources provided by the user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubnetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Delete started."
+          },
+          "204": {
+            "description": "No Content - the specified container group was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -811,14 +864,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContainerPort"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         },
         "environmentVariables": {
           "description": "The environment variables to set in the container instance.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "instanceView": {
           "description": "The instance view of the container instance. Only valid in response.",
@@ -847,7 +906,11 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Event"
-              }
+              },
+              "x-ms-identifiers": [
+                "name",
+                "type"
+              ]
             }
           }
         },
@@ -860,7 +923,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeMount"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "livenessProbe": {
           "description": "The liveness probe.",
@@ -1188,7 +1254,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HttpHeader"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -1241,134 +1310,154 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "type": "object",
-          "required": [
-            "properties"
-          ],
-          "properties": {
-            "identity": {
-              "$ref": "#/definitions/ContainerGroupIdentity",
-              "description": "The identity of the container group, if configured."
-            },
-            "properties": {
-              "x-ms-client-flatten": true,
-              "type": "object",
-              "description": "The container group properties",
-              "properties": {
-                "provisioningState": {
-                  "readOnly": true,
-                  "type": "string",
-                  "description": "The provisioning state of the container group. This only appears in the response."
-                },
-                "containers": {
-                  "type": "array",
-                  "description": "The containers within the container group.",
-                  "items": {
-                    "$ref": "#/definitions/Container"
-                  }
-                },
-                "imageRegistryCredentials": {
-                  "type": "array",
-                  "description": "The image registry credentials by which the container group is created from.",
-                  "items": {
-                    "$ref": "#/definitions/ImageRegistryCredential"
-                  }
-                },
-                "restartPolicy": {
-                  "type": "string",
-                  "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
-                  "enum": [
-                    "Always",
-                    "OnFailure",
-                    "Never"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ContainerGroupRestartPolicy",
-                    "modelAsString": true
-                  }
-                },
-                "ipAddress": {
-                  "description": "The IP address type of the container group.",
-                  "$ref": "#/definitions/IpAddress"
-                },
-                "osType": {
-                  "type": "string",
-                  "description": "The operating system type required by the containers in the container group.",
-                  "enum": [
-                    "Windows",
-                    "Linux"
-                  ],
-                  "x-ms-enum": {
-                    "name": "OperatingSystemTypes",
-                    "modelAsString": true
-                  }
-                },
-                "volumes": {
-                  "type": "array",
-                  "description": "The list of volumes that can be mounted by containers in this container group.",
-                  "items": {
-                    "$ref": "#/definitions/Volume"
-                  }
-                },
-                "instanceView": {
-                  "description": "The instance view of the container group. Only valid in response.",
-                  "readOnly": true,
-                  "type": "object",
-                  "properties": {
-                    "events": {
-                      "description": "The events of this container group.",
-                      "readOnly": true,
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/Event"
-                      }
-                    },
-                    "state": {
-                      "readOnly": true,
-                      "type": "string",
-                      "description": "The state of the container group. Only valid in response."
-                    }
-                  }
-                },
-                "diagnostics": {
-                  "description": "The diagnostic information for a container group.",
-                  "$ref": "#/definitions/ContainerGroupDiagnostics"
-                },
-                "subnetIds": {
-                  "type": "array",
-                  "description": "The subnet resource IDs for a container group.",
-                  "items": {
-                    "$ref": "#/definitions/ContainerGroupSubnetId"
-                  }
-                },
-                "dnsConfig": {
-                  "description": "The DNS config information for a container group.",
-                  "$ref": "#/definitions/DnsConfiguration"
-                },
-                "sku": {
-                  "description": "The SKU for a container group.",
-                  "$ref": "#/definitions/ContainerGroupSku"
-                },
-                "encryptionProperties": {
-                  "description": "The encryption properties for a container group.",
-                  "$ref": "#/definitions/EncryptionProperties"
-                },
-                "initContainers": {
-                  "type": "array",
-                  "description": "The init containers for a container group.",
-                  "items": {
-                    "$ref": "#/definitions/InitContainerDefinition"
-                  }
-                }
-              },
-              "required": [
-                "containers",
-                "osType"
-              ]
-            }
-          }
+          "$ref": "#/definitions/ContainerGroupProperties"
         }
       ]
+    },
+    "ContainerGroupProperties": {
+      "description": "The container group properties",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ContainerGroupIdentity",
+          "description": "The identity of the container group, if configured."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The container group properties",
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The provisioning state of the container group. This only appears in the response."
+            },
+            "containers": {
+              "type": "array",
+              "description": "The containers within the container group.",
+              "items": {
+                "$ref": "#/definitions/Container"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "imageRegistryCredentials": {
+              "type": "array",
+              "description": "The image registry credentials by which the container group is created from.",
+              "items": {
+                "$ref": "#/definitions/ImageRegistryCredential"
+              },
+              "x-ms-identifiers": [
+                "username"
+              ]
+            },
+            "restartPolicy": {
+              "type": "string",
+              "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
+              "enum": [
+                "Always",
+                "OnFailure",
+                "Never"
+              ],
+              "x-ms-enum": {
+                "name": "ContainerGroupRestartPolicy",
+                "modelAsString": true
+              }
+            },
+            "ipAddress": {
+              "description": "The IP address type of the container group.",
+              "$ref": "#/definitions/IpAddress"
+            },
+            "osType": {
+              "type": "string",
+              "description": "The operating system type required by the containers in the container group.",
+              "enum": [
+                "Windows",
+                "Linux"
+              ],
+              "x-ms-enum": {
+                "name": "OperatingSystemTypes",
+                "modelAsString": true
+              }
+            },
+            "volumes": {
+              "type": "array",
+              "description": "The list of volumes that can be mounted by containers in this container group.",
+              "items": {
+                "$ref": "#/definitions/Volume"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "instanceView": {
+              "description": "The instance view of the container group. Only valid in response.",
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "events": {
+                  "description": "The events of this container group.",
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Event"
+                  },
+                  "x-ms-identifiers": [
+                    "name",
+                    "type"
+                  ]
+                },
+                "state": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The state of the container group. Only valid in response."
+                }
+              }
+            },
+            "diagnostics": {
+              "description": "The diagnostic information for a container group.",
+              "$ref": "#/definitions/ContainerGroupDiagnostics"
+            },
+            "subnetIds": {
+              "type": "array",
+              "description": "The subnet resource IDs for a container group.",
+              "items": {
+                "$ref": "#/definitions/ContainerGroupSubnetId"
+              }
+            },
+            "dnsConfig": {
+              "description": "The DNS config information for a container group.",
+              "$ref": "#/definitions/DnsConfiguration"
+            },
+            "sku": {
+              "description": "The SKU for a container group.",
+              "$ref": "#/definitions/ContainerGroupSku"
+            },
+            "encryptionProperties": {
+              "description": "The encryption properties for a container group.",
+              "$ref": "#/definitions/EncryptionProperties"
+            },
+            "initContainers": {
+              "type": "array",
+              "description": "The init containers for a container group.",
+              "items": {
+                "$ref": "#/definitions/InitContainerDefinition"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            }
+          },
+          "required": [
+            "containers",
+            "osType"
+          ]
+        }
+      }
     },
     "ContainerGroupIdentity": {
       "description": "Identity for the container group.",
@@ -1399,22 +1488,27 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "description": "The list of user identities associated with the container group.",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              }
-            }
+            "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+            "$ref": "#/definitions/UserAssignedIdentities"
           }
+        }
+      }
+    },
+    "UserAssignedIdentities": {
+      "type": "object",
+      "description": "The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
         }
       }
     },
@@ -1444,8 +1538,7 @@
         }
       },
       "required": [
-        "server",
-        "username"
+        "server"
       ]
     },
     "ContainerGroupDiagnostics": {
@@ -1468,7 +1561,8 @@
         },
         "workspaceKey": {
           "description": "The workspace key for log analytics",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "logType": {
           "type": "string",
@@ -1491,7 +1585,8 @@
         },
         "workspaceResourceId": {
           "description": "The workspace resource id for log analytics",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1525,7 +1620,10 @@
           "description": "The list of ports exposed on the container group.",
           "items": {
             "$ref": "#/definitions/Port"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         },
         "type": {
           "type": "string",
@@ -1624,7 +1722,8 @@
         },
         "secureValue": {
           "type": "string",
-          "description": "The value of the secure environment variable."
+          "description": "The value of the secure environment variable.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1640,6 +1739,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of operations."
         },
         "nextLink": {
@@ -1711,7 +1813,10 @@
           "description": "The usage data.",
           "items": {
             "$ref": "#/definitions/Usage"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1719,6 +1824,11 @@
       "description": "A single usage result",
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the usage result"
+        },
         "unit": {
           "readOnly": true,
           "type": "string",
@@ -1923,6 +2033,9 @@
           "items": {
             "$ref": "#/definitions/cachedImages"
           },
+          "x-ms-identifiers": [
+            "image"
+          ],
           "description": "The list of cached images."
         },
         "nextLink": {
@@ -1958,6 +2071,10 @@
           "items": {
             "$ref": "#/definitions/Capabilities"
           },
+          "x-ms-identifiers": [
+            "resourceType",
+            "location"
+          ],
           "description": "The list of capabilities."
         },
         "nextLink": {
@@ -2093,7 +2210,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "instanceView": {
           "description": "The instance view of the init container. Only valid in response.",
@@ -2122,7 +2242,11 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Event"
-              }
+              },
+              "x-ms-identifiers": [
+                "name",
+                "type"
+              ]
             }
           }
         },
@@ -2131,7 +2255,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeMount"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2164,6 +2291,10 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -2216,6 +2347,22 @@
       "required": true,
       "type": "string",
       "description": "The name of the container group.",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualNetworkNameParameter": {
+      "name": "virtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual network.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubnetNameParameter": {
+      "name": "subnetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the subnet.",
       "x-ms-parameter-location": "method"
     },
     "OperationIdParameter": {

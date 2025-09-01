@@ -24,12 +24,12 @@ These are the global settings for the ContainerRegistry API.
 title: ContainerRegistryAdminClient
 description: ContainerRegistry Admin Client
 openapi-type: arm
-tag: package-2019-11-01
+tag: package-2019-11-01-preview
 ```
 
-### Tag: package-2019-11-01
+### Tag: package-2019-11-01-preview
 
-These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
+These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
@@ -86,4 +86,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

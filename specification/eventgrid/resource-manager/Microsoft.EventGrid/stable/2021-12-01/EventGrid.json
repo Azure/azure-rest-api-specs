@@ -2637,7 +2637,11 @@
             "enum": [
               "topics",
               "domains"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -2707,7 +2711,11 @@
             "enum": [
               "topics",
               "domains"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -2791,7 +2799,11 @@
             "enum": [
               "topics",
               "domains"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -2862,7 +2874,11 @@
             "enum": [
               "topics",
               "domains"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true
+            }
           },
           {
             "name": "parentName",
@@ -4395,7 +4411,8 @@
         "isSecret": {
           "description": "Boolean flag to tell if the attribute contains sensitive information .",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "x-ms-secret": true
         }
       }
     },
@@ -4475,7 +4492,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource ID of the storage account that is the destination of the deadletter events",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
         },
         "blobContainerName": {
           "description": "The name of the Storage blob container that is the destination of the deadletter events",
@@ -4719,6 +4744,131 @@
       },
       "x-ms-discriminator-value": "StringContains"
     },
+    "NumberInRangeAdvancedFilter": {
+      "description": "NumberInRange Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "format": "double",
+              "type": "number"
+            }
+          }
+        }
+      },
+      "x-ms-discriminator-value": "NumberInRange"
+    },
+    "NumberNotInRangeAdvancedFilter": {
+      "description": "NumberNotInRange Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "format": "double",
+              "type": "number"
+            }
+          }
+        }
+      },
+      "x-ms-discriminator-value": "NumberNotInRange"
+    },
+    "StringNotBeginsWithAdvancedFilter": {
+      "description": "StringNotBeginsWith Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringNotBeginsWith"
+    },
+    "StringNotEndsWithAdvancedFilter": {
+      "description": "StringNotEndsWith Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringNotEndsWith"
+    },
+    "StringNotContainsAdvancedFilter": {
+      "description": "StringNotContains Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringNotContains"
+    },
+    "IsNullOrUndefinedAdvancedFilter": {
+      "description": "IsNullOrUndefined Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "IsNullOrUndefined"
+    },
+    "IsNotNullAdvancedFilter": {
+      "description": "IsNotNull Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "IsNotNull"
+    },
     "AdvancedFilter": {
       "description": "This is the base type that represents an advanced filter. To configure an advanced filter, do not directly instantiate an object of this class. Instead, instantiate an object of a derived class such as BoolEqualsAdvancedFilter, NumberInAdvancedFilter, StringEqualsAdvancedFilter etc. depending on the type of the key based on which you want to filter.",
       "required": [
@@ -4740,7 +4890,14 @@
             "StringNotIn",
             "StringBeginsWith",
             "StringEndsWith",
-            "StringContains"
+            "StringContains",
+            "NumberInRange",
+            "NumberNotInRange",
+            "StringNotBeginsWith",
+            "StringNotEndsWith",
+            "StringNotContains",
+            "IsNullOrUndefined",
+            "IsNotNull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4849,7 +5006,8 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of an Event Hub destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -4883,7 +5041,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource ID of the storage account that contains the queue that is the destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
         },
         "queueName": {
           "description": "The name of the Storage queue under a storage account that is the destination of an event subscription.",
@@ -4919,7 +5085,8 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource ID of an hybrid connection that is the destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -4953,7 +5120,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceBus/namespaces/queues"
+              }
+            ]
+          }
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -4987,7 +5162,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceBus/namespaces/topics"
+              }
+            ]
+          }
         },
         "deliveryAttributeMappings": {
           "description": "Delivery attribute details.",
@@ -5021,7 +5204,15 @@
       "properties": {
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Azure Function destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Web/sites/functions"
+              }
+            ]
+          }
         },
         "maxEventsPerBatch": {
           "format": "int32",
@@ -5219,23 +5410,27 @@
       }
     },
     "Operation": {
-      "description": "Represents an operation returned by the GetOperations request",
+      "description": "Represents an operation returned by the GetOperations request.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the operation",
+          "description": "Name of the operation.",
           "type": "string"
         },
         "display": {
           "$ref": "#/definitions/OperationInfo",
-          "description": "Display name of the operation"
+          "description": "Display name of the operation."
         },
         "origin": {
-          "description": "Origin of the operation",
+          "description": "Origin of the operation.",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "This Boolean is used to determine if the operation is a data plane action or not.",
+          "type": "boolean"
+        },
         "properties": {
-          "description": "Properties of the operation",
+          "description": "Properties of the operation.",
           "type": "object",
           "x-ms-client-flatten": true
         }

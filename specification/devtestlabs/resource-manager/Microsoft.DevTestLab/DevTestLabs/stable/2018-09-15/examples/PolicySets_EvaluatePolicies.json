@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "name": "{policySetName}",
+    "api-version": "2018-09-15",
+    "evaluatePoliciesRequest": {
+      "policies": [
+        {
+          "factName": "LabVmCount",
+          "valueOffset": "1"
+        }
+      ]
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "hasError": true,
+            "policyViolations": [
+              {
+                "code": "MaxValuePolicy",
+                "message": "You cannot exceed the limit (1) of virtual machines that can be created in this lab."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicySets_EvaluatePolicies",
+  "title": "PolicySets_EvaluatePolicies"
+}

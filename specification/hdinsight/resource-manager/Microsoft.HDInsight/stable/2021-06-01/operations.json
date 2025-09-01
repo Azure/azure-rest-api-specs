@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available HDInsight REST API operations.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Lists all of the available operations": {
+            "$ref": "./examples/ListHDInsightOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -127,7 +132,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecifications"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -210,7 +218,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -245,6 +256,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of HDInsight operations supported by the HDInsight resource provider."
         },
         "nextLink": {

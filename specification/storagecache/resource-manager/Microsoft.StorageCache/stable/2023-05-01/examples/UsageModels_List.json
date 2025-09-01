@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "modelName": "READ_ONLY",
+            "targetType": "nfs3",
+            "display": {
+              "description": "Read only, with a default verification timer of 30 seconds. Verification timer has a minimum value of 1 and maximum value of 31536000. Write-back timer must have value of 0 or be null."
+            }
+          },
+          {
+            "modelName": "READ_WRITE",
+            "targetType": "nfs3",
+            "display": {
+              "description": "Read-write, with a default verification timer of 8 hours and default write-back timer of 1 hour. Verification timer and write-back timer have a minimum value of 1 and maximum value of 31536000."
+            }
+          }
+        ]
+      }
+    }
+  }
+}

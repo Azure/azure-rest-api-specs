@@ -5,15 +5,25 @@
     "externalCloudProviderType": "externalBillingAccounts",
     "parameters": {
       "type": "Usage",
-      "timeframe": "MonthToDate",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
       "dataset": {
         "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "Cost",
+            "function": "Sum"
+          }
+        },
         "filter": {
           "and": [
             {
               "or": [
                 {
-                  "dimension": {
+                  "dimensions": {
                     "name": "ResourceLocation",
                     "operator": "In",
                     "values": [
@@ -23,7 +33,7 @@
                   }
                 },
                 {
-                  "tag": {
+                  "tags": {
                     "name": "Environment",
                     "operator": "In",
                     "values": [
@@ -35,7 +45,7 @@
               ]
             },
             {
-              "dimension": {
+              "dimensions": {
                 "name": "ResourceGroup",
                 "operator": "In",
                 "values": [

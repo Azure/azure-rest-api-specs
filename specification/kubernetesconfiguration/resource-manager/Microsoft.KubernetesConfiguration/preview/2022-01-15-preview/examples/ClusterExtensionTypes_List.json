@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.ContainerService",
+    "clusterResourceName": "managedClusters",
+    "clusterName": "clusterName1",
+    "api-version": "2022-01-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.ContainerService/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensionTypes/microsoft.example",
+            "name": "microsoft.example",
+            "type": "Microsoft.KubernetesConfiguration/extensionTypes",
+            "properties": {
+              "releaseTrains": [
+                "stable",
+                "preview",
+                "pilot"
+              ],
+              "clusterTypes": [
+                "connectedClusters"
+              ],
+              "supportedScopes": {
+                "defaultScope": "cluster",
+                "clusterScopeSettings": {
+                  "allowMultipleInstances": true,
+                  "defaultReleaseNamespace": "kube-system"
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2020-09-08T05:10:57.027Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2020-09-08T05:10:57.027Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

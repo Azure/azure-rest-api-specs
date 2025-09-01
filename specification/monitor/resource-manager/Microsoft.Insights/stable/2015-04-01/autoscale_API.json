@@ -45,7 +45,7 @@
         "operationId": "AutoscaleSettings_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -87,7 +87,7 @@
         "operationId": "AutoscaleSettings_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -142,7 +142,7 @@
         "operationId": "AutoscaleSettings_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -182,7 +182,7 @@
         "operationId": "AutoscaleSettings_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -222,7 +222,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AutoscaleSettingNameParameter"
@@ -457,6 +457,9 @@
           "items": {
             "$ref": "#/definitions/ScaleRuleMetricDimension"
           },
+          "x-ms-identifiers": [
+            "DimensionName"
+          ],
           "description": "List of dimension conditions. For example: [{\"DimensionName\":\"AppName\",\"Operator\":\"Equals\",\"Values\":[\"App1\"]},{\"DimensionName\":\"Deployment\",\"Operator\":\"Equals\",\"Values\":[\"default\"]}]."
         },
         "dividePerInstance": {
@@ -642,6 +645,9 @@
           "items": {
             "$ref": "#/definitions/ScaleRule"
           },
+          "x-ms-identifiers": [
+            "/metricTrigger/metricName"
+          ],
           "description": "the collection of rules that provide the triggers and parameters for the scaling action. A maximum of 10 rules can be specified."
         },
         "fixedDate": {
@@ -718,6 +724,9 @@
           "items": {
             "$ref": "#/definitions/WebhookNotification"
           },
+          "x-ms-identifiers": [
+            "serviceUri"
+          ],
           "description": "the collection of webhook notifications."
         }
       },
@@ -734,6 +743,9 @@
           "items": {
             "$ref": "#/definitions/AutoscaleProfile"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified."
         },
         "notifications": {
@@ -741,12 +753,13 @@
           "items": {
             "$ref": "#/definitions/AutoscaleNotification"
           },
+          "x-ms-identifiers": [],
           "description": "the collection of notifications."
         },
         "enabled": {
           "type": "boolean",
-          "description": "the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'true'.",
-          "default": true
+          "description": "the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'false'.",
+          "default": false
         },
         "name": {
           "type": "string",
@@ -866,14 +879,6 @@
     }
   },
   "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "AutoscaleSettingNameParameter": {
       "name": "autoscaleSettingName",
       "in": "path",

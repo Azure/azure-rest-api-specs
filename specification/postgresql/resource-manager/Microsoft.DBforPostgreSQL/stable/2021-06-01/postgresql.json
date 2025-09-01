@@ -1046,11 +1046,24 @@
     "VirtualNetworkSubnetUsageResult": {
       "type": "object",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location the resource resides in.",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        },
         "delegatedSubnetsUsage": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DelegatedSubnetUsage"
           },
+          "x-ms-identifiers": [
+            "subnetName"
+          ],
           "readOnly": true
         }
       },
@@ -1148,6 +1161,9 @@
           "items": {
             "$ref": "#/definitions/VcoreCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "status": {
@@ -1170,6 +1186,9 @@
           "items": {
             "$ref": "#/definitions/StorageMBCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "status": {
@@ -1214,6 +1233,9 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
@@ -1222,6 +1244,9 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of server versions supported by this server edition.",
           "readOnly": true
         },
@@ -1246,6 +1271,9 @@
           "items": {
             "$ref": "#/definitions/StorageEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of editions supported by this server edition.",
           "readOnly": true
         },
@@ -1254,6 +1282,9 @@
           "items": {
             "$ref": "#/definitions/ServerVersionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of server versions supported by this server edition.",
           "readOnly": true
         },
@@ -1262,6 +1293,9 @@
           "items": {
             "$ref": "#/definitions/NodeTypeCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of Node Types supported by this server edition.",
           "readOnly": true
         },
@@ -1300,6 +1334,9 @@
           "items": {
             "$ref": "#/definitions/FlexibleServerEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "supportedHyperscaleNodeEditions": {
@@ -1307,6 +1344,17 @@
           "items": {
             "$ref": "#/definitions/HyperscaleNodeEditionCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
           "readOnly": true
         },
         "status": {
@@ -1326,6 +1374,9 @@
           "items": {
             "$ref": "#/definitions/CapabilityProperties"
           },
+          "x-ms-identifiers": [
+            "zone"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -1340,6 +1391,7 @@
       "type": "string",
       "description": "The version of a server.",
       "enum": [
+        "14",
         "13",
         "12",
         "11"
@@ -1403,14 +1455,17 @@
         },
         "storage": {
           "$ref": "#/definitions/Storage",
+          "default": null,
           "description": "Storage properties of a server."
         },
         "backup": {
           "$ref": "#/definitions/Backup",
+          "default": null,
           "description": "Backup properties of a server."
         },
         "network": {
           "$ref": "#/definitions/Network",
+          "default": null,
           "description": "Network properties of a server.",
           "x-ms-mutability": [
             "create",
@@ -1419,10 +1474,12 @@
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
+          "default": null,
           "description": "High availability properties of a server."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
+          "default": null,
           "description": "Maintenance window properties of a server.",
           "x-ms-mutability": [
             "update",
@@ -1431,6 +1488,14 @@
         },
         "sourceServerResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+              }
+            ]
+          },
           "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore'.",
           "x-ms-mutability": [
             "create"
@@ -1446,6 +1511,7 @@
         },
         "availabilityZone": {
           "type": "string",
+          "default": "",
           "description": "availability zone information of the server.",
           "x-ms-mutability": [
             "create",
@@ -1469,13 +1535,6 @@
             "create",
             "update"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
       "description": "The properties of a server."
@@ -1508,23 +1567,31 @@
       "properties": {
         "administratorLoginPassword": {
           "type": "string",
+          "x-ms-secret": true,
           "format": "password",
-          "description": "The password of the administrator login."
+          "description": "The password of the administrator login.",
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "storage": {
           "$ref": "#/definitions/Storage",
+          "default": null,
           "description": "Storage properties of a server."
         },
         "backup": {
           "$ref": "#/definitions/Backup",
+          "default": null,
           "description": "Backup properties of a server."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
+          "default": null,
           "description": "High availability properties of a server."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
+          "default": null,
           "description": "Maintenance window properties of a server.",
           "x-ms-mutability": [
             "update",
@@ -1631,10 +1698,12 @@
         "backupRetentionDays": {
           "type": "integer",
           "format": "int32",
+          "default": 7,
           "description": "Backup retention days for the server."
         },
         "geoRedundantBackup": {
           "type": "string",
+          "default": "Disabled",
           "description": "A value indicating whether Geo-Redundant backup is enabled on the server.",
           "enum": [
             "Enabled",
@@ -1675,6 +1744,15 @@
         },
         "delegatedSubnetResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
+          "default": "",
           "description": "delegated subnet arm resource id.",
           "x-ms-mutability": [
             "create",
@@ -1683,6 +1761,15 @@
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          },
+          "default": "",
           "description": "private dns zone arm resource id.",
           "x-ms-mutability": [
             "create",
@@ -1696,6 +1783,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "Disabled",
           "description": "The HA mode for the server.",
           "enum": [
             "Disabled",
@@ -1725,6 +1813,7 @@
         },
         "standbyAvailabilityZone": {
           "type": "string",
+          "default": "",
           "description": "availability zone information of the standby."
         }
       },
@@ -1736,21 +1825,25 @@
       "properties": {
         "customWindow": {
           "type": "string",
+          "default": "Disabled",
           "description": "indicates whether custom window is enabled or disabled"
         },
         "startHour": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "description": "start hour for maintenance window"
         },
         "startMinute": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "description": "start minute for maintenance window"
         },
         "dayOfWeek": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "description": "day of week for maintenance window"
         }
       }
@@ -1853,6 +1946,31 @@
         "source": {
           "type": "string",
           "description": "Source of the configuration."
+        },
+        "isDynamicConfig": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration dynamic or static."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration read-only or not."
+        },
+        "isConfigPendingRestart": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Configuration is pending restart or not."
+        },
+        "unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Configuration unit."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Configuration documentation link."
         }
       },
       "description": "The properties of a configuration."
@@ -1971,7 +2089,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -1999,19 +2120,36 @@
       "properties": {
         "message": {
           "type": "string",
-          "description": "Error Message."
+          "description": "Error Message.",
+          "readOnly": true
         },
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicates whether the resource name is available."
+          "description": "Indicates whether the resource name is available.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "name of the PostgreSQL server."
+          "description": "name of the PostgreSQL server.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "type of the server"
+          "description": "type of the server",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The name availability reason.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       },
       "description": "Represents a resource name availability."

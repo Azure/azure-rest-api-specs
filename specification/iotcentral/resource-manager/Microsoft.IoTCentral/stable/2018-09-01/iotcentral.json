@@ -513,8 +513,40 @@
             "create",
             "read"
           ]
+        },
+        "state": {
+          "description": "The current state of the application.",
+          "$ref": "#/definitions/AppState"
+        },
+        "geography": {
+          "description": "The geography the application is in.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbnailUrl": {
+          "description": "The URI for the thumbnail image used in the application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenant": {
+          "description": "The tenant ID the application belongs to.",
+          "type": "string",
+          "readOnly": true
         }
       }
+    },
+    "AppState": {
+      "description": "The current state of the application.",
+      "type": "string",
+      "enum": [
+        "created",
+        "suspended"
+      ],
+      "x-ms-enum": {
+        "name": "AppState",
+        "modelAsString": true
+      },
+      "readOnly": true
     },
     "AppSkuInfo": {
       "description": "Information about the SKU of the IoT Central application.",

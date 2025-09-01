@@ -10,9 +10,12 @@ typescript:
   azure-arm: true
   generate-metadata: true
 
+modelerfour:
+  treat-type-object-as-anything: true
+
 directive:
     # dynamically add a DummyOrchestrationServiceName value to the enum 
-  - from: compute.json
+  - from: virtualMachineScaleSet.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
@@ -25,12 +28,17 @@ directive:
     transform: >-
       return $.
         replace(/[,|*] 'DummyOrchestrationServiceName'/g,'');
+
+  # we do not need to hack to add a dummy enum entry in track 2, because track 2 generator will generate the enum type even if it only has on entry 
+  - from: diskRPCommon.json
+    where: "$.definitions.PurchasePlan"
+    transform: >
+      $["x-ms-client-name"] = "DiskPurchasePlan";
 ```
 
 ``` yaml $(typescript) && !$(profile-content)
   package-name: "@azure/arm-compute"
   output-folder: "$(typescript-sdks-folder)/sdk/compute/arm-compute"
-  clear-output-folder: true
   
 ```
 
@@ -54,7 +62,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-compute-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/compute/arm-compute-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   azure-arm: true
   generate-metadata: true
   batch:

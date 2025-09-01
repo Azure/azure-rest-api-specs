@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid",
+    "identityProviderName": "aadB2C"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
+        "type": "Microsoft.ApiManagement/service/identityProviders",
+        "name": "AadB2C",
+        "properties": {
+          "clientId": "f02dafe2-b8b8-48ec-a38e-27e5c16c51e5",
+          "type": "aadB2C",
+          "authority": "login.microsoftonline.com",
+          "signinTenant": "contosoaadb2c.onmicrosoft.com",
+          "allowedTenants": [
+            "contosoaadb2c.onmicrosoft.com",
+            "contoso2aadb2c.onmicrosoft.com"
+          ],
+          "signupPolicyName": "B2C_1_policy-signup",
+          "signinPolicyName": "B2C_1_policy-signin"
+        }
+      }
+    }
+  }
+}

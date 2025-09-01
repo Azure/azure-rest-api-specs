@@ -1,0 +1,19 @@
+name: Add Label Artifact
+description: Uploads an empty artifact named `label-${name}=${value}`, that's consumed by action "update-labels"
+
+inputs:
+  name:
+    description: Name
+    required: true
+  value:
+    description: Value ("true" or "false")
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - uses: ./.github/actions/add-empty-artifact
+      with:
+        name: label-${{ inputs.name }}
+        value: ${{ inputs.value }}

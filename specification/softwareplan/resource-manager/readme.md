@@ -26,20 +26,6 @@ These are the global settings for the softwareplan.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06-01-preview
-```
-
-### Tag: package-2019-06-01-preview
-
-These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06-01-preview'
-input-file:
-  - Microsoft.SoftwarePlan/preview/2019-06-01-preview/softwareplan.json
-```
-
-``` yaml
-openapi-type: arm
 tag: package-2019-12-01
 ```
 
@@ -50,6 +36,15 @@ These settings apply only when `--tag=package-2019-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2019-12-01'
 input-file:
   - Microsoft.SoftwarePlan/stable/2019-12-01/softwareplan.json
+```
+
+### Tag: package-2019-06-01-preview
+
+These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01-preview'
+input-file:
+  - Microsoft.SoftwarePlan/preview/2019-06-01-preview/softwareplan.json
 ```
 
 ---
@@ -63,7 +58,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -72,6 +66,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_softwareplan']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

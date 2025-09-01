@@ -1,0 +1,179 @@
+{
+  "title": "VolumeGroups_Create",
+  "operationId": "VolumeGroups_Create",
+  "parameters": {
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "volumeGroupName": "volumegroupname",
+    "parameters": {
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {
+          "key7482": {}
+        }
+      },
+      "properties": {
+        "protocolType": "Iscsi",
+        "encryption": "EncryptionAtRestWithCustomerManagedKey",
+        "encryptionProperties": {
+          "keyVaultProperties": {
+            "keyName": "sftaiernmrzypnrkpakrrawxcbsqzc",
+            "keyVersion": "c",
+            "keyVaultUri": "https://microsoft.com/axmblwp"
+          },
+          "identity": {
+            "userAssignedIdentity": "im"
+          }
+        },
+        "networkAcls": {
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+              "action": "Allow"
+            }
+          ]
+        }
+      }
+    },
+    "api-version": "2023-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "identity": {
+          "principalId": "ihsiwrwdofymkhquaxcrtfmmrsygw",
+          "tenantId": "gtkzkjsy",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key7482": {
+              "principalId": "vfdzizicxcfcqecgsmshz",
+              "clientId": "jaczsquolgxwpznljbmdupn"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "protocolType": "Iscsi",
+          "encryption": "EncryptionAtRestWithPlatformKey",
+          "encryptionProperties": {
+            "keyVaultProperties": {
+              "keyName": "sftaiernmrzypnrkpakrrawxcbsqzc",
+              "keyVersion": "c",
+              "keyVaultUri": "https://microsoft.com/axmblwp",
+              "currentVersionedKeyIdentifier": "rnpxhtzkquzyoepwbwktbwb",
+              "lastKeyRotationTimestamp": "2023-08-23T12:16:11.388Z",
+              "currentVersionedKeyExpirationTimestamp": "2023-08-23T12:16:11.388Z"
+            },
+            "identity": {
+              "userAssignedIdentity": "im"
+            }
+          },
+          "networkAcls": {
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+                "action": "Allow"
+              }
+            ]
+          }
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+        "systemData": {
+          "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
+          "createdByType": "User",
+          "createdAt": "2023-08-23T12:16:10.057Z",
+          "lastModifiedBy": "bcclmbseed",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-08-23T12:16:10.057Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "identity": {
+          "principalId": "ihsiwrwdofymkhquaxcrtfmmrsygw",
+          "tenantId": "gtkzkjsy",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key7482": {
+              "principalId": "vfdzizicxcfcqecgsmshz",
+              "clientId": "jaczsquolgxwpznljbmdupn"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "protocolType": "Iscsi",
+          "encryption": "EncryptionAtRestWithPlatformKey",
+          "encryptionProperties": {
+            "keyVaultProperties": {
+              "keyName": "sftaiernmrzypnrkpakrrawxcbsqzc",
+              "keyVersion": "c",
+              "keyVaultUri": "https://microsoft.com/axmblwp",
+              "currentVersionedKeyIdentifier": "rnpxhtzkquzyoepwbwktbwb",
+              "lastKeyRotationTimestamp": "2023-08-23T12:16:11.388Z",
+              "currentVersionedKeyExpirationTimestamp": "2023-08-23T12:16:11.388Z"
+            },
+            "identity": {
+              "userAssignedIdentity": "im"
+            }
+          },
+          "networkAcls": {
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+                "action": "Allow"
+              }
+            ]
+          },
+          "privateEndpointConnections": [
+            {
+              "properties": {
+                "provisioningState": "Invalid",
+                "privateEndpoint": {
+                  "id": "ehxmltubeltzmgcqxocakaansat"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Pending",
+                  "description": "nahklgxicbqjbbvcdrkljqdhprruys",
+                  "actionsRequired": "sairafcqpvucoy"
+                },
+                "groupIds": [
+                  "bolviufgqnyid"
+                ]
+              },
+              "id": "opcjchensdf",
+              "name": "gewxykc",
+              "type": "ailymcedgvxbqklmqtlty",
+              "systemData": {
+                "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
+                "createdByType": "User",
+                "createdAt": "2023-08-23T12:16:10.057Z",
+                "lastModifiedBy": "bcclmbseed",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2023-08-23T12:16:10.057Z"
+              }
+            }
+          ]
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups",
+        "systemData": {
+          "createdBy": "kakcyehdrphqkilgkhpbdtvpupak",
+          "createdByType": "User",
+          "createdAt": "2023-08-23T12:16:10.057Z",
+          "lastModifiedBy": "bcclmbseed",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-08-23T12:16:10.057Z"
+        }
+      }
+    }
+  }
+}

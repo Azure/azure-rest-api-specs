@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -550,6 +550,9 @@
           "items": {
             "$ref": "#/definitions/PolicyDefinitionReference"
           },
+          "x-ms-identifiers": [
+            "policyDefinitionReferenceId"
+          ],
           "description": "An array of policy definition references."
         },
         "policyDefinitionGroups": {
@@ -557,6 +560,9 @@
           "items": {
             "$ref": "#/definitions/PolicyDefinitionGroup"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The metadata describing groups of policy definition references within the policy set definition."
         }
       },

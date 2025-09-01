@@ -1,0 +1,3438 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Confluent",
+    "version": "2024-02-13"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List Confluent marketplace agreements in the subscription.",
+        "operationId": "MarketplaceAgreements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_List": {
+            "$ref": "./examples/MarketplaceAgreements_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements/default": {
+      "put": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Create Confluent Marketplace agreement in the subscription.",
+        "operationId": "MarketplaceAgreements_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Confluent Marketplace Agreement resource",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_Create": {
+            "$ref": "./examples/MarketplaceAgreements_Create.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Confluent/operations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all operations provided by Microsoft.Confluent.",
+        "operationId": "OrganizationOperations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrganizationOperations_List": {
+            "$ref": "./examples/OrganizationOperations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/organizations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all organizations under the specified subscription.",
+        "operationId": "Organization_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organization_ListBySubscription": {
+            "$ref": "./examples/Organization_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all Organizations under the specified resource group.",
+        "operationId": "Organization_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organization_ListByResourceGroup": {
+            "$ref": "./examples/Organization_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Get the properties of a specific Organization resource.",
+        "operationId": "Organization_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_Get": {
+            "$ref": "./examples/Organization_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Create Organization resource",
+        "operationId": "Organization_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Organization resource model",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Organization_Create": {
+            "$ref": "./examples/Organization_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Update Organization resource",
+        "operationId": "Organization_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated Organization resource",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Confluent_Update": {
+            "$ref": "./examples/Organization_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Delete Organization resource",
+        "operationId": "Organization_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified confluent resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Confluent_Delete": {
+            "$ref": "./examples/Organization_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidate": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Organization Validate proxy resource",
+        "operationId": "Validations_ValidateOrganization",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Organization resource model",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validations_ValidateOrganizations": {
+            "$ref": "./examples/Validations_ValidateOrganizations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidateV2": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Organization Validate proxy resource",
+        "operationId": "Validations_ValidateOrganizationV2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Organization resource model",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validations_ValidateOrganizations": {
+            "$ref": "./examples/Validations_ValidateOrganizationsV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listUsers": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Organization users details",
+        "operationId": "Access_ListUsers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_ListUsers_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_UsersList": {
+            "$ref": "./examples/Access_UsersList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listServiceAccounts": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Organization service accounts details",
+        "operationId": "Access_ListServiceAccounts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_ListServiceAccounts_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_ServiceAccountsList": {
+            "$ref": "./examples/Access_ServiceAccountsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listInvitations": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Organization accounts invitation details",
+        "operationId": "Access_ListInvitations",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_ListInvitations_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_InvitationsList": {
+            "$ref": "./examples/Access_InvitationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/createInvitation": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Invite user to the organization",
+        "operationId": "Access_InviteUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Invite user account model",
+            "schema": {
+              "$ref": "#/definitions/Access_InviteUserAccountModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InvitationRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_InviteUser": {
+            "$ref": "./examples/Access_InviteUser.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listEnvironments": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Environment list of an organization",
+        "operationId": "Access_ListEnvironments",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_ListEnvironments_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_EnvironmentList": {
+            "$ref": "./examples/Access_EnvironmentList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listClusters": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Cluster details",
+        "operationId": "Access_ListClusters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_ListCluster_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_ClusterList": {
+            "$ref": "./examples/Access_ClusterList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindings": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Organization role bindings",
+        "operationId": "Access_ListRoleBindings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_ListRoleBindings_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_RoleBindingList": {
+            "$ref": "./examples/Access_RoleBindingList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/createRoleBinding": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Organization role bindings",
+        "operationId": "Access_CreateRoleBinding",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Create role binding Request Model",
+            "schema": {
+              "$ref": "#/definitions/Access_CreateRoleBindingRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RoleBindingRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_CreateRoleBinding": {
+            "$ref": "./examples/Access_CreateRoleBinding.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/deleteRoleBinding/{roleBindingId}": {
+      "delete": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Organization role bindings",
+        "operationId": "Access_DeleteRoleBinding",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleBindingIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_DeleteRoleBinding": {
+            "$ref": "./examples/Access_DeleteRoleBinding.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindingNameList": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Organization role bindings",
+        "operationId": "Access_ListRoleBindingNameList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_RoleBindingNameList_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_RoleBindingNameList": {
+            "$ref": "./examples/Access_RoleBindingNameList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments": {
+      "get": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Lists of all the environments in a organization",
+        "operationId": "Organization_ListEnvironments",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/PageTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetEnvironmentsResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_ListEnvironments": {
+            "$ref": "./examples/Organization_EnvironmentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}": {
+      "get": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Get Environment details by environment Id",
+        "operationId": "Organization_GetEnvironmentById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SCEnvironmentRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_GetEnvironmentById": {
+            "$ref": "./examples/Organization_GetEnvironmentById.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters": {
+      "get": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Lists of all the clusters in a environment",
+        "operationId": "Organization_ListClusters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/PageTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ListClustersSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_ListClusters": {
+            "$ref": "./examples/Organization_ClusterList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters": {
+      "get": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Get schema registry clusters",
+        "operationId": "Organization_ListSchemaRegistryClusters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/PageTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ListSchemaRegistryClustersResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_ListSchemaRegistryClusters": {
+            "$ref": "./examples/Organization_ListSchemaRegistryClusters.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/listRegions": {
+      "post": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "cloud provider regions available for creating Schema Registry clusters.",
+        "operationId": "Organization_ListRegions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ListRegionsSuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_ListRegions": {
+            "$ref": "./examples/Organization_ListRegions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters/{clusterId}/createAPIKey": {
+      "post": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Creates API key for a schema registry Cluster ID or Kafka Cluster ID under a environment",
+        "operationId": "Organization_CreateAPIKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload for get creating API Key for schema registry Cluster ID or Kafka Cluster ID under a environment",
+            "schema": {
+              "$ref": "#/definitions/CreateAPIKeyModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APIKeyRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_CreateAPIKey": {
+            "$ref": "./examples/Organization_CreateClusterAPIKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}": {
+      "delete": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Deletes API key of a kafka or schema registry cluster",
+        "operationId": "Organization_DeleteClusterAPIKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfluentAPIKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_DeleteClusterAPIKey": {
+            "$ref": "./examples/Organization_DeleteClusterAPIKey.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Get API key details of a kafka or schema registry cluster",
+        "operationId": "Organization_GetClusterAPIKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfluentAPIKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/APIKeyRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_GetClusterAPIKey": {
+            "$ref": "./examples/Organization_GetClusterAPIKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters/{clusterId}": {
+      "get": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Get schema registry cluster by Id",
+        "operationId": "Organization_GetSchemaRegistryClusterById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistryClusterRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_GetSchemaRegistryClusterById": {
+            "$ref": "./examples/Organization_GetSchemaRegistryClusterById.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters/{clusterId}": {
+      "get": {
+        "tags": [
+          "service connectors"
+        ],
+        "summary": "Get cluster by Id",
+        "operationId": "Organization_GetClusterById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SCClusterRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_GetClusterById": {
+            "$ref": "./examples/Organization_GetClusterById.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfluentAgreementProperties": {
+      "description": "Terms properties for Marketplace and Confluent.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "Publisher identifier string.",
+          "type": "string"
+        },
+        "product": {
+          "description": "Product identifier string.",
+          "type": "string"
+        },
+        "plan": {
+          "description": "Plan identifier string.",
+          "type": "string"
+        },
+        "licenseTextLink": {
+          "description": "Link to HTML with Microsoft and Publisher terms.",
+          "type": "string"
+        },
+        "privacyPolicyLink": {
+          "description": "Link to the privacy policy of the publisher.",
+          "type": "string"
+        },
+        "retrieveDatetime": {
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.",
+          "type": "string"
+        },
+        "signature": {
+          "description": "Terms signature.",
+          "type": "string"
+        },
+        "accepted": {
+          "description": "If any version of the terms have been accepted, otherwise false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ConfluentAgreementResource": {
+      "description": "Agreement Terms definition",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConfluentAgreementProperties",
+          "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "ConfluentAgreementResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/ConfluentAgreementResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.Confluent",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Type on which the operation is performed, e.g., 'clusters'.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Write confluent'.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "An Confluent REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of GET request to list Confluent operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Confluent operations supported by the Microsoft.Confluent provider.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ValidationResponse": {
+      "type": "object",
+      "description": "Validation response from the provider",
+      "title": "ValidationResponse",
+      "properties": {
+        "info": {
+          "description": "Info from the response",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Response body of Error",
+      "title": "ErrorResponseBody",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Error target",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Error detail",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "description": "Default error response for resource provider",
+      "title": "ResourceProviderDefaultErrorResponse",
+      "properties": {
+        "error": {
+          "description": "Response body of Error",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "description": "Provision states for confluent RP",
+      "title": "ProvisioningState",
+      "x-ms-enum": {
+        "name": "ProvisionState",
+        "modelAsString": true
+      }
+    },
+    "SaaSOfferStatus": {
+      "enum": [
+        "Started",
+        "PendingFulfillmentStart",
+        "InProgress",
+        "Subscribed",
+        "Suspended",
+        "Reinstated",
+        "Succeeded",
+        "Failed",
+        "Unsubscribed",
+        "Updating"
+      ],
+      "type": "string",
+      "description": "SaaS Offer Status for confluent RP",
+      "title": "SaaSOfferStatus",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SaaSOfferStatus"
+      }
+    },
+    "OfferDetail": {
+      "description": "Confluent Offer detail",
+      "type": "object",
+      "required": [
+        "publisherId",
+        "id",
+        "planId",
+        "planName",
+        "termUnit"
+      ],
+      "properties": {
+        "publisherId": {
+          "description": "Publisher Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "id": {
+          "description": "Offer Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "planId": {
+          "description": "Offer Plan Id",
+          "maxLength": 200,
+          "type": "string"
+        },
+        "planName": {
+          "description": "Offer Plan Name",
+          "maxLength": 200,
+          "type": "string"
+        },
+        "termUnit": {
+          "description": "Offer Plan Term unit",
+          "maxLength": 25,
+          "type": "string"
+        },
+        "termId": {
+          "description": "Offer Plan Term Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "privateOfferId": {
+          "description": "Private Offer Id",
+          "maxLength": 255,
+          "type": "string"
+        },
+        "privateOfferIds": {
+          "description": "Array of Private Offer Ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "SaaS Offer Status",
+          "$ref": "#/definitions/SaaSOfferStatus"
+        }
+      }
+    },
+    "UserDetail": {
+      "description": "Subscriber detail",
+      "type": "object",
+      "required": [
+        "emailAddress"
+      ],
+      "properties": {
+        "firstName": {
+          "description": "First name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email address",
+          "pattern": "^\\S+@\\S+\\.\\S+$",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "User principal name",
+          "type": "string"
+        },
+        "aadEmail": {
+          "description": "AAD email address",
+          "type": "string"
+        }
+      }
+    },
+    "LinkOrganization": {
+      "description": "Link an existing Confluent organization",
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "description": "User auth token",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OrganizationResourceProperties": {
+      "description": "Organization resource property",
+      "type": "object",
+      "required": [
+        "offerDetail",
+        "userDetail"
+      ],
+      "properties": {
+        "createdTime": {
+          "format": "date-time",
+          "description": "The creation time of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provision states for confluent RP",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "organizationId": {
+          "description": "Id of the Confluent organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ssoUrl": {
+          "description": "SSO url for the Confluent organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerDetail": {
+          "description": "Confluent offer detail",
+          "$ref": "#/definitions/OfferDetail"
+        },
+        "userDetail": {
+          "description": "Subscriber detail",
+          "$ref": "#/definitions/UserDetail"
+        },
+        "linkOrganization": {
+          "description": "Link an existing Confluent organization",
+          "$ref": "#/definitions/LinkOrganization"
+        }
+      }
+    },
+    "OrganizationResource": {
+      "description": "Organization resource.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Organization resource properties",
+          "$ref": "#/definitions/OrganizationResourceProperties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Organization resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Location of Organization resource",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceListResult": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Result of a list operation.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/OrganizationResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceUpdate": {
+      "description": "Organization Resource update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "ARM resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListAccessRequestModel": {
+      "description": "List Access Request Model",
+      "type": "object",
+      "properties": {
+        "searchFilters": {
+          "description": "Search filters for the request",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConfluentListMetadata": {
+      "description": "Metadata of the list",
+      "type": "object",
+      "properties": {
+        "first": {
+          "description": "First page of the list",
+          "type": "string"
+        },
+        "last": {
+          "description": "Last page of the list",
+          "type": "string"
+        },
+        "prev": {
+          "description": "Previous page of the list",
+          "type": "string"
+        },
+        "next": {
+          "description": "Next page of the list",
+          "type": "string"
+        },
+        "total_size": {
+          "description": "Total size of the list",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "MetadataEntity": {
+      "description": "Metadata of the data record",
+      "type": "object",
+      "properties": {
+        "self": {
+          "description": "Self lookup url",
+          "type": "string"
+        },
+        "resource_name": {
+          "description": "Resource name of the record",
+          "type": "string"
+        },
+        "created_at": {
+          "description": "Created Date Time",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Updated Date time",
+          "type": "string"
+        },
+        "deleted_at": {
+          "description": "Deleted Date time",
+          "type": "string"
+        }
+      }
+    },
+    "UserRecord": {
+      "description": "Record of the user",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of account",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the user",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/MetadataEntity"
+        },
+        "email": {
+          "description": "Email of the user",
+          "type": "string"
+        },
+        "full_name": {
+          "description": "Name of the user",
+          "type": "string"
+        },
+        "auth_type": {
+          "description": "Auth type of the user",
+          "type": "string"
+        }
+      }
+    },
+    "UsersList": {
+      "description": "Data of the users list",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/UserRecord"
+      }
+    },
+    "Access_ListUsers_SuccessResponse": {
+      "description": "List users success response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "Data of the users list",
+          "$ref": "#/definitions/UsersList"
+        }
+      }
+    },
+    "ServiceAccountRecord": {
+      "description": "Record of the service account",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of account",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the service account",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/MetadataEntity"
+        },
+        "display_name": {
+          "description": "Name of the service account",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the service account",
+          "type": "string"
+        }
+      }
+    },
+    "ServiceAccountsList": {
+      "description": "Data of the service accounts list",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceAccountRecord"
+      }
+    },
+    "Access_ListServiceAccounts_SuccessResponse": {
+      "description": "List service accounts success response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "Data of the service accounts list",
+          "$ref": "#/definitions/ServiceAccountsList"
+        }
+      }
+    },
+    "InvitationRecord": {
+      "description": "Record of the invitation",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of account",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the invitation",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/MetadataEntity"
+        },
+        "email": {
+          "description": "Email of the user",
+          "type": "string"
+        },
+        "auth_type": {
+          "description": "Auth type of the user",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the invitation",
+          "type": "string"
+        },
+        "accepted_at": {
+          "description": "Accepted date time of the invitation",
+          "type": "string"
+        },
+        "expires_at": {
+          "description": "Expiration date time of the invitation",
+          "type": "string"
+        }
+      }
+    },
+    "InvitationsList": {
+      "description": "Data of the invitations list",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/InvitationRecord"
+      }
+    },
+    "Access_ListInvitations_SuccessResponse": {
+      "description": "List invitations success response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "Data of the invitations list",
+          "$ref": "#/definitions/InvitationsList"
+        }
+      }
+    },
+    "Access_InvitedUserDetails": {
+      "description": "Details of the user being invited",
+      "type": "object",
+      "properties": {
+        "invitedEmail": {
+          "description": "UPN/Email of the user who is being invited",
+          "type": "string"
+        },
+        "auth_type": {
+          "description": "Auth type of the user",
+          "type": "string"
+        }
+      }
+    },
+    "Access_InviteUserAccountModel": {
+      "description": "Invite User Account model",
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "description": "Id of the organization",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email of the logged in user",
+          "type": "string"
+        },
+        "upn": {
+          "description": "Upn of the logged in user",
+          "type": "string"
+        },
+        "invitedUserDetails": {
+          "description": "Details of the user who is being invited",
+          "$ref": "#/definitions/Access_InvitedUserDetails"
+        }
+      }
+    },
+    "EnvironmentRecord": {
+      "description": "Details about environment name, metadata and environment id of an environment",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of environment",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the environment",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/MetadataEntity"
+        },
+        "display_name": {
+          "description": "Display name of the user",
+          "type": "string"
+        }
+      }
+    },
+    "EnvironmentsList": {
+      "description": "List of environment records",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EnvironmentRecord"
+      }
+    },
+    "Access_ListEnvironments_SuccessResponse": {
+      "description": "Details of the environments returned on successful response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the  environment list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "Environment list data",
+          "$ref": "#/definitions/EnvironmentsList"
+        }
+      }
+    },
+    "ClusterSpecEntity": {
+      "description": "Spec of the cluster record",
+      "type": "object",
+      "properties": {
+        "display_name": {
+          "description": "The name of the cluster",
+          "type": "string"
+        },
+        "availability": {
+          "description": "The availability zone configuration of the cluster",
+          "type": "string"
+        },
+        "cloud": {
+          "description": "The cloud service provider ",
+          "type": "string"
+        },
+        "zone": {
+          "description": "type of zone availability",
+          "type": "string"
+        },
+        "region": {
+          "description": "The cloud service provider region",
+          "type": "string"
+        },
+        "kafka_bootstrap_endpoint": {
+          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster",
+          "type": "string"
+        },
+        "http_endpoint": {
+          "description": "The cluster HTTP request URL.",
+          "type": "string"
+        },
+        "api_endpoint": {
+          "description": "The Kafka API cluster endpoint",
+          "type": "string"
+        },
+        "config": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterConfigEntity"
+        },
+        "environment": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterEnvironmentEntity"
+        },
+        "network": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterNetworkEntity"
+        },
+        "byok": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterByokEntity"
+        }
+      }
+    },
+    "ClusterByokEntity": {
+      "description": "The network associated with this object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resource_name": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterNetworkEntity": {
+      "description": "The network associated with this object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Environment of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resource_name": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterEnvironmentEntity": {
+      "description": "The environment to which cluster belongs",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Environment of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resource_name": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterConfigEntity": {
+      "description": "The configuration of the Kafka cluster",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The lifecycle phase of the cluster",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterStatusEntity": {
+      "description": "Status of the cluster record",
+      "type": "object",
+      "properties": {
+        "phase": {
+          "description": "The lifecycle phase of the cluster",
+          "type": "string"
+        },
+        "cku": {
+          "description": "The number of Confluent Kafka Units ",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ClusterRecord": {
+      "description": "Details of cluster record",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of cluster",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the cluster",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/MetadataEntity"
+        },
+        "display_name": {
+          "description": "Display name of the cluster",
+          "type": "string"
+        },
+        "spec": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterSpecEntity"
+        },
+        "status": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterStatusEntity"
+        }
+      }
+    },
+    "ClusterList": {
+      "description": "List of Cluster Records",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ClusterRecord"
+      }
+    },
+    "Access_ListCluster_SuccessResponse": {
+      "description": "Details of the clusters returned on successful response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "List of clusters",
+          "$ref": "#/definitions/ClusterList"
+        }
+      }
+    },
+    "RoleBindingRecord": {
+      "description": "Details on principal, role name and crn pattern of a role binding",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the role binding",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/MetadataEntity"
+        },
+        "principal": {
+          "description": "The principal User or Group to bind the role to",
+          "type": "string"
+        },
+        "role_name": {
+          "description": "The name of the role to bind to the principal",
+          "type": "string"
+        },
+        "crn_pattern": {
+          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind",
+          "type": "string"
+        }
+      }
+    },
+    "RoleBindingList": {
+      "description": "List of Role Binding records",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RoleBindingRecord"
+      }
+    },
+    "Access_ListRoleBindings_SuccessResponse": {
+      "description": "Details of the role bindings returned on successful response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "List of role binding",
+          "$ref": "#/definitions/RoleBindingList"
+        }
+      }
+    },
+    "RoleBindingNameList": {
+      "description": "List of role binding names",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Access_CreateRoleBindingRequestModel": {
+      "description": "Create role binding request model",
+      "type": "object",
+      "properties": {
+        "principal": {
+          "description": "The principal User or Group to bind the role to",
+          "type": "string"
+        },
+        "role_name": {
+          "description": "The name of the role to bind to the principal",
+          "type": "string"
+        },
+        "crn_pattern": {
+          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind",
+          "type": "string"
+        }
+      }
+    },
+    "Access_RoleBindingNameList_SuccessResponse": {
+      "description": "Details of the role binding names returned on successful response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "List of role binding names",
+          "$ref": "#/definitions/RoleBindingNameList"
+        }
+      }
+    },
+    "SCMetadataEntity": {
+      "description": "Metadata of the data record",
+      "type": "object",
+      "properties": {
+        "self": {
+          "description": "Self lookup url",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Resource name of the record",
+          "type": "string"
+        },
+        "createdTimestamp": {
+          "description": "Created Date Time",
+          "type": "string"
+        },
+        "updatedTimestamp": {
+          "description": "Updated Date time",
+          "type": "string"
+        },
+        "deletedTimestamp": {
+          "description": "Deleted Date time",
+          "type": "string"
+        }
+      }
+    },
+    "SCConfluentListMetadata": {
+      "description": "Metadata of the list",
+      "type": "object",
+      "properties": {
+        "first": {
+          "description": "First page of the list",
+          "type": "string"
+        },
+        "last": {
+          "description": "Last page of the list",
+          "type": "string"
+        },
+        "prev": {
+          "description": "Previous page of the list",
+          "type": "string"
+        },
+        "next": {
+          "description": "Next page of the list",
+          "type": "string"
+        },
+        "totalSize": {
+          "description": "Total size of the list",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "GetEnvironmentsResponse": {
+      "description": "Result of GET request to list Confluent operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of environments in a confluent organization",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/SCEnvironmentRecord"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of environment records if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "SCEnvironmentRecord": {
+      "description": "Details about environment name, metadata and environment id of an environment",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of environment",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the environment",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Environment properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentProperties"
+        },
+        "name": {
+          "description": "Display name of the environment",
+          "type": "string"
+        }
+      }
+    },
+    "EnvironmentProperties": {
+      "description": "Environment resource property",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/SCMetadataEntity"
+        }
+      }
+    },
+    "SCClusterByokEntity": {
+      "description": "The network associated with this object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "SCClusterNetworkEnvironmentEntity": {
+      "description": "The environment or the network to which cluster belongs",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Environment of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "SCClusterSpecEntity": {
+      "description": "Spec of the cluster record",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the cluster",
+          "type": "string"
+        },
+        "availability": {
+          "description": "The availability zone configuration of the cluster",
+          "type": "string"
+        },
+        "cloud": {
+          "description": "The cloud service provider ",
+          "type": "string"
+        },
+        "zone": {
+          "description": "type of zone availability",
+          "type": "string"
+        },
+        "region": {
+          "description": "The cloud service provider region",
+          "type": "string"
+        },
+        "kafkaBootstrapEndpoint": {
+          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster",
+          "type": "string"
+        },
+        "httpEndpoint": {
+          "description": "The cluster HTTP request URL.",
+          "type": "string"
+        },
+        "apiEndpoint": {
+          "description": "The Kafka API cluster endpoint",
+          "type": "string"
+        },
+        "config": {
+          "description": "Specification of the cluster configuration",
+          "$ref": "#/definitions/ClusterConfigEntity"
+        },
+        "environment": {
+          "description": "Specification of the cluster environment",
+          "$ref": "#/definitions/SCClusterNetworkEnvironmentEntity"
+        },
+        "network": {
+          "description": "Specification of the cluster network",
+          "$ref": "#/definitions/SCClusterNetworkEnvironmentEntity"
+        },
+        "byok": {
+          "description": "Specification of the cluster byok",
+          "$ref": "#/definitions/SCClusterByokEntity"
+        }
+      }
+    },
+    "SCClusterRecord": {
+      "description": "Details of cluster record",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of cluster",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the cluster",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Cluster Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties"
+        },
+        "name": {
+          "description": "Display name of the cluster",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterProperties": {
+      "description": "Cluster Properties",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/SCMetadataEntity"
+        },
+        "spec": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/SCClusterSpecEntity"
+        },
+        "status": {
+          "description": "Specification of the cluster status",
+          "$ref": "#/definitions/ClusterStatusEntity"
+        }
+      }
+    },
+    "ListClustersSuccessResponse": {
+      "description": "Result of GET request to list clusters in the environment of a confluent organization",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of clusters in an environment of a confluent organization",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/SCClusterRecord"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of cluster records if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ListSchemaRegistryClustersResponse": {
+      "description": "Result of GET request to list schema registry clusters in the environment of a confluent organization",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of schema registry clusters in an environment of a confluent organization",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/SchemaRegistryClusterRecord"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of schema registry cluster records if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "SchemaRegistryClusterEnvironmentRegionEntity": {
+      "description": "The environment associated with this object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "SchemaRegistryClusterSpecEntity": {
+      "description": "Details of schema registry cluster spec",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the schema registry cluster",
+          "type": "string"
+        },
+        "httpEndpoint": {
+          "description": "Http endpoint of the cluster",
+          "type": "string"
+        },
+        "package": {
+          "description": "Type of the cluster package Advanced, essentials",
+          "type": "string"
+        },
+        "region": {
+          "description": "Region details of the schema registry cluster",
+          "type": "object",
+          "$ref": "#/definitions/SchemaRegistryClusterEnvironmentRegionEntity"
+        },
+        "environment": {
+          "description": "Environment details of the schema registry cluster",
+          "type": "object",
+          "$ref": "#/definitions/SchemaRegistryClusterEnvironmentRegionEntity"
+        },
+        "cloud": {
+          "description": "The cloud service provider ",
+          "type": "string"
+        }
+      }
+    },
+    "SchemaRegistryClusterStatusEntity": {
+      "description": "Status of the schema registry cluster record",
+      "type": "object",
+      "properties": {
+        "phase": {
+          "description": "The lifecycle phase of the cluster",
+          "type": "string"
+        }
+      }
+    },
+    "SchemaRegistryClusterRecord": {
+      "description": "Details of schema registry cluster record",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of the cluster",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the cluster",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Schema Registry Cluster Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaRegistryClusterProperties"
+        }
+      }
+    },
+    "SchemaRegistryClusterProperties": {
+      "description": "Schema Registry Cluster Properties",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/SCMetadataEntity"
+        },
+        "spec": {
+          "description": "Specification of the schema registry cluster",
+          "$ref": "#/definitions/SchemaRegistryClusterSpecEntity"
+        },
+        "status": {
+          "description": "Specification of the cluster status",
+          "$ref": "#/definitions/SchemaRegistryClusterStatusEntity"
+        }
+      }
+    },
+    "RegionSpecEntity": {
+      "description": "Region spec details",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Display Name of the region",
+          "type": "string"
+        },
+        "cloud": {
+          "description": "Cloud provider name",
+          "type": "string"
+        },
+        "regionName": {
+          "description": "Region name",
+          "type": "string"
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegionRecord": {
+      "description": "Details of region record",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of the cluster",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the cluster",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Region Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegionProperties"
+        }
+      }
+    },
+    "RegionProperties": {
+      "description": "Region Properties",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/SCMetadataEntity"
+        },
+        "spec": {
+          "description": "Specification of the region",
+          "$ref": "#/definitions/RegionSpecEntity"
+        }
+      }
+    },
+    "ListRegionsSuccessResponse": {
+      "description": "Result of POST request to list regions supported by confluent",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "List of regions supported by confluent",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/RegionRecord"
+          }
+        }
+      }
+    },
+    "APIKeyRecord": {
+      "description": "Details API key",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of api key",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the api key",
+          "type": "string"
+        },
+        "properties": {
+          "description": "API Key Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/APIKeyProperties"
+        }
+      }
+    },
+    "APIKeyProperties": {
+      "description": "API Key Properties",
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Metadata of the record",
+          "$ref": "#/definitions/SCMetadataEntity"
+        },
+        "spec": {
+          "description": "Specification of the API Key",
+          "$ref": "#/definitions/APIKeySpecEntity"
+        }
+      }
+    },
+    "APIKeySpecEntity": {
+      "description": "Spec of the API Key record",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the API Key",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the API Key",
+          "type": "string"
+        },
+        "secret": {
+          "description": "API Key Secret ",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "resource": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/APIKeyResourceEntity"
+        },
+        "owner": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/APIKeyOwnerEntity"
+        }
+      }
+    },
+    "APIKeyResourceEntity": {
+      "description": "API Key Resource details which can be kafka cluster or schema registry cluster",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the resource",
+          "type": "string"
+        },
+        "environment": {
+          "description": "The environment of the api key",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the api key resource object ",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Type of the owner which can be service or user account",
+          "type": "string"
+        }
+      }
+    },
+    "APIKeyOwnerEntity": {
+      "description": "API Key Owner details which can be a user or service account",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "API Key owner id",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object ",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Type of the owner service or user account",
+          "type": "string"
+        }
+      }
+    },
+    "CreateAPIKeyModel": {
+      "description": "Create API Key model",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the API Key",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the API Key",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    },
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "Microsoft Azure subscription id",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "Resource group name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OrganizationResourceNameParameter": {
+      "in": "path",
+      "name": "organizationName",
+      "description": "Organization resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RoleBindingIdParameter": {
+      "in": "path",
+      "name": "roleBindingId",
+      "description": "Confluent Role binding id",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentIdParameter": {
+      "in": "path",
+      "name": "environmentId",
+      "description": "Confluent environment id",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterIdParameter": {
+      "in": "path",
+      "name": "clusterId",
+      "description": "Confluent kafka or schema registry cluster id",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfluentAPIKeyParameter": {
+      "in": "path",
+      "name": "apiKeyId",
+      "description": "Confluent API Key id",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PageSizeParameter": {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Pagination size",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "PageTokenParameter": {
+      "name": "pageToken",
+      "in": "query",
+      "description": "An opaque pagination token to fetch the next set of records",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

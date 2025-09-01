@@ -1,0 +1,31 @@
+{
+  "operationId": "AzureLargeInstance_Restart",
+  "title": "AzureLargeInstance_Restart",
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "azureLargeInstanceName": "myALInstance",
+    "forceState": {
+      "state": "active"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "00000000-0000-0000-0000-000000000001",
+        "status": "InProgress",
+        "startTime": "2024-08-04T21:17:24.9052926Z",
+        "error": {
+          "code": "",
+          "message": ""
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzureLargeInstance/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2024-04-10"
+      }
+    }
+  }
+}

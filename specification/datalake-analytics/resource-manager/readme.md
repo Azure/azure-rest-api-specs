@@ -86,44 +86,17 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_analytics']
   - repo: azure-resource-manager-schemas
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DataLake.Analytics
-  output-folder: $(csharp-sdks-folder)/datalake-analytics/Microsoft.Azure.Management.DataLake.Analytics/src/Generated
-  clear-output-folder: true
+  - repo: azure-powershell
 ```
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-datalake-analytics
-  clear-output-folder: true
-  no-namespace-folders: true
-  namespace: azure.mgmt.datalake.analytics.account
-  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 

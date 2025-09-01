@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": [
+      {
+        "documentName": "12345678",
+        "invoiceName": "E123456789"
+      },
+      {
+        "documentName": "12345678",
+        "invoiceName": "E987654321"
+      }
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "expiryTime": "2023-02-16T17:32:28Z",
+        "url": "https://myaccount.blob.core.windows.net/invoices/1383724.pdf?sv=2019-02-02&sr=b&sp=r"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/00000000-0000-0000-0000-000000000000/operationResults/invoiceDownload_11111111-1111-1111-1111-111111111111?api-version=2024-04-01",
+        "Retry-After": "10"
+      }
+    }
+  }
+}

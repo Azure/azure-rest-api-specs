@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "D633CC2E-722B-4AE1-B636-BBD9E4C60ED9",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "api-version": "2021-10-01",
+    "body": {
+      "tags": {
+        "Tag1": "Value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
+        "name": "account1",
+        "type": "Microsoft.NetApp/netAppAccounts",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/providers/Microsoft.NetApp/locations/eastus/operationResults/a0216c17-f9d6-4b99-9faf-9ebd4883d0e4?api-version=2021-08-01&operationResultResponseType=Location"
+      },
+      "body": {
+        "id": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
+        "name": "account1",
+        "type": "Microsoft.NetApp/netAppAccounts",
+        "location": "eastus",
+        "tags": {
+          "Tag1": "Value1"
+        },
+        "properties": {
+          "provisioningState": "Patching",
+          "encryption": {
+            "keySource": "Microsoft.NetApp"
+          }
+        }
+      }
+    }
+  }
+}

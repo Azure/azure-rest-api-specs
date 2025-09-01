@@ -1,0 +1,705 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2021-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
+      "get": {
+        "x-ms-examples": {
+          "Get all watchlists.": {
+            "$ref": "./examples/watchlists/GetWatchlists.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Get all watchlists, without watchlist items.",
+        "operationId": "Watchlists_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a watchlist.": {
+            "$ref": "./examples/watchlists/GetWatchlistByAlias.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Get a watchlist, without its watchlist items.",
+        "operationId": "Watchlists_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a watchlist.": {
+            "$ref": "./examples/watchlists/DeleteWatchlist.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Delete a watchlist.",
+        "operationId": "Watchlists_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a watchlist.": {
+            "$ref": "./examples/watchlists/CreateWatchlist.json"
+          },
+          "Create or update a watchlist and bulk creates watchlist items.": {
+            "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with rawContent and contentType properties.",
+        "operationId": "Watchlists_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/Watchlist"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
+      "get": {
+        "x-ms-examples": {
+          "Get all watchlist Items.": {
+            "$ref": "./examples/watchlists/GetWatchlistItems.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Get all watchlist Items.",
+        "operationId": "WatchlistItems_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItemList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a watchlist item.": {
+            "$ref": "./examples/watchlists/GetWatchlistItemById.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Get a watchlist item.",
+        "operationId": "WatchlistItems_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a watchlist item.": {
+            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Delete a watchlist item.",
+        "operationId": "WatchlistItems_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a watchlist item.": {
+            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Create or update a watchlist item.",
+        "operationId": "WatchlistItems_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WatchlistList": {
+      "description": "List all the watchlists.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of watchlists.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of watchlist.",
+          "items": {
+            "$ref": "#/definitions/Watchlist"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Watchlist": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Watchlist in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatchlistProperties",
+          "description": "Watchlist properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WatchlistProperties": {
+      "description": "Describes watchlist properties",
+      "properties": {
+        "watchlistId": {
+          "description": "The id (a Guid) of the watchlist",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the watchlist",
+          "type": "string"
+        },
+        "provider": {
+          "description": "The provider of the watchlist",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the watchlist",
+          "enum": [
+            "Local file",
+            "Remote storage"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "source"
+          }
+        },
+        "created": {
+          "description": "The time the watchlist was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the watchlist was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
+          "description": "Describes a user that created the watchlist",
+          "type": "object"
+        },
+        "updatedBy": {
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
+          "description": "Describes a user that updated the watchlist",
+          "type": "object"
+        },
+        "description": {
+          "description": "A description of the watchlist",
+          "type": "string"
+        },
+        "watchlistType": {
+          "description": "The type of the watchlist",
+          "type": "string"
+        },
+        "watchlistAlias": {
+          "description": "The alias of the watchlist",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the watchlist is deleted or not",
+          "type": "boolean"
+        },
+        "labels": {
+          "description": "List of labels relevant to this watchlist",
+          "items": {
+            "$ref": "../../../common/2.0/types.json#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "defaultDuration": {
+          "description": "The default duration of a watchlist (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenantId where the watchlist belongs to",
+          "type": "string"
+        },
+        "numberOfLinesToSkip": {
+          "description": "The number of lines in a csv content to skip before the header",
+          "type": "integer",
+          "format": "int32"
+        },
+        "rawContent": {
+          "description": "The raw content that represents to watchlist items to create. Example : This line will be skipped\nheader1,header2\nvalue1,value2",
+          "type": "string"
+        },
+        "itemsSearchKey": {
+          "description": "The search key is used to optimize query performance when using watchlists for joins with other data. For example, enable a column with IP addresses to be the designated SearchKey field, then use this field as the key field when joining to other event data by IP address.",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "The content type of the raw content. For now, only text/csv is valid",
+          "type": "string"
+        },
+        "uploadStatus": {
+          "description": "The status of the Watchlist upload : New, InProgress or Complete. **Note** : When a Watchlist upload status is InProgress, the Watchlist cannot be deleted",
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "source",
+        "provider",
+        "itemsSearchKey"
+      ],
+      "type": "object"
+    },
+    "WatchlistItemList": {
+      "description": "List all the watchlist items.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of watchlist items.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of watchlist items.",
+          "items": {
+            "$ref": "#/definitions/WatchlistItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WatchlistItem": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Watchlist Item in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatchlistItemProperties",
+          "description": "Watchlist Item properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WatchlistItemProperties": {
+      "description": "Describes watchlist item properties",
+      "properties": {
+        "watchlistItemType": {
+          "description": "The type of the watchlist item",
+          "type": "string"
+        },
+        "watchlistItemId": {
+          "description": "The id (a Guid) of the watchlist item",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenantId to which the watchlist item belongs to",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the watchlist item is deleted or not",
+          "type": "boolean"
+        },
+        "created": {
+          "description": "The time the watchlist item was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the watchlist item was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
+          "description": "Describes a user that created the watchlist item",
+          "type": "object"
+        },
+        "updatedBy": {
+          "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
+          "description": "Describes a user that updated the watchlist item",
+          "type": "object"
+        },
+        "itemsKeyValue": {
+          "description": "key-value pairs for a watchlist item",
+          "type": "object"
+        },
+        "entityMapping": {
+          "description": "key-value pairs for a watchlist item entity mapping",
+          "type": "object"
+        }
+      },
+      "required": [
+        "itemsKeyValue"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "WatchlistAlias": {
+      "description": "The watchlist alias",
+      "in": "path",
+      "name": "watchlistAlias",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Watchlist": {
+      "description": "The watchlist",
+      "in": "body",
+      "name": "watchlist",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Watchlist"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WatchlistItem": {
+      "description": "The watchlist item",
+      "in": "body",
+      "name": "watchlistItem",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WatchlistItem"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WatchlistItemId": {
+      "description": "The watchlist item id (GUID)",
+      "in": "path",
+      "name": "watchlistItemId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "endpoint": "testWs.dev.azuresynapse.net",
+    "kqlScriptName": "testScript",
+    "api-version": "2021-11-01-preview",
+    "kqlScript": {
+      "id": "/subscriptions/99c6ec47-aacb-485c-863c-018be33b9000/resourceGroups/testResourceGroup/providers/Microsoft.Synapse/workspaces/testWs/kqlScripts/testScript",
+      "type": "Microsoft.Synapse/workspaces/kqlScripts",
+      "properties": {
+        "content": {
+          "query": "Logs | where TimeStamp > ago(1h) | take 10"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/99c6ec47-aacb-485c-863c-018be33b9000/resourceGroups/testResourceGroup/providers/Microsoft.Synapse/workspaces/testWs/kqlScripts/testScript",
+        "name": "testScript",
+        "type": "Microsoft.Synapse/workspaces/kqlScripts",
+        "properties": {
+          "content": {
+            "query": "Logs | where TimeStamp > ago(1h) | take 10"
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

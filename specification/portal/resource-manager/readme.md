@@ -26,9 +26,28 @@ These are the global settings for the portal.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-09-01-preview
+tag: package-2025-04-01-preview
 ```
 
+### Tag: package-2025-04-01-preview
+
+These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01-preview'
+input-file:
+  - Microsoft.Portal/preview/2025-04-01-preview/portal.json
+  - Microsoft.Portal/preview/2025-04-01-preview/tenantConfiguration.json
+```
+
+### Tag: package-2022-12-01-preview
+
+These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01-preview'
+input-file:
+  - Microsoft.Portal/preview/2022-12-01-preview/portal.json
+  - Microsoft.Portal/preview/2022-12-01-preview/tenantConfiguration.json
+```
 
 ### Tag: package-2020-09-01-preview
 
@@ -78,11 +97,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
@@ -90,6 +107,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_portal']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go

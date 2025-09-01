@@ -69,22 +69,9 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customer_insights']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.CustomerInsights
-  output-folder: $(csharp-sdks-folder)/customer-insights/Microsoft.Azure.Management.CustomerInsights/src/Generated
-  clear-output-folder: true
-```
 
 ## Go
 

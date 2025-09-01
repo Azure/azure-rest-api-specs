@@ -127,14 +127,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AutomationAccount"
             }
           },
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/AutomationAccount"
             }
@@ -802,6 +802,9 @@
           "items": {
             "$ref": "#/definitions/Key"
           },
+          "x-ms-identifiers": [
+            "KeyName"
+          ],
           "description": "Lists the automation keys."
         }
       }

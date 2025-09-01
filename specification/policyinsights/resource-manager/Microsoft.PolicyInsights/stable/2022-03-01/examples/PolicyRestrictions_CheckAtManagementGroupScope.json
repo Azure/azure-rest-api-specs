@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "managementGroupsNamespace": "Microsoft.Management",
+    "managementGroupId": "financeMg",
+    "api-version": "2022-03-01",
+    "parameters": {
+      "pendingFields": [
+        {
+          "field": "type"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "fieldRestrictions": [
+          {
+            "field": "type",
+            "restrictions": [
+              {
+                "result": "Required",
+                "values": [
+                  "Microsoft.Compute/virtualMachines"
+                ],
+                "policy": {
+                  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/financeMg/providers/microsoft.authorization/policyDefinitions/allowedTypes",
+                  "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/financeMg/providers/microsoft.authorization/policyAssignments/7EB1508A",
+                  "policySetDefinitionId": "/providers/Microsoft.Management/managementGroups/financeMg/providers/microsoft.authorization/policySetDefinitions/735551F1",
+                  "policyDefinitionReferenceId": "DefRef"
+                }
+              }
+            ]
+          }
+        ],
+        "contentEvaluationResult": {
+          "policyEvaluations": []
+        }
+      }
+    }
+  }
+}

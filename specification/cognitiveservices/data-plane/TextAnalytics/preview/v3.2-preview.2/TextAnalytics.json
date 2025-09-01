@@ -8,7 +8,7 @@
       "email": "mlapi@microsoft.com"
     },
     "title": "Text Analytics Client",
-    "description": "The Text Analytics API is a suite of natural language processing (NLP) services built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. Functionality for analysis of text specific to the healthcare domain and personal information are also available in the API. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>"
+    "description": "The Text Analytics API is a suite of natural language processing (NLP) services built with Microsoft machine learning algorithms. You can use the API to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, and language detection. Functionality for analysis of text specific to the healthcare domain and personal information is also available in the API. You can find more documentation in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>."
   },
   "securityDefinitions": {
     "apim_key": {
@@ -60,7 +60,7 @@
         ],
         "responses": {
           "202": {
-            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+            "description": "A successful call results in an Operation-Location header that's used to check the status of the analysis job.",
             "headers": {
               "Operation-Location": {
                 "type": "string"
@@ -68,7 +68,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -89,7 +89,7 @@
           "application/json",
           "text/json"
         ],
-        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are completed, the job will transition to the completed state and results will be available for each task.",
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks are completed, the job transitions to the completed state and results are available for each task.",
         "operationId": "AnalyzeStatus",
         "summary": "Get analysis status and results",
         "parameters": [
@@ -101,7 +101,7 @@
           },
           {
             "default": 20,
-            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "maximum": 50,
             "minimum": 1,
@@ -110,7 +110,7 @@
           },
           {
             "default": 0,
-            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "minimum": 0,
             "name": "$skip",
@@ -125,7 +125,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -145,7 +145,7 @@
           "application/json",
           "text/json"
         ],
-        "description": "Get details of the healthcare prediction job specified by the jobId.",
+        "description": "Get details of the healthcare prediction job that jobId specifies.",
         "operationId": "HealthStatus",
         "summary": "Get healthcare analysis job status and results",
         "parameters": [
@@ -154,7 +154,7 @@
           },
           {
             "default": 20,
-            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "maximum": 50,
             "minimum": 1,
@@ -163,7 +163,7 @@
           },
           {
             "default": 0,
-            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "minimum": 0,
             "name": "$skip",
@@ -175,13 +175,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/HealthcareJobState"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -199,7 +199,7 @@
           "application/json",
           "text/json"
         ],
-        "description": "Cancel healthcare prediction job.",
+        "description": "Cancel the healthcare prediction job.",
         "operationId": "CancelHealthJob",
         "summary": "Cancel healthcare prediction job",
         "parameters": [
@@ -209,7 +209,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Cancel Job request has been received.",
+            "description": "The request to cancel a job has been received.",
             "headers": {
               "Operation-Location": {
                 "type": "string"
@@ -217,7 +217,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -235,7 +235,7 @@
     "/entities/health/jobs": {
       "post": {
         "summary": "Submit healthcare analysis job",
-        "description": "Start a healthcare analysis job to recognize healthcare related entities (drugs, conditions, symptoms, etc) and their relations.",
+        "description": "Start a healthcare analysis job to recognize healthcare-related entities (for example, drugs, conditions, or symptoms) and their relations.",
         "operationId": "Health",
         "consumes": [
           "application/json",
@@ -261,7 +261,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted - call results in a link where the status of the submitted job can be checked via the GET operation.",
+            "description": "Accepted. The call results in a link where the status of the submitted job can be checked via the GET operation.",
             "headers": {
               "Operation-Location": {
                 "type": "string"
@@ -269,7 +269,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -287,7 +287,7 @@
     "/entities/recognition/general": {
       "post": {
         "summary": "Named Entity Recognition",
-        "description": "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://aka.ms/taner\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "description": "The API returns a list of general named entities in a document. For the list of supported entity types, see <a href=\"https://aka.ms/taner\">Supported entity types in the Text Analytics API</a>. For the list of enabled languages, see <a href=\"https://aka.ms/talangs\">Supported languages in the Text Analytics API</a>.",
         "operationId": "EntitiesRecognitionGeneral",
         "consumes": [
           "application/json",
@@ -322,7 +322,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -339,7 +339,7 @@
     "/entities/recognition/pii": {
       "post": {
         "summary": "Entities containing personal information",
-        "description": "The API returns a list of entities with personal information (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. For the list of supported entity types, check <a href=\"https://aka.ms/tanerpii\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "description": "The API returns a list of entities with personal information (such as \\\"SSN\\\" or \\\"Bank Account\\\") in the document. For the list of supported entity types, see <a href=\"https://aka.ms/tanerpii\">Supported entity types in the Text Analytics API</a>. For the list of enabled languages, see <a href=\"https://aka.ms/talangs\">Supported languages in the Text Analytics API</a>.\n",
         "operationId": "EntitiesRecognitionPii",
         "consumes": [
           "application/json",
@@ -362,7 +362,7 @@
           {
             "name": "domain",
             "in": "query",
-            "description": "(Optional) if specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'PHI', 'none'.",
+            "description": "If specified, sets the PII domain to include only a subset of the entity categories.",
             "type": "string"
           },
           {
@@ -377,13 +377,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call results in a list of entities containing personal information returned for each valid document",
+            "description": "A successful call results in a list of entities that contain personal information returned for each valid document.",
             "schema": {
               "$ref": "#/definitions/PiiResult"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -400,7 +400,7 @@
     "/entities/linking": {
       "post": {
         "summary": "Linked entities from a well known knowledge base",
-        "description": "The API returns a list of recognized entities with links to a well known knowledge base. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "description": "The API returns a list of recognized entities with links to a well-known knowledge base. For the list of enabled languages, see <a href=\"https://aka.ms/talangs\">Supported languages in the Text Analytics API</a>.",
         "operationId": "EntitiesLinking",
         "consumes": [
           "application/json",
@@ -429,13 +429,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call results in a list of recognized entities with links to a well known knowledge base returned for each valid document",
+            "description": "A successful call results in a list of recognized entities with links to a well-known knowledge base returned for each valid document.",
             "schema": {
               "$ref": "#/definitions/EntityLinkingResult"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -452,7 +452,7 @@
     "/keyPhrases": {
       "post": {
         "summary": "Key Phrases",
-        "description": "The API returns a list of strings denoting the key phrases in the input text. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "description": "The API returns a list of strings that denote the key phrases in the input text. For the list of enabled languages, see <a href=\"https://aka.ms/talangs\">Supported languages in the Text Analytics API</a>.",
         "operationId": "KeyPhrases",
         "consumes": [
           "application/json",
@@ -478,13 +478,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful response results in 0 or more key phrases identified in each valid document",
+            "description": "A successful response results in 0 or more key phrases identified in each valid document.",
             "schema": {
               "$ref": "#/definitions/KeyPhraseResult"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -501,7 +501,7 @@
     "/languages": {
       "post": {
         "summary": "Detect Language",
-        "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100 percent certainty that the identified language is true. For the list of enabled languages, see <a href=\"https://aka.ms/talangs\">Supported languages in the Text Analytics API</a>.",
         "operationId": "Languages",
         "consumes": [
           "application/json",
@@ -527,13 +527,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call results in the detected language with the highest probability for each valid document",
+            "description": "A successful call results in the detected language with the highest probability for each valid document.",
             "schema": {
               "$ref": "#/definitions/LanguageResult"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -550,7 +550,7 @@
     "/sentiment": {
       "post": {
         "summary": "Sentiment",
-        "description": "The API returns a detailed sentiment analysis for the input text. The analysis is done in multiple levels of granularity, start from the a document level, down to sentence and key terms (targets and assessments).",
+        "description": "The API returns a detailed sentiment analysis for the input text. The analysis is done in multiple levels of granularity. It starts from the document level and proceeds to sentences and key terms (targets and assessments).",
         "operationId": "Sentiment",
         "consumes": [
           "application/json",
@@ -573,7 +573,7 @@
           {
             "name": "opinionMining",
             "in": "query",
-            "description": "(Optional) if set to true, response will contain not only sentiment prediction but also opinion mining (aspect-based sentiment analysis) results.",
+            "description": "If it's set to true, the response will contain not only sentiment prediction but also opinion mining (aspect-based sentiment analysis) results.",
             "type": "boolean"
           },
           {
@@ -585,13 +585,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call results in a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral)",
+            "description": "A successful call results in a document sentiment prediction, along with sentiment scores for each sentiment class (Positive, Negative, and Neutral).",
             "schema": {
               "$ref": "#/definitions/SentimentResponse"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -610,7 +610,7 @@
     "JobManifest": {
       "properties": {
         "tasks": {
-          "description": "The set of tasks to execute on the input documents. Cannot specify the same task more than once.",
+          "description": "Set of tasks to execute on the input documents. You can't specify the same task more than once.",
           "properties": {
             "entityRecognitionTasks": {
               "type": "array",
@@ -683,13 +683,13 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "The set of documents to process as part of this batch.",
+          "description": "Set of documents to process as part of this batch.",
           "items": {
             "$ref": "#/definitions/MultiLanguageInput"
           }
         }
       },
-      "description": "Contains a set of input documents to be analyzed by the service."
+      "description": "Contains a set of input documents for the service to analyze."
     },
     "MultiLanguageInput": {
       "type": "object",
@@ -700,18 +700,18 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "A unique, non-empty document identifier."
+          "description": "Unique, non-empty document identifier."
         },
         "text": {
           "type": "string",
-          "description": "The input text to process."
+          "description": "Input text to process."
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description": "This is the two-letter ISO 639-1 representation of a language. For example, use \"en\" for English and \"es\" for Spanish. If it's not set, \"en\" for English is the default."
         }
       },
-      "description": "Contains an input document to be analyzed by the service."
+      "description": "Contains an input document for the service to analyze."
     },
     "DocumentError": {
       "type": "object",
@@ -722,11 +722,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Document Id."
+          "description": "Document ID."
         },
         "error": {
           "type": "object",
-          "description": "Document Error.",
+          "description": "Document error.",
           "$ref": "#/definitions/TextAnalyticsError"
         }
       }
@@ -739,7 +739,7 @@
       "properties": {
         "error": {
           "type": "object",
-          "description": "Document Error.",
+          "description": "Document error.",
           "$ref": "#/definitions/TextAnalyticsError"
         }
       }
@@ -776,7 +776,7 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description": "Inner error contains more specific information."
+          "description": "The inner error contains more specific information."
         },
         "details": {
           "type": "array",
@@ -812,7 +812,7 @@
         },
         "targetRef": {
           "type": "string",
-          "description": "A JSON pointer reference indicating the target object."
+          "description": "JSON pointer reference that indicates the target object."
         }
       }
     },
@@ -1066,7 +1066,7 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description": "Inner error contains more specific information."
+          "description": "The inner error contains more specific information."
         }
       }
     },
@@ -1109,14 +1109,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/ExtractedDocumentSummary"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -1144,20 +1144,20 @@
         },
         "sentences": {
           "type": "array",
-          "description": "A ranked list of sentences representing the extracted summary.",
+          "description": "Ranked list of sentences that represent the extracted summary.",
           "items": {
             "$ref": "#/definitions/ExtractedSummarySentence"
           }
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -1173,22 +1173,22 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The extracted sentence text."
+          "description": "Extracted sentence text."
         },
         "rankScore": {
           "type": "number",
           "format": "double",
-          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
+          "description": "Double value that represents the relevance of the sentence within the summary. Higher values indicate higher importance."
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+          "description": "Sentence offset from the start of the document, based on the value of the parameter StringIndexType."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of the sentence."
+          "description": "Length of the sentence."
         }
       }
     },
@@ -1203,14 +1203,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/DocumentEntities"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -1239,14 +1239,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/SingleClassificationDocument"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -1275,14 +1275,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/MultiClassificationDocument"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -1317,13 +1317,13 @@
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -1349,13 +1349,13 @@
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -1374,7 +1374,7 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the recognized classification."
+          "description": "Confidence score between 0 and 1 for the recognized classification."
         }
       }
     },
@@ -1395,7 +1395,7 @@
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -1614,7 +1614,7 @@
         },
         "sentiment": {
           "type": "string",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+          "description": "Predicted sentiment for the document.",
           "enum": [
             "positive",
             "neutral",
@@ -1630,19 +1630,19 @@
           "$ref": "#/definitions/DocumentStatistics"
         },
         "confidenceScores": {
-          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
+          "description": "Document-level sentiment confidence scores between 0 and 1 for each sentiment class.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
         "sentences": {
           "type": "array",
-          "description": "Sentence level sentiment analysis.",
+          "description": "Sentence-level sentiment analysis.",
           "items": {
             "$ref": "#/definitions/SentenceSentiment"
           }
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
@@ -1666,12 +1666,12 @@
         "validDocumentsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+          "description": "Number of valid documents. This excludes documents that are empty, over the size limit, or in an unsupported language."
         },
         "erroneousDocumentsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+          "description": "Number of invalid documents. This includes documents that are empty, over the size limit, or in an unsupported language."
         },
         "transactionsCount": {
           "type": "integer",
@@ -1679,7 +1679,7 @@
           "description": "Number of transactions for the request."
         }
       },
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+      "description": "If showStats=true was specified in the request, this field contains information about the request payload."
     },
     "DocumentStatistics": {
       "type": "object",
@@ -1699,7 +1699,7 @@
           "description": "Number of transactions for the document."
         }
       },
-      "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+      "description": "If showStats=true was specified in the request, this field contains information about the document payload."
     },
     "SentimentConfidenceScorePerLabel": {
       "type": "object",
@@ -1736,11 +1736,11 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The sentence text."
+          "description": "Sentence text."
         },
         "sentiment": {
           "type": "string",
-          "description": "The predicted Sentiment for the sentence.",
+          "description": "Predicted sentiment for the sentence.",
           "enum": [
             "positive",
             "neutral",
@@ -1752,29 +1752,29 @@
           }
         },
         "confidenceScores": {
-          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
+          "description": "Sentiment confidence score between 0 and 1 for the sentence, for all classes.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The sentence offset from the start of the document."
+          "description": "Sentence offset from the start of the document."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of the sentence."
+          "description": "Length of the sentence."
         },
         "targets": {
           "type": "array",
-          "description": "The array of sentence targets for the sentence.",
+          "description": "Array of sentence targets for the sentence.",
           "items": {
             "$ref": "#/definitions/SentenceTarget"
           }
         },
         "assessments": {
           "type": "array",
-          "description": "The array of assessments for the sentence.",
+          "description": "Array of assessments for the sentence.",
           "items": {
             "$ref": "#/definitions/SentenceAssessment"
           }
@@ -1812,20 +1812,20 @@
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The target offset from the start of the sentence."
+          "description": "Target offset from the start of the sentence."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of the target."
+          "description": "Length of the target."
         },
         "text": {
           "type": "string",
-          "description": "The target text detected."
+          "description": "Detected target text."
         },
         "relations": {
           "type": "array",
-          "description": "The array of either assessment or target objects which is related to the target.",
+          "description": "Array of either assessment or target objects that are related to the target.",
           "items": {
             "$ref": "#/definitions/TargetRelation"
           }
@@ -1863,20 +1863,20 @@
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The assessment offset from the start of the sentence."
+          "description": "Assessment offset from the start of the sentence."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of the assessment."
+          "description": "Length of the assessment."
         },
         "text": {
           "type": "string",
-          "description": "The assessment text detected."
+          "description": "Detected assessment text."
         },
         "isNegated": {
           "type": "boolean",
-          "description": "The indicator representing if the assessment is negated."
+          "description": "Indicator of whether the assessment is negated."
         }
       }
     },
@@ -1897,11 +1897,11 @@
             "name": "TargetRelationType",
             "modelAsString": false
           },
-          "description": "The type related to the target."
+          "description": "Type related to the target."
         },
         "ref": {
           "type": "string",
-          "description": "The JSON pointer indicating the linked object."
+          "description": "JSON pointer that indicates the linked object."
         }
       }
     },
@@ -1933,14 +1933,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/DocumentEntities"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -1975,13 +1975,13 @@
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -2012,13 +2012,13 @@
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -2035,7 +2035,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "Entity text as appears in the request."
+          "description": "Entity text as it appears in the request."
         },
         "category": {
           "type": "string",
@@ -2043,22 +2043,22 @@
         },
         "subcategory": {
           "type": "string",
-          "description": "(Optional) Entity sub type."
+          "description": "Entity subtype."
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+          "description": "Start position for the entity text. Use of different stringIndexType values can affect the offset returned."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+          "description": "Length for the entity text. Use of different stringIndexType values can affect the length returned."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
+          "description": "Confidence score between 0 and 1 for the extracted entity."
         }
       }
     },
@@ -2072,14 +2072,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/DocumentLinkedEntities"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -2107,20 +2107,20 @@
         },
         "entities": {
           "type": "array",
-          "description": "Recognized well known entities in the document.",
+          "description": "Recognized well-known entities in the document.",
           "items": {
             "$ref": "#/definitions/LinkedEntity"
           }
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -2148,14 +2148,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/DocumentHealthcareEntities"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -2198,13 +2198,13 @@
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -2222,14 +2222,14 @@
     },
     "HealthcareRelation": {
       "type": "object",
-      "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
+      "description": "Every relation is an entity graph of a certain relationType value, where all entities are connected and have specific roles within the relation context.",
       "required": [
         "relationType",
         "entities"
       ],
       "properties": {
         "relationType": {
-          "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
+          "description": "Type of relation. Examples include DosageOfMedication and FrequencyOfMedication.",
           "type": "string",
           "enum": [
             "Abbreviation",
@@ -2260,7 +2260,7 @@
           }
         },
         "entities": {
-          "description": "The entities in the relation.",
+          "description": "Entities in the relation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthcareRelationEntity"
@@ -2284,7 +2284,7 @@
           }
         },
         "certainty": {
-          "description": "Describes the entities certainty and polarity.",
+          "description": "Describes the certainty and polarity entities.",
           "type": "string",
           "enum": [
             "positive",
@@ -2299,7 +2299,7 @@
           }
         },
         "association": {
-          "description": "Describes if the entity is the subject of the text or if it describes someone else.",
+          "description": "Indicates if the entity is the subject of the text or if it describes someone else.",
           "type": "string",
           "enum": [
             "subject",
@@ -2320,11 +2320,11 @@
       ],
       "properties": {
         "ref": {
-          "description": "Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .",
+          "description": "Reference link object, using JSON pointer RFC 6901 (URI Fragment Identifier Representation), that points to the entity.",
           "type": "string"
         },
         "role": {
-          "description": "Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis).",
+          "description": "Role of the entity in the relationship. For example, 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parentheses: CD20 (GeneOrProtein), positive (Expression), diffuse large B-cell lymphoma (Diagnosis).",
           "type": "string"
         }
       }
@@ -2337,11 +2337,11 @@
       ],
       "properties": {
         "dataSource": {
-          "description": "Entity Catalog. Examples include: UMLS, CHV, MSH, etc.",
+          "description": "Entity catalog. Examples include UMLS, CHV, and MSH.",
           "type": "string"
         },
         "id": {
-          "description": "Entity id in the given source catalog.",
+          "description": "Entity ID in the source catalog.",
           "type": "string"
         }
       }
@@ -2358,7 +2358,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "Entity text as appears in the request."
+          "description": "Entity text as it appears in the request."
         },
         "category": {
           "x-ms-enum": {
@@ -2366,7 +2366,7 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "Healthcare Entity Category.",
+          "description": "Healthcare entity category.",
           "enum": [
             "BODY_STRUCTURE",
             "AGE",
@@ -2398,22 +2398,22 @@
         },
         "subcategory": {
           "type": "string",
-          "description": "(Optional) Entity sub type."
+          "description": "Entity subtype."
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+          "description": "Start position for the entity text. Use of different stringIndexType values can affect the offset returned."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+          "description": "Length for the entity text. Use of different stringIndexType values can affect the length returned."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
+          "description": "Confidence score between 0 and 1 for the extracted entity."
         }
       }
     },
@@ -2424,7 +2424,7 @@
           "$ref": "#/definitions/HealthcareAssertion"
         },
         "name": {
-          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
+          "description": "Preferred name for the entity. Example: 'histologically' would have a name of 'histologic'.",
           "type": "string"
         },
         "links": {
@@ -2448,11 +2448,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Entity Linking formal name."
+          "description": "Formal name for entity linking."
         },
         "matches": {
           "type": "array",
-          "description": "List of instances this entity appears in the text.",
+          "description": "List of instances where this entity appears in the text.",
           "items": {
             "$ref": "#/definitions/Match"
           }
@@ -2471,7 +2471,7 @@
         },
         "dataSource": {
           "type": "string",
-          "description": "Data source used to extract entity linking, such as Wiki/Bing etc."
+          "description": "Data source used to extract entity linking, such as Wiki/Bing."
         },
         "bingId": {
           "type": "string",
@@ -2491,11 +2491,11 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "If a well known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
+          "description": "If a well-known item is recognized, a decimal number between 0 and 1 that denotes the confidence level will be returned."
         },
         "text": {
           "type": "string",
-          "description": "Entity text as appears in the request."
+          "description": "Entity text as it appears in the request."
         },
         "offset": {
           "type": "integer",
@@ -2609,7 +2609,7 @@
     "JobDescriptor": {
       "properties": {
         "displayName": {
-          "description": "Optional display name for the analysis job.",
+          "description": "Display name for the analysis job.",
           "type": "string"
         }
       },
@@ -2699,14 +2699,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/DocumentKeyPhrases"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -2734,20 +2734,20 @@
         },
         "keyPhrases": {
           "type": "array",
-          "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
+          "description": "List of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
           "items": {
             "type": "string"
           }
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -2848,14 +2848,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/PiiDocumentEntities"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -2879,14 +2879,14 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "Response by document.",
           "items": {
             "$ref": "#/definitions/DocumentLanguage"
           }
         },
         "errors": {
           "type": "array",
-          "description": "Errors by document id.",
+          "description": "Errors by document ID.",
           "items": {
             "$ref": "#/definitions/DocumentError"
           }
@@ -2913,18 +2913,18 @@
           "description": "Unique, non-empty document identifier."
         },
         "detectedLanguage": {
-          "description": "Detected Language.",
+          "description": "Detected language.",
           "$ref": "#/definitions/DetectedLanguage"
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "description": "If showStats=true was specified in the request, this field contains information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
@@ -2939,16 +2939,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Long name of a detected language (e.g. English, French)."
+          "description": "Long name of a detected language (for example, English or French)."
         },
         "iso6391Name": {
           "type": "string",
-          "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
+          "description": "Two-letter representation of the detected language according to the ISO 639-1 standard (for example, en or fr)."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+          "description": "Confidence score between 0 and 1. Scores close to 1 indicate 100 percent certainty that the identified language is true."
         }
       }
     },
@@ -2965,22 +2965,22 @@
         "values": [
           {
             "value": "TextElement_v8",
-            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+            "description": "Returned offset and length values will correspond to TextElement values (graphemes and grapheme clusters) that conform to the Unicode 8.0.0 standard. Use this option if your application is written in .NET Framework or .NET Core and you plan to use StringInfo."
           },
           {
             "value": "UnicodeCodePoint",
-            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that supports Unicode, such as Python."
           },
           {
             "value": "Utf16CodeUnit",
-            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that supports Unicode, such as Java or JavaScript."
           }
         ]
       },
       "type": "string"
     },
     "PiiCategories": {
-      "description": "(Optional) describes the PII categories to return",
+      "description": "Describes the PII categories to return.",
       "items": {
         "type": "string",
         "x-ms-enum": {
@@ -3182,7 +3182,7 @@
     },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "description": "Supported Azure Cognitive Services endpoints (protocol and host name, such as https://westus.api.cognitive.microsoft.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
@@ -3193,7 +3193,7 @@
       "name": "stringIndexType",
       "in": "query",
       "type": "string",
-      "description": "(Optional) Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets",
+      "description": "Specifies the method used to interpret string offsets. It defaults to TextElement (grapheme) according to Unicode v8.0.0. For more information, see https://aka.ms/text-analytics-offsets.",
       "default": "TextElement_v8",
       "enum": [
         "TextElement_v8",
@@ -3206,22 +3206,22 @@
         "values": [
           {
             "value": "TextElement_v8",
-            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+            "description": "Returned offset and length values will correspond to TextElement values (graphemes and grapheme clusters) that conform to the Unicode 8.0.0 standard. Use this option if your application is written in .NET Framework or .NET Core and you plan to use StringInfo."
           },
           {
             "value": "UnicodeCodePoint",
-            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that supports Unicode, such as Python."
           },
           {
             "value": "Utf16CodeUnit",
-            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that supports Unicode, such as Java or JavaScript."
           }
         ]
       },
       "x-ms-parameter-location": "method"
     },
     "PiiCategories": {
-      "description": "(Optional) describes the PII categories to return",
+      "description": "Describes the PII categories to return.",
       "in": "query",
       "collectionFormat": "csv",
       "items": {
@@ -3413,7 +3413,7 @@
       "x-ms-parameter-location": "method"
     },
     "JobId": {
-      "description": "Job ID",
+      "description": "Job ID.",
       "format": "uuid",
       "in": "path",
       "name": "jobId",
@@ -3422,7 +3422,7 @@
       "x-ms-parameter-location": "method"
     },
     "AnalyzeJobId": {
-      "description": "Job ID for Analyze",
+      "description": "Job ID for Analyze.",
       "in": "path",
       "name": "jobId",
       "required": true,
@@ -3432,7 +3432,7 @@
     "ShowStats": {
       "name": "showStats",
       "in": "query",
-      "description": "(Optional) if set to true, response will contain request and document level statistics.",
+      "description": "If it's set to true, the response will contain request and document-level statistics.",
       "type": "boolean",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -3440,7 +3440,7 @@
     "LoggingOptOut": {
       "name": "loggingOptOut",
       "in": "query",
-      "description": "(Optional) If set to true, you opt-out of having your text input logged for troubleshooting. By default, Text Analytics logs your input text for 48 hours, solely to allow for troubleshooting issues in providing you with the Text Analytics natural language processing functions. Setting this parameter to true, disables input logging and may limit our ability to remediate issues that occur.  Please see Cognitive Services Compliance and Privacy notes at https://aka.ms/cs-compliance for additional details, and Microsoft Responsible AI principles at https://www.microsoft.com/en-us/ai/responsible-ai.",
+      "description": "If it's set to true, you opt out of having your text input logged for troubleshooting. By default, Text Analytics logs your input text for 48 hours, solely to allow for troubleshooting problems in providing you with the Text Analytics natural language processing functions. Setting this parameter to true disables input logging and might limit our ability to remediate problems that occur. For more information, see the Azure Cognitive Services compliance and privacy notes at https://aka.ms/cs-compliance, and the Microsoft Responsible AI principles at https://www.microsoft.com/en-us/ai/responsible-ai.",
       "type": "boolean",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -3448,7 +3448,7 @@
     "ModelVersion": {
       "name": "model-version",
       "in": "query",
-      "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+      "description": "This value indicates which model will be used for scoring. If a model version is not specified, the API should default to the latest non-preview version.",
       "type": "string",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -3466,7 +3466,7 @@
     "LanguageInput": {
       "in": "body",
       "name": "input",
-      "description": "Collection of documents to analyze for language endpoint.",
+      "description": "Collection of documents to analyze for a language endpoint.",
       "required": true,
       "schema": {
         "$ref": "#/definitions/LanguageBatchInput"

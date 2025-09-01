@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "aml-workspace-name",
+    "ruleName": "some_string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "type": "FQDN",
+        "destination": "some_string",
+        "status": "Active",
+        "category": "UserDefined"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "some_string",
+        "name": "some_string",
+        "type": "some_string",
+        "properties": {
+          "type": "FQDN",
+          "destination": "some_string",
+          "status": "Active",
+          "category": "UserDefined"
+        }
+      }
+    }
+  }
+}

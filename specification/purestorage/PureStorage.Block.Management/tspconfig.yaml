@@ -1,0 +1,49 @@
+output-dir: "{project-root}/"
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/purestorageblock"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/purestorage.json"
+    arm-resource-flattening: true
+    emit-common-types-schema: "never"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "Azure.ResourceManager.PureStorageBlock"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-purestorageblock"
+    namespace: "azure.mgmt.purestorageblock"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-purestorageblock"
+    namespace: "com.azure.resourcemanager.purestorageblock"
+    flavor: "azure"
+    service-name: "Pure Storage Block"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-purestorageblock"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-purestorageblock"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/purestorageblock"
+    package-dir: "armpurestorageblock"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

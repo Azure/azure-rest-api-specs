@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "experimentName": "exampleExperiment",
+    "api-version": "2023-09-01-preview",
+    "experiment": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.ManagedIdentity/userAssignedIdentity/exampleUMI": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/myResourceGroup/providers/Microsoft.Chaos/locations/eastus/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2023-09-01-preview",
+        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/myResourceGroup/providers/Microsoft.Chaos/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-09-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments/exampleExperiment",
+        "type": "Microsoft.Chaos/experiments",
+        "name": "exampleExperiment",
+        "location": "centraluseuap",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.ManagedIdentity/userAssignedIdentity/exampleUMI": {}
+          },
+          "principalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+          "tenantId": "8c3e2fb2-fe7a-4bf1-b779-d73990782fe6"
+        },
+        "properties": {
+          "steps": [
+            {
+              "name": "step1",
+              "branches": [
+                {
+                  "name": "branch1",
+                  "actions": [
+                    {
+                      "type": "continuous",
+                      "name": "urn:csci:provider:providername:Shutdown/1.0",
+                      "selectorId": "selector1",
+                      "duration": "PT10M",
+                      "parameters": [
+                        {
+                          "key": "abruptShutdown",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "selectors": [
+            {
+              "type": "List",
+              "id": "selector1",
+              "targets": [
+                {
+                  "type": "ChaosTarget",
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets/Microsoft-VirtualMachine"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-07-01T00:00:00.0Z",
+          "createdBy": "User",
+          "createdByType": "b3a41dba-4415-4d36-9ee8-e5eaa86db976",
+          "lastModifiedAt": "2021-07-01T00:00:00.0Z",
+          "lastModifiedBy": "User",
+          "lastModifiedByType": "b3a41dba-4415-4d36-9ee8-e5eaa86db976"
+        }
+      }
+    }
+  }
+}

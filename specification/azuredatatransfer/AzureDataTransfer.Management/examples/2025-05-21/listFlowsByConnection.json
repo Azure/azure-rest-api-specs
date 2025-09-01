@@ -1,0 +1,46 @@
+{
+  "operationId": "Flows_ListByConnection",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "connectionName": "testConnection",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Gets flows in a connection",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testConnection",
+            "type": "Microsoft.AzureDataTransfer/connections/flows",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+            "location": "East US",
+            "properties": {
+              "connection": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
+              },
+              "flowType": "Standard",
+              "storageAccountName": "testsa",
+              "storageContainerName": "testcontainer"
+            }
+          },
+          {
+            "name": "testConnection2",
+            "type": "Microsoft.AzureDataTransfer/connections/flows",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection2/flows/testFlow",
+            "location": "East US",
+            "properties": {
+              "connection": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
+              },
+              "flowType": "Standard",
+              "storageAccountName": "testsa",
+              "storageContainerName": "testcontainer"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1168,12 +1168,21 @@
         "type": {
           "description": "Identity Type",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "type",
             "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -1237,6 +1246,7 @@
       }
     },
     "CloudConnectors": {
+      "description": "External Cloud Service connectors",
       "type": "object",
       "properties": {
         "awsExternalId": {
@@ -1299,6 +1309,22 @@
         },
         "storageAccount": {
           "description": "Gets the managed storage account resource identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Uses client ID and Principal ID",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "Gets or Sets Client ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Gets or Sets Principal ID",
           "type": "string",
           "readOnly": true
         }
@@ -1393,6 +1419,9 @@
           "items": {
             "$ref": "#/definitions/ErrorModel"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "readOnly": true
         },
         "message": {
@@ -1411,6 +1440,10 @@
       "description": "The account update properties.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity related info to add/remove userAssignedIdentities."
+        },
         "properties": {
           "$ref": "#/definitions/AccountProperties",
           "description": "The account properties."
@@ -1510,7 +1543,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1583,7 +1619,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "metric specifications for the operation",
@@ -1591,7 +1630,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1609,7 +1651,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "displayDescription": {
           "description": "description of the metric",
@@ -1942,6 +1987,9 @@
       "description": "The name of the account.",
       "required": true,
       "type": "string",
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
       "x-ms-parameter-location": "method"
     }
   },

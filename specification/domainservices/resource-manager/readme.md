@@ -26,8 +26,49 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-05
+tag: package-preview-2025-06-01
 ```
+
+### Tag: package-preview-2025-06-01
+
+These settings apply only when `--tag=package-preview-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01'
+input-file:
+  - Microsoft.AAD/preview/2025-06-01/domainservices.json
+  - Microsoft.AAD/preview/2025-06-01/oucontainer.json
+```
+
+### Tag: package-preview-2025-05-01
+
+These settings apply only when `--tag=package-preview-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-01'
+input-file:
+  - Microsoft.AAD/preview/2025-05-01/domainservices.json
+  - Microsoft.AAD/preview/2025-05-01/oucontainer.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+- Microsoft.AAD/stable/2022-12-01/domainservices.json
+- Microsoft.AAD/stable/2022-12-01/oucontainer.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+- Microsoft.AAD/stable/2022-09-01/domainservices.json
+- Microsoft.AAD/stable/2022-09-01/oucontainer.json
+```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
@@ -78,6 +119,19 @@ input-file:
 ```
 
 ---
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend"]
+    reason: Microsoft.AAD is the correct provider name for legacy reasons.
+  - suppress: PatchBodyParametersSchema
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}"].patch.parameters[4].schema.properties.properties
+    reason: Properties of a PATCH request body can have default value.
+```
+
 # Code Generation
 
 
@@ -88,26 +142,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DomainServices
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/domainservices/Microsoft.Azure.Management.DomainServices/src/Generated
-  clear-output-folder: true
+  - repo: azure-powershell
 ```
 
 ## Go
@@ -132,11 +170,39 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-domainservices
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2022-12
+  - tag: package-2022-09
   - tag: package-2021-05
   - tag: package-2021-03
   - tag: package-2020-01
   - tag: package-2017-06
   - tag: package-2017-01
+```
+
+### Tag: package-2022-12 and java
+
+These settings apply only when `--tag=package-2022-12 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-12' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2022_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2022_12_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2022-09 and java
+
+These settings apply only when `--tag=package-2022-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2022_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2022_09_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-05 and java
@@ -203,6 +269,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-

@@ -1,0 +1,3498 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Neon.Postgres",
+    "version": "2025-06-23-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Organizations"
+    },
+    {
+      "name": "Projects"
+    },
+    {
+      "name": "Branches"
+    },
+    {
+      "name": "Computes"
+    },
+    {
+      "name": "NeonDatabases"
+    },
+    {
+      "name": "NeonRoles"
+    },
+    {
+      "name": "Endpoints"
+    }
+  ],
+  "paths": {
+    "/providers/Neon.Postgres/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Neon.Postgres/organizations": {
+      "get": {
+        "operationId": "Organizations_ListBySubscription",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "List OrganizationResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/getPostgresVersions": {
+      "post": {
+        "operationId": "Organizations_GetPostgresVersions",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Action to retrieve the PostgreSQL versions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Post Action to retrieve the PostgreSQL versions.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PgVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PgVersionsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_GetPostgresVersions_MaximumSet": {
+            "$ref": "./examples/Organizations_GetPostgresVersions_MaximumSet_Gen.json"
+          },
+          "Organizations_GetPostgresVersions_MinimumSet": {
+            "$ref": "./examples/Organizations_GetPostgresVersions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations": {
+      "get": {
+        "operationId": "Organizations_ListByResourceGroup",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "List OrganizationResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}": {
+      "get": {
+        "operationId": "Organizations_Get",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Get a OrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Get_MaximumSet": {
+            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Organizations_CreateOrUpdate",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Create a OrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OrganizationResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'OrganizationResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Organizations_Update",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Update a OrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Update_MaximumSet": {
+            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Organizations_Delete",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Delete a OrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Delete_MaximumSet": {
+            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects": {
+      "get": {
+        "operationId": "Projects_List",
+        "tags": [
+          "Projects"
+        ],
+        "description": "List Project resources by OrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_List_MaximumSet": {
+            "$ref": "./examples/Projects_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}": {
+      "get": {
+        "operationId": "Projects_Get",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Get a Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Get_MaximumSet": {
+            "$ref": "./examples/Projects_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Projects_CreateOrUpdate",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Create a Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Project' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "201": {
+            "description": "Resource 'Project' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Projects_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Projects_Delete",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Delete a Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Delete_MaximumSet": {
+            "$ref": "./examples/Projects_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches": {
+      "get": {
+        "operationId": "Branches_List",
+        "tags": [
+          "Branches"
+        ],
+        "description": "List Branch resources by Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BranchListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Branches_List_MaximumSet": {
+            "$ref": "./examples/Branches_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}": {
+      "get": {
+        "operationId": "Branches_Get",
+        "tags": [
+          "Branches"
+        ],
+        "description": "Get a Branch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Branch"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Branches_Get_MaximumSet": {
+            "$ref": "./examples/Branches_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Branches_CreateOrUpdate",
+        "tags": [
+          "Branches"
+        ],
+        "description": "Create a Branch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Branch' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Branch"
+            }
+          },
+          "201": {
+            "description": "Resource 'Branch' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Branch"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Branches_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Branches_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Branches_Delete",
+        "tags": [
+          "Branches"
+        ],
+        "description": "Delete a Branch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Branches_Delete_MaximumSet": {
+            "$ref": "./examples/Branches_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/computes": {
+      "get": {
+        "operationId": "Computes_List",
+        "tags": [
+          "Computes"
+        ],
+        "description": "List Compute resources by Branch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Computes_List_MaximumSet": {
+            "$ref": "./examples/Computes_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/endpoints": {
+      "get": {
+        "operationId": "Endpoints_List",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "List Endpoint resources by Branch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EndpointListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_List_MaximumSet": {
+            "$ref": "./examples/Endpoints_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/endpoints/{endpointName}": {
+      "put": {
+        "operationId": "Endpoints_CreateOrUpdate",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Create a Endpoint",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Endpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Endpoint' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "201": {
+            "description": "Resource 'Endpoint' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Endpoints_Delete",
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Delete a Endpoint",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Endpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoints_Delete_MaximumSet": {
+            "$ref": "./examples/Endpoints_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonDatabases": {
+      "get": {
+        "operationId": "NeonDatabases_List",
+        "tags": [
+          "NeonDatabases"
+        ],
+        "description": "List NeonDatabase resources by Branch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NeonDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NeonDatabases_List_MaximumSet": {
+            "$ref": "./examples/NeonDatabases_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonDatabases/{neonDatabaseName}": {
+      "put": {
+        "operationId": "NeonDatabases_CreateOrUpdate",
+        "tags": [
+          "NeonDatabases"
+        ],
+        "description": "Create a NeonDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "neonDatabaseName",
+            "in": "path",
+            "description": "The name of the NeonDatabase",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NeonDatabase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NeonDatabase' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NeonDatabase"
+            }
+          },
+          "201": {
+            "description": "Resource 'NeonDatabase' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NeonDatabase"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NeonDatabases_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NeonDatabases_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NeonDatabases_Delete",
+        "tags": [
+          "NeonDatabases"
+        ],
+        "description": "Delete a NeonDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "neonDatabaseName",
+            "in": "path",
+            "description": "The name of the NeonDatabase",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NeonDatabases_Delete_MaximumSet": {
+            "$ref": "./examples/NeonDatabases_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonRoles": {
+      "get": {
+        "operationId": "NeonRoles_List",
+        "tags": [
+          "NeonRoles"
+        ],
+        "description": "List NeonRole resources by Branch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NeonRoleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NeonRoles_List_MaximumSet": {
+            "$ref": "./examples/NeonRoles_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonRoles/{neonRoleName}": {
+      "put": {
+        "operationId": "NeonRoles_CreateOrUpdate",
+        "tags": [
+          "NeonRoles"
+        ],
+        "description": "Create a NeonRole",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "neonRoleName",
+            "in": "path",
+            "description": "The name of the NeonRole",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NeonRole"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NeonRole' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NeonRole"
+            }
+          },
+          "201": {
+            "description": "Resource 'NeonRole' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NeonRole"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NeonRoles_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NeonRoles_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NeonRoles_Delete",
+        "tags": [
+          "NeonRoles"
+        ],
+        "description": "Delete a NeonRole",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "neonRoleName",
+            "in": "path",
+            "description": "The name of the NeonRole",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NeonRoles_Delete_MaximumSet": {
+            "$ref": "./examples/NeonRoles_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/preflight": {
+      "post": {
+        "operationId": "Branches_Preflight",
+        "tags": [
+          "Branches"
+        ],
+        "description": "Action to validate preflight checks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for preflight checks.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreflightCheckParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreflightCheckResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Branches_Preflight_Database_Gen": {
+            "$ref": "./examples/Branches_Preflight_Database_Gen.json"
+          },
+          "Branches_Preflight_Endpoint_Gen": {
+            "$ref": "./examples/Branches_Preflight_Endpoint_Gen.json"
+          },
+          "Branches_Preflight_MaximumSet": {
+            "$ref": "./examples/Branches_Preflight_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/getConnectionUri": {
+      "post": {
+        "operationId": "Projects_GetConnectionUri",
+        "tags": [
+          "Projects"
+        ],
+        "description": "Action to retrieve the connection URI for the Neon Database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "connectionUriParameters",
+            "in": "body",
+            "description": "Additional parameters for retrieving the database connection URI.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionUriProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionUriProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_GetConnectionUri_MaximumSet": {
+            "$ref": "./examples/Projects_GetConnectionUri_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attributes": {
+      "type": "object",
+      "description": "Additional attributes specific to Neon Resources",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the attribute"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the attribute"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "AutoscalingSize": {
+      "type": "object",
+      "description": "Represents the compute units size range for autoscaling",
+      "properties": {
+        "autoscalingLimitMinCu": {
+          "type": "number",
+          "format": "float",
+          "description": "The minimum compute units for autoscaling"
+        },
+        "autoscalingLimitMaxCu": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum compute units for autoscaling"
+        }
+      },
+      "required": [
+        "autoscalingLimitMinCu",
+        "autoscalingLimitMaxCu"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "BaseEntity": {
+      "type": "object",
+      "description": "Base model for all tracked resources",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Unique identifier for the entity",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the entity was created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Branch": {
+      "type": "object",
+      "description": "The Branch resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BranchProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BranchListResult": {
+      "type": "object",
+      "description": "The response of a Branch list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Branch items on this page",
+          "items": {
+            "$ref": "#/definitions/Branch"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BranchProperties": {
+      "type": "object",
+      "description": "Properties specific to Branch",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Unique identifier for the entity",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the entity was created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the project this branch belongs to"
+        },
+        "parentId": {
+          "type": "string",
+          "description": "The ID of the parent branch",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Role name associated with the branch"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name associated with the branch"
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles associated with the branch",
+          "items": {
+            "$ref": "#/definitions/NeonRoleProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "databases": {
+          "type": "array",
+          "description": "Neon Databases associated with the branch",
+          "items": {
+            "$ref": "#/definitions/NeonDatabaseProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Endpoints associated with the branch",
+          "items": {
+            "$ref": "#/definitions/EndpointProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "branchId": {
+          "type": "string",
+          "description": "Unique identifier for the branch",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "branch": {
+          "type": "string",
+          "description": "Name of the branch",
+          "pattern": "^\\S.{0,126}\\S$|^\\S$"
+        },
+        "dataSize": {
+          "type": "string",
+          "description": "Total data size in MB for the branch",
+          "readOnly": true
+        },
+        "lastActive": {
+          "type": "string",
+          "description": "Last active compute for the branch",
+          "readOnly": true
+        },
+        "computeHours": {
+          "type": "string",
+          "description": "Compute hours for the branch",
+          "readOnly": true
+        },
+        "protected": {
+          "type": "boolean",
+          "description": "Branch protected status",
+          "readOnly": true
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Branch default status",
+          "readOnly": true
+        }
+      }
+    },
+    "Compute": {
+      "type": "object",
+      "description": "The Compute resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComputeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ComputeListResult": {
+      "type": "object",
+      "description": "The response of a Compute list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Compute items on this page",
+          "items": {
+            "$ref": "#/definitions/Compute"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ComputeProperties": {
+      "type": "object",
+      "description": "Properties specific to Compute",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Unique identifier for the entity",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the entity was created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where the compute instance is located"
+        },
+        "cpuCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of allocated CPU cores"
+        },
+        "memory": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Memory allocated in GB"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the compute instance"
+        }
+      }
+    },
+    "ConnectionUriProperties": {
+      "type": "object",
+      "description": "Connection uri parameters for the associated database",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Project Id associated with this connection"
+        },
+        "branchId": {
+          "type": "string",
+          "description": "Branch Id associated with this connection"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name associated with this connection"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "The role name used for authentication"
+        },
+        "endpointId": {
+          "type": "string",
+          "description": "the endpoint Id with this connection"
+        },
+        "isPooled": {
+          "type": "boolean",
+          "description": "Indicates if the connection is pooled"
+        },
+        "connectionStringUri": {
+          "type": "string",
+          "format": "password",
+          "description": "connection uri returned for the database",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      }
+    },
+    "DefaultEndpointSettings": {
+      "type": "object",
+      "description": "Default Endpoint Settings for the project.",
+      "properties": {
+        "autoscalingLimitMinCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum compute units for autoscaling."
+        },
+        "autoscalingLimitMaxCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum compute units for autoscaling."
+        }
+      },
+      "required": [
+        "autoscalingLimitMinCu",
+        "autoscalingLimitMaxCu"
+      ]
+    },
+    "DefaultEndpointSettingsUpdate": {
+      "type": "object",
+      "description": "Default Endpoint Settings for the project.",
+      "properties": {
+        "autoscalingLimitMinCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum compute units for autoscaling."
+        },
+        "autoscalingLimitMaxCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum compute units for autoscaling."
+        }
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "The Neon compute endpoint resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EndpointListResult": {
+      "type": "object",
+      "description": "The response of a Endpoint list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Endpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EndpointProperties": {
+      "type": "object",
+      "description": "Properties specific to Endpoints",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Unique identifier for the entity",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the entity was created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the project this endpoint belongs to"
+        },
+        "branchId": {
+          "type": "string",
+          "description": "The ID of the branch this endpoint belongs to"
+        },
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "The type of the endpoint"
+        },
+        "endpointId": {
+          "type": "string",
+          "description": "Unique identifier for the compute endpoint",
+          "pattern": "^[a-z0-9-]{1,60}$"
+        },
+        "computeName": {
+          "type": "string",
+          "description": "Name of the compute endpoint",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "status": {
+          "$ref": "#/definitions/EndpointStatus",
+          "description": "The current status of the compute endpoint",
+          "readOnly": true
+        },
+        "lastActive": {
+          "type": "string",
+          "description": "The timestamp when the compute endpoint was last active",
+          "readOnly": true
+        },
+        "size": {
+          "$ref": "#/definitions/AutoscalingSize",
+          "description": "The compute units size range for autoscaling (MinCU-MaxCU)"
+        }
+      }
+    },
+    "EndpointStatus": {
+      "type": "string",
+      "description": "The current status of the compute endpoint.",
+      "enum": [
+        "init",
+        "active",
+        "idle"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Init",
+            "value": "init",
+            "description": "The compute endpoint is currently initializing"
+          },
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The compute endpoint is currently active"
+          },
+          {
+            "name": "Idle",
+            "value": "idle",
+            "description": "The compute endpoint is currently idle"
+          }
+        ]
+      }
+    },
+    "EndpointType": {
+      "type": "string",
+      "description": "The compute endpoint type. Either read_write or read_only.",
+      "enum": [
+        "read_only",
+        "read_write"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadOnly",
+            "value": "read_only",
+            "description": "ReadOnly compute endpoint type"
+          },
+          {
+            "name": "ReadWrite",
+            "value": "read_write",
+            "description": "ReadWrite compute endpoint type"
+          }
+        ]
+      }
+    },
+    "EntityType": {
+      "type": "string",
+      "description": "Entity types allowed for preflight deletion validation.",
+      "enum": [
+        "branch",
+        "neonRole",
+        "neonDatabase",
+        "endpoint"
+      ],
+      "x-ms-enum": {
+        "name": "EntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Branch",
+            "value": "branch",
+            "description": "Branch entity"
+          },
+          {
+            "name": "NeonRole",
+            "value": "neonRole",
+            "description": "NeonRole entity"
+          },
+          {
+            "name": "NeonDatabase",
+            "value": "neonDatabase",
+            "description": "Database entity"
+          },
+          {
+            "name": "Endpoint",
+            "value": "endpoint",
+            "description": "Endpoint entity"
+          }
+        ]
+      }
+    },
+    "LiftrBase.CompanyDetails": {
+      "type": "object",
+      "description": "Company details for an organization",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country name of the company"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Office address of the company"
+        },
+        "businessPhone": {
+          "type": "string",
+          "description": "Business phone number of the company"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the user"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of employees in the company"
+        }
+      }
+    },
+    "LiftrBase.Data.OrganizationProperties": {
+      "type": "object",
+      "description": "Properties specific to Neon Organization resource",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "userDetails": {
+          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "description": "Details of the user."
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/LiftrBase.CompanyDetails",
+          "description": "Details of the company."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "partnerOrganizationProperties": {
+          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationProperties",
+          "description": "Neon Organization properties"
+        },
+        "projectProperties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "Neon Project Properties"
+        }
+      },
+      "required": [
+        "marketplaceDetails",
+        "userDetails",
+        "companyDetails"
+      ]
+    },
+    "LiftrBase.Data.OrganizationPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to Neon Organization resource",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "userDetails": {
+          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "description": "Details of the user."
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/LiftrBase.CompanyDetails",
+          "description": "Details of the company."
+        },
+        "partnerOrganizationProperties": {
+          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationPropertiesUpdate",
+          "description": "Neon Organization properties"
+        },
+        "projectProperties": {
+          "$ref": "#/definitions/ProjectPropertiesUpdate",
+          "description": "Neon Project Properties"
+        }
+      }
+    },
+    "LiftrBase.Data.PartnerOrganizationProperties": {
+      "type": "object",
+      "description": "Properties specific to Partner's organization",
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "description": "Organization Id in partner's system"
+        },
+        "organizationName": {
+          "type": "string",
+          "description": "Organization name in partner's system",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "singleSignOnProperties": {
+          "$ref": "#/definitions/LiftrBase.SingleSignOnProperties",
+          "description": "Single Sign On properties for the organization"
+        }
+      },
+      "required": [
+        "organizationName"
+      ]
+    },
+    "LiftrBase.Data.PartnerOrganizationPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to Partner's organization",
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "description": "Organization Id in partner's system"
+        },
+        "organizationName": {
+          "type": "string",
+          "description": "Organization name in partner's system",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "singleSignOnProperties": {
+          "$ref": "#/definitions/LiftrBase.SingleSignOnProperties",
+          "description": "Single Sign On properties for the organization"
+        }
+      }
+    },
+    "LiftrBase.MarketplaceDetails": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "SaaS subscription id for the the marketplace offer"
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetails",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      },
+      "required": [
+        "offerDetails"
+      ]
+    },
+    "LiftrBase.MarketplaceDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "SaaS subscription id for the the marketplace offer"
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      }
+    },
+    "LiftrBase.MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of a resource.",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Purchased but not yet activated"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace subscription is activated"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "This state indicates that a customer's payment for the Marketplace service was not received"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Customer has cancelled the subscription"
+          }
+        ]
+      }
+    },
+    "LiftrBase.OfferDetails": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term Id for the marketplace offer"
+        }
+      },
+      "required": [
+        "publisherId",
+        "offerId",
+        "planId"
+      ]
+    },
+    "LiftrBase.OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term Id for the marketplace offer"
+        }
+      }
+    },
+    "LiftrBase.SingleSignOnProperties": {
+      "type": "object",
+      "description": "Properties specific to Single Sign On Resource",
+      "properties": {
+        "singleSignOnState": {
+          "$ref": "#/definitions/LiftrBase.SingleSignOnStates",
+          "description": "State of the Single Sign On for the organization"
+        },
+        "enterpriseAppId": {
+          "type": "string",
+          "description": "AAD enterprise application Id used to setup SSO"
+        },
+        "singleSignOnUrl": {
+          "$ref": "#/definitions/LiftrBase.Uri",
+          "description": "URL for SSO to be used by the partner to redirect the user to their system"
+        },
+        "aadDomains": {
+          "type": "array",
+          "description": "List of AAD domains fetched from Microsoft Graph for user.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LiftrBase.SingleSignOnStates": {
+      "type": "string",
+      "description": "Various states of the SSO resource",
+      "enum": [
+        "Initial",
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SingleSignOnStates",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initial",
+            "value": "Initial",
+            "description": "Initial state of the SSO resource"
+          },
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "SSO is enabled for the organization"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "SSO is disabled for the organization"
+          }
+        ]
+      }
+    },
+    "LiftrBase.Uri": {
+      "type": "string",
+      "description": "A string that represents a URI."
+    },
+    "LiftrBase.UserDetails": {
+      "type": "object",
+      "description": "User details for an organization",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        }
+      }
+    },
+    "LiftrBase.email": {
+      "type": "string",
+      "description": "Reusable representation of an email address.",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+    },
+    "NeonDatabase": {
+      "type": "object",
+      "description": "The Neon Database resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NeonDatabaseProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NeonDatabaseListResult": {
+      "type": "object",
+      "description": "The response of a NeonDatabase list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NeonDatabase items on this page",
+          "items": {
+            "$ref": "#/definitions/NeonDatabase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NeonDatabaseProperties": {
+      "type": "object",
+      "description": "Properties specific to Databases",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Unique identifier for the entity",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the entity was created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "branchId": {
+          "type": "string",
+          "description": "The ID of the branch this database belongs to"
+        },
+        "ownerName": {
+          "type": "string",
+          "description": "The name of the role that owns the database"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Timestamp indicating when the database was last updated",
+          "readOnly": true
+        }
+      }
+    },
+    "NeonRole": {
+      "type": "object",
+      "description": "The Neon Role resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NeonRoleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NeonRoleListResult": {
+      "type": "object",
+      "description": "The response of a NeonRole list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NeonRole items on this page",
+          "items": {
+            "$ref": "#/definitions/NeonRole"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NeonRoleProperties": {
+      "type": "object",
+      "description": "Properties specific to Roles",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Unique identifier for the entity",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the entity was created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "branchId": {
+          "type": "string",
+          "description": "The ID of the branch this role belongs to"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Permissions assigned to the role",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isSuperUser": {
+          "type": "boolean",
+          "description": "Indicates whether the role has superuser privileges"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Name of the role",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Timestamp indicating when the role was last updated",
+          "readOnly": true
+        },
+        "owns": {
+          "type": "string",
+          "description": "Databases name associated with the role",
+          "readOnly": true
+        }
+      }
+    },
+    "OrganizationResource": {
+      "type": "object",
+      "description": "Organization Resource by Neon",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LiftrBase.Data.OrganizationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OrganizationResourceListResult": {
+      "type": "object",
+      "description": "The response of a OrganizationResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OrganizationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/OrganizationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OrganizationResourceUpdate": {
+      "type": "object",
+      "description": "Organization Resource by Neon",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LiftrBase.Data.OrganizationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "PgVersion": {
+      "type": "object",
+      "description": "PostgreSQL Version model",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The major PostgreSQL version number"
+        }
+      }
+    },
+    "PgVersionsResult": {
+      "type": "object",
+      "description": "Response model for PostgreSQL versions",
+      "properties": {
+        "versions": {
+          "type": "array",
+          "description": "List of PostgreSQL versions",
+          "items": {
+            "$ref": "#/definitions/PgVersion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "versions"
+      ]
+    },
+    "PreflightCheckParameters": {
+      "type": "object",
+      "description": "Preflight check parameters for branch and child resources.\n\nIMPORTANT: Only one of the property types (branchProperties, roleProperties, databaseProperties,\nor endpointProperties) should be provided at a time, based on the entityType value:\n- When entityType is \"branch\", provide only branchProperties\n- When entityType is \"role\", provide only roleProperties\n- When entityType is \"database\", provide only databaseProperties\n- When entityType is \"endpoint\", provide only endpointProperties",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Project Id associated with this connection"
+        },
+        "branchId": {
+          "type": "string",
+          "description": "Branch Id associated with this connection"
+        },
+        "entityType": {
+          "$ref": "#/definitions/EntityType",
+          "description": "Entity type to be validated for deletion."
+        },
+        "branchProperties": {
+          "$ref": "#/definitions/BranchProperties",
+          "description": "The branch properties - ONLY provided when entityType is 'branch'"
+        },
+        "roleProperties": {
+          "$ref": "#/definitions/NeonRoleProperties",
+          "description": "The role properties - ONLY provided when entityType is 'role'"
+        },
+        "databaseProperties": {
+          "$ref": "#/definitions/NeonDatabaseProperties",
+          "description": "The database properties - ONLY provided when entityType is 'database'"
+        },
+        "endpointProperties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The endpoint properties - ONLY provided when entityType is 'endpoint'"
+        }
+      },
+      "required": [
+        "projectId",
+        "branchId",
+        "entityType"
+      ]
+    },
+    "PreflightCheckResult": {
+      "type": "object",
+      "description": "Result of the pre-deletion validation operation.",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether action is allowed."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Optional message in case action is not allowed."
+        }
+      },
+      "required": [
+        "isValid"
+      ]
+    },
+    "Project": {
+      "type": "object",
+      "description": "The Project resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProjectListResult": {
+      "type": "object",
+      "description": "The response of a Project list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Project items on this page",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProjectProperties": {
+      "type": "object",
+      "description": "Properties specific to Project",
+      "properties": {
+        "entityId": {
+          "type": "string",
+          "description": "Unique identifier for the entity",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the entity was created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "regionId": {
+          "type": "string",
+          "description": "Region where the project is created"
+        },
+        "storage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Data Storage bytes per hour for the project"
+        },
+        "pgVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Postgres version for the project"
+        },
+        "historyRetention": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retention period for project history in seconds."
+        },
+        "defaultEndpointSettings": {
+          "$ref": "#/definitions/DefaultEndpointSettings",
+          "description": "Default endpoint settings for the project."
+        },
+        "branch": {
+          "$ref": "#/definitions/BranchProperties",
+          "description": "The Branch properties of the project. This is optional"
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles associated with the project",
+          "items": {
+            "$ref": "#/definitions/NeonRoleProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "databases": {
+          "type": "array",
+          "description": "Neon Databases associated with the project",
+          "items": {
+            "$ref": "#/definitions/NeonDatabaseProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Endpoints associated with the project",
+          "items": {
+            "$ref": "#/definitions/EndpointProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProjectPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to Project",
+      "properties": {
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "regionId": {
+          "type": "string",
+          "description": "Region where the project is created"
+        },
+        "storage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Data Storage bytes per hour for the project"
+        },
+        "pgVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Postgres version for the project"
+        },
+        "historyRetention": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retention period for project history in seconds."
+        },
+        "defaultEndpointSettings": {
+          "$ref": "#/definitions/DefaultEndpointSettingsUpdate",
+          "description": "Default endpoint settings for the project."
+        },
+        "branch": {
+          "$ref": "#/definitions/BranchProperties",
+          "description": "The Branch properties of the project. This is optional"
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles associated with the project",
+          "items": {
+            "$ref": "#/definitions/NeonRoleProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "databases": {
+          "type": "array",
+          "description": "Neon Databases associated with the project",
+          "items": {
+            "$ref": "#/definitions/NeonDatabaseProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Endpoints associated with the project",
+          "items": {
+            "$ref": "#/definitions/EndpointProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

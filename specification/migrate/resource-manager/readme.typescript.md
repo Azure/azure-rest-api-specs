@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-migrate"
   output-folder: "$(typescript-sdks-folder)/sdk/migrate/arm-migrate"
-  clear-output-folder: true
   generate-metadata: true
 ```

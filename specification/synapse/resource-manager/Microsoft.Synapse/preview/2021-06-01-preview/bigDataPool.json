@@ -41,7 +41,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -94,7 +94,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -158,7 +158,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -240,7 +240,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
             "type": "string",
@@ -253,15 +253,15 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
-            "description": ""
+            "description": "Created"
           },
           "204": {
             "description": ""
@@ -308,7 +308,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -406,7 +406,8 @@
         "creationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The time when the Big Data pool was created."
+          "description": "The time when the Big Data pool was created.",
+          "readOnly": true
         },
         "autoPause": {
           "$ref": "#/definitions/AutoPauseProperties",
@@ -415,6 +416,15 @@
         "isComputeIsolationEnabled": {
           "type": "boolean",
           "description": "Whether compute isolation is required or not."
+        },
+        "isAutotuneEnabled": {
+          "type": "boolean",
+          "title": "Enable Autotune",
+          "description": "Whether autotune is required or not.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sessionLevelPackagesEnabled": {
           "type": "boolean",
@@ -446,8 +456,9 @@
           "description": "List of custom libraries/packages associated with the spark pool.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LibraryInfo"
-          }
+            "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
+          },
+          "x-ms-identifiers": []
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/SparkConfigProperties",
@@ -508,7 +519,11 @@
         "minNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of nodes the Big Data pool can support."
+          "description": "The minimum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "enabled": {
           "type": "boolean",
@@ -517,7 +532,11 @@
         "maxNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of nodes the Big Data pool can support."
+          "description": "The maximum number of nodes the Big Data pool can support.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -544,44 +563,16 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
-        }
-      }
-    },
-    "LibraryInfo": {
-      "type": "object",
-      "description": "Library/package information of a Big Data pool powered by Apache Spark",
-      "title": "Information about a library/package created at the workspace level.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the library."
         },
-        "path": {
-          "type": "string",
-          "description": "Storage blob path of library."
+        "minExecutors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of executors alloted"
         },
-        "containerName": {
-          "type": "string",
-          "description": "Storage blob container name."
-        },
-        "uploadedTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last update time of the library."
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the library."
-        },
-        "provisioningStatus": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Provisioning status of the library/package."
-        },
-        "creatorId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Creator Id of the library/package."
+        "maxExecutors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of executors alloted"
         }
       }
     },
@@ -635,7 +626,11 @@
           "x-ms-enum": {
             "name": "ConfigurationType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     }

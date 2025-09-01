@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "extensionName": "ClusterMonitor",
+    "api-version": "2022-03-01",
+    "clusterName": "clusterName1"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT1H"
+      }
+    },
+    "200": {},
+    "204": {}
+  }
+}

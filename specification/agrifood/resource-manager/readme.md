@@ -26,7 +26,25 @@ These are the global settings for the agrifood.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-05-12-preview
+tag: package-preview-2023-06
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.AgFoodPlatform/preview/2023-06-01-preview/agfood.json
+```
+
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.AgFoodPlatform/preview/2021-09-01-preview/agfood.json
 ```
 
 ### Tag: package-2020-05-12-preview
@@ -49,10 +67,13 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
+  - repo: azure-powershell
 ```
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -71,25 +92,54 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - from: agfood.json
+    suppress: R3010 # TrackedResourceListByImmediateParent
+    where:
+      - $.definitions
+    reason: Have an api already.
+  - from: agfood.json
     suppress: R3006 # BodyTopLevelProperties
-    where: $.definitions.FarmBeats.properties    
+    where: $.definitions.FarmBeats.properties
     reason: Currently systemData is not allowed.
   - from: agfood.json
     suppress: R3006 # BodyTopLevelProperties
-    where: $.definitions.Extension.properties    
+    where: $.definitions.Extension.properties
     reason: Currently systemData is not allowed.
   - from: agfood.json
-    suppress: R3018  # EnumInsteadOfBoolean
+    suppress: R3006 # BodyTopLevelProperties
+    where: $.definitions.FarmBeatsExtension.properties
+    reason: Currently systemData is not allowed.
+  - from: agfood.json
+    suppress: R2003 # ValidFormats
+    where: $.definitions.FarmBeatsProperties.properties.instanceUri.format
+    reason: Currently systemData is not allowed.
+  - from: agfood.json
+    suppress: R3018 # EnumInsteadOfBoolean
     where:
       - $.definitions.Operation.properties.isDataAction
-      - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable 
+      - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
     reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
   - from: agfood.json
-    suppress: R4000  # DescriptionAndTitleMissing
+    suppress: RequiredReadOnlySystemData
+    reason: We do not yet support system data
+  - from: agfood.json
+    suppress: R4009 #RequiredReadOnlySystemData
+    reason: Currently systemData is not allowed
+  - from: agfood.json
+    suppress: R4000 # DescriptionAndTitleMissing
     where:
+      - $.definitions.FarmBeatsExtension.properties.systemData
+      - $.definitions.FarmBeatsExtension.properties.properties
+      - $.definitions.DetailedInformation.properties.unitsSupported
+      - $.definitions.SensorIntegration.properties.provisioningInfo
+      - $.definitions.FarmBeatsProperties.properties.publicNetworkAccess
+      - $.definitions.FarmBeatsProperties.properties.sensorIntegration
+      - $.definitions.FarmBeatsProperties.properties.publicNetworkAccess
+      - $.definitions.FarmBeatsProperties.properties.privateEndpointConnections
+      - $.definitions.FarmBeatsUpdateProperties.properties.sensorIntegration
+      - $.definitions.FarmBeatsUpdateProperties.properties.publicNetworkAccess
       - $.definitions.Error.properties.innererror
       - $.definitions.ErrorResponse.properties.error
       - $.definitions.Extension.properties.properties
@@ -100,7 +150,7 @@ directive:
       - $.definitions.Operation.properties.display
     reason: Model has description added in it's schema.
   - from: types.json
-    suppress: R4000  # DescriptionAndTitleMissing
+    suppress: R4000 # DescriptionAndTitleMissing
     where: $.definitions.Resource
     reason: Common type models are inherited.
 ```

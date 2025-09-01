@@ -40,7 +40,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -77,7 +78,10 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/TriggerPipelineReference"
           },
-          "description": "Pipelines that need to be started."
+          "description": "Pipelines that need to be started.",
+          "x-ms-identifiers": [
+            "/pipelineReference/referenceName"
+          ]
         }
       }
     },
@@ -213,7 +217,8 @@
           "items": {
             "$ref": "#/definitions/RecurrenceScheduleOccurrence"
           },
-          "description": "The monthly occurrences."
+          "description": "The monthly occurrences.",
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -320,7 +325,7 @@
             },
             "events": {
               "description": "The type of events that cause this trigger to fire.",
-              "$ref": "#/definitions/BlobEventTypes"
+              "$ref": "#/definitions/BlobEventTypeArray"
             },
             "scope": {
               "description": "The ARM resource ID of the Storage Account.",
@@ -337,7 +342,7 @@
         "typeProperties"
       ]
     },
-    "BlobEventTypes": {
+    "BlobEventTypeArray": {
       "type": "array",
       "items": {
         "type": "string",
@@ -378,7 +383,8 @@
               "type": "array",
               "items": {
                 "type": "object"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "scope": {
               "description": "The ARM resource ID of the Azure Event Grid Topic.",
@@ -433,6 +439,7 @@
             },
             "delay": {
               "type": "object",
+              "x-ms-format": "dfe-string",
               "description": "Specifies how long the trigger waits past due time before triggering new run. It doesn't alter window start and end time. The default is 0. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
             },
             "maxConcurrency": {
@@ -450,7 +457,8 @@
               "description": "Triggers that this trigger depends on. Only tumbling window triggers are supported.",
               "items": {
                 "$ref": "#/definitions/DependencyReference"
-              }
+              },
+              "x-ms-identifiers": []
             }
           },
           "required": [
@@ -484,6 +492,7 @@
       "properties": {
         "count": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Maximum ordinary retry attempts. Default is 0. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "intervalInSeconds": {
@@ -503,7 +512,11 @@
           "type": "string",
           "enum": [
             "TriggerReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "TriggerReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "description": "Reference trigger name.",
@@ -668,7 +681,10 @@
               "items": {
                 "$ref": "../datafactory.json#/definitions/PipelineReference"
               },
-              "description": "Upstream Pipelines."
+              "description": "Upstream Pipelines.",
+              "x-ms-identifiers": [
+                "referenceName"
+              ]
             },
             "runDimension": {
               "description": "Run Dimension property that needs to be emitted by upstream pipelines.",

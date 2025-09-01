@@ -1,0 +1,37 @@
+{
+  "operationId": "ApiSources_List",
+  "title": "ApiSources_ListByWorkspace",
+  "parameters": {
+    "resourceGroupName": "contoso-resources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "serviceName": "contoso",
+    "workspaceName": "default",
+    "api-version": "2024-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiCenter/services/contoso/workspaces/default/apiSources/contoso-api-management",
+            "type": "Microsoft.ApiCenter/services/workspaces/apiSources",
+            "name": "contoso-api-management",
+            "systemData": {
+              "createdAt": "2023-07-03T18:27:09.128871Z",
+              "lastModifiedAt": "2023-07-03T18:27:09.1288716Z"
+            },
+            "properties": {
+              "azureApiManagementSource": {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiManagement/service/contoso",
+                "msiResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity"
+              },
+              "importSpecification": "ondemand",
+              "targetEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiCenter/services/contoso/workspaces/default/environments/azure-api-management",
+              "targetLifecycleStage": "design"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

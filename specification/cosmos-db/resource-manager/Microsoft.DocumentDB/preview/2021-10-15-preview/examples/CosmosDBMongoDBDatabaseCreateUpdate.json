@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-10-15-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "createUpdateMongoDBDatabaseParameters": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "databaseName"
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName",
+        "name": "databaseName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "updatedDatabaseName"
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

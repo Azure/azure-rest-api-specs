@@ -41,6 +41,11 @@
         ],
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RedisCacheOperations": {
+            "$ref": "./examples/RedisCacheOperations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1380,7 +1385,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The redis cache was successfully deleted."
+            "description": "Linked server was successfully deleted."
           },
           "204": {
             "description": "Linked server was successfully deleted."
@@ -1654,11 +1659,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",

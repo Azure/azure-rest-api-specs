@@ -1,0 +1,484 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Open Energy Platform Management Service APIs",
+    "description": "Open Energy Platform Management Service APIs",
+    "version": "2021-06-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "Checks the name availability of the resource with requested resource name.",
+        "operationId": "Locations_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "description": "NameAvailabilityRequest object.",
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Locations_CheckNameAvailability": {
+            "$ref": "./examples/Locations_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Returns list of oep resources..",
+        "operationId": "EnergyServices_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnergyServiceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OepResource_ListByResourceGroup": {
+            "$ref": "./examples/OepResource_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/energyServices": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Lists a collection of oep resources under the given Azure Subscription ID.",
+        "operationId": "EnergyServices_ListBySubscription",
+        "x-ms-examples": {
+          "OepResource_ListBySubscriptionId": {
+            "$ref": "./examples/OepResource_ListBySubscriptionId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/EnergyServiceList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}": {
+      "get": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Returns oep resource for a given name.",
+        "operationId": "EnergyServices_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Get": {
+            "$ref": "./examples/OepResource_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserRPOepResource"
+        ],
+        "description": "Method that gets called if subscribed for ResourceCreationBegin trigger.",
+        "operationId": "EnergyServices_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body.",
+            "schema": {
+              "description": "Request body.",
+              "$ref": "#/definitions/EnergyService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The OEP resource created.",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "201": {
+            "description": "The OEP resource will be created asynchronously",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Create": {
+            "$ref": "./examples/OepResource_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EnergyServices_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EnergyResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the oep resource.",
+            "schema": {
+              "$ref": "#/definitions/EnergyService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Update": {
+            "$ref": "./examples/OepResource_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes oep resource",
+        "operationId": "EnergyServices_Delete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "The OEP resource will be deleted asynchronously"
+          },
+          "204": {
+            "description": "Returned when the operation returns no content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "OepResource_Delete": {
+            "$ref": "./examples/OepResource_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.OpenEnergyPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists the available operations of Microsoft.OpenEnergyPlatform resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EnergyServiceList": {
+      "description": "The list of oep resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of oep resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of oep resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnergyService"
+          }
+        }
+      }
+    },
+    "DataPartitionNames": {
+      "type": "object",
+      "description": "The list of Energy services resource's Data Partition Names.",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "EnergyServiceProperties": {
+      "type": "object",
+      "properties": {
+        "dnsName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "authAppId": {
+          "type": "string",
+          "readOnly": false
+        },
+        "dataPartitionNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPartitionNames"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EnergyService": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnergyServiceProperties"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Geo-location where the resource lives.",
+          "type": "string"
+        }
+      }
+    },
+    "EnergyResourceUpdate": {
+      "description": "The resource model definition used for updating a tracked ARM resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ]
+}

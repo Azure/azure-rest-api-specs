@@ -1,20 +1,17 @@
 # FAQ in Swagger PR Review
 
-This page is intended to answer questions frequently asked during Azure Swagger PR review.
+This page is intended to answer questions frequently asked during Azure API spec PR review.
 
-1. [I am new to Swagger/OpenAPI, How should I start?](#Onboard)
+1. [I am new to API specs, where should I start?](#Onboard)
 2. [How to fix validation failure?](#validation)
-3. [How to generate SDK from Swagger?](#SDK)
+3. [How to generate SDK from API specs?](#SDK)
 4. [How to generate document](#doc)
 5. [How to generate swagger examples](#examplegen)
-6. [If need further help, who can we contact?](#contact)
 
-## How to onboard PR review Process?<a name="Onboard"></a>
-If you are new to Swagger/OpenAPI, you can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/80/Getting-started-with-OpenAPI-specifications)
+## How to onboard to API spec PR review Process?<a name="Onboard"></a>
+If you are new to API spec, you can refer to this [document](https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-specs#create-your-rest-api-definition)
 
-If you are new to Swagger PR review process, you can refer to this [flowchart](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/212/Swagger-PR-Review)
-
-You can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/49/Request-Access-to-Azure-SDK-repos) to get read permission to submit PR.
+You can refer to this [document](https://eng.ms/docs/products/azure-developer-experience/onboard/access) to get read permission to submit PR.
 
 ## How to fix validation failure?<a name="validation"></a>
 | Validation | Description | How to fix |
@@ -30,16 +27,11 @@ You can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/
 Refer to [Document](https://aka.ms/ci-fix) for how to run these tools locally
 
 ## How to generate SDK from Swagger?<a name="SDK"></a>
-If you are working in the public repository,SDK generation is triggered as soon as your OpenAPI specification (a.k.a swagger) PR is created/committed/merged in to the azure-rest-api-specs repository.
-
-If you are working in the private repository, please refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/81/Management-Plane-SDK-generation) to manually generate SDKs of different languages, including Python, Java, Go, C#, Js etc.
+Refer to this [document](https://eng.ms/docs/products/azure-developer-experience/develop/sdk-generate).
 
 
 ## How to generate Document from Swagger?<a name="doc"></a>
-Refer to [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/79/Generation-of-docs-on-docs.microsoft.com)
+Refer to [document](https://eng.ms/docs/products/azure-developer-experience/design/api-docs)
 
 ## How to generate examples from Swagger?<a name="examplegen"></a>
-Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation)
-
-## If need further help, who can we contact?<a name="contact"></a>
-If any other help need, Please send a mail to vscswagger@microsoft.com
+Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md)

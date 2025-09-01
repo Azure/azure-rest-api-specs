@@ -16,13 +16,25 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-iothub
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-07-02
   - tag: package-2020-03
   - tag: package-preview-2019-07  
   - tag: package-preview-2019-03
   - tag: package-2018-12-preview
   - tag: package-2018-04
 ```
+### Tag: package-2021-07-02 and java
 
+These settings apply only when `--tag=package-2021-07-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-07-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.iothub.v2021_07_02
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iothub/mgmt-v2021_07_02
+regenerate-manager: true
+generate-interface: true
+```
 ### Tag: package-2020-03 and java
 
 These settings apply only when `--tag=package-2020-03 --java` is specified on the command line.

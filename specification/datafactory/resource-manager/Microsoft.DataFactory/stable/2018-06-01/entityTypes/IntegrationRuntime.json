@@ -126,6 +126,14 @@
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeVNetProperties"
+        },
+        "copyComputeScaleProperties": {
+          "description": "CopyComputeScale properties for managed integration runtime.",
+          "$ref": "#/definitions/CopyComputeScaleProperties"
+        },
+        "pipelineExternalComputeScaleProperties": {
+          "description": "PipelineExternalComputeScale properties for managed integration runtime.",
+          "$ref": "#/definitions/PipelineExternalComputeScaleProperties"
         }
       },
       "additionalProperties": {
@@ -161,6 +169,74 @@
         "cleanup": {
           "description": "Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.",
           "type": "boolean"
+        },
+        "customProperties": {
+          "description": "Custom properties are used to tune the data flow runtime performance.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "Name of custom property.",
+                "type": "string"
+              },
+              "value": {
+                "description": "Value of custom property.",
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "CopyComputeScaleProperties": {
+      "description": "CopyComputeScale properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "dataIntegrationUnit": {
+          "description": "DIU number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 4
+        },
+        "timeToLive": {
+          "description": "Time to live (in minutes) setting of integration runtime which will execute copy activity.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PipelineExternalComputeScaleProperties": {
+      "description": "PipelineExternalComputeScale properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "timeToLive": {
+          "description": "Time to live (in minutes) setting of integration runtime which will execute pipeline and external activity.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5
+        },
+        "numberOfPipelineNodes": {
+          "description": "Number of the pipeline nodes, which should be greater than 0 and less than 11.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "numberOfExternalNodes": {
+          "description": "Number of the the external nodes, which should be greater than 0 and less than 11.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 10
         }
       },
       "additionalProperties": {
@@ -241,14 +317,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomSetupBase"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "packageStores": {
           "description": "Package stores for the SSIS Integration Runtime.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PackageStore"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -398,12 +478,14 @@
       "type": "object",
       "properties": {
         "targetName": {
-          "description": "The server name of data source access.",
-          "type": "object"
+          "description": "The server name of data source access. Type: string.",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "userName": {
-          "description": "The user name of data source access.",
-          "type": "object"
+          "description": "The user name of data source access. Type: string.",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password of data source access.",
@@ -566,6 +648,10 @@
       "properties": {
         "linkedInfo": {
           "$ref": "#/definitions/LinkedIntegrationRuntimeType"
+        },
+        "selfContainedInteractiveAuthoringEnabled": {
+          "type": "boolean",
+          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay."
         }
       }
     },
@@ -615,6 +701,10 @@
         "resourceId": {
           "description": "The resource identifier of the integration runtime to be shared.",
           "type": "string"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -630,7 +720,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "category"
+          ]
         }
       }
     },
@@ -647,7 +740,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
         }
       }
     },
@@ -664,7 +760,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         }
       }
     },
@@ -763,7 +862,10 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeNode"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "nodeId"
+          ]
         },
         "otherErrors": {
           "description": "The errors that occurred on this integration runtime.",
@@ -771,7 +873,8 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "lastOperation": {
           "description": "The last operation result that occurred on this integration runtime.",
@@ -851,7 +954,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -950,7 +1054,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-          }
+          },
+          "x-ms-identifiers": [
+            "nodeName"
+          ]
         },
         "scheduledUpdateDate": {
           "description": "The date at which the integration runtime will be scheduled to update, in ISO8601 format.",
@@ -1000,7 +1107,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedIntegrationRuntime"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "pushedVersion": {
           "description": "The version that the integration runtime is going to update to.",
@@ -1017,6 +1127,11 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "selfContainedInteractiveAuthoringEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay."
         }
       }
     },
@@ -1278,7 +1393,10 @@
           "description": "Integration runtime node monitoring data.",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeNodeMonitoringData"
-          }
+          },
+          "x-ms-identifiers": [
+            "nodeName"
+          ]
         }
       }
     },

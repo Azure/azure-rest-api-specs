@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "endpoint": "accountName.purview.azure.com/share",
+    "sentShareName": "share1",
+    "api-version": "2021-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 17:33:55 GMT",
+        "x-ms-correlation-request-id": "5d862c55-4de9-4a46-969d-cf1ed3e235ed"
+      },
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "storageAccountResourceId": "/subscriptions/0f3dcfc3-18f8-4099-b381-8353e19d43a7/resourceGroups/sender-storage-rg/providers/Microsoft.Storage/storageAccounts/senderStorage",
+              "receiverAssetName": "receiverFriendlyName",
+              "paths": [
+                {
+                  "containerName": "container1",
+                  "senderPath": "directory/file.txt",
+                  "receiverPath": "folder"
+                }
+              ],
+              "location": "eastus2",
+              "provisioningState": "Succeeded"
+            },
+            "kind": "AdlsGen2Account",
+            "id": "/sentShares/share1/assets/assetName1",
+            "name": "assetName1",
+            "type": "sentShares/assets"
+          }
+        ]
+      }
+    }
+  }
+}

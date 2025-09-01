@@ -6,15 +6,25 @@
     "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789/enrollmentAccounts/456",
     "parameters": {
       "type": "Usage",
-      "timeframe": "MonthToDate",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
       "dataset": {
         "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "Cost",
+            "function": "Sum"
+          }
+        },
         "filter": {
           "and": [
             {
               "or": [
                 {
-                  "dimension": {
+                  "dimensions": {
                     "name": "ResourceLocation",
                     "operator": "In",
                     "values": [
@@ -24,7 +34,7 @@
                   }
                 },
                 {
-                  "tag": {
+                  "tags": {
                     "name": "Environment",
                     "operator": "In",
                     "values": [
@@ -36,7 +46,7 @@
               ]
             },
             {
-              "dimension": {
+              "dimensions": {
                 "name": "ResourceGroup",
                 "operator": "In",
                 "values": [
@@ -56,17 +66,13 @@
       "body": {
         "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/enrollmentAccounts/456/providers/Microsoft.CostManagement/query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
-        "type": "microsoft.costmanagement/Query",
+        "type": "Microsoft.CostManagement/query",
         "properties": {
           "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/enrollmentAccounts/456/providers/Microsoft.CostManagement/Forecast?api-version=2021-10-01&$skiptoken=AQAAAA%3D%3D",
           "columns": [
             {
               "name": "PreTaxCost",
               "type": "Number"
-            },
-            {
-              "name": "ResourceGroup",
-              "type": "String"
             },
             {
               "name": "UsageDate",
@@ -84,28 +90,24 @@
           "rows": [
             [
               2.10333307059661,
-              "JapanUnifia-Trial",
               20180331,
               "Forecast",
               "USD"
             ],
             [
               218.68795741935486,
-              "RVIIOT-TRIAL",
               20180331,
               "Forecast",
               "USD"
             ],
             [
               0.14384913581657052,
-              "VSTSHOL-1595322048000",
               20180401,
               "Forecast",
               "USD"
             ],
             [
               0.009865586851323632,
-              "gs-stms-dev",
               20180429,
               "Forecast",
               "USD"
@@ -113,6 +115,7 @@
           ]
         }
       }
-    }
+    },
+    "204": {}
   }
 }

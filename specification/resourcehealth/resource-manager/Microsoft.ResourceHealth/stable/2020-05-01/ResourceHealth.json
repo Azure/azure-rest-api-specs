@@ -149,6 +149,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetHealthHistoryByResource": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -367,6 +372,10 @@
                 "modelAsString": true
               }
             },
+            "title": {
+              "type": "string",
+              "description": "Title description of the availability status."
+            },
             "summary": {
               "type": "string",
               "description": "Summary description of the availability status."
@@ -378,6 +387,18 @@
             "reasonType": {
               "type": "string",
               "description": "When the resource's availabilityState is Unavailable, it describes where the health impacting event was originated. Examples are planned, unplanned, user initiated or an outage etc."
+            },
+            "context": {
+              "type": "string",
+              "description": "When an event is created, it can either be triggered by a customer or the platform of the resource and this field will illustrate that. This field is connected to the category field in this object."
+            },
+            "category": {
+              "type": "string",
+              "description": "When a context field is set to Platform, this field will reflect if the event was planned or unplanned. If the context field does not have a value of Platform, then this field will be ignored."
+            },
+            "articleId": {
+              "type": "string",
+              "description": "The Article Id"
             },
             "rootCauseAttributionTime": {
               "type": "string",
@@ -405,7 +426,7 @@
               "description": "When the resource's availabilityState is Unavailable and the reasonType is not User Initiated, it provides the date and time for when the issue is expected to be resolved.",
               "format": "date-time"
             },
-            "occurredTime": {
+            "occuredTime": {
               "type": "string",
               "description": "Timestamp for when last change in health status occurred.",
               "format": "date-time"
@@ -431,7 +452,7 @@
               "type": "object",
               "description": "An annotation describing a change in the availabilityState to Available from Unavailable with a reasonType of type Unplanned",
               "properties": {
-                "unavailableOccurredTime": {
+                "unavailableOccuredTime": {
                   "type": "string",
                   "description": "Timestamp for when the availabilityState changed to Unavailable",
                   "format": "date-time"
@@ -441,7 +462,7 @@
                   "description": "Timestamp when the availabilityState changes to Available.",
                   "format": "date-time"
                 },
-                "unavailabilitySummary": {
+                "unavailableSummary": {
                   "type": "string",
                   "description": "Brief description of cause of the resource becoming unavailable."
                 }
@@ -449,6 +470,7 @@
             },
             "recommendedActions": {
               "type": "array",
+              "x-ms-identifiers": [],
               "description": "Lists actions the user can take based on the current availabilityState of the resource.",
               "items": {
                 "$ref": "#/definitions/recommendedAction"
@@ -456,6 +478,7 @@
             },
             "serviceImpactingEvents": {
               "type": "array",
+              "x-ms-identifiers": [],
               "description": "Lists the service impacting events that may be affecting the health of the resource.",
               "items": {
                 "$ref": "#/definitions/serviceImpactingEvent"
@@ -466,9 +489,11 @@
       }
     },
     "operationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/operation"
           },
@@ -482,6 +507,7 @@
     },
     "operation": {
       "description": "Operation available in the resourcehealth resource provider.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -522,6 +548,10 @@
         "actionUrl": {
           "type": "string",
           "description": "Link to the action"
+        },
+        "_ActionUrl.Comment": {
+          "type": "string",
+          "description": "the comment for the Action"
         },
         "actionUrlText": {
           "type": "string",
@@ -622,26 +652,20 @@
       "description": "Error details.",
       "type": "object",
       "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "description": "The error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "The error message.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "description": "The error details.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "The error details.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
@@ -670,6 +694,10 @@
       "enum": [
         "default"
       ],
+      "x-ms-enum": {
+        "name": "IssueNameParameter",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {

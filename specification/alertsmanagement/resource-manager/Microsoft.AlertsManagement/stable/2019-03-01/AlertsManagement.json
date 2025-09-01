@@ -49,6 +49,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -234,6 +239,9 @@
           },
           {
             "$ref": "#/parameters/newState"
+          },
+          {
+            "$ref": "#/parameters/comment"
           }
         ],
         "responses": {
@@ -269,7 +277,7 @@
             "$ref": "#/parameters/alertId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -387,7 +395,7 @@
       "in": "query",
       "required": true,
       "enum": [
-        "2018-05-05"
+        "2019-03-01"
       ],
       "x-ms-enum": {
         "name": "api-version",
@@ -505,6 +513,16 @@
       "x-ms-enum": {
         "name": "AlertState",
         "modelAsString": true
+      }
+    },
+    "comment": {
+      "description": "reason of change alert state",
+      "name": "comment",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/comments"
       }
     },
     "alertState": {
@@ -872,6 +890,15 @@
         }
       }
     },
+    "comments": {
+      "type": "object",
+      "description": "Change alert state reason",
+      "properties": {
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
     "egressConfig": {
       "type": "object",
       "description": "Config which would be used for displaying the data in portal.",
@@ -881,6 +908,16 @@
       "type": "object",
       "description": "Information specific to the monitor service that gives more contextual details about the alert.",
       "readOnly": true
+    },
+    "actionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean",
+          "description": "Value indicating whether alert is suppressed."
+        }
+      }
     },
     "essentials": {
       "type": "object",
@@ -1027,6 +1064,13 @@
           "type": "string",
           "description": "User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.",
           "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/actionStatus"
+        },
+        "description": {
+          "type": "string",
+          "description": "Alert description."
         }
       }
     },

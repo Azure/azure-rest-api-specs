@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-reservations"
   output-folder: "$(typescript-sdks-folder)/sdk/reservations/arm-reservations"
-  clear-output-folder: true
   generate-metadata: true
 ```

@@ -3,7 +3,7 @@
 These settings apply only when `--az` is specified on the command line.
 
 ``` yaml $(az) && $(target-mode) == 'core'
-tag: package-preview-2021-01
+tag: package-2021-08
 az:
     extensions: apim
     namespace: azure.mgmt.apimanagement

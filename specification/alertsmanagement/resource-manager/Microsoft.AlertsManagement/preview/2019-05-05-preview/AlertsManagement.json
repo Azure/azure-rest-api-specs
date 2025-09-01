@@ -45,10 +45,21 @@
             "schema": {
               "$ref": "#/definitions/operationsList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -72,6 +83,12 @@
             "description": "OK. Successfully listed alert meta data.",
             "schema": {
               "$ref": "#/definitions/alertsMetaData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
             }
           }
         },
@@ -228,6 +245,9 @@
           },
           {
             "$ref": "#/parameters/newState"
+          },
+          {
+            "$ref": "#/parameters/comment"
           }
         ],
         "responses": {
@@ -484,6 +504,16 @@
         "modelAsString": true
       }
     },
+    "comment": {
+      "description": "reason of change alert state",
+      "name": "comment",
+      "in": "body",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/comments"
+      }
+    },
     "alertState": {
       "description": "Filter by state of the alert instance. Default value is to select all.",
       "name": "alertState",
@@ -579,6 +609,7 @@
       "description": "Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25.",
       "name": "pageCount",
       "type": "integer",
+      "format": "int64",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -637,7 +668,11 @@
       "enum": [
         "asc",
         "desc"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "SortOrder",
+        "modelAsString": true
+      }
     },
     "select": {
       "description": "This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
@@ -692,6 +727,10 @@
               "description": "Description of the operation"
             }
           }
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
         }
       }
     },
@@ -768,6 +807,7 @@
       }
     },
     "alert": {
+      "type": "object",
       "description": "An alert created in alert management service.",
       "allOf": [
         {
@@ -781,6 +821,7 @@
       }
     },
     "alertsList": {
+      "type": "object",
       "description": "List the alerts.",
       "properties": {
         "nextLink": {
@@ -811,6 +852,15 @@
         }
       }
     },
+    "comments": {
+      "type": "object",
+      "description": "Change alert state reason",
+      "properties": {
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
     "egressConfig": {
       "type": "object",
       "description": "Config which would be used for displaying the data in portal.",
@@ -820,6 +870,16 @@
       "type": "object",
       "description": "Information specific to the monitor service that gives more contextual details about the alert.",
       "readOnly": true
+    },
+    "actionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean",
+          "description": "Value indicating whether alert is suppressed."
+        }
+      }
     },
     "essentials": {
       "type": "object",
@@ -965,10 +1025,18 @@
           "type": "string",
           "description": "User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.",
           "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/actionStatus"
+        },
+        "description": {
+          "type": "string",
+          "description": "Alert description."
         }
       }
     },
     "alertModification": {
+      "type": "object",
       "description": "Alert Modification details",
       "allOf": [
         {
@@ -1000,6 +1068,7 @@
       }
     },
     "alertModificationItem": {
+      "type": "object",
       "description": "Alert modification item.",
       "properties": {
         "modificationEvent": {
@@ -1047,6 +1116,7 @@
       }
     },
     "alertsSummary": {
+      "type": "object",
       "description": "Summary of alerts based on the input filters and 'groupby' parameters.",
       "allOf": [
         {
@@ -1065,10 +1135,12 @@
       "properties": {
         "total": {
           "type": "integer",
+          "format": "int64",
           "description": "Total count of the result set."
         },
         "smartGroupsCount": {
           "type": "integer",
+          "format": "int64",
           "description": "Total count of the smart groups."
         },
         "groupedby": {
@@ -1094,6 +1166,7 @@
         },
         "count": {
           "type": "integer",
+          "format": "int64",
           "description": "Count of the aggregated field"
         },
         "groupedby": {
@@ -1110,6 +1183,7 @@
       }
     },
     "alertsMetaData": {
+      "type": "object",
       "description": "alert meta data information.",
       "properties": {
         "properties": {
@@ -1118,6 +1192,7 @@
       }
     },
     "alertsMetaDataProperties": {
+      "type": "object",
       "description": "alert meta data property bag",
       "discriminator": "metadataIdentifier",
       "required": [
@@ -1138,6 +1213,7 @@
       }
     },
     "MonitorServiceList": {
+      "type": "object",
       "title": "Monitor service details",
       "description": "Monitor service details",
       "required": [
@@ -1162,6 +1238,7 @@
       }
     },
     "MonitorServiceDetails": {
+      "type": "object",
       "description": "Details of a monitor service",
       "properties": {
         "name": {

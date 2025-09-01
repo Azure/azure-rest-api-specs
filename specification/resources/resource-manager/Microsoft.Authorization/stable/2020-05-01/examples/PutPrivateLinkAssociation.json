@@ -4,12 +4,27 @@
     "groupId": "my-management-group",
     "api-version": "2020-05-01",
     "parameters": {
-      "privateLink": "00000000-0000-0000-0000-000000000000",
-      "publicNetworkAccess": "Enabled"
+      "properties": {
+        "privateLink": "00000000-0000-0000-0000-000000000000",
+        "publicNetworkAccess": "Enabled"
+      }
     }
   },
   "responses": {
     "200": {
+      "body": {
+        "properties": {
+          "privateLink": "00000000-0000-0000-0000-000000000000",
+          "publicNetworkAccess": "Enabled",
+          "tenantID": "06b3ccb8-1384-4bcc-aec7-852f6d57161b",
+          "scope": "/providers/Microsoft.Management/managementGroups/my-management-group"
+        },
+        "id": "00000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Authorization/privateLinkAssociations",
+        "name": "my-pla"
+      }
+    },
+    "201": {
       "body": {
         "properties": {
           "privateLink": "00000000-0000-0000-0000-000000000000",

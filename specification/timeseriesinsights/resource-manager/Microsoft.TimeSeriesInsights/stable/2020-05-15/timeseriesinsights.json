@@ -1101,7 +1101,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1177,14 +1180,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
         },
         "logSpecifications": {
           "description": "A list of Azure Monitoring log definitions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1213,7 +1223,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "aggregationType": {
           "type": "string",
@@ -1224,7 +1237,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricAvailability"
-          }
+          },
+          "x-ms-identifiers": [
+            "timeGrain"
+          ]
         },
         "category": {
           "type": "string",
@@ -1707,6 +1723,9 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event properties which will be used to partition data in the environment. Currently, only a single partition key property is supported."
         }
       },
@@ -1722,6 +1741,9 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event properties which will be used to define the environment's time series id."
         },
         "storageConfiguration": {
@@ -1786,6 +1808,9 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of event properties which will be used to define the environment's time series id."
         },
         "storageConfiguration": {
@@ -2482,6 +2507,9 @@
           "items": {
             "$ref": "#/definitions/ReferenceDataSetKeyProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of key properties for the reference data set."
         },
         "dataStringComparisonBehavior": {
@@ -2675,6 +2703,7 @@
             "$ref": "#/definitions/CloudErrorBody",
             "description": "Describes a particular API error with an error code and a message."
           },
+          "x-ms-identifiers": [],
           "description": "Contains nested errors that are related to this error."
         }
       },
