@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -68,41 +70,9 @@ model ProxySiteRefreshBody {
 }
 
 /**
- * Represents the presence of Oids in Tables under a DB.
- */
-union HasTablesWithOids {
-  @doc("Oids presence in the database is unknown.")
-  Unknown: "Unknown",
-
-  @doc("The Database has tables with Oids.")
-  True: "True",
-
-  @doc("The Database does not have tables with Oids.")
-  False: "False",
-
-  string,
-}
-
-/**
- * Represents the presence of custom data types in a DB.
- */
-union HasCustomDataTypes {
-  @doc("Custom data types presence in the database is unknown.")
-  Unknown: "Unknown",
-
-  @doc("The Database has custom data types.")
-  True: "True",
-
-  @doc("The Database does not have custom data types.")
-  False: "False",
-
-  string,
-}
-
-/**
  * Represents an Enum with boolean values.
  */
-union BoolValue {
+enum BoolValue {
   @doc("Represents an unknown value.")
   Unknown: "Unknown",
 
@@ -128,12 +98,16 @@ union TlsVersion {
 
   /**
    * TLS version 1.0.
+   * @deprecated This version is deprecated
    */
+  @deprecated("This version is deprecated")
   Tls1_0: "Tls1_0",
 
   /**
    * TLS version 1.1.
+   * @deprecated This version is deprecated
    */
+  @deprecated("This version is deprecated")
   Tls1_1: "Tls1_1",
 
   /**
