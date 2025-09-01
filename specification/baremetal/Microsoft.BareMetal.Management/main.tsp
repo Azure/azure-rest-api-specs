@@ -2,6 +2,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./BareMetalConnection.tsp";
+import "./NetworkInterfaceAttachment.tsp";
 import "./PeeringSetting.tsp";
 import "./routes.tsp";
 

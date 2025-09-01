@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.BareMetal;
 
@@ -185,6 +187,94 @@ model BareMetalConnectionUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
+}
+
+/**
+ * Network Interface Attachment resource.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachment is TrackedResource<NetworkInterfaceAttachmentProperties> {
+  /**
+   * The name of the Network Interface Attachment resource.
+   */
+  @maxLength(63)
+  @minLength(3)
+  @pattern("^[-\\w\\._\\(\\)]+$")
+  @path
+  @key("networkInterfaceAttachmentName")
+  @segment("networkInterfaceAttachments")
+  @visibility(Lifecycle.Read)
+  name: string;
+}
+
+/**
+ * Properties for creating Network Interface Attachment via PUT.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentCreateProperties {
+  /** Subnet resource id. */
+  subnetResourceId: ResourceIdentifier;
+  /** Single digit physical AZ in string format (e.g., "1"). */
+  @pattern("^[0-9]$")
+  sddcPhysicalAz: string;
+  /** SDDC identifier (GUID). */
+  @format("uuid")
+  sddcId: string;
+}
+
+/**
+ * IP configuration under an anchor NIC.
+ */
+@added(Versions.v2025_08_01_preview)
+model AnchorNicIpConfiguration {
+  /** Private IP address in CIDR. */
+  privateIpAddress: string;
+  /** IP version. */
+  privateIpAddressVersion: "IPv4" | "IPv6";
+  /** Whether this is primary. */
+  primary: boolean;
+}
+
+/**
+ * Anchor NIC entry.
+ */
+@added(Versions.v2025_08_01_preview)
+model AnchorNic {
+  /** NIC ARM resource id. */
+  id: ResourceIdentifier;
+  /** IP configurations (1-1024). */
+  @minItems(1)
+  @maxItems(1024)
+  ipConfigurations: AnchorNicIpConfiguration[];
+}
+
+/**
+ * Full properties of Network Interface Attachment.
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentProperties is NetworkInterfaceAttachmentCreateProperties {
+  /** Anchor NICs (exactly 8 elements when present). */
+  @minItems(0)
+  @maxItems(8)
+  anchorNics?: AnchorNic[];
+  /** Provisioning state. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * PATCH model for Network Interface Attachment (anchor NICs + tags).
+ */
+@added(Versions.v2025_08_01_preview)
+model NetworkInterfaceAttachmentPatchModel {
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Patch tags object"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+  /** Anchor NICs (exactly 8 elements when present). */
+  @minItems(0)
+  @maxItems(8)
+  anchorNics?: AnchorNic[];
 }
 
 /**
