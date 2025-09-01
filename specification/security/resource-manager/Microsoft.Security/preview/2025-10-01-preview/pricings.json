@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Defender for Cloud",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2025-10-01-preview"
+    "version": "2024-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -214,73 +214,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PricingList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/{scopeId}/providers/Microsoft.Security/pricings/batch": {
-      "put": {
-        "x-ms-examples": {
-          "Batch update multiple pricing plans - success": {
-            "$ref": "./examples/Pricings/BatchUpdatePricings_Success_example.json"
-          },
-          "Batch update with partial success": {
-            "$ref": "./examples/Pricings/BatchUpdatePricings_PartialSuccess_example.json"
-          },
-          "Batch update with validation errors": {
-            "$ref": "./examples/Pricings/BatchUpdatePricings_ValidationError_example.json"
-          },
-          "Batch update with authorization failure": {
-            "$ref": "./examples/Pricings/BatchUpdatePricings_AuthError_example.json"
-          }
-        },
-        "tags": [
-          "Pricings"
-        ],
-        "summary": "Updates multiple pricing configurations in a single atomic operation",
-        "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported for batch operations. Maximum of 15 pricing plans can be updated in a single batch request.",
-        "operationId": "Pricings_BatchUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
-          },
-          {
-            "$ref": "#/parameters/BatchPricingUpdateRequest"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Batch update completed. Check individual results for success/failure status of each pricing plan.",
-            "schema": {
-              "$ref": "#/definitions/BatchPricingUpdateResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request - Invalid request structure, unsupported scope (only subscription-level supported), validation errors, or batch size exceeds limit (max 15 plans).",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          },
-          "403": {
-            "description": "Forbidden - Insufficient permissions for subscription or authorization failures for specific extensions.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          },
-          "409": {
-            "description": "Conflict - Enforcement policy violations or concurrent operation conflicts due to subscription-level locking.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           },
           "default": {
@@ -550,117 +483,6 @@
           "description": "Additional information regarding the success/failure of the operation."
         }
       }
-    },
-    "BatchPricingUpdateRequest": {
-      "type": "object",
-      "description": "Request for updating multiple pricing configurations in a single operation",
-      "required": [
-        "plansConfigurations"
-      ],
-      "properties": {
-        "plansConfigurations": {
-          "type": "array",
-          "description": "Array of pricing plan configurations to update. Maximum of 15 plans allowed per batch request.",
-          "items": {
-            "$ref": "#/definitions/BatchPlanItem"
-          },
-          "minItems": 1,
-          "maxItems": 15
-        }
-      }
-    },
-    "BatchPlanItem": {
-      "type": "object",
-      "description": "Individual pricing plan configuration for batch update operation",
-      "required": [
-        "planName",
-        "properties"
-      ],
-      "properties": {
-        "planName": {
-          "type": "string",
-          "description": "Name of the pricing plan (e.g., VirtualMachines, StorageAccounts, CloudPosture, Containers, etc.)",
-          "example": "VirtualMachines"
-        },
-        "properties": {
-          "$ref": "#/definitions/PricingProperties",
-          "description": "Pricing configuration properties for this plan"
-        }
-      }
-    },
-    "BatchPricingUpdateResponse": {
-      "type": "object",
-      "description": "Response from batch pricing update operation containing results for each plan and operation summary",
-      "required": [
-        "results",
-        "summary"
-      ],
-      "properties": {
-        "results": {
-          "type": "array",
-          "description": "Results for each individual pricing plan update within the batch operation",
-          "items": {
-            "$ref": "#/definitions/BatchPricingResult"
-          }
-        },
-        "summary": {
-          "$ref": "#/definitions/BatchOperationSummary",
-          "description": "Summary statistics for the batch operation including total, successful, and failed update counts"
-        }
-      }
-    },
-    "BatchPricingResult": {
-      "type": "object",
-      "description": "Result of updating a single pricing plan within a batch operation",
-      "required": [
-        "planName",
-        "success"
-      ],
-      "properties": {
-        "planName": {
-          "type": "string",
-          "description": "Name of the pricing plan that was processed in this batch operation"
-        },
-        "success": {
-          "type": "boolean",
-          "description": "Whether the update for this pricing plan was successful"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Detailed error message if the update failed (only present when success=false). Contains specific validation or authorization error details."
-        },
-        "result": {
-          "$ref": "#/definitions/Pricing",
-          "description": "Updated pricing configuration resource (only present when success=true). Contains the complete pricing configuration with all properties populated."
-        }
-      }
-    },
-    "BatchOperationSummary": {
-      "type": "object",
-      "description": "Summary statistics for batch operation results providing overview of operation success",
-      "required": [
-        "totalRequested",
-        "successfulUpdates",
-        "failedUpdates"
-      ],
-      "properties": {
-        "totalRequested": {
-          "type": "integer",
-          "description": "Total number of pricing configurations requested for update in this batch",
-          "minimum": 1,
-          "maximum": 15
-        },
-        "successfulUpdates": {
-          "type": "integer",
-          "description": "Number of pricing configurations successfully updated",
-          "minimum": 0
-        },
-        "failedUpdates": {
-          "type": "integer",
-          "description": "Number of pricing configurations that failed to update due to validation or authorization errors",
-          "minimum": 0
-        }
-      }
     }
   },
   "parameters": {
@@ -679,16 +501,6 @@
       "description": "Pricing object",
       "schema": {
         "$ref": "#/definitions/Pricing"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "BatchPricingUpdateRequest": {
-      "name": "batchPricingRequest",
-      "in": "body",
-      "required": true,
-      "description": "Batch pricing update request containing multiple plan configurations (maximum 15 plans per batch)",
-      "schema": {
-        "$ref": "#/definitions/BatchPricingUpdateRequest"
       },
       "x-ms-parameter-location": "method"
     }
