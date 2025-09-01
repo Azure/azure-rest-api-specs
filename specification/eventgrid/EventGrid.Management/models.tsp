@@ -1195,29 +1195,6 @@ model CaCertificateProperties {
 }
 
 /**
- * Definition of a Resource.
- */
-model Resource {
-  /**
-   * Fully qualified identifier of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
  * Properties of the Channel.
  */
 model ChannelProperties {
@@ -1762,24 +1739,6 @@ model UserIdentityProperties {
    * The client id of user assigned identity.
    */
   clientId?: string;
-}
-
-/**
- * Definition of a Tracked Resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model TrackedResource extends Resource {
-  /**
-   * Location of the resource.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * Tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**
@@ -3945,7 +3904,7 @@ model EventTypesListResult {
  * Event Type for a subject under a topic
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model EventType extends Resource {
+model EventType extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Properties of the event type.
    */
