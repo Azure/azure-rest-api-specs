@@ -24,12 +24,6 @@
             }
           ]
         },
-        "roPlanProperties": {
-          "identity": {
-            "type": "None",
-            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
-          }
-        },
         "chaosExperimentProperties": {
           "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
           "region": "westus",
@@ -42,7 +36,13 @@
             "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
           }
         },
-        "rbacSetupMode": "AutomatedCustomRole"
+        "rbacSetupMode": "AutomatedCustomRole",
+        "recoveryPlanProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        }
       }
     }
   },
@@ -62,14 +62,6 @@
                 "destinationAmwAccountUrl": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/defaultresourcegroup-cid/providers/microsoft.monitor/accounts/defaultazuremonitorworkspace-cid"
               }
             ]
-          },
-          "roPlanProperties": {
-            "identity": {
-              "type": "None",
-              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
-            },
-            "roPlanId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/rePlan1",
-            "roResourceExcludedCount": 16
           },
           "chaosExperimentProperties": {
             "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
@@ -91,14 +83,6 @@
             "rbacNeededForDrillOnExperiment": [
               "lcjjnucz"
             ],
-            "drillRbacOnRo": "Set",
-            "rbacNeededForDrillOnRo": [
-              "ba"
-            ],
-            "drillRbacOnAmw": "Set",
-            "rbacNeededForDrillOnAmw": [
-              "skthovtgoqwviiisr"
-            ],
             "drillRbacOnSlo": "Set",
             "rbacNeededForDrillOnSlo": [
               "lmnjpqcour"
@@ -106,10 +90,18 @@
             "roReadiness": "UnderEdit",
             "faultRbacOnTargets": "Set",
             "targets": "Exists",
-            "roAndDrillResourcesState": "InSync",
-            "sgAndDrillResourcesState": "InSync",
             "drillUserMsi": "Exists",
-            "chaosExperimentUserMsi": "Exists"
+            "chaosExperimentUserMsi": "Exists",
+            "drillRbacOnRecoveryPlan": "Set",
+            "rbacNeededForDrillOnRecoveryPlan": [
+              "ayfyepziwdyxuwuexlamaadey"
+            ],
+            "drillRbacOnAzureMonitoringWorkspace": "Set",
+            "rbacNeededForDrillOnAzureMonitoringWorkspace": [
+              "fgvnjvmagxv"
+            ],
+            "recoveryPlanAndDrillResourcesState": "InSync",
+            "serviceGroupAndDrillResourcesState": "InSync"
           },
           "systemMetadata": {
             "initialConfig": "Pending"
@@ -121,8 +113,6 @@
             "lastRunTime": "2025-05-05T05:36:37.151Z",
             "lastRunDuration": "PT6M"
           },
-          "provisioningState": "Succeeded",
-          "sgId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
           "healthModelProperties": {
             "identity": {
               "type": "UserAssigned",
@@ -131,14 +121,24 @@
             "healthModelId": "/subscriptions/ef4ab5a7-c2c0-4304-af80-af49f48af3d1/resourceGroups/DeleteDemoRG/providers/Microsoft.CloudHealth/healthmodels/ahm-demo"
           },
           "executionReadinessState": "Ready",
-          "lastSyncTime": "2025-05-05T05:36:37.151Z",
           "managedOnBehalfOfConfiguration": {
             "moboBrokerResources": [
               {
                 "id": "lvukttgzvssiupnypauorkyzvzf"
               }
             ]
-          }
+          },
+          "provisioningState": "Succeeded",
+          "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
+          "recoveryPlanProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "recoveryPlanId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/rePlan1",
+            "recoveryPlanResourceExcludedCount": 29
+          },
+          "lastSyncTime": "2025-05-05T05:36:37.151Z"
         },
         "identity": {
           "type": "None",

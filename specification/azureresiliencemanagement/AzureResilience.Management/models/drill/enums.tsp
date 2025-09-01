@@ -152,16 +152,16 @@ union DrillResourceState {
   string,
 
   @doc("Resource is in SG but not part of the Drill")
-  InSGNotInDrill: "InSGNotInDrill",
+  InServiceGroupNotInDrill: "InServiceGroupNotInDrill",
 
   @doc("Resource is in Drill but not part of the SG")
-  InDrillNotInSG: "InDrillNotInSG",
+  InDrillNotInServiceGroup: "InDrillNotInServiceGroup",
 
-  @doc("Resource is in ROPlan but not part of the Drill")
-  InRONotInDrill: "InRONotInDrill",
+  @doc("Resource is in RecoveryPlan but not part of the Drill")
+  InRecoveryPlanNotInDrill: "InRecoveryPlanNotInDrill",
 
-  @doc("Resource is in Drill but not part of the ROPlan")
-  InDrillNotInRO: "InDrillNotInRO",
+  @doc("Resource is in Drill but not part of the RecoveryPlan")
+  InDrillNotInRecoveryPlan: "InDrillNotInRecoveryPlan",
 
   @doc("Resource is not in a state where it can be faulted.")
   ResourceStateIncompatibleWithFault: "ResourceStateIncompatibleWithFault",
@@ -298,14 +298,14 @@ union DrillRunOperationVerbs {
 }
 
 /**
- * Enum for Enum for RO Exclusion reason.
+ * Enum for Enum for RecoveryPlan Exclusion reason.
  */
-@doc("Enum for RO Exclusion reason.")
-union RoExclusionReason {
+@doc("Enum for RecoveryPlan Exclusion reason.")
+union RecoveryPlanExclusionReason {
   string,
 
-  @doc("Excluded From Ro by user.")
-  ExcludedFromRo: "ExcludedFromRo",
+  @doc("Excluded From RecoveryPlan by user.")
+  ExcludedFromRecoveryPlan: "ExcludedFromRecoveryPlan",
 
   @doc("Protection not configured.")
   ProtectionStatus: "ProtectionStatus",

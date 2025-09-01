@@ -41,7 +41,7 @@ model DrillRunProperties extends JobProperties {
 
   @doc("Parent Drill resource.")
   @visibility(Lifecycle.Read)
-  drillUrl?: armResourceIdentifier<[
+  drillId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/drills";
     }
