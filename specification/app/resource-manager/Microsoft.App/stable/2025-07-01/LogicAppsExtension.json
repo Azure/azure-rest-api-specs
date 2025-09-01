@@ -31,20 +31,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/ContainerAppNameParameter"
           },
           {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the Logic App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/LogicAppNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -84,20 +74,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/ContainerAppNameParameter"
           },
           {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the Logic App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/LogicAppNameParameter"
           },
           {
             "name": "resource",
@@ -151,20 +131,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/ContainerAppNameParameter"
           },
           {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the Logic App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/LogicAppNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -206,20 +176,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/ContainerAppNameParameter"
           },
           {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the Logic App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/LogicAppNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -264,20 +224,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/ContainerAppNameParameter"
           },
           {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the Logic App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/LogicAppNameParameter"
           },
           {
             "name": "workflowName",
@@ -329,20 +279,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppName",
-            "in": "path",
-            "description": "Name of the Container App.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/ContainerAppNameParameter"
           },
           {
-            "name": "logicAppName",
-            "in": "path",
-            "description": "Name of the Logic App, the extension resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/LogicAppNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -370,6 +310,24 @@
       }
     }
   },
+  "parameters": {
+    "ContainerAppNameParameter": {
+      "name": "containerAppName",
+      "in": "path",
+      "description": "Name of the Container App.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
+    },
+    "LogicAppNameParameter": {
+      "name": "logicAppName",
+      "in": "path",
+      "description": "Name of the Logic App.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
+    }
+  },
   "definitions": {
     "LogicApp": {
       "type": "object",
@@ -381,24 +339,14 @@
       ]
     },
     "WorkflowEnvelope": {
-      "description": "Workflow properties definition.",
+      "description": "Schema for the workflow object.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource id."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the resource type for ex. Microsoft.App/logicApps/workflows."
-        },
         "kind": {
           "type": "string",
           "description": "Gets the logic app hybrid workflow kind.",
@@ -449,6 +397,7 @@
         "nextLink": {
           "description": "Link to next page of resources.",
           "type": "string",
+          "format": "uri",
           "readOnly": true
         }
       }
