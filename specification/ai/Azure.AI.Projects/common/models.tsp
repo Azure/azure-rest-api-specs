@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Azure.AI.Projects;
-using TypeSpec.Versioning;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")
@@ -115,26 +114,4 @@ model BlobReference {
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
-}
-
-@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
-@added(Versions.v2025_05_15_preview)
-model AzureOpenAIModelConfiguration extends TargetConfig {
-  @visibility(Lifecycle.Read)
-  type: "AzureOpenAIModel";
-
-  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
-  modelDeploymentName: string;
-
-  @doc("Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.")
-  @added(Versions.v2025_07_31_preview)
-  modelParameters?: Record<unknown>;
-}
-
-@doc("Abstract class for target configuration.")
-@added(Versions.v2025_05_15_preview)
-@discriminator("type")
-model TargetConfig {
-  @doc("Type of the model configuration.")
-  type: string;
 }
