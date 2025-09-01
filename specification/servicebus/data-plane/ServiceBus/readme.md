@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-05'
 input-file:
-  - Microsoft.ServiceBus/stable/2021-05/servicebus.json
+  - stable/2021-05/servicebus.json
 ```
 
 ### Suppression
