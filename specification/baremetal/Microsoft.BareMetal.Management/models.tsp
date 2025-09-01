@@ -213,12 +213,12 @@ model NetworkInterfaceAttachment is TrackedResource<NetworkInterfaceAttachmentPr
 @added(Versions.v2025_08_01_preview)
 model NetworkInterfaceAttachmentCreateProperties {
   /** Subnet resource id. */
-  subnetResourceId: ResourceIdentifier;
+  subnetResourceId: Azure.Core.armResourceIdentifier<[]>;
   /** Single digit physical AZ in string format (e.g., "1"). */
   @pattern("^[0-9]$")
   sddcPhysicalAz: string;
   /** SDDC identifier (GUID). */
-  @format("uuid")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   sddcId: string;
 }
 
@@ -241,7 +241,7 @@ model NetworkInterfaceIpConfiguration {
 @added(Versions.v2025_08_01_preview)
 model NetworkInterface {
   /** NIC ARM resource id. */
-  id: ResourceIdentifier;
+  id: Azure.Core.armResourceIdentifier<[]>;
   /** IP configurations (1-1024). */
   @minItems(1)
   @maxItems(1024)

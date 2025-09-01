@@ -1375,7 +1375,10 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "NIC ARM resource id."
+          "description": "NIC ARM resource id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "ipConfigurations": {
           "type": "array",
@@ -1463,7 +1466,10 @@
         "subnetResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Subnet resource id."
+          "description": "Subnet resource id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "sddcPhysicalAz": {
           "type": "string",
@@ -1472,8 +1478,8 @@
         },
         "sddcId": {
           "type": "string",
-          "format": "uuid",
-          "description": "SDDC identifier (GUID)."
+          "description": "SDDC identifier (GUID).",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "bgpNics": {
           "type": "array",
