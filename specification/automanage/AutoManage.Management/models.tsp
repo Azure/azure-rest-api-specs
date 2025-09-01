@@ -52,18 +52,14 @@ union ActionType {
  * Automanage configuration profile properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@example(ConfigurationDictionary)
 model ConfigurationProfileProperties {
   /**
    * configuration dictionary of the configuration profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @example(#{ `Antimalware/Enable`: true })
   configuration?: unknown;
 }
-
-const ConfigurationDictionary: ConfigurationProfileProperties = #{
-  configuration: #{ `Antimalware/Enable`: true },
-};
 
 /**
  * The response of the list best practice operation.
