@@ -7649,8 +7649,7 @@
         "nfsV4IDDomain": {
           "type": "string",
           "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
-          "maxLength": 255,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
+          "x-nullable": true
         },
         "multiAdStatus": {
           "$ref": "#/definitions/MultiAdStatus",
@@ -7665,7 +7664,8 @@
       "properties": {
         "activeDirectoryId": {
           "type": "string",
-          "description": "Id of the Active Directory"
+          "description": "Id of the Active Directory",
+          "x-nullable": true
         },
         "username": {
           "type": "string",
@@ -7673,8 +7673,10 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "Plain text password of Active Directory domain administrator, value is masked in the response",
-          "maxLength": 64
+          "maxLength": 64,
+          "x-ms-secret": true
         },
         "domain": {
           "type": "string",
@@ -7711,6 +7713,8 @@
         "backupOperators": {
           "type": "array",
           "description": "Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier",
+          "minItems": 1,
+          "maxItems": 255,
           "items": {
             "type": "string"
           }
@@ -7718,6 +7722,8 @@
         "administrators": {
           "type": "array",
           "description": "Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier",
+          "minItems": 1,
+          "maxItems": 255,
           "items": {
             "type": "string"
           }
@@ -7735,9 +7741,11 @@
         },
         "serverRootCACertificate": {
           "type": "string",
+          "format": "password",
           "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.",
           "minLength": 1,
-          "maxLength": 10240
+          "maxLength": 10240,
+          "x-ms-secret": true
         },
         "aesEncryption": {
           "type": "boolean",
@@ -7750,6 +7758,8 @@
         "securityOperators": {
           "type": "array",
           "description": "Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier",
+          "minItems": 1,
+          "maxItems": 255,
           "items": {
             "type": "string"
           }

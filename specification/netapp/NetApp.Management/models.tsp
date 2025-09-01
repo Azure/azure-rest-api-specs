@@ -1216,9 +1216,10 @@ model AccountProperties {
    * Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(255)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
-  nfsV4IDDomain?: string;
+  nfsV4IDDomain?: string | null;
 
   /**
    * MultiAD Status for the account
@@ -1234,7 +1235,8 @@ model ActiveDirectory {
   /**
    * Id of the Active Directory
    */
-  activeDirectoryId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  activeDirectoryId?: string | null;
 
   /**
    * A domain user account with permission to create machine accounts
@@ -1244,6 +1246,7 @@ model ActiveDirectory {
   /**
    * Plain text password of Active Directory domain administrator, value is masked in the response
    */
+  @secret
   @maxLength(64)
   password?: string;
 
@@ -1288,11 +1291,15 @@ model ActiveDirectory {
   /**
    * Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier
    */
+  @maxItems(255)
+  @minItems(1)
   backupOperators?: string[];
 
   /**
    * Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier
    */
+  @maxItems(255)
+  @minItems(1)
   administrators?: string[];
 
   /**
@@ -1315,6 +1322,7 @@ model ActiveDirectory {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @maxLength(10240)
   @minLength(1)
+  @secret
   serverRootCACertificate?: string;
 
   /**
@@ -1330,6 +1338,8 @@ model ActiveDirectory {
   /**
    * Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier
    */
+  @maxItems(255)
+  @minItems(1)
   securityOperators?: string[];
 
   /**
