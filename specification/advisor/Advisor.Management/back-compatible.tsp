@@ -12,20 +12,20 @@ using Microsoft.Advisor;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PredictionResponse.properties);
 
-@@clientLocation(ResourceRecommendationBases.get, "recommendations", "!csharp");
+@@clientLocation(ResourceRecommendationBases.get, "Recommendations", "!csharp");
 @@clientLocation(ResourceRecommendationBases.patch,
-  "recommendations",
+  "Recommendations",
   "!csharp"
 );
 @@clientName(ResourceRecommendationBases.patch::parameters.properties,
   "trackedProperties"
 );
 @@clientLocation(ResourceRecommendationBases.list,
-  "recommendations",
+  "Recommendations",
   "!csharp"
 );
 @@clientLocation(ResourceRecommendationBases.listByTenant,
-  "recommendations",
+  "Recommendations",
   "!csharp"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
