@@ -15004,10 +15004,9 @@
               "$ref": "#/definitions/InferencePool"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -15443,10 +15442,9 @@
               "$ref": "#/definitions/InferenceEndpoint"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -15512,15 +15510,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Online Endpoint entity to apply during operation.",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -15898,10 +15887,9 @@
               "$ref": "#/definitions/InferenceGroup"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -17937,10 +17925,9 @@
               "$ref": "#/definitions/MarketplaceSubscription"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -19000,10 +18987,9 @@
               "$ref": "#/definitions/OnlineEndpoint"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -19393,10 +19379,9 @@
               "$ref": "#/definitions/OnlineDeployment"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -20355,6 +20340,9 @@
           "StorageAccountListPrivateEndpointConnections": {
             "$ref": "./examples/PrivateEndpointConnection/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -20569,6 +20557,9 @@
           "WorkspaceListPrivateLinkResources": {
             "$ref": "./examples/PrivateLinkResource/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -20905,10 +20896,9 @@
               "$ref": "#/definitions/Schedule"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -21175,10 +21165,9 @@
               "$ref": "#/definitions/ServerlessEndpoint"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               },
               "x-ms-async-operation-timeout": {
                 "type": "string",
@@ -21532,11 +21521,13 @@
       "properties": {
         "clusterFqdn": {
           "type": "string",
-          "description": "Cluster full qualified domain name"
+          "description": "Cluster full qualified domain name",
+          "x-nullable": true
         },
         "systemServices": {
           "type": "array",
           "description": "System services",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/SystemService"
           },
@@ -21548,11 +21539,13 @@
         "agentCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of agents"
+          "description": "Number of agents",
+          "x-nullable": true
         },
         "agentVmSize": {
           "type": "string",
-          "description": "Agent virtual machine size"
+          "description": "Agent virtual machine size",
+          "x-nullable": true
         },
         "clusterPurpose": {
           "type": "string",
@@ -21584,11 +21577,13 @@
         },
         "sslConfiguration": {
           "$ref": "#/definitions/SslConfiguration",
-          "description": "SSL configuration"
+          "description": "SSL configuration",
+          "x-nullable": true
         },
         "aksNetworkingConfiguration": {
           "$ref": "#/definitions/AksNetworkingConfiguration",
-          "description": "AKS networking configuration for vnet"
+          "description": "AKS networking configuration for vnet",
+          "x-nullable": true
         },
         "loadBalancerType": {
           "type": "string",
@@ -21615,7 +21610,8 @@
         },
         "loadBalancerSubnet": {
           "type": "string",
-          "description": "Load Balancer Subnet"
+          "description": "Load Balancer Subnet",
+          "x-nullable": true
         }
       }
     },
@@ -21988,7 +21984,8 @@
         },
         "virtualMachineImage": {
           "$ref": "#/definitions/VirtualMachineImage",
-          "description": "Virtual Machine image for AML Compute - windows only"
+          "description": "Virtual Machine image for AML Compute - windows only",
+          "x-nullable": true
         },
         "isolatedNetwork": {
           "type": "boolean",
@@ -22000,14 +21997,19 @@
         },
         "userAccountCredentials": {
           "$ref": "#/definitions/UserAccountCredentials",
-          "description": "Credentials for an administrator user account that will be created on each compute node."
+          "title": "User account credentials.",
+          "description": "Credentials for an administrator user account that will be created on each compute node.",
+          "x-nullable": true
         },
         "subnet": {
           "$ref": "#/definitions/ResourceId",
-          "description": "Virtual network subnet resource ID the compute nodes belong to."
+          "title": "Subnet.",
+          "description": "Virtual network subnet resource ID the compute nodes belong to.",
+          "x-nullable": true
         },
         "remoteLoginPortPublicAccess": {
           "type": "string",
+          "title": "Close remote Login Access Port",
           "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.",
           "default": "NotSpecified",
           "enum": [
@@ -22036,18 +22038,22 @@
         },
         "allocationState": {
           "$ref": "#/definitions/AllocationState",
+          "title": "Allocation state.",
           "description": "Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.",
           "readOnly": true
         },
         "allocationStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "Allocation state transition time.",
           "description": "The time at which the compute entered its current allocation state.",
           "readOnly": true
         },
         "errors": {
           "type": "array",
+          "title": "Errors.",
           "description": "Collection of errors encountered by various compute nodes during node setup.",
+          "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
@@ -22059,29 +22065,35 @@
         "currentNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Current node count.",
           "description": "The number of compute nodes currently assigned to the compute.",
+          "x-nullable": true,
           "readOnly": true
         },
         "targetNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Target node count.",
           "description": "The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation.",
+          "x-nullable": true,
           "readOnly": true
         },
         "nodeStateCounts": {
           "$ref": "#/definitions/NodeStateCounts",
+          "title": "Node state counts.",
           "description": "Counts of various node states on the compute.",
+          "x-nullable": true,
           "readOnly": true
         },
         "enableNodePublicIp": {
           "type": "boolean",
+          "title": "Enable node public IP.",
           "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.",
           "default": true
         },
         "propertyBag": {
-          "type": "object",
           "description": "A property bag containing additional properties.",
-          "additionalProperties": {}
+          "x-nullable": true
         }
       }
     },
@@ -22834,6 +22846,7 @@
         "endpoint": {
           "type": "string",
           "description": "Azure cloud endpoint for the storage account.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -22852,6 +22865,7 @@
         "protocol": {
           "type": "string",
           "description": "Protocol used to communicate with the storage account.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -25119,8 +25133,9 @@
         },
         "subnet": {
           "$ref": "#/definitions/ResourceId",
-          "title": "Subnet",
-          "description": "Virtual network subnet resource ID the compute nodes belong to."
+          "title": "Subnet.",
+          "description": "Virtual network subnet resource ID the compute nodes belong to.",
+          "x-nullable": true
         },
         "applicationSharingPolicy": {
           "type": "string",
@@ -25195,7 +25210,7 @@
         },
         "errors": {
           "type": "array",
-          "title": "Errors",
+          "title": "Errors.",
           "description": "Collection of errors encountered on this ComputeInstance.",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
@@ -25233,7 +25248,7 @@
           "type": "boolean",
           "title": "Enable Auto OS Patching.",
           "description": "Enable Auto OS Patching. Possible values are: true, false.",
-          "x-nullable": true
+          "default": false
         },
         "enableRootAccess": {
           "type": "boolean",
@@ -25250,12 +25265,14 @@
         "releaseQuotaOnStop": {
           "type": "boolean",
           "title": "Release quota if compute instance stopped.",
-          "description": "Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped."
+          "description": "Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.",
+          "default": false
         },
         "personalComputeInstanceSettings": {
           "$ref": "#/definitions/PersonalComputeInstanceSettings",
           "title": "Personal Compute Instance settings.",
-          "description": "Settings for a personal compute instance."
+          "description": "Settings for a personal compute instance.",
+          "x-nullable": true
         },
         "setupScripts": {
           "$ref": "#/definitions/SetupScripts",
@@ -25265,11 +25282,13 @@
         "lastOperation": {
           "$ref": "#/definitions/ComputeInstanceLastOperation",
           "description": "The last operation on ComputeInstance.",
+          "x-nullable": true,
           "readOnly": true
         },
         "schedules": {
           "$ref": "#/definitions/ComputeSchedules",
-          "description": "The list of schedules to be applied on the computes."
+          "description": "The list of schedules to be applied on the computes.",
+          "x-nullable": true
         },
         "idleTimeBeforeShutdown": {
           "type": "string",
@@ -25277,11 +25296,14 @@
         },
         "enableNodePublicIp": {
           "type": "boolean",
-          "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs."
+          "title": "Enable node public IP.",
+          "description": "Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.",
+          "x-nullable": true
         },
         "containers": {
           "type": "array",
           "description": "Describes informations of containers on this ComputeInstance.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceContainer"
           },
@@ -25293,6 +25315,7 @@
         "dataDisks": {
           "type": "array",
           "description": "Describes informations of dataDisks on this ComputeInstance.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataDisk"
           },
@@ -25302,6 +25325,7 @@
         "dataMounts": {
           "type": "array",
           "description": "Describes informations of dataMounts on this ComputeInstance.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataMount"
           },
@@ -25321,6 +25345,7 @@
       "properties": {
         "sshPublicAccess": {
           "type": "string",
+          "title": "Access policy for SSH",
           "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.",
           "default": "Disabled",
           "enum": [
@@ -26822,8 +26847,47 @@
       "type": "object",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/InputDeliveryMode",
+          "type": "string",
           "description": "Input Asset Delivery Mode.",
+          "default": "ReadOnlyMount",
+          "enum": [
+            "ReadOnlyMount",
+            "ReadWriteMount",
+            "Download",
+            "Direct",
+            "EvalMount",
+            "EvalDownload"
+          ],
+          "x-ms-enum": {
+            "name": "InputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadOnlyMount",
+                "value": "ReadOnlyMount"
+              },
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Download",
+                "value": "Download"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              },
+              {
+                "name": "EvalMount",
+                "value": "EvalMount"
+              },
+              {
+                "name": "EvalDownload",
+                "value": "EvalDownload"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -26851,11 +26915,36 @@
       "properties": {
         "assetName": {
           "type": "string",
-          "description": "Output Asset Name."
+          "description": "Output Asset Name.",
+          "x-nullable": true
         },
         "mode": {
-          "$ref": "#/definitions/OutputDeliveryMode",
+          "type": "string",
           "description": "Output Asset Delivery Mode.",
+          "default": "ReadWriteMount",
+          "enum": [
+            "ReadWriteMount",
+            "Upload",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "OutputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Upload",
+                "value": "Upload"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -26863,7 +26952,8 @@
         },
         "uri": {
           "type": "string",
-          "description": "Output Asset URI."
+          "description": "Output Asset URI.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -32442,48 +32532,6 @@
         "value"
       ]
     },
-    "InputDeliveryMode": {
-      "type": "string",
-      "description": "Enum to determine the input data delivery mode.",
-      "enum": [
-        "ReadOnlyMount",
-        "ReadWriteMount",
-        "Download",
-        "Direct",
-        "EvalMount",
-        "EvalDownload"
-      ],
-      "x-ms-enum": {
-        "name": "InputDeliveryMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ReadOnlyMount",
-            "value": "ReadOnlyMount"
-          },
-          {
-            "name": "ReadWriteMount",
-            "value": "ReadWriteMount"
-          },
-          {
-            "name": "Download",
-            "value": "Download"
-          },
-          {
-            "name": "Direct",
-            "value": "Direct"
-          },
-          {
-            "name": "EvalMount",
-            "value": "EvalMount"
-          },
-          {
-            "name": "EvalDownload",
-            "value": "EvalDownload"
-          }
-        ]
-      }
-    },
     "InstanceSegmentationPrimaryMetrics": {
       "type": "string",
       "description": "Primary metrics for InstanceSegmentation tasks.",
@@ -33532,8 +33580,47 @@
       "type": "object",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/InputDeliveryMode",
+          "type": "string",
           "description": "Input Asset Delivery Mode.",
+          "default": "ReadOnlyMount",
+          "enum": [
+            "ReadOnlyMount",
+            "ReadWriteMount",
+            "Download",
+            "Direct",
+            "EvalMount",
+            "EvalDownload"
+          ],
+          "x-ms-enum": {
+            "name": "InputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadOnlyMount",
+                "value": "ReadOnlyMount"
+              },
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Download",
+                "value": "Download"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              },
+              {
+                "name": "EvalMount",
+                "value": "EvalMount"
+              },
+              {
+                "name": "EvalDownload",
+                "value": "EvalDownload"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -33561,11 +33648,36 @@
       "properties": {
         "assetName": {
           "type": "string",
-          "description": "Output Asset Name."
+          "description": "Output Asset Name.",
+          "x-nullable": true
         },
         "mode": {
-          "$ref": "#/definitions/OutputDeliveryMode",
+          "type": "string",
           "description": "Output Asset Delivery Mode.",
+          "default": "ReadWriteMount",
+          "enum": [
+            "ReadWriteMount",
+            "Upload",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "OutputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Upload",
+                "value": "Upload"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -33573,7 +33685,8 @@
         },
         "uri": {
           "type": "string",
-          "description": "Output Asset URI."
+          "description": "Output Asset URI.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -33610,8 +33723,47 @@
       "type": "object",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/InputDeliveryMode",
+          "type": "string",
           "description": "Input Asset Delivery Mode.",
+          "default": "ReadOnlyMount",
+          "enum": [
+            "ReadOnlyMount",
+            "ReadWriteMount",
+            "Download",
+            "Direct",
+            "EvalMount",
+            "EvalDownload"
+          ],
+          "x-ms-enum": {
+            "name": "InputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadOnlyMount",
+                "value": "ReadOnlyMount"
+              },
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Download",
+                "value": "Download"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              },
+              {
+                "name": "EvalMount",
+                "value": "EvalMount"
+              },
+              {
+                "name": "EvalDownload",
+                "value": "EvalDownload"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -33639,11 +33791,36 @@
       "properties": {
         "assetName": {
           "type": "string",
-          "description": "Output Asset Name."
+          "description": "Output Asset Name.",
+          "x-nullable": true
         },
         "mode": {
-          "$ref": "#/definitions/OutputDeliveryMode",
+          "type": "string",
           "description": "Output Asset Delivery Mode.",
+          "default": "ReadWriteMount",
+          "enum": [
+            "ReadWriteMount",
+            "Upload",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "OutputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Upload",
+                "value": "Upload"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -33651,7 +33828,8 @@
         },
         "uri": {
           "type": "string",
-          "description": "Output Asset URI."
+          "description": "Output Asset URI.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -36472,33 +36650,6 @@
         "value"
       ]
     },
-    "OutputDeliveryMode": {
-      "type": "string",
-      "description": "Output data delivery mode enums.",
-      "enum": [
-        "ReadWriteMount",
-        "Upload",
-        "Direct"
-      ],
-      "x-ms-enum": {
-        "name": "OutputDeliveryMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ReadWriteMount",
-            "value": "ReadWriteMount"
-          },
-          {
-            "name": "Upload",
-            "value": "Upload"
-          },
-          {
-            "name": "Direct",
-            "value": "Direct"
-          }
-        ]
-      }
-    },
     "OutputPathAssetReference": {
       "type": "object",
       "description": "Reference to an asset via its path in a job output.",
@@ -37118,6 +37269,9 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -37274,6 +37428,9 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -41744,8 +41901,47 @@
       "type": "object",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/InputDeliveryMode",
+          "type": "string",
           "description": "Input Asset Delivery Mode.",
+          "default": "ReadOnlyMount",
+          "enum": [
+            "ReadOnlyMount",
+            "ReadWriteMount",
+            "Download",
+            "Direct",
+            "EvalMount",
+            "EvalDownload"
+          ],
+          "x-ms-enum": {
+            "name": "InputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadOnlyMount",
+                "value": "ReadOnlyMount"
+              },
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Download",
+                "value": "Download"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              },
+              {
+                "name": "EvalMount",
+                "value": "EvalMount"
+              },
+              {
+                "name": "EvalDownload",
+                "value": "EvalDownload"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -41773,11 +41969,36 @@
       "properties": {
         "assetName": {
           "type": "string",
-          "description": "Output Asset Name."
+          "description": "Output Asset Name.",
+          "x-nullable": true
         },
         "mode": {
-          "$ref": "#/definitions/OutputDeliveryMode",
+          "type": "string",
           "description": "Output Asset Delivery Mode.",
+          "default": "ReadWriteMount",
+          "enum": [
+            "ReadWriteMount",
+            "Upload",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "OutputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Upload",
+                "value": "Upload"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -41785,7 +42006,8 @@
         },
         "uri": {
           "type": "string",
-          "description": "Output Asset URI."
+          "description": "Output Asset URI.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -41900,8 +42122,47 @@
       "type": "object",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/InputDeliveryMode",
+          "type": "string",
           "description": "Input Asset Delivery Mode.",
+          "default": "ReadOnlyMount",
+          "enum": [
+            "ReadOnlyMount",
+            "ReadWriteMount",
+            "Download",
+            "Direct",
+            "EvalMount",
+            "EvalDownload"
+          ],
+          "x-ms-enum": {
+            "name": "InputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadOnlyMount",
+                "value": "ReadOnlyMount"
+              },
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Download",
+                "value": "Download"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              },
+              {
+                "name": "EvalMount",
+                "value": "EvalMount"
+              },
+              {
+                "name": "EvalDownload",
+                "value": "EvalDownload"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -41929,11 +42190,36 @@
       "properties": {
         "assetName": {
           "type": "string",
-          "description": "Output Asset Name."
+          "description": "Output Asset Name.",
+          "x-nullable": true
         },
         "mode": {
-          "$ref": "#/definitions/OutputDeliveryMode",
+          "type": "string",
           "description": "Output Asset Delivery Mode.",
+          "default": "ReadWriteMount",
+          "enum": [
+            "ReadWriteMount",
+            "Upload",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "OutputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Upload",
+                "value": "Upload"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -41941,7 +42227,8 @@
         },
         "uri": {
           "type": "string",
-          "description": "Output Asset URI."
+          "description": "Output Asset URI.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -41965,8 +42252,47 @@
       "type": "object",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/InputDeliveryMode",
+          "type": "string",
           "description": "Input Asset Delivery Mode.",
+          "default": "ReadOnlyMount",
+          "enum": [
+            "ReadOnlyMount",
+            "ReadWriteMount",
+            "Download",
+            "Direct",
+            "EvalMount",
+            "EvalDownload"
+          ],
+          "x-ms-enum": {
+            "name": "InputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadOnlyMount",
+                "value": "ReadOnlyMount"
+              },
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Download",
+                "value": "Download"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              },
+              {
+                "name": "EvalMount",
+                "value": "EvalMount"
+              },
+              {
+                "name": "EvalDownload",
+                "value": "EvalDownload"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -41994,11 +42320,36 @@
       "properties": {
         "assetName": {
           "type": "string",
-          "description": "Output Asset Name."
+          "description": "Output Asset Name.",
+          "x-nullable": true
         },
         "mode": {
-          "$ref": "#/definitions/OutputDeliveryMode",
+          "type": "string",
           "description": "Output Asset Delivery Mode.",
+          "default": "ReadWriteMount",
+          "enum": [
+            "ReadWriteMount",
+            "Upload",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "OutputDeliveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ReadWriteMount",
+                "value": "ReadWriteMount"
+              },
+              {
+                "name": "Upload",
+                "value": "Upload"
+              },
+              {
+                "name": "Direct",
+                "value": "Direct"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -42006,7 +42357,8 @@
         },
         "uri": {
           "type": "string",
-          "description": "Output Asset URI."
+          "description": "Output Asset URI.",
+          "x-nullable": true
         }
       },
       "allOf": [

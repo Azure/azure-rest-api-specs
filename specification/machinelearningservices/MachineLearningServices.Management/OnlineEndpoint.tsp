@@ -42,9 +42,13 @@ interface OnlineEndpoints {
   /**
    * Create or update Online Endpoint (asynchronous).
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OnlineEndpoint,
-    Response = ArmResourceUpdatedResponse<OnlineEndpoint> | (ArmResourceCreatedResponse<OnlineEndpoint> & {
+    Response = ArmResourceUpdatedResponse<OnlineEndpoint> | (ArmResourceCreatedResponse<
+      OnlineEndpoint,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineEndpoint>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
@@ -138,11 +142,7 @@ interface OnlineEndpoints {
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
-  listKeys is ArmResourceActionSync<
-    OnlineEndpoint,
-    void,
-    EndpointAuthKeys
-  >;
+  listKeys is ArmResourceActionSync<OnlineEndpoint, void, EndpointAuthKeys>;
 
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).

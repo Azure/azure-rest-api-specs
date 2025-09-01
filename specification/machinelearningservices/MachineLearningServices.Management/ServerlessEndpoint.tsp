@@ -45,9 +45,13 @@ interface ServerlessEndpoints {
   /**
    * Create or update Serverless Endpoint (asynchronous).
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerlessEndpoint,
-    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmResourceCreatedResponse<ServerlessEndpoint> & {
+    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmResourceCreatedResponse<
+      ServerlessEndpoint,
+      LroHeaders = ArmAsyncOperationHeader<ServerlessEndpoint>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
@@ -104,11 +108,7 @@ interface ServerlessEndpoints {
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
-  listKeys is ArmResourceActionSync<
-    ServerlessEndpoint,
-    void,
-    EndpointAuthKeys
-  >;
+  listKeys is ArmResourceActionSync<ServerlessEndpoint, void, EndpointAuthKeys>;
 
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).

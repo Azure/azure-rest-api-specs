@@ -75,9 +75,13 @@ interface InferenceEndpoints {
   /**
    * Create or update InferenceEndpoint (asynchronous).
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<
     InferenceEndpoint,
-    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<InferenceEndpoint> & {
+    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<
+      InferenceEndpoint,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
@@ -92,7 +96,7 @@ interface InferenceEndpoints {
   @patch(#{ implicitOptionality: false })
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
-    PatchModel = {},
+    PatchModel = void,
     Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmAcceptedLroResponse & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.

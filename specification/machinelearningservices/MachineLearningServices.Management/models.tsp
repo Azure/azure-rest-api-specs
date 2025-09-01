@@ -9198,6 +9198,9 @@ model PrivateEndpointConnectionListResult {
    */
   @pageItems
   value?: PrivateEndpointConnection[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -9207,6 +9210,9 @@ model PrivateLinkResourceListResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @pageItems
   value?: PrivateLinkResource[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -9342,24 +9348,25 @@ model AKSSchemaProperties {
   /**
    * Cluster full qualified domain name
    */
-  clusterFqdn?: string;
+  clusterFqdn?: string | null;
 
   /**
    * System services
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
-  systemServices?: SystemService[];
+  systemServices?: SystemService[] | null;
 
   /**
    * Number of agents
    */
-  agentCount?: int32;
+  @minValue(0)
+  agentCount?: int32 | null;
 
   /**
    * Agent virtual machine size
    */
-  agentVmSize?: string;
+  agentVmSize?: string | null;
 
   /**
    * Intended usage of the cluster
@@ -9369,12 +9376,12 @@ model AKSSchemaProperties {
   /**
    * SSL configuration
    */
-  sslConfiguration?: SslConfiguration;
+  sslConfiguration?: SslConfiguration | null;
 
   /**
    * AKS networking configuration for vnet
    */
-  aksNetworkingConfiguration?: AksNetworkingConfiguration;
+  aksNetworkingConfiguration?: AksNetworkingConfiguration | null;
 
   /**
    * Load Balancer Type
@@ -9384,7 +9391,7 @@ model AKSSchemaProperties {
   /**
    * Load Balancer Subnet
    */
-  loadBalancerSubnet?: string;
+  loadBalancerSubnet?: string | null;
 }
 
 /**
@@ -9596,7 +9603,7 @@ model AmlComputeProperties {
   /**
    * Virtual Machine image for AML Compute - windows only
    */
-  virtualMachineImage?: VirtualMachineImage;
+  virtualMachineImage?: VirtualMachineImage | null;
 
   /**
    * Network is isolated or not
@@ -9611,65 +9618,74 @@ model AmlComputeProperties {
   /**
    * Credentials for an administrator user account that will be created on each compute node.
    */
-  userAccountCredentials?: UserAccountCredentials;
+  @summary("User account credentials.")
+  userAccountCredentials?: UserAccountCredentials | null;
 
   /**
    * Virtual network subnet resource ID the compute nodes belong to.
    */
-  subnet?: ResourceId;
+  @summary("Subnet.")
+  subnet?: ResourceId | null;
 
   /**
    * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.
    */
+  @summary("Close remote Login Access Port")
   remoteLoginPortPublicAccess?: RemoteLoginPortPublicAccess = RemoteLoginPortPublicAccess.NotSpecified;
 
   /**
    * Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.
    */
   @visibility(Lifecycle.Read)
+  @summary("Allocation state.")
   allocationState?: AllocationState;
 
   /**
    * The time at which the compute entered its current allocation state.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @summary("Allocation state transition time.")
   allocationStateTransitionTime?: utcDateTime;
 
   /**
    * Collection of errors encountered by various compute nodes during node setup.
    */
   @visibility(Lifecycle.Read)
+  @summary("Errors.")
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
-  errors?: ErrorResponse[];
+  errors?: ErrorResponse[] | null;
 
   /**
    * The number of compute nodes currently assigned to the compute.
    */
   @visibility(Lifecycle.Read)
-  currentNodeCount?: int32;
+  @summary("Current node count.")
+  currentNodeCount?: int32 | null;
 
   /**
    * The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation.
    */
   @visibility(Lifecycle.Read)
-  targetNodeCount?: int32;
+  @summary("Target node count.")
+  targetNodeCount?: int32 | null;
 
   /**
    * Counts of various node states on the compute.
    */
   @visibility(Lifecycle.Read)
-  nodeStateCounts?: NodeStateCounts;
+  @summary("Node state counts.")
+  nodeStateCounts?: NodeStateCounts | null;
 
   /**
    * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
    */
+  @summary("Enable node public IP.")
   enableNodePublicIp?: boolean = true;
 
   /**
    * A property bag containing additional properties.
    */
-  propertyBag?: Record<unknown>;
+  propertyBag?: unknown | null;
 }
 
 /**
@@ -9777,8 +9793,8 @@ model ComputeInstanceProperties {
   /**
    * Virtual network subnet resource ID the compute nodes belong to.
    */
-  @summary("Subnet")
-  subnet?: ResourceId;
+  @summary("Subnet.")
+  subnet?: ResourceId | null;
 
   /**
    * Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.
@@ -9832,7 +9848,7 @@ model ComputeInstanceProperties {
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
-  @summary("Errors")
+  @summary("Errors.")
   errors?: ErrorResponse[];
 
   /**
@@ -9851,7 +9867,7 @@ model ComputeInstanceProperties {
    * Enable Auto OS Patching. Possible values are: true, false.
    */
   @summary("Enable Auto OS Patching.")
-  enableOSPatching?: boolean | null;
+  enableOSPatching?: boolean = false;
 
   /**
    * Enable root access. Possible values are: true, false.
@@ -9869,13 +9885,13 @@ model ComputeInstanceProperties {
    * Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.
    */
   @summary("Release quota if compute instance stopped.")
-  releaseQuotaOnStop?: boolean;
+  releaseQuotaOnStop?: boolean = false;
 
   /**
    * Settings for a personal compute instance.
    */
   @summary("Personal Compute Instance settings.")
-  personalComputeInstanceSettings?: PersonalComputeInstanceSettings;
+  personalComputeInstanceSettings?: PersonalComputeInstanceSettings | null;
 
   /**
    * Details of customized scripts to execute for setting up the cluster.
@@ -9886,12 +9902,12 @@ model ComputeInstanceProperties {
    * The last operation on ComputeInstance.
    */
   @visibility(Lifecycle.Read)
-  lastOperation?: ComputeInstanceLastOperation;
+  lastOperation?: ComputeInstanceLastOperation | null;
 
   /**
    * The list of schedules to be applied on the computes.
    */
-  schedules?: ComputeSchedules;
+  schedules?: ComputeSchedules | null;
 
   /**
    * Stops compute instance after user defined period of inactivity. Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days.
@@ -9901,28 +9917,29 @@ model ComputeInstanceProperties {
   /**
    * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
    */
-  enableNodePublicIp?: boolean;
+  @summary("Enable node public IP.")
+  enableNodePublicIp?: boolean | null;
 
   /**
    * Describes informations of containers on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  containers?: ComputeInstanceContainer[];
+  containers?: ComputeInstanceContainer[] | null;
 
   /**
    * Describes informations of dataDisks on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  dataDisks?: ComputeInstanceDataDisk[];
+  dataDisks?: ComputeInstanceDataDisk[] | null;
 
   /**
    * Describes informations of dataMounts on this ComputeInstance.
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  dataMounts?: ComputeInstanceDataMount[];
+  dataMounts?: ComputeInstanceDataMount[] | null;
 
   /**
    * ComputeInstance version.
@@ -9948,6 +9965,7 @@ model ComputeInstanceSshSettings {
   /**
    * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.
    */
+  @summary("Access policy for SSH")
   sshPublicAccess?: SshPublicAccess = SshPublicAccess.Disabled;
 
   /**
@@ -10901,7 +10919,7 @@ model AssetJobInput {
    * Input Asset Delivery Mode.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  mode?: InputDeliveryMode;
+  mode?: InputDeliveryMode = InputDeliveryMode.ReadOnlyMount;
 
   /**
    * [Required] Input Asset URI.
@@ -10918,18 +10936,18 @@ model AssetJobOutput {
   /**
    * Output Asset Name.
    */
-  assetName?: string;
+  assetName?: string | null;
 
   /**
    * Output Asset Delivery Mode.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  mode?: OutputDeliveryMode;
+  mode?: OutputDeliveryMode = OutputDeliveryMode.ReadWriteMount;
 
   /**
    * Output Asset URI.
    */
-  uri?: string;
+  uri?: string | null;
 }
 
 /**
@@ -11296,7 +11314,7 @@ model AzureDataLakeGen2Datastore extends DatastoreProperties {
    * Azure cloud endpoint for the storage account.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  endpoint?: string;
+  endpoint?: string | null;
 
   /**
    * [Required] The name of the Data Lake Gen2 filesystem.
@@ -11310,7 +11328,7 @@ model AzureDataLakeGen2Datastore extends DatastoreProperties {
    * Protocol used to communicate with the storage account.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  protocol?: string;
+  protocol?: string | null;
 
   /**
    * Indicates which identity to use to authenticate service data access to customer's storage.

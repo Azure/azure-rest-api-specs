@@ -52,7 +52,6 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to get all PE connections.
    */
-  @list
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

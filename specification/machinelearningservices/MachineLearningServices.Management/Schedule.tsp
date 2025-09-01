@@ -35,9 +35,13 @@ interface Schedules {
   /**
    * Create or update schedule.
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Schedule,
-    Response = ArmResourceUpdatedResponse<Schedule> | (ArmResourceCreatedResponse<Schedule> & {
+    Response = ArmResourceUpdatedResponse<Schedule> | (ArmResourceCreatedResponse<
+      Schedule,
+      LroHeaders = ArmAsyncOperationHeader<Schedule>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

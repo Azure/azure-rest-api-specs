@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.MachineLearningServices;
 
@@ -42,9 +43,13 @@ interface InferencePools {
   /**
    * Create or update InferencePool (asynchronous).
    */
+  @useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InferencePool,
-    Response = ArmResourceUpdatedResponse<InferencePool> | (ArmResourceCreatedResponse<InferencePool> & {
+    Response = ArmResourceUpdatedResponse<InferencePool> | (ArmResourceCreatedResponse<
+      InferencePool,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferencePool>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
@@ -60,7 +65,7 @@ interface InferencePools {
   update is ArmCustomPatchAsync<
     InferencePool,
     PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
-     Response = InferencePool | (ArmAcceptedLroResponse & {
+    Response = InferencePool | (ArmAcceptedLroResponse & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

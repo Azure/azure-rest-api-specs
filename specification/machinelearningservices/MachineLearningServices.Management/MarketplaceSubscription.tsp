@@ -38,9 +38,13 @@ interface MarketplaceSubscriptions {
   /**
    * Create or update Marketplace Subscription (asynchronous).
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MarketplaceSubscription,
-    Response = ArmResourceUpdatedResponse<MarketplaceSubscription> | (ArmResourceCreatedResponse<MarketplaceSubscription> & {
+    Response = ArmResourceUpdatedResponse<MarketplaceSubscription> | (ArmResourceCreatedResponse<
+      MarketplaceSubscription,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = MarketplaceSubscription>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

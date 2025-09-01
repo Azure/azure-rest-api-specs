@@ -10642,6 +10642,10 @@
               "$ref": "#/definitions/InferencePool"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10953,6 +10957,10 @@
               "$ref": "#/definitions/InferenceEndpoint"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -11001,14 +11009,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -11278,6 +11278,10 @@
               "$ref": "#/definitions/InferenceGroup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -12751,6 +12755,10 @@
               "$ref": "#/definitions/MarketplaceSubscription"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -13491,6 +13499,10 @@
               "$ref": "#/definitions/OnlineEndpoint"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -13778,6 +13790,10 @@
               "$ref": "#/definitions/OnlineDeployment"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -14467,6 +14483,9 @@
           "StorageAccountListPrivateEndpointConnections": {
             "$ref": "./examples/PrivateEndpointConnection/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14621,6 +14640,9 @@
           "WorkspaceListPrivateLinkResources": {
             "$ref": "./examples/PrivateLinkResource/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14846,6 +14868,10 @@
               "$ref": "#/definitions/Schedule"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -15041,6 +15067,10 @@
               "$ref": "#/definitions/ServerlessEndpoint"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -15301,10 +15331,12 @@
       "type": "object",
       "properties": {
         "clusterFqdn": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "systemServices": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/SystemService"
           },
@@ -15315,10 +15347,12 @@
         },
         "agentCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "agentVmSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "clusterPurpose": {
           "type": "string",
@@ -15334,10 +15368,12 @@
           }
         },
         "sslConfiguration": {
-          "$ref": "#/definitions/SslConfiguration"
+          "$ref": "#/definitions/SslConfiguration",
+          "x-nullable": true
         },
         "aksNetworkingConfiguration": {
-          "$ref": "#/definitions/AksNetworkingConfiguration"
+          "$ref": "#/definitions/AksNetworkingConfiguration",
+          "x-nullable": true
         },
         "loadBalancerType": {
           "type": "string",
@@ -15352,7 +15388,8 @@
           }
         },
         "loadBalancerSubnet": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -15646,7 +15683,8 @@
           }
         },
         "virtualMachineImage": {
-          "$ref": "#/definitions/VirtualMachineImage"
+          "$ref": "#/definitions/VirtualMachineImage",
+          "x-nullable": true
         },
         "isolatedNetwork": {
           "type": "boolean"
@@ -15655,13 +15693,18 @@
           "$ref": "#/definitions/ScaleSettings"
         },
         "userAccountCredentials": {
-          "$ref": "#/definitions/UserAccountCredentials"
+          "$ref": "#/definitions/UserAccountCredentials",
+          "title": "User account credentials.",
+          "x-nullable": true
         },
         "subnet": {
-          "$ref": "#/definitions/ResourceId"
+          "$ref": "#/definitions/ResourceId",
+          "title": "Subnet.",
+          "x-nullable": true
         },
         "remoteLoginPortPublicAccess": {
           "type": "string",
+          "title": "Close remote Login Access Port",
           "default": "NotSpecified",
           "enum": [
             "Enabled",
@@ -15675,6 +15718,7 @@
         },
         "allocationState": {
           "type": "string",
+          "title": "Allocation state.",
           "enum": [
             "Steady",
             "Resizing"
@@ -15688,10 +15732,13 @@
         "allocationStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "Allocation state transition time.",
           "readOnly": true
         },
         "errors": {
           "type": "array",
+          "title": "Errors.",
+          "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
@@ -15703,24 +15750,30 @@
         "currentNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Current node count.",
+          "x-nullable": true,
           "readOnly": true
         },
         "targetNodeCount": {
           "type": "integer",
           "format": "int32",
+          "title": "Target node count.",
+          "x-nullable": true,
           "readOnly": true
         },
         "nodeStateCounts": {
           "$ref": "#/definitions/NodeStateCounts",
+          "title": "Node state counts.",
+          "x-nullable": true,
           "readOnly": true
         },
         "enableNodePublicIp": {
           "type": "boolean",
+          "title": "Enable node public IP.",
           "default": true
         },
         "propertyBag": {
-          "type": "object",
-          "additionalProperties": {}
+          "x-nullable": true
         }
       }
     },
@@ -16264,6 +16317,7 @@
         },
         "endpoint": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -16280,6 +16334,7 @@
         },
         "protocol": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -18077,7 +18132,8 @@
         },
         "subnet": {
           "$ref": "#/definitions/ResourceId",
-          "title": "Subnet"
+          "title": "Subnet.",
+          "x-nullable": true
         },
         "applicationSharingPolicy": {
           "type": "string",
@@ -18134,7 +18190,7 @@
         },
         "errors": {
           "type": "array",
-          "title": "Errors",
+          "title": "Errors.",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
@@ -18184,7 +18240,7 @@
         "enableOSPatching": {
           "type": "boolean",
           "title": "Enable Auto OS Patching.",
-          "x-nullable": true
+          "default": false
         },
         "enableRootAccess": {
           "type": "boolean",
@@ -18198,11 +18254,13 @@
         },
         "releaseQuotaOnStop": {
           "type": "boolean",
-          "title": "Release quota if compute instance stopped."
+          "title": "Release quota if compute instance stopped.",
+          "default": false
         },
         "personalComputeInstanceSettings": {
           "$ref": "#/definitions/PersonalComputeInstanceSettings",
-          "title": "Personal Compute Instance settings."
+          "title": "Personal Compute Instance settings.",
+          "x-nullable": true
         },
         "setupScripts": {
           "$ref": "#/definitions/SetupScripts",
@@ -18210,19 +18268,24 @@
         },
         "lastOperation": {
           "$ref": "#/definitions/ComputeInstanceLastOperation",
+          "x-nullable": true,
           "readOnly": true
         },
         "schedules": {
-          "$ref": "#/definitions/ComputeSchedules"
+          "$ref": "#/definitions/ComputeSchedules",
+          "x-nullable": true
         },
         "idleTimeBeforeShutdown": {
           "type": "string"
         },
         "enableNodePublicIp": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "Enable node public IP.",
+          "x-nullable": true
         },
         "containers": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceContainer"
           },
@@ -18233,6 +18296,7 @@
         },
         "dataDisks": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataDisk"
           },
@@ -18240,6 +18304,7 @@
         },
         "dataMounts": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataMount"
           },
@@ -18256,6 +18321,7 @@
       "properties": {
         "sshPublicAccess": {
           "type": "string",
+          "title": "Access policy for SSH",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -18730,6 +18796,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -18767,10 +18834,12 @@
       "type": "object",
       "properties": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -18786,7 +18855,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -23907,6 +23977,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -23944,10 +24015,12 @@
       "type": "object",
       "properties": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -23963,7 +24036,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -23999,6 +24073,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -24036,10 +24111,12 @@
       "type": "object",
       "properties": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -24055,7 +24132,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -26500,12 +26578,19 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -26627,12 +26712,19 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -29785,6 +29877,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -29822,10 +29915,12 @@
       "type": "object",
       "properties": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -29841,7 +29936,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -29950,6 +30046,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -29987,10 +30084,12 @@
       "type": "object",
       "properties": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -30006,7 +30105,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -30030,6 +30130,7 @@
       "properties": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -30067,10 +30168,12 @@
       "type": "object",
       "properties": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -30086,7 +30189,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [

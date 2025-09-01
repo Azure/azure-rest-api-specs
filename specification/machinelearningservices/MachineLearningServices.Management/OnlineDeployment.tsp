@@ -42,9 +42,13 @@ interface OnlineDeployments {
   /**
    * Create or update Inference Endpoint Deployment (asynchronous).
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OnlineDeployment,
-    Response = ArmResourceUpdatedResponse<OnlineDeployment> | (ArmResourceCreatedResponse<OnlineDeployment> & {
+    Response = ArmResourceUpdatedResponse<OnlineDeployment> | (ArmResourceCreatedResponse<
+      OnlineDeployment,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineDeployment>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

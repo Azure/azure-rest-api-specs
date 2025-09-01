@@ -94,6 +94,7 @@
 | `definitions.AKS.type__added` | added | `object` |
 | `definitions.AksComputeSecrets.type__added` | added | `object` |
 | `definitions.AmlCompute.type__added` | added | `object` |
+| `definitions.AmlComputeProperties.properties.propertyBag.type__deleted` | deleted | `object` |
 | `definitions.ColumnTransformer.properties.parameters.type__deleted` | deleted | `object` |
 | `definitions.CommandJob.properties.parameters.type__deleted` | deleted | `object` |
 | `definitions.ComputeInstance.type__added` | added | `object` |
@@ -127,7 +128,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/features'].get.parameters[0].type__added` | added | `string` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].patch.parameters[4].schema.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions'].get.parameters[1].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models'].get.parameters[0].type__added` | added | `string` |
@@ -333,14 +333,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"URI to poll for asynchronous operation status."}` |
 
 ### Changes for `200`
 
@@ -375,13 +367,16 @@
 | `definitions.NotificationSetting.properties.webhooks.additionalProperties.description__deleted` | deleted | `Webhook base` |
 | `definitions.PipelineJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.PipelineJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.PrivateEndpointConnectionListResult.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.PrivateEndpointConnectionListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.PrivateLinkResourceListResult.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.PrivateLinkResourceListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
 | `definitions.SparkJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.SparkJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
 | `definitions.SweepJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.SweepJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets'].post.responses.200.schema.description__deleted` | deleted | `Base definition for datastore secrets.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].patch.parameters[4].schema.description__deleted` | deleted | `Strictly used in update requests.` |
 
 ### Changes for `items`
 
@@ -395,13 +390,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores'].get.parameters[6].collectionFormat__added` | added | `csv` |
-
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 
 ### Changes for `AKSSchema`
 
@@ -755,7 +743,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AKSSchemaProperties__added` | added | `{"type":"object","properties":{"clusterFqdn":{"type":"string"},"systemServices":{"type":"array","ite...` |
+| `definitions.AKSSchemaProperties__added` | added | `{"type":"object","properties":{"clusterFqdn":{"type":"string","x-nullable":true},"systemServices":{"...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>`
 
@@ -1026,8 +1014,8 @@
 | `definitions.ComputeInstance.properties__added` | added | `{"properties":{"$ref":"#/definitions/ComputeInstanceProperties"}}` |
 | `definitions.ComputeResource.properties.properties__added` | added | `{"$ref":"#/definitions/ComputeResourceSchema"}` |
 | `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
-| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
+| `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
 | `definitions.Databricks.properties__added` | added | `{"properties":{"$ref":"#/definitions/DatabricksProperties"}}` |
 | `definitions.DatabricksComputeSecrets.properties__added` | added | `{"databricksAccessToken":{"type":"string"}}` |
 | `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties"}` |
@@ -1050,10 +1038,10 @@
 | `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties"}` |
 | `definitions.Kubernetes.properties__added` | added | `{"properties":{"$ref":"#/definitions/KubernetesProperties"}}` |
 | `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties"}` |
-| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
+| `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
+| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
+| `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
 | `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties"}` |
 | `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties"}` |
 | `definitions.OnlineDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineDeploymentProperties"}` |
@@ -1065,12 +1053,12 @@
 | `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties"}` |
 | `definitions.SpeechEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
 | `definitions.SynapseSpark.properties.properties.properties__deleted` | deleted | `{"autoScaleProperties":{"$ref":"#/definitions/AutoScaleProperties","description":"Auto scale propert...` |
-| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.UriFileJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
-| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","enum":["ReadOnlyMount","ReadWriteMount","Download","Direct","EvalMount","E...` |
-| `definitions.UriFolderJobOutput.properties__added` | added | `{"assetName":{"type":"string"},"mode":{"type":"string","enum":["ReadWriteMount","Upload","Direct"],"...` |
+| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
+| `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
+| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
+| `definitions.UriFileJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
+| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
+| `definitions.UriFolderJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
 | `definitions.VirtualMachine.properties__added` | added | `{"properties":{"$ref":"#/definitions/VirtualMachineSchemaProperties"}}` |
 | `definitions.VirtualMachineSecrets.properties__added` | added | `{"administratorAccount":{"$ref":"#/definitions/VirtualMachineSshCredentials"}}` |
 
@@ -1120,29 +1108,12 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AmlComputeProperties.properties.currentNodeCount['x-nullable__deleted']` | deleted | `true` |
 | `definitions.AmlComputeProperties.properties.enableNodePublicIp['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeProperties.properties.errors['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeProperties.properties.nodeStateCounts['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeProperties.properties.propertyBag['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeProperties.properties.subnet['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeProperties.properties.targetNodeCount['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeProperties.properties.userAccountCredentials['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AmlComputeProperties.properties.virtualMachineImage['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureDataLakeGen2Datastore.properties.endpoint['x-nullable__deleted']` | deleted | `true` |
-| `definitions.AzureDataLakeGen2Datastore.properties.protocol['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.computeInstanceAuthorizationType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.containers['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.dataDisks['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.dataMounts['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.enableNodePublicIp['x-nullable__deleted']` | deleted | `true` |
+| `definitions.ComputeInstanceProperties.properties.enableOSPatching['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.enableRootAccess['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.enableSSO['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.lastOperation['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.personalComputeInstanceSettings['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.releaseQuotaOnStop['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.schedules['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.subnet['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceVersion.properties.runtime['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeRecurrenceSchedule.properties.monthDays['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeRecurrenceSchedule.properties.weekDays['x-nullable__deleted']` | deleted | `true` |
@@ -1584,73 +1555,6 @@
 | `definitions.VulnerabilityFindings.properties.source['x-nullable__deleted']` | deleted | `true` |
 | `definitions.Webhook.properties.eventType['x-nullable__deleted']` | deleted | `true` |
 
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AmlComputeProperties.properties.allocationState.title__deleted` | deleted | `Allocation state.` |
-| `definitions.AmlComputeProperties.properties.allocationStateTransitionTime.title__deleted` | deleted | `Allocation state transition time.` |
-| `definitions.AmlComputeProperties.properties.currentNodeCount.title__deleted` | deleted | `Current node count.` |
-| `definitions.AmlComputeProperties.properties.enableNodePublicIp.title__deleted` | deleted | `Enable node public IP.` |
-| `definitions.AmlComputeProperties.properties.errors.title__deleted` | deleted | `Errors.` |
-| `definitions.AmlComputeProperties.properties.nodeStateCounts.title__deleted` | deleted | `Node state counts.` |
-| `definitions.AmlComputeProperties.properties.remoteLoginPortPublicAccess.title__deleted` | deleted | `Close remote Login Access Port` |
-| `definitions.AmlComputeProperties.properties.subnet.title__deleted` | deleted | `Subnet.` |
-| `definitions.AmlComputeProperties.properties.targetNodeCount.title__deleted` | deleted | `Target node count.` |
-| `definitions.AmlComputeProperties.properties.userAccountCredentials.title__deleted` | deleted | `User account credentials.` |
-| `definitions.ComputeInstanceProperties.properties.enableNodePublicIp.title__deleted` | deleted | `Enable node public IP.` |
-| `definitions.ComputeInstanceSshSettings.properties.sshPublicAccess.title__deleted` | deleted | `Access policy for SSH` |
-| `definitions.Endpoint.properties.protocol.title__deleted` | deleted | `Endpoint Communication Protocol` |
-| `definitions.EnvironmentVariable.properties.type.title__deleted` | deleted | `Type of Environment Variable` |
-| `definitions.EstimatedVMPrice.properties.osType.title__deleted` | deleted | `OS type` |
-| `definitions.EstimatedVMPrice.properties.retailPrice.title__deleted` | deleted | `Retail price` |
-| `definitions.EstimatedVMPrice.properties.vmTier.title__deleted` | deleted | `VM tier` |
-| `definitions.EstimatedVMPrices.properties.billingCurrency.title__deleted` | deleted | `Billing currency` |
-| `definitions.EstimatedVMPrices.properties.unitOfMeasure.title__deleted` | deleted | `Unit of time measure` |
-| `definitions.EstimatedVMPrices.properties.values.title__deleted` | deleted | `List of estimated VM prices.` |
-| `definitions.Image.properties.type.title__deleted` | deleted | `Type of the image` |
-| `definitions.NodeStateCounts.properties.idleNodeCount.title__deleted` | deleted | `Idle node count.` |
-| `definitions.NodeStateCounts.properties.leavingNodeCount.title__deleted` | deleted | `Leaving node count.` |
-| `definitions.NodeStateCounts.properties.preemptedNodeCount.title__deleted` | deleted | `Preempted node count.` |
-| `definitions.NodeStateCounts.properties.preparingNodeCount.title__deleted` | deleted | `Preparing node count.` |
-| `definitions.NodeStateCounts.properties.runningNodeCount.title__deleted` | deleted | `Running node count.` |
-| `definitions.NodeStateCounts.properties.unusableNodeCount.title__deleted` | deleted | `Unusable node count.` |
-| `definitions.PersonalComputeInstanceSettings.properties.assignedUser.title__deleted` | deleted | `Assigned User.` |
-| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
-| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
-| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
-| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
-| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
-| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
-| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
-| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
-| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
-| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
-| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
-| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
-| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
-| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
-| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
-| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
-| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
-
-### Changes for `additionalProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AmlComputeProperties.properties.propertyBag.additionalProperties__added` | added | `{}` |
-| `definitions.ComputeInstanceContainer.properties.services.items.additionalProperties__added` | added | `{}` |
-| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.additionalProperties__added` | added | `{}` |
-| `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.PipelineJob.properties.jobs.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
-| `definitions.ResourceConfiguration.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.additionalProperties__added` | added | `{}` |
-| `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
-
 ### Changes for `x-ms-mutability`
 
 | Path | Change Type | Value |
@@ -1716,8 +1620,6 @@
 | `definitions.AutoMLJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
 | `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.ComputeInstanceProperties.properties.enableOSPatching.default__deleted` | deleted | `false` |
-| `definitions.ComputeInstanceProperties.properties.releaseQuotaOnStop.default__deleted` | deleted | `false` |
 | `definitions.ContentSafety.properties.contentSafetyLevel.default__deleted` | deleted | `Blocking` |
 | `definitions.DataCollector.properties.rollingRate.default__deleted` | deleted | `Hour` |
 | `definitions.DeltaModelCurrentState.properties.count.default__deleted` | deleted | `0` |
@@ -2210,6 +2112,19 @@
 | `definitions.ServerlessInferenceEndpoint.properties.uri.readOnly__added` | added | `true` |
 | `definitions.UpdateWorkspaceQuotas.properties.status.readOnly__deleted` | deleted | `false` |
 
+### Changes for `additionalProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ComputeInstanceContainer.properties.services.items.additionalProperties__added` | added | `{}` |
+| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.additionalProperties__added` | added | `{}` |
+| `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.PipelineJob.properties.jobs.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
+| `definitions.ResourceConfiguration.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
+| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.additionalProperties__added` | added | `{}` |
+| `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
+
 ### Changes for `location`
 
 | Path | Change Type | Value |
@@ -2273,6 +2188,47 @@
 |------|------------|-------|
 | `definitions.DeltaModelModifyRequest.properties.addDeltaModels.uniqueItems__deleted` | deleted | `true` |
 | `definitions.DeltaModelModifyRequest.properties.removeDeltaModels.uniqueItems__deleted` | deleted | `true` |
+
+### Changes for `title`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Endpoint.properties.protocol.title__deleted` | deleted | `Endpoint Communication Protocol` |
+| `definitions.EnvironmentVariable.properties.type.title__deleted` | deleted | `Type of Environment Variable` |
+| `definitions.EstimatedVMPrice.properties.osType.title__deleted` | deleted | `OS type` |
+| `definitions.EstimatedVMPrice.properties.retailPrice.title__deleted` | deleted | `Retail price` |
+| `definitions.EstimatedVMPrice.properties.vmTier.title__deleted` | deleted | `VM tier` |
+| `definitions.EstimatedVMPrices.properties.billingCurrency.title__deleted` | deleted | `Billing currency` |
+| `definitions.EstimatedVMPrices.properties.unitOfMeasure.title__deleted` | deleted | `Unit of time measure` |
+| `definitions.EstimatedVMPrices.properties.values.title__deleted` | deleted | `List of estimated VM prices.` |
+| `definitions.Image.properties.type.title__deleted` | deleted | `Type of the image` |
+| `definitions.NodeStateCounts.properties.idleNodeCount.title__deleted` | deleted | `Idle node count.` |
+| `definitions.NodeStateCounts.properties.leavingNodeCount.title__deleted` | deleted | `Leaving node count.` |
+| `definitions.NodeStateCounts.properties.preemptedNodeCount.title__deleted` | deleted | `Preempted node count.` |
+| `definitions.NodeStateCounts.properties.preparingNodeCount.title__deleted` | deleted | `Preparing node count.` |
+| `definitions.NodeStateCounts.properties.runningNodeCount.title__deleted` | deleted | `Running node count.` |
+| `definitions.NodeStateCounts.properties.unusableNodeCount.title__deleted` | deleted | `Unusable node count.` |
+| `definitions.PersonalComputeInstanceSettings.properties.assignedUser.title__deleted` | deleted | `Assigned User.` |
+| `definitions.QuotaBaseProperties.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
+| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
+| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
+| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
+| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
+| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
+| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
+| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
+| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
+| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
+| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
+| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
+| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
+| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
+| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
+| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
+| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
+| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
 
 ### Changes for `autoRebuild`
 
@@ -2646,6 +2602,13 @@
 |------|------------|-------|
 | `definitions.OnlineEndpoint.properties.traffic__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"format":"int32","type":"integer"}}` |
 
+### Changes for `nextLink`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PrivateEndpointConnectionListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.PrivateLinkResourceListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+
 ### Changes for `x-ms-identifiers`
 
 | Path | Change Type | Value |
@@ -2767,8 +2730,6 @@
 | `definitions.ComponentContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ComponentContainerResource` | `#/definitions/ComponentContainer` |
 | `definitions.ComponentVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.ComponentVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ComponentVersionResource` | `#/definitions/ComponentVersion` |
-| `definitions.ComputeInstanceProperties.properties.errors.title` | `Errors.` | `Errors` |
-| `definitions.ComputeInstanceProperties.properties.subnet.title` | `Subnet.` | `Subnet` |
 | `definitions.ComputeResource.allOf[0].$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
 | `definitions.CustomService.additionalProperties` | `true` | `{}` |
 | `definitions.DataContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
@@ -3034,6 +2995,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].patch.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].put.parameters[3].schema.$ref` | `#/definitions/InferencePoolTrackedResource` | `#/definitions/InferencePool` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].put.responses.200.schema.$ref` | `#/definitions/InferencePoolTrackedResource` | `#/definitions/InferencePool` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].put.responses.201.schema.$ref` | `#/definitions/InferencePoolTrackedResource` | `#/definitions/InferencePool` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].get.responses.200.schema.$ref` | `#/definitions/InferenceEndpointTrackedResource` | `#/definitions/InferenceEndpoint` |
@@ -3041,6 +3003,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].patch.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].put.parameters[4].schema.$ref` | `#/definitions/InferenceEndpointTrackedResource` | `#/definitions/InferenceEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].put.responses.200.schema.$ref` | `#/definitions/InferenceEndpointTrackedResource` | `#/definitions/InferenceEndpoint` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].put.responses.201.schema.$ref` | `#/definitions/InferenceEndpointTrackedResource` | `#/definitions/InferenceEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].get.responses.200.schema.$ref` | `#/definitions/InferenceGroupTrackedResource` | `#/definitions/InferenceGroup` |
@@ -3048,6 +3011,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].patch.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].put.parameters[4].schema.$ref` | `#/definitions/InferenceGroupTrackedResource` | `#/definitions/InferenceGroup` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].put.responses.200.schema.$ref` | `#/definitions/InferenceGroupTrackedResource` | `#/definitions/InferenceGroup` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].put.responses.201.schema.$ref` | `#/definitions/InferenceGroupTrackedResource` | `#/definitions/InferenceGroup` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify'].post.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
@@ -3071,6 +3035,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.parameters[3].schema.$ref` | `#/definitions/MarketplaceSubscriptionResource` | `#/definitions/MarketplaceSubscription` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.responses.200.schema.$ref` | `#/definitions/MarketplaceSubscriptionResource` | `#/definitions/MarketplaceSubscription` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.responses.201.schema.$ref` | `#/definitions/MarketplaceSubscriptionResource` | `#/definitions/MarketplaceSubscription` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].get.responses.200.schema.$ref` | `#/definitions/ModelContainerResource` | `#/definitions/ModelContainer` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].put.parameters[1].name` | `name` | `workspaceName` |
@@ -3093,6 +3058,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.parameters[3].schema.$ref` | `#/definitions/OnlineEndpointTrackedResource` | `#/definitions/OnlineEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.responses.200.schema.$ref` | `#/definitions/OnlineEndpointTrackedResource` | `#/definitions/OnlineEndpoint` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.responses.201.schema.$ref` | `#/definitions/OnlineEndpointTrackedResource` | `#/definitions/OnlineEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].get.responses.200.schema.$ref` | `#/definitions/OnlineDeploymentTrackedResource` | `#/definitions/OnlineDeployment` |
@@ -3104,6 +3070,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.parameters[4].schema.$ref` | `#/definitions/OnlineDeploymentTrackedResource` | `#/definitions/OnlineDeployment` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.responses.200.schema.$ref` | `#/definitions/OnlineDeploymentTrackedResource` | `#/definitions/OnlineDeployment` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.responses.201.schema.$ref` | `#/definitions/OnlineDeploymentTrackedResource` | `#/definitions/OnlineDeployment` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/regenerateKeys'].post.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
@@ -3117,6 +3084,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.parameters[3].schema.$ref` | `#/definitions/ScheduleResource` | `#/definitions/Schedule` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.responses.200.schema.$ref` | `#/definitions/ScheduleResource` | `#/definitions/Schedule` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.responses.201.schema.$ref` | `#/definitions/ScheduleResource` | `#/definitions/Schedule` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].delete.parameters[1].name` | `name` | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].delete.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
@@ -3130,6 +3098,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.parameters[1].pattern` | `^[a-zA-Z][a-zA-Z0-9-]{0,51}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.parameters[3].schema.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.200.schema.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `URI to poll for asynchronous operation status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.responses.201.schema.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys'].post.parameters[1].name` | `name` | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys'].post.parameters[1].pattern` | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$` | `^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$` |

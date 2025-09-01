@@ -6052,9 +6052,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -6286,9 +6288,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -6322,11 +6326,13 @@
             " "
           ],
           [
-            "~",
+            "-",
             {
+              "name": "body",
+              "in": "body",
+              "required": true,
               "schema": {
-                "description__deleted": "Strictly used in update requests.",
-                "type__added": "object"
+                "description": "Strictly used in update requests."
               }
             }
           ]
@@ -6532,9 +6538,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -7226,9 +7234,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -7822,9 +7832,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -8062,9 +8074,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -8385,20 +8399,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources": {
-      "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork": {
       "post": {
         "responses": {
@@ -8558,9 +8558,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -8724,9 +8726,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -10041,10 +10045,12 @@
       "type": "object",
       "properties": {
         "clusterFqdn": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "systemServices": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/SystemService"
           },
@@ -10055,10 +10061,12 @@
         },
         "agentCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "agentVmSize": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "clusterPurpose": {
           "type": "string",
@@ -10074,10 +10082,12 @@
           }
         },
         "sslConfiguration": {
-          "$ref": "#/definitions/SslConfiguration"
+          "$ref": "#/definitions/SslConfiguration",
+          "x-nullable": true
         },
         "aksNetworkingConfiguration": {
-          "$ref": "#/definitions/AksNetworkingConfiguration"
+          "$ref": "#/definitions/AksNetworkingConfiguration",
+          "x-nullable": true
         },
         "loadBalancerType": {
           "type": "string",
@@ -10092,7 +10102,8 @@
           }
         },
         "loadBalancerSubnet": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -11816,49 +11827,11 @@
     },
     "AmlComputeProperties": {
       "properties": {
-        "virtualMachineImage": {
-          "x-nullable__deleted": true
-        },
-        "userAccountCredentials": {
-          "title__deleted": "User account credentials.",
-          "x-nullable__deleted": true
-        },
-        "subnet": {
-          "title__deleted": "Subnet.",
-          "x-nullable__deleted": true
-        },
-        "remoteLoginPortPublicAccess": {
-          "title__deleted": "Close remote Login Access Port"
-        },
-        "allocationState": {
-          "title__deleted": "Allocation state."
-        },
-        "allocationStateTransitionTime": {
-          "title__deleted": "Allocation state transition time."
-        },
-        "errors": {
-          "title__deleted": "Errors.",
-          "x-nullable__deleted": true
-        },
-        "currentNodeCount": {
-          "title__deleted": "Current node count.",
-          "x-nullable__deleted": true
-        },
-        "targetNodeCount": {
-          "title__deleted": "Target node count.",
-          "x-nullable__deleted": true
-        },
-        "nodeStateCounts": {
-          "title__deleted": "Node state counts.",
-          "x-nullable__deleted": true
-        },
         "enableNodePublicIp": {
-          "title__deleted": "Enable node public IP.",
           "x-nullable__deleted": true
         },
         "propertyBag": {
-          "x-nullable__deleted": true,
-          "additionalProperties__added": {}
+          "type__deleted": "object"
         }
       }
     },
@@ -11979,11 +11952,9 @@
           "x-nullable": true
         },
         "endpoint": {
-          "x-nullable__deleted": true,
           "example__deleted": "core.windows.net"
         },
         "protocol": {
-          "x-nullable__deleted": true,
           "example__deleted": "https"
         }
       },
@@ -12731,24 +12702,11 @@
     },
     "ComputeInstanceProperties": {
       "properties": {
-        "subnet": {
-          "x-nullable__deleted": true,
-          "title": {
-            "__old": "Subnet.",
-            "__new": "Subnet"
-          }
-        },
-        "errors": {
-          "title": {
-            "__old": "Errors.",
-            "__new": "Errors"
-          }
-        },
         "computeInstanceAuthorizationType": {
           "x-nullable__deleted": true
         },
         "enableOSPatching": {
-          "default__deleted": false
+          "x-nullable__deleted": true
         },
         "enableRootAccess": {
           "x-nullable__deleted": true
@@ -12757,37 +12715,7 @@
           "x-nullable__deleted": true
         },
         "releaseQuotaOnStop": {
-          "default__deleted": false,
           "x-nullable__deleted": true
-        },
-        "personalComputeInstanceSettings": {
-          "x-nullable__deleted": true
-        },
-        "lastOperation": {
-          "x-nullable__deleted": true
-        },
-        "schedules": {
-          "x-nullable__deleted": true
-        },
-        "enableNodePublicIp": {
-          "title__deleted": "Enable node public IP.",
-          "x-nullable__deleted": true
-        },
-        "containers": {
-          "x-nullable__deleted": true
-        },
-        "dataDisks": {
-          "x-nullable__deleted": true
-        },
-        "dataMounts": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "ComputeInstanceSshSettings": {
-      "properties": {
-        "sshPublicAccess": {
-          "title__deleted": "Access policy for SSH"
         }
       }
     },
@@ -12938,6 +12866,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -12979,10 +12908,12 @@
     "CustomModelJobOutput": {
       "properties__added": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -12998,7 +12929,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -16033,6 +15965,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -16074,10 +16007,12 @@
     "MLFlowModelJobOutput": {
       "properties__added": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -16093,7 +16028,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -16130,6 +16066,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -16171,10 +16108,12 @@
     "MLTableJobOutput": {
       "properties__added": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -16190,7 +16129,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -17312,10 +17252,36 @@
         ]
       ]
     },
+    "PrivateEndpointConnectionListResult": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
     "PrivateEndpointResource": {
       "properties": {
         "subnetArmId": {
           "x-nullable__deleted": true
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
         }
       }
     },
@@ -18659,6 +18625,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -18700,10 +18667,12 @@
     "TritonModelJobOutput": {
       "properties__added": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -18719,7 +18688,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -18769,6 +18739,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -18810,10 +18781,12 @@
     "UriFileJobOutput": {
       "properties__added": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -18829,7 +18802,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -18861,6 +18835,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
+          "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
             "ReadWriteMount",
@@ -18902,10 +18877,12 @@
     "UriFolderJobOutput": {
       "properties__added": {
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mode": {
           "type": "string",
+          "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
             "Upload",
@@ -18921,7 +18898,8 @@
           ]
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [

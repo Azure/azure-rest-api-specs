@@ -75,9 +75,13 @@ interface InferenceGroups {
   /**
    * Create or update InferenceGroup (asynchronous).
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is InferenceGroupOps.CreateOrUpdateAsync<
     InferenceGroup,
-    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmResourceCreatedResponse<InferenceGroup> & {
+    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmResourceCreatedResponse<
+      InferenceGroup,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceGroup>
+    > & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
