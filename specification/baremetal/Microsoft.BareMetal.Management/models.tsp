@@ -282,7 +282,7 @@ model NetworkInterfaceAttachmentProperties
 model NetworkInterfaceAttachmentPatchModel {
   /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Patch tags object"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   tags?: Record<string>;
 
   /** Anchor NICs (minimum 1). Required in PATCH. */
