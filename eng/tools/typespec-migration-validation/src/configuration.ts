@@ -8,6 +8,6 @@ interface configuration {
 export const configuration: configuration = {
   ignoreDescription: true,
   enumNameToCamelCase: true,
-  ignorePathCase: true, // Normalize the path 
-  ignoreDefinitionCase: false,
+  ignorePathCase: true, // Normalize the path
+  ignoreDefinitionCase: false, // Sort in "definitions" ignores casing
 };

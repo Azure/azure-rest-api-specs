@@ -97,7 +97,7 @@ function parseArguments() {
       type: "boolean",
     })
     .option("ignoreDefinitionCase", {
-      description: "Sort definitions case-insensitively",
+      description: "Sort definitions case-insensitively. Use this when definitions in Swagger specification is not in PascalCase.",
       type: "boolean",
     })
     .option("jsonOutput", {
