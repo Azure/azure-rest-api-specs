@@ -1587,6 +1587,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByResource",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get all private endpoint connections under a topic, domain, or partner namespace or namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces",
+              "namespaces"
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains"
+                },
+                {
+                  "name": "partnerNamespaces",
+                  "value": "partnerNamespaces"
+                },
+                {
+                  "name": "namespaces",
+                  "value": "namespaces"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByResource": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/networkSecurityPerimeterConfigurations": {
       "get": {
         "operationId": "NetworkSecurityPerimeterConfigurations_List",
@@ -1647,98 +1745,6 @@
         "x-ms-examples": {
           "NetworkSecurityPerimeterConfigurations_List": {
             "$ref": "./examples/NetworkSecurityPerimeterConfigurations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/privateEndpointConnections": {
-      "get": {
-        "operationId": "PrivateEndpointConnections_ListByResource",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Get all private endpoint connections under a topic, domain, or partner namespace or namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces",
-              "namespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains"
-                },
-                {
-                  "name": "partnerNamespaces",
-                  "value": "partnerNamespaces"
-                },
-                {
-                  "name": "namespaces",
-                  "value": "namespaces"
-                }
-              ]
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_ListByResource": {
-            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
           }
         },
         "x-ms-pageable": {
@@ -9393,291 +9399,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/privateEndpointConnections/{privateEndpointConnectionName}/{parentType}": {
-      "get": {
-        "operationId": "PrivateEndpointConnections_Get",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Get a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection connection.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces",
-              "namespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains"
-                },
-                {
-                  "name": "partnerNamespaces",
-                  "value": "partnerNamespaces"
-                },
-                {
-                  "name": "namespaces",
-                  "value": "namespaces"
-                }
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Get": {
-            "$ref": "./examples/PrivateEndpointConnections_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PrivateEndpointConnections_Update",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Update a specific private endpoint connection under a topic, domain or partner namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection connection.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces",
-              "namespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains"
-                },
-                {
-                  "name": "partnerNamespaces",
-                  "value": "partnerNamespaces"
-                },
-                {
-                  "name": "namespaces",
-                  "value": "namespaces"
-                }
-              ]
-            }
-          },
-          {
-            "name": "privateEndpointConnection",
-            "in": "body",
-            "description": "The private endpoint connection object to update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Update": {
-            "$ref": "./examples/PrivateEndpointConnections_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/PrivateEndpointConnection"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "PrivateEndpointConnections_Delete",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Delete a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection connection.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces",
-              "namespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains"
-                },
-                {
-                  "name": "partnerNamespaces",
-                  "value": "partnerNamespaces"
-                },
-                {
-                  "name": "namespaces",
-                  "value": "namespaces"
-                }
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Delete": {
-            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/privateLinkResources/{privateLinkResourceName}/{parentType}": {
       "get": {
         "operationId": "PrivateLinkResources_Get",
@@ -11461,6 +11182,306 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CTopicSharedAccessKeys%3E"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces",
+              "namespaces"
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains"
+                },
+                {
+                  "name": "partnerNamespaces",
+                  "value": "partnerNamespaces"
+                },
+                {
+                  "name": "namespaces",
+                  "value": "namespaces"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Update",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update a specific private endpoint connection under a topic, domain or partner namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces",
+              "namespaces"
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains"
+                },
+                {
+                  "name": "partnerNamespaces",
+                  "value": "partnerNamespaces"
+                },
+                {
+                  "name": "namespaces",
+                  "value": "namespaces"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection object to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces",
+              "namespaces"
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains"
+                },
+                {
+                  "name": "partnerNamespaces",
+                  "value": "partnerNamespaces"
+                },
+                {
+                  "name": "namespaces",
+                  "value": "namespaces"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }

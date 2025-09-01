@@ -21,51 +21,54 @@ model PrivateEndpointConnection
   >;
 }
 
+alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "microsoft.EventGrid";
+
+    /**
+       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
+       */
+      @path
+      parentType: PrivateEndpointConnectionsParentType;
+      @path
+      parentName: string,
+  },
+  {},
+  {
+    @path
+    @key
+    @segment("privateEndpointConnections")
+    privateEndpointConnectionName: string;
+  }
+>;
+
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Get a specific private endpoint connection under a topic, domain, or partner namespace or namespace.
    */
-  get is ArmResourceRead<
-    PrivateEndpointConnection,
-    Parameters = {
-      /**
-       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
-       */
-      @path
-      parentType: PrivateEndpointConnectionsParentType;
-    }
-  >;
+  get is PrivateEndpointConnectionOps.Read<PrivateEndpointConnection>;
 
   /**
    * Update a specific private endpoint connection under a topic, domain or partner namespace.
    */
-  update is ArmResourceCreateOrReplaceAsync<
+  update is PrivateEndpointConnectionOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
-    Parameters = {
-      /**
-       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
-       */
-      @path
-      parentType: PrivateEndpointConnectionsParentType;
-    },
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+      Azure.Core.Foundations.RetryAfterHeader>;
 
   /**
    * Delete a specific private endpoint connection under a topic, domain, or partner namespace or namespace.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PrivateEndpointConnection,
-    Parameters = {
-      /**
-       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
-       */
-      @path
-      parentType: PrivateEndpointConnectionsParentType;
-    }
-  >;
+  delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
    * Get all private endpoint connections under a topic, domain, or partner namespace or namespace.
@@ -78,6 +81,8 @@ interface PrivateEndpointConnections {
        */
       @path
       parentType: PrivateEndpointConnectionsParentType;
+      @path
+      parentName: string,
 
       /**
        * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
