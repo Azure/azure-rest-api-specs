@@ -1,13 +1,21 @@
-name: "[TEST-IGNORE] Swagger SemanticValidation - Analyze Code"
+name: "Swagger SemanticValidation - Analyze Code"
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
 
 jobs:
   oav:
-    name: "[TEST-IGNORE] Swagger SemanticValidation - Analyze Code"
+    name: "Swagger SemanticValidation - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
