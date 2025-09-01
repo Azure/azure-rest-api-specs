@@ -11651,23 +11651,25 @@
         },
         "isDefaultQuotaEnabled": {
           "type": "boolean",
-          "description": "Specifies if default quota is enabled for the volume."
+          "description": "Specifies if default quota is enabled for the volume.",
+          "default": false
         },
         "defaultUserQuotaInKiBs": {
           "type": "integer",
           "format": "int64",
-          "description": "Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies ."
+          "description": "Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .",
+          "default": 0
         },
         "defaultGroupQuotaInKiBs": {
           "type": "integer",
           "format": "int64",
-          "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies."
+          "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.",
+          "default": 0
         },
         "unixPermissions": {
           "type": "string",
           "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
-          "minLength": 4,
-          "maxLength": 4
+          "x-nullable": true
         },
         "coolAccess": {
           "type": "boolean",
@@ -11694,7 +11696,8 @@
         },
         "smbAccessBasedEnumeration": {
           "$ref": "#/definitions/SmbAccessBasedEnumeration",
-          "description": "Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume"
+          "description": "Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+          "x-nullable": true
         },
         "smbNonBrowsable": {
           "$ref": "#/definitions/SmbNonBrowsable",
@@ -11826,6 +11829,7 @@
           "type": "string",
           "format": "arm-id",
           "description": "Resource identifier used to identify the Snapshot.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -11846,6 +11850,7 @@
           "type": "string",
           "format": "arm-id",
           "description": "Resource identifier used to identify the Backup.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -12003,6 +12008,7 @@
         "kerberosEnabled": {
           "type": "boolean",
           "description": "Describe if a volume is KerberosEnabled. To be use with swagger version 2020-05-01 or later",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -12037,11 +12043,13 @@
         },
         "smbEncryption": {
           "type": "boolean",
-          "description": "Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later"
+          "description": "Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later",
+          "default": false
         },
         "smbAccessBasedEnumeration": {
           "$ref": "#/definitions/SmbAccessBasedEnumeration",
-          "description": "Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume"
+          "description": "Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+          "x-nullable": true
         },
         "smbNonBrowsable": {
           "$ref": "#/definitions/SmbNonBrowsable",
@@ -12049,12 +12057,14 @@
         },
         "smbContinuouslyAvailable": {
           "type": "boolean",
-          "description": "Enables continuously available share property for smb volume. Only applicable for SMB volume"
+          "description": "Enables continuously available share property for smb volume. Only applicable for SMB volume",
+          "default": false
         },
         "throughputMibps": {
           "type": "number",
           "format": "float",
-          "description": "Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume"
+          "description": "Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
+          "x-nullable": true
         },
         "actualThroughputMibps": {
           "type": "number",
@@ -12094,6 +12104,7 @@
         "ldapEnabled": {
           "type": "boolean",
           "description": "Specifies whether LDAP is enabled or not for a given NFS volume.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -12101,7 +12112,8 @@
         },
         "coolAccess": {
           "type": "boolean",
-          "description": "Specifies whether Cool Access(tiering) is enabled for the volume."
+          "description": "Specifies whether Cool Access(tiering) is enabled for the volume.",
+          "default": false
         },
         "coolnessPeriod": {
           "type": "integer",
@@ -12121,13 +12133,13 @@
         "unixPermissions": {
           "type": "string",
           "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
-          "minLength": 4,
-          "maxLength": 4
+          "x-nullable": true
         },
         "cloneProgress": {
           "type": "integer",
           "format": "int32",
           "description": "When a volume is being restored from another volume's snapshot, will show the percentage completion of this cloning process. When this value is empty/null there is no cloning process currently happening on this volume. This value will update every 5 minutes during cloning.",
+          "x-nullable": true,
           "readOnly": true
         },
         "fileAccessLogs": {
@@ -12195,17 +12207,20 @@
         },
         "isDefaultQuotaEnabled": {
           "type": "boolean",
-          "description": "Specifies if default quota is enabled for the volume."
+          "description": "Specifies if default quota is enabled for the volume.",
+          "default": false
         },
         "defaultUserQuotaInKiBs": {
           "type": "integer",
           "format": "int64",
-          "description": "Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies ."
+          "description": "Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .",
+          "default": 0
         },
         "defaultGroupQuotaInKiBs": {
           "type": "integer",
           "format": "int64",
-          "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies."
+          "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.",
+          "default": 0
         },
         "maximumNumberOfFiles": {
           "type": "integer",
@@ -12278,11 +12293,13 @@
         "provisionedAvailabilityZone": {
           "type": "string",
           "description": "The availability zone where the volume is provisioned. This refers to the logical availability zone where the volume resides.",
+          "x-nullable": true,
           "readOnly": true
         },
         "isLargeVolume": {
           "type": "boolean",
           "description": "Specifies whether volume is a Large Volume or Regular Volume.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -12291,12 +12308,14 @@
         "originatingResourceId": {
           "type": "string",
           "description": "Id of the snapshot or backup that the volume is restored from.",
+          "x-nullable": true,
           "readOnly": true
         },
         "inheritedSizeInBytes": {
           "type": "integer",
           "format": "int64",
           "description": "Space shared by short term clone volume with parent volume in bytes.",
+          "x-nullable": true,
           "readOnly": true
         }
       },

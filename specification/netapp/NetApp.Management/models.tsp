@@ -1855,12 +1855,14 @@ model VolumeProperties {
   /**
    * Resource identifier used to identify the Snapshot.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   snapshotId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
     }
-  ]>;
+  ]> | null;
 
   /**
    * If enabled (true) the snapshot the volume was created from will be automatically deleted after the volume create operation has finished.  Defaults to false
@@ -1870,12 +1872,13 @@ model VolumeProperties {
   /**
    * Resource identifier used to identify the Backup.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   backupId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
     }
-  ]>;
+  ]> | null;
 
   /**
    * Unique Baremetal Tenant Identifier.
@@ -1954,7 +1957,7 @@ model VolumeProperties {
    * Describe if a volume is KerberosEnabled. To be use with swagger version 2020-05-01 or later
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  kerberosEnabled?: boolean;
+  kerberosEnabled?: boolean = false;
 
   /**
    * The security style of volume, default unix, defaults to ntfs for dual protocol or CIFS protocol
@@ -1965,12 +1968,13 @@ model VolumeProperties {
   /**
    * Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later
    */
-  smbEncryption?: boolean;
+  smbEncryption?: boolean = false;
 
   /**
    * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
-  smbAccessBasedEnumeration?: SmbAccessBasedEnumeration;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  smbAccessBasedEnumeration?: SmbAccessBasedEnumeration | null;
 
   /**
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
@@ -1980,12 +1984,13 @@ model VolumeProperties {
   /**
    * Enables continuously available share property for smb volume. Only applicable for SMB volume
    */
-  smbContinuouslyAvailable?: boolean;
+  smbContinuouslyAvailable?: boolean = false;
 
   /**
    * Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume
    */
-  throughputMibps?: float32;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  throughputMibps?: float32 | null;
 
   /**
    * Actual throughput in MiB/s for auto qosType volumes calculated based on size and serviceLevel
@@ -2007,12 +2012,12 @@ model VolumeProperties {
    * Specifies whether LDAP is enabled or not for a given NFS volume.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  ldapEnabled?: boolean;
+  ldapEnabled?: boolean = false;
 
   /**
    * Specifies whether Cool Access(tiering) is enabled for the volume.
    */
-  coolAccess?: boolean;
+  coolAccess?: boolean = false;
 
   /**
    * Specifies the number of days after which data that is not accessed by clients will be tiered.
@@ -2037,15 +2042,17 @@ model VolumeProperties {
   /**
    * UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(4)
   @minLength(4)
-  unixPermissions?: string;
+  unixPermissions?: string | null;
 
   /**
    * When a volume is being restored from another volume's snapshot, will show the percentage completion of this cloning process. When this value is empty/null there is no cloning process currently happening on this volume. This value will update every 5 minutes during cloning.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  cloneProgress?: int32;
+  cloneProgress?: int32 | null;
 
   /**
    * Flag indicating whether file access logs are enabled for the volume, based on active diagnostic settings present on the volume.
@@ -2068,17 +2075,17 @@ model VolumeProperties {
   /**
    * Specifies if default quota is enabled for the volume.
    */
-  isDefaultQuotaEnabled?: boolean;
+  isDefaultQuotaEnabled?: boolean = false;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
    */
-  defaultUserQuotaInKiBs?: int64;
+  defaultUserQuotaInKiBs?: int64 = 0;
 
   /**
    * Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.
    */
-  defaultGroupQuotaInKiBs?: int64;
+  defaultGroupQuotaInKiBs?: int64 = 0;
 
   /**
    * Maximum number of files allowed. Needs a service request in order to be changed. Only allowed to be changed if volume quota is more than 4TiB.
@@ -2133,26 +2140,29 @@ model VolumeProperties {
   /**
    * The availability zone where the volume is provisioned. This refers to the logical availability zone where the volume resides.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  provisionedAvailabilityZone?: string;
+  provisionedAvailabilityZone?: string | null;
 
   /**
    * Specifies whether volume is a Large Volume or Regular Volume.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isLargeVolume?: boolean;
+  isLargeVolume?: boolean = false;
 
   /**
    * Id of the snapshot or backup that the volume is restored from.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  originatingResourceId?: string;
+  originatingResourceId?: string | null;
 
   /**
    * Space shared by short term clone volume with parent volume in bytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  inheritedSizeInBytes?: int64;
+  inheritedSizeInBytes?: int64 | null;
 }
 
 /**
@@ -2547,24 +2557,25 @@ model VolumePatchProperties {
   /**
    * Specifies if default quota is enabled for the volume.
    */
-  isDefaultQuotaEnabled?: boolean;
+  isDefaultQuotaEnabled?: boolean = false;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
    */
-  defaultUserQuotaInKiBs?: int64;
+  defaultUserQuotaInKiBs?: int64 = 0;
 
   /**
    * Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.
    */
-  defaultGroupQuotaInKiBs?: int64;
+  defaultGroupQuotaInKiBs?: int64 = 0;
 
   /**
    * UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(4)
   @minLength(4)
-  unixPermissions?: string;
+  unixPermissions?: string | null;
 
   /**
    * Specifies whether Cool Access(tiering) is enabled for the volume.
@@ -2599,7 +2610,8 @@ model VolumePatchProperties {
   /**
    * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
-  smbAccessBasedEnumeration?: SmbAccessBasedEnumeration;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  smbAccessBasedEnumeration?: SmbAccessBasedEnumeration | null;
 
   /**
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
