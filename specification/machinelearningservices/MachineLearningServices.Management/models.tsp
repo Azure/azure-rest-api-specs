@@ -9680,7 +9680,7 @@ model AmlComputeProperties {
    * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
    */
   @summary("Enable node public IP.")
-  enableNodePublicIp?: boolean = true;
+  enableNodePublicIp?: boolean | null = true;
 
   /**
    * A property bag containing additional properties.
@@ -12491,19 +12491,19 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
+  featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * The settings for computing feature importance.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  featureImportanceSettings?: FeatureImportanceSettings;
+  featureImportanceSettings?: FeatureImportanceSettings | null;
 
   /**
    * The feature filter which identifies which feature to calculate drift over.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  features?: MonitoringFeatureFilterBase;
+  features?: MonitoringFeatureFilterBase | null;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.

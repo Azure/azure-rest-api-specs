@@ -1115,7 +1115,6 @@
 | `definitions.ComputeInstanceProperties.properties.enableSSO['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeInstanceProperties.properties.releaseQuotaOnStop['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.DataDriftMetricThresholdBase.properties.threshold['x-nullable__deleted']` | deleted | `true` |
 | `definitions.DataDriftMonitoringSignal.properties.featureDataTypeOverride['x-nullable__deleted']` | deleted | `true` |
 | `definitions.DataDriftMonitoringSignal.properties.featureImportanceSettings['x-nullable__deleted']` | deleted | `true` |
 | `definitions.DataDriftMonitoringSignal.properties.features['x-nullable__deleted']` | deleted | `true` |

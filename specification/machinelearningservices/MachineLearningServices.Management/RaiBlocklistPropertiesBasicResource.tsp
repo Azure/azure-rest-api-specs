@@ -92,7 +92,7 @@ interface RaiBlocklistPropertiesBasicResources {
   addBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
     RaiBlocklistItemsBulkAddRequest,
-    ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>
+    RaiBlocklistItemPropertiesBasicResource[]
   >;
 
   /**
