@@ -344,44 +344,41 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Gets the logic app hybrid workflow kind.",
+          "enum": [
+            "Stateful",
+            "Stateless",
+            "Agentic"
+          ],
+          "x-ms-enum": {
+            "name": "WorkflowKind",
+            "modelAsString": true
+          }
         },
-        {
+        "properties": {
+          "description": "Additional workflow properties.",
           "type": "object",
           "properties": {
-            "kind": {
-              "type": "string",
-              "description": "Gets the logic app hybrid workflow kind.",
-              "enum": [
-                "Stateful",
-                "Stateless",
-                "Agentic"
-              ],
-              "x-ms-enum": {
-                "name": "WorkflowKind",
-                "modelAsString": true
-              }
+            "files": {
+              "description": "Gets or sets the files.",
+              "$ref": "#/definitions/WorkflowFiles"
             },
-            "properties": {
-              "description": "Additional workflow properties.",
-              "type": "object",
-              "properties": {
-                "files": {
-                  "description": "Gets or sets the files.",
-                  "$ref": "#/definitions/WorkflowFiles"
-                },
-                "flowState": {
-                  "description": "Gets or sets the state of the workflow.",
-                  "$ref": "#/definitions/WorkflowState"
-                },
-                "health": {
-                  "$ref": "#/definitions/WorkflowHealth",
-                  "description": "Gets or sets workflow health."
-                }
-              }
+            "flowState": {
+              "description": "Gets or sets the state of the workflow.",
+              "$ref": "#/definitions/WorkflowState"
+            },
+            "health": {
+              "$ref": "#/definitions/WorkflowHealth",
+              "description": "Gets or sets workflow health."
             }
           }
         }
-      ]
+      }
     },
     "WorkflowEnvelopeCollection": {
       "description": "Collection of workflow information elements.",
