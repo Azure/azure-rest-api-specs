@@ -6640,6 +6640,18 @@ model WindowsParameters {
    * This is used to install patches that were published on or before this given max published date.
    */
   maxPatchPublishDate?: utcDateTime;
+
+  /**
+   * This is used to include patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.
+   */
+  @added(Versions.v2025_04_01)
+  patchNameMasksToInclude?: string[];
+
+  /**
+   * This is used to exclude patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.
+   */
+  @added(Versions.v2025_04_01)
+  patchNameMasksToExclude?: string[];
 }
 
 /**
