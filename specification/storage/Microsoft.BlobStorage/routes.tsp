@@ -440,7 +440,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
     @route("{containerName}?restype=container&comp=blobs")
-    op filterBlobs is StorageOperation<
+    op findBlobsByTags is StorageOperation<
       {
         ...ContainerNamePathParameter;
         ...TimeoutParameter;
@@ -450,8 +450,6 @@ namespace Storage.Blob {
         ...FilterBlobsIncludeParameter;
       },
       {
-        ...DateResponseHeader;
-
         /** The container filter blob enumeration results */
         @body
         enumerationResults: FilterBlobSegment;
