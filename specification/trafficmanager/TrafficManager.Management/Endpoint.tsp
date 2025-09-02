@@ -57,7 +57,7 @@ interface Endpoints {
     #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointName?: string,
-  ): ArmResponse<Endpoint> | ErrorResponse;
+  ): ArmResponse<Endpoint> | CloudError;
 
   /**
    * Create or update a Traffic Manager endpoint.
@@ -95,7 +95,7 @@ interface Endpoints {
      */
     @bodyRoot
     resource: Endpoint,
-  ): ArmResponse<Endpoint> | ArmCreatedResponse<Endpoint> | ErrorResponse;
+  ): ArmResponse<Endpoint> | ArmCreatedResponse<Endpoint> | CloudError;
 
   /**
    * Update a Traffic Manager endpoint.
@@ -133,7 +133,7 @@ interface Endpoints {
      */
     @bodyRoot
     properties: Endpoint,
-  ): ArmResponse<Endpoint> | ErrorResponse;
+  ): ArmResponse<Endpoint> | CloudError;
 
   /**
    * Deletes a Traffic Manager endpoint.
@@ -165,7 +165,7 @@ interface Endpoints {
     #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     endpointName?: string,
-  ): ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse | ErrorResponse;
+  ): ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse | CloudError;
 }
 
 @@doc(Endpoint.name, "The name of the Traffic Manager endpoint.");

@@ -26,6 +26,26 @@ model UserMetricsModel
 }
 
 @armResourceOperations
+interface UserMetricsModelOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+    {
+      ...ApiVersionParameter,
+      ...SubscriptionIdParameter,
+      ...Azure.ResourceManager.Legacy.Provider,
+
+      /**
+       * The user metrics keys. The default value is "default".
+       */
+      @path
+      @segment("trafficManagerUserMetricsKeys")
+      @key("trafficManagerUserMetricsKeys")
+      trafficManagerUserMetricsKeys: "default",
+    },
+    {},
+    ErrorType = CloudError
+  >{}
+
+@armResourceOperations
 interface UserMetricsModels {
   /**
    * Get the subscription-level key used for Real User Metrics collection.
@@ -34,7 +54,8 @@ interface UserMetricsModels {
   @operationId("TrafficManagerUserMetricsKeys_Get")
   get is ArmResourceRead<
     UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
@@ -44,10 +65,10 @@ interface UserMetricsModels {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TrafficManagerUserMetricsKeys_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is UserMetricsModelOps.CreateOrUpdateSync<
     UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceCreatedSyncResponse<UserMetricsModel>
+    Request = void,
+    Response = ArmResourceCreatedSyncResponse<UserMetricsModel>,
   >;
 
   /**
@@ -59,7 +80,8 @@ interface UserMetricsModels {
   delete is ArmResourceDeleteSync<
     UserMetricsModel,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<DeleteOperationResult>
+    Response = ArmResponse<DeleteOperationResult>,
+    Error = CloudError
   >;
 }
 

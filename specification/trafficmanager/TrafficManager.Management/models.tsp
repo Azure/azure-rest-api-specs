@@ -269,6 +269,72 @@ model EndpointPropertiesCustomHeadersItem {
 }
 
 /**
+ * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ProxyResource extends Resource {}
+
+/**
+ * The core properties of ARM resources
+ */
+model Resource {
+  /**
+   * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
+   */
+  id?: string;
+
+  /**
+   * The name of the resource
+   */
+  name?: string;
+
+  /**
+   * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
+   */
+  type?: string;
+}
+
+/**
+ * An error returned by the Azure Resource Manager
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@error
+model CloudError {
+  /**
+   * The content of the error.
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * The content of an error returned by the Azure Resource Manager
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model CloudErrorBody {
+  /**
+   * Error code
+   */
+  code?: string;
+
+  /**
+   * Error message
+   */
+  message?: string;
+
+  /**
+   * Error target
+   */
+  target?: string;
+
+  /**
+   * Error details
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  details?: CloudErrorBody[];
+}
+
+/**
  * The result of the request or operation.
  */
 model DeleteOperationResult {

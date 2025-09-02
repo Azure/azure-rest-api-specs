@@ -69,7 +69,7 @@ interface HeatMapModels {
     @minItems(2)
     @maxItems(2)
     botRight?: float64[],
-  ): ArmResponse<HeatMapModel> | ErrorResponse;
+  ): ArmResponse<HeatMapModel> | CloudError;
 }
 
 @@doc(HeatMapModel.name, "");
